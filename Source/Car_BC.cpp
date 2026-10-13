@@ -5671,7 +5671,7 @@ Ang16 Car_BC::GetRadioTowerAngle_442520()
 EXTERN_GLOBAL(Fix16, kFPZero_6691B0);
 DEFINE_GLOBAL_INIT(Fix16, kAngFix16FullCircle_66A8E4, Fix16(0x18F60, 0), 0x66A8E4);
 DEFINE_GLOBAL_INIT(Fix16, kAngFix16HalfCircle_6691EC, Fix16(0xC7B0, 0), 0x6691EC);
-inline Fix16 __stdcall WrapAngle_40E790(Fix16& unk) // 9.6f inlined func
+inline Fix16 __stdcall WrapAngle_40E790(const Fix16& unk) // 9.6f inlined func
 {
     Fix16 result = unk;
     for (; result < kFPZero_6691B0; result += kAngFix16FullCircle_66A8E4)
@@ -5689,7 +5689,7 @@ inline Fix16 __stdcall WrapAngle_40E790(Fix16& unk) // 9.6f inlined func
 // TODO: Move
 // https://decomp.me/scratch/GnD4O
 MATCH_FUNC(0x405CE0)
-EXPORT void __stdcall SmoothApproachAngle_405CE0(Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4, Fix16& a5)
+EXPORT void __stdcall SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4, Fix16& a5)
 {
     if (a1 - a3 > kAngFix16HalfCircle_6691EC)
     {

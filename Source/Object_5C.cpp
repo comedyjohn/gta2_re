@@ -342,7 +342,7 @@ bool Object_2C::SelectCollisionSprite_522460(Sprite* pProbe)
 }
 
 MATCH_FUNC(0x5224e0)
-void Object_2C::SetMovementVector_5224E0(Fix16_Point& speed)
+void Object_2C::SetMovementVector_5224E0(const Fix16_Point& speed)
 {
     Fix16_Point new_velocity;
     if (field_10_obj_3c)
@@ -359,7 +359,7 @@ void Object_2C::SetMovementVector_5224E0(Fix16_Point& speed)
 }
 
 MATCH_FUNC(0x522640)
-void Object_2C::SetMovementVectorWithRandomState_522640(Fix16_Point& point)
+void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16_Point& point)
 {
     SetMovementVector_5224E0(point);
 
@@ -2282,7 +2282,7 @@ void Object_2C::ReleaseSubObjects_527F10()
 
 // 9.6f 0x4847D0
 MATCH_FUNC(0x528130)
-void Object_2C::NewObj3C_528130(Fix16_Point& speed)
+void Object_2C::NewObj3C_528130(const Fix16_Point& speed)
 {
     Object_3C* pNewObj = gObject_3C_Pool_6F8F7C->Allocate();
 

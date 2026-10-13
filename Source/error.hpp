@@ -4,7 +4,7 @@
 #include <windows.h>
 
 #if defined(__clang__) || (_MSC_VER <= 1200)
-#include <FSTREAM.H>
+#include <fstream.h>
 #define ostream_type ostream
 #else
 #include <fstream>

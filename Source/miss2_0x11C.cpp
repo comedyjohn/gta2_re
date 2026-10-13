@@ -7,7 +7,7 @@
 #include "explosion_type.hpp"
 #include "hud_message_priority.hpp"
 #include "voice_line.hpp"
-#include "miss2_0x11c.hpp"
+#include "miss2_0x11C.hpp"
 #include "CarAI_78.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"

@@ -33,7 +33,7 @@
 #include "winmain.hpp"
 #include "TagGame_28.hpp"
 #include "PlayerCrimeStats_3C.hpp"
-#include <DINPUT.H>
+#include <dinput.h>
 
 // Forward declarations: the functions below are in address order
 EXTERN_GLOBAL(s16, gTestRouteIdx_675F14);

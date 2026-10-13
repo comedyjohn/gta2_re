@@ -5,32 +5,35 @@ matching `decomp_main.exe`, compiled by GCC into a Linux executable, with no Win
 
 ```bash
 sudo apt-get install g++-multilib cmake ninja-build
+port/tools/setup_sdl32.sh ~/sdl32        # 32-bit SDL2 (runtime from apt, headers unpacked)
 git submodule update --init 3rdParty/GTA2Hax
 git -C 3rdParty/GTA2Hax submodule update --init 3rdParty/imgui
-cmake -S port -B build_port/native -G Ninja
+cmake -S port -B build_port/native -G Ninja -DCMAKE_PREFIX_PATH=~/sdl32/usr
 cmake --build build_port/native
 ```
 
-Run `build_port/native/gta2` from a directory holding the game's `data/` folder (from your own copy
-of GTA2). Settings the game writes to the registry go to `~/.config/gta2-native/registry.txt`.
+Run `build_port/native/gta2` from a directory holding the game's `data/` folder, or use
+`port/gta2-launch` as described in [RUNNING.md](RUNNING.md).
 
 ## Status
 
-**Milestone 1 (done): it compiles, links and starts.** Every source file the VC6 build compiles also
-compiles here, and every Windows, DirectX, Miles and Bink call has a native implementation, most of
-them stubs. The game starts and runs its initialisation until it needs data. There's no window,
-sound or input yet.
+**Milestone 2: a window, a renderer and input.** Players: see [RUNNING.md](RUNNING.md).
 
-| Subsystem | Windows | Here | Next |
-|---|---|---|---|
-| Window, message loop | user32 (`winmain.cpp`) | handles with no window, empty message queue | SDL window; SDL events become window messages |
-| Rendering | `d3ddll.dll` (`gbh_*`) and `dmavideo.dll` (`Vid_*`), loaded by name | `platform/renderer.cpp`: the same 58 functions, drawing nothing | OpenGL, using GTA2Hax's D3D9 renderer as the reference for what each call does |
-| Input | DirectInput 5 | `platform/directx.cpp`: devices that report nothing pressed | SDL keyboard and game controllers behind the same interfaces |
-| Audio | Miles Sound System (`AIL_*`) | `Source/3rdParty/mss.cpp`, the stubs the VC6 build ships as mss32.dll | the `AIL_*` subset the game uses, over SDL audio |
-| Video | Bink | `Source/3rdParty/bink.cpp` stubs (videos are skipped) | FFmpeg's Bink decoder |
-| Multiplayer | DirectPlay | unavailable: the game finds no connections | UDP |
-| Settings | registry | `platform/win32.cpp`: a persistent key/value store | — |
-| Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case | — |
+| Subsystem | Windows | Here |
+|---|---|---|
+| Window, message loop | user32 (`winmain.cpp`) | an SDL window; SDL events arrive as the window messages the game's window procedure handles (`platform/win32.cpp`, `platform/sdl/`) |
+| Rendering | `d3ddll.dll` (`gbh_*`) and `dmavideo.dll` (`Vid_*`), loaded by name | `platform/renderer.cpp`: the same 58 functions over OpenGL 2.1, following GTA2Hax's Direct3D 9 version. The game's 640x480 picture is scaled into the window, 4:3 |
+| Input | DirectInput 5 | `platform/dinput.cpp`: keyboard and SDL game controllers behind DirectInput's interfaces, laid out by the data formats the game sets, polled or buffered |
+| Audio | Miles Sound System (`AIL_*`) | `Source/3rdParty/mss.cpp` stubs: silent |
+| Video | Bink | `Source/3rdParty/bink.cpp` stubs; `.bik` files are reported absent, so the game skips its movies |
+| Multiplayer | DirectPlay | unavailable: the game finds no connections |
+| Settings | registry | a persistent key/value store (`platform/win32.cpp`) |
+| Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case |
+
+`gta2 --selftest` draws through the renderer's entry points (a palette, paletted tiles with
+transparency and rotation, additive blending, a 16-bit TGA) and checks the pixels; CI runs it on a
+virtual display. `gta2-launch` is what players run: it finds the game folder, or unpacks an Inno
+Setup installer with `innoextract`, and starts the game in it.
 
 ## How it fits together
 
@@ -42,9 +45,10 @@ sound or input yet.
   `GTA2_PORT`, MSVC's keywords (`__stdcall` and friends) and `_WIN32`: third-party headers the game
   includes (GTA2Hax's `ddraw_vc6.h`, Miles' `mss.h`) pick their Win32 branch from it. It refuses to
   build anything but 32-bit with a 2-byte `wchar_t`.
-- **`platform/` implements that API.** When the SDL layer arrives it goes in files that don't see
-  the prelude, since SDL takes `_WIN32` to mean "building for Windows"; `platform/` then calls it
-  through a plain C++ interface.
+- **`platform/` implements that API.** The SDL code is in `platform/sdl/`, a library of its own that
+  doesn't see the prelude, since SDL takes `_WIN32` to mean "building for Windows". The rest of
+  `platform/` reaches it through `platform/platform.h`, which passes only plain types. OpenGL is
+  loaded at runtime through SDL (`platform/gl.h`), so no GL headers or libGL are needed to build.
 - **32-bit only, for now.** Game structures hold 32-bit pointers and their sizes are asserted
   (`GTA2_ASSERT_SIZEOF_ALWAYS`). A 64-bit build is a project of its own.
 - **`wchar_t` is 2 bytes** (`-fshort-wchar`), as on Windows: the game's text is UTF-16 and several
@@ -84,10 +88,12 @@ port/tools/check_matching.sh /some/dir/baseline   # must report "changed: 0"
 
 ## Follow-ups
 
-- Milestone 2: an SDL window, input and an OpenGL renderer, so the game is playable.
-- Milestone 3: audio over the `AIL_*` interface, then Bink videos.
+- Audio: the `AIL_*` subset the game uses (samples, streamed music) over SDL audio.
+- Bink movies, with FFmpeg's Bink decoder.
+- The ImGui debug overlay (`ImGuiDebug.cpp`): needs ImGui's OpenGL backend; `gbh_SetBeginSceneCB` ignores it for now.
+- Higher resolutions than 640x480 (the game's own projection would need to know).
 - Compile without `-fpermissive`, and with warnings on for `Source/`, which will turn up the
   constructs MSVC accepted silently.
-- Run under AddressSanitizer and UndefinedBehaviorSanitizer once it gets in game.
+- Run under AddressSanitizer and UndefinedBehaviorSanitizer.
 - Floating-point: the x87 code VC6 generated and GCC's SSE differ in precision. Most game maths is
   fixed-point (`Fix16`), but replays (`InputRecorder_67F8B0`) need checking.

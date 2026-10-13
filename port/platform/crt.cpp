@@ -163,6 +163,14 @@ long port_findfirst(const char* pattern, _finddata_t* data)
     std::string dirPart = slash == std::string::npos ? "" : full.substr(0, slash + 1);
     std::string mask = slash == std::string::npos ? full : full.substr(slash + 1);
 
+    // Bink movies can't be played yet (Source/3rdParty/bink.cpp is stubs) and the game treats a
+    // movie it fails to open as fatal. It only plays one after finding it with _findfirst
+    // (Frontend::intro_bik_exists_4B5FF0 and pre_intro_bik_exists_4B6030), so they are reported absent.
+    if (mask.size() > 4 && strcasecmp(mask.c_str() + mask.size() - 4, ".bik") == 0)
+    {
+        return -1;
+    }
+
     FindState state;
     state.mDir = dirPart.empty() ? "" : port_resolve_path(dirPart.c_str());
     if (!state.mDir.empty() && state.mDir.back() != '/')

@@ -6,15 +6,26 @@
 # The game sources are compiled unchanged, against port/include/ (a Win32/DirectX-shaped API
 # declared for the game) and linked with port/platform/ (its implementation).
 cmake_minimum_required(VERSION 3.16)
+
+# Structures hold 32-bit pointers and their sizes are asserted, so the port is 32-bit for now. Set
+# before project() so CMake detects a 32-bit target and looks for i386 libraries (SDL2).
+set(CMAKE_C_FLAGS_INIT "-m32")
+set(CMAKE_CXX_FLAGS_INIT "-m32")
+set(CMAKE_EXE_LINKER_FLAGS_INIT "-m32")
 project(gta2_native C CXX)
 
 set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-# Structures hold 32-bit pointers and their sizes are asserted, so the port is 32-bit for now.
 set(CMAKE_CXX_STANDARD 14) # C++17 removed the throw(std::bad_alloc) specifications crt_stubs.cpp uses
 set(CMAKE_CXX_EXTENSIONS ON)
-add_compile_options(-m32 -fshort-wchar -fno-strict-aliasing -fwrapv)
-add_link_options(-m32)
+add_compile_options(-fshort-wchar -fno-strict-aliasing -fwrapv)
+
+# SDL2, 32-bit (Debian/Ubuntu: libsdl2-dev:i386). SDL_config.h forwards to an architecture
+# directory, so both include directories are needed.
+find_path(SDL2_INCLUDE_DIR SDL.h PATH_SUFFIXES SDL2 REQUIRED)
+find_path(SDL2_ARCH_INCLUDE_DIR SDL2/_real_SDL_config.h)
+find_library(SDL2_LIBRARY NAMES SDL2 SDL2-2.0 REQUIRED)
+message(STATUS "SDL2: ${SDL2_LIBRARY}")
 
 # The game's source list lives in the top-level CMakeLists.txt (gta2_lib_src); read it from there
 # so the two builds can't drift apart.
@@ -57,13 +68,25 @@ add_library(gta2_game STATIC
 gta2_game_target(gta2_game)
 target_compile_options(gta2_game PRIVATE -w) # the decompiled code is warning-heavy by nature
 
+# The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as
+# "building for Windows"), so it is a library of its own.
+add_library(gta2_sdl STATIC platform/sdl/sdl_platform.cpp)
+target_include_directories(gta2_sdl PRIVATE ${SDL2_INCLUDE_DIR})
+if (SDL2_ARCH_INCLUDE_DIR)
+    target_include_directories(gta2_sdl PRIVATE ${SDL2_ARCH_INCLUDE_DIR})
+endif()
+target_compile_options(gta2_sdl PRIVATE -Wall)
+target_link_libraries(gta2_sdl PUBLIC ${SDL2_LIBRARY})
+
 add_executable(gta2
     platform/main.cpp
     platform/crt.cpp
     platform/wchar.cpp
     platform/win32.cpp
     platform/directx.cpp
-    platform/renderer.cpp)
+    platform/dinput.cpp
+    platform/renderer.cpp
+    platform/selftest.cpp)
 gta2_game_target(gta2)
 target_compile_options(gta2 PRIVATE -Wall -Wno-unused-function)
-target_link_libraries(gta2 PRIVATE gta2_game dear_imgui)
+target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl)

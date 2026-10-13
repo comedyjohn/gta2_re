@@ -1,10 +1,12 @@
 // The Win32 API as the game uses it (port/include/port_win32_api.h, mmsystem.h, commctrl.h).
 //
-// Milestone 1 scope: everything links and behaves plausibly without a display. Windows are handles
-// with no window behind them and the message queue stays empty; that becomes SDL in milestone 2.
+// Windows are handles; the one real window is the SDL window the renderer opens, and platform events
+// (port_pump_events) arrive as messages to the game's window procedure.
 // The registry is real, since the game keeps its settings there: a key/value store saved to
 // $XDG_CONFIG_HOME/gta2-native/registry.txt (or ~/.config/...).
+#include "events.h"
 #include "path.h"
+#include "platform.h"
 #include "renderer.h"
 
 #include <commctrl.h>
@@ -17,6 +19,7 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <deque>
 #include <map>
 #include <string>
 #include <vector>
@@ -380,40 +383,156 @@ int wsprintfA(LPSTR buf, LPCSTR fmt, ...)
 // ---------------------------------------------------------------- user32: windows and messages
 namespace
 {
-std::map<std::string, WNDPROC> gWindowClasses;
+std::map<std::string, WNDPROC> gWindowClasses; // lower-case class name -> window procedure
+std::map<HWND, WNDPROC> gWindowProcs;
 std::map<HWND, LONG> gWindowLongs[2];
+std::deque<MSG> gMessages;
+HWND gMainWindow = 0; // the first top-level window: where platform events go
 int gCursorCount = 0;
+bool gPumping = false;
+
+void Post(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    MSG m;
+    memset(&m, 0, sizeof(m));
+    m.hwnd = hwnd;
+    m.message = msg;
+    m.wParam = wParam;
+    m.lParam = lParam;
+    m.time = MonotonicMs();
+    gMessages.push_back(m);
+}
 } // namespace
+
+} // extern "C"
+
+void port_pump_events()
+{
+    if (gPumping) // DirectInput can be read from inside a window procedure
+    {
+        return;
+    }
+    gPumping = true;
+    plat::Event e;
+    while (plat::PollEvent(e))
+    {
+        switch (e.type)
+        {
+            case plat::EventType::Quit:
+                Post(gMainWindow, WM_CLOSE, 0, 0);
+                break;
+            case plat::EventType::FocusGained:
+                Post(gMainWindow, WM_ACTIVATE, WA_ACTIVE, 0);
+                Post(gMainWindow, WM_SETFOCUS, 0, 0);
+                break;
+            case plat::EventType::FocusLost:
+                Post(gMainWindow, WM_ACTIVATE, WA_INACTIVE, 0);
+                Post(gMainWindow, WM_KILLFOCUS, 0, 0);
+                break;
+            case plat::EventType::Minimized:
+                Post(gMainWindow, WM_SIZE, 1, 0); // SIZE_MINIMIZED
+                break;
+            case plat::EventType::Restored:
+                Post(gMainWindow, WM_SIZE, 0, MAKELONG(640, 480)); // SIZE_RESTORED
+                break;
+            case plat::EventType::KeyDown:
+            case plat::EventType::KeyUp:
+            {
+                const bool down = e.type == plat::EventType::KeyDown;
+                // Alt+Enter switches fullscreen here rather than through the game's DirectDraw mode reset
+                if (down && e.alt && e.vk == VK_RETURN)
+                {
+                    plat::ToggleFullscreen();
+                    break;
+                }
+                if (e.dik)
+                {
+                    port_dinput_key_event(e.dik, down);
+                }
+                if (e.vk)
+                {
+                    const bool sys = e.alt || e.vk == VK_F10 || e.vk == VK_LMENU || e.vk == VK_RMENU;
+                    const UINT msg = down ? (sys ? WM_SYSKEYDOWN : WM_KEYDOWN) : (sys ? WM_SYSKEYUP : WM_KEYUP);
+                    Post(gMainWindow, msg, e.vk, e.alt ? (KF_ALTDOWN << 16) : 0);
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    gPumping = false;
+}
+
+extern "C" {
 
 int MessageBoxA(HWND, LPCSTR text, LPCSTR caption, UINT)
 {
-    fprintf(stderr, "[%s] %s\n", caption ? caption : "", text ? text : "");
+    plat::ShowMessage(caption ? caption : "GTA2", text ? text : "");
     return IDOK;
 }
 
-LRESULT DefWindowProcA(HWND, UINT, WPARAM, LPARAM)
+LRESULT DefWindowProcA(HWND hwnd, UINT msg, WPARAM, LPARAM)
 {
+    if (msg == WM_CLOSE)
+    {
+        DestroyWindow(hwnd);
+    }
     return 0;
 }
 
 ATOM RegisterClassA(const WNDCLASSA* wc)
 {
-    gWindowClasses[wc->lpszClassName] = wc->lpfnWndProc;
+    std::string name = wc->lpszClassName ? wc->lpszClassName : "";
+    for (char& c : name)
+    {
+        c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    }
+    gWindowClasses[name] = wc->lpfnWndProc;
     return static_cast<ATOM>(gWindowClasses.size());
 }
 
-HWND CreateWindowExA(DWORD, LPCSTR, LPCSTR, DWORD, int, int, int, int, HWND, HMENU, HINSTANCE, LPVOID)
+HWND CreateWindowExA(DWORD, LPCSTR className, LPCSTR, DWORD, int, int, int, int, HWND parent, HMENU, HINSTANCE, LPVOID)
 {
-    return reinterpret_cast<HWND>(MakeHandle());
+    HWND hwnd = reinterpret_cast<HWND>(MakeHandle());
+    std::string name = className ? className : "";
+    for (char& c : name)
+    {
+        c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    }
+    auto it = gWindowClasses.find(name);
+    gWindowProcs[hwnd] = it != gWindowClasses.end() ? it->second : 0;
+    if (!parent && !gMainWindow)
+    {
+        gMainWindow = hwnd;
+    }
+    // The real window appears when the game sets a video mode (renderer.cpp's Vid_SetMode)
+    return hwnd;
 }
 
-BOOL DestroyWindow(HWND)
+BOOL DestroyWindow(HWND hwnd)
 {
+    auto it = gWindowProcs.find(hwnd);
+    if (it == gWindowProcs.end())
+    {
+        return FALSE;
+    }
+    if (it->second)
+    {
+        it->second(hwnd, WM_DESTROY, 0, 0);
+    }
+    gWindowProcs.erase(hwnd);
     return TRUE;
 }
 
-BOOL ShowWindow(HWND, int)
+BOOL ShowWindow(HWND hwnd, int cmd)
 {
+    if (hwnd == gMainWindow && cmd != SW_HIDE)
+    {
+        // Windows activates a window it shows
+        Post(hwnd, WM_ACTIVATE, WA_ACTIVE, 0);
+        Post(hwnd, WM_SETFOCUS, 0, 0);
+    }
     return TRUE;
 }
 
@@ -429,6 +548,12 @@ BOOL SetForegroundWindow(HWND)
 
 LONG SetWindowLongA(HWND hwnd, int index, LONG value)
 {
+    if (index == GWL_WNDPROC)
+    {
+        LONG old = reinterpret_cast<LONG>(gWindowProcs[hwnd]);
+        gWindowProcs[hwnd] = reinterpret_cast<WNDPROC>(value);
+        return old;
+    }
     std::map<HWND, LONG>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
     LONG old = longs[hwnd];
     longs[hwnd] = value;
@@ -437,6 +562,10 @@ LONG SetWindowLongA(HWND hwnd, int index, LONG value)
 
 LONG GetWindowLongA(HWND hwnd, int index)
 {
+    if (index == GWL_WNDPROC)
+    {
+        return reinterpret_cast<LONG>(gWindowProcs[hwnd]);
+    }
     return gWindowLongs[index == GWL_EXSTYLE ? 1 : 0][hwnd];
 }
 
@@ -447,6 +576,7 @@ BOOL SetWindowPos(HWND, HWND, int, int, int, int, UINT)
 
 BOOL GetClientRect(HWND, LPRECT rect)
 {
+    // The game draws at 640x480; the renderer scales that to the real window
     rect->left = 0;
     rect->top = 0;
     rect->right = 640;
@@ -474,16 +604,28 @@ HWND FindWindowExA(HWND, HWND, LPCSTR, LPCSTR)
     return 0;
 }
 
-BOOL PeekMessageA(LPMSG, HWND, UINT, UINT, UINT)
+BOOL PeekMessageA(LPMSG msg, HWND, UINT, UINT, UINT remove)
 {
-    return FALSE; // the queue stays empty until SDL feeds it (milestone 2)
+    port_pump_events();
+    if (gMessages.empty())
+    {
+        return FALSE;
+    }
+    *msg = gMessages.front();
+    if (remove & PM_REMOVE)
+    {
+        gMessages.pop_front();
+    }
+    return TRUE;
 }
 
-BOOL GetMessageA(LPMSG msg, HWND, UINT, UINT)
+BOOL GetMessageA(LPMSG msg, HWND hwnd, UINT min, UINT max)
 {
-    memset(msg, 0, sizeof(*msg));
-    msg->message = WM_QUIT;
-    return FALSE;
+    while (!PeekMessageA(msg, hwnd, min, max, PM_REMOVE))
+    {
+        usleep(5000);
+    }
+    return msg->message != WM_QUIT;
 }
 
 BOOL TranslateMessage(const MSG*)
@@ -491,28 +633,42 @@ BOOL TranslateMessage(const MSG*)
     return FALSE;
 }
 
-LRESULT DispatchMessageA(const MSG*)
+LRESULT DispatchMessageA(const MSG* msg)
 {
-    return 0;
+    auto it = gWindowProcs.find(msg->hwnd);
+    if (it == gWindowProcs.end() || !it->second)
+    {
+        return 0;
+    }
+    return it->second(msg->hwnd, msg->message, msg->wParam, msg->lParam);
 }
 
-BOOL PostMessageA(HWND, UINT, WPARAM, LPARAM)
+BOOL PostMessageA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    Post(hwnd, msg, wParam, lParam);
     return TRUE;
 }
 
-LRESULT SendMessageA(HWND, UINT, WPARAM, LPARAM)
+LRESULT SendMessageA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    return 0;
+    auto it = gWindowProcs.find(hwnd);
+    if (it == gWindowProcs.end() || !it->second)
+    {
+        return 0; // a lobby dialog control: none exist
+    }
+    return it->second(hwnd, msg, wParam, lParam);
 }
 
-void PostQuitMessage(int)
+void PostQuitMessage(int code)
 {
+    Post(0, WM_QUIT, static_cast<WPARAM>(code), 0);
 }
 
 int ShowCursor(BOOL show)
 {
-    return show ? ++gCursorCount : --gCursorCount;
+    gCursorCount += show ? 1 : -1;
+    plat::SetCursorVisible(gCursorCount >= 0);
+    return gCursorCount;
 }
 
 HICON LoadIconA(HINSTANCE, LPCSTR)
@@ -569,19 +725,23 @@ short GetKeyState(int)
     return 0;
 }
 
-BOOL SetWindowTextA(HWND, LPCSTR)
+BOOL SetWindowTextA(HWND hwnd, LPCSTR text)
 {
+    if (hwnd == gMainWindow && text)
+    {
+        plat::SetWindowTitle(text);
+    }
     return TRUE;
 }
 
 HWND GetActiveWindow(void)
 {
-    return 0;
+    return gMainWindow;
 }
 
 HWND GetForegroundWindow(void)
 {
-    return 0;
+    return gMainWindow;
 }
 
 BOOL IsIconic(HWND)

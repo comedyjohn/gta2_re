@@ -1,11 +1,27 @@
-// Native entry point: hands the command line to the game's WinMain (test.cpp), as Windows would.
+// Native entry point: starts the platform layer, then hands the command line to the game's WinMain
+// (test.cpp), as Windows would.
+#include "platform.h"
 #include "types.hpp"
+
 #include <string>
 
 s32 APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, s32 nCmdShow);
+int port_selftest();
 
 int main(int argc, char** argv)
 {
+    if (!plat::Init())
+    {
+        return 1;
+    }
+
+    if (argc > 1 && std::string(argv[1]) == "--selftest")
+    {
+        const int result = port_selftest();
+        plat::Shutdown();
+        return result;
+    }
+
     std::string cmdLine;
     for (int i = 1; i < argc; i++)
     {
@@ -15,5 +31,8 @@ int main(int argc, char** argv)
         }
         cmdLine += argv[i];
     }
-    return WinMain(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
+    const int result = WinMain(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
+
+    plat::Shutdown();
+    return result;
 }

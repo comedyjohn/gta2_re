@@ -1,0 +1,75 @@
+#!/bin/sh
+# Starts the native GTA2. Keep this script next to the gta2 binary, in a folder that holds either an
+# installed copy of the game (a data/ folder) or its Inno Setup installer (setup.exe, plus any
+# setup-1.bin, setup-2.bin, ... slices). On the first run the installer is unpacked into game/ with
+# innoextract; nothing is installed system-wide. Arguments are passed on to the game.
+set -eu
+
+here=$(cd "$(dirname "$0")" && pwd)
+bin="$here/gta2"
+
+fail() {
+    echo "gta2-launch: $*" >&2
+    exit 1
+}
+
+# A folder is the game if it has a data/ folder (any case) holding GTA2's maps (*.gmp)
+is_game_dir() {
+    data=$(find "$1" -maxdepth 1 -type d -iname data 2>/dev/null | head -n 1)
+    [ -n "$data" ] && [ -n "$(find "$data" -maxdepth 1 -type f -iname '*.gmp' 2>/dev/null | head -n 1)" ]
+}
+
+find_game_dir() {
+    for candidate in "$here" "$here/game"; do
+        if [ -d "$candidate" ] && is_game_dir "$candidate"; then
+            echo "$candidate"
+            return 0
+        fi
+    done
+    return 1
+}
+
+install_from_installer() {
+    installer=$(find "$here" -maxdepth 1 -type f -iname '*.exe' | head -n 1)
+    [ -n "$installer" ] || fail "no game found: put an installed GTA2 (with its data folder) or its setup .exe (and .bin files) next to this script"
+    command -v innoextract >/dev/null 2>&1 ||
+        fail "unpacking $(basename "$installer") needs innoextract (Debian/Ubuntu: sudo apt install innoextract)"
+
+    echo "Unpacking $(basename "$installer") into game/ ..."
+    rm -rf "$here/game.tmp"
+    mkdir -p "$here/game.tmp"
+    innoextract --silent --progress=1 --output-dir "$here/game.tmp" "$installer" ||
+        fail "innoextract couldn't unpack $(basename "$installer") (are all of its .bin files here?)"
+
+    # The game is wherever the installer put the folder holding data/ (usually app/)
+    gamedir=$(find "$here/game.tmp" -type d -iname data -exec dirname {} \; 2>/dev/null | while IFS= read -r dir; do
+        if is_game_dir "$dir"; then
+            echo "$dir"
+            break
+        fi
+    done)
+    if [ -z "$gamedir" ]; then
+        echo "Unpacked files:" >&2
+        find "$here/game.tmp" -maxdepth 3 | head -n 50 >&2
+        fail "the installer unpacked, but no GTA2 data folder was among its files (it may hold them in an archive of its own); see the list above"
+    fi
+    rm -rf "$here/game"
+    mv "$gamedir" "$here/game"
+    rm -rf "$here/game.tmp"
+    echo "Installed into $here/game"
+}
+
+[ -x "$bin" ] || fail "the gta2 binary should be next to this script ($bin)"
+
+if missing=$(ldd "$bin" 2>/dev/null | grep "not found"); then
+    echo "$missing" >&2
+    fail "32-bit libraries are missing. Debian/Ubuntu: sudo dpkg --add-architecture i386 && sudo apt update && sudo apt install libsdl2-2.0-0:i386 libgl1:i386 libgl1-mesa-dri:i386"
+fi
+
+gamedir=$(find_game_dir) || {
+    install_from_installer
+    gamedir=$(find_game_dir) || fail "installation finished but the game folder wasn't found"
+}
+
+cd "$gamedir"
+exec "$bin" "$@"

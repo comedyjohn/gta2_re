@@ -4,7 +4,7 @@
 #include "NetPlay.hpp"
 #include "registry.hpp"
 #include "text_0x14.hpp"
-#include <COMMCTRL.H>
+#include <commctrl.h>
 #include <direct.h>
 
 DEFINE_GLOBAL(UINT_PTR, gTimerId_6F8A18, 0x6F8A18);

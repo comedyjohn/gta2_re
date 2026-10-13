@@ -128,7 +128,7 @@ Fix16 __stdcall Fix16::Abs_436A50(const Fix16& input)
 }
 
 MATCH_FUNC(0x436A70)
-Fix16 __stdcall Fix16::SquareRoot_436A70(const Fix16& input)
+Fix16 __stdcall Fix16::SquareRoot_436A70(const Fix16& input) throw()
 {
     return Fix16(sqrt(input.AsDouble()));
 }

@@ -167,19 +167,40 @@ void __stdcall LogFuncAddr(u32 codeAddr, s32 mode);
     #endif
 
 #else
+    // Other compilers, e.g. the native Linux build (port/): no markers, no address bookkeeping
     #define WIP_FUNC(addr)
     #define MATCH_FUNC(addr)
     #define STUB_FUNC(addr)
     #define EXPORT
-    #define NOT_IMPLEMENTED
-    #define WIP_IMPLEMENTED
     #define __stdcall
+
+    // Report unfinished code the first time the game reaches it
+    #define NOT_IMPLEMENTED                                        \
+        do                                                         \
+        {                                                          \
+            static bool logged___ = false;                         \
+            if (!logged___)                                        \
+            {                                                      \
+                logged___ = true;                                  \
+                printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
+            }                                                      \
+        } while (0)
+    #define WIP_IMPLEMENTED                                        \
+        do                                                         \
+        {                                                          \
+            static bool logged___ = false;                         \
+            if (!logged___)                                        \
+            {                                                      \
+                logged___ = true;                                  \
+                printf("WIP IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
+            }                                                      \
+        } while (0)
 
     #define DEFINE_GLOBAL(type, name, addr) type name
     #define DEFINE_GLOBAL_INIT(type, name, value, addr) type name = value
 
     #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) type name[size]
-//#define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, ...)  type name[size] = { __VA_ARGS__ }
+    #define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) type name[size] = {va_args}
 
     #define EXTERN_GLOBAL(type, name) extern type name
     #define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]

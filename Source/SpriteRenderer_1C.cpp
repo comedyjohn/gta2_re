@@ -74,6 +74,9 @@ EXPORT s32 get_rdtsc_5BEE90()
 {
     // NOTE: Actually is inline assembly, surprisingly
     unsigned __int64 t;
+#if defined(GTA2_PORT)
+    t = __builtin_ia32_rdtsc();
+#else
     __asm
     {
         // The original has the 16-bit pushaw/popaw. Prefix pushad/popad with an operand-size
@@ -86,6 +89,7 @@ EXPORT s32 get_rdtsc_5BEE90()
         _emit 0x66
         popad
     }
+#endif
     return static_cast<s32>(t);
 }
 

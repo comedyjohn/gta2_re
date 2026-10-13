@@ -221,3 +221,38 @@ jobs:
         name: linux_vc6_main_exe
         path: build_vc6/decomp_main.exe
         retention-days: 7
+
+    # ======================================
+    #      Linux native (port/)
+    # ======================================
+
+  build-linux-native:
+    runs-on: ubuntu-24.04
+    name: Linux_Native
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Only GTA2Hax (the renderer API headers, and Dear ImGui inside it) is needed, not the VC6 toolchain
+    - name: Fetch submodules
+      run: |
+        git submodule update --init 3rdParty/GTA2Hax
+        git -C 3rdParty/GTA2Hax submodule update --init 3rdParty/imgui
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++-multilib cmake ninja-build
+
+    - name: Build
+      run: |
+        cmake -S port -B build_port/native -G Ninja
+        cmake --build build_port/native
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux_native
+        path: build_port/native/gta2
+        retention-days: 7

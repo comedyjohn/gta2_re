@@ -1,0 +1,304 @@
+// DirectX for the native build: the GUIDs, DirectInput and DirectPlay.
+//
+// Milestone 1: DirectInput devices exist and report no input; DirectPlay reports itself unavailable,
+// which the game shows as "no network connections". COM objects nobody else creates fail.
+#include <dinput.h>
+#include <VC98/Include/DPLAY.H>
+#include <VC98/Include/DPLOBBY.H>
+
+#include <string.h>
+
+// ---- GUIDs (values from the DirectX SDK headers)
+#define PORT_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+    extern "C" const GUID name = {l, w1, w2, {b1, b2, b3, b4, b5, b6, b7, b8}}
+PORT_GUID(GUID_Key, 0x55728220,0xD33C,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_POV, 0xA36D02F2,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_XAxis, 0xA36D02E0,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_YAxis, 0xA36D02E1,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_ZAxis, 0xA36D02E2,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_RxAxis, 0xA36D02F4,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_RyAxis, 0xA36D02F5,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_RzAxis, 0xA36D02E3,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_Slider, 0xA36D02E4,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_Button, 0xA36D02F0,0xC9F3,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_SysKeyboard, 0x6F1D2B61,0xD5A0,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_SysMouse, 0x6F1D2B60,0xD5A0,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(GUID_Joystick, 0x6F1D2B70,0xD5A0,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(IID_IDirectInputA, 0x89521360,0xAA8A,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(IID_IDirectInputDeviceA, 0x5944E680,0xC92E,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(IID_IDirectInputDevice2A, 0x5944E682,0xC92E,0x11CF,0xBF,0xC7,0x44,0x45,0x53,0x54,0x00,0x00);
+PORT_GUID(IID_IDirectDraw2, 0xB3A6F3E0,0x2B43,0x11CF,0xA2,0xDE,0x00,0xAA,0x00,0xB9,0x33,0x56);
+PORT_GUID(IID_IDirectDrawSurface2, 0x57805885,0x6eec,0x11cf,0x94,0x41,0xa8,0x23,0x03,0xc1,0x0e,0x27);
+PORT_GUID(CLSID_DirectPlay, 0xd1eb6d20,0x8923,0x11d0,0x9d,0x97,0x0,0xa0,0xc9,0xa,0x43,0xcb);
+PORT_GUID(IID_IDirectPlay2, 0x2b74f7c0,0x9154,0x11cf,0xa9,0xcd,0x0,0xaa,0x0,0x68,0x86,0xe3);
+PORT_GUID(IID_IDirectPlay3, 0x133efe40,0x32dc,0x11d0,0x9c,0xfb,0x0,0xa0,0xc9,0xa,0x43,0xcb);
+PORT_GUID(IID_IDirectPlayLobby, 0xaf465c71,0x9588,0x11cf,0xa0,0x20,0x0,0xaa,0x0,0x61,0x57,0xac);
+PORT_GUID(IID_IDirectPlayLobby2, 0x194c220,0xa303,0x11d0,0x9c,0x4f,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPSPGUID_IPX, 0x685bc400,0x9d2c,0x11cf,0xa9,0xcd,0x0,0xaa,0x0,0x68,0x86,0xe3);
+PORT_GUID(DPSPGUID_TCPIP, 0x36E95EE0,0x8577,0x11cf,0x96,0xc,0x0,0x80,0xc7,0x53,0x4e,0x82);
+PORT_GUID(DPSPGUID_SERIAL, 0xf1d6860,0x88d9,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPSPGUID_MODEM, 0x44eaa760,0xcb68,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_TotalSize, 0x1318f560,0x912c,0x11d0,0x9d,0xaa,0x0,0xa0,0xc9,0xa,0x43,0xcb);
+PORT_GUID(DPAID_ServiceProvider, 0x7d916c0,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_LobbyProvider, 0x59b95640,0x9667,0x11d0,0xa7,0x7d,0x0,0x0,0xf8,0x3,0xab,0xfc);
+PORT_GUID(DPAID_Phone, 0x78ec89a0,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_PhoneW, 0xba5a7a70,0x9dbf,0x11d0,0x9c,0xc1,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_Modem, 0xf6dcc200,0xa2fe,0x11d0,0x9c,0x4f,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_ModemW, 0x1fd92e0,0xa2ff,0x11d0,0x9c,0x4f,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_INet, 0xc4a54da0,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_INetW, 0xe63232a0,0x9dbf,0x11d0,0x9c,0xc1,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+PORT_GUID(DPAID_ComPort, 0xf2f0ce00,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
+
+// ---- DirectInput
+namespace
+{
+class DirectInputDevice final : public IDirectInputDevice2A
+{
+  public:
+    explicit DirectInputDevice(const GUID& guid) : mGuid(guid), mRefs(1), mStateSize(0)
+    {
+    }
+
+    HRESULT QueryInterface(REFIID riid, void** out) override
+    {
+        if (riid == IID_IDirectInputDeviceA || riid == IID_IDirectInputDevice2A)
+        {
+            AddRef();
+            *out = this;
+            return S_OK;
+        }
+        *out = 0;
+        return E_NOINTERFACE;
+    }
+    ULONG AddRef() override
+    {
+        return ++mRefs;
+    }
+    ULONG Release() override
+    {
+        ULONG refs = --mRefs;
+        if (!refs)
+        {
+            delete this;
+        }
+        return refs;
+    }
+
+    HRESULT GetCapabilities(LPDIDEVCAPS caps) override
+    {
+        DWORD size = caps->dwSize;
+        memset(caps, 0, size);
+        caps->dwSize = size;
+        caps->dwDevType = mGuid == GUID_SysKeyboard ? DIDEVTYPE_KEYBOARD : DIDEVTYPE_MOUSE;
+        return DI_OK;
+    }
+    HRESULT EnumObjects(LPVOID, LPVOID, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT GetProperty(REFGUID, LPDIPROPHEADER) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT SetProperty(REFGUID, LPCDIPROPHEADER) override
+    {
+        return DI_OK;
+    }
+    HRESULT Acquire() override
+    {
+        return DI_OK;
+    }
+    HRESULT Unacquire() override
+    {
+        return DI_OK;
+    }
+    HRESULT GetDeviceState(DWORD size, LPVOID data) override
+    {
+        memset(data, 0, size); // nothing pressed (input arrives with the SDL platform layer)
+        return DI_OK;
+    }
+    HRESULT GetDeviceData(DWORD, LPDIDEVICEOBJECTDATA, LPDWORD inOut, DWORD) override
+    {
+        *inOut = 0; // no buffered events
+        return DI_OK;
+    }
+    HRESULT SetDataFormat(LPCDIDATAFORMAT format) override
+    {
+        mStateSize = format ? format->dwDataSize : 0;
+        return DI_OK;
+    }
+    HRESULT SetEventNotification(HANDLE) override
+    {
+        return DI_OK;
+    }
+    HRESULT SetCooperativeLevel(HWND, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT GetObjectInfo(LPVOID, DWORD, DWORD) override
+    {
+        return DIERR_OBJECTNOTFOUND;
+    }
+    HRESULT GetDeviceInfo(LPDIDEVICEINSTANCEA info) override
+    {
+        DWORD size = info->dwSize;
+        memset(info, 0, size);
+        info->dwSize = size;
+        info->guidInstance = mGuid;
+        info->guidProduct = mGuid;
+        info->dwDevType = mGuid == GUID_SysKeyboard ? DIDEVTYPE_KEYBOARD : DIDEVTYPE_MOUSE;
+        return DI_OK;
+    }
+    HRESULT RunControlPanel(HWND, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT Initialize(HINSTANCE, DWORD, REFGUID) override
+    {
+        return DI_OK;
+    }
+    HRESULT CreateEffect(REFGUID, LPVOID, LPVOID*, LPUNKNOWN) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT EnumEffects(LPVOID, LPVOID, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT GetEffectInfo(LPVOID, REFGUID) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT GetForceFeedbackState(LPDWORD) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT SendForceFeedbackCommand(DWORD) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT EnumCreatedEffectObjects(LPVOID, LPVOID, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT Escape(LPVOID) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+    HRESULT Poll() override
+    {
+        return DI_NOEFFECT;
+    }
+    HRESULT SendDeviceData(DWORD, LPDIDEVICEOBJECTDATA, LPDWORD, DWORD) override
+    {
+        return DIERR_UNSUPPORTED;
+    }
+
+  private:
+    GUID mGuid;
+    ULONG mRefs;
+    DWORD mStateSize;
+};
+
+class DirectInput final : public IDirectInputA
+{
+  public:
+    DirectInput() : mRefs(1)
+    {
+    }
+
+    HRESULT QueryInterface(REFIID riid, void** out) override
+    {
+        if (riid == IID_IDirectInputA)
+        {
+            AddRef();
+            *out = this;
+            return S_OK;
+        }
+        *out = 0;
+        return E_NOINTERFACE;
+    }
+    ULONG AddRef() override
+    {
+        return ++mRefs;
+    }
+    ULONG Release() override
+    {
+        ULONG refs = --mRefs;
+        if (!refs)
+        {
+            delete this;
+        }
+        return refs;
+    }
+    HRESULT CreateDevice(REFGUID guid, IDirectInputDeviceA** device, LPUNKNOWN) override
+    {
+        if (guid != GUID_SysKeyboard && guid != GUID_SysMouse)
+        {
+            *device = 0;
+            return DIERR_DEVICENOTREG; // no game pads until the SDL platform layer
+        }
+        *device = new DirectInputDevice(guid);
+        return DI_OK;
+    }
+    HRESULT EnumDevices(DWORD, LPDIENUMDEVICESCALLBACKA, LPVOID, DWORD) override
+    {
+        return DI_OK; // no game pads to enumerate yet
+    }
+    HRESULT GetDeviceStatus(REFGUID guid) override
+    {
+        return (guid == GUID_SysKeyboard || guid == GUID_SysMouse) ? DI_OK : DI_NOTATTACHED;
+    }
+    HRESULT RunControlPanel(HWND, DWORD) override
+    {
+        return DI_OK;
+    }
+    HRESULT Initialize(HINSTANCE, DWORD) override
+    {
+        return DI_OK;
+    }
+
+  private:
+    ULONG mRefs;
+};
+} // namespace
+
+extern "C" HRESULT DirectInputCreateA(HINSTANCE, DWORD, LPDIRECTINPUTA* out, LPUNKNOWN)
+{
+    *out = new DirectInput();
+    return DI_OK;
+}
+
+// ---- DirectPlay: unavailable for now
+extern "C" HRESULT DirectPlayCreate(LPGUID, LPDIRECTPLAY* out, IUnknown*)
+{
+    *out = 0;
+    return DPERR_UNAVAILABLE;
+}
+
+extern "C" HRESULT DirectPlayLobbyCreateW(LPGUID, LPDIRECTPLAYLOBBY* out, IUnknown*, LPVOID, DWORD)
+{
+    *out = 0;
+    return DPERR_UNAVAILABLE;
+}
+
+extern "C" HRESULT DirectPlayLobbyCreateA(LPGUID sp, LPDIRECTPLAYLOBBY* out, IUnknown* outer, LPVOID data, DWORD size)
+{
+    return DirectPlayLobbyCreateW(sp, out, outer, data, size);
+}
+
+// ---- COM
+extern "C" HRESULT CoInitialize(LPVOID)
+{
+    return S_OK;
+}
+
+extern "C" void CoUninitialize()
+{
+}
+
+extern "C" HRESULT CoCreateInstance(REFCLSID, LPUNKNOWN, DWORD, REFIID, LPVOID* out)
+{
+    *out = 0;
+    return REGDB_E_CLASSNOTREG; // DirectPlay (CLSID_DirectPlay) and DirectMusic aren't available
+}

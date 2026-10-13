@@ -1,0 +1,985 @@
+// The Win32 API as the game uses it (port/include/port_win32_api.h, mmsystem.h, commctrl.h).
+//
+// Milestone 1 scope: everything links and behaves plausibly without a display. Windows are handles
+// with no window behind them and the message queue stays empty; that becomes SDL in milestone 2.
+// The registry is real, since the game keeps its settings there: a key/value store saved to
+// $XDG_CONFIG_HOME/gta2-native/registry.txt (or ~/.config/...).
+#include "path.h"
+#include "renderer.h"
+
+#include <commctrl.h>
+#include <io.h>
+#include <mmsystem.h>
+
+#include <errno.h>
+#include <stdarg.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <unistd.h>
+
+#include <map>
+#include <string>
+#include <vector>
+
+namespace
+{
+uint32_t MonotonicMs()
+{
+    timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return static_cast<uint32_t>(ts.tv_sec * 1000ull + ts.tv_nsec / 1000000ull);
+}
+
+// Fake handles: distinct non-null values, never dereferenced
+HANDLE MakeHandle()
+{
+    static uintptr_t next = 0x1000;
+    next += 4;
+    return reinterpret_cast<HANDLE>(next);
+}
+
+const HMODULE kRendererModule = reinterpret_cast<HMODULE>(0xD3D);
+} // namespace
+
+extern "C" {
+
+// ---------------------------------------------------------------- kernel32
+BOOL CloseHandle(HANDLE)
+{
+    return TRUE;
+}
+
+HANDLE CreateEventA(LPSECURITY_ATTRIBUTES, BOOL, BOOL, LPCSTR)
+{
+    return MakeHandle();
+}
+
+HANDLE CreateMutexA(LPSECURITY_ATTRIBUTES, BOOL, LPCSTR)
+{
+    return MakeHandle();
+}
+
+HANDLE OpenMutexA(DWORD, BOOL, LPCSTR)
+{
+    return 0; // no other instance of the game is running
+}
+
+BOOL ReleaseMutex(HANDLE)
+{
+    return TRUE;
+}
+
+BOOL SetEvent(HANDLE)
+{
+    return TRUE;
+}
+
+BOOL ResetEvent(HANDLE)
+{
+    return TRUE;
+}
+
+DWORD WaitForSingleObject(HANDLE, DWORD)
+{
+    return 0;
+}
+
+void Sleep(DWORD ms)
+{
+    usleep(static_cast<useconds_t>(ms) * 1000);
+}
+
+DWORD GetTickCount(void)
+{
+    return MonotonicMs();
+}
+
+DWORD timeGetTime(void)
+{
+    return MonotonicMs();
+}
+
+MMRESULT timeBeginPeriod(UINT)
+{
+    return TIMERR_NOERROR;
+}
+
+MMRESULT timeEndPeriod(UINT)
+{
+    return TIMERR_NOERROR;
+}
+
+BOOL QueryPerformanceCounter(LARGE_INTEGER* count)
+{
+    timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    count->QuadPart = static_cast<LONGLONG>(ts.tv_sec) * 1000000000ll + ts.tv_nsec;
+    return TRUE;
+}
+
+BOOL QueryPerformanceFrequency(LARGE_INTEGER* freq)
+{
+    freq->QuadPart = 1000000000ll;
+    return TRUE;
+}
+
+HMODULE LoadLibraryA(LPCSTR name)
+{
+    if (name && port_is_renderer_library(name))
+    {
+        return kRendererModule;
+    }
+    return 0;
+}
+
+BOOL FreeLibrary(HMODULE)
+{
+    return TRUE;
+}
+
+FARPROC GetProcAddress(HMODULE module, LPCSTR name)
+{
+    return module == kRendererModule ? port_renderer_lookup(name) : 0;
+}
+
+HMODULE GetModuleHandleA(LPCSTR)
+{
+    return reinterpret_cast<HMODULE>(1);
+}
+
+DWORD GetModuleFileNameA(HMODULE, LPSTR name, DWORD size)
+{
+    ssize_t len = readlink("/proc/self/exe", name, size ? size - 1 : 0);
+    if (len < 0)
+    {
+        len = 0;
+    }
+    if (size)
+    {
+        name[len] = 0;
+    }
+    return static_cast<DWORD>(len);
+}
+
+BOOL GetComputerNameA(LPSTR buffer, LPDWORD size)
+{
+    char host[256] = "linux";
+    gethostname(host, sizeof(host) - 1);
+    host[MAX_COMPUTERNAME_LENGTH] = 0;
+    size_t len = strlen(host);
+    if (len + 1 > *size)
+    {
+        *size = static_cast<DWORD>(len + 1);
+        return FALSE;
+    }
+    strcpy(buffer, host);
+    *size = static_cast<DWORD>(len);
+    return TRUE;
+}
+
+UINT GetDriveTypeA(LPCSTR)
+{
+    return DRIVE_FIXED; // the game data is installed, never on a CD
+}
+
+DWORD GetFileAttributesA(LPCSTR name)
+{
+    struct stat st;
+    if (stat(port_resolve_path(name).c_str(), &st) != 0)
+    {
+        return 0xFFFFFFFF; // INVALID_FILE_ATTRIBUTES
+    }
+    return S_ISDIR(st.st_mode) ? FILE_ATTRIBUTE_DIRECTORY : FILE_ATTRIBUTE_NORMAL;
+}
+
+BOOL GetVersionExA(LPOSVERSIONINFOA info)
+{
+    info->dwMajorVersion = 5; // Windows XP: the newest the game's checks know about
+    info->dwMinorVersion = 1;
+    info->dwBuildNumber = 2600;
+    info->dwPlatformId = VER_PLATFORM_WIN32_NT;
+    info->szCSDVersion[0] = 0;
+    return TRUE;
+}
+
+void OutputDebugStringA(LPCSTR s)
+{
+    fputs(s, stderr);
+}
+
+DWORD GetLastError(void)
+{
+    return 0;
+}
+
+int MultiByteToWideChar(UINT, DWORD, LPCSTR src, int srcLen, LPWSTR dst, int dstLen)
+{
+    int len = srcLen < 0 ? static_cast<int>(strlen(src)) + 1 : srcLen;
+    if (!dstLen)
+    {
+        return len;
+    }
+    int n = len < dstLen ? len : dstLen;
+    for (int i = 0; i < n; i++)
+    {
+        dst[i] = static_cast<unsigned char>(src[i]);
+    }
+    return n;
+}
+
+int WideCharToMultiByte(UINT, DWORD, LPCWSTR src, int srcLen, LPSTR dst, int dstLen, LPCSTR, LPBOOL usedDefault)
+{
+    int len = srcLen < 0 ? static_cast<int>(port_wcslen(src)) + 1 : srcLen;
+    if (usedDefault)
+    {
+        *usedDefault = FALSE;
+    }
+    if (!dstLen)
+    {
+        return len;
+    }
+    int n = len < dstLen ? len : dstLen;
+    for (int i = 0; i < n; i++)
+    {
+        unsigned short c = static_cast<unsigned short>(src[i]);
+        dst[i] = c < 256 ? static_cast<char>(c) : '?';
+        if (c >= 256 && usedDefault)
+        {
+            *usedDefault = TRUE;
+        }
+    }
+    return n;
+}
+
+// FindFirstFileA & co. sit on the _findfirst family in crt.cpp
+static void ToFindData(const _finddata_t& in, LPWIN32_FIND_DATAA out)
+{
+    memset(out, 0, sizeof(*out));
+    out->dwFileAttributes = (in.attrib & _A_SUBDIR) ? FILE_ATTRIBUTE_DIRECTORY : FILE_ATTRIBUTE_NORMAL;
+    out->nFileSizeLow = in.size;
+    snprintf(out->cFileName, sizeof(out->cFileName), "%s", in.name);
+}
+
+HANDLE FindFirstFileA(LPCSTR pattern, LPWIN32_FIND_DATAA data)
+{
+    _finddata_t fd;
+    long h = port_findfirst(pattern, &fd);
+    if (h == -1)
+    {
+        return INVALID_HANDLE_VALUE;
+    }
+    ToFindData(fd, data);
+    return reinterpret_cast<HANDLE>(h);
+}
+
+BOOL FindNextFileA(HANDLE find, LPWIN32_FIND_DATAA data)
+{
+    _finddata_t fd;
+    if (port_findnext(reinterpret_cast<long>(find), &fd) != 0)
+    {
+        return FALSE;
+    }
+    ToFindData(fd, data);
+    return TRUE;
+}
+
+BOOL FindClose(HANDLE find)
+{
+    return port_findclose(reinterpret_cast<long>(find)) == 0;
+}
+
+DWORD GetPrivateProfileStringA(LPCSTR app, LPCSTR key, LPCSTR def, LPSTR ret, DWORD size, LPCSTR file)
+{
+    // A minimal INI reader: [section] and key=value, both matched ignoring case
+    std::string result = def ? def : "";
+    if (FILE* f = fopen(port_resolve_path(file).c_str(), "r"))
+    {
+        char line[512];
+        bool inSection = false;
+        while (fgets(line, sizeof(line), f))
+        {
+            char* p = line;
+            while (*p == ' ' || *p == '\t')
+            {
+                p++;
+            }
+            p[strcspn(p, "\r\n")] = 0;
+            if (*p == '[')
+            {
+                char* end = strchr(p, ']');
+                if (end)
+                {
+                    *end = 0;
+                }
+                inSection = app && strcasecmp(p + 1, app) == 0;
+            }
+            else if (inSection && key)
+            {
+                char* eq = strchr(p, '=');
+                if (eq)
+                {
+                    *eq = 0;
+                    char* k = p;
+                    char* kEnd = eq;
+                    while (kEnd > k && (kEnd[-1] == ' ' || kEnd[-1] == '\t'))
+                    {
+                        *--kEnd = 0;
+                    }
+                    if (strcasecmp(k, key) == 0)
+                    {
+                        result = eq + 1;
+                        break;
+                    }
+                }
+            }
+        }
+        fclose(f);
+    }
+    if (!size)
+    {
+        return 0;
+    }
+    snprintf(ret, size, "%s", result.c_str());
+    return static_cast<DWORD>(strlen(ret));
+}
+
+LPSTR lstrcatA(LPSTR a, LPCSTR b)
+{
+    return strcat(a, b);
+}
+
+LPSTR lstrcpyA(LPSTR a, LPCSTR b)
+{
+    return strcpy(a, b);
+}
+
+int lstrlenA(LPCSTR s)
+{
+    return s ? static_cast<int>(strlen(s)) : 0;
+}
+
+int lstrcmpiA(LPCSTR a, LPCSTR b)
+{
+    return strcasecmp(a, b);
+}
+
+int wvsprintfA(LPSTR buf, LPCSTR fmt, va_list args)
+{
+    return vsprintf(buf, fmt, args);
+}
+
+int wsprintfA(LPSTR buf, LPCSTR fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+    int n = vsprintf(buf, fmt, args);
+    va_end(args);
+    return n;
+}
+
+// ---------------------------------------------------------------- user32: windows and messages
+namespace
+{
+std::map<std::string, WNDPROC> gWindowClasses;
+std::map<HWND, LONG> gWindowLongs[2];
+int gCursorCount = 0;
+} // namespace
+
+int MessageBoxA(HWND, LPCSTR text, LPCSTR caption, UINT)
+{
+    fprintf(stderr, "[%s] %s\n", caption ? caption : "", text ? text : "");
+    return IDOK;
+}
+
+LRESULT DefWindowProcA(HWND, UINT, WPARAM, LPARAM)
+{
+    return 0;
+}
+
+ATOM RegisterClassA(const WNDCLASSA* wc)
+{
+    gWindowClasses[wc->lpszClassName] = wc->lpfnWndProc;
+    return static_cast<ATOM>(gWindowClasses.size());
+}
+
+HWND CreateWindowExA(DWORD, LPCSTR, LPCSTR, DWORD, int, int, int, int, HWND, HMENU, HINSTANCE, LPVOID)
+{
+    return reinterpret_cast<HWND>(MakeHandle());
+}
+
+BOOL DestroyWindow(HWND)
+{
+    return TRUE;
+}
+
+BOOL ShowWindow(HWND, int)
+{
+    return TRUE;
+}
+
+BOOL UpdateWindow(HWND)
+{
+    return TRUE;
+}
+
+BOOL SetForegroundWindow(HWND)
+{
+    return TRUE;
+}
+
+LONG SetWindowLongA(HWND hwnd, int index, LONG value)
+{
+    std::map<HWND, LONG>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
+    LONG old = longs[hwnd];
+    longs[hwnd] = value;
+    return old;
+}
+
+LONG GetWindowLongA(HWND hwnd, int index)
+{
+    return gWindowLongs[index == GWL_EXSTYLE ? 1 : 0][hwnd];
+}
+
+BOOL SetWindowPos(HWND, HWND, int, int, int, int, UINT)
+{
+    return TRUE;
+}
+
+BOOL GetClientRect(HWND, LPRECT rect)
+{
+    rect->left = 0;
+    rect->top = 0;
+    rect->right = 640;
+    rect->bottom = 480;
+    return TRUE;
+}
+
+BOOL GetWindowRect(HWND hwnd, LPRECT rect)
+{
+    return GetClientRect(hwnd, rect);
+}
+
+BOOL AdjustWindowRect(LPRECT, DWORD, BOOL)
+{
+    return TRUE;
+}
+
+HWND FindWindowA(LPCSTR, LPCSTR)
+{
+    return 0;
+}
+
+HWND FindWindowExA(HWND, HWND, LPCSTR, LPCSTR)
+{
+    return 0;
+}
+
+BOOL PeekMessageA(LPMSG, HWND, UINT, UINT, UINT)
+{
+    return FALSE; // the queue stays empty until SDL feeds it (milestone 2)
+}
+
+BOOL GetMessageA(LPMSG msg, HWND, UINT, UINT)
+{
+    memset(msg, 0, sizeof(*msg));
+    msg->message = WM_QUIT;
+    return FALSE;
+}
+
+BOOL TranslateMessage(const MSG*)
+{
+    return FALSE;
+}
+
+LRESULT DispatchMessageA(const MSG*)
+{
+    return 0;
+}
+
+BOOL PostMessageA(HWND, UINT, WPARAM, LPARAM)
+{
+    return TRUE;
+}
+
+LRESULT SendMessageA(HWND, UINT, WPARAM, LPARAM)
+{
+    return 0;
+}
+
+void PostQuitMessage(int)
+{
+}
+
+int ShowCursor(BOOL show)
+{
+    return show ? ++gCursorCount : --gCursorCount;
+}
+
+HICON LoadIconA(HINSTANCE, LPCSTR)
+{
+    return reinterpret_cast<HICON>(MakeHandle());
+}
+
+HCURSOR LoadCursorA(HINSTANCE, LPCSTR)
+{
+    return reinterpret_cast<HCURSOR>(MakeHandle());
+}
+
+HCURSOR SetCursor(HCURSOR cursor)
+{
+    return cursor;
+}
+
+int GetSystemMetrics(int index)
+{
+    switch (index)
+    {
+        case SM_CXSCREEN:
+            return 640;
+        case SM_CYSCREEN:
+            return 480;
+        default:
+            return 0;
+    }
+}
+
+HDC GetDC(HWND)
+{
+    return reinterpret_cast<HDC>(MakeHandle());
+}
+
+int ReleaseDC(HWND, HDC)
+{
+    return 1;
+}
+
+BOOL GetKeyboardLayoutNameA(LPSTR name)
+{
+    strcpy(name, "00000409"); // US English
+    return TRUE;
+}
+
+short GetAsyncKeyState(int)
+{
+    return 0;
+}
+
+short GetKeyState(int)
+{
+    return 0;
+}
+
+BOOL SetWindowTextA(HWND, LPCSTR)
+{
+    return TRUE;
+}
+
+HWND GetActiveWindow(void)
+{
+    return 0;
+}
+
+HWND GetForegroundWindow(void)
+{
+    return 0;
+}
+
+BOOL IsIconic(HWND)
+{
+    return FALSE;
+}
+
+BOOL InvalidateRect(HWND, const RECT*, BOOL)
+{
+    return TRUE;
+}
+
+BOOL ValidateRect(HWND, const RECT*)
+{
+    return TRUE;
+}
+
+// Dialogs exist only for the network lobby, and multiplayer is unavailable for now
+INT_PTR DialogBoxParamA(HINSTANCE, LPCSTR, HWND, DLGPROC, LPARAM)
+{
+    return -1;
+}
+
+BOOL EndDialog(HWND, INT_PTR)
+{
+    return TRUE;
+}
+
+HWND GetDlgItem(HWND, int)
+{
+    return 0;
+}
+
+int GetDlgCtrlID(HWND)
+{
+    return 0;
+}
+
+UINT GetDlgItemTextA(HWND, int, LPSTR text, int max)
+{
+    if (max > 0)
+    {
+        text[0] = 0;
+    }
+    return 0;
+}
+
+BOOL SetDlgItemTextA(HWND, int, LPCSTR)
+{
+    return TRUE;
+}
+
+LRESULT SendDlgItemMessageA(HWND, int, UINT, WPARAM, LPARAM)
+{
+    return 0;
+}
+
+BOOL EnableWindow(HWND, BOOL)
+{
+    return FALSE;
+}
+
+HWND GetParent(HWND)
+{
+    return 0;
+}
+
+int GetWindowTextA(HWND, LPSTR text, int max)
+{
+    if (max > 0)
+    {
+        text[0] = 0;
+    }
+    return 0;
+}
+
+LRESULT CallWindowProcA(WNDPROC proc, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    return proc ? proc(hwnd, msg, wParam, lParam) : 0;
+}
+
+UINT_PTR SetTimer(HWND, UINT_PTR id, UINT, TIMERPROC)
+{
+    return id ? id : 1;
+}
+
+BOOL KillTimer(HWND, UINT_PTR)
+{
+    return TRUE;
+}
+
+void InitCommonControls(void)
+{
+}
+
+// ---------------------------------------------------------------- gdi32
+int GetDeviceCaps(HDC, int index)
+{
+    switch (index)
+    {
+        case BITSPIXEL:
+            return 32;
+        case PLANES:
+            return 1;
+        case HORZRES:
+            return 640;
+        case VERTRES:
+            return 480;
+        default:
+            return 0;
+    }
+}
+
+HGDIOBJ GetStockObject(int)
+{
+    return MakeHandle();
+}
+
+// ---------------------------------------------------------------- advapi32: the registry
+namespace
+{
+struct RegValue
+{
+    DWORD mType;
+    std::vector<BYTE> mData;
+};
+
+// Key paths are stored lower-case ("hkey_local_machine\software\dma design ltd\gta2\screen")
+std::map<std::string, std::map<std::string, RegValue>> gRegistry;
+std::map<HKEY, std::string> gOpenKeys;
+bool gRegistryLoaded = false;
+
+std::string Lower(std::string s)
+{
+    for (char& c : s)
+    {
+        c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    }
+    return s;
+}
+
+std::string RegistryFile()
+{
+    const char* base = getenv("XDG_CONFIG_HOME");
+    std::string dir = base && *base ? base : std::string(getenv("HOME") ? getenv("HOME") : ".") + "/.config";
+    dir += "/gta2-native";
+    mkdir(dir.c_str(), 0755);
+    return dir + "/registry.txt";
+}
+
+// One value per line: key \t value-name \t type \t hex bytes
+void LoadRegistry()
+{
+    if (gRegistryLoaded)
+    {
+        return;
+    }
+    gRegistryLoaded = true;
+    FILE* f = fopen(RegistryFile().c_str(), "r");
+    if (!f)
+    {
+        return;
+    }
+    char line[4096];
+    while (fgets(line, sizeof(line), f))
+    {
+        line[strcspn(line, "\r\n")] = 0;
+        char* fields[4];
+        char* p = line;
+        int n = 0;
+        for (; n < 4 && p; n++)
+        {
+            fields[n] = p;
+            p = strchr(p, '\t');
+            if (p)
+            {
+                *p++ = 0;
+            }
+        }
+        if (n < 4)
+        {
+            continue;
+        }
+        RegValue v;
+        v.mType = static_cast<DWORD>(strtoul(fields[2], 0, 10));
+        for (const char* h = fields[3]; h[0] && h[1]; h += 2)
+        {
+            char byte[3] = {h[0], h[1], 0};
+            v.mData.push_back(static_cast<BYTE>(strtoul(byte, 0, 16)));
+        }
+        gRegistry[fields[0]][fields[1]] = v;
+    }
+    fclose(f);
+}
+
+void SaveRegistry()
+{
+    FILE* f = fopen(RegistryFile().c_str(), "w");
+    if (!f)
+    {
+        return;
+    }
+    for (const auto& key : gRegistry)
+    {
+        for (const auto& value : key.second)
+        {
+            fprintf(f, "%s\t%s\t%u\t", key.first.c_str(), value.first.c_str(), static_cast<unsigned>(value.second.mType));
+            for (BYTE b : value.second.mData)
+            {
+                fprintf(f, "%02x", b);
+            }
+            fputc('\n', f);
+        }
+    }
+    fclose(f);
+}
+
+bool KeyPath(HKEY key, LPCSTR subKey, std::string& out)
+{
+    LoadRegistry();
+    std::string base;
+    if (key == HKEY_LOCAL_MACHINE)
+    {
+        base = "hkey_local_machine";
+    }
+    else if (key == HKEY_CURRENT_USER)
+    {
+        base = "hkey_current_user";
+    }
+    else if (key == HKEY_CLASSES_ROOT)
+    {
+        base = "hkey_classes_root";
+    }
+    else if (key == HKEY_USERS)
+    {
+        base = "hkey_users";
+    }
+    else
+    {
+        auto it = gOpenKeys.find(key);
+        if (it == gOpenKeys.end())
+        {
+            return false;
+        }
+        base = it->second;
+    }
+    out = base;
+    if (subKey && *subKey)
+    {
+        out += '\\';
+        out += Lower(subKey);
+    }
+    return true;
+}
+
+HKEY OpenHandle(const std::string& path)
+{
+    HKEY h = reinterpret_cast<HKEY>(MakeHandle());
+    gOpenKeys[h] = path;
+    return h;
+}
+} // namespace
+
+LSTATUS RegOpenKeyExA(HKEY key, LPCSTR subKey, DWORD, REGSAM, PHKEY result)
+{
+    std::string path;
+    if (!KeyPath(key, subKey, path) || !gRegistry.count(path))
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    *result = OpenHandle(path);
+    return ERROR_SUCCESS;
+}
+
+LSTATUS RegOpenKeyA(HKEY key, LPCSTR subKey, PHKEY result)
+{
+    return RegOpenKeyExA(key, subKey, 0, KEY_ALL_ACCESS, result);
+}
+
+LSTATUS RegCreateKeyExA(HKEY key, LPCSTR subKey, DWORD, LPSTR, DWORD, REGSAM, LPSECURITY_ATTRIBUTES, PHKEY result,
+                        LPDWORD disposition)
+{
+    std::string path;
+    if (!KeyPath(key, subKey, path))
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    bool existed = gRegistry.count(path) != 0;
+    gRegistry[path];
+    if (disposition)
+    {
+        *disposition = existed ? REG_OPENED_EXISTING_KEY : REG_CREATED_NEW_KEY;
+    }
+    *result = OpenHandle(path);
+    return ERROR_SUCCESS;
+}
+
+LSTATUS RegCloseKey(HKEY key)
+{
+    gOpenKeys.erase(key);
+    return ERROR_SUCCESS;
+}
+
+LSTATUS RegQueryValueExA(HKEY key, LPCSTR name, LPDWORD, LPDWORD type, LPBYTE data, LPDWORD size)
+{
+    std::string path;
+    if (!KeyPath(key, 0, path))
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    auto keyIt = gRegistry.find(path);
+    if (keyIt == gRegistry.end())
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    auto valueIt = keyIt->second.find(Lower(name ? name : ""));
+    if (valueIt == keyIt->second.end())
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    const RegValue& v = valueIt->second;
+    if (type)
+    {
+        *type = v.mType;
+    }
+    if (size)
+    {
+        DWORD available = *size;
+        *size = static_cast<DWORD>(v.mData.size());
+        if (data)
+        {
+            if (available < v.mData.size())
+            {
+                return ERROR_MORE_DATA;
+            }
+            memcpy(data, v.mData.data(), v.mData.size());
+        }
+    }
+    return ERROR_SUCCESS;
+}
+
+LSTATUS RegSetValueExA(HKEY key, LPCSTR name, DWORD, DWORD type, const BYTE* data, DWORD size)
+{
+    std::string path;
+    if (!KeyPath(key, 0, path))
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    RegValue v;
+    v.mType = type;
+    v.mData.assign(data, data + size);
+    gRegistry[path][Lower(name ? name : "")] = v;
+    SaveRegistry();
+    return ERROR_SUCCESS;
+}
+
+LSTATUS RegDeleteValueA(HKEY key, LPCSTR name)
+{
+    std::string path;
+    if (!KeyPath(key, 0, path) || !gRegistry[path].erase(Lower(name ? name : "")))
+    {
+        return ERROR_FILE_NOT_FOUND;
+    }
+    SaveRegistry();
+    return ERROR_SUCCESS;
+}
+
+// ---------------------------------------------------------------- version, shell32, shlwapi
+DWORD GetFileVersionInfoSizeA(LPCSTR, LPDWORD handle)
+{
+    if (handle)
+    {
+        *handle = 0;
+    }
+    return 0; // no version resources on Linux
+}
+
+BOOL GetFileVersionInfoA(LPCSTR, DWORD, DWORD, LPVOID)
+{
+    return FALSE;
+}
+
+BOOL VerQueryValueA(const void*, LPCSTR, LPVOID* buffer, PUINT len)
+{
+    *buffer = 0;
+    *len = 0;
+    return FALSE;
+}
+
+HINSTANCE ShellExecuteA(HWND, LPCSTR, LPCSTR file, LPCSTR, LPCSTR, int)
+{
+    fprintf(stderr, "ShellExecute(%s) is not supported\n", file ? file : "");
+    return reinterpret_cast<HINSTANCE>(2); // <= 32 means failure
+}
+
+LPSTR StrStrIA(LPCSTR haystack, LPCSTR needle)
+{
+    return const_cast<LPSTR>(strcasestr(haystack, needle));
+}
+
+} // extern "C"

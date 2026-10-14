@@ -51,3 +51,18 @@ FILE* port_freopen(const char* path, const char* mode, FILE* stream);
 #endif
 #define fopen(path, mode) port_fopen(path, mode)
 #define freopen(path, mode, stream) port_freopen(path, mode, stream)
+
+// The game's random numbers come from rand(), and in a network game every machine has to draw the same
+// ones. C libraries each have their own generator (glibc's isn't musl's or Windows'), so the port uses
+// MSVC's everywhere: the same numbers on every system, and the ones the original game drew.
+#ifdef __cplusplus
+extern "C" {
+#endif
+int port_rand(void);
+void port_srand(unsigned int seed);
+#ifdef __cplusplus
+}
+#endif
+#define PORT_RAND_MAX 0x7FFF
+#define rand() port_rand()
+#define srand(seed) port_srand(seed)

@@ -256,4 +256,18 @@ char* port_itoa(int value, char* buf, int radix)
     return buf;
 }
 
+// MSVC's rand(): a linear congruential generator, 15 bits a draw, seeded with 1
+static unsigned int gRandState = 1;
+
+int port_rand(void)
+{
+    gRandState = gRandState * 214013u + 2531011u;
+    return static_cast<int>((gRandState >> 16) & PORT_RAND_MAX);
+}
+
+void port_srand(unsigned int seed)
+{
+    gRandState = seed;
+}
+
 } // extern "C"

@@ -41,6 +41,17 @@ set(CMAKE_CXX_EXTENSIONS ON)
 # MSVC semantics the decompiled code relies on: 2-byte wchar_t, signed char (unsigned by default on
 # ARM), wrapping signed arithmetic and type punning
 add_compile_options(-fshort-wchar -fsigned-char -fno-strict-aliasing -fwrapv)
+# The same floating-point arithmetic on every machine, so a network game (lockstep: every machine runs
+# the whole simulation) can't drift apart between a 32-bit PC, a 64-bit one and an ARM handheld. The
+# game's maths is fixed-point; floating point only fills its trigonometry tables and takes square
+# roots, both far enough from any rounding edge to come out alike today (gta2 --simcheck compares
+# them). These keep it that way: 32-bit x86 uses SSE2 like the others, rather than x87 registers
+# whose 80-bit intermediates depend on where the compiler spills them, and no CPU fuses a multiply
+# and an add (GCC does by default on ARM).
+add_compile_options(-ffp-contract=off)
+if (CMAKE_SIZEOF_VOID_P EQUAL 4 AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86|i.86|AMD64")
+    add_compile_options(-msse2 -mfpmath=sse)
+endif()
 
 # SDL2 for the target architecture (Debian/Ubuntu: libsdl2-dev for 64-bit; for 32-bit see
 # tools/setup_sdl32.sh). SDL_config.h forwards to an architecture directory, so both include

@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {"major": 3, "minor": 21, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "linux32",
+      "displayName": "Linux, 32-bit (playable)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/linux32",
+      "cacheVariables": {
+        "GTA2_BITS": "32",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_PREFIX_PATH": "$env{HOME}/sdl32/usr"
+      }
+    },
+    {
+      "name": "linux64",
+      "displayName": "Linux, 64-bit (builds, not playable yet)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/linux64",
+      "cacheVariables": {
+        "GTA2_BITS": "64",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets": [
+    {"name": "linux32", "configurePreset": "linux32"},
+    {"name": "linux64", "configurePreset": "linux64"}
+  ]
+}

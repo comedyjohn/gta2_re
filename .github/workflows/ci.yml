@@ -228,7 +228,11 @@ jobs:
 
   build-linux-native:
     runs-on: ubuntu-24.04
-    name: Linux_Native
+    name: Linux_Native_${{ matrix.bits }}bit
+    strategy:
+      fail-fast: false
+      matrix:
+        bits: [32, 64]
 
     steps:
     - name: Checkout repository
@@ -243,33 +247,36 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y g++-multilib cmake ninja-build xvfb
-        port/tools/setup_sdl32.sh "$HOME/sdl32"
-        sudo apt-get install -y libgl1:i386 libgl1-mesa-dri:i386
+        sudo apt-get install -y cmake ninja-build xvfb
+        if [ "${{ matrix.bits }}" = 32 ]; then
+          sudo apt-get install -y g++-multilib
+          port/tools/setup_sdl32.sh "$HOME/sdl32"
+          sudo apt-get install -y libgl1:i386 libgl1-mesa-dri:i386
+        else
+          sudo apt-get install -y g++ libsdl2-dev libgl1 libgl1-mesa-dri
+        fi
 
     - name: Build
-      run: |
-        cmake -S port -B build_port/native -G Ninja -DCMAKE_PREFIX_PATH="$HOME/sdl32/usr"
-        cmake --build build_port/native
+      run: port/build.sh ${{ matrix.bits }}
 
     # Draws through the renderer's entry points on a virtual display (Mesa) and checks the pixels
     - name: Renderer self-test
-      run: xvfb-run -a -s "-screen 0 1600x1200x24" build_port/native/gta2 --selftest
+      run: xvfb-run -a -s "-screen 0 1600x1200x24" build_port/linux${{ matrix.bits }}/gta2 --selftest
 
     # Plays samples and streams through the AIL_* functions, mixed without a device, then once
     # through SDL's dummy audio device
     - name: Audio self-test
-      run: SDL_AUDIODRIVER=dummy build_port/native/gta2 --audiotest
+      run: SDL_AUDIODRIVER=dummy build_port/linux${{ matrix.bits }}/gta2 --audiotest
 
     - name: Package
       run: |
         mkdir -p gta2-native
-        cp build_port/native/gta2 port/gta2-launch port/RUNNING.md gta2-native/
-        tar czf gta2-native-linux.tar.gz gta2-native
+        cp build_port/linux${{ matrix.bits }}/gta2 port/gta2-launch port/RUNNING.md gta2-native/
+        tar czf gta2-native-linux${{ matrix.bits }}.tar.gz gta2-native
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: linux_native
-        path: gta2-native-linux.tar.gz
+        name: linux_native_${{ matrix.bits }}bit
+        path: gta2-native-linux${{ matrix.bits }}.tar.gz
         retention-days: 7

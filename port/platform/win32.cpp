@@ -390,6 +390,7 @@ std::deque<MSG> gMessages;
 HWND gMainWindow = 0; // the first top-level window: where platform events go
 int gCursorCount = 0;
 bool gPumping = false;
+std::vector<WNDPROC>* gWndProcHandles = 0; // 64-bit: see WndProcToLong
 
 void Post(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -546,12 +547,52 @@ BOOL SetForegroundWindow(HWND)
     return TRUE;
 }
 
+// GWL_WNDPROC passes a window procedure through a LONG. That fits in a 32-bit build; in a 64-bit one
+// a LONG can't hold a pointer, so procedures travel as small numbered handles instead (64-bit
+// Windows does the same), which CallWindowProcA and SetWindowLongA turn back into the procedure.
+static LONG WndProcToLong(WNDPROC proc)
+{
+#if __SIZEOF_POINTER__ == 4
+    return reinterpret_cast<LONG>(proc);
+#else
+    static std::vector<WNDPROC> handles;
+    if (!proc)
+    {
+        return 0;
+    }
+    for (size_t i = 0; i < handles.size(); i++)
+    {
+        if (handles[i] == proc)
+        {
+            return static_cast<LONG>(0xFFFF0000u + i);
+        }
+    }
+    handles.push_back(proc);
+    gWndProcHandles = &handles;
+    return static_cast<LONG>(0xFFFF0000u + handles.size() - 1);
+#endif
+}
+
+static WNDPROC LongToWndProc(intptr_t value)
+{
+#if __SIZEOF_POINTER__ == 4
+    return reinterpret_cast<WNDPROC>(value);
+#else
+    const uint32_t v = static_cast<uint32_t>(value);
+    if (gWndProcHandles && value == static_cast<LONG>(v) && v >= 0xFFFF0000u && v - 0xFFFF0000u < gWndProcHandles->size())
+    {
+        return (*gWndProcHandles)[v - 0xFFFF0000u];
+    }
+    return reinterpret_cast<WNDPROC>(value);
+#endif
+}
+
 LONG SetWindowLongA(HWND hwnd, int index, LONG value)
 {
     if (index == GWL_WNDPROC)
     {
-        LONG old = reinterpret_cast<LONG>(gWindowProcs[hwnd]);
-        gWindowProcs[hwnd] = reinterpret_cast<WNDPROC>(value);
+        LONG old = WndProcToLong(gWindowProcs[hwnd]);
+        gWindowProcs[hwnd] = LongToWndProc(value);
         return old;
     }
     std::map<HWND, LONG>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
@@ -564,7 +605,7 @@ LONG GetWindowLongA(HWND hwnd, int index)
 {
     if (index == GWL_WNDPROC)
     {
-        return reinterpret_cast<LONG>(gWindowProcs[hwnd]);
+        return WndProcToLong(gWindowProcs[hwnd]);
     }
     return gWindowLongs[index == GWL_EXSTYLE ? 1 : 0][hwnd];
 }
@@ -820,6 +861,7 @@ int GetWindowTextA(HWND, LPSTR text, int max)
 
 LRESULT CallWindowProcA(WNDPROC proc, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    proc = LongToWndProc(reinterpret_cast<intptr_t>(proc)); // may be a handle from GetWindowLongA
     return proc ? proc(hwnd, msg, wParam, lParam) : 0;
 }
 

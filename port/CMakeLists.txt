@@ -1,27 +1,50 @@
 # Native Linux build of the decompiled game. A separate project from the top-level CMakeLists.txt,
-# which builds the matching VC6 executable:
+# which builds the matching VC6 executable. Easiest through the presets (port/CMakePresets.json) or
+# port/build.sh:
 #
-#   cmake -S port -B build_port && cmake --build build_port -j
+#   cmake --preset linux32 && cmake --build --preset linux32     (or: port/build.sh 32)
+#   cmake --preset linux64 && cmake --build --preset linux64     (or: port/build.sh 64)
 #
 # The game sources are compiled unchanged, against port/include/ (a Win32/DirectX-shaped API
 # declared for the game) and linked with port/platform/ (its implementation).
 cmake_minimum_required(VERSION 3.16)
 
-# Structures hold 32-bit pointers and their sizes are asserted, so the port is 32-bit for now. Set
-# before project() so CMake detects a 32-bit target and looks for i386 libraries (SDL2).
-set(CMAKE_C_FLAGS_INIT "-m32")
-set(CMAKE_CXX_FLAGS_INIT "-m32")
-set(CMAKE_EXE_LINKER_FLAGS_INIT "-m32")
+# GTA2_BITS picks the pointer size. 32 is what plays today: the game's structures were laid out for
+# 4-byte pointers. 64 builds, but isn't playable until the game stops keeping pointers in 32-bit
+# integers (port/TODO.md). On an x86-64 host, 32 means -m32, set before project() so CMake detects a
+# 32-bit target and looks for i386 libraries. A cross toolchain (CMAKE_TOOLCHAIN_FILE, e.g. armhf or
+# aarch64) brings its own target, and only the check below applies.
+set(GTA2_BITS 32 CACHE STRING "Pointer size of the native build: 32 or 64")
+set_property(CACHE GTA2_BITS PROPERTY STRINGS 32 64)
+if (NOT GTA2_BITS STREQUAL "32" AND NOT GTA2_BITS STREQUAL "64")
+    message(FATAL_ERROR "GTA2_BITS must be 32 or 64, not ${GTA2_BITS}")
+endif()
+cmake_host_system_information(RESULT host_arch QUERY OS_PLATFORM) # project() hasn't detected it yet
+if (GTA2_BITS STREQUAL "32" AND NOT CMAKE_TOOLCHAIN_FILE AND host_arch MATCHES "x86_64|AMD64")
+    set(CMAKE_C_FLAGS_INIT "-m32")
+    set(CMAKE_CXX_FLAGS_INIT "-m32")
+    set(CMAKE_EXE_LINKER_FLAGS_INIT "-m32")
+endif()
 project(gta2_native C CXX)
+
+math(EXPR detected_bits "${CMAKE_SIZEOF_VOID_P} * 8")
+if (NOT detected_bits EQUAL GTA2_BITS)
+    message(FATAL_ERROR "GTA2_BITS=${GTA2_BITS}, but the compiler produces ${detected_bits}-bit code"
+                        " (for 32-bit on x86-64, install g++-multilib)")
+endif()
+message(STATUS "GTA2 native build: ${GTA2_BITS}-bit")
 
 set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 set(CMAKE_CXX_STANDARD 14) # C++17 removed the throw(std::bad_alloc) specifications crt_stubs.cpp uses
 set(CMAKE_CXX_EXTENSIONS ON)
-add_compile_options(-fshort-wchar -fno-strict-aliasing -fwrapv)
+# MSVC semantics the decompiled code relies on: 2-byte wchar_t, signed char (unsigned by default on
+# ARM), wrapping signed arithmetic and type punning
+add_compile_options(-fshort-wchar -fsigned-char -fno-strict-aliasing -fwrapv)
 
-# SDL2, 32-bit (Debian/Ubuntu: libsdl2-dev:i386). SDL_config.h forwards to an architecture
-# directory, so both include directories are needed.
+# SDL2 for the target architecture (Debian/Ubuntu: libsdl2-dev for 64-bit; for 32-bit see
+# tools/setup_sdl32.sh). SDL_config.h forwards to an architecture directory, so both include
+# directories are needed.
 find_path(SDL2_INCLUDE_DIR SDL.h PATH_SUFFIXES SDL2 REQUIRED)
 find_path(SDL2_ARCH_INCLUDE_DIR SDL2/_real_SDL_config.h)
 find_library(SDL2_LIBRARY NAMES SDL2 SDL2-2.0 REQUIRED)

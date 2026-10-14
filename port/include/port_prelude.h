@@ -6,9 +6,12 @@
     #error "port/include is for the native build only; the VC6 build uses the real Windows headers"
 #endif
 
-#if !defined(__i386__)
-    // Structures hold 32-bit pointers and their sizes are asserted (GTA2_ASSERT_SIZEOF_ALWAYS).
-    #error "The native port is 32-bit only for now: build with -m32"
+#if __SIZEOF_POINTER__ == 8
+    // 64-bit (GTA2_BITS=64): it compiles, but the game still keeps pointers in 32-bit integers in
+    // places, so it isn't playable yet. See port/TODO.md.
+    #define GTA2_PORT_64BIT 1
+#elif __SIZEOF_POINTER__ != 4
+    #error "Unsupported pointer size"
 #endif
 
 #if __SIZEOF_WCHAR_T__ != 2

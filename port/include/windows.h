@@ -65,13 +65,23 @@ typedef unsigned short WORD;
 typedef WORD* LPWORD;
 typedef unsigned short USHORT;
 typedef short SHORT;
+// Windows keeps long at 32 bits even in 64-bit builds (LLP64); Linux doesn't (LP64). The 32-bit
+// build keeps MSVC's exact types, which the game's code was written against.
+#if __SIZEOF_LONG__ == 4
 typedef unsigned long DWORD;
+typedef long LONG;
+typedef unsigned long ULONG;
+typedef long HRESULT;
+#else
+typedef unsigned int DWORD;
+typedef int LONG;
+typedef unsigned int ULONG;
+typedef int HRESULT;
+#endif
 typedef DWORD* LPDWORD;
 typedef DWORD* PDWORD;
-typedef long LONG;
 typedef LONG* LPLONG;
 typedef LONG* PLONG;
-typedef unsigned long ULONG;
 typedef ULONG* PULONG;
 typedef int INT;
 typedef unsigned int UINT;
@@ -94,16 +104,15 @@ typedef WCHAR* LPWSTR;
 typedef const WCHAR* LPCWSTR;
 typedef LPSTR LPTSTR;
 typedef LPCSTR LPCTSTR;
-typedef unsigned int UINT_PTR;
-typedef int INT_PTR;
-typedef long LONG_PTR;
-typedef unsigned long ULONG_PTR;
+typedef uintptr_t UINT_PTR;
+typedef intptr_t INT_PTR;
+typedef intptr_t LONG_PTR;
+typedef uintptr_t ULONG_PTR;
 typedef ULONG_PTR DWORD_PTR;
 typedef ULONG_PTR SIZE_T;
 typedef UINT_PTR WPARAM;
 typedef LONG_PTR LPARAM;
 typedef LONG_PTR LRESULT;
-typedef long HRESULT;
 typedef WORD ATOM;
 typedef DWORD COLORREF;
 

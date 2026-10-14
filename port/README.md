@@ -4,16 +4,28 @@ A native Linux build of the decompiled game: the same `Source/` that the VC6 bui
 matching `decomp_main.exe`, compiled by GCC into a Linux executable, with no Wine and no Windows DLLs.
 
 ```bash
-sudo apt-get install g++-multilib cmake ninja-build
-port/tools/setup_sdl32.sh ~/sdl32        # 32-bit SDL2 (runtime from apt, headers unpacked)
-git submodule update --init 3rdParty/GTA2Hax
-git -C 3rdParty/GTA2Hax submodule update --init 3rdParty/imgui
-cmake -S port -B build_port/native -G Ninja -DCMAKE_PREFIX_PATH=~/sdl32/usr
-cmake --build build_port/native
+sudo apt-get install g++-multilib cmake ninja-build libsdl2-dev   # Debian/Ubuntu
+port/build.sh 32      # build_port/linux32/gta2: the playable one
+port/build.sh 64      # build_port/linux64/gta2: builds and passes its self-tests, not playable yet
+port/build.sh all     # both
 ```
 
-Run `build_port/native/gta2` from a directory holding the game's `data/` folder, or use
-`port/gta2-launch` as described in [RUNNING.md](RUNNING.md).
+`build.sh` fetches the two submodules it needs (GTA2Hax and the Dear ImGui inside it) and, for 32-bit
+on a 64-bit system, the 32-bit SDL2 headers (`tools/setup_sdl32.sh`, into `~/sdl32`). It then uses the
+CMake presets in `CMakePresets.json`, which work directly too:
+
+```bash
+cmake --preset linux32 && cmake --build --preset linux32
+cmake --preset linux64 && cmake --build --preset linux64
+```
+
+The pointer size is the one CMake option, `GTA2_BITS` (32 or 64); configure fails if the compiler
+doesn't produce that size. A cross toolchain (`CMAKE_TOOLCHAIN_FILE`, e.g. for ARM handhelds) sets
+the target itself, and `GTA2_BITS` must match it.
+
+Run `build_port/linux32/gta2` from a directory holding the game's `data/` folder, or use
+`port/gta2-launch` as described in [RUNNING.md](RUNNING.md). `gta2 --selftest` (renderer) and
+`gta2 --audiotest` (sound) check a build without game data.
 
 ## Status
 
@@ -51,8 +63,11 @@ Setup installer with `innoextract`, and starts the game in it.
   doesn't see the prelude, since SDL takes `_WIN32` to mean "building for Windows". The rest of
   `platform/` reaches it through `platform/platform.h`, which passes only plain types. OpenGL is
   loaded at runtime through SDL (`platform/gl.h`), so no GL headers or libGL are needed to build.
-- **32-bit only, for now.** Game structures hold 32-bit pointers and their sizes are asserted
-  (`GTA2_ASSERT_SIZEOF_ALWAYS`). A 64-bit build is a project of its own.
+- **32-bit is the playable build.** Game structures were laid out for 4-byte pointers, and in places
+  the game keeps a pointer in an `s32`. `GTA2_BITS=64` builds: the Win32 types keep their Windows
+  widths (`DWORD` and `LONG` stay 32-bit, as on 64-bit Windows), the structure size checks that count
+  4-byte pointers are skipped, and `sptr` (`Source/types.hpp`) is the type for an integer that holds a
+  pointer (`s32` under MSVC, so the VC6 build is unchanged). What's left is in `TODO.md`.
 - **`wchar_t` is 2 bytes** (`-fshort-wchar`), as on Windows: the game's text is UTF-16 and several
   structures hold `wchar_t` arrays. glibc's `wcs*` functions assume 4 bytes, so the ones the game uses
   are redirected to `platform/wchar.cpp`, including MSVC's `swprintf` (no size argument; `%s` takes

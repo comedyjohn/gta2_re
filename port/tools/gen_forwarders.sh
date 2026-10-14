@@ -10,3 +10,10 @@ fwd() { printf '#pragma once\n#include "%s"\n' "$hax/$2" > "$out/$1"; }
 fwd '..\Common\Types.hpp' Common/types.hpp
 fwd '..\Common\ddraw_vc6.h' Common/ddraw_vc6.h
 fwd '..\d3ddll\d3ddll.hpp' d3ddll/d3ddll.hpp
+# GTA2Hax's structure size checks count 4-byte pointers; a 64-bit build skips them
+cat >> "$out/..\\Common\\Types.hpp" <<'END'
+#if __SIZEOF_POINTER__ == 8
+    #undef STATIC_ASSERT
+    #define STATIC_ASSERT(x, msg)
+#endif
+END

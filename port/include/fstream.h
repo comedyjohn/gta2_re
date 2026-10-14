@@ -123,4 +123,6 @@ class ofstream : public ostream
     char mPadding[0x3C - sizeof(FILE*)]; // pads to the classic ofstream's size
 };
 
+#if __SIZEOF_POINTER__ == 4
 static_assert(sizeof(ofstream) == 0x3C, "ErrorLog expects the classic ofstream's size");
+#endif

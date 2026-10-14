@@ -847,7 +847,7 @@ class Ped
     Ang16 field_132_follow_car_offset_angle;
     Ang16 field_134_rotation;
     s16 field_136_unused;
-    s32 field_138_collided_char_b4;
+    sptr field_138_collided_char_b4; // Char_B4*
     TrainStation_34* field_13C_pTrainStation;
     Car_BC* field_140_stolen_car;
     Ped* field_144_attacker;

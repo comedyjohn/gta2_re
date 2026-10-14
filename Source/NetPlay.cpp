@@ -50,8 +50,8 @@ NetPlay::NetPlay()
     field_8F4_time_diff = 0;
     field_5E4_pDPlay3 = 0;
     field_5E0_pDPlayLobby2 = 0;
-    field_8E4_pReceivedDataBuffer = (s32)operator new(0x1800);
-    field_8E0_pSendDataBuffer = (s32)operator new(0x1800);
+    field_8E4_pReceivedDataBuffer = (sptr)operator new(0x1800);
+    field_8E0_pSendDataBuffer = (sptr)operator new(0x1800);
     memset(&field_C4_sessions, 0, sizeof(field_C4_sessions));
     memset(field_4C_func_ptrs_and_params, 0, sizeof(field_4C_func_ptrs_and_params));
     memset(&field_30_enumed_connections, 0, sizeof(field_30_enumed_connections));
@@ -168,9 +168,9 @@ void NetPlay::AddEnumeratedConnection_51D930(EnumeratedConnection* pConnectionIn
 MATCH_FUNC(0x51da30)
 s32 __stdcall NetPlay::EnumConnections_cb_51DA30(const GUID* lpguidSP,
                                                  void* lpConnection,
-                                                 unsigned long dwConnectionSize,
+                                                 DWORD dwConnectionSize,
                                                  const DPNAME* lpName,
-                                                 unsigned long dwFlags,
+                                                 DWORD dwFlags,
                                                  void* lpContext)
 {
     EnumeratedConnection info;
@@ -321,7 +321,7 @@ s32 NetPlay::DirectPlayCreate_51DED0()
         return 1;
     }
     {
-        unsigned long playerAddressLen = 0;
+        DWORD playerAddressLen = 0;
         HRESULT result = pDirectPlay3->GetPlayerAddress(0, 0, &playerAddressLen);
         if (result == DPERR_UNAVAILABLE)
         {
@@ -796,10 +796,10 @@ void NetPlay::Set15_51ECD0(s32 pFunc, Network_20324* pParam)
 MATCH_FUNC(0x51ed00)
 void NetPlay::NetworkTick_51ED00()
 {
-    s32 pData;
+    sptr pData;
     s32 dataLen;
-    unsigned long recvId;
-    unsigned long senderId;
+    DWORD recvId;
+    DWORD senderId;
 
     switch (field_48_net_state)
     {
@@ -899,9 +899,9 @@ s32 NetPlay::SendPing_51EF60()
 }
 
 MATCH_FUNC(0x51f010)
-char_type NetPlay::Receive_51F010(s32* pOutData, s32* pOutDataLen, unsigned long* recvId, unsigned long* senderId)
+char_type NetPlay::Receive_51F010(sptr* pOutData, s32* pOutDataLen, DWORD* recvId, DWORD* senderId)
 {
-    unsigned long readLen = 0x1800;
+    DWORD readLen = 0x1800;
     // The shared return 0 has to sit at the end of the loop body to get the original layout;
     // early returns or a break out of the loop change the code
     if (field_5E4_pDPlay3->Receive(senderId, recvId, DPRECEIVE_ALL, (void*)field_8E4_pReceivedDataBuffer, &readLen))
@@ -996,7 +996,7 @@ void NetPlay::ProcessPingOrHandshakeSend_51F110(void* pPacket, s32 packetLen, s3
 
 // The csv size of the original stops at the FatalError_4A38C0 call, the epilogue after it isn't compared
 MATCH_FUNC(0x51f210)
-s32 NetPlay::CalcPacketLen_51F210(s32 pPacket, u32 packetLen)
+s32 NetPlay::CalcPacketLen_51F210(sptr pPacket, u32 packetLen)
 {
     u8 copy[64];
     u8* pBytes = (u8*)pPacket;
@@ -1951,10 +1951,10 @@ void NetPlay::Send_521370()
 MATCH_FUNC(0x5213e0)
 bool NetPlay::WaitForPlayersSync_5213E0()
 {
-    unsigned long senderId;
-    s32 pData;
+    DWORD senderId;
+    sptr pData;
     DWORD startTime;
-    unsigned long recvId;
+    DWORD recvId;
     s32 dataLen;
 
     startTime = timeGetTime();
@@ -2140,9 +2140,9 @@ char_type NetPlay::ReceiveGameMessage_521890(Network_8* pOut, s32* pPlayerIdx, u
     char_type bGotMessage;
     char_type bCheckBuffered;
     char_type receivedTick;
-    s32 pData;
-    unsigned long senderId;
-    unsigned long recvId;
+    sptr pData;
+    DWORD senderId;
+    DWORD recvId;
     s32 dataLen;
 
     bCheckBuffered = 1;

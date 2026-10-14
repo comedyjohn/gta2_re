@@ -10,6 +10,14 @@ typedef signed short int s16;
 typedef unsigned int u32;
 typedef signed int s32;
 
+// An integer that holds a pointer: s32 in the original (VC6, 32-bit), pointer-sized in the native
+// 64-bit build (port/)
+#if defined(_MSC_VER)
+typedef s32 sptr;
+#else
+typedef __INTPTR_TYPE__ sptr;
+#endif
+
 typedef float f32;
 typedef double f64;
 

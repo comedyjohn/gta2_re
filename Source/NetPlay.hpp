@@ -180,9 +180,9 @@ struct NetPlay
     EXPORT void AddEnumeratedConnection_51D930(EnumeratedConnection* pConnectionInfo);
     EXPORT static s32 __stdcall EnumConnections_cb_51DA30(const GUID* lpguidSP,
                                          void* lpConnection,
-                                         unsigned long dwConnectionSize,
+                                         DWORD dwConnectionSize,
                                          const DPNAME* lpName,
-                                         unsigned long dwFlags,
+                                         DWORD dwFlags,
                                          void* lpContext);
     EXPORT s32 SetProtoAndConnection_51DAE0(GUID* pProtocolGuid, Network_Buffer_8* pUseThisConnection);
     EXPORT void DirectPlayDestroy_51DC90();
@@ -202,10 +202,10 @@ struct NetPlay
     EXPORT void Set15_51ECD0(s32 pFunc, Network_20324* pParam);
     EXPORT void NetworkTick_51ED00();
     EXPORT s32 SendPing_51EF60();
-    EXPORT char_type Receive_51F010(s32* pOutData, s32* pOutDataLen, unsigned long* recvId, unsigned long* senderId);
+    EXPORT char_type Receive_51F010(sptr* pOutData, s32* pOutDataLen, DWORD* recvId, DWORD* senderId);
     EXPORT void SendOrReceivePacket_51F0D0(void* pPacket, s32 packetLen, s32 recvId, s32 bSendOrRecv);
     EXPORT void ProcessPingOrHandshakeSend_51F110(void* pPacket, s32 packetLen, s32 recvId, s32 sendFlag);
-    EXPORT s32 CalcPacketLen_51F210(s32 pPacket, u32 packetLen); // Also converts enums back
+    EXPORT s32 CalcPacketLen_51F210(sptr pPacket, u32 packetLen); // Also converts enums back
     EXPORT void MakeSendData_51F420(Packet_SubType_3* pPacket, s32* pData, u32* pDataLen); // Format data before using IDirectPlay3::Send
     EXPORT void OnPacketReceived_51F870(void* pPacket, s32 packetLen, s32 recvId, s32 sendFlag);
     EXPORT s32 MovePlayerToGroup_520040(s32 toFind, Network_Game_Session* pStru, Network_Game_Session* pDst, u32* pOutIdx);
@@ -292,8 +292,8 @@ struct NetPlay
     Network_Game_Session field_5E8_n1;
     Network_Game_Session field_758_n2;
     naughty_sinoussi_0x800* field_8C8_not_used[MAX_PLAYERS];
-    s32 field_8E0_pSendDataBuffer; // 0x1800 of alloc size
-    s32 field_8E4_pReceivedDataBuffer; // 0x1800 of alloc size
+    sptr field_8E0_pSendDataBuffer; // 0x1800 of alloc size
+    sptr field_8E4_pReceivedDataBuffer; // 0x1800 of alloc size
     s32 field_8E8_time;
     s32 field_8EC_unused;
     char field_8F0_disabled; // Receive_51F010 and ReceiveGameMessage_521890 always returns false if this var is true

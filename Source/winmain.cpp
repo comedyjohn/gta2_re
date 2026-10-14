@@ -1574,6 +1574,13 @@ EXPORT void __stdcall GetDirectXVersion_4C4EC0(u32* pDXVer, u32* osKind)
     DDSURFACEDESC surfaceDesc; // [esp+68h] [ebp-100h] BYREF
     struct _OSVERSIONINFOA osVersionInfo; // [esp+D4h] [ebp-94h] BYREF
 
+#if defined(GTA2_PORT)
+    // The native build has no DirectDraw or DirectMusic to probe: its own renderer, input and sound
+    // (port/platform/) stand in for the DirectX 6.1 the game asks for
+    *pDXVer = 0x601;
+    *osKind = VER_PLATFORM_WIN32_NT;
+    return;
+#endif
     pDDraw = 0;
     pDraw2 = 0;
     pDSurface = 0;

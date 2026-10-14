@@ -194,7 +194,7 @@ size_t __stdcall File::Write_4A6F30(void* Buffer, size_t ElementSize, size_t Ele
 }
 
 MATCH_FUNC(0x4A6F50)
-void __stdcall File::AppendBufferToFile_4A6F50(const char_type* FileName, void* pBuffer, size_t* pBufferSize)
+void __stdcall File::AppendBufferToFile_4A6F50(const char_type* FileName, void* pBuffer, u32* pBufferSize)
 {
     Error_SetName_4A0770(FileName);
     if (!*pBufferSize)

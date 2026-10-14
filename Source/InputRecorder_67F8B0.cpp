@@ -679,7 +679,7 @@ void InputRecorder_67F8B0::SaveReplay_4CDED0()
     if (bConstant_replay_save_67D5C4 != 1 && bDo_release_replay_67D4EB && field_38_replay_state != Disabled_2 && field_75340_rec_buf_idx > 0 &&
         !RecOrPlayBackState_4CEDF0())
     {
-        size_t len = sizeof(InputRecord_C) * field_75340_rec_buf_idx;
+        u32 len = sizeof(InputRecord_C) * field_75340_rec_buf_idx;
         File::AppendBufferToFile_4A6F50("test\\replay.rep", field_3C_rec_buff, &len);
     }
 }
@@ -716,7 +716,7 @@ void InputRecorder_67F8B0::AppendReplayHeader_4CDF70()
 {
     ReplayHeader_10C header;
     DWORD computer_name_size;
-    size_t header_size;
+    u32 header_size;
 
     memset(&header, 0, sizeof(header));
     computer_name_size = 29;

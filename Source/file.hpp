@@ -22,7 +22,7 @@ class File
 
     EXPORT static size_t __stdcall Write_4A6F30(void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
 
-    EXPORT static void __stdcall AppendBufferToFile_4A6F50(const char_type* FileName, void* Buffer, size_t* pBufferSize);
+    EXPORT static void __stdcall AppendBufferToFile_4A6F50(const char_type* FileName, void* Buffer, u32* pBufferSize);
 
     EXPORT static void __stdcall CreateFile_4A7000(const char_type* FileName);
 

@@ -4656,7 +4656,7 @@ void Map_0x370::load_rgen_4E94A0()
 }
 
 MATCH_FUNC(0x4E94B0)
-void Map_0x370::load_chunk_4E94B0(const char_type* pChunkType, size_t chunkLen)
+void Map_0x370::load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen)
 {
     if (!strncmp(pChunkType, "DMAP", 4u))
     {

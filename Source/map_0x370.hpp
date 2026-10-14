@@ -565,7 +565,7 @@ class Map_0x370
 
     EXPORT void load_rgen_4E94A0();
 
-    EXPORT void load_chunk_4E94B0(const char_type* pChunkType, size_t chunkLen);
+    EXPORT void load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen);
 
     EXPORT void process_loaded_zone_data_4E95A0();
 

@@ -222,7 +222,7 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
     }
 
     {
-        size_t writeLen = 4;
+        u32 writeLen = 4;
         File::AppendBufferToFile_4A6F50(pFileName, &colBytes, &writeLen);
         if (colBytes)
         {
@@ -231,7 +231,7 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
     }
 
     {
-        size_t writeLen = 4;
+        u32 writeLen = 4;
         File::AppendBufferToFile_4A6F50(pFileName, &blockInfoBytes, &writeLen);
         if (blockInfoBytes)
         {
@@ -240,11 +240,11 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
     }
 
     {
-        size_t writeLen = 4;
+        u32 writeLen = 4;
         File::AppendBufferToFile_4A6F50(pFileName, &mapSubBytes, &writeLen);
         if (mapSubBytes)
         {
-            File::AppendBufferToFile_4A6F50(pFileName, pMapSub, (unsigned int*)&mapSubBytes);
+            File::AppendBufferToFile_4A6F50(pFileName, pMapSub, (u32*)&mapSubBytes);
         }
     }
 }
@@ -252,9 +252,9 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 MATCH_FUNC(0x511f80)
 void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
 {
-    size_t mapSubLen;
-    size_t blockInfoLen;
-    size_t colDataLen;
+    u32 mapSubLen;
+    u32 blockInfoLen;
+    u32 colDataLen;
     u16** pColData;
     gmp_block_info* pBlockInfo;
     DmapInfoList* pMapSub;

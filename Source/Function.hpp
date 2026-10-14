@@ -214,6 +214,9 @@ void __stdcall LogFuncAddr(u32 codeAddr, s32 mode);
         #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
             static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
     #endif
+#elif __SIZEOF_POINTER__ == 8
+    // A 64-bit native build (port/, GTA2_BITS=64): the asserted sizes count 4-byte pointers
+    #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize)
 #else
     #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
         static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);

@@ -87,7 +87,7 @@ class PoliceCrew_38
     s16 field_2C_unused;
     char_type field_2E_unused;
     char_type field_2F_unused;
-    s32 field_30;
+    sptr field_30; // Ped*
     char_type field_34_is_dismissed;
     u8 field_35;
     char_type field_36_unused;

@@ -74,8 +74,13 @@ EXPORT s32 get_rdtsc_5BEE90()
 {
     // NOTE: Actually is inline assembly, surprisingly
     unsigned __int64 t;
-#if defined(GTA2_PORT)
+#if defined(GTA2_PORT) && (defined(__i386__) || defined(__x86_64__))
     t = __builtin_ia32_rdtsc();
+#elif defined(GTA2_PORT)
+    // Other CPUs have no rdtsc: nanoseconds stand in for cycles (only the profiler display reads them)
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    t = static_cast<unsigned __int64>(ts.tv_sec) * 1000000000u + ts.tv_nsec;
 #else
     __asm
     {

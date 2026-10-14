@@ -10,8 +10,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 # GTA2_BITS picks the pointer size. 32 is what plays today: the game's structures were laid out for
-# 4-byte pointers. 64 builds, but isn't playable until the game stops keeping pointers in 32-bit
-# integers (port/TODO.md). On an x86-64 host, 32 means -m32, set before project() so CMake detects a
+# 4-byte pointers. 64 builds and handles those layouts, but hasn't been play-tested yet
+# (port/TODO.md). On an x86-64 host, 32 means -m32, set before project() so CMake detects a
 # 32-bit target and looks for i386 libraries. A cross toolchain (CMAKE_TOOLCHAIN_FILE, e.g. armhf or
 # aarch64) brings its own target, and only the check below applies.
 set(GTA2_BITS 32 CACHE STRING "Pointer size of the native build: 32 or 64")

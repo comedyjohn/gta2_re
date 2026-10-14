@@ -7,8 +7,9 @@
 #endif
 
 #if __SIZEOF_POINTER__ == 8
-    // 64-bit (GTA2_BITS=64): it compiles, but the game still keeps pointers in 32-bit integers in
-    // places, so it isn't playable yet. See port/TODO.md.
+    // 64-bit (GTA2_BITS=64): pointers the game kept in 32-bit integers and file structures holding
+    // pointers are handled (sptr, PTR32, the loaders' 64-bit branches), but it hasn't been played
+    // yet. See port/TODO.md.
     #define GTA2_PORT_64BIT 1
 #elif __SIZEOF_POINTER__ != 4
     #error "Unsupported pointer size"

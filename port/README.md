@@ -6,7 +6,7 @@ matching `decomp_main.exe`, compiled by GCC into a Linux executable, with no Win
 ```bash
 sudo apt-get install g++-multilib cmake ninja-build libsdl2-dev   # Debian/Ubuntu
 port/build.sh 32      # build_port/linux32/gta2: the playable one
-port/build.sh 64      # build_port/linux64/gta2: builds and passes its self-tests, not playable yet
+port/build.sh 64      # build_port/linux64/gta2: builds and passes its self-tests, not play-tested yet
 port/build.sh all     # both
 ```
 
@@ -58,16 +58,26 @@ Setup installer with `innoextract`, and starts the game in it.
 - **`include/port_prelude.h` is force-included** into the game and into `platform/`. It defines
   `GTA2_PORT`, MSVC's keywords (`__stdcall` and friends) and `_WIN32`: third-party headers the game
   includes (GTA2Hax's `ddraw_vc6.h`, Miles' `mss.h`) pick their Win32 branch from it. It refuses to
-  build anything but 32-bit with a 2-byte `wchar_t`.
+  build with pointers other than 4 or 8 bytes, or without a 2-byte `wchar_t`.
 - **`platform/` implements that API.** The SDL code is in `platform/sdl/`, a library of its own that
   doesn't see the prelude, since SDL takes `_WIN32` to mean "building for Windows". The rest of
   `platform/` reaches it through `platform/platform.h`, which passes only plain types. OpenGL is
   loaded at runtime through SDL (`platform/gl.h`), so no GL headers or libGL are needed to build.
-- **32-bit is the playable build.** Game structures were laid out for 4-byte pointers, and in places
-  the game keeps a pointer in an `s32`. `GTA2_BITS=64` builds: the Win32 types keep their Windows
-  widths (`DWORD` and `LONG` stay 32-bit, as on 64-bit Windows), the structure size checks that count
-  4-byte pointers are skipped, and `sptr` (`Source/types.hpp`) is the type for an integer that holds a
-  pointer (`s32` under MSVC, so the VC6 build is unchanged). What's left is in `TODO.md`.
+- **32-bit is the tested build.** Game structures were laid out for 4-byte pointers. At
+  `GTA2_BITS=64` the Win32 types keep their Windows widths (`DWORD` and `LONG` stay 32-bit, as on
+  64-bit Windows) and the structure size checks that count 4-byte pointers are skipped. Everything
+  below leaves the VC6 build unchanged:
+  - `sptr` (`Source/types.hpp`) is an integer that holds a pointer: `s32` under MSVC, pointer-sized
+    otherwise.
+  - `PTR32(T)` (`Source/Ptr32.hpp`) is a pointer the game keeps in 4 bytes of file data, the mission
+    script's object slots: `T*`, or at 64 bits a 32-bit handle that `platform/ptr32.cpp` maps to the
+    pointer. `GTA2_ASSERT_FILE_SIZEOF` checks those structures' sizes at every width.
+  - The loaders whose file records hold a pointer (the style's sprite index, the text's keys) have a
+    `GTA2_PORT_64BIT` branch that reads the records as they are and widens them; sizes the original
+    spells for 4-byte pointers are macros (`SPRITE_DELTAS_SIZE`, `GMP_ZONE_LIST_SIZE`, ...) that
+    expand to the original expression under MSVC.
+
+  What's left is in `TODO.md`.
 - **`wchar_t` is 2 bytes** (`-fshort-wchar`), as on Windows: the game's text is UTF-16 and several
   structures hold `wchar_t` arrays. glibc's `wcs*` functions assume 4 bytes, so the ones the game uses
   are redirected to `platform/wchar.cpp`, including MSVC's `swprintf` (no size argument; `%s` takes

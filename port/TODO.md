@@ -12,7 +12,9 @@ Read this first when picking the port up again. `README.md` explains how the por
 3. Milestone 3: Miles (`AIL_*`) over SDL audio: 2D samples, WAV streams, the `GTAUDIO` path.
    `gta2 --audiotest` checks the mix.
 4. 32 and 64 bits from one option: `port/build.sh 32|64|all` (or the `linux32`/`linux64` CMake
-   presets, `GTA2_BITS`). 64-bit builds and passes the self-tests; making it playable is below.
+   presets, `GTA2_BITS`). 64-bit builds and passes the self-tests.
+5. The 64-bit pointer fixes: pointers in 32-bit integers, the mission script's pointer slots and the
+   file structures that hold pointers (see "Play-test the 64-bit build" below for what is covered).
 
 ## Left to do
 
@@ -42,23 +44,30 @@ The order follows what a player notices first.
 - [ ] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.**
 - [ ] **Floating-point.** VC6's x87 code and GCC's SSE differ in precision. Check that replays
       (`InputRecorder_67F8B0`) still play back the same.
-- [ ] **A playable 64-bit build.** `port/build.sh 64` builds, and its renderer and audio
-      self-tests pass (CI runs both widths), but the game isn't playable at 64 bits yet:
-      - **Pointers kept in 32-bit integers:** 141 casts GCC flags when compiling for 64 bits
-        (`-Wpointer-to-int-cast -Wint-to-pointer-cast`): 80 in multiplayer (`NetPlay.cpp`,
-        `Network_20324.cpp`, unused while DirectPlay is unavailable), 23 in `error.cpp`, and about 38
-        in game code (`Car_BC.cpp` 12, `char.cpp` 6, `sound_obj.cpp` 3, then one or two each in
-        `winmain`, `sprite.hpp`, `gtx_0x106C`, `Police_38`, `KanjiFont_8EC`, `Bink`, `text_0x14`,
-        `registry`, `memory`, `Frontend`, `Draw`). The fix is `sptr` (`Source/types.hpp`): `s32` under
-        MSVC, pointer-sized otherwise, so VC6 output is unchanged (`NetPlay`'s packet buffers are done
-        this way). Check each change with `tools/check_matching.sh`.
-      - **Structures with pointers that are read from or written to files** (save games, replays,
-        map/style chunks) change layout at 64 bits. GCC can't flag these; they need reading.
-      - **Structures whose asserted size counts 4-byte pointers** (skipped at 64 bits): `Camera_0xBC`,
+- [ ] **Play-test the 64-bit build.** `port/build.sh 64` builds and its renderer and audio
+      self-tests pass (CI runs both widths). The known 64-bit problems are fixed, without changing
+      what VC6 generates, but nobody has played it yet:
+      - Done: pointers kept in 32-bit integers in game code (`sptr`: car thread triggers, a ped's
+        last collision, a police crew's target, `Aligned_malloc_4FE510`, the Kanji glyph outline,
+        NetPlay's buffers and exit callback); the mission script's object slots (`PTR32`, a 32-bit
+        handle at 64 bits); the style's sprite index and sprite deltas, the text's TKEY entries, the
+        map's column words and zone list (64-bit loader branches and size macros).
+      - Checked and left as they are: the save game, replay and the other map/style/text chunks
+        hold no pointers. The structures whose asserted size counts 4-byte pointers (`Camera_0xBC`,
         `CarInfo_808`, `Car_BC`, `Car_Door_10`, `Ped`, `Ped_List_4`, `ScriptStackFrame_C`,
-        `ScriptStackFramePool_25C`, `SpritePool`, `miss2_0x11C`, `miss2_8`. Most only matter in
-        memory, but any of them that reaches a file belongs to the previous point.
-      - Then play-test, ideally side by side with the 32-bit build (replays help).
+        `ScriptStackFramePool_25C`, `SpritePool`, `miss2_0x11C`, `miss2_8`) only live in memory.
+      - Casts GCC still flags at 64 bits (`-Wpointer-to-int-cast -Wint-to-pointer-cast`) and why
+        they are harmless: multiplayer (`NetPlay.cpp`, `Network_20324.cpp`; DirectPlay is
+        unavailable), `error.cpp` (integer arguments read back as `const char*`, then cast to an
+        integer again), file offsets stored in pointer fields and read back
+        (`gtx_0x106C`, `text_0x14`), values only used as numbers (`sound_obj.cpp`'s hash and parity
+        bit, `sprite.hpp`'s collision id, `registry.cpp`/`Frontend.cpp` reading a DWORD into a
+        pointer variable, `winmain`'s `ShellExecuteA` result), and pointers handed to stubs or
+        never read (`Bink.cpp`, `Draw.cpp`'s screen table).
+      - Next: play with real game data, ideally side by side with the 32-bit build (replays help),
+        and under the sanitizers above. Anything that still breaks only at 64 bits most likely
+        stores a pointer through a 4-byte type GCC doesn't flag (`*(u32*)&p`, a `memcpy` of 4
+        bytes, a stride of 4 or 8 written out by hand).
 
 ## Working rules (from the top-level CLAUDE.md)
 - Work on a branch, never `master`. The current branch is `claude/nice-feynman-sw4r6m`.

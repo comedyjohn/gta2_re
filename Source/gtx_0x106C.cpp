@@ -721,8 +721,33 @@ void gtx_0x106C::load_map_object_info_5AAF00(u32 obji_chunk_len)
 MATCH_FUNC(0x5AAF80)
 void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
 {
+#if defined(GTA2_PORT_64BIT)
+    // The file's 8-byte entries hold a 4-byte offset where sprite_index has a pointer. Read them as
+    // they are and widen them; SetSpriteIndexDataPtrs_5AAC40 turns the offsets into pointers later.
+    struct sprite_index_file
+    {
+        u32 field_0_offset;
+        u8 field_4_width;
+        u8 field_5_height;
+        s16 field_6_pad;
+    };
+    const u32 entry_count = (sprx_chunk_size >> 3) + 1; // plus the spare last entry, as below
+    sprite_index_file* pFileEntries = (sprite_index_file*)Memory::malloc_4FE4D0(sprx_chunk_size);
+    File::Global_Read_4A71C0(pFileEntries, sprx_chunk_size);
+    field_20_sprite_index = (sprite_index*)Memory::malloc_4FE4D0(entry_count * sizeof(sprite_index));
+    memset(field_20_sprite_index, 0, entry_count * sizeof(sprite_index));
+    for (u32 i = 0; i < entry_count - 1; i++)
+    {
+        field_20_sprite_index[i].field_0_pData = (BYTE*)(sptr)pFileEntries[i].field_0_offset;
+        field_20_sprite_index[i].field_4_width = pFileEntries[i].field_4_width;
+        field_20_sprite_index[i].field_5_height = pFileEntries[i].field_5_height;
+        field_20_sprite_index[i].field_6_pad = pFileEntries[i].field_6_pad;
+    }
+    crt::free(pFileEntries);
+#else
     field_20_sprite_index = (sprite_index*)Memory::malloc_4FE4D0(sprx_chunk_size + 8);
     File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
+#endif
     if ((sprx_chunk_size & ~7u) > 524280)
     {
         FatalError_4A38C0(Gta2Error::TooManySprites, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1198, (u32)sprx_chunk_size >> 3);

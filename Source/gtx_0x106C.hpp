@@ -188,6 +188,16 @@ struct delta_container
     sprite_deltas* field_4_entries[1];
 };
 
+// Bytes taken by a sprite_deltas with count deltas, and by a delta_container with count entries. The
+// original spells them for 4-byte pointers; at 64 bits the pointers, and the padding before them, grow.
+#if defined(GTA2_PORT_64BIT)
+    #define SPRITE_DELTAS_SIZE(count) (offsetof(sprite_deltas, field_4_deltas) + sizeof(sprite_delta) * (count))
+    #define DELTA_CONTAINER_SIZE(count) (offsetof(delta_container, field_4_entries) + sizeof(sprite_deltas*) * (count))
+#else
+    #define SPRITE_DELTAS_SIZE(count) (8 * (count) + 4)
+    #define DELTA_CONTAINER_SIZE(count) (4 * (count) + 4)
+#endif
+
 namespace tile_spec
 {
 enum

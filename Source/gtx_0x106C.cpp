@@ -418,7 +418,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
     for (; off < delx_chunk_size;)
     {
         u32 size = 2 * pIter->field_2_delta_count + 4;
-        field_60_delta_len += 8 * pIter->field_2_delta_count + 4;
+        field_60_delta_len += SPRITE_DELTAS_SIZE(pIter->field_2_delta_count);
         pIter = (delta_entry*)((u8*)pIter + size);
         off += size;
     }
@@ -442,7 +442,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
         }
 
         u32 size = 2 * pSrc->field_2_delta_count + 4;
-        pDst = (sprite_deltas*)((u8*)pDst + 8 * pDst->field_2_count + 4);
+        pDst = (sprite_deltas*)((u8*)pDst + SPRITE_DELTAS_SIZE(pDst->field_2_count));
         off2 += size;
         pSrc = (delta_entry*)((u8*)pSrc + size);
     }
@@ -452,6 +452,20 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
 MATCH_FUNC(0x5AABF0)
 void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
 {
+#if defined(GTA2_PORT_64BIT)
+    // The walk below at sprite_deltas' real layout. It adds the store's address to each offset
+    // load_delx_5AAB30 left in field_0_pData, which the original does with 32-bit adds.
+    for (u32 offset = 0; offset < (u32)field_60_delta_len;)
+    {
+        sprite_deltas* pDeltas = (sprite_deltas*)((u8*)field_50_delta_buffer + offset);
+        for (u32 delta_idx = 0; delta_idx < pDeltas->field_2_count; delta_idx++)
+        {
+            sprite_delta& delta = pDeltas->field_4_deltas[delta_idx];
+            delta.field_0_pData = (delta_store_entry*)((u8*)field_48_delta_store + (sptr)delta.field_0_pData);
+        }
+        offset += SPRITE_DELTAS_SIZE(pDeltas->field_2_count);
+    }
+#else
     s32 size;
     delta_entry* i = (delta_entry*)field_50_delta_buffer;
 
@@ -464,6 +478,7 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
         size = 8 * (u8)i->field_2_delta_count + 4;
         i = (delta_entry*)((char_type*)i + size);
     }
+#endif
 }
 
 MATCH_FUNC(0x5AAC40)
@@ -585,12 +600,12 @@ void gtx_0x106C::build_delta_container_5AAC70()
             maxSprite = pIter->field_0_which_sprite;
         }
 
-        u32 size = 8 * pIter->field_2_count + 4;
+        u32 size = SPRITE_DELTAS_SIZE(pIter->field_2_count);
         off += size;
         pIter = (sprite_deltas*)((u8*)pIter + size);
     }
 
-    field_54_del = (delta_container*)Memory::malloc_4FE4D0(4 * maxSprite + 8);
+    field_54_del = (delta_container*)Memory::malloc_4FE4D0(DELTA_CONTAINER_SIZE(maxSprite + 1));
     field_54_del->field_0_count = maxSprite + 1;
 
     for (u32 i = 0; i < field_54_del->field_0_count; i++)
@@ -614,7 +629,7 @@ void gtx_0x106C::build_delta_container_5AAC70()
             maxSprite = pIter->field_0_which_sprite;
         }
 
-        u32 size = 8 * pIter->field_2_count + 4;
+        u32 size = SPRITE_DELTAS_SIZE(pIter->field_2_count);
         pIter = (sprite_deltas*)((u8*)pIter + size);
         off2 += size;
     }

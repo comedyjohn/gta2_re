@@ -3,6 +3,7 @@
 #include "Fix16_Point.hpp"
 #include "Function.hpp"
 #include "Pool.hpp"
+#include "Ptr32.hpp"
 #include "ang16.hpp"
 #include "fix16.hpp"
 #include "miss2_xyz.hpp"
@@ -38,11 +39,12 @@ struct SCR_ONEVAR_RECT : SCR_CMD_HEADER
 struct SCR_PLAYER_PED
 {
     SCR_CMD_HEADER field_0_header;
-    Ped* field_8_ped;
+    PTR32(Ped) field_8_ped;
     SCR_XYZ_f field_C_pos;
     Ang16 field_18_rot;
     s16 field_1A_remap;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_PLAYER_PED, 0x1C)
 
 struct SCR_CAR_DATA_DEC : SCR_CMD_HEADER
 {
@@ -57,22 +59,24 @@ struct SCR_CAR_DATA_DEC : SCR_CMD_HEADER
 
 struct SCR_CHAR_DATA_DEC : SCR_CMD_HEADER
 {
-    Ped* field_8_char;
+    PTR32(Ped) field_8_char;
     SCR_XYZ_f field_C_pos;
     Ang16 field_18_rot;
     s16 field_1A_remap;
     s16 field_1C_occupation;
     u16 field_1E_padding;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_CHAR_DATA_DEC, 0x20)
 
 struct SCR_OBJ_DATA : SCR_CMD_HEADER
 {
-    Object_2C* field_8_obj;
+    PTR32(Object_2C) field_8_obj;
     SCR_XYZ_f field_C_pos;
     u16 field_18_obj_id;
     Ang16 field_1A_rot;
     u8 field_1C_value_shop_type;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_OBJ_DATA, 0x20)
 
 struct SCR_TWO_PARAMS : SCR_CMD_HEADER
 {
@@ -129,13 +133,13 @@ struct SCR_POINTER : SCR_CMD_HEADER
 {
     union
     {
-        Ped* field_8_char;
-        Car_BC* field_8_car;
-        Object_2C* field_8_obj;
-        Crane_15C* field_8_crane;
-        Light_28* field_8_light;
-        Door_38* field_8_door;
-        Crusher_30* field_8_crusher;
+        PTR32(Ped) field_8_char;
+        PTR32(Car_BC) field_8_car;
+        PTR32(Object_2C) field_8_obj;
+        PTR32(Crane_15C) field_8_crane;
+        PTR32(Light_28) field_8_light;
+        PTR32(Door_38) field_8_door;
+        PTR32(Crusher_30) field_8_crusher;
         s32 field_8_counter;
         u16 field_8_index;
         union
@@ -143,11 +147,12 @@ struct SCR_POINTER : SCR_CMD_HEADER
             u16 field_6;
             u16 field_8;
         } words;
-        Generator_2C* field_8_generator;
-        Hud_Arrow_7C* field_8_arrow;
-        AttachedSprite_18* field_8_sprite;
+        PTR32(Generator_2C) field_8_generator;
+        PTR32(Hud_Arrow_7C) field_8_arrow;
+        PTR32(AttachedSprite_18) field_8_sprite;
     };
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_POINTER, 0xC)
 
 struct SCR_CMD_ALTER_WANTED_LEVEL : SCR_CMD_HEADER
 {
@@ -166,7 +171,7 @@ struct SCR_LOC_SEC_CHAR : SCR_CMD_HEADER
 
 struct SCR_THREAD : SCR_CMD_HEADER
 {
-    miss2_0x11C* field_8_script_thread;
+    PTR32(miss2_0x11C) field_8_script_thread;
     s16 field_C_thread_id;
     u16 field_E_thread_start_cmd;
     union
@@ -187,10 +192,11 @@ struct SCR_THREAD : SCR_CMD_HEADER
         };
     };
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_THREAD, 0x18)
 
 struct SCR_CHAR_AREA_ANY : SCR_CMD_HEADER
 {
-    miss2_0x11C* field_8_script_thread;
+    PTR32(miss2_0x11C) field_8_script_thread;
     s16 field_C_unused;
     u16 field_E_unused;
     Fix16 field_10_x;
@@ -202,6 +208,7 @@ struct SCR_CHAR_AREA_ANY : SCR_CMD_HEADER
     char_type field_26_result;
     u8 field_27_flag;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_CHAR_AREA_ANY, 0x28)
 
 struct SCR_CHAR_OBJECTIVE : SCR_CMD_HEADER
 {
@@ -273,7 +280,7 @@ struct SCR_RADIOSTATION_DEC : SCR_CMD_HEADER
 
 struct SCR_CRANE_TARGET_DEC : SCR_CMD_HEADER
 {
-    Crane_15C* field_8_crane;
+    PTR32(Crane_15C) field_8_crane;
     u32 field_C_homecrane;
     SCR_XY_f field_10_pos;
     u16 field_18_home_rotation;
@@ -282,10 +289,11 @@ struct SCR_CRANE_TARGET_DEC : SCR_CMD_HEADER
     u16 field_24_target_rotation;
     u16 field_26_unk6;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_CRANE_TARGET_DEC, 0x28)
 
 struct SCR_CRANE_BASIC_DEC : SCR_CMD_HEADER
 {
-    Crane_15C* field_8_crane;
+    PTR32(Crane_15C) field_8_crane;
     u32 field_C_homecrane;
     SCR_XY_f field_10_pos;
     u16 field_18_home_rotation;
@@ -295,6 +303,7 @@ struct SCR_CRANE_BASIC_DEC : SCR_CMD_HEADER
     u16 field_26_second_rotation;
     SCR_XY_f field_28_second_pos;
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_CRANE_BASIC_DEC, 0x30)
 
 struct SCR_DECLARE_CRANE_POWERUP : SCR_CMD_HEADER
 {
@@ -449,7 +458,7 @@ struct SCR_IF_JUMP : SCR_CMD_HEADER
 
 struct SCR_DOOR_DATA_DEC : SCR_CMD_HEADER
 {
-    Door_38* field_8_door;
+    PTR32(Door_38) field_8_door;
     SCR_XYZ_uc field_C_block;
     u8 field_F_face;
     u8 field_10_gr_id;
@@ -461,6 +470,7 @@ struct SCR_DOOR_DATA_DEC : SCR_CMD_HEADER
     u8 field_29_reversed;
     u16 field_30_somename; // id of car/model/char or integer value (int is not supported by gta2 according to docs)
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_DOOR_DATA_DEC, 0x2C)
 
 struct SCR_UPDATE_DOOR : SCR_CMD_HEADER
 {
@@ -822,11 +832,12 @@ struct SCR_ARROW_ENTITY : SCR_CMD_HEADER
 {
     union
     {
-        Car_BC* field_8_car;
-        Ped* field_8_char;
-        Object_2C* field_8_obj;
+        PTR32(Car_BC) field_8_car;
+        PTR32(Ped) field_8_char;
+        PTR32(Object_2C) field_8_obj;
     };
 };
+GTA2_ASSERT_FILE_SIZEOF(SCR_ARROW_ENTITY, 0xC)
 
 struct SCR_ARROW_XYZ : SCR_CMD_HEADER
 {

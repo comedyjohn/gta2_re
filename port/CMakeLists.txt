@@ -109,6 +109,7 @@ add_executable(gta2
     platform/dinput.cpp
     platform/renderer.cpp
     platform/mss.cpp
+    platform/ptr32.cpp
     platform/selftest.cpp
     platform/audiotest.cpp)
 gta2_game_target(gta2)

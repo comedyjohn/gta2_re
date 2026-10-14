@@ -261,7 +261,7 @@ struct CarThreadTriggerCmd : SCR_CMD_HEADER
     union
     {
         u16 field_8_idx;
-        miss2_0x11C* field_8_thread;
+        PTR32(miss2_0x11C) field_8_thread;
     };
     u16 field_C;
     s16 field_E;
@@ -269,6 +269,7 @@ struct CarThreadTriggerCmd : SCR_CMD_HEADER
     u8 field_12_pad[0x12];
     u16 field_24_idx;
 };
+GTA2_ASSERT_FILE_SIZEOF(CarThreadTriggerCmd, 0x28)
 
 MATCH_FUNC(0x5c8780)
 void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)

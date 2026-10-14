@@ -222,6 +222,14 @@ void __stdcall LogFuncAddr(u32 codeAddr, s32 mode);
         static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
 #endif
 
+// For a structure laid over data read from a file, whose size must not change at 64 bits either
+#if defined(_MSC_VER)
+    #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize)
+#else
+    #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) \
+        static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
+#endif
+
 #define GTA2_COUNTOF(x) (sizeof(x) / sizeof(*(x)))
 #define GTA2_COUNTOF_S(x) ((s32)GTA2_COUNTOF(x))
 

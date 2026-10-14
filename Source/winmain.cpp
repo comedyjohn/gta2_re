@@ -949,7 +949,7 @@ EXPORT void __stdcall InitializeGame_4DA4D0()
         ClearDebugFlags_4DB170();
 
         gGame_0x40_67E008 = new Game_0x40(gNetPlay_7071E8.GetMaxPlayers_521350(), gNetPlay_7071E8.GetPlayerIdx_409C40());
-        gNetPlay_7071E8.SetExitGameCallBack_521330((int)ExitGameCallback_4DB0D0, gGame_0x40_67E008);
+        gNetPlay_7071E8.SetExitGameCallBack_521330((sptr)ExitGameCallback_4DB0D0, gGame_0x40_67E008);
 
         memset(&gCurrentNetInputs_6F57D8, 0, sizeof(gCurrentNetInputs_6F57D8));
         memset(&gPrevNetInputs_6F5B28, 0, sizeof(gPrevNetInputs_6F5B28));

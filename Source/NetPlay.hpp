@@ -234,7 +234,7 @@ struct NetPlay
     EXPORT void Set27SavePlayerName_5211F0(s32 pCallback, s32 pContext);
     EXPORT void DisableJoining_521220();
     EXPORT s32 IsUserHost_5212E0();
-    EXPORT void SetExitGameCallBack_521330(s32 pFunc, Game_0x40* pGame);
+    EXPORT void SetExitGameCallBack_521330(sptr pFunc, Game_0x40* pGame);
     EXPORT s32 GetMaxPlayers_521350();
     EXPORT void Send_521370();
     EXPORT bool WaitForPlayersSync_5213E0();

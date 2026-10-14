@@ -1912,7 +1912,7 @@ s32 NetPlay::IsUserHost_5212E0()
 }
 
 MATCH_FUNC(0x521330)
-void NetPlay::SetExitGameCallBack_521330(s32 pFunc, Game_0x40* pGame)
+void NetPlay::SetExitGameCallBack_521330(sptr pFunc, Game_0x40* pGame)
 {
     this->field_4C_func_ptrs_and_params[4].field_0_param_fn_callback = (void*)pFunc;
     this->field_4C_func_ptrs_and_params[4].field_4_param_context = pGame;

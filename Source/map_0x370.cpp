@@ -4411,7 +4411,7 @@ void Map_0x370::OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes
 }
 
 MATCH_FUNC(0x4E8CF0)
-void Map_0x370::GetModifiedMapData_4E8CF0(u16*** outColumnPtr,
+void Map_0x370::GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
                            u32* outColumnBytes,
                            gmp_block_info** outBlockPtr,
                            u32* outBlockBytes,
@@ -4517,7 +4517,7 @@ void Map_0x370::build_zone_list_4E90E0(u32 chunk_size)
         in_use_size += zone_data_size;
         pZone = (gmp_map_zone*)((u8*)pZone + zone_data_size);
     }
-    field_32C_pZones = (gmp_zone_list*)Memory::malloc_4FE4D0(4 * num_zones + 4);
+    field_32C_pZones = (gmp_zone_list*)Memory::malloc_4FE4D0(GMP_ZONE_LIST_SIZE(num_zones));
 
     in_use_size = 0;
     field_32C_pZones->field_0_num_zones = num_zones;
@@ -4615,7 +4615,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     u32 m_size = field_35C_column_word_extra * sizeof(DWORD);
     u32 column_data_size = field_0_pDmap->field_40000_column_words * sizeof(DWORD);
 
-    field_0_pDmap->field_40008_pColumn = (u16**)Memory::malloc_4FE4D0(m_size);
+    field_0_pDmap->field_40008_pColumn = (gmp_column_word*)Memory::malloc_4FE4D0(m_size);
 
     File::Global_Read_4A71C0(field_0_pDmap->field_40008_pColumn, column_data_size);
 

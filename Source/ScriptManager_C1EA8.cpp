@@ -185,7 +185,7 @@ void ScriptManager_C1EA8::SaveMapInfo_511D40()
 MATCH_FUNC(0x511e10)
 void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 {
-    unsigned short** pColData;
+    gmp_column_word* pColData;
     unsigned int colBytes;
 
     gmp_block_info* pBlockInfo;
@@ -255,7 +255,7 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
     u32 mapSubLen;
     u32 blockInfoLen;
     u32 colDataLen;
-    u16** pColData;
+    gmp_column_word* pColData;
     gmp_block_info* pBlockInfo;
     DmapInfoList* pMapSub;
 

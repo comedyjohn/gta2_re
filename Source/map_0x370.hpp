@@ -125,6 +125,14 @@ struct gmp_header
 
 struct DmapInfoList;
 
+// One 4-byte word of a .gmp file's column data. The original types the column array as u16**, which
+// has the right element size at 32 bits only; at 64 bits the words would be read 8 bytes apart.
+#if defined(GTA2_PORT_64BIT)
+typedef u32 gmp_column_word;
+#else
+typedef u16* gmp_column_word;
+#endif
+
 struct gmp_compressed_map_32
 {
     EXPORT void ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub);
@@ -141,7 +149,7 @@ struct gmp_compressed_map_32
     u32 field_0_base[256][256];
     s32 field_40000_column_words;
     s32 field_40004_num_blocks;
-    u16** field_40008_pColumn;
+    gmp_column_word* field_40008_pColumn;
     gmp_block_info* field_4000C_block;
 
     gmp_block_info* get_block(u32 block)
@@ -340,6 +348,13 @@ struct gmp_zone_list
     u16 field_2_pad;
     gmp_map_zone* field_4_zone_array[2];
 };
+
+// Bytes taken by a gmp_zone_list of count zones. The original spells it for 4-byte pointers.
+#if defined(GTA2_PORT_64BIT)
+    #define GMP_ZONE_LIST_SIZE(count) (offsetof(gmp_zone_list, field_4_zone_array) + sizeof(gmp_map_zone*) * (count))
+#else
+    #define GMP_ZONE_LIST_SIZE(count) (4 * (count) + 4)
+#endif
 
 class Map_0x370
 {
@@ -540,7 +555,7 @@ class Map_0x370
     EXPORT void LowerColumn_4E8A10(s32 x_pos, s32 y_pos);
     EXPORT void LowerLevel_4E8B70(s32 x_min, s32 x_max, s32 y_min, s32 y_max);
     EXPORT void OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes, u32 obj_bytes);
-    EXPORT void GetModifiedMapData_4E8CF0(u16*** outColumnPtr,
+    EXPORT void GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
                            u32* outColumnBytes,
                            gmp_block_info** outBlockPtr,
                            u32* outBlockBytes,

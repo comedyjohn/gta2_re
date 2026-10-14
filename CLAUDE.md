@@ -210,3 +210,5 @@ with `/TP /O2 /GX /EHsc`.
   original function addresses, offsets and sizes.
 - `reccmp/`: config for the reccmp tool (used in CI, `python3 build.py --reccmp`).
 - `3rdParty/gta2_re_compile_tools`: VC6 compiler, cmake and jom (submodule).
+- `port/`: the native Linux build (GCC + SDL). **`port/TODO.md` says where it stands and what is
+  left to do; read it before working on the port, and update it when an item is done.**

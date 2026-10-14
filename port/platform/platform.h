@@ -59,4 +59,26 @@ void GetKeyboardState(uint8_t state[256]);
 int PadCount();
 bool GetPadState(int index, PadState& out);
 const char* PadName(int index);
+
+// Audio output: interleaved signed 16-bit stereo, pulled from a callback on SDL's audio thread.
+// OpenAudio asks for `rate` frames a second and returns the rate the device actually took.
+typedef void (*AudioCallback)(int16_t* out, int frames, void* user);
+bool OpenAudio(int rate, AudioCallback callback, void* user, int& actualRate);
+void CloseAudio();
+void PauseAudio(bool paused);
+// Held while changing anything the callback reads; the callback runs with it held
+void LockAudio();
+void UnlockAudio();
+
+// A WAV file image (PCM, or Microsoft or IMA ADPCM) decoded to signed 16-bit frames, at its own
+// rate and channel count. The samples are released with FreeWav.
+struct Wav
+{
+    int16_t* samples;
+    uint32_t frames;
+    int channels;
+    int rate;
+};
+bool DecodeWav(const void* data, uint32_t size, Wav& out);
+void FreeWav(Wav& wav);
 } // namespace plat

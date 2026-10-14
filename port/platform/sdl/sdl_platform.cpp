@@ -442,3 +442,133 @@ bool GetPadState(int index, PadState& out)
     return true;
 }
 } // namespace plat
+
+// ---- Audio
+namespace
+{
+SDL_AudioDeviceID gAudioDevice;
+plat::AudioCallback gAudioCallback;
+void* gAudioUser;
+
+void SDLCALL AudioThunk(void*, Uint8* stream, int len)
+{
+    gAudioCallback(reinterpret_cast<int16_t*>(stream), len / 4, gAudioUser);
+}
+} // namespace
+
+namespace plat
+{
+bool OpenAudio(int rate, AudioCallback callback, void* user, int& actualRate)
+{
+    if (gAudioDevice)
+    {
+        return false;
+    }
+    if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0)
+    {
+        fprintf(stderr, "No audio: %s\n", SDL_GetError());
+        return false;
+    }
+    gAudioCallback = callback;
+    gAudioUser = user;
+
+    SDL_AudioSpec want;
+    SDL_zero(want);
+    want.freq = rate;
+    want.format = AUDIO_S16SYS;
+    want.channels = 2;
+    want.samples = 1024;
+    want.callback = AudioThunk;
+    SDL_AudioSpec have;
+    gAudioDevice = SDL_OpenAudioDevice(nullptr, 0, &want, &have, SDL_AUDIO_ALLOW_FREQUENCY_CHANGE);
+    if (!gAudioDevice)
+    {
+        fprintf(stderr, "No audio device: %s\n", SDL_GetError());
+        SDL_QuitSubSystem(SDL_INIT_AUDIO);
+        return false;
+    }
+    actualRate = have.freq;
+    SDL_PauseAudioDevice(gAudioDevice, 0);
+    return true;
+}
+
+void CloseAudio()
+{
+    if (gAudioDevice)
+    {
+        SDL_CloseAudioDevice(gAudioDevice);
+        gAudioDevice = 0;
+        SDL_QuitSubSystem(SDL_INIT_AUDIO);
+    }
+}
+
+void PauseAudio(bool paused)
+{
+    if (gAudioDevice)
+    {
+        SDL_PauseAudioDevice(gAudioDevice, paused ? 1 : 0);
+    }
+}
+
+void LockAudio()
+{
+    if (gAudioDevice)
+    {
+        SDL_LockAudioDevice(gAudioDevice);
+    }
+}
+
+void UnlockAudio()
+{
+    if (gAudioDevice)
+    {
+        SDL_UnlockAudioDevice(gAudioDevice);
+    }
+}
+
+bool DecodeWav(const void* data, uint32_t size, Wav& out)
+{
+    SDL_AudioSpec spec;
+    Uint8* buf = nullptr;
+    Uint32 len = 0;
+    if (!SDL_LoadWAV_RW(SDL_RWFromConstMem(data, static_cast<int>(size)), 1, &spec, &buf, &len))
+    {
+        fprintf(stderr, "Can't decode WAV: %s\n", SDL_GetError());
+        return false;
+    }
+
+    SDL_AudioCVT cvt;
+    if (SDL_BuildAudioCVT(&cvt, spec.format, spec.channels, spec.freq, AUDIO_S16SYS, spec.channels, spec.freq) < 0)
+    {
+        SDL_FreeWAV(buf);
+        return false;
+    }
+    cvt.len = static_cast<int>(len);
+    cvt.buf = static_cast<Uint8*>(SDL_malloc(static_cast<size_t>(len) * (cvt.len_mult > 0 ? cvt.len_mult : 1)));
+    if (!cvt.buf)
+    {
+        SDL_FreeWAV(buf);
+        return false;
+    }
+    memcpy(cvt.buf, buf, len);
+    SDL_FreeWAV(buf);
+    if (cvt.needed && SDL_ConvertAudio(&cvt) != 0)
+    {
+        SDL_free(cvt.buf);
+        return false;
+    }
+
+    out.samples = reinterpret_cast<int16_t*>(cvt.buf);
+    out.channels = spec.channels;
+    out.rate = spec.freq;
+    out.frames = static_cast<uint32_t>(cvt.needed ? cvt.len_cvt : cvt.len) / (2u * spec.channels);
+    return true;
+}
+
+void FreeWav(Wav& wav)
+{
+    SDL_free(wav.samples);
+    wav.samples = nullptr;
+    wav.frames = 0;
+}
+} // namespace plat

@@ -256,6 +256,11 @@ jobs:
     - name: Renderer self-test
       run: xvfb-run -a -s "-screen 0 1600x1200x24" build_port/native/gta2 --selftest
 
+    # Plays samples and streams through the AIL_* functions, mixed without a device, then once
+    # through SDL's dummy audio device
+    - name: Audio self-test
+      run: SDL_AUDIODRIVER=dummy build_port/native/gta2 --audiotest
+
     - name: Package
       run: |
         mkdir -p gta2-native

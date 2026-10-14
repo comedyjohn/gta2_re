@@ -27,10 +27,11 @@ std::string port_resolve_path(const char* gamePath)
             c = '/';
         }
     }
-    // "C:/..." -> "/...": the game only names drives for the CD, which is a directory here
+    // "C:/..." -> "...": the game only names a drive for the CD's music (cSampleManager looks for
+    // X:\GTAUDIO\ on every drive), which is a folder in the game's own folder here
     if (path.size() >= 2 && path[1] == ':')
     {
-        path.erase(0, 2);
+        path.erase(0, path.size() >= 3 && path[2] == '/' ? 3 : 2);
     }
     if (path.empty() || access(path.c_str(), F_OK) == 0)
     {

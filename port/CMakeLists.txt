@@ -63,8 +63,7 @@ add_library(gta2_game STATIC
     ${game_sources}
     ${REPO_ROOT}/test.cpp
     ${REPO_ROOT}/StdAfx.cpp
-    ${REPO_ROOT}/Source/3rdParty/mss.cpp   # Miles Sound System, stubbed (the same stubs the VC6 build ships as mss32.dll)
-    ${REPO_ROOT}/Source/3rdParty/bink.cpp) # Bink video, stubbed likewise
+    ${REPO_ROOT}/Source/3rdParty/bink.cpp) # Bink video, stubbed (the same stubs the VC6 build ships as binkw32.dll)
 gta2_game_target(gta2_game)
 target_compile_options(gta2_game PRIVATE -w) # the decompiled code is warning-heavy by nature
 
@@ -86,7 +85,9 @@ add_executable(gta2
     platform/directx.cpp
     platform/dinput.cpp
     platform/renderer.cpp
-    platform/selftest.cpp)
+    platform/mss.cpp
+    platform/selftest.cpp
+    platform/audiotest.cpp)
 gta2_game_target(gta2)
 target_compile_options(gta2 PRIVATE -Wall -Wno-unused-function)
 target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl)

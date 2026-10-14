@@ -17,22 +17,24 @@ Run `build_port/native/gta2` from a directory holding the game's `data/` folder,
 
 ## Status
 
-**Milestone 2: a window, a renderer and input.** Players: see [RUNNING.md](RUNNING.md).
+**Milestone 3: sound and music.** Players: see [RUNNING.md](RUNNING.md).
 
 | Subsystem | Windows | Here |
 |---|---|---|
 | Window, message loop | user32 (`winmain.cpp`) | an SDL window; SDL events arrive as the window messages the game's window procedure handles (`platform/win32.cpp`, `platform/sdl/`) |
 | Rendering | `d3ddll.dll` (`gbh_*`) and `dmavideo.dll` (`Vid_*`), loaded by name | `platform/renderer.cpp`: the same 58 functions over OpenGL 2.1, following GTA2Hax's Direct3D 9 version. The game's 640x480 picture is scaled into the window, 4:3 |
 | Input | DirectInput 5 | `platform/dinput.cpp`: keyboard and SDL game controllers behind DirectInput's interfaces, laid out by the data formats the game sets, polled or buffered |
-| Audio | Miles Sound System (`AIL_*`) | `Source/3rdParty/mss.cpp` stubs: silent |
+| Audio | Miles Sound System (`AIL_*`) | `platform/mss.cpp`: the 2D samples, streams and digital driver the game uses, mixed into an SDL audio device. No 3D providers, so the game keeps to 2D samples |
 | Video | Bink | `Source/3rdParty/bink.cpp` stubs; `.bik` files are reported absent, so the game skips its movies |
 | Multiplayer | DirectPlay | unavailable: the game finds no connections |
 | Settings | registry | a persistent key/value store (`platform/win32.cpp`) |
-| Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case |
+| Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case; a drive (`C:\GTAUDIO\`, where the game looks for the CD's music) is the game folder |
 
 `gta2 --selftest` draws through the renderer's entry points (a palette, paletted tiles with
 transparency and rotation, additive blending, a 16-bit TGA) and checks the pixels; CI runs it on a
-virtual display. `gta2-launch` is what players run: it finds the game folder, or unpacks an Inno
+virtual display. `gta2 --audiotest` plays samples and streams through the `AIL_*` functions
+(volume, pan, loop counts and loop blocks, playback rates, 8-bit data, PCM and IMA ADPCM WAVs, the
+`GTAUDIO` path) and checks the mix; it needs no display or sound card. `gta2-launch` is what players run: it finds the game folder, or unpacks an Inno
 Setup installer with `innoextract`, and starts the game in it.
 
 ## How it fits together
@@ -88,7 +90,10 @@ port/tools/check_matching.sh /some/dir/baseline   # must report "changed: 0"
 
 ## Follow-ups
 
-- Audio: the `AIL_*` subset the game uses (samples, streamed music) over SDL audio.
+- 3D sound: a provider behind `AIL_*_3D_*` (OpenAL, or panning by position in the mixer), so the
+  options menu's 3D sound setting does something. Until then `AIL_enumerate_3D_providers` offers none.
+- Streams are decoded whole when opened (`SDL_LoadWAV`); a music track is a few MB, decoded in tens of
+  milliseconds. Decoding in chunks would remove that hitch when the radio changes.
 - Bink movies, with FFmpeg's Bink decoder.
 - The ImGui debug overlay (`ImGuiDebug.cpp`): needs ImGui's OpenGL backend; `gbh_SetBeginSceneCB` ignores it for now.
 - Higher resolutions than 640x480 (the game's own projection would need to know).

@@ -20,9 +20,15 @@ Settings are kept in `~/.config/gta2-native/registry.txt`; delete it to go back 
 Alt+Enter switches between a window and fullscreen. Keyboards and game controllers work; the
 controls are set in the game's own options menu.
 
+The game plays its music from a `GTAUDIO` folder, which came on the original CD (the game looks for
+it as `GTAUDIO` on every drive letter). Copy that folder into the game folder, next to `data/`, to
+hear the radio; without it everything else still has sound.
+
 ## Not there yet
 
-- **No sound or music**, and the intro movies are skipped.
+- The intro movies are skipped.
+- No 3D sound: the options menu's 3D setting stays off, and sounds are panned in stereo as the game does
+  without it.
 - No multiplayer.
 - The picture is the game's original 640x480, scaled to the window.
 

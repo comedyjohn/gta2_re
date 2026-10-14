@@ -84,7 +84,7 @@ struct car_rng_list
 class CarThreadTrigger_18
 {
   public:
-    s32 field_0_pScriptCmd;
+    sptr field_0_pScriptCmd; // SCR_THREAD*, then read back as the command it waits on
     Object_2C* field_4_O2C;
     s32 field_8_type;
     s32 field_C;

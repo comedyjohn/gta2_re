@@ -21,15 +21,18 @@ cmake --preset linux64 && cmake --build --preset linux64
 
 The pointer size is the one CMake option, `GTA2_BITS` (32 or 64); configure fails if the compiler
 doesn't produce that size. A cross toolchain (`CMAKE_TOOLCHAIN_FILE`, e.g. for ARM handhelds) sets
-the target itself, and `GTA2_BITS` must match it.
+the target itself, and `GTA2_BITS` must match it. `cmake/aarch64-linux-gnu.cmake` is one for 64-bit
+ARM (Debian/Ubuntu's `g++-aarch64-linux-gnu`; it says how to point it at ARM SDL2).
 
 Run `build_port/linux32/gta2` from a directory holding the game's `data/` folder, or use
 `port/gta2-launch` as described in [RUNNING.md](RUNNING.md). `gta2 --selftest` (renderer) and
-`gta2 --audiotest` (sound) check a build without game data.
+`gta2 --audiotest` (sound) check a build without game data, and so does `tools/nettest.sh` (network
+games between several copies, see [MULTIPLAYER.md](MULTIPLAYER.md)). The build also makes
+`gta2-server`, a network game server that needs no game data.
 
 ## Status
 
-**Milestone 3: sound and music.** Players: see [RUNNING.md](RUNNING.md).
+**Milestone 4: multiplayer.** Players: see [RUNNING.md](RUNNING.md).
 
 | Subsystem | Windows | Here |
 |---|---|---|
@@ -38,7 +41,7 @@ Run `build_port/linux32/gta2` from a directory holding the game's `data/` folder
 | Input | DirectInput 5 | `platform/dinput.cpp`: keyboard and SDL game controllers behind DirectInput's interfaces, laid out by the data formats the game sets, polled or buffered |
 | Audio | Miles Sound System (`AIL_*`) | `platform/mss.cpp`: the 2D samples, streams and digital driver the game uses, mixed into an SDL audio device. No 3D providers, so the game keeps to 2D samples |
 | Video | Bink | `Source/3rdParty/bink.cpp` stubs; `.bik` files are reported absent, so the game skips its movies |
-| Multiplayer | DirectPlay | unavailable: the game finds no connections |
+| Multiplayer | DirectPlay | `platform/dplay.cpp`: DirectPlay over the port's own reliable UDP protocol (`platform/net/`), a session server in the hosting game or on its own (`gta2-server`), the lobby on the command line (`platform/lobby.cpp`). 32-bit, 64-bit and ARM builds of the same version play together; see [MULTIPLAYER.md](MULTIPLAYER.md) |
 | Settings | registry | a persistent key/value store (`platform/win32.cpp`) |
 | Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case; a drive (`C:\GTAUDIO\`, where the game looks for the CD's music) is the game folder |
 
@@ -125,5 +128,6 @@ port/tools/check_matching.sh /some/dir/baseline   # must report "changed: 0"
 - Compile without `-fpermissive`, and with warnings on for `Source/`, which will turn up the
   constructs MSVC accepted silently.
 - Run under AddressSanitizer and UndefinedBehaviorSanitizer.
-- Floating-point: the x87 code VC6 generated and GCC's SSE differ in precision. Most game maths is
-  fixed-point (`Fix16`), but replays (`InputRecorder_67F8B0`) need checking.
+- Floating-point: the x87 code VC6 generated and GCC's SSE differ in precision. The game's maths is
+  fixed-point (`Fix16`) and the port computes the same on every system (`MULTIPLAYER.md`), but
+  replays recorded by the original (`InputRecorder_67F8B0`) need checking.

@@ -15,12 +15,23 @@ Read this first when picking the port up again. `README.md` explains how the por
    presets, `GTA2_BITS`). 64-bit builds and passes the self-tests.
 5. The 64-bit pointer fixes: pointers in 32-bit integers, the mission script's pointer slots and the
    file structures that hold pointers (see "Play-test the 64-bit build" below for what is covered).
+6. Multiplayer, for every system the port builds for (`MULTIPLAYER.md`): DirectPlay over the port's
+   own reliable UDP protocol, a session server in the hosting game or on its own (`gta2-server`), the
+   lobby on the command line (`--host`, `--join`), the same simulation on every system (MSVC's
+   `rand()`, SSE2 and no fused multiply-adds), builds of other game code turned away, NetPlay's 64-bit
+   casts, and `tools/nettest.sh` (32 against 64 bits in CI; ARM64 by hand under qemu).
+7. The game starts: the DirectX 6.1 check (`GetDirectXVersion_4C4EC0`) no longer probes for
+   `DDRAW.DLL`, which stopped every start with "Incorrect version of DirectX". It now gets to loading
+   game data; nothing past that has been run.
+8. ARM64 builds (`cmake/aarch64-linux-gnu.cmake`): the profiler's `rdtsc` has a clock on other CPUs.
 
 ## Left to do
 
 The order follows what a player notices first.
 
 ### Missing for players
+- [ ] **Single player with real game data.** Nobody has played the port yet: it now starts and gets
+      as far as loading the data. Everything else waits on this.
 - [ ] **Bink movies.** `Source/3rdParty/bink.cpp` is still stubs, and the `.bik` files are reported
       absent, so the intros are skipped. Plan: decode them with FFmpeg's Bink decoder.
 - [ ] **3D sound.** Nothing implements `AIL_*_3D_*` yet, and `AIL_enumerate_3D_providers` offers no
@@ -28,9 +39,9 @@ The order follows what a player notices first.
       in `platform/mss.cpp`'s mixer.
 - [ ] **Higher resolutions than 640x480.** The picture is scaled into the window at 4:3. The game's
       projection code would need to know the new size.
-- [ ] **Multiplayer.** There is no DirectPlay replacement (the game finds no connections). The full
-      plan (a DirectPlay replacement over UDP, a lobby, the 64-bit casts, a same-build check, tests)
-      is in `MULTIPLAYER.md`; read it before starting.
+- [ ] **Multiplayer with real game data.** Built and tested without game data (`MULTIPLAYER.md`);
+      next is a real match: two copies on one PC, two machines, then mixed systems. Then, if wanted, a
+      graphical lobby (the original dialog's controls drawn with Dear ImGui) and NAT hole punching.
 
 ### Polish
 - [ ] **Radio hitch.** Streams are decoded whole when opened (`SDL_LoadWAV`). Decode in chunks to
@@ -58,8 +69,8 @@ The order follows what a player notices first.
         `CarInfo_808`, `Car_BC`, `Car_Door_10`, `Ped`, `Ped_List_4`, `ScriptStackFrame_C`,
         `ScriptStackFramePool_25C`, `SpritePool`, `miss2_0x11C`, `miss2_8`) only live in memory.
       - Casts GCC still flags at 64 bits (`-Wpointer-to-int-cast -Wint-to-pointer-cast`) and why
-        they are harmless: multiplayer (`NetPlay.cpp`, `Network_20324.cpp`; DirectPlay is
-        unavailable), `error.cpp` (integer arguments read back as `const char*`, then cast to an
+        they are harmless: `Network_20324.cpp`'s dialog procedures (the port's lobby doesn't use
+        them; `NetPlay.cpp` has none left), `error.cpp` (integer arguments read back as `const char*`, then cast to an
         integer again), file offsets stored in pointer fields and read back
         (`gtx_0x106C`, `text_0x14`), values only used as numbers (`sound_obj.cpp`'s hash and parity
         bit, `sprite.hpp`'s collision id, `registry.cpp`/`Frontend.cpp` reading a DWORD into a

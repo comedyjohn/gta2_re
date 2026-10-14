@@ -85,6 +85,28 @@ void text_0x14::RemapExtendedChars_5B5930(wchar_t* pStr)
 MATCH_FUNC(0x5B5960)
 void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
 {
+#if defined(GTA2_PORT_64BIT)
+    // The file's 12-byte entries hold a 4-byte offset where text_0xC has a pointer, then the 8-byte
+    // key. Read them as they are and widen them; TDAT_Offsets2Strings_5B59B0 turns the offsets into
+    // pointers later. field_8 stays zero, so a key of all 8 characters still ends there.
+    struct text_0xC_file
+    {
+        u32 field_0_offset;
+        char_type field_4_key[8];
+    };
+    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(text_0xC_file);
+    field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
+    text_0xC_file* pFileEntries = new text_0xC_file[field_0_tKey.field_4_tKey_count];
+    File::Global_Read_4A71C0(pFileEntries, chunkSize);
+    for (u32 i = 0; i < field_0_tKey.field_4_tKey_count; i++)
+    {
+        text_0xC& entry = field_0_tKey.field_0_tKey[i];
+        memset(&entry, 0, sizeof(entry));
+        entry.field_0_pwstr = (wchar_t*)(sptr)pFileEntries[i].field_0_offset;
+        memcpy(&entry.field_4_pKey, pFileEntries[i].field_4_key, sizeof(pFileEntries[i].field_4_key));
+    }
+    delete[] pFileEntries;
+#else
     // TODO: probably an inline
     field_0_tKey.field_4_tKey_count = chunkSize / sizeof(text_0xC);
     field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
@@ -94,6 +116,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
     }
 
     File::Global_Read_4A71C0(field_0_tKey.field_0_tKey, chunkSize);
+#endif
 }
 
 MATCH_FUNC(0x5B59B0)

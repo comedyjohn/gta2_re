@@ -28,8 +28,9 @@ The order follows what a player notices first.
       in `platform/mss.cpp`'s mixer.
 - [ ] **Higher resolutions than 640x480.** The picture is scaled into the window at 4:3. The game's
       projection code would need to know the new size.
-- [ ] **Multiplayer.** There is no DirectPlay replacement (the game finds no connections). Not
-      scheduled.
+- [ ] **Multiplayer.** There is no DirectPlay replacement (the game finds no connections). The full
+      plan (a DirectPlay replacement over UDP, a lobby, the 64-bit casts, a same-build check, tests)
+      is in `MULTIPLAYER.md`; read it before starting.
 
 ### Polish
 - [ ] **Radio hitch.** Streams are decoded whole when opened (`SDL_LoadWAV`). Decode in chunks to

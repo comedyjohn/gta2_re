@@ -111,12 +111,42 @@ endif()
 target_compile_options(gta2_sdl PRIVATE -Wall)
 target_link_libraries(gta2_sdl PUBLIC ${SDL2_LIBRARY})
 
+# The network layer (port/platform/net/): plain C++ and POSIX sockets, no game or SDL types, so the
+# dedicated server builds from it alone
+find_package(Threads REQUIRED)
+add_library(gta2_net STATIC
+    platform/net/socket.cpp
+    platform/net/link.cpp
+    platform/net/server.cpp
+    platform/net/client.cpp)
+target_compile_options(gta2_net PRIVATE -Wall)
+target_link_libraries(gta2_net PUBLIC Threads::Threads)
+
+# gta2-server: a session server on its own, for a machine everybody can reach (port/MULTIPLAYER.md)
+add_executable(gta2-server platform/net/server_main.cpp)
+target_compile_options(gta2-server PRIVATE -Wall)
+target_link_libraries(gta2-server PRIVATE gta2_net)
+
+# Which builds can play together: a hash of the game code, regenerated when it changes
+file(GLOB compat_inputs ${REPO_ROOT}/Source/*.cpp ${REPO_ROOT}/Source/*.hpp ${REPO_ROOT}/Source/*.h
+     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${CMAKE_CURRENT_SOURCE_DIR}/platform/crt.cpp)
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/gta2_compat.h
+    COMMAND ${CMAKE_COMMAND} -DREPO=${REPO_ROOT} -DOUT=${CMAKE_BINARY_DIR}/gta2_compat.h
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/tools/game_hash.cmake
+    DEPENDS ${compat_inputs} ${CMAKE_CURRENT_SOURCE_DIR}/tools/game_hash.cmake
+    COMMENT "Hashing the game code for network compatibility")
+
 add_executable(gta2
+    ${CMAKE_BINARY_DIR}/gta2_compat.h
     platform/main.cpp
     platform/crt.cpp
     platform/wchar.cpp
     platform/win32.cpp
     platform/directx.cpp
+    platform/dplay.cpp
+    platform/lobby.cpp
+    platform/nettest.cpp
+    platform/simcheck.cpp
     platform/dinput.cpp
     platform/renderer.cpp
     platform/mss.cpp
@@ -125,4 +155,5 @@ add_executable(gta2
     platform/audiotest.cpp)
 gta2_game_target(gta2)
 target_compile_options(gta2 PRIVATE -Wall -Wno-unused-function)
-target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl)
+target_include_directories(gta2 PRIVATE ${CMAKE_BINARY_DIR})
+target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl gta2_net)

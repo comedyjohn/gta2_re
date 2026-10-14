@@ -69,6 +69,11 @@ if missing=$(ldd "$bin" 2>/dev/null | grep "not found"); then
     fail "libraries are missing. Debian/Ubuntu: sudo apt install libsdl2-2.0-0 libgl1 libgl1-mesa-dri"
 fi
 
+# These need no game data
+case "${1:-}" in
+    --help | -h | --selftest | --audiotest | --nettest | --simcheck) exec "$bin" "$@" ;;
+esac
+
 gamedir=$(find_game_dir) || {
     install_from_installer
     gamedir=$(find_game_dir) || fail "installation finished but the game folder wasn't found"

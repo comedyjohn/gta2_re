@@ -800,10 +800,16 @@ BOOL ValidateRect(HWND, const RECT*)
     return TRUE;
 }
 
-// Dialogs exist only for the network lobby, and multiplayer is unavailable for now
-INT_PTR DialogBoxParamA(HINSTANCE, LPCSTR, HWND, DLGPROC, LPARAM)
+// The one dialog is the network lobby (resource 103), which the port runs without a window
+// (lobby.cpp). Its controls' text is kept, so the game's own code reading the player name back
+// (Network_20324::cb_SavePlayerName_51BC00) gets what the lobby put there.
+INT_PTR PortRunDialog(HINSTANCE instance, LPCSTR templateName, DLGPROC proc, LPARAM param);
+static std::map<int, std::string> gDialogText;
+
+INT_PTR DialogBoxParamA(HINSTANCE instance, LPCSTR templateName, HWND, DLGPROC proc, LPARAM param)
 {
-    return -1;
+    gDialogText.clear();
+    return PortRunDialog(instance, templateName, proc, param);
 }
 
 BOOL EndDialog(HWND, INT_PTR)
@@ -821,17 +827,22 @@ int GetDlgCtrlID(HWND)
     return 0;
 }
 
-UINT GetDlgItemTextA(HWND, int, LPSTR text, int max)
+UINT GetDlgItemTextA(HWND, int id, LPSTR text, int max)
 {
-    if (max > 0)
+    if (max <= 0)
     {
-        text[0] = 0;
+        return 0;
     }
-    return 0;
+    const std::string& s = gDialogText[id];
+    const size_t n = std::min(s.size(), static_cast<size_t>(max - 1));
+    memcpy(text, s.data(), n);
+    text[n] = 0;
+    return static_cast<UINT>(n);
 }
 
-BOOL SetDlgItemTextA(HWND, int, LPCSTR)
+BOOL SetDlgItemTextA(HWND, int id, LPCSTR text)
 {
+    gDialogText[id] = text ? text : "";
     return TRUE;
 }
 

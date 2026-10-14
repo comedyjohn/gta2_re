@@ -225,6 +225,7 @@ typedef union _LARGE_INTEGER
 #define E_OUTOFMEMORY ((HRESULT)0x8007000EL)
 #define E_INVALIDARG ((HRESULT)0x80070057L)
 #define E_NOINTERFACE ((HRESULT)0x80004002L)
+#define E_NOTIMPL ((HRESULT)0x80004001L)
 #define SUCCEEDED(hr) (((HRESULT)(hr)) >= 0)
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
 #define MAKE_HRESULT(sev, fac, code) ((HRESULT)(((unsigned long)(sev) << 31) | ((unsigned long)(fac) << 16) | ((unsigned long)(code))))

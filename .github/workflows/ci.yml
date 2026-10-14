@@ -268,10 +268,15 @@ jobs:
     - name: Audio self-test
       run: SDL_AUDIODRIVER=dummy build_port/linux${{ matrix.bits }}/gta2 --audiotest
 
+    # Several players on this machine through the port's DirectPlay: lost datagrams, players
+    # leaving, a host that dies, a different build turned away, a separate gta2-server
+    - name: Network test
+      run: port/tools/nettest.sh build_port/linux${{ matrix.bits }}
+
     - name: Package
       run: |
         mkdir -p gta2-native
-        cp build_port/linux${{ matrix.bits }}/gta2 port/gta2-launch port/RUNNING.md gta2-native/
+        cp build_port/linux${{ matrix.bits }}/gta2 build_port/linux${{ matrix.bits }}/gta2-server port/gta2-launch port/RUNNING.md gta2-native/
         tar czf gta2-native-linux${{ matrix.bits }}.tar.gz gta2-native
 
     - name: Upload artifacts
@@ -280,3 +285,33 @@ jobs:
         name: linux_native_${{ matrix.bits }}bit
         path: gta2-native-linux${{ matrix.bits }}.tar.gz
         retention-days: 7
+
+  # A network game between the 32-bit and the 64-bit build: the same simulation (gta2 --simcheck)
+  # and the network tests with the players mixed across the two
+  linux-native-mixed-network:
+    runs-on: ubuntu-24.04
+    name: Linux_Native_Mixed_Network
+    needs: build-linux-native
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install the 32-bit and 64-bit libraries
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install -y libsdl2-2.0-0 libsdl2-2.0-0:i386
+
+    - name: Download both builds
+      uses: actions/download-artifact@v4
+      with:
+        pattern: linux_native_*bit
+
+    - name: Network test, 32-bit against 64-bit
+      run: |
+        for bits in 32 64; do
+          mkdir -p native$bits
+          tar xzf linux_native_${bits}bit/gta2-native-linux$bits.tar.gz -C native$bits
+        done
+        port/tools/nettest.sh native32/gta2-native native64/gta2-native

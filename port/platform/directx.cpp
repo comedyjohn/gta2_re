@@ -1,10 +1,10 @@
 // DirectX for the native build: the GUIDs, DirectPlay and COM.
 //
-// DirectInput itself is in dinput.cpp. DirectPlay reports itself unavailable, which the game shows as
-// "no network connections". COM objects nobody else creates fail.
+// DirectInput itself is in dinput.cpp and DirectPlay in dplay.cpp. COM objects nobody else creates fail.
 #include <dinput.h>
 #include <VC98/Include/DPLAY.H>
 #include <VC98/Include/DPLOBBY.H>
+#include "dplay_port.h"
 
 #include <string.h>
 
@@ -49,24 +49,6 @@ PORT_GUID(DPAID_INet, 0xc4a54da0,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,
 PORT_GUID(DPAID_INetW, 0xe63232a0,0x9dbf,0x11d0,0x9c,0xc1,0x0,0xa0,0xc9,0x5,0x42,0x5e);
 PORT_GUID(DPAID_ComPort, 0xf2f0ce00,0xe0af,0x11cf,0x9c,0x4e,0x0,0xa0,0xc9,0x5,0x42,0x5e);
 
-// ---- DirectPlay: unavailable for now
-extern "C" HRESULT DirectPlayCreate(LPGUID, LPDIRECTPLAY* out, IUnknown*)
-{
-    *out = 0;
-    return DPERR_UNAVAILABLE;
-}
-
-extern "C" HRESULT DirectPlayLobbyCreateW(LPGUID, LPDIRECTPLAYLOBBY* out, IUnknown*, LPVOID, DWORD)
-{
-    *out = 0;
-    return DPERR_UNAVAILABLE;
-}
-
-extern "C" HRESULT DirectPlayLobbyCreateA(LPGUID sp, LPDIRECTPLAYLOBBY* out, IUnknown* outer, LPVOID data, DWORD size)
-{
-    return DirectPlayLobbyCreateW(sp, out, outer, data, size);
-}
-
 // ---- COM
 extern "C" HRESULT CoInitialize(LPVOID)
 {
@@ -77,8 +59,12 @@ extern "C" void CoUninitialize()
 {
 }
 
-extern "C" HRESULT CoCreateInstance(REFCLSID, LPUNKNOWN, DWORD, REFIID, LPVOID* out)
+extern "C" HRESULT CoCreateInstance(REFCLSID clsid, LPUNKNOWN, DWORD, REFIID iid, LPVOID* out)
 {
+    if (clsid == CLSID_DirectPlay)
+    {
+        return PortDirectPlayCreate(iid, out);
+    }
     *out = 0;
-    return REGDB_E_CLASSNOTREG; // DirectPlay (CLSID_DirectPlay) and DirectMusic aren't available
+    return REGDB_E_CLASSNOTREG; // DirectMusic isn't available
 }

@@ -1,6 +1,6 @@
 // DirectPlay 6 subset for the native build, at the path NetPlay.hpp includes it from
-// (<VC98/Include/DPLAY.H>). Structure layouts follow the SDK. Multiplayer is stubbed for now:
-// DirectPlayCreate fails, so the game reports no network connections.
+// (<VC98/Include/DPLAY.H>). Structure layouts follow the SDK. port/platform/dplay.cpp implements it
+// over the port's own UDP session protocol (port/platform/net/).
 #pragma once
 #include <windows.h>
 #include <objbase.h>
@@ -12,11 +12,27 @@ typedef DPID* LPDPID;
 #define MAKE_DPHRESULT(code) MAKE_HRESULT(1, _FACDP, code)
 #define DP_OK S_OK
 #define DPERR_GENERIC E_FAIL
+#define DPERR_ALREADYINITIALIZED MAKE_DPHRESULT(5)
 #define DPERR_BUFFERTOOSMALL MAKE_DPHRESULT(30)
+#define DPERR_CANTADDPLAYER MAKE_DPHRESULT(40)
+#define DPERR_CANTCREATEGROUP MAKE_DPHRESULT(50)
+#define DPERR_CANTCREATEPLAYER MAKE_DPHRESULT(60)
+#define DPERR_CANTCREATESESSION MAKE_DPHRESULT(70)
+#define DPERR_INVALIDPARAMS E_INVALIDARG
+#define DPERR_INVALIDPLAYER MAKE_DPHRESULT(150)
+#define DPERR_INVALIDGROUP MAKE_DPHRESULT(155)
+#define DPERR_NOCONNECTION MAKE_DPHRESULT(170)
 #define DPERR_NOMESSAGES MAKE_DPHRESULT(190)
+#define DPERR_NOSESSIONS MAKE_DPHRESULT(220)
+#define DPERR_SENDTOOBIG MAKE_DPHRESULT(230)
+#define DPERR_TIMEOUT MAKE_DPHRESULT(240)
 #define DPERR_UNAVAILABLE MAKE_DPHRESULT(250)
+#define DPERR_UNSUPPORTED E_NOTIMPL
 #define DPERR_USERCANCEL MAKE_DPHRESULT(280)
+#define DPERR_SESSIONLOST MAKE_DPHRESULT(310)
+#define DPERR_INVALIDPASSWORD MAKE_DPHRESULT(340)
 #define DPERR_CONNECTING MAKE_DPHRESULT(350)
+#define DPERR_INVALIDINTERFACE MAKE_DPHRESULT(470)
 
 #define DPID_SYSMSG 0
 #define DPID_ALLPLAYERS 0

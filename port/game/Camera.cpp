@@ -78,15 +78,6 @@ EXTERN_GLOBAL(Ang16, kAng180_676772);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_676964, Ang16(0), 0x676964);
 
 
-// TODO: move
-static inline Fix16 Max_41E130(Fix16 a1, Fix16 a2)
-{
-    if (a1 > a2)
-    {
-        return a1;
-    }
-    return a2;
-}
 
 MATCH_FUNC(0x4355D0)
 bool Camera_0xBC::IsSpriteTheCameraSubject_4355D0(Sprite* pSprite)
@@ -599,7 +590,7 @@ void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
         Fix16 new_y;
         new_y = pCar->GetY_41E440();
         Fix16 new_z;
-        new_z = Max_41E130(pCar->GetZ_41E450() - kTwo_676820, kOne_67681C);
+        new_z = Fix16::Max_41E130(pCar->GetZ_41E450() - kTwo_676820, kOne_67681C);
         Fix16 zoom = kDefaultZoom_6766D4;
 
         AccumulateSuspicionOnDriver_435F90(pCar);
@@ -626,7 +617,7 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
         {
             xpos = pPed->get_cam_x();
             ypos = pPed->get_cam_y();
-            zpos = Max_41E130(pPed->get_cam_z() - kTwo_676820, kOne_67681C);
+            zpos = Fix16::Max_41E130(pPed->get_cam_z() - kTwo_676820, kOne_67681C);
             zposToUse = zpos;
             if (pCar)
             {
@@ -638,7 +629,7 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
         {
             xpos = pCar_2->GetX_41E430();
             ypos = pCar_2->GetY_41E440();
-            zpos = Max_41E130(pCar_2->GetZ_41E450() - kTwo_676820, kOne_67681C);
+            zpos = Fix16::Max_41E130(pCar_2->GetZ_41E450() - kTwo_676820, kOne_67681C);
             zposToUse = zpos;
             Camera_0xBC::AccumulateSuspicionOnDriver_435F90(pCar_2);
             Camera_0xBC::ApplyCarVelocityCameraOffset_436200(pCar_2, &xpos, &ypos, &zposToUse);

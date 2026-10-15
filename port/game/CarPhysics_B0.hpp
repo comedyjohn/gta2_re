@@ -272,7 +272,7 @@ class CarPhysics_B0
         }
     }
 
-    Fix16 CarPhysics_B0::ComputeTorqueUnknown_49E8E0()
+    Fix16 ComputeTorqueUnknown_49E8E0()
     {
         if (get_revs_561940())
         {
@@ -284,7 +284,7 @@ class CarPhysics_B0
         }
     }
 
-    bool CarPhysics_B0::IsDrowning_421100()
+    bool IsDrowning_421100()
     {
         if (field_98_surface_type == 8)
         {

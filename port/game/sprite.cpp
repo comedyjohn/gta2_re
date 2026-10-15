@@ -590,7 +590,7 @@ u8 Sprite::GetWaterCornerMask_59E250()
 }
 
 MATCH_FUNC(0x59e2e0)
-void Sprite::CopyCollisionShapeToVisual_59E2E0(void)
+void Sprite::CopyCollisionShapeToVisual_59E2E0()
 {
     EnsureVisualShape_59F990();
     memcpy(field_4_pVisualShape, field_C_pCollisionShape, sizeof(SpriteShape_4C));

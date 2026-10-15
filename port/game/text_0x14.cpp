@@ -188,8 +188,9 @@ void text_tdat::TDAT_Load_5B5A80(u32 size)
 // 0x5B5AD0
 u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
 {
-    // Both tables are indexed with the raw char (0x80-0xFF), so the 'g'/'i'/'r'/'s' lookup reads
-    // past kExtendedRussianCharMap_626490 into word_626590[0..127], and 'f' reads word_626590[128..255].
+    // The original indexed both tables with the raw char (0x80-0xFF), so its 'g'/'i'/'r'/'s' lookup read
+    // past kExtendedRussianCharMap_626490 into word_626590[0..127], which follows it in memory. That
+    // read is spelled out below; 'f' reads word_626590[128..255].
     // TODO: the contents of these arrays are very wrong
     switch (field_10_lang_code)
     {
@@ -221,7 +222,7 @@ u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
             }
             if (ch >= 0x80 && ch <= 0xFF)
             {
-                return kExtendedRussianCharMap_626490[ch];
+                return word_626590[ch - 0x80];
             }
             break;
     }

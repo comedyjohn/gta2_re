@@ -1000,9 +1000,9 @@ void LoadMapsFromData(Network_Enumerated_Map* pOut, u16& num_maps_loaded)
             );
             // Now check if the map exists
             _chdir("data");
-            if (GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_0_map_name) != -1
-                && GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_104_style_name) != -1
-                && GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_208_script_name) != -1)
+            if (GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_0_map_name) != INVALID_FILE_ATTRIBUTES
+                && GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_104_style_name) != INVALID_FILE_ATTRIBUTES
+                && GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_208_script_name) != INVALID_FILE_ATTRIBUTES)
             {
                 memcpy(&pOut[total_map_count], &enumerated_mmp_name[i], sizeof(Network_Enumerated_Map));
                 strcpy(&mmp_maps_description[total_map_count][0], (const char*)&enumerated_mmp_name[i].field_30C_description);

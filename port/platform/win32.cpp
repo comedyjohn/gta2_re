@@ -190,7 +190,7 @@ DWORD GetFileAttributesA(LPCSTR name)
     struct stat st;
     if (stat(port_resolve_path(name).c_str(), &st) != 0)
     {
-        return 0xFFFFFFFF; // INVALID_FILE_ATTRIBUTES
+        return INVALID_FILE_ATTRIBUTES;
     }
     return S_ISDIR(st.st_mode) ? FILE_ATTRIBUTE_DIRECTORY : FILE_ATTRIBUTE_NORMAL;
 }

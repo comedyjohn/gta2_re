@@ -2246,11 +2246,11 @@ void Network_20324::EnumerateMaps_51BFA0()
 
         // Only keep maps whose files all exist
         _chdir("data");
-        if (GetFileAttributesA(maps[i].field_0_map_name) != -1)
+        if (GetFileAttributesA(maps[i].field_0_map_name) != INVALID_FILE_ATTRIBUTES)
         {
-            if (GetFileAttributesA(maps[i].field_104_style_name) != -1)
+            if (GetFileAttributesA(maps[i].field_104_style_name) != INVALID_FILE_ATTRIBUTES)
             {
-                if (GetFileAttributesA(maps[i].field_208_script_name) != -1)
+                if (GetFileAttributesA(maps[i].field_208_script_name) != INVALID_FILE_ATTRIBUTES)
                 {
                     OutputDebugStringA(field_4_maps[i].field_0_map_name);
                     memcpy(&field_4_maps[field_1FD64_total_map_count], &maps[i], sizeof(Network_Enumerated_Map));

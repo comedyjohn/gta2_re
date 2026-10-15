@@ -252,30 +252,11 @@ bool InputDevices_1::game_pads_init_498BA0()
 {
     if (gpDInput_67B804)
     {
-#if defined(__clang__) || (_MSC_VER <= 1200)
-    #pragma comment(lib, "DInput.lib")
         // VC6-compatible path
         if (FAILED(DirectInputCreateA(gHInstance_708220, 0x700, &gpDInput_67B804, nullptr)))
         {
             return true;
         }
-#else
-    #pragma comment(lib, "DInput8.lib")
-        // Runtime dynamic loading path
-        HMODULE hDx = LoadLibrary("DInput.dll");
-        if (hDx)
-        {
-            FARPROC p = GetProcAddress(hDx, "DirectInputCreateA");
-            if (p)
-            {
-                auto pDirectInputCreateA = reinterpret_cast<decltype(&DirectInputCreateA)>(p);
-                if (FAILED(pDirectInputCreateA(gHInstance_708220, 0x700, &gpDInput_67B804, 0)))
-                {
-                    return 1;
-                }
-            }
-        }
-#endif
     }
 
     gpDInput_67B804->EnumDevices(DIDEVTYPE_JOYSTICK, DirectInputDeviceEnumCallBack_498910, this, DIEDFL_ATTACHEDONLY);

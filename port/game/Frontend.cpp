@@ -34,7 +34,6 @@
 #include <cstdio>
 #include <cwchar>
 
-#pragma comment(lib, "dxguid.lib")
 
 void Start_GTA2Manager_5E4DE0();
 

@@ -3,6 +3,7 @@
 #include "enums.hpp"
 #include "error.hpp"
 #include "sprite.hpp"
+#include <chrono>
 
 // Forward declarations: the functions below are in address order
 EXPORT s32 get_rdtsc_5BEE90();
@@ -72,30 +73,10 @@ SpriteRenderer_1C::~SpriteRenderer_1C()
 MATCH_FUNC(0x5BEE90)
 EXPORT s32 get_rdtsc_5BEE90()
 {
-    // NOTE: Actually is inline assembly, surprisingly
-    unsigned __int64 t;
-#if defined(GTA2_PORT) && (defined(__i386__) || defined(__x86_64__))
-    t = __builtin_ia32_rdtsc();
-#elif defined(GTA2_PORT)
-    // Other CPUs have no rdtsc: nanoseconds stand in for cycles (only the profiler display reads them)
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    t = static_cast<unsigned __int64>(ts.tv_sec) * 1000000000u + ts.tv_nsec;
-#else
-    __asm
-    {
-        // The original has the 16-bit pushaw/popaw. Prefix pushad/popad with an operand-size
-        // override so the compiler still sees them and saves ebx/esi/edi.
-        _emit 0x66
-        pushad
-        rdtsc
-        mov DWORD PTR t, eax
-        mov DWORD PTR t+4, edx
-        _emit 0x66
-        popad
-    }
-#endif
-    return static_cast<s32>(t);
+    // The original reads the CPU's cycle counter (rdtsc); nanoseconds stand in for cycles here (only
+    // the profiler display reads them)
+    const auto t = std::chrono::steady_clock::now().time_since_epoch();
+    return static_cast<s32>(std::chrono::duration_cast<std::chrono::nanoseconds>(t).count());
 }
 
 // Converts a cycle count from get_rdtsc_5BEE90 for the profiler display (dword_705334 is the

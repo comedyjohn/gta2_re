@@ -2,17 +2,7 @@
 
 #include "Globals.hpp"
 #include "types.hpp"
-
-#if _MSC_VER > 1200
-    #include <stdio.h> // printf
-#endif
-
-// The empty Marker_<addr>_fpo() after each naked marker matters: C2 sizes [esp+x] operands (when deciding
-// to copy a small tail block or jump to it, <= 20 bytes is copied) using flags left by the previously
-// compiled function. A naked/asm function leaves them off, an FPO function leaves them on as in the
-// original. See "How VC6 copies and merges block tails" in docs/matching_quirks.md.
-// Pattern: 0x90, 0x90 0xB8 [addr bytes x4] 0xB8 [status bytes x4] 0x90 0x90
-#define FUNC_MARKER_ASM(addr, status) __asm nop __asm nop __asm mov eax, addr __asm mov eax, status __asm nop __asm nop
+#include <cstdio>
 
 // Variadic macros were added in C99, but this is not supported by VC6.
 // We need to use variadic args for the DEFINE_GLOBAL_ARRAY_INIT macro.
@@ -23,199 +13,47 @@
 // but not confuse the compiler with extra parameters.
 #define COMMA ,
 
-#if defined(_MSC_VER)
-    #define WIP_FUNC(addr)                                           \
-        __declspec(naked) __declspec(dllexport) void Marker_##addr() \
-        {                                                            \
-            FUNC_MARKER_ASM(addr, 2)                                 \
-        } \
-        __declspec(dllexport) void Marker_##addr##_fpo() {}
-    #define MATCH_FUNC(addr)                                         \
-        __declspec(naked) __declspec(dllexport) void Marker_##addr() \
-        {                                                            \
-            FUNC_MARKER_ASM(addr, 1)                                 \
-        } \
-        __declspec(dllexport) void Marker_##addr##_fpo() {}
-    #define STUB_FUNC(addr)                                          \
-        __declspec(naked) __declspec(dllexport) void Marker_##addr() \
-        {                                                            \
-            FUNC_MARKER_ASM(addr, 0)                                 \
-        } \
-        __declspec(dllexport) void Marker_##addr##_fpo() {}
+// The markers give each function's address in the original 10.5.exe (and whether the decompilation
+// matched it byte for byte); they generate no code
+#define WIP_FUNC(addr)
+#define MATCH_FUNC(addr)
+#define STUB_FUNC(addr)
+#define EXPORT
+#define __stdcall
 
-    #if defined(EXPORT_FUNCS)
-        #define EXPORT __declspec(dllexport)
-    #else
-        #define EXPORT
-    #endif
+// Report unfinished code the first time the game reaches it
+#define NOT_IMPLEMENTED                                        \
+    do                                                         \
+    {                                                          \
+        static bool logged___ = false;                         \
+        if (!logged___)                                        \
+        {                                                      \
+            logged___ = true;                                  \
+            printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
+        }                                                      \
+    } while (0)
+#define WIP_IMPLEMENTED                                        \
+    do                                                         \
+    {                                                          \
+        static bool logged___ = false;                         \
+        if (!logged___)                                        \
+        {                                                      \
+            logged___ = true;                                  \
+            printf("WIP IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
+        }                                                      \
+    } while (0)
 
-    #if defined(EXPORT_VARS) && defined(IMPORT_VARS)
-        #error "EXPORT_VARS and IMPORT_VARS should not be defined together!"
-    #endif
+#define DEFINE_GLOBAL(type, name, addr) type name
+#define DEFINE_GLOBAL_INIT(type, name, value, addr) type name = value
 
-    #if defined(EXPORT_VARS) || defined(IMPORT_VARS)
-        #if defined(EXPORT_VARS)
-            #define DEFINE_GLOBAL(type, name, addr) \
-                __declspec(dllexport) type name;    \
-                GLOBAL(name, addr)
+#define DEFINE_GLOBAL_ARRAY(type, name, size, addr) type name[size]
+#define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) type name[size] = {va_args}
 
-            #define DEFINE_GLOBAL_INIT(type, name, value, addr) \
-                __declspec(dllexport) type name = value;        \
-                GLOBAL(name, addr)
+#define EXTERN_GLOBAL(type, name) extern type name
+#define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]
 
-            #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) \
-                __declspec(dllexport) type name[size];          \
-                GLOBAL(name, addr)
-
-            #define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) \
-                __declspec(dllexport) type name[size] = {va_args};            \
-                GLOBAL(name, addr)
-
-            #define EXTERN_GLOBAL(type, name) __declspec(dllexport) extern type name
-            #define EXTERN_GLOBAL_ARRAY(type, name, size) __declspec(dllexport) extern type name[size]
-
-        #elif defined(IMPORT_VARS)
-            // define
-            #define DEFINE_GLOBAL(type, name, addr) __declspec(dllimport) type name
-            #define DEFINE_GLOBAL_INIT(type, name, value, addr) __declspec(dllimport) type name;
-
-            #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) __declspec(dllimport) type name[size]
-            #define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) __declspec(dllimport) type name[size];
-            // extern
-            #define EXTERN_GLOBAL(type, name) __declspec(dllimport) extern type name
-            #define EXTERN_GLOBAL_ARRAY(type, name, size) __declspec(dllimport) extern type name[size]
-        #endif
-    #else
-        // Static build
-        #define DEFINE_GLOBAL(type, name, addr) \
-            type name;                          \
-            GLOBAL(name, addr)
-
-        #define DEFINE_GLOBAL_INIT(type, name, value, addr) \
-            type name = value;                              \
-            GLOBAL(name, addr)
-
-        #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) \
-            type name[size];                                \
-            GLOBAL(name, addr)
-
-        #define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) \
-            type name[size] = {va_args};                                  \
-            GLOBAL(name, addr)
-
-        #define EXTERN_GLOBAL(type, name) extern type name
-        #define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]
-    #endif
-
-    #if defined(__clang__) || (_MSC_VER <= 1200)
-void __stdcall LogFuncAddr(u32 codeAddr, s32 mode);
-
-        #define GET_IP(var)   \
-            __asm call $ + 5; \
-            __asm pop var;
-
-        #define NOT_IMPLEMENTED                                                                                                    \
-            do                                                                                                                     \
-            {                                                                                                                      \
-                static bool logged = false;                                                                                        \
-                if (!logged)                                                                                                       \
-                {                                                                                                                  \
-                    unsigned int ip;                                                                                               \
-                    __asm { _emit 0xE8 }                                                                                             \
-                    __asm {_emit 0x00} __asm {_emit 0x00} __asm {_emit 0x00} __asm {_emit 0x00} __asm {pop ip} LogFuncAddr(ip, 0); \
-                    logged = true;                                                                                                 \
-                }                                                                                                                  \
-            } while (0)
-
-        #define WIP_IMPLEMENTED                                                                                                    \
-            do                                                                                                                     \
-            {                                                                                                                      \
-                static bool logged = false;                                                                                        \
-                if (!logged)                                                                                                       \
-                {                                                                                                                  \
-                    unsigned int ip;                                                                                               \
-                    __asm { _emit 0xE8 }                                                                                             \
-                    __asm {_emit 0x00} __asm {_emit 0x00} __asm {_emit 0x00} __asm {_emit 0x00} __asm {pop ip} LogFuncAddr(ip, 1); \
-                    logged = true;                                                                                                 \
-                }                                                                                                                  \
-            } while (0)
-
-        // build.py --no_wip_logging: no logging code in WIP/stub functions, so their asm can be
-        // compared with the original's (Scripts/report_progress_to_discord.py scores the WIPs on it)
-        #ifdef NO_WIP_LOGGING
-            #undef NOT_IMPLEMENTED
-            #define NOT_IMPLEMENTED
-            #undef WIP_IMPLEMENTED
-            #define WIP_IMPLEMENTED
-        #endif
-    #else
-        #define NOT_IMPLEMENTED                               \
-            static bool done___ = false;                      \
-            if (!done___)                                     \
-            {                                                 \
-                done___ = true;                               \
-                printf("NOT IMPLEMENTED %s\n", __FUNCTION__); \
-            }
-
-        #define WIP_IMPLEMENTED                               \
-            static bool done___ = false;                      \
-            if (!done___)                                     \
-            {                                                 \
-                done___ = true;                               \
-                printf("WIP IMPLEMENTED %s\n", __FUNCTION__); \
-            }
-    #endif
-
-#else
-    // Other compilers, e.g. the native Linux build (port/): no markers, no address bookkeeping
-    #define WIP_FUNC(addr)
-    #define MATCH_FUNC(addr)
-    #define STUB_FUNC(addr)
-    #define EXPORT
-    #define __stdcall
-
-    // Report unfinished code the first time the game reaches it
-    #define NOT_IMPLEMENTED                                        \
-        do                                                         \
-        {                                                          \
-            static bool logged___ = false;                         \
-            if (!logged___)                                        \
-            {                                                      \
-                logged___ = true;                                  \
-                printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
-            }                                                      \
-        } while (0)
-    #define WIP_IMPLEMENTED                                        \
-        do                                                         \
-        {                                                          \
-            static bool logged___ = false;                         \
-            if (!logged___)                                        \
-            {                                                      \
-                logged___ = true;                                  \
-                printf("WIP IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
-            }                                                      \
-        } while (0)
-
-    #define DEFINE_GLOBAL(type, name, addr) type name
-    #define DEFINE_GLOBAL_INIT(type, name, value, addr) type name = value
-
-    #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) type name[size]
-    #define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) type name[size] = {va_args}
-
-    #define EXTERN_GLOBAL(type, name) extern type name
-    #define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]
-#endif
-
-#if defined(_MSC_VER)
-    #if defined(__clang__) || (_MSC_VER <= 1200)
-        #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
-            typedef int static_assert_##structureName[sizeof(structureName) == expectedSize ? 1 : -1];
-    #else
-        #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
-            static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
-    #endif
-#elif __SIZEOF_POINTER__ == 8
-    // A 64-bit native build (port/, GTA2_BITS=64): the asserted sizes count 4-byte pointers
+// The size a structure has in the original. It counts 4-byte pointers, so the 64-bit build skips it.
+#if __SIZEOF_POINTER__ == 8
     #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize)
 #else
     #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
@@ -223,16 +61,12 @@ void __stdcall LogFuncAddr(u32 codeAddr, s32 mode);
 #endif
 
 // For a structure laid over data read from a file, whose size must not change at 64 bits either
-#if defined(_MSC_VER)
-    #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize)
-#else
-    #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) \
-        static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
-#endif
+#define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) \
+    static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
 
 #define GTA2_COUNTOF(x) (sizeof(x) / sizeof(*(x)))
 #define GTA2_COUNTOF_S(x) ((s32)GTA2_COUNTOF(x))
 
 #define GTA2_DELETE_AND_NULL(x) \
     delete x;                   \
-    x = 0;
+    x = nullptr;

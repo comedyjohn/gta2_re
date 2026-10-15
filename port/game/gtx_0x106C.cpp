@@ -1256,7 +1256,6 @@ void sprite_delta::Delta_5ABA00(u8* pArray)
 {
     // Inline asm in the original (lodsw, rep movsb). Each entry is a u16 offset from the end
     // of the previous run, a u8 length and that many bytes.
-#if defined(GTA2_PORT)
     // The asm below, in C++ for compilers without MSVC inline asm
     u8* pSrc = reinterpret_cast<u8*>(field_0_pData);
     u8* pEnd = pSrc + field_4_len;
@@ -1272,31 +1271,6 @@ void sprite_delta::Delta_5ABA00(u8* pArray)
         pDst += len;
         pSrc += len;
     } while (pSrc != pEnd);
-#else
-    sprite_delta* pThis = this;
-    __asm
-    {
-        push edi
-        push esi
-        mov eax, 0
-        mov ecx, 0
-        mov edi, pArray
-        mov ebx, pThis
-        mov esi, [ebx]
-        movzx ebx, word ptr [ebx+4]
-        add ebx, esi
-    next_entry:
-        lodsw
-        mov cl, [esi]
-        add edi, eax
-        inc esi
-        rep movsb
-        cmp esi, ebx
-        jne next_entry
-        pop esi
-        pop edi
-    }
-#endif
 }
 
 // https://decomp.me/scratch/Cc0Dx Not fully working
@@ -1305,7 +1279,6 @@ void sprite_delta::Delta_5ABA40(u8* pArray, u32 width)
 {
     // Inline asm in the original (lodsw / loop)
     // Each entry: u16 offset, u8 len, then len bytes written backwards from the end of the row
-#if defined(GTA2_PORT)
     // The asm below, in C++ for compilers without MSVC inline asm
     u8* pSrc = reinterpret_cast<u8*>(field_0_pData);
     u8* pEnd = pSrc + field_4_len;
@@ -1329,44 +1302,6 @@ void sprite_delta::Delta_5ABA40(u8* pArray, u32 width)
             *pDst-- = *pSrc++;
         } while (--len);
     } while (pSrc != pEnd);
-#else
-    __asm
-    {
-        push edi
-        push esi
-        mov eax, 0
-        mov ecx, 0
-        mov edi, pArray
-        mov ebx, this
-        mov esi, [ebx]
-        movzx ebx, word ptr [ebx + 4]
-        add ebx, esi
-        dec edi
-        add edi, width
-    next_entry:
-        lodsw
-        mov cl, [esi]
-        add edi, eax
-        and eax, 0xFF
-        shl eax, 1
-        sub edi, eax
-        cmp eax, 0x100
-        jl skip_wrap
-        add edi, 0x200
-    skip_wrap:
-        inc esi
-    copy_bytes:
-        mov al, [esi]
-        mov [edi], al
-        inc esi
-        dec edi
-        loop copy_bytes
-        cmp esi, ebx
-        jne next_entry
-        pop esi
-        pop edi
-    }
-#endif
 }
 
 MATCH_FUNC(0x5abaa0)

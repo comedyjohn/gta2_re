@@ -90,11 +90,9 @@ Setup installer with `innoextract`, and starts the game in it.
 - **MSVC 6 semantics:** `-fwrapv` and `-fno-strict-aliasing`, because decompiled code relies on
   wrapping arithmetic and type punning that MSVC never exploited. `-fpermissive` still covers a few
   MSVC-only constructs; removing it is one of the follow-ups below.
-- **The source list is read from the top-level `CMakeLists.txt`** (`gta2_lib_src`), so a new file
-  added for the VC6 build is picked up here too.
-- An undefined `_MSC_VER` is 0 in `#if`, so GCC takes the `_MSC_VER <= 1200` (VC6) branches in
-  `error.hpp`, `input.cpp` and friends. `include/fstream.h` provides the pre-standard `ofstream` the
-  VC6 branch of `ErrorLog` holds, at its original 0x3C bytes.
+- **Every `.cpp` in `game/` is part of the game.**
+- **`game/` has no compiler-specific branches:** the VC6 ones (`_MSC_VER`, inline asm, the classic
+  `ofstream`) were dropped in the fork, keeping what the port compiled.
 
 ## Changing the game code
 

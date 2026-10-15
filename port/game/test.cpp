@@ -16,7 +16,6 @@
 #include "ScriptManager_C1EA8.hpp"
 #include "Globals.hpp"
 
-#pragma comment(lib, "Winmm.lib")
 
 extern void EnableBoot2MapDebugOptions();
 

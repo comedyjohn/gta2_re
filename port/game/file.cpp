@@ -144,7 +144,7 @@ size_t File::ReadFileToFixedBuffer_4A6DB0(const char_type* FileName, void* pBuff
     if (size > *pMaxSize)
     {
         crt::fclose(hFile);
-        FatalError_4A38C0(Gta2Error::FileTooLarge, "C:\\Splitting\\Gta2\\Source\\File.cpp", 198, size - *pMaxSize);
+        FatalError_4A38C0(Gta2Error::FileTooLarge, "C:\\Splitting\\Gta2\\Source\\File.cpp", 198, (s32)(size - *pMaxSize));
     }
 
     if (Read_4A6D90(pBuffer, size, 1u, hFile) != 1)

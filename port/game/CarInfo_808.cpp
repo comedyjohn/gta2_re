@@ -656,7 +656,7 @@ void CarInfo_808::LoadModelPhysics_4546D0()
         FatalError_4A38C0(Gta2Error::ModelCountMismatchInStyleFile,
                           "C:\\Splitting\\Gta2\\Source\\carinfo.cpp",
                           0xbe,
-                          data_size / sizeof(ModelPhysics_48),
+                          (s32)(data_size / sizeof(ModelPhysics_48)),
                           file_name_677EC4,
                           number_of_cars);
     }

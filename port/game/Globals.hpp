@@ -19,7 +19,7 @@ extern "C"
     __declspec(dllexport) GlobalsRegistry* __cdecl GetGlobalsRegistry();
 }
 
-typedef GlobalsRegistry*(__cdecl* TGetGlobalsRegistry)();
+using TGetGlobalsRegistry = GlobalsRegistry* (__cdecl *)();
 
 class GlobalRef
 {

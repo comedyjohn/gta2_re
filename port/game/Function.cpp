@@ -7,8 +7,8 @@
 #include <vector>
 
 // For C++98, we'll use these typedefs
-typedef unsigned int u32;
-typedef unsigned char u8;
+using u32 = unsigned int;
+using u8 = unsigned char;
 
 // Structure to store one function's metadata.
 struct FunctionMetadata

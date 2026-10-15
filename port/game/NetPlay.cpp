@@ -1447,9 +1447,9 @@ void NetPlay::FreePlayerSlot_5201A0(s32 idx, Network_Game_Session* pStru)
 }
 
 // TODO: Temp - should be integrated into the type array or something
-typedef void(__stdcall* T1)(void*);
-typedef void(__stdcall* T2)(void*, sptr);
-typedef void(__stdcall* T3)(void*, sptr, sptr);
+using T1 = void (__stdcall *)(void*);
+using T2 = void (__stdcall *)(void*, sptr);
+using T3 = void (__stdcall *)(void*, sptr, sptr);
 
 MATCH_FUNC(0x520230)
 void NetPlay::ProcessIncomingPacket_520230(s32 idx, uptr pUnknown)

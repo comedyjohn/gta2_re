@@ -30,5 +30,5 @@ EXPORT void* __cdecl malloc(size_t Size);
 // static array destructors call. The CRT's version takes a __thiscall destructor; VC6 has no
 // __thiscall keyword, so this one (`??_M@YGXPAXIHP6AX0@Z@Z`, defined in crt_stubs.cpp) takes a
 // __cdecl destructor thunk instead.
-typedef void(__cdecl* EhVecDtorFn)(void*);
+using EhVecDtorFn = void (__cdecl *)(void*);
 void __stdcall __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);

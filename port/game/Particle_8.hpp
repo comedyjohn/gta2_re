@@ -38,6 +38,6 @@ class Particle_8
 
 EXTERN_GLOBAL(Particle_8*, gParticle_8_6FD5E8);
 
-typedef Pool<Particle_4C, 500> T_Particle_4C_Pool;
+using T_Particle_4C_Pool = Pool<Particle_4C, 500>;
 
 EXTERN_GLOBAL(T_Particle_4C_Pool*, gParticle_4C_Pool_6FD5E4);

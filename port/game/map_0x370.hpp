@@ -128,9 +128,9 @@ struct DmapInfoList;
 // One 4-byte word of a .gmp file's column data. The original types the column array as u16**, which
 // has the right element size at 32 bits only; at 64 bits the words would be read 8 bytes apart.
 #if defined(GTA2_PORT_64BIT)
-typedef u32 gmp_column_word;
+using gmp_column_word = u32;
 #else
-typedef u16* gmp_column_word;
+using gmp_column_word = u16*;
 #endif
 
 struct gmp_compressed_map_32

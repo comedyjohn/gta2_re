@@ -776,7 +776,7 @@ void Police_7B8::Service_570270()
         Police_7B8::UpdatePursuitTargets_56FBD0();
     }
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_4_cop_crew); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_4_cop_crew); i++)
     {
         if (field_4_cop_crew[i].field_1C_used == 1)
         {

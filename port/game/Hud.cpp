@@ -485,7 +485,7 @@ void Hud_CopHead_C_Array::Init_5D0210()
     field_4C_w_fp.FromU8(sprite_index->field_4_width);
     field_50_h_fp.FromU8(sprite_index->field_5_height);
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_1028_cop_heads); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1028_cop_heads); i++)
     {
         field_1028_cop_heads[i].field_2_frame_delay = 2;
         field_1028_cop_heads[i].field_1_frame_timer = 2;
@@ -1078,7 +1078,7 @@ void Hud_Arrow_7C_Array::UpdateArrows_5D0FD0()
 {
     FindVisibleGangArrow_5D0EF0();
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_array); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
     {
         if (!field_0_array[i].IsType0_4C6F80())
         {
@@ -1883,7 +1883,7 @@ void Hud_Pager_C_Array::DrawPagers_5D3040()
     s32 width = (get_sprite_width_4C7220(117) / 2) + 3;
 
     s32 ypos = gGameSession_67E8E0.IsBonusStage_4C59A0() ? 36 : 104;
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_pagers_array); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_pagers_array); i++)
     {
         field_0_pagers_array[i].DrawPager_5D2AB0(width, ypos);
         ypos += totalSpriteHeight;
@@ -1893,7 +1893,7 @@ void Hud_Pager_C_Array::DrawPagers_5D3040()
 // 0x5d31b0
 void Hud_Pager_C_Array::UpdatePagers_5D31B0()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_pagers_array); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_pagers_array); i++)
     {
         field_0_pagers_array[i].Service_5D2320();
     }
@@ -2421,7 +2421,7 @@ Hud_Brief_704::Hud_Brief_704()
     field_700_prev_briefs = nullptr;
     field_504_tick_timer = 0;
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_518_briefs) - 1; i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_518_briefs) - 1; i++)
     {
         field_518_briefs[i].field_C_pNext = &field_518_briefs[i + 1];
     }

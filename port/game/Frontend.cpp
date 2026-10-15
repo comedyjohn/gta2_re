@@ -5195,7 +5195,7 @@ menu_option_0x82::menu_option_0x82()
     field_6E_horizontal_selected_idx = 0;
     field_70 = 0;
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_72_horizontal_idx_enabled); i++) // or is it a u32 ??
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_72_horizontal_idx_enabled); i++) // or is it a u32 ??
     {
         field_72_horizontal_idx_enabled[i] = 0;
     }

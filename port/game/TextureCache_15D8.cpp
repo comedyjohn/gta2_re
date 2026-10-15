@@ -356,12 +356,12 @@ TextureCache_15D8::TextureCache_15D8()
     field_15D6_pal_count = 0;
     s32 i;
 
-    for (i = 0; i < GTA2_COUNTOF(field_0_tile_textures); i++)
+    for (i = 0; i < GTA2_COUNTOF_S(field_0_tile_textures); i++)
     {
         field_0_tile_textures[i] = nullptr;
     }
 
-    for (i = 0; i < GTA2_COUNTOF(field_1004_car_damage_textures); i++)
+    for (i = 0; i < GTA2_COUNTOF_S(field_1004_car_damage_textures); i++)
     {
         field_1004_car_damage_textures[i] = nullptr;
     }
@@ -373,7 +373,7 @@ TextureCache_15D8::~TextureCache_15D8()
 {
     if (field_1001_bFreeTileTextures)
     {
-        for (s32 i = 0; i < GTA2_COUNTOF(field_0_tile_textures); i++)
+        for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_tile_textures); i++)
         {
             if (field_0_tile_textures[i])
             {
@@ -385,7 +385,7 @@ TextureCache_15D8::~TextureCache_15D8()
 
     if (field_1000_bFreeCarDamageTextures)
     {
-        for (s32 i = 0; i < GTA2_COUNTOF(field_1004_car_damage_textures); i++)
+        for (s32 i = 0; i < GTA2_COUNTOF_S(field_1004_car_damage_textures); i++)
         {
             if (field_1004_car_damage_textures[i])
             {
@@ -395,7 +395,7 @@ TextureCache_15D8::~TextureCache_15D8()
         }
     }
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_10C4_digit_textures); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_10C4_digit_textures); i++)
     {
         if (field_10C4_digit_textures[i].field_4_pTexture)
         {

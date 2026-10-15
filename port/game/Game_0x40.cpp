@@ -953,7 +953,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
 
     field_3C_skip_police = bSkip_police_67D4F9;
 
-    for (s32 ii = 0; ii < GTA2_COUNTOF(field_4_players); ii++)
+    for (s32 ii = 0; ii < GTA2_COUNTOF_S(field_4_players); ii++)
     {
         field_4_players[ii] = nullptr;
     }

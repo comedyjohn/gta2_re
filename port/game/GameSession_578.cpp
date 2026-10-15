@@ -61,7 +61,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
     gGameSession_67E8E0.SetPlySlotIdx_4C5920(0);
     gGameSession_67E8E0.SetLevelFinishBonusType_4C5930(0);
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_408_statistics); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_408_statistics); i++)
     {
         field_408_statistics[i] = 0;
     }
@@ -267,7 +267,7 @@ void GameSession_578::init_4C5AF0()
     field_441_max_players = 0;
     field_442_winner_player_idx = 6;
 
-    for (s32 i = 0; i < GTA2_COUNTOF(field_490_frags_list); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_490_frags_list); i++)
     {
         for (s32 j = 0; j < MAX_PLAYERS; j++)
         {

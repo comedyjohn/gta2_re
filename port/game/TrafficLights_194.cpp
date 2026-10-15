@@ -376,7 +376,7 @@ void TrafficLights_194::CreateFromMapZones_5C2AC0()
 TrafficLights_194::TrafficLights_194()
 {
     field_190_array_used_count = 0;
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_traffic_lights); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_traffic_lights); i++)
     {
         field_0_traffic_lights[i] = nullptr;
     }

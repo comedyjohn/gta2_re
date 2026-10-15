@@ -231,7 +231,7 @@ class gtx_0x106C
     // 9.6f 0x4C03D0 (a ctor of the spec array there)
     inline void ResetSpecs_4C03D0()
     {
-        for (int i = 0; i < GTA2_COUNTOF(field_6C_spec); i++)
+        for (int i = 0; i < GTA2_COUNTOF_S(field_6C_spec); i++)
         {
             field_6C_spec[i] = 1;
         }

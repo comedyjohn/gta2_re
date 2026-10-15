@@ -1434,7 +1434,7 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinition_5343C0(s32 idx)
 // 0x5343f0
 ObjectDefinitions_8CA8::ObjectDefinitions_8CA8()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF(field_87F4_definition_by_idx); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_87F4_definition_by_idx); i++)
     {
         field_87F4_definition_by_idx[i] = nullptr;
     }

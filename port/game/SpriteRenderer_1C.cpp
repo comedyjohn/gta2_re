@@ -21,7 +21,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFpZero_705AC4, Fix16(0), 0x705AC4);
 // 0x4954f0
 void SpriteRenderer_1C::ResetAll_4954F0()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_layers); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_layers); i++)
     {
         field_0_layers[i]->Reset_5C5E50();
     }
@@ -245,7 +245,7 @@ SpriteTree_4::~SpriteTree_4()
 // 0x5c5f60
 SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF(field_0_entries); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_entries); i++)
     {
         field_0_entries[i].field_0_pSprite = nullptr;
     }

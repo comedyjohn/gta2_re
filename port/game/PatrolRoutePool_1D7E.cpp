@@ -33,7 +33,7 @@ void PatrolRoute_96::sub_543EC0()
 // 0x543ed0
 PatrolRoutePool_1D7E::PatrolRoutePool_1D7E()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF(field_1D4C_bUsed); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1D4C_bUsed); i++)
     {
         field_1D4C_bUsed[i] = 0;
     }

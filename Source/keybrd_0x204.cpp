@@ -8,7 +8,7 @@
 
 DEFINE_GLOBAL(keybrd_0x204*, gKeybrd_0x204_6F52F4, 0x6F52F4);
 
-char kTwoSpacesStr_620D2C[] = {' ', ' ', 0};
+char kTwoSpacesStr_620D2C[4] = {' ', ' ', 0}; // GetLayout_4D6000 copies 4 bytes
 
 MATCH_FUNC(0x4D5D70)
 keybrd_0x204::keybrd_0x204()

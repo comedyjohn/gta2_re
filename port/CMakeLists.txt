@@ -121,7 +121,7 @@ target_compile_options(gta2-server PRIVATE -Wall)
 target_link_libraries(gta2-server PRIVATE gta2_net)
 
 # Which builds can play together: a hash of the game code, regenerated when it changes
-file(GLOB compat_inputs ${GAME_DIR}/*.cpp ${GAME_DIR}/*.hpp ${GAME_DIR}/*.h
+file(GLOB compat_inputs CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp ${GAME_DIR}/*.hpp ${GAME_DIR}/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${CMAKE_CURRENT_SOURCE_DIR}/platform/crt.cpp)
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/gta2_compat.h
     COMMAND ${CMAKE_COMMAND} -DREPO=${REPO_ROOT} -DOUT=${CMAKE_BINARY_DIR}/gta2_compat.h

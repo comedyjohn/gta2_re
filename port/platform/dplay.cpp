@@ -8,11 +8,7 @@
 // together, as long as they run the same game code (PortNetCompat).
 #include "dplay_port.h"
 #include "gta2_compat.h"
-// windows.h defines SAL's __out as nothing, which libstdc++'s <thread> uses as a name
-#pragma push_macro("__out")
-#undef __out
 #include "net/net.h"
-#pragma pop_macro("__out")
 
 #include <VC98/Include/DPLAY.H>
 #include <VC98/Include/DPLOBBY.H>

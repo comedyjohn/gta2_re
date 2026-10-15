@@ -38,11 +38,6 @@
 #define _Reserved_
 #define _Check_return_
 #define _Success_(x)
-#define __in
-#define __out
-#define __inout
-#define __in_opt
-#define __out_opt
 
 #ifndef FALSE
     #define FALSE 0

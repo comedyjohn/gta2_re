@@ -6,7 +6,7 @@
 #include <chrono>
 
 // Forward declarations: the functions below are in address order
-EXPORT s32 get_rdtsc_5BEE90();
+s32 get_rdtsc_5BEE90();
 EXTERN_GLOBAL(u32, dword_705334);
 
 DEFINE_GLOBAL(SpriteRenderer_1C*, gSpriteRenderer_67B580, 0x67B580);
@@ -18,7 +18,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFpOne_67B434, Fix16(1), 0x67B434);
 DEFINE_GLOBAL_INIT(Fix16, kFp96_705B80, Fix16(0x180000, 0), 0x705B80);
 DEFINE_GLOBAL_INIT(Fix16, kFpZero_705AC4, Fix16(0), 0x705AC4);
 
-MATCH_FUNC(0x4954f0)
+// 0x4954f0
 void SpriteRenderer_1C::ResetAll_4954F0()
 {
     for (s32 i = 0; i < GTA2_COUNTOF(field_0_layers); i++)
@@ -27,7 +27,7 @@ void SpriteRenderer_1C::ResetAll_4954F0()
     }
 }
 
-MATCH_FUNC(0x495510)
+// 0x495510
 void SpriteRenderer_1C::DisplayAdd_495510(Sprite* pSprite)
 {
     const s32 rdtsc = get_rdtsc_5BEE90();
@@ -38,7 +38,7 @@ void SpriteRenderer_1C::DisplayAdd_495510(Sprite* pSprite)
     gDisplayAdd_67B578 += get_rdtsc_5BEE90() - rdtsc;
 }
 
-MATCH_FUNC(0x495560)
+// 0x495560
 void SpriteRenderer_1C::Draw_495560(s32 layer)
 {
     const s32 rdtsc = get_rdtsc_5BEE90();
@@ -46,7 +46,7 @@ void SpriteRenderer_1C::Draw_495560(s32 layer)
     gDisplayDraw_67B57C += get_rdtsc_5BEE90() - rdtsc;
 }
 
-MATCH_FUNC(0x4955a0)
+// 0x4955a0
 SpriteRenderer_1C::SpriteRenderer_1C()
 {
     for (s32 i = 0; i < k_num_layers; i++)
@@ -59,7 +59,7 @@ SpriteRenderer_1C::SpriteRenderer_1C()
     }
 }
 
-MATCH_FUNC(0x495630)
+// 0x495630
 SpriteRenderer_1C::~SpriteRenderer_1C()
 {
     for (s32 i = 0; i < k_num_layers; i++)
@@ -70,8 +70,8 @@ SpriteRenderer_1C::~SpriteRenderer_1C()
 
 // TODO: move
 // https://decomp.me/scratch/qe97a
-MATCH_FUNC(0x5BEE90)
-EXPORT s32 get_rdtsc_5BEE90()
+// 0x5BEE90
+s32 get_rdtsc_5BEE90()
 {
     // The original reads the CPU's cycle counter (rdtsc); nanoseconds stand in for cycles here (only
     // the profiler display reads them)
@@ -81,14 +81,14 @@ EXPORT s32 get_rdtsc_5BEE90()
 
 // Converts a cycle count from get_rdtsc_5BEE90 for the profiler display (dword_705334 is the
 // number of cycles per unit)
-MATCH_FUNC(0x5BEED0)
-EXPORT s32 __stdcall sub_5BEED0(s32 cycles)
+// 0x5BEED0
+s32 sub_5BEED0(s32 cycles)
 {
     return (u32)cycles / dword_705334;
 }
 
 // https://decomp.me/scratch/qyVgM
-MATCH_FUNC(0x5c5cf0)
+// 0x5c5cf0
 void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
 {
     SpriteTreeNode_C* pRoot = field_0_pRoot;
@@ -176,7 +176,7 @@ void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
     }
 }
 
-MATCH_FUNC(0x5C5DF0)
+// 0x5C5DF0
 void SpriteTree_4::Draw_5C5DF0()
 {
     SpriteTreeNode_C* pIter = this->field_0_pRoot;
@@ -200,7 +200,7 @@ void SpriteTree_4::Draw_5C5DF0()
 
 DEFINE_GLOBAL_INIT(u32, dword_705334, 1701493, 0x705334);
 
-MATCH_FUNC(0x5c5e50)
+// 0x5c5e50
 void SpriteTree_4::Reset_5C5E50()
 {
     gSpriteTreeNodePool_705BBC->Reset_4C4B70();
@@ -208,7 +208,7 @@ void SpriteTree_4::Reset_5C5E50()
 }
 
 // TODO: Doesn't match due to SEH stuff
-MATCH_FUNC(0x5c5e70)
+// 0x5c5e70
 SpriteTree_4::SpriteTree_4()
 {
     if (!gSpriteTreeNodePool_705BBC)
@@ -223,7 +223,7 @@ SpriteTree_4::SpriteTree_4()
     Reset_5C5E50();
 }
 
-MATCH_FUNC(0x5c5f10)
+// 0x5c5f10
 SpriteTree_4::~SpriteTree_4()
 {
     // An explicit dtor call through the global plus operator delete on a saved copy gives the original's
@@ -242,7 +242,7 @@ SpriteTree_4::~SpriteTree_4()
     }
 }
 
-MATCH_FUNC(0x5c5f60)
+// 0x5c5f60
 SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
 {
     for (s32 i = 0; i < GTA2_COUNTOF(field_0_entries); i++)
@@ -252,7 +252,7 @@ SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
     Reset_4C4B70();
 }
 
-MATCH_FUNC(0x5c5f90)
+// 0x5c5f90
 SpriteTreeNodePool_2EE4::~SpriteTreeNodePool_2EE4()
 {
 }

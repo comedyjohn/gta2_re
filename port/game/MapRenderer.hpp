@@ -46,65 +46,65 @@ class MapRenderer
         set_shading_lev_4E9DB0(15u);
     }
 
-    EXPORT void SetAmbientLevel_4E9D50(s32& target_level, u16& cycles);
-    EXPORT void set_shading_lev_4E9DB0(u8 shading_lev);
-    EXPORT void draw_4E9EE0(u16& word_side, const bool& bUnk, u8 colour);
-    EXPORT void ambient_light_tick_4E9EA0();
-    EXPORT void draw_4EA190(u16& rotation_and_flip);
-    EXPORT void DrawLeftSide_4EA390(u16& left_word);
-    EXPORT void ProjectVertTop_4EAE00(const Fix16& xpos, const Fix16& ypos, Vert* pVert);
-    EXPORT void ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCoord, Vert* pVert);
-    EXPORT void DrawRightSide_4EAF40(u16& right_word);
-    EXPORT void ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const Fix16& zpos, Vert* pVert);
-    EXPORT void DrawTopSide_4EBA60(u16& top_word);
-    EXPORT void DrawDiagonalUpLeftFace_4EC450(u16& left_word);
-    EXPORT void DrawDiagonalUpRightFace_4EC7A0(u16& right_word);
-    EXPORT void DrawDiagonalDownLeftFace_4ECAF0(u16& left_word);
-    EXPORT void DrawDiagonalDownRightFace_4ECE40(u16& right_word);
-    EXPORT void draw_bottom_4ED290(u16& bottom_word);
-    EXPORT void draw_lid_4EE130();
+    void SetAmbientLevel_4E9D50(s32& target_level, u16& cycles);
+    void set_shading_lev_4E9DB0(u8 shading_lev);
+    void draw_4E9EE0(u16& word_side, const bool& bUnk, u8 colour);
+    void ambient_light_tick_4E9EA0();
+    void draw_4EA190(u16& rotation_and_flip);
+    void DrawLeftSide_4EA390(u16& left_word);
+    void ProjectVertTop_4EAE00(const Fix16& xpos, const Fix16& ypos, Vert* pVert);
+    void ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCoord, Vert* pVert);
+    void DrawRightSide_4EAF40(u16& right_word);
+    void ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const Fix16& zpos, Vert* pVert);
+    void DrawTopSide_4EBA60(u16& top_word);
+    void DrawDiagonalUpLeftFace_4EC450(u16& left_word);
+    void DrawDiagonalUpRightFace_4EC7A0(u16& right_word);
+    void DrawDiagonalDownLeftFace_4ECAF0(u16& left_word);
+    void DrawDiagonalDownRightFace_4ECE40(u16& right_word);
+    void draw_bottom_4ED290(u16& bottom_word);
+    void draw_lid_4EE130();
 
     // Note: These are func chunks
     void DrawDiagonalWallUpLeft_4EE7D0();
     void DrawDiagonalWallUpRight_4EE8A0();
     void DrawDiagonalWallDownLeft_4EE970();
     void DrawDiagonalWallDownRight_4EEA40();
-    EXPORT void DrawPartialBlockLeft_4F5160();
-    EXPORT void DrawPartialBlockRight_4F5360();
-    EXPORT void DrawPartialBlockTop_4F5560();
-    EXPORT void DrawPartialBlockBottom_4F5760();
-    EXPORT void DrawPartialBlockTopLeftCorner_4F5960();
-    EXPORT void DrawPartialBlockTopRightCorner_4F5B70();
-    EXPORT void DrawPartialBlockBottomRightCorner_4F5D80();
-    EXPORT void DrawPartialBlockBottomLeftCorner_4F5FD0();
-    EXPORT void DrawPartialCentreBlock_4F6350();
+    void DrawPartialBlockLeft_4F5160();
+    void DrawPartialBlockRight_4F5360();
+    void DrawPartialBlockTop_4F5560();
+    void DrawPartialBlockBottom_4F5760();
+    void DrawPartialBlockTopLeftCorner_4F5960();
+    void DrawPartialBlockTopRightCorner_4F5B70();
+    void DrawPartialBlockBottomRightCorner_4F5D80();
+    void DrawPartialBlockBottomLeftCorner_4F5FD0();
+    void DrawPartialCentreBlock_4F6350();
 
-    EXPORT void Draw3SidedDiagonalUpLeft_4EEAF0();
-    EXPORT void Draw3SidedDiagonalUpRight_4EEE60();
-    EXPORT void Draw3SidedDiagonalDownLeft_4EF1C0();
-    EXPORT void Draw3SidedDiagonalDownRight_4EF520();
-    EXPORT void Draw4SidedDiagonalUpLeft_4EF880();
-    EXPORT void Draw4SidedDiagonalUpRight_4EFB20();
-    EXPORT void Draw4SidedDiagonalDownLeft_4EFDB0();
-    EXPORT void Draw4SidedDiagonalDownRight_4F0030();
-    EXPORT void DrawDiagonalWall_4F02D0();
-    EXPORT void DrawTriangularDiagonal_4F0340();
-    EXPORT void DrawGradientSlopeNorthwards_4F0420();
-    EXPORT char_type GetColour_4F0BD0(s32 lid_type);
-    EXPORT void DrawGradientSlopeSouthwards_4F1660();
-    EXPORT void DrawGradientSlopeWestwards_4F22F0();
-    EXPORT void DrawGradientSlopeEastwards_4F33B0();
-    EXPORT void draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b);
-    EXPORT void draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b);
-    EXPORT void draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off);
-    EXPORT void draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off);
-    EXPORT void draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& unk4);
-    EXPORT void DrawPartialBlocks_4F6580();
-    EXPORT void DrawGradientSlope_4F6630();
-    EXPORT void RenderFlatBlock_4F66C0();
-    EXPORT void RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord);
-    EXPORT void ClearDrawnTileCount_4F6A10();
-    EXPORT void Draw_4F6A20();
+    void Draw3SidedDiagonalUpLeft_4EEAF0();
+    void Draw3SidedDiagonalUpRight_4EEE60();
+    void Draw3SidedDiagonalDownLeft_4EF1C0();
+    void Draw3SidedDiagonalDownRight_4EF520();
+    void Draw4SidedDiagonalUpLeft_4EF880();
+    void Draw4SidedDiagonalUpRight_4EFB20();
+    void Draw4SidedDiagonalDownLeft_4EFDB0();
+    void Draw4SidedDiagonalDownRight_4F0030();
+    void DrawDiagonalWall_4F02D0();
+    void DrawTriangularDiagonal_4F0340();
+    void DrawGradientSlopeNorthwards_4F0420();
+    char_type GetColour_4F0BD0(s32 lid_type);
+    void DrawGradientSlopeSouthwards_4F1660();
+    void DrawGradientSlopeWestwards_4F22F0();
+    void DrawGradientSlopeEastwards_4F33B0();
+    void draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b);
+    void draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b);
+    void draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off);
+    void draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off);
+    void draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& unk4);
+    void DrawPartialBlocks_4F6580();
+    void DrawGradientSlope_4F6630();
+    void RenderFlatBlock_4F66C0();
+    void RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord);
+    void ClearDrawnTileCount_4F6A10();
+    void Draw_4F6A20();
 
     inline u32 update_and_get_gradient_direction(u32 idx)
     {
@@ -184,11 +184,11 @@ class MapRenderer
     s32 field_2F00_drawn_tile_count;
 };
 
-EXPORT void __stdcall set_vert_xyz_relative_to_cam_4EAD90(Fix16 xCoord, Fix16 yCoord, Fix16 z_val, Vert* pVerts);
+void set_vert_xyz_relative_to_cam_4EAD90(Fix16 xCoord, Fix16 yCoord, Fix16 z_val, Vert* pVerts);
 
-EXPORT void __stdcall draw_4F3FB0(s32 arg);
+void draw_4F3FB0(s32 arg);
 
-EXPORT void __stdcall Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx);
+void Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx);
 
 EXTERN_GLOBAL(MapRenderer*, gpMapRenderer_6F66E4);
 

@@ -57,7 +57,7 @@ DEFINE_GUID(GUID_SysKeyboard, 0x6F1D2B61, 0xD5A0, 0x11CF, 0xBF, 0xC7, 0x44, 0x45
 
 const AttractFile attractFiles_62083C[ATTRACT_COUNT] = {"data\\attract\\attr1.rep", "data\\attract\\attr2.rep", "data\\attract\\attr3.rep"};
 
-MATCH_FUNC(0x498730)
+// 0x498730
 bool InputDevices_1::acquire_input_device_498730(LPDIRECTINPUTDEVICEA pGamePadDevice)
 {
     if (!pGamePadDevice)
@@ -80,7 +80,7 @@ bool InputDevices_1::acquire_input_device_498730(LPDIRECTINPUTDEVICEA pGamePadDe
     return true;
 }
 
-MATCH_FUNC(0x4987A0)
+// 0x4987A0
 void InputDevices_1::free_input_devices_4987A0()
 {
     if (gpDInput_67B804)
@@ -101,8 +101,8 @@ void InputDevices_1::free_input_devices_4987A0()
     }
 }
 
-MATCH_FUNC(0x498800)
-BOOL __stdcall InputDevices_1::make_input_devices_498800(HINSTANCE hInstance)
+// 0x498800
+BOOL InputDevices_1::make_input_devices_498800(HINSTANCE hInstance)
 {
     DIPROPDWORD prop;
 
@@ -141,8 +141,8 @@ BOOL __stdcall InputDevices_1::make_input_devices_498800(HINSTANCE hInstance)
     return !FAILED(gKeyboardDevice_67B5C0->Acquire());
 }
 
-MATCH_FUNC(0x498910)
-EXPORT BOOL CALLBACK DirectInputDeviceEnumCallBack_498910(LPCDIDEVICEINSTANCEA lpddi, LPVOID pvRef)
+// 0x498910
+BOOL CALLBACK DirectInputDeviceEnumCallBack_498910(LPCDIDEVICEINSTANCEA lpddi, LPVOID pvRef)
 {
     const GUID guidInstanceCopy = lpddi->guidInstance;
     LPDIRECTINPUTDEVICEA tempDevice;
@@ -172,7 +172,7 @@ EXPORT BOOL CALLBACK DirectInputDeviceEnumCallBack_498910(LPCDIDEVICEINSTANCEA l
 }
 
 // TODO: the debug strings are guesses, only code is compared
-MATCH_FUNC(0x4989C0)
+// 0x4989C0
 void InputDevices_1::set_game_pad_device_properties_4989C0()
 {
     DIPROPDWORD prop;
@@ -247,7 +247,7 @@ void InputDevices_1::set_game_pad_device_properties_4989C0()
     }
 }
 
-MATCH_FUNC(0x498BA0)
+// 0x498BA0
 bool InputDevices_1::game_pads_init_498BA0()
 {
     if (gpDInput_67B804)
@@ -269,7 +269,7 @@ bool InputDevices_1::game_pads_init_498BA0()
     return true;
 }
 
-MATCH_FUNC(0x498C00)
+// 0x498C00
 void InputDevices_1::get_registry_controls_498C00()
 {
     for (u32 i = 0; i < 12; ++i)
@@ -280,8 +280,8 @@ void InputDevices_1::get_registry_controls_498C00()
     }
 }
 
-MATCH_FUNC(0x498C40)
-void __stdcall InputDevices_1::input_devices_init_498C40(HINSTANCE hInstance)
+// 0x498C40
+void InputDevices_1::input_devices_init_498C40(HINSTANCE hInstance)
 {
     get_registry_controls_498C00();
 
@@ -294,7 +294,7 @@ void __stdcall InputDevices_1::input_devices_init_498C40(HINSTANCE hInstance)
     game_pads_init_498BA0();
 }
 
-MATCH_FUNC(0x498C80)
+// 0x498C80
 void InputDevices_1::AddKeyToInputBits_498C80(s32* pInputBits, DIDEVICEOBJECTDATA* device_data_keys)
 {
     *pInputBits = (device_data_keys->dwOfs << 12) | *pInputBits;
@@ -305,7 +305,7 @@ void InputDevices_1::AddKeyToInputBits_498C80(s32* pInputBits, DIDEVICEOBJECTDAT
 }
 
 // https://decomp.me/scratch/LbfoG ridiculous function to match
-MATCH_FUNC(0x498CB0)
+// 0x498CB0
 void InputDevices_1::SetAltKeyState_498CB0(u32 alt_down)
 {
     // An if/else on the DirectInput key state bit: VC6 turns it into a dword load + `shr $7,%al`,
@@ -320,7 +320,7 @@ void InputDevices_1::SetAltKeyState_498CB0(u32 alt_down)
     }
 }
 
-MATCH_FUNC(0x498CC0)
+// 0x498CC0
 void InputDevices_1::read_keyboard_and_gamepad_498CC0()
 {
     gKeyboardStatus_67B624 = -1;
@@ -336,7 +336,7 @@ void InputDevices_1::read_keyboard_and_gamepad_498CC0()
     }
 }
 
-MATCH_FUNC(0x498D20)
+// 0x498D20
 bool InputDevices_1::game_pad_read_498D20()
 {
     DWORD num_items = -1;
@@ -356,7 +356,7 @@ bool InputDevices_1::game_pad_read_498D20()
 }
 
 // https://decomp.me/scratch/75Pau
-MATCH_FUNC(0x498DA0)
+// 0x498DA0
 void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
 {
     bool bFirstPass = true;
@@ -588,31 +588,31 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
 
 // ================================================
 
-MATCH_FUNC(0x4cdcd0)
+// 0x4cdcd0
 void InputRecorder_67F8B0::StaticShutdown_4CDCD0()
 {
     gInputRecorder_67F8B0.Shutdown_4CEA00();
 }
 
-MATCH_FUNC(0x4cdce0)
+// 0x4cdce0
 void InputRecorder_67F8B0::clear_inputs_4CDCE0()
 {
     field_4_input_bits &= ~0xFFFFF000;
 }
 
-MATCH_FUNC(0x4cdcf0)
+// 0x4cdcf0
 void InputRecorder_67F8B0::set_input_4CDCF0(s32 mask_idx)
 {
     field_4_input_bits |= field_8_input_masks[mask_idx];
 }
 
-MATCH_FUNC(0x4cdd10)
+// 0x4cdd10
 void InputRecorder_67F8B0::clear_input_4CDD10(s32 mask_idx)
 {
     field_4_input_bits &= ~field_8_input_masks[mask_idx];
 }
 
-MATCH_FUNC(0x4cdd80)
+// 0x4cdd80
 bool InputRecorder_67F8B0::should_ignore_input_4CDD80(s32 dinput_key)
 {
     return dinput_key == DIK_NUMPAD1 || dinput_key == DIK_NUMPAD2 || dinput_key == DIK_NUMPAD3 || dinput_key == DIK_NUMPAD4 ||
@@ -621,13 +621,13 @@ bool InputRecorder_67F8B0::should_ignore_input_4CDD80(s32 dinput_key)
         dinput_key == DIK_F6 || dinput_key == DIK_ADD || gHud_2B00_706620->IsQuitMessageInputKey_5D6CB0(dinput_key);
 }
 
-MATCH_FUNC(0x4cddf0)
+// 0x4cddf0
 bool InputRecorder_67F8B0::should_ignore_input_4CDDF0(s32 dinput_key)
 {
     return !should_ignore_input_4CDD80(dinput_key) && dinput_key != DIK_ADD;
 }
 
-MATCH_FUNC(0x4cde20)
+// 0x4cde20
 void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
 {
     if ((inputs & 0x1FF000) != 0)
@@ -658,7 +658,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
     }
 }
 
-MATCH_FUNC(0x4cded0)
+// 0x4cded0
 void InputRecorder_67F8B0::SaveReplay_4CDED0()
 {
     if (bConstant_replay_save_67D5C4 != 1 && bDo_release_replay_67D4EB && field_38_replay_state != Disabled_2 && field_75340_rec_buf_idx > 0 &&
@@ -671,7 +671,7 @@ void InputRecorder_67F8B0::SaveReplay_4CDED0()
 
 // https://decomp.me/scratch/c6Gy5
 // Register allocation differs, see docs/match_attempts.md
-MATCH_FUNC(0x4cdf30)
+// 0x4cdf30
 void InputRecorder_67F8B0::modify_inputs_4CDF30(s32 match_mask)
 {
 
@@ -696,7 +696,7 @@ void InputRecorder_67F8B0::modify_inputs_4CDF30(s32 match_mask)
     }
 }
 
-MATCH_FUNC(0x4cdf70)
+// 0x4cdf70
 void InputRecorder_67F8B0::AppendReplayHeader_4CDF70()
 {
     ReplayHeader_10C header;
@@ -763,7 +763,7 @@ void InputRecorder_67F8B0::AppendReplayHeader_4CDF70()
     File::AppendBufferToFile_4A6F50("test\\replay.rep", &header, &header_size);
 }
 
-MATCH_FUNC(0x4ce380)
+// 0x4ce380
 void InputRecorder_67F8B0::LoadReplayHeader_4CE380(char_type bLoadDebug)
 {
     u32 header_size = sizeof(ReplayHeader_10C);
@@ -817,7 +817,7 @@ void InputRecorder_67F8B0::LoadReplayHeader_4CE380(char_type bLoadDebug)
     }
 }
 
-MATCH_FUNC(0x4ce650)
+// 0x4ce650
 void InputRecorder_67F8B0::VerifyAttractFilesExist_4CE650()
 {
     const AttractFile* attr1FilePath = &attractFiles_62083C[0];
@@ -835,7 +835,7 @@ void InputRecorder_67F8B0::VerifyAttractFilesExist_4CE650()
     }
 }
 
-MATCH_FUNC(0x4ce6e0)
+// 0x4ce6e0
 void InputRecorder_67F8B0::GetNextAttrReplay_4CE6E0(char_type* pAttrPathOut)
 {
     strcpy(pAttrPathOut, attractFiles_62083C[field_75345_attract_idx].field_0_path);
@@ -846,7 +846,7 @@ void InputRecorder_67F8B0::GetNextAttrReplay_4CE6E0(char_type* pAttrPathOut)
     }
 }
 
-MATCH_FUNC(0x4ce740)
+// 0x4ce740
 void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
 {
     char FileName[256];
@@ -889,7 +889,7 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     }
 }
 
-MATCH_FUNC(0x4ce880)
+// 0x4ce880
 void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
 {
     field_0_bShutDown = 0;
@@ -956,7 +956,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     }
 }
 
-MATCH_FUNC(0x4cea00)
+// 0x4cea00
 void InputRecorder_67F8B0::Shutdown_4CEA00() // 4CEA00
 {
     if (!field_0_bShutDown)
@@ -968,7 +968,7 @@ void InputRecorder_67F8B0::Shutdown_4CEA00() // 4CEA00
     }
 }
 
-MATCH_FUNC(0x4cea40)
+// 0x4cea40
 void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 {
     if ((*input_bits & 0xFFFFF000) == 0x37000)
@@ -993,7 +993,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 }
 
 // https://decomp.me/scratch/t5tNu
-MATCH_FUNC(0x4ceac0)
+// 0x4ceac0
 u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
 {
     s32 inputs;
@@ -1124,7 +1124,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
     return *control_status;
 }
 
-MATCH_FUNC(0x4ced00)
+// 0x4ced00
 void InputRecorder_67F8B0::save_replay_inputs_4CED00(s32 input_old, s32 input_new)
 {
     u32 calc_inputs = 0;
@@ -1191,7 +1191,7 @@ void InputRecorder_67F8B0::save_replay_inputs_4CED00(s32 input_old, s32 input_ne
     }
 }
 
-MATCH_FUNC(0x4ced90)
+// 0x4ced90
 void InputRecorder_67F8B0::DisplayInputBits_4CED90()
 {
     s8 i = 0;
@@ -1208,7 +1208,7 @@ void InputRecorder_67F8B0::DisplayInputBits_4CED90()
     } while (i < 12);
 }
 
-MATCH_FUNC(0x4cedf0)
+// 0x4cedf0
 bool InputRecorder_67F8B0::RecOrPlayBackState_4CEDF0()
 {
     if (field_38_replay_state == Playback_1 || field_38_replay_state == Attract_3)
@@ -1218,7 +1218,7 @@ bool InputRecorder_67F8B0::RecOrPlayBackState_4CEDF0()
     return false;
 }
 
-MATCH_FUNC(0x4cee10)
+// 0x4cee10
 void InputRecorder_67F8B0::ShowInput_4CEE10()
 {
     if (RecOrPlayBackState_4CEDF0())

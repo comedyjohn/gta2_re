@@ -7,28 +7,28 @@
 DEFINE_GLOBAL(EmergencyCrewPool_1E0*, gEmergencyCrewPool_706280, 0x706280);
 DEFINE_GLOBAL(Fix16, dword_706148, 0x706148);
 
-MATCH_FUNC(0x4beb00)
+// 0x4beb00
 EmergencyCrew_30::EmergencyCrew_30()
 {
     Init_5CBC00();
 }
 
-MATCH_FUNC(0x4beb10)
+// 0x4beb10
 EmergencyCrew_30::~EmergencyCrew_30()
 {
 }
 
-MATCH_FUNC(0x4beb20)
+// 0x4beb20
 EmergencyCrewPool_1E0::~EmergencyCrewPool_1E0()
 {
 }
 
-MATCH_FUNC(0x5cbb70)
+// 0x5cbb70
 void EmergencyCrewPool_1E0::init_5CBB70()
 {
 }
 
-MATCH_FUNC(0x5cbb80)
+// 0x5cbb80
 EmergencyCrew_30* EmergencyCrewPool_1E0::AllocateSlot_5CBB80()
 {
     for (u8 i = 0; i < GTA2_COUNTOF(field_0_slots); i++)
@@ -41,7 +41,7 @@ EmergencyCrew_30* EmergencyCrewPool_1E0::AllocateSlot_5CBB80()
     return nullptr;
 }
 
-MATCH_FUNC(0x5cbbd0)
+// 0x5cbbd0
 void EmergencyCrewPool_1E0::ServiceAll_5CBBD0()
 {
     for (s32 i = 0; i < 10; i++)
@@ -56,7 +56,7 @@ void EmergencyCrewPool_1E0::ServiceAll_5CBBD0()
     }
 }
 
-MATCH_FUNC(0x5cbc00)
+// 0x5cbc00
 void EmergencyCrew_30::Init_5CBC00()
 {
     field_1A_idle_limit = 150;
@@ -71,13 +71,13 @@ void EmergencyCrew_30::Init_5CBC00()
     field_1C_spawn_wait_ticks = 0;
 }
 
-MATCH_FUNC(0x5cbc30)
+// 0x5cbc30
 void EmergencyCrew_30::ReInit_5CBC30()
 {
     Init_5CBC00();
 }
 
-MATCH_FUNC(0x5cbc40)
+// 0x5cbc40
 void EmergencyCrew_30::RemovePed_5CBC40(Ped* pPed)
 {
     field_8_group->RemovePed_4C9970(pPed);
@@ -85,7 +85,7 @@ void EmergencyCrew_30::RemovePed_5CBC40(Ped* pPed)
 }
 
 // https://decomp.me/scratch/HmQPr
-MATCH_FUNC(0x5cbc60)
+// 0x5cbc60
 bool EmergencyCrew_30::IsLeaderAlive_5CBC60()
 {
     if (field_4_ped && field_4_ped->isDead_403B60())
@@ -107,7 +107,7 @@ bool EmergencyCrew_30::IsLeaderAlive_5CBC60()
     return true;
 }
 
-MATCH_FUNC(0x5cbc90)
+// 0x5cbc90
 bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
 {
     PedGroup* pGroup = this->field_8_group;
@@ -148,7 +148,7 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
 }
 
 // https://decomp.me/scratch/sUPg8
-MATCH_FUNC(0x5cbd50)
+// 0x5cbd50
 void EmergencyCrew_30::UpdateStateMachine_5CBD50()
 {
     char_type bCarGone = 0;
@@ -427,7 +427,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
 }
 
 // 9.6f 0x4C5A00
-MATCH_FUNC(0x5cc1c0)
+// 0x5cc1c0
 void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
 {
     bool bClearRouteAndTryClearOthers = false;
@@ -597,7 +597,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
     }
 }
 
-MATCH_FUNC(0x5cc480)
+// 0x5cc480
 bool EmergencyCrew_30::Service_5CC480()
 {
     if (field_18_spawn_delay > 0)

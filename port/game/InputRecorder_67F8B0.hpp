@@ -26,20 +26,20 @@ class InputDevices_1
 {
   public:
     // TODO: Probably this call
-    EXPORT void __stdcall free_input_devices_4987A0();
+    void free_input_devices_4987A0();
 
-    EXPORT void read_keyboard_and_gamepad_498CC0();
+    void read_keyboard_and_gamepad_498CC0();
 
-    EXPORT void get_registry_controls_498C00();
-    EXPORT bool game_pads_init_498BA0();
-    EXPORT BOOL __stdcall make_input_devices_498800(HINSTANCE hInstance);
-    EXPORT void set_game_pad_device_properties_4989C0();
-    EXPORT void __stdcall input_devices_init_498C40(HINSTANCE hInstance);
-    EXPORT void SetAltKeyState_498CB0(u32 alt_down);
-    EXPORT bool acquire_input_device_498730(struct IDirectInputDeviceA* pGamePadDevice);
-    EXPORT bool game_pad_read_498D20();
-    EXPORT void AddKeyToInputBits_498C80(s32* pInputBits, DIDEVICEOBJECTDATA* device_data_keys);
-    EXPORT void read_input_device_498DA0(s32* input_bits, u8 bUnknown);
+    void get_registry_controls_498C00();
+    bool game_pads_init_498BA0();
+    BOOL make_input_devices_498800(HINSTANCE hInstance);
+    void set_game_pad_device_properties_4989C0();
+    void input_devices_init_498C40(HINSTANCE hInstance);
+    void SetAltKeyState_498CB0(u32 alt_down);
+    bool acquire_input_device_498730(struct IDirectInputDeviceA* pGamePadDevice);
+    bool game_pad_read_498D20();
+    void AddKeyToInputBits_498C80(s32* pInputBits, DIDEVICEOBJECTDATA* device_data_keys);
+    void read_input_device_498DA0(s32* input_bits, u8 bUnknown);
 
     u8 field_0;
 };
@@ -75,28 +75,28 @@ class InputRecorder_67F8B0
         k_max_records = 40000
     };
 
-    EXPORT void StaticShutdown_4CDCD0(); // static dtor
-    EXPORT void clear_inputs_4CDCE0();
-    EXPORT void set_input_4CDCF0(s32 mask_idx);
-    EXPORT void clear_input_4CDD10(s32 mask_idx);
-    EXPORT bool should_ignore_input_4CDD80(s32 dinput_key);
-    EXPORT bool should_ignore_input_4CDDF0(s32 dinput_key);
-    EXPORT void save_replay_record_4CDE20(u32 inputs);
-    EXPORT void SaveReplay_4CDED0();
-    EXPORT void modify_inputs_4CDF30(s32 match_mask);
-    EXPORT void AppendReplayHeader_4CDF70();
-    EXPORT void LoadReplayHeader_4CE380(char_type bLoadDebug);
-    EXPORT void VerifyAttractFilesExist_4CE650();
-    EXPORT void GetNextAttrReplay_4CE6E0(char_type* pAttrPathOut);
-    EXPORT void input_init_replay_4CE740(HINSTANCE hInstance);
-    EXPORT void input_init_live_4CE880(HINSTANCE hInstance);
-    EXPORT void Shutdown_4CEA00();
-    EXPORT void replay_save_4CEA40(u32* input_bits);
-    EXPORT u32 get_input_bits_4CEAC0();
-    EXPORT void save_replay_inputs_4CED00(s32 input_old, s32 input_new);
-    EXPORT void DisplayInputBits_4CED90();
-    EXPORT bool RecOrPlayBackState_4CEDF0();
-    EXPORT void ShowInput_4CEE10();
+    void StaticShutdown_4CDCD0(); // static dtor
+    void clear_inputs_4CDCE0();
+    void set_input_4CDCF0(s32 mask_idx);
+    void clear_input_4CDD10(s32 mask_idx);
+    bool should_ignore_input_4CDD80(s32 dinput_key);
+    bool should_ignore_input_4CDDF0(s32 dinput_key);
+    void save_replay_record_4CDE20(u32 inputs);
+    void SaveReplay_4CDED0();
+    void modify_inputs_4CDF30(s32 match_mask);
+    void AppendReplayHeader_4CDF70();
+    void LoadReplayHeader_4CE380(char_type bLoadDebug);
+    void VerifyAttractFilesExist_4CE650();
+    void GetNextAttrReplay_4CE6E0(char_type* pAttrPathOut);
+    void input_init_replay_4CE740(HINSTANCE hInstance);
+    void input_init_live_4CE880(HINSTANCE hInstance);
+    void Shutdown_4CEA00();
+    void replay_save_4CEA40(u32* input_bits);
+    u32 get_input_bits_4CEAC0();
+    void save_replay_inputs_4CED00(s32 input_old, s32 input_new);
+    void DisplayInputBits_4CED90();
+    bool RecOrPlayBackState_4CEDF0();
+    void ShowInput_4CEE10();
 
     // 9.6f 0x44AA60
     bool inlined_check()

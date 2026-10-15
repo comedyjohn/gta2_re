@@ -26,36 +26,36 @@ class SpriteList_4
         field_0_p18 = nullptr;
     }
 
-    EXPORT AttachedSprite_18* GetSpriteForModel_5A6A50(s32 obj_type);
-    EXPORT Object_2C* FindObject2CByModel_5A6A90(s32 obj_type);
-    EXPORT AttachedSprite_18* FindFirstActiveObject_5A6AD0();
-    EXPORT void RemoveSprite_5A6B10(Sprite* toFind);
-    EXPORT void RemoveSpriteSafe_5A6B60(Sprite* toFind);
-    EXPORT void sub_5A6BB0();
-    EXPORT void sub_5A6BD0();
-    EXPORT void DispatchCarImpactEvents_5A6BF0(Sprite* pSprite);
-    EXPORT char_type TagSpriteWithRng_5A6C10(Sprite* toFind);
-    EXPORT void RemoveByRngValue_5A6C40(s32 toFind);
-    EXPORT Sprite* FirstSpriteOfType_5A6CA0(s32 sprite_type);
-    EXPORT void AddSprite_5A6CD0(Sprite* pSprite);
-    EXPORT void PushImpactEvent_5A6D00(Sprite* pSprite1, Fix16 x, Fix16 y, Ang16 angle);
-    EXPORT void PushSprite_5A6D40(Sprite* pToFind);
-    EXPORT char_type SpriteExists_5A6D80(Sprite* pToFind);
-    EXPORT Sprite* PopFrontSprite_5A6DA0();
-    EXPORT Sprite* PopBackSprite_5A6DC0();
-    EXPORT AttachedSprite_18* ClearList_5A6E10();
-    EXPORT Sprite* FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff);
-    EXPORT Sprite* TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos);
+    AttachedSprite_18* GetSpriteForModel_5A6A50(s32 obj_type);
+    Object_2C* FindObject2CByModel_5A6A90(s32 obj_type);
+    AttachedSprite_18* FindFirstActiveObject_5A6AD0();
+    void RemoveSprite_5A6B10(Sprite* toFind);
+    void RemoveSpriteSafe_5A6B60(Sprite* toFind);
+    void sub_5A6BB0();
+    void sub_5A6BD0();
+    void DispatchCarImpactEvents_5A6BF0(Sprite* pSprite);
+    char_type TagSpriteWithRng_5A6C10(Sprite* toFind);
+    void RemoveByRngValue_5A6C40(s32 toFind);
+    Sprite* FirstSpriteOfType_5A6CA0(s32 sprite_type);
+    void AddSprite_5A6CD0(Sprite* pSprite);
+    void PushImpactEvent_5A6D00(Sprite* pSprite1, Fix16 x, Fix16 y, Ang16 angle);
+    void PushSprite_5A6D40(Sprite* pToFind);
+    char_type SpriteExists_5A6D80(Sprite* pToFind);
+    Sprite* PopFrontSprite_5A6DA0();
+    Sprite* PopBackSprite_5A6DC0();
+    AttachedSprite_18* ClearList_5A6E10();
+    Sprite* FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff);
+    Sprite* TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos);
 
-    EXPORT void PoolUpdate_5A6F70(Sprite* pSprite);
-    EXPORT void DestroyAllSprites_5A7010();
-    EXPORT void CleanupSpriteList_5A7080();
-    EXPORT void ClearGangIconSprite_5A7110();
-    EXPORT s32 GetGangIdxFromSpriteIfAny_5A71A0();
-    EXPORT void sub_5A71F0();
-    EXPORT void PruneNonCollidingSprites_5A7240(Sprite* pSprite);
-    EXPORT void PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown);
-    EXPORT char_type sub_5A7310();
+    void PoolUpdate_5A6F70(Sprite* pSprite);
+    void DestroyAllSprites_5A7010();
+    void CleanupSpriteList_5A7080();
+    void ClearGangIconSprite_5A7110();
+    s32 GetGangIdxFromSpriteIfAny_5A71A0();
+    void sub_5A71F0();
+    void PruneNonCollidingSprites_5A7240(Sprite* pSprite);
+    void PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown);
+    char_type sub_5A7310();
 
   public:
     AttachedSprite_18* field_0_p18;
@@ -64,8 +64,8 @@ class SpriteList_4
 class Object_3C
 {
   public:
-    EXPORT Object_3C(); // 0x52ad80
-    EXPORT ~Object_3C(); // 0x52ade0
+    Object_3C(); // 0x52ad80
+    ~Object_3C(); // 0x52ade0
 
     // 9.6f 0x482B20
     void PoolAllocate()
@@ -95,7 +95,7 @@ class Object_3C
     }
 
     // ?? not sure if this is O3C either :skull:
-    EXPORT Fix16_Point GetSpeedVector_52ADF0();
+    Fix16_Point GetSpeedVector_52ADF0();
 
     // 9.6f 0x482BA0; GetSpeedVector_52ADF0 is its out-of-line copy. It returns a Fix16_Point (which has a
     // destructor), so VC6 never expands it: it is charged to the caller's inline budget and called out of
@@ -107,7 +107,7 @@ class Object_3C
         return p;
     }
 
-    EXPORT void GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle);
+    void GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle);
 
     SpriteList_4 field_0;
     Ang16 field_4_angle;

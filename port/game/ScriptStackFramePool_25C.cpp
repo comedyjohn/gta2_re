@@ -1,12 +1,12 @@
 #include "ScriptStackFramePool_25C.hpp"
 
-MATCH_FUNC(0x4bc300)
+// 0x4bc300
 ScriptStackFramePool_25C::~ScriptStackFramePool_25C()
 {
     field_0_pool.field_0_pHead = nullptr;
 }
 
-MATCH_FUNC(0x4bea80)
+// 0x4bea80
 ScriptStackFrame_C::ScriptStackFrame_C()
 {
     mpNext = nullptr;
@@ -14,13 +14,13 @@ ScriptStackFrame_C::ScriptStackFrame_C()
     field_4_return_cmd = 205;
 }
 
-MATCH_FUNC(0x4beaa0)
+// 0x4beaa0
 ScriptStackFrame_C::~ScriptStackFrame_C()
 {
     mpNext = nullptr;
 }
 
-MATCH_FUNC(0x503110)
+// 0x503110
 void ScriptStackFrame_C::PoolAllocate()
 {
     field_0_cond_result = 0;

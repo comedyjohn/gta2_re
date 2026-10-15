@@ -57,21 +57,21 @@ class Door_38
         return field_20_state;
     }
 
-    EXPORT Door_38();
-    EXPORT ~Door_38();
-    EXPORT bool IsSpriteClearOfDoorCollision_49C6A0(Sprite* pSprite);
-    EXPORT bool CanOpen_49C6D0(Car_BC* pCar);
-    EXPORT bool CanOpenForPed_49C7F0(Ped* pPed);
-    EXPORT void Open_49C840();
-    EXPORT void TryOpenForCar_49C870(Car_BC* pCar);
-    EXPORT void TryOpenForPed_49C8A0(Ped* pPed);
-    EXPORT void InitSingleNoCheck_49C8D0(u8 door_group, u8 gr_id, u8 x, u8 y, u8 z, s32 facing);
-    EXPORT void AddDoorData_49CA50(u8 gr_id, char_type x, char_type y, char_type z, s32 face);
-    EXPORT void InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h);
-    EXPORT void InitDouble_49CC00(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h);
-    EXPORT void UpdateAutoClose_49CD90();
-    EXPORT char_type Service_49CE90();
-    EXPORT void get_door_xyz_face_49CEE0(u8* pX, u8* pY, u8* pZ, u32* pFace);
+    Door_38();
+    ~Door_38();
+    bool IsSpriteClearOfDoorCollision_49C6A0(Sprite* pSprite);
+    bool CanOpen_49C6D0(Car_BC* pCar);
+    bool CanOpenForPed_49C7F0(Ped* pPed);
+    void Open_49C840();
+    void TryOpenForCar_49C870(Car_BC* pCar);
+    void TryOpenForPed_49C8A0(Ped* pPed);
+    void InitSingleNoCheck_49C8D0(u8 door_group, u8 gr_id, u8 x, u8 y, u8 z, s32 facing);
+    void AddDoorData_49CA50(u8 gr_id, char_type x, char_type y, char_type z, s32 face);
+    void InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h);
+    void InitDouble_49CC00(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h);
+    void UpdateAutoClose_49CD90();
+    char_type Service_49CE90();
+    void get_door_xyz_face_49CEE0(u8* pX, u8* pY, u8* pZ, u32* pFace);
     
     // 9.6f 0x44C860, defined in Door_4D4.hpp (needs DoorData_10)
     inline bool IsOpen_44C860();

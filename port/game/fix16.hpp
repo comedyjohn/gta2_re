@@ -20,7 +20,7 @@ class Fix16
 {
   public:
     // 9.6f func
-    static inline s32 __stdcall Round_To_Int_410BF0(const Fix16& a1)
+    static inline s32 Round_To_Int_410BF0(const Fix16& a1)
     {
         s32 v = a1.mValue;
         return (v + 0x2000) >> 14;
@@ -29,7 +29,7 @@ class Fix16
 
     // TODO: BIG HACK!!! Makes no sense for this to be a method but its the only way to force certain inlining behaviour
     // ideally we'll figure out how to get the inlining we need without doing this in the future.
-    bool __stdcall IntervalIntersectsRange_438FB0_inline(const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax) const
+    bool IntervalIntersectsRange_438FB0_inline(const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax) const
     {
         if (*this < rangeMin)
         {
@@ -121,7 +121,7 @@ class Fix16
         return Fix16(value, 0);
     }
 
-    //MATCH_FUNC(0x4086A0)
+    // 0x4086A0
     Fix16 operator-() const
     {
         return Fix16(-mValue, 0);
@@ -147,13 +147,13 @@ class Fix16
         return mValue >= other.mValue;
     }
 
-    // MATCH_FUNC(0x509990)
+    // 0x509990
     bool operator>=(const s32 value) const
     {
         return mValue >= value << 14;
     }
 
-    // MATCH_FUNC(0x509990)
+    // 0x509990
     bool operator<(const s32 value) const
     {
         return mValue < value << 14;
@@ -259,7 +259,7 @@ class Fix16
     // inline budget sees the front-end size, 57 here (each brace pair adds 2, the else 2 more, a non-const
     // parameter 1 less). 57 is the only size that gives the original's cut-offs both in MaxAbsDistance_42A6B0
     // (Ped::NotifyWeaponHit_46FF00 needs <= 57) and in GetLength_41E260 (Car_BC::ManageDrowning_43E560 >= 57).
-    inline static Fix16 __stdcall Abs(const Fix16& input)
+    inline static Fix16 Abs(const Fix16& input)
     {
         if (input.mValue > 0)
             return input;
@@ -282,7 +282,7 @@ class Fix16
     }
 
     // 9.6f 0x42A630 as a static taking the value by reference; defined in CarPhysics_B0.cpp (UpdateZPhysics_55AD90)
-    static Fix16 __stdcall GetFracValue_42A630(const Fix16& v);
+    static Fix16 GetFracValue_42A630(const Fix16& v);
 
     // 9.6f func: 0x42A630
     inline Fix16 GetFracValue() const
@@ -326,22 +326,22 @@ class Fix16
     // inline budget charges the front-end size, 48 here (41 without the local, 46 with a non-const one).
     // Car_BC::ApplyExplosionImpulse_443710 needs >= 48 and CarPhysics_B0::EnforceGearSensitiveMaxSpeed_562D00
     // <= 49; with GetLength_41E260 at 162, Crane_15C::ComputeHookPolar_47F6C0 needs >= 48 too.
-    inline static Fix16 __stdcall SquareRoot(const Fix16& input)
+    inline static Fix16 SquareRoot(const Fix16& input)
     {
         const f64 value = input.AsDouble();
         return Fix16(sqrt(value));
     }
 
     // SquareRoot forced inline, only for Fix16_Point::GetLength_SqrtForced_43A240 (unexplained)
-    __forceinline static Fix16 __stdcall SquareRoot_forced(const Fix16& input)
+    __forceinline static Fix16 SquareRoot_forced(const Fix16& input)
     {
         return Fix16(sqrt(input.AsDouble()));
     }
 
-    EXPORT static Fix16 __stdcall Max_44E540(const Fix16& pLhs, const Fix16& pRhs);
+    static Fix16 Max_44E540(const Fix16& pLhs, const Fix16& pRhs);
     // 9.6f 0x41E130, out-of-line copy Max_44E540. Small functions inline it (Ped_List_4::FindClosestActivePed_471340),
     // and as a site after the two Abs it sets their nested budget in MaxAbsDistance_42A6B0
-    inline static Fix16 __stdcall Max_41E130(const Fix16& a, const Fix16& b)
+    inline static Fix16 Max_41E130(const Fix16& a, const Fix16& b)
     {
         if (a > b)
         {
@@ -352,27 +352,27 @@ class Fix16
             return b;
         }
     }
-    EXPORT static Fix16 __stdcall Abs_436A50(const Fix16& input);
-    EXPORT static Fix16 __stdcall SquareRoot_436A70(const Fix16& a2) throw();
+    static Fix16 Abs_436A50(const Fix16& input);
+    static Fix16 SquareRoot_436A70(const Fix16& a2) throw();
     // throw(): the original calls these out-of-line copies without an EH frame (their inline
     // bodies were visible there), see CarPhysics_B0::UpdateReferencePoint_563460
     // Out-of-line copy of operator+ (0x408660)
-    EXPORT Fix16 Add_408660(const Fix16& rhs) const throw();
-    EXPORT Fix16 Multiply_408680(const Fix16& in) const throw();
+    Fix16 Add_408660(const Fix16& rhs) const throw();
+    Fix16 Multiply_408680(const Fix16& in) const throw();
     // Out-of-line copies of operators, which big functions call once they run out of inline
     // expansions (SpriteShape_4C::DrawCollisionBox_5A4DA0)
-    EXPORT Fix16 Subtract_436A00(const Fix16& in) const;
-    EXPORT Fix16 Divide_436A20(const Fix16& in) const;
-    EXPORT s32 IsLess_451670(const Fix16& other) const;
-    EXPORT s32 IsGreater_451690(const Fix16& other) const;
-    EXPORT Fix16& DivideAssign_539F90(const Fix16& rhs);
-    EXPORT Fix16 MultiplyInt_561DB0(const s32& in) const;
-    EXPORT Fix16 DivideInt_53E860(const s32& in) const;
-    EXPORT Fix16& MultiplyAssign_562430(const Fix16& rhs);
-    EXPORT Fix16 Negate_4086A0() const throw();
+    Fix16 Subtract_436A00(const Fix16& in) const;
+    Fix16 Divide_436A20(const Fix16& in) const;
+    s32 IsLess_451670(const Fix16& other) const;
+    s32 IsGreater_451690(const Fix16& other) const;
+    Fix16& DivideAssign_539F90(const Fix16& rhs);
+    Fix16 MultiplyInt_561DB0(const s32& in) const;
+    Fix16 DivideInt_53E860(const s32& in) const;
+    Fix16& MultiplyAssign_562430(const Fix16& rhs);
+    Fix16 Negate_4086A0() const throw();
 
     // Needed this for a GetLength variant used by miss2_0x11C::GetSpeed_50E190.
-    inline static Fix16 __stdcall Abs_negate_out_of_line(const Fix16& input)
+    inline static Fix16 Abs_negate_out_of_line(const Fix16& input)
     {
         if (input.mValue > 0)
         {
@@ -382,7 +382,7 @@ class Fix16
         return input.Negate_4086A0();
     }
 
-    //MATCH_FUNC(0x436A20)
+    // 0x436A20
     Fix16 operator/(const Fix16& in) const
     {
         s32 value = (s32)(((__int64)mValue << 14) / in.mValue);
@@ -392,7 +392,7 @@ class Fix16
     // Inlined from 9.6f at 0x401bf0
     // I am not fully sure if this is right, i.e. the s32 parameter, instead of Fix16.
     // But I couldn't match ObjectDefinition_74::SetDimensionsFromSprite_533090 without this overload.
-    EXPORT Fix16 operator/(const s32& in)
+    Fix16 operator/(const s32& in)
     {
         s32 value = mValue / in;
         return Fix16(value, 0);
@@ -421,7 +421,7 @@ class Fix16
     }
 
     // https://decomp.me/scratch/MqQPJ
-    inline static Fix16 __stdcall MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
+    inline static Fix16 MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
     {
         Fix16 diff_x;
         diff_x = x2 - x1;
@@ -434,10 +434,10 @@ class Fix16
 
     // Out-of-line copy of the inline below, at its address (callers use the inline, which VC6 emits as
     // its own COMDAT copy). Defined in CarPhysics_B0.cpp.
-    EXPORT static Fix16 __stdcall ClampToRangeFlexible_ool_55EEE0(Fix16& a2, Fix16& a3, Fix16& a4);
+    static Fix16 ClampToRangeFlexible_ool_55EEE0(Fix16& a2, Fix16& a3, Fix16& a4);
 
     // NOTE: 10.5 function - matched but inlined
-    static inline Fix16 __stdcall ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)
+    static inline Fix16 ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)
     {
         if (a2 > a3)
         {
@@ -489,25 +489,25 @@ class Fix16
         return Fix16(mValue + 0x4000, 0);
     }
 
-    EXPORT static class Ang16 __stdcall atan2_fixed_405320(const Fix16& y, const Fix16& x);
+    static class Ang16 atan2_fixed_405320(const Fix16& y, const Fix16& x);
 
   public:
     s32 mValue;
 };
 
-EXPORT bool __stdcall IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
+bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
                                                      const Fix16& intervalEnd,
                                                      const Fix16& rangeMin,
                                                      const Fix16& rangeMax);
 
 class Ang16;
-EXPORT Ang16 __stdcall ArcTanLookup_405500(const Fix16& targetTan);
+Ang16 ArcTanLookup_405500(const Fix16& targetTan);
 
-EXPORT void __stdcall FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
+void FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
 
-EXPORT Fix16 __stdcall sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
-EXPORT s32 __stdcall sub_405E80(Fix16* pTarget, Fix16* pCur);
+Fix16 sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
+s32 sub_405E80(Fix16* pTarget, Fix16* pCur);
 EXTERN_GLOBAL_ARRAY(Fix16, gSin_table_667A80, 1440);
 EXTERN_GLOBAL_ARRAY(Fix16, gCos_table_669260, 1440);
 
-EXPORT void Init_trigonometry_tables();
+void Init_trigonometry_tables();

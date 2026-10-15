@@ -35,8 +35,8 @@ struct font_base
 
 struct sprite_index
 {
-    EXPORT void ClearPixelsOfColour_5ABAA0(u8 clear_target);
-    EXPORT void CopyPixels_5ABB00(u8* dst_x);
+    void ClearPixelsOfColour_5ABAA0(u8 clear_target);
+    void CopyPixels_5ABB00(u8* dst_x);
 
     BYTE* field_0_pData;
     u8 field_4_width;
@@ -165,8 +165,8 @@ struct delta_store_entry
 
 struct sprite_delta
 {
-    EXPORT void Delta_5ABA00(u8* pArray);
-    EXPORT void Delta_5ABA40(u8* pArray, u32 width);
+    void Delta_5ABA00(u8* pArray);
+    void Delta_5ABA40(u8* pArray, u32 width);
 
     delta_store_entry* field_0_pData;
     u16 field_4_len;
@@ -292,113 +292,113 @@ class gtx_0x106C
         return get_sprite_index_5AA440(a2)->field_5_height;
     }
 
-    EXPORT car_info* get_car_info_5AA3B0(u8 idx);
+    car_info* get_car_info_5AA3B0(u8 idx);
 
-    EXPORT BYTE* get_car_remap_5AA3D0(u8 idx);
+    BYTE* get_car_remap_5AA3D0(u8 idx);
 
-    EXPORT sprite_delta* get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx);
+    sprite_delta* get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx);
 
-    EXPORT sprite_index* get_sprite_index_5AA440(u16 idx);
+    sprite_index* get_sprite_index_5AA440(u16 idx);
 
-    EXPORT u16 GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_pal);
+    u16 GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_pal);
 
-    EXPORT s16 GetSpriteBaseOfType_5AA4F0(s32 sprite_type);
+    s16 GetSpriteBaseOfType_5AA4F0(s32 sprite_type);
 
-    EXPORT s16 GetPaletteBaseOfType_5AA560(s32 palette_type);
+    s16 GetPaletteBaseOfType_5AA560(s32 palette_type);
 
-    EXPORT s16 GetTruePalette_5AA5F0(s32 palette_type, s16 pal); // maybe "get virtual palette"?
+    s16 GetTruePalette_5AA5F0(s32 palette_type, s16 pal); // maybe "get virtual palette"?
 
-    EXPORT BYTE* GetPalData_5AA6A0(u16 palette_idx);
+    BYTE* GetPalData_5AA6A0(u16 palette_idx);
 
-    EXPORT u16 get_phys_pal_5AA6F0(u16 palId);
+    u16 get_phys_pal_5AA6F0(u16 palId);
 
-    EXPORT u16 GetSpriteIdxFromFont_5AA710(u16 font_type, s16 offset);
+    u16 GetSpriteIdxFromFont_5AA710(u16 font_type, s16 offset);
 
-    EXPORT u16 GetFontWidth_5AA760(u16* font_type, wchar_t* pStr);
+    u16 GetFontWidth_5AA760(u16* font_type, wchar_t* pStr);
 
-    EXPORT u16 GetSpaceCharWidth_5AA7B0(u16* font_type);
+    u16 GetSpaceCharWidth_5AA7B0(u16* font_type);
 
-    EXPORT s16 GetLineSpacing_5AA800(u16* font_type);
+    s16 GetLineSpacing_5AA800(u16* font_type);
 
-    EXPORT bool IsTileRemapped_5AA850(u16 tile_idx);
+    bool IsTileRemapped_5AA850(u16 tile_idx);
 
-    EXPORT s16 GetTile_5AA870(u16 tile_idx);
+    s16 GetTile_5AA870(u16 tile_idx);
 
-    EXPORT s16 GetFirstFreeReservedTileIdx_5AA890();
+    s16 GetFirstFreeReservedTileIdx_5AA890();
 
-    EXPORT void* GetTiles_5AA8C0();
+    void* GetTiles_5AA8C0();
 
-    EXPORT u16 get_physical_palettes_len_5AA900();
+    u16 get_physical_palettes_len_5AA900();
 
-    EXPORT object_info* get_map_object_info_5AA910(u16 idx);
+    object_info* get_map_object_info_5AA910(u16 idx);
 
-    EXPORT void SetTileRemap_5AA930(u16 tile_idx, s16 tile_val);
+    void SetTileRemap_5AA930(u16 tile_idx, s16 tile_val);
 
-    EXPORT void InitTileMapping_5AA950();
+    void InitTileMapping_5AA950();
 
-    EXPORT void BuildCarInfoContainer_5AA9A0(s32 chunk_size);
+    void BuildCarInfoContainer_5AA9A0(s32 chunk_size);
 
-    EXPORT void load_delx_5AAB30(u32 delx_chunk_size);
+    void load_delx_5AAB30(u32 delx_chunk_size);
 
-    EXPORT void SetDeltaDataPtrs_5AABF0();
+    void SetDeltaDataPtrs_5AABF0();
 
-    EXPORT void SetSpriteIndexDataPtrs_5AAC40();
+    void SetSpriteIndexDataPtrs_5AAC40();
 
-    EXPORT void build_delta_container_5AAC70();
+    void build_delta_container_5AAC70();
 
-    EXPORT void load_car_info_5AAD50(u32 cari_chunk_size);
+    void load_car_info_5AAD50(u32 cari_chunk_size);
 
-    EXPORT void load_delta_index_5AAD80(u32 delx_chunk_size);
+    void load_delta_index_5AAD80(u32 delx_chunk_size);
 
-    EXPORT void load_delta_store_5AADD0(u32 dels_chunk_size);
+    void load_delta_store_5AADD0(u32 dels_chunk_size);
 
-    EXPORT void load_tiles_5AADF0(u32 tile_chunk_len);
+    void load_tiles_5AADF0(u32 tile_chunk_len);
 
-    EXPORT void skip_ovly_5AAE20(u32 size);
+    void skip_ovly_5AAE20(u32 size);
 
-    EXPORT void skip_psxt_5AAE30(u32 size);
+    void skip_psxt_5AAE30(u32 size);
 
-    EXPORT void load_sprite_graphics_5AAE40(u32 sprg_chunk_len);
+    void load_sprite_graphics_5AAE40(u32 sprg_chunk_len);
 
-    EXPORT void load_physical_palettes_5AAE70(u32 ppal_chunk_size);
+    void load_physical_palettes_5AAE70(u32 ppal_chunk_size);
 
-    EXPORT void load_palette_index_5AAEA0(u32 palx_chunk_len);
+    void load_palette_index_5AAEA0(u32 palx_chunk_len);
 
-    EXPORT void load_map_object_info_5AAF00(u32 obji_chunk_len);
+    void load_map_object_info_5AAF00(u32 obji_chunk_len);
 
-    EXPORT void load_sprite_index_5AAF80(u32 sprx_chunk_size);
+    void load_sprite_index_5AAF80(u32 sprx_chunk_size);
 
-    EXPORT void InitFontTypes_5AAFE0(u16 fontCount);
+    void InitFontTypes_5AAFE0(u16 fontCount);
 
-    EXPORT void load_font_base_5AB0F0(u32 fonb_chunk_size);
+    void load_font_base_5AB0F0(u32 fonb_chunk_size);
 
-    EXPORT static u16 __stdcall ConvertToVirtualOffsets_5AB1A0(u16* pOffsets, u32 offsetsCount);
+    static u16 ConvertToVirtualOffsets_5AB1A0(u16* pOffsets, u32 offsetsCount);
 
-    EXPORT static void __stdcall ConvertToVirtualOffsets_5AB1C0(u16* pBuffer, u32 len);
+    static void ConvertToVirtualOffsets_5AB1C0(u16* pBuffer, u32 len);
 
-    EXPORT void load_sprite_base_5AB210(u32 sprite_base_chunk_size);
+    void load_sprite_base_5AB210(u32 sprite_base_chunk_size);
 
-    EXPORT void load_palete_base_5AB2C0(u32 palette_base_chunk_len);
+    void load_palete_base_5AB2C0(u32 palette_base_chunk_len);
 
-    EXPORT bool IsCarModelInRecycleList_5AB380(u8 car_id);
+    bool IsCarModelInRecycleList_5AB380(u8 car_id);
 
-    EXPORT void load_car_recycling_info_5AB3C0(u32 recy_chunk_size);
+    void load_car_recycling_info_5AB3C0(u32 recy_chunk_size);
 
-    EXPORT void read_spec_5AB3F0(u32 read_size2);
+    void read_spec_5AB3F0(u32 read_size2);
 
-    EXPORT void load_spec_5AB450();
+    void load_spec_5AB450();
 
-    EXPORT void LoadChunk_5AB4B0(const char_type* Str1, u32 chunk_len);
+    void LoadChunk_5AB4B0(const char_type* Str1, u32 chunk_len);
 
-    EXPORT void SetDataPtrs_5AB720();
+    void SetDataPtrs_5AB720();
 
-    EXPORT void LoadSty_5AB750(const char_type* pStyFileName);
+    void LoadSty_5AB750(const char_type* pStyFileName);
 
     // 0x5AB820
-    EXPORT gtx_0x106C();
+    gtx_0x106C();
 
     // 0x5AB8A0
-    EXPORT ~gtx_0x106C();
+    ~gtx_0x106C();
 
     // inlined v9.6f, 0x432850
     u8 get_number_of_cars() const
@@ -460,7 +460,7 @@ class gtx_0x106C
 EXTERN_GLOBAL(gtx_0x106C*, gGtx_0x106C_703DD4);
 
 // 9.6f 0x4C23D0
-inline s32 __stdcall GetSpaceWidth_4C23D0(u16 font_type)
+inline s32 GetSpaceWidth_4C23D0(u16 font_type)
 {
     return (u16)gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);
 }

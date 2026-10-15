@@ -53,54 +53,54 @@ class SpriteGrid_400
         return nullptr;
     }
 
-    EXPORT void Empty_478A10();
-    EXPORT void DrawSpritesClipped_477A40();
-    EXPORT void AddToSingleBucket_477AE0(Sprite* pSprite);
-    EXPORT void Remove_477B00(Sprite* pSprite);
-    EXPORT void AddToRegionBuckets_477B20(Sprite* pSprite);
-    EXPORT void AddToSpriteRectBuckets_477B60(Sprite* pSprite);
-    EXPORT void DebugLogAll_477BA0();
-    EXPORT char_type CheckAndHandleCollisionInStrips_477BD0(Sprite* pSprite);
-    EXPORT bool CheckAndHandleAllCollisionsForSprite_477C30(Sprite* pSprite, s32 sprite_type_filter);
-    EXPORT Sprite* FindNearestSprite_SpiralSearch_477C90(s32 primary_sprite_type,
+    void Empty_478A10();
+    void DrawSpritesClipped_477A40();
+    void AddToSingleBucket_477AE0(Sprite* pSprite);
+    void Remove_477B00(Sprite* pSprite);
+    void AddToRegionBuckets_477B20(Sprite* pSprite);
+    void AddToSpriteRectBuckets_477B60(Sprite* pSprite);
+    void DebugLogAll_477BA0();
+    char_type CheckAndHandleCollisionInStrips_477BD0(Sprite* pSprite);
+    bool CheckAndHandleAllCollisionsForSprite_477C30(Sprite* pSprite, s32 sprite_type_filter);
+    Sprite* FindNearestSprite_SpiralSearch_477C90(s32 primary_sprite_type,
                                                          s32 secondary_sprite_type,
                                                          Sprite* pExclude,
                                                          u8 max_rings,
                                                          s32 search_mode,
                                                          char_type bUseSpriteZ);
-    EXPORT void SetSpriteToExclude_477E50(Sprite* pSprite);
-    EXPORT Sprite* FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desired_sprite_type);
-    EXPORT bool CollectRectCollisions_477F30(Fix16_Rect* pRect,
+    void SetSpriteToExclude_477E50(Sprite* pSprite);
+    Sprite* FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desired_sprite_type);
+    bool CollectRectCollisions_477F30(Fix16_Rect* pRect,
                                              char_type bDeepCheck,
                                              s32 exclude_sprite_type,
                                              Sprite* pExclude,
                                              SpriteList_4* pOutList);
-    EXPORT bool CheckRectForCollisions_477F60(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude);
-    EXPORT SpriteGrid_400();
-    EXPORT ~SpriteGrid_400();
+    bool CheckRectForCollisions_477F60(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude);
+    SpriteGrid_400();
+    ~SpriteGrid_400();
 
     // height = how many rows to scan downward from gSpriteGrid_start_y_679098
-    EXPORT void SearchTileColumnForClosestSprite_478160(u8 height);
+    void SearchTileColumnForClosestSprite_478160(u8 height);
 
     // pSpriteLinks = linked list of GridSpriteLink_8 at a single (x,y) tile
-    EXPORT void CheckTileSpritesForClosestMatch_478060(GridSpriteLink_8* pSpriteLinks);
+    void CheckTileSpritesForClosestMatch_478060(GridSpriteLink_8* pSpriteLinks);
 
     // width = how many columns to scan horizontally from gSpriteGrid_start_x_679090
-    EXPORT void SearchTileStripForClosestSprite_4781E0(u8 width);
-    EXPORT void AddToDrawList_478240(s32 left, s32 right, s32 top, s32 bottom);
-    EXPORT void DoRemove_4782C0(s32 x_pos, s32 y_pos, Sprite* pSprite);
+    void SearchTileStripForClosestSprite_4781E0(u8 width);
+    void AddToDrawList_478240(s32 left, s32 right, s32 top, s32 bottom);
+    void DoRemove_4782C0(s32 x_pos, s32 y_pos, Sprite* pSprite);
 
   private:
-    EXPORT void AddToColumnBuckets_478370(s32 y_pos, Sprite* pSprite);
-    EXPORT void AddToSingleBucket_478440(s32 x_pos, s32 y_pos, Sprite* pSprite);
-    EXPORT void AddToRowBuckets_4784D0(s32 y_pos, Sprite* pSprite);
-    EXPORT GridCell_C* GetFirstXCellInRow_478590(s32 y_pos);
-    EXPORT char_type CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect* pRect);
-    EXPORT char_type CheckAndHandleCollisionsInStrip_478750(u32 y_pos, Sprite* pSprite);
-    EXPORT bool CheckAndHandleRowCollisionsForSprite_4787E0(u32 y_pos, Sprite* pSprite);
-    EXPORT Sprite* FindNearestSpriteInRow_478880(u32 y_pos, Sprite* pSprite);
-    EXPORT void DebugLog_478950(s32 x_pos, s32 y_pos);
-    EXPORT GridCell_C** Clear_4789F0();
+    void AddToColumnBuckets_478370(s32 y_pos, Sprite* pSprite);
+    void AddToSingleBucket_478440(s32 x_pos, s32 y_pos, Sprite* pSprite);
+    void AddToRowBuckets_4784D0(s32 y_pos, Sprite* pSprite);
+    GridCell_C* GetFirstXCellInRow_478590(s32 y_pos);
+    char_type CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect* pRect);
+    char_type CheckAndHandleCollisionsInStrip_478750(u32 y_pos, Sprite* pSprite);
+    bool CheckAndHandleRowCollisionsForSprite_4787E0(u32 y_pos, Sprite* pSprite);
+    Sprite* FindNearestSpriteInRow_478880(u32 y_pos, Sprite* pSprite);
+    void DebugLog_478950(s32 x_pos, s32 y_pos);
+    GridCell_C** Clear_4789F0();
 
     GridCell_C* field_0_rows[256]; // rows of Y; each is a sparse X-linked list of GridCell_C
 };

@@ -12,14 +12,14 @@ DEFINE_GLOBAL(FpsCounter_54*, gFpsCounter_7055D4, 0x7055D4);
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
 
-MATCH_FUNC(0x5BEC30)
+// 0x5BEC30
 void FpsCounter_54::ShowFps_5BEC30()
 {
     swprintf(tmpBuff_67BD9C, L"%d/%d fps", field_8_update_fps, field_14_draw_fps);
     gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 0, gDebugFont_706600, 1);
 }
 
-MATCH_FUNC(0x5BEC70)
+// 0x5BEC70
 FpsCounter_54::FpsCounter_54()
 {
     field_8_update_fps = 0;
@@ -30,13 +30,13 @@ FpsCounter_54::FpsCounter_54()
     field_10_draw_start_time = timeGetTime();
 }
 
-MATCH_FUNC(0x5BECC0)
+// 0x5BECC0
 FpsCounter_54::~FpsCounter_54()
 {
 
 }
 
-MATCH_FUNC(0x5BECF0)
+// 0x5BECF0
 void FpsCounter_54::UpdateFpsCounters_5BECF0(char_type bDrewFrame, char_type bUpdatedLogic)
 {
     if (bUpdatedLogic)

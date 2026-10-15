@@ -9,8 +9,8 @@ class PatrolPoint_3
   public:
     // ctor 463F90
     // dtor 463FA0
-    EXPORT PatrolPoint_3();
-    EXPORT ~PatrolPoint_3();
+    PatrolPoint_3();
+    ~PatrolPoint_3();
 
     u8 field_0_x;
     u8 field_1_y;
@@ -28,9 +28,9 @@ class PatrolRoute_96
     };
 
 
-    EXPORT ~PatrolRoute_96();
-    EXPORT void sub_543EC0();
-    EXPORT PatrolRoute_96();
+    ~PatrolRoute_96();
+    void sub_543EC0();
+    PatrolRoute_96();
     PatrolPoint_3 field_0_points[k_max_points];
 };
 
@@ -44,9 +44,9 @@ class PatrolRoutePool_1D7E
     };
 
 
-    EXPORT ~PatrolRoutePool_1D7E();
-    EXPORT PatrolRoutePool_1D7E();
-    EXPORT PatrolRoute_96* AllocPatrolList_543F10(u8* pRet);
+    ~PatrolRoutePool_1D7E();
+    PatrolRoutePool_1D7E();
+    PatrolRoute_96* AllocPatrolList_543F10(u8* pRet);
     PatrolRoute_96 field_0_routes[k_max_routes];
     u8 field_1D4C_bUsed[k_max_routes];
 };

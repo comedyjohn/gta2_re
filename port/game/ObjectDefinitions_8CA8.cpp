@@ -477,17 +477,17 @@ void InitCodeObjectTemplates()
     printf("CodeObjectTemplate_6C array loaded!\n");
 }
 
-MATCH_FUNC(0x4bdf40)
+// 0x4bdf40
 ObjectDefinitions_8CA8::~ObjectDefinitions_8CA8()
 {
 }
 
-MATCH_FUNC(0x4bdf60)
+// 0x4bdf60
 ObjectDefinition_74::~ObjectDefinition_74()
 {
 }
 
-MATCH_FUNC(0x531860)
+// 0x531860
 CodeObjectTemplate_6C::CodeObjectTemplate_6C(u32 param_1,
                u8 param_2,
                u32& param_3,
@@ -549,7 +549,7 @@ CodeObjectTemplate_6C::CodeObjectTemplate_6C(u32 param_1,
     field_69 = param_29;
 }
 
-MATCH_FUNC(0x532fb0)
+// 0x532fb0
 MapObjectOverride_54::MapObjectOverride_54(s32 param_1,
                s32& param_2,
                s32 param_3,
@@ -595,7 +595,7 @@ MapObjectOverride_54::MapObjectOverride_54(s32 param_1,
     field_50 = param_21;
 }
 
-MATCH_FUNC(0x533060)
+// 0x533060
 void ObjectDefinition_74::SetDimensions_533060(Fix16 width, Fix16 height, Fix16 depth)
 {
     field_0_width = width;
@@ -611,7 +611,7 @@ void ObjectDefinition_74::SetDimensions_533060(Fix16 width, Fix16 height, Fix16 
     }
 }
 
-MATCH_FUNC(0x533090)
+// 0x533090
 void ObjectDefinition_74::SetDimensionsFromSprite_533090()
 {
     if (field_28_sprite_type != sprite_types_enum::object_1)
@@ -639,7 +639,7 @@ void ObjectDefinition_74::SetDimensionsFromSprite_533090()
     }
 }
 
-MATCH_FUNC(0x533110)
+// 0x533110
 void ObjectDefinition_74::SetRemap_533110(s16 remap)
 {
     switch (field_28_sprite_type)
@@ -654,14 +654,14 @@ void ObjectDefinition_74::SetRemap_533110(s16 remap)
     field_1C_remap = remap;
 }
 
-MATCH_FUNC(0x533150)
+// 0x533150
 void ObjectDefinition_74::OffsetBaseSpriteIdxAndSetAnimSpeed_533150(s16 sprite_idx_offset, s16 anim_speed)
 {
     field_1E_base_sprite_idx += sprite_idx_offset;
     field_6C_sprite_anim_speed = anim_speed;
 }
 
-MATCH_FUNC(0x533170)
+// 0x533170
 Sprite* ObjectDefinition_74::CreateSpriteFromDefinition_533170()
 {
     Sprite* pFreeSprite = gSpritePool_703818->get_new_sprite();
@@ -672,7 +672,7 @@ Sprite* ObjectDefinition_74::CreateSpriteFromDefinition_533170()
 // fix16?
 s32 kFp255_6F8FA4 = 0x3FC000;
 
-MATCH_FUNC(0x5331a0)
+// 0x5331a0
 void ObjectDefinition_74::ApplyDefinitionToSprite_5331A0(Sprite* pSprite)
 {
     s32 f40; // eax
@@ -700,7 +700,7 @@ void ObjectDefinition_74::ApplyDefinitionToSprite_5331A0(Sprite* pSprite)
     }
 }
 
-MATCH_FUNC(0x533220)
+// 0x533220
 ObjectDefinition_74::ObjectDefinition_74()
 {
     field_0_width = kFp255_6F8FA4;
@@ -738,7 +738,7 @@ ObjectDefinition_74::ObjectDefinition_74()
     field_70_has_sound = 0;
 }
 
-MATCH_FUNC(0x5332d0)
+// 0x5332d0
 ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinitionWithSprite_5332D0(s32 idx, s32 sprite_type, s16 sprite_palette, u8 anim_speed)
 {
     ObjectDefinition_74* result = AllocDefinition_5343C0(idx);
@@ -749,7 +749,7 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinitionWithSprite_5332D0(s3
     return result;
 }
 
-MATCH_FUNC(0x533300)
+// 0x533300
 void ObjectDefinitions_8CA8::CreateMapObjectDefinitions_533300()
 {
     s16 sprites = 0;
@@ -764,7 +764,7 @@ void ObjectDefinitions_8CA8::CreateMapObjectDefinitions_533300()
     }
 }
 
-MATCH_FUNC(0x533360)
+// 0x533360
 void ObjectDefinitions_8CA8::ApplyMapObjectOverrides_533360()
 {
     int override_count = gMapObjectOverrides_length_623EEC;
@@ -803,7 +803,7 @@ void ObjectDefinitions_8CA8::ApplyMapObjectOverrides_533360()
     }
 }
 
-MATCH_FUNC(0x533420)
+// 0x533420
 void ObjectDefinitions_8CA8::CloneAnimatedDefinitions_533420()
 {
     ObjectDefinition_74* pAVar1;
@@ -1101,7 +1101,7 @@ void ObjectDefinitions_8CA8::CloneAnimatedDefinitions_533420()
     return;
 }
 
-MATCH_FUNC(0x533b30)
+// 0x533b30
 void ObjectDefinitions_8CA8::CreateCodeObjectDefinitions_533B30()
 {
     u16 sprite_base = 0;
@@ -1151,7 +1151,7 @@ void ObjectDefinitions_8CA8::CreateCodeObjectDefinitions_533B30()
     }
 }
 
-MATCH_FUNC(0x533c90)
+// 0x533c90
 void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
 {
     ObjectDefinition_74* tmp;
@@ -1366,7 +1366,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     ClearColour1PixelsOfDefinitions287To293_534270();
 }
 
-MATCH_FUNC(0x534270)
+// 0x534270
 void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitions287To293_534270()
 {
     ClearColour1PixelsOfDefinitionSprite_5342F0(287);
@@ -1378,13 +1378,13 @@ void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitions287To293_534270()
     ClearColour1PixelsOfDefinitionSprite_5342F0(293);
 }
 
-MATCH_FUNC(0x5342d0)
+// 0x5342d0
 void ObjectDefinitions_8CA8::CacheDef112SpritePalette_5342D0()
 {
     field_8CA4_def112_sprite_palette = GetObjectDefinition_534360(112)->field_1E_base_sprite_idx;
 }
 
-MATCH_FUNC(0x5342f0)
+// 0x5342f0
 void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx)
 {
     ObjectDefinition_74* pDef = GetObjectDefinition_534360(idx);
@@ -1393,7 +1393,7 @@ void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx
     psprite_index->ClearPixelsOfColour_5ABAA0(1);
 }
 
-MATCH_FUNC(0x534330)
+// 0x534330
 void ObjectDefinitions_8CA8::InitDefinitions_534330()
 {
     CreateMapObjectDefinitions_533300();
@@ -1404,13 +1404,13 @@ void ObjectDefinitions_8CA8::InitDefinitions_534330()
     CacheDef112SpritePalette_5342D0();
 }
 
-MATCH_FUNC(0x534360)
+// 0x534360
 ObjectDefinition_74* ObjectDefinitions_8CA8::GetObjectDefinition_534360(s32 idx)
 {
     return field_87F4_definition_by_idx[idx];
 }
 
-MATCH_FUNC(0x534370)
+// 0x534370
 ObjectDefinition_74* ObjectDefinitions_8CA8::CloneDefinition_534370(s32 dst_idx, s32 src_idx)
 {
     ObjectDefinition_74* result = &field_4_definitions[field_0_next_idx];
@@ -1421,7 +1421,7 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::CloneDefinition_534370(s32 dst_idx,
     return result;
 }
 
-MATCH_FUNC(0x5343c0)
+// 0x5343c0
 ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinition_5343C0(s32 idx)
 {
     ObjectDefinition_74* result = &field_4_definitions[field_0_next_idx];
@@ -1431,7 +1431,7 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinition_5343C0(s32 idx)
     return result;
 }
 
-MATCH_FUNC(0x5343f0)
+// 0x5343f0
 ObjectDefinitions_8CA8::ObjectDefinitions_8CA8()
 {
     for (s32 i = 0; i < GTA2_COUNTOF(field_87F4_definition_by_idx); i++)

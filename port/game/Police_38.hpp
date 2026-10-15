@@ -39,30 +39,30 @@ enum
 class PoliceCrew_38
 {
   public:
-    EXPORT PoliceCrew_38();
-    EXPORT ~PoliceCrew_38();
-    EXPORT void Init_5709C0();
-    EXPORT void AddToPursuit_570A10();
-    EXPORT void RemoveFromPursuit_570AB0();
-    EXPORT void SpawnPoliceInCar_570BF0();
-    EXPORT void SpawnSWAT_570E30();
-    EXPORT void SpawnFBI_nonused_571150();
-    EXPORT void TryDespawnOffscreenCrew_571350();
-    EXPORT void sub_571540();
-    EXPORT void sub_571A30();
-    EXPORT void sub_5720C0();
-    EXPORT bool sub_572210();
-    EXPORT void State3_AlertedSearch_572340();
-    EXPORT void State5_PursueOrChase_572920();
-    EXPORT void State6_ShutDown_574720();
-    EXPORT void State1_Patrol_574F10();
-    EXPORT void sub_575200();
-    EXPORT void sub_575210();
-    EXPORT void sub_575270();
-    EXPORT void sub_5752C0();
-    EXPORT void sub_575310();
-    EXPORT void Service_575590();
-    EXPORT void sub_575650();
+    PoliceCrew_38();
+    ~PoliceCrew_38();
+    void Init_5709C0();
+    void AddToPursuit_570A10();
+    void RemoveFromPursuit_570AB0();
+    void SpawnPoliceInCar_570BF0();
+    void SpawnSWAT_570E30();
+    void SpawnFBI_nonused_571150();
+    void TryDespawnOffscreenCrew_571350();
+    void sub_571540();
+    void sub_571A30();
+    void sub_5720C0();
+    bool sub_572210();
+    void State3_AlertedSearch_572340();
+    void State5_PursueOrChase_572920();
+    void State6_ShutDown_574720();
+    void State1_Patrol_574F10();
+    void sub_575200();
+    void sub_575210();
+    void sub_575270();
+    void sub_5752C0();
+    void sub_575310();
+    void Service_575590();
+    void sub_575650();
 
     u16 field_0_id;
     u8 field_2_targ_x;
@@ -140,13 +140,13 @@ class PolicePursuitTarget_7C  // Pursuit of one wanted criminal by police crews
 class PoliceRoadblock_A4
 {
   public:
-    EXPORT void Reset_575710();
-    EXPORT void Update_5757B0();
-    EXPORT void RemoveRoadblock_575CA0();
-    EXPORT char_type CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orientation);
+    void Reset_575710();
+    void Update_5757B0();
+    void RemoveRoadblock_575CA0();
+    char_type CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orientation);
 
-    EXPORT PoliceRoadblock_A4();
-    EXPORT ~PoliceRoadblock_A4();
+    PoliceRoadblock_A4();
+    ~PoliceRoadblock_A4();
     char_type field_0_bActive;
     char_type field_1_unused;
     char_type field_2_unused;

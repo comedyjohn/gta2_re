@@ -12,7 +12,7 @@
 EXTERN_GLOBAL(Fix16_Point, gZeroVector_6F8EF0);
 EXTERN_GLOBAL(s32, gObj2C_id_623EC0);
 
-EXPORT void __stdcall UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3);
+void UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3);
 
 class Object_2C;
 class Sprite;
@@ -54,82 +54,82 @@ class Object_2C
         field_27_thread_trigger_idx = v;
     }
 
-    EXPORT Object_2C();
-    EXPORT void PoolDeallocate();
-    EXPORT bool CanCollideWithSpriteByOwnerRef_522250(Sprite* pSprite);
-    EXPORT s32 GetMovementRegionSize_5222B0();
-    EXPORT void UpdatePhysics_5222D0();
-    EXPORT void PoolGive_522340();
-    EXPORT void PoolTake_522360();
-    EXPORT bool ShouldCollideWith_5223C0(Sprite* pSprite);
-    EXPORT bool ShouldStopAtTrafficLight_525290(Sprite* pSprite);
-    EXPORT bool ShouldCollideWithSprite_522430(Sprite* pSprite);
-    EXPORT bool SelectCollisionSprite_522460(Sprite* pProbe);
-    EXPORT void SetMovementVector_5224E0(const Fix16_Point& speed);
-    EXPORT void SetMovementVectorWithRandomState_522640(const Fix16_Point& point);
-    EXPORT void SetConveyorPush_5226A0(char_type conveyor_speed);
-    EXPORT void ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* pPoint);
-    EXPORT void ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint, u8 not_used);
-    EXPORT void ResolveCollisionWithWorld_522B20(Fix16_Point* f18, Fix16_Point* pPoint, Fix16_Point* speed);
-    EXPORT void ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint);
-    EXPORT void ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint);
-    EXPORT void HandleCollision_522E10(Fix16_Point* pPoint);
-    EXPORT bool TryStartSlide_5233A0(Fix16 value);
-    EXPORT void HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnknown1, char_type bUnknown2);
-    EXPORT bool HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, Fix16 found_z);
-    EXPORT bool HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2);
-    EXPORT bool HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z);
-    EXPORT void ComputeWallHitSide_524550();
-    EXPORT void IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, Ang16 move_angle);
-    EXPORT void OnExplosionNearby_525190(u8 ped_ref_idx);
-    EXPORT void UpdateAnimation_5257D0();
-    EXPORT bool DispatchFrameAction_525910();
-    EXPORT char ShouldCollideWithSprite_525370(Sprite* pSprite);
-    EXPORT void CheckCollisionForModel_139_And_141_525AE0();
-    EXPORT void SpawnSpriteParticlesForRocketBullet_525B40();
-    EXPORT bool CheckWaterDeath_525B60();
-    EXPORT void UpdatePhysicsAndMovement_525B80();
-    EXPORT void UpdatePhysicsMovementAndAnimation_525D90();
-    EXPORT void Update_525F30();
-    EXPORT bool PoolUpdate();
-    EXPORT void TriggerCarExplosionIfApplicable_526790(Sprite* pSprite);
-    EXPORT static s32 __stdcall GetExplosionTypeForItemDefinition_526830(s32 type);
-    EXPORT void InheritMotionFromSprite_526B40(Sprite* pSprite);
-    EXPORT bool UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 y, Ang16 rot);
-    EXPORT void InitializeObject_527630(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
-    EXPORT void TurnOffLight_527990();
-    EXPORT void AssignToBucket_527AE0();
-    EXPORT void RemoveFromCollisionBuckets_527D00();
-    EXPORT void ReleaseSubObjects_527F10();
-    EXPORT void NewObj3C_528130(const Fix16_Point& speed);
-    EXPORT bool HandleRotationStateTransition_528240(s32 current, s32 desired);
-    EXPORT void TickObject_5283C0(s32 obj_type);
-    EXPORT char_type OnObjectTouched_5288B0(Sprite* pSprite);
-    EXPORT void HandleWaterDeath_528900();
-    EXPORT static s32 __stdcall GetExplosionTypeForWallSide_528E00(s32 wall_side); // TODO: Check if thiscall
-    EXPORT bool HandleObjectHitIfExplosive_528960(Object_2C* pOther);
-    EXPORT char_type HandleObjectHit_528990(Sprite* pSprite);
-    EXPORT void ProcessObjectExplosionImpact_528A20(Object_2C* pObj);
-    EXPORT void HandleImpactNoSprite_528BA0();
-    EXPORT void HandleImpact_528E50(Sprite* pSprite);
-    EXPORT void HandleCollisionWithObject_529000(Object_2C* pObj);
-    EXPORT void SetConveyorSpeed_529030(s8 speed_x, s8 speed_y);
-    EXPORT void ApplyConveyorSpeedFrom_529070(Object_2C* pObj);
-    EXPORT s32 GetExplosionSideFromDiagonalWall_529210();
-    EXPORT s32 GetMapBlockSoundSpec_529240();
-    EXPORT void SetDefaultWeaponAmmo_5292D0();
-    EXPORT void SetDamageOwner_529080(u8 ped_ref_idx);
-    EXPORT void RequestRemoval_5290A0();
-    EXPORT void RequestRemovalWhenOffScreen_5290B0();
-    EXPORT void Dealloc_5291B0();
-    EXPORT void PoolGiveAndMarkDone_5291D0();
-    EXPORT void PoolGiveAndSetDone_5291E0(s32 bDone);
-    EXPORT bool IsNotModel_174_529200();
-    EXPORT ~Object_2C();
-    EXPORT void EnsureObject3C_52A650();
-    EXPORT void ReactivateObjectAfterImpact_52A6D0(Sprite* pSprite);
-    EXPORT Fix16_Point GetXY_52AE70();
-    EXPORT Fix16_Point GetSpeedVector_52AE90();
+    Object_2C();
+    void PoolDeallocate();
+    bool CanCollideWithSpriteByOwnerRef_522250(Sprite* pSprite);
+    s32 GetMovementRegionSize_5222B0();
+    void UpdatePhysics_5222D0();
+    void PoolGive_522340();
+    void PoolTake_522360();
+    bool ShouldCollideWith_5223C0(Sprite* pSprite);
+    bool ShouldStopAtTrafficLight_525290(Sprite* pSprite);
+    bool ShouldCollideWithSprite_522430(Sprite* pSprite);
+    bool SelectCollisionSprite_522460(Sprite* pProbe);
+    void SetMovementVector_5224E0(const Fix16_Point& speed);
+    void SetMovementVectorWithRandomState_522640(const Fix16_Point& point);
+    void SetConveyorPush_5226A0(char_type conveyor_speed);
+    void ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* pPoint);
+    void ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint, u8 not_used);
+    void ResolveCollisionWithWorld_522B20(Fix16_Point* f18, Fix16_Point* pPoint, Fix16_Point* speed);
+    void ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint);
+    void ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint);
+    void HandleCollision_522E10(Fix16_Point* pPoint);
+    bool TryStartSlide_5233A0(Fix16 value);
+    void HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnknown1, char_type bUnknown2);
+    bool HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, Fix16 found_z);
+    bool HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2);
+    bool HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z);
+    void ComputeWallHitSide_524550();
+    void IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, Ang16 move_angle);
+    void OnExplosionNearby_525190(u8 ped_ref_idx);
+    void UpdateAnimation_5257D0();
+    bool DispatchFrameAction_525910();
+    char ShouldCollideWithSprite_525370(Sprite* pSprite);
+    void CheckCollisionForModel_139_And_141_525AE0();
+    void SpawnSpriteParticlesForRocketBullet_525B40();
+    bool CheckWaterDeath_525B60();
+    void UpdatePhysicsAndMovement_525B80();
+    void UpdatePhysicsMovementAndAnimation_525D90();
+    void Update_525F30();
+    bool PoolUpdate();
+    void TriggerCarExplosionIfApplicable_526790(Sprite* pSprite);
+    static s32 GetExplosionTypeForItemDefinition_526830(s32 type);
+    void InheritMotionFromSprite_526B40(Sprite* pSprite);
+    bool UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 y, Ang16 rot);
+    void InitializeObject_527630(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
+    void TurnOffLight_527990();
+    void AssignToBucket_527AE0();
+    void RemoveFromCollisionBuckets_527D00();
+    void ReleaseSubObjects_527F10();
+    void NewObj3C_528130(const Fix16_Point& speed);
+    bool HandleRotationStateTransition_528240(s32 current, s32 desired);
+    void TickObject_5283C0(s32 obj_type);
+    char_type OnObjectTouched_5288B0(Sprite* pSprite);
+    void HandleWaterDeath_528900();
+    static s32 GetExplosionTypeForWallSide_528E00(s32 wall_side); // TODO: Check if thiscall
+    bool HandleObjectHitIfExplosive_528960(Object_2C* pOther);
+    char_type HandleObjectHit_528990(Sprite* pSprite);
+    void ProcessObjectExplosionImpact_528A20(Object_2C* pObj);
+    void HandleImpactNoSprite_528BA0();
+    void HandleImpact_528E50(Sprite* pSprite);
+    void HandleCollisionWithObject_529000(Object_2C* pObj);
+    void SetConveyorSpeed_529030(s8 speed_x, s8 speed_y);
+    void ApplyConveyorSpeedFrom_529070(Object_2C* pObj);
+    s32 GetExplosionSideFromDiagonalWall_529210();
+    s32 GetMapBlockSoundSpec_529240();
+    void SetDefaultWeaponAmmo_5292D0();
+    void SetDamageOwner_529080(u8 ped_ref_idx);
+    void RequestRemoval_5290A0();
+    void RequestRemovalWhenOffScreen_5290B0();
+    void Dealloc_5291B0();
+    void PoolGiveAndMarkDone_5291D0();
+    void PoolGiveAndSetDone_5291E0(s32 bDone);
+    bool IsNotModel_174_529200();
+    ~Object_2C();
+    void EnsureObject3C_52A650();
+    void ReactivateObjectAfterImpact_52A6D0(Sprite* pSprite);
+    Fix16_Point GetXY_52AE70();
+    Fix16_Point GetSpeedVector_52AE90();
     // 9.6f 0x482C50; GetSpeedVector_52AE90 is its out-of-line copy. It returns a Fix16_Point (which has
     // a destructor), so VC6 never expands it: it is charged to the caller's inline budget and called
     // out of line (SetMovementVector_5224E0)
@@ -143,15 +143,15 @@ class Object_2C
     }
 
     // TODO: ordering
-    EXPORT void SetSpriteIdxOffset_5290C0(u8 offset);
-    EXPORT Fix16 GetEffectiveSpeed_5290F0();
-    EXPORT bool IsFireExplosion_525AC0();
-    EXPORT void UpdateEffectPool_525B20();
-    EXPORT void UpdateLight_527A30();
-    EXPORT void OnAttachedSpriteDestroyed_525100();
+    void SetSpriteIdxOffset_5290C0(u8 offset);
+    Fix16 GetEffectiveSpeed_5290F0();
+    bool IsFireExplosion_525AC0();
+    void UpdateEffectPool_525B20();
+    void UpdateLight_527A30();
+    void OnAttachedSpriteDestroyed_525100();
 
-    EXPORT void IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 angle);
-    EXPORT void Sprite_UpdateZFromSlopeAndTile_522FA0(Sprite* pSprite);
+    void IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 angle);
+    void Sprite_UpdateZFromSlopeAndTile_522FA0(Sprite* pSprite);
 
     // 9.6f 0x475A70
     inline bool IsStaticCollisionCheck_475A70()
@@ -371,22 +371,22 @@ struct SavedObjectData_164;
 class Object_5C
 {
   public:
-    EXPORT void TrimSpriteList_529300();
-    EXPORT void ObjectsService_5293A0();
-    EXPORT Object_5C();
-    EXPORT ~Object_5C();
-    EXPORT void CreateDiagonalWallObjects_5297F0();
-    EXPORT Object_2C* GetDirectionalObject_5298E0(s32 slope_type);
-    EXPORT Object_2C* NewTouchPoint_529950(s32 object_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, Fix16 w, Fix16 h, Fix16 depth);
-    EXPORT Object_2C* NewPhysicsObj_5299B0(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
-    EXPORT Object_2C* NewWithPedRefIdx_5299F0(s32 object_type, u32 ped_ref_idx, Fix16 xpos, Fix16 ypos, Fix16 zpos);
-    EXPORT Object_2C* NewLight_529A40(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity);
-    EXPORT Object_2C* NewLight_529AB0(s32 light_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, u32 argb, Fix16 radius, u8 intensity);
-    EXPORT Object_2C* NewFlashingLight_529B20(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity, u8 on_time, u8 off_time, u8 shape);
-    EXPORT Object_2C* NewPhysicsObjUnlessBlocked_529BC0(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
-    EXPORT Object_2C* CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char fail_if_blocked);
-    EXPORT char_type SetPendingDamageOwner_52A210(char_type owner);
-    EXPORT Object_2C* NewMovingObj_52A240(s32 object_type,
+    void TrimSpriteList_529300();
+    void ObjectsService_5293A0();
+    Object_5C();
+    ~Object_5C();
+    void CreateDiagonalWallObjects_5297F0();
+    Object_2C* GetDirectionalObject_5298E0(s32 slope_type);
+    Object_2C* NewTouchPoint_529950(s32 object_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, Fix16 w, Fix16 h, Fix16 depth);
+    Object_2C* NewPhysicsObj_5299B0(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
+    Object_2C* NewWithPedRefIdx_5299F0(s32 object_type, u32 ped_ref_idx, Fix16 xpos, Fix16 ypos, Fix16 zpos);
+    Object_2C* NewLight_529A40(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity);
+    Object_2C* NewLight_529AB0(s32 light_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, u32 argb, Fix16 radius, u8 intensity);
+    Object_2C* NewFlashingLight_529B20(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity, u8 on_time, u8 off_time, u8 shape);
+    Object_2C* NewPhysicsObjUnlessBlocked_529BC0(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
+    Object_2C* CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char fail_if_blocked);
+    char_type SetPendingDamageOwner_52A210(char_type owner);
+    Object_2C* NewMovingObj_52A240(s32 object_type,
                                         Fix16 xpos,
                                         Fix16 ypos,
                                         Fix16 zpos,
@@ -395,7 +395,7 @@ class Object_5C
                                         Fix16 speed,
                                         Fix16 friction,
                                         Fix16 z_speed);
-    EXPORT Object_2C* NewMovingObjUnlessBlocked_52A280(s32 object_type,
+    Object_2C* NewMovingObjUnlessBlocked_52A280(s32 object_type,
                                  Fix16 xpos,
                                  Fix16 ypos,
                                  Fix16 zpos,
@@ -404,7 +404,7 @@ class Object_5C
                                  Fix16 speed,
                                  Fix16 friction,
                                  Fix16 z_speed);
-    EXPORT Object_2C* CreateMovingObj_52A2C0(s32 object_type,
+    Object_2C* CreateMovingObj_52A2C0(s32 object_type,
                                  Fix16 xpos,
                                  Fix16 ypos,
                                  Fix16 zpos,
@@ -414,11 +414,11 @@ class Object_5C
                                  Fix16 friction,
                                  Fix16 z_speed,
                                  char_type fail_if_blocked);
-    EXPORT Object_2C* CreateExplosion_52A3D0(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 kind, s32 ped_id);
+    Object_2C* CreateExplosion_52A3D0(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 kind, s32 ped_id);
 
-    EXPORT void SaveObjects_52A500(SavedObjectData_164* pUnknownObj);
-    EXPORT void RestoreObjects_52A590(SavedObjectData_164* pUnknownObj);
-    EXPORT void RemoveAndFree_52A610(Object_2C* p2C);
+    void SaveObjects_52A500(SavedObjectData_164* pUnknownObj);
+    void RestoreObjects_52A590(SavedObjectData_164* pUnknownObj);
+    void RemoveAndFree_52A610(Object_2C* p2C);
 
     Object_2C* field_0_diagonal_wall_ang315;
     Object_2C* field_4_diagonal_wall_ang135;

@@ -11,8 +11,8 @@
 #include "sprite.hpp"
 
 // Forward declarations: the functions below are in address order
-EXPORT void __stdcall SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3);
-EXPORT void __stdcall SmoothApproachClamped_4F75D0(Fix16* target_coord,
+void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3);
+void SmoothApproachClamped_4F75D0(Fix16* target_coord,
                                                    Fix16* coord_velocity,
                                                    Fix16* curr_coord,
                                                    Fix16* velocity_1,
@@ -79,7 +79,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAngZero_676964, Ang16(0), 0x676964);
 
 
 
-MATCH_FUNC(0x4355D0)
+// 0x4355D0
 bool Camera_0xBC::IsSpriteTheCameraSubject_4355D0(Sprite* pSprite)
 {
     Car_BC* pCar = pSprite->AsCar_40FEB0();
@@ -111,7 +111,7 @@ bool Camera_0xBC::IsSpriteTheCameraSubject_4355D0(Sprite* pSprite)
     return false;
 }
 
-MATCH_FUNC(0x435630)
+// 0x435630
 char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
 {
     Fix16 half_width;
@@ -148,7 +148,7 @@ char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
     return 0;
 }
 
-MATCH_FUNC(0x4357B0)
+// 0x4357B0
 void Camera_0xBC::SavePrevCamPos_4357B0()
 {
     field_88_prev_pos.field_0_x = field_98_cur_pos.field_0_x;
@@ -157,7 +157,7 @@ void Camera_0xBC::SavePrevCamPos_4357B0()
     field_88_prev_pos.field_C_zoom = field_98_cur_pos.field_C_zoom;
 }
 
-MATCH_FUNC(0x4357F0)
+// 0x4357F0
 void Camera_0xBC::IncreaseElevation_4357F0()
 {
     if (field_40_target_elevation < kMaxTgtElevation_676894)
@@ -166,7 +166,7 @@ void Camera_0xBC::IncreaseElevation_4357F0()
     }
 }
 
-MATCH_FUNC(0x435810)
+// 0x435810
 void Camera_0xBC::DecreaseElevation_435810()
 {
     if (field_40_target_elevation > kZero_676818)
@@ -175,13 +175,13 @@ void Camera_0xBC::DecreaseElevation_435810()
     }
 }
 
-MATCH_FUNC(0x435830)
+// 0x435830
 void Camera_0xBC::ReturnToDefaultZoom_435830()
 {
     field_40_target_elevation = kZero_676818;
 }
 
-MATCH_FUNC(0x435840)
+// 0x435840
 void Camera_0xBC::ClampTargetZ_435840()
 {
     if (field_10_pending_target_pos.field_8_z < kZero_676818)
@@ -195,7 +195,7 @@ void Camera_0xBC::ClampTargetZ_435840()
     }
 }
 
-MATCH_FUNC(0x435860)
+// 0x435860
 void Camera_0xBC::ApplyMovementDeltaFrom_435860(Camera_0xBC* pCamera)
 {
     field_10_pending_target_pos.field_0_x += pCamera->field_98_cur_pos.field_0_x - pCamera->field_88_prev_pos.field_0_x;
@@ -206,7 +206,7 @@ void Camera_0xBC::ApplyMovementDeltaFrom_435860(Camera_0xBC* pCamera)
 }
 
 // matches on decompme: https://decomp.me/scratch/NpBvl
-MATCH_FUNC(0x4358D0)
+// 0x4358D0
 Ang16 Camera_0xBC::ComputeTargetFacingAngle_4358D0()
 {
     Ang16 CarRotation;
@@ -257,7 +257,7 @@ Ang16 Camera_0xBC::ComputeTargetFacingAngle_4358D0()
     }
 }
 
-MATCH_FUNC(0x435A20)
+// 0x435A20
 Fix16 Camera_0xBC::ReturnOwnerVelocity_435A20()
 {
     Ped* pPed = field_34_target_ped;
@@ -282,7 +282,7 @@ Fix16 Camera_0xBC::ReturnOwnerVelocity_435A20()
 // FromPolar_41E210 here would drop offset.x's store before its second multiply. The original keeps it, as if
 // the copy had not been compiled yet (the same effect as Fix16_Point::operator+ in Weapon_30, see
 // docs/matching_quirks.md).
-MATCH_FUNC(0x436200)
+// 0x436200
 void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX, Fix16* pOutY, Fix16* pOutZ)
 {
     // 9.6f 0x41EBF0: this source matches it exactly when built with VC7 (compile_vc7.sh, permuter_score.py --96f)
@@ -347,7 +347,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
     }
 }
 
-MATCH_FUNC(0x435A70)
+// 0x435A70
 s32 Camera_0xBC::IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z)
 {
     Fix16_Point_POD pos = WorldToScreen_40CFC0(x, y, z);
@@ -359,7 +359,7 @@ s32 Camera_0xBC::IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z)
 }
 
 // https://decomp.me/scratch/YoPmg Is field_60_screen_scale really a Fix16_Point ?
-MATCH_FUNC(0x435B90)
+// 0x435B90
 void Camera_0xBC::UpdateBoundaries_435B90()
 {
     field_60_screen_scale.x = Fix16(field_68_screen_px_width) * field_98_cur_pos.field_C_zoom;
@@ -415,7 +415,7 @@ void Camera_0xBC::UpdateBoundaries_435B90()
     field_20_padded_view_bounds.field_C_bottom = field_78_view_bounds.field_C_bottom + dword_67691C;
 }
 
-MATCH_FUNC(0x435D20)
+// 0x435D20
 void Camera_0xBC::MoveTarget_435D20(char_type move_north, char_type move_south, char_type move_west, char_type move_east, char_type zoom_in, char_type zoom_out)
 {
     ResetPendingTarget();
@@ -451,7 +451,7 @@ void Camera_0xBC::MoveTarget_435D20(char_type move_north, char_type move_south, 
     ClampTargetZ_435840();
 }
 
-MATCH_FUNC(0x435DD0)
+// 0x435DD0
 void Camera_0xBC::ResetCameraSmoothing_435DD0()
 {
     field_98_cur_pos.field_0_x = field_0_target_pos.field_0_x;
@@ -465,7 +465,7 @@ void Camera_0xBC::ResetCameraSmoothing_435DD0()
     field_AC_cam_velocity.field_C_zoom = kZero_676818;
 }
 
-MATCH_FUNC(0x435F90)
+// 0x435F90
 void Camera_0xBC::AccumulateSuspicionOnDriver_435F90(Car_BC* pCar)
 {
     if (pCar->field_54_driver &&
@@ -487,7 +487,7 @@ void Camera_0xBC::AccumulateSuspicionOnDriver_435F90(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x435FF0)
+// 0x435FF0
 void Camera_0xBC::Update_435FF0()
 {
     Camera_0xBC::SavePrevCamPos_4357B0();
@@ -534,19 +534,19 @@ void Camera_0xBC::Update_435FF0()
     field_0_target_pos = field_10_pending_target_pos;
 }
 
-MATCH_FUNC(0x436110)
+// 0x436110
 void Camera_0xBC::RefreshBoundaries_436110()
 {
     UpdateBoundaries_435B90();
 }
 
-MATCH_FUNC(0x436120)
+// 0x436120
 void Camera_0xBC::SetShake_436120(Fix16 amount)
 {
     field_30_shake_amount = amount * dword_6768D8;
 }
 
-MATCH_FUNC(0x436140)
+// 0x436140
 void Camera_0xBC::ApplyShake_436140()
 {
     field_98_cur_pos.field_0_x += field_30_shake_amount;
@@ -560,7 +560,7 @@ void Camera_0xBC::ApplyShake_436140()
     field_30_shake_amount = dword_6766F4 * field_30_shake_amount;
 }
 
-MATCH_FUNC(0x4361B0)
+// 0x4361B0
 void Camera_0xBC::SetScreenSize_4361B0(u32 width, u32 height)
 {
     field_68_screen_px_width = width;
@@ -576,7 +576,7 @@ void Camera_0xBC::SetScreenSize_4361B0(u32 width, u32 height)
 }
 
 
-MATCH_FUNC(0x4364A0)
+// 0x4364A0
 void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
 {
 
@@ -599,7 +599,7 @@ void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x436540)
+// 0x436540
 void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
 {
     Car_BC* pCar_2;
@@ -644,7 +644,7 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x436710)
+// 0x436710
 void Camera_0xBC::HandlePanning_436710(char_type forward_gas_on, char_type foot_brake_on, char_type left_on, char_type right_on)
 {
     if (forward_gas_on)
@@ -724,7 +724,7 @@ void Camera_0xBC::HandlePanning_436710(char_type forward_gas_on, char_type foot_
     }
 }
 
-MATCH_FUNC(0x436830)
+// 0x436830
 void Camera_0xBC::ResetPanning_436830()
 {
     field_48_pan_x = 0;
@@ -735,7 +735,7 @@ void Camera_0xBC::ResetPanning_436830()
     field_54_pan_speed_down = kInitialPanSpeed_6766E4;
 }
 
-MATCH_FUNC(0x436860)
+// 0x436860
 void Camera_0xBC::ApplyZOffsetToScreenPosition_436860(Ped* pPed, Fix16& x_pos, Fix16& y_pos, Fix16 z_pos)
 {
     Fix16 depth_scale = (z_pos - pPed->get_cam_z() + Fix16(8)) / field_60_screen_scale.y;
@@ -743,7 +743,7 @@ void Camera_0xBC::ApplyZOffsetToScreenPosition_436860(Ped* pPed, Fix16& x_pos, F
     y_pos += field_4C_pan_y * depth_scale;
 }
 
-MATCH_FUNC(0x4368E0)
+// 0x4368E0
 Camera_0xBC::Camera_0xBC()
 {
     field_68_screen_px_width = 0;
@@ -765,12 +765,12 @@ Camera_0xBC::Camera_0xBC()
     ResetPanning_436830();
 }
 
-MATCH_FUNC(0x4369E0)
+// 0x4369E0
 Camera_0xBC::~Camera_0xBC()
 {
 }
 
-MATCH_FUNC(0x4397D0)
+// 0x4397D0
 void Camera_0xBC::SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom)
 {
     field_10_pending_target_pos.field_0_x = x;
@@ -782,8 +782,8 @@ void Camera_0xBC::SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom)
 
 // TODO: move
 // https://decomp.me/scratch/qYIak
-MATCH_FUNC(0x4F7540)
-EXPORT void __stdcall SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3)
+// 0x4F7540
+void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3)
 {
     // One shared `Coord_2 += Velocity_1` at the end: VC6 copies it into the clamp paths
     Fix16 DeltaCoord = Coord_1 - Coord_2;
@@ -840,8 +840,8 @@ EXPORT void __stdcall SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, F
 
 // TODO: move
 // https://decomp.me/scratch/kwM8W
-MATCH_FUNC(0x4F75D0)
-EXPORT void __stdcall SmoothApproachClamped_4F75D0(Fix16* target_coord,
+// 0x4F75D0
+void SmoothApproachClamped_4F75D0(Fix16* target_coord,
                                                    Fix16* coord_velocity,
                                                    Fix16* curr_coord,
                                                    Fix16* velocity_1,
@@ -898,7 +898,7 @@ EXPORT void __stdcall SmoothApproachClamped_4F75D0(Fix16* target_coord,
     *curr_coord += *coord_velocity;
 }
 
-MATCH_FUNC(0x58CF10)
+// 0x58CF10
 bool Camera_0xBC::IsPointInBoundaries_58CF10(Fix16 x, Fix16 y)
 {
     return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right &&

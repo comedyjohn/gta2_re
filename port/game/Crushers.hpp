@@ -37,11 +37,11 @@ class Crusher_30
         UnCrushH_4 = 4,
     };
 
-    EXPORT Crusher_30();
-    EXPORT ~Crusher_30();
-    EXPORT void CrushCar_488310(Car_BC* pCar);
-    EXPORT void Service_488350();
-    EXPORT void InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_idx);
+    Crusher_30();
+    ~Crusher_30();
+    void CrushCar_488310(Car_BC* pCar);
+    void Service_488350();
+    void InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_idx);
 
     Car_BC* GetCarBeingCrushed() const 
     {
@@ -74,12 +74,12 @@ public:
 class CrusherPool_94
 {
   public:
-    EXPORT bool IsCarBeingCrushed_4887A0(Car_BC* pCar);
-    EXPORT void CrushCarWithCrusher_4887D0(Car_BC* pCar, u8 crusher_idx);
-    EXPORT void CrushersService_4887F0();
-    EXPORT Crusher_30* CreateCrusher_488820(Fix16 xpos, Fix16 ypos);
-    EXPORT CrusherPool_94();
-    EXPORT ~CrusherPool_94();
+    bool IsCarBeingCrushed_4887A0(Car_BC* pCar);
+    void CrushCarWithCrusher_4887D0(Car_BC* pCar, u8 crusher_idx);
+    void CrushersService_4887F0();
+    Crusher_30* CreateCrusher_488820(Fix16 xpos, Fix16 ypos);
+    CrusherPool_94();
+    ~CrusherPool_94();
 
   private:
     Crusher_30 field_0_crushers[3];

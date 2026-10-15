@@ -29,13 +29,13 @@ DEFINE_GLOBAL_INIT(Ang16, kAng270_67A660, Ang16(0x438), 0x67A660);
 DEFINE_GLOBAL_INIT(Ang16, kAng180_67A63A, Ang16(0x2D0), 0x67A63A);
 DEFINE_GLOBAL_INIT(Ang16, kAng90_67A568, Ang16(0x168), 0x67A568);
 
-MATCH_FUNC(0x4882d0)
+// 0x4882d0
 Crusher_30::Crusher_30()
 {
     field_18_sound = nullptr;
 }
 
-MATCH_FUNC(0x4882e0)
+// 0x4882e0
 Crusher_30::~Crusher_30()
 {
     if (field_18_sound)
@@ -45,7 +45,7 @@ Crusher_30::~Crusher_30()
     }
 }
 
-MATCH_FUNC(0x488310)
+// 0x488310
 void Crusher_30::CrushCar_488310(Car_BC* pCar)
 {
     if (field_2C_state == CrusherStates::Idle_0 && !pCar->IsDespawning_4215B0() && !pCar->IsSpriteShrunk_43DC00() && !pCar->IsEngineCrushed_447EB0())
@@ -56,7 +56,7 @@ void Crusher_30::CrushCar_488310(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x488350)
+// 0x488350
 void Crusher_30::Service_488350()
 {
     if (field_2C_state != CrusherStates::Idle_0)
@@ -147,7 +147,7 @@ void Crusher_30::Service_488350()
     }
 }
 
-MATCH_FUNC(0x4885a0)
+// 0x4885a0
 void Crusher_30::InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_idx)
 {
     Fix16 zpos = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos);
@@ -180,7 +180,7 @@ void Crusher_30::InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_id
     }
 }
 
-MATCH_FUNC(0x4887a0)
+// 0x4887a0
 bool CrusherPool_94::IsCarBeingCrushed_4887A0(Car_BC* pCar)
 {
     for (s32 i = 0; i < field_90_count; i++)
@@ -193,13 +193,13 @@ bool CrusherPool_94::IsCarBeingCrushed_4887A0(Car_BC* pCar)
     return false;
 }
 
-MATCH_FUNC(0x4887d0)
+// 0x4887d0
 void CrusherPool_94::CrushCarWithCrusher_4887D0(Car_BC* pCar, u8 crusher_idx)
 {
     field_0_crushers[crusher_idx].CrushCar_488310(pCar);
 }
 
-MATCH_FUNC(0x4887f0)
+// 0x4887f0
 void CrusherPool_94::CrushersService_4887F0()
 {
     s32 idx = 0;
@@ -212,7 +212,7 @@ void CrusherPool_94::CrushersService_4887F0()
     }
 }
 
-MATCH_FUNC(0x488820)
+// 0x488820
 Crusher_30* CrusherPool_94::CreateCrusher_488820(Fix16 xpos, Fix16 ypos)
 {
     Crusher_30* pNew = &field_0_crushers[field_90_count];
@@ -221,13 +221,13 @@ Crusher_30* CrusherPool_94::CreateCrusher_488820(Fix16 xpos, Fix16 ypos)
     return pNew;
 }
 
-MATCH_FUNC(0x488860)
+// 0x488860
 CrusherPool_94::CrusherPool_94()
 {
     field_90_count = 0;
 }
 
-MATCH_FUNC(0x4bbc30)
+// 0x4bbc30
 CrusherPool_94::~CrusherPool_94()
 {
 }

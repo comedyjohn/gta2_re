@@ -12,7 +12,7 @@
 
 DEFINE_GLOBAL(KanjiFont_8EC*, gKanjiFont_6F5168, 0x6F5168);
 
-MATCH_FUNC(0x4D1FC0)
+// 0x4D1FC0
 void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
 {
     if (!strncmp(pChunkId, "KIDX", 4u))
@@ -40,7 +40,7 @@ void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
     }
 }
 
-MATCH_FUNC(0x4D2090)
+// 0x4D2090
 void KanjiFont_8EC::Load_kanji_dat_4D2090()
 {
     File::Global_Open_4A7060("data\\kanji.dat");
@@ -64,7 +64,7 @@ void KanjiFont_8EC::Load_kanji_dat_4D2090()
 }
 
 // Outlines the pixels of colour field_8E8_colour with colour field_8E9_outline_colour in a 256 wide sprite
-MATCH_FUNC(0x4D2150)
+// 0x4D2150
 void KanjiFont_8EC::OutlineGlyph_4D2150(sptr pPixels_addr, u16 width, u16 height)
 {
     u8(*pPixels)[256] = reinterpret_cast<u8(*)[256]>(pPixels_addr);
@@ -96,7 +96,7 @@ void KanjiFont_8EC::OutlineGlyph_4D2150(sptr pPixels_addr, u16 width, u16 height
 }
 
 // Expands a 16x16 1bpp glyph into the 256 pixel wide 8bpp sprite data
-MATCH_FUNC(0x4D2240)
+// 0x4D2240
 u8* KanjiFont_8EC::ExpandSmallGlyph_4D2240(char_type* pGlyph)
 {
     u8* pDst = field_8D0_pSprtData;
@@ -128,7 +128,7 @@ u8* KanjiFont_8EC::ExpandSmallGlyph_4D2240(char_type* pGlyph)
 }
 
 // Expands a 16x16 1bpp glyph at double size (2x2 pixels per bit) into the 256 pixel wide 8bpp sprite data
-MATCH_FUNC(0x4D23B0)
+// 0x4D23B0
 u8* KanjiFont_8EC::ExpandLargeGlyph_4D23B0(char_type* pGlyph)
 {
     u8* pDst = field_8DC_pSprtData;
@@ -240,7 +240,7 @@ u8* KanjiFont_8EC::ExpandLargeGlyph_4D23B0(char_type* pGlyph)
     return pDst;
 }
 
-MATCH_FUNC(0x4D2610)
+// 0x4D2610
 void KanjiFont_8EC::RenderSmallGlyph_4D2610(wchar_t text_char)
 {
     u16 kidx = text_char;
@@ -260,7 +260,7 @@ void KanjiFont_8EC::RenderSmallGlyph_4D2610(wchar_t text_char)
     pgbh_UnlockTexture(field_8D8_pTexture);
 }
 
-MATCH_FUNC(0x4D2690)
+// 0x4D2690
 void KanjiFont_8EC::RenderLargeGlyph_4D2690(wchar_t text_char)
 {
     u16 kidx = text_char;
@@ -280,7 +280,7 @@ void KanjiFont_8EC::RenderLargeGlyph_4D2690(wchar_t text_char)
     pgbh_UnlockTexture(field_8E4_pTexture);
 }
 
-MATCH_FUNC(0x4D2710)
+// 0x4D2710
 STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
 {
     KanjiGlyph_10* pOldest;
@@ -316,7 +316,7 @@ STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
     return field_8D8_pTexture;
 }
 
-MATCH_FUNC(0x4D27D0)
+// 0x4D27D0
 STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
 {
     KanjiGlyph_10* pOldest;
@@ -352,7 +352,7 @@ STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
     return field_8E4_pTexture;
 }
 
-MATCH_FUNC(0x4D28A0)
+// 0x4D28A0
 void KanjiFont_8EC::SetGlyphParamsFromFont_4D28A0(u16 font_type)
 {
     switch (font_type)
@@ -393,7 +393,7 @@ void KanjiFont_8EC::SetGlyphParamsFromFont_4D28A0(u16 font_type)
     }
 }
 
-MATCH_FUNC(0x4D29D0)
+// 0x4D29D0
 void KanjiFont_8EC::SetGlyphParamsFromRemap_4D29D0(u16 remap)
 {
     if (gGame_0x40_67E008)
@@ -484,7 +484,7 @@ void KanjiFont_8EC::SetGlyphParamsFromRemap_4D29D0(u16 remap)
     }
 }
 
-MATCH_FUNC(0x4D2B40)
+// 0x4D2B40
 void KanjiFont_8EC::InitGlyphCaches_4D2B40()
 {
     u16 base_font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703C3E, 0);
@@ -525,7 +525,7 @@ void KanjiFont_8EC::InitGlyphCaches_4D2B40()
     }
 }
 
-MATCH_FUNC(0x4D2C80)
+// 0x4D2C80
 KanjiFont_8EC::KanjiFont_8EC()
 {
     field_8E8_colour = -2;
@@ -537,7 +537,7 @@ KanjiFont_8EC::KanjiFont_8EC()
     Load_kanji_dat_4D2090();
 }
 
-MATCH_FUNC(0x4D2CC0)
+// 0x4D2CC0
 KanjiFont_8EC::~KanjiFont_8EC()
 {
     if (field_8C8_pKBIT)

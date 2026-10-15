@@ -8,11 +8,11 @@
 class CreditsText_FD22
 {
   public:
-    EXPORT CreditsText_FD22(); // 483E70
-    EXPORT ~CreditsText_FD22(); // 483EA0
+    CreditsText_FD22(); // 483E70
+    ~CreditsText_FD22(); // 483EA0
 
-    EXPORT wchar_t ReadNextNonBlankChar_483EC0(const wchar_t *pStr, u16 *pStartPos, bool bStopAtSpace);
-    EXPORT void LoadCredits_483F20();
+    wchar_t ReadNextNonBlankChar_483EC0(const wchar_t *pStr, u16 *pStartPos, bool bStopAtSpace);
+    void LoadCredits_483F20();
 
     s16 field_0_line_count;
     CreditsLine_6C field_2_lines[600];

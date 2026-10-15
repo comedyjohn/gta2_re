@@ -1,19 +1,19 @@
 #include "PlayerCrimeStats_3C.hpp"
 #include "Function.hpp"
 
-MATCH_FUNC(0x484ED0)
+// 0x484ED0
 PlayerCrimeStats_3C::PlayerCrimeStats_3C() // 0x484ED0
 {
     Reset_484EF0();
 }
 
-MATCH_FUNC(0x484EE0)
+// 0x484EE0
 PlayerCrimeStats_3C::~PlayerCrimeStats_3C() // 0x484EE0
 {
     // Empty
 }
 
-MATCH_FUNC(0x484EF0)
+// 0x484EF0
 void PlayerCrimeStats_3C::Reset_484EF0()
 {
     bool* pByteIter = field_28_bCountAllowed;
@@ -29,13 +29,13 @@ void PlayerCrimeStats_3C::Reset_484EF0()
     field_38_evasion_rating = 0;
 }
 
-MATCH_FUNC(0x484F20)
+// 0x484F20
 void PlayerCrimeStats_3C::Service_484F20()
 {
     ResetCrimeCountFlags_484F30();
 }
 
-MATCH_FUNC(0x484F30)
+// 0x484F30
 void PlayerCrimeStats_3C::ResetCrimeCountFlags_484F30()
 {
     for (u8 i = crime_stats_type::car_damaged_1; i < crime_stats_type::count_10; i++)
@@ -44,7 +44,7 @@ void PlayerCrimeStats_3C::ResetCrimeCountFlags_484F30()
     }
 }
 
-MATCH_FUNC(0x484F50)
+// 0x484F50
 void PlayerCrimeStats_3C::IncrementCrimeCount_484F50(int crime_type)
 {
     switch (crime_type)
@@ -72,13 +72,13 @@ void PlayerCrimeStats_3C::IncrementCrimeCount_484F50(int crime_type)
     }
 }
 
-MATCH_FUNC(0x484FA0)
+// 0x484FA0
 void PlayerCrimeStats_3C::AddCarDamageCost_484FA0(int cost)
 {
     field_34_car_damage_cost += cost;
 }
 
-MATCH_FUNC(0x484FB0)
+// 0x484FB0
 void PlayerCrimeStats_3C::AddEvasionRating_484FB0(int amount)
 {
     field_38_evasion_rating += amount;

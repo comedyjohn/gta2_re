@@ -16,136 +16,136 @@ struct sdt_entry_0x18
 class cSampleManager
 {
   public:
-    EXPORT cSampleManager();
+    cSampleManager();
 
-    EXPORT char_type DisableA3DSplash_58D620();
+    char_type DisableA3DSplash_58D620();
 
-    EXPORT char_type SoundInit_58D6C0(s32* a2);
+    char_type SoundInit_58D6C0(s32* a2);
 
-    EXPORT char_type OpenDigitalDriver_58D720(char_type bFlag, char_type bStereo, s32 sampleRate);
+    char_type OpenDigitalDriver_58D720(char_type bFlag, char_type bStereo, s32 sampleRate);
 
     // todo: order
 
-    EXPORT char_type AllocSamples_58D9F0(s32 a2);
+    char_type AllocSamples_58D9F0(s32 a2);
 
-    EXPORT void PlaySampleRange_58E8C0(u32 idx, u32 end_idx);
+    void PlaySampleRange_58E8C0(u32 idx, u32 end_idx);
 
-    EXPORT char_type Init3DProvider_58D820(BYTE* pMaxSamples);
+    char_type Init3DProvider_58D820(BYTE* pMaxSamples);
 
-    EXPORT void Reset3DSamples_58D960();
+    void Reset3DSamples_58D960();
 
-    EXPORT void AllocSample_58DA80();
+    void AllocSample_58DA80();
 
-    EXPORT void ReleaseSample_58DAC0();
+    void ReleaseSample_58DAC0();
 
-    EXPORT void Terminate_58DAE0();
+    void Terminate_58DAE0();
 
-    EXPORT void Shutdown_58DB30();
+    void Shutdown_58DB30();
 
-    EXPORT s32 GetPlayBackRateIdx_58DBF0(s32 idx);
+    s32 GetPlayBackRateIdx_58DBF0(s32 idx);
 
-    EXPORT s32 GetRandomDisplacement_58DC10(s32 idx);
+    s32 GetRandomDisplacement_58DC10(s32 idx);
 
-    EXPORT s32 GetLoopStart_58DC30(s32 sample_idx);
+    s32 GetLoopStart_58DC30(s32 sample_idx);
 
-    EXPORT s32 GetLoopEnd_58DC50(s32 sample_idx);
+    s32 GetLoopEnd_58DC50(s32 sample_idx);
 
-    EXPORT s32 GetSampleLength_maybe_58DC70(s32 sample_idx);
+    s32 GetSampleLength_maybe_58DC70(s32 sample_idx);
 
-    EXPORT void InitialiseChannel_58DC90(s32 channel, s32 sample_idx);
+    void InitialiseChannel_58DC90(s32 channel, s32 sample_idx);
 
-    EXPORT void SetChannelVolume_58DCE0(s32 channel, s32 volume);
+    void SetChannelVolume_58DCE0(s32 channel, s32 volume);
 
-    EXPORT void SetChannelPan_58DD00(s32 channel, s32 pan);
+    void SetChannelPan_58DD00(s32 channel, s32 pan);
 
-    EXPORT void SetChannelFrequency_58DD20(s32 channel, s32 frequency);
+    void SetChannelFrequency_58DD20(s32 channel, s32 frequency);
 
-    EXPORT void SetChannelLoopPoints_58DD40(s32 channel, s32 startOffset, s32 endOffset);
+    void SetChannelLoopPoints_58DD40(s32 channel, s32 startOffset, s32 endOffset);
 
-    EXPORT void SetChannelLoopCount_58DD60(s32 channel, s32 loopCount);
+    void SetChannelLoopCount_58DD60(s32 channel, s32 loopCount);
 
-    EXPORT bool GetChannelUsedFlag_58DD80(s32 channel);
+    bool GetChannelUsedFlag_58DD80(s32 channel);
 
-    EXPORT void StartChannel_58DDB0(s32 channel);
+    void StartChannel_58DDB0(s32 channel);
 
-    EXPORT void StopChannel_58DDD0(s32 channel);
+    void StopChannel_58DDD0(s32 channel);
 
-    EXPORT bool InitialiseChannel3D_58DDF0(s32 channel, s32 nSfx, s32 rate);
+    bool InitialiseChannel3D_58DDF0(s32 channel, s32 nSfx, s32 rate);
 
-    EXPORT void SetChannel3DVolume_58DE80(s32 idx, s32 vol);
+    void SetChannel3DVolume_58DE80(s32 idx, s32 vol);
 
-    EXPORT void SetChannel3DPosition_58DEA0(s32 channel, f32 x, f32 y, f32 z);
+    void SetChannel3DPosition_58DEA0(s32 channel, f32 x, f32 y, f32 z);
 
-    EXPORT void SetChannel3DDistances_58DED0(s32 channel, f32 maxDist, f32 minDist);
+    void SetChannel3DDistances_58DED0(s32 channel, f32 maxDist, f32 minDist);
 
-    EXPORT void SetChannel3DFrequency_58DF00(s32 channel, s32 freq);
+    void SetChannel3DFrequency_58DF00(s32 channel, s32 freq);
 
-    EXPORT void SetChannel3DLoopPoints_58DF20(s32 channel, s32 loop_start, s32 loop_end);
+    void SetChannel3DLoopPoints_58DF20(s32 channel, s32 loop_start, s32 loop_end);
 
-    EXPORT void SetChannel3DLoopCount_58DF50(s32 channel, s32 loop_count);
+    void SetChannel3DLoopCount_58DF50(s32 channel, s32 loop_count);
 
-    EXPORT bool GetChannel3DUsedFlag_58DF70(s32 channel);
+    bool GetChannel3DUsedFlag_58DF70(s32 channel);
 
-    EXPORT void StartChannel3D_58DFA0(s32 samp_idx);
+    void StartChannel3D_58DFA0(s32 samp_idx);
 
-    EXPORT void StopChannel3D_58DFC0(s32 samp_idx);
+    void StopChannel3D_58DFC0(s32 samp_idx);
 
-    EXPORT u8 Get3DSampleCount_58E000();
-    EXPORT void SetEaxEnvironment_58E010(s32 env_idx);
+    u8 Get3DSampleCount_58E000();
+    void SetEaxEnvironment_58E010(s32 env_idx);
 
-    EXPORT char_type Open3DProvider_58E140(s32 envIdx);
-
-    // todo order
-    EXPORT void Close3DProvider_58E1C0();
+    char_type Open3DProvider_58E140(s32 envIdx);
 
     // todo order
-    EXPORT void Enum3DProviders_58E1F0();
+    void Close3DProvider_58E1C0();
+
+    // todo order
+    void Enum3DProviders_58E1F0();
 
     // order func
 
-    EXPORT bool StreamStatus_58E2C0();
+    bool StreamStatus_58E2C0();
 
-    EXPORT void StreamSetVolume_58E2F0(u8 vol);
+    void StreamSetVolume_58E2F0(u8 vol);
 
-    EXPORT void OpenStream_58E320(u32 stream_idx);
+    void OpenStream_58E320(u32 stream_idx);
 
-    EXPORT void CloseStream_58E460();
+    void CloseStream_58E460();
 
-    EXPORT void FadeOut_58E490();
+    void FadeOut_58E490();
 
-    EXPORT char_type MusicFileExists_58E500();
+    char_type MusicFileExists_58E500();
 
-    EXPORT void PlayVocal_58E510(s32 stream_idx, s32 voc_idx, char_type bAppendA);
+    void PlayVocal_58E510(s32 stream_idx, s32 voc_idx, char_type bAppendA);
 
-    EXPORT void CloseVocalStream_58E6A0(s32 stream_idx);
+    void CloseVocalStream_58E6A0(s32 stream_idx);
 
-    EXPORT void SetVocalVolume_58E6D0(s32 stream_idx, u8 vol);
+    void SetVocalVolume_58E6D0(s32 stream_idx, u8 vol);
 
-    EXPORT void SetVocalSpeed_58E700(s32 stream_idx, s32 playbackRate);
+    void SetVocalSpeed_58E700(s32 stream_idx, s32 playbackRate);
 
-    EXPORT s32 GetVocalSpeed_58E720(s32 stream_idx);
+    s32 GetVocalSpeed_58E720(s32 stream_idx);
 
-    EXPORT void SetVocalPosMs_58E750(s32 stream_idx, s32 ms_pos);
+    void SetVocalPosMs_58E750(s32 stream_idx, s32 ms_pos);
 
-    EXPORT s32 GetVocalPosMs_58E770(long stream_idx);
+    s32 GetVocalPosMs_58E770(long stream_idx);
 
-    EXPORT s32 GetVocalLengthMs_58E7A0(long stream_idx);
+    s32 GetVocalLengthMs_58E7A0(long stream_idx);
 
-    EXPORT void SetSampleVol_58E7D0(u8 vol);
+    void SetSampleVol_58E7D0(u8 vol);
 
-    EXPORT void PlayAtIdx_58E7F0(s32 idx);
+    void PlayAtIdx_58E7F0(s32 idx);
 
-    EXPORT bool SampleNotDone_58E880();
+    bool SampleNotDone_58E880();
     
-    EXPORT void EndSample_58E8A0();
+    void EndSample_58E8A0();
 
-    EXPORT void EndSample_58E960();
+    void EndSample_58E960();
 
-    EXPORT char_type LoadWavSdtData_58E980(const char_type* pRawOrSdtName);
+    char_type LoadWavSdtData_58E980(const char_type* pRawOrSdtName);
 
-    EXPORT BYTE Reacquire_58E2A0();
+    BYTE Reacquire_58E2A0();
 
-    EXPORT void Release_58E290();
+    void Release_58E290();
 
     HDIGDRIVER field_0_hDriver;
     char_type field_4_gtaAudioDriveLetter;

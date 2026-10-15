@@ -12,14 +12,14 @@ DEFINE_GLOBAL(rng, gRng_6F6784, 0x6F6784);
 
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
-MATCH_FUNC(0x48B900)
+// 0x48B900
 void rng::AdvanceCycle_48B900()
 {
     ++field_0_rng;
     field_4_rnd = gRng_6F6784.rand_4F7C00();
 }
 
-MATCH_FUNC(0x48B920)
+// 0x48B920
 void rng::ShowCycle_48B920()
 {
     if (gInputRecorder_67F8B0.inlined_check())
@@ -39,13 +39,13 @@ void rng::ShowCycle_48B920()
     gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 460, gDebugFont_706600, 1);
 }
 
-MATCH_FUNC(0x4F7A40)
+// 0x4F7A40
 void rng::srand_4F7A40()
 {
     srand(1);
 }
 
-MATCH_FUNC(0x4F7AE0)
+// 0x4F7AE0
 s16 rng::get_int_4F7AE0(const s16& max_rnd)
 {
     if (bLog_random_67D5FC)
@@ -75,7 +75,7 @@ s16 rng::get_int_4F7AE0(const s16& max_rnd)
     }
 }
 
-MATCH_FUNC(0x4F7B70)
+// 0x4F7B70
 u8 rng::get_uint8_4F7B70(const u8& max_rnd)
 {
     if (bLog_random_67D5FC)
@@ -105,7 +105,7 @@ u8 rng::get_uint8_4F7B70(const u8& max_rnd)
     }
 }
 
-MATCH_FUNC(0x4F7C00)
+// 0x4F7C00
 int rng::rand_4F7C00()
 {
     return rand();

@@ -15,8 +15,8 @@ static inline bool IsDirectBufferMode_481DF0()
     return gBufferMode_706B34 == 2;
 }
 
-MATCH_FUNC(0x513210)
-void __stdcall Bink::Reset_513210()
+// 0x513210
+void Bink::Reset_513210()
 {
     gBinkHandleSlot2_6F83B0 = nullptr;
     gBinkHandleSlot1_6F8168 = nullptr;
@@ -26,7 +26,7 @@ void __stdcall Bink::Reset_513210()
     gBinkActiveSlot_6F83FF = 0;
 }
 
-MATCH_FUNC(0x513240)
+// 0x513240
 char_type Bink::TickFrame_513240()
 {
 
@@ -91,7 +91,7 @@ char_type Bink::TickFrame_513240()
     return false;
 }
 
-MATCH_FUNC(0x513340)
+// 0x513340
 void Bink::CloseSlot1_513340()
 {
     if (gBinkBufferSlot1_6F8170 != nullptr)
@@ -110,7 +110,7 @@ void Bink::CloseSlot1_513340()
     }
 }
 
-MATCH_FUNC(0x513390)
+// 0x513390
 void Bink::CloseSlot2_513390()
 {
     if (gBinkBufferSlot2_6F80C4 != nullptr)
@@ -131,8 +131,8 @@ void Bink::CloseSlot2_513390()
 
 // The csv size (0x166) stops after the last FatalError call: the shared slot store and epilogue
 // after it are not compared
-MATCH_FUNC(0x5133E0)
-void __stdcall Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver)
+// 0x5133E0
+void Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver)
 {
     BinkSetSoundSystem((void*)BinkOpenMiles, (intptr_t)hDriver);
     BinkSetIOSize(600000);
@@ -206,8 +206,8 @@ void __stdcall Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDr
     gBinkActiveSlot_6F83FF = 2;
 }
 
-MATCH_FUNC(0x513560)
-void __stdcall Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver)
+// 0x513560
+void Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver)
 {
     BinkSetSoundSystem((void*)BinkOpenMiles, (intptr_t)hDriver);
     BinkSetIOSize(600000);
@@ -276,8 +276,8 @@ void __stdcall Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDr
     }
 }
 
-MATCH_FUNC(0x5136D0)
-void __stdcall Bink::CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY)
+// 0x5136D0
+void Bink::CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY)
 {
     if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != nullptr)
     {
@@ -290,7 +290,7 @@ void __stdcall Bink::CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY)
     }
 }
 
-MATCH_FUNC(0x513720)
+// 0x513720
 void Bink::ResetBufferOffset_513720()
 {
     if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != nullptr)
@@ -303,32 +303,32 @@ void Bink::ResetBufferOffset_513720()
     }
 }
 
-MATCH_FUNC(0x513760)
+// 0x513760
 BOOL Bink::IsDDBufferOpen_513760()
 {
     return gBinkDDState_6F83FE == 2;
 }
 
-MATCH_FUNC(0x513770)
+// 0x513770
 BOOL Bink::IsUsingDDBuffer_513770()
 {
     return gBinkDDState_6F83FE == 2 || gBinkDDState_6F83FE == 1;
 }
 
-MATCH_FUNC(0x513790)
+// 0x513790
 char_type Bink::GetActiveSlot_513790()
 {
     return gBinkActiveSlot_6F83FF;
 }
 
-MATCH_FUNC(0x5137A0)
-void __stdcall Bink::SetActiveSlot_5137A0(char_type slot)
+// 0x5137A0
+void Bink::SetActiveSlot_5137A0(char_type slot)
 {
     gBinkActiveSlot_6F83FF = slot;
 }
 
-MATCH_FUNC(0x5137B0)
-void __stdcall Bink::SetDDState_5137B0(char_type state)
+// 0x5137B0
+void Bink::SetDDState_5137B0(char_type state)
 {
     gBinkDDState_6F83FE = state;
 }

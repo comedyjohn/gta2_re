@@ -7,7 +7,7 @@ DEFINE_GLOBAL(Ped_List_4, gThreateningPedsList_678468, 0x678468);
 
 DEFINE_GLOBAL_INIT(Ang16, kAng0_678B40, Ang16(0), 0x678B40);
 
-MATCH_FUNC(0x471140)
+// 0x471140
 Char_8* Ped_List_4::AddPedToFront_471140(Ped* pPed)
 {
     Char_8* pNew = gChar_8_Pool_678b50->Allocate_445EF0();
@@ -20,7 +20,7 @@ Char_8* Ped_List_4::AddPedToFront_471140(Ped* pPed)
     return pNew;
 }
 
-MATCH_FUNC(0x471160)
+// 0x471160
 void Ped_List_4::AddPedToBackIfMissing_471160(Ped* pPed)
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -56,7 +56,7 @@ void Ped_List_4::AddPedToBackIfMissing_471160(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x4711B0)
+// 0x4711B0
 void Ped_List_4::AddPedToFrontIfMissing_4711B0(Ped* pPed)
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -83,7 +83,7 @@ void Ped_List_4::AddPedToFrontIfMissing_4711B0(Ped* pPed)
     field_0_pFirstPed = pNew;
 }
 
-MATCH_FUNC(0x4711f0)
+// 0x4711f0
 void Ped_List_4::RemovePed_4711F0(Ped* pPed)
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -108,7 +108,7 @@ void Ped_List_4::RemovePed_4711F0(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x471240)
+// 0x471240
 void Ped_List_4::RemovePed_471240(Ped* pPed)
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -133,7 +133,7 @@ void Ped_List_4::RemovePed_471240(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x471290)
+// 0x471290
 u8 Ped_List_4::RemoveNonCorpses_471290()
 {
     Char_8* pPrevKept = nullptr;
@@ -168,7 +168,7 @@ u8 Ped_List_4::RemoveNonCorpses_471290()
     return removedCount;
 }
 
-MATCH_FUNC(0x4712F0)
+// 0x4712F0
 void Ped_List_4::ClearPeds_4712F0()
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -182,7 +182,7 @@ void Ped_List_4::ClearPeds_4712F0()
     field_0_pFirstPed = nullptr;
 }
 
-MATCH_FUNC(0x471320)
+// 0x471320
 Ped* Ped_List_4::RemoveFirstPed_471320()
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -200,7 +200,7 @@ Ped* Ped_List_4::RemoveFirstPed_471320()
 // 9.6f 0x445C30
 // 9.6f calls MaxAbsDistance_42A6B0 here. By value, with the y difference first, VC6 keeps
 // both differences and the max in registers as the original does.
-MATCH_FUNC(0x471340)
+// 0x471340
 Ped* Ped_List_4::FindClosestActivePed_471340(Fix16 x, Fix16 y)
 {
     Fix16 closestDistance(99999);
@@ -224,7 +224,7 @@ Ped* Ped_List_4::FindClosestActivePed_471340(Fix16 x, Fix16 y)
 }
 
 // https://decomp.me/scratch/GJ2JR
-MATCH_FUNC(0x4713C0)
+// 0x4713C0
 Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing, Ang16 half_cone)
 {
     Fix16 distance;
@@ -260,7 +260,7 @@ Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing,
     return pClosest;
 }
 
-MATCH_FUNC(0x4715a0)
+// 0x4715a0
 void Ped_List_4::KillAndClearAllPeds_4715A0()
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -275,7 +275,7 @@ void Ped_List_4::KillAndClearAllPeds_4715A0()
     field_0_pFirstPed = nullptr;
 }
 
-MATCH_FUNC(0x4715e0)
+// 0x4715e0
 void Ped_List_4::KillAndClearAllPedsResetCarRef_4715E0()
 {
     Char_8* pIter = field_0_pFirstPed;
@@ -291,7 +291,7 @@ void Ped_List_4::KillAndClearAllPedsResetCarRef_4715E0()
     field_0_pFirstPed = nullptr;
 }
 
-MATCH_FUNC(0x471630)
+// 0x471630
 void Ped_List_4::ApplyPassengerBusStopBehavior_471630()
 {
     for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
@@ -305,7 +305,7 @@ void Ped_List_4::ApplyPassengerBusStopBehavior_471630()
     }
 }
 
-MATCH_FUNC(0x471680)
+// 0x471680
 void Ped_List_4::ForceTaxiPassengersToExit_471680()
 {
     for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
@@ -317,7 +317,7 @@ void Ped_List_4::ForceTaxiPassengersToExit_471680()
     }
 }
 
-MATCH_FUNC(0x4716b0)
+// 0x4716b0
 u16 Ped_List_4::GetPedsCount_4716B0()
 {
     u16 passengerCount;
@@ -329,7 +329,7 @@ u16 Ped_List_4::GetPedsCount_4716B0()
     return passengerCount;
 }
 
-MATCH_FUNC(0x4716d0)
+// 0x4716d0
 void Ped_List_4::SyncPassengersWithCarState_4716D0(Car_BC* pCar)
 {
     for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
@@ -340,7 +340,7 @@ void Ped_List_4::SyncPassengersWithCarState_4716D0(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x471710)
+// 0x471710
 bool Ped_List_4::HasScriptCreatedPed_471710()
 {
     Char_8* pIter = field_0_pFirstPed;

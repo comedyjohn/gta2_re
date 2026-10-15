@@ -6,7 +6,7 @@
 DEFINE_GLOBAL(Taxi_4_Pool*, gTaxi_4_Pool_6783F8, 0x6783F8);
 DEFINE_GLOBAL(Taxi_4*, gTaxi_4_704130, 0x704130);
 
-MATCH_FUNC(0x457ba0)
+// 0x457ba0
 void Taxi_4::PushTaxi_457BA0(Car_BC* pCar)
 {
     Taxi_8* pFirst = gTaxi_4_Pool_6783F8->Allocate();
@@ -15,7 +15,7 @@ void Taxi_4::PushTaxi_457BA0(Car_BC* pCar)
     this->field_0_pFirst = pFirst;
 }
 
-MATCH_FUNC(0x457bc0)
+// 0x457bc0
 void Taxi_4::PopAll_457BC0()
 {
     Taxi_8* pIter = this->field_0_pFirst;
@@ -29,7 +29,7 @@ void Taxi_4::PopAll_457BC0()
 }
 
 // https://decomp.me/scratch/tPr1q
-MATCH_FUNC(0x457bf0)
+// 0x457bf0
 Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
 {
     Car_BC* pCarRet = nullptr;
@@ -54,7 +54,7 @@ Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
     return pCarRet;
 }
 
-MATCH_FUNC(0x5ae060)
+// 0x5ae060
 Taxi_4::Taxi_4()
 {
     Init_4C09B0();
@@ -69,7 +69,7 @@ Taxi_4::Taxi_4()
     }
 }
 
-MATCH_FUNC(0x5ae0d0)
+// 0x5ae0d0
 Taxi_4::~Taxi_4()
 {
     if (gTaxi_4_Pool_6783F8)

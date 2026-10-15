@@ -7,7 +7,7 @@
 
 DEFINE_GLOBAL(root_sound, gRoot_sound_66B038, 0x66B038);
 
-MATCH_FUNC(0x40EF40)
+// 0x40EF40
 SoundObject_10* root_sound::CreateSoundObject_40EF40(void* pObject, s32 objectType)
 {
     SoundObject_10* pCurrent = PopFree_410730();
@@ -23,121 +23,121 @@ SoundObject_10* root_sound::CreateSoundObject_40EF40(void* pObject, s32 objectTy
     return pCurrent;
 }
 
-MATCH_FUNC(0x40EF80)
+// 0x40EF80
 void root_sound::Init_40EF80()
 {
     gSound_obj_66F680.Init_419E10();
 }
 
-MATCH_FUNC(0x40EFA0)
+// 0x40EFA0
 void root_sound::Service_40EFA0()
 {
     gSound_obj_66F680.Service_419EF0();
 }
 
-MATCH_FUNC(0x40EFB0)
+// 0x40EFB0
 s32 root_sound::AddSoundObject_40EFB0(SoundObject_10* pSoundObj)
 {
     return gSound_obj_66F680.AddSoundObject_419FA0(pSoundObj);
 }
 
-MATCH_FUNC(0x40EFD0)
+// 0x40EFD0
 void root_sound::FreeSoundEntry_40EFD0(s32 sound_entry)
 {
     gSound_obj_66F680.FreeSoundEntry_41A090(sound_entry);
 }
 
-MATCH_FUNC(0x40EFF0)
+// 0x40EFF0
 char_type root_sound::LoadStyle_40EFF0(const char_type* pStyleName)
 {
     return gSound_obj_66F680.LoadStyle_41A1B0(pStyleName);
 }
 
-MATCH_FUNC(0x40F010)
+// 0x40F010
 void root_sound::InitMusicAndCopRadio_40F010()
 {
     gSound_obj_66F680.InitMusicAndCopRadio_57E960();
 }
 
-MATCH_FUNC(0x40F020)
+// 0x40F020
 void root_sound::DeInitVocals_40F020()
 {
     gSound_obj_66F680.DeInitVocals_57EA10();
 }
 
-MATCH_FUNC(0x40F030)
+// 0x40F030
 void root_sound::DeclareRadioStation_40F030(s32 station_idx, Fix16 xpos, Fix16 ypos)
 {
     gSound_obj_66F680.DeclareRadioStation_57ECB0(station_idx, xpos, ypos);
 }
 
-MATCH_FUNC(0x40F050)
+// 0x40F050
 void root_sound::RemoveSound_40F050(Fix16 sound_id, Fix16 emitter)
 {
     gSound_obj_66F680.RemoveSound_57EE30(sound_id, emitter);
 }
 
-MATCH_FUNC(0x40F070)
+// 0x40F070
 void root_sound::CycleRadioStation_40F070(char_type direction)
 {
     gSound_obj_66F680.CycleRadioStation_57EEE0(direction);
 }
 
-MATCH_FUNC(0x40F090)
+// 0x40F090
 void root_sound::PlayVoice_40F090(s32 state)
 {
     gSound_obj_66F680.PlayVocal_418C80(state);
 }
 
-MATCH_FUNC(0x40F0B0)
+// 0x40F0B0
 void root_sound::SetSfxVol_40F0B0(u8 sfxVol)
 {
     gSound_obj_66F680.SetSfxVol_41A250(sfxVol > 127 ? 127 : sfxVol);
 }
 
-MATCH_FUNC(0x40F0F0)
+// 0x40F0F0
 void root_sound::SetCDVol_40F0F0(u8 cdVol)
 {
     gSound_obj_66F680.SetCDVol_41A270(cdVol > 127 ? 127 : cdVol);
 }
 
-MATCH_FUNC(0x40F120)
+// 0x40F120
 u8 root_sound::GetCDVol_40F120()
 {
     return gSound_obj_66F680.GetCDVol_41A280();
 }
 
-MATCH_FUNC(0x40F130)
+// 0x40F130
 void root_sound::Release_40F130()
 {
     gSound_obj_66F680.Release_41A290();
 }
 
-MATCH_FUNC(0x40F140)
+// 0x40F140
 void root_sound::Reacquire_40F140()
 {
     gSound_obj_66F680.Reacquire_41A2A0();
 }
 
-MATCH_FUNC(0x40F150)
+// 0x40F150
 char_type root_sound::GetAudioDriveLetter_40F150()
 {
     return gSound_obj_66F680.GetAudioDriveLetter_41A2E0();
 }
 
-MATCH_FUNC(0x40F160)
+// 0x40F160
 char_type root_sound::Set3DSound_40F160(char_type b3dSound)
 {
     return gSound_obj_66F680.Set3DSound_41A2F0(b3dSound);
 }
 
-MATCH_FUNC(0x40F180)
+// 0x40F180
 char_type root_sound::Get3DSound_40F180()
 {
     return gSound_obj_66F680.Get3dSound_41A390();
 }
 
-MATCH_FUNC(0x411E30)
+// 0x411E30
 root_sound::root_sound()
 {
     SoundObject_10* pIter = field_4_pool;
@@ -151,7 +151,7 @@ root_sound::root_sound()
     field_4_pool[999].field_C_pAny.pNextFree = nullptr;
 }
 
-MATCH_FUNC(0x411E60)
+// 0x411E60
 root_sound::~root_sound()
 {
     field_0_pFreeList = nullptr;

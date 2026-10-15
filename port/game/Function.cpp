@@ -169,7 +169,7 @@ static u32 find_func_meta_data(u32 codeAddr)
     return 0; // Not found.
 }
 
-void __stdcall LogFuncAddr(u32 codeAddr, s32 mode)
+void LogFuncAddr(u32 codeAddr, s32 mode)
 {
     const u32 ogAddr = find_func_meta_data(codeAddr);
     if (ogAddr == 0)

@@ -13,9 +13,9 @@
 class Input
 {
   public:
-    EXPORT static void __stdcall DirectInputCreate_4986D0(HINSTANCE hInstance);
+    static void DirectInputCreate_4986D0(HINSTANCE hInstance);
 
-    EXPORT static void __stdcall DInputRelease_498710();
+    static void DInputRelease_498710();
 };
 
 EXTERN_GLOBAL(LPDIRECTINPUTA, gpDInput_67B804);

@@ -7,9 +7,9 @@
 class ScriptStackFrame_C
 {
   public:
-    EXPORT ScriptStackFrame_C();
-    EXPORT ~ScriptStackFrame_C();
-    EXPORT void PoolAllocate();
+    ScriptStackFrame_C();
+    ~ScriptStackFrame_C();
+    void PoolAllocate();
 
     void PoolDeallocate()
     {
@@ -36,7 +36,7 @@ class ScriptStackFramePool_25C
 
     }
 
-    EXPORT ~ScriptStackFramePool_25C();
+    ~ScriptStackFramePool_25C();
 
     // 9.6f 0x476780
     inline void DeAllocate_476780(ScriptStackFrame_C* pItem)

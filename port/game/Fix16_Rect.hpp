@@ -18,7 +18,7 @@ EXTERN_GLOBAL(Fix16, kCollisionPrismHalfHeight_6771E4);
 
 // 9.6f 0x41E160
 // https://decomp.me/scratch/A4s7c
-inline bool __stdcall IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
+inline bool IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
 {
     if (ourMin < otherMin)
     {
@@ -83,8 +83,8 @@ class Fix16_Rect
     }
 
     // TODO: None inline version of SetRect_41E350 ??
-    EXPORT void SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
-    EXPORT void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
+    void SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
+    void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
     // 9.6f 0x433560
     inline bool OverlapsZ_433560(Fix16_Rect* pOther)
@@ -132,12 +132,12 @@ class Fix16_Rect
         field_C_bottom = h + y;
     }
 
-    EXPORT void DoSetCurrentRect_59DD60();
-    EXPORT bool IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite);
-    EXPORT char_type CanRectEnterMovementRegion_59DE80();
-    EXPORT void ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y);
-    EXPORT bool RectOverlapsZone_59DF20(u8 zone_type);
-    EXPORT bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
+    void DoSetCurrentRect_59DD60();
+    bool IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite);
+    char_type CanRectEnterMovementRegion_59DE80();
+    void ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y);
+    bool RectOverlapsZone_59DF20(u8 zone_type);
+    bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
 
     // 9.6f 0x4B9FD0
     inline bool IsPointInRect_4B9FD0(Fix16_Point* a2)

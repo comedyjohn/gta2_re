@@ -18,27 +18,27 @@ DEFINE_GLOBAL_INIT(Fix16, dword_67F630, Fix16(4), 0x67F630);
 
 // The original is the compiler generated static destructor of pedGroups_67EF20: a call to the
 // CRT's vector destructor iterator `??_M` (`__ehvec_dtor`, which VC6 maps to that name). The CRT's
-// version takes a __thiscall destructor pointer (`P6E`), which VC6 can't declare (no __thiscall
+// version takes a destructor pointer (`P6E`), which VC6 can't declare (no 
 // keyword), and a destructor's address can't be taken, so __ehvec_dtor (crt_stubs.cpp) takes a
-// __cdecl pointer to a destructor thunk here.
-static void __cdecl PedGroup_dtor_4CB870(void* pGroup)
+// pointer to a destructor thunk here.
+static void PedGroup_dtor_4CB870(void* pGroup)
 {
     static_cast<PedGroup*>(pGroup)->~PedGroup();
 }
 
-MATCH_FUNC(0x4c8e60)
+// 0x4c8e60
 void PedGroup::sub_4C8E60()
 {
     __ehvec_dtor(pedGroups_67EF20, sizeof(PedGroup), GTA2_COUNTOF(pedGroups_67EF20), PedGroup_dtor_4CB870);
 }
 
-MATCH_FUNC(0x4c8e80)
+// 0x4c8e80
 void PedGroup::sub_4C8E80()
 {
     byte_620838 = 1;
 }
 
-MATCH_FUNC(0x4c8e90)
+// 0x4c8e90
 void PedGroup::ClearGroupData_4C8E90()
 {
     field_40_in_use = false;
@@ -66,7 +66,7 @@ void PedGroup::ClearGroupData_4C8E90()
     }
 }
 
-MATCH_FUNC(0x4c8ef0)
+// 0x4c8ef0
 void PedGroup::Reset_4C8EF0()
 {
     field_40_in_use = 0;
@@ -84,7 +84,7 @@ void PedGroup::Reset_4C8EF0()
     }
 }
 
-MATCH_FUNC(0x4c8f20)
+// 0x4c8f20
 void PedGroup::ResetGroupObjectives_4C8F20()
 {
     field_2C_ped_leader->SetObjective(objectives_enum::no_obj_0);
@@ -100,7 +100,7 @@ void PedGroup::ResetGroupObjectives_4C8F20()
     }
 }
 
-MATCH_FUNC(0x4c8f90)
+// 0x4c8f90
 void PedGroup::add_ped_to_end_of_list_4C8F90(Ped* pPed)
 {
     pPed->SetObjective2_463830(objectives_enum::no_obj_0);
@@ -110,7 +110,7 @@ void PedGroup::add_ped_to_end_of_list_4C8F90(Ped* pPed)
     ++field_36_count;
 }
 
-MATCH_FUNC(0x4c8fe0)
+// 0x4c8fe0
 void PedGroup::replace_leader_4C8FE0(Ped* new_leader)
 {
     add_ped_to_end_of_list_4C8F90(field_2C_ped_leader);
@@ -123,7 +123,7 @@ void PedGroup::replace_leader_4C8FE0(Ped* new_leader)
     }
 }
 
-MATCH_FUNC(0x4c9040)
+// 0x4c9040
 bool PedGroup::PurgeMembersInCars_4C9040()
 {
     field_36_count = field_34_count;
@@ -173,7 +173,7 @@ bool PedGroup::PurgeMembersInCars_4C9040()
     return true;
 }
 
-MATCH_FUNC(0x4c9150)
+// 0x4c9150
 char_type PedGroup::AreAllMembersOffScreen_4C9150()
 {
     if (field_2C_ped_leader->field_168_game_object == nullptr || field_2C_ped_leader->GetOffscreenCounter_4039F0() < 0x28)
@@ -192,7 +192,7 @@ char_type PedGroup::AreAllMembersOffScreen_4C9150()
     return true;
 }
 
-MATCH_FUNC(0x4c91b0)
+// 0x4c91b0
 void PedGroup::ResetMembersToFollowLeader_4C91B0()
 {
     for (u8 i = 0; i < field_34_count; i++)
@@ -203,7 +203,7 @@ void PedGroup::ResetMembersToFollowLeader_4C91B0()
     }
 }
 
-MATCH_FUNC(0x4c9210)
+// 0x4c9210
 bool PedGroup::IsLeaderInCar_4C9210()
 {
     if (field_2C_ped_leader->field_16C_car != nullptr)
@@ -216,7 +216,7 @@ bool PedGroup::IsLeaderInCar_4C9210()
     }
 }
 
-MATCH_FUNC(0x4c9220)
+// 0x4c9220
 bool PedGroup::IsLeaderEnteringCarOrUnknown5_4C9220()
 {
     if (field_2C_ped_leader->GetPedState_403990() != ped_state1_enum::ped_entering_a_car)
@@ -229,7 +229,7 @@ bool PedGroup::IsLeaderEnteringCarOrUnknown5_4C9220()
     return true;
 }
 
-MATCH_FUNC(0x4c9240)
+// 0x4c9240
 void PedGroup::KillEntireGroup_4C9240()
 {
     field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
@@ -243,7 +243,7 @@ void PedGroup::KillEntireGroup_4C9240()
 }
 
 
-MATCH_FUNC(0x4c92a0)
+// 0x4c92a0
 void PedGroup::DisbandGroup_4C92A0()
 {
     if (field_40_in_use == false)
@@ -284,7 +284,7 @@ void PedGroup::DisbandGroup_4C92A0()
     ClearGroupData_4C8E90();
 }
 
-MATCH_FUNC(0x4c93a0)
+// 0x4c93a0
 void PedGroup::DestroyGroup_4C93A0()
 {
     if (field_40_in_use == false)
@@ -335,7 +335,7 @@ void PedGroup::DestroyGroup_4C93A0()
     return;
 }
 
-MATCH_FUNC(0x4c94e0)
+// 0x4c94e0
 void PedGroup::DisbandGroupDueToAttack_4C94E0(Ped* pAttacker)
 {
     // 9.6f: Ped 0x403A50 sets field_168_game_object->field_3C_run_or_jump_speed (inlined, a Ped helper for it
@@ -387,7 +387,7 @@ void PedGroup::DisbandGroupDueToAttack_4C94E0(Ped* pAttacker)
     }
 }
 
-MATCH_FUNC(0x4c9680)
+// 0x4c9680
 void PedGroup::PromoteMemberToLeader_4C9680(u8 idx)
 {
     Ped* pTmp = gPedPool_6787B8->Allocate();
@@ -479,7 +479,7 @@ void PedGroup::PromoteMemberToLeader_4C9680(u8 idx)
     pTmp->Kill_46F9D0();
 }
 
-MATCH_FUNC(0x4c9970)
+// 0x4c9970
 void PedGroup::RemovePed_4C9970(Ped* pPed)
 {
     if (pPed == field_2C_ped_leader)
@@ -549,7 +549,7 @@ void PedGroup::RemovePed_4C9970(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x4c9b10)
+// 0x4c9b10
 void PedGroup::add_ped_leader_4C9B10(Ped* ptr)
 {
     field_2C_ped_leader = ptr;
@@ -557,7 +557,7 @@ void PedGroup::add_ped_leader_4C9B10(Ped* ptr)
     field_2C_ped_leader->set_ped_group_id(99);
 }
 
-MATCH_FUNC(0x4c9b30)
+// 0x4c9b30
 void PedGroup::add_ped_to_list_4C9B30(Ped* ptr, u8 idx)
 {
     field_4_ped_list[idx & 0xff] = ptr;
@@ -568,7 +568,7 @@ void PedGroup::add_ped_to_list_4C9B30(Ped* ptr, u8 idx)
 // The original never sets a return value
 #pragma warning(push)
 #pragma warning(disable : 4716)
-MATCH_FUNC(0x4c9b60)
+// 0x4c9b60
 char_type PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
 {
     s8 i;
@@ -681,7 +681,7 @@ char_type PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x4c9ed0)
+// 0x4c9ed0
 Ped* PedGroup::sub_4C9ED0()
 {
     for (s8 i = this->field_34_count - 1; i >= 0; i--)
@@ -695,7 +695,7 @@ Ped* PedGroup::sub_4C9ED0()
     return nullptr;
 }
 
-MATCH_FUNC(0x4c9f00)
+// 0x4c9f00
 void PedGroup::CoordinateGroupCarEntry_4C9F00()
 {
     s8 i;
@@ -898,13 +898,13 @@ void PedGroup::CoordinateGroupCarEntry_4C9F00()
     field_30_panicking = 1;
 }
 
-MATCH_FUNC(0x4ca3e0)
+// 0x4ca3e0
 u32 PedGroup::sub_4CA3E0()
 {
     return field_2C_ped_leader->field_21C_bf.bPanicking;
 }
 
-MATCH_FUNC(0x4ca3f0)
+// 0x4ca3f0
 Ped* PedGroup::FindFarthestMember_4CA3F0(Fix16* pFoundDistance)
 {
     Fix16 max_distance = Fix16(0);
@@ -931,7 +931,7 @@ Ped* PedGroup::FindFarthestMember_4CA3F0(Fix16* pFoundDistance)
     return field_4_ped_list[found_index];
 }
 
-MATCH_FUNC(0x4ca4b0)
+// 0x4ca4b0
 void PedGroup::UpdateFormation_4CA4B0()
 {
     if (!field_2C_ped_leader->field_16C_car && (field_2C_ped_leader->field_21C_bf.bLeftVehicle) == 0)
@@ -993,7 +993,7 @@ void PedGroup::UpdateFormation_4CA4B0()
     }
 }
 
-MATCH_FUNC(0x4ca5e0)
+// 0x4ca5e0
 void PedGroup::UpdateMemberAIState_4CA5E0(u8 idx)
 {
     Ped* pMember = field_4_ped_list[idx];
@@ -1090,7 +1090,7 @@ void PedGroup::UpdateMemberAIState_4CA5E0(u8 idx)
     }
 }
 
-MATCH_FUNC(0x4ca820)
+// 0x4ca820
 void PedGroup::UpdateMemberTightFollowState_4CA820(u8 idx)
 {
     Ped* pMember = field_4_ped_list[idx];
@@ -1118,7 +1118,7 @@ void PedGroup::UpdateMemberTightFollowState_4CA820(u8 idx)
     }
 }
 
-MATCH_FUNC(0x4caa20)
+// 0x4caa20
 bool PedGroup::IsAllMembersInSomeCar_4CAA20()
 {
     if (field_34_count == 0)
@@ -1136,7 +1136,7 @@ bool PedGroup::IsAllMembersInSomeCar_4CAA20()
     return true;
 }
 
-MATCH_FUNC(0x4caae0)
+// 0x4caae0
 char_type PedGroup::HasNoActiveMembers_4CAAE0()
 {
     for (u8 i = 0; i < field_34_count; i++)
@@ -1150,7 +1150,7 @@ char_type PedGroup::HasNoActiveMembers_4CAAE0()
     return true;
 }
 
-MATCH_FUNC(0x4cab80)
+// 0x4cab80
 char_type PedGroup::AreAllMembersOnFoot_4CAB80()
 {
     for (u8 i = 0; i < field_34_count; i++)
@@ -1163,7 +1163,7 @@ char_type PedGroup::AreAllMembersOnFoot_4CAB80()
     return true;
 }
 
-MATCH_FUNC(0x4cac20)
+// 0x4cac20
 bool PedGroup::IsMemberTooFarFromLeader_4CAC20(u8 idx)
 {
     Ped* pMember = field_4_ped_list[idx];
@@ -1182,7 +1182,7 @@ bool PedGroup::IsMemberTooFarFromLeader_4CAC20(u8 idx)
     return false;
 }
 
-MATCH_FUNC(0x4cad40)
+// 0x4cad40
 bool PedGroup::IsLeaderCloseToTargetCar_4CAD40()
 {
     Fix16 leader_xpos = field_2C_ped_leader->get_cam_x();
@@ -1210,7 +1210,7 @@ bool PedGroup::IsLeaderCloseToTargetCar_4CAD40()
 // The loop is a do/while under its own entry test: an empty group skips the final
 // nearest_distance check. Reading pOther's x directly (not through get_cam_x) loads
 // pMember's x first, as in the original.
-MATCH_FUNC(0x4cae80)
+// 0x4cae80
 Ped* PedGroup::FindNearestOtherMember_4CAE80(u8 idx)
 {
     Fix16 x_abs;
@@ -1250,7 +1250,7 @@ Ped* PedGroup::FindNearestOtherMember_4CAE80(u8 idx)
     return nullptr;
 }
 
-MATCH_FUNC(0x4cb080)
+// 0x4cb080
 void PedGroup::ResetAllGroups_4CB080()
 {
     sub_4C8E80();
@@ -1263,7 +1263,7 @@ void PedGroup::ResetAllGroups_4CB080()
     }
 }
 
-MATCH_FUNC(0x4cb0d0)
+// 0x4cb0d0
 PedGroup* PedGroup::New_4CB0D0()
 {
     for (s32 i = 0; i < 20; i++)
@@ -1278,13 +1278,13 @@ PedGroup* PedGroup::New_4CB0D0()
     return nullptr;
 }
 
-MATCH_FUNC(0x4cb860)
+// 0x4cb860
 PedGroup::PedGroup()
 {
     Reset_4C8EF0();
 }
 
-MATCH_FUNC(0x4cb870)
+// 0x4cb870
 PedGroup::~PedGroup()
 {
 }

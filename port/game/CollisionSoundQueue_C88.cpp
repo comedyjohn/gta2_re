@@ -11,7 +11,7 @@ DEFINE_GLOBAL(CollisionTarget_28, gCollisionTarget_679188, 0x679188);
 DEFINE_GLOBAL(Fix16, kFpZero_66AE98, 0x66AE98);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_66AE9C, Fix16(0x4000, 0), 0x66AE9C);
 
-MATCH_FUNC(0x40B870)
+// 0x40B870
 void CollisionEvent_28::SetPosition_40B870(Fix16 x, Fix16 y, Fix16 z)
 {
     field_4_x = x;
@@ -19,7 +19,7 @@ void CollisionEvent_28::SetPosition_40B870(Fix16 x, Fix16 y, Fix16 z)
     field_C_z = z;
 }
 
-MATCH_FUNC(0x40B890)
+// 0x40B890
 void CollisionEvent_28::SetupForCar_40B890(Car_BC* pCar)
 {
     field_10_car = pCar;
@@ -70,7 +70,7 @@ void CollisionEvent_28::SetupForCar_40B890(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x40B980)
+// 0x40B980
 void CollisionEvent_28::SetupForPed_40B980()
 {
     switch (gCollisionTarget_679188.field_0_type)
@@ -118,7 +118,7 @@ void CollisionEvent_28::SetupForPed_40B980()
     }
 }
 
-MATCH_FUNC(0x40BA60)
+// 0x40BA60
 bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
 {
     if (!pObj->GetDefHasShadowsField_40FF00())
@@ -184,7 +184,7 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
     return true;
 }
 
-MATCH_FUNC(0x40bb90)
+// 0x40bb90
 void CollisionSoundQueue_C88::Reset_40BB90()
 {
     field_C84_count = 0;
@@ -192,7 +192,7 @@ void CollisionSoundQueue_C88::Reset_40BB90()
 
 // ================================================================
 
-MATCH_FUNC(0x40bba0)
+// 0x40bba0
 void CollisionSoundQueue_C88::AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_strength)
 {
     if (!bSkip_audio_67D6BE)
@@ -222,7 +222,7 @@ void CollisionSoundQueue_C88::AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_
     }
 }
 
-MATCH_FUNC(0x40bc40)
+// 0x40bc40
 void CollisionSoundQueue_C88::AddFloorCollision_40BC40(Sprite* pSprite)
 {
     if (!bSkip_audio_67D6BE)
@@ -254,7 +254,7 @@ void CollisionSoundQueue_C88::AddFloorCollision_40BC40(Sprite* pSprite)
     }
 }
 
-MATCH_FUNC(0x40bd10)
+// 0x40bd10
 void CollisionSoundQueue_C88::AddBlockCollision_40BD10(Sprite* pSprite)
 {
     if (!bSkip_audio_67D6BE)
@@ -285,7 +285,7 @@ void CollisionSoundQueue_C88::AddBlockCollision_40BD10(Sprite* pSprite)
     }
 }
 
-MATCH_FUNC(0x40bdd0)
+// 0x40bdd0
 void CollisionSoundQueue_C88::AddSpriteCollision_40BDD0(Sprite* pSprite, Sprite* pHitSprite)
 {
     gCollisionTarget_679188.field_20_pHitSprite = pHitSprite;
@@ -293,7 +293,7 @@ void CollisionSoundQueue_C88::AddSpriteCollision_40BDD0(Sprite* pSprite, Sprite*
     AddCollision_40BBA0(pSprite, kFpZero_66AE98);
 }
 
-MATCH_FUNC(0x40be00)
+// 0x40be00
 CollisionSoundQueue_C88::CollisionSoundQueue_C88()
 {
     if (bSkip_audio_67D6BE)
@@ -307,7 +307,7 @@ CollisionSoundQueue_C88::CollisionSoundQueue_C88()
     Reset_40BB90();
 }
 
-MATCH_FUNC(0x40be40)
+// 0x40be40
 CollisionSoundQueue_C88::~CollisionSoundQueue_C88()
 {
     if (field_0_pSoundObj)
@@ -317,7 +317,7 @@ CollisionSoundQueue_C88::~CollisionSoundQueue_C88()
     }
 }
 
-MATCH_FUNC(0x477A10)
+// 0x477A10
 bool CollisionTarget_28::IsObj2C_477A10()
 {
     if (field_0_type == collision_target_type::sprite_3)

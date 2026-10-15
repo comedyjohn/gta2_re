@@ -46,7 +46,7 @@ DEFINE_GLOBAL(u8, gPathFinder_edge4_z_6FDBF4, 0x6FDBF4);
 DEFINE_GLOBAL(u8, gPathFinder_edge4_grid_x_6FDBF0, 0x6FDBF0);
 DEFINE_GLOBAL(u8, gPathFinder_edge4_grid_y_6FDBF1, 0x6FDBF1);
 
-MATCH_FUNC(0x554080)
+// 0x554080
 bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
 {
     if (field_25_xpos > 1u && field_25_xpos < 254u && field_26_ypos > 1u && field_26_ypos < 254u)
@@ -59,7 +59,7 @@ bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
     return false;
 }
 
-MATCH_FUNC(0x5540e0)
+// 0x5540e0
 char_type PathFinder_2FD4::TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u8 curr_zpos, u8 desired_xpos, u8 desired_ypos)
 {
     field_25_xpos = curr_xpos;
@@ -68,7 +68,7 @@ char_type PathFinder_2FD4::TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u
     return CanMoveDiagonally_554110(desired_xpos, desired_ypos);
 }
 
-MATCH_FUNC(0x554110)
+// 0x554110
 char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_ypos)
 {
 
@@ -230,13 +230,13 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
     return CanMoveInDirection_554080(path_direction::down_2);
 }
 
-MATCH_FUNC(0x5545c0)
+// 0x5545c0
 void PathFinder_2FD4::ClearGrid_5545C0()
 {
     memset(this->field_40_grid, 0, sizeof(this->field_40_grid));
 }
 
-MATCH_FUNC(0x5545e0)
+// 0x5545e0
 void PathFinder_2FD4::Init_5545E0()
 {
     memset(this->field_40_grid, 0, sizeof(this->field_40_grid));
@@ -248,7 +248,7 @@ void PathFinder_2FD4::Init_5545E0()
     field_2FD1_time_out_counter = 0;
 }
 
-MATCH_FUNC(0x554620)
+// 0x554620
 void PathFinder_2FD4::RemovePed_554620(s32 ped_id)
 {
     if (ped_id == field_0_ped_id)
@@ -258,7 +258,7 @@ void PathFinder_2FD4::RemovePed_554620(s32 ped_id)
     }
 }
 
-MATCH_FUNC(0x554640)
+// 0x554640
 char_type PathFinder_2FD4::EvaluateGridCell_554640()
 {
     if (field_23_grid_x <= 32)
@@ -320,7 +320,7 @@ char_type PathFinder_2FD4::EvaluateGridCell_554640()
 }
 
 // https://decomp.me/scratch/f8WDL
-MATCH_FUNC(0x554710)
+// 0x554710
 void PathFinder_2FD4::AddGridCell_554710()
 {
     u16 cost_scale;
@@ -431,7 +431,7 @@ void PathFinder_2FD4::AddGridCell_554710()
     }
 }
 
-MATCH_FUNC(0x5548c0)
+// 0x5548c0
 bool PathFinder_2FD4::ProcessGridCell_5548C0()
 {
     char_type cell_result = PathFinder_2FD4::EvaluateGridCell_554640();
@@ -460,7 +460,7 @@ bool PathFinder_2FD4::ProcessGridCell_5548C0()
     return false;
 }
 
-MATCH_FUNC(0x554920)
+// 0x554920
 void PathFinder_2FD4::RestoreSavedPosition_554920()
 {
     switch (gPathFinder_angle_face_6FDD38)
@@ -510,14 +510,14 @@ void PathFinder_2FD4::RestoreSavedPosition_554920()
     }
 }
 
-MATCH_FUNC(0x554a90)
+// 0x554a90
 s32 PathFinder_2FD4::IsFirstPassenger_554A90(Ped* pPed)
 {
     return field_3C_ped_list.field_0_pFirstPed->field_0_char_ped == pPed;
 }
 
 // https://decomp.me/scratch/Fr0bT
-MATCH_FUNC(0x554ab0)
+// 0x554ab0
 char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
                                         Ped* pPed,
                                         u8 x_start,
@@ -888,7 +888,7 @@ LABEL_61:
 }
 
 // https://decomp.me/scratch/19LIh
-MATCH_FUNC(0x5552b0)
+// 0x5552b0
 bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer)
 {
     u8 j = 0;

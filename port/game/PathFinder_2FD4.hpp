@@ -30,23 +30,23 @@ class PathFinder_2FD4
     {
         Init_5545E0();
     }
-    EXPORT bool CanMoveInDirection_554080(s32 path_direction);
-    EXPORT char_type TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u8 curr_zpos, u8 desired_xpos, u8 desired_ypos);
-    EXPORT char_type CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_ypos);
-    EXPORT void ClearGrid_5545C0();
-    EXPORT void Init_5545E0();
+    bool CanMoveInDirection_554080(s32 path_direction);
+    char_type TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u8 curr_zpos, u8 desired_xpos, u8 desired_ypos);
+    char_type CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_ypos);
+    void ClearGrid_5545C0();
+    void Init_5545E0();
 
     ~PathFinder_2FD4()
     {
         // TODO: Should this be empty?
     }
-    EXPORT void RemovePed_554620(s32 ped_id);
-    EXPORT char_type EvaluateGridCell_554640();
-    EXPORT void AddGridCell_554710();
-    EXPORT bool ProcessGridCell_5548C0();
-    EXPORT void RestoreSavedPosition_554920();
-    EXPORT s32 IsFirstPassenger_554A90(Ped* pPed);
-    EXPORT char_type ComputePath_554AB0(s32 ped_id,
+    void RemovePed_554620(s32 ped_id);
+    char_type EvaluateGridCell_554640();
+    void AddGridCell_554710();
+    bool ProcessGridCell_5548C0();
+    void RestoreSavedPosition_554920();
+    s32 IsFirstPassenger_554A90(Ped* pPed);
+    char_type ComputePath_554AB0(s32 ped_id,
                                         Ped* pPed,
                                         u8 x_start,
                                         u8 y_start,
@@ -56,7 +56,7 @@ class PathFinder_2FD4
                                         u8 z_end,
                                         s32 angle_face,
                                         u8* pOutPathFailCount);
-    EXPORT bool FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer);
+    bool FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer);
 
     s32 field_0_ped_id;
     char_type field_4_bFindTileMode; // 1: FindNearbyTileMatchingSlopeType, 0: ComputePath

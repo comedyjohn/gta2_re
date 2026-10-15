@@ -13,7 +13,7 @@ class Object_2C;
 class CollisionTarget_28
 {
   public:
-    EXPORT bool IsObj2C_477A10();
+    bool IsObj2C_477A10();
 
     void Reset_4637B0()
     {
@@ -92,10 +92,10 @@ class CollisionTarget_28
 class CollisionEvent_28
 {
   public:
-    EXPORT void SetPosition_40B870(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT void SetupForCar_40B890(Car_BC* pCar);
-    EXPORT void SetupForPed_40B980();
-    EXPORT bool SetupForObject_40BA60(Object_2C* pObj);
+    void SetPosition_40B870(Fix16 x, Fix16 y, Fix16 z);
+    void SetupForCar_40B890(Car_BC* pCar);
+    void SetupForPed_40B980();
+    bool SetupForObject_40BA60(Object_2C* pObj);
 
     void SetImpactStrength_40FF10(const Fix16& strength)
     {
@@ -123,13 +123,13 @@ class CollisionSoundQueue_C88
         k_max_events = 80
     };
 
-    EXPORT void Reset_40BB90();
-    EXPORT void AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_strength);
-    EXPORT void AddFloorCollision_40BC40(Sprite* pSprite);
-    EXPORT void AddBlockCollision_40BD10(Sprite* pSprite);
-    EXPORT void AddSpriteCollision_40BDD0(Sprite* pSprite, Sprite* pHitSprite);
-    EXPORT CollisionSoundQueue_C88();
-    EXPORT ~CollisionSoundQueue_C88();
+    void Reset_40BB90();
+    void AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_strength);
+    void AddFloorCollision_40BC40(Sprite* pSprite);
+    void AddBlockCollision_40BD10(Sprite* pSprite);
+    void AddSpriteCollision_40BDD0(Sprite* pSprite, Sprite* pHitSprite);
+    CollisionSoundQueue_C88();
+    ~CollisionSoundQueue_C88();
 
     SoundObject_10* field_0_pSoundObj;
     CollisionEvent_28 field_4_events[k_max_events];

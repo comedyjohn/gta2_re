@@ -97,10 +97,10 @@ DEFINE_GLOBAL_INIT(Ang16, gSpawnRotationBottom_678540, Ang16(720), 0x678540);
 DEFINE_GLOBAL_INIT(s16, gSpawnCounter_6787C6, 0, 0x6787C6);
 EXTERN_GLOBAL(u8, gNumberArmedGangMembers_6787CE);
 
-EXPORT Ped* __stdcall SpawnPedChainGroupAt_46DB90(char_type remap, u8 number_followers, Fix16 xpos, Fix16 ypos, Fix16 zpos);
+Ped* SpawnPedChainGroupAt_46DB90(char_type remap, u8 number_followers, Fix16 xpos, Fix16 ypos, Fix16 zpos);
 
-MATCH_FUNC(0x46DB90)
-EXPORT Ped* __stdcall SpawnPedChainGroupAt_46DB90(char_type remap, u8 number_followers, Fix16 xpos, Fix16 ypos, Fix16 zpos)
+// 0x46DB90
+Ped* SpawnPedChainGroupAt_46DB90(char_type remap, u8 number_followers, Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
     Fix16 xpos_adjusted = kFpPoint8_6784A0 + Fix16((u8)(xpos.ToInt()));
     Fix16 ypos_adjusted = kFpPoint8_6784A0 + Fix16((u8)(ypos.ToInt()));
@@ -148,8 +148,8 @@ static inline Fix16 GetSpawnJitter()
 }
 
 // TODO: Prob a method of PedManager?
-MATCH_FUNC(0x46E380)
-EXPORT void __stdcall SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation)
+// 0x46E380
+void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation)
 {
     u8 kind = 0;
     s16 rng_val = gRng_6F6784.get_int_4F7AE0(1000);
@@ -461,7 +461,7 @@ EXPORT void __stdcall SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpo
     }
 }
 
-MATCH_FUNC(0x46eb60)
+// 0x46eb60
 void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
 {
     Fix16 xpos;
@@ -584,7 +584,7 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
     }
 }
 
-MATCH_FUNC(0x470330)
+// 0x470330
 void PedManager::Dummies_470330()
 {
     s16 max_dummies = gPedManager_6787BC->field_0_max_dummy_chars;
@@ -619,7 +619,7 @@ void PedManager::Dummies_470330()
 }
 
 // https://decomp.me/scratch/dQf8H
-MATCH_FUNC(0x4703f0)
+// 0x4703f0
 void PedManager::PedsService_4703F0()
 {
     ++gPedsServiceTickCount_6787F0;
@@ -680,7 +680,7 @@ void PedManager::PedsService_4703F0()
 }
 
 // https://decomp.me/scratch/P1OvR
-MATCH_FUNC(0x470650)
+// 0x470650
 PedManager::PedManager()
 {
     field_8 = nullptr;
@@ -765,7 +765,7 @@ PedManager::PedManager()
     gThreateningPedsList_678468.ClearList_420E90();
 }
 
-MATCH_FUNC(0x4709b0)
+// 0x4709b0
 PedManager::~PedManager()
 {
     if (gThreateningPedsList_678468.field_0_pFirstPed)
@@ -795,7 +795,7 @@ PedManager::~PedManager()
     }
 }
 
-MATCH_FUNC(0x470a50)
+// 0x470a50
 Ped* PedManager::SpawnPedAt(Fix16 xpos, Fix16 ypos, Fix16 zpos, u8 remap, Ang16 rotation)
 {
     Ped* pPed = gPedPool_6787B8->Allocate();
@@ -816,7 +816,7 @@ Ped* PedManager::SpawnPedAt(Fix16 xpos, Fix16 ypos, Fix16 zpos, u8 remap, Ang16 
     return pPed;
 }
 
-MATCH_FUNC(0x470b00)
+// 0x470b00
 Ped* PedManager::SpawnDriver_470B00(Car_BC* pCar)
 {
     Ped* pNewPed = gPedPool_6787B8->Allocate();
@@ -837,7 +837,7 @@ Ped* PedManager::SpawnDriver_470B00(Car_BC* pCar)
 }
 
 // https://decomp.me/scratch/6AW5o
-MATCH_FUNC(0x470ba0)
+// 0x470ba0
 Ped* PedManager::SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang)
 {
     Ped* pNewPed = gPedPool_6787B8->Allocate();
@@ -880,7 +880,7 @@ Ped* PedManager::SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang)
     return pNewPed;
 }
 
-MATCH_FUNC(0x470cc0)
+// 0x470cc0
 Ped* PedManager::CreateDummyDriver_470CC0(Car_BC* pCar)
 {
     Ped* pNewPed = gPedPool_6787B8->Allocate();
@@ -900,7 +900,7 @@ Ped* PedManager::CreateDummyDriver_470CC0(Car_BC* pCar)
     return pNewPed;
 }
 
-MATCH_FUNC(0x470d60)
+// 0x470d60
 Ped* PedManager::SpawnRunAwayGuy_470D60()
 {
     Ped* pPed = gPedPool_6787B8->Allocate();
@@ -936,7 +936,7 @@ Ped* PedManager::SpawnRunAwayGuy_470D60()
 }
 
 // 9.6f 0x43DEB0
-MATCH_FUNC(0x470e30)
+// 0x470e30
 Ped* PedManager::SpawnTrainLeaver_470E30()
 {
     Ped* pPed = gPedPool_6787B8->Allocate();
@@ -971,7 +971,7 @@ Ped* PedManager::SpawnTrainLeaver_470E30()
     return pPed;
 }
 
-MATCH_FUNC(0x470f30)
+// 0x470f30
 Ped* PedManager::AllocatePed_470F30()
 {
     Ped* pNewPed = gPedPool_6787B8->Allocate();
@@ -979,7 +979,7 @@ Ped* PedManager::AllocatePed_470F30()
     return pNewPed;
 }
 
-MATCH_FUNC(0x470f90)
+// 0x470f90
 Ped* PedManager::ClonePed_470F90(Ped* pSrc)
 {
     Ped* pDst = gPedPool_6787B8->Allocate();
@@ -998,7 +998,7 @@ Ped* PedManager::ClonePed_470F90(Ped* pSrc)
     return pDst;
 }
 
-MATCH_FUNC(0x471060)
+// 0x471060
 void PedManager::DoIanTest_471060(u16 key)
 {
     switch (key)
@@ -1016,7 +1016,7 @@ void PedManager::DoIanTest_471060(u16 key)
     }
 }
 
-MATCH_FUNC(0x4710c0)
+// 0x4710c0
 Ped* PedManager::PedById(s32 pedId)
 {
     for (Ped* pPedIter = gPedPool_6787B8->GetFirstPed_435530(); pPedIter; pPedIter = pPedIter->mpNext)
@@ -1029,7 +1029,7 @@ Ped* PedManager::PedById(s32 pedId)
     return nullptr;
 }
 
-MATCH_FUNC(0x471110)
+// 0x471110
 PedPool::~PedPool()
 {
 }

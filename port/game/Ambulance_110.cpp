@@ -19,24 +19,24 @@ DEFINE_GLOBAL(Ambulance_110*, gAmbulance_110_6F70A8, 0x6F70A8);
 DEFINE_GLOBAL(class Ped*, gParamedicCrewPed_6F6D60, 0x6F6D60);
 DEFINE_GLOBAL_INIT(Fix16, gParamedicRunSpeed_6F6DD4, Fix16(0x1999, 0), 0x6F6DD4);
 
-MATCH_FUNC(0x4beab0)
+// 0x4beab0
 Ambulance_20::Ambulance_20()
 {
     field_10_patients.ClearList_420E90();
     ClearTask_4FA7D0();
 }
 
-MATCH_FUNC(0x4bead0)
+// 0x4bead0
 Ambulance_20::~Ambulance_20()
 {
 }
 
-MATCH_FUNC(0x4beae0)
+// 0x4beae0
 Ambulance_110::~Ambulance_110()
 {
 }
 
-MATCH_FUNC(0x4fa310)
+// 0x4fa310
 void Ambulance_110::init_4FA310()
 {
     field_0 = 1;
@@ -50,7 +50,7 @@ void Ambulance_110::init_4FA310()
     }
 }
 
-MATCH_FUNC(0x4fa330)
+// 0x4fa330
 bool Ambulance_110::HandlePedDeath_4FA330(Ped* pDeadPed)
 {
     for (u8 i = 0; i < 2; i++)
@@ -115,7 +115,7 @@ bool Ambulance_110::HandlePedDeath_4FA330(Ped* pDeadPed)
     return false;
 }
 
-MATCH_FUNC(0x4fa470)
+// 0x4fa470
 bool Ambulance_110::TryAddPatient_4FA470(Ped* pPed)
 {
     if (pPed->PedTypeIs_45EDE0(ped_type::player_2) || field_1_corpse_count >= 25)
@@ -131,7 +131,7 @@ bool Ambulance_110::TryAddPatient_4FA470(Ped* pPed)
 
 EXTERN_GLOBAL(Fix16, dword_6F6FC0);
 
-MATCH_FUNC(0x4fa4b0)
+// 0x4fa4b0
 Ambulance_20* Ambulance_110::AllocateTaskSlot_4FA4B0()
 {
     for (u8 i = 0; i < 2; i++)
@@ -144,7 +144,7 @@ Ambulance_20* Ambulance_110::AllocateTaskSlot_4FA4B0()
     return nullptr;
 }
 
-MATCH_FUNC(0x4fa500)
+// 0x4fa500
 void Ambulance_110::ProcessPatientQueue_4FA500()
 {
     u8 x, y, z;
@@ -234,7 +234,7 @@ void Ambulance_110::ProcessPatientQueue_4FA500()
     field_1_corpse_count--;
 }
 
-MATCH_FUNC(0x4fa790)
+// 0x4fa790
 void Ambulance_110::AmbulancesService_4FA790()
 {
     if (field_1_corpse_count > 0)
@@ -251,7 +251,7 @@ void Ambulance_110::AmbulancesService_4FA790()
     }
 }
 
-MATCH_FUNC(0x4fa7d0)
+// 0x4fa7d0
 void Ambulance_20::ClearTask_4FA7D0()
 {
     field_10_patients.ClearList_420E90();
@@ -268,14 +268,14 @@ void Ambulance_20::ClearTask_4FA7D0()
     field_1D_revive_ticks = 0;
 }
 
-MATCH_FUNC(0x4fa800)
+// 0x4fa800
 void Ambulance_20::AddPassenger_4FA800(Ped* pPed)
 {
     field_10_patients.AddPedToFront_471140(pPed);
     field_14_patient_count++;
 }
 
-MATCH_FUNC(0x4fa820)
+// 0x4fa820
 bool Ambulance_20::SpawnParamedicCrew_4FA820()
 {
     PedGroup* pGroup = PedGroup::New_4CB0D0();
@@ -338,7 +338,7 @@ bool Ambulance_20::SpawnParamedicCrew_4FA820()
     return true;
 }
 
-MATCH_FUNC(0x4fa9d0)
+// 0x4fa9d0
 void Ambulance_20::EvaluatePickupState_4FA9D0()
 {
     bool bUnk = false;
@@ -406,7 +406,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6F6FC0, Fix16(8), 0x6F6FC0);
 // Runs the paramedic crew (the leader, then each group member, in gParamedicCrewPed_6F6D60): pick up the
 // patients in field_10_patients one by one, revive them, then drive off. Sets field_1C_done when nobody had
 // anything left to do.
-MATCH_FUNC(0x4faac0)
+// 0x4faac0
 void Ambulance_20::HandleObjectiveState_4FAAC0()
 {
     u8 bBusy = 0;
@@ -767,7 +767,7 @@ void Ambulance_20::HandleObjectiveState_4FAAC0()
 }
 
 // near match https://decomp.me/scratch/cxgie
-MATCH_FUNC(0x4fb330)
+// 0x4fb330
 void Ambulance_20::UpdateState_4FB330()
 {
     bool bHandle = true;

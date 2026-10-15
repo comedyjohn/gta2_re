@@ -1,7 +1,7 @@
 #include "CreditsLine_6C.hpp"
 #include <cstring>
 
-MATCH_FUNC(0x483E30)
+// 0x483E30
 CreditsLine_6C::CreditsLine_6C() // 483E30
 {
     field_0_bLoaded = false;
@@ -11,7 +11,7 @@ CreditsLine_6C::CreditsLine_6C() // 483E30
     memset(field_8_text, 0, sizeof(field_8_text));
 }
 
-MATCH_FUNC(0x483E60)
+// 0x483E60
 CreditsLine_6C::~CreditsLine_6C() // 483E60
 {
 }

@@ -6,8 +6,8 @@
 class CreditsLine_6C
 {
   public:
-    EXPORT CreditsLine_6C(); // 483E30
-    EXPORT ~CreditsLine_6C(); // 483E60
+    CreditsLine_6C(); // 483E30
+    ~CreditsLine_6C(); // 483E60
 
     bool field_0_bLoaded;
     s16 field_2_unused; // set to 300 by LoadCredits_483F20, never read

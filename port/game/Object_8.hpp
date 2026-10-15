@@ -8,8 +8,8 @@ EXTERN_GLOBAL(u32, gObj8_dealloc_count_6F8DC0);
 class Object_8
 {
   public:
-    EXPORT Object_8();
-    EXPORT ~Object_8();
+    Object_8();
+    ~Object_8();
 
     inline void PoolAllocate()
     {

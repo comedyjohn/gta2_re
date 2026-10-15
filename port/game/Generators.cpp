@@ -6,7 +6,7 @@
 DEFINE_GLOBAL(GeneratorPool_14AC*, gGeneratorPool_14AC_67E5D0, 0x67E5D0);
 EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
 
-MATCH_FUNC(0x4C1A70)
+// 0x4C1A70
 void Generator_2C::Activate_4C1A70()
 {
     field_1E_kill_timer = -1;
@@ -23,7 +23,7 @@ void Generator_2C::Activate_4C1A70()
     }
 }
 
-MATCH_FUNC(0x4C1AB0)
+// 0x4C1AB0
 s32 Generator_2C::next_cycle_4C1AB0()
 {
     s32 result;
@@ -38,8 +38,8 @@ s32 Generator_2C::next_cycle_4C1AB0()
     return result + gpRng_67AB34->get_cur_rng_41CFE0();
 }
 
-MATCH_FUNC(0x4C1B10)
-EXPORT void Generator_2C::SpawnObject_4C1B10()
+// 0x4C1B10
+void Generator_2C::SpawnObject_4C1B10()
 {
     if (field_21 == 2)
     {
@@ -110,7 +110,7 @@ EXPORT void Generator_2C::SpawnObject_4C1B10()
     }
 }
 
-MATCH_FUNC(0x4c1c50)
+// 0x4c1c50
 void Generator_2C::Service_4C1C50()
 {
     if (gpRng_67AB34->get_cur_rng_41CFE0() >= field_18_cycle)
@@ -122,7 +122,7 @@ void Generator_2C::Service_4C1C50()
     }
 }
 
-MATCH_FUNC(0x4c1c70)
+// 0x4c1c70
 void Generator_2C::Init_4C1C70(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 generator_type, s16 min_delay, s16 max_delay)
 {
     field_4_x = x.mValue;
@@ -141,7 +141,7 @@ void Generator_2C::Init_4C1C70(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 generat
     field_21 = 1;
 }
 
-MATCH_FUNC(0x4c1cd0)
+// 0x4c1cd0
 void GeneratorPool_14AC::sub_4C1CD0()
 {
     s32 count = field_14A0_count;
@@ -173,7 +173,7 @@ void GeneratorPool_14AC::sub_4C1CD0()
     }
 }
 
-MATCH_FUNC(0x4c1d70)
+// 0x4c1d70
 void GeneratorPool_14AC::GeneratorsService_4C1D70()
 {
     s32 start_idx = field_14A8_count_d3 * (gpRng_67AB34->get_cur_rng_41CFE0() & 3);
@@ -191,7 +191,7 @@ void GeneratorPool_14AC::GeneratorsService_4C1D70()
     }
 }
 
-MATCH_FUNC(0x4c1dc0)
+// 0x4c1dc0
 Generator_2C* GeneratorPool_14AC::CreateGenerator_4C1DC0(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 type, s16 min_delay, s16 max_delay)
 {
     Generator_2C* pMaccies = &field_0_pool[field_14A0_count];
@@ -200,7 +200,7 @@ Generator_2C* GeneratorPool_14AC::CreateGenerator_4C1DC0(Fix16 x, Fix16 y, Fix16
     return pMaccies;
 }
 
-MATCH_FUNC(0x4c1e20)
+// 0x4c1e20
 GeneratorPool_14AC::GeneratorPool_14AC()
 {
     field_14A0_count = 0;

@@ -35,16 +35,16 @@ enum
 class EmergencyCrew_30
 {
   public:
-    EXPORT EmergencyCrew_30();
-    EXPORT ~EmergencyCrew_30();
-    EXPORT void Init_5CBC00();
-    EXPORT void ReInit_5CBC30();
-    EXPORT void RemovePed_5CBC40(Ped* pPed);
-    EXPORT bool IsLeaderAlive_5CBC60();
-    EXPORT bool ReplaceLeaderIfNeeded_5CBC90();
-    EXPORT void UpdateStateMachine_5CBD50();
-    EXPORT void CleanupExpiredEntities_5CC1C0();
-    EXPORT bool Service_5CC480();
+    EmergencyCrew_30();
+    ~EmergencyCrew_30();
+    void Init_5CBC00();
+    void ReInit_5CBC30();
+    void RemovePed_5CBC40(Ped* pPed);
+    bool IsLeaderAlive_5CBC60();
+    bool ReplaceLeaderIfNeeded_5CBC90();
+    void UpdateStateMachine_5CBD50();
+    void CleanupExpiredEntities_5CC1C0();
+    bool Service_5CC480();
     Car_BC* field_0_car;
     Ped* field_4_ped;
     PedGroup* field_8_group;
@@ -68,10 +68,10 @@ class EmergencyCrewPool_1E0
     {
         init_5CBB70();
     }
-    EXPORT ~EmergencyCrewPool_1E0();
-    EXPORT void init_5CBB70();
-    EXPORT EmergencyCrew_30* AllocateSlot_5CBB80();
-    EXPORT void ServiceAll_5CBBD0();
+    ~EmergencyCrewPool_1E0();
+    void init_5CBB70();
+    EmergencyCrew_30* AllocateSlot_5CBB80();
+    void ServiceAll_5CBBD0();
     EmergencyCrew_30 field_0_slots[10];
 };
 

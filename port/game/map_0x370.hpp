@@ -135,7 +135,7 @@ using gmp_column_word = u16*;
 
 struct gmp_compressed_map_32
 {
-    EXPORT void ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub);
+    void ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub);
 
     // 9.6f 0x4630B0
     gmp_compressed_map_32()
@@ -186,7 +186,7 @@ struct DmapInfoList
         field_320_max_idx = 0;
     }
 
-    EXPORT void AddOrUpdateDmapInfo_4E80E0(u8 x, u8 y, u32 column_idx);
+    void AddOrUpdateDmapInfo_4E80E0(u8 x, u8 y, u32 column_idx);
 
     gmp_dmap_info field_0_dmap_infos[100];
     s32 field_320_max_idx;
@@ -203,8 +203,8 @@ class gmp_map_zone
     u8 field_5_name_length;
     char_type field_6_name[2];
 
-    EXPORT s8 IsZoneVisibleToAnyPlayer_4DEF40();
-    EXPORT wchar_t* get_zone_str_4DEF00();
+    s8 IsZoneVisibleToAnyPlayer_4DEF40();
+    wchar_t* get_zone_str_4DEF00();
 
     // 9.6f 0x463020
     inline bool ContainsPoint_463020(u8 x, u8 y)
@@ -262,7 +262,7 @@ struct gmp_tile_animation
 
 struct gmp_map_slope
 {
-    EXPORT gmp_map_slope(u8 gradient_direction, u8 gradient_size, u8 gradient_level, Fix16 zpos_lower, Fix16 zpos_higher);
+    gmp_map_slope(u8 gradient_direction, u8 gradient_size, u8 gradient_level, Fix16 zpos_lower, Fix16 zpos_higher);
 
     gmp_map_slope()
     {
@@ -340,7 +340,7 @@ EXTERN_GLOBAL(Fix16, kGradientScaleSize8_6F6214);
 EXTERN_GLOBAL(Fix16, kFpZero_6F610C);
 extern Fix16 kFpOne_6F6110;
 EXTERN_GLOBAL(Ang16, word_6F603E);
-EXPORT Ang16 __stdcall ReturnAngleFromRoadDirection_4F7940(s32* road_direction);
+Ang16 ReturnAngleFromRoadDirection_4F7940(s32* road_direction);
 
 struct gmp_zone_list
 {
@@ -359,31 +359,31 @@ struct gmp_zone_list
 class Map_0x370
 {
   public:
-    EXPORT gmp_block_info* get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord);
+    gmp_block_info* get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord);
 
-    EXPORT gmp_map_zone* zone_by_name_4DEFD0(const char_type* pZoneName);
+    gmp_map_zone* zone_by_name_4DEFD0(const char_type* pZoneName);
 
-    EXPORT s32 zone_idx_by_name_4DF050(const char_type* pZoneName, BYTE zone_name_len);
+    s32 zone_idx_by_name_4DF050(const char_type* pZoneName, BYTE zone_name_len);
 
-    EXPORT gmp_map_zone* zone_by_type_bounded_4DF0F0(u8 zone_type);
+    gmp_map_zone* zone_by_type_bounded_4DF0F0(u8 zone_type);
 
-    EXPORT gmp_map_zone* first_zone_by_type_4DF1D0(u8 zone_type);
+    gmp_map_zone* first_zone_by_type_4DF1D0(u8 zone_type);
 
-    EXPORT gmp_map_zone* GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_type);
-    EXPORT gmp_map_zone* sub_4DF3E0(u8 xpos, u8 ypos, u8 zone_type);
+    gmp_map_zone* GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_type);
+    gmp_map_zone* sub_4DF3E0(u8 xpos, u8 ypos, u8 zone_type);
 
-    EXPORT gmp_map_zone* zone_by_pos_and_type_4DF4D0(u8 zone_x, u8 zone_y, u8 zone_type);
-    EXPORT gmp_map_zone* nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y);
+    gmp_map_zone* zone_by_pos_and_type_4DF4D0(u8 zone_x, u8 zone_y, u8 zone_type);
+    gmp_map_zone* nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y);
 
-    EXPORT gmp_map_zone* first_zone_by_pos_4DF6A0(u8 zone_x, u8 zone_y);
+    gmp_map_zone* first_zone_by_pos_4DF6A0(u8 zone_x, u8 zone_y);
 
-    EXPORT gmp_map_zone* next_zone_4DF770();
+    gmp_map_zone* next_zone_4DF770();
 
-    EXPORT gmp_zone_info* cur_zone_4DF840();
+    gmp_zone_info* cur_zone_4DF840();
 
-    EXPORT gmp_zone_info* GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y);
+    gmp_zone_info* GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y);
 
-    EXPORT void SetZoneInfo_4DF8C0(s32 zone_idx,
+    void SetZoneInfo_4DF8C0(s32 zone_idx,
                                             s16 car_density,
                                             s16 goodcar_ratio,
                                             s16 badcar_ratio,
@@ -396,91 +396,91 @@ class Map_0x370
                                             s16 gangchar_ratio,
                                             s16 policeped_ratio);
 
-    EXPORT gmp_zone_info* GetZoneInfo_4DF9A0(u16 zone_idx);
+    gmp_zone_info* GetZoneInfo_4DF9A0(u16 zone_idx);
 
-    EXPORT void SetZoneCarDensity_4DF9D0(u16 zone_idx, s16 value);
+    void SetZoneCarDensity_4DF9D0(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneGoodCarRatio_4DF9F0(u16 zone_idx, s16 value);
+    void SetZoneGoodCarRatio_4DF9F0(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneBadCarRatio_4DFA10(u16 zone_idx, s16 value);
+    void SetZoneBadCarRatio_4DFA10(u16 zone_idx, s16 value);
 
-    EXPORT void SetZonePoliceCarRatio_4DFA30(u16 zone_idx, s16 value);
+    void SetZonePoliceCarRatio_4DFA30(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneGangCarRatio_4DFA50(u16 zone_idx, s16 value);
+    void SetZoneGangCarRatio_4DFA50(u16 zone_idx, s16 value);
 
-    EXPORT void SetZonePedDensity_4DFA70(u16 zone_idx, s16 value);
+    void SetZonePedDensity_4DFA70(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneMuggerRatio_4DFA90(u16 zone_idx, s16 value);
+    void SetZoneMuggerRatio_4DFA90(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneCarThiefRatio_4DFAB0(u16 zone_idx, s16 value);
+    void SetZoneCarThiefRatio_4DFAB0(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneElvisRatio_4DFAD0(u16 zone_idx, s16 value);
+    void SetZoneElvisRatio_4DFAD0(u16 zone_idx, s16 value);
 
-    EXPORT void SetZoneGangCharRatio_4DFAF0(u16 zone_idx, s16 value);
+    void SetZoneGangCharRatio_4DFAF0(u16 zone_idx, s16 value);
 
-    EXPORT void SetZonePolicePedRatio_4DFB10(u16 zone_idx, s16 value);
+    void SetZonePolicePedRatio_4DFB10(u16 zone_idx, s16 value);
 
-    EXPORT gmp_map_zone* get_zone_4DFB30(u16 zone_idx);
+    gmp_map_zone* get_zone_4DFB30(u16 zone_idx);
 
-    EXPORT Gang_144* GetGangAtCoords_4DFB50(Fix16 x, Fix16 y);
+    Gang_144* GetGangAtCoords_4DFB50(Fix16 x, Fix16 y);
 
-    EXPORT void SpawnMapObjects_4DFB90();
-    EXPORT void alloc_zones_4DFCA0();
-    EXPORT void update_lights_4DFCD0();
+    void SpawnMapObjects_4DFB90();
+    void alloc_zones_4DFCA0();
+    void update_lights_4DFCD0();
 
-    EXPORT gmp_block_info* get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord);
+    gmp_block_info* get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord);
 
-    EXPORT gmp_block_info* GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z);
-    EXPORT gmp_block_info* GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 z_coord);
+    gmp_block_info* GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z);
+    gmp_block_info* GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 z_coord);
 
-    EXPORT DWORD GetLeftEdgeSpec_4DFF60(Fix16 x_coord, Fix16 y_coord, Fix16 z_coord);
+    DWORD GetLeftEdgeSpec_4DFF60(Fix16 x_coord, Fix16 y_coord, Fix16 z_coord);
 
-    EXPORT s32 GetTopEdgeSpec_4E0000(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
-    EXPORT s32 GetBlockSpec_4E00A0(Fix16 x, Fix16 y, Fix16 z);
+    s32 GetTopEdgeSpec_4E0000(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
+    s32 GetBlockSpec_4E00A0(Fix16 x, Fix16 y, Fix16 z);
 
     // 9.6f 0x49EBE0, inlined in 10.5; defined in CarPhysics_B0.cpp (ProcessGroundCollisionAndSurfaceType_55B970)
     inline u8 GetBlockSurfaceType_49EBE0(s32 x, s32 y, s32 z, u8* pGradientSize, u8* pGradientLevel);
-    EXPORT char_type sub_4E0110();
-    EXPORT char_type sub_4E0120();
-    EXPORT bool CanMoveOntoSlopeTile_4E0130(s32 x, s32 y, s32 z, s32 path_direction, u8* pSlopeZDelta, char_type bReportStepUp);
-    EXPORT char_type RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect);
-    EXPORT bool SpriteHitsDiagonalWall_4E1520(s32 z_pos);
-    EXPORT bool HasWallInArea_4E18A0(s32 x_min, s32 x_max, s32 y_min, s32 y_max, s32 z);
-    EXPORT bool sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tileY_max, s32 zLevel);
-    EXPORT char_type CanSpriteEnterTile_4E1E00(s32 regionLeft, s32 regionRight, s32 regionTop, s32 regionBottom, s32 tileX, s32 tileY, s32 zLevel);
-    EXPORT char_type CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y, s32 tile_z, Sprite* pSprite, s16 collision_mask);
-    EXPORT char_type sub_4E4630(Fix16 zpos_f16);
-    EXPORT bool sub_4E4770(Fix16 z_pos);
-    EXPORT char_type sub_4E4820(Fix16_Rect* pRect, u8 slope_type);
-    EXPORT void FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type block_type);
-    EXPORT static bool __stdcall IsSearchBlockOfType_4E4AC0(char_type block_type);
-    EXPORT bool CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* pBlock);
-    EXPORT gmp_block_info* FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z);
-    EXPORT gmp_block_info* FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z);
-    EXPORT gmp_block_info* FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z);
-    EXPORT Fix16 FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
-    EXPORT Fix16 sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
-    EXPORT Fix16 GetGroundZBelowCoord_4E4F40(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT Fix16 sub_4E5050(Fix16 x, Fix16 y, Fix16 z, bool& bFound);
-    EXPORT bool IsZOnGround_4E5170(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT char_type sub_4E52A0(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT bool CheckZCollisionAtCoord_4E5300(Fix16 x, Fix16 y, Fix16 z, Fix16 second_z);
-    EXPORT bool CanPlaceOilOrMine_4E5480(Fix16 x, Fix16 y, Fix16 z, Fix16 unk_z_coord, Fix16* found_z);
-    EXPORT char_type sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_1, Fix16 y_1, Fix16 z_1, Fix16 x_2, Fix16 y_2, Fix16 z_2);
-    EXPORT Fix16 FindGroundZForCoord_4E5B60(Fix16 x_pos, Fix16 y_pos);
-    EXPORT u8 UpdateZFromSlopeAtCoord_4E5BF0(Fix16 x_pos, Fix16 y_pos, Fix16& z_pos);
-    EXPORT char_type HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock, s32 direction, char_type bDefault);
-    EXPORT s32 GetArrowDirectionFromBlock_4E5FC0(gmp_block_info* pBlock, char_type bDontFlip);
-    EXPORT s16 sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bFlag);
-    EXPORT Fix16 FloorPlusOne_4E62B0(Fix16 value);
-    EXPORT gmp_block_info* FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z);
-    EXPORT gmp_block_info* FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z);
-    EXPORT Fix16 GetRailwayZBelowCoord_4E6400(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
-    EXPORT Fix16 GetRailwayZCoordAtXY_4E6510(Fix16 x, Fix16 y);
-    EXPORT void sub_4E65A0(Fix16 x, Fix16 y, Fix16* z_pos, char_type arrow_param, char_type bFlag);
-    EXPORT void sub_4E5D10(Fix16* pX, Fix16* pY, Fix16 dist, s32 direction);
-    EXPORT Fix16 sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle);
-    EXPORT Fix16 sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle);
+    char_type sub_4E0110();
+    char_type sub_4E0120();
+    bool CanMoveOntoSlopeTile_4E0130(s32 x, s32 y, s32 z, s32 path_direction, u8* pSlopeZDelta, char_type bReportStepUp);
+    char_type RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect);
+    bool SpriteHitsDiagonalWall_4E1520(s32 z_pos);
+    bool HasWallInArea_4E18A0(s32 x_min, s32 x_max, s32 y_min, s32 y_max, s32 z);
+    bool sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tileY_max, s32 zLevel);
+    char_type CanSpriteEnterTile_4E1E00(s32 regionLeft, s32 regionRight, s32 regionTop, s32 regionBottom, s32 tileX, s32 tileY, s32 zLevel);
+    char_type CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y, s32 tile_z, Sprite* pSprite, s16 collision_mask);
+    char_type sub_4E4630(Fix16 zpos_f16);
+    bool sub_4E4770(Fix16 z_pos);
+    char_type sub_4E4820(Fix16_Rect* pRect, u8 slope_type);
+    void FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type block_type);
+    static bool IsSearchBlockOfType_4E4AC0(char_type block_type);
+    bool CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* pBlock);
+    gmp_block_info* FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z);
+    gmp_block_info* FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z);
+    gmp_block_info* FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z);
+    Fix16 FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
+    Fix16 sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
+    Fix16 GetGroundZBelowCoord_4E4F40(Fix16 x, Fix16 y, Fix16 z);
+    Fix16 sub_4E5050(Fix16 x, Fix16 y, Fix16 z, bool& bFound);
+    bool IsZOnGround_4E5170(Fix16 x, Fix16 y, Fix16 z);
+    char_type sub_4E52A0(Fix16 x, Fix16 y, Fix16 z);
+    bool CheckZCollisionAtCoord_4E5300(Fix16 x, Fix16 y, Fix16 z, Fix16 second_z);
+    bool CanPlaceOilOrMine_4E5480(Fix16 x, Fix16 y, Fix16 z, Fix16 unk_z_coord, Fix16* found_z);
+    char_type sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_1, Fix16 y_1, Fix16 z_1, Fix16 x_2, Fix16 y_2, Fix16 z_2);
+    Fix16 FindGroundZForCoord_4E5B60(Fix16 x_pos, Fix16 y_pos);
+    u8 UpdateZFromSlopeAtCoord_4E5BF0(Fix16 x_pos, Fix16 y_pos, Fix16& z_pos);
+    char_type HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock, s32 direction, char_type bDefault);
+    s32 GetArrowDirectionFromBlock_4E5FC0(gmp_block_info* pBlock, char_type bDontFlip);
+    s16 sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bFlag);
+    Fix16 FloorPlusOne_4E62B0(Fix16 value);
+    gmp_block_info* FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z);
+    gmp_block_info* FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z);
+    Fix16 GetRailwayZBelowCoord_4E6400(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
+    Fix16 GetRailwayZCoordAtXY_4E6510(Fix16 x, Fix16 y);
+    void sub_4E65A0(Fix16 x, Fix16 y, Fix16* z_pos, char_type arrow_param, char_type bFlag);
+    void sub_4E5D10(Fix16* pX, Fix16* pY, Fix16 dist, s32 direction);
+    Fix16 sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle);
+    Fix16 sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle);
 
     // The block under (x, y, z), or the one at z when the one under is a lid-less "air" block
     inline gmp_block_info* GetRoadBlockAt_4E6660(Fix16& x, Fix16& y, Fix16& z)
@@ -540,55 +540,55 @@ class Map_0x370
         }
     }
 
-    EXPORT s32 sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist);
-    EXPORT s32 sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist);
-    EXPORT char_type FindFirstPavementCoord_4E7E90(u8* pX, char_type* pY);
-    EXPORT char_type CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT s32 AddBlock_4E8140(gmp_block_info* pBlockInfo);
-    EXPORT s32 CloneOriginalBlock_4E8180(u32 read_block_idx);
-    EXPORT s32 CloneOriginalColumn_4E81D0(u32 column_idx);
-    EXPORT s32 CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z);
-    EXPORT s32 sub_4E8370(u32 column_idx, s32 z, char_type do_drop);
-    EXPORT void ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u16 info_value);
-    EXPORT void AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockData);
-    EXPORT void RemoveBlock_4E8940(s32 x_pos, s32 y_pos, s32 offset, char_type do_drop);
-    EXPORT void LowerColumn_4E8A10(s32 x_pos, s32 y_pos);
-    EXPORT void LowerLevel_4E8B70(s32 x_min, s32 x_max, s32 y_min, s32 y_max);
-    EXPORT void OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes, u32 obj_bytes);
-    EXPORT void GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
+    s32 sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist);
+    s32 sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist);
+    char_type FindFirstPavementCoord_4E7E90(u8* pX, char_type* pY);
+    char_type CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z);
+    s32 AddBlock_4E8140(gmp_block_info* pBlockInfo);
+    s32 CloneOriginalBlock_4E8180(u32 read_block_idx);
+    s32 CloneOriginalColumn_4E81D0(u32 column_idx);
+    s32 CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z);
+    s32 sub_4E8370(u32 column_idx, s32 z, char_type do_drop);
+    void ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u16 info_value);
+    void AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockData);
+    void RemoveBlock_4E8940(s32 x_pos, s32 y_pos, s32 offset, char_type do_drop);
+    void LowerColumn_4E8A10(s32 x_pos, s32 y_pos);
+    void LowerLevel_4E8B70(s32 x_min, s32 x_max, s32 y_min, s32 y_max);
+    void OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes, u32 obj_bytes);
+    void GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
                            u32* outColumnBytes,
                            gmp_block_info** outBlockPtr,
                            u32* outBlockBytes,
                            DmapInfoList** outSubObj,
                            s32* outSubObjBytes);
 
-    EXPORT void do_process_loaded_zone_data_4E8E30();
+    void do_process_loaded_zone_data_4E8E30();
 
-    EXPORT void build_zone_list_4E90E0(u32 chunk_size);
+    void build_zone_list_4E90E0(u32 chunk_size);
 
-    EXPORT void AddTileAnimations_4E9160(s32 size);
+    void AddTileAnimations_4E9160(s32 size);
 
-    EXPORT void load_mobj_4E91A0(size_t len);
+    void load_mobj_4E91A0(size_t len);
 
-    EXPORT void load_lght_4E9200(size_t size);
+    void load_lght_4E9200(size_t size);
 
-    EXPORT void load_zone_4E9250(size_t size);
+    void load_zone_4E9250(size_t size);
 
-    EXPORT void load_anim_4E9280(size_t size);
+    void load_anim_4E9280(size_t size);
 
-    EXPORT void load_dmap_4E92B0(u32 len);
+    void load_dmap_4E92B0(u32 len);
 
-    EXPORT void load_rgen_4E94A0();
+    void load_rgen_4E94A0();
 
-    EXPORT void load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen);
+    void load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen);
 
-    EXPORT void process_loaded_zone_data_4E95A0();
+    void process_loaded_zone_data_4E95A0();
 
-    EXPORT void LoadMap_4E95B0(const char_type* pGmpFileName);
+    void LoadMap_4E95B0(const char_type* pGmpFileName);
 
-    EXPORT Map_0x370();
+    Map_0x370();
 
-    EXPORT ~Map_0x370();
+    ~Map_0x370();
 
     inline bool IsWaterBlockAt_4B9F40(s32 x, s32 y, s32 z)
     {
@@ -839,7 +839,7 @@ EXTERN_GLOBAL(s32, gSpriteGrid_left_6F5FD4);
 
 EXTERN_GLOBAL(s32, gSpriteGrid_right_6F5B80);
 
-EXPORT void Init_gmp_slopes_array();
+void Init_gmp_slopes_array();
 
 static inline u8 get_slope_bits(u8& slope_byte) // slope_byte but with its first 2 bits cleared
 {

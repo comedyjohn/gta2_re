@@ -66,7 +66,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FD2F4, Fix16(0x1333, 0), 0x6FD2F4);
 EXTERN_GLOBAL(Fix16, dword_6FD2E8);
 EXTERN_GLOBAL(Fix16, dword_6FD46C);
 
-MATCH_FUNC(0x5408f0)
+// 0x5408f0
 Explosion_30::Explosion_30()
 {
     this->field_C_angle = 0;
@@ -88,7 +88,7 @@ Explosion_30::Explosion_30()
     this->field_2C_owner_ped_id = 0;
 }
 
-MATCH_FUNC(0x540a10)
+// 0x540a10
 Explosion_30::~Explosion_30()
 {
     field_14_pObj2C = nullptr;
@@ -96,7 +96,7 @@ Explosion_30::~Explosion_30()
 }
 
 // No callers. Every few frames, a particle thrown in a random diagonal direction from the attached object
-MATCH_FUNC(0x540A40)
+// 0x540A40
 void Explosion_30::EmitRandomDiagonalParticle_540A40()
 {
     if (this->field_18_particle_cooldown == 0)
@@ -163,7 +163,7 @@ void Explosion_30::EmitRandomDiagonalParticle_540A40()
     }
 }
 
-MATCH_FUNC(0x540d30)
+// 0x540d30
 void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
@@ -206,7 +206,7 @@ void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
 }
 
 // 9.6f 0x48E5F0
-MATCH_FUNC(0x540f90)
+// 0x540f90
 void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
@@ -248,7 +248,7 @@ void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
     }
 }
 
-MATCH_FUNC(0x5411e0)
+// 0x5411e0
 void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
@@ -290,7 +290,7 @@ void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
     }
 }
 
-MATCH_FUNC(0x541430)
+// 0x541430
 void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
 {
 
@@ -338,7 +338,7 @@ void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
     }
 }
 
-MATCH_FUNC(0x541680)
+// 0x541680
 Fix16 Explosion_30::GetBlastRadius_541680()
 {
     Fix16 radius;
@@ -368,7 +368,7 @@ Fix16 Explosion_30::GetBlastRadius_541680()
 }
 
 
-MATCH_FUNC(0x541710)
+// 0x541710
 Fix16 Explosion_30::GetBlastHeight_541710()
 {
     Fix16 height;
@@ -391,7 +391,7 @@ Fix16 Explosion_30::GetBlastHeight_541710()
     return height;
 }
 
-MATCH_FUNC(0x541760)
+// 0x541760
 void Explosion_30::SpawnFlashParticle_541760()
 {
     if (field_10_type != explosion_type::small_18 && field_10_type != explosion_type::no_ring_32)
@@ -414,7 +414,7 @@ void Explosion_30::SpawnFlashParticle_541760()
     }
 }
 
-MATCH_FUNC(0x541850)
+// 0x541850
 void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
 {
     SpriteList_4 collision_list;
@@ -563,7 +563,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
 }
 
 // 9.6f 0x48EB00
-MATCH_FUNC(0x541d60)
+// 0x541d60
 void Explosion_30::EmitExplosion_18_33_541D60()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
@@ -616,7 +616,7 @@ void Explosion_30::EmitExplosion_18_33_541D60()
     }
 }
 
-MATCH_FUNC(0x542060)
+// 0x542060
 void Explosion_30::EmitExplosion_19_32_542060()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
@@ -665,7 +665,7 @@ void Explosion_30::EmitExplosion_19_32_542060()
     }
 }
 
-MATCH_FUNC(0x542340)
+// 0x542340
 void Explosion_30::EmitExplosion_20_542340()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
@@ -712,7 +712,7 @@ void Explosion_30::EmitExplosion_20_542340()
     }
 }
 
-MATCH_FUNC(0x542790)
+// 0x542790
 void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
 {
     bool isOnScreen = true;
@@ -818,7 +818,7 @@ void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
     }
 }
 
-MATCH_FUNC(0x542e30)
+// 0x542e30
 void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
 {
     Sprite* pSprite = this->field_14_pObj2C->field_4;
@@ -942,7 +942,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
     }
 }
 
-MATCH_FUNC(0x5434a0)
+// 0x5434a0
 char_type Explosion_30::Update_5434A0(Fix16 speed, Ang16 ang)
 {
     u16 timer = this->field_1A_timer;
@@ -1004,7 +1004,7 @@ char_type Explosion_30::Update_5434A0(Fix16 speed, Ang16 ang)
     return 0;
 }
 
-MATCH_FUNC(0x5435d0)
+// 0x5435d0
 bool Explosion_30::IsFireType_5435D0()
 {
     switch (field_10_type)
@@ -1021,7 +1021,7 @@ bool Explosion_30::IsFireType_5435D0()
     }
 }
 
-MATCH_FUNC(0x543610)
+// 0x543610
 void Explosion_30::Release_543610()
 {
     this->field_6_id = 0;
@@ -1035,7 +1035,7 @@ void Explosion_30::Release_543610()
     }
 }
 
-MATCH_FUNC(0x543650)
+// 0x543650
 void Explosion_30::Init_543650()
 {
     this->field_10_type = 0;
@@ -1048,7 +1048,7 @@ void Explosion_30::Init_543650()
     this->field_0_bIn20Pool = 0;
 }
 
-MATCH_FUNC(0x543680)
+// 0x543680
 void Explosion_30::SetObject_543680(Object_2C* pObj)
 {
     this->field_14_pObj2C = pObj;
@@ -1059,7 +1059,7 @@ void Explosion_30::SetObject_543680(Object_2C* pObj)
 // The early exit returns the freed index (eax), the fall-through path returns nothing like the original.
 #pragma warning(push)
 #pragma warning(disable : 4715) // not all control paths return a value
-MATCH_FUNC(0x543690)
+// 0x543690
 s32 ExplosionPool_7A8::FreeLowestPriority_543690()
 {
     u8 lowest_priority = 99;
@@ -1190,7 +1190,7 @@ s32 ExplosionPool_7A8::FreeLowestPriority_543690()
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x543800)
+// 0x543800
 Explosion_30* ExplosionPool_7A8::Allocate_543800()
 {
     // 9.6f has the init block twice, 10.5 merges both into one block. Indexing field_0_explosions at each
@@ -1229,7 +1229,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
     return nullptr;
 }
 
-MATCH_FUNC(0x5438b0)
+// 0x5438b0
 ExplosionPool_7A8::ExplosionPool_7A8()
 {
     for (u8 i = 0; i < GTA2_COUNTOF(field_0_explosions); i++)
@@ -1241,12 +1241,12 @@ ExplosionPool_7A8::ExplosionPool_7A8()
     gParticleInstCount_6FD5F4 = 0;
 }
 
-MATCH_FUNC(0x5438f0)
+// 0x5438f0
 ExplosionPool_7A8::~ExplosionPool_7A8()
 {
 }
 
-MATCH_FUNC(0x543900)
+// 0x543900
 Explosion_30* ExplosionPool_3D4::Allocate_543900()
 {
     for (u8 idx = 0; idx < GTA2_COUNTOF(field_0_explosions); idx++)
@@ -1265,7 +1265,7 @@ Explosion_30* ExplosionPool_3D4::Allocate_543900()
     return nullptr;
 }
 
-MATCH_FUNC(0x543980)
+// 0x543980
 ExplosionPool_3D4::ExplosionPool_3D4()
 {
     for (u8 i = 0; i < GTA2_COUNTOF(field_3C0_bUsed); i++)
@@ -1276,7 +1276,7 @@ ExplosionPool_3D4::ExplosionPool_3D4()
     gParticleInstCount_6FD5F4 = 0;
 }
 
-MATCH_FUNC(0x5439c0)
+// 0x5439c0
 ExplosionPool_3D4::~ExplosionPool_3D4()
 {
 }

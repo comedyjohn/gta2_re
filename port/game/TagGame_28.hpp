@@ -10,10 +10,10 @@ class Ped;
 class TagGame_28
 {
   public:
-    EXPORT void Init_516560();
-    EXPORT void SetNewFugitive_516590(Player* pNewFugitive);
-    EXPORT void ExecuteGamemodeTick_516660();
-    EXPORT void UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pPlayer_killer);
+    void Init_516560();
+    void SetNewFugitive_516590(Player* pNewFugitive);
+    void ExecuteGamemodeTick_516660();
+    void UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pPlayer_killer);
 
     // 9.6f 0x434B20
     inline bool IsTagGame_434B20()

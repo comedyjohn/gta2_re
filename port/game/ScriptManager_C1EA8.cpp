@@ -25,7 +25,7 @@ DEFINE_GLOBAL_INIT(u8, gbAllowMiss2Logging_6212EC, 1, 0x6212EC);
 //Car_BC* gStoredCar_6F7560;
 //s32 gStoredCarId_6F78B4;
 
-MATCH_FUNC(0x503080)
+// 0x503080
 str_table_entry* ScriptManager_C1EA8::FindStringById_503080(s16 stringId)
 {
     u16 idx = 0;
@@ -42,7 +42,7 @@ str_table_entry* ScriptManager_C1EA8::FindStringById_503080(s16 stringId)
     return nullptr;
 }
 
-MATCH_FUNC(0x5030b0)
+// 0x5030b0
 str_table_entry* ScriptManager_C1EA8::StrEntryByString_5030B0(char_type* strToFind)
 {
     u16 idx = 0;
@@ -63,7 +63,7 @@ EXTERN_GLOBAL_ARRAY(u8, kDecidePowerupGenTypes_6212F0, 19);
 
 // Sets the generator type for `car_model` from the script's car list, or type 0x41 when it isn't
 // in the list. Reads the global rather than `this`.
-MATCH_FUNC(0x511A70)
+// 0x511A70
 void ScriptManager_C1EA8::SetGeneratorTypeForCar_511A70(s32 car_model, Generator_2C* pGen)
 {
     u8* pList = (u8*)gScriptManager_6F8060->field_340_car_list;
@@ -95,7 +95,7 @@ void ScriptManager_C1EA8::SetGeneratorTypeForCar_511A70(s32 car_model, Generator
     }
 }
 
-MATCH_FUNC(0x511b10)
+// 0x511b10
 char_type ScriptManager_C1EA8::AddCranePowerupTrigger_511B10(s16 idx)
 {
     SCR_DECLARE_CRANE_POWERUP* pCmd = (SCR_DECLARE_CRANE_POWERUP*)GetBasePointer_512770(idx);
@@ -110,7 +110,7 @@ char_type ScriptManager_C1EA8::AddCranePowerupTrigger_511B10(s16 idx)
                                        kFpHalf_6F75F0);
 }
 
-MATCH_FUNC(0x511b90)
+// 0x511b90
 void ScriptManager_C1EA8::SaveScriptCounters_511B90()
 {
     u16 saved_counter_count = 0;
@@ -140,7 +140,7 @@ void ScriptManager_C1EA8::SaveScriptCounters_511B90()
     }
 }
 
-MATCH_FUNC(0x511c30)
+// 0x511c30
 void ScriptManager_C1EA8::LoadScriptCounters_511C30()
 {
     for (u16 saved_counter_idx = 0; saved_counter_idx < 300; saved_counter_idx++)
@@ -154,7 +154,7 @@ void ScriptManager_C1EA8::LoadScriptCounters_511C30()
     }
 }
 
-MATCH_FUNC(0x511C60)
+// 0x511C60
 void ScriptManager_C1EA8::RestoreAnsweredPhones_511C60()
 {
     for (char_type bit = 0; bit < 32; bit++)
@@ -168,7 +168,7 @@ void ScriptManager_C1EA8::RestoreAnsweredPhones_511C60()
     }
 }
 
-MATCH_FUNC(0x511d40)
+// 0x511d40
 void ScriptManager_C1EA8::SaveMapInfo_511D40()
 {
     strcpy(gGameSave_6F78C8.field_0_map_name, gGameSession_67E8E0.GetMapName_4C5940());
@@ -182,7 +182,7 @@ void ScriptManager_C1EA8::SaveMapInfo_511D40()
     gGameSave_6F78C8.field_4D_bonus_stage = gGameSession_67E8E0.IsBonusStage_4C59A0();
 }
 
-MATCH_FUNC(0x511e10)
+// 0x511e10
 void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 {
     gmp_column_word* pColData;
@@ -249,7 +249,7 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
     }
 }
 
-MATCH_FUNC(0x511f80)
+// 0x511f80
 void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
 {
     u32 mapSubLen;
@@ -296,7 +296,7 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
     field_C1E2C_bLoadedFromSave = true;
 }
 
-MATCH_FUNC(0x5120C0)
+// 0x5120C0
 miss2_0x11C* ScriptManager_C1EA8::SpawnThread_5120C0(s16 start_cmd, char_type bFlag)
 {
     miss2_0x11C* pThread = miss2_0x11C_Pool_6F8064->Allocate_4767A0();
@@ -304,7 +304,7 @@ miss2_0x11C* ScriptManager_C1EA8::SpawnThread_5120C0(s16 start_cmd, char_type bF
     return pThread;
 }
 
-MATCH_FUNC(0x512100)
+// 0x512100
 SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 startOff)
 {
     u16 idx;
@@ -327,7 +327,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
     return nullptr;
 }
 
-MATCH_FUNC(0x512160)
+// 0x512160
 void ScriptManager_C1EA8::Update_512160()
 {
     if (!bSkip_mission_67D4E5)
@@ -349,7 +349,7 @@ void ScriptManager_C1EA8::Update_512160()
 
 // https://decomp.me/scratch/W4gXh
 // See docs/match_attempts.md
-MATCH_FUNC(0x5121E0)
+// 0x5121E0
 void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
 {
     u32 total_str_length = 0;
@@ -390,7 +390,7 @@ void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
     field_13350_pStringTbl->field_0_string_count = str_count;
 }
 
-MATCH_FUNC(0x5122D0)
+// 0x5122D0
 void ScriptManager_C1EA8::GetScrFileName_5122D0()
 {
     const char_type* pSlashPos = strrchr(field_35C_full_scr_file_name, '\\');
@@ -413,7 +413,7 @@ void ScriptManager_C1EA8::GetScrFileName_5122D0()
     }
 }
 
-MATCH_FUNC(0x512330)
+// 0x512330
 void ScriptManager_C1EA8::Load_512330(const char_type* pScrName)
 {
     if (!bSkip_mission_67D4E5)
@@ -437,7 +437,7 @@ void ScriptManager_C1EA8::Load_512330(const char_type* pScrName)
     }
 }
 
-MATCH_FUNC(0x512400)
+// 0x512400
 u16 ScriptManager_C1EA8::LoadMissionScript_512400(const char_type* String1, u16* pStartCmd)
 {
     u16 Buffer = 0;
@@ -471,7 +471,7 @@ u16 ScriptManager_C1EA8::LoadMissionScript_512400(const char_type* String1, u16*
     return Buffer;
 }
 
-MATCH_FUNC(0x5125F0)
+// 0x5125F0
 void ScriptManager_C1EA8::LoadSubScripts_5125F0()
 {
     u32 Buffer;
@@ -513,7 +513,7 @@ void ScriptManager_C1EA8::LoadSubScripts_5125F0()
     }
 }
 
-MATCH_FUNC(0x512770)
+// 0x512770
 SCR_CMD_HEADER* ScriptManager_C1EA8::GetBasePointer_512770(u16 idx)
 {
     if (!field_46C_base_pointers[idx])
@@ -523,7 +523,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::GetBasePointer_512770(u16 idx)
     return (SCR_CMD_HEADER*)&field_334C_script_data[field_46C_base_pointers[idx]];
 }
 
-MATCH_FUNC(0x5127a0)
+// 0x5127a0
 void ScriptManager_C1EA8::ExecuteScriptThreads_5127A0()
 {
     if (!bSkip_mission_67D4E5)
@@ -541,7 +541,7 @@ void ScriptManager_C1EA8::ExecuteScriptThreads_5127A0()
     gCarManager_6C_677930->field_5C_model_check_destroyed = 0;
 }
 
-MATCH_FUNC(0x5128a0)
+// 0x5128a0
 ThreadTrigger_C* ScriptManager_C1EA8::FindCarThread_5128A0(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pThread = &field_4_car_triggers[0];
@@ -556,7 +556,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindCarThread_5128A0(s32 ped_id, s32 obj_f
     return nullptr;
 }
 
-MATCH_FUNC(0x5128d0)
+// 0x5128d0
 void ScriptManager_C1EA8::AddCarThread_5128D0(s32 ped_id, s32 obj_f14, u16 cmd_line)
 {
     ThreadTrigger_C* pHeader = &field_4_car_triggers[0];
@@ -575,7 +575,7 @@ void ScriptManager_C1EA8::AddCarThread_5128D0(s32 ped_id, s32 obj_f14, u16 cmd_l
     ++field_0_car_trigger_count;
 }
 
-MATCH_FUNC(0x512910)
+// 0x512910
 bool ScriptManager_C1EA8::TriggerCarThread_512910(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pThread = ScriptManager_C1EA8::FindCarThread_5128A0(ped_id, obj_f14);
@@ -597,7 +597,7 @@ bool ScriptManager_C1EA8::TriggerCarThread_512910(s32 ped_id, s32 obj_f14)
     return false;
 }
 
-MATCH_FUNC(0x512980)
+// 0x512980
 ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThread_512980(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pHeader = &field_188_phone_triggers[0];
@@ -612,7 +612,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThread_512980(s32 ped_id, s32 obj
     return nullptr;
 }
 
-MATCH_FUNC(0x5129b0)
+// 0x5129b0
 void ScriptManager_C1EA8::AddPhoneThread_5129B0(s32 ped_id, s32 obj_f14, u16 cmd_line)
 {
     ThreadTrigger_C* thread = &field_188_phone_triggers[0];
@@ -626,7 +626,7 @@ void ScriptManager_C1EA8::AddPhoneThread_5129B0(s32 ped_id, s32 obj_f14, u16 cmd
     field_184_phone_trigger_count++;
 }
 
-MATCH_FUNC(0x5129f0)
+// 0x5129f0
 bool ScriptManager_C1EA8::AnswerPhone_5129F0(s32 ped_idx, s32 phone_idx)
 {
     ThreadTrigger_C* pThrdHeader = ScriptManager_C1EA8::FindPhoneThread_512980(ped_idx, phone_idx);
@@ -655,7 +655,7 @@ bool ScriptManager_C1EA8::AnswerPhone_5129F0(s32 ped_idx, s32 phone_idx)
     return false;
 }
 
-MATCH_FUNC(0x512a70)
+// 0x512a70
 ThreadTrigger_C* ScriptManager_C1EA8::RemovePhoneThread_512A70(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pHeader = ScriptManager_C1EA8::FindPhoneThread_512980(ped_id, obj_f14);
@@ -669,7 +669,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::RemovePhoneThread_512A70(s32 ped_id, s32 o
     return pHeader;
 }
 
-MATCH_FUNC(0x512aa0)
+// 0x512aa0
 ThreadTrigger_C* ScriptManager_C1EA8::RemovePhoneThreadByObjId_512AA0(s32 obj_f14)
 {
     ThreadTrigger_C* pThrHeader = ScriptManager_C1EA8::FindPhoneThreadByObjId_512AD0(obj_f14);
@@ -680,7 +680,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::RemovePhoneThreadByObjId_512AA0(s32 obj_f1
     return pThrHeader;
 }
 
-MATCH_FUNC(0x512ad0)
+// 0x512ad0
 ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThreadByObjId_512AD0(s32 obj_f14)
 {
     ThreadTrigger_C* pHeader = &field_188_phone_triggers[0];
@@ -695,7 +695,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThreadByObjId_512AD0(s32 obj_f14)
     return nullptr;
 }
 
-MATCH_FUNC(0x512af0)
+// 0x512af0
 char_type ScriptManager_C1EA8::TestAndRecordWeaponHit_512AF0(s32 id, char_type weapon_idx, char_type bUnk)
 {
     WeaponCheckTable* pFree = nullptr;
@@ -747,7 +747,7 @@ char_type ScriptManager_C1EA8::TestAndRecordWeaponHit_512AF0(s32 id, char_type w
     return 0;
 }
 
-MATCH_FUNC(0x512ba0)
+// 0x512ba0
 void ScriptManager_C1EA8::ClearWeaponHitFlag_512BA0(s32 id, char_type bUnk)
 {
     WeaponCheckTable* pTable = &field_27C_weapon_check_table[0];
@@ -781,7 +781,7 @@ void ScriptManager_C1EA8::ClearWeaponHitFlag_512BA0(s32 id, char_type bUnk)
 }
 
 // https://decomp.me/scratch/r6LhX
-MATCH_FUNC(0x512c00)
+// 0x512c00
 void ScriptManager_C1EA8::RecordWeaponHit_512C00(s32 entity_id, s32 projectile_model, char_type bUnk)
 {
     WeaponCheckTable* pTable = &field_27C_weapon_check_table[0];
@@ -817,7 +817,7 @@ void ScriptManager_C1EA8::RecordWeaponHit_512C00(s32 entity_id, s32 projectile_m
     }
 }
 
-MATCH_FUNC(0x512c70)
+// 0x512c70
 bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_idx, char_type bUnk)
 {
     WeaponCheckTable* pTable = &field_27C_weapon_check_table[0];
@@ -849,7 +849,7 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
 }
 
 // https://decomp.me/scratch/qh4EW
-MATCH_FUNC(0x512ce0)
+// 0x512ce0
 ScriptManager_C1EA8::ScriptManager_C1EA8()
 {
     field_13350_pStringTbl = nullptr;
@@ -929,7 +929,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     gStoredCarId_6F78B4 = 0;
 }
 
-MATCH_FUNC(0x5130e0)
+// 0x5130e0
 ScriptManager_C1EA8::~ScriptManager_C1EA8()
 {
     if (miss2_0x11C_Pool_6F8064)

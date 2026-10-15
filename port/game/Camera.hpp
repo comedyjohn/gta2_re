@@ -52,36 +52,36 @@ class Camera_0xBC
         return field_34_target_ped;
     }
 
-    EXPORT bool IsSpriteTheCameraSubject_4355D0(Sprite* pSprite);
-    EXPORT char_type IsSpriteInView_435630(Sprite* pSprite, s32 wide_view);
-    EXPORT void SavePrevCamPos_4357B0();
-    EXPORT void IncreaseElevation_4357F0();
-    EXPORT void DecreaseElevation_435810();
-    EXPORT void ReturnToDefaultZoom_435830();
-    EXPORT void ClampTargetZ_435840();
-    EXPORT void ApplyMovementDeltaFrom_435860(Camera_0xBC* pCamera);
-    EXPORT Ang16 ComputeTargetFacingAngle_4358D0();
-    EXPORT Fix16 ReturnOwnerVelocity_435A20();
-    EXPORT s32 IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z);
-    EXPORT void UpdateBoundaries_435B90();
-    EXPORT void MoveTarget_435D20(char_type move_north, char_type move_south, char_type move_west, char_type move_east, char_type zoom_in, char_type zoom_out);
-    EXPORT void ResetCameraSmoothing_435DD0();
-    EXPORT void AccumulateSuspicionOnDriver_435F90(Car_BC* pCar);
-    EXPORT void Update_435FF0();
-    EXPORT void RefreshBoundaries_436110();
-    EXPORT void SetShake_436120(Fix16 amount);
-    EXPORT void ApplyShake_436140();
-    EXPORT void SetScreenSize_4361B0(u32 width, u32 height);
-    EXPORT void ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX, Fix16* pOutY, Fix16* pOutZ);
-    EXPORT void UpdateFollowCarCamera_4364A0(Car_BC* pCar);
-    EXPORT void UpdateFollowPedCamera_436540(Ped* pPed);
-    EXPORT void HandlePanning_436710(char_type forward_gas_on, char_type foot_brake_on, char_type left_on, char_type right_on);
-    EXPORT void ResetPanning_436830();
-    EXPORT void ApplyZOffsetToScreenPosition_436860(Ped* pPed, Fix16& x_pos, Fix16& y_pos, Fix16 z_pos);
-    EXPORT Camera_0xBC(); // 4368E0
-    EXPORT ~Camera_0xBC(); // empty 4369E0
-    EXPORT void SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom);
-    EXPORT bool IsPointInBoundaries_58CF10(Fix16 x, Fix16 y);
+    bool IsSpriteTheCameraSubject_4355D0(Sprite* pSprite);
+    char_type IsSpriteInView_435630(Sprite* pSprite, s32 wide_view);
+    void SavePrevCamPos_4357B0();
+    void IncreaseElevation_4357F0();
+    void DecreaseElevation_435810();
+    void ReturnToDefaultZoom_435830();
+    void ClampTargetZ_435840();
+    void ApplyMovementDeltaFrom_435860(Camera_0xBC* pCamera);
+    Ang16 ComputeTargetFacingAngle_4358D0();
+    Fix16 ReturnOwnerVelocity_435A20();
+    s32 IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z);
+    void UpdateBoundaries_435B90();
+    void MoveTarget_435D20(char_type move_north, char_type move_south, char_type move_west, char_type move_east, char_type zoom_in, char_type zoom_out);
+    void ResetCameraSmoothing_435DD0();
+    void AccumulateSuspicionOnDriver_435F90(Car_BC* pCar);
+    void Update_435FF0();
+    void RefreshBoundaries_436110();
+    void SetShake_436120(Fix16 amount);
+    void ApplyShake_436140();
+    void SetScreenSize_4361B0(u32 width, u32 height);
+    void ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX, Fix16* pOutY, Fix16* pOutZ);
+    void UpdateFollowCarCamera_4364A0(Car_BC* pCar);
+    void UpdateFollowPedCamera_436540(Ped* pPed);
+    void HandlePanning_436710(char_type forward_gas_on, char_type foot_brake_on, char_type left_on, char_type right_on);
+    void ResetPanning_436830();
+    void ApplyZOffsetToScreenPosition_436860(Ped* pPed, Fix16& x_pos, Fix16& y_pos, Fix16 z_pos);
+    Camera_0xBC(); // 4368E0
+    ~Camera_0xBC(); // empty 4369E0
+    void SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom);
+    bool IsPointInBoundaries_58CF10(Fix16 x, Fix16 y);
 
     void ProjectWorldToScreen_4B90E0(Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
     {

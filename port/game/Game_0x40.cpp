@@ -91,7 +91,7 @@ DEFINE_GLOBAL(Game_0x40*, gGame_0x40_67E008, 0x67E008);
 // TODO: move
 void sub_SetGamma();
 
-MATCH_FUNC(0x4B8BB0)
+// 0x4B8BB0
 s32 Game_0x40::GetFrameDurationMs_4B8BB0()
 {
     if (bStartNetworkGame_7081F0 == false)
@@ -101,7 +101,7 @@ s32 Game_0x40::GetFrameDurationMs_4B8BB0()
     return field_34_network_frame_ms;
 }
 
-MATCH_FUNC(0x4B8BD0)
+// 0x4B8BD0
 void Game_0x40::ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type)
 {
     int timer = field_28_exit_timer;
@@ -113,13 +113,13 @@ void Game_0x40::ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type)
     }
 }
 
-MATCH_FUNC(0x4B8C00)
+// 0x4B8C00
 void Game_0x40::ExitGameNoBonus_4B8C00(s32 new_timer, s32 exit_type)
 {
     ExitGame_4B8BD0(new_timer, exit_type, 0);
 }
 
-MATCH_FUNC(0x4B8C20)
+// 0x4B8C20
 bool Game_0x40::UpdateExitTimer_4B8C20()
 {
     if (field_28_exit_timer == 0)
@@ -135,7 +135,7 @@ bool Game_0x40::UpdateExitTimer_4B8C20()
     return false;
 }
 
-MATCH_FUNC(0x4B8C40)
+// 0x4B8C40
 void Game_0x40::LoadGameFiles_4B8C40()
 {
     char_type tmp_array[256];
@@ -191,7 +191,7 @@ void Game_0x40::LoadGameFiles_4B8C40()
     }
 }
 
-MATCH_FUNC(0x4B8E00)
+// 0x4B8E00
 void Game_0x40::SetScreenSize_4B8E00(u32 width, u32 height)
 {
     field_38_local_player->field_90_game_camera.SetScreenSize_4361B0(width, height);
@@ -200,7 +200,7 @@ void Game_0x40::SetScreenSize_4B8E00(u32 width, u32 height)
     gHud_2B00_706620->RecalcTextLayout_5D6AB0();
 }
 
-MATCH_FUNC(0x4B8E50)
+// 0x4B8E50
 void Game_0x40::ApplyNetworkGameSettings_4B8E50()
 {
     switch (gNetworkGameSpeed_7071A0)
@@ -227,8 +227,8 @@ EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
 DEFINE_GLOBAL(Ped*, gLastTestPed_6787E8, 0x6787E8);
 
 // Gives the player a group of count peds with the given remap
-MATCH_FUNC(0x46DD70)
-EXPORT void __stdcall SpawnTestGroup_46DD70(char_type remap, u8 count)
+// 0x46DD70
+void SpawnTestGroup_46DD70(char_type remap, u8 count)
 {
     Ped* pPlayerPed = gGame_0x40_67E008->field_38_local_player->GetPlayerPed_41D020();
     PedGroup* pGroup = PedGroup::New_4CB0D0();
@@ -268,20 +268,20 @@ EXPORT void __stdcall SpawnTestGroup_46DD70(char_type remap, u8 count)
 }
 
 // TODO: move
-MATCH_FUNC(0x46E370)
-EXPORT void SpawnTestGroupDefault_46E370()
+// 0x46E370
+void SpawnTestGroupDefault_46E370()
 {
     SpawnTestGroup_46DD70(4, 4);
 }
 
 // TODO: move
-MATCH_FUNC(0x5D8DF0)
-EXPORT void InvalidateCachedScreenDimension_5D8DF0()
+// 0x5D8DF0
+void InvalidateCachedScreenDimension_5D8DF0()
 {
     gCachedScreenDimension_706C58 = 0;
 }
 
-MATCH_FUNC(0x4B8EB0)
+// 0x4B8EB0
 void Game_0x40::BootGame_4B8EB0()
 {
 
@@ -330,7 +330,7 @@ void Game_0x40::BootGame_4B8EB0()
     gPlyDat_6FEAC0->DoMuchCashCheat_56C250();
 }
 
-MATCH_FUNC(0x4B8FF0)
+// 0x4B8FF0
 void Game_0x40::ShowCounters_4B8FF0()
 {
     swprintf(tmpBuff_67BD9C, L"recycled cars : %d", gCarManager_6C_677930->field_28_recycled_cars);
@@ -371,7 +371,7 @@ void Game_0x40::ShowCounters_4B8FF0()
     }
 }
 
-MATCH_FUNC(0x4B9270)
+// 0x4B9270
 void Game_0x40::ShowDebugOverlay_4B9270()
 {
     if (gDo_show_counter_67D6E6)
@@ -386,7 +386,7 @@ void Game_0x40::ShowDebugOverlay_4B9270()
     }
 }
 
-MATCH_FUNC(0x4B92D0)
+// 0x4B92D0
 void Game_0x40::Draw_4B92D0()
 {
     gViewCamera_676978 = &field_1C_draw_player->field_14C_view_camera;
@@ -421,7 +421,7 @@ void Game_0x40::Draw_4B92D0()
     FreeSurface_5D7DC0();
 }
 
-MATCH_FUNC(0x4B9380)
+// 0x4B9380
 void Game_0x40::UpdateAllPlayersControls_4B9380()
 {
     Player** ppPlayersIterator = field_4_players;
@@ -437,7 +437,7 @@ void Game_0x40::UpdateAllPlayersControls_4B9380()
     }
 }
 
-//MATCH_FUNC(0x5D9970)
+// 0x5D9970
 static void SetGamma_5D9970() // TODO Function chunk of 0x4AEC00, 0x4B93C0 and 0x4B9410 - probably move elsewhere
 {
     const s32 gamma = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 10u);
@@ -454,7 +454,7 @@ static void SetGamma_5D9970() // TODO Function chunk of 0x4AEC00, 0x4B93C0 and 0
     }
 }
 
-MATCH_FUNC(0x4B93C0)
+// 0x4B93C0
 void Game_0x40::UpdatePaused_4B93C0()
 {
     Player** pIter = field_4_players;
@@ -477,7 +477,7 @@ void Game_0x40::UpdatePaused_4B93C0()
     }
 }
 
-MATCH_FUNC(0x4B9410)
+// 0x4B9410
 void Game_0x40::UpdateGame_4B9410()
 {
     Player** ppPlayerIter = field_4_players;
@@ -570,7 +570,7 @@ void Game_0x40::UpdateGame_4B9410()
     }
 }
 
-MATCH_FUNC(0x4B9640)
+// 0x4B9640
 bool Game_0x40::ExecuteGame_4B9640()
 {
     UpdateAllPlayersControls_4B9380();
@@ -610,7 +610,7 @@ bool Game_0x40::ExecuteGame_4B9640()
 }
 
 // TODO: Werid function chunk stuff
-MATCH_FUNC(0x4B96B0)
+// 0x4B96B0
 void Game_0x40::Pause_4B96B0()
 {
     // Singleplayer or playing alone on multiplayer?
@@ -620,7 +620,7 @@ void Game_0x40::Pause_4B96B0()
     }
 }
 
-MATCH_FUNC(0x4B96C0)
+// 0x4B96C0
 void Game_0x40::Unpause_4B96C0()
 {
     if (field_23_num_players == 1)
@@ -642,7 +642,7 @@ void Game_0x40::Unpause_4B96C0()
     }
 }
 
-MATCH_FUNC(0x4B9700)
+// 0x4B9700
 void Game_0x40::TogglePause_4B9700()
 {
     if (field_0_game_state == GameState::Running_1)
@@ -655,7 +655,7 @@ void Game_0x40::TogglePause_4B9700()
     }
 }
 
-MATCH_FUNC(0x4B9710)
+// 0x4B9710
 void Game_0x40::SinglePlayerStepFrame_4B9710()
 {
     if (field_23_num_players == 1)
@@ -664,7 +664,7 @@ void Game_0x40::SinglePlayerStepFrame_4B9710()
     }
 }
 
-MATCH_FUNC(0x4B9720)
+// 0x4B9720
 void Game_0x40::ReinitAfterVideoModeChange_4B9720()
 {
     if (field_38_local_player)
@@ -680,7 +680,7 @@ void Game_0x40::ReinitAfterVideoModeChange_4B9720()
     }
 }
 
-MATCH_FUNC(0x4B9750)
+// 0x4B9750
 Player* Game_0x40::GetFirstPlayerWithoutPed_4B9750()
 {
     for (s32 i = 0; i < field_23_num_players; i++)
@@ -693,7 +693,7 @@ Player* Game_0x40::GetFirstPlayerWithoutPed_4B9750()
     return nullptr;
 }
 
-MATCH_FUNC(0x4B9790)
+// 0x4B9790
 void Game_0x40::ShakeCamerasAtPos_4B9790(Fix16 amount, Fix16 x, Fix16 y)
 {
     Camera_0xBC* pCam = IteratePlayerCamera_4B9BC0();
@@ -707,7 +707,7 @@ void Game_0x40::ShakeCamerasAtPos_4B9790(Fix16 amount, Fix16 x, Fix16 y)
     }
 }
 
-MATCH_FUNC(0x4B97E0)
+// 0x4B97E0
 bool Game_0x40::IsSpriteInAnyPlayerBounds_4B97E0(Sprite* pSprite, Fix16 margin)
 {
     for (u8 i = 0; i < field_23_num_players; i++)
@@ -720,7 +720,7 @@ bool Game_0x40::IsSpriteInAnyPlayerBounds_4B97E0(Sprite* pSprite, Fix16 margin)
     return false;
 }
 
-MATCH_FUNC(0x4B9830)
+// 0x4B9830
 bool Game_0x40::IsSpriteInBoundsOrFollowedByAnyPlayer_4B9830(Sprite* pSprite, Fix16 margin)
 {
     for (u8 i = 0; i < field_23_num_players; i++)
@@ -733,7 +733,7 @@ bool Game_0x40::IsSpriteInBoundsOrFollowedByAnyPlayer_4B9830(Sprite* pSprite, Fi
     return false;
 }
 
-MATCH_FUNC(0x4B9890)
+// 0x4B9890
 bool Game_0x40::IsSpriteInAnyPlayerView_4B9890(Sprite* pSprite, s32 wide_view)
 {
     for (u8 i = 0; i < field_23_num_players; i++)
@@ -746,7 +746,7 @@ bool Game_0x40::IsSpriteInAnyPlayerView_4B9890(Sprite* pSprite, s32 wide_view)
     return false;
 }
 
-MATCH_FUNC(0x4B98E0)
+// 0x4B98E0
 bool Game_0x40::IsSpriteInPlayerView_4B98E0(Sprite* pSprite, u8 player_idx, s32 wide_view)
 {
     if (field_4_players[player_idx]->field_8E_in_use)
@@ -761,7 +761,7 @@ bool Game_0x40::IsSpriteInPlayerView_4B98E0(Sprite* pSprite, u8 player_idx, s32 
     return false;
 }
 
-MATCH_FUNC(0x4B9950)
+// 0x4B9950
 bool Game_0x40::IsSpriteInPlayerBounds_4B9950(Sprite* pSprite, u8 player_idx, Fix16 margin)
 {
     Player*& pPlayer = this->field_4_players[player_idx]; // a reference: 9.6f keeps the slot address too
@@ -783,7 +783,7 @@ bool Game_0x40::IsSpriteInPlayerBounds_4B9950(Sprite* pSprite, u8 player_idx, Fi
     return false;
 }
 
-MATCH_FUNC(0x4B9A10)
+// 0x4B9A10
 bool Game_0x40::IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player_idx)
 {
     if (field_4_players[player_idx]->field_8E_in_use)
@@ -798,7 +798,7 @@ bool Game_0x40::IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player
 }
 
 // https://decomp.me/scratch/PO0RU wip - prob needs Fix16 operators ??
-MATCH_FUNC(0x4B9A80)
+// 0x4B9A80
 bool Game_0x40::IsPointOnScreen_4B9A80(Fix16 x, Fix16 y)
 {
     s32 i;
@@ -821,7 +821,7 @@ bool Game_0x40::IsPointOnScreen_4B9A80(Fix16 x, Fix16 y)
     return false;
 }
 
-MATCH_FUNC(0x4B9B10)
+// 0x4B9B10
 bool Game_0x40::IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds)
 {
     s32 i;
@@ -844,7 +844,7 @@ bool Game_0x40::IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds)
     return false;
 }
 
-MATCH_FUNC(0x4B9BC0)
+// 0x4B9BC0
 Camera_0xBC* Game_0x40::IteratePlayerCamera_4B9BC0()
 {
     for (field_21_camera_iter_idx = 0; field_21_camera_iter_idx < field_23_num_players; field_21_camera_iter_idx++)
@@ -858,7 +858,7 @@ Camera_0xBC* Game_0x40::IteratePlayerCamera_4B9BC0()
     return nullptr;
 }
 
-MATCH_FUNC(0x4B9C10)
+// 0x4B9C10
 bool Game_0x40::IsCarInAnyPlayerHistory_4B9C10(Car_BC* pCar)
 {
     Player* pPlayer = IterateFirstPlayer_4B9CD0();
@@ -873,7 +873,7 @@ bool Game_0x40::IsCarInAnyPlayerHistory_4B9C10(Car_BC* pCar)
     return false;
 }
 
-MATCH_FUNC(0x4B9C50)
+// 0x4B9C50
 Camera_0xBC* Game_0x40::IterateNextPlayerCamera_4B9C50()
 {
     if (!field_4_players[field_21_camera_iter_idx]->field_2D0_aux_cam_active || field_22_aux_cam_iterated)
@@ -895,7 +895,7 @@ Camera_0xBC* Game_0x40::IterateNextPlayerCamera_4B9C50()
     }
 }
 
-MATCH_FUNC(0x4B9CD0)
+// 0x4B9CD0
 Player* Game_0x40::IterateFirstPlayer_4B9CD0()
 {
     for (field_20_player_iter_idx = 0; field_20_player_iter_idx < field_23_num_players; field_20_player_iter_idx++)
@@ -908,7 +908,7 @@ Player* Game_0x40::IterateFirstPlayer_4B9CD0()
     return nullptr;
 }
 
-MATCH_FUNC(0x4B9D10)
+// 0x4B9D10
 Player* Game_0x40::IterateNextPlayer_4B9D10()
 {
     while (++field_20_player_iter_idx < field_23_num_players)
@@ -921,7 +921,7 @@ Player* Game_0x40::IterateNextPlayer_4B9D10()
     return nullptr;
 }
 
-MATCH_FUNC(0x4B9D60)
+// 0x4B9D60
 void Game_0x40::ReduceTrafficSpawnCounterOfOtherViewers_4B9D60(Sprite* pSprite, Player* pExclude)
 {
     for (u8 i = 0; i < GTA2_COUNTOF(field_4_players); i++)
@@ -946,7 +946,7 @@ void Game_0x40::ReduceTrafficSpawnCounterOfOtherViewers_4B9D60(Sprite* pSprite, 
 
 DEFINE_GLOBAL_INIT(Fix16, kInitialAmbient_67DCCC, Fix16(0x666, 0), 0x67DCCC);
 
-MATCH_FUNC(0x4B9DE0)
+// 0x4B9DE0
 Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
 {
     gRng_6F6784.srand_4F7A40(); // srand?
@@ -1282,7 +1282,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
     }
 }
 
-MATCH_FUNC(0x4BAE30)
+// 0x4BAE30
 Game_0x40::~Game_0x40()
 {
     bSkip_police_67D4F9 = field_3C_skip_police;

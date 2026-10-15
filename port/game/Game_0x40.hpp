@@ -66,44 +66,44 @@ class Game_0x40
         return field_2C_game_exit_type;
     }
 
-    EXPORT s32 GetFrameDurationMs_4B8BB0();
-    EXPORT void ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type);
-    EXPORT void ExitGameNoBonus_4B8C00(s32 new_timer, s32 exit_type);
-    EXPORT bool UpdateExitTimer_4B8C20();
-    EXPORT void LoadGameFiles_4B8C40();
-    EXPORT void SetScreenSize_4B8E00(u32 width, u32 height);
-    EXPORT void ApplyNetworkGameSettings_4B8E50();
-    EXPORT void BootGame_4B8EB0();
-    EXPORT void ShowCounters_4B8FF0();
-    EXPORT void ShowDebugOverlay_4B9270();
-    EXPORT void Draw_4B92D0();
-    EXPORT void UpdateAllPlayersControls_4B9380();
-    EXPORT void UpdatePaused_4B93C0();
-    EXPORT void UpdateGame_4B9410();
-    EXPORT bool ExecuteGame_4B9640();
-    EXPORT void Pause_4B96B0();
-    EXPORT void Unpause_4B96C0();
-    EXPORT void TogglePause_4B9700();
-    EXPORT void SinglePlayerStepFrame_4B9710();
-    EXPORT void ReinitAfterVideoModeChange_4B9720();
-    EXPORT Player* GetFirstPlayerWithoutPed_4B9750();
-    EXPORT void ShakeCamerasAtPos_4B9790(Fix16 amount, Fix16 x, Fix16 y);
-    EXPORT bool IsSpriteInAnyPlayerBounds_4B97E0(Sprite* pSprite, Fix16 margin);
-    EXPORT bool IsSpriteInBoundsOrFollowedByAnyPlayer_4B9830(Sprite* pSprite, Fix16 margin);
-    EXPORT bool IsSpriteInAnyPlayerView_4B9890(Sprite* pSprite, s32 wide_view);
-    EXPORT bool IsSpriteInPlayerView_4B98E0(Sprite* pSprite, u8 player_idx, s32 wide_view);
-    EXPORT bool IsSpriteInPlayerBounds_4B9950(Sprite* pSprite, u8 player_idx, Fix16 margin);
-    EXPORT bool IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player_idx);
-    EXPORT bool IsPointOnScreen_4B9A80(Fix16 x, Fix16 y);
-    EXPORT bool IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds);
-    EXPORT Camera_0xBC* IteratePlayerCamera_4B9BC0();
-    EXPORT bool IsCarInAnyPlayerHistory_4B9C10(Car_BC* pCar);
-    EXPORT Camera_0xBC* IterateNextPlayerCamera_4B9C50();
-    EXPORT Player* IterateFirstPlayer_4B9CD0();
-    EXPORT Player* IterateNextPlayer_4B9D10();
-    EXPORT void ReduceTrafficSpawnCounterOfOtherViewers_4B9D60(Sprite* pSprite, Player* pExclude);
-    EXPORT Game_0x40(u8 max_players, s8 player_idx); // 4B9DE0
-    EXPORT ~Game_0x40(); // 4BAE30
+    s32 GetFrameDurationMs_4B8BB0();
+    void ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type);
+    void ExitGameNoBonus_4B8C00(s32 new_timer, s32 exit_type);
+    bool UpdateExitTimer_4B8C20();
+    void LoadGameFiles_4B8C40();
+    void SetScreenSize_4B8E00(u32 width, u32 height);
+    void ApplyNetworkGameSettings_4B8E50();
+    void BootGame_4B8EB0();
+    void ShowCounters_4B8FF0();
+    void ShowDebugOverlay_4B9270();
+    void Draw_4B92D0();
+    void UpdateAllPlayersControls_4B9380();
+    void UpdatePaused_4B93C0();
+    void UpdateGame_4B9410();
+    bool ExecuteGame_4B9640();
+    void Pause_4B96B0();
+    void Unpause_4B96C0();
+    void TogglePause_4B9700();
+    void SinglePlayerStepFrame_4B9710();
+    void ReinitAfterVideoModeChange_4B9720();
+    Player* GetFirstPlayerWithoutPed_4B9750();
+    void ShakeCamerasAtPos_4B9790(Fix16 amount, Fix16 x, Fix16 y);
+    bool IsSpriteInAnyPlayerBounds_4B97E0(Sprite* pSprite, Fix16 margin);
+    bool IsSpriteInBoundsOrFollowedByAnyPlayer_4B9830(Sprite* pSprite, Fix16 margin);
+    bool IsSpriteInAnyPlayerView_4B9890(Sprite* pSprite, s32 wide_view);
+    bool IsSpriteInPlayerView_4B98E0(Sprite* pSprite, u8 player_idx, s32 wide_view);
+    bool IsSpriteInPlayerBounds_4B9950(Sprite* pSprite, u8 player_idx, Fix16 margin);
+    bool IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player_idx);
+    bool IsPointOnScreen_4B9A80(Fix16 x, Fix16 y);
+    bool IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds);
+    Camera_0xBC* IteratePlayerCamera_4B9BC0();
+    bool IsCarInAnyPlayerHistory_4B9C10(Car_BC* pCar);
+    Camera_0xBC* IterateNextPlayerCamera_4B9C50();
+    Player* IterateFirstPlayer_4B9CD0();
+    Player* IterateNextPlayer_4B9D10();
+    void ReduceTrafficSpawnCounterOfOtherViewers_4B9D60(Sprite* pSprite, Player* pExclude);
+    Game_0x40(u8 max_players, s8 player_idx); // 4B9DE0
+    ~Game_0x40(); // 4BAE30
 
     Player* GetPlayer_4219E0(u8 idx)
     {

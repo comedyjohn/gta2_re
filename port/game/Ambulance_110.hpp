@@ -18,14 +18,14 @@ class PatientSlot_8
 class Ambulance_20
 {
   public:
-    EXPORT Ambulance_20();
-    EXPORT ~Ambulance_20();
-    EXPORT void ClearTask_4FA7D0();
-    EXPORT void AddPassenger_4FA800(Ped* pPed);
-    EXPORT bool SpawnParamedicCrew_4FA820();
-    EXPORT void EvaluatePickupState_4FA9D0();
-    EXPORT void HandleObjectiveState_4FAAC0();
-    EXPORT void UpdateState_4FB330();
+    Ambulance_20();
+    ~Ambulance_20();
+    void ClearTask_4FA7D0();
+    void AddPassenger_4FA800(Ped* pPed);
+    bool SpawnParamedicCrew_4FA820();
+    void EvaluatePickupState_4FA9D0();
+    void HandleObjectiveState_4FAAC0();
+    void UpdateState_4FB330();
 
     u8 field_0_target_x; // pickup tile
     u8 field_1_target_y;
@@ -53,13 +53,13 @@ class Ambulance_110
         init_4FA310();
     }
 
-    EXPORT ~Ambulance_110();
-    EXPORT void init_4FA310();
-    EXPORT bool HandlePedDeath_4FA330(Ped* pDeadPed);
-    EXPORT bool TryAddPatient_4FA470(Ped* pPed);
-    EXPORT Ambulance_20* AllocateTaskSlot_4FA4B0();
-    EXPORT void ProcessPatientQueue_4FA500();
-    EXPORT void AmbulancesService_4FA790();
+    ~Ambulance_110();
+    void init_4FA310();
+    bool HandlePedDeath_4FA330(Ped* pDeadPed);
+    bool TryAddPatient_4FA470(Ped* pPed);
+    Ambulance_20* AllocateTaskSlot_4FA4B0();
+    void ProcessPatientQueue_4FA500();
+    void AmbulancesService_4FA790();
 
     char_type field_0; // set to 1 by init_4FA310, never read
     u8 field_1_corpse_count;   // bodies waiting in field_4_patient_queue (an index into the slots below, once)

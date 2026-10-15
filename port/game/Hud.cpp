@@ -122,12 +122,12 @@ static inline void ProjectWorldToScreen_Hud_4B90E0(Camera_0xBC* pCam, Fix16 x, F
     *pOut2 = (((y - pCam->field_98_cur_pos.field_4_y) * pCam->field_60_screen_scale.x) * scale) + Fix16(pCam->field_74_screen_px_center_y);
 }
 
-MATCH_FUNC(0x4bbbb0)
+// 0x4bbbb0
 Hud_2B00::~Hud_2B00()
 {
 }
 
-MATCH_FUNC(0x4be650)
+// 0x4be650
 Hud_Pager_C::~Hud_Pager_C()
 {
     field_0_timer = -1;
@@ -142,8 +142,8 @@ Hud_Pager_C::~Hud_Pager_C()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x4DEF00)
-EXPORT wchar_t* gmp_map_zone::get_zone_str_4DEF00()
+// 0x4DEF00
+wchar_t* gmp_map_zone::get_zone_str_4DEF00()
 {
     char buf[4];
     if (field_5_name_length == 3)
@@ -157,7 +157,7 @@ EXPORT wchar_t* gmp_map_zone::get_zone_str_4DEF00()
     return nullptr;
 }
 
-MATCH_FUNC(0x5cf620)
+// 0x5cf620
 void Hud_BriefSelector_4::ShowNextNumberedBrief_5CF620()
 {
     do
@@ -174,7 +174,7 @@ void Hud_BriefSelector_4::ShowNextNumberedBrief_5CF620()
     gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(tmpBuff_67BD9C, hud_message_priority::important_3);
 }
 
-MATCH_FUNC(0x5cf6b0)
+// 0x5cf6b0
 void Hud_BriefSelector_4::ShowPrevNumberedBrief_5CF6B0()
 {
     do
@@ -191,7 +191,7 @@ void Hud_BriefSelector_4::ShowPrevNumberedBrief_5CF6B0()
     gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(tmpBuff_67BD9C, hud_message_priority::important_3);
 }
 
-MATCH_FUNC(0x5cf730)
+// 0x5cf730
 void Hud_UnderRoofArrowMarker_C::Update_5CF730()
 {
     Ped* pPed = gGame_0x40_67E008->field_38_local_player->GetCameraModePed();
@@ -218,7 +218,7 @@ void Hud_UnderRoofArrowMarker_C::Update_5CF730()
     }
 }
 
-MATCH_FUNC(0x5cf910)
+// 0x5cf910
 void Hud_UnderRoofArrowMarker_C::Draw_5CF910()
 {
     if (field_A_ped_under_solid)
@@ -235,7 +235,7 @@ void Hud_UnderRoofArrowMarker_C::Draw_5CF910()
     }
 }
 
-MATCH_FUNC(0x5cf970)
+// 0x5cf970
 void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
 {
     if (field_0_show_coords)
@@ -284,7 +284,7 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
 // ----------------------------------------------------
 
 // https://decomp.me/scratch/bd2MO
-MATCH_FUNC(0x5cfa70)
+// 0x5cfa70
 void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
 {
     u32 random_num = gpRng_67AB34->get_cur_rng_41CFE0() & 0xF;
@@ -366,17 +366,17 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
     }
 }
 
-MATCH_FUNC(0x5cfe20)
+// 0x5cfe20
 void Hud_GangRespectBars_1::Empty_5CFE20()
 {
 }
 
-MATCH_FUNC(0x5cfe30)
+// 0x5cfe30
 void Hud_GangRespectBars_1::Empty_5CFE30()
 {
 }
 
-MATCH_FUNC(0x5cfe40)
+// 0x5cfe40
 void Hud_PlayerNames_4::DrawPlayerNames_5CFE40()
 {
     if (bStartNetworkGame_7081F0 && bShow_player_names_67D54C)
@@ -417,7 +417,7 @@ void Hud_PlayerNames_4::DrawPlayerNames_5CFE40()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d0050)
+// 0x5d0050
 void Hud_CopHead_C::UpdateHead_5D0050(bool bShakeHead)
 {
     if (!bShakeHead)
@@ -446,7 +446,7 @@ void Hud_CopHead_C::UpdateHead_5D0050(bool bShakeHead)
     }
 }
 
-MATCH_FUNC(0x5d00b0)
+// 0x5d00b0
 void Hud_CopHead_C_Array::UpdateWantedLevel_5D00B0()
 {
     Ped* pPed = gGame_0x40_67E008->field_38_local_player->GetPlayerPed_41D020();
@@ -464,7 +464,7 @@ void Hud_CopHead_C_Array::UpdateWantedLevel_5D00B0()
 }
 
 // https://decomp.me/scratch/QYlEW
-MATCH_FUNC(0x5d0110)
+// 0x5d0110
 void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
 {
     Fix16 xpos = (Fix16(640) - (field_4C_w_fp * field_48_cop_level)) / 2;
@@ -478,7 +478,7 @@ void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
     }
 }
 
-MATCH_FUNC(0x5d0210)
+// 0x5d0210
 void Hud_CopHead_C_Array::Init_5D0210()
 {
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, 14);
@@ -496,7 +496,7 @@ void Hud_CopHead_C_Array::Init_5D0210()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d0260)
+// 0x5d0260
 void Hud_Health_4::DrawHealth_5D0260()
 {
     s32 half_hearts;
@@ -536,7 +536,7 @@ void Hud_Health_4::DrawHealth_5D0260()
     }
 }
 
-MATCH_FUNC(0x5d03c0)
+// 0x5d03c0
 void ArrowTrace_24::PointToInfoPhone_5D03C0(Gang_144* pZone)
 {
     set_arrow_aim_from_pos_4767C0(pZone->field_12C_info_phone_x, pZone->field_130_info_phone_y, pZone->field_134_info_phone_z);
@@ -545,7 +545,7 @@ void ArrowTrace_24::PointToInfoPhone_5D03C0(Gang_144* pZone)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5D03F0)
+// 0x5D03F0
 void ArrowTrace_24::UpdateAimCoordinates_5D03F0()
 {
     Ped* pPed;
@@ -624,13 +624,13 @@ void ArrowTrace_24::UpdateAimCoordinates_5D03F0()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d0510)
+// 0x5d0510
 void Hud_Arrow_7C::SetArrowColour_5D0510(s32 arrow_colour)
 {
     field_18.field_28_arrow_colour = arrow_colour;
 }
 
-MATCH_FUNC(0x5d0530)
+// 0x5d0530
 bool Hud_Arrow_7C::CheckVisibility_5D0530()
 {
     Gang_144* pThisGang = field_18.field_10.field_30_gang;
@@ -696,7 +696,7 @@ bool Hud_Arrow_7C::CheckVisibility_5D0530()
 }
 
 // https://decomp.me/scratch/pp6SY
-MATCH_FUNC(0x5d0620)
+// 0x5d0620
 bool Hud_Arrow_7C::UpdateTargets_5D0620()
 {
     Fix16_Point diff;
@@ -739,7 +739,7 @@ bool Hud_Arrow_7C::UpdateTargets_5D0620()
 }
 
 // https://decomp.me/scratch/CoKn3
-MATCH_FUNC(0x5d0850)
+// 0x5d0850
 void Hud_Arrow_7C::UpdateScreenPos_5D0850()
 {
     Fix16_Point displacement;
@@ -842,7 +842,7 @@ void Hud_Arrow_7C::UpdateScreenPos_5D0850()
                                               &field_4_screen_pos_y);
 }
 
-MATCH_FUNC(0x5d0c60)
+// 0x5d0c60
 void Hud_Arrow_7C::Service_5D0C60()
 {
     if (!UpdateTargets_5D0620())
@@ -856,7 +856,7 @@ void Hud_Arrow_7C::Service_5D0C60()
     }
 }
 
-MATCH_FUNC(0x5d0c90)
+// 0x5d0c90
 void Hud_Arrow_7C::DrawArrow_5D0C90()
 {
     // TODO: Kinda messy, refactor this
@@ -939,7 +939,7 @@ inline s32 TagGame_28::GetPlayerTime_4C7380(Player* pPlayer)
     return field_4_it_time_secs[pPlayer->get_idx_4219D0()];
 }
 
-MATCH_FUNC(0x5d0dc0)
+// 0x5d0dc0
 void Hud_Arrow_7C::SetPlayerArrowColour_5D0DC0(Ped* pPed)
 {
     switch (pPed->field_244_remap)
@@ -972,7 +972,7 @@ void Hud_Arrow_7C::SetPlayerArrowColour_5D0DC0(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x5d0e40)
+// 0x5d0e40
 bool Hud_Arrow_7C_Array::IsThereAnyOtherArrowsInSameGang_5D0E40(Hud_Arrow_7C* pArgArrow)
 {
     Gang_144* pGang = pArgArrow->field_18.field_10.field_30_gang;
@@ -989,7 +989,7 @@ bool Hud_Arrow_7C_Array::IsThereAnyOtherArrowsInSameGang_5D0E40(Hud_Arrow_7C* pA
     return false;
 }
 
-MATCH_FUNC(0x5d0e90)
+// 0x5d0e90
 void Hud_Arrow_7C_Array::DrawArrows_5D0E90()
 {
     if (IsNetworkGame_434B10())
@@ -1014,7 +1014,7 @@ void Hud_Arrow_7C_Array::DrawArrows_5D0E90()
     }
 }
 
-MATCH_FUNC(0x5d0ef0)
+// 0x5d0ef0
 void Hud_Arrow_7C_Array::FindVisibleGangArrow_5D0EF0()
 {
     s32 idx = 0;
@@ -1038,7 +1038,7 @@ void Hud_Arrow_7C_Array::FindVisibleGangArrow_5D0EF0()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d0f40)
+// 0x5d0f40
 bool Hud_Arrow_7C_Array::IsThereAnyMissionPhoneArrowForGang_5D0F40(Gang_144* pArgGang)
 {
     Hud_Arrow_7C* pIter = &field_0_array[0];
@@ -1054,7 +1054,7 @@ bool Hud_Arrow_7C_Array::IsThereAnyMissionPhoneArrowForGang_5D0F40(Gang_144* pAr
     return false;
 }
 
-MATCH_FUNC(0x5d0f80)
+// 0x5d0f80
 void Hud_Arrow_7C_Array::ClearOrphanInfoPhoneArrows_5D0F80()
 {
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
@@ -1076,7 +1076,7 @@ void Hud_Arrow_7C_Array::ClearOrphanInfoPhoneArrows_5D0F80()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d0fd0)
+// 0x5d0fd0
 void Hud_Arrow_7C_Array::UpdateArrows_5D0FD0()
 {
     FindVisibleGangArrow_5D0EF0();
@@ -1098,7 +1098,7 @@ void Hud_Arrow_7C_Array::UpdateArrows_5D0FD0()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d1020)
+// 0x5d1020
 Hud_Arrow_7C* Hud_Arrow_7C_Array::FindFreeArrow_5D1020(s32* pOutIdx)
 {
     Hud_Arrow_7C* pIter = &field_0_array[0];
@@ -1114,7 +1114,7 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::FindFreeArrow_5D1020(s32* pOutIdx)
     return nullptr;
 }
 
-MATCH_FUNC(0x5d1050)
+// 0x5d1050
 Hud_Arrow_7C* Hud_Arrow_7C_Array::AllocArrow_5D1050()
 {
     s32 idx;
@@ -1124,7 +1124,7 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::AllocArrow_5D1050()
     return pRet;
 }
 
-MATCH_FUNC(0x5d10b0)
+// 0x5d10b0
 void Hud_Arrow_7C_Array::ReleaseAllArrows_5D10B0()
 {
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
@@ -1139,7 +1139,7 @@ void Hud_Arrow_7C_Array::ReleaseAllArrows_5D10B0()
     }
 }
 
-MATCH_FUNC(0x5d10d0)
+// 0x5d10d0
 Hud_Arrow_7C* Hud_Arrow_7C_Array::FindGangPhoneArrow_5D10D0(Gang_144* pZone, s32 phone_type)
 {
     s32 i = 0;
@@ -1158,7 +1158,7 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::FindGangPhoneArrow_5D10D0(Gang_144* pZone, s32
     return nullptr;
 }
 
-MATCH_FUNC(0x5d1110)
+// 0x5d1110
 void Hud_Arrow_7C_Array::place_gang_phone_5D1110(Object_2C* pPhoneInfo)
 {
     s32 phone_type = GetPhoneTypeFromObjModel_5D1260(pPhoneInfo->field_18_model);
@@ -1207,8 +1207,8 @@ void Hud_Arrow_7C_Array::place_gang_phone_5D1110(Object_2C* pPhoneInfo)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5D1260)
-s32 __stdcall GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx)
+// 0x5D1260
+s32 GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx)
 {
     switch (phone_model_idx)
     {
@@ -1228,8 +1228,8 @@ s32 __stdcall GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5D12B0)
-char_type* __stdcall get_phone_colour_5D12B0(s32 phone_type)
+// 0x5D12B0
+char_type* get_phone_colour_5D12B0(s32 phone_type)
 {
     switch (phone_type)
     {
@@ -1243,8 +1243,8 @@ char_type* __stdcall get_phone_colour_5D12B0(s32 phone_type)
     return "unknown";
 }
 
-MATCH_FUNC(0x5D12E0)
-u8 __stdcall GetMinRespectForPhoneType_5D12E0(s32 phone_type)
+// 0x5D12E0
+u8 GetMinRespectForPhoneType_5D12E0(s32 phone_type)
 {
     switch (phone_type)
     {
@@ -1258,7 +1258,7 @@ u8 __stdcall GetMinRespectForPhoneType_5D12E0(s32 phone_type)
     return 0;
 }
 
-MATCH_FUNC(0x5d1310)
+// 0x5d1310
 void Hud_Arrow_7C_Array::SetNewGangArrow_5D1310(Gang_144* pZone)
 {
     Hud_Arrow_7C* p7C = AllocArrow_5D1050();
@@ -1271,7 +1271,7 @@ void Hud_Arrow_7C_Array::SetNewGangArrow_5D1310(Gang_144* pZone)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d1350)
+// 0x5d1350
 void Hud_Arrow_7C_Array::CreatePlayerArrows_5D1350()
 {
     if ((u8)bStartNetworkGame_7081F0)
@@ -1298,7 +1298,7 @@ void Hud_Arrow_7C_Array::CreatePlayerArrows_5D1350()
     }
 }
 
-MATCH_FUNC(0x5d13c0)
+// 0x5d13c0
 bool Hud_QuitMessage_1::IsOnQuitMessage_5D13C0(s32 action, Player* pPlayer)
 {
     if (pPlayer->field_78A_show_quit_message)
@@ -1329,7 +1329,7 @@ bool Hud_QuitMessage_1::IsOnQuitMessage_5D13C0(s32 action, Player* pPlayer)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d1430)
+// 0x5d1430
 void Hud_QuitMessage_1::DrawQuitMessage_5D1430()
 {
     if (gGame_0x40_67E008->field_38_local_player->field_78A_show_quit_message)
@@ -1354,13 +1354,13 @@ void Hud_QuitMessage_1::DrawQuitMessage_5D1430()
     }
 }
 
-MATCH_FUNC(0x5d15a0)
+// 0x5d15a0
 bool Hud_QuitMessage_1::IsQuitMessageKey_5D15A0(s32 action)
 {
     return gGame_0x40_67E008->field_38_local_player->field_78A_show_quit_message && (action == DIK_RETURN || action == DIK_ESCAPE);
 }
 
-MATCH_FUNC(0x5d15d0)
+// 0x5d15d0
 void Hud_QuitMessage_1::ShowQuitMessage_5D15D0(Player* pPlayer)
 {
     pPlayer->field_78A_show_quit_message = 1;
@@ -1368,7 +1368,7 @@ void Hud_QuitMessage_1::ShowQuitMessage_5D15D0(Player* pPlayer)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d15e0)
+// 0x5d15e0
 bool Hud_ChatInput_1::IsTypingOnChat_5D15E0(s32 action, Player* pPlayer)
 {
     if (bStartNetworkGame_7081F0 && pPlayer->field_794_is_chatting)
@@ -1416,7 +1416,7 @@ bool Hud_ChatInput_1::IsTypingOnChat_5D15E0(s32 action, Player* pPlayer)
 }
 
 // https://decomp.me/scratch/gMsUi
-MATCH_FUNC(0x5d16b0)
+// 0x5d16b0
 void Hud_ChatInput_1::DrawChatMessages_5D16B0()
 {
     s32 line_spacing = GetLineSpacingFromFontType_5D7700_inlined(word_70643E);
@@ -1453,7 +1453,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
     }
 }
 
-MATCH_FUNC(0x5d17d0)
+// 0x5d17d0
 bool Hud_ChatInput_1::IsChatInputKey_5D17D0(s32 key_idx)
 {
     if (bStartNetworkGame_7081F0)
@@ -1474,7 +1474,7 @@ bool Hud_ChatInput_1::IsChatInputKey_5D17D0(s32 key_idx)
     return false;
 }
 
-MATCH_FUNC(0x5d1830)
+// 0x5d1830
 void Hud_ChatInput_1::StartChatting_5D1830(Player* pPlayer)
 {
     pPlayer->field_794_is_chatting = true;
@@ -1484,13 +1484,13 @@ void Hud_ChatInput_1::StartChatting_5D1830(Player* pPlayer)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d1850)
+// 0x5d1850
 void Hud_Message_1C8::ClearTimeToShow_5D1850()
 {
     field_0_time_to_show = 0;
 }
 
-MATCH_FUNC(0x5d1860)
+// 0x5d1860
 void Hud_Message_1C8::FormatMessage_5D1860()
 {
     if (this->field_0_time_to_show)
@@ -1501,7 +1501,7 @@ void Hud_Message_1C8::FormatMessage_5D1860()
     }
 }
 
-MATCH_FUNC(0x5d1940)
+// 0x5d1940
 void Hud_Message_1C8::DrawMessage_5D1940()
 {
     if (field_0_time_to_show)
@@ -1510,7 +1510,7 @@ void Hud_Message_1C8::DrawMessage_5D1940()
     }
 }
 
-MATCH_FUNC(0x5d1a00)
+// 0x5d1a00
 void Hud_Message_1C8::ShowMessage_5D1A00(wchar_t* pStr, s32 priority)
 {
     if (field_0_time_to_show <= 0 || priority >= field_1C4_priority)
@@ -1523,7 +1523,7 @@ void Hud_Message_1C8::ShowMessage_5D1A00(wchar_t* pStr, s32 priority)
     }
 }
 
-MATCH_FUNC(0x5d1ab0)
+// 0x5d1ab0
 void Hud_Message_1C8::DecrementTimeToShow_5D1AB0()
 {
     if (field_0_time_to_show != 0)
@@ -1534,14 +1534,14 @@ void Hud_Message_1C8::DecrementTimeToShow_5D1AB0()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d1ae0)
+// 0x5d1ae0
 Hud_Message_1C8::Hud_Message_1C8()
 {
     field_0_time_to_show = 0;
     field_1C4_priority = hud_message_priority::normal_1;
 }
 
-MATCH_FUNC(0x5d1b10)
+// 0x5d1b10
 void Hud_TextEntry_C4::FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, s16 ypos, s16 fontType, s32 displayTime)
 {
     this->field_AC_fontType = fontType;
@@ -1587,7 +1587,7 @@ void Hud_TextEntry_C4::FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, 
     ClearAlpha_4C70E0();
 }
 
-MATCH_FUNC(0x5d1d00)
+// 0x5d1d00
 void Hud_TextEntry_C4::Draw_5D1D00()
 {
     DrawText_5D7720(field_0_str_buf,
@@ -1600,7 +1600,7 @@ void Hud_TextEntry_C4::Draw_5D1D00()
                     field_BC_alpha_flag);
 }
 
-MATCH_FUNC(0x5d1db0)
+// 0x5d1db0
 bool Hud_TextEntry_C4::DecrementDisplayTime_5D1DB0()
 {
     if (field_A4_display_time != -3)
@@ -1614,14 +1614,14 @@ bool Hud_TextEntry_C4::DecrementDisplayTime_5D1DB0()
     return false;
 }
 
-MATCH_FUNC(0x5d1e10)
+// 0x5d1e10
 bool Hud_TextEntry_C4::operator_equals_5D1E10(Hud_TextEntry_C4* pOther)
 {
     return field_A4_display_time > 0 && pOther != this && field_A8_x == pOther->field_A8_x && field_AA_y == pOther->field_AA_y &&
         field_AC_fontType == pOther->field_AC_fontType && !wcscmp(field_0_str_buf, pOther->field_0_str_buf);
 }
 
-MATCH_FUNC(0x5d1eb0)
+// 0x5d1eb0
 void Hud_TextList_968::ExpireDuplicates_5D1EB0(Hud_TextEntry_C4* String2)
 {
     Hud_TextEntry_C4* pIter = field_960_pFirst;
@@ -1636,7 +1636,7 @@ void Hud_TextList_968::ExpireDuplicates_5D1EB0(Hud_TextEntry_C4* String2)
     }
 }
 
-MATCH_FUNC(0x5d1f50)
+// 0x5d1f50
 Hud_TextEntry_C4* Hud_TextList_968::DisplayText_5D1F50(const wchar_t* pStr, s16 maybe_x, s16 maybe_y, s16 font_type, s32 display_time)
 {
     Hud_TextEntry_C4* pOld_964 = field_964_pFreeList;
@@ -1649,7 +1649,7 @@ Hud_TextEntry_C4* Hud_TextList_968::DisplayText_5D1F50(const wchar_t* pStr, s16 
     return pOld_964;
 }
 
-MATCH_FUNC(0x5d2010)
+// 0x5d2010
 void Hud_TextList_968::Service_5D2010()
 {
     Hud_TextEntry_C4* pIter = field_960_pFirst;
@@ -1670,7 +1670,7 @@ inline void Hud_Pager_C::SetCounter_4C7130(s32* pCounter)
     }
 }
 
-MATCH_FUNC(0x5d2050)
+// 0x5d2050
 void Hud_TextList_968::RemoveExpired_5D2050()
 {
     Hud_TextEntry_C4* pAltIter = nullptr;
@@ -1703,7 +1703,7 @@ void Hud_TextList_968::RemoveExpired_5D2050()
     }
 }
 
-MATCH_FUNC(0x5d2280)
+// 0x5d2280
 Hud_TextList_968::Hud_TextList_968()
 {
     Hud_TextEntry_C4* pIter = &field_0_29_ary[0];
@@ -1718,7 +1718,7 @@ Hud_TextList_968::Hud_TextList_968()
     field_960_pFirst = nullptr;
 }
 
-MATCH_FUNC(0x5d2320)
+// 0x5d2320
 void Hud_Pager_C::Service_5D2320()
 {
     if (field_0_timer < 0)
@@ -1733,7 +1733,7 @@ void Hud_Pager_C::Service_5D2320()
     }
 }
 
-MATCH_FUNC(0x5d2380)
+// 0x5d2380
 void Hud_Pager_C::DrawCounterDigits_5D2380(s32 xpos, s32 ypos)
 {
     s32 counter = *field_4_ptr_counter;
@@ -1763,7 +1763,7 @@ void Hud_Pager_C::DrawCounterDigits_5D2380(s32 xpos, s32 ypos)
     DrawFigureScaled_5D7670(sprite_types_enum::user_6, 123 + thousands, xpos - 10, ypos + 2, kAngZero_706610, palette_types_enum::sprites_2, 0, 0, 0);
 }
 
-MATCH_FUNC(0x5d2680)
+// 0x5d2680
 void Hud_Pager_C::DrawDigits_5D2680(s32 xpos, s32 ypos)
 {
     // (field_0_timer / 30 fps) = total time in seconds
@@ -1833,7 +1833,7 @@ void Hud_Pager_C::DrawDigits_5D2680(s32 xpos, s32 ypos)
 }
 
 // https://decomp.me/scratch/3IY3c
-MATCH_FUNC(0x5d2ab0)
+// 0x5d2ab0
 void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
 {
     const s32 palette_type = palette_types_enum::sprites_2;
@@ -1879,7 +1879,7 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
     }
 }
 
-MATCH_FUNC(0x5d3040)
+// 0x5d3040
 void Hud_Pager_C_Array::DrawPagers_5D3040()
 {
     s32 totalSpriteHeight = get_sprite_height_4C7250(117) + get_sprite_height_4C7250(118) + get_sprite_height_4C7250(119);
@@ -1893,7 +1893,7 @@ void Hud_Pager_C_Array::DrawPagers_5D3040()
     }
 }
 
-MATCH_FUNC(0x5d31b0)
+// 0x5d31b0
 void Hud_Pager_C_Array::UpdatePagers_5D31B0()
 {
     for (s32 i = 0; i < GTA2_COUNTOF(field_0_pagers_array); i++)
@@ -1902,7 +1902,7 @@ void Hud_Pager_C_Array::UpdatePagers_5D31B0()
     }
 }
 
-MATCH_FUNC(0x5d31f0)
+// 0x5d31f0
 s32 Hud_Pager_C_Array::CreateTimer_5D31F0(s32 seconds) // returns the new Pager id
 {
     for (s32 id = 0; id < GTA2_COUNTOF_S(field_0_pagers_array); id++)
@@ -1918,7 +1918,7 @@ s32 Hud_Pager_C_Array::CreateTimer_5D31F0(s32 seconds) // returns the new Pager 
     return -1;
 }
 
-MATCH_FUNC(0x5d3220)
+// 0x5d3220
 s32 Hud_Pager_C_Array::AddOnScreenCounter_5D3220(s32* pCounter)
 {
     s32 targetIdx = -1;
@@ -1936,7 +1936,7 @@ s32 Hud_Pager_C_Array::AddOnScreenCounter_5D3220(s32* pCounter)
     return targetIdx;
 }
 
-MATCH_FUNC(0x5d3280)
+// 0x5d3280
 void Hud_Pager_C_Array::ClearPager_5D3280(s32 idx)
 {
     SoundObject_10* pSound = field_0_pagers_array[idx].field_8_sound;
@@ -1953,26 +1953,26 @@ void Hud_Pager_C_Array::ClearPager_5D3280(s32 idx)
     }
 }
 
-MATCH_FUNC(0x5d32d0)
+// 0x5d32d0
 void Hud_Pager_C_Array::ClearClockOnly_5D32D0(s32 pager_idx)
 {
     field_0_pagers_array[pager_idx].field_0_timer = -1;
 }
 
-MATCH_FUNC(0x5d32f0)
+// 0x5d32f0
 void Hud_Pager_C_Array::AddTime_5D32F0(s32 pager_idx, s32 time_to_add)
 {
     Hud_Pager_C* pPager = &field_0_pagers_array[pager_idx];
     pPager->field_0_timer += time_to_add;
 }
 
-MATCH_FUNC(0x5d3310)
+// 0x5d3310
 void Hud_Pager_C_Array::ClearCounterOnly_5D3310(s32 pager_idx)
 {
     field_0_pagers_array[pager_idx].field_4_ptr_counter = nullptr;
 }
 
-MATCH_FUNC(0x5d3330)
+// 0x5d3330
 void Hud_Brief_704::MovePrevBriefToCurrent_5D3330()
 {
     Hud_BriefEntry_18* pBrief = field_700_prev_briefs;
@@ -1981,7 +1981,7 @@ void Hud_Brief_704::MovePrevBriefToCurrent_5D3330()
     field_6F8_curr_briefs = pBrief;
 }
 
-MATCH_FUNC(0x5d3350)
+// 0x5d3350
 void Hud_Brief_704::FreeCurrentBrief_5D3350()
 {
     Hud_BriefEntry_18* pPrev;
@@ -1991,7 +1991,7 @@ void Hud_Brief_704::FreeCurrentBrief_5D3350()
     this->field_6FC_free_briefs = pPrev;
 }
 
-MATCH_FUNC(0x5d3370)
+// 0x5d3370
 void Hud_Brief_704::MoveCurrentBriefToPrev_5D3370()
 {
     Hud_BriefEntry_18* pPrev = this->field_6F8_curr_briefs;
@@ -2003,7 +2003,7 @@ void Hud_Brief_704::MoveCurrentBriefToPrev_5D3370()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d33a0)
+// 0x5d33a0
 void Hud_Brief_704::AppendCurrentBriefToPrev_5D33A0()
 {
     Hud_BriefEntry_18* pBrief;
@@ -2018,7 +2018,7 @@ void Hud_Brief_704::AppendCurrentBriefToPrev_5D33A0()
 }
 
 // https://decomp.me/scratch/L1e5G reg swap
-MATCH_FUNC(0x5d33f0)
+// 0x5d33f0
 Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
 {
     Hud_BriefEntry_18* result = field_6FC_free_briefs;
@@ -2084,7 +2084,7 @@ Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
     return result;
 }
 
-MATCH_FUNC(0x5d3470)
+// 0x5d3470
 size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
 {
     size_t num_chars;
@@ -2174,8 +2174,8 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
     return num_chars;
 }
 
-MATCH_FUNC(0x5d3680)
-char_type __stdcall GetBriefFaceIdx_5D3680(u16 two_byte_chars)
+// 0x5d3680
+char_type GetBriefFaceIdx_5D3680(u16 two_byte_chars)
 {
     switch (two_byte_chars)
     {
@@ -2202,7 +2202,7 @@ char_type __stdcall GetBriefFaceIdx_5D3680(u16 two_byte_chars)
     }
 }
 
-MATCH_FUNC(0x5d39d0)
+// 0x5d39d0
 void Hud_Brief_704::StartCurrentBrief_5D39D0()
 {
     field_510_time_to_show = Hud_Brief_704::FormatCurrentBrief_5D3470();
@@ -2213,7 +2213,7 @@ void Hud_Brief_704::StartCurrentBrief_5D39D0()
 }
 
 // https://decomp.me/scratch/exFU8
-MATCH_FUNC(0x5d3b80)
+// 0x5d3b80
 void Hud_Brief_704::DrawBrief_5D3B80()
 {
     if (field_6F8_curr_briefs)
@@ -2241,7 +2241,7 @@ void Hud_Brief_704::DrawBrief_5D3B80()
     }
 }
 
-MATCH_FUNC(0x5d3f10)
+// 0x5d3f10
 void Hud_Brief_704::SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32 cost_param)
 {
     Hud_BriefEntry_18* pNewBrief = AllocBrief_5D33F0();
@@ -2306,13 +2306,13 @@ inline void Hud_Arrow_7C::SetMinRadiusPos_4C6FF0(s32 steps)
     field_C_min_radius_pos = kArrowRadiusOffset_7065B4 + kArrowMinRadiusStep_706338 * steps;
 }
 
-MATCH_FUNC(0x5d4400)
+// 0x5d4400
 void Hud_Brief_704::SetHudBrief_5D4400(s32 priority, const char_type* pTextIdStr)
 {
     SetHudBrief_5D3F10(priority, pTextIdStr, -1);
 }
 
-MATCH_FUNC(0x5d44d0)
+// 0x5d44d0
 void Hud_Brief_704::UpdateBrief_5D44D0()
 {
     if (field_6F8_curr_briefs)
@@ -2351,7 +2351,7 @@ void Hud_Brief_704::UpdateBrief_5D44D0()
     }
 }
 
-MATCH_FUNC(0x5d4850)
+// 0x5d4850
 void Hud_Brief_704::ShowBrief_5D4850()
 {
     if (field_700_prev_briefs)
@@ -2370,7 +2370,7 @@ void Hud_Brief_704::ShowBrief_5D4850()
 }
 
 // https://decomp.me/scratch/N327U
-MATCH_FUNC(0x5d4890)
+// 0x5d4890
 void Hud_Brief_704::ClearAllBriefsWithPriority_5D4890(s32 priority)
 {
     Hud_BriefEntry_18* pLast = nullptr;
@@ -2412,7 +2412,7 @@ void Hud_Brief_704::ClearAllBriefsWithPriority_5D4890(s32 priority)
     }
 }
 
-MATCH_FUNC(0x5d4930)
+// 0x5d4930
 Hud_Brief_704::Hud_Brief_704()
 {
     field_6FC_free_briefs = &field_518_briefs[0];
@@ -2433,7 +2433,7 @@ Hud_Brief_704::Hud_Brief_704()
 }
 
 // TODO: Calls 2 Fix16 ctors that are exactly the same but are 2 unique functions ??
-MATCH_FUNC(0x5d4a10)
+// 0x5d4a10
 void Hud_CarName_4C::DrawCarName_5D4A10()
 {
     if (field_0_display_time)
@@ -2456,7 +2456,7 @@ void Hud_CarName_4C::DrawCarName_5D4A10()
     }
 }
 
-MATCH_FUNC(0x5d5190)
+// 0x5d5190
 void Hud_2B00::CalcCarNameXPosOffset_5D5190()
 {
     if (field_0_car_name.field_0_display_time)
@@ -2466,7 +2466,7 @@ void Hud_2B00::CalcCarNameXPosOffset_5D5190()
     }
 }
 
-MATCH_FUNC(0x5d5240)
+// 0x5d5240
 void Hud_2B00::ShowCarName_5D5240(wchar_t* Source)
 {
     field_0_car_name.field_0_display_time = 120;
@@ -2478,7 +2478,7 @@ void Hud_2B00::ShowCarName_5D5240(wchar_t* Source)
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d5350)
+// 0x5d5350
 void Hud_2B00::UpdateCarName_5D5350()
 {
     Hud_CarName_4C* pCarName = &field_0_car_name;
@@ -2496,13 +2496,13 @@ void Hud_2B00::UpdateCarName_5D5350()
     }
 }
 
-MATCH_FUNC(0x5d53b0)
+// 0x5d53b0
 Hud_CarName_4C::Hud_CarName_4C()
 {
     field_0_display_time = 0;
 }
 
-MATCH_FUNC(0x5d53e0)
+// 0x5d53e0
 void Hud_PickupText_88::CalcTextWidth_5D53E0()
 {
     if (field_0_timer)
@@ -2511,7 +2511,7 @@ void Hud_PickupText_88::CalcTextWidth_5D53E0()
     }
 }
 
-MATCH_FUNC(0x5d5420)
+// 0x5d5420
 void Hud_PickupText_88::Draw_5D5420()
 {
     if (field_0_timer)
@@ -2520,7 +2520,7 @@ void Hud_PickupText_88::Draw_5D5420()
     }
 }
 
-MATCH_FUNC(0x5d5600)
+// 0x5d5600
 void Hud_PickupText_88::ShowPickupText_5D5600(u8 pickup_idx)
 {
     sprintf(gTmpGxtKey_67CE50, "c%02d", pickup_idx);
@@ -2530,7 +2530,7 @@ void Hud_PickupText_88::ShowPickupText_5D5600(u8 pickup_idx)
     CalcTextWidth_5D53E0();
 }
 
-MATCH_FUNC(0x5d5690)
+// 0x5d5690
 void Hud_PickupText_88::DecrementTimer_5D5690()
 {
     if (field_0_timer)
@@ -2539,13 +2539,13 @@ void Hud_PickupText_88::DecrementTimer_5D5690()
     }
 }
 
-MATCH_FUNC(0x5d56a0)
+// 0x5d56a0
 Hud_PickupText_88::Hud_PickupText_88()
 {
     field_0_timer = 0;
 }
 
-MATCH_FUNC(0x5d56b0)
+// 0x5d56b0
 void Hud_MpMessage_D0::CalcTextWidth_5D56B0()
 {
     if (this->field_0_timer)
@@ -2555,7 +2555,7 @@ void Hud_MpMessage_D0::CalcTextWidth_5D56B0()
 }
 
 //https://decomp.me/scratch/QUvWb
-MATCH_FUNC(0x5d56d0)
+// 0x5d56d0
 void Hud_MpMessage_D0::Draw_5D56D0()
 {
     if (this->field_0_timer)
@@ -2564,7 +2564,7 @@ void Hud_MpMessage_D0::Draw_5D56D0()
     }
 }
 
-MATCH_FUNC(0x5d5730)
+// 0x5d5730
 void Hud_MpMessage_D0::ShowText_5D5730(const wchar_t* pStr)
 {
     this->field_0_timer = 120;
@@ -2572,7 +2572,7 @@ void Hud_MpMessage_D0::ShowText_5D5730(const wchar_t* pStr)
     CalcTextWidth_5D56B0();
 }
 
-MATCH_FUNC(0x5d5760)
+// 0x5d5760
 void Hud_MpMessage_D0::DecrementTimer_5D5760()
 {
     if (field_0_timer)
@@ -2582,7 +2582,7 @@ void Hud_MpMessage_D0::DecrementTimer_5D5760()
 }
 
 //https://decomp.me/scratch/3hVt8
-MATCH_FUNC(0x5d5770)
+// 0x5d5770
 void Hud_MpMessage_D0::AnnounceKill_5D5770(Player* killer, Player* victim)
 {
     if (killer->IsUser_41DC70())
@@ -2620,13 +2620,13 @@ void Hud_MpMessage_D0::AnnounceKill_5D5770(Player* killer, Player* victim)
     this->ShowText_5D5730(tmpBuff_67BD9C);
 }
 
-MATCH_FUNC(0x5d58f0)
+// 0x5d58f0
 Hud_MpMessage_D0::Hud_MpMessage_D0()
 {
     field_0_timer = 0;
 }
 
-MATCH_FUNC(0x5d5900)
+// 0x5d5900
 void Hud_MapZone_98::DrawZoneName_5D5900()
 {
     if (field_0_timer)
@@ -2652,7 +2652,7 @@ void Hud_MapZone_98::DrawZoneName_5D5900()
     }
 }
 
-MATCH_FUNC(0x5d5ad0)
+// 0x5d5ad0
 void Hud_MapZone_98::GetXPosOffset_5D5AD0()
 {
     if (field_0_timer)
@@ -2663,7 +2663,7 @@ void Hud_MapZone_98::GetXPosOffset_5D5AD0()
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d5af0)
+// 0x5d5af0
 void Hud_MapZone_98::ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZone2)
 {
     gmp_map_zone* pArg2Or3 = pZone2;
@@ -2686,7 +2686,7 @@ void Hud_MapZone_98::ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZo
     }
 }
 
-MATCH_FUNC(0x5d5b60)
+// 0x5d5b60
 void Hud_MapZone_98::UpdateZoneName_5D5B60()
 {
     u8 x;
@@ -2738,14 +2738,14 @@ void Hud_MapZone_98::UpdateZoneName_5D5B60()
     }
 }
 
-MATCH_FUNC(0x5d5c50)
+// 0x5d5c50
 void Hud_MapZone_98::ResetTransparency_5D5C50()
 {
     field_90_alpha_flag = 0;
     field_94_transparency = 0;
 }
 
-MATCH_FUNC(0x5d5c60)
+// 0x5d5c60
 Hud_MapZone_98::Hud_MapZone_98()
 {
     field_0_timer = 0;
@@ -2753,7 +2753,7 @@ Hud_MapZone_98::Hud_MapZone_98()
     field_8C_local_nav_zone = nullptr;
 }
 
-MATCH_FUNC(0x5d5c80)
+// 0x5d5c80
 void Hud_PlayerStats_4::DrawPlayerStats_5D5C80()
 {
     // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
@@ -2863,8 +2863,8 @@ void Hud_PlayerStats_4::DrawPlayerStats_5D5C80()
     }
 }
 
-MATCH_FUNC(0x5D6060)
-void __stdcall DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count)
+// 0x5D6060
+void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count)
 {
     if (ammo_idx != -1)
     {
@@ -2896,8 +2896,8 @@ static inline u16 GetPowerupSpriteIndex_5D61A0(gtx_0x106C* pGtx, s32 sprite_pal)
     return pGtx->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, sprite_pal);
 }
 
-MATCH_FUNC(0x5D61A0)
-s32 __stdcall DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number)
+// 0x5D61A0
+s32 DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number)
 {
     u16 sprite_idx = GetPowerupSpriteIndex_5D61A0(gGtx_0x106C_703DD4, powerup_idx + 141);
     s32 width = gGtx_0x106C_703DD4->get_sprite_width_420220(sprite_idx);
@@ -2916,7 +2916,7 @@ s32 __stdcall DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 o
 
 // ----------------------------------------------------
 
-MATCH_FUNC(0x5d6290)
+// 0x5d6290
 void Hud_PlayerStats_4::UpdateRollingDigits_5D6290()
 {
     Player* pPlayerIter = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0();
@@ -2939,7 +2939,7 @@ void Hud_PlayerStats_4::UpdateRollingDigits_5D6290()
 // ----------------------------------------------------
 
 // Not in IDA's function list: only reached through the UpdatePauseSection_5D69C0 thunk below.
-MATCH_FUNC(0x5D6300)
+// 0x5D6300
 void Hud_PauseScreen_2::UpdatePauseSection_5D6300()
 {
     if (!gGameSession_67E8E0.IsBonusStage_4C59A0())
@@ -2989,7 +2989,7 @@ void Hud_PauseScreen_2::UpdatePauseSection_5D6300()
 }
 
 // https://decomp.me/scratch/Uq97l
-MATCH_FUNC(0x5d63b0)
+// 0x5d63b0
 void Hud_PauseScreen_2::DrawPause_5D63B0()
 {
 
@@ -3143,7 +3143,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
     }
 }
 
-MATCH_FUNC(0x5d6860)
+// 0x5d6860
 void Hud_2B00::DrawGui_5D6860()
 {
     if (!bSkip_user_67D506)
@@ -3170,13 +3170,13 @@ void Hud_2B00::DrawGui_5D6860()
     }
 }
 
-MATCH_FUNC(0x5d69c0)
+// 0x5d69c0
 void Hud_2B00::UpdatePauseSection_5D69C0()
 {
     field_12E4_pause_screen.UpdatePauseSection_5D6300();
 }
 
-MATCH_FUNC(0x5d69d0)
+// 0x5d69d0
 void Hud_2B00::UpdateHUD_5D69D0()
 {
     field_1118_player_stats.UpdateRollingDigits_5D6290();
@@ -3195,7 +3195,7 @@ void Hud_2B00::UpdateHUD_5D69D0()
     field_12F0_mp_message.DecrementTimer_5D5760();
 }
 
-MATCH_FUNC(0x5d6a70)
+// 0x5d6a70
 void Hud_2B00::SetFullAmbient_5D6A70()
 {
     if (gLighting_626A09)
@@ -3204,13 +3204,13 @@ void Hud_2B00::SetFullAmbient_5D6A70()
     }
 }
 
-MATCH_FUNC(0x5d6a90)
+// 0x5d6a90
 void Hud_2B00::GetTextSpeed_5D6A90()
 {
     field_13C4_text_speed = gRegistry_6FF968.Set_Option_586F70("text_speed", 3);
 }
 
-MATCH_FUNC(0x5d6ab0)
+// 0x5d6ab0
 void Hud_2B00::RecalcTextLayout_5D6AB0()
 {
     SetFontTypes_5D6B00();
@@ -3222,7 +3222,7 @@ void Hud_2B00::RecalcTextLayout_5D6AB0()
     field_1080_pickup_text.CalcTextWidth_5D53E0();
 }
 
-MATCH_FUNC(0x5d6b00)
+// 0x5d6b00
 void Hud_2B00::SetFontTypes_5D6B00()
 {
     if (gText_0x14_704DFC->LangIsJapanese_452E60())
@@ -3255,7 +3255,7 @@ void Hud_2B00::SetFontTypes_5D6B00()
     }
 }
 
-MATCH_FUNC(0x5d6be0)
+// 0x5d6be0
 void Hud_2B00::Init_5D6BE0()
 {
     GetTextSpeed_5D6A90();
@@ -3266,19 +3266,19 @@ void Hud_2B00::Init_5D6BE0()
     field_1F18_arrows.CreatePlayerArrows_5D1350();
 }
 
-MATCH_FUNC(0x5d6c20)
+// 0x5d6c20
 bool Hud_2B00::IsBusy_5D6C20(s32 action, Player* pPlayer)
 {
     return field_12EC_quit_message.IsOnQuitMessage_5D13C0(action, pPlayer) || field_2A25_chat_input.IsTypingOnChat_5D15E0(action, pPlayer);
 }
 
-MATCH_FUNC(0x5d6c70)
+// 0x5d6c70
 bool Hud_2B00::IsInputKeyConsumed_5D6C70(s32 action)
 {
     return field_12EC_quit_message.IsQuitMessageKey_5D15A0(action) || field_2A25_chat_input.IsChatInputKey_5D17D0(action);
 }
 
-MATCH_FUNC(0x5d6cb0)
+// 0x5d6cb0
 bool Hud_2B00::IsQuitMessageInputKey_5D6CB0(s32 action)
 {
     return field_12EC_quit_message.IsQuitMessageKey_5D15A0(action);
@@ -3286,13 +3286,13 @@ bool Hud_2B00::IsQuitMessageInputKey_5D6CB0(s32 action)
 
 // Defined before the member ctors it calls: when VC6 has already compiled them in this TU (and seen
 // that they can't throw) it drops the EH frame and the state for the pager array that the original has.
-MATCH_FUNC(0x5d6cd0)
+// 0x5d6cd0
 Hud_2B00::Hud_2B00()
 {
     field_13C4_text_speed = 0;
 }
 
-MATCH_FUNC(0x5d7510)
+// 0x5d7510
 Hud_CopHead_C::Hud_CopHead_C()
 {
     field_0_frame = 0;
@@ -3302,7 +3302,7 @@ Hud_CopHead_C::Hud_CopHead_C()
     field_8_velocity = -1;
 }
 
-MATCH_FUNC(0x5d7600)
+// 0x5d7600
 Hud_Arrow_7C::Hud_Arrow_7C()
 {
     field_18.field_10.field_30_gang = nullptr;
@@ -3317,7 +3317,7 @@ Hud_Arrow_7C::Hud_Arrow_7C()
     field_18.field_10.field_6_in_use = 0;
 }
 
-MATCH_FUNC(0x5d7650)
+// 0x5d7650
 Hud_Pager_C::Hud_Pager_C()
 {
     field_0_timer = -1;

@@ -35,40 +35,40 @@ class Police_7B8
         Init_56F400();
     }
 
-    EXPORT ~Police_7B8();
+    ~Police_7B8();
 
   private:
-    EXPORT void Init_56F400();
+    void Init_56F400();
 
   public:
-    EXPORT bool TryReplaceCrewLeaderOnDeath_56F4D0(Ped* pPed);
+    bool TryReplaceCrewLeaderOnDeath_56F4D0(Ped* pPed);
 
   private:
-    EXPORT PoliceCrew_38* NewCrew_56F560();
+    PoliceCrew_38* NewCrew_56F560();
 
   public:
-    EXPORT Ped* SpawnRoadblockGuard_56F5C0(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
-    EXPORT void DespawnCrewInCar_56F6D0(Car_BC* pCar);
-    EXPORT bool IsBeingPursued_56F800(Ped* pCriminal);
-    EXPORT bool IsActivelyChased_56F880(Ped* pCriminal);
-    EXPORT void SetArrestedPed_56F8E0(Ped* pCriminal, Ped* pAuxPed);
-    EXPORT void RegisterCriminal_56F940(Ped* pCriminal);
+    Ped* SpawnRoadblockGuard_56F5C0(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
+    void DespawnCrewInCar_56F6D0(Car_BC* pCar);
+    bool IsBeingPursued_56F800(Ped* pCriminal);
+    bool IsActivelyChased_56F880(Ped* pCriminal);
+    void SetArrestedPed_56F8E0(Ped* pCriminal, Ped* pAuxPed);
+    void RegisterCriminal_56F940(Ped* pCriminal);
 
   private:
-    EXPORT void UpdateFirstPursuitTimer_56FA40();
-    EXPORT bool DispatchNewCrewToPursuit_56FAA0(PolicePursuitTarget_7C* pPursuitTarget);
-    EXPORT void UpdatePursuitTargets_56FBD0();
+    void UpdateFirstPursuitTimer_56FA40();
+    bool DispatchNewCrewToPursuit_56FAA0(PolicePursuitTarget_7C* pPursuitTarget);
+    void UpdatePursuitTargets_56FBD0();
 
   public:
-    EXPORT void Service_570270();
-    EXPORT void SpawnWalkingGuard_570320(Ped* pPed, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
-    EXPORT bool SpawnCrewInCar_5703E0(Car_BC* pCar);
-    EXPORT bool AssignCrewToPursuit_570790(PoliceCrew_38* pCrew, PolicePursuitTarget_7C* pPursuitTarget);
-    EXPORT bool TryAssignCarCrewToCriminal_5707B0(Car_BC* pCar, Ped* pCriminal);
-    EXPORT void UpdateLastSeenCoordsForCriminal_5708C0(Ped* pPed);
-    EXPORT void UpdateCriminalLatestPosition_570940(Ped* pPed);
-    EXPORT bool TryBeginRoadblock_577320();
-    EXPORT void TryCreateRoadblockAt_577370(u8 tileX, u8 tileY, s32 roadblock_type);
+    void Service_570270();
+    void SpawnWalkingGuard_570320(Ped* pPed, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
+    bool SpawnCrewInCar_5703E0(Car_BC* pCar);
+    bool AssignCrewToPursuit_570790(PoliceCrew_38* pCrew, PolicePursuitTarget_7C* pPursuitTarget);
+    bool TryAssignCarCrewToCriminal_5707B0(Car_BC* pCar, Ped* pCriminal);
+    void UpdateLastSeenCoordsForCriminal_5708C0(Ped* pPed);
+    void UpdateCriminalLatestPosition_570940(Ped* pPed);
+    bool TryBeginRoadblock_577320();
+    void TryCreateRoadblockAt_577370(u8 tileX, u8 tileY, s32 roadblock_type);
 
   private:
     u8 field_0; // set to 1 in Init, never read

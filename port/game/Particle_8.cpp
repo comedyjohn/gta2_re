@@ -53,13 +53,13 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FD464, Fix16(0x1EB, 0), 0x6FD464);
 // NOTE: Will not match in marked extern !!
 DEFINE_GLOBAL(u16, gParticleInstCount_6FD5F4, 0x6FD5F4);
 
-MATCH_FUNC(0x53e320)
+// 0x53e320
 void Particle_8::ParticlesService_53E320()
 {
     gParticle_4C_Pool_6FD5E4->UpdatePool();
 }
 
-MATCH_FUNC(0x53E3C0)
+// 0x53E3C0
 Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x, Fix16 speed_y, Fix16 field_10_value, Fix16 additional_speed_x, Fix16 additional_speed_y, Fix16 field_1C_value)
 {
     Particle_4C* pNew4C = nullptr;
@@ -102,7 +102,7 @@ static inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
 // the unary minus on the divides (never inlined: it builds a by-value argument, so it adds two sites) set
 // the inline budget: + out of line and the negate inline in the first rotation, the multiplies out of line
 // in MultiplyByFix16_401CB0, the ctor out of line in Ang16::operator-.
-MATCH_FUNC(0x53E450)
+// 0x53E450
 void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
 {
     Ang16 angle;
@@ -143,7 +143,7 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
 }
 
 // 9.6f 0x48CC50
-MATCH_FUNC(0x53e880)
+// 0x53e880
 void Particle_8::SpawnBlood_53E880(Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
     Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(xpos, ypos, 0, 0, 0, 0);
@@ -163,10 +163,9 @@ void Particle_8::SpawnBlood_53E880(Fix16 xpos, Fix16 ypos, Fix16 zpos)
     }
 }
 
-WIP_FUNC(0x53e970)
+// 0x53e970
 void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
 {
-    WIP_IMPLEMENTED;
     // The original enters with EH state 4 and sets 7 at the top of the car branch, as five points up
     // front and three in the car branch would. Declared like that (unused extras), the ctors stay inline
     // but the rest of the function moves further away, so only the used points are declared for now.
@@ -279,7 +278,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
 // Something wrong with the velocities https://decomp.me/scratch/2Kz9I
 // 9.6f 0x48D1F0 (unpaired before): plain members (MultiplyByFix16_401CB0, +, -, RotateByAngle_40F6B0 as
 // RotateNegExport_), a count-down loop, -(v / 15) through Negate_4086A0.
-MATCH_FUNC(0x53f060)
+// 0x53f060
 void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char_type bRandomRot)
 {
     Ang16 angle_2;
@@ -343,7 +342,7 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
 // about 230 nodes. The implicit int -> Fix16 conversions in the vel constructions, the declared
 // then assigned zpos, the `x = x | n` flag stores and the `!= 0` are code-neutral spellings that
 // put it there (Scripts/inline_budget/inlsim.py --scan); explicit `Fix16(0)` / `|=` forms fall short.
-MATCH_FUNC(0x53F4C0)
+// 0x53F4C0
 void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
 {
     {
@@ -432,7 +431,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
 
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD500, Fix16(0x1, 0), 0x6FD500);
 
-MATCH_FUNC(0x53FAE0)
+// 0x53FAE0
 void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
 {
     Ang16 angle;
@@ -502,7 +501,7 @@ static inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radi
 }
 
 // https://decomp.me/scratch/wfzEd
-MATCH_FUNC(0x53FE40)
+// 0x53FE40
 void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir)
 {
     // 9.6f declares both angles up front. dir is destroyed by the callee; the unused point gives
@@ -546,7 +545,7 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
     }
 }
 
-MATCH_FUNC(0x540320)
+// 0x540320
 void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 ang)
 {
     Ang16 angle;
@@ -589,7 +588,7 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
     }
 }
 
-MATCH_FUNC(0x5405D0)
+// 0x5405D0
 void Particle_8::SpawnParticleSprite_5405D0(Sprite* pSprite)
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
@@ -615,7 +614,7 @@ void Particle_8::SpawnParticleSprite_5405D0(Sprite* pSprite)
 
 // 9.6f 0x48E060. Fix16_Point vel has a dtor, which gives the EH frame; its fields are zeroed again
 // before the call, and the two other zero args go through the out-of-line Fix16(s32) ctor.
-MATCH_FUNC(0x5406b0)
+// 0x5406b0
 void Particle_8::SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnknown)
 {
     Fix16_Point vel(Fix16(0), Fix16(0));
@@ -683,7 +682,7 @@ static inline Ang16 AddAng16_ool(const Ang16& a, const Ang16& b)
     return Ang16(&value, 0);
 }
 
-MATCH_FUNC(0x5439d0)
+// 0x5439d0
 Particle_8::Particle_8()
 {
     if (!gParticle_4C_Pool_6FD5E4)
@@ -698,7 +697,7 @@ Particle_8::Particle_8()
     field_4 = nullptr;
 }
 
-MATCH_FUNC(0x543a60)
+// 0x543a60
 Particle_8::~Particle_8()
 {
     if (gParticle_4C_Pool_6FD5E4)

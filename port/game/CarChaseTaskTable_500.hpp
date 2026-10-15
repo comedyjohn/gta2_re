@@ -14,9 +14,9 @@ class Ped;
 class CarChaseTask_40
 {
   public:
-    EXPORT void ResetEntry_4747B0();
-    EXPORT CarChaseTask_40();
-    EXPORT ~CarChaseTask_40();
+    void ResetEntry_4747B0();
+    CarChaseTask_40();
+    ~CarChaseTask_40();
 
     char_type field_0_in_use;
     Ped* field_4_pDriver;
@@ -52,21 +52,21 @@ class CarChaseTaskTable_500
         k_max_entries = 20
     };
 
-    EXPORT CarChaseTask_40* AllocateEntry_474810();
-    EXPORT bool AreAllies_474850(Ped* pPed1, Ped* pPed2);
-    EXPORT Ped* FindDriverInState_4748A0(s32 chase_state, Ped* pTargetPed);
-    EXPORT u8 CountPursuers_474920(Ped* pTargetPed, Ped* pPed);
-    EXPORT bool HasAnyPursuer_474970(Ped* pTargetPed);
-    EXPORT bool HasPursuerInFront_4749B0(Ped* pPed);
-    EXPORT bool HasPursuerAlongsideLeft_474A20(Ped* pPed);
-    EXPORT bool HasPursuerOnLeft_474A80(Ped* pPed);
-    EXPORT bool HasPursuerAlongsideRight_474AF0(Ped* pPed);
-    EXPORT bool HasPursuerOnRight_474B50(Ped* pPed);
-    EXPORT bool HasPursuerAlongside_474BC0(Ped* pPed);
-    EXPORT char_type HasPursuerChoosingSide_474C30(Ped* pPed);
-    EXPORT void FreeEntry_474CC0(CarChaseTask_40* pEntry);
-    EXPORT CarChaseTaskTable_500();
-    EXPORT ~CarChaseTaskTable_500();
+    CarChaseTask_40* AllocateEntry_474810();
+    bool AreAllies_474850(Ped* pPed1, Ped* pPed2);
+    Ped* FindDriverInState_4748A0(s32 chase_state, Ped* pTargetPed);
+    u8 CountPursuers_474920(Ped* pTargetPed, Ped* pPed);
+    bool HasAnyPursuer_474970(Ped* pTargetPed);
+    bool HasPursuerInFront_4749B0(Ped* pPed);
+    bool HasPursuerAlongsideLeft_474A20(Ped* pPed);
+    bool HasPursuerOnLeft_474A80(Ped* pPed);
+    bool HasPursuerAlongsideRight_474AF0(Ped* pPed);
+    bool HasPursuerOnRight_474B50(Ped* pPed);
+    bool HasPursuerAlongside_474BC0(Ped* pPed);
+    char_type HasPursuerChoosingSide_474C30(Ped* pPed);
+    void FreeEntry_474CC0(CarChaseTask_40* pEntry);
+    CarChaseTaskTable_500();
+    ~CarChaseTaskTable_500();
 
     CarChaseTask_40 field_0_entries[k_max_entries];
 };

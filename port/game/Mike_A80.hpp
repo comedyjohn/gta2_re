@@ -81,17 +81,17 @@ class Mike_A80
         Init_4FF1B0();
     }
 
-    EXPORT void Init_4FF1B0();
-    EXPORT s32 sDrawFlatRect_4FF1C0(f32 left, f32 top, f32 right, f32 bottom, s32 colour);
-    EXPORT void DebugDrawProfiling_4FF250();
-    EXPORT static void sDrawString_4FF910(s32 xpos, s32 ypos, const wchar_t* pFormat, ...);
-    EXPORT static void __stdcall sub_4FF970(u32* pValue);
-    EXPORT void sub_4FF980();
-    EXPORT void sub_4FF990(u32 idx);
-    EXPORT void sub_4FF9F0(u32 idx);
-    EXPORT void sub_4FFA50(const char_type* pFormat, ...);
-    EXPORT void sub_4FFA90();
-    EXPORT void sub_4FFD90();
+    void Init_4FF1B0();
+    s32 sDrawFlatRect_4FF1C0(f32 left, f32 top, f32 right, f32 bottom, s32 colour);
+    void DebugDrawProfiling_4FF250();
+    static void sDrawString_4FF910(s32 xpos, s32 ypos, const wchar_t* pFormat, ...);
+    static void sub_4FF970(u32* pValue);
+    void sub_4FF980();
+    void sub_4FF990(u32 idx);
+    void sub_4FF9F0(u32 idx);
+    void sub_4FFA50(const char_type* pFormat, ...);
+    void sub_4FFA90();
+    void sub_4FFD90();
 
     inline void DrawProfileBar(s32 x, s32 value, s32 colour)
     {

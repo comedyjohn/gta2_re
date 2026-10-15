@@ -19,19 +19,19 @@ class Car_BC;
 class Hud_PlayerNames_4
 {
   public:
-    EXPORT void DrawPlayerNames_5CFE40();
+    void DrawPlayerNames_5CFE40();
     s32 field_0;
 };
 
 class Hud_MpMessage_D0
 {
   public:
-    EXPORT void CalcTextWidth_5D56B0();
-    EXPORT void Draw_5D56D0();
-    EXPORT void ShowText_5D5730(const wchar_t* pStr);
-    EXPORT void DecrementTimer_5D5760();
-    EXPORT void AnnounceKill_5D5770(Player* killer, Player* victim);
-    EXPORT Hud_MpMessage_D0();
+    void CalcTextWidth_5D56B0();
+    void Draw_5D56D0();
+    void ShowText_5D5730(const wchar_t* pStr);
+    void DecrementTimer_5D5760();
+    void AnnounceKill_5D5770(Player* killer, Player* victim);
+    Hud_MpMessage_D0();
     char_type field_0_timer;
     wchar_t field_2_str[101];
     s32 field_CC_text_width;
@@ -40,19 +40,19 @@ class Hud_MpMessage_D0
 class Hud_ChatInput_1
 {
   public:
-    EXPORT bool IsTypingOnChat_5D15E0(s32 action, Player* pPlayer);
-    EXPORT void DrawChatMessages_5D16B0();
-    EXPORT bool IsChatInputKey_5D17D0(s32 key_idx);
-    EXPORT void StartChatting_5D1830(Player* pPlayer);
+    bool IsTypingOnChat_5D15E0(s32 action, Player* pPlayer);
+    void DrawChatMessages_5D16B0();
+    bool IsChatInputKey_5D17D0(s32 key_idx);
+    void StartChatting_5D1830(Player* pPlayer);
 };
 
 class Hud_QuitMessage_1
 {
   public:
-    EXPORT bool IsOnQuitMessage_5D13C0(s32 action, Player* pPlayer);
-    EXPORT void DrawQuitMessage_5D1430();
-    EXPORT bool IsQuitMessageKey_5D15A0(s32 action);
-    EXPORT void ShowQuitMessage_5D15D0(Player* pPlayer);
+    bool IsOnQuitMessage_5D13C0(s32 action, Player* pPlayer);
+    void DrawQuitMessage_5D1430();
+    bool IsQuitMessageKey_5D15A0(s32 action);
+    void ShowQuitMessage_5D15D0(Player* pPlayer);
     char_type field_12EC_quit_message;
 };
 
@@ -64,8 +64,8 @@ class Hud_BriefSelector_4
     {
         field_0_value = 0; // TODO: byte ?
     }
-    EXPORT void ShowNextNumberedBrief_5CF620();
-    EXPORT void ShowPrevNumberedBrief_5CF6B0();
+    void ShowNextNumberedBrief_5CF620();
+    void ShowPrevNumberedBrief_5CF6B0();
     s32 field_0_value;
 };
 
@@ -92,8 +92,8 @@ class Hud_PauseScreen_2
         field_0_current_pause_section = 0;
         field_1_timer = 45;
     }
-    EXPORT void DrawPause_5D63B0();
-    EXPORT void UpdatePauseSection_5D6300();
+    void DrawPause_5D63B0();
+    void UpdatePauseSection_5D6300();
     u8 field_0_current_pause_section;
     char_type field_1_timer;
 };
@@ -101,12 +101,12 @@ class Hud_PauseScreen_2
 class Hud_Message_1C8
 {
   public:
-    EXPORT void ClearTimeToShow_5D1850();
-    EXPORT void FormatMessage_5D1860();
-    EXPORT void DrawMessage_5D1940();
-    EXPORT void ShowMessage_5D1A00(wchar_t* pStr, s32 priority);
-    EXPORT void DecrementTimeToShow_5D1AB0();
-    EXPORT Hud_Message_1C8();
+    void ClearTimeToShow_5D1850();
+    void FormatMessage_5D1860();
+    void DrawMessage_5D1940();
+    void ShowMessage_5D1A00(wchar_t* pStr, s32 priority);
+    void DecrementTimeToShow_5D1AB0();
+    Hud_Message_1C8();
     u8 field_0_time_to_show;
     wchar_t field_2_str[221];
     s32 field_1BC_str_width;
@@ -117,8 +117,8 @@ class Hud_Message_1C8
 class Hud_PlayerStats_4
 {
   public:
-    EXPORT void DrawPlayerStats_5D5C80();
-    EXPORT void UpdateRollingDigits_5D6290();
+    void DrawPlayerStats_5D5C80();
+    void UpdateRollingDigits_5D6290();
     s32 field_0;
 };
 
@@ -131,8 +131,8 @@ class Hud_UnderRoofArrowMarker_C
         field_8_rotation = 0;
         field_A_ped_under_solid = 0;
     }
-    EXPORT void Update_5CF730();
-    EXPORT void Draw_5CF910();
+    void Update_5CF730();
+    void Draw_5CF910();
     Fix16 field_0_screen_x;
     Fix16 field_4_screen_y;
     Ang16 field_8_rotation;
@@ -143,18 +143,18 @@ class Hud_UnderRoofArrowMarker_C
 class Hud_Health_4
 {
   public:
-    EXPORT void DrawHealth_5D0260();
+    void DrawHealth_5D0260();
     s32 field_0;
 };
 
 class Hud_PickupText_88
 {
   public:
-    EXPORT void CalcTextWidth_5D53E0();
-    EXPORT void Draw_5D5420();
-    EXPORT void ShowPickupText_5D5600(u8 pickup_idx);
-    EXPORT void DecrementTimer_5D5690();
-    EXPORT Hud_PickupText_88();
+    void CalcTextWidth_5D53E0();
+    void Draw_5D5420();
+    void ShowPickupText_5D5600(u8 pickup_idx);
+    void DecrementTimer_5D5690();
+    Hud_PickupText_88();
     char_type field_0_timer;
     wchar_t field_2_str[65];
     s32 field_84_text_width;
@@ -168,7 +168,7 @@ class Hud_ShowCoords_1
     {
         field_0_show_coords = false;
     }
-    EXPORT void ShowPlayerCoords_5CF970();
+    void ShowPlayerCoords_5CF970();
 
     // 9.6f 0x4A4760
     inline void ToggleShowCoords_4A4760()
@@ -182,17 +182,17 @@ class Hud_ShowCoords_1
 class Hud_GangRespectBars_1
 {
   public:
-    EXPORT void DrawGangRespectBars_5CFA70();
-    EXPORT void Empty_5CFE20();
-    EXPORT void Empty_5CFE30();
+    void DrawGangRespectBars_5CFA70();
+    void Empty_5CFE20();
+    void Empty_5CFE30();
     char_type field_107C_gang_respect_bars;
 };
 
 class Hud_CopHead_C
 {
   public:
-    EXPORT void UpdateHead_5D0050(bool bShakeHead);
-    EXPORT Hud_CopHead_C();
+    void UpdateHead_5D0050(bool bShakeHead);
+    Hud_CopHead_C();
     u8 field_0_frame;
     char_type field_1_frame_timer;
     char_type field_2_frame_delay;
@@ -208,9 +208,9 @@ class Hud_CopHead_C_Array
     {
         field_48_cop_level = 0;
     }
-    EXPORT void UpdateWantedLevel_5D00B0();
-    EXPORT void DrawWantedLevel_5D0110();
-    EXPORT void Init_5D0210();
+    void UpdateWantedLevel_5D00B0();
+    void DrawWantedLevel_5D0110();
+    void Init_5D0210();
     Hud_CopHead_C field_1028_cop_heads[6];
     s32 field_48_cop_level;
     Fix16 field_4C_w_fp;
@@ -220,10 +220,10 @@ class Hud_CopHead_C_Array
 class Hud_TextEntry_C4
 {
   public:
-    EXPORT void FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, s16 ypos, s16 fontType, s32 displayTime);
-    EXPORT void Draw_5D1D00();
-    EXPORT bool DecrementDisplayTime_5D1DB0();
-    EXPORT bool operator_equals_5D1E10(Hud_TextEntry_C4* pOther);
+    void FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, s16 ypos, s16 fontType, s32 displayTime);
+    void Draw_5D1D00();
+    bool DecrementDisplayTime_5D1DB0();
+    bool operator_equals_5D1E10(Hud_TextEntry_C4* pOther);
 
     // 9.6f 0x4C70F0
     inline void Expire_4C70F0()
@@ -259,11 +259,11 @@ class Hud_TextEntry_C4
 class Hud_TextList_968
 {
   public:
-    EXPORT void ExpireDuplicates_5D1EB0(Hud_TextEntry_C4* String2);
-    EXPORT Hud_TextEntry_C4* DisplayText_5D1F50(const wchar_t* pStr, s16 xpos, s16 ypos, s16 font_type, s32 display_time);
-    EXPORT void Service_5D2010();
-    EXPORT void RemoveExpired_5D2050();
-    EXPORT Hud_TextList_968();
+    void ExpireDuplicates_5D1EB0(Hud_TextEntry_C4* String2);
+    Hud_TextEntry_C4* DisplayText_5D1F50(const wchar_t* pStr, s16 xpos, s16 ypos, s16 font_type, s32 display_time);
+    void Service_5D2010();
+    void RemoveExpired_5D2050();
+    Hud_TextList_968();
 
     // TODO: Seems like a pool and the ctor would suggest it is, yet somehow the fields are in the wrong order?
     Hud_TextEntry_C4 field_0_29_ary[30];
@@ -301,13 +301,13 @@ class Hud_Pager_C
         return field_0_timer;
     }
 
-    EXPORT ~Hud_Pager_C();
-    EXPORT void Service_5D2320();
-    EXPORT void DrawCounterDigits_5D2380(s32 xpos, s32 ypos);
-    EXPORT void DrawDigits_5D2680(s32 xpos, s32 ypos);
-    EXPORT void DrawPager_5D2AB0(u32 xpos, s32 ypos);
+    ~Hud_Pager_C();
+    void Service_5D2320();
+    void DrawCounterDigits_5D2380(s32 xpos, s32 ypos);
+    void DrawDigits_5D2680(s32 xpos, s32 ypos);
+    void DrawPager_5D2AB0(u32 xpos, s32 ypos);
 
-    EXPORT Hud_Pager_C();
+    Hud_Pager_C();
     s32 field_0_timer;
     s32* field_4_ptr_counter; //  counter?
     SoundObject_10* field_8_sound;
@@ -322,26 +322,26 @@ class Hud_Pager_C_Array
     }
 
     // TODO: Correct order ?
-    EXPORT s32 AddOnScreenCounter_5D3220(s32* pCounter);
-    EXPORT void ClearPager_5D3280(s32 idx);
+    s32 AddOnScreenCounter_5D3220(s32* pCounter);
+    void ClearPager_5D3280(s32 idx);
 
-    EXPORT void DrawPagers_5D3040();
-    EXPORT void UpdatePagers_5D31B0();
-    EXPORT s32 CreateTimer_5D31F0(s32 seconds);
-    EXPORT void ClearClockOnly_5D32D0(s32 pager_idx);
-    EXPORT void AddTime_5D32F0(s32 pager_idx, s32 time_to_add);
-    EXPORT void ClearCounterOnly_5D3310(s32 pager_idx);
+    void DrawPagers_5D3040();
+    void UpdatePagers_5D31B0();
+    s32 CreateTimer_5D31F0(s32 seconds);
+    void ClearClockOnly_5D32D0(s32 pager_idx);
+    void AddTime_5D32F0(s32 pager_idx, s32 time_to_add);
+    void ClearCounterOnly_5D3310(s32 pager_idx);
 
     Hud_Pager_C field_0_pagers_array[4];
 };
 
-inline u8 __stdcall get_sprite_width_4C7220(s16 user_sprite_idx)
+inline u8 get_sprite_width_4C7220(s16 user_sprite_idx)
 {
     s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, user_sprite_idx);
     return gGtx_0x106C_703DD4->get_sprite_width_420220(sprite_idx);
 }
 
-inline u8 __stdcall get_sprite_height_4C7250(s16 user_sprite_idx)
+inline u8 get_sprite_height_4C7250(s16 user_sprite_idx)
 {
     s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, user_sprite_idx);
     return gGtx_0x106C_703DD4->get_sprite_height_4C6C90(sprite_idx);
@@ -383,8 +383,8 @@ class Hud_ArrowGangInfo_8
 class ArrowTrace_24
 {
   public:
-    EXPORT void PointToInfoPhone_5D03C0(Gang_144* pZone);
-    EXPORT void UpdateAimCoordinates_5D03F0();
+    void PointToInfoPhone_5D03C0(Gang_144* pZone);
+    void UpdateAimCoordinates_5D03F0();
 
     void SetTargetCar(Car_BC* pCar)
     {
@@ -490,13 +490,13 @@ class Hud_Arrow_7C
         return field_10_radius_pos == 0;
     }
 
-    EXPORT void SetArrowColour_5D0510(s32 arrow_colour);
-    EXPORT bool CheckVisibility_5D0530();
-    EXPORT bool UpdateTargets_5D0620();
-    EXPORT void UpdateScreenPos_5D0850();
-    EXPORT void Service_5D0C60();
-    EXPORT void DrawArrow_5D0C90();
-    EXPORT void SetPlayerArrowColour_5D0DC0(Ped* pPed);
+    void SetArrowColour_5D0510(s32 arrow_colour);
+    bool CheckVisibility_5D0530();
+    bool UpdateTargets_5D0620();
+    void UpdateScreenPos_5D0850();
+    void Service_5D0C60();
+    void DrawArrow_5D0C90();
+    void SetPlayerArrowColour_5D0DC0(Ped* pPed);
 
     // 9.6f inline 0x4C6F80
     inline bool IsType0_4C6F80()
@@ -557,7 +557,7 @@ class Hud_Arrow_7C
         pTarget->field_10_target_type = ArrowTargetType::XYZ_Coord_1;
     }
 
-    EXPORT Hud_Arrow_7C();
+    Hud_Arrow_7C();
     Fix16 field_0_screen_pos_x; // x and y are not independent from field_10_radius_pos
     Fix16 field_4_screen_pos_y;
     Ang16 field_8_rotation;
@@ -584,44 +584,44 @@ class Hud_Arrow_7C_Array
         field_844_check_info_phones = 0;
     }
 
-    EXPORT void CreatePlayerArrows_5D1350();
-    EXPORT bool IsThereAnyOtherArrowsInSameGang_5D0E40(Hud_Arrow_7C* pArgArrow);
-    EXPORT void DrawArrows_5D0E90();
-    EXPORT void FindVisibleGangArrow_5D0EF0();
-    EXPORT bool IsThereAnyMissionPhoneArrowForGang_5D0F40(Gang_144* pArgGang);
-    EXPORT void ClearOrphanInfoPhoneArrows_5D0F80();
-    EXPORT void UpdateArrows_5D0FD0();
-    EXPORT Hud_Arrow_7C* FindFreeArrow_5D1020(s32* pOutIdx);
-    EXPORT Hud_Arrow_7C* AllocArrow_5D1050();
-    EXPORT void ReleaseAllArrows_5D10B0();
-    EXPORT Hud_Arrow_7C* FindGangPhoneArrow_5D10D0(Gang_144* pZone, s32 phone_type);
-    EXPORT void place_gang_phone_5D1110(Object_2C* pPhoneInfo);
-    EXPORT void SetNewGangArrow_5D1310(Gang_144* pZone);
+    void CreatePlayerArrows_5D1350();
+    bool IsThereAnyOtherArrowsInSameGang_5D0E40(Hud_Arrow_7C* pArgArrow);
+    void DrawArrows_5D0E90();
+    void FindVisibleGangArrow_5D0EF0();
+    bool IsThereAnyMissionPhoneArrowForGang_5D0F40(Gang_144* pArgGang);
+    void ClearOrphanInfoPhoneArrows_5D0F80();
+    void UpdateArrows_5D0FD0();
+    Hud_Arrow_7C* FindFreeArrow_5D1020(s32* pOutIdx);
+    Hud_Arrow_7C* AllocArrow_5D1050();
+    void ReleaseAllArrows_5D10B0();
+    Hud_Arrow_7C* FindGangPhoneArrow_5D10D0(Gang_144* pZone, s32 phone_type);
+    void place_gang_phone_5D1110(Object_2C* pPhoneInfo);
+    void SetNewGangArrow_5D1310(Gang_144* pZone);
     Hud_Arrow_7C field_0_array[17];
     char_type field_83C_show_gang_arrows;
     Hud_Arrow_7C* field_840_visible_gang_arrow;
     char_type field_844_check_info_phones;
 };
 
-EXPORT char_type __stdcall GetBriefFaceIdx_5D3680(u16 face_char);
+char_type GetBriefFaceIdx_5D3680(u16 face_char);
 
 class Hud_Brief_704 // size 0x704
 {
   public:
-    EXPORT void MovePrevBriefToCurrent_5D3330();
-    EXPORT void FreeCurrentBrief_5D3350();
-    EXPORT void MoveCurrentBriefToPrev_5D3370();
-    EXPORT void AppendCurrentBriefToPrev_5D33A0();
-    EXPORT Hud_BriefEntry_18* AllocBrief_5D33F0();
-    EXPORT size_t FormatCurrentBrief_5D3470();
-    EXPORT void StartCurrentBrief_5D39D0();
-    EXPORT void DrawBrief_5D3B80();
-    EXPORT void SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32 cost_param);
-    EXPORT void SetHudBrief_5D4400(s32 priority, const char_type* pTextIdStr);
-    EXPORT void UpdateBrief_5D44D0();
-    EXPORT void ShowBrief_5D4850();
-    EXPORT void ClearAllBriefsWithPriority_5D4890(s32 priority);
-    EXPORT Hud_Brief_704();
+    void MovePrevBriefToCurrent_5D3330();
+    void FreeCurrentBrief_5D3350();
+    void MoveCurrentBriefToPrev_5D3370();
+    void AppendCurrentBriefToPrev_5D33A0();
+    Hud_BriefEntry_18* AllocBrief_5D33F0();
+    size_t FormatCurrentBrief_5D3470();
+    void StartCurrentBrief_5D39D0();
+    void DrawBrief_5D3B80();
+    void SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32 cost_param);
+    void SetHudBrief_5D4400(s32 priority, const char_type* pTextIdStr);
+    void UpdateBrief_5D44D0();
+    void ShowBrief_5D4850();
+    void ClearAllBriefsWithPriority_5D4890(s32 priority);
+    Hud_Brief_704();
 
     wchar_t field_0_str[640];
     s16 field_500_unused;
@@ -652,12 +652,12 @@ class Hud_MapZone_98
         field_8C_local_nav_zone = nullptr;
     }
 
-    EXPORT void DrawZoneName_5D5900();
-    EXPORT void GetXPosOffset_5D5AD0();
-    EXPORT void ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZone2);
-    EXPORT void UpdateZoneName_5D5B60();
-    EXPORT void ResetTransparency_5D5C50();
-    EXPORT Hud_MapZone_98();
+    void DrawZoneName_5D5900();
+    void GetXPosOffset_5D5AD0();
+    void ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZone2);
+    void UpdateZoneName_5D5B60();
+    void ResetTransparency_5D5C50();
+    Hud_MapZone_98();
     u8 field_0_timer;
     wchar_t field_2_wstr[65];
     s32 field_84_xpos_offset;
@@ -670,8 +670,8 @@ class Hud_MapZone_98
 class Hud_CarName_4C
 {
   public:
-    EXPORT Hud_CarName_4C();
-    EXPORT void DrawCarName_5D4A10();
+    Hud_CarName_4C();
+    void DrawCarName_5D4A10();
     char_type field_0_display_time;
     wchar_t field_2_car_name[33];
     s32 field_44_xpos_offset;
@@ -681,22 +681,22 @@ class Hud_CarName_4C
 class Hud_2B00
 {
   public:
-    EXPORT ~Hud_2B00();
-    EXPORT void CalcCarNameXPosOffset_5D5190();
-    EXPORT void ShowCarName_5D5240(wchar_t* Source);
-    EXPORT void UpdateCarName_5D5350();
-    EXPORT void DrawGui_5D6860();
-    EXPORT void UpdatePauseSection_5D69C0();
-    EXPORT void UpdateHUD_5D69D0();
-    EXPORT void SetFullAmbient_5D6A70();
-    EXPORT void GetTextSpeed_5D6A90();
-    EXPORT void RecalcTextLayout_5D6AB0();
-    EXPORT void SetFontTypes_5D6B00();
-    EXPORT void Init_5D6BE0();
-    EXPORT bool IsBusy_5D6C20(s32 action, Player* pPlayer);
-    EXPORT bool IsInputKeyConsumed_5D6C70(s32 action);
-    EXPORT bool IsQuitMessageInputKey_5D6CB0(s32 action);
-    EXPORT Hud_2B00();
+    ~Hud_2B00();
+    void CalcCarNameXPosOffset_5D5190();
+    void ShowCarName_5D5240(wchar_t* Source);
+    void UpdateCarName_5D5350();
+    void DrawGui_5D6860();
+    void UpdatePauseSection_5D69C0();
+    void UpdateHUD_5D69D0();
+    void SetFullAmbient_5D6A70();
+    void GetTextSpeed_5D6A90();
+    void RecalcTextLayout_5D6AB0();
+    void SetFontTypes_5D6B00();
+    void Init_5D6BE0();
+    bool IsBusy_5D6C20(s32 action, Player* pPlayer);
+    bool IsInputKeyConsumed_5D6C70(s32 action);
+    bool IsQuitMessageInputKey_5D6CB0(s32 action);
+    Hud_2B00();
 
     Hud_CarName_4C field_0_car_name;
     Hud_MapZone_98 field_4C_zone_name;
@@ -727,9 +727,9 @@ EXTERN_GLOBAL(s16, gDebugFont_706600);
 
 EXTERN_GLOBAL_ARRAY(char, gTmpGxtKey_67CE50, 264);
 
-EXPORT s32 __stdcall GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx);
-EXPORT char_type* __stdcall get_phone_colour_5D12B0(s32 phone_type);
-EXPORT u8 __stdcall GetMinRespectForPhoneType_5D12E0(s32 phone_type);
+s32 GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx);
+char_type* get_phone_colour_5D12B0(s32 phone_type);
+u8 GetMinRespectForPhoneType_5D12E0(s32 phone_type);
 
-EXPORT void __stdcall DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count);
-EXPORT s32 __stdcall DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number);
+void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count);
+s32 DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number);

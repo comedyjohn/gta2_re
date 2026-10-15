@@ -13,13 +13,6 @@
 // but not confuse the compiler with extra parameters.
 #define COMMA ,
 
-// The markers give each function's address in the original 10.5.exe (and whether the decompilation
-// matched it byte for byte); they generate no code
-#define WIP_FUNC(addr)
-#define MATCH_FUNC(addr)
-#define STUB_FUNC(addr)
-#define EXPORT
-#define __stdcall
 
 // Report unfinished code the first time the game reaches it
 #define NOT_IMPLEMENTED                                        \
@@ -30,16 +23,6 @@
         {                                                      \
             logged___ = true;                                  \
             printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
-        }                                                      \
-    } while (0)
-#define WIP_IMPLEMENTED                                        \
-    do                                                         \
-    {                                                          \
-        static bool logged___ = false;                         \
-        if (!logged___)                                        \
-        {                                                      \
-            logged___ = true;                                  \
-            printf("WIP IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
         }                                                      \
     } while (0)
 

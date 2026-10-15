@@ -58,11 +58,11 @@ class Taxi_4
         return field_0_pFirst == nullptr;
     }
 
-    EXPORT void PushTaxi_457BA0(Car_BC* pCar);
-    EXPORT void PopAll_457BC0();
-    EXPORT Car_BC* GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos);
-    EXPORT Taxi_4();
-    EXPORT ~Taxi_4();
+    void PushTaxi_457BA0(Car_BC* pCar);
+    void PopAll_457BC0();
+    Car_BC* GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos);
+    Taxi_4();
+    ~Taxi_4();
     Taxi_8* field_0_pFirst;
 };
 

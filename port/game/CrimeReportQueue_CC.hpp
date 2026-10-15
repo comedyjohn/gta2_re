@@ -13,10 +13,10 @@ class Char_B4;
 class CrimeReport_14
 {
   public:
-    EXPORT CrimeReport_14();
-    EXPORT ~CrimeReport_14();
-    EXPORT void SetReport(s32 crime_type, s32 ped_id);
-    EXPORT void GetReport(s32* pCrimeType, Fix16* pXPos, Fix16* yPos, Fix16* zPos);
+    CrimeReport_14();
+    ~CrimeReport_14();
+    void SetReport(s32 crime_type, s32 ped_id);
+    void GetReport(s32* pCrimeType, Fix16* pXPos, Fix16* yPos, Fix16* zPos);
 
     s32 field_0_crime_type; // crime_stats_type
     s32 field_4_ped_id;
@@ -28,17 +28,17 @@ class CrimeReport_14
 class CrimeReportQueue_CC
 {
   public:
-    EXPORT CrimeReportQueue_CC();
-    EXPORT ~CrimeReportQueue_CC();
-    EXPORT void QueueReport(s32 crime_type, s32 ped_id);
-    EXPORT bool TryPopOldestReport(s32* pCrimeType, Fix16* pXPos, Fix16* pYPos, Fix16* pZPos);
-    EXPORT bool IsCrimeQueued(s32 crime_type);
-    EXPORT CrimeReportQueue_CC* ctor_484FC0();
-    EXPORT void dtor_484FD0();
-    EXPORT void ReportCrimeForPed(u32 crime_type, Ped* pPed);
-    EXPORT bool ShouldReportCarCrime_485090(Car_BC* pCar, Player* pPlayer);
-    EXPORT bool ShouldReportCharCrime_4850F0(Char_B4* pB4, Player* pPlayer);
-    EXPORT bool ShouldReportPedCrime_485140(Ped* pPed, Player* pPlayer);
+    CrimeReportQueue_CC();
+    ~CrimeReportQueue_CC();
+    void QueueReport(s32 crime_type, s32 ped_id);
+    bool TryPopOldestReport(s32* pCrimeType, Fix16* pXPos, Fix16* pYPos, Fix16* pZPos);
+    bool IsCrimeQueued(s32 crime_type);
+    CrimeReportQueue_CC* ctor_484FC0();
+    void dtor_484FD0();
+    void ReportCrimeForPed(u32 crime_type, Ped* pPed);
+    bool ShouldReportCarCrime_485090(Car_BC* pCar, Player* pPlayer);
+    bool ShouldReportCharCrime_4850F0(Char_B4* pB4, Player* pPlayer);
+    bool ShouldReportPedCrime_485140(Ped* pPed, Player* pPlayer);
 
     u16 field_0_write_idx;
     u16 field_2_read_idx;
@@ -47,8 +47,8 @@ class CrimeReportQueue_CC
 
 class CrimeReportQueue_CC_Sub : public CrimeReportQueue_CC {
   public:
-    EXPORT CrimeReportQueue_CC_Sub();
-    EXPORT ~CrimeReportQueue_CC_Sub();
+    CrimeReportQueue_CC_Sub();
+    ~CrimeReportQueue_CC_Sub();
 };
 
 EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);

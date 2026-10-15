@@ -5,8 +5,8 @@
 #include <cstdlib>
 #include "enums.hpp"
 
-MATCH_FUNC(0x4FE4D0)
-void* __stdcall Memory::malloc_4FE4D0(size_t Size)
+// 0x4FE4D0
+void* Memory::malloc_4FE4D0(size_t Size)
 {
     void* result = crt::malloc(Size);
     if (!result)
@@ -17,8 +17,8 @@ void* __stdcall Memory::malloc_4FE4D0(size_t Size)
     return result;
 }
 
-MATCH_FUNC(0x4FE510)
-void* __stdcall Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
+// 0x4FE510
+void* Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
 {
     // Allocate with extra space for alignment
     void* pAlloc = crt::malloc(requestedSize + 0x10000);

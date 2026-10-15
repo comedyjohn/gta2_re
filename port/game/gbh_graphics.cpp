@@ -47,8 +47,8 @@ DEFINE_GLOBAL(FARPROC, pDrawLine, 0x7085DC);
 DEFINE_GLOBAL(s32, gGBH_GraphicsLoaded_7085E0, 0x7085E0);
 DEFINE_GLOBAL(u32*, gpGBH_Globals_7085E4, 0x7085E4);
 
-MATCH_FUNC(0x5EA4D0)
-EXPORT void __stdcall GBH_Graphics_Stub_5EA4D0()
+// 0x5EA4D0
+void GBH_Graphics_Stub_5EA4D0()
 {
     MessageBoxA(nullptr,
                 "Error: A GBH Graphic function was called without the DLL being loaded, or the function has not been fixed up.",
@@ -56,8 +56,8 @@ EXPORT void __stdcall GBH_Graphics_Stub_5EA4D0()
                 MB_OK);
 }
 
-MATCH_FUNC(0x5EA500)
-EXPORT void __stdcall GBH_Graphics_Unload_5EA500()
+// 0x5EA500
+void GBH_Graphics_Unload_5EA500()
 {
     FreeLibrary(gGbhDllHandle_7085D8);
     pgbh_InitDLL = (T_gbh_InitDLL)GBH_Graphics_Stub_5EA4D0;
@@ -91,8 +91,8 @@ EXPORT void __stdcall GBH_Graphics_Unload_5EA500()
     pgbh_DrawFlatRect = (T_gbh_DrawFlatRect)GBH_Graphics_Stub_5EA4D0;
 }
 
-MATCH_FUNC(0x5EA640)
-EXPORT s32 GBH_Graphics_Free_5EA640()
+// 0x5EA640
+s32 GBH_Graphics_Free_5EA640()
 {
     if (!gGBH_GraphicsLoaded_7085E0)
     {
@@ -116,8 +116,8 @@ EXPORT s32 GBH_Graphics_Free_5EA640()
         return -1;                                                     \
     }
 
-MATCH_FUNC(0x5EA680)
-EXPORT s32 __stdcall GBH_GraphicsLoadDll_5EA680(const char_type* lpLibFileName)
+// 0x5EA680
+s32 GBH_GraphicsLoadDll_5EA680(const char_type* lpLibFileName)
 {
     char_type Text[126];
     if (!lpLibFileName)
@@ -178,8 +178,8 @@ EXPORT s32 __stdcall GBH_GraphicsLoadDll_5EA680(const char_type* lpLibFileName)
     return 0;
 }
 
-MATCH_FUNC(0x5EB680)
-EXPORT s32 __stdcall GBH_GraphicsLoad_5EB680(const char_type* lpLibFileName, SVideo* pVidSys)
+// 0x5EB680
+s32 GBH_GraphicsLoad_5EB680(const char_type* lpLibFileName, SVideo* pVidSys)
 {
     const s32 error = GBH_GraphicsLoadDll_5EA680(lpLibFileName);
     if (error)

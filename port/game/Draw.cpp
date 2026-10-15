@@ -21,8 +21,8 @@ DEFINE_GLOBAL(DWORD, gWindowBottom_70679C, 0x70679C);
 
 //u16 word_703BAA; //DEFINE_GLOBAL(u16, word_703BAA, 0x703BAA);
 
-MATCH_FUNC(0x495470)
-void __stdcall DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, s32 a7, u8 a8)
+// 0x495470
+void DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, s32 a7, u8 a8)
 {
     DrawTexture_5D8470(pTexture,
                x_pos * gViewCamera_676978->field_A8_ui_scale,
@@ -35,14 +35,14 @@ void __stdcall DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y
                a8);
 }
 
-MATCH_FUNC(0x4B87A0)
-void __stdcall DrawText_4B87A0(const wchar_t* pBuffer, Fix16 xpos_fp, Fix16 ypos_fp, s16 fontType, Fix16 scale)
+// 0x4B87A0
+void DrawText_4B87A0(const wchar_t* pBuffer, Fix16 xpos_fp, Fix16 ypos_fp, s16 fontType, Fix16 scale)
 {
     DrawText_5D8A10(pBuffer, xpos_fp, ypos_fp, fontType, scale, 2, 0, 0, 0);
 }
 
-MATCH_FUNC(0x5D7670)
-void __stdcall DrawFigureScaled_5D7670(s32 sprite_type, s16 sprite_idx, Fix16 x_pos, Fix16 y_pos, Ang16 rotation, const s32& palette_type, s16 palette, s32 alpha_value, u8 flags)
+// 0x5D7670
+void DrawFigureScaled_5D7670(s32 sprite_type, s16 sprite_idx, Fix16 x_pos, Fix16 y_pos, Ang16 rotation, const s32& palette_type, s16 palette, s32 alpha_value, u8 flags)
 {
     DrawFigure_5D7EC0(sprite_type,
                sprite_idx,
@@ -57,14 +57,14 @@ void __stdcall DrawFigureScaled_5D7670(s32 sprite_type, s16 sprite_idx, Fix16 x_
                0);
 }
 
-MATCH_FUNC(0x5D7700)
-s32 __stdcall GetLineSpacingFromFontType_5D7700(u16 font_type)
+// 0x5D7700
+s32 GetLineSpacingFromFontType_5D7700(u16 font_type)
 {
     return (u16)gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type);
 }
 
-MATCH_FUNC(0x5D7720)
-void __stdcall DrawText_5D7720(const wchar_t* pStr, Fix16 xoff, Fix16 yoff, u16 fontType, const s32& palette_type, u16 palette, s32 alpha, u8 alpha_flag)
+// 0x5D7720
+void DrawText_5D7720(const wchar_t* pStr, Fix16 xoff, Fix16 yoff, u16 fontType, const s32& palette_type, u16 palette, s32 alpha, u8 alpha_flag)
 {
     DrawText_5D8A10(pStr,
                     xoff * gViewCamera_676978->field_A8_ui_scale,
@@ -77,8 +77,8 @@ void __stdcall DrawText_5D7720(const wchar_t* pStr, Fix16 xoff, Fix16 yoff, u16 
                     alpha_flag);
 }
 
-MATCH_FUNC(0x5D77A0)
-void __stdcall DrawTextScaled_5D77A0(wchar_t* pText, Fix16 xpos, Fix16 ypos, u16 font_type)
+// 0x5D77A0
+void DrawTextScaled_5D77A0(wchar_t* pText, Fix16 xpos, Fix16 ypos, u16 font_type)
 {
     DrawText_5D8A10(pText,
                     xpos * gViewCamera_676978->field_A8_ui_scale,
@@ -92,16 +92,16 @@ void __stdcall DrawTextScaled_5D77A0(wchar_t* pText, Fix16 xpos, Fix16 ypos, u16
 }
 
 // The original is a tail-call thunk into the body at 0x5D7CC0 (9.6f: 0x4CAEB0 -> 0x4CADE0)
-MATCH_FUNC(0x5D7CB0)
-void __stdcall ConvertColourBanks_5D7CB0()
+// 0x5D7CB0
+void ConvertColourBanks_5D7CB0()
 {
     pgbh_SetColourDepth();
     ConvertColourBanks_5D7CC0();
 }
 
 // https://decomp.me/scratch/zpWhI
-MATCH_FUNC(0x5D7CC0)
-void __stdcall ConvertColourBanks_5D7CC0()
+// 0x5D7CC0
+void ConvertColourBanks_5D7CC0()
 {
     if (gGtx_0x106C_703DD4 && gGtx_0x106C_703DD4->field_6A_palettes_converted == 0)
     {
@@ -120,8 +120,8 @@ void __stdcall ConvertColourBanks_5D7CC0()
     }
 }
 
-MATCH_FUNC(0x5D7D30)
-void __stdcall MakeScreenTableAndSetWindow_5D7D30()
+// 0x5D7D30
+void MakeScreenTableAndSetWindow_5D7D30()
 {
     pVid_GetSurface(gVidSys_7071D0);
     pMakeScreenTable((sptr)gVidSys_7071D0->field_50_surface_pixels_ptr,
@@ -147,8 +147,8 @@ void __stdcall MakeScreenTableAndSetWindow_5D7D30()
 // them), the flags test is one equality condition and the widths go through the Fix16(u8) ctor.
 // The ternary, the field reads in u/v and `u32 flags` set the front-end size that gives the
 // original's inline cut-offs: the second rotation's Negate_4086A0 inline, the others out of line.
-MATCH_FUNC(0x5D7EC0)
-void __stdcall DrawFigure_5D7EC0(s32 sprite_type,
+// 0x5D7EC0
+void DrawFigure_5D7EC0(s32 sprite_type,
                           s16 sprite_idx,
                           Fix16 x_pos,
                           Fix16 y_pos,
@@ -223,8 +223,8 @@ void __stdcall DrawFigure_5D7EC0(s32 sprite_type,
                   255);
 }
 
-MATCH_FUNC(0x5D83E0);
-s32 __stdcall CalcQuadFlags_5D83E0(s32 mode, u8 a2)
+// 0x5D83E0
+s32 CalcQuadFlags_5D83E0(s32 mode, u8 a2)
 {
     switch (mode)
     {
@@ -257,8 +257,8 @@ static inline f32 Fix16ToF32_Rounded(const Fix16& v)
 }
 
 // https://decomp.me/scratch/SCz1D
-MATCH_FUNC(0x5D8470);
-void __stdcall DrawTexture_5D8470(STexture* pTexture,
+// 0x5D8470
+void DrawTexture_5D8470(STexture* pTexture,
                                  Fix16 x_pos,
                                  Fix16 y_pos,
                                  u8 width,
@@ -336,8 +336,8 @@ void __stdcall DrawTexture_5D8470(STexture* pTexture,
     pgbh_DrawQuad(flags | CalcQuadFlags_5D83E0(a8, a9) | 0x20000, pTexture, gQuadVerts_706B88.field_0_verts, 255);
 }
 
-MATCH_FUNC(0x5D8940)
-s32 __stdcall CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
+// 0x5D8940
+s32 CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
 {
     s32 line_spacing = GetLineSpacingFromFontType_5D7700_inlined(font_type);
 
@@ -353,8 +353,8 @@ s32 __stdcall CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
 }
 
 // https://decomp.me/scratch/HX0q9
-MATCH_FUNC(0x5D8A10)
-void __stdcall DrawText_5D8A10(const wchar_t* pText,
+// 0x5D8A10
+void DrawText_5D8A10(const wchar_t* pText,
                                Fix16 xpos_fp,
                                Fix16 ypos_fp,
                                u16 font_type,

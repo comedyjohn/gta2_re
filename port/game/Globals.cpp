@@ -66,7 +66,7 @@ void GlobalsRegistry::CheckVars()
 
 extern "C"
 {
-    __declspec(dllexport) GlobalsRegistry* __cdecl GetGlobalsRegistry()
+    __declspec(dllexport) GlobalsRegistry* GetGlobalsRegistry()
     {
         static GlobalsRegistry globalsReg;
         return &globalsReg;

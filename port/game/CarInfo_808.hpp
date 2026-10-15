@@ -43,7 +43,7 @@ struct PixelsToFix16Table
 
     // This one won't match with a ref argument even though its the
     // same as the above function :')
-    EXPORT Fix16 SignedPixelsToFix16_440860(s8 var);
+    Fix16 SignedPixelsToFix16_440860(s8 var);
 
     Fix16 list[256];
 };
@@ -80,16 +80,16 @@ class ModelPhysics_48
         return field_2C_anti_strngth;
     }
 
-    EXPORT void ConvertMass_454680();
+    void ConvertMass_454680();
 };
 GTA2_ASSERT_SIZEOF_ALWAYS(ModelPhysics_48, 0x48);
 
 class CarInfo_2C
 {
   public:
-    EXPORT CarInfo_2C();
-    EXPORT ~CarInfo_2C();
-    EXPORT void CalculateCarInfo_4542A0(s32 idx);
+    CarInfo_2C();
+    ~CarInfo_2C();
+    void CalculateCarInfo_4542A0(s32 idx);
 
     Fix16 field_0_moment_of_inertia;
     Fix16 field_4_front_wheel_offset;
@@ -107,31 +107,31 @@ GTA2_ASSERT_SIZEOF_ALWAYS(CarInfo_2C, 0x2C);
 class CarInfo_808
 {
   public:
-    EXPORT ModelPhysics_48* GetModelPhysicsFromIdx_4546B0(u8 model_idx);
-    EXPORT void LoadModelPhysics_4546D0();
-    EXPORT CarInfo_2C* GetInfoAtIdx_454840(u8 idx);
-    EXPORT void CalculateAllCarInfo_454850();
-    EXPORT void ConvertAllMass_4549C0();
-    EXPORT void LoadFromGciFile_454A00(const char_type* pGciFilePath);
-    EXPORT void Reload_454A50();
-    EXPORT void Clear_454A80();
-    EXPORT void Free_454AA0();
-    EXPORT CarInfo_808();
-    EXPORT ~CarInfo_808();
+    ModelPhysics_48* GetModelPhysicsFromIdx_4546B0(u8 model_idx);
+    void LoadModelPhysics_4546D0();
+    CarInfo_2C* GetInfoAtIdx_454840(u8 idx);
+    void CalculateAllCarInfo_454850();
+    void ConvertAllMass_4549C0();
+    void LoadFromGciFile_454A00(const char_type* pGciFilePath);
+    void Reload_454A50();
+    void Clear_454A80();
+    void Free_454AA0();
+    CarInfo_808();
+    ~CarInfo_808();
 
-    EXPORT static char* __stdcall parse_gci_file_430A30(void* input,
+    static char* parse_gci_file_430A30(void* input,
                                                         size_t input_size,
                                                         ModelPhysics_48* output,
                                                         size_t output_size,
                                                         u32* next_position);
-    EXPORT static char* __stdcall SetErr_430AC0(s32 error_code);
-    EXPORT static s32 __stdcall ReadToken_430B10(char* pOut);
-    EXPORT static s32 __stdcall PushData_430E60(void* pSrc, u32 size);
-    EXPORT static s32 __stdcall HexStr2Int_430EC0(const char* pStr, s32* pOut);
-    EXPORT static s32 __stdcall HexStr2Int_430F30(const char* pStr, s16* pOut);
-    EXPORT static s32 __stdcall StrToInt_430FA0(const char* pStr, s32* pOut);
-    EXPORT static s32 __stdcall FloatStrToFix16_431000(char* pStr, Fix16& pOut);
-    EXPORT static s32 __stdcall StrToInt_431080(const char* pStr, s16* pOut);
+    static char* SetErr_430AC0(s32 error_code);
+    static s32 ReadToken_430B10(char* pOut);
+    static s32 PushData_430E60(void* pSrc, u32 size);
+    static s32 HexStr2Int_430EC0(const char* pStr, s32* pOut);
+    static s32 HexStr2Int_430F30(const char* pStr, s16* pOut);
+    static s32 StrToInt_430FA0(const char* pStr, s32* pOut);
+    static s32 FloatStrToFix16_431000(char* pStr, Fix16& pOut);
+    static s32 StrToInt_431080(const char* pStr, s16* pOut);
 
     CarInfo_2C* field_0_ptr_array[256];
     CarInfo_2C* field_400_raw_data;
@@ -142,4 +142,4 @@ GTA2_ASSERT_SIZEOF_ALWAYS(CarInfo_808, 0x808);
 
 EXTERN_GLOBAL(CarInfo_808*, gCarInfo_808_678098);
 
-EXPORT s32 __stdcall ParseTokenAndPush_430C70(char_type* a1);
+s32 ParseTokenAndPush_430C70(char_type* a1);

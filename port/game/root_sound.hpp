@@ -29,49 +29,49 @@ class root_sound
         return pCurrent;
     }
 
-    EXPORT SoundObject_10* CreateSoundObject_40EF40(void* pObject, s32 objectType);
+    SoundObject_10* CreateSoundObject_40EF40(void* pObject, s32 objectType);
 
-    EXPORT void Init_40EF80();
+    void Init_40EF80();
 
-    EXPORT void Service_40EFA0();
+    void Service_40EFA0();
 
-    EXPORT s32 AddSoundObject_40EFB0(SoundObject_10* pSoundObj);
+    s32 AddSoundObject_40EFB0(SoundObject_10* pSoundObj);
 
-    EXPORT void FreeSoundEntry_40EFD0(s32 sound_entry);
+    void FreeSoundEntry_40EFD0(s32 sound_entry);
 
-    EXPORT char_type LoadStyle_40EFF0(const char_type* pStyleName);
+    char_type LoadStyle_40EFF0(const char_type* pStyleName);
 
-    EXPORT void InitMusicAndCopRadio_40F010();
+    void InitMusicAndCopRadio_40F010();
 
-    EXPORT void DeInitVocals_40F020();
+    void DeInitVocals_40F020();
 
-    EXPORT void DeclareRadioStation_40F030(s32 station_idx, Fix16 xpos, Fix16 ypos);
+    void DeclareRadioStation_40F030(s32 station_idx, Fix16 xpos, Fix16 ypos);
 
-    EXPORT void RemoveSound_40F050(Fix16 sound_id, Fix16 emitter);
+    void RemoveSound_40F050(Fix16 sound_id, Fix16 emitter);
 
-    EXPORT void CycleRadioStation_40F070(char_type direction);
+    void CycleRadioStation_40F070(char_type direction);
 
-    EXPORT void PlayVoice_40F090(s32 state);
+    void PlayVoice_40F090(s32 state);
 
-    EXPORT void SetSfxVol_40F0B0(u8 sfxVol);
+    void SetSfxVol_40F0B0(u8 sfxVol);
 
-    EXPORT void SetCDVol_40F0F0(u8 cdVol);
+    void SetCDVol_40F0F0(u8 cdVol);
 
-    EXPORT u8 GetCDVol_40F120();
+    u8 GetCDVol_40F120();
 
-    EXPORT void Release_40F130();
+    void Release_40F130();
 
-    EXPORT void Reacquire_40F140();
+    void Reacquire_40F140();
 
-    EXPORT char_type GetAudioDriveLetter_40F150();
+    char_type GetAudioDriveLetter_40F150();
 
-    EXPORT char_type Set3DSound_40F160(char_type b3dSound);
+    char_type Set3DSound_40F160(char_type b3dSound);
 
-    EXPORT char_type Get3DSound_40F180();
+    char_type Get3DSound_40F180();
 
-    EXPORT root_sound();
+    root_sound();
 
-    EXPORT ~root_sound();
+    ~root_sound();
 
     void DeinitializeAudio();
 };

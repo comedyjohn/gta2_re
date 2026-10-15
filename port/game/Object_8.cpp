@@ -1,6 +1,6 @@
 #include "Object_8.hpp"
 
-MATCH_FUNC(0x52ad50)
+// 0x52ad50
 Object_8::Object_8()
 {
     this->mpNext = nullptr;
@@ -9,7 +9,7 @@ Object_8::Object_8()
     this->field_4_timer = 99;
 }
 
-MATCH_FUNC(0x52ad70)
+// 0x52ad70
 Object_8::~Object_8()
 {
     mpNext = nullptr;

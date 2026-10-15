@@ -15,47 +15,47 @@ DEFINE_GLOBAL_INIT(Ang16, kAng180_669156, Ang16(720), 0x669156);
 DEFINE_GLOBAL_INIT(Ang16, kAng90_667A7C, Ang16(360), 0x667A7C);
 DEFINE_GLOBAL_INIT(Ang16, kAng270_66916C, Ang16(1080), 0x66916C);
 
-MATCH_FUNC(0x408660)
+// 0x408660
 Fix16 Fix16::Add_408660(const Fix16& rhs) const throw()
 {
     s32 value = mValue + rhs.mValue;
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x408680)
+// 0x408680
 Fix16 Fix16::Multiply_408680(const Fix16& in) const throw()
 {
     s32 value = (s32)((mValue * (__int64)in.mValue) >> 14);
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x436A00)
+// 0x436A00
 Fix16 Fix16::Subtract_436A00(const Fix16& in) const
 {
     s32 value = mValue - in.mValue;
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x436A20)
+// 0x436A20
 Fix16 Fix16::Divide_436A20(const Fix16& in) const
 {
     s32 value = (s32)(((__int64)mValue << 14) / in.mValue);
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x451670)
+// 0x451670
 s32 Fix16::IsLess_451670(const Fix16& other) const
 {
     return mValue < other.mValue;
 }
 
-MATCH_FUNC(0x451690)
+// 0x451690
 s32 Fix16::IsGreater_451690(const Fix16& other) const
 {
     return mValue > other.mValue;
 }
 
-MATCH_FUNC(0x539F90)
+// 0x539F90
 Fix16& Fix16::DivideAssign_539F90(const Fix16& rhs)
 {
     mValue = (s32)(((__int64)mValue << 14) / rhs.mValue);
@@ -63,35 +63,35 @@ Fix16& Fix16::DivideAssign_539F90(const Fix16& rhs)
 }
 
 // Out-of-line copy of operator/(const s32&) (20 bytes, called by Particle_8::EmitImpactParticles_53FE40)
-MATCH_FUNC(0x53E860)
+// 0x53E860
 Fix16 Fix16::DivideInt_53E860(const s32& in) const
 {
     s32 value = mValue / in;
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x561DB0)
+// 0x561DB0
 Fix16 Fix16::MultiplyInt_561DB0(const s32& in) const
 {
     s32 value = mValue * in;
     return Fix16(value, 0);
 }
 
-MATCH_FUNC(0x562430)
+// 0x562430
 Fix16& Fix16::MultiplyAssign_562430(const Fix16& rhs)
 {
     mValue = (s32)((mValue * (__int64)rhs.mValue) >> 14);
     return *this;
 }
 
-MATCH_FUNC(0x4086A0)
+// 0x4086A0
 Fix16 Fix16::Negate_4086A0() const throw()
 {
     return Fix16(-mValue, 0);
 }
 
-MATCH_FUNC(0x44E540)
-Fix16 __stdcall Fix16::Max_44E540(const Fix16& pLhs, const Fix16& pRhs)
+// 0x44E540
+Fix16 Fix16::Max_44E540(const Fix16& pLhs, const Fix16& pRhs)
 {
     Fix16 result;
     if (pLhs.mValue > pRhs.mValue)
@@ -106,7 +106,7 @@ Fix16 __stdcall Fix16::Max_44E540(const Fix16& pLhs, const Fix16& pRhs)
 }
 
 /*
-MATCH_FUNC(0x436A20)
+// 0x436A20
 Fix16 Fix16::operator/(const Fix16& in)
 {
     s32 value = ((__int64)mValue << 14) / in.mValue;
@@ -114,8 +114,8 @@ Fix16 Fix16::operator/(const Fix16& in)
 }
 */
 
-MATCH_FUNC(0x436A50)
-Fix16 __stdcall Fix16::Abs_436A50(const Fix16& input)
+// 0x436A50
+Fix16 Fix16::Abs_436A50(const Fix16& input)
 {
     if (input.mValue > 0)
     {
@@ -127,16 +127,16 @@ Fix16 __stdcall Fix16::Abs_436A50(const Fix16& input)
     }
 }
 
-MATCH_FUNC(0x436A70)
-Fix16 __stdcall Fix16::SquareRoot_436A70(const Fix16& input) throw()
+// 0x436A70
+Fix16 Fix16::SquareRoot_436A70(const Fix16& input) throw()
 {
     return Fix16(sqrt(input.AsDouble()));
 }
 
 // 10.5 https://decomp.me/scratch/7a41K
 // 9.6f https://decomp.me/scratch/ZkUbq
-MATCH_FUNC(0x405320)
-Ang16 __stdcall Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
+// 0x405320
+Ang16 Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
 {
     Ang16 table_angle;
     if (y == kFPZero_6691B0)
@@ -197,8 +197,8 @@ Ang16 __stdcall Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
     }
 }
 
-MATCH_FUNC(0x438FB0)
-EXPORT bool __stdcall IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
+// 0x438FB0
+bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
                                                      const Fix16& intervalEnd,
                                                      const Fix16& rangeMin,
                                                      const Fix16& rangeMax)
@@ -219,8 +219,8 @@ EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle_6691EC);
 
 // Turns the angle `cur` toward `*pTarget` by at most `*pSpeed`, the short way round, and wraps the
 // result into [0, 2pi). Called by Trailer::UpdateTrailerAlignment_407CE0.
-MATCH_FUNC(0x405DA0)
-EXPORT Fix16 __stdcall sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
+// 0x405DA0
+Fix16 sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
 {
     if (*pTarget - cur > kAngFix16HalfCircle_6691EC)
     {
@@ -264,8 +264,8 @@ DEFINE_GLOBAL_INIT(Fix16, dword_669140, Fix16(0x63D8, 0), 0x669140);
 DEFINE_GLOBAL_INIT(Fix16, dword_6691FC, Fix16(0x12B88, 0), 0x6691FC);
 
 // Is `*a` within dword_66A924 of `*b`, directly or one turn (kAngFix16FullCircle_66A8E4) either way.
-MATCH_FUNC(0x405E20)
-EXPORT s32 __stdcall sub_405E20(Fix16* a, Fix16* b)
+// 0x405E20
+s32 sub_405E20(Fix16* a, Fix16* b)
 {
     if ((*a > *b - dword_66A924 && *a < *b + dword_66A924) ||
         (*a > *b - kAngFix16FullCircle_66A8E4 - dword_66A924 && *a < *b - kAngFix16FullCircle_66A8E4 + dword_66A924) ||
@@ -279,8 +279,8 @@ EXPORT s32 __stdcall sub_405E20(Fix16* a, Fix16* b)
 // Clamps the angle `*pCur` into the window of +-dword_669140 around `*pTarget`, allowing for the
 // wrap at 0 / 2pi, and returns whether it ends up on either edge. Called by
 // Trailer::UpdateTrailerAlignment_407CE0.
-MATCH_FUNC(0x405E80)
-EXPORT s32 __stdcall sub_405E80(Fix16* pTarget, Fix16* pCur)
+// 0x405E80
+s32 sub_405E80(Fix16* pTarget, Fix16* pCur)
 {
     Fix16 lo;
     Fix16 hi;
@@ -346,8 +346,8 @@ EXPORT s32 __stdcall sub_405E80(Fix16* pTarget, Fix16* pCur)
 
 // The original is a CRT init func (called from the CRT init table), here Init_trigonometry_tables
 // calls it. The constants are pi and 1/720: 1440 steps of the full circle.
-MATCH_FUNC(0x4052D0)
-EXPORT void __stdcall arc_tan_table_init_4052D0()
+// 0x4052D0
+void arc_tan_table_init_4052D0()
 {
     s32 arg = 0;
     Fix16* pTan = gTanTable_6663C8;
@@ -361,8 +361,8 @@ EXPORT void __stdcall arc_tan_table_init_4052D0()
 }
 
 // 9.6f: 0x40E810
-MATCH_FUNC(0x405500)
-EXPORT Ang16 __stdcall ArcTanLookup_405500(const Fix16& targetTan)
+// 0x405500
+Ang16 ArcTanLookup_405500(const Fix16& targetTan)
 {
     s16 low = 0;
     s16 high = 360 - 1;
@@ -411,8 +411,8 @@ EXPORT Ang16 __stdcall ArcTanLookup_405500(const Fix16& targetTan)
     }
 }
 
-MATCH_FUNC(0x5A57E0)
-EXPORT void __stdcall FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
+// 0x5A57E0
+void FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
 {
     minOut = a;
     maxOut = a;

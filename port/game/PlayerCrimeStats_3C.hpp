@@ -23,14 +23,14 @@ enum
 class PlayerCrimeStats_3C
 {
   public:
-    EXPORT PlayerCrimeStats_3C(); // 0x484ED0
-    EXPORT ~PlayerCrimeStats_3C(); // 0x484EE0
-    EXPORT void Reset_484EF0();
-    EXPORT void Service_484F20();
-    EXPORT void ResetCrimeCountFlags_484F30();
-    EXPORT void IncrementCrimeCount_484F50(int crime_type);
-    EXPORT void AddCarDamageCost_484FA0(int cost);
-    EXPORT void AddEvasionRating_484FB0(int amount);
+    PlayerCrimeStats_3C(); // 0x484ED0
+    ~PlayerCrimeStats_3C(); // 0x484EE0
+    void Reset_484EF0();
+    void Service_484F20();
+    void ResetCrimeCountFlags_484F30();
+    void IncrementCrimeCount_484F50(int crime_type);
+    void AddCarDamageCost_484FA0(int cost);
+    void AddEvasionRating_484FB0(int amount);
 
   public:
     u32 field_0_crime_count_list[crime_stats_type::count_10]; // indexed by crime_stats_type

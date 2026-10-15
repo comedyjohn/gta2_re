@@ -8,13 +8,13 @@ DEFINE_GLOBAL(CollisionCounters_C*, gCollisionCounters_6791FC, 0x6791FC);
 DEFINE_GLOBAL(GridSpriteLink_Pool*, gGridSpriteLink_Pool_679200, 0x679200);
 DEFINE_GLOBAL(GridCell_Pool*, gGridCell_Pool_679204, 0x679204);
 
-MATCH_FUNC(0x478a20)
+// 0x478a20
 void CollisionCounters_C::ResetCount_478A20()
 {
     field_0_test_count = 0;
 }
 
-MATCH_FUNC(0x478a30)
+// 0x478a30
 CollisionCounters_C::CollisionCounters_C()
 {
     field_0_test_count = 0;
@@ -55,7 +55,7 @@ CollisionCounters_C::CollisionCounters_C()
     gSpriteGrid_exclusion_sprite_678F84 = nullptr;
 }
 
-MATCH_FUNC(0x478bf0)
+// 0x478bf0
 CollisionCounters_C::~CollisionCounters_C()
 {
     GTA2_DELETE_AND_NULL(gSpriteGrid_1_679208);

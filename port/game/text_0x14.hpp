@@ -29,7 +29,7 @@ class text_tdat
     }
     BYTE* field_0_data;
     s32 field_4_len;
-    EXPORT void TDAT_Load_5B5A80(u32 size);
+    void TDAT_Load_5B5A80(u32 size);
 };
 
 class text_tkey
@@ -68,45 +68,45 @@ class text_0x14
     char_type field_10_lang_code;
     char_type field_11_pad[3];
 
-    EXPORT u16 RemapExtendedChar_5B58D0(u16 ch);
+    u16 RemapExtendedChar_5B58D0(u16 ch);
 
-    EXPORT void RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText);
+    void RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText);
 
-    EXPORT void RemapExtendedChars_5B5930(wchar_t* pStr);
+    void RemapExtendedChars_5B5930(wchar_t* pStr);
 
-    EXPORT void TKEY_Load_5B5960(u32 size);
+    void TKEY_Load_5B5960(u32 size);
 
-    EXPORT void TDAT_Offsets2Strings_5B59B0(BYTE* pDat);
+    void TDAT_Offsets2Strings_5B59B0(BYTE* pDat);
 
-    EXPORT bool TKeyFind_5B59E0(const char_type* pIdStr);
+    bool TKeyFind_5B59E0(const char_type* pIdStr);
 
-    EXPORT static s32 __cdecl TKeySearch_5B5A10(const void* a, const void* b);
+    static s32 TKeySearch_5B5A10(const void* a, const void* b);
 
-    EXPORT wchar_t* TKeyFind_5B5A50(const char_type* pIdStr);
+    wchar_t* TKeyFind_5B5A50(const char_type* pIdStr);
 
-    EXPORT u16 ToUpper_5B5AD0(wchar_t ch);
+    u16 ToUpper_5B5AD0(wchar_t ch);
 
-    EXPORT wchar_t* StrToUpper_5B5B80(wchar_t* pWideStr);
+    wchar_t* StrToUpper_5B5B80(wchar_t* pWideStr);
 
-    EXPORT static s32 __stdcall InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type);
+    static s32 InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type);
 
-    EXPORT static char_type* __stdcall Wide2PesudoAscii_5B5D10(const wchar_t* pText);
+    static char_type* Wide2PesudoAscii_5B5D10(const wchar_t* pText);
 
-    EXPORT static wchar_t* __stdcall Ascii2Wide_5B5DF0(char_type* pStr);
+    static wchar_t* Ascii2Wide_5B5DF0(char_type* pStr);
 
-    EXPORT void load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len);
+    void load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len);
 
-    EXPORT void Load_5B5E90();
+    void Load_5B5E90();
 
-    EXPORT wchar_t* Find_5B5F90(const char_type* pIdStr);
+    wchar_t* Find_5B5F90(const char_type* pIdStr);
 
-    EXPORT bool KeyExists_5B5FA0(const char_type* pIdStr);
+    bool KeyExists_5B5FA0(const char_type* pIdStr);
 
     // 0x5B5FB0
-    EXPORT text_0x14();
+    text_0x14();
 
     // 0x5B6050
-    EXPORT ~text_0x14();
+    ~text_0x14();
 };
 
 EXTERN_GLOBAL(text_0x14*, gText_0x14_704DFC);

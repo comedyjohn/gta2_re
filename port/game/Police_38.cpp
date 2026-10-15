@@ -23,18 +23,18 @@ DEFINE_GLOBAL(Ped*, gCurrentCrewPed_6FEDDC, 0x6FEDDC);
 DEFINE_GLOBAL(u8, byte_6FEB48, 0x6FEB48);
 DEFINE_GLOBAL_INIT(Fix16, kFpEight_6FED48, kFpOne64th_6FEB88 * 512, 0x6FED48);
 
-MATCH_FUNC(0x4beb30)
+// 0x4beb30
 PoliceCrew_38::PoliceCrew_38()
 {
     Init_5709C0();
 }
 
-MATCH_FUNC(0x4beb40)
+// 0x4beb40
 PoliceCrew_38::~PoliceCrew_38()
 {
 }
 
-MATCH_FUNC(0x5709c0)
+// 0x5709c0
 void PoliceCrew_38::Init_5709C0()
 {
     field_2_targ_x = 0;
@@ -57,7 +57,7 @@ void PoliceCrew_38::Init_5709C0()
     field_34_is_dismissed = 0;
 }
 
-MATCH_FUNC(0x570a10)
+// 0x570a10
 void PoliceCrew_38::AddToPursuit_570A10()
 {
     if (field_14_pPursuitTarget->field_75_num_crews < 6)
@@ -93,7 +93,7 @@ void PoliceCrew_38::AddToPursuit_570A10()
     }
 }
 
-MATCH_FUNC(0x570ab0)
+// 0x570ab0
 void PoliceCrew_38::RemoveFromPursuit_570AB0()
 {
     if (!field_1C_used || (field_24_state != police_crew_state::none_0 
@@ -143,7 +143,7 @@ void PoliceCrew_38::RemoveFromPursuit_570AB0()
     }
 }
 
-MATCH_FUNC(0x570bf0)
+// 0x570bf0
 void PoliceCrew_38::SpawnPoliceInCar_570BF0()
 {
     PedGroup* pGroup = PedGroup::New_4CB0D0();
@@ -225,7 +225,7 @@ void PoliceCrew_38::SpawnPoliceInCar_570BF0()
     field_10_subObj->field_8_group = pGroup;
 }
 
-MATCH_FUNC(0x570e30)
+// 0x570e30
 void PoliceCrew_38::SpawnSWAT_570E30()
 {
     PedGroup* pSwatGroup = PedGroup::New_4CB0D0();
@@ -271,7 +271,7 @@ void PoliceCrew_38::SpawnSWAT_570E30()
     field_10_subObj->field_8_group = pSwatGroup;
 }
 
-MATCH_FUNC(0x571150)
+// 0x571150
 void PoliceCrew_38::SpawnFBI_nonused_571150()
 {
     Ped* pFBI = gPedManager_6787BC->AllocatePed_470F30();
@@ -297,7 +297,7 @@ void PoliceCrew_38::SpawnFBI_nonused_571150()
     field_10_subObj->field_8_group = nullptr;
 }
 
-MATCH_FUNC(0x571350)
+// 0x571350
 void PoliceCrew_38::TryDespawnOffscreenCrew_571350()
 {
     field_24_state = police_crew_state::unknown_2;
@@ -341,7 +341,7 @@ void PoliceCrew_38::TryDespawnOffscreenCrew_571350()
     }
 }
 
-MATCH_FUNC(0x571540)
+// 0x571540
 void PoliceCrew_38::sub_571540()
 {
     Car_BC* pCar = field_10_subObj->field_0_car;
@@ -439,7 +439,7 @@ void PoliceCrew_38::sub_571540()
     }
 }
 
-MATCH_FUNC(0x571a30)
+// 0x571a30
 void PoliceCrew_38::sub_571A30()
 {
     Car_BC* pPlayerCar = gCurrentCrewPed_6FEDDC->field_16C_car;
@@ -577,7 +577,7 @@ void PoliceCrew_38::sub_571A30()
     }
 }
 
-MATCH_FUNC(0x5720c0)
+// 0x5720c0
 void PoliceCrew_38::sub_5720C0()
 {
     if (field_10_subObj->field_24_phase == crew_phase::finished_2)
@@ -619,7 +619,7 @@ void PoliceCrew_38::sub_5720C0()
 
 // https://decomp.me/scratch/p2NiN
 // MaxAbsDistance_42A6B0 with a by-value max, which keeps the compare in registers
-MATCH_FUNC(0x572210)
+// 0x572210
 bool PoliceCrew_38::sub_572210()
 {
     if (field_14_pPursuitTarget->field_0_criminal_ped && !field_34_is_dismissed && field_14_pPursuitTarget->field_C_timer > 0)
@@ -642,7 +642,7 @@ bool PoliceCrew_38::sub_572210()
     }
 }
 
-MATCH_FUNC(0x572340)
+// 0x572340
 void PoliceCrew_38::State3_AlertedSearch_572340()
 {
     u8 bUnk = true;
@@ -844,7 +844,7 @@ static inline Fix16 MaxAbsDistance_572920(const Fix16& x1, const Fix16& y1, cons
 // The inline cut-offs of MaxAbsDistance (one Abs negate inline, Max out of line) need its nested budget at 287..321,
 // i.e. the 18 sites left after it: the enter-car test reads field_278_ped_state_1 directly. `default: break;` first in
 // the objective switch keeps goto_area_in_car_14's trailing `field_28 = 1; break;` as the copy objective_43 merges into.
-MATCH_FUNC(0x572920)
+// 0x572920
 void PoliceCrew_38::State5_PursueOrChase_572920()
 {
     u8 bUnk = true;
@@ -1249,7 +1249,7 @@ void PoliceCrew_38::State5_PursueOrChase_572920()
 }
 
 // https://decomp.me/scratch/mAN9o
-MATCH_FUNC(0x574720)
+// 0x574720
 void PoliceCrew_38::State6_ShutDown_574720()
 {
     u8 i = 0;
@@ -1453,7 +1453,7 @@ void PoliceCrew_38::State6_ShutDown_574720()
     }
 }
 
-MATCH_FUNC(0x574f10)
+// 0x574f10
 void PoliceCrew_38::State1_Patrol_574F10()
 {
     Car_BC* pCarUnk;
@@ -1584,14 +1584,14 @@ void PoliceCrew_38::State1_Patrol_574F10()
     }
 }
 
-MATCH_FUNC(0x575200)
+// 0x575200
 void PoliceCrew_38::sub_575200()
 {
     byte_6FEB48 = 1;
     field_24_state = police_crew_state::shutdown_6;
 }
 
-MATCH_FUNC(0x575210)
+// 0x575210
 void PoliceCrew_38::sub_575210()
 {
     if (field_10_subObj->field_24_phase)
@@ -1613,7 +1613,7 @@ void PoliceCrew_38::sub_575210()
     }
 }
 
-MATCH_FUNC(0x575270)
+// 0x575270
 void PoliceCrew_38::sub_575270()
 {
     if (field_10_subObj->field_24_phase)
@@ -1631,7 +1631,7 @@ void PoliceCrew_38::sub_575270()
     }
 }
 
-MATCH_FUNC(0x5752c0)
+// 0x5752c0
 void PoliceCrew_38::sub_5752C0()
 {
     if (gCurrentCrewPed_6FEDDC->GetObjectiveStatus_450CB0() != objective_status::not_finished_0)
@@ -1648,7 +1648,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FEBF4, Fix16(0.5), 0x6FEBF4);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FECF4, Fix16(3), 0x6FECF4);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FEDE0, Fix16(0x1EB, 0), 0x6FEDE0);
 
-MATCH_FUNC(0x575310)
+// 0x575310
 void PoliceCrew_38::sub_575310()
 {
     byte_6FEB48 = 1;
@@ -1734,7 +1734,7 @@ void PoliceCrew_38::sub_575310()
     }
 }
 
-MATCH_FUNC(0x575590)
+// 0x575590
 void PoliceCrew_38::Service_575590()
 {
     if (field_10_subObj)
@@ -1786,7 +1786,7 @@ void PoliceCrew_38::Service_575590()
 }
 
 // TODO: logic matches, but the original keeps field_75_num_crews in bl and i in cl
-MATCH_FUNC(0x575650)
+// 0x575650
 void PoliceCrew_38::sub_575650()
 {
     PolicePursuitTarget_7C* pPursuitTarget = field_14_pPursuitTarget;
@@ -1828,7 +1828,7 @@ void PoliceCrew_38::sub_575650()
     }
 }
 
-MATCH_FUNC(0x575710)
+// 0x575710
 void PoliceRoadblock_A4::Reset_575710()
 {
     field_0_bActive = 0;
@@ -1875,7 +1875,7 @@ void PoliceRoadblock_A4::Reset_575710()
     field_9C_guard_6 = nullptr;
 }
 
-MATCH_FUNC(0x5757b0)
+// 0x5757b0
 void PoliceRoadblock_A4::Update_5757B0()
 {
     u8 bAllClear = 1;
@@ -2244,7 +2244,7 @@ void PoliceRoadblock_A4::Update_5757B0()
     }
 }
 
-MATCH_FUNC(0x575ca0)
+// 0x575ca0
 void PoliceRoadblock_A4::RemoveRoadblock_575CA0()
 {
     if (field_10_car_1)
@@ -2492,7 +2492,7 @@ DEFINE_GLOBAL_INIT(u8, byte_624FBD, 1, 0x624FBD); // the next roadblock lane get
 // The "first free slot" fills for the cars, barriers and guards are written out in the body, as in
 // 9.6f (built with /Ob0, so they were never inline helpers). As inline helpers they used up VC6's
 // inline budget and the x branch's Ang16 Normalize went out of line.
-WIP_FUNC(0x575ff0)
+// 0x575ff0
 char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orientation)
 {
     Car_BC* pCar = nullptr;
@@ -3119,14 +3119,14 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
     return 1;
 }
 
-MATCH_FUNC(0x577480)
+// 0x577480
 PoliceRoadblock_A4::PoliceRoadblock_A4()
 {
     Reset_575710();
     field_A0_rect = new Fix16_Rect();
 }
 
-MATCH_FUNC(0x5774a0)
+// 0x5774a0
 PoliceRoadblock_A4::~PoliceRoadblock_A4()
 {
     delete[] field_A0_rect;

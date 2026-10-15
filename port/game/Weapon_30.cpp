@@ -80,7 +80,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAngZero_707006, Ang16(0), 0x707006);
 // TODO: move
 EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);
 
-MATCH_FUNC(0x5DCD10)
+// 0x5DCD10
 Weapon_30::Weapon_30()
 {
     field_0_ammo = 0;
@@ -99,7 +99,7 @@ Weapon_30::Weapon_30()
     field_28_pSound = nullptr;
 }
 
-MATCH_FUNC(0x5DCD50)
+// 0x5DCD50
 Weapon_30::~Weapon_30()
 {
     field_24_pPed = nullptr;
@@ -113,7 +113,7 @@ Weapon_30::~Weapon_30()
     }
 }
 
-MATCH_FUNC(0x5DCD90)
+// 0x5DCD90
 void Weapon_30::init_5DCD90()
 {
     field_24_pPed = nullptr;
@@ -133,7 +133,7 @@ void Weapon_30::init_5DCD90()
     }
 }
 
-MATCH_FUNC(0x5DCDE0)
+// 0x5DCDE0
 void Weapon_30::PoolDeallocate()
 {
     init_5DCD90();
@@ -147,13 +147,13 @@ void Weapon_30::PoolDeallocate()
     }
 }
 
-MATCH_FUNC(0x5dce20)
+// 0x5dce20
 void Weapon_30::add_ammo_5DCE20(u8 clips)
 {
     field_0_ammo = clips * 10;
 }
 
-MATCH_FUNC(0x5dce40)
+// 0x5dce40
 char_type Weapon_30::add_ammo_capped_5DCE40(u8 to_add)
 {
     s32 cap_total = max_ammo_capacity_5FF75C[field_1C_idx] * 10;
@@ -180,13 +180,13 @@ char_type Weapon_30::add_ammo_capped_5DCE40(u8 to_add)
     return 1;
 }
 
-MATCH_FUNC(0x5dcea0)
+// 0x5dcea0
 bool Weapon_30::is_max_capacity_5DCEA0()
 {
     return this->field_0_ammo == 10 * max_ammo_capacity_5FF75C[this->field_1C_idx];
 }
 
-MATCH_FUNC(0x5dcef0)
+// 0x5dcef0
 bool Weapon_30::sub_5DCEF0()
 {
     bool result;
@@ -212,7 +212,7 @@ bool Weapon_30::sub_5DCEF0()
     return result;
 }
 
-MATCH_FUNC(0x5dcf40)
+// 0x5dcf40
 void Weapon_30::TickReloadSpeed_5DCF40()
 {
     Player* pPlayer = field_24_pPed->field_15C_player;
@@ -226,7 +226,7 @@ void Weapon_30::TickReloadSpeed_5DCF40()
 }
 
 // 9.6f 0x4CDA90
-MATCH_FUNC(0x5dcf60)
+// 0x5dcf60
 Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rot, const Fix16_Point& speed)
 {
     // probe_x/probe_y are assigned, not initialised: initialised, VC6 folds them into the call
@@ -269,7 +269,7 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
 }
 
 // https://decomp.me/scratch/73olU
-MATCH_FUNC(0x5dd0f0)
+// 0x5dd0f0
 void Weapon_30::flamethrower_5DD0F0()
 {
     Ang16 ped_rot;
@@ -319,7 +319,7 @@ void Weapon_30::flamethrower_5DD0F0()
 // The spread angles are built three ways: Ang16(s16, u8) gives the 16-bit add/sub + jns, operator+
 // (the const s16& ctor) gives the 32-bit lea + test/jge of the first tank shot, and the last tank shot
 // normalizes out of line through Normalize_406C20.
-MATCH_FUNC(0x5dd290)
+// 0x5dd290
 void Weapon_30::shotgun_5DD290()
 {
     Ang16 ped_rotation;
@@ -379,7 +379,7 @@ static inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radiu
 }
 
 // 9.6f 0x4CE070
-MATCH_FUNC(0x5dd860)
+// 0x5dd860
 void Weapon_30::pistol_5DD860()
 {
     Ang16 pedRot;
@@ -438,7 +438,7 @@ void Weapon_30::pistol_5DD860()
 }
 
 // It matches on decompme: https://decomp.me/scratch/dAQ5C
-MATCH_FUNC(0x5dda70)
+// 0x5dda70
 void Weapon_30::dual_pistol_5DDA70()
 {
     Ang16 ped_rotation;
@@ -507,7 +507,7 @@ void Weapon_30::dual_pistol_5DDA70()
 }
 
 // https://decomp.me/scratch/lAo1H
-MATCH_FUNC(0x5ddd20)
+// 0x5ddd20
 void Weapon_30::smg_5DDD20()
 {
     Fix16_Point point;
@@ -570,7 +570,7 @@ void Weapon_30::smg_5DDD20()
 }
 
 // https://decomp.me/scratch/OrmRn
-MATCH_FUNC(0x5ddfc0)
+// 0x5ddfc0
 void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_charge)
 {
     Fix16_Point vector;
@@ -725,7 +725,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
     }
 }
 
-EXPORT void __stdcall sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3);
+void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3);
 
 // GetLength_41E260 with both Abs and the x multiply, the add and the square root out of line
 static inline Fix16 BeamLength_5DE4F0(Fix16_Point& d)
@@ -754,7 +754,7 @@ static inline void BeamStep_5DE4F0(Ang16& angle, Fix16 radius, Fix16& ret1, Fix1
 
 // The direct field_1AC_cam.x read in `delta` (instead of get_cam_x()) drops one register candidate from the
 // first block, so `angle` loses ebx to the `dist << 14` temp and is spilled like in the original.
-MATCH_FUNC(0x5de4f0)
+// 0x5de4f0
 void Weapon_30::sub_5DE4F0()
 {
     Sprite* pBeam = gObject_5C_6F8F84->field_58_collision_probe_sprite;
@@ -883,8 +883,8 @@ static inline Fix16 BeamLength_5DE910(Fix16_Point& d)
 // The EH state is 0xA at entry and never changes: 11 Fix16_Point locals, two of them unused
 // (likely the original's by-value a1 is one of them). `d` is reused for the rest of the way and
 // `len` for the straight segment count, as the original's frame shows.
-MATCH_FUNC(0x5de910)
-void __stdcall sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
+// 0x5de910
+void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
 {
     Fix16_Point d;
     Fix16_Point start;
@@ -993,8 +993,8 @@ static inline Fix16 MaxAbsDistance_5DF270(const Fix16& x1, const Fix16& y1, Fix1
 
 // The a6 check is a do-while under an if (the first loop's exit jumps straight to the tail, which stays last),
 // and the !a4 (shock counter) branch comes first in the source: its get_x_y temporaries take EH states 0/1.
-MATCH_FUNC(0x5DF270)
-void __stdcall sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprite* a6)
+// 0x5DF270
+void sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprite* a6)
 {
     // 9.6f 0x4CEF40
     SpriteList_4 hits;
@@ -1151,7 +1151,7 @@ void __stdcall sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped*
     }
 }
 
-MATCH_FUNC(0x5dfb60)
+// 0x5dfb60
 void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
 {
     SpriteList_4 hits;
@@ -1306,7 +1306,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
     }
 }
 
-MATCH_FUNC(0x5e06b0)
+// 0x5e06b0
 void Weapon_30::shocker_5E06B0()
 {
     gWeapon_8_707018->field_0.ClearList_5A6E10();
@@ -1321,7 +1321,7 @@ void Weapon_30::shocker_5E06B0()
     }
 }
 
-MATCH_FUNC(0x5e0740)
+// 0x5e0740
 void Weapon_30::electro_batton_5E0740()
 {
     if (!field_24_pPed->field_198_hit_target_ped)
@@ -1379,7 +1379,7 @@ void Weapon_30::electro_batton_5E0740()
     }
 }
 
-MATCH_FUNC(0x5e0ab0)
+// 0x5e0ab0
 void Weapon_30::car_bomb_5E0AB0(char_type instant_bomb)
 {
     field_24_pPed = field_14_car->GetDriver_4118B0();
@@ -1403,7 +1403,7 @@ DEFINE_GLOBAL_INIT(Ang16, word_706DFA, Ang16(720), 0x706DFA);
 DEFINE_GLOBAL_INIT(Fix16, dword_706CDC, Fix16(0xE00, 0), 0x706CDC);
 DEFINE_GLOBAL_INIT(Fix16, dword_706CD8, Fix16(0x800, 0), 0x706CD8);
 
-MATCH_FUNC(0x5e0b10)
+// 0x5e0b10
 void Weapon_30::fire_truck_flamethrower_5E0B10()
 {
     Ang16 gun_ang;
@@ -1456,7 +1456,7 @@ void Weapon_30::fire_truck_flamethrower_5E0B10()
 // function uses operator+, and fire_truck_flamethrower_5E0B10 above calls Add_40AC50. The inline getters
 // (GetDriver_4118B0, IsTargetHit_41CC70) are free inline sites that set the inline budget split, so the
 // second rotation calls Negate_4086A0 out of line as in 10.5.
-MATCH_FUNC(0x5e0e70)
+// 0x5e0e70
 void Weapon_30::fire_truck_gun_5E0E70()
 {
     Ang16 gun_ang;
@@ -1519,7 +1519,7 @@ static inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& 
 }
 
 // https://decomp.me/scratch/QliaE
-MATCH_FUNC(0x5e10e0)
+// 0x5e10e0
 void Weapon_30::tank_main_gun_5E10E0()
 {
     Ang16 cannon_angle;
@@ -1595,7 +1595,7 @@ void Weapon_30::tank_main_gun_5E10E0()
     }
 }
 
-MATCH_FUNC(0x5e13e0)
+// 0x5e13e0
 void Weapon_30::army_gun_jeep_5E13E0()
 {
     Ang16 gun_ang;
@@ -1658,7 +1658,7 @@ void Weapon_30::army_gun_jeep_5E13E0()
 }
 
 // https://decomp.me/scratch/75934
-MATCH_FUNC(0x5e1dc0)
+// 0x5e1dc0
 void Weapon_30::oil_stain_5E1DC0()
 {
     Fix16_Point vector;
@@ -1694,7 +1694,7 @@ void Weapon_30::oil_stain_5E1DC0()
     }
 }
 
-MATCH_FUNC(0x5e2550)
+// 0x5e2550
 void Weapon_30::car_mine_5E2550()
 {
     Fix16_Point p;
@@ -1731,7 +1731,7 @@ void Weapon_30::car_mine_5E2550()
 
 // 9.6f 0x4D0230
 // 10.5 https://decomp.me/scratch/odtu0
-MATCH_FUNC(0x5e2940)
+// 0x5e2940
 void Weapon_30::car_smg_5E2940()
 {
     // The original has a fifth destructible local up front (EH entry state 4), hence unused_5.
@@ -1816,7 +1816,7 @@ void Weapon_30::car_smg_5E2940()
     }
 }
 
-MATCH_FUNC(0x5e33c0)
+// 0x5e33c0
 char_type Weapon_30::sub_5E33C0()
 {
     char result;
@@ -1836,7 +1836,7 @@ char_type Weapon_30::sub_5E33C0()
     return result;
 }
 
-MATCH_FUNC(0x5e34b0)
+// 0x5e34b0
 void Weapon_30::ChuckThrowable_5E34B0()
 {
     if (field_2_reload_speed > 0)
@@ -1865,7 +1865,7 @@ void Weapon_30::ChuckThrowable_5E34B0()
     }
 }
 
-MATCH_FUNC(0x5e3670)
+// 0x5e3670
 void Weapon_30::pull_trigger_5E3670()
 {
     switch (field_1C_idx)
@@ -1976,7 +1976,7 @@ void Weapon_30::pull_trigger_5E3670()
     }
 }
 
-MATCH_FUNC(0x5e3850)
+// 0x5e3850
 void Weapon_30::rocket_5E3850()
 {
     if (field_2_reload_speed == 0)
@@ -2061,7 +2061,7 @@ void Weapon_30::rocket_5E3850()
     }
 }
 
-MATCH_FUNC(0x5e3bd0)
+// 0x5e3bd0
 char_type Weapon_30::IsExplosiveWeapon_5E3BD0()
 {
     char result;
@@ -2082,7 +2082,7 @@ char_type Weapon_30::IsExplosiveWeapon_5E3BD0()
 }
 
 // 9.6f 0x4CD8C0
-MATCH_FUNC(0x5E3F90)
+// 0x5E3F90
 void Weapon_30::GetSoundPos_5E3F90(Fix16* pX, Fix16* pY, Fix16* pZ)
 {
     if (field_24_pPed)

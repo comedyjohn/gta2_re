@@ -13,7 +13,7 @@ class Fix16_Point;
 
 class SoundObject_10;
 
-EXPORT void __stdcall sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprite* a6);
+void sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprite* a6);
 
 class Weapon_30
 {
@@ -48,40 +48,40 @@ class Weapon_30
         field_14_car = v;
     }
 
-    EXPORT Weapon_30();
-    EXPORT ~Weapon_30();
-    EXPORT void init_5DCD90();
-    EXPORT void PoolDeallocate();
-    EXPORT void add_ammo_5DCE20(u8 clips);
-    EXPORT char_type add_ammo_capped_5DCE40(u8 to_add);
-    EXPORT bool is_max_capacity_5DCEA0();
-    EXPORT bool sub_5DCEF0();
-    EXPORT void TickReloadSpeed_5DCF40();
-    EXPORT Object_2C* spawn_bullet_5DCF60(s32 bullet_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, const Fix16_Point& speed);
-    EXPORT void flamethrower_5DD0F0();
-    EXPORT void shotgun_5DD290();
-    EXPORT void pistol_5DD860();
-    EXPORT void dual_pistol_5DDA70();
-    EXPORT void smg_5DDD20();
-    EXPORT void throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_charge);
-    EXPORT void sub_5DE4F0();
-    EXPORT void sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle);
-    EXPORT void shocker_5E06B0();
-    EXPORT void electro_batton_5E0740();
-    EXPORT void car_bomb_5E0AB0(char_type instant_bomb);
-    EXPORT void fire_truck_flamethrower_5E0B10();
-    EXPORT void fire_truck_gun_5E0E70();
-    EXPORT void tank_main_gun_5E10E0();
-    EXPORT void army_gun_jeep_5E13E0();
-    EXPORT void oil_stain_5E1DC0();
-    EXPORT void car_mine_5E2550();
-    EXPORT void car_smg_5E2940();
-    EXPORT char_type sub_5E33C0();
-    EXPORT void ChuckThrowable_5E34B0();
-    EXPORT void pull_trigger_5E3670();
-    EXPORT void rocket_5E3850();
-    EXPORT char_type IsExplosiveWeapon_5E3BD0();
-    EXPORT void GetSoundPos_5E3F90(Fix16* pX, Fix16* pY, Fix16* pZ);
+    Weapon_30();
+    ~Weapon_30();
+    void init_5DCD90();
+    void PoolDeallocate();
+    void add_ammo_5DCE20(u8 clips);
+    char_type add_ammo_capped_5DCE40(u8 to_add);
+    bool is_max_capacity_5DCEA0();
+    bool sub_5DCEF0();
+    void TickReloadSpeed_5DCF40();
+    Object_2C* spawn_bullet_5DCF60(s32 bullet_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, const Fix16_Point& speed);
+    void flamethrower_5DD0F0();
+    void shotgun_5DD290();
+    void pistol_5DD860();
+    void dual_pistol_5DDA70();
+    void smg_5DDD20();
+    void throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_charge);
+    void sub_5DE4F0();
+    void sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle);
+    void shocker_5E06B0();
+    void electro_batton_5E0740();
+    void car_bomb_5E0AB0(char_type instant_bomb);
+    void fire_truck_flamethrower_5E0B10();
+    void fire_truck_gun_5E0E70();
+    void tank_main_gun_5E10E0();
+    void army_gun_jeep_5E13E0();
+    void oil_stain_5E1DC0();
+    void car_mine_5E2550();
+    void car_smg_5E2940();
+    char_type sub_5E33C0();
+    void ChuckThrowable_5E34B0();
+    void pull_trigger_5E3670();
+    void rocket_5E3850();
+    char_type IsExplosiveWeapon_5E3BD0();
+    void GetSoundPos_5E3F90(Fix16* pX, Fix16* pY, Fix16* pZ);
 
     // 9.6f inline 0x4A4FA0
     bool is_infinite_ammo_4A4FA0()

@@ -15,7 +15,7 @@ DEFINE_GLOBAL(TagGame_28, gTagGame_6F8450, 0x6F8450);
 DEFINE_GLOBAL(Fix16_Point, stru_6F8720, 0x6F8720);
 DEFINE_GLOBAL(s32, gNetTimeLimitEnabled_6F58A4, 0x6F58A4);
 
-MATCH_FUNC(0x516560)
+// 0x516560
 void TagGame_28::Init_516560() // For some reason, it's a function instead of a proper ctor
 {
     field_0_fugitive = nullptr;
@@ -24,7 +24,7 @@ void TagGame_28::Init_516560() // For some reason, it's a function instead of a 
     memset(field_20_bHasQuit, 0, sizeof(field_20_bHasQuit));
 }
 
-MATCH_FUNC(0x516590)
+// 0x516590
 void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
 {
     if (pNewFugitive == nullptr)
@@ -60,7 +60,7 @@ void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
     }
 }
 
-MATCH_FUNC(0x516660)
+// 0x516660
 void TagGame_28::ExecuteGamemodeTick_516660()
 {
     switch (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0())
@@ -97,7 +97,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
     }
 }
 
-MATCH_FUNC(0x516740)
+// 0x516740
 void TagGame_28::UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pPlayer_killer)
 {
     Fix16 threshold_distance(65535); // 65535.0 (raw 0x3FFFC000): start value of the nearest player search

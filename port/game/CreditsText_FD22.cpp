@@ -2,18 +2,18 @@
 #include "text_0x14.hpp"
 #include "credits_line_category.hpp"
 
-MATCH_FUNC(0x483E70)
+// 0x483E70
 CreditsText_FD22::CreditsText_FD22() // 483E70
 {
     field_0_line_count = 0;
 }
 
-MATCH_FUNC(0x483EA0)
+// 0x483EA0
 CreditsText_FD22::~CreditsText_FD22() // 483EA0
 {
 }
 
-MATCH_FUNC(0x483EC0)
+// 0x483EC0
 wchar_t CreditsText_FD22::ReadNextNonBlankChar_483EC0(const wchar_t* pStr, u16* pStartPos, bool bStopAtSpace)
 {
     wchar_t cur_wchar = pStr[(*pStartPos)++];
@@ -24,7 +24,7 @@ wchar_t CreditsText_FD22::ReadNextNonBlankChar_483EC0(const wchar_t* pStr, u16* 
     return cur_wchar;
 }
 
-MATCH_FUNC(0x483F20)
+// 0x483F20
 void CreditsText_FD22::LoadCredits_483F20()
 {
     s16 y_gap = 0;

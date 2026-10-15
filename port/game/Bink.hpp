@@ -23,29 +23,29 @@ EXTERN_GLOBAL(s32, gBinkPixelFormat_6F81B0);
 class Bink
 {
   public:
-    EXPORT static void __stdcall Reset_513210();
+    static void Reset_513210();
 
-    EXPORT static void CloseSlot1_513340();
+    static void CloseSlot1_513340();
 
-    EXPORT static void CloseSlot2_513390();
+    static void CloseSlot2_513390();
 
-    EXPORT static void __stdcall CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY);
+    static void CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY);
 
-    EXPORT static BOOL IsUsingDDBuffer_513770();
+    static BOOL IsUsingDDBuffer_513770();
 
-    EXPORT static BOOL IsDDBufferOpen_513760();
+    static BOOL IsDDBufferOpen_513760();
 
-    EXPORT static void ResetBufferOffset_513720();
+    static void ResetBufferOffset_513720();
 
-    EXPORT static char_type TickFrame_513240();
+    static char_type TickFrame_513240();
 
-    EXPORT static char_type GetActiveSlot_513790();
+    static char_type GetActiveSlot_513790();
 
-    EXPORT static void __stdcall SetActiveSlot_5137A0(char_type slot);
+    static void SetActiveSlot_5137A0(char_type slot);
 
-    EXPORT static void __stdcall OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver);
+    static void OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver);
 
-    EXPORT static void __stdcall SetDDState_5137B0(char_type state);
+    static void SetDDState_5137B0(char_type state);
 
-    EXPORT static void __stdcall OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver);
+    static void OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver);
 };

@@ -50,10 +50,9 @@ enum
 u8 traffic_light_phase_timers_626840[] = {0x00, 0x64, 0x18, 0x18, 0x64, 0x18, 0x18, 0x96, 0x50, 0x00, 0x00, 0x00};
 
 // https://decomp.me/scratch/JogBj
-WIP_FUNC(0x5C1D00)
+// 0x5C1D00
 void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
 {
-    WIP_IMPLEMENTED;
 
     Fix16 zpos = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(x, y);
     u8 zTmp = (zpos.ToInt()) - 1;
@@ -212,7 +211,7 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
     }
 }
 
-MATCH_FUNC(0x5C27A0)
+// 0x5C27A0
 void TrafficLight_20::UpdateLightsFromPhase_5C27A0(u8 phase)
 {
     switch (phase)
@@ -306,7 +305,7 @@ void TrafficLight_20::UpdateLightsFromPhase_5C27A0(u8 phase)
     }
 }
 
-MATCH_FUNC(0x5c2910)
+// 0x5c2910
 void TrafficLights_194::AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h)
 {
     TrafficLight_20* pMem = new TrafficLight_20();
@@ -314,7 +313,7 @@ void TrafficLights_194::AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h)
     pMem->Init_5C1D00(x, y, w, h);
 }
 
-MATCH_FUNC(0x5c2950)
+// 0x5c2950
 void TrafficLights_194::TrafficLightsService_5C2950()
 {
     field_193_timer--;
@@ -347,7 +346,7 @@ void TrafficLights_194::TrafficLightsService_5C2950()
     }
 }
 
-MATCH_FUNC(0x5c2a10)
+// 0x5c2a10
 void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
 {
     swprintf(tmpBuff_67BD9C, L"timer: %d", field_193_timer);
@@ -362,7 +361,7 @@ void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
     }
 }
 
-MATCH_FUNC(0x5c2ac0)
+// 0x5c2ac0
 void TrafficLights_194::CreateFromMapZones_5C2AC0()
 {
     gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(Traffic_light_2);
@@ -373,7 +372,7 @@ void TrafficLights_194::CreateFromMapZones_5C2AC0()
     }
 }
 
-MATCH_FUNC(0x5c2b00)
+// 0x5c2b00
 TrafficLights_194::TrafficLights_194()
 {
     field_190_array_used_count = 0;
@@ -385,7 +384,7 @@ TrafficLights_194::TrafficLights_194()
     field_193_timer = traffic_light_phase_timers_626840[traffic_light_phase::north_south_green_1];
 }
 
-MATCH_FUNC(0x5c2b30)
+// 0x5c2b30
 TrafficLights_194::~TrafficLights_194()
 {
     for (u32 i = 0; i < field_190_array_used_count; i++)

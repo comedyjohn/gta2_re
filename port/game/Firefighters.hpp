@@ -35,11 +35,11 @@ class Firefighter_28
         field_24_next_state_timer = 0;
     }
 
-    EXPORT bool sub_4A7FC0();
-    EXPORT void deinit_4A81A0();
-    EXPORT void Update_4A81F0();
-    EXPORT void init_4A85C0();
-    EXPORT void Reset_4A85E0();
+    bool sub_4A7FC0();
+    void deinit_4A81A0();
+    void Update_4A81F0();
+    void init_4A85C0();
+    void Reset_4A85E0();
 
     s16 field_0_id;
     s16 field_2_unused;
@@ -72,12 +72,12 @@ class FirefighterPool_54
         // TODO: Should this be empty?
     }
 
-    EXPORT void FireEnginesService_4A85F0();
-    EXPORT Firefighter_28* DispatchFirefighters_4A8620(Car_BC* pCar, Fix16 x, Fix16 y, Fix16 z);
-    EXPORT Firefighter_28* New28_4A8800();
-    EXPORT char_type TryDispatchFirefightersToCar_4A8820(Car_BC* pCar);
-    EXPORT char_type IsFireEngineSentToCar_4A8890(Car_BC* pFireEngine, Car_BC* pTargetCar);
-    EXPORT void ResetCount_4A88D0();
+    void FireEnginesService_4A85F0();
+    Firefighter_28* DispatchFirefighters_4A8620(Car_BC* pCar, Fix16 x, Fix16 y, Fix16 z);
+    Firefighter_28* New28_4A8800();
+    char_type TryDispatchFirefightersToCar_4A8820(Car_BC* pCar);
+    char_type IsFireEngineSentToCar_4A8890(Car_BC* pFireEngine, Car_BC* pTargetCar);
+    void ResetCount_4A88D0();
 
     Firefighter_28 field_0_firefighters[2];
     s16 field_50_count;

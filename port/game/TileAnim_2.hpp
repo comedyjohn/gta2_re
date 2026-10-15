@@ -9,12 +9,12 @@ struct gmp_tile_animation;
 class TileAnim_2
 {
   public:
-    EXPORT void AddAnim_5BC260(s16 base, s16 f0, s16 length, s16 frame_rate, s16 repeat);
-    EXPORT void AddGmpAnim_5BC2C0(const gmp_tile_animation* pTileAnimation);
-    EXPORT void Empty_5BC300();
-    EXPORT void UpdateTileAnimations_5BC310();
-    EXPORT TileAnim_2();
-    EXPORT ~TileAnim_2();
+    void AddAnim_5BC260(s16 base, s16 f0, s16 length, s16 frame_rate, s16 repeat);
+    void AddGmpAnim_5BC2C0(const gmp_tile_animation* pTileAnimation);
+    void Empty_5BC300();
+    void UpdateTileAnimations_5BC310();
+    TileAnim_2();
+    ~TileAnim_2();
     s16 field_0_count;
 };
 
@@ -32,17 +32,17 @@ class TileAnim_18
         field_C_ptr = nullptr;
     }
 
-    EXPORT void PoolAllocate();
+    void PoolAllocate();
     void PoolDeallocate()
     {
       
     }
-    EXPORT void ApplyCurrentFrame_5BC150();
-    EXPORT void InitFromGmpAnim_5BC190(const gmp_tile_animation* pStru);
-    EXPORT void Start_5BC1D0();
-    EXPORT char_type PoolUpdate();
-    EXPORT TileAnim_18();
-    EXPORT ~TileAnim_18();
+    void ApplyCurrentFrame_5BC150();
+    void InitFromGmpAnim_5BC190(const gmp_tile_animation* pStru);
+    void Start_5BC1D0();
+    char_type PoolUpdate();
+    TileAnim_18();
+    ~TileAnim_18();
 
     u16 field_0_start_frame;
     u16 field_2_anim_length;
@@ -64,7 +64,7 @@ class TileAnimPool
     {
     }
 
-    EXPORT ~TileAnimPool();
+    ~TileAnimPool();
 
     TileAnim_18* Allocate()
     {

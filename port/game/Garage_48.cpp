@@ -26,14 +26,14 @@ DEFINE_GLOBAL_INIT(Fix16, kFpEighth_6FCF60, kFpQuarter_6FD04C / kFpTwo_6FD128, 0
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FD0D8, Fix16(0x100, 0), 0x6FD0D8);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FD1D8, kFpOne64th_6FD0D8, 0x6FD1D8);
 
-MATCH_FUNC(0x4bbc60)
+// 0x4bbc60
 Garage_48::~Garage_48()
 {
 }
 
 // The heading for a ped leaving through a door facing `face`.
-MATCH_FUNC(0x5345E0)
-EXPORT Ang16 __stdcall sub_5345E0(s32 face)
+// 0x5345E0
+Ang16 sub_5345E0(s32 face)
 {
     switch (face)
     {
@@ -64,7 +64,7 @@ static inline bool IsLongerThanOneBlock_447ED0(Car_BC* pCar)
 }
 
 // 9.6f 0x489B10
-MATCH_FUNC(0x534650)
+// 0x534650
 void Garage_48::ValidateParkCommand_534650()
 {
     // The result is unused (the out-of-line Add_408660 on a const Fix16)
@@ -96,7 +96,7 @@ DEFINE_GLOBAL_INIT(Ang16, word_6FD07E, Ang16(720), 0x6FD07E);
 DEFINE_GLOBAL_INIT(Ang16, word_6FD0A4, Ang16(1080), 0x6FD0A4);
 DEFINE_GLOBAL_INIT(Ang16, word_6FD25C, Ang16(0), 0x6FD25C);
 
-MATCH_FUNC(0x534700)
+// 0x534700
 u8 Garage_48::ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor)
 {
     field_0_parking_car = pCar;
@@ -196,7 +196,7 @@ u8 Garage_48::ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor)
     return field_3E_park_ticket;
 }
 
-MATCH_FUNC(0x5349d0)
+// 0x5349d0
 void Garage_48::GaragesService_5349D0()
 {
     u8 idx1;
@@ -364,7 +364,7 @@ void Garage_48::GaragesService_5349D0()
     }
 }
 
-MATCH_FUNC(0x534e80)
+// 0x534e80
 Garage_48::Garage_48()
 {
     field_0_parking_car = nullptr;

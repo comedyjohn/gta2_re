@@ -14,11 +14,11 @@ class PedRef_8
 class PedRefTable_7F8
 {
   public:
-    EXPORT u8 AllocForPed_59B060(s32 ped_id);
-    EXPORT void IncrementRefCount_59B0B0(u8 idx);
-    EXPORT void DecrementRefCount_59B0D0(u8 idx);
-    EXPORT PedRefTable_7F8();
-    EXPORT ~PedRefTable_7F8();
+    u8 AllocForPed_59B060(s32 ped_id);
+    void IncrementRefCount_59B0B0(u8 idx);
+    void DecrementRefCount_59B0D0(u8 idx);
+    PedRefTable_7F8();
+    ~PedRefTable_7F8();
 
     inline void Clear_434070(u8 idx)
     {

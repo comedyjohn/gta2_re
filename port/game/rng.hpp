@@ -23,13 +23,13 @@ class rng
         return field_4_rnd;
     }
 
-    EXPORT void AdvanceCycle_48B900();
-    EXPORT void ShowCycle_48B920();
+    void AdvanceCycle_48B900();
+    void ShowCycle_48B920();
 
-    EXPORT void srand_4F7A40();
-    EXPORT s16 get_int_4F7AE0(const s16& max_rnd);
-    EXPORT u8 get_uint8_4F7B70(const u8& max_rnd);
-    EXPORT int rand_4F7C00();
+    void srand_4F7A40();
+    s16 get_int_4F7AE0(const s16& max_rnd);
+    u8 get_uint8_4F7B70(const u8& max_rnd);
+    int rand_4F7C00();
 
     s32 field_0_rng;
     s32 field_4_rnd;

@@ -356,7 +356,7 @@ static inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
     }
 }
 
-MATCH_FUNC(0x4e9d50)
+// 0x4e9d50
 void MapRenderer::SetAmbientLevel_4E9D50(s32& target_level, u16& cycles)
 {
     field_4_target_ambient = Fix16(target_level, 0);
@@ -373,7 +373,7 @@ void MapRenderer::SetAmbientLevel_4E9D50(s32& target_level, u16& cycles)
 }
 
 // https://decomp.me/scratch/SrbHE
-MATCH_FUNC(0x4e9db0)
+// 0x4e9db0
 void MapRenderer::set_shading_lev_4E9DB0(u8 shading_lev)
 {
     u8 mid_shade = 2 * shading_lev / 3;
@@ -402,7 +402,7 @@ void MapRenderer::set_shading_lev_4E9DB0(u8 shading_lev)
     field_1B_tri_diag_down_right_colour = shading_leva;
 }
 
-MATCH_FUNC(0x4e9ea0)
+// 0x4e9ea0
 void MapRenderer::ambient_light_tick_4E9EA0()
 {
     field_0_ambient = field_8_ambient_step + field_0_ambient;
@@ -426,7 +426,7 @@ void MapRenderer::ambient_light_tick_4E9EA0()
 }
 
 // this function matches, but some "fcomps" offsets are wrong
-MATCH_FUNC(0x4E9EE0)
+// 0x4E9EE0
 void MapRenderer::draw_4E9EE0(u16& word_side, const bool& bUnk, u8 colour)
 {
     u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(word_side & 0x3FF);
@@ -452,7 +452,7 @@ void MapRenderer::draw_4E9EE0(u16& word_side, const bool& bUnk, u8 colour)
 }
 
 // this function matches, but some "fcomps" offsets are wrong
-MATCH_FUNC(0x4EA190)
+// 0x4EA190
 void MapRenderer::draw_4EA190(u16& rotation_and_flip) 
 {
     s32 vert_idx;
@@ -575,7 +575,7 @@ void MapRenderer::draw_4EA190(u16& rotation_and_flip)
 }
 
 // https://decomp.me/scratch/FGVOK
-MATCH_FUNC(0x4ea390)
+// 0x4ea390
 void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
 {
     if (!bSkip_left_67D6BF)
@@ -715,8 +715,8 @@ void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
     }
 }
 
-MATCH_FUNC(0x4ead90)
-void __stdcall set_vert_xyz_relative_to_cam_4EAD90(Fix16 xCoord, Fix16 yCoord, Fix16 z_val, Vert* pVerts)
+// 0x4ead90
+void set_vert_xyz_relative_to_cam_4EAD90(Fix16 xCoord, Fix16 yCoord, Fix16 z_val, Vert* pVerts)
 {
     Camera_0xBC* pCam = gViewCamera_676978;
 
@@ -730,7 +730,7 @@ void __stdcall set_vert_xyz_relative_to_cam_4EAD90(Fix16 xCoord, Fix16 yCoord, F
 }
 
 // This function matches, but the offsets of gScreenScaleTop_6F628C and gInvDepthTop_6F656C are wrong
-MATCH_FUNC(0x4eae00)
+// 0x4eae00
 void MapRenderer::ProjectVertTop_4EAE00(const Fix16& xpos, const Fix16& ypos, Vert* pVert)
 {
     set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, gZCoordTop_6F62B0, pVert);
@@ -740,7 +740,7 @@ void MapRenderer::ProjectVertTop_4EAE00(const Fix16& xpos, const Fix16& ypos, Ve
     pVert->z = gInvDepthTop_6F656C.ToFloat();
 }
 
-MATCH_FUNC(0x4eaea0)
+// 0x4eaea0
 void MapRenderer::ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCoord, Vert* pVert)
 {
     set_vert_xyz_relative_to_cam_4EAD90(xCoord, yCoord, gZCoord_6F63E0, pVert);
@@ -751,7 +751,7 @@ void MapRenderer::ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCo
 }
 
 // https://decomp.me/scratch/mWsfM
-MATCH_FUNC(0x4eaf40)
+// 0x4eaf40
 void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
 {
     // Declared up front and assigned later: VC6 numbers it before gZCoordFp_6F6518, so the z sum for
@@ -903,7 +903,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
 }
 
 // https://decomp.me/scratch/GkGnQ
-MATCH_FUNC(0x4EB940)
+// 0x4EB940
 void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const Fix16& zpos, Vert* pVert)
 {
     set_vert_xyz_relative_to_cam_inlined(xpos, ypos, zpos, pVert);
@@ -917,7 +917,7 @@ void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const
 }
 
 // https://decomp.me/scratch/a6z18
-MATCH_FUNC(0x4eba60)
+// 0x4eba60
 void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
 {
     if (!bSkip_top_67D574)
@@ -1060,7 +1060,7 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
 }
 
 // https://decomp.me/scratch/MyepN
-MATCH_FUNC(0x4ec450)
+// 0x4ec450
 void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
 {
     Ang16 rotation;
@@ -1089,7 +1089,7 @@ void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
 }
 
 // https://decomp.me/scratch/8QjCQ
-MATCH_FUNC(0x4ec7a0)
+// 0x4ec7a0
 void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
 {
     Ang16 rotation;
@@ -1119,7 +1119,7 @@ void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
 
 // https://decomp.me/scratch/eGEBV
 // 9.6f: MapRenderer::sub_46D680
-MATCH_FUNC(0x4ecaf0)
+// 0x4ecaf0
 void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
 {
     Ang16 angle;
@@ -1148,7 +1148,7 @@ void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
 
 // https://decomp.me/scratch/3kT2F
 // 9.6f: MapRenderer::sub_46D810
-MATCH_FUNC(0x4ece40)
+// 0x4ece40
 void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
 {
     Ang16 angle;
@@ -1177,7 +1177,7 @@ void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
 
 // https://decomp.me/scratch/4EDti
 // 9.6f: MapRenderer::sub_46D9A0
-MATCH_FUNC(0x4ed290)
+// 0x4ed290
 void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
 {
     // See DrawRightSide_4EAF40: declared up front for the operand order of the z sum. That raises the
@@ -1341,7 +1341,7 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
 }
 
 // https://decomp.me/scratch/pJOfC
-MATCH_FUNC(0x4ee130)
+// 0x4ee130
 void MapRenderer::draw_lid_4EE130()
 {
     if (!bSkip_lid_67D546)
@@ -1407,7 +1407,7 @@ void MapRenderer::draw_lid_4EE130()
     }
 }
 
-MATCH_FUNC(0x4EE7D0)
+// 0x4EE7D0
 void MapRenderer::DrawDiagonalWallUpLeft_4EE7D0()
 {
     if (gBlockRight_6F63C6)
@@ -1430,7 +1430,7 @@ void MapRenderer::DrawDiagonalWallUpLeft_4EE7D0()
     }
 }
 
-MATCH_FUNC(0x4EE8A0)
+// 0x4EE8A0
 void MapRenderer::DrawDiagonalWallUpRight_4EE8A0()
 {
     if (gBlockLeft_6F62F6)
@@ -1453,7 +1453,7 @@ void MapRenderer::DrawDiagonalWallUpRight_4EE8A0()
     }
 }
 
-MATCH_FUNC(0x4EE970)
+// 0x4EE970
 void MapRenderer::DrawDiagonalWallDownLeft_4EE970()
 {
     if (gBlockLeft_6F62F6)
@@ -1476,7 +1476,7 @@ void MapRenderer::DrawDiagonalWallDownLeft_4EE970()
     }
 }
 
-MATCH_FUNC(0x4EEA40)
+// 0x4EEA40
 void MapRenderer::DrawDiagonalWallDownRight_4EEA40()
 {
     if (gBlockLeft_6F62F6)
@@ -1500,7 +1500,7 @@ void MapRenderer::DrawDiagonalWallDownRight_4EEA40()
 }
 
 // https://decomp.me/scratch/husii
-MATCH_FUNC(0x4eeaf0)
+// 0x4eeaf0
 void MapRenderer::Draw3SidedDiagonalUpLeft_4EEAF0()
 {
     if (gBlockRight_6F63C6)
@@ -1531,7 +1531,7 @@ void MapRenderer::Draw3SidedDiagonalUpLeft_4EEAF0()
 }
 
 // https://decomp.me/scratch/XGan6
-MATCH_FUNC(0x4eee60)
+// 0x4eee60
 void MapRenderer::Draw3SidedDiagonalUpRight_4EEE60()
 {
     
@@ -1563,7 +1563,7 @@ void MapRenderer::Draw3SidedDiagonalUpRight_4EEE60()
 }
 
 // https://decomp.me/scratch/O0oa4
-MATCH_FUNC(0x4ef1c0)
+// 0x4ef1c0
 void MapRenderer::Draw3SidedDiagonalDownLeft_4EF1C0()
 {
     
@@ -1596,7 +1596,7 @@ void MapRenderer::Draw3SidedDiagonalDownLeft_4EF1C0()
 
 // https://decomp.me/scratch/6WLOw
 // Remaining diff: an lea operand-order tie-break (fails against 10.5.exe)
-MATCH_FUNC(0x4ef520)
+// 0x4ef520
 void MapRenderer::Draw3SidedDiagonalDownRight_4EF520()
 {
 
@@ -1628,7 +1628,7 @@ void MapRenderer::Draw3SidedDiagonalDownRight_4EF520()
 }
 
 // https://decomp.me/scratch/YoWOt
-MATCH_FUNC(0x4ef880)
+// 0x4ef880
 void MapRenderer::Draw4SidedDiagonalUpLeft_4EF880()
 {
     if (gBlockRight_6F63C6)
@@ -1661,7 +1661,7 @@ void MapRenderer::Draw4SidedDiagonalUpLeft_4EF880()
 }
 
 // https://decomp.me/scratch/ZTyHA
-MATCH_FUNC(0x4efb20)
+// 0x4efb20
 void MapRenderer::Draw4SidedDiagonalUpRight_4EFB20()
 {
     if (gBlockLeft_6F62F6)
@@ -1695,7 +1695,7 @@ void MapRenderer::Draw4SidedDiagonalUpRight_4EFB20()
 
 // https://decomp.me/scratch/IdZ0n
 // Remaining diff: an lea operand-order tie-break (fails against 10.5.exe)
-MATCH_FUNC(0x4efdb0)
+// 0x4efdb0
 void MapRenderer::Draw4SidedDiagonalDownLeft_4EFDB0()
 {
 
@@ -1729,7 +1729,7 @@ void MapRenderer::Draw4SidedDiagonalDownLeft_4EFDB0()
 }
 
 // https://decomp.me/scratch/AKo7h
-MATCH_FUNC(0x4f0030)
+// 0x4f0030
 void MapRenderer::Draw4SidedDiagonalDownRight_4F0030()
 {
     if (gBlockLeft_6F62F6)
@@ -1761,7 +1761,7 @@ void MapRenderer::Draw4SidedDiagonalDownRight_4F0030()
     }
 }
 
-MATCH_FUNC(0x4f02d0)
+// 0x4f02d0
 void MapRenderer::DrawDiagonalWall_4F02D0()
 {
     u8 field_B_slope_type = gpBlock_6F6478->field_B_slope_type;
@@ -1785,7 +1785,7 @@ void MapRenderer::DrawDiagonalWall_4F02D0()
     }
 }
 
-MATCH_FUNC(0x4f0340)
+// 0x4f0340
 void MapRenderer::DrawTriangularDiagonal_4F0340()
 {
     u8 field_B_slope_type = gpBlock_6F6478->field_B_slope_type;
@@ -1837,7 +1837,7 @@ void MapRenderer::DrawTriangularDiagonal_4F0340()
 
 // https://decomp.me/scratch/MyE2X
 // 9.6f: MapRenderer::sub_46EF10
-MATCH_FUNC(0x4f0420)
+// 0x4f0420
 void MapRenderer::DrawGradientSlopeNorthwards_4F0420()
 {
     if (gBlockLeft_6F62F6)
@@ -1965,7 +1965,7 @@ void MapRenderer::DrawGradientSlopeNorthwards_4F0420()
     }
 }
 
-MATCH_FUNC(0x4f0bd0)
+// 0x4f0bd0
 char_type MapRenderer::GetColour_4F0BD0(s32 lid_type)
 {
     switch (lid_type)
@@ -1984,7 +1984,7 @@ char_type MapRenderer::GetColour_4F0BD0(s32 lid_type)
 }
 
 // https://decomp.me/scratch/HfCiT
-MATCH_FUNC(0x4f1660)
+// 0x4f1660
 void MapRenderer::DrawGradientSlopeSouthwards_4F1660()
 {
     
@@ -2112,7 +2112,7 @@ void MapRenderer::DrawGradientSlopeSouthwards_4F1660()
 }
 
 // https://decomp.me/scratch/6Zrn3
-MATCH_FUNC(0x4f22f0)
+// 0x4f22f0
 void MapRenderer::DrawGradientSlopeWestwards_4F22F0()
 {
     if (gBlockLeft_6F62F6)
@@ -2238,7 +2238,7 @@ void MapRenderer::DrawGradientSlopeWestwards_4F22F0()
 }
 
 // https://decomp.me/scratch/cvW2D
-MATCH_FUNC(0x4f33b0)
+// 0x4f33b0
 void MapRenderer::DrawGradientSlopeEastwards_4F33B0()
 {
     
@@ -2365,7 +2365,7 @@ void MapRenderer::DrawGradientSlopeEastwards_4F33B0()
 }
 
 // https://decomp.me/scratch/zty5O
-MATCH_FUNC(0x4f3c00)
+// 0x4f3c00
 void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b)
 {
     if (!bSkip_left_67D6BF)
@@ -2405,8 +2405,8 @@ void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a,
     }
 }
 
-MATCH_FUNC(0x4F3FB0)
-void __stdcall draw_4F3FB0(s32 arg)
+// 0x4F3FB0
+void draw_4F3FB0(s32 arg)
 {
     Fix16_Point tmp;
     switch (arg & 0x60)
@@ -2459,8 +2459,8 @@ void __stdcall draw_4F3FB0(s32 arg)
 }
 
 // https://decomp.me/scratch/NaMFS or https://decomp.me/scratch/hij63
-MATCH_FUNC(0x4f4190)
-void __stdcall Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
+// 0x4f4190
+void Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
 {
     Fix16_Point uv_coords = ((gUVEdge01_6F62A8 * a1) + (gUVEdge03_6F62A0 * a2)) + gUVCorner0_6F6580;
     // Converting through f32 locals (rather than ToFloat()) adds a narrowing step that makes
@@ -2472,7 +2472,7 @@ void __stdcall Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
 }
 
 // https://decomp.me/scratch/dGqKl
-MATCH_FUNC(0x4f4250)
+// 0x4f4250
 void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b)
 {
     if (!bSkip_right_67D4E4)
@@ -2513,7 +2513,7 @@ void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a
 }
 
 // https://decomp.me/scratch/7xF8P
-MATCH_FUNC(0x4f4600)
+// 0x4f4600
 void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off)
 {
     if (!bSkip_top_67D574)
@@ -2554,7 +2554,7 @@ void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b
 }
 
 // https://decomp.me/scratch/QiYzx
-MATCH_FUNC(0x4f49b0)
+// 0x4f49b0
 void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off)
 {
     if (!bSkip_bottom_67D4E7)
@@ -2595,7 +2595,7 @@ void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_of
 }
 
 // https://decomp.me/scratch/sV2SV
-MATCH_FUNC(0x4f4d60)
+// 0x4f4d60
 void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& unk4)
 {
     if (!bSkip_lid_67D546)
@@ -2653,7 +2653,7 @@ void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& 
 
 // DrawPartialBlocks_4F6580 tail-jumps (jmp) to the nine functions below; IDA treats them as chunks
 // of it, so they are not in its function list.
-MATCH_FUNC(0x4F5160)
+// 0x4F5160
 void MapRenderer::DrawPartialBlockLeft_4F5160()
 {
     u16 side_word;
@@ -2723,7 +2723,7 @@ void MapRenderer::DrawPartialBlockLeft_4F5160()
     }
 }
 
-MATCH_FUNC(0x4F5360)
+// 0x4F5360
 void MapRenderer::DrawPartialBlockRight_4F5360()
 {
     u16 side_word;
@@ -2793,7 +2793,7 @@ void MapRenderer::DrawPartialBlockRight_4F5360()
     }
 }
 
-MATCH_FUNC(0x4F5560)
+// 0x4F5560
 void MapRenderer::DrawPartialBlockTop_4F5560()
 {
     u16 side_word;
@@ -2863,7 +2863,7 @@ void MapRenderer::DrawPartialBlockTop_4F5560()
     }
 }
 
-MATCH_FUNC(0x4F5760)
+// 0x4F5760
 void MapRenderer::DrawPartialBlockBottom_4F5760()
 {
     u16 side_word;
@@ -2933,7 +2933,7 @@ void MapRenderer::DrawPartialBlockBottom_4F5760()
     }
 }
 
-MATCH_FUNC(0x4F5960)
+// 0x4F5960
 void MapRenderer::DrawPartialBlockTopLeftCorner_4F5960()
 {
     u16 side_word;
@@ -3003,7 +3003,7 @@ void MapRenderer::DrawPartialBlockTopLeftCorner_4F5960()
     }
 }
 
-MATCH_FUNC(0x4F5B70)
+// 0x4F5B70
 void MapRenderer::DrawPartialBlockTopRightCorner_4F5B70()
 {
     u16 side_word;
@@ -3073,7 +3073,7 @@ void MapRenderer::DrawPartialBlockTopRightCorner_4F5B70()
     }
 }
 
-MATCH_FUNC(0x4F5D80)
+// 0x4F5D80
 void MapRenderer::DrawPartialBlockBottomRightCorner_4F5D80()
 {
     u16 side_word;
@@ -3143,7 +3143,7 @@ void MapRenderer::DrawPartialBlockBottomRightCorner_4F5D80()
     }
 }
 
-MATCH_FUNC(0x4F5FD0)
+// 0x4F5FD0
 void MapRenderer::DrawPartialBlockBottomLeftCorner_4F5FD0()
 {
     u16 side_word;
@@ -3213,7 +3213,7 @@ void MapRenderer::DrawPartialBlockBottomLeftCorner_4F5FD0()
     }
 }
 
-MATCH_FUNC(0x4F6350)
+// 0x4F6350
 void MapRenderer::DrawPartialCentreBlock_4F6350()
 {
     u16 side_word;
@@ -3283,7 +3283,7 @@ void MapRenderer::DrawPartialCentreBlock_4F6350()
     }
 }
 
-MATCH_FUNC(0x4f6580)
+// 0x4f6580
 void MapRenderer::DrawPartialBlocks_4F6580()
 {
     u8 slope_byte = gpBlock_6F6478->field_B_slope_type;
@@ -3323,7 +3323,7 @@ void MapRenderer::DrawPartialBlocks_4F6580()
 }
 
 
-MATCH_FUNC(0x4f6630)
+// 0x4f6630
 void MapRenderer::DrawGradientSlope_4F6630()
 {
     u32 slope_idx = (gpBlock_6F6478->field_B_slope_type >> 2);
@@ -3353,7 +3353,7 @@ void MapRenderer::DrawGradientSlope_4F6630()
 }
 
 // https://decomp.me/scratch/8po7Q  instruction swap at lines (0xbc vs 0xc2) and (0x125 vs 0x12b)
-MATCH_FUNC(0x4f66c0)
+// 0x4f66c0
 void MapRenderer::RenderFlatBlock_4F66C0()
 {
     u16 side_word;
@@ -3420,7 +3420,7 @@ void MapRenderer::RenderFlatBlock_4F66C0()
     }
 }
 
-MATCH_FUNC(0x4f6880)
+// 0x4f6880
 void MapRenderer::RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord)
 {
     gmp_block_info* pBlock = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(pXCoord, pYCoord, gZCoord_6F63E0);
@@ -3495,7 +3495,7 @@ void MapRenderer::RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord)
     }
 }
 
-MATCH_FUNC(0x4f6a10)
+// 0x4f6a10
 void MapRenderer::ClearDrawnTileCount_4F6A10()
 {
     field_2F00_drawn_tile_count = 0;
@@ -3524,10 +3524,9 @@ static inline void AddToDrawListByVal(MapRenderer* pThis, s32 x, s32 y)
 }
 
 // https://decomp.me/scratch/VJVUz
-WIP_FUNC(0x4f6a20)
+// 0x4f6a20
 void MapRenderer::Draw_4F6A20()
 {
-    WIP_IMPLEMENTED;
 
     // set ambient level
     if (gLighting_626A09)

@@ -106,8 +106,8 @@ EXTERN_GLOBAL(u16, word_677CFC);
 EXTERN_GLOBAL(u8, byte_6771DC);
 
 // TODO: Move
-MATCH_FUNC(0x447650)
-void __stdcall InitAIvars_447650()
+// 0x447650
+void InitAIvars_447650()
 {
     byte_677A78 = 0;
     bOnGradientSlope_677C90 = 0;
@@ -135,7 +135,7 @@ void __stdcall InitAIvars_447650()
     gCurrCarAI_TargetCar_6779B0 = nullptr;
 }
 
-MATCH_FUNC(0x4476f0)
+// 0x4476f0
 void CarAI_78::MakeAgressiveSirensAndLights_4476F0()
 {
     if (field_0_car->IsPoliceCar_439EC0())
@@ -153,7 +153,7 @@ inline void CarAI_78::TurnAround_447970()
     field_0_car->field_60_pChaseTask->field_26_route_finished = 1;
 }
 
-MATCH_FUNC(0x447710)
+// 0x447710
 void CarAI_78::PlanTurnAtNextJunction_447710()
 {
     s8 arrow_run_len = 0;
@@ -282,7 +282,7 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
     }
 }
 
-MATCH_FUNC(0x447970)
+// 0x447970
 void CarAI_78::DoShortcutsUsingJunctions_447970()
 {
     this->field_24_flags &= ~0xC0000u;
@@ -396,7 +396,7 @@ void CarAI_78::DoShortcutsUsingJunctions_447970()
     }
 }
 
-MATCH_FUNC(0x447ca0)
+// 0x447ca0
 bool CarAI_78::GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction)
 {
     field_28_junc_idx = gRouteFinder_6FFDC8->StartRoute_58A190(gCurrCarAI_xpos_677C38.ToInt(),
@@ -417,7 +417,7 @@ bool CarAI_78::GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction)
     return false;
 }
 
-MATCH_FUNC(0x447d40)
+// 0x447d40
 char_type CarAI_78::TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBlock)
 {
     Ang16 angle = this->field_10_angle;
@@ -640,7 +640,7 @@ char_type CarAI_78::TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBloc
     return 0;
 }
 
-MATCH_FUNC(0x448270)
+// 0x448270
 bool CarAI_78::IsClockwiseTurning_448270()
 {
     switch (field_4C_curr_direction)
@@ -675,7 +675,7 @@ bool CarAI_78::IsClockwiseTurning_448270()
     return false;
 }
 
-MATCH_FUNC(0x4482C0)
+// 0x4482C0
 void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
 {
     Sprite* pProbe = gObject_5C_6F8F84->field_58_collision_probe_sprite;
@@ -874,7 +874,7 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
 }
 
 // 9.6f 0x430650
-MATCH_FUNC(0x448770)
+// 0x448770
 void CarAI_78::CheckRoadAhead_448770()
 {
     Fix16 toUse = kF16Zero_677B90;
@@ -1064,7 +1064,7 @@ void CarAI_78::CheckRoadAhead_448770()
 
 // https://decomp.me/scratch/NIiIz
 // 9.6f 0x430CC0. ClearSteeringIfTurning_4538B0 (9.6f 0x42FE40) is called once and inlined three times in 10.5
-MATCH_FUNC(0x448ce0)
+// 0x448ce0
 void CarAI_78::ManageTrafficCarDirection_448CE0()
 {
     Ang16 target_angle = kAng0_677CE8;
@@ -1640,7 +1640,7 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
 }
 
 // https://decomp.me/scratch/FqWRo
-MATCH_FUNC(0x44a1f0)
+// 0x44a1f0
 void CarAI_78::FollowRoadDirection_44A1F0()
 {
     Ang16 lane_angle = kAng0_677CE8;
@@ -2026,7 +2026,7 @@ void CarAI_78::FollowRoadDirection_44A1F0()
 // inline budget their Normalize is called out of line (0x406C20) on it. The angle global is the left
 // operand (this) in every sum: with dword_677A2E as `this` in one site and the argument in another, VC6
 // loads both with 32-bit movs instead of a 16-bit mov/sub.
-MATCH_FUNC(0x44af00)
+// 0x44af00
 void CarAI_78::AlignToLaneCenter_44AF00()
 {
     s8 arrow_run_len = 0;
@@ -2416,7 +2416,7 @@ void CarAI_78::AlignToLaneCenter_44AF00()
     }
 }
 
-MATCH_FUNC(0x44d1d0)
+// 0x44d1d0
 void CarAI_78::DetectCarAhead_44D1D0()
 {
     Fix16 x_off;
@@ -2798,7 +2798,7 @@ probe_sides:
     }
 }
 
-MATCH_FUNC(0x44e0c0)
+// 0x44e0c0
 void CarAI_78::Init_AI_Chase_44E0C0()
 {
     byte_677BBC = 1;
@@ -2963,7 +2963,7 @@ void CarAI_78::Init_AI_Chase_44E0C0()
 // https://decomp.me/scratch/Auxlx
 // MaxAbsDistance_42A6B0 past the inline budget: the y difference stays inline, the Abs calls
 // go out of line (budget)
-static inline Fix16 __stdcall MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, Fix16& y2)
+static inline Fix16 MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, Fix16& y2)
 {
     Fix16 diff_x = x2 - x1;
     Fix16 diff_y;
@@ -2974,7 +2974,7 @@ static inline Fix16 __stdcall MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fi
     return result;
 }
 
-WIP_FUNC(0x44e560)
+// 0x44e560
 void CarAI_78::UpdateStateMachine_44E560()
 {
     NOT_IMPLEMENTED;
@@ -4087,7 +4087,7 @@ void CarAI_78::UpdateStateMachine_44E560()
     }
 }
 
-MATCH_FUNC(0x451980)
+// 0x451980
 void CarAI_78::ReactToNearbyCar_451980()
 {
     Fix16 near_dist = gF16fOne_677B94;
@@ -4355,7 +4355,7 @@ void CarAI_78::ReactToNearbyCar_451980()
     }
 }
 
-MATCH_FUNC(0x451fa0)
+// 0x451fa0
 void CarAI_78::ReactToNearbyObject_451FA0()
 {
     if (!byte_677BBC)
@@ -4370,7 +4370,7 @@ void CarAI_78::ReactToNearbyObject_451FA0()
     }
 }
 
-MATCH_FUNC(0x451ff0)
+// 0x451ff0
 void CarAI_78::ReactToNearbyPed_451FF0()
 {
     if (!field_24_bf.bFlag21)
@@ -4398,7 +4398,7 @@ static inline void SetByte6771DC_42ACE0(u8 value)
     byte_6771DC = value;
 }
 
-MATCH_FUNC(0x452060)
+// 0x452060
 void CarAI_78::ScanAheadForObstacles_452060()
 {
     Fix16 probe_height;
@@ -4721,7 +4721,7 @@ void CarAI_78::ScanAheadForObstacles_452060()
 }
 
 // https://decomp.me/scratch/zCa7m
-MATCH_FUNC(0x452a20)
+// 0x452a20
 void CarAI_78::ManageCollisions_452A20()
 {
     Fix16_Point impact_point;
@@ -4873,7 +4873,7 @@ void CarAI_78::ManageCollisions_452A20()
 }
 
 // https://decomp.me/scratch/uZlwP
-MATCH_FUNC(0x452df0)
+// 0x452df0
 void CarAI_78::UpdateDrivingAI_452DF0()
 {
 
@@ -5062,7 +5062,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
     field_24_bf.bFlag12 = false;
 }
 
-MATCH_FUNC(0x453470)
+// 0x453470
 void CarAI_78::UpdateDriving_453470()
 {
     this->field_0_car->field_58_physics->SetHandBrakeOff_421260();
@@ -5123,7 +5123,7 @@ void CarAI_78::UpdateDriving_453470()
     }
 }
 
-MATCH_FUNC(0x4537d0)
+// 0x4537d0
 void CarAI_78::ChooseRandomTurn_4537D0()
 {
     if (!this->field_0_car->IsTurnLeft_42AC30() && !this->field_0_car->IsTurnRight_42AC20())
@@ -5139,7 +5139,7 @@ void CarAI_78::ChooseRandomTurn_4537D0()
     }
 }
 
-MATCH_FUNC(0x4538b0)
+// 0x4538b0
 void CarAI_78::ClearSteeringIfTurning_4538B0()
 {
     if (this->field_24_bf.bFlag7)
@@ -5149,7 +5149,7 @@ void CarAI_78::ClearSteeringIfTurning_4538B0()
     }
 }
 
-MATCH_FUNC(0x453990)
+// 0x453990
 void CarAI_78::RaiseSpeedTo_453990(Fix16 target_speed)
 {
     if (this->field_14_speed < target_speed)
@@ -5158,14 +5158,14 @@ void CarAI_78::RaiseSpeedTo_453990(Fix16 target_speed)
     }
 }
 
-MATCH_FUNC(0x4539b0)
+// 0x4539b0
 void CarAI_78::ClearTurnReady_4539B0()
 {
     this->field_0_car->field_A6_bf.bTurnRightReady = false;
     this->field_0_car->field_A6_bf.bTurnLeftReady = false;
 }
 
-MATCH_FUNC(0x4539d0)
+// 0x4539d0
 void CarAI_78::UpdateSpeedTowardTarget_4539D0()
 {
     Fix16 f14 = this->field_14_speed;
@@ -5194,7 +5194,7 @@ void CarAI_78::UpdateSpeedTowardTarget_4539D0()
     pPhysics->field_95 = 0;
 }
 
-MATCH_FUNC(0x453a40)
+// 0x453a40
 void CarAI_78::UpdateTrainMovement_453A40()
 {
     Fix16 zpos = kF16Zero_677B90;
@@ -5255,7 +5255,7 @@ void CarAI_78::UpdateTrainMovement_453A40()
     field_0_car->field_58_physics->SetVelocityTowardTarget_55A1D0(xpos, ypos, i, &a5);
 }
 
-MATCH_FUNC(0x453bb0)
+// 0x453bb0
 void CarAI_78::AI_Service_453BB0()
 {
     InitAIvars_447650();
@@ -5268,7 +5268,7 @@ void CarAI_78::AI_Service_453BB0()
     UpdateDriving_453470();
 }
 
-MATCH_FUNC(0x453bf0)
+// 0x453bf0
 void CarAI_78::SetCar_453BF0(Car_BC* pCar)
 {
     field_0_car = pCar;
@@ -5283,7 +5283,7 @@ static inline bool IsMovingBackwards_453C00(CarPhysics_B0* pPhysics)
     return heading_delta <= kAng90_6779E4 || heading_delta >= kAng270_677B08;
 }
 
-MATCH_FUNC(0x453c00)
+// 0x453c00
 void CarAI_78::ReverseOrNeutral_453C00()
 {
     if (IsMovingBackwards_453C00(field_0_car->field_58_physics) || field_0_car->GetCarLinearSpeed_43A240() < dword_677A8C)
@@ -5296,7 +5296,7 @@ void CarAI_78::ReverseOrNeutral_453C00()
     }
 }
 
-MATCH_FUNC(0x453cb0)
+// 0x453cb0
 CarAI_78::CarAI_78()
 {
     this->field_10_angle = 0;
@@ -5343,7 +5343,7 @@ CarAI_78::CarAI_78()
     this->field_24_flags &= ~0x3C0000u;
 }
 
-MATCH_FUNC(0x453d80)
+// 0x453d80
 void CarAI_78::PoolAllocate()
 {
     this->field_0_car = nullptr;

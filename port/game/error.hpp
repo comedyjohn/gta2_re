@@ -29,13 +29,13 @@ class ErrorLog
     FILE* mFile = nullptr;
 };
 
-EXPORT void __stdcall Error_SetName_4A0770(const char_type* pFileName);
+void Error_SetName_4A0770(const char_type* pFileName);
 
-EXPORT void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo, ...);
-EXPORT void __stdcall FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo);
-EXPORT void __stdcall Shutdown_4DA740();
+void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo, ...);
+void FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo);
+void Shutdown_4DA740();
 
-EXPORT void __stdcall GBH_Graphis_DMA_Video_Free_5D9830();
+void GBH_Graphis_DMA_Video_Free_5D9830();
 
 EXTERN_GLOBAL(char_type, gTmpBuffer_67C598[256]);
 EXTERN_GLOBAL(HWND, gHwnd_707F04);

@@ -45,5 +45,5 @@ class SoundObject_10
     // Type depends on what field_0_object_type is
     SoundObjectType field_C_pAny;
 
-    EXPORT void Release_40EF20();
+    void Release_40EF20();
 };

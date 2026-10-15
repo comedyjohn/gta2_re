@@ -75,7 +75,7 @@ static inline bool is_car_weapon(s32& weapon_idx)
     return weapon_idx >= 15 && weapon_idx <= 27;
 }
 
-MATCH_FUNC(0x503200)
+// 0x503200
 void miss2_0x11C::MissionFailOnArrest_503200()
 {
     if (gScriptManager_6F8060->field_355_death_arr_state && gScriptManager_6F8060->field_344_mission_flag &&
@@ -133,7 +133,7 @@ void miss2_0x11C::MissionFailOnArrest_503200()
     }
 }
 
-MATCH_FUNC(0x503410)
+// 0x503410
 u8 miss2_0x11C::GetEntityTypeOfCommand_503410(u32 opcode)
 {
     switch (opcode)
@@ -210,14 +210,14 @@ u8 miss2_0x11C::GetEntityTypeOfCommand_503410(u32 opcode)
     }
 }
 
-MATCH_FUNC(0x5035b0)
+// 0x5035b0
 void miss2_0x11C::PoolAllocate_5035B0()
 {
     field_118_in_level_start = 0;
     field_11A_thread_id = gNextThreadId_6212EE++;
 }
 
-MATCH_FUNC(0x5035d0)
+// 0x5035d0
 void miss2_0x11C::Log_5035D0()
 {
     if (gDo_miss_logging_67D6BC)
@@ -229,13 +229,13 @@ void miss2_0x11C::Log_5035D0()
 
 DEFINE_GLOBAL(s32, gPrevCmdIdx_6F806C, 0x6F806C);
 
-MATCH_FUNC(0x503610)
+// 0x503610
 void miss2_0x11C::StopThread_503610()
 {
     field_10_stopped = 1;
 }
 
-MATCH_FUNC(0x503620)
+// 0x503620
 void miss2_0x11C::Next_503620(SCR_CMD_HEADER* pCmd)
 {
     if ((u16)pCmd->field_4_cmd_next != 0xFFFF)
@@ -250,7 +250,7 @@ void miss2_0x11C::Next_503620(SCR_CMD_HEADER* pCmd)
     }
 }
 
-MATCH_FUNC(0x503650)
+// 0x503650
 void miss2_0x11C::JumpToCmd_503650(u16 cmdIdx)
 {
     if (cmdIdx != 0xFFFF)
@@ -263,13 +263,13 @@ void miss2_0x11C::JumpToCmd_503650(u16 cmdIdx)
     }
 }
 
-MATCH_FUNC(0x503670)
+// 0x503670
 void miss2_0x11C::EndCmd_503670()
 {
     field_4_next_cmd = 0xFFFFu;
 }
 
-MATCH_FUNC(0x503680)
+// 0x503680
 void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
@@ -316,7 +316,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
     }
 }
 
-MATCH_FUNC(0x5038d0)
+// 0x5038d0
 void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
@@ -372,7 +372,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPoi
     }
 }
 
-MATCH_FUNC(0x503a20)
+// 0x503a20
 void miss2_0x11C::SCRCMD_PLAYER_PED_503A20(SCR_PLAYER_PED* pCmd)
 {
     Player* pPlayer = gGame_0x40_67E008->GetFirstPlayerWithoutPed_4B9750();
@@ -427,7 +427,7 @@ void miss2_0x11C::SCRCMD_PLAYER_PED_503A20(SCR_PLAYER_PED* pCmd)
     }
 }
 
-MATCH_FUNC(0x503bc0)
+// 0x503bc0
 void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570) //  255.0
@@ -531,7 +531,7 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
     }
 }
 
-MATCH_FUNC(0x503f80)
+// 0x503f80
 void miss2_0x11C::SCRCMD_PARKED_CAR_DECSET_503F80(SCR_POINTER* pCmd)
 {
     miss2_0x11C::SCRCMD_CAR_DECSET_503BC0((SCR_CAR_DATA_DEC*)pCmd, pCmd);
@@ -541,7 +541,7 @@ void miss2_0x11C::SCRCMD_PARKED_CAR_DECSET_503F80(SCR_POINTER* pCmd)
     pCar->field_76_last_seen_timer = 0;
 }
 
-MATCH_FUNC(0x503fb0)
+// 0x503fb0
 void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_POINTER* pPointer)
 {
     Ped* pPed;
@@ -574,14 +574,14 @@ void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_P
     }
 }
 
-MATCH_FUNC(0x504110)
+// 0x504110
 void miss2_0x11C::SetCharObjective_504110(SCR_CHAR_OBJECTIVE* pCmd, SCR_POINTER* pPointer)
 {
     pPointer->field_8_char->SetObjective(pCmd->field_A_objective);
     pPointer->field_8_char->field_21C_bf.bScheduledForRemoval = false;
 }
 
-MATCH_FUNC(0x504150)
+// 0x504150
 void miss2_0x11C::SCRCMD_MAP_ZONE_SET_504150(SCR_MAP_ZONE_SET* pCmd)
 {
     str_table_entry* StringById_503080;
@@ -601,13 +601,13 @@ void miss2_0x11C::SCRCMD_MAP_ZONE_SET_504150(SCR_MAP_ZONE_SET* pCmd)
                                                    pCmd->field_1A_policeped_ratio);
 }
 
-MATCH_FUNC(0x5041b0)
+// 0x5041b0
 void miss2_0x11C::SCRCMD_ARROW_DEC_5041B0(SCR_TWO_PARAMS* pCmd)
 {
     pCmd->field_8_u32 = 0;
 }
 
-MATCH_FUNC(0x5041c0)
+// 0x5041c0
 void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRANE_BASIC_DEC* pBasicCmd)
 {
     pBasicCmd->field_8_crane =
@@ -664,7 +664,7 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
     }
 }
 
-MATCH_FUNC(0x5043a0)
+// 0x5043a0
 void miss2_0x11C::SCRCMD_CONVEYOR_DECSET1_2_5043A0(SCR_CONVEYOR* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_rect.field_0_pos.field_8_z == kFp255_6F7570)
@@ -685,7 +685,7 @@ void miss2_0x11C::SCRCMD_CONVEYOR_DECSET1_2_5043A0(SCR_CONVEYOR* pCmd, SCR_POINT
     pPointer->field_8_obj->SetConveyorSpeed_529030(pCmd->field_18_speed.field_0_x, pCmd->field_18_speed.field_1_y);
 }
 
-MATCH_FUNC(0x504420)
+// 0x504420
 void miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(SCR_GENERATOR* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
@@ -710,7 +710,7 @@ void miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(SCR_GENERATOR* pCmd, SCR_POINTE
     }
 }
 
-MATCH_FUNC(0x504530)
+// 0x504530
 void miss2_0x11C::SCRCMD_DESTRUCTOR_DECSET_504530(SCR_DESTRUCTOR* pCmd, SCR_POINTER* pPointer)
 {
     if (pCmd->field_C_rect.field_0_pos.field_8_z == kFp255_6F7570)
@@ -730,13 +730,13 @@ void miss2_0x11C::SCRCMD_DESTRUCTOR_DECSET_504530(SCR_DESTRUCTOR* pCmd, SCR_POIN
                                                                     kFpOne_6F77C4);
 }
 
-MATCH_FUNC(0x5045a0)
+// 0x5045a0
 void miss2_0x11C::SCRCMD_CRUSHER_BASIC_5045A0(SCR_CRUSHER_BASIC* pCmd, SCR_POINTER* pPointer)
 {
     pPointer->field_8_crusher = gCrusherPool_94_67A830->CreateCrusher_488820(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
 }
 
-MATCH_FUNC(0x5045d0)
+// 0x5045d0
 void miss2_0x11C::SCRCMD_THREAD_DECLARE2_5045D0(SCR_THREAD* pThread, s16* pThreadIdx)
 {
     SCR_THREAD* pCmd = pThread;
@@ -750,7 +750,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE2_5045D0(SCR_THREAD* pThread, s16* pThrea
     }
 }
 
-MATCH_FUNC(0x504660)
+// 0x504660
 void miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660(SCR_THREAD* pThread)
 {
     SCR_THREAD* pCmd = pThread;
@@ -769,7 +769,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660(SCR_THREAD* pThread)
     }
 }
 
-MATCH_FUNC(0x504710)
+// 0x504710
 void miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(SCR_CHAR_AREA_ANY* pCmd)
 {
     if (((SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_24_char_idx))->field_8_char)
@@ -804,7 +804,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(SCR_CHAR_AREA_ANY* pCmd)
     }
 }
 
-MATCH_FUNC(0x5047c0)
+// 0x5047c0
 void miss2_0x11C::SCRCMD_THREAD_DECLARE4_5047C0(SCR_THREAD* pThread, s16* pThreadIdx)
 {
     SCR_THREAD* pCmd = pThread;
@@ -818,7 +818,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE4_5047C0(SCR_THREAD* pThread, s16* pThrea
     }
 }
 
-MATCH_FUNC(0x504830)
+// 0x504830
 void miss2_0x11C::SCRCMD_SET_GANG_INFO1_504830(SCR_SET_GANG_INFO* pCmd)
 {
     str_table_entry* string_entry;
@@ -856,13 +856,13 @@ void miss2_0x11C::SCRCMD_SET_GANG_INFO1_504830(SCR_SET_GANG_INFO* pCmd)
     }
 }
 
-MATCH_FUNC(0x504950)
+// 0x504950
 void miss2_0x11C::SCRCMD_SET_DOOR_INFO_504950(SCR_FOUR_PARAMS* pCmd)
 {
     gDoor_4D4_67BD2C->RegisterDoorInfo_49D2D0(pCmd->field_8_unsigned_1, pCmd->field_A_unsigned_2, pCmd->field_C_unsigned_3);
 }
 
-MATCH_FUNC(0x504970)
+// 0x504970
 void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
 {
     if (pCmd->field_2_type == SCRCMD_DOOR_DECLARE_S1)
@@ -987,7 +987,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
     // 9.6f: Door_38::set_close_delay (0x476A20, inlined, using it changes the code)
 }
 
-MATCH_FUNC(0x504b80)
+// 0x504b80
 void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
 {
     if (pCmd->field_2_type == SCRCMD_DOOR_DECLARE_S2)
@@ -1114,7 +1114,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
     // 9.6f: Door_38::set_close_delay (0x476A20, inlined, using it changes the code)
 }
 
-MATCH_FUNC(0x504dd0)
+// 0x504dd0
 void miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0(SCR_TWO_PARAMS* pCmd)
 {
     SCR_POINTER* pPointer;
@@ -1139,7 +1139,7 @@ void miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0(SCR_TWO_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x504ee0)
+// 0x504ee0
 void miss2_0x11C::CreateLight_504EE0(SCR_CREATE_LIGHT* pCmd, SCR_POINTER* pPointer)
 {
     Light_28* pNewLight = gLight_1D4CC_6F5520->Init_469010(pCmd->field_C_xpos,
@@ -1155,7 +1155,7 @@ void miss2_0x11C::CreateLight_504EE0(SCR_CREATE_LIGHT* pCmd, SCR_POINTER* pPoint
     }
 }
 
-MATCH_FUNC(0x505030)
+// 0x505030
 void miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030(SCR_SET_STATION* pCmd)
 {
     s32 num_passenger;
@@ -1195,13 +1195,13 @@ void miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030(SCR_SET_STATION* pCmd)
     }
 }
 
-MATCH_FUNC(0x5051d0)
+// 0x5051d0
 void miss2_0x11C::SCRCMD_RADIOSTATION_DEC_5051D0(SCR_RADIOSTATION_DEC* pCmd)
 {
     gRoot_sound_66B038.DeclareRadioStation_40F030(pCmd->field_10_station_type, pCmd->field_8_pos.field_0_x, pCmd->field_8_pos.field_4_y);
 }
 
-MATCH_FUNC(0x505210)
+// 0x505210
 void miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210(SCR_TWO_PARAMS* pCmd)
 {
     str_table_entry* StringById;
@@ -1216,7 +1216,7 @@ void miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210(SCR_TWO_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x5052c0)
+// 0x5052c0
 void miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0(SCR_DECLARE_POLICELEVEL* pCmd)
 {
     u8 max_wanted_level = pCmd->field_A_wanted_level;
@@ -1227,7 +1227,7 @@ void miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0(SCR_DECLARE_POLICELEVEL* pCmd)
     gPolice_7B8_6FEE40->field_660_max_wanted_stars = pCmd->field_A_wanted_level; // max_wanted_level
 }
 
-MATCH_FUNC(0x505340)
+// 0x505340
 void miss2_0x11C::SCRCMD_SOUND_DECSET_505340(SCR_SOUND_DECSET* pCmd, SCR_POINTER* pPointer)
 {
     if (!pCmd->field_19_play_type)
@@ -1248,7 +1248,7 @@ void miss2_0x11C::SCRCMD_SOUND_DECSET_505340(SCR_SOUND_DECSET* pCmd, SCR_POINTER
     }
 }
 
-MATCH_FUNC(0x505430)
+// 0x505430
 void miss2_0x11C::SCRCMD_SET_MISSIONS_TOTAL_505430(SCR_TWO_PARAMS* pCmd)
 {
     switch (pCmd->field_2_type)
@@ -1273,7 +1273,7 @@ void miss2_0x11C::SCRCMD_SET_MISSIONS_TOTAL_505430(SCR_TWO_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x505580)
+// 0x505580
 void miss2_0x11C::SCRCMD_PASSED_FAILED_FLAGS_505580(SCR_TWO_PARAMS* pCmd)
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1);
@@ -1303,19 +1303,19 @@ void miss2_0x11C::SCRCMD_PASSED_FAILED_FLAGS_505580(SCR_TWO_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x505710)
+// 0x505710
 void miss2_0x11C::SCRCMD_FINISH_SCORE_505710(SCR_TWO_PARAMS* pCmd)
 {
     gScriptManager_6F8060->field_310_finish_score = pCmd->field_8_s32;
 }
 
-MATCH_FUNC(0x505750)
+// 0x505750
 void miss2_0x11C::SCRCMD_DECLARE_CARLIST_505750(SCR_TWO_PARAMS* pCmd)
 {
     gScriptManager_6F8060->field_340_car_list = &pCmd->field_8_u32;
 }
 
-MATCH_FUNC(0x505790)
+// 0x505790
 void miss2_0x11C::DisableThread_505790(u16 idx)
 {
     SCR_CMD_HEADER* pCmd = gScriptManager_6F8060->GetBasePointer_512770(idx);
@@ -1366,7 +1366,7 @@ void miss2_0x11C::DisableThread_505790(u16 idx)
     }
 }
 
-MATCH_FUNC(0x505b10)
+// 0x505b10
 void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
 {
     SCR_POINTER* pCarCmdPointer;
@@ -1432,7 +1432,7 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
     }
 }
 
-MATCH_FUNC(0x505ea0)
+// 0x505ea0
 s16 miss2_0x11C::GetBonusResult_505EA0(u16 idx)
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
@@ -1448,7 +1448,7 @@ s16 miss2_0x11C::GetBonusResult_505EA0(u16 idx)
     return result;
 }
 
-MATCH_FUNC(0x505f50)
+// 0x505f50
 void miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50(SCR_TWO_PARAMS* pCmd)
 {
     if (gDo_text_id_test_67D6D0)
@@ -1464,7 +1464,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50(SCR_TWO_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x506010)
+// 0x506010
 void miss2_0x11C::SCRCMD_DEC_DEATH_BASE_506010(SCR_FOUR_PARAMS* pCmd)
 {
     if (pCmd->field_2_type == SCRCMD_DEC_DEATH_BASE_1)
@@ -1481,14 +1481,14 @@ void miss2_0x11C::SCRCMD_DEC_DEATH_BASE_506010(SCR_FOUR_PARAMS* pCmd)
     }
 }
 
-MATCH_FUNC(0x5060d0)
+// 0x5060d0
 void miss2_0x11C::SCRCMD_DO_CRANE_POWERUP_5060D0(SCR_DECLARE_CRANE_POWERUP* pCmd)
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_crane_idx);
     pPointer->field_8_crane->field_140_powerup_cmd = pCmd->field_0_cmd_this;
 }
 
-MATCH_FUNC(0x506140)
+// 0x506140
 void miss2_0x11C::SCRCMD_START_BASIC_KF_506140(u16* pKfValue)
 {
     for (u16 idx = 0; idx < 25; idx++)
@@ -1501,7 +1501,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_506140(u16* pKfValue)
     }
 }
 
-MATCH_FUNC(0x5061c0)
+// 0x5061c0
 void miss2_0x11C::ExecOpCode_5061C0()
 {
     for (u16 i = 1; i < 6000u; ++i)
@@ -1684,7 +1684,7 @@ void miss2_0x11C::ExecOpCode_5061C0()
     gGeneratorPool_14AC_67E5D0->sub_4C1CD0();
 }
 
-MATCH_FUNC(0x5069c0)
+// 0x5069c0
 void miss2_0x11C::SCRCMD_LEVELSTART_5069C0()
 {
     gRoot_sound_66B038.PlayVoice_40F090(voice_line::respectis_24); //  "And remember, respect is everything!"
@@ -1692,14 +1692,14 @@ void miss2_0x11C::SCRCMD_LEVELSTART_5069C0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5069f0)
+// 0x5069f0
 void miss2_0x11C::SCRCMD_LEVELEND_5069F0()
 {
     field_118_in_level_start = 0;
     miss2_0x11C::EndCmd_503670();
 }
 
-MATCH_FUNC(0x506a00)
+// 0x506a00
 void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -1712,7 +1712,7 @@ void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x506a60)
+// 0x506a60
 void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
 {
     SCR_THREAD* pThread = (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
@@ -1747,7 +1747,7 @@ void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x506af0)
+// 0x506af0
 void miss2_0x11C::SCRCMD_IF_JUMP_506AF0()
 {
     //  field_8_cond_result = 1  means the boolean opcode has returned true
@@ -1766,7 +1766,7 @@ void miss2_0x11C::SCRCMD_IF_JUMP_506AF0()
     Next_503620(gBasePtr_6F8070); // go to field_4_cmd_next
 }
 
-MATCH_FUNC(0x506b30)
+// 0x506b30
 void miss2_0x11C::SCRCMD_GOSUB_506B30()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -1777,7 +1777,7 @@ void miss2_0x11C::SCRCMD_GOSUB_506B30()
     miss2_0x11C::JumpToCmd_503650(pCmd->field_8_unsigned_1);
 }
 
-MATCH_FUNC(0x506b80)
+// 0x506b80
 void miss2_0x11C::SCRCMD_RETURN_506B80() // MISSIONEND
 {
     ScriptStackFrame_C* pFrame = field_114_gosub_stack->remove_503180();
@@ -1794,7 +1794,7 @@ void miss2_0x11C::SCRCMD_RETURN_506B80() // MISSIONEND
     }
 }
 
-MATCH_FUNC(0x506bc0)
+// 0x506bc0
 u8 miss2_0x11C::GetOperationType_506BC0(u32 opcode)
 {
     switch (opcode)
@@ -1840,7 +1840,7 @@ u8 miss2_0x11C::GetOperationType_506BC0(u32 opcode)
     }
 }
 
-MATCH_FUNC(0x506d60)
+// 0x506d60
 void miss2_0x11C::SCRCMD_S_OP_I_506D60()
 {
     SCR_OPERATE_COUNTER_AND_INT* pCmd = (SCR_OPERATE_COUNTER_AND_INT*)gBasePtr_6F8070;
@@ -1917,7 +1917,7 @@ void miss2_0x11C::SCRCMD_S_OP_I_506D60()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x506ed0)
+// 0x506ed0
 void miss2_0x11C::SCRCMD_S_OP_S_506ED0()
 {
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type);
@@ -1989,7 +1989,7 @@ void miss2_0x11C::SCRCMD_S_OP_S_506ED0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507110)
+// 0x507110
 void miss2_0x11C::SCRCMD_I_OP_S_507110()
 {
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type);
@@ -2061,14 +2061,14 @@ void miss2_0x11C::SCRCMD_I_OP_S_507110()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507750)
+// 0x507750
 void miss2_0x11C::SCRCMD_NOT_507750()
 {
     field_8_cond_result = field_8_cond_result == 0; //  just toggle the boolean value
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5078d0)
+// 0x5078d0
 void miss2_0x11C::SCRCMD_START_EXEC_5078D0()
 {
     s16 exec_flag;
@@ -2084,7 +2084,7 @@ void miss2_0x11C::SCRCMD_START_EXEC_5078D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5079a0)
+// 0x5079a0
 void miss2_0x11C::SCRCMD_STOP_EXEC_5079A0()
 {
     s16 exec_flag;
@@ -2099,7 +2099,7 @@ void miss2_0x11C::SCRCMD_STOP_EXEC_5079A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507a70)
+// 0x507a70
 void miss2_0x11C::SCRCMD_INCREMENT_507A70()
 {
     SCR_POINTER* pPointer;
@@ -2110,7 +2110,7 @@ void miss2_0x11C::SCRCMD_INCREMENT_507A70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507b50)
+// 0x507b50
 void miss2_0x11C::SCRCMD_DECREMENT_507B50()
 {
     SCR_POINTER* pPointer;
@@ -2121,7 +2121,7 @@ void miss2_0x11C::SCRCMD_DECREMENT_507B50()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507ce0)
+// 0x507ce0
 void miss2_0x11C::SCRCMD_CREATE_OBJ_507CE0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2149,7 +2149,7 @@ void miss2_0x11C::SCRCMD_CREATE_OBJ_507CE0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x507f80)
+// 0x507f80
 void miss2_0x11C::SCRCMD_CREATE_CAR_507F80()
 {
     SCR_CAR_DATA_DEC* pCmd = (SCR_CAR_DATA_DEC*)gBasePtr_6F8070;
@@ -2171,7 +2171,7 @@ void miss2_0x11C::SCRCMD_CREATE_CAR_507F80()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508220)
+// 0x508220
 void miss2_0x11C::SCRCMD_MAKE_CAR_DUMMY_508220()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2189,7 +2189,7 @@ void miss2_0x11C::SCRCMD_MAKE_CAR_DUMMY_508220()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508280)
+// 0x508280
 void miss2_0x11C::SCRCMD_SET_DENSITY_508280()
 {
     SCR_MAP_SET_ZONE_INFO* pCmd = (SCR_MAP_SET_ZONE_INFO*)gBasePtr_6F8070;
@@ -2235,7 +2235,7 @@ void miss2_0x11C::SCRCMD_SET_DENSITY_508280()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508550)
+// 0x508550
 void miss2_0x11C::SCRCMD_POINT_ARROW_3D_508550() //  SCRCMD_POINT_ARROW_3D and SCRCMD_LEVEL_END_ARROW2
 {
     SCR_LEVEL_END_ARROW2* pCmd = (SCR_LEVEL_END_ARROW2*)gBasePtr_6F8070;
@@ -2255,7 +2255,7 @@ void miss2_0x11C::SCRCMD_POINT_ARROW_3D_508550() //  SCRCMD_POINT_ARROW_3D and S
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5086f0)
+// 0x5086f0
 void miss2_0x11C::SCRCMD_POINT_ARROW_AT_5086F0()
 {
     SCR_POINT_ARROW_AT* pParams = (SCR_POINT_ARROW_AT*)gBasePtr_6F8070;
@@ -2319,7 +2319,7 @@ void miss2_0x11C::SCRCMD_POINT_ARROW_AT_5086F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508dc0)
+// 0x508dc0
 void miss2_0x11C::SCRCMD_ARROW_COLOUR_508DC0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2332,7 +2332,7 @@ void miss2_0x11C::SCRCMD_ARROW_COLOUR_508DC0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508e80)
+// 0x508e80
 void miss2_0x11C::SCRCMD_REMOVE_ARROW_508E80()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2346,7 +2346,7 @@ void miss2_0x11C::SCRCMD_REMOVE_ARROW_508E80()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x508f00)
+// 0x508f00
 void miss2_0x11C::SCRCMD_CHECK_CAR_DAMAGE_508F00()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2363,7 +2363,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DAMAGE_508F00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509030)
+// 0x509030
 void miss2_0x11C::SCRCMD_CHECK_HEALTH_509030()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2389,7 +2389,7 @@ void miss2_0x11C::SCRCMD_CHECK_HEALTH_509030()
 // but that reference lifts pParam2's colour priority (7) above the zero constant (2), which swaps the
 // callee-saved registers (original: zero esi, 4 edi, pParam2 ebx) and folds the gStoredCarId load; with the
 // read through pChar the else block does not reference pParam2 (prio 1) and all of that matches (80 -> 46).
-WIP_FUNC(0x509180)
+// 0x509180
 void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2462,7 +2462,7 @@ void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5093c0)
+// 0x5093c0
 void miss2_0x11C::SCRCMD_DISPLAY_MESSAGE_5093C0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2611,7 +2611,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_MESSAGE_5093C0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5096e0)
+// 0x5096e0
 void miss2_0x11C::SCRCMD_DISPLAY_TIMER_5096E0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2621,7 +2621,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_TIMER_5096E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509730)
+// 0x509730
 void miss2_0x11C::SCRCMD_CREATE_CHAR_509730()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2633,7 +2633,7 @@ void miss2_0x11C::SCRCMD_CREATE_CHAR_509730()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509790)
+// 0x509790
 void miss2_0x11C::SCRCMD_SET_CHAR_OCCUPATION_509790()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -2643,7 +2643,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OCCUPATION_509790()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5097d0)
+// 0x5097d0
 void miss2_0x11C::SCRCMD_SET_CHAR_OBJ1_5097D0()
 {
     SCR_POINTER* BasePointer_512770;
@@ -2654,7 +2654,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ1_5097D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509810)
+// 0x509810
 void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_PASS_509810()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2678,7 +2678,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_PASS_509810()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509880)
+// 0x509880
 void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_FAIL_509880()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2699,7 +2699,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_FAIL_509880()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5098e0)
+// 0x5098e0
 void miss2_0x11C::SCRCMD_GIVE_WEAPON_5098E0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2725,7 +2725,7 @@ void miss2_0x11C::SCRCMD_GIVE_WEAPON_5098E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509990)
+// 0x509990
 void miss2_0x11C::SCRCMD_IS_CAR_IN_BLOCK_509990()
 {
     SCR_IS_CAR_IN_BLOCK* pCmd = (SCR_IS_CAR_IN_BLOCK*)gBasePtr_6F8070;
@@ -2750,7 +2750,7 @@ void miss2_0x11C::SCRCMD_IS_CAR_IN_BLOCK_509990()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509a70)
+// 0x509a70
 void miss2_0x11C::SCRCMD_CAR_IN_AREA_509A70()
 {
     SCR_ONEVAR_RECT* pCmd = (SCR_ONEVAR_RECT*)gBasePtr_6F8070;
@@ -2781,7 +2781,7 @@ void miss2_0x11C::SCRCMD_CAR_IN_AREA_509A70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509bb0)
+// 0x509bb0
 void miss2_0x11C::SCRCMD_HAS_CHAR_DIED_509BB0()
 {
     SCR_POINTER* pPointer;
@@ -2799,7 +2799,7 @@ void miss2_0x11C::SCRCMD_HAS_CHAR_DIED_509BB0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509c10)
+// 0x509c10
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_CAR_509C10()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2822,7 +2822,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_CAR_509C10()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509c90)
+// 0x509c90
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_MODEL_509C90()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -2841,7 +2841,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_MODEL_509C90()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509d00)
+// 0x509d00
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_ANY_CAR_509D00()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2858,14 +2858,14 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_ANY_CAR_509D00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509d60)
+// 0x509d60
 void miss2_0x11C::SCRCMD_DELETE_ITEM_509D60()
 {
     miss2_0x11C::DeallocOrDeleteItem_505B10(gBasePtr_6F8070->field_8_index); //  delete item
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509d90)
+// 0x509d90
 void miss2_0x11C::SCRCMD_ADD_SCORE_509D90()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -2891,7 +2891,7 @@ void miss2_0x11C::SCRCMD_ADD_SCORE_509D90()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509e00)
+// 0x509e00
 void miss2_0x11C::SCRCMD_ADD_SCORE2_509E00()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -2910,7 +2910,7 @@ void miss2_0x11C::SCRCMD_ADD_SCORE2_509E00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509e70)
+// 0x509e70
 void miss2_0x11C::SCRCMD_IS_CHAR_STOPPED_509E70()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -2929,7 +2929,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STOPPED_509E70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509ed0)
+// 0x509ed0
 void miss2_0x11C::SCRCMD_EXPLODE_509ED0()
 {
     SCR_EXPLODE* pCmd = (SCR_EXPLODE*)gBasePtr_6F8070;
@@ -2971,7 +2971,7 @@ void miss2_0x11C::SCRCMD_EXPLODE_509ED0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509f60)
+// 0x509f60
 void miss2_0x11C::SCRCMD_EXPLODE_BUILDING_509F60()
 {
     SCR_EXPLODE_WALL* pCmd = (SCR_EXPLODE_WALL*)gBasePtr_6F8070;
@@ -3015,7 +3015,7 @@ void miss2_0x11C::SCRCMD_EXPLODE_BUILDING_509F60()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x509fd0)
+// 0x509fd0
 void miss2_0x11C::Locate_509FD0()
 {
     SCR_ONEVAR_RECT* pCmd = (SCR_ONEVAR_RECT*)gBasePtr_6F8070;
@@ -3098,7 +3098,7 @@ void miss2_0x11C::Locate_509FD0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a200)
+// 0x50a200
 void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
 {
     SCR_CHAR_OBJECTIVE* pCmd = (SCR_CHAR_OBJECTIVE*)gBasePtr_6F8070;
@@ -3155,7 +3155,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a3e0)
+// 0x50a3e0
 void miss2_0x11C::SCRCMD_SET_CHAR_OBJ3_50A3E0()
 {
     SCR_CHAR_OBJ3* pCmd;
@@ -3176,7 +3176,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ3_50A3E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a460)
+// 0x50a460
 void miss2_0x11C::SCRCMD_SET_CHAR_OBJ_FOLLOW_50A460()
 {
     SCR_CHAR_OBJECTIVE* pCmd;
@@ -3214,7 +3214,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ_FOLLOW_50A460()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a570)
+// 0x50a570
 void miss2_0x11C::SCRCMD_CHANGE_CAR_REMAP_50A570()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -3226,7 +3226,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_REMAP_50A570()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a5b0)
+// 0x50a5b0
 void miss2_0x11C::SCRCMD_CHANGE_CHAR_REMAP_50A5B0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -3239,7 +3239,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CHAR_REMAP_50A5B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a610)
+// 0x50a610
 void miss2_0x11C::SCRCMD_CHECK_CAR_MODEL_50A610()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -3259,7 +3259,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_MODEL_50A610()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a670)
+// 0x50a670
 void miss2_0x11C::SCRCMD_CHECK_CAR_REMAP_50A670()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -3279,7 +3279,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_REMAP_50A670()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a6e0)
+// 0x50a6e0
 void miss2_0x11C::SCRCMD_CHECK_CAR_BOTH_50A6E0()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -3301,7 +3301,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_BOTH_50A6E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a760)
+// 0x50a760
 void miss2_0x11C::IsOnScreen_50A760()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3403,7 +3403,7 @@ void miss2_0x11C::IsOnScreen_50A760()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a940)
+// 0x50a940
 void miss2_0x11C::SCRCMD_DELAY_HERE_50A940()
 {
     SCR_CMD_HEADER* pNextCmd = ((SCR_CMD_HEADER*)gBasePtr_6F8070) + 1; //  TODO: remove this hack
@@ -3423,7 +3423,7 @@ void miss2_0x11C::SCRCMD_DELAY_HERE_50A940()
     }
 }
 
-MATCH_FUNC(0x50a980)
+// 0x50a980
 void miss2_0x11C::SCRCMD_DELAY_50A980()
 {
     s16 param_1 = gBasePtr_6F8070->field_8_index;
@@ -3450,7 +3450,7 @@ void miss2_0x11C::SCRCMD_DELAY_50A980()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50a9e0)
+// 0x50a9e0
 void miss2_0x11C::EnableThread_50A9E0(u16 idx)
 {
     SCR_CMD_HEADER* pCmd = gScriptManager_6F8060->GetBasePointer_512770(idx);
@@ -3499,21 +3499,21 @@ void miss2_0x11C::EnableThread_50A9E0(u16 idx)
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50abc0)
+// 0x50abc0
 void miss2_0x11C::SCRCMD_DISABLE_THREAD_50ABC0()
 {
     miss2_0x11C::DisableThread_505790(gBasePtr_6F8070->field_8_index);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50abf0)
+// 0x50abf0
 void miss2_0x11C::SCRCMD_ENABLE_THREAD_50ABF0()
 {
     miss2_0x11C::EnableThread_50A9E0(gBasePtr_6F8070->field_8_index);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ac20)
+// 0x50ac20
 void miss2_0x11C::SCRCMD_SET_GANG_KILL_REACTION_50AC20()
 {
     str_table_entry* gang_1_str;
@@ -3543,7 +3543,7 @@ void miss2_0x11C::SCRCMD_SET_GANG_KILL_REACTION_50AC20()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50acf0)
+// 0x50acf0
 void miss2_0x11C::SCRCMD_CHANGE_RESPECT_50ACF0()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -3580,7 +3580,7 @@ void miss2_0x11C::SCRCMD_CHANGE_RESPECT_50ACF0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50aef0)
+// 0x50aef0
 void miss2_0x11C::RespectOperator_50AEF0()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -3640,7 +3640,7 @@ void miss2_0x11C::RespectOperator_50AEF0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b0e0)
+// 0x50b0e0
 void miss2_0x11C::SCRCMD_ADD_PATROL_POINT_50B0E0()
 {
     SCR_ADD_PATROL_POINT* pCmd = (SCR_ADD_PATROL_POINT*)gBasePtr_6F8070;
@@ -3659,7 +3659,7 @@ void miss2_0x11C::SCRCMD_ADD_PATROL_POINT_50B0E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b150)
+// 0x50b150
 void miss2_0x11C::SCRCMD_SET_AMBIENT_50B150()
 {
     SCR_SET_AMBIENT* pCmd = (SCR_SET_AMBIENT*)gBasePtr_6F8070;
@@ -3667,7 +3667,7 @@ void miss2_0x11C::SCRCMD_SET_AMBIENT_50B150()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b180)
+// 0x50b180
 void miss2_0x11C::SCRCMD_ANSWER_PHONE_50B180()
 {
     SCR_ANSWER_PHONE* pCmd = (SCR_ANSWER_PHONE*)gBasePtr_6F8070;
@@ -3694,7 +3694,7 @@ void miss2_0x11C::SCRCMD_ANSWER_PHONE_50B180()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b230)
+// 0x50b230
 void miss2_0x11C::SCRCMD_CHECK_PHONE_50B230()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3712,7 +3712,7 @@ void miss2_0x11C::SCRCMD_CHECK_PHONE_50B230()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b2c0)
+// 0x50b2c0
 void miss2_0x11C::SCRCMD_CHECK_PHONETIMER_50B2C0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3741,7 +3741,7 @@ void miss2_0x11C::SCRCMD_CHECK_PHONETIMER_50B2C0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b360)
+// 0x50b360
 void miss2_0x11C::SCRCMD_STOP_PHONE_RING_50B360()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3758,7 +3758,7 @@ void miss2_0x11C::SCRCMD_STOP_PHONE_RING_50B360()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b3d0)
+// 0x50b3d0
 void miss2_0x11C::SCRCMD_IS_CHAR_FIRE_ONSCREEN_50B3D0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3774,7 +3774,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_FIRE_ONSCREEN_50B3D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b440)
+// 0x50b440
 void miss2_0x11C::SCRCMD_CAR_DRIVE_AWAY_50B440()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3782,7 +3782,7 @@ void miss2_0x11C::SCRCMD_CAR_DRIVE_AWAY_50B440()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b470)
+// 0x50b470
 void miss2_0x11C::SCRCMD_GET_CAR_FROM_CRANE_50B470()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -3809,7 +3809,7 @@ void miss2_0x11C::SCRCMD_GET_CAR_FROM_CRANE_50B470()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b4f0)
+// 0x50b4f0
 void miss2_0x11C::SCRCMD_CHAR_TO_DRIVE_CAR_50B4F0()
 {
     SCR_CHAR_ENTER_CAR* pCmd = (SCR_CHAR_ENTER_CAR*)gBasePtr_6F8070;
@@ -3833,7 +3833,7 @@ void miss2_0x11C::SCRCMD_CHAR_TO_DRIVE_CAR_50B4F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b5a0)
+// 0x50b5a0
 void miss2_0x11C::SCRCMD_DRIVER_OUT_CAR_50B5A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3846,7 +3846,7 @@ void miss2_0x11C::SCRCMD_DRIVER_OUT_CAR_50B5A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b600)
+// 0x50b600
 void miss2_0x11C::SCRCMD_GIVE_DRIVER_BRAKE_50B600()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3863,7 +3863,7 @@ void miss2_0x11C::SCRCMD_GIVE_DRIVER_BRAKE_50B600()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b670)
+// 0x50b670
 void miss2_0x11C::SCRCMD_SET_GANG_INFO1_50B670()
 {
     // mid-game change
@@ -3871,7 +3871,7 @@ void miss2_0x11C::SCRCMD_SET_GANG_INFO1_50B670()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b690)
+// 0x50b690
 void miss2_0x11C::SCRCMD_CLEAR_TIMERS_50B690()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3884,7 +3884,7 @@ void miss2_0x11C::SCRCMD_CLEAR_TIMERS_50B690()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b6f0)
+// 0x50b6f0
 void miss2_0x11C::SCRCMD_CHECK_SCORE_50B6F0()
 {
     SCR_CHECK_SCORE_GREATER* pCmd = (SCR_CHECK_SCORE_GREATER*)gBasePtr_6F8070;
@@ -3905,7 +3905,7 @@ void miss2_0x11C::SCRCMD_CHECK_SCORE_50B6F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b760)
+// 0x50b760
 void miss2_0x11C::SCRCMD_GET_SCORE_50B760()
 {
     SCR_GET_SCORE* pCmd = (SCR_GET_SCORE*)gBasePtr_6F8070;
@@ -3922,7 +3922,7 @@ void miss2_0x11C::SCRCMD_GET_SCORE_50B760()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b7d0)
+// 0x50b7d0
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_GANG_50B7D0()
 {
     SCR_IS_CHAR_IN_GANG_ZONE* pCmd = (SCR_IS_CHAR_IN_GANG_ZONE*)gBasePtr_6F8070;
@@ -3957,7 +3957,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_GANG_50B7D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b8b0)
+// 0x50b8b0
 void miss2_0x11C::SCRCMD_SET_NO_COLLIDE_50B8B0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -3978,7 +3978,7 @@ void miss2_0x11C::SCRCMD_SET_NO_COLLIDE_50B8B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b910)
+// 0x50b910
 void miss2_0x11C::SCRCMD_IS_CHAR_FIRING_AREA_50B910()
 {
     SCR_ONEVAR_RECT* pCmd = (SCR_ONEVAR_RECT*)gBasePtr_6F8070;
@@ -3997,7 +3997,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_FIRING_AREA_50B910()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50b9c0)
+// 0x50b9c0
 void miss2_0x11C::SCRCMD_GET_PASSENGER_NUM_50B9C0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4016,7 +4016,7 @@ void miss2_0x11C::SCRCMD_GET_PASSENGER_NUM_50B9C0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ba30)
+// 0x50ba30
 void miss2_0x11C::SCRCMD_CLEAR_WANTED_LEVEL_50BA30()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4024,7 +4024,7 @@ void miss2_0x11C::SCRCMD_CLEAR_WANTED_LEVEL_50BA30()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ba70)
+// 0x50ba70
 void miss2_0x11C::SCRCMD_ALT_WANTED_LEVEL_50BA70()
 {
     SCR_CMD_ALTER_WANTED_LEVEL* kGlobal = (SCR_CMD_ALTER_WANTED_LEVEL*)gBasePtr_6F8070;
@@ -4045,7 +4045,7 @@ void miss2_0x11C::SCRCMD_ALT_WANTED_LEVEL_50BA70()
     Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bad0)
+// 0x50bad0
 void miss2_0x11C::SCRCMD_CAR_WRECK_IN_LOCATION_50BAD0()
 {
     SCR_ONEVAR_RECT* pCmd = (SCR_ONEVAR_RECT*)gBasePtr_6F8070;
@@ -4063,7 +4063,7 @@ void miss2_0x11C::SCRCMD_CAR_WRECK_IN_LOCATION_50BAD0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bb80)
+// 0x50bb80
 void miss2_0x11C::SCRCMD_SEND_CAR_TO_BLOCK_50BB80()
 {
     SCR_CAR_DATA_DEC* pCmd = (SCR_CAR_DATA_DEC*)gBasePtr_6F8070;
@@ -4075,7 +4075,7 @@ void miss2_0x11C::SCRCMD_SEND_CAR_TO_BLOCK_50BB80()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bbd0)
+// 0x50bbd0
 void miss2_0x11C::SCRCMD_SET_CHAR_BRAVERY_50BBD0()
 {
     SCR_CHAR_OBJECTIVE* pCmd = (SCR_CHAR_OBJECTIVE*)gBasePtr_6F8070;
@@ -4097,7 +4097,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_BRAVERY_50BBD0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bc60)
+// 0x50bc60
 void miss2_0x11C::SCRCMD_CHECK_NUM_ALIVE_50BC60()
 {
     SCR_CHAR_OBJECTIVE* pCmd = (SCR_CHAR_OBJECTIVE*)gBasePtr_6F8070;
@@ -4117,7 +4117,7 @@ void miss2_0x11C::SCRCMD_CHECK_NUM_ALIVE_50BC60()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bcd0)
+// 0x50bcd0
 void miss2_0x11C::SCRCMD_SET_MIN_ALIVE_50BCD0()
 {
     SCR_CHAR_OBJECTIVE* pCmd = (SCR_CHAR_OBJECTIVE*)gBasePtr_6F8070;
@@ -4128,7 +4128,7 @@ void miss2_0x11C::SCRCMD_SET_MIN_ALIVE_50BCD0()
 }
 
 // 9.6f 0x47BAC0
-MATCH_FUNC(0x50bd10)
+// 0x50bd10
 void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
 {
     SCR_TWO_PARAMS* pParams = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4158,7 +4158,7 @@ void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bdc0)
+// 0x50bdc0
 void miss2_0x11C::SCRCMD_SET_COUNTER_50BDC0() // Set counter to a given constant value
 {
     SCR_SET_COUNTER* pCmd = (SCR_SET_COUNTER*)gBasePtr_6F8070;
@@ -4167,7 +4167,7 @@ void miss2_0x11C::SCRCMD_SET_COUNTER_50BDC0() // Set counter to a given constant
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50be00)
+// 0x50be00
 void miss2_0x11C::SCRCMD_HAS_CAR_WEAPON_50BE00()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4185,7 +4185,7 @@ void miss2_0x11C::SCRCMD_HAS_CAR_WEAPON_50BE00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50be70)
+// 0x50be70
 void miss2_0x11C::SCRCMD_IS_CHAR_HORN_50BE70()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4203,7 +4203,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_HORN_50BE70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bed0)
+// 0x50bed0
 void miss2_0x11C::SCRCMD_CHECK_MAX_PASS_50BED0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4221,7 +4221,7 @@ void miss2_0x11C::SCRCMD_CHECK_MAX_PASS_50BED0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50bf40)
+// 0x50bf40
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_ZONE_50BF40()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4260,7 +4260,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_ZONE_50BF40()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c040)
+// 0x50c040
 void miss2_0x11C::SCRCMD_SET_PHONE_DEAD_50C040()
 {
     u16* pIndex = &gBasePtr_6F8070->field_8_index;
@@ -4284,7 +4284,7 @@ void miss2_0x11C::SCRCMD_SET_PHONE_DEAD_50C040()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c0e0)
+// 0x50c0e0
 void miss2_0x11C::SCRCMD_IS_TRAILER_ATT_50C0E0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4322,7 +4322,7 @@ void miss2_0x11C::SCRCMD_IS_TRAILER_ATT_50C0E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c1b0)
+// 0x50c1b0
 void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4346,7 +4346,7 @@ void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c230)
+// 0x50c230
 void miss2_0x11C::SCRCMD_ENABLE_DISABLE_CRANE_50C230()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4363,7 +4363,7 @@ void miss2_0x11C::SCRCMD_ENABLE_DISABLE_CRANE_50C230()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c2a0)
+// 0x50c2a0
 void miss2_0x11C::SCRCMD_CAR_GOT_DRIVER_50C2A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4378,7 +4378,7 @@ void miss2_0x11C::SCRCMD_CAR_GOT_DRIVER_50C2A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c2f0)
+// 0x50c2f0
 void miss2_0x11C::SCRCMD_SPOTTED_PLAYER_50C2F0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4393,7 +4393,7 @@ void miss2_0x11C::SCRCMD_SPOTTED_PLAYER_50C2F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c350)
+// 0x50c350
 void miss2_0x11C::SCRCMD_GET_LAST_PUNCHED_50C350()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4406,7 +4406,7 @@ void miss2_0x11C::SCRCMD_GET_LAST_PUNCHED_50C350()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c3b0)
+// 0x50c3b0
 void miss2_0x11C::SCRCMD_IS_CHAR_STUNNED_50C3B0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4423,7 +4423,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STUNNED_50C3B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c410)
+// 0x50c410
 void miss2_0x11C::SCRCMD_KILL_ALL_PASSENG_50C410()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4436,7 +4436,7 @@ void miss2_0x11C::SCRCMD_KILL_ALL_PASSENG_50C410()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c470)
+// 0x50c470
 void miss2_0x11C::SCRCMD_IS_GROUP_IN_CAR_50C470()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4463,7 +4463,7 @@ void miss2_0x11C::SCRCMD_IS_GROUP_IN_CAR_50C470()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c4e0)
+// 0x50c4e0
 void miss2_0x11C::SCRCMD_PUNCHED_SOMEONE_50C4E0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4478,7 +4478,7 @@ void miss2_0x11C::SCRCMD_PUNCHED_SOMEONE_50C4E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c540)
+// 0x50c540
 void miss2_0x11C::SCRCMD_ADD_CHAR_TO_GANG_50C540()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4492,7 +4492,7 @@ void miss2_0x11C::SCRCMD_ADD_CHAR_TO_GANG_50C540()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c5a0)
+// 0x50c5a0
 void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4558,7 +4558,7 @@ void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c6f0)
+// 0x50c6f0
 void miss2_0x11C::SCRCMD_PARK_50C6F0() // PARK and PARK_NO_RESPAWN
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4573,7 +4573,7 @@ void miss2_0x11C::SCRCMD_PARK_50C6F0() // PARK and PARK_NO_RESPAWN
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c760)
+// 0x50c760
 void miss2_0x11C::SCRCMD_BEEN_PUNCHED_BY_50C760()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4591,7 +4591,7 @@ void miss2_0x11C::SCRCMD_BEEN_PUNCHED_BY_50C760()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c7d0)
+// 0x50c7d0
 void miss2_0x11C::SCRCMD_UPDATE_DOOR_50C7D0()
 {
     SCR_UPDATE_DOOR* pCmd = (SCR_UPDATE_DOOR*)gBasePtr_6F8070;
@@ -4623,7 +4623,7 @@ void miss2_0x11C::SCRCMD_UPDATE_DOOR_50C7D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c8a0)
+// 0x50c8a0
 void miss2_0x11C::SCRCMD_DOOR_50C8A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4678,7 +4678,7 @@ void miss2_0x11C::SCRCMD_DOOR_50C8A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c990)
+// 0x50c990
 void miss2_0x11C::SCRCMD_REMOVE_WEAPON_50C990()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4697,7 +4697,7 @@ void miss2_0x11C::SCRCMD_REMOVE_WEAPON_50C990()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50c9f0)
+// 0x50c9f0
 void miss2_0x11C::SCRCMD_REMOVE_BLOCK_50C9F0()
 {
     SCR_REMOVE_BLOCK* pCmd = (SCR_REMOVE_BLOCK*)gBasePtr_6F8070;
@@ -4709,7 +4709,7 @@ void miss2_0x11C::SCRCMD_REMOVE_BLOCK_50C9F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ca30)
+// 0x50ca30
 void miss2_0x11C::SCRCMD_LOWER_LEVEL_50CA30()
 {
     SCR_LOWER_LEVEL* pCmd = (SCR_LOWER_LEVEL*)gBasePtr_6F8070;
@@ -4721,7 +4721,7 @@ void miss2_0x11C::SCRCMD_LOWER_LEVEL_50CA30()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ca70)
+// 0x50ca70
 void miss2_0x11C::SCRCMD_CHANGE_BLOCK_50CA70()
 {
     SCR_CHANGE_BLOCK* pCmd = (SCR_CHANGE_BLOCK*)gBasePtr_6F8070;
@@ -4733,7 +4733,7 @@ void miss2_0x11C::SCRCMD_CHANGE_BLOCK_50CA70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50cab0)
+// 0x50cab0
 void miss2_0x11C::SCRCMD_ADD_NEW_BLOCK_50CAB0()
 {
     gmp_block_info Block;
@@ -4747,7 +4747,7 @@ void miss2_0x11C::SCRCMD_ADD_NEW_BLOCK_50CAB0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50cb20)
+// 0x50cb20
 void miss2_0x11C::SCRCMD_ROAD_ON_OFF_50CB20()
 {
     SCR_SWITCH_ROAD_ON_OFF* pCmd = (SCR_SWITCH_ROAD_ON_OFF*)gBasePtr_6F8070;
@@ -4763,7 +4763,7 @@ void miss2_0x11C::SCRCMD_ROAD_ON_OFF_50CB20()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50cb70)
+// 0x50cb70
 void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -4840,7 +4840,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ccb0)
+// 0x50ccb0
 void miss2_0x11C::SCRCMD_SWITCH_GENERATOR1_50CCB0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -4865,7 +4865,7 @@ void miss2_0x11C::SCRCMD_SWITCH_GENERATOR1_50CCB0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50cd30)
+// 0x50cd30
 void miss2_0x11C::SCRCMD_SWITCH_GENERATOR3_50CD30()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -4891,7 +4891,7 @@ void miss2_0x11C::SCRCMD_SWITCH_GENERATOR3_50CD30()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50cdb0)
+// 0x50cdb0
 void miss2_0x11C::SCRCMD_CAR_DAMAGE_POS_50CDB0()
 {
     SCR_TWO_PARAMS* pCmd;
@@ -4911,7 +4911,7 @@ void miss2_0x11C::SCRCMD_CAR_DAMAGE_POS_50CDB0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ce10)
+// 0x50ce10
 void miss2_0x11C::SCRCMD_PARK_FINISHED_50CE10()
 {
     if (gGarage_48_6FD26C->field_C_state == 3)
@@ -4925,7 +4925,7 @@ void miss2_0x11C::SCRCMD_PARK_FINISHED_50CE10()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ce50)
+// 0x50ce50
 void miss2_0x11C::Gosub_50CE50(SCR_CMD_HEADER* pCmd, u16 cmd_idx)
 {
     ScriptStackFrame_C* pFrame = field_114_gosub_stack->AllocFrame_5031A0();
@@ -4935,7 +4935,7 @@ void miss2_0x11C::Gosub_50CE50(SCR_CMD_HEADER* pCmd, u16 cmd_idx)
     miss2_0x11C::JumpToCmd_503650(cmd_idx);
 }
 
-MATCH_FUNC(0x50ce90)
+// 0x50ce90
 void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
 {
     SCR_PHONE_TEMPLATE* pCmd = (SCR_PHONE_TEMPLATE*)gBasePtr_6F8070;
@@ -5095,7 +5095,7 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
     }
 }
 
-MATCH_FUNC(0x50d200)
+// 0x50d200
 void miss2_0x11C::SCRCMD_REMOTE_CONTROL_50D200()
 {
     SCR_REMOTE_CONTROL* pCmd = (SCR_REMOTE_CONTROL*)gBasePtr_6F8070;
@@ -5107,14 +5107,14 @@ void miss2_0x11C::SCRCMD_REMOTE_CONTROL_50D200()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50d2e0)
+// 0x50d2e0
 void miss2_0x11C::SCRCMD_LAUNCH_MISSION_50D2E0()
 {
     str_table_entry* StringById_503080 = gScriptManager_6F8060->FindStringById_503080(gBasePtr_6F8070->field_8_index);
     miss2_0x11C::launch_mission_5119A0(gBasePtr_6F8070, StringById_503080->get_name());
 }
 
-MATCH_FUNC(0x50d340)
+// 0x50d340
 void miss2_0x11C::SCRCMD_SAVE_GAME_50D340()
 {
     char* pSaveFileName = gGameSession_67E8E0.GetDebugStr_4C5970();
@@ -5122,7 +5122,7 @@ void miss2_0x11C::SCRCMD_SAVE_GAME_50D340()
     Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50d3c0)
+// 0x50d3c0
 void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
 {
     if (field_C_cmd_initialised == false)
@@ -5180,7 +5180,7 @@ void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
     }
 }
 
-MATCH_FUNC(0x50d680)
+// 0x50d680
 void miss2_0x11C::SCRCMD_CHANGE_CAR_LOCK_50D680()
 {
     SCR_CHANGE_CAR_LOCK* pCmd = (SCR_CHANGE_CAR_LOCK*)gBasePtr_6F8070;
@@ -5229,7 +5229,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_LOCK_50D680()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50d870)
+// 0x50d870
 void miss2_0x11C::SCRCMD_CHANGE_INTENSITY_50D870()
 {
     SCR_CHANGE_LIGHT_INTENSITY* pCmd = (SCR_CHANGE_LIGHT_INTENSITY*)gBasePtr_6F8070;
@@ -5240,7 +5240,7 @@ void miss2_0x11C::SCRCMD_CHANGE_INTENSITY_50D870()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50d900)
+// 0x50d900
 void miss2_0x11C::SCRCMD_CHANGE_COLOUR_50D900()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -5251,7 +5251,7 @@ void miss2_0x11C::SCRCMD_CHANGE_COLOUR_50D900()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50d9a0)
+// 0x50d9a0
 void miss2_0x11C::SCRCMD_CHANGE_RADIUS_50D9A0()
 {
     SCR_CHANGE_LIGHT_RADIUS* pCmd = (SCR_CHANGE_LIGHT_RADIUS*)gBasePtr_6F8070;
@@ -5262,7 +5262,7 @@ void miss2_0x11C::SCRCMD_CHANGE_RADIUS_50D9A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50da50)
+// 0x50da50
 void miss2_0x11C::SCRCMD_CREATE_LIGHT_50DA50() // CREATE_LIGHT1 or LIGHT_DECSET2
 {
     //SCR_CREATE_LIGHT* pCmd = (SCR_CREATE_LIGHT*)gBasePtr_6F8070;
@@ -5272,7 +5272,7 @@ void miss2_0x11C::SCRCMD_CREATE_LIGHT_50DA50() // CREATE_LIGHT1 or LIGHT_DECSET2
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50db70)
+// 0x50db70
 void miss2_0x11C::GetSetLivesAndMultiplier_50DB70()
 {
     SCR_GET_NUM_LIVES_MULTIPLIERS* pCmd = (SCR_GET_NUM_LIVES_MULTIPLIERS*)gBasePtr_6F8070;
@@ -5327,7 +5327,7 @@ void miss2_0x11C::GetSetLivesAndMultiplier_50DB70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50dd00)
+// 0x50dd00
 void miss2_0x11C::SCRCMD_GET_LIVES_MULT_50DD00() // GET_NUM_LIVES or GET_NUM_MULT
 {
     SCR_GET_NUM_LIVES_MULTIPLIERS* pCmd = (SCR_GET_NUM_LIVES_MULTIPLIERS*)gBasePtr_6F8070;
@@ -5345,7 +5345,7 @@ void miss2_0x11C::SCRCMD_GET_LIVES_MULT_50DD00() // GET_NUM_LIVES or GET_NUM_MUL
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50dd90)
+// 0x50dd90
 void miss2_0x11C::SCRCMD_SET_DIR_OF_TVVAN_50DD90()
 {
     SCR_SET_DIR_OF_TVVAN* pCmd = (SCR_SET_DIR_OF_TVVAN*)gBasePtr_6F8070;
@@ -5356,7 +5356,7 @@ void miss2_0x11C::SCRCMD_SET_DIR_OF_TVVAN_50DD90()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50de00)
+// 0x50de00
 void miss2_0x11C::SCRCMD_POINT_ONSCREEN_50DE00()
 {
     SCR_IS_POINT_ON_SCREEN* pCmd = (SCR_IS_POINT_ON_SCREEN*)gBasePtr_6F8070;
@@ -5371,7 +5371,7 @@ void miss2_0x11C::SCRCMD_POINT_ONSCREEN_50DE00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50de50)
+// 0x50de50
 void miss2_0x11C::SCRCMD_CHAR_IN_AIR_50DE50()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5388,7 +5388,7 @@ void miss2_0x11C::SCRCMD_CHAR_IN_AIR_50DE50()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50deb0)
+// 0x50deb0
 void miss2_0x11C::SCRCMD_CHAR_SUNK_50DEB0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5405,7 +5405,7 @@ void miss2_0x11C::SCRCMD_CHAR_SUNK_50DEB0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50df10)
+// 0x50df10
 void miss2_0x11C::StartBonus_50DF10()
 {
     SCR_START_BONUS* pCmd = (SCR_START_BONUS*)gBasePtr_6F8070;
@@ -5491,7 +5491,7 @@ void miss2_0x11C::StartBonus_50DF10()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e0b0)
+// 0x50e0b0
 void miss2_0x11C::SCRCMD_CHECK_BONUS_50E0B0()
 {
     s16 result = miss2_0x11C::GetBonusResult_505EA0(gBasePtr_6F8070->field_8_index);
@@ -5521,14 +5521,14 @@ void miss2_0x11C::SCRCMD_CHECK_BONUS_50E0B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e120)
+// 0x50e120
 void miss2_0x11C::SCRCMD_SETUP_MODEL_CHECK_50E120()
 {
     gCarManager_6C_677930->field_58_model_to_check_destroy = (u16)gBasePtr_6F8070->field_8_index;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e150)
+// 0x50e150
 void miss2_0x11C::SCRCMD_MODEL_CHECK_50E150()
 {
     if (gCarManager_6C_677930->field_5C_model_check_destroyed)
@@ -5542,7 +5542,7 @@ void miss2_0x11C::SCRCMD_MODEL_CHECK_50E150()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e190)
+// 0x50e190
 void miss2_0x11C::GetSpeed_50E190()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -5588,7 +5588,7 @@ void miss2_0x11C::GetSpeed_50E190()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e360)
+// 0x50e360
 void miss2_0x11C::SCRCMD_CHECK_CAR_SPEED_50E360()
 {
     SCR_CHECK_CAR_SPEED* pCmd = (SCR_CHECK_CAR_SPEED*)gBasePtr_6F8070;
@@ -5608,7 +5608,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_SPEED_50E360()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e460)
+// 0x50e460
 void miss2_0x11C::SCRCMD_SET_CAR_GRAPHIC_50E460()
 {
     SCR_SET_CAR_GRAPHIC* pCmd = (SCR_SET_CAR_GRAPHIC*)gBasePtr_6F8070;
@@ -5618,7 +5618,7 @@ void miss2_0x11C::SCRCMD_SET_CAR_GRAPHIC_50E460()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e4a0)
+// 0x50e4a0
 void miss2_0x11C::SCRCMD_CHAR_ARRESTED_50E4A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5633,7 +5633,7 @@ void miss2_0x11C::SCRCMD_CHAR_ARRESTED_50E4A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e4f0)
+// 0x50e4f0
 void miss2_0x11C::SCRCMD_S_IS_S_OP_S_50E4F0()
 {
     SCR_OPERATE_COUNTER_AND_COUNTER* pCmd = (SCR_OPERATE_COUNTER_AND_COUNTER*)gBasePtr_6F8070;
@@ -5665,7 +5665,7 @@ void miss2_0x11C::SCRCMD_S_IS_S_OP_S_50E4F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e610)
+// 0x50e610
 void miss2_0x11C::SCRCMD_S_IS_S_OP_I_50E610()
 {
     SCR_OPERATE_COUNTER_AND_OPERAND_INT* pCmd = (SCR_OPERATE_COUNTER_AND_OPERAND_INT*)gBasePtr_6F8070;
@@ -5695,7 +5695,7 @@ void miss2_0x11C::SCRCMD_S_IS_S_OP_I_50E610()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e730)
+// 0x50e730
 void miss2_0x11C::SCRCMD_CHAR_DRIVE_AGGR_50E730()
 {
     SCR_SET_CHAR_DRIVE_AGGR* pCmd = (SCR_SET_CHAR_DRIVE_AGGR*)gBasePtr_6F8070;
@@ -5705,7 +5705,7 @@ void miss2_0x11C::SCRCMD_CHAR_DRIVE_AGGR_50E730()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e780)
+// 0x50e780
 void miss2_0x11C::SCRCMD_SET_SPEED_50E780()
 {
     SCR_SET_RUN_SPEED* pCmd = (SCR_SET_RUN_SPEED*)gBasePtr_6F8070;
@@ -5721,7 +5721,7 @@ void miss2_0x11C::SCRCMD_SET_SPEED_50E780()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e7f0)
+// 0x50e7f0
 void miss2_0x11C::SCRCMD_GIVE_CAR_ALARM_50E7F0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5729,7 +5729,7 @@ void miss2_0x11C::SCRCMD_GIVE_CAR_ALARM_50E7F0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e820)
+// 0x50e820
 void miss2_0x11C::SCRCMD_CAR_WEAPON_KIND_PROOF_50E820()
 {
     SCR_SET_CAR_DAMAGE_PROOF* pCmd = (SCR_SET_CAR_DAMAGE_PROOF*)gBasePtr_6F8070;
@@ -5776,7 +5776,7 @@ void miss2_0x11C::SCRCMD_CAR_WEAPON_KIND_PROOF_50E820()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e900)
+// 0x50e900
 void miss2_0x11C::SCRCMD_PUT_CAR_ON_TRAILER_50E900()
 {
     SCR_PUT_CAR_ON_TRAILER* pCmd = (SCR_PUT_CAR_ON_TRAILER*)gBasePtr_6F8070;
@@ -5806,7 +5806,7 @@ void miss2_0x11C::SCRCMD_PUT_CAR_ON_TRAILER_50E900()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e9a0)
+// 0x50e9a0
 void miss2_0x11C::SCRCMD_CLEAR_BRIEFS_50E9A0()
 {
     gHud_2B00_706620->field_DC_brief.ClearAllBriefsWithPriority_5D4890(1); // clear lowest brief priority
@@ -5814,7 +5814,7 @@ void miss2_0x11C::SCRCMD_CLEAR_BRIEFS_50E9A0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50e9e0)
+// 0x50e9e0
 void miss2_0x11C::SCRCMD_CHECK_HEADS_50E9E0()
 {
     SCR_CHECK_HEADS_GREATER* pCmd = (SCR_CHECK_HEADS_GREATER*)gBasePtr_6F8070;
@@ -5831,7 +5831,7 @@ void miss2_0x11C::SCRCMD_CHECK_HEADS_50E9E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ea40)
+// 0x50ea40
 void miss2_0x11C::SCRCMD_FINISH_LEVEL_50EA40()
 {
     SCR_FINISH_LEVEL* pCmd = (SCR_FINISH_LEVEL*)gBasePtr_6F8070;
@@ -5871,7 +5871,7 @@ void miss2_0x11C::SCRCMD_FINISH_LEVEL_50EA40()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50eb00)
+// 0x50eb00
 void miss2_0x11C::SCRCMD_CHECK_WEAPONHIT_50EB00()
 {
     SCR_CHECK_WEAPONHIT* pCmd = (SCR_CHECK_WEAPONHIT*)gBasePtr_6F8070;
@@ -5899,7 +5899,7 @@ void miss2_0x11C::SCRCMD_CHECK_WEAPONHIT_50EB00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ebd0)
+// 0x50ebd0
 void miss2_0x11C::SCRCMD_WEAP_HIT_CAR_50EBD0()
 {
     SCR_CHECK_WEAPONHIT* pCmd = (SCR_CHECK_WEAPONHIT*)gBasePtr_6F8070;
@@ -5942,7 +5942,7 @@ void miss2_0x11C::SCRCMD_WEAP_HIT_CAR_50EBD0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ece0)
+// 0x50ece0
 void miss2_0x11C::SCRCMD_IS_CHAR_ON_FIRE_50ECE0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5957,7 +5957,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_ON_FIRE_50ECE0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ed40)
+// 0x50ed40
 void miss2_0x11C::SCRCMD_BRIEF_ONSCREEN_50ED40()
 {
     Hud_BriefEntry_18* field_6F8_curr_briefs = gHud_2B00_706620->field_DC_brief.field_6F8_curr_briefs;
@@ -5972,7 +5972,7 @@ void miss2_0x11C::SCRCMD_BRIEF_ONSCREEN_50ED40()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ed80)
+// 0x50ed80
 void miss2_0x11C::SCRCMD_CREATE_SOUND_50ED80()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -5980,7 +5980,7 @@ void miss2_0x11C::SCRCMD_CREATE_SOUND_50ED80()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50edc0)
+// 0x50edc0
 void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
 {
     SCR_PHONE_TEMPLATE* pCmd = (SCR_PHONE_TEMPLATE*)gBasePtr_6F8070;
@@ -6080,7 +6080,7 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
     }
 }
 
-MATCH_FUNC(0x50f060)
+// 0x50f060
 void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
 {
     SCR_CHAR_INTO_CAR* pCmd = (SCR_CHAR_INTO_CAR*)gBasePtr_6F8070;
@@ -6124,7 +6124,7 @@ void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f150)
+// 0x50f150
 void miss2_0x11C::SCRCMD_DECIDE_POWERUP_50F150()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -6171,7 +6171,7 @@ void miss2_0x11C::SCRCMD_DECIDE_POWERUP_50F150()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f220)
+// 0x50f220
 void miss2_0x11C::SCRCMD_SUPPRESS_MODEL_50F220()
 {
     if ((u16)gBasePtr_6F8070->field_8_index == 0xFFFFu) //  TODO: fix gBasePtr_6F8070
@@ -6185,7 +6185,7 @@ void miss2_0x11C::SCRCMD_SUPPRESS_MODEL_50F220()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f270)
+// 0x50f270
 void miss2_0x11C::SCRCMD_WARP_CHAR_50F270() // WARP_FROM_CAR_TO_POINT
 {
     SCR_WARP_FROM_CAR* pCmd = (SCR_WARP_FROM_CAR*)gBasePtr_6F8070;
@@ -6216,7 +6216,7 @@ void miss2_0x11C::SCRCMD_WARP_CHAR_50F270() // WARP_FROM_CAR_TO_POINT
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f3d0)
+// 0x50f3d0
 void miss2_0x11C::SCRCMD_SET_GROUP_TYPE_50F3D0()
 {
     SCR_SET_GROUP_TYPE* pCmd = (SCR_SET_GROUP_TYPE*)gBasePtr_6F8070;
@@ -6231,7 +6231,7 @@ void miss2_0x11C::SCRCMD_SET_GROUP_TYPE_50F3D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f410)
+// 0x50f410
 void miss2_0x11C::SCRCMD_CHAR_DO_NOTHING_50F410()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6244,7 +6244,7 @@ void miss2_0x11C::SCRCMD_CHAR_DO_NOTHING_50F410()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f450)
+// 0x50f450
 void miss2_0x11C::SCRCMD_EMERG_LIGHTS_50F450()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -6264,7 +6264,7 @@ void miss2_0x11C::SCRCMD_EMERG_LIGHTS_50F450()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f4d0)
+// 0x50f4d0
 void miss2_0x11C::SCRCMD_CHECK_OBJ_MODEL_50F4D0()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -6284,7 +6284,7 @@ void miss2_0x11C::SCRCMD_CHECK_OBJ_MODEL_50F4D0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f550)
+// 0x50f550
 void miss2_0x11C::SCRCMD_PED_GRAPHIC_50F550()
 {
     SCR_SET_CHAR_GRAPHIC_TYPE* pCmd = (SCR_SET_CHAR_GRAPHIC_TYPE*)gBasePtr_6F8070;
@@ -6298,7 +6298,7 @@ void miss2_0x11C::SCRCMD_PED_GRAPHIC_50F550()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f5e0)
+// 0x50f5e0
 void miss2_0x11C::SCRCMD_SET_CHAR_FLAGS_50F5E0()
 {
     SCR_SET_STATE* pCmd = (SCR_SET_STATE*)gBasePtr_6F8070;
@@ -6350,7 +6350,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_FLAGS_50F5E0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f770)
+// 0x50f770
 void miss2_0x11C::SCRCMD_MAKE_MUGGERS_50F770()
 {
     SCR_SET_STATE* pCmd = (SCR_SET_STATE*)gBasePtr_6F8070;
@@ -6365,7 +6365,7 @@ void miss2_0x11C::SCRCMD_MAKE_MUGGERS_50F770()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f7b0)
+// 0x50f7b0
 void miss2_0x11C::LocSecChar_50F7B0()
 {
     SCR_LOC_SEC_CHAR* pCmd = (SCR_LOC_SEC_CHAR*)gBasePtr_6F8070;
@@ -6416,7 +6416,7 @@ void miss2_0x11C::LocSecChar_50F7B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f900)
+// 0x50f900
 void miss2_0x11C::SCRCMD_STOP_CAR_DRIVE_50F900()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6429,7 +6429,7 @@ void miss2_0x11C::SCRCMD_STOP_CAR_DRIVE_50F900()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f940)
+// 0x50f940
 void miss2_0x11C::SCRCMD_IS_BUS_FULL_50F940()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6450,7 +6450,7 @@ void miss2_0x11C::SCRCMD_IS_BUS_FULL_50F940()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50f9b0)
+// 0x50f9b0
 void miss2_0x11C::SCRCMD_NO_CHARS_OFF_BUS_50F9B0()
 {
     SCR_SET_STATE* pCmd = (SCR_SET_STATE*)gBasePtr_6F8070;
@@ -6465,7 +6465,7 @@ void miss2_0x11C::SCRCMD_NO_CHARS_OFF_BUS_50F9B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fa00)
+// 0x50fa00
 void miss2_0x11C::SCRCMD_KILL_CHAR_50FA00()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6478,14 +6478,14 @@ void miss2_0x11C::SCRCMD_KILL_CHAR_50FA00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fa40)
+// 0x50fa40
 void miss2_0x11C::SCRCMD_SET_SHADING_LEV_50FA40()
 {
     gpMapRenderer_6F66E4->set_shading_lev_4E9DB0(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fa70)
+// 0x50fa70
 void miss2_0x11C::SCRCMD_SET_CAR_JAMMED_50FA70()
 {
     SCR_SET_CAR_JAMMED* pCmd = (SCR_SET_CAR_JAMMED*)gBasePtr_6F8070;
@@ -6506,14 +6506,14 @@ void miss2_0x11C::SCRCMD_SET_CAR_JAMMED_50FA70()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fad0)
+// 0x50fad0
 void miss2_0x11C::SCRCMD_FINISH_MISSION_50FAD0()
 {
     gMiss2_25C_6F805C->MissionCleanUp_502DC0();
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50faf0)
+// 0x50faf0
 void miss2_0x11C::SCRCMD_STORE_BONUS_50FAF0()
 {
     SCR_STORE_BONUS_COUNT* pCmd = (SCR_STORE_BONUS_COUNT*)gBasePtr_6F8070;
@@ -6530,7 +6530,7 @@ void miss2_0x11C::SCRCMD_STORE_BONUS_50FAF0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fb60)
+// 0x50fb60
 void miss2_0x11C::SCRCMD_SET_ENTER_STATUS_50FB60() // SCRCMD_SET_ENTER_STATUS and SCRCMD_SET_ALL_CONTROLS
 {
     SCR_SET_PLAYER_CONTROLS* pCmd = (SCR_SET_PLAYER_CONTROLS*)gBasePtr_6F8070;
@@ -6562,7 +6562,7 @@ void miss2_0x11C::SCRCMD_SET_ENTER_STATUS_50FB60() // SCRCMD_SET_ENTER_STATUS an
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fc20)
+// 0x50fc20
 void miss2_0x11C::SCRCMD_SET_FAV_CAR_50FC20()
 {
     SCR_SET_FAV_CAR* pCmd = (SCR_SET_FAV_CAR*)gBasePtr_6F8070;
@@ -6576,7 +6576,7 @@ void miss2_0x11C::SCRCMD_SET_FAV_CAR_50FC20()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fc60)
+// 0x50fc60
 void miss2_0x11C::GroupInArea_50FC60()
 {
     SCR_ONEVAR_RECT* pCmd = (SCR_ONEVAR_RECT*)gBasePtr_6F8070;
@@ -6633,7 +6633,7 @@ void miss2_0x11C::GroupInArea_50FC60()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fe00)
+// 0x50fe00
 void miss2_0x11C::SCRCMD_SET_KF_WEAPON_50FE00()
 {
     SCR_SET_KF_WEAPON* pCmd = (SCR_SET_KF_WEAPON*)gBasePtr_6F8070;
@@ -6652,7 +6652,7 @@ void miss2_0x11C::SCRCMD_SET_KF_WEAPON_50FE00()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50fed0)
+// 0x50fed0
 void miss2_0x11C::SCRCMD_CLEAR_KF_WEAPON_50FED0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6662,7 +6662,7 @@ void miss2_0x11C::SCRCMD_CLEAR_KF_WEAPON_50FED0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ff50)
+// 0x50ff50
 void miss2_0x11C::SCRCMD_ADD_ONSCREEN_COUNTER_50FF50()
 {
     SCR_ADD_ONSCREEN_COUNTER* pCmd = (SCR_ADD_ONSCREEN_COUNTER*)gBasePtr_6F8070;
@@ -6673,7 +6673,7 @@ void miss2_0x11C::SCRCMD_ADD_ONSCREEN_COUNTER_50FF50()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x50ffb0)
+// 0x50ffb0
 void miss2_0x11C::SCRCMD_CLEAR_COUNTER_50FFB0() // SCRCMD_CLEAR_COUNTER and SCRCMD_CLEAR_CLOCK_ONLY
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6693,14 +6693,14 @@ void miss2_0x11C::SCRCMD_CLEAR_COUNTER_50FFB0() // SCRCMD_CLEAR_COUNTER and SCRC
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510030)
+// 0x510030
 void miss2_0x11C::SCRCMD_CHANGE_POLICE_510030()
 {
     miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0((SCR_DECLARE_POLICELEVEL*)gBasePtr_6F8070);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510050)
+// 0x510050
 void miss2_0x11C::SCRCMD_DESTROY_GROUP_510050()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6714,7 +6714,7 @@ void miss2_0x11C::SCRCMD_DESTROY_GROUP_510050()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510090)
+// 0x510090
 void miss2_0x11C::SCRCMD_CHECK_CURRENT_WEAPON_510090()
 {
     SCR_CHECK_CURRENT_WEAPON* pCmd = (SCR_CHECK_CURRENT_WEAPON*)gBasePtr_6F8070;
@@ -6733,7 +6733,7 @@ void miss2_0x11C::SCRCMD_CHECK_CURRENT_WEAPON_510090()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510100)
+// 0x510100
 void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
 {
     SCR_START_BASIC_KF_TEMPLATE* pCmd = (SCR_START_BASIC_KF_TEMPLATE*)gBasePtr_6F8070;
@@ -6786,7 +6786,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
     }
 }
 
-MATCH_FUNC(0x510280)
+// 0x510280
 void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
 {
     SCR_POINTER* pTimerIDPointer;
@@ -6866,14 +6866,14 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
     }
 }
 
-MATCH_FUNC(0x510530)
+// 0x510530
 void miss2_0x11C::SCRCMD_SET_BONUS_RATING_510530()
 {
     gGameSession_67E8E0.SetBonusRatingTextIdx_4C5AB0(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510560)
+// 0x510560
 void miss2_0x11C::SCRCMD_ADD_TIME_510560()
 {
     SCR_FOUR_PARAMS* pCmd = (SCR_FOUR_PARAMS*)gBasePtr_6F8070;
@@ -6883,7 +6883,7 @@ void miss2_0x11C::SCRCMD_ADD_TIME_510560()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5105b0)
+// 0x5105b0
 void miss2_0x11C::SCRCMD_SET_MODEL_WANTED_5105B0()
 {
     SCR_TWO_PARAMS* pCmd = (SCR_TWO_PARAMS*)gBasePtr_6F8070;
@@ -6900,7 +6900,7 @@ void miss2_0x11C::SCRCMD_SET_MODEL_WANTED_5105B0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510600)
+// 0x510600
 void miss2_0x11C::SCRCMD_CHECK_DEATH_ARR_510600()
 {
     if (gScriptManager_6F8060->field_C1E2E_death_arrest_flag)
@@ -6914,7 +6914,7 @@ void miss2_0x11C::SCRCMD_CHECK_DEATH_ARR_510600()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510660)
+// 0x510660
 void miss2_0x11C::SCRCMD_FORCE_CLEANUP_510660()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
@@ -6930,7 +6930,7 @@ void miss2_0x11C::SCRCMD_FORCE_CLEANUP_510660()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x510780)
+// 0x510780
 void miss2_0x11C::SCRCMD_SAVE_RESTORE_RESPECT_510780()
 {
     u8 idx = 0;
@@ -6953,7 +6953,7 @@ void miss2_0x11C::SCRCMD_SAVE_RESTORE_RESPECT_510780()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-MATCH_FUNC(0x5108d0)
+// 0x5108d0
 void miss2_0x11C::PreExecOpCode_5108D0()
 {
     if (field_10_stopped != 1)
@@ -7690,7 +7690,7 @@ void miss2_0x11C::PreExecOpCode_5108D0()
     }
 }
 
-MATCH_FUNC(0x511840)
+// 0x511840
 char_type miss2_0x11C::PoolUpdate()
 { //  return boolean: true if it has reached LEVELEND, false otherwise
     SCR_CMD_HEADER* BasePointer_512770;
@@ -7757,7 +7757,7 @@ char_type miss2_0x11C::PoolUpdate()
     return reachedLevelEnd;
 }
 
-MATCH_FUNC(0x511930)
+// 0x511930
 void miss2_0x11C::InitThread_511930(char_type flags, u16 levelStart)
 {
     field_4_next_cmd = levelStart;
@@ -7769,7 +7769,7 @@ void miss2_0x11C::InitThread_511930(char_type flags, u16 levelStart)
     field_10_stopped = 0;
 }
 
-MATCH_FUNC(0x511960)
+// 0x511960
 miss2_0x11C* miss2_0x11C::SpawnThread_511960(u16 levelStart)
 {
     miss2_0x11C* pNewThread = miss2_0x11C_Pool_6F8064->Allocate_4767A0();
@@ -7777,7 +7777,7 @@ miss2_0x11C* miss2_0x11C::SpawnThread_511960(u16 levelStart)
     return pNewThread;
 }
 
-MATCH_FUNC(0x5119a0)
+// 0x5119a0
 void miss2_0x11C::launch_mission_5119A0(SCR_CMD_HEADER* BasePointer, char_type* string)
 {
     u16 cmd_next;
@@ -7786,7 +7786,7 @@ void miss2_0x11C::launch_mission_5119A0(SCR_CMD_HEADER* BasePointer, char_type* 
     miss2_0x11C::Gosub_50CE50(BasePointer, cmd_next);
 }
 
-MATCH_FUNC(0x511a00)
+// 0x511a00
 miss2_0x11C::miss2_0x11C()
 {
     mpNext = nullptr;
@@ -7806,7 +7806,7 @@ miss2_0x11C::miss2_0x11C()
 }
 
 // https://decomp.me/scratch/gmYBd
-MATCH_FUNC(0x511cd0)
+// 0x511cd0
 void miss2_0x11C::DisableBasicKfsFromSave_511CD0()
 {
     for (u16 i = 0; i < 25; i++)
@@ -7821,7 +7821,7 @@ void miss2_0x11C::DisableBasicKfsFromSave_511CD0()
     }
 }
 
-MATCH_FUNC(0x512fd0)
+// 0x512fd0
 miss2_0x11C::~miss2_0x11C()
 {
     if (field_114_gosub_stack)
@@ -7831,7 +7831,7 @@ miss2_0x11C::~miss2_0x11C()
     mpNext = nullptr;
 }
 
-MATCH_FUNC(0x5131C0)
+// 0x5131C0
 miss2_0x11C_Pool::~miss2_0x11C_Pool()
 {
 }

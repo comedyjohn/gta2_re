@@ -922,8 +922,8 @@ struct Network_UI_Control_Data_Array
 
 Network_UI_Control_Data_Array gUiControlDefinitions_621430;
 
-MATCH_FUNC(0x519960)
-void __stdcall WideToDbcs_519960(char_type* pDst, wchar_t* pSrc)
+// 0x519960
+void WideToDbcs_519960(char_type* pDst, wchar_t* pSrc)
 {
     wchar_t c = *pSrc;
     if (c)
@@ -951,7 +951,7 @@ void __stdcall WideToDbcs_519960(char_type* pDst, wchar_t* pSrc)
     }
 }
 
-MATCH_FUNC(0x5199b0)
+// 0x5199b0
 void Network_20324::DbcsToWide_5199B0(wchar_t* pDst, char_type* pSrc)
 {
     char_type c = *pSrc;
@@ -980,8 +980,8 @@ void Network_20324::DbcsToWide_5199B0(wchar_t* pDst, char_type* pSrc)
     }
 }
 
-MATCH_FUNC(0x519a00)
-char_type* __stdcall GetString_519A00(const char_type* pKey)
+// 0x519a00
+char_type* GetString_519A00(const char_type* pKey)
 {
     wchar_t* pText = gtext_0x14_6F87F0->Find_5B5F90(pKey);
 
@@ -996,7 +996,7 @@ char_type* __stdcall GetString_519A00(const char_type* pKey)
     return Dest_6F88A4;
 }
 
-MATCH_FUNC(0x519a50)
+// 0x519a50
 void Network_20324::GetString_519A50(wchar_t* Dest, char_type* Source, size_t MaxCount)
 {
     if (gtext_0x14_6F87F0->field_10_lang_code == 'j')
@@ -1009,7 +1009,7 @@ void Network_20324::GetString_519A50(wchar_t* Dest, char_type* Source, size_t Ma
     }
 }
 
-MATCH_FUNC(0x519a90)
+// 0x519a90
 Network_20324::Network_20324()
 {
     this->field_202E4_hInstance = nullptr;
@@ -1034,7 +1034,7 @@ Network_20324::Network_20324()
     EnumerateMaps_51BFA0();
 }
 
-MATCH_FUNC(0x519ba0)
+// 0x519ba0
 Network_20324::~Network_20324()
 {
     if (gtext_0x14_6F87F0)
@@ -1045,7 +1045,7 @@ Network_20324::~Network_20324()
 }
 
 // TODO: Make a scratch
-MATCH_FUNC(0x519bd0)
+// 0x519bd0
 s32 Network_20324::ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance)
 {
     this->field_202E4_hInstance = hInstance;
@@ -1064,8 +1064,8 @@ s32 Network_20324::ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance)
                            (LPARAM)this) == 1;
 }
 
-MATCH_FUNC(0x519c80)
-INT_PTR __stdcall Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+// 0x519c80
+INT_PTR Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -1106,7 +1106,7 @@ INT_PTR __stdcall Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wPar
     return 0;
 }
 
-MATCH_FUNC(0x519d30)
+// 0x519d30
 s32 Network_20324::cb_FillSessionList_519D30(Network_20324* pThis, Network_NameList* pSessions)
 {
     char_type name[260];
@@ -1129,19 +1129,19 @@ s32 Network_20324::cb_FillSessionList_519D30(Network_20324* pThis, Network_NameL
     return EnableWindow(GetDlgItem(pThis->Get_202E0_HWND_519E20(), 1001), FALSE);
 }
 
-MATCH_FUNC(0x519e10)
+// 0x519e10
 void Network_20324::SetDlgHwnd_519E10(HWND hDlg)
 {
     field_202E0_dlg_hwnd = hDlg;
 }
 
-MATCH_FUNC(0x519e20)
+// 0x519e20
 HWND Network_20324::Get_202E0_HWND_519E20()
 {
     return field_202E0_dlg_hwnd;
 }
 
-MATCH_FUNC(0x519e30)
+// 0x519e30
 void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pName, s32 player_idx)
 {
     LVITEMA item;
@@ -1199,14 +1199,14 @@ void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pN
     }
 }
 
-MATCH_FUNC(0x519fd0)
-void __stdcall Network_20324::OnPaint_519FD0(HWND hWnd)
+// 0x519fd0
+void Network_20324::OnPaint_519FD0(HWND hWnd)
 {
     // Empty
 }
 
-MATCH_FUNC(0x519fe0)
-void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
+// 0x519fe0
+void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
 {
     Network_8 groupData;
     Network_8 playerData;
@@ -1473,8 +1473,8 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
     }
 }
 
-MATCH_FUNC(0x51a9d0)
-void __stdcall Network_20324::OnTimer_51A9D0(HWND hWnd, s32 timer_id)
+// 0x51a9d0
+void Network_20324::OnTimer_51A9D0(HWND hWnd, s32 timer_id)
 {
     Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hWnd, 8);
     int hadSelection = 0;
@@ -1508,7 +1508,7 @@ void __stdcall Network_20324::OnTimer_51A9D0(HWND hWnd, s32 timer_id)
     }
 }
 
-MATCH_FUNC(0x51aa90)
+// 0x51aa90
 void Network_20324::CreateMainUi_51AA90(HWND hWndParent)
 {
     for (u32 i = 0; i < 3; i++)
@@ -1559,7 +1559,7 @@ void Network_20324::CreateMainUi_51AA90(HWND hWndParent)
     }
 }
 
-MATCH_FUNC(0x51abf0)
+// 0x51abf0
 void Network_20324::ShowSpecificWindow_51ABF0(s32 showing_specific_window_idx)
 {
     u32 i;
@@ -1580,7 +1580,7 @@ void Network_20324::ShowSpecificWindow_51ABF0(s32 showing_specific_window_idx)
     this->field_202D4_showing_specific_window_idx = showing_specific_window_idx;
 }
 
-MATCH_FUNC(0x51ac60)
+// 0x51ac60
 s32 Network_20324::OnInitDialog_51AC60(HWND hWnd, s32 lParam, Network_20324* thisPtr)
 {
     SetWindowLongPtrA(hWnd, 8, (LONG_PTR)thisPtr);
@@ -1593,13 +1593,13 @@ s32 Network_20324::OnInitDialog_51AC60(HWND hWnd, s32 lParam, Network_20324* thi
     return 1;
 }
 
-MATCH_FUNC(0x51acc0)
+// 0x51acc0
 s32 Network_20324::Get_202D4_active_control_idx_51ACC0()
 {
     return field_202D4_showing_specific_window_idx;
 }
 
-MATCH_FUNC(0x51acd0)
+// 0x51acd0
 void Network_20324::cb_sub_51ACD0(Network_20324* pNetUi, wchar_t* Source)
 {
     LVFINDINFOA findInfo;
@@ -1642,7 +1642,7 @@ void Network_20324::cb_sub_51ACD0(Network_20324* pNetUi, wchar_t* Source)
     }
 }
 
-MATCH_FUNC(0x51ade0)
+// 0x51ade0
 void Network_20324::cb_Disconnect_51ADE0(Network_20324* pNetUi)
 {
     gNetPlay_7071E8.Disconnect_520D10();
@@ -1651,7 +1651,7 @@ void Network_20324::cb_Disconnect_51ADE0(Network_20324* pNetUi)
     pNetUi->ShowSpecificWindow_51ABF0(0);
 }
 
-MATCH_FUNC(0x51ae20)
+// 0x51ae20
 void Network_20324::ClearTreeView_51AE20(s32 nIDDlgItem)
 {
     HWND hwndDlg = this->field_202E0_dlg_hwnd;
@@ -1663,7 +1663,7 @@ void Network_20324::ClearTreeView_51AE20(s32 nIDDlgItem)
 
 #pragma warning(push)
 #pragma warning(disable : 4715) // not all control paths return a value
-MATCH_FUNC(0x51ae50)
+// 0x51ae50
 s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_PlayerPing* pPing)
 {
     LVFINDINFOA findInfo;
@@ -1705,7 +1705,7 @@ s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_Player
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x51afa0)
+// 0x51afa0
 void Network_20324::PopulateMainUI_51AFA0()
 {
     LPARAM columnInfo[8];
@@ -1766,7 +1766,7 @@ void Network_20324::PopulateMainUI_51AFA0()
 
 #pragma warning(push)
 #pragma warning(disable : 4715) // not all control paths return a value
-MATCH_FUNC(0x51b2f0)
+// 0x51b2f0
 LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_ChatMessage* pMsg)
 {
     char_type line[260];
@@ -1821,7 +1821,7 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
 #pragma warning(push)
 #pragma warning(disable : 4715) // not all control paths return a value
 #pragma warning(disable : 4700) // name is never filled in, as in the original
-MATCH_FUNC(0x51b4f0)
+// 0x51b4f0
 s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMsg)
 {
     char_type line[260];
@@ -1909,7 +1909,7 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x51b7c0)
+// 0x51b7c0
 void Network_20324::SetPlayerNameText_51B7C0()
 {
     SetDlgItemTextA(field_202E0_dlg_hwnd,
@@ -1917,7 +1917,7 @@ void Network_20324::SetPlayerNameText_51B7C0()
                     field_1FF80_player_name);
 }
 
-MATCH_FUNC(0x51b7e0)
+// 0x51b7e0
 void Network_20324::cb_sub_51B7E0(Network_20324* pNetUi, const char_type** ppData)
 {
     const char_type* pData = *ppData;
@@ -1929,7 +1929,7 @@ void Network_20324::cb_sub_51B7E0(Network_20324* pNetUi, const char_type** ppDat
 
 #pragma warning(push)
 #pragma warning(disable : 4701) // pSpeedText is used uninitialised for an unknown speed, as in the original
-MATCH_FUNC(0x51b810)
+// 0x51b810
 void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
 {
     char_type msg[520];
@@ -1992,7 +1992,7 @@ void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
 
 #pragma warning(push)
 #pragma warning(disable : 4701) // pSpeedText is used uninitialised for an unknown speed, as in the original
-MATCH_FUNC(0x51b9c0)
+// 0x51b9c0
 void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
 {
     Network_8 data;
@@ -2071,31 +2071,31 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x51bbc0)
+// 0x51bbc0
 void Network_20324::IncCount_51BBC0()
 {
     field_1FD6C_count++;
 }
 
-MATCH_FUNC(0x51bbd0)
+// 0x51bbd0
 u32 Network_20324::GetCount_51BBD0()
 {
     return field_1FD6C_count;
 }
 
-MATCH_FUNC(0x51bbe0)
+// 0x51bbe0
 void Network_20324::DecCount_51BBE0()
 {
     field_1FD6C_count--;
 }
 
-MATCH_FUNC(0x51bbf0)
+// 0x51bbf0
 void Network_20324::ResetCount_51BBF0()
 {
     field_1FD6C_count = 0;
 }
 
-MATCH_FUNC(0x51bc00)
+// 0x51bc00
 void Network_20324::cb_SavePlayerName_51BC00(Network_20324* pThis)
 {
     char String[260];
@@ -2107,13 +2107,13 @@ void Network_20324::cb_SavePlayerName_51BC00(Network_20324* pThis)
     pThis->SetEndDialog_51BC70(1);
 }
 
-MATCH_FUNC(0x51bc70)
+// 0x51bc70
 void Network_20324::SetEndDialog_51BC70(s32 bEnd)
 {
     field_1FD68_bEndDialog = bEnd;
 }
 
-MATCH_FUNC(0x51bc80)
+// 0x51bc80
 s32 Network_20324::GetEndDialog_51BC80()
 {
     return field_1FD68_bEndDialog;
@@ -2121,7 +2121,7 @@ s32 Network_20324::GetEndDialog_51BC80()
 
 #pragma function(strcpy)
 
-MATCH_FUNC(0x51bc90)
+// 0x51bc90
 void Network_20324::LoadPlayerNameFromRegistry_51BC90()
 {
     DWORD Type = REG_SZ;
@@ -2152,7 +2152,7 @@ void Network_20324::LoadPlayerNameFromRegistry_51BC90()
     }
 }
 
-MATCH_FUNC(0x51bd40)
+// 0x51bd40
 void Network_20324::SetPlayNameAndSaveToRegistry_51BD40(const wchar_t* pPlayerNameW, const char* pPlayerNameA)
 {
     strcpy(field_1FF80_player_name, pPlayerNameA);
@@ -2175,8 +2175,8 @@ void Network_20324::SetPlayNameAndSaveToRegistry_51BD40(const wchar_t* pPlayerNa
 
 #pragma intrinsic(strcpy)
 
-MATCH_FUNC(0x51bdd0)
-LRESULT __stdcall Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+// 0x51bdd0
+LRESULT Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
     HWND parentHwnd = GetParent(hWnd);
     if (parentHwnd)
@@ -2207,7 +2207,7 @@ LRESULT __stdcall Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARA
     return 0;
 }
 
-MATCH_FUNC(0x51beb0)
+// 0x51beb0
 void Network_20324::OnEnterPressed_51BEB0(s32 nIDDlgItem, s32 player_idx)
 {
     char_type String[128];
@@ -2220,7 +2220,7 @@ void Network_20324::OnEnterPressed_51BEB0(s32 nIDDlgItem, s32 player_idx)
 }
 
 // https://decomp.me/scratch/tQkqa
-MATCH_FUNC(0x51bfa0)
+// 0x51bfa0
 void Network_20324::EnumerateMaps_51BFA0()
 {
     CHAR FileName[260];
@@ -2312,8 +2312,8 @@ void Network_20324::EnumerateMaps_51BFA0()
     }
 }
 
-MATCH_FUNC(0x51c630)
-void __stdcall Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 code, s32 pos)
+// 0x51c630
+void Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 code, s32 pos)
 {
     Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hWnd, 8);
     if (GetDlgCtrlID(hTrackBar) == 1031)
@@ -2339,7 +2339,7 @@ void __stdcall Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 
     }
 }
 
-MATCH_FUNC(0x51c7f0)
+// 0x51c7f0
 void Network_20324::CopyGameSettings_51C7F0(NetworkGameSettings* pSettings)
 {
     if (pSettings)
@@ -2348,7 +2348,7 @@ void Network_20324::CopyGameSettings_51C7F0(NetworkGameSettings* pSettings)
     }
 }
 
-MATCH_FUNC(0x51c830)
+// 0x51c830
 void Network_20324::LoadGameSettingsFromRegistry_51C830()
 {
     field_20088_game_settings.field_2018C_map_idx = gRegistry_6FF968.Set_Network_Setting_587690("map_index", 0);
@@ -2374,33 +2374,33 @@ void Network_20324::LoadGameSettingsFromRegistry_51C830()
            field_4_maps[field_20088_game_settings.field_2018C_map_idx].field_410_mmp_name);
 }
 
-MATCH_FUNC(0x51ca10)
+// 0x51ca10
 char_type* Network_20324::GetMapName_51CA10()
 {
     return field_4_maps[field_20088_game_settings.field_2018C_map_idx].field_0_map_name;
 }
 
-MATCH_FUNC(0x51ca50)
+// 0x51ca50
 char_type* Network_20324::GetMapStyName_51CA50()
 {
     return field_4_maps[field_20088_game_settings.field_2018C_map_idx].field_104_style_name;
 }
 
-MATCH_FUNC(0x51ca90)
+// 0x51ca90
 char_type* Network_20324::GetMapScrName_51CA90()
 {
     return field_4_maps[field_20088_game_settings.field_2018C_map_idx].field_208_script_name;
 }
 
-MATCH_FUNC(0x51cad0)
-void __stdcall Network_20324::ShowUnableToOpenFileError_51CAD0(const char_type* pMmpName, const char_type* pFileName)
+// 0x51cad0
+void Network_20324::ShowUnableToOpenFileError_51CAD0(const char_type* pMmpName, const char_type* pFileName)
 {
     char Text[256];
     sprintf(Text, "Unable to open file: %s in mmpfile: %s", pFileName, pMmpName);
     MessageBoxA(nullptr, Text, "", MB_ICONEXCLAMATION); // TODO: blank str is byte_67DC88 ?
 }
 
-MATCH_FUNC(0x51cb30)
+// 0x51cb30
 void Network_20324::SetPlayerCountText_51CB30(s32 count, HWND hDlg)
 {
     char String[260];
@@ -2409,7 +2409,7 @@ void Network_20324::SetPlayerCountText_51CB30(s32 count, HWND hDlg)
     SetDlgItemTextA(hDlg, 1033, String);
 }
 
-MATCH_FUNC(0x51cbc0)
+// 0x51cbc0
 void Network_20324::UpdateButtonsEnabledState_51CBC0()
 {
     if (Network_20324::GetCount_51BBD0() == field_4_maps[field_20088_game_settings.field_2018C_map_idx].field_514_player_count)
@@ -2431,7 +2431,7 @@ void Network_20324::UpdateButtonsEnabledState_51CBC0()
     }
 }
 
-MATCH_FUNC(0x51ccb0)
+// 0x51ccb0
 void Network_20324::SetPoliceEnabledCheckBox_51CCB0(s32 bPoliceOn, HWND hDlg)
 {
     if (bPoliceOn)
@@ -2444,7 +2444,7 @@ void Network_20324::SetPoliceEnabledCheckBox_51CCB0(s32 bPoliceOn, HWND hDlg)
     }
 }
 
-MATCH_FUNC(0x51cd30)
+// 0x51cd30
 void Network_20324::SetJoinedGamePoliceEnabledText_51CD30(s32 bPoliceOn, HWND hDlg)
 {
     if (bPoliceOn == 1)
@@ -2457,7 +2457,7 @@ void Network_20324::SetJoinedGamePoliceEnabledText_51CD30(s32 bPoliceOn, HWND hD
     }
 }
 
-MATCH_FUNC(0x51cdc0)
+// 0x51cdc0
 void Network_20324::SetFragsNumberAndLabel_51CDC0(s32 gameType, s32 fragLimit, HWND hDlg)
 {
     char_type* fragLimitString;
@@ -2503,7 +2503,7 @@ void Network_20324::SetFragsNumberAndLabel_51CDC0(s32 gameType, s32 fragLimit, H
 // argument slot), and that is what gives each case its own copy of the call.
 #pragma warning(push)
 #pragma warning(disable : 4701) // local variable 'pText' may be used without having been initialized
-MATCH_FUNC(0x51cfc0)
+// 0x51cfc0
 void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWND hDlg)
 {
     SendDlgItemMessageA(hDlg, 1031, 0x405, 1u, game_speed); // 0x405 = TBM_SETPOS
@@ -2525,7 +2525,7 @@ void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWN
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x51d0c0)
+// 0x51d0c0
 void Network_20324::SetJoinedGameTypeAndFragLimitText_51D0C0(s32 game_type, s32 frag_limit, HWND hDlg)
 {
     char_type String[260];
@@ -2560,7 +2560,7 @@ void Network_20324::SetJoinedGameTypeAndFragLimitText_51D0C0(s32 game_type, s32 
     }
 }
 
-MATCH_FUNC(0x51d2f0)
+// 0x51d2f0
 void Network_20324::SetJoinedGameTimeLimitText_51D2F0(s32 gameTimeLimit, HWND hDlg)
 {
     char_type Buffer[260];
@@ -2570,7 +2570,7 @@ void Network_20324::SetJoinedGameTimeLimitText_51D2F0(s32 gameTimeLimit, HWND hD
     SetDlgItemTextA(hDlg, LABEL_JOINED_GAME_TIME_LIMIT_1060, String);
 }
 
-MATCH_FUNC(0x51d3b0)
+// 0x51d3b0
 void Network_20324::SetGameTimeLimitTextBox_51D3B0(s32 timeLimitMins, HWND hDlg)
 {
     char_type String[260];

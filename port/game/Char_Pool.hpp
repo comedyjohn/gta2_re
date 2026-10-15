@@ -78,22 +78,22 @@ class Char_8_Pool
 class PedManager
 {
   public:
-    EXPORT void SpawnDummies_46EB60(Camera_0xBC* pCam);
-    EXPORT void PedsService_4703F0();
-    EXPORT PedManager();
-    EXPORT ~PedManager();
-    EXPORT Ped* SpawnPedAt(Fix16 xpos, Fix16 ypos, Fix16 zpos, u8 remap, Ang16 rotation);
-    EXPORT Ped* SpawnDriver_470B00(Car_BC* pCar);
-    EXPORT Ped* SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang);
-    EXPORT Ped* CreateDummyDriver_470CC0(Car_BC* pCar);
-    EXPORT Ped* SpawnRunAwayGuy_470D60();
-    EXPORT Ped* SpawnTrainLeaver_470E30();
-    EXPORT Ped* AllocatePed_470F30();
-    EXPORT Ped* ClonePed_470F90(Ped* pSrc);
-    EXPORT void DoIanTest_471060(u16 key);
-    EXPORT Ped* PedById(s32 pedId);
+    void SpawnDummies_46EB60(Camera_0xBC* pCam);
+    void PedsService_4703F0();
+    PedManager();
+    ~PedManager();
+    Ped* SpawnPedAt(Fix16 xpos, Fix16 ypos, Fix16 zpos, u8 remap, Ang16 rotation);
+    Ped* SpawnDriver_470B00(Car_BC* pCar);
+    Ped* SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang);
+    Ped* CreateDummyDriver_470CC0(Car_BC* pCar);
+    Ped* SpawnRunAwayGuy_470D60();
+    Ped* SpawnTrainLeaver_470E30();
+    Ped* AllocatePed_470F30();
+    Ped* ClonePed_470F90(Ped* pSrc);
+    void DoIanTest_471060(u16 key);
+    Ped* PedById(s32 pedId);
 
-    EXPORT void Dummies_470330();
+    void Dummies_470330();
 
     s16 field_0_max_dummy_chars;
     char_type field_2_num_dummy_chars;
@@ -114,7 +114,7 @@ class PedPool
     {
     }
 
-    EXPORT ~PedPool();
+    ~PedPool();
 
     // 9.6f 0x403890
     Ped* Allocate()

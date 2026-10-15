@@ -39,39 +39,39 @@ enum
 class CarAI_78
 {
   public:
-    EXPORT void MakeAgressiveSirensAndLights_4476F0();
-    EXPORT void PlanTurnAtNextJunction_447710();
-    EXPORT void DoShortcutsUsingJunctions_447970();
+    void MakeAgressiveSirensAndLights_4476F0();
+    void PlanTurnAtNextJunction_447710();
+    void DoShortcutsUsingJunctions_447970();
     inline void TurnAround_447970();
-    EXPORT bool GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction);
-    EXPORT char_type TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBlock);
-    EXPORT bool IsClockwiseTurning_448270();
-    EXPORT void BrakeForBlockedRoadAhead_4482C0();
-    EXPORT void CheckRoadAhead_448770();
-    EXPORT void ManageTrafficCarDirection_448CE0();
-    EXPORT void FollowRoadDirection_44A1F0();
-    EXPORT void AlignToLaneCenter_44AF00();
-    EXPORT void DetectCarAhead_44D1D0();
-    EXPORT void Init_AI_Chase_44E0C0();
-    EXPORT void UpdateStateMachine_44E560();
-    EXPORT void ReactToNearbyCar_451980();
-    EXPORT void ReactToNearbyObject_451FA0();
-    EXPORT void ReactToNearbyPed_451FF0();
-    EXPORT void ScanAheadForObstacles_452060();
-    EXPORT void ManageCollisions_452A20();
-    EXPORT void UpdateDrivingAI_452DF0();
-    EXPORT void UpdateDriving_453470();
-    EXPORT void ChooseRandomTurn_4537D0();
-    EXPORT void ClearSteeringIfTurning_4538B0();
-    EXPORT void RaiseSpeedTo_453990(Fix16 target_speed);
-    EXPORT void ClearTurnReady_4539B0();
-    EXPORT void UpdateSpeedTowardTarget_4539D0();
-    EXPORT void UpdateTrainMovement_453A40();
-    EXPORT void AI_Service_453BB0();
-    EXPORT void SetCar_453BF0(Car_BC* pCar);
-    EXPORT void ReverseOrNeutral_453C00();
-    EXPORT void PoolAllocate();
-    EXPORT CarAI_78();
+    bool GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction);
+    char_type TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBlock);
+    bool IsClockwiseTurning_448270();
+    void BrakeForBlockedRoadAhead_4482C0();
+    void CheckRoadAhead_448770();
+    void ManageTrafficCarDirection_448CE0();
+    void FollowRoadDirection_44A1F0();
+    void AlignToLaneCenter_44AF00();
+    void DetectCarAhead_44D1D0();
+    void Init_AI_Chase_44E0C0();
+    void UpdateStateMachine_44E560();
+    void ReactToNearbyCar_451980();
+    void ReactToNearbyObject_451FA0();
+    void ReactToNearbyPed_451FF0();
+    void ScanAheadForObstacles_452060();
+    void ManageCollisions_452A20();
+    void UpdateDrivingAI_452DF0();
+    void UpdateDriving_453470();
+    void ChooseRandomTurn_4537D0();
+    void ClearSteeringIfTurning_4538B0();
+    void RaiseSpeedTo_453990(Fix16 target_speed);
+    void ClearTurnReady_4539B0();
+    void UpdateSpeedTowardTarget_4539D0();
+    void UpdateTrainMovement_453A40();
+    void AI_Service_453BB0();
+    void SetCar_453BF0(Car_BC* pCar);
+    void ReverseOrNeutral_453C00();
+    void PoolAllocate();
+    CarAI_78();
 
     void PoolDeallocate()
     {

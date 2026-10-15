@@ -16,10 +16,10 @@ class GlobalsRegistry;
 // the HookLoader can easily find and special case it.
 extern "C"
 {
-    __declspec(dllexport) GlobalsRegistry* __cdecl GetGlobalsRegistry();
+    __declspec(dllexport) GlobalsRegistry* GetGlobalsRegistry();
 }
 
-using TGetGlobalsRegistry = GlobalsRegistry* (__cdecl *)();
+using TGetGlobalsRegistry = GlobalsRegistry* (*)();
 
 class GlobalRef
 {

@@ -36,7 +36,7 @@ EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);
 DEFINE_GLOBAL_INIT(Fix16, kFlyCarMinVelocity_7028BC, Fix16(0x666, 0), 0x7028BC);
 
 
-MATCH_FUNC(0x591bd0)
+// 0x591bd0
 PlayerScoreTracker_36C::PlayerScoreTracker_36C()
 {
     field_368_player = nullptr;
@@ -66,7 +66,7 @@ PlayerScoreTracker_36C::PlayerScoreTracker_36C()
     }
 }
 
-MATCH_FUNC(0x591c70)
+// 0x591c70
 void PlayerScoreTracker_36C::Service_591C70()
 {
     field_1A8_bonuses.Service_431E30();
@@ -270,7 +270,7 @@ void PlayerScoreTracker_36C::Service_591C70()
     }
 }
 
-MATCH_FUNC(0x5922f0)
+// 0x5922f0
 void PlayerScoreTracker_36C::Init_5922F0(Player* pPlayer, s16 digit_transition_speed, s32 max_score_value, s16 palette, u16 max_frag_value)
 {
     field_368_player = pPlayer;
@@ -278,7 +278,7 @@ void PlayerScoreTracker_36C::Init_5922F0(Player* pPlayer, s16 digit_transition_s
     field_38_multiplayer_frags.SetupDigitsParams_492110(digit_transition_speed, max_frag_value, palette);
 }
 
-MATCH_FUNC(0x592330)
+// 0x592330
 void PlayerScoreTracker_36C::Reset_592330()
 {
     field_0_money.InitDigitSprites_492150();
@@ -287,19 +287,19 @@ void PlayerScoreTracker_36C::Reset_592330()
     ResetCarModelFlags_592380(car_model_flag::both_3);
 }
 
-MATCH_FUNC(0x592360)
+// 0x592360
 RollingDigitCounter_38* PlayerScoreTracker_36C::GetScoreDigits_592360()
 {
     return &field_0_money;
 }
 
-MATCH_FUNC(0x592370)
+// 0x592370
 s32 PlayerScoreTracker_36C::GetScore_592370()
 {
     return field_0_money.field_0_value;
 }
 
-MATCH_FUNC(0x592380)
+// 0x592380
 void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
 {
     if ((bits & car_model_flag::stolen_1) != 0)
@@ -342,7 +342,7 @@ void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
     }
 }
 
-MATCH_FUNC(0x592430)
+// 0x592430
 void PlayerScoreTracker_36C::CheckAllCarModelsFlagged_592430(char_type bits)
 {
     u16 i;
@@ -385,14 +385,14 @@ void PlayerScoreTracker_36C::CheckAllCarModelsFlagged_592430(char_type bits)
     }
 }
 
-MATCH_FUNC(0x592570)
+// 0x592570
 void PlayerScoreTracker_36C::SetCarModelFlag_592570(char_type flag, s32 car_model)
 {
     field_8C_car_model_flags[car_model] |= flag;
     CheckAllCarModelsFlagged_592430(flag);
 }
 
-MATCH_FUNC(0x5925b0)
+// 0x5925b0
 s32 PlayerScoreTracker_36C::GetCarScoreValue_5925B0(u32 car_model, u8 reward_tier)
 {
     u32 result = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(car_model)->field_2_value;
@@ -410,7 +410,7 @@ s32 PlayerScoreTracker_36C::GetCarScoreValue_5925B0(u32 car_model, u8 reward_tie
     }
 }
 
-MATCH_FUNC(0x592620)
+// 0x592620
 void PlayerScoreTracker_36C::AddCash_592620(s32 cash)
 {
     field_0_money.ChangeStatByAmount_4921B0(cash);
@@ -423,7 +423,7 @@ void PlayerScoreTracker_36C::AddCash_592620(s32 cash)
 
 // Scores the player killing pVictim (pKiller is the killer's ped): points by occupation and kill
 // type, exploding score, cash, and reports the crime
-MATCH_FUNC(0x592660)
+// 0x592660
 void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKiller)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
@@ -752,7 +752,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     }
 }
 
-MATCH_FUNC(0x592dd0)
+// 0x592dd0
 void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pKiller)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
@@ -850,7 +850,7 @@ void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pK
     SetCarModelFlag_592570(car_model_flag::destroyed_2, pCar->field_84_car_info_idx);
 }
 
-MATCH_FUNC(0x593030)
+// 0x593030
 void PlayerScoreTracker_36C::AwardCarDamageScore_593030(Car_BC* pCar, s16 damage)
 {
     bool bAddScore = true;
@@ -904,7 +904,7 @@ void PlayerScoreTracker_36C::AwardCarDamageScore_593030(Car_BC* pCar, s16 damage
     }
 }
 
-MATCH_FUNC(0x593150)
+// 0x593150
 void PlayerScoreTracker_36C::AwardCarDamageScoreHit_593150(Car_BC* pCar, s16 damage)
 {
     if (!pCar->IsMaxDamage_40F890())
@@ -933,13 +933,13 @@ void PlayerScoreTracker_36C::AwardCarDamageScoreHit_593150(Car_BC* pCar, s16 dam
     }
 }
 
-MATCH_FUNC(0x593220)
+// 0x593220
 void PlayerScoreTracker_36C::AddCashWithMultiplier_593220()
 {
     field_368_player->field_2D4_scores.AddCash_592620(field_368_player->field_6BC_multipliers.field_0_value * 20);
 }
 
-MATCH_FUNC(0x593240)
+// 0x593240
 void PlayerScoreTracker_36C::AwardCarHijackedScore_593240(Car_BC* pCar)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
@@ -965,7 +965,7 @@ void PlayerScoreTracker_36C::AwardCarHijackedScore_593240(Car_BC* pCar)
     SetCarModelFlag_592570(car_model_flag::stolen_1, pCar->field_84_car_info_idx);
 }
 
-MATCH_FUNC(0x593370)
+// 0x593370
 void PlayerScoreTracker_36C::AwardBusStolenScore_593370(Car_BC* pCar)
 {
     if (!bExplodingScoresOff_67D4FB && field_368_player->IsUser_41DC70())
@@ -980,7 +980,7 @@ void PlayerScoreTracker_36C::AwardBusStolenScore_593370(Car_BC* pCar)
     gCrimeReportQueue_67A4B8->ReportCrimeForPed(crime_stats_type::bus_stolen_4, field_368_player->GetPlayerPed_4A5130());
 }
 
-MATCH_FUNC(0x593410)
+// 0x593410
 void PlayerScoreTracker_36C::AwardFullBusDestroyedScore_593410(Car_BC* pCar)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
@@ -1004,7 +1004,7 @@ void PlayerScoreTracker_36C::AwardFullBusDestroyedScore_593410(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x5934f0)
+// 0x5934f0
 void PlayerScoreTracker_36C::UpdateAccuracyCount_5934F0(u32 event, s32 weapon_model, Ped* pTarget)
 {
     field_194_last_accuracy_event = event;
@@ -1040,19 +1040,19 @@ void PlayerScoreTracker_36C::UpdateAccuracyCount_5934F0(u32 event, s32 weapon_mo
     }
 }
 
-MATCH_FUNC(0x5935b0)
+// 0x5935b0
 RollingDigitCounter_38* PlayerScoreTracker_36C::GetMultiplayerFragDigits_5935B0()
 {
     return &field_38_multiplayer_frags;
 }
 
-MATCH_FUNC(0x5935c0)
+// 0x5935c0
 s32 PlayerScoreTracker_36C::GetFrags_5935C0()
 {
     return field_38_multiplayer_frags.field_0_value;
 }
 
-MATCH_FUNC(0x5935d0)
+// 0x5935d0
 void PlayerScoreTracker_36C::ChangeFragsByAmount_5935D0(s32 amount)
 {
     field_38_multiplayer_frags.ChangeStatByAmount_4921B0(amount);

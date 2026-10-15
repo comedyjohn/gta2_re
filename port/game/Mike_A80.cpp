@@ -12,14 +12,14 @@
 
 DEFINE_GLOBAL(Mike_A80*, gMike_A80_6F7328, 0x6F7328);
 
-MATCH_FUNC(0x4ff1b0)
+// 0x4ff1b0
 void Mike_A80::Init_4FF1B0()
 {
     field_A78_ary_idx = 0;
     field_A7C_count = 0;
 }
 
-MATCH_FUNC(0x4ff1c0)
+// 0x4ff1c0
 s32 Mike_A80::sDrawFlatRect_4FF1C0(f32 left, f32 top, f32 right, f32 bottom, s32 colour)
 {
     Vert verts[4];
@@ -41,13 +41,13 @@ s32 Mike_A80::sDrawFlatRect_4FF1C0(f32 left, f32 top, f32 right, f32 bottom, s32
 EXTERN_GLOBAL(u32, gBufferMode_706B34);
 EXTERN_GLOBAL(s32, gDisplayDraw_67B57C);
 EXTERN_GLOBAL(s32, gDisplayAdd_67B578);
-EXPORT s32 __stdcall sub_5BEED0(s32 cycles);
+s32 sub_5BEED0(s32 cycles);
 
 DEFINE_GLOBAL(u32, gMemTotal_6F7360, 0x6F7360);
 DEFINE_GLOBAL(s32, gMemTotalCounter_6F7550, 0x6F7550);
 DEFINE_GLOBAL(s32, gLargeFrameTimer_6F754C, 0x6F754C);
 
-MATCH_FUNC(0x4ff250)
+// 0x4ff250
 void Mike_A80::DebugDrawProfiling_4FF250()
 {
     s32 total_textures_used = 0;
@@ -151,7 +151,7 @@ void Mike_A80::DebugDrawProfiling_4FF250()
     sub_4FFD90();
 }
 
-MATCH_FUNC(0x4ff910)
+// 0x4ff910
 void Mike_A80::sDrawString_4FF910(s32 xpos, s32 ypos, const wchar_t* pFormat, ...)
 {
     wchar_t buffer[240];
@@ -161,18 +161,18 @@ void Mike_A80::sDrawString_4FF910(s32 xpos, s32 ypos, const wchar_t* pFormat, ..
     DrawText_4B87A0(buffer, xpos, ypos, word_703BAA, 1);
 }
 
-MATCH_FUNC(0x4ff970)
-void __stdcall Mike_A80::sub_4FF970(u32* pValue)
+// 0x4ff970
+void Mike_A80::sub_4FF970(u32* pValue)
 {
     *pValue = 0;
 }
 
-MATCH_FUNC(0x4ff980)
+// 0x4ff980
 void Mike_A80::sub_4FF980()
 {
 }
 
-MATCH_FUNC(0x4ff990)
+// 0x4ff990
 void Mike_A80::sub_4FF990(u32 idx)
 {
     switch (idx)
@@ -192,7 +192,7 @@ void Mike_A80::sub_4FF990(u32 idx)
     }
 }
 
-MATCH_FUNC(0x4ff9f0)
+// 0x4ff9f0
 void Mike_A80::sub_4FF9F0(u32 idx)
 {
     switch (idx)
@@ -212,7 +212,7 @@ void Mike_A80::sub_4FF9F0(u32 idx)
     }
 }
 
-MATCH_FUNC(0x4ffa50)
+// 0x4ffa50
 void Mike_A80::sub_4FFA50(const char_type* pFormat, ...)
 {
     char_type buffer[240];
@@ -222,7 +222,7 @@ void Mike_A80::sub_4FFA50(const char_type* pFormat, ...)
     OutputDebugStringA(buffer);
 }
 
-MATCH_FUNC(0x4ffa90)
+// 0x4ffa90
 void Mike_A80::sub_4FFA90()
 {
     s32 process_time = m81.TakeElapsed();
@@ -309,7 +309,7 @@ void Mike_A80::sub_4FFA90()
     field_A7C_count++;
 }
 
-MATCH_FUNC(0x4ffd90)
+// 0x4ffd90
 void Mike_A80::sub_4FFD90()
 {
     s32 count = field_A7C_count < 100 ? field_A7C_count : 100;

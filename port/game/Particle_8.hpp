@@ -15,22 +15,22 @@ class Object_2C;
 class Particle_8
 {
   public:
-    EXPORT Particle_4C* New_53E3C0(Fix16 speed_x, Fix16 speed_y, Fix16 field_10_value, Fix16 additional_speed_x, Fix16 additional_speed_y, Fix16 field_1C_value);
+    Particle_4C* New_53E3C0(Fix16 speed_x, Fix16 speed_y, Fix16 field_10_value, Fix16 additional_speed_x, Fix16 additional_speed_y, Fix16 field_1C_value);
 
-    EXPORT void ParticlesService_53E320();
-    EXPORT void EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang);
-    EXPORT void SpawnBlood_53E880(Fix16 xpos, Fix16 ypos, Fix16 zpos);
-    EXPORT void GunMuzzelFlash_53E970(Sprite* pSprite);
-    EXPORT void EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char_type bRandomRot);
-    EXPORT void SpawnParticleSprite_5405D0(Sprite* pSprite);
-    EXPORT void EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 ang);
-    EXPORT void SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnknown);
-    EXPORT Particle_8();
-    EXPORT ~Particle_8();
+    void ParticlesService_53E320();
+    void EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang);
+    void SpawnBlood_53E880(Fix16 xpos, Fix16 ypos, Fix16 zpos);
+    void GunMuzzelFlash_53E970(Sprite* pSprite);
+    void EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char_type bRandomRot);
+    void SpawnParticleSprite_5405D0(Sprite* pSprite);
+    void EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 ang);
+    void SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnknown);
+    Particle_8();
+    ~Particle_8();
 
-    EXPORT void EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite);
-    EXPORT void EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir);
-    EXPORT void EmitFlameStreamSegment_53F4C0(Sprite* pSprite);
+    void EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite);
+    void EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir);
+    void EmitFlameStreamSegment_53F4C0(Sprite* pSprite);
 
     Object_2C* field_0_fire_hit_obj;
     Object_2C* field_4;

@@ -16,7 +16,7 @@ DEFINE_GLOBAL(HWND, gHwnd_707F04, 0x707F04);
 EXTERN_GLOBAL(s32, gGTA2VersionMajor_708280);
 EXTERN_GLOBAL(s32, gGTA2VersionMajor_708284);
 
-MATCH_FUNC(0x4D9470)
+// 0x4D9470
 void ErrorLog::Open_4D9470(const char* path, s32 mode)
 {
     if (mFile)
@@ -27,7 +27,7 @@ void ErrorLog::Open_4D9470(const char* path, s32 mode)
     log_timestamp_4D9540();
 }
 
-MATCH_FUNC(0x4D94E0)
+// 0x4D94E0
 ErrorLog::ErrorLog(const char* path, int mode)
 {
     Open_4D9470(path, mode);
@@ -46,19 +46,19 @@ void ErrorLog::Write(const char* text, bool newLine)
     }
 }
 
-MATCH_FUNC(0x4D9620)
+// 0x4D9620
 void ErrorLog::Write_4D9620(const char* pMsg)
 {
     Write(pMsg, true);
 }
 
-MATCH_FUNC(0x4D9650)
+// 0x4D9650
 void ErrorLog::Write_Log_4D9650(const char* buffer)
 {
     Write(buffer, false);
 }
 
-MATCH_FUNC(0x4D9540)
+// 0x4D9540
 void ErrorLog::log_timestamp_4D9540()
 {
     time_t curTime = time(nullptr);
@@ -68,7 +68,7 @@ void ErrorLog::log_timestamp_4D9540()
     Write_4D9620(gTmpBuffer_67C598);
 }
 
-MATCH_FUNC(0x4A3610)
+// 0x4A3610
 ErrorLog::~ErrorLog()
 {
     log_intro_4D95A0();
@@ -78,7 +78,7 @@ ErrorLog::~ErrorLog()
     }
 }
 
-MATCH_FUNC(0x4D95A0)
+// 0x4D95A0
 void ErrorLog::log_intro_4D95A0()
 {
     sprintf(gTmpBuffer_67C598, "Coop v%d.%d", gGTA2VersionMajor_708280, gGTA2VersionMajor_708284);
@@ -132,14 +132,14 @@ const char_type* gListTypes_61AB70[30] = {"objects",
                                           "scorefx_space",
                                           "audio_info_space"};
 
-MATCH_FUNC(0x4A0770)
-EXPORT void __stdcall Error_SetName_4A0770(const char_type* pFileName)
+// 0x4A0770
+void Error_SetName_4A0770(const char_type* pFileName)
 {
     strcpy(gGlobalFileName_67C6AC, pFileName);
 }
 
-MATCH_FUNC(0x4A07A0)
-EXPORT const char_type* __stdcall SourceFileNameFromPath_4A07A0(const char_type* pPath)
+// 0x4A07A0
+const char_type* SourceFileNameFromPath_4A07A0(const char_type* pPath)
 {
     // ecx was swapped with edx without using the local pIter
     const char_type* result = nullptr;
@@ -170,8 +170,8 @@ struct Coord2
 
 #define err_a1_int(msg, arg) sprintf(gTmpBuffer_67C598, msg, va_1);
 
-MATCH_FUNC(0x4A07C0)
-EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, ...)
+// 0x4A07C0
+void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, ...)
 {
     va_list va; // [esp+94h] [ebp+34h] BYREF
 
@@ -2254,8 +2254,8 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
     gErrorLog_67CF58.Write_4D9620(gTmpBuffer_67C598);
 }
 
-MATCH_FUNC(0x4A38C0)
-EXPORT void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo, ...)
+// 0x4A38C0
+void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo, ...)
 {
     if (Code == 16)
     {
@@ -2355,8 +2355,8 @@ EXPORT void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo
 // body order. The empty DI_OK case is needed: without it VC6 splits the switch differently (compares instead of
 // the byte-indexed table for 0x8007000E-0x80070057), which shifts the register rotation and so which cases
 // cross-jump into the default's tail.
-MATCH_FUNC(0x4A3CF0)
-EXPORT void __stdcall FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo)
+// 0x4A3CF0
+void FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo)
 {
     switch (hr)
     {

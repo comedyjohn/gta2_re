@@ -149,8 +149,8 @@ DEFINE_GLOBAL_INIT(Fix16, kFP16MinusOne_6FD790, Fix16(-1), 0x6FD790);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FDA04, k_dword_6FD868 * 256, 0x6FDA04);
 
 
-MATCH_FUNC(0x4056C0)
-EXPORT Ang16 __stdcall ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3)
+// 0x4056C0
+Ang16 ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3)
 {
     Ang16 delta = a2 - a3;
     if (delta > kAng180_669156)
@@ -163,8 +163,8 @@ EXPORT Ang16 __stdcall ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3)
 // No callers. The angle halfway between a and b, going the short way round. The normalizations of delta
 // are kept at the top level (in a register, where VC6 turns the loops into its division form): through the
 // unary operator- the nested Normalize runs out of inline budget and is called out of line.
-MATCH_FUNC(0x4057B0)
-EXPORT Ang16 __stdcall MidAngle_4057B0(Ang16& a, Ang16& b)
+// 0x4057B0
+Ang16 MidAngle_4057B0(Ang16& a, Ang16& b)
 {
     Ang16 half;
     Ang16 delta(b.rValue - a.rValue);
@@ -182,7 +182,7 @@ EXPORT Ang16 __stdcall MidAngle_4057B0(Ang16& a, Ang16& b)
     return a + half;
 }
 
-MATCH_FUNC(0x46DD50)
+// 0x46DD50
 void Char_B4::SetRemap_46DD50(u8 remap)
 {
     this->field_5_remap = remap;
@@ -192,22 +192,22 @@ void Char_B4::SetRemap_46DD50(u8 remap)
     }
 }
 
-MATCH_FUNC(0x4F79B0)
-EXPORT Fix16 __stdcall SnapZTo16_4F79B0(Fix16 a2)
+// 0x4F79B0
+Fix16 SnapZTo16_4F79B0(Fix16 a2)
 {
     return ((kFP16Half_6F67B0 + (a2 * 1000)).GetRoundValue()) / 1000;
 }
 
-MATCH_FUNC(0x529050)
-EXPORT void __stdcall UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3)
+// 0x529050
+void UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3)
 {
     *a2 = (a1 >> 4) - 7;
     *a3 = (a1 & 0xF) - 7;
 }
 
 //https://decomp.me/scratch/iQH9l
-MATCH_FUNC(0x544F70)
-void __stdcall ResetCharUpdateGlobals_544F70()
+// 0x544F70
+void ResetCharUpdateGlobals_544F70()
 {
     gCharB4_Saved_Xpos_6FD7F8 = kFP16Zero_6FD9E4;
     gCharB4_Saved_Ypos_6FD800 = kFP16Zero_6FD9E4;
@@ -232,7 +232,7 @@ void __stdcall ResetCharUpdateGlobals_544F70()
 }
 
 // https://decomp.me/scratch/ZsDjc
-MATCH_FUNC(0x544ff0)
+// 0x544ff0
 Char_B4::Char_B4()
 {
     field_0_id = 0;
@@ -290,7 +290,7 @@ Char_B4::Char_B4()
     field_4A = 0;
 }
 
-MATCH_FUNC(0x5451A0)
+// 0x5451A0
 Char_B4::~Char_B4()
 {
     field_18_collided_entity = nullptr;
@@ -301,7 +301,7 @@ Char_B4::~Char_B4()
     field_84_target_car = nullptr;
 }
 
-MATCH_FUNC(0x5451C0)
+// 0x5451C0
 bool Char_B4::HasShadows_5451C0()
 {
     if (field_8_ped_state_1 == 9)
@@ -318,7 +318,7 @@ bool Char_B4::HasShadows_5451C0()
     return false;
 }
 
-MATCH_FUNC(0x545200)
+// 0x545200
 void Char_B4::PoolAllocate()
 {
     field_0_id = gB4_id_6FDB4C++;
@@ -388,7 +388,7 @@ void Char_B4::PoolAllocate()
     field_B0_scream_timer = -1;
 }
 
-MATCH_FUNC(0x5453d0)
+// 0x5453d0
 void Char_B4::PoolDeallocate()
 {
     if (field_80_sprite_ptr)
@@ -401,7 +401,7 @@ void Char_B4::PoolDeallocate()
     field_B0_scream_timer = -1;
 }
 
-MATCH_FUNC(0x545430)
+// 0x545430
 void Char_B4::DrawFlamesAndStartScreamTimer_545430()
 {
     // Spawn fire
@@ -410,14 +410,14 @@ void Char_B4::DrawFlamesAndStartScreamTimer_545430()
     field_B0_scream_timer = 10; // Start screaming timer
 }
 
-MATCH_FUNC(0x5454B0)
+// 0x5454B0
 void Char_B4::RemoveFireSprites_5454B0()
 {
     field_B0_scream_timer = -1;
     field_88_obj_2c.CleanupSpriteList_5A7080();
 }
 
-MATCH_FUNC(0x5454d0)
+// 0x5454d0
 void Char_B4::DoJump_5454D0()
 {
     if (field_8_ped_state_1 != ped_state_1::immobilized_8)
@@ -442,7 +442,7 @@ void Char_B4::DoJump_5454D0()
     }
 }
 
-MATCH_FUNC(0x545530)
+// 0x545530
 void Char_B4::Teleport_545530(Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
     field_58_flags_bf.bTeleported = true;
@@ -451,14 +451,14 @@ void Char_B4::Teleport_545530(Fix16 xpos, Fix16 ypos, Fix16 zpos)
     field_AC_zpos = zpos;
 }
 
-MATCH_FUNC(0x545570)
+// 0x545570
 s32 Char_B4::IsOnWater_545570()
 {
     return field_80_sprite_ptr->IsOnWater_59E1D0();
 }
 
 // 9.6f 0x493780
-MATCH_FUNC(0x545580)
+// 0x545580
 Fix16_Point Char_B4::sub_545580()
 {
     Fix16_Point p;
@@ -466,13 +466,13 @@ Fix16_Point Char_B4::sub_545580()
     return p;
 }
 
-MATCH_FUNC(0x5455f0)
+// 0x5455f0
 void Char_B4::KillPed_5455F0()
 {
     field_7C_pPed->Kill_46F9D0();
 }
 
-MATCH_FUNC(0x545600)
+// 0x545600
 void Char_B4::ClearCollisionState_545600()
 {
     field_18_collided_entity = nullptr;
@@ -486,19 +486,19 @@ void Char_B4::ClearCollisionState_545600()
     field_2C_ang = kAng0_6FDB34;
 }
 
-MATCH_FUNC(0x545640)
+// 0x545640
 void Char_B4::GetTileFracX64_545640(Fix16 coord, s16* output)
 {
     *output = (coord.GetFracValue() * Fix16(64)).ToInt();
 }
 
-MATCH_FUNC(0x545670)
+// 0x545670
 void Char_B4::GetTileFracY64_545670(Fix16 coord, s16* output)
 {
     *output = (coord.GetFracValue() * Fix16(64)).ToInt();
 }
 
-MATCH_FUNC(0x5456a0)
+// 0x5456a0
 void Char_B4::InitSprite_5456A0()
 {
     // TODO: maybe an inline here: temp var not needed
@@ -510,13 +510,13 @@ void Char_B4::InitSprite_5456A0()
     field_80_sprite_ptr->CreateSoundObj_5A29D0();
 }
 
-MATCH_FUNC(0x545700)
+// 0x545700
 bool Char_B4::IsOnScreen_545700()
 {
     return gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(this->field_80_sprite_ptr, kFP16Zero_6FD9E4) == 1;
 }
 
-MATCH_FUNC(0x545720)
+// 0x545720
 void Char_B4::Update_545720(Fix16 distance_to_target)
 {
     if (++gCharB4_UpdateCounter_6FDB48 > 20)
@@ -629,14 +629,14 @@ void Char_B4::Update_545720(Fix16 distance_to_target)
     }
 }
 
-MATCH_FUNC(0x5459c0)
+// 0x5459c0
 void Char_B4::CheckAndHandleCollisions_5459C0()
 {
     gCharB4_HitByMine_6FDB59 = 0;
     gSpriteGrid_2_67920C->CheckAndHandleCollisionInStrips_477BD0(field_80_sprite_ptr);
 }
 
-MATCH_FUNC(0x5459e0)
+// 0x5459e0
 void Char_B4::DrownPed_5459E0()
 {
     field_7C_pPed->ChangeNextPedState1_45C500(ped_state_1::immobilized_8);
@@ -679,7 +679,7 @@ static inline u8 FrameDelay_546360(Char_B4* pThis)
     return 4;
 }
 
-MATCH_FUNC(0x546360)
+// 0x546360
 void Char_B4::UpdateAnimState_546360()
 {
     s16 newId = 0;
@@ -1631,7 +1631,7 @@ void Char_B4::UpdateAnimState_546360()
     field_80_sprite_ptr->set_id_lazy_4206C0(newId);
 }
 
-MATCH_FUNC(0x548590)
+// 0x548590
 void Char_B4::ManageZCoordAndSlopes_548590()
 {
     Fix16 zpos = kFP16Zero_6FD9E4;
@@ -1681,7 +1681,7 @@ static inline Ang16 TurnBy16Deg_548BD0(Ang16 angle)
 }
 
 // 9.6f 0x499F00
-MATCH_FUNC(0x548670)
+// 0x548670
 void Char_B4::DispatchCollision_548670(char_type bFlag)
 {
     u8 bUnknown; // bl
@@ -1809,7 +1809,7 @@ static inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
     return false;
 }
 
-MATCH_FUNC(0x548840)
+// 0x548840
 void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
 {
     //pObj_ = pObj;
@@ -1905,7 +1905,7 @@ static inline void CollideWithPed_493000(Ped* pPed, Char_B4* pOther)
     }
 }
 
-MATCH_FUNC(0x548bd0)
+// 0x548bd0
 void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
 {
     s32 my_type = field_7C_pPed->GetPedType_420B70();
@@ -2115,7 +2115,7 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
 // there. step_x/step_y are the one pair of function-scope locals for both PolarToCartesian calls (the
 // player arm's too): separate block locals flip the player arm's imul operand order. The width/height
 // getters (9.6f GetW/GetH) do the same, so those stay field accesses.
-MATCH_FUNC(0x54a530)
+// 0x54a530
 void Char_B4::HandleGenericCollision_54A530(Car_BC* pCar, Object_2C* pObj, Char_B4* pChar)
 {
     Ang16 corner_ang;
@@ -2477,7 +2477,7 @@ void Char_B4::HandleGenericCollision_54A530(Car_BC* pCar, Object_2C* pObj, Char_
 }
 
 // https://decomp.me/scratch/aRlEV
-MATCH_FUNC(0x54b8f0)
+// 0x54b8f0
 char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
 {
     Fix16 x_vec;
@@ -2609,7 +2609,7 @@ done:
 }
 
 // 9.6f 0x491F10: the face (1-4) next to `face`, clockwise or not
-static inline s32 __stdcall RotateFace_491F10(s32* face, bool* clockwise)
+static inline s32 RotateFace_491F10(s32* face, bool* clockwise)
 {
     switch (*face)
     {
@@ -2634,7 +2634,7 @@ inline void Char_B4::SetTurnTarget_492400(Ang16 target_rotation)
     field_46_timer = 255;
 }
 
-MATCH_FUNC(0x54c090)
+// 0x54c090
 void Char_B4::sub_54C090()
 {
 
@@ -2689,7 +2689,7 @@ void Char_B4::sub_54C090()
     this->field_46_timer = 100;
 }
 
-MATCH_FUNC(0x54c1a0)
+// 0x54c1a0
 char_type Char_B4::CanMoveOntoSlope_54C1A0(s32 path_direction)
 {
     u8 slope_type = 0;
@@ -2784,7 +2784,7 @@ char_type Char_B4::CanMoveOntoSlope_54C1A0(s32 path_direction)
 }
 
 // 9.6f 0x495470
-MATCH_FUNC(0x54c3e0)
+// 0x54c3e0
 void Char_B4::sub_54C3E0()
 {
     bool cw_free = false;
@@ -2826,7 +2826,7 @@ void Char_B4::sub_54C3E0()
 }
 
 // 9.6f 0x495540
-MATCH_FUNC(0x54c500)
+// 0x54c500
 char_type Char_B4::CanMoveToTile_54C500(char_type x, char_type y)
 {
     Fix16 tx = field_80_sprite_ptr->field_14_xy.x;
@@ -2855,7 +2855,7 @@ char_type Char_B4::CanMoveToTile_54C500(char_type x, char_type y)
     return (dy == -1) ? Char_B4::CanMoveOntoSlope_54C1A0(1) : Char_B4::CanMoveOntoSlope_54C1A0(2);
 }
 
-MATCH_FUNC(0x54c580)
+// 0x54c580
 void Char_B4::SelectRandomIdleBehavior_54C580()
 {
     if (!this->field_46_timer)
@@ -2914,7 +2914,7 @@ void Char_B4::SelectRandomIdleBehavior_54C580()
     }
 }
 
-MATCH_FUNC(0x54c6c0)
+// 0x54c6c0
 void Char_B4::ApplyRandomRotationJitter_54C6C0()
 {
     if (gRng_6F6784.get_int_4F7AE0(32) > 22)
@@ -2933,7 +2933,7 @@ void Char_B4::ApplyRandomRotationJitter_54C6C0()
     }
 }
 
-MATCH_FUNC(0x54c900)
+// 0x54c900
 void Char_B4::TickMovementStateMachine_54C900()
 {
     switch (this->field_10_char_state)
@@ -3036,7 +3036,7 @@ void Char_B4::TickMovementStateMachine_54C900()
     }
 }
 
-MATCH_FUNC(0x54cae0)
+// 0x54cae0
 void Char_B4::TurnTowardsAngle_54CAE0()
 {
     // Each half jumps into the other half's add block (shared blocks in the original layout),
@@ -3062,7 +3062,7 @@ void Char_B4::TurnTowardsAngle_54CAE0()
 }
 
 // https://decomp.me/scratch/RGvHW
-MATCH_FUNC(0x54cc40)
+// 0x54cc40
 void Char_B4::ApplyMovement_54CC40()
 {
 
@@ -3296,7 +3296,7 @@ void Char_B4::ApplyMovement_54CC40()
     }
 }
 
-MATCH_FUNC(0x54dd70)
+// 0x54dd70
 void Char_B4::sub_54DD70()
 {
     if (this->field_8_ped_state_1 != ped_state_1::dead_9 && this->field_10_char_state != Char_B4_state::Jumping_15)
@@ -3342,7 +3342,7 @@ static inline bool IsBlockTypeInRange_1_4(u8 block_type)
 }
 
 // https://decomp.me/scratch/56qkT
-MATCH_FUNC(0x54ddf0)
+// 0x54ddf0
 void Char_B4::state_0_54DDF0()
 {
     char bCanMove;
@@ -3832,7 +3832,7 @@ LABEL_152:
 }
 
 // https://decomp.me/scratch/Zk9Eh
-MATCH_FUNC(0x54ecb0)
+// 0x54ecb0
 bool Char_B4::CanStepForwardWithRegionCheck_54ECB0(s32 direction)
 {
     u8 u8_unk;
@@ -3914,7 +3914,7 @@ bool Char_B4::CanStepForwardWithRegionCheck_54ECB0(s32 direction)
 // https://decomp.me/scratch/Ub1EN
 // 9.6f 0x495BF0: the collision offset division is written at each use (VC6 CSEs it), bCanStep is set
 // in each leaf and leaves 2-4 return explicitly (leaf 1's tail is the cross-jump keeper).
-MATCH_FUNC(0x54EF60)
+// 0x54EF60
 bool Char_B4::CanStepDiagonal_54EF60(char_type target_x, char_type target_y)
 {
     bool bIsNearXposBlockBoundary = true;
@@ -4301,7 +4301,7 @@ bool Char_B4::CanStepDiagonal_54EF60(char_type target_x, char_type target_y)
 }
 
 // https://decomp.me/scratch/xc0PO
-MATCH_FUNC(0x54fec0)
+// 0x54fec0
 bool Char_B4::CanStepForward_54FEC0(s32 direction)
 {
     bool result;
@@ -4387,7 +4387,7 @@ bool Char_B4::CanStepForward_54FEC0(s32 direction)
     return true;
 }
 
-MATCH_FUNC(0x550090)
+// 0x550090
 bool Char_B4::CanReachTile_550090(u8 xpos, u8 ypos)
 {
     bool bRes_1;
@@ -4612,7 +4612,7 @@ static inline Fix16 MaxAbsDistance_5504F0(Fix16& x1, Fix16& y1, const Fix16& x2,
 }
 
 // https://decomp.me/scratch/chZqY
-MATCH_FUNC(0x5504f0)
+// 0x5504f0
 void Char_B4::state_1_5504F0()
 {
     Ang16 saved_rotation;
@@ -5025,7 +5025,7 @@ LABEL_65:
 }
 
 // https://decomp.me/scratch/4eLOQ
-MATCH_FUNC(0x550f60)
+// 0x550f60
 Ang16 Char_B4::GetNextRotationToward_550F60(Ang16 inputAng)
 {
     u8 side_curr = field_40_rotation.ToAng4_405680();
@@ -5156,7 +5156,7 @@ Ang16 Char_B4::GetNextRotationToward_550F60(Ang16 inputAng)
     return result;
 }
 
-MATCH_FUNC(0x551350)
+// 0x551350
 bool Char_B4::CanStepInDirection_551350(Ang16 ang)
 {
     Fix16 old_x = field_80_sprite_ptr->field_14_xy.x;
@@ -5177,7 +5177,7 @@ bool Char_B4::CanStepInDirection_551350(Ang16 ang)
     return Char_B4::CanReachTile_550090(x_pos.ToInt(), y_pos.ToInt());
 }
 
-MATCH_FUNC(0x551400)
+// 0x551400
 void Char_B4::ChooseNextMovementTile_551400()
 {
     s32 saved_direction = gCharB4_PathDirection_623F44;
@@ -5311,7 +5311,7 @@ void Char_B4::ChooseNextMovementTile_551400()
     field_55 = 40;
 }
 
-MATCH_FUNC(0x5516f0)
+// 0x5516f0
 void Char_B4::SelectNextTileFast_5516F0()
 {
     s32 saved_direction = gCharB4_PathDirection_623F44;
@@ -5432,13 +5432,13 @@ void Char_B4::SelectNextTileFast_5516F0()
     }
 }
 
-MATCH_FUNC(0x5519F0)
+// 0x5519F0
 void Char_B4::state_1_5519F0()
 {
     Char_B4::state_1_5504F0();
 }
 
-MATCH_FUNC(0x551A00)
+// 0x551A00
 void Char_B4::state_3_551A00()
 {
     if (field_C_ped_state_2 == ped_state_2::ped2_following_a_car_4)
@@ -5496,7 +5496,7 @@ void Char_B4::state_3_551A00()
     }
 }
 
-MATCH_FUNC(0x551B30)
+// 0x551B30
 void Char_B4::state_4_551B30()
 {
     if (field_6C_animation_state != Char_Anim_state::Exiting_Car_7)
@@ -5526,7 +5526,7 @@ void Char_B4::state_4_551B30()
     }
 }
 
-MATCH_FUNC(0x551BB0)
+// 0x551BB0
 void Char_B4::state_5_551BB0()
 {
     if (field_C_ped_state_2 == ped_state_2::ped2_following_a_car_4)
@@ -5573,7 +5573,7 @@ void Char_B4::state_5_551BB0()
 }
 
 // https://decomp.me/scratch/qNjdM
-MATCH_FUNC(0x551CB0)
+// 0x551CB0
 void Char_B4::state_7_551CB0()
 {
     u8 block_type;
@@ -5745,10 +5745,9 @@ void Char_B4::state_7_551CB0()
 }
 
 // https://decomp.me/scratch/x9UcS
-WIP_FUNC(0x5520A0)
+// 0x5520A0
 void Char_B4::state_8_5520A0()
 {
-    WIP_IMPLEMENTED;
     Fix16 nudge_x;
     Fix16 nudge_y;
     Object_2C* field_184_pObj2C;
@@ -6220,13 +6219,13 @@ void Char_B4::state_8_5520A0()
 }
 
 // https://decomp.me/scratch/4c8aU
-MATCH_FUNC(0x552DE0)
+// 0x552DE0
 Fix16 CarPhysics_B0::vec_len_552DE0() // Weird location, I'm putting this here to preserve ordering
 {
     return field_40_linvel_1.GetLength_41E260();
 }
 
-MATCH_FUNC(0x552E90)
+// 0x552E90
 void Char_B4::state_9_552E90()
 {
     s32 rng;
@@ -6360,7 +6359,7 @@ void Char_B4::state_9_552E90()
     }
 }
 
-MATCH_FUNC(0x5532C0)
+// 0x5532C0
 bool Char_B4::IsNearTileCentre_5532C0()
 {
     s16 ret1 = 0;
@@ -6374,14 +6373,14 @@ bool Char_B4::IsNearTileCentre_5532C0()
     return false;
 }
 
-MATCH_FUNC(0x553330)
+// 0x553330
 char_type Char_B4::IsThreatToSearchingPed_553330()
 {
     return field_7C_pPed->IsThreatToSearchingPed_4661F0();
 }
 
 // 9.6f 0x497480
-MATCH_FUNC(0x553340)
+// 0x553340
 bool Char_B4::ShouldCollideWithSprite_553340(Sprite* pSprite)
 {
     Ped* pPed; // eax
@@ -6466,7 +6465,7 @@ bool Char_B4::ShouldCollideWithSprite_553340(Sprite* pSprite)
     return true;
 }
 
-MATCH_FUNC(0x5535B0)
+// 0x5535B0
 bool Char_B4::PhoneTouched_5535B0(Object_2C* p2c)
 {
     Ped* pPed = field_7C_pPed;
@@ -6480,7 +6479,7 @@ bool Char_B4::PhoneTouched_5535B0(Object_2C* p2c)
     }
 }
 
-MATCH_FUNC(0x553640)
+// 0x553640
 char_type Char_B4::OnObjectTouched_553640(Object_2C* p2c)
 {
     s8 conveyor_x;
@@ -6534,7 +6533,7 @@ char_type Char_B4::OnObjectTouched_553640(Object_2C* p2c)
     return 0;
 }
 
-MATCH_FUNC(0x5537F0)
+// 0x5537F0
 char_type Char_B4::HandlePedObjectHit_5537F0(Object_2C* p2c)
 {
     const u8 idx = p2c->get_field_26_420FF0();
@@ -6580,7 +6579,7 @@ static inline Fix16 GetLength_inline_5538A0(Fix16_Point& p)
     }
 }
 
-MATCH_FUNC(0x5538A0)
+// 0x5538A0
 #define SPAWN_KNOCKDOWN_OBJ(speed) \
     gObject_5C_6F8F84->NewMovingObj_52A240(110, \
                                          this->field_80_sprite_ptr->field_14_xy.x, \
@@ -6748,7 +6747,7 @@ void Char_B4::HandleCarImpact_5538A0(Car_BC* pCar, u8 bUnknown, Fix16 x, Fix16 y
 }
 #undef SPAWN_KNOCKDOWN_OBJ
 
-MATCH_FUNC(0x553E00)
+// 0x553E00
 void Char_B4::HandleGenericImpact_553E00(Ang16 ang, Fix16 impact_x, Fix16 impact_z, char_type impact_type)
 {
 
@@ -6831,20 +6830,20 @@ void Char_B4::HandleGenericImpact_553E00(Ang16 ang, Fix16 impact_x, Fix16 impact
     }
 }
 
-MATCH_FUNC(0x553F90)
-void __stdcall ResetCharStatics_553F90()
+// 0x553F90
+void ResetCharStatics_553F90()
 {
     gCharB4_UpdateCounter_6FDB48 = 0;
     byte_6FDB49 = 0;
     gB4_id_6FDB4C = 0;
 }
 
-EXPORT void Char_B4::nullsub_28()
+void Char_B4::nullsub_28()
 {
     NOT_IMPLEMENTED;
 }
 
-//STUB_FUNC(0x5519f0)
+// 0x5519f0
 //void j_Char_B4::state_1_5504F0()
 //{
 //    NOT_IMPLEMENTED;

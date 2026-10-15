@@ -42,7 +42,7 @@ static const u16 kExtendedWesternCharMap[128] = {
     140, 141, 0,   173, 142, 143, 144, 0,   145, 0,   0,   146, 147, 148, 149, 0, 0,   150, 151, 152, 153, 0,   154, 0,   155, 156,
     157, 158, 159, 160, 161, 162, 163, 164, 0,   174, 165, 166, 167, 0,   168, 0, 0,   169, 170, 171, 172, 0,   0,   0};
 
-MATCH_FUNC(0x5B58D0)
+// 0x5B58D0
 u16 text_0x14::RemapExtendedChar_5B58D0(u16 ch)
 {
     u16 result = ch;
@@ -64,7 +64,7 @@ u16 text_0x14::RemapExtendedChar_5B58D0(u16 ch)
     return result;
 }
 
-MATCH_FUNC(0x5B5910)
+// 0x5B5910
 void text_0x14::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
 {
     if (field_10_lang_code != 'j')
@@ -73,7 +73,7 @@ void text_0x14::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
     }
 }
 
-MATCH_FUNC(0x5B5930)
+// 0x5B5930
 void text_0x14::RemapExtendedChars_5B5930(wchar_t* pStr)
 {
     for (wchar_t* pStrIter = pStr; *pStrIter; ++pStrIter)
@@ -82,7 +82,7 @@ void text_0x14::RemapExtendedChars_5B5930(wchar_t* pStr)
     }
 }
 
-MATCH_FUNC(0x5B5960)
+// 0x5B5960
 void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
 {
 #if defined(GTA2_PORT_64BIT)
@@ -119,7 +119,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
 #endif
 }
 
-MATCH_FUNC(0x5B59B0)
+// 0x5B59B0
 void text_0x14::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
 {
     text_0xC* ptKeyIter = field_0_tKey.field_0_tKey;
@@ -133,7 +133,7 @@ void text_0x14::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
     }
 }
 
-MATCH_FUNC(0x5B59E0)
+// 0x5B59E0
 bool text_0x14::TKeyFind_5B59E0(const char_type* pIdStr)
 {
     return bsearch(pIdStr, // search key
@@ -145,15 +145,15 @@ bool text_0x14::TKeyFind_5B59E0(const char_type* pIdStr)
         false;
 }
 
-MATCH_FUNC(0x5B5A10)
-s32 __cdecl text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
+// 0x5B5A10
+s32 text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
 {
     const char_type* pIdStr = (const char_type*)a;
     const text_0xC* a2 = (const text_0xC*)b;
     return strcmp(pIdStr, (const char_type*)&a2->field_4_pKey); // TODO: ???
 }
 
-MATCH_FUNC(0x5B5A50)
+// 0x5B5A50
 wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
 {
     text_0xC* pFound = (text_0xC*)bsearch(pIdStr, // key
@@ -171,7 +171,7 @@ wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
     }
 }
 
-MATCH_FUNC(0x5B5A80)
+// 0x5B5A80
 void text_tdat::TDAT_Load_5B5A80(u32 size)
 {
     field_4_len = size / sizeof(wchar_t);
@@ -185,7 +185,7 @@ void text_tdat::TDAT_Load_5B5A80(u32 size)
     File::Global_Read_4A71C0(field_0_data, size);
 }
 
-MATCH_FUNC(0x5B5AD0)
+// 0x5B5AD0
 u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
 {
     // Both tables are indexed with the raw char (0x80-0xFF), so the 'g'/'i'/'r'/'s' lookup reads
@@ -228,7 +228,7 @@ u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
     return ch;
 }
 
-MATCH_FUNC(0x5B5B80)
+// 0x5B5B80
 wchar_t* text_0x14::StrToUpper_5B5B80(wchar_t* pWideStr)
 {
     for (wchar_t* pStrIter = pWideStr; *pStrIter; ++pStrIter)
@@ -239,14 +239,14 @@ wchar_t* text_0x14::StrToUpper_5B5B80(wchar_t* pWideStr)
 }
 
 // 9.6f 0x4539D0, file-local copy of GetCharWidth_4539D0 (Draw.hpp): including Draw.hpp changes this file's static init code
-static inline s32 __stdcall GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
+static inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
 {
     return (u16)gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
 }
 
 // https://decomp.me/scratch/JzIDq
-MATCH_FUNC(0x5B5BC0)
-s32 __stdcall text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
+// 0x5B5BC0
+s32 text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
 {
     const wchar_t* pSrcStrCopy = pSrcStr;
     wchar_t* pDestStrCopy = pDestStr;
@@ -308,7 +308,7 @@ s32 __stdcall text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr
     return num_of_lines;
 }
 
-MATCH_FUNC(0x5B5D10)
+// 0x5B5D10
 char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
 {
     const wchar_t* pSrc = pText;
@@ -341,8 +341,8 @@ char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
     return tmpWide2AsciiStr_70462C;
 }
 
-MATCH_FUNC(0x5B5DF0)
-wchar_t* __stdcall text_0x14::Ascii2Wide_5B5DF0(char_type* pStr)
+// 0x5B5DF0
+wchar_t* text_0x14::Ascii2Wide_5B5DF0(char_type* pStr)
 {
     // movsx vs movzx caused by unsigned vs s8
     wchar_t* pDst = tmpAscii2WideStr_70488C;
@@ -358,7 +358,7 @@ wchar_t* __stdcall text_0x14::Ascii2Wide_5B5DF0(char_type* pStr)
     return tmpAscii2WideStr_70488C;
 }
 
-MATCH_FUNC(0x5B5E20)
+// 0x5B5E20
 void text_0x14::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
 {
     if (!strncmp(chunk_type, "TKEY", 4u))
@@ -375,7 +375,7 @@ void text_0x14::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
     }
 }
 
-MATCH_FUNC(0x5B5E90)
+// 0x5B5E90
 void text_0x14::Load_5B5E90()
 {
     char_type expected_code[5];
@@ -406,19 +406,19 @@ void text_0x14::Load_5B5E90()
     TDAT_Offsets2Strings_5B59B0(field_8_tDat.field_0_data);
 }
 
-MATCH_FUNC(0x5B5F90)
+// 0x5B5F90
 wchar_t* text_0x14::Find_5B5F90(const char_type* pIdStr)
 {
     return TKeyFind_5B5A50(pIdStr);
 }
 
-MATCH_FUNC(0x5B5FA0)
+// 0x5B5FA0
 bool text_0x14::KeyExists_5B5FA0(const char_type* pIdStr)
 {
     return TKeyFind_5B59E0(pIdStr);
 }
 
-MATCH_FUNC(0x5B5FB0)
+// 0x5B5FB0
 text_0x14::text_0x14()
 {
     gRegistry_6FF968.Get_Option_586F00("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
@@ -435,7 +435,7 @@ text_0x14::text_0x14()
 }
 
 // Only gets its EH frame when <new> isn't included, see Globals.hpp
-MATCH_FUNC(0x5B6050)
+// 0x5B6050
 text_0x14::~text_0x14()
 {
 }

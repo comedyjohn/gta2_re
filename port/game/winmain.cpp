@@ -365,22 +365,22 @@ DEFINE_GLOBAL(u8, bInputsPending_6F5760, 0x6F5760);
 DEFINE_GLOBAL(u8, bForceGameUpdate_6F5880, 0x6F5880);
 
 // TODO: move
-MATCH_FUNC(0x4DA820)
-EXPORT void ForceGameUpdate_4DA820()
+// 0x4DA820
+void ForceGameUpdate_4DA820()
 {
     bForceGameUpdate_6F5880 = 1;
 }
 
 // TODO: Other missing stubs here
-MATCH_FUNC(0x4DA830)
-EXPORT void __stdcall ResetFrameTimer_4DA830()
+// 0x4DA830
+void ResetFrameTimer_4DA830()
 {
     gMatchStartTime_6F5A28 = timeGetTime();
     gFramesSinceDraw_6F58D8 = 0;
 }
 
 // TODO: move
-MATCH_FUNC(0x5D8E00)
+// 0x5D8E00
 void UpdateGameScreenSize_5D8E00()
 {
     if (gGame_0x40_67E008)
@@ -407,8 +407,8 @@ void UpdateGameScreenSize_5D8E00()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D8EB0)
-EXPORT void __stdcall Init_FrameRateLightAndUnknown_5D8EB0()
+// 0x5D8EB0
+void Init_FrameRateLightAndUnknown_5D8EB0()
 {
     if (bStartNetworkGame_7081F0)
     {
@@ -441,8 +441,8 @@ EXPORT void __stdcall Init_FrameRateLightAndUnknown_5D8EB0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D7C60)
-EXPORT void __stdcall Input_MouseAcquire_5D7C60()
+// 0x5D7C60
+void Input_MouseAcquire_5D7C60()
 {
     if (gMouseDevice_706C60)
     {
@@ -451,8 +451,8 @@ EXPORT void __stdcall Input_MouseAcquire_5D7C60()
 }
 
 // todo: move
-MATCH_FUNC(0x5D7C70)
-EXPORT void __stdcall Input_ReleaseMouse_5D7C70()
+// 0x5D7C70
+void Input_ReleaseMouse_5D7C70()
 {
     if (gMouseDevice_706C60)
     {
@@ -463,8 +463,8 @@ EXPORT void __stdcall Input_ReleaseMouse_5D7C70()
 }
 
 // todo: move
-MATCH_FUNC(0x5D94F0)
-EXPORT void __stdcall HideCursor_5D94F0()
+// 0x5D94F0
+void HideCursor_5D94F0()
 {
     do
     {
@@ -473,8 +473,8 @@ EXPORT void __stdcall HideCursor_5D94F0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D7BF0)
-EXPORT char_type Input_InitMouse_5D7BF0()
+// 0x5D7BF0
+char_type Input_InitMouse_5D7BF0()
 {
     // TODO: using the HR error checking macros doesn't match here, what did they do??
     if (!gpDInput_67B804 || gMouseDevice_706C60 || gpDInput_67B804->CreateDevice(GUID_SysMouse, &gMouseDevice_706C60, nullptr) ||
@@ -487,8 +487,8 @@ EXPORT char_type Input_InitMouse_5D7BF0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D93A0)
-EXPORT void __stdcall SetFullScreenMode_5D93A0()
+// 0x5D93A0
+void SetFullScreenMode_5D93A0()
 {
     bool bModeChanged = false;
     s32 bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, full_width_706B5C, full_height_706798, 16);
@@ -537,14 +537,14 @@ EXPORT void __stdcall SetFullScreenMode_5D93A0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D92C0)
-EXPORT char_type IsWindowedModeAvailable_5D92C0()
+// 0x5D92C0
+char_type IsWindowedModeAvailable_5D92C0()
 {
     return bWindowedModeAvailable_706C5C;
 }
 
-MATCH_FUNC(0x5D9660)
-EXPORT void __stdcall ShowCursor_5D9660()
+// 0x5D9660
+void ShowCursor_5D9660()
 {
     s32 refCount;
     do
@@ -554,9 +554,9 @@ EXPORT void __stdcall ShowCursor_5D9660()
 }
 
 // todo: move
-// __stdcall, not __cdecl: see GetLayout_4D6000 (the `push 0x316` goes before the rect loads)
-MATCH_FUNC(0x5D9510)
-EXPORT char_type __stdcall SetWindowedMode_5D9510()
+// , not : see GetLayout_4D6000 (the `push 0x316` goes before the rect loads)
+// 0x5D9510
+char_type SetWindowedMode_5D9510()
 {
 
     if (!IsWindowedModeAvailable_5D92C0())
@@ -606,8 +606,8 @@ EXPORT char_type __stdcall SetWindowedMode_5D9510()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D8F70)
-EXPORT s32 ReadScreenSettings_5D8F70()
+// 0x5D8F70
+s32 ReadScreenSettings_5D8F70()
 {
     const u32 full_width_old = full_width_706B5C;
     const u32 window_width_old = window_width_706630;
@@ -661,8 +661,8 @@ EXPORT s32 ReadScreenSettings_5D8F70()
 }
 
 // todo: move
-MATCH_FUNC(0x5D98E0)
-EXPORT void __stdcall SetSavedGamma_5D98E0()
+// 0x5D98E0
+void SetSavedGamma_5D98E0()
 {
     DWORD Screen_Setting_5870D0 = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 0xAu);
     if (SetGamma_5D9910(Screen_Setting_5870D0))
@@ -672,8 +672,8 @@ EXPORT void __stdcall SetSavedGamma_5D98E0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D92D0)
-EXPORT void __stdcall SetVideoModeFromSettings_5D92D0()
+// 0x5D92D0
+void SetVideoModeFromSettings_5D92D0()
 {
     Init_FrameRateLightAndUnknown_5D8EB0();
     ReadScreenSettings_5D8F70();
@@ -714,14 +714,14 @@ EXPORT void __stdcall SetVideoModeFromSettings_5D92D0()
     SetSavedGamma_5D98E0();
 }
 
-MATCH_FUNC(0x5D9860)
-EXPORT s32 jGBH_Graphics_Free_5D9860()
+// 0x5D9860
+s32 jGBH_Graphics_Free_5D9860()
 {
     return GBH_Graphics_Free_5EA640();
 }
 
-MATCH_FUNC(0x5D9830)
-EXPORT void __stdcall GBH_Graphis_DMA_Video_Free_5D9830()
+// 0x5D9830
+void GBH_Graphis_DMA_Video_Free_5D9830()
 {
     jGBH_Graphics_Free_5D9860();
     if (gVidSys_7071D0)
@@ -733,16 +733,16 @@ EXPORT void __stdcall GBH_Graphis_DMA_Video_Free_5D9830()
 }
 
 // todo: move
-MATCH_FUNC(0x5D9290)
-EXPORT bool Vid_FindDevice_5D9290()
+// 0x5D9290
+bool Vid_FindDevice_5D9290()
 {
     SDevice* pDevice = pVid_FindDevice(gVidSys_7071D0, gVideodevice_70694C);
     return pDevice && (pDevice->field_4_flags & 1) == 1;
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D9800)
-EXPORT s32 GetHwndDCDeviceCaps_5D9800()
+// 0x5D9800
+s32 GetHwndDCDeviceCaps_5D9800()
 {
     HDC hdc = GetDC(gHwnd_707F04);
     s32 deviceCaps = GetDeviceCaps(hdc, BITSPIXEL);
@@ -751,8 +751,8 @@ EXPORT s32 GetHwndDCDeviceCaps_5D9800()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D97C0)
-EXPORT void __stdcall GBH_GraphicsInit_5D97C0()
+// 0x5D97C0
+void GBH_GraphicsInit_5D97C0()
 {
     if (GBH_GraphicsLoad_5EB680(gRenderDllName_7067F0, gVidSys_7071D0))
     {
@@ -761,8 +761,8 @@ EXPORT void __stdcall GBH_GraphicsInit_5D97C0()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D96C0)
-EXPORT void InitVideo_5D96C0()
+// 0x5D96C0
+void InitVideo_5D96C0()
 {
     s32 ddraw_flags = 0;
     if (DMA_Video_LoadDll_5EB970(gVideoDllName_706654))
@@ -814,8 +814,8 @@ EXPORT void InitVideo_5D96C0()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA440)
-EXPORT void __stdcall Init_keybrd_jolly_and_sound_4DA440()
+// 0x4DA440
+void Init_keybrd_jolly_and_sound_4DA440()
 {
     keybrd_0x204::create_4D5F50();
     PlyDat_2BC0::Create_56C2C0();
@@ -830,8 +830,8 @@ EXPORT void __stdcall Init_keybrd_jolly_and_sound_4DA440()
     }
 }
 
-MATCH_FUNC(0x4DB170)
-void __stdcall ClearDebugFlags_4DB170()
+// 0x4DB170
+void ClearDebugFlags_4DB170()
 {
     bShow_all_arrows_67D6E7 = false;
     bDo_kill_phones_on_answer_67D6E8 = false;
@@ -906,8 +906,8 @@ void __stdcall ClearDebugFlags_4DB170()
     gCheatUnlimitedFlameThrower_67D6CC = false;
 }
 
-MATCH_FUNC(0x4DB070)
-EXPORT void __stdcall ShowPlayerLeftMessage_4DB070(u8 idx)
+// 0x4DB070
+void ShowPlayerLeftMessage_4DB070(u8 idx)
 {
     Player* pPlayer = gGame_0x40_67E008->GetPlayer_4219E0(idx);
     pPlayer->Disconnect_568730();
@@ -915,8 +915,8 @@ EXPORT void __stdcall ShowPlayerLeftMessage_4DB070(u8 idx)
     gHud_2B00_706620->field_12F0_mp_message.ShowText_5D5730(tmpBuff_67BD9C);
 }
 
-MATCH_FUNC(0x4DB0D0)
-void __stdcall ExitGameCallback_4DB0D0(Game_0x40* pGame, int reason)
+// 0x4DB0D0
+void ExitGameCallback_4DB0D0(Game_0x40* pGame, int reason)
 {
     char Buffer[260];
     sprintf(Buffer, "(ExitGameCallback)Called with reason - %d", reason);
@@ -926,8 +926,8 @@ void __stdcall ExitGameCallback_4DB0D0(Game_0x40* pGame, int reason)
 
 // todo move to another file for ordering
 // https://decomp.me/scratch/VazoB
-MATCH_FUNC(0x4DA4D0)
-EXPORT void __stdcall InitializeGame_4DA4D0()
+// 0x4DA4D0
+void InitializeGame_4DA4D0()
 {
     if (bReplayMode_6F5B71)
     {
@@ -992,16 +992,16 @@ EXPORT void __stdcall InitializeGame_4DA4D0()
 }
 
 // todo: move
-MATCH_FUNC(0x5D9680)
-EXPORT void OnVideoModeChanged_5D9680()
+// 0x5D9680
+void OnVideoModeChanged_5D9680()
 {
     ConvertColourBanks_5D7CB0();
     UpdateGameScreenSize_5D8E00();
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D9690)
-EXPORT void __stdcall ApplyChangedScreenSettings_5D9690()
+// 0x5D9690
+void ApplyChangedScreenSettings_5D9690()
 {
     Init_FrameRateLightAndUnknown_5D8EB0();
     if ((u8)ReadScreenSettings_5D8F70() || bVideoModeResetPending_706C5D)
@@ -1014,8 +1014,8 @@ EXPORT void __stdcall ApplyChangedScreenSettings_5D9690()
 }
 
 // TODO: order
-MATCH_FUNC(0x4DA780)
-EXPORT bool ExecuteGame_4DA780()
+// 0x4DA780
+bool ExecuteGame_4DA780()
 {
     bool exit_requested = gGame_0x40_67E008->ExecuteGame_4B9640();
     if (gFpsCounter_7055D4)
@@ -1025,8 +1025,8 @@ EXPORT bool ExecuteGame_4DA780()
     return exit_requested;
 }
 
-MATCH_FUNC(0x4DA7B0)
-void __stdcall Draw_4DA7B0()
+// 0x4DA7B0
+void Draw_4DA7B0()
 {
     gGame_0x40_67E008->Draw_4B92D0();
     pVid_FlipBuffers(gVidSys_7071D0);
@@ -1041,16 +1041,16 @@ DEFINE_GLOBAL(Network_PlayerInputs_0x30, gNetInputsHistory2_6F5798, 0x6F5798);
 u8 gNetPlayerDropped_6F8470[6];//DEFINE_GLOBAL_ARRAY(u8, gNetPlayerDropped_6F8470, 6, 0x6F8470);  // global crashing standalone
 
 // Re-sends our inputs of a previous frame to one player.
-MATCH_FUNC(0x4DA9B0)
-EXPORT void __stdcall Net_4DA9B0(Network_InputData_0x8* pInputs, s32 delayed_ticks, u8 player_idx)
+// 0x4DA9B0
+void Net_4DA9B0(Network_InputData_0x8* pInputs, s32 delayed_ticks, u8 player_idx)
 {
     gInputSendData_6F5B18.field_0_data = pInputs;
     gInputSendData_6F5B18.field_4_len = bDo_sync_check_67D6C1 ? sizeof(Network_InputData_0x8) : sizeof(u32);
     gNetPlay_7071E8.SendToPlayer_521630(&gInputSendData_6F5B18, player_idx, delayed_ticks);
 }
 
-MATCH_FUNC(0x4DA9F0)
-EXPORT void Net_Receive_Players_Inputs_4DA9F0()
+// 0x4DA9F0
+void Net_Receive_Players_Inputs_4DA9F0()
 {
     s32 retries = 0;
     s32 max_retries = bRecordStartTime_6F593C ? 25 : 6;
@@ -1158,8 +1158,8 @@ EXPORT void Net_Receive_Players_Inputs_4DA9F0()
 }
 
 // Sum of all the bytes of a file
-MATCH_FUNC(0x4DB120)
-EXPORT s32 __stdcall FileByteSum_4DB120(FILE* hFile)
+// 0x4DB120
+s32 FileByteSum_4DB120(FILE* hFile)
 {
     s32 sum = 0;
     u8 c;
@@ -1171,8 +1171,8 @@ EXPORT s32 __stdcall FileByteSum_4DB120(FILE* hFile)
 }
 
 // Fills in the sync check data that is compared between players at the start of a network game
-MATCH_FUNC(0x4DB2E0)
-EXPORT void __stdcall MakeInitialSyncData_4DB2E0(u8* pSyncData)
+// 0x4DB2E0
+void MakeInitialSyncData_4DB2E0(u8* pSyncData)
 {
     SyncCheckData_1F* pData = (SyncCheckData_1F*)pSyncData;
     struct _stat st;
@@ -1221,8 +1221,8 @@ EXPORT void __stdcall MakeInitialSyncData_4DB2E0(u8* pSyncData)
     pData->field_1E_player_idx = gNetworkPlayerIdx_6F56C8;
 }
 
-MATCH_FUNC(0x4DB410)
-EXPORT void __stdcall FatalErrorMsg_4DB410(const char_type* pMsg)
+// 0x4DB410
+void FatalErrorMsg_4DB410(const char_type* pMsg)
 {
     Shutdown_4DA740();
     GBH_Graphis_DMA_Video_Free_5D9830();
@@ -1232,8 +1232,8 @@ EXPORT void __stdcall FatalErrorMsg_4DB410(const char_type* pMsg)
 }
 
 // Quits with an error when another player's sync check data differs from ours
-MATCH_FUNC(0x4DB440)
-EXPORT void __stdcall CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
+// 0x4DB440
+void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
 {
     SyncCheckData_1F* pLocal = (SyncCheckData_1F*)pLocalSyncData;
     SyncCheckData_1F* pRemote = (SyncCheckData_1F*)pRemoteSyncData;
@@ -1277,8 +1277,8 @@ EXPORT void __stdcall CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemot
     }
 }
 
-MATCH_FUNC(0x4DACB0)
-EXPORT void Net_Send_Our_Inputs_4DACB0()
+// 0x4DACB0
+void Net_Send_Our_Inputs_4DACB0()
 {
     if (gNetPlay_7071E8.GetPlayerCount_461DA0() > 1)
     {
@@ -1299,8 +1299,8 @@ EXPORT void Net_Send_Our_Inputs_4DACB0()
     }
 }
 
-MATCH_FUNC(0x4DAD50)
-EXPORT void Net_Set_Local_Player_Inputs_4DAD50()
+// 0x4DAD50
+void Net_Set_Local_Player_Inputs_4DAD50()
 {
     for (u32 player_idx = 0; player_idx < MAX_PLAYERS; player_idx++)
     {
@@ -1313,8 +1313,8 @@ EXPORT void Net_Set_Local_Player_Inputs_4DAD50()
     }
 }
 
-MATCH_FUNC(0x4DADA0)
-EXPORT void TagGameHudUpdate_4DADA0()
+// 0x4DADA0
+void TagGameHudUpdate_4DADA0()
 {
     if (gNetTimeLimitEnabled_6F58A4)
     {
@@ -1389,8 +1389,8 @@ EXPORT void TagGameHudUpdate_4DADA0()
     }
 }
 
-MATCH_FUNC(0x4DAF30)
-EXPORT void __stdcall do_network_and_local_inputs_4DAF30()
+// 0x4DAF30
+void do_network_and_local_inputs_4DAF30()
 {
     if (bStartNetworkGame_7081F0)
     {
@@ -1456,8 +1456,8 @@ EXPORT void __stdcall do_network_and_local_inputs_4DAF30()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA850)
-EXPORT bool RunGameFrame_4DA850()
+// 0x4DA850
+bool RunGameFrame_4DA850()
 {
     u8 frame_due = 0;
     bool exit_requested = false;
@@ -1534,8 +1534,8 @@ GUID IID_DirectMusic = {1667997456u, 3197u, 4561u, {149u, 178u, 0u, 32u, 175u, 2
 GUID IDD_IDirectMusic = {1698042202u, 31533u, 4562u, {186u, 24u, 0u, 0u, 248u, 117u, 172u, 18u}};
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4A0650)
-EXPORT void __stdcall GetDirectMusicVer_4A0650()
+// 0x4A0650
+void GetDirectMusicVer_4A0650()
 {
     // todo
     HMODULE hDMusic; // esi
@@ -1557,8 +1557,8 @@ EXPORT void __stdcall GetDirectMusicVer_4A0650()
 GUID IID_IDirectDrawSurface4_ = {0x0B2B8630, 0xAD35, 0x11D0, 0x8E, 0xA6, 0x00, 0x60, 0x97, 0x97, 0xEA, 0x5B};
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4C4EC0)
-EXPORT void __stdcall GetDirectXVersion_4C4EC0(u32* pDXVer, u32* osKind)
+// 0x4C4EC0
+void GetDirectXVersion_4C4EC0(u32* pDXVer, u32* osKind)
 {
     // The original probes DirectDraw, DirectInput and DirectMusic for the version. The port has its
     // own renderer, input and sound (port/platform/), which stand in for the DirectX 6.1 the game asks
@@ -1570,8 +1570,8 @@ EXPORT void __stdcall GetDirectXVersion_4C4EC0(u32* pDXVer, u32* osKind)
 const char_type* kDefaultDllNames_626A00[2] = {"d3ddll.dll", "dmavideo.dll"};
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D90E0)
-EXPORT void __stdcall Video_Render_Inits_5D90E0()
+// 0x5D90E0
+void Video_Render_Inits_5D90E0()
 {
     gRenderdevice_706998 = gRegistry_6FF968.Get_Screen_Setting_5870D0("renderdevice", 1);
     gVideodevice_70694C = gRegistry_6FF968.Get_Screen_Setting_5870D0("videodevice", 1);
@@ -1598,15 +1598,15 @@ EXPORT void __stdcall Video_Render_Inits_5D90E0()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D9280)
-EXPORT bool IsFullScreen_5D9280()
+// 0x5D9280
+bool IsFullScreen_5D9280()
 {
     return gStartMode_626A0C == 1;
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D8E70)
-EXPORT void __stdcall UpdateWinXY_5D8E70()
+// 0x5D8E70
+void UpdateWinXY_5D8E70()
 {
     if (!IsFullScreen_5D9280())
     {
@@ -1618,15 +1618,15 @@ EXPORT void __stdcall UpdateWinXY_5D8E70()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x5D7CA0)
-EXPORT void __stdcall j_gbh_init_5D7CA0()
+// 0x5D7CA0
+void j_gbh_init_5D7CA0()
 {
     pgbh_Init(0);
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA700)
-EXPORT void __stdcall CleanUpInputAndOthers_4DA700()
+// 0x4DA700
+void CleanUpInputAndOthers_4DA700()
 {
     gInputRecorder_67F8B0.Shutdown_4CEA00();
     if (gGame_0x40_67E008)
@@ -1637,8 +1637,8 @@ EXPORT void __stdcall CleanUpInputAndOthers_4DA700()
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA390)
-EXPORT s32 __stdcall SkipWhiteSpace_4DA390(char_type* pStr)
+// 0x4DA390
+s32 SkipWhiteSpace_4DA390(char_type* pStr)
 {
     char* pCur = pStr;
     s32 result = 0;
@@ -1685,8 +1685,8 @@ EXPORT s32 __stdcall SkipWhiteSpace_4DA390(char_type* pStr)
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA3F0)
-EXPORT char_type* __stdcall SkipToNextToken_4DA3F0(char_type* a1)
+// 0x4DA3F0
+char_type* SkipToNextToken_4DA3F0(char_type* a1)
 {
     char_type* result = a1;
     for (char_type i = *a1; i; i = *++result)
@@ -1719,8 +1719,8 @@ EXPORT char_type* __stdcall SkipToNextToken_4DA3F0(char_type* a1)
 }
 
 // todo move to another file for ordering
-MATCH_FUNC(0x4DA320)
-EXPORT void __stdcall ParseCommandLine_4DA320(char_type* pCommandLine)
+// 0x4DA320
+void ParseCommandLine_4DA320(char_type* pCommandLine)
 {
     char* pIter = pCommandLine;
     s32 len = SkipWhiteSpace_4DA390(pCommandLine);
@@ -1757,8 +1757,8 @@ EXPORT void __stdcall ParseCommandLine_4DA320(char_type* pCommandLine)
 // The original passes an uninitialised lParam to PostMessageA, keep it for matching
 #pragma warning(push)
 #pragma warning(disable : 4700)
-MATCH_FUNC(0x5E4DE0)
-EXPORT void Start_GTA2Manager_5E4DE0()
+// 0x5E4DE0
+void Start_GTA2Manager_5E4DE0()
 {
     ShowWindow(gHwnd_707F04, SW_SHOWMINNOACTIVE);
     HANDLE hMutex = OpenMutexA(MUTEX_ALL_ACCESS, 0, "GBH_BOB_MUTEX");
@@ -1791,23 +1791,23 @@ EXPORT void Start_GTA2Manager_5E4DE0()
 }
 #pragma warning(pop)
 
-MATCH_FUNC(0x5E4EC0)
-EXPORT void __stdcall ErrorMsgBox_5E4EC0(LPCSTR lpText)
+// 0x5E4EC0
+void ErrorMsgBox_5E4EC0(LPCSTR lpText)
 {
     MessageBoxA(gHwnd_707F04, lpText, "Error!", MB_OK);
 }
 
 // todo: move
-MATCH_FUNC(0x5D9230)
-EXPORT void __stdcall SetStartMode_5D9230(s32 startMode)
+// 0x5D9230
+void SetStartMode_5D9230(s32 startMode)
 {
     gStartMode_626A0C = startMode;
     gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", startMode);
 }
 
 // todo: move
-MATCH_FUNC(0x498D10)
-EXPORT void Input_Read_498D10()
+// 0x498D10
+void Input_Read_498D10()
 {
     if (gInputDevices_67B990)
     {
@@ -1816,15 +1816,15 @@ EXPORT void Input_Read_498D10()
 }
 
 // todo: move
-MATCH_FUNC(0x5D9250)
-EXPORT void __stdcall ToggleStartMode_5D9250()
+// 0x5D9250
+void ToggleStartMode_5D9250()
 {
     gStartMode_626A0C = (gStartMode_626A0C != 1);
     gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", gStartMode_626A0C);
 }
 
-MATCH_FUNC(0x5E4EE0)
-EXPORT LRESULT __stdcall WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+// 0x5E4EE0
+LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
     BYTE bSetFocusInput;
     BYTE bKillFocusInput;
@@ -2063,8 +2063,8 @@ EXPORT LRESULT __stdcall WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, L
     return DefWindowProcA(hWnd, Msg, wParam, lParam);
 }
 
-MATCH_FUNC(0x5E53F0)
-s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, s32 nShowCmd)
+// 0x5E53F0
+s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, s32 nShowCmd)
 {
     //hInstance_ = hInstance;
     gHInstance_708220 = hInstance;
@@ -2353,8 +2353,8 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
 }
 
 // TODO: order
-MATCH_FUNC(0x4DA740)
-EXPORT void __stdcall Shutdown_4DA740()
+// 0x4DA740
+void Shutdown_4DA740()
 {
     if (!bDestroyed_6F5B70)
     {
@@ -2373,8 +2373,8 @@ EXPORT void __stdcall Shutdown_4DA740()
 
 NetworkGameSettings gNetworkGameSettings_707098;//DEFINE_GLOBAL(NetworkGameSettings, gNetworkGameSettings_707098, 0x707098);  // global crashing standalone
 
-MATCH_FUNC(0x5E5A30)
-EXPORT char_type __stdcall Start_NetworkGame_5E5A30(HINSTANCE hInstance)
+// 0x5E5A30
+char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
 {
     char_type bRet = 1;
     gGameSession_67E8E0.init_4C5AF0();
@@ -2464,8 +2464,8 @@ EXPORT char_type __stdcall Start_NetworkGame_5E5A30(HINSTANCE hInstance)
 }
 
 
-MATCH_FUNC(0x5E5D60)
-EXPORT void __stdcall GetGTA2Version_5E5D60(s32* pVerMinor, s32* pVerMajor)
+// 0x5E5D60
+void GetGTA2Version_5E5D60(s32* pVerMinor, s32* pVerMajor)
 {
     DWORD dwHandle;
     DWORD dwSize = GetFileVersionInfoSizeA("GTA2.EXE", &dwHandle);

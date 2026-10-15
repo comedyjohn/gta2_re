@@ -18,7 +18,7 @@ struct LightIntensityRadius
     }
 
     // Out-of-line copy of SetRadius_463F10
-    EXPORT void SetRadius_5C5CD0(Fix16 radius);
+    void SetRadius_5C5CD0(Fix16 radius);
     s32 flag;
 };
 
@@ -26,13 +26,13 @@ struct LightIntensityRadius
 class Light_28
 {
   public:
-    EXPORT Light_28();
+    Light_28();
 
-    EXPORT ~Light_28();
+    ~Light_28();
 
-    EXPORT void AddToGrid_4D6D70();
+    void AddToGrid_4D6D70();
 
-    EXPORT Light_28* RemoveFromGrid_4D6DC0();
+    Light_28* RemoveFromGrid_4D6DC0();
 
     // 0x45B330
     s32 PoolUpdate()
@@ -123,9 +123,9 @@ class Light_28
 class LightGrid
 {
   public:
-    EXPORT static void __stdcall AllocGrid_4D6E00();
+    static void AllocGrid_4D6E00();
 
-    EXPORT static void FreeGrid_4D6E30();
+    static void FreeGrid_4D6E30();
 
-    EXPORT static void __stdcall SubmitLightsInArea_4D6E50(s32 min_x, s32 min_y, s32 max_x, s32 max_y);
+    static void SubmitLightsInArea_4D6E50(s32 min_x, s32 min_y, s32 max_x, s32 max_y);
 };

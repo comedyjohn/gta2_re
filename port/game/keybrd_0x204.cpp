@@ -10,14 +10,14 @@ DEFINE_GLOBAL(keybrd_0x204*, gKeybrd_0x204_6F52F4, 0x6F52F4);
 
 char kTwoSpacesStr_620D2C[4] = {' ', ' ', 0}; // GetLayout_4D6000 copies 4 bytes
 
-MATCH_FUNC(0x4D5D70)
+// 0x4D5D70
 keybrd_0x204::keybrd_0x204()
 {
     field_200_keyBoardLayout = 0;
     memset(field_0_keys, 0, sizeof(field_0_keys));
 }
 
-MATCH_FUNC(0x4D5D90)
+// 0x4D5D90
 keybrd_0x204::~keybrd_0x204()
 {
 }
@@ -28,7 +28,7 @@ static inline bool is_line_break_or_space(wchar_t letter)
     return letter == '\n' || letter == ' ';
 }
 
-MATCH_FUNC(0x4D5DA0)
+// 0x4D5DA0
 void keybrd_0x204::ReadCfg_4D5DA0(FILE* Stream, wchar_t* pOut)
 {
     u8 i = 0;
@@ -45,7 +45,7 @@ void keybrd_0x204::ReadCfg_4D5DA0(FILE* Stream, wchar_t* pOut)
 }
 
 
-MATCH_FUNC(0x4D5E00)
+// 0x4D5E00
 void keybrd_0x204::LoadKbCfg_4D5E00()
 {
     field_200_keyBoardLayout = 0;
@@ -117,15 +117,15 @@ void keybrd_0x204::LoadKbCfg_4D5E00()
     fclose(hConfigFile);
 }
 
-MATCH_FUNC(0x4D5F40)
+// 0x4D5F40
 wchar_t keybrd_0x204::GetKey_4D5F40(u16 key_idx)
 {
     return field_0_keys[key_idx];
 }
 
 
-MATCH_FUNC(0x4D5F50)
-void __stdcall keybrd_0x204::create_4D5F50()
+// 0x4D5F50
+void keybrd_0x204::create_4D5F50()
 {
     if (!gKeybrd_0x204_6F52F4)
     {
@@ -138,7 +138,7 @@ void __stdcall keybrd_0x204::create_4D5F50()
     gKeybrd_0x204_6F52F4->LoadKbCfg_4D5E00();
 }
 
-MATCH_FUNC(0x4D5FA0)
+// 0x4D5FA0
 void keybrd_0x204::destroy_4D5FA0()
 {
     if (gKeybrd_0x204_6F52F4)
@@ -149,7 +149,7 @@ void keybrd_0x204::destroy_4D5FA0()
 }
 
 
-MATCH_FUNC(0x4D5FD0)
+// 0x4D5FD0
 void keybrd_0x204::RecreateIfLayoutChanged_4D5FD0()
 {
     if (gKeybrd_0x204_6F52F4)
@@ -168,10 +168,10 @@ void keybrd_0x204::RecreateIfLayoutChanged_4D5FD0()
     }
 }
 
-// __stdcall, not __cdecl: with __cdecl VC6 gives the loads after GetKeyboardLayoutNameA no call-clobber
+// , not : with VC6 gives the loads after GetKeyboardLayoutNameA no call-clobber
 // latency, so the KLID byte loads are scheduled before `lea &v2` (see matching_quirks.md)
-MATCH_FUNC(0x4D6000)
-s32 __stdcall keybrd_0x204::GetLayout_4D6000()
+// 0x4D6000
+s32 keybrd_0x204::GetLayout_4D6000()
 {
     s32 result; // eax
     char_type Buffer[4]; // [esp+0h] [ebp-14h] BYREF

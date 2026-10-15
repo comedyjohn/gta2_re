@@ -11,24 +11,24 @@
 
 namespace crt
 {
-EXPORT long __cdecl ftell(FILE*);
-EXPORT int __cdecl fseek(FILE*, long, int);
-EXPORT FILE* __cdecl fopen(const char* FileName, const char* Mode);
-EXPORT int __cdecl fclose(FILE*);
-EXPORT size_t __cdecl fread(void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
-EXPORT int __cdecl fgetc(FILE*);
-EXPORT size_t __cdecl fwrite(const void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
+long ftell(FILE*);
+int fseek(FILE*, long, int);
+FILE* fopen(const char* FileName, const char* Mode);
+int fclose(FILE*);
+size_t fread(void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
+int fgetc(FILE*);
+size_t fwrite(const void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
 
-EXPORT void __cdecl free(void* Block);
-EXPORT void* __cdecl malloc(size_t Size);
+void free(void* Block);
+void* malloc(size_t Size);
 
 // TODO: crt::malloc, crt::free
 
 } // namespace crt
 
 // VC6 maps this name to the CRT's vector destructor iterator `??_M`, which compiler generated
-// static array destructors call. The CRT's version takes a __thiscall destructor; VC6 has no
-// __thiscall keyword, so this one (`??_M@YGXPAXIHP6AX0@Z@Z`, defined in crt_stubs.cpp) takes a
-// __cdecl destructor thunk instead.
-using EhVecDtorFn = void (__cdecl *)(void*);
-void __stdcall __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);
+// static array destructors call. The CRT's version takes a destructor; VC6 has no
+// keyword, so this one (`??_M@YGXPAXIHP6AX0@Z@Z`, defined in crt_stubs.cpp) takes a
+// destructor thunk instead.
+using EhVecDtorFn = void (*)(void*);
+void __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);

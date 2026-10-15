@@ -11,11 +11,11 @@ class Door_38;
 class Garage_48
 {
   public:
-    EXPORT ~Garage_48();
-    EXPORT void ValidateParkCommand_534650();
-    EXPORT u8 ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor);
-    EXPORT void GaragesService_5349D0();
-    EXPORT Garage_48();
+    ~Garage_48();
+    void ValidateParkCommand_534650();
+    u8 ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor);
+    void GaragesService_5349D0();
+    Garage_48();
 
     // inlined 0x44C870
     bool sub_44C870(Car_BC* param_1) const

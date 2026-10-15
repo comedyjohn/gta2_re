@@ -9,7 +9,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAng225_6F67DC, Ang16(0x384), 0x6F67DC);
 
 EXTERN_GLOBAL(Ang16, kAng180_669156);
 
-MATCH_FUNC(0x405640)
+// 0x405640
 void Ang16::SnapToAng4_405640()
 {
     if (rValue < 180 || rValue > 1260)
@@ -26,20 +26,20 @@ void Ang16::SnapToAng4_405640()
     }
 }
 
-MATCH_FUNC(0x405680)
+// 0x405680
 u8 Ang16::ToAng4_405680()
 {
     return rValue / 360;
 }
 
-MATCH_FUNC(0x4056A0)
+// 0x4056A0
 u8 Ang16::GetOctant_4056A0()
 {
     return rValue / 180;
 }
 
-MATCH_FUNC(0x405B60)
-Fix16 __stdcall Ang16::NormalizeAngleDeltaScaled_405B60(Ang16& from, Ang16& to, Ang16& divisor)
+// 0x405B60
+Fix16 Ang16::NormalizeAngleDeltaScaled_405B60(Ang16& from, Ang16& to, Ang16& divisor)
 {
     Ang16 d = to - from;
     if (d > kAng180_669156)
@@ -53,8 +53,8 @@ Fix16 __stdcall Ang16::NormalizeAngleDeltaScaled_405B60(Ang16& from, Ang16& to, 
     }
 }
 
-MATCH_FUNC(0x405C60)
-bool __stdcall Ang16::IsAngleAhead_405C60(Ang16* pFrom, Ang16* pTo)
+// 0x405C60
+bool Ang16::IsAngleAhead_405C60(Ang16* pFrom, Ang16* pTo)
 {
     if (*pTo - *pFrom <= kAng180_669156)
     {
@@ -63,13 +63,13 @@ bool __stdcall Ang16::IsAngleAhead_405C60(Ang16* pFrom, Ang16* pTo)
     return false;
 }
 
-MATCH_FUNC(0x406C20)
+// 0x406C20
 void Ang16::Normalize_406C20()
 {
     Normalize();
 }
 
-MATCH_FUNC(0x409300)
+// 0x409300
 Ang16* Ang16::AssignNormalized_409300(const s16& value, s32 a3)
 {
     rValue = value;
@@ -77,13 +77,13 @@ Ang16* Ang16::AssignNormalized_409300(const s16& value, s32 a3)
     return this;
 }
 
-MATCH_FUNC(0x409340)
+// 0x409340
 Ang16 Ang16::SubtractNormalized_409340(const Ang16& toSub)
 {
     return Ang16(rValue - toSub.rValue, (u8)0);
 }
 
-MATCH_FUNC(0x4516B0)
+// 0x4516B0
 Ang16::Ang16(Fix16* a2, s32 a3)
 {
     rValue = a2->ToInt();
@@ -91,21 +91,21 @@ Ang16::Ang16(Fix16* a2, s32 a3)
 }
 
 // TODO: move
-MATCH_FUNC(0x451730)
-void __stdcall Ang16::PolarToCartesian_451730(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
+// 0x451730
+void Ang16::PolarToCartesian_451730(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
 {
     ret1 = radius * Ang16::sine_40F500(angle);
     ret2 = radius * Ang16::cosine_40F520(angle);
 }
 
-MATCH_FUNC(0x482740)
+// 0x482740
 Ang16 Ang16::Fix16_To_Ang16_482740(Fix16& value)
 {
     return Ang16(value.mValue / 71, 0);
 }
 
-MATCH_FUNC(0x4F78F0)
-s32 __stdcall Ang16::GetAngleFace_4F78F0(const Ang16& angle)
+// 0x4F78F0
+s32 Ang16::GetAngleFace_4F78F0(const Ang16& angle)
 {
     if (angle <= kAng45_6F677C || angle > kAng315_6F680C) //  45° and 315°
     {

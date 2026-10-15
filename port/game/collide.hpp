@@ -53,9 +53,9 @@ class GridCell_Pool : public PoolBasic<GridCell_C, 6000>
 class CollisionCounters_C
 {
   public:
-    EXPORT void ResetCount_478A20();
-    EXPORT CollisionCounters_C();
-    EXPORT ~CollisionCounters_C();
+    void ResetCount_478A20();
+    CollisionCounters_C();
+    ~CollisionCounters_C();
     s32 field_0_test_count;
     s32 field_4_query_id;
     s32 field_8_bUnknown;

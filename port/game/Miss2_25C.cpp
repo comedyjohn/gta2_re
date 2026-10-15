@@ -11,7 +11,7 @@
 
 DEFINE_GLOBAL(Miss2_25C*, gMiss2_25C_6F805C, 0x6F805C);
 
-MATCH_FUNC(0x502d90)
+// 0x502d90
 Miss2_25C::Miss2_25C() throw()
 {
     field_258_count = 0;
@@ -23,7 +23,7 @@ Miss2_25C::Miss2_25C() throw()
     }
 }
 
-MATCH_FUNC(0x502dc0)
+// 0x502dc0
 void Miss2_25C::MissionCleanUp_502DC0()
 {
     Miss2_C* pIter = &field_0_entries[0];
@@ -97,7 +97,7 @@ void Miss2_25C::MissionCleanUp_502DC0()
     gScriptManager_6F8060->field_C1E70_wanted_car_model = 87;
 }
 
-MATCH_FUNC(0x502f60)
+// 0x502f60
 Miss2_C* Miss2_25C::allocate_next_502F60()
 {
     Miss2_C* pIter = field_0_entries;
@@ -112,7 +112,7 @@ Miss2_C* Miss2_25C::allocate_next_502F60()
     return nullptr;
 }
 
-MATCH_FUNC(0x502f80)
+// 0x502f80
 void Miss2_25C::push_type_1_car_502F80(Car_BC* pCar)
 {
     Miss2_C* pFree = allocate_next_502F60();
@@ -126,7 +126,7 @@ void Miss2_25C::push_type_1_car_502F80(Car_BC* pCar)
     }
 }
 
-MATCH_FUNC(0x502fb0)
+// 0x502fb0
 void Miss2_25C::push_type_3_ped_502FB0(Ped* pPed)
 {
     Miss2_C* pFree = allocate_next_502F60();
@@ -140,7 +140,7 @@ void Miss2_25C::push_type_3_ped_502FB0(Ped* pPed)
     }
 }
 
-MATCH_FUNC(0x502ff0)
+// 0x502ff0
 void Miss2_25C::push_type_2_502FF0(Object_2C* pObj, char_type bUnknown)
 {
     if (bUnknown || pObj && ((pObj->GetModel_40FEF0() < 64) || pObj->GetModel_40FEF0() > 108) && (pObj->GetModel_40FEF0() < 200 || pObj->GetModel_40FEF0() > 244))
@@ -156,7 +156,7 @@ void Miss2_25C::push_type_2_502FF0(Object_2C* pObj, char_type bUnknown)
     }
 }
 
-MATCH_FUNC(0x503050)
+// 0x503050
 void Miss2_25C::push_type_2_503050(Object_2C* pObj)
 {
     Miss2_C* pC = allocate_next_502F60();

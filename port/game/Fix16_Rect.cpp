@@ -6,7 +6,7 @@
 DEFINE_GLOBAL_INIT(Fix16, kSmallWidthEpslion_703450, Fix16(0xCCC, 0), 0x703450);
 DEFINE_GLOBAL_INIT(Fix16, kCollisionPrismHalfHeight_6771E4, Fix16(0x800, 0), 0x6771E4);
 
-MATCH_FUNC(0x4E6280)
+// 0x4E6280
 void Fix16_Rect::MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
 {
     field_0_left = x;
@@ -15,7 +15,7 @@ void Fix16_Rect::MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
     field_C_bottom = y + h;
 }
 
-MATCH_FUNC(0x59dd60)
+// 0x59dd60
 void Fix16_Rect::DoSetCurrentRect_59DD60()
 {
     gSpriteGrid_left_6F5FD4 = field_0_left.ToInt();
@@ -25,7 +25,7 @@ void Fix16_Rect::DoSetCurrentRect_59DD60()
 }
 
 // 0x4BA6C0 9.6f
-MATCH_FUNC(0x59ddf0)
+// 0x59ddf0
 bool Fix16_Rect::IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite)
 {
     Fix16_Point* pCorners = pSprite->field_C_pCollisionShape->field_C_corners;
@@ -34,7 +34,7 @@ bool Fix16_Rect::IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite)
         || IsPointInRect_4B9FD0(&pCorners[2]) || IsPointInRect_4B9FD0(&pCorners[3]));
 }
 
-MATCH_FUNC(0x59de80)
+// 0x59de80
 char_type Fix16_Rect::CanRectEnterMovementRegion_59DE80()
 {
     DoSetCurrentRect_59DD60();
@@ -44,7 +44,7 @@ char_type Fix16_Rect::CanRectEnterMovementRegion_59DE80()
     return gMap_0x370_6F6268->CanSpriteEnterMovementRegion_4E4460(x, y, z, nullptr, 1024);
 }
 
-MATCH_FUNC(0x59dee0)
+// 0x59dee0
 void Fix16_Rect::ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y)
 {
     if (x < field_0_left)
@@ -72,7 +72,7 @@ void Fix16_Rect::ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y)
     }
 }
 
-MATCH_FUNC(0x59df20)
+// 0x59df20
 bool Fix16_Rect::RectOverlapsZone_59DF20(u8 zone_type)
 {
     u8 zone_y = field_8_top.ToUInt8();
@@ -94,7 +94,7 @@ bool Fix16_Rect::RectOverlapsZone_59DF20(u8 zone_type)
     return false;
 }
 
-MATCH_FUNC(0x59dfb0)
+// 0x59dfb0
 bool Fix16_Rect::EveryTileMatchesArrowType_59DFB0(s32 arrow_type)
 {
     u8 y_pos = field_8_top.ToUInt8();
@@ -145,7 +145,7 @@ bool Fix16_Rect::EveryTileMatchesArrowType_59DFB0(s32 arrow_type)
     return true;
 }
 
-MATCH_FUNC(0x5A5E30)
+// 0x5A5E30
 void Fix16_Rect::SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
 {
     this->field_0_left = left;

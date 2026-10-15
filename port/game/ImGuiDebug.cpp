@@ -496,8 +496,8 @@ DEFINE_GLOBAL_INIT(Fix16, dword_7041F0, Fix16(0.5), 0x7041F0);
 EXTERN_GLOBAL(Car_BC*, gTestArrowCar_7043F0);
 
 // Builds a test scene: a few blocks, cars with weapons and gang icons, and a row of each object
-MATCH_FUNC(0x5B1170)
-EXPORT void __stdcall NoRefs_sub_5B1170()
+// 0x5B1170
+void NoRefs_sub_5B1170()
 {
     gmp_block_info block;
     gGtx_0x106C_703DD4->get_sprite_index_5AA440(

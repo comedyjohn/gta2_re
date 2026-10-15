@@ -11,15 +11,15 @@ class RollingDigitCounter_38
         kDigitAfterNine = '9' + 1, // the glyph rows are 0-9 then a blank row, see DrawDigits
     };
 
-    EXPORT RollingDigitCounter_38();
-    EXPORT void SetupDigitsParams_492110(s16 digit_transition_speed, s32 max_value, s16 palette);
-    EXPORT void InitDigitSprites_492150();
-    EXPORT void ChangeStatByAmount_4921B0(s32 amount);
-    EXPORT void ColorDigits_4921F0(s32 palette_type, s16 palette);
-    EXPORT s32 DrawDigitsRightAligned_492260(s32 base_xpos, s32 base_ypos);
-    EXPORT s32 DrawDigitsLeftAligned_492430(s32 base_xpos, s32 base_ypos);
-    EXPORT bool IsAnyDigitRolling_4925C0();
-    EXPORT void UpdateRollingDigits_4925E0();
+    RollingDigitCounter_38();
+    void SetupDigitsParams_492110(s16 digit_transition_speed, s32 max_value, s16 palette);
+    void InitDigitSprites_492150();
+    void ChangeStatByAmount_4921B0(s32 amount);
+    void ColorDigits_4921F0(s32 palette_type, s16 palette);
+    s32 DrawDigitsRightAligned_492260(s32 base_xpos, s32 base_ypos);
+    s32 DrawDigitsLeftAligned_492430(s32 base_xpos, s32 base_ypos);
+    bool IsAnyDigitRolling_4925C0();
+    void UpdateRollingDigits_4925E0();
 
     // 9.6f 0x4A50B0
     inline void SetValueClamped_4A50B0(s32 value)

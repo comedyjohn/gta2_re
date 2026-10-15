@@ -84,8 +84,8 @@ class SpriteTreeNodePool_2EE4
         field_2EE0_next_free_idx = 0;
     }
 
-    EXPORT SpriteTreeNodePool_2EE4();
-    EXPORT ~SpriteTreeNodePool_2EE4();
+    SpriteTreeNodePool_2EE4();
+    ~SpriteTreeNodePool_2EE4();
     SpriteTreeNode_C field_0_entries[SpriteTreeStack_FA4::k_max_nodes];
     u32 field_2EE0_next_free_idx;
 };
@@ -94,11 +94,11 @@ class SpriteTreeNodePool_2EE4
 class SpriteTree_4
 {
   public:
-    EXPORT void AddSprite_5C5CF0(Sprite* pSprite);
-    EXPORT void Draw_5C5DF0();
-    EXPORT void Reset_5C5E50();
-    EXPORT SpriteTree_4();
-    EXPORT ~SpriteTree_4();
+    void AddSprite_5C5CF0(Sprite* pSprite);
+    void Draw_5C5DF0();
+    void Reset_5C5E50();
+    SpriteTree_4();
+    ~SpriteTree_4();
     SpriteTreeNode_C* field_0_pRoot;
 };
 
@@ -112,11 +112,11 @@ class SpriteRenderer_1C
         k_num_layers = 7
     };
 
-    EXPORT void ResetAll_4954F0();
-    EXPORT void DisplayAdd_495510(Sprite* pSprite);
-    EXPORT void Draw_495560(s32 layer);
-    EXPORT SpriteRenderer_1C();
-    EXPORT ~SpriteRenderer_1C();
+    void ResetAll_4954F0();
+    void DisplayAdd_495510(Sprite* pSprite);
+    void Draw_495560(s32 layer);
+    SpriteRenderer_1C();
+    ~SpriteRenderer_1C();
     SpriteTree_4* field_0_layers[k_num_layers];
 };
 

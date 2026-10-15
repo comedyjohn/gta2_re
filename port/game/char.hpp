@@ -22,8 +22,8 @@ EXTERN_GLOBAL(Fix16, kFpOne128th_6784BC);
 EXTERN_GLOBAL(Ang16, word_6FD940);
 EXTERN_GLOBAL(Ang16, word_6FD8F8);
 
-EXPORT void __stdcall UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3);
-EXPORT Ang16 __stdcall ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3);
+void UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3);
+Ang16 ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3);
 
 // SpriteList_4 with a (trivial) destructor: the original Char_B4 ctor has an EH frame for this member,
 // while other owners of a SpriteList_4 (Car_BC, Object_5C, Weapon_8) have none.
@@ -317,15 +317,15 @@ class Char_B4
     Char_B4();
     ~Char_B4();
 
-    EXPORT void PoolAllocate();
-    EXPORT void PoolDeallocate();
+    void PoolAllocate();
+    void PoolDeallocate();
 
     // Function chunk
-    EXPORT void DrawFlamesAndStartScreamTimer_545430();
-    EXPORT bool HasShadows_5451C0();
+    void DrawFlamesAndStartScreamTimer_545430();
+    bool HasShadows_5451C0();
 
-    EXPORT Fix16_Point sub_545580();
-    EXPORT void SetRemap_46DD50(u8 remap);
+    Fix16_Point sub_545580();
+    void SetRemap_46DD50(u8 remap);
 
     // Inlined copy of SetRemap_46DD50
     inline void SetRemap_Inline(u8 remap)
@@ -337,70 +337,70 @@ class Char_B4
         }
     }
 
-    EXPORT void RemoveFireSprites_5454B0();
-    EXPORT void DoJump_5454D0();
-    EXPORT void Teleport_545530(Fix16 xpos, Fix16 ypos, Fix16 zpos);
-    EXPORT s32 IsOnWater_545570();
-    EXPORT void KillPed_5455F0();
-    EXPORT void ClearCollisionState_545600();
-    EXPORT void GetTileFracX64_545640(Fix16 coord, s16* output);
-    EXPORT void GetTileFracY64_545670(Fix16 coord, s16* output);
-    EXPORT void InitSprite_5456A0();
-    EXPORT bool IsOnScreen_545700();
-    EXPORT void Update_545720(Fix16 distance_to_target);
-    EXPORT void CheckAndHandleCollisions_5459C0();
-    EXPORT void DrownPed_5459E0();
-    EXPORT void UpdateAnimState_546360();
-    EXPORT void ManageZCoordAndSlopes_548590();
-    EXPORT void DispatchCollision_548670(char_type bFlag);
-    EXPORT void HandleObjectCollision_548840(Object_2C* pObj);
-    EXPORT void HandlePedCollision_548BD0(Char_B4* pOther);
-    EXPORT void HandleGenericCollision_54A530(Car_BC* pCar, Object_2C* pObj, Char_B4* pChar);
-    EXPORT char_type ContinueMovementAfterCollision_54B8F0();
-    EXPORT void sub_54C090();
-    EXPORT char_type CanMoveOntoSlope_54C1A0(s32 path_direction);
+    void RemoveFireSprites_5454B0();
+    void DoJump_5454D0();
+    void Teleport_545530(Fix16 xpos, Fix16 ypos, Fix16 zpos);
+    s32 IsOnWater_545570();
+    void KillPed_5455F0();
+    void ClearCollisionState_545600();
+    void GetTileFracX64_545640(Fix16 coord, s16* output);
+    void GetTileFracY64_545670(Fix16 coord, s16* output);
+    void InitSprite_5456A0();
+    bool IsOnScreen_545700();
+    void Update_545720(Fix16 distance_to_target);
+    void CheckAndHandleCollisions_5459C0();
+    void DrownPed_5459E0();
+    void UpdateAnimState_546360();
+    void ManageZCoordAndSlopes_548590();
+    void DispatchCollision_548670(char_type bFlag);
+    void HandleObjectCollision_548840(Object_2C* pObj);
+    void HandlePedCollision_548BD0(Char_B4* pOther);
+    void HandleGenericCollision_54A530(Car_BC* pCar, Object_2C* pObj, Char_B4* pChar);
+    char_type ContinueMovementAfterCollision_54B8F0();
+    void sub_54C090();
+    char_type CanMoveOntoSlope_54C1A0(s32 path_direction);
     inline void SetTurnTarget_492400(Ang16 target_rotation);
-    EXPORT void sub_54C3E0();
-    EXPORT char_type CanMoveToTile_54C500(char_type x, char_type y);
-    EXPORT void SelectRandomIdleBehavior_54C580();
-    EXPORT void ApplyRandomRotationJitter_54C6C0();
-    EXPORT void TickMovementStateMachine_54C900();
-    EXPORT void TurnTowardsAngle_54CAE0();
-    EXPORT void ApplyMovement_54CC40();
-    EXPORT void sub_54DD70();
-    EXPORT void state_0_54DDF0();
-    EXPORT bool CanStepForwardWithRegionCheck_54ECB0(s32 direction);
-    EXPORT bool CanStepDiagonal_54EF60(char_type target_x, char_type target_y);
-    EXPORT bool CanStepForward_54FEC0(s32 direction);
-    EXPORT bool CanReachTile_550090(u8 xpos, u8 ypos);
-    EXPORT void state_1_5504F0();
-    EXPORT Ang16 GetNextRotationToward_550F60(Ang16 inputAng);
-    EXPORT bool CanStepInDirection_551350(Ang16 angle);
-    EXPORT void ChooseNextMovementTile_551400();
-    EXPORT void SelectNextTileFast_5516F0();
-    //EXPORT void state_1_5504F0();
-    EXPORT void state_1_5519F0();
-    EXPORT void state_3_551A00();
-    EXPORT void state_4_551B30();
-    EXPORT void state_5_551BB0();
-    EXPORT void state_7_551CB0();
-    EXPORT void state_8_5520A0();
-    EXPORT void state_9_552E90();
+    void sub_54C3E0();
+    char_type CanMoveToTile_54C500(char_type x, char_type y);
+    void SelectRandomIdleBehavior_54C580();
+    void ApplyRandomRotationJitter_54C6C0();
+    void TickMovementStateMachine_54C900();
+    void TurnTowardsAngle_54CAE0();
+    void ApplyMovement_54CC40();
+    void sub_54DD70();
+    void state_0_54DDF0();
+    bool CanStepForwardWithRegionCheck_54ECB0(s32 direction);
+    bool CanStepDiagonal_54EF60(char_type target_x, char_type target_y);
+    bool CanStepForward_54FEC0(s32 direction);
+    bool CanReachTile_550090(u8 xpos, u8 ypos);
+    void state_1_5504F0();
+    Ang16 GetNextRotationToward_550F60(Ang16 inputAng);
+    bool CanStepInDirection_551350(Ang16 angle);
+    void ChooseNextMovementTile_551400();
+    void SelectNextTileFast_5516F0();
+    //void state_1_5504F0();
+    void state_1_5519F0();
+    void state_3_551A00();
+    void state_4_551B30();
+    void state_5_551BB0();
+    void state_7_551CB0();
+    void state_8_5520A0();
+    void state_9_552E90();
 
-    EXPORT bool IsNearTileCentre_5532C0();
-    EXPORT char_type IsThreatToSearchingPed_553330();
-    EXPORT bool ShouldCollideWithSprite_553340(Sprite* pSprite);
-    EXPORT bool PhoneTouched_5535B0(Object_2C* p2c);
-    EXPORT char_type OnObjectTouched_553640(Object_2C* p2c);
-    EXPORT char_type HandlePedObjectHit_5537F0(Object_2C* p2c);
-    EXPORT void HandleCarImpact_5538A0(Car_BC* pCar, u8 bUnknown, Fix16 x, Fix16 y);
-    EXPORT void HandleGenericImpact_553E00(Ang16 ang, Fix16 impact_x, Fix16 impact_z, char_type impact_type);
+    bool IsNearTileCentre_5532C0();
+    char_type IsThreatToSearchingPed_553330();
+    bool ShouldCollideWithSprite_553340(Sprite* pSprite);
+    bool PhoneTouched_5535B0(Object_2C* p2c);
+    char_type OnObjectTouched_553640(Object_2C* p2c);
+    char_type HandlePedObjectHit_5537F0(Object_2C* p2c);
+    void HandleCarImpact_5538A0(Car_BC* pCar, u8 bUnknown, Fix16 x, Fix16 y);
+    void HandleGenericImpact_553E00(Ang16 ang, Fix16 impact_x, Fix16 impact_z, char_type impact_type);
 
-    EXPORT void nullsub_28();
+    void nullsub_28();
 };
 
-EXPORT void __stdcall ResetCharUpdateGlobals_544F70();
-EXPORT void __stdcall ResetCharStatics_553F90();
+void ResetCharUpdateGlobals_544F70();
+void ResetCharStatics_553F90();
 
 EXTERN_GLOBAL(u8, bThreateningPedAdded_6787EF);
 

@@ -12,10 +12,10 @@ class MapObjectOverride_54
 {
   public:
     // Temporary ctor, otherwise it won't be possible to define gMapObjectOverrides_6FC5F8.
-    EXPORT MapObjectOverride_54()
+    MapObjectOverride_54()
     {
     }
-    EXPORT MapObjectOverride_54(s32 param_1,
+    MapObjectOverride_54(s32 param_1,
                   s32& param_2,
                   s32 param_3,
                   s8 param_4,
@@ -37,7 +37,7 @@ class MapObjectOverride_54
                   s32 param_20,
                   s8 param_21);
 
-    EXPORT MapObjectOverride_54(s32 param_1,
+    MapObjectOverride_54(s32 param_1,
                   s32 param_2,
                   s32 param_3,
                   s8 param_4,
@@ -88,10 +88,10 @@ class CodeObjectTemplate_6C
 {
   public:
     // Temporary ctor, otherwise it won't be possible to define gCodeObjectTemplates_6F9038.
-    EXPORT CodeObjectTemplate_6C()
+    CodeObjectTemplate_6C()
     {
     }
-    EXPORT CodeObjectTemplate_6C(u32 param_1,
+    CodeObjectTemplate_6C(u32 param_1,
                   u8 param_2,
                   u32& param_3,
                   u32 param_4,
@@ -121,7 +121,7 @@ class CodeObjectTemplate_6C
                   u8 param_28,
                   u8 param_29);
 
-    EXPORT CodeObjectTemplate_6C(u32 param_1,
+    CodeObjectTemplate_6C(u32 param_1,
                   u8 param_2,
                   u32 param_3,
                   u32 param_4,
@@ -232,14 +232,14 @@ enum
 class ObjectDefinition_74
 {
   public:
-    EXPORT ~ObjectDefinition_74();
-    EXPORT void SetDimensions_533060(Fix16 width, Fix16 height, Fix16 depth);
-    EXPORT void SetDimensionsFromSprite_533090();
-    EXPORT void SetRemap_533110(s16 remap);
-    EXPORT void OffsetBaseSpriteIdxAndSetAnimSpeed_533150(s16 sprite_idx_offset, s16 anim_speed);
-    EXPORT Sprite* CreateSpriteFromDefinition_533170();
-    EXPORT void ApplyDefinitionToSprite_5331A0(Sprite* pSprite);
-    EXPORT ObjectDefinition_74();
+    ~ObjectDefinition_74();
+    void SetDimensions_533060(Fix16 width, Fix16 height, Fix16 depth);
+    void SetDimensionsFromSprite_533090();
+    void SetRemap_533110(s16 remap);
+    void OffsetBaseSpriteIdxAndSetAnimSpeed_533150(s16 sprite_idx_offset, s16 anim_speed);
+    Sprite* CreateSpriteFromDefinition_533170();
+    void ApplyDefinitionToSprite_5331A0(Sprite* pSprite);
+    ObjectDefinition_74();
 
 
     Fix16 field_0_width;
@@ -287,27 +287,27 @@ class ObjectDefinitions_8CA8
         k_max_definitions = 300
     };
 
-    EXPORT ~ObjectDefinitions_8CA8();
-    EXPORT ObjectDefinition_74* AllocDefinitionWithSprite_5332D0(s32 idx, s32 sprite_type, s16 sprite_palette, u8 anim_speed);
-    EXPORT void CreateMapObjectDefinitions_533300();
-    EXPORT void ApplyMapObjectOverrides_533360();
-    EXPORT void CloneAnimatedDefinitions_533420();
-    EXPORT void CreateCodeObjectDefinitions_533B30();
-    EXPORT void CloneRemappedDefinitions_533C90();
-    EXPORT void ClearColour1PixelsOfDefinitions287To293_534270();
-    EXPORT void CacheDef112SpritePalette_5342D0();
-    EXPORT void ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx);
-    EXPORT void InitDefinitions_534330();
-    EXPORT ObjectDefinition_74* GetObjectDefinition_534360(s32 idx);
+    ~ObjectDefinitions_8CA8();
+    ObjectDefinition_74* AllocDefinitionWithSprite_5332D0(s32 idx, s32 sprite_type, s16 sprite_palette, u8 anim_speed);
+    void CreateMapObjectDefinitions_533300();
+    void ApplyMapObjectOverrides_533360();
+    void CloneAnimatedDefinitions_533420();
+    void CreateCodeObjectDefinitions_533B30();
+    void CloneRemappedDefinitions_533C90();
+    void ClearColour1PixelsOfDefinitions287To293_534270();
+    void CacheDef112SpritePalette_5342D0();
+    void ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx);
+    void InitDefinitions_534330();
+    ObjectDefinition_74* GetObjectDefinition_534360(s32 idx);
 
     // 9.6f 0x4C6E30
     inline s16 GetObjectPalette_4C6E30(s32 idx)
     {
         return GetObjectDefinition_534360(idx)->field_1E_base_sprite_idx;
     }
-    EXPORT ObjectDefinition_74* CloneDefinition_534370(s32 dst_idx, s32 src_idx);
-    EXPORT ObjectDefinition_74* AllocDefinition_5343C0(s32 idx);
-    EXPORT ObjectDefinitions_8CA8();
+    ObjectDefinition_74* CloneDefinition_534370(s32 dst_idx, s32 src_idx);
+    ObjectDefinition_74* AllocDefinition_5343C0(s32 idx);
+    ObjectDefinitions_8CA8();
 
     u16 field_0_next_idx;
     s16 field_2_unused;
@@ -330,5 +330,5 @@ EXTERN_GLOBAL(s32, gCodeObjectTemplates_length_623EF0);
 EXTERN_GLOBAL_ARRAY(MapObjectOverride_54, gMapObjectOverrides_6FC5F8, 24);
 EXTERN_GLOBAL_ARRAY(CodeObjectTemplate_6C, gCodeObjectTemplates_6F9038, 126);
 
-EXPORT void InitMapObjectOverrides();
-EXPORT void InitCodeObjectTemplates();
+void InitMapObjectOverrides();
+void InitCodeObjectTemplates();

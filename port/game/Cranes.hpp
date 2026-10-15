@@ -24,38 +24,38 @@ class Crane_15C
         field_78_maybe_homecrane = v;
     }
 
-    EXPORT ~Crane_15C();
-    EXPORT Crane_15C();
-    EXPORT void ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16_Point* pOutPoint);
-    EXPORT void ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16_Point* pOutPoint);
-    EXPORT void ComputeHookOffset_47E840(Ang16 ang, Fix16_Point* pOutPoint);
-    EXPORT bool IsDropPositionClear_47E920();
-    EXPORT bool IsTarget1PositionClear_47EB00();
-    EXPORT void DropHookedCar_47ECC0();
-    EXPORT void DropHookedCarOnTransporter_47ED60();
-    EXPORT void HookTransporterCargo_47EDF0();
-    EXPORT void HookPickupCar_47EF80();
-    EXPORT void sub_47F170();
-    EXPORT void SetTransporterCargoTarget_47F220(Fix16 radius, Fix16 angle, Sprite* pCargo, Sprite* pTransporter);
-    EXPORT void SetDropTransporterTarget_47F290(Fix16 radius, Fix16 angle, Sprite* pSprite);
-    EXPORT void SetPickupCarTarget_47F2F0(Fix16 radius, Fix16 angle, Sprite* pSprite);
-    EXPORT bool IsTransporterCargoTargetValid_47F350();
-    EXPORT bool IsPickupCarTargetValid_47F3D0();
-    EXPORT bool IsDropTransporterTargetValid_47F450();
-    EXPORT void UpdateCraneTargets_47F4C0();
-    EXPORT bool ComputeHookPolar_47F6C0(const Fix16_Point& pPoint, Fix16* pOutF16, Fix16* pOutAng);
-    EXPORT void TargetTransporter_47F7F0(Car_BC* pCar);
-    EXPORT void PickUpCar_47F930(Car_BC* pCar);
-    EXPORT void TryNextDropPosition_47FB40();
-    EXPORT s32 MoveTowardsTargets_47FBA0();
-    EXPORT void ReleaseHookedCar_47FD10();
-    EXPORT void UpdateCraneTick_47FD50();
-    EXPORT void UpdateCraneSprites_47FE10();
-    EXPORT void Service_480310();
-    EXPORT void InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id);
-    EXPORT void CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang);
-    EXPORT void ComputePickupAlignment_480B60(Fix16 xpos, Fix16 ypos, Ang16 ang);
-    EXPORT Car_BC* GetCarFromCrane_480DA0();
+    ~Crane_15C();
+    Crane_15C();
+    void ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16_Point* pOutPoint);
+    void ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16_Point* pOutPoint);
+    void ComputeHookOffset_47E840(Ang16 ang, Fix16_Point* pOutPoint);
+    bool IsDropPositionClear_47E920();
+    bool IsTarget1PositionClear_47EB00();
+    void DropHookedCar_47ECC0();
+    void DropHookedCarOnTransporter_47ED60();
+    void HookTransporterCargo_47EDF0();
+    void HookPickupCar_47EF80();
+    void sub_47F170();
+    void SetTransporterCargoTarget_47F220(Fix16 radius, Fix16 angle, Sprite* pCargo, Sprite* pTransporter);
+    void SetDropTransporterTarget_47F290(Fix16 radius, Fix16 angle, Sprite* pSprite);
+    void SetPickupCarTarget_47F2F0(Fix16 radius, Fix16 angle, Sprite* pSprite);
+    bool IsTransporterCargoTargetValid_47F350();
+    bool IsPickupCarTargetValid_47F3D0();
+    bool IsDropTransporterTargetValid_47F450();
+    void UpdateCraneTargets_47F4C0();
+    bool ComputeHookPolar_47F6C0(const Fix16_Point& pPoint, Fix16* pOutF16, Fix16* pOutAng);
+    void TargetTransporter_47F7F0(Car_BC* pCar);
+    void PickUpCar_47F930(Car_BC* pCar);
+    void TryNextDropPosition_47FB40();
+    s32 MoveTowardsTargets_47FBA0();
+    void ReleaseHookedCar_47FD10();
+    void UpdateCraneTick_47FD50();
+    void UpdateCraneSprites_47FE10();
+    void Service_480310();
+    void InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id);
+    void CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang);
+    void ComputePickupAlignment_480B60(Fix16 xpos, Fix16 ypos, Ang16 ang);
+    Car_BC* GetCarFromCrane_480DA0();
 
     inline void SetHomeRotation_4768E0(Ang16 rotation)
     {
@@ -170,11 +170,11 @@ class Crane_15C
 class CranePool_D9C
 {
   public:
-    EXPORT void PickUpCar_480E00(Car_BC* pCar, u8 crane_idx);
-    EXPORT void CranesService_480E50();
-    EXPORT Crane_15C* NewCrane_480EC0(Fix16 x_pos, Fix16 y_pos);
-    EXPORT CranePool_D9C();
-    EXPORT ~CranePool_D9C();
+    void PickUpCar_480E00(Car_BC* pCar, u8 crane_idx);
+    void CranesService_480E50();
+    Crane_15C* NewCrane_480EC0(Fix16 x_pos, Fix16 y_pos);
+    CranePool_D9C();
+    ~CranePool_D9C();
 
     Crane_15C field_0_cranes[10];
     s32 field_D98_count;

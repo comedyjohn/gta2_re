@@ -5,14 +5,14 @@
 // TODO: move
 DEFINE_GLOBAL(ScriptStackFramePool_25C*, gScriptStackFramePool_6F8068, 0x6F8068);
 
-MATCH_FUNC(0x503120)
+// 0x503120
 miss2_8::miss2_8() throw() // 503120
 {
     field_0_current = nullptr;
     field_4_count = 0;
 }
 
-MATCH_FUNC(0x503130)
+// 0x503130
 miss2_8::~miss2_8() // 503130
 {
     for (ScriptStackFrame_C* pOld = field_0_current; field_0_current; pOld = field_0_current)
@@ -23,7 +23,7 @@ miss2_8::~miss2_8() // 503130
     }
 }
 
-MATCH_FUNC(0x503160)
+// 0x503160
 void miss2_8::add_503160(ScriptStackFrame_C* pFrame)
 {
     pFrame->mpNext = field_0_current;
@@ -31,7 +31,7 @@ void miss2_8::add_503160(ScriptStackFrame_C* pFrame)
     field_4_count++;
 }
 
-MATCH_FUNC(0x503180)
+// 0x503180
 ScriptStackFrame_C* miss2_8::remove_503180()
 {
     ScriptStackFrame_C* pOld = field_0_current;
@@ -45,7 +45,7 @@ ScriptStackFrame_C* miss2_8::remove_503180()
     return pOld;
 }
 
-MATCH_FUNC(0x5031A0)
+// 0x5031A0
 ScriptStackFrame_C* miss2_8::AllocFrame_5031A0()
 {
     ScriptStackFrame_C* pFrame = gScriptStackFramePool_6F8068->field_0_pool.field_0_pHead;
@@ -57,13 +57,13 @@ ScriptStackFrame_C* miss2_8::AllocFrame_5031A0()
 //    return gScriptStackFramePool_6F8068->field_0_pool.Allocate();
 }
 
-MATCH_FUNC(0x5031C0)
+// 0x5031C0
 void miss2_8::FreeFrame_5031C0(ScriptStackFrame_C* pFrame)
 {
     gScriptStackFramePool_6F8068->field_0_pool.DeAllocate(pFrame);
 }
 
-MATCH_FUNC(0x5031E0)
+// 0x5031E0
 void miss2_8::remove_5031E0(u8 count)
 {
     while (field_4_count > count)

@@ -16,19 +16,19 @@ DEFINE_GLOBAL_INIT(Fix16, dword_702C08, Fix16(0x5A0000, 0), 0x702C08); // 0x7800
 DEFINE_GLOBAL(Fix16, dword_702DE0, 0x702DE0);
 DEFINE_GLOBAL(Ang16, word_702F24, 0x702F24);
 
-MATCH_FUNC(0x5967e0)
+// 0x5967e0
 ExplodingScorePool::ExplodingScorePool()
 {
     field_0_last_palette = 9;
     field_2_free_scores = 3;
 }
 
-MATCH_FUNC(0x596840)
+// 0x596840
 ExplodingScorePool::~ExplodingScorePool()
 {
 }
 
-MATCH_FUNC(0x596860)
+// 0x596860
 s16 ExplodingScorePool::NextPalette_596860()
 {
     field_0_last_palette++;
@@ -39,13 +39,13 @@ s16 ExplodingScorePool::NextPalette_596860()
     return field_0_last_palette;
 }
 
-MATCH_FUNC(0x596880)
+// 0x596880
 void ExplodingScorePool::IncrementFreeScores_596880()
 {
     field_2_free_scores++;
 }
 
-MATCH_FUNC(0x596890)
+// 0x596890
 void ExplodingScorePool::PushScore_596890(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32 score)
 {
     if (this->field_2_free_scores == 0)
@@ -77,13 +77,13 @@ void ExplodingScorePool::PushScore_596890(Fix16 xpos, Fix16 ypos, Fix16 zpos, u3
     }
 }
 
-MATCH_FUNC(0x596940)
+// 0x596940
 void ExplodingScorePool::Update_596940()
 {
     field_4_pool.UpdatePool();
 }
 
-MATCH_FUNC(0x5969e0)
+// 0x5969e0
 void ExplodingScorePool::DrawExplodingScores_5969E0()
 {
     // TODO: Would there have been an iterator object ??
@@ -95,7 +95,7 @@ void ExplodingScorePool::DrawExplodingScores_5969E0()
     }
 }
 
-MATCH_FUNC(0x596a00)
+// 0x596a00
 ExplodingScore_50::ExplodingScore_50()
 {
     field_0_numbers_count = 0;
@@ -113,23 +113,23 @@ ExplodingScore_50::ExplodingScore_50()
     field_34_palette = 9;
 }
 
-MATCH_FUNC(0x596a40)
+// 0x596a40
 ExplodingScore_50::~ExplodingScore_50()
 {
     mpNext = nullptr;
 }
 
-MATCH_FUNC(0x596a50)
+// 0x596a50
 void ExplodingScore_50::PoolAllocate()
 {
 }
 
-MATCH_FUNC(0x596a60)
+// 0x596a60
 void ExplodingScore_50::PoolDeallocate()
 {
 }
 
-MATCH_FUNC(0x596a70)
+// 0x596a70
 void ExplodingScore_50::ClearNumbersArrayFrom_596A70(s32 start_idx)
 {
     for (u32 i = start_idx; i > 0; i--)
@@ -138,7 +138,7 @@ void ExplodingScore_50::ClearNumbersArrayFrom_596A70(s32 start_idx)
     }
 }
 
-MATCH_FUNC(0x596a90)
+// 0x596a90
 void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32 score)
 {
     u32 tmpScore = score;
@@ -246,7 +246,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
     this->field_40 = 1;
 }
 
-MATCH_FUNC(0x596c90)
+// 0x596c90
 void ExplodingScore_50::DrawNumbers_596C90()
 {
     Fix16 a3;
@@ -360,7 +360,7 @@ void ExplodingScore_50::DrawNumbers_596C90()
     }
 }
 
-MATCH_FUNC(0x5970c0)
+// 0x5970c0
 char_type ExplodingScore_50::PoolUpdate()
 {
     if (field_38 < 0)
@@ -389,7 +389,7 @@ char_type ExplodingScore_50::PoolUpdate()
 }
 
 // 9.6f 0x4B92B0
-MATCH_FUNC(0x597100)
+// 0x597100
 void ExplodingScore_50::DrawSingleNumber_597100(s32 number_to_draw, s32 xpos_sub)
 {
 

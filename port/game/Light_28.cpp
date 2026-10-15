@@ -6,7 +6,7 @@
 
 DEFINE_GLOBAL(Light_28**, gLightGrid_6F5400, 0x6F5400) ;
 
-MATCH_FUNC(0x4D6D20)
+// 0x4D6D20
 Light_28::Light_28()
 {
     field_0.flag = 0x2A2A2A2A;
@@ -24,7 +24,7 @@ Light_28::Light_28()
     field_18_intensity = 0;
 }
 
-MATCH_FUNC(0x4D6D60)
+// 0x4D6D60
 Light_28::~Light_28()
 {
     mpNext = nullptr;
@@ -32,7 +32,7 @@ Light_28::~Light_28()
     field_20_pGridNext = nullptr;
 }
 
-MATCH_FUNC(0x4D6D70)
+// 0x4D6D70
 void Light_28::AddToGrid_4D6D70()
 {
     u32 cell_idx = (field_4_x.ToInt() >> 2) + ((field_8_y.ToInt() >> 2) * 64);
@@ -53,7 +53,7 @@ void Light_28::AddToGrid_4D6D70()
     }
 }
 
-MATCH_FUNC(0x4D6DC0)
+// 0x4D6DC0
 Light_28* Light_28::RemoveFromGrid_4D6DC0()
 {
     Light_28* pPrev = field_24_pGridPrev;
@@ -74,8 +74,8 @@ Light_28* Light_28::RemoveFromGrid_4D6DC0()
     return pNext;
 }
 
-MATCH_FUNC(0x4D6E00)
-void __stdcall LightGrid::AllocGrid_4D6E00()
+// 0x4D6E00
+void LightGrid::AllocGrid_4D6E00()
 {
     gLightGrid_6F5400 = (Light_28**)crt::malloc(4096 * sizeof(Light_28*));
     for (s32 i = 0; i < 4096; i++)
@@ -84,7 +84,7 @@ void __stdcall LightGrid::AllocGrid_4D6E00()
     }
 }
 
-MATCH_FUNC(0x4D6E30)
+// 0x4D6E30
 void LightGrid::FreeGrid_4D6E30()
 {
     if (gLightGrid_6F5400)
@@ -94,8 +94,8 @@ void LightGrid::FreeGrid_4D6E30()
     }
 }
 
-MATCH_FUNC(0x4D6E50)
-void __stdcall LightGrid::SubmitLightsInArea_4D6E50(s32 min_x, s32 min_y, s32 max_x, s32 max_y)
+// 0x4D6E50
+void LightGrid::SubmitLightsInArea_4D6E50(s32 min_x, s32 min_y, s32 max_x, s32 max_y)
 {
     min_x = (min_x >> 2) - 2;
     if (min_x < 0)

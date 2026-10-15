@@ -10,8 +10,8 @@ DEFINE_GLOBAL(LPDIRECTINPUTDEVICEA, gKeyboardDevice_67B5C0, 0x67B5C0);
 DEFINE_GLOBAL(LPDIRECTINPUTDEVICEA, gGamePadDevice_67B6C0, 0x67B6C0);
 
 
-MATCH_FUNC(0x4986D0)
-void __stdcall Input::DirectInputCreate_4986D0(HINSTANCE hInstance)
+// 0x4986D0
+void Input::DirectInputCreate_4986D0(HINSTANCE hInstance)
 {
     // VC6-compatible path
     if (DirectInputCreateA(hInstance, 1792, &gpDInput_67B804, nullptr) < 0)
@@ -21,8 +21,8 @@ void __stdcall Input::DirectInputCreate_4986D0(HINSTANCE hInstance)
 
 }
 
-MATCH_FUNC(0x498710)
-void __stdcall Input::DInputRelease_498710()
+// 0x498710
+void Input::DInputRelease_498710()
 {
     if (gpDInput_67B804)
     {

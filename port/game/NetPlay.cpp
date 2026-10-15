@@ -99,7 +99,7 @@ NetPlay::~NetPlay()
         for (u32 i = 0; i < field_30_enumed_connections.field_8_connections_count; i++)
         {
             operator delete(field_30_enumed_connections.field_0_enumed_connections[i].field_10_pConnectionName);
-            operator delete(field_30_enumed_connections.field_0_enumed_connections[i].field_14_pConnection);
+            delete[] field_30_enumed_connections.field_0_enumed_connections[i].field_14_pConnection;
         }
         operator delete(field_30_enumed_connections.field_0_enumed_connections);
         field_30_enumed_connections.field_0_enumed_connections = nullptr;
@@ -250,7 +250,8 @@ s32 NetPlay::SetProtoAndConnection_51DAE0(GUID* pProtocolGuid, Network_Buffer_8*
             NetPlay::AddEnumeratedConnection_51D930(&info);
 
             delete[] info.field_10_pConnectionName;
-            GTA2_DELETE_AND_NULL(info.field_14_pConnection);
+            delete[] info.field_14_pConnection;
+            info.field_14_pConnection = nullptr;
 
             field_30_enumed_connections.field_10_enum_success = 1;
             return 1;
@@ -1439,8 +1440,8 @@ s32 NetPlay::MovePlayerToGroup_520040(s32 toFind, Network_Game_Session* pStru, N
 // 0x5201a0
 void NetPlay::FreePlayerSlot_5201A0(s32 idx, Network_Game_Session* pStru)
 {
-    delete pStru->field_10_players[idx].field_1C_player_name;
-    delete pStru->field_10_players[idx].field_24_pData;
+    operator delete(pStru->field_10_players[idx].field_1C_player_name);
+    operator delete(pStru->field_10_players[idx].field_24_pData);
     memset(&pStru->field_10_players[idx], 0, sizeof(Network_Player));
     pStru->field_10_players[idx].field_0_in_use = 0;
     pStru->field_4_players_count--;

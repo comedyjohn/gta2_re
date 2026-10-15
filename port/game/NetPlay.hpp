@@ -88,7 +88,7 @@ class EnumeratedConnection
   public:
     GUID field_0_sp_guid;
     wchar_t* field_10_pConnectionName;
-    void* field_14_pConnection;
+    u8* field_14_pConnection;
     s32 field_18_connection_len;
 };
 

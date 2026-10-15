@@ -1754,8 +1754,6 @@ void ParseCommandLine_4DA320(char_type* pCommandLine)
 }
 
 // The original passes an uninitialised lParam to PostMessageA, keep it for matching
-#pragma warning(push)
-#pragma warning(disable : 4700)
 // 0x5E4DE0
 void Start_GTA2Manager_5E4DE0()
 {
@@ -1787,7 +1785,6 @@ void Start_GTA2Manager_5E4DE0()
         }
     }
 }
-#pragma warning(pop)
 
 // 0x5E4EC0
 void ErrorMsgBox_5E4EC0(LPCSTR lpText)

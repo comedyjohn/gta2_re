@@ -188,12 +188,10 @@ cSampleManager::cSampleManager()
 }
 
 // The original returns an uninitialised bOk when both values are written
-#pragma warning(push)
-#pragma warning(disable : 4700)
 // 0x58D620
 char_type cSampleManager::DisableA3DSplash_58D620()
 {
-    char_type bOk;
+    char_type bOk = 1; // unset in the original when both writes succeed
     DWORD data;
     HKEY hKey;
     DWORD disposition;
@@ -218,7 +216,6 @@ char_type cSampleManager::DisableA3DSplash_58D620()
     RegCloseKey(hKey);
     return bOk;
 }
-#pragma warning(pop)
 
 // 0x58D6C0
 char_type cSampleManager::SoundInit_58D6C0(s32* a2)

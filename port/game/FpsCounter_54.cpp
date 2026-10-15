@@ -1,5 +1,4 @@
 // Built with /GX- (see cmake/vc6.cmake) to match, the STL headers pulled in warn about that
-#pragma warning(disable : 4530)
 
 #include "FpsCounter_54.hpp"
 #include "Function.hpp"

@@ -1812,8 +1812,6 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
     return 0;
 }
 
-#pragma warning(push)
-#pragma warning(disable : 4700) // name is never filled in, as in the original
 // 0x51b4f0
 s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMsg)
 {
@@ -1824,8 +1822,9 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
     wchar_t playerName[260];
     char_type allText[10000];
 
-    // The original gets our name as a wide string but then formats with the (unset) narrow buffer
+    // The original got our name as a wide string but then formatted the (unset) narrow buffer
     gNetPlay_7071E8.GetPlayerName_521100(playerName, 7);
+    wcstombs(name, playerName, sizeof(name));
     // TODO: the format string is a guess, only code is compared
     snprintf(line, sizeof(line), "%s: %s", name, pMsg);
     gChatLineCount_6F8A2C++;
@@ -1900,7 +1899,6 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
     }
     return 0;
 }
-#pragma warning(pop)
 
 // 0x51b7c0
 void Network_20324::SetPlayerNameText_51B7C0()
@@ -1920,14 +1918,12 @@ void Network_20324::cb_sub_51B7E0(Network_20324* pNetUi, const char_type** ppDat
     }
 }
 
-#pragma warning(push)
-#pragma warning(disable : 4701) // pSpeedText is used uninitialised for an unknown speed, as in the original
 // 0x51b810
 void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
 {
     char_type msg[520];
     wchar_t wmsg[520];
-    char_type* pSpeedText;
+    const char_type* pSpeedText = ""; // unset in the original for an unknown speed
 
     const NetworkGameSettings* pSettings = (const NetworkGameSettings*)pData;
     if (pSettings)
@@ -1981,10 +1977,7 @@ void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
         SetJoinedGameTimeLimitText_51D2F0(field_20088_game_settings.field_201A4_game_time_limit, field_202E0_dlg_hwnd);
     }
 }
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable : 4701) // pSpeedText is used uninitialised for an unknown speed, as in the original
 // 0x51b9c0
 void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
 {
@@ -2062,7 +2055,6 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
     data.field_4_len = sizeof(field_20088_game_settings);
     gNetPlay_7071E8.SetGameSettings_521170(&data);
 }
-#pragma warning(pop)
 
 // 0x51bbc0
 void Network_20324::IncCount_51BBC0()
@@ -2112,7 +2104,6 @@ s32 Network_20324::GetEndDialog_51BC80()
     return field_1FD68_bEndDialog;
 }
 
-#pragma function(strcpy)
 
 // 0x51bc90
 void Network_20324::LoadPlayerNameFromRegistry_51BC90()
@@ -2166,7 +2157,6 @@ void Network_20324::SetPlayNameAndSaveToRegistry_51BD40(const wchar_t* pPlayerNa
     }
 }
 
-#pragma intrinsic(strcpy)
 
 // 0x51bdd0
 LRESULT Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
@@ -2494,14 +2484,12 @@ void Network_20324::SetFragsNumberAndLabel_51CDC0(s32 gameType, s32 fragLimit, H
 // https://decomp.me/scratch/gzeUC
 // The original leaves pText uninitialised for an unknown speed (it pushes whatever is in the
 // argument slot), and that is what gives each case its own copy of the call.
-#pragma warning(push)
-#pragma warning(disable : 4701) // local variable 'pText' may be used without having been initialized
 // 0x51cfc0
 void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWND hDlg)
 {
     SendDlgItemMessageA(hDlg, 1031, 0x405, 1u, game_speed); // 0x405 = TBM_SETPOS
 
-    LPCSTR pText;
+    LPCSTR pText = ""; // unset in the original for an unknown speed
     switch (game_speed)
     {
         case 2:
@@ -2516,7 +2504,6 @@ void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWN
     }
     SetDlgItemTextA(hDlg, LABEL_GAME_SPEED_TEXT_1032, pText);
 }
-#pragma warning(pop)
 
 // 0x51d0c0
 void Network_20324::SetJoinedGameTypeAndFragLimitText_51D0C0(s32 game_type, s32 frag_limit, HWND hDlg)

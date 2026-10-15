@@ -603,8 +603,6 @@ s32 RouteFinder::NoRefs_589210(u8 x, u8 y, s32 a4, u8 direction, s32 a6, u16 jun
 }
 
 // dx/dy are uninitialised for a direction that isn't 1, 2, 4 or 8, as in the original
-#pragma warning(push)
-#pragma warning(disable : 4701)
 // 0x5892d0
 RouteFinder_10::RouteFinder_10()
 {
@@ -614,7 +612,6 @@ RouteFinder_10::RouteFinder_10()
     field_8_pParent = nullptr;
     field_C_pNext = nullptr;
 }
-#pragma warning(pop)
 
 // 0x5892f0
 RouteFinder_10* RouteFinder::NewChildNode_5892F0(RouteFinder_10* pRoute, u16 idx, s16 step_cost)

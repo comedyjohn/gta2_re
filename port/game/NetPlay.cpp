@@ -2094,10 +2094,8 @@ void NetPlay::Add_5216E0(Network_8* pData, s32 id, char_type game_tick)
 // 0x521770
 u32 NetPlay::GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlayerId)
 {
-#pragma warning(push)
-#pragma warning(disable : 4700) // best_seq/best_idx are read uninitialised in the original too
-    u8 best_seq;
-    u32 best_idx;
+    u8 best_seq = 0; // read unset in the original too
+    u32 best_idx = 0;
     char_type bFound = 0;
     for (u32 i = 0; i < 48; i++)
     {
@@ -2126,7 +2124,6 @@ u32 NetPlay::GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlay
         return best_idx;
     }
     return -1;
-#pragma warning(pop)
 }
 
 // 0x521820

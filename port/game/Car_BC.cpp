@@ -4252,8 +4252,6 @@ s32 GetDamageMultiplier_45CF90(Ped* pPed)
 }
 
 // impact_vec is read uninitialised, as in the original
-#pragma warning(push)
-#pragma warning(disable : 4700)
 // 9.6f 0x4274C0. The Fix16 and Fix16_Point operators are the out-of-line copies (Add_40AC50,
 // Multiply_438FE0, operator- 0x40AC80, Multiply_408680, operator+ 0x408660, Normalize_406C20).
 // The 9.6f getters (IsMaxDamage_40F890, the flag tests, get_x_y 0x4207B0) set the inline budget: every
@@ -4409,7 +4407,6 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
     return 1;
 }
 
-#pragma warning(pop)
 
 // 0x440510
 Fix16 Car_BC::GetMaxTurnRate_440510()

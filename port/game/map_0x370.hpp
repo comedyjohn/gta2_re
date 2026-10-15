@@ -147,8 +147,8 @@ struct gmp_compressed_map_32
     }
 
     u32 field_0_base[256][256];
-    s32 field_40000_column_words;
-    s32 field_40004_num_blocks;
+    u32 field_40000_column_words;
+    u32 field_40004_num_blocks;
     gmp_column_word* field_40008_pColumn;
     gmp_block_info* field_4000C_block;
 
@@ -189,7 +189,7 @@ struct DmapInfoList
     void AddOrUpdateDmapInfo_4E80E0(u8 x, u8 y, u32 column_idx);
 
     gmp_dmap_info field_0_dmap_infos[100];
-    s32 field_320_max_idx;
+    u32 field_320_max_idx;
 };
 
 class gmp_map_zone
@@ -813,12 +813,12 @@ class Map_0x370
     gmp_map_object* field_338_pMapObjects;
     gmp_map_light* field_33C_pLightData;
     gmp_tile_animation* field_340_pTileAnimData;
-    s32 field_344_map_object_count;
-    s32 field_348_num_lights;
-    s32 field_34C_num_blocks;
+    u32 field_344_map_object_count;
+    u32 field_348_num_lights;
+    u32 field_34C_num_blocks;
     s32 field_350_num_blocks_extra;
     u32 field_354_num_blocks; // u32: OnModifiedMapDataLoaded_4E8C00 matches only with these two unsigned
-    s32 field_358_column_words;
+    u32 field_358_column_words;
     s32 field_35C_column_word_extra;
     u32 field_360_column_words;
     u16 field_364_cur_zone_idx;

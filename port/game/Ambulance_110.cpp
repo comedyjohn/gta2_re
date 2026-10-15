@@ -11,7 +11,7 @@
 #include "CarAI_78.hpp"
 #include "CarChaseTaskTable_500.hpp"
 #include "RouteFinder.hpp"
-#include <stdio.h>
+#include <cstdio>
 #include "ped_graphic_type.hpp"
 
 DEFINE_GLOBAL(Ambulance_110*, gAmbulance_110_6F70A8, 0x6F70A8);

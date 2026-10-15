@@ -16,7 +16,7 @@
 #include "file.hpp"
 #include "fix16.hpp"
 #include "gbh_graphics.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 #include "gtx_0x106C.hpp"
 #include "SoundObject_10.hpp"
 #include "input.hpp"
@@ -31,8 +31,8 @@
 #include "winmain.hpp"
 #include "TagGame_28.hpp"
 #include <io.h>
-#include <stdio.h>
-#include <wchar.h>
+#include <cstdio>
+#include <cwchar>
 
 #pragma comment(lib, "dxguid.lib")
 

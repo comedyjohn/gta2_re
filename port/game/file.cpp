@@ -4,8 +4,8 @@
 #include "memory.hpp"
 #include "Globals.hpp"
 #include "crt_stubs.hpp"
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include "enums.hpp"
 
 DEFINE_GLOBAL(s32, gbGlobalFileOpen_67D160, 0x67D160);

@@ -4,8 +4,8 @@
 #include "enums.hpp"
 #include "fix16.hpp"
 #include "winmain.hpp"
-#include <stdio.h>
-#include <time.h>
+#include <cstdio>
+#include <ctime>
 #include <windows.h>
 
 DEFINE_GLOBAL(char_type, bDestroyed_6F5B70, 0x6F5B70);

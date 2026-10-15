@@ -1,5 +1,5 @@
 #include "CreditsLine_6C.hpp"
-#include <string.h>
+#include <cstring>
 
 MATCH_FUNC(0x483E30)
 CreditsLine_6C::CreditsLine_6C() // 483E30

@@ -10,9 +10,9 @@
 #include "registry.hpp"
 #include "rng.hpp"
 #include <io.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
 #include "GameSession_578.hpp"
 
 #define ATTRACT_COUNT 3

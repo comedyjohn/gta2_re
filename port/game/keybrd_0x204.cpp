@@ -2,7 +2,7 @@
 #include "Function.hpp"
 #include "Globals.hpp"
 #include "error.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 #include <windows.h>
 #include "enums.hpp"
 

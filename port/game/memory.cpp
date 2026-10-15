@@ -2,7 +2,7 @@
 #include "Function.hpp"
 #include "error.hpp"
 #include "crt_stubs.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 #include "enums.hpp"
 
 MATCH_FUNC(0x4FE4D0)

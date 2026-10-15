@@ -26,7 +26,7 @@
 #include "map_0x370.hpp"
 #include "sprite.hpp"
 #include "CrimeReportQueue_CC.hpp"
-#include <math.h>
+#include <cmath>
 
 // Forward declarations: the functions below are in address order
 EXTERN_GLOBAL(u16, word_6751D0);

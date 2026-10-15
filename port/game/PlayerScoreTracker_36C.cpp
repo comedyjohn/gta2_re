@@ -27,7 +27,7 @@
 #include "root_sound.hpp"
 #include "text_0x14.hpp"
 #include "Ped.inl"
-#include <string.h>
+#include <cstring>
 
 // TODO: move
 EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);

@@ -4,7 +4,7 @@
 #include "error.hpp"
 #include "map_0x370.hpp"
 #include "text_0x14.hpp"
-#include <string.h>
+#include <cstring>
 
 DEFINE_GLOBAL(GangPool_CA8*, gGangPool_CA8_67E274, 0x67E274);
 DEFINE_GLOBAL_INIT(s32, gGangIdx_6206B8, -1, 0x6206B8);

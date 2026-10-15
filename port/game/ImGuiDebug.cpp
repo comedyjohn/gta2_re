@@ -44,7 +44,7 @@
 #include "CarAI_78.hpp"
 #include <direct.h>
 #include <vector>
-#include <stdarg.h>
+#include <cstdarg>
 
 #include "HookLoader.hpp"
 #include <shlwapi.h>

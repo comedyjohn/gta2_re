@@ -1,8 +1,8 @@
 #include "Function.hpp"
-#include <stdio.h>
+#include <cstdio>
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <string>
 #include <vector>
 

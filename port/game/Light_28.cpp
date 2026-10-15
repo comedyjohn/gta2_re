@@ -2,7 +2,7 @@
 #include "Globals.hpp"
 #include "crt_stubs.hpp"
 #include "gbh_graphics.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 
 DEFINE_GLOBAL(Light_28**, gLightGrid_6F5400, 0x6F5400) ;
 

@@ -5,8 +5,8 @@
 #include "Frontend.hpp"
 #include "fix16.hpp"
 #include "gtx_0x106C.hpp"
-#include <stdio.h>
-#include <stdarg.h>
+#include <cstdio>
+#include <cstdarg>
 #include <windows.h>
 #include <mmsystem.h>
 

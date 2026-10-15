@@ -2,7 +2,7 @@
 #include "Char_Pool.hpp"
 #include "Globals.hpp"
 #include "map_0x370.hpp"
-#include <string.h>
+#include <cstring>
 
 DEFINE_GLOBAL(u8, gPathFinder_SlopeZDelta_6FDEEC, 0x6FDEEC);
 DEFINE_GLOBAL(s16, gPathFinder_best_cost_6FDECE, 0x6FDECE);

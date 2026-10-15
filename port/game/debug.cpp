@@ -2,7 +2,7 @@
 #include "Function.hpp"
 #include "registry.hpp"
 #include "Globals.hpp"
-#include <stdio.h>
+#include <cstdio>
 
 DEFINE_GLOBAL(bool, gDo_infinite_lives_67D4C9, 0x67D4C9);
 DEFINE_GLOBAL(bool, bLimit_recycling_67D4CA, 0x67D4CA);

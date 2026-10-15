@@ -7,8 +7,8 @@
 #include "error.hpp"
 #include "file.hpp"
 #include "memory.hpp"
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <windows.h>
 #include "enums.hpp"
 

@@ -13,7 +13,7 @@
 #include "winmain.hpp"
 #include "Game_0x40.hpp"
 #include "Player.hpp"
-#include <stdio.h>
+#include <cstdio>
 
 DEFINE_GLOBAL(CrusherPool_94*, gCrusherPool_94_67A830, 0x67A830);
 

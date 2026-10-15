@@ -26,7 +26,7 @@
 #include "FpsCounter_54.hpp"
 #include <ddraw.h>
 #include <direct.h>
-#include <stdio.h>
+#include <cstdio>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <windows.h>

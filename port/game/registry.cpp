@@ -3,7 +3,7 @@
 #include "Globals.hpp"
 #include "error.hpp"
 #include "StdAfx.h"
-#include <stdio.h>
+#include <cstdio>
 #include <windows.h>
 #include "enums.hpp"
 

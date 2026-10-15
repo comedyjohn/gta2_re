@@ -2379,7 +2379,7 @@ char_type* Network_20324::GetMapScrName_51CA90()
 void Network_20324::ShowUnableToOpenFileError_51CAD0(const char_type* pMmpName, const char_type* pFileName)
 {
     char Text[256];
-    sprintf(Text, "Unable to open file: %s in mmpfile: %s", pFileName, pMmpName);
+    snprintf(Text, sizeof(Text), "Unable to open file: %s in mmpfile: %s", pFileName, pMmpName);
     MessageBoxA(nullptr, Text, "", MB_ICONEXCLAMATION); // TODO: blank str is byte_67DC88 ?
 }
 

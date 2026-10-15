@@ -1,6 +1,10 @@
 {
   "version": 3,
-  "cmakeMinimumRequired": {"major": 3, "minor": 21, "patch": 0},
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
   "configurePresets": [
     {
       "name": "linux32",
@@ -8,6 +12,8 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/../build_port/linux32",
       "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
         "GTA2_BITS": "32",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_PREFIX_PATH": "$env{HOME}/sdl32/usr"
@@ -19,13 +25,21 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/../build_port/linux64",
       "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
         "GTA2_BITS": "64",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     }
   ],
   "buildPresets": [
-    {"name": "linux32", "configurePreset": "linux32"},
-    {"name": "linux64", "configurePreset": "linux64"}
+    {
+      "name": "linux32",
+      "configurePreset": "linux32"
+    },
+    {
+      "name": "linux64",
+      "configurePreset": "linux64"
+    }
   ]
 }

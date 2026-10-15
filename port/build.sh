@@ -12,7 +12,24 @@ if [ ! -f "$repo/3rdParty/GTA2Hax/d3ddll/d3ddll.hpp" ] || [ ! -f "$repo/3rdParty
     git -C "$repo/3rdParty/GTA2Hax" submodule update --init 3rdParty/imgui
 fi
 
+# The presets build with the system's gcc/g++ (CMakePresets.json). Check up front that it can
+# produce the asked-for width, which otherwise fails deep inside CMake's compiler check.
+check_compiler() {
+    command -v g++ >/dev/null 2>&1 || { echo "build.sh: g++ is missing (Debian/Ubuntu: sudo apt install g++)" >&2; exit 1; }
+    flag=""
+    [ "$1" = 32 ] && [ "$(uname -m)" = x86_64 ] && flag=-m32
+    if ! echo 'int main(){return 0;}' | g++ $flag -x c++ - -o /dev/null 2>/dev/null; then
+        if [ -n "$flag" ]; then
+            echo "build.sh: g++ can't build 32-bit programs (Debian/Ubuntu: sudo apt install g++-multilib)" >&2
+        else
+            echo "build.sh: g++ can't build a test program" >&2
+        fi
+        exit 1
+    fi
+}
+
 build() {
+    check_compiler "$1"
     if [ "$1" = 32 ] && [ ! -f "$HOME/sdl32/usr/include/SDL2/SDL.h" ]; then
         "$port/tools/setup_sdl32.sh" "$HOME/sdl32"
     fi

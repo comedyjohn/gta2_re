@@ -23,7 +23,7 @@ class ExplodingScore_50
     Fix16 field_2C_y;
     Fix16 field_30_z;
     s16 field_34_palette;
-    char_type field_36; // draw figure param
+    u8 field_36; // draw figure param
     char_type field_37_unused; // pad ?
     s32 field_38; // scale factor?
     s32 field_3C; // xoff ?
@@ -46,7 +46,7 @@ class ExplodingScorePool
     void Update_596940();
     void DrawExplodingScores_5969E0();
 
-    s16 field_0_last_palette;
+    u16 field_0_last_palette;
     u16 field_2_free_scores;
 
     // NOTE: Nearly all other pools start at offset 0, this object is some 

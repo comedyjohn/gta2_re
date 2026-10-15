@@ -672,7 +672,7 @@ class Hud_CarName_4C
   public:
     Hud_CarName_4C();
     void DrawCarName_5D4A10();
-    char_type field_0_display_time;
+    u8 field_0_display_time;
     wchar_t field_2_car_name[33];
     s32 field_44_xpos_offset;
     s32 field_48_ypos;

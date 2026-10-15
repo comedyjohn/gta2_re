@@ -96,7 +96,7 @@ class PedManager
     void Dummies_470330();
 
     s16 field_0_max_dummy_chars;
-    char_type field_2_num_dummy_chars;
+    u8 field_2_num_dummy_chars;
     char_type field_3_num_peds_updated;
     char_type field_4_num_script_created_peds;
     u8 field_5_fbi_army_count;

@@ -189,7 +189,7 @@ void PlayerScoreTracker_36C::Service_591C70()
         field_19C_reverse_time_ms = 0;
     }
 
-    if (field_19C_reverse_time_ms >= 60000u)
+    if (field_19C_reverse_time_ms >= 60000)
     {
         field_19C_reverse_time_ms = 0;
         field_368_player->AddScore_41DC40(1000);

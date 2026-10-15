@@ -126,7 +126,7 @@ class Ped
     }
 
     // 9.6f 0x433B80
-    inline void SetOffscreenCounter_433B80(s16 v)
+    inline void SetOffscreenCounter_433B80(u16 v)
     {
         field_20E_offscreen_counter = v;
     }
@@ -900,7 +900,7 @@ class Ped
     u16 field_208_invulnerability;
     s16 field_20A_wanted_points;
     u16 field_20C_target_unseen_counter; // frames the target was not seen; gives up after 15
-    s16 field_20E_offscreen_counter;
+    u16 field_20E_offscreen_counter;
     u16 field_210_shock_counter;
     u16 field_212_electrocution_threshold;
     s16 field_214_unused;
@@ -933,7 +933,7 @@ class Ped
     //char_type field_257;
     s32 field_258_objective;
     s32 field_25C_internal_objective;
-    char_type field_260_wait_counter; // frames waited on the target (field_224_bf.bWaitingOnTarget)
+    u8 field_260_wait_counter; // frames waited on the target (field_224_bf.bWaitingOnTarget)
     char_type field_261_unused;
     u8 field_262_attackers_count;
     u8 field_263_prev_attackers_count;

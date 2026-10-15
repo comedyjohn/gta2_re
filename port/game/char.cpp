@@ -5717,7 +5717,7 @@ void Char_B4::state_7_551CB0()
                 {
                     if ((field_7C_pPed->PedTypeIs_45EDE0(ped_type::script_created_5) || field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2)) && !field_4A)
                     {
-                        if (gRng_6F6784.get_int_4F7AE0(600) < 4u && field_10_char_state != Char_B4_state::Smoking_35)
+                        if (gRng_6F6784.get_int_4F7AE0(600) < 4 && field_10_char_state != Char_B4_state::Smoking_35)
                         {
                             field_10_char_state = Char_B4_state::Smoking_35;
                             field_68_animation_frame = 0;

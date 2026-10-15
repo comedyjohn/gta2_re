@@ -88,7 +88,7 @@ class Police_7B8
     u8 field_7AC_roadblock_cooldown;
 
   public:
-    char_type field_7AD_police_peds_in_range_screen;
+    u8 field_7AD_police_peds_in_range_screen;
     Ped* field_7B0_last_firing_emergency_ped;
     bool field_7B4_crew_ped_onscreen;
 };

@@ -40,7 +40,7 @@ class CarChaseTask_40
     Ped* field_30_pTargetPed;
     s16 field_34_snap_timer;
     s32 field_38_unused;
-    char_type field_3C_block_counter;
+    u8 field_3C_block_counter;
 };
 
 // Fixed table of the 20 chase tasks

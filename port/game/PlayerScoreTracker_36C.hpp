@@ -59,11 +59,11 @@ class PlayerScoreTracker_36C
     u8 field_74_car_kill_combo;
     u8 field_75_score_mult;
     s32 field_78_last_kill_time;
-    s16 field_7C_execution_count;
+    u16 field_7C_execution_count;
     s32 field_80_last_elvis_kill_time;
-    s16 field_84_num_elvis_killed;
+    u16 field_84_num_elvis_killed;
     u16 field_86_total_kills;
-    s16 field_88_killed_cops;
+    u16 field_88_killed_cops;
     u16 field_8A_cars_stolen_count;
     u8 field_8C_car_model_flags[256]; // car_model_flag bits (car_model_flag.hpp)
     u32 field_18C_one_second_timer_ms;

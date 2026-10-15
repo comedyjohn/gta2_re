@@ -157,7 +157,7 @@ class PoliceRoadblock_A4
     char_type field_A_unused;
     char_type field_B_unused;
     u16 field_C;
-    s16 field_E;
+    u16 field_E;
     Car_BC* field_10_car_1;
     Car_BC* field_14_car_2;
     Car_BC* field_18_car_3;

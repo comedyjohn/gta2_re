@@ -121,7 +121,7 @@ class CarAI_78
     u16 field_54_accel_cooldown;
     s16 field_56_route_pos;
     u16 field_58_off_road_timer;
-    s16 field_5A_obstacle_timer;
+    u16 field_5A_obstacle_timer;
     Fix16 field_5C_unused;
     Fix16 field_60_unused;
     Fix16 field_64_unused;

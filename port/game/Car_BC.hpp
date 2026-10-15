@@ -290,7 +290,7 @@ class CarManager_6C
     s32 field_14_next_car_id;
     char_type field_18_unused;
     char_type field_19_unused;
-    char_type field_1A_fire_effect_cycle;
+    u8 field_1A_fire_effect_cycle;
     char_type field_1B_unused;
     s32 field_1C_explosion_offset_cycle;
     s32 field_20_light_state_a;

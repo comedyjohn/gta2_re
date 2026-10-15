@@ -116,7 +116,7 @@ class Network_20324
 
     //s32 field_0_vTable; // added by the compiler
     Network_Enumerated_Map field_4_maps[100];
-    s32 field_1FD64_total_map_count;
+    u32 field_1FD64_total_map_count;
     s32 field_1FD68_bEndDialog;
     s32 field_1FD6C_count;
     WNDPROC field_1FD70_old_proc;

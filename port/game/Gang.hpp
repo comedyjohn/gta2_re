@@ -123,7 +123,7 @@ class Gang_144
     u8 field_139_kill_respect_change;
     char field_13A_unused;
     char field_13B_unused;
-    u32 field_13C_gang_car_model;
+    s32 field_13C_gang_car_model;
     char field_140_gang_car_remap;
     char field_141_always_basic_weapon;
     char field_142_unused;

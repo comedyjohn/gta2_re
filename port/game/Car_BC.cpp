@@ -575,7 +575,7 @@ void CarManager_6C::DistributeCarsByRating_444980()
 // 0x444ab0
 u32 CarManager_6C::SelectTrafficCarModel_444AB0(Player* pPlayer, gmp_zone_info* pZoneInfo, Fix16 density_scale, u16* pOut)
 {
-    u32 result;
+    s32 result;
     Fix16 density_calc = Fix16(pZoneInfo->field_0_car_density) / Fix16(0xFA0000, 0);
     if (density_calc == gFix16_6777CC)
     {
@@ -1581,7 +1581,7 @@ void CarManager_6C::EnableFreeShoppingIfAllKFsPassed_446760()
         const u32 total_secrets = gScriptManager_6F8060->field_318_total_secrets;
         if (total_secrets > 0)
         {
-            if (!this->field_69_do_free_shopping && *pSecretsPassed >= total_secrets)
+            if (!this->field_69_do_free_shopping && (u32)*pSecretsPassed >= total_secrets)
             {
                 this->field_69_do_free_shopping = 1;
             }

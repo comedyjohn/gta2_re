@@ -55,7 +55,7 @@ EXTERN_GLOBAL(s32, gGTA2VersionMajor_708284);
 
 DEFINE_GUID(GUID_SysKeyboard, 0x6F1D2B61, 0xD5A0, 0x11CF, 0xBF, 0xC7, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00);
 
-const AttractFile attractFiles_62083C[ATTRACT_COUNT] = {"data\\attract\\attr1.rep", "data\\attract\\attr2.rep", "data\\attract\\attr3.rep"};
+const AttractFile attractFiles_62083C[ATTRACT_COUNT] = {{"data\\attract\\attr1.rep"}, {"data\\attract\\attr2.rep"}, {"data\\attract\\attr3.rep"}};
 
 // 0x498730
 bool InputDevices_1::acquire_input_device_498730(LPDIRECTINPUTDEVICEA pGamePadDevice)

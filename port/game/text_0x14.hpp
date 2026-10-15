@@ -50,7 +50,7 @@ public:
         field_0_tKey = nullptr;
     }
     text_0xC* field_0_tKey;
-    s32 field_4_tKey_count;
+    u32 field_4_tKey_count;
 };
 
 

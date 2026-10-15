@@ -137,7 +137,9 @@ typedef HINSTANCE HMODULE;
 typedef void* HGDIOBJ;
 typedef HANDLE HGLOBAL;
 typedef HKEY* PHKEY;
-typedef int (*FARPROC)();
+// void (*)() rather than Windows' int (*)(): the generic function pointer type, so casting it to the
+// real signature is not a cast between incompatible function types (GCC -Wcast-function-type)
+typedef void (*FARPROC)();
 
 typedef struct tagRECT
 {

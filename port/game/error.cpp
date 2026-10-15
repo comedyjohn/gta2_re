@@ -979,7 +979,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1034:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Invalid switch in parameter list: %c", (char)va_1);
             break;
         }
@@ -1063,7 +1063,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1040:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Out of space for list type %s", gListTypes_61AB70[(u32)va_1]);
             break;
         }
@@ -1133,13 +1133,13 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1048:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Releasing null ptr in release_passive. List type %s", gListTypes_61AB70[(u32)va_1]);
             break;
         }
         case 1049:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Trying to 'pacify' a NULL list element. List type %s", gListTypes_61AB70[(u32)va_1]);
             break;
         }
@@ -1272,14 +1272,14 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1078:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Activating null ptr in activate. List type %s", gListTypes_61AB70[(u32)va_1]);
             break;
         }
 
         case 1079:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Activating item twice. List type %s", gListTypes_61AB70[(u32)va_1]);
             break;
         }
@@ -1334,7 +1334,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1137:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Counter check failed for list type %s", gListTypes_61AB70[(DWORD)va_1]);
             break;
         }
@@ -1348,14 +1348,14 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1138:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Releasing twice in release_passive. List type %s", gListTypes_61AB70[(DWORD)va_1]);
             break;
         }
 
         case 1139:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
+            s32 va_1 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Releasing twice in release. List type %s", gListTypes_61AB70[(DWORD)va_1]);
             break;
         }
@@ -1438,57 +1438,57 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
 
         case 1106:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Line accessing trigger that hasn't been created: uid: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Line accessing trigger that hasn't been created: uid: %d", va_1);
             break;
         }
 
         case 1108:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Line accessing crane that hasn't been created: uid: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Line accessing crane that hasn't been created: uid: %d", va_1);
             break;
         }
 
         case 1109:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Line attempting to order driver out of car, but char_type isn't a driver!: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Line attempting to order driver out of car, but char_type isn't a driver!: %d", va_1);
             break;
         }
 
         case 1112:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Line accessing arrow that hasn't been created: uid: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Line accessing arrow that hasn't been created: uid: %d", va_1);
             break;
         }
 
         case 1113:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d", va_1);
             break;
         }
 
         case 1114:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Failed to create a crane in script line: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Failed to create a crane in script line: %d", va_1);
             break;
         }
 
         case 1115:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Failed to create a conveyor in script line: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Failed to create a conveyor in script line: %d", va_1);
             break;
         }
 
         case 1116:
         {
-            const char_type* va_1 = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "Failed to create a generator in script line: %d", (int)va_1);
+            s32 va_1 = va_arg(va, int);
+            sprintf(gTmpBuffer_67C598, "Failed to create a generator in script line: %d", va_1);
             break;
         }
 
@@ -1739,7 +1739,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2024:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "List type %s corrupted at grab at %d elements", gListTypes_61AB70[(DWORD)va_2], va_2);
             break;
         }
@@ -1747,7 +1747,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2025:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "List type %s corrupted at release at %d elements", gListTypes_61AB70[(DWORD)va_2], va_2);
             break;
         }
@@ -1755,7 +1755,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2026:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "List type %s corrupted at traverse at %d elements", gListTypes_61AB70[(DWORD)va_2], va_2);
             break;
         }
@@ -1763,7 +1763,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2030:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "List type %s corrupted at activate at %d elements", gListTypes_61AB70[(DWORD)va_2], va_2);
             break;
         }
@@ -1771,7 +1771,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2031:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "List type %s corrupted at pacify at %d elements", gListTypes_61AB70[(DWORD)va_2], va_2);
             break;
         }
@@ -1779,7 +1779,7 @@ EXPORT void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 2005:
         {
             s32 va_1 = va_arg(va, int);
-            const char_type* va_2 = va_arg(va, const char_type*);
+            s32 va_2 = va_arg(va, int);
             sprintf(gTmpBuffer_67C598, "Can't delete element %d from list type %s", va_2, gListTypes_61AB70[(DWORD)va_2]);
             break;
         }

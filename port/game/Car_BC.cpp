@@ -530,7 +530,7 @@ void CarManager_6C::DistributeCarsByRating_444980()
                 if (pInfo->rating != 99)
                 {
                     u16 r_mod_10 = pInfo->rating % 10;
-                    u16 idx_type;
+                    u16 idx_type = 0; // ratings of 30 and up are in no list (the original left it uninitialised)
 
                     if (pInfo->rating < 10)
                     {

@@ -908,7 +908,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
                 case 5:
                     return;
                 default:
-                    // BUG: colour_related - un-inited?
+                    colour_related = 0; // left uninitialised in the original
                     break;
             }
 
@@ -2087,7 +2087,7 @@ Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
 // 0x5d3470
 size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
 {
-    size_t num_chars;
+    size_t num_chars = 0;
     char_type brief_face_idx;
 
     if (field_6F8_curr_briefs)

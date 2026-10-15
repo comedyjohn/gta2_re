@@ -1781,8 +1781,7 @@ void Start_GTA2Manager_5E4DE0()
     }
     else
     {
-        LPARAM lParam; // [esp+4h] [ebp-4h]
-        PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, lParam);
+        PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, 0); // the original passed an uninitialised lParam
         if ((uintptr_t)ShellExecuteA(nullptr, nullptr, "GTA2 Manager.EXE", nullptr, gWorkingDir_707F64, 1) <= 0x20)
         {
             FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 136);

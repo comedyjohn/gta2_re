@@ -3443,10 +3443,8 @@ void CC ImGuiDebugDraw()
                     case 2:
                         pTable = &gPlyDat_6FEAC0->field_24C0_alt_scores;
                         break;
-                    case 3:
-                        pTable = &gPlyDat_6FEAC0->field_25B0;
-                        break;
                     default:
+                        pTable = &gPlyDat_6FEAC0->field_25B0;
                         break;
                 }
 

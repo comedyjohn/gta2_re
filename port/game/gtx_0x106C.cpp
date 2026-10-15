@@ -97,8 +97,7 @@ u16 gtx_0x106C::GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_idx)
             result = sprite_idx + field_14_sprite_base2->field_A_font;
             break;
         default:
-            // No assignment: VC6 gives result sprite_idx's stack slot, so this returns sprite_idx
-            // with the original's 32-bit load. 'result = sprite_idx;' loads 16 bits.
+            result = sprite_idx;
             break;
     }
     return result;

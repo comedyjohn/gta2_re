@@ -76,7 +76,7 @@ bool CompareNameChars_577E90(char_type* pChar1, char_type* pChar2)
 // 0x577EE0
 gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
 {
-    u32 zone_type;
+    u32 zone_type = Railway_Station_Entry_Point_11;
 
     switch (case_value)
     {

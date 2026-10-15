@@ -1275,8 +1275,8 @@ void Frontend::DrawMenu_4AD140()
 
     if (chosen_option_idx == 3 || chosen_option_idx == 4)
     {
-        u8 main_level_idx;
-        u8 bonus_level_idx;
+        u8 main_level_idx = 0;
+        u8 bonus_level_idx = 0;
 
         if (chosen_option_idx == 3) //  START PLAY IN AREA
         {
@@ -1304,7 +1304,7 @@ void Frontend::DrawMenu_4AD140()
         if (pMenuElement->field_1_is_it_displayed)
         {
             u16 font_type;
-            s32 shape_type;
+            s32 shape_type = 2;
 
             switch (pMenuElement->field_0_element_type)
             {

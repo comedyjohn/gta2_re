@@ -1716,8 +1716,8 @@ void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
 void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
 {
     SCR_THREAD* pThread = (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
-    miss2_0x11C* pScriptThread;
-    s16 threadId;
+    miss2_0x11C* pScriptThread = nullptr;
+    s16 threadId = 0;
 
     s32 opcode_idx = pThread->field_2_type;
     if (opcode_idx != SCRCMD_THREAD_ID)
@@ -1740,7 +1740,7 @@ void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
         pThread->field_8_script_thread = nullptr;
     }
 
-    if (pScriptThread->field_11A_thread_id == threadId)
+    if (pScriptThread && pScriptThread->field_11A_thread_id == threadId)
     {
         pScriptThread->StopThread_503610();
     }

@@ -664,7 +664,7 @@ void PedManager::PedsService_4703F0()
     bThreateningPedAdded_6787EF = 0;
     if (bDo_iain_test_67D4E9)
     {
-        u16 num_peds = *(u32*)&gNumPedsOnScreen_6787EC; //  TODO: fix me
+        u16 num_peds = gNumPedsOnScreen_6787EC;
         swprintf(tmpBuff_67BD9C, L"num peds on screen : %d",
                  num_peds); // num peds on screen : %d
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);

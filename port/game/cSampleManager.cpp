@@ -1154,16 +1154,24 @@ char_type cSampleManager::LoadWavSdtData_58E980(const char_type* pRawOrSdtName)
     }
 
     rewind(hRawFile_);
-    fread(field_1EA8_pAudioBuffer1, 1u, rawFileSize, hRawFile_);
+    const size_t rawRead = fread(field_1EA8_pAudioBuffer1, 1u, rawFileSize, hRawFile_);
     fclose(hRawFile_);
+    if (rawRead != (size_t)rawFileSize)
+    {
+        return 0;
+    }
     hSdtFile = fopen(sdtName, "rb");
     if (!hSdtFile)
     {
         return 0; // the original closed the raw file a second time here and read from a null FILE*
     }
 
-    fread(field_A8_sdt_entries, sizeof(sdt_entry_0x18), 320u, hSdtFile);
+    const size_t sdtRead = fread(field_A8_sdt_entries, sizeof(sdt_entry_0x18), 320u, hSdtFile); // up to 320 entries
     fclose(hSdtFile);
+    if (sdtRead == 0)
+    {
+        return 0;
+    }
     field_A4_bLoaded = 1;
     return 1;
 }

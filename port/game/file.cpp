@@ -374,7 +374,7 @@ char_type __stdcall File::SkipWhitespace_4A7340(FILE* Stream)
 {
     char_type next_char = 0;
 
-    while (1)
+    while (true)
     {
         next_char = crt::fgetc(Stream);
         // note: feof = Stream->_flag & 0x10

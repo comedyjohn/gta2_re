@@ -295,15 +295,15 @@ class Object_2C
     {
         if (this->field_18_model == 197)
         {
-            return 1;
+            return true;
         }
 
         if (IsFireExplosion_525AC0())
         {
-            return 1;
+            return true;
         }
 
-        return 0;
+        return false;
     }
 
     // 9.6f 0x482400

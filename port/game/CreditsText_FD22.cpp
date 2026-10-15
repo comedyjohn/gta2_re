@@ -30,7 +30,7 @@ void CreditsText_FD22::LoadCredits_483F20()
     s16 y_gap = 0;
     u16 read_pos = 0;
     wchar_t* pCreditsText = gText_0x14_704DFC->Find_5B5F90("credits");
-    wchar_t line_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, 1);
+    wchar_t line_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, true);
     u16 line_idx = 0;
 
     while (line_char != 0)
@@ -44,7 +44,7 @@ void CreditsText_FD22::LoadCredits_483F20()
         {
             if (line_char == 35)
             {
-                wchar_t tag_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, 1);
+                wchar_t tag_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, true);
                 if (tag_char != 'W')
                 {
                     if (tag_char == 'B')
@@ -79,9 +79,9 @@ void CreditsText_FD22::LoadCredits_483F20()
             pLine->field_2_unused = 300;
 
             u16 i = 0;
-            while (1)
+            while (true)
             {
-                wchar_t content_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, 0);
+                wchar_t content_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, false);
                 if (content_char == '*')
                 {
                     break;
@@ -95,7 +95,7 @@ void CreditsText_FD22::LoadCredits_483F20()
             y_gap = 0;
             line_idx++;
         }
-        line_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, 1);
+        line_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, true);
         if (line_char == 0)
         {
             return;

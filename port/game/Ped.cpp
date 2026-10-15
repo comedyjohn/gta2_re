@@ -1743,7 +1743,7 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
             goto ret_false;
         }
 
-        return 1;
+        return true;
     }
 
     {
@@ -1786,7 +1786,7 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
                     goto ret_false;
                 }
 
-                return 1;
+                return true;
             }
 
             if (pMyGang->field_110_has_high_respect != 0)
@@ -1841,7 +1841,7 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
                             goto ret_true;
                         }
 
-                        return 0;
+                        return false;
                     }
 
                     goto ret_false;
@@ -1859,7 +1859,7 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
                     {
                         goto ret_true;
                     }
-                    return 0;
+                    return false;
                 }
 
                 goto ret_false;
@@ -1875,21 +1875,21 @@ no_my_gang:
         case ped_ocupation_enum::criminal_type_1:
             if (pTargetPed->field_240_occupation == ped_ocupation_enum::criminal_type_1)
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
         case ped_ocupation_enum::criminal_type_2:
             if (pTargetPed->field_240_occupation == ped_ocupation_enum::criminal_type_2)
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
         case ped_ocupation_enum::elvis:
             if (pTargetPed->PedTypeIs_45EDE0(ped_type::player_2))
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
@@ -1938,7 +1938,7 @@ block_466022:
                 pTargetPed->field_20A_wanted_points = 0x258;
             }
 
-            return 0;
+            return false;
         }
 
         if (pTargetPed->field_20A_wanted_points >= 0x258)
@@ -1947,7 +1947,7 @@ block_466022:
         }
 
         pTargetPed->field_20A_wanted_points = 0x258;
-        return 1;
+        return true;
     }
 
 block_4660FB:
@@ -1985,7 +1985,7 @@ block_4660FB:
         goto merge_178;
     }
 
-    return 1;
+    return true;
 }
 
 block_46613E:
@@ -2006,7 +2006,7 @@ block_46613E:
             goto merge_178;
         }
 
-        return 1;
+        return true;
     }
 
     if (pTargetPed->GetAttacking_433CA0())
@@ -2023,10 +2023,10 @@ merge_178:
     goto ret_false;
 
 ret_true:
-    return 1;
+    return true;
 
 ret_false:
-    return 0;
+    return false;
 }
 
 // https://decomp.me/scratch/Yg4cw
@@ -2471,7 +2471,7 @@ void Ped::StartCrossingRoad_45E4A0()
         }
 
         direction = 4;
-    } while (0);
+    } while (false);
 
     switch (direction)
     {
@@ -6030,7 +6030,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
             goto ret_false;
         }
 
-        return 1;
+        return true;
     }
 
     {
@@ -6073,7 +6073,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
                     goto ret_false;
                 }
 
-                return 1;
+                return true;
             }
 
             if (pMyGang->field_110_has_high_respect != 0)
@@ -6126,7 +6126,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
                             goto ret_true;
                         }
 
-                        return 0;
+                        return false;
                     }
 
                     goto ret_false;
@@ -6144,7 +6144,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
                     {
                         goto ret_true;
                     }
-                    return 0;
+                    return false;
                 }
 
                 goto ret_false;
@@ -6160,21 +6160,21 @@ no_my_gang:
         case ped_ocupation_enum::criminal_type_1:
             if (pTargetPed->field_240_occupation == ped_ocupation_enum::criminal_type_1)
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
         case ped_ocupation_enum::criminal_type_2:
             if (pTargetPed->field_240_occupation == ped_ocupation_enum::criminal_type_2)
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
         case ped_ocupation_enum::elvis:
             if (pTargetPed->PedTypeIs_45EDE0(ped_type::player_2))
             {
-                return 0;
+                return false;
             }
 
             goto merge_178;
@@ -6223,7 +6223,7 @@ block_466022:
                 pTargetPed->field_20A_wanted_points = 0x258;
             }
 
-            return 0;
+            return false;
         }
 
         if (pTargetPed->get_wanted_points_433DC0() >= 0x258)
@@ -6232,7 +6232,7 @@ block_466022:
         }
 
         pTargetPed->field_20A_wanted_points = 0x258;
-        return 1;
+        return true;
     }
 
 block_4660FB:
@@ -6270,7 +6270,7 @@ block_4660FB:
         goto merge_178;
     }
 
-    return 1;
+    return true;
 }
 
 block_46613E:
@@ -6291,7 +6291,7 @@ block_46613E:
             goto merge_178;
         }
 
-        return 1;
+        return true;
     }
 
     if (pTargetPed->GetAttacking_433CA0())
@@ -6308,10 +6308,10 @@ merge_178:
     goto ret_false;
 
 ret_true:
-    return 1;
+    return true;
 
 ret_false:
-    return 0;
+    return false;
 }
 
 // The normalizing Ang16 ctor (out of line, AssignNormalized_409300) on a by-value parameter: the
@@ -7018,7 +7018,7 @@ void Ped::UpdateMovementTowardsTarget_4672E0(Fix16 distance, u8 type)
                     field_18C_current_path_point = &field_0_patrol_points[0];
                     field_21C_bf.bInPathList = false;
 
-                    while (1)
+                    while (true)
                     {
                         if (field_18C_current_path_point->field_0_x == 0)
                         {
@@ -9934,7 +9934,7 @@ void Ped::EnterCarStateMachine_46BDC0()
 MATCH_FUNC(0x46c250)
 void Ped::ExitCarStateMachine_46C250()
 {
-    bool bUnknown = 0;
+    bool bUnknown = false;
     // Shared by both door paths; the z temporaries are block scoped (this gives the frame layout)
     Fix16 char_x;
     Fix16 char_y;
@@ -10008,7 +10008,7 @@ void Ped::ExitCarStateMachine_46C250()
         {
             if (FindUsableCarDoor_467090())
             {
-                bUnknown = 1;
+                bUnknown = true;
                 Car_Door_10* pDoor = field_154_target_to_enter->GetDoor(field_24C_target_car_door);
                 if (!pDoor->get_pObj_4341B0() || this->field_25C_internal_objective == objectives_enum::leave_train_38)
                 {
@@ -10416,7 +10416,7 @@ void Ped::EnterTrainStateMachine_46D0D0()
     Fix16 abs_xd;
     Fix16 abs_yd;
 
-    found_door = 0;
+    found_door = false;
     state1 = field_278_ped_state_1;
     field_21C_bf.bLeftVehicle = true;
     if (state1 != ped_state_1::immobilized_8)
@@ -10454,7 +10454,7 @@ void Ped::EnterTrainStateMachine_46D0D0()
                     {
                         best_dist = dist;
                         best_door = new_door_idx;
-                        found_door = 1;
+                        found_door = true;
                     }
                 }
                 door_idx = ++new_door_idx;
@@ -10480,19 +10480,19 @@ void Ped::ExitTrainStateMachine_46D240()
     bool door_available;
     volatile bool found_usable_door; // NOTE: volatile keeps the flag in its stack slot like OG
 
-    door_available = 1;
+    door_available = true;
     field_248_enter_car_as_passenger = 1;
     field_21C_bf.bLeftVehicle = true;
     if (field_27C_ped_state_2 == ped_state_2::ped2_driving_10)
     {
-        found_usable_door = 0;
+        found_usable_door = false;
         u8 attempt = 0;
-        while (1)
+        while (true)
         {
             attempt++;
             if (field_154_target_to_enter->IsStoppedWithPavementAtDoor_43B140(field_24C_target_car_door))
             {
-                found_usable_door = 1;
+                found_usable_door = true;
                 break;
             }
             field_24C_target_car_door++;

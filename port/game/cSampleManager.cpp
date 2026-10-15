@@ -643,7 +643,7 @@ bool cSampleManager::InitialiseChannel3D_58DDF0(s32 channel, s32 nSfx, s32 rate)
         return tmp != 0 ? true : false;
     }
 
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x58DE80)
@@ -833,16 +833,16 @@ bool cSampleManager::StreamStatus_58E2C0()
         {
             if (AIL_stream_status(field_9C_hStreams[0]) == SMP_DONE)
             {
-                return 1;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x58E2F0)

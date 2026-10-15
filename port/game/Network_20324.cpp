@@ -1942,7 +1942,7 @@ void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
         field_20088_game_settings = *pSettings;
 
         u32 i = 0;
-        while (1)
+        while (true)
         {
             if (i >= field_1FD64_total_map_count)
             {

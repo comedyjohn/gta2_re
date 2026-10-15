@@ -1555,11 +1555,11 @@ bool Frontend::intro_bik_exists_4B5FF0()
 
     if (hFind == -1)
     {
-        return 0;
+        return false;
     }
 
     _findclose(hFind);
-    return 1;
+    return true;
 }
 
 void sub_SetGamma()
@@ -1794,7 +1794,7 @@ void Frontend::ManageCredits_4B7A10()
 
         if (field_1EB34_credits_ypos <= 262124)
         {
-            while (1)
+            while (true)
             {
                 if (++field_1EB38_credits_line_idx == 600)
                 {
@@ -1849,7 +1849,7 @@ void Frontend::UpdatePageFromUserInput_4AE2D0()
                         --bonus_scan_idx;
                     }
                     LoadMapFilenames_4B4D00(stage_main_idx, stage_bonus_idx);
-                    gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(0);
+                    gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(false);
                     field_EE08_menu_screen = RedBar_16;
                     field_110_state = FrontendState::Booting_Map_2;
                     break;
@@ -1918,7 +1918,7 @@ void Frontend::UpdatePageFromUserInput_4AE2D0()
                     if (FreeLoader::CheckCityInstalled_4AE1F0(stage_main_idx))
                     {
                         LoadMapFilenames_4B4D00(stage_main_idx, stage_bonus_idx);
-                        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(1);
+                        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(true);
                         field_EE08_menu_screen = RedBar_16;
                         field_110_state = FrontendState::Booting_Map_2;
                     }
@@ -2790,7 +2790,7 @@ void Frontend::ContinueToNextStage_4B8020()
         }
 
         LoadMapFilenames_4B4D00(main_stage_idx, substage_idx);
-        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(0);
+        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(false);
         field_EE08_menu_screen = RedBar_16;
         field_110_state = FrontendState::Booting_Map_2;
     }
@@ -4386,7 +4386,7 @@ u8 Frontend::GetPrevUnlockedStageBonusCode_4B7800(PlySlot_A4* pStats)
 {
     u8 stage = Frontend::GetPrevUnlockedStageIndex_4B77B0(pStats);
     u8 bonus = field_1EB51_num_bonus_stages[stage] - 1;
-    while (1)
+    while (true)
     {
         if (bonus == 0)
         {

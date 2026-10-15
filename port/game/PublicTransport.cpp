@@ -1867,10 +1867,10 @@ bool PublicTransport_181C::AreCarsInDifferentTrains_57B740(Car_BC* pCar1, Car_BC
         Train_58* pTrain2 = GetTrainFromCar_57B5C0(pCar2);
         if (pTrain1->field_57_track_idx != pTrain2->field_57_track_idx)
         {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x57b7b0)

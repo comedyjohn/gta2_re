@@ -466,7 +466,7 @@ EXPORT bool __stdcall ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix
 
     if (p0.x == p1.x)
     {
-        return 0;
+        return false;
     }
 
     if (p0.x <= scanLineX && p1.x >= scanLineX)
@@ -476,7 +476,7 @@ EXPORT bool __stdcall ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix
         if (y.mValue >= minX.mValue && y.mValue <= minY.mValue)
         {
             gCollisionTarget_679188.field_18_hseg_y = y;
-            return 1;
+            return true;
         }
     }
     else if (p1.x <= scanLineX && p0.x >= scanLineX)
@@ -486,10 +486,10 @@ EXPORT bool __stdcall ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix
         if (y.mValue >= minX.mValue && y.mValue <= minY.mValue)
         {
             gCollisionTarget_679188.field_18_hseg_y = y;
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x54EC80)
@@ -2763,7 +2763,7 @@ bool AttachedSprite_18::UpdateAttached_5A6910(Sprite* pSprite)
         else
         {
             Char_B4* cB4 = field_0_pSprite->AsCharB4_40FEA0();
-            bRet = 0;
+            bRet = false;
             cB4->Update_545720(kFP16Zero_703A38);
         }
     }

@@ -760,7 +760,7 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
 
     s32 time_out_counter = 0;
     s32 zTmpInt = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos).ToInt();
-    while (1)
+    while (true)
     {
         gmp_block_info* pBlock = gMap_0x370_6F6268->FindNonAirBlockAtOrBelowZ_4E4CB0(xpos.ToInt(), ypos.ToInt(), zTmpInt);
         ++zTmpInt;
@@ -1822,10 +1822,10 @@ bool Car_BC::IsEnterable_445360()
         if (field_84_car_info_idx != car_model_enum::boxcar && field_84_car_info_idx != car_model_enum::TRAINFB &&
             field_84_car_info_idx != car_model_enum::TRAINCAB)
         {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x43D5D0)
@@ -2633,7 +2633,7 @@ bool Car_BC::IsStoppedWithPavementAtDoor_43B140(u8 target_car_door)
     u8 remap = GetRemap();
     if (GetCarLinearSpeed_43A240() > gFix16_6777CC)
     {
-        return 0;
+        return false;
     }
 
     Fix16 door_x;
@@ -3984,7 +3984,7 @@ void Car_BC::DestroyWhileSinking_43DD60()
     Gang_144* pGang; // eax
     s32 f58; // eax
 
-    bUnknown = 0;
+    bUnknown = false;
 
     StopMovement_43DBD0();
     field_50_car_sprite->IncreaseZoom_59E320(1);
@@ -3997,7 +3997,7 @@ void Car_BC::DestroyWhileSinking_43DD60()
         {
             if (field_54_driver->get_occupation_403980() == ped_ocupation_enum::unknown_2)
             {
-                bUnknown = 1;
+                bUnknown = true;
             }
         }
         exploder_ped_id = this->field_70_exploder_ped_id;
@@ -5556,10 +5556,10 @@ bool Car_BC::CanDespawn_442200()
     {
         if (field_7C_ped_type != ped_type::special_ped_4 && (field_7C_ped_type != ped_type::dummy_with_occupation_6 || !field_54_driver))
         {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x442310)
@@ -6255,7 +6255,7 @@ bool Car_BC::UpdateAttachedToSprite_443360(Sprite* pSprite, Fix16 x, Fix16 y, An
     }
 
     gSpriteGrid_3_679210->AddToSingleBucket_477AE0(field_50_car_sprite);
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x4435a0)

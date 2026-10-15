@@ -68,7 +68,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
     field_430_car_damage_cost = 0;
     field_434_evasion_rating = 0;
     field_438_bonus_rating_text_idx = 0;
-    field_43A_bStartedFromPlayBonusMenu = 0;
+    field_43A_bStartedFromPlayBonusMenu = false;
 
     init_4C5AF0();
 }

@@ -1610,12 +1610,12 @@ bool sound_obj::GetCar_4145E0(s32 idx, Car_BC** ppOut)
                 *ppOut = pCar;
                 if (pCar)
                 {
-                    return 1;
+                    return true;
                 }
             }
         }
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x414690)
@@ -2824,24 +2824,24 @@ char_type sound_obj::Type_2_4182A0(sound_0x68* pObj)
 MATCH_FUNC(0x4182E0)
 void sound_obj::HandleCarDoorSounds_4182E0(Sound_Params_8* pParams)
 {
-    bool bQueued1 = 0;
-    bool bQueued2 = 0;
+    bool bQueued1 = false;
+    bool bQueued2 = false;
     Car_BC* pCar = pParams->field_0_pObj->field_8_car_bc_ptr;
     s32 model = pCar->field_84_car_info_idx;
     BYTE* car_remap_5AA3D0 = gGtx_0x106C_703DD4->get_car_remap_5AA3D0(model);
     for (u8 i = 0; i < (u8)pCar->GetRemap(); ++i)
     {
-        bool bTrainOrBus = 0;
+        bool bTrainOrBus = false;
         s8 remap = car_remap_5AA3D0[2 * i + 1];
         if ((remap > 64 || remap < -64) && model != car_model_enum::TRAIN && model != car_model_enum::TRAINCAB &&
             model != car_model_enum::TRAINFB && model != car_model_enum::boxcar && model != car_model_enum::BUS)
         {
-            bTrainOrBus = 1;
+            bTrainOrBus = true;
         }
 
         if (!bQueued1 && pCar->field_C_doors[i].IsStartingToOpen())
         {
-            bQueued1 = 1;
+            bQueued1 = true;
             if (CalculateDistance_419020(Fix16(0xE1000, 0)))
             {
                 if (VolCalc_419070(0x32u, Fix16(0x1E000, 0), pParams->field_5_bHasSolidAbove))
@@ -2861,7 +2861,7 @@ void sound_obj::HandleCarDoorSounds_4182E0(Sound_Params_8* pParams)
                     {
                         this->field_30_sQueueSample.field_1C_ReleasingVolumeModificator = 5;
                     }
-                    this->field_30_sQueueSample.field_14_samp_idx = get_samp_idx_for_car_417D70(pCar, 1, bTrainOrBus);
+                    this->field_30_sQueueSample.field_14_samp_idx = get_samp_idx_for_car_417D70(pCar, true, bTrainOrBus);
                     this->field_30_sQueueSample.field_3C_speed_multiplier = 0;
                     this->field_30_sQueueSample.field_20_rate =
                         RandomDisplacement_41A650(this->field_30_sQueueSample.field_14_samp_idx) +
@@ -2878,7 +2878,7 @@ void sound_obj::HandleCarDoorSounds_4182E0(Sound_Params_8* pParams)
         {
             if (pCar->field_C_doors[i].IsStartingToClose())
             {
-                bQueued2 = 1;
+                bQueued2 = true;
                 if (CalculateDistance_419020(Fix16(0xE1000, 0)))
                 {
                     if (VolCalc_419070(0x32u, Fix16(0x1E000, 0), pParams->field_5_bHasSolidAbove))
@@ -2898,7 +2898,7 @@ void sound_obj::HandleCarDoorSounds_4182E0(Sound_Params_8* pParams)
                         {
                             this->field_30_sQueueSample.field_1C_ReleasingVolumeModificator = 5;
                         }
-                        this->field_30_sQueueSample.field_14_samp_idx = get_samp_idx_for_car_417D70(pCar, 0, bTrainOrBus);
+                        this->field_30_sQueueSample.field_14_samp_idx = get_samp_idx_for_car_417D70(pCar, false, bTrainOrBus);
                         this->field_30_sQueueSample.field_3C_speed_multiplier = 0;
                         this->field_30_sQueueSample.field_20_rate =
                             RandomDisplacement_41A650(this->field_30_sQueueSample.field_14_samp_idx) +
@@ -5966,12 +5966,12 @@ EXPORT bool Cooldown_4236C0()
     if (gCooldownCounter_67554D > 0)
     {
         --gCooldownCounter_67554D;
-        return 0;
+        return false;
     }
     else
     {
         gCooldownCounter_67554D = 6;
-        return 1;
+        return true;
     }
 }
 
@@ -7220,7 +7220,7 @@ void sound_obj::ChooseRadioEmitterForVehicle_57E6C0()
             // out, and VC6 shares that block between case 0 and case 1.
             case 0:
                 i = 0;
-                while (1)
+                while (true)
                 {
                     s32 status = *(u32*)&field_544C[i + 1].field_8.field_4_bStatus;
                     if (status == 6 || (status > 8 && status <= 10))
@@ -7240,7 +7240,7 @@ void sound_obj::ChooseRadioEmitterForVehicle_57E6C0()
                 break;
             case 1:
                 i = 0;
-                while (1)
+                while (true)
                 {
                     s32 status = *(u32*)&field_544C[i + 1].field_8.field_4_bStatus;
                     if (status >= 7 && (status <= 8 || status == 11))
@@ -7325,7 +7325,7 @@ void sound_obj::DeInitVocals_57EA10()
 {
     if (gSoundVocalsInited_6FF538)
     {
-        gSoundVocalsInited_6FF538 = 0;
+        gSoundVocalsInited_6FF538 = false;
 
         s32 idx = 0;
         s32 k2 = 2;
@@ -7665,7 +7665,7 @@ bool sound_obj::IsTrainOrBoxcar_57F120(Car_BC* pCar)
 {
     if (!pCar)
     {
-        return 0;
+        return false;
     }
 
     if (pCar->field_84_car_info_idx == car_model_enum::boxcar ||

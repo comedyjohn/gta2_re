@@ -1222,7 +1222,7 @@ void miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0(SCR_DECLARE_POLICELEVEL* pCmd)
     u8 max_wanted_level = pCmd->field_A_wanted_level;
     if (max_wanted_level == 0)
     {
-        bSkip_police_67D4F9 = 0;
+        bSkip_police_67D4F9 = false;
     }
     gPolice_7B8_6FEE40->field_660_max_wanted_stars = pCmd->field_A_wanted_level; // max_wanted_level
 }
@@ -7727,7 +7727,7 @@ char_type miss2_0x11C::PoolUpdate()
         // field_6_return_value == 1  means it's in a WHILE_EXEC block
         if (BasePointer_512770->field_6_return_value == 1)
         {
-            while (1) // execute commands in the same frame
+            while (true) // execute commands in the same frame
             {
                 pCurrentCmd = gScriptManager_6F8060->GetBasePointer_512770(field_4_next_cmd);
                 miss2_0x11C::PreExecOpCode_5108D0();

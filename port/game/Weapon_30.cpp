@@ -197,13 +197,13 @@ bool Weapon_30::sub_5DCEF0()
         case weapon_type::car_mines:
         case weapon_type::fire_truck_gun:
         case weapon_type::weapon_0x17:
-            result = 0;
+            result = false;
             break;
         case weapon_type::car_smg:
         case weapon_type::tank_main_gun:
         case weapon_type::fire_truck_flamethrower:
         case weapon_type::army_gun_jeep:
-            result = 1;
+            result = true;
             break;
         default:
             result = field_24_pPed->field_16C_car == nullptr;
@@ -258,11 +258,11 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
     {
         pNewBullet->RequestRemoval_5290A0();
         pNewBullet = nullptr;
-        bAllowFlameSegment_706D60 = 0;
+        bAllowFlameSegment_706D60 = false;
     }
     else
     {
-        bAllowFlameSegment_706D60 = 1;
+        bAllowFlameSegment_706D60 = true;
         pNewBullet->SetMovementVector_5224E0(speed);
     }
     return pNewBullet;
@@ -292,7 +292,7 @@ void Weapon_30::flamethrower_5DD0F0()
     if (!field_4_bTargetHit)
     {
         set_field_2C_4CCA80(1);
-        bAllowFlameSegment_706D60 = 0;
+        bAllowFlameSegment_706D60 = false;
         Weapon_30::spawn_bullet_5DCF60(154, xpos, ypos, cam_z, ped_rot, ped_pos_maybe);
         if (bAllowFlameSegment_706D60)
         {

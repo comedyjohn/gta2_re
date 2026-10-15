@@ -172,7 +172,7 @@ void force_link()
     u8 zero_u8 = 0;
     lewin.GetIdx_4881E0();
     lewin.AddCarToHistory_5645B0(nullptr);
-    lewin.PromoteCarInHistory_564610(nullptr, 0);
+    lewin.PromoteCarInHistory_564610(nullptr, false);
     lewin.PushCarInfo_564680(nullptr);
     lewin.SetKFCarWeapon_564710(nullptr, 0);
     lewin.SetKFWeapon_564790(0);
@@ -490,13 +490,13 @@ EXPORT char_type Input_InitMouse_5D7BF0()
 MATCH_FUNC(0x5D93A0)
 EXPORT void __stdcall SetFullScreenMode_5D93A0()
 {
-    bool bModeChanged = 0;
+    bool bModeChanged = false;
     s32 bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, full_width_706B5C, full_height_706798, 16);
     if (!bcheckModeRet)
     {
         if (full_width_706B5C == 640 ||
             (full_width_706B5C = 640,
-             bModeChanged = 1,
+             bModeChanged = true,
              full_height_706798 = 480,
              (bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, 640, 480, 16)) == 0))
         {
@@ -833,77 +833,77 @@ EXPORT void __stdcall Init_keybrd_jolly_and_sound_4DA440()
 MATCH_FUNC(0x4DB170)
 void __stdcall ClearDebugFlags_4DB170()
 {
-    bShow_all_arrows_67D6E7 = 0;
-    bDo_kill_phones_on_answer_67D6E8 = 0;
-    bSkip_dummies_67D4EF = 0;
-    bSkip_tiles_67D655 = 0;
-    bDo_test_67D4F8 = 0;
-    bSkip_mission_67D4E5 = 0;
-    bDo_brian_test_67D544 = 0;
-    bDo_iain_test_67D4E9 = 0;
-    bSkip_user_67D506 = 0;
-    bSkip_traffic_lights_67D4EC = 0;
-    bSkip_recycling_67D575 = 0;
-    bLog_collisions_67D4E6 = 0;
-    bDo_show_traffic_lights_info_67D4FA = 0;
-    bLimit_recycling_67D4CA = 0;
-    bNo_annoying_chars_67D586 = 0;
-    bSkip_slopes_67D505 = 0;
-    bSkip_left_67D6BF = 0;
-    bSkip_right_67D4E4 = 0;
-    bSkip_top_67D574 = 0;
-    bSkip_bottom_67D4E7 = 0;
-    bSkip_lid_67D546 = 0;
-    bLog_routefinder_67D6D1 = 0;
-    bDo_mike_67D5CC = 0;
-    bSkip_particles_67D64D = 0;
-    bShow_hidden_faces_67D5CD = 0;
-    bGet_all_weapons_67D684 = 0;
-    bDo_exit_after_replay_67D6E4 = 0;
-    bDont_get_car_back_67D4F5 = 0;
-    bSkip_ambulance_67D6C9 = 0;
-    bSkip_frontend_67D53B = 0;
-    bDo_invulnerable_67D4CB = 0;
-    bKeep_weapons_after_death_67D54D = 0;
-    bSkip_skidmarks_67D585 = 0;
-    gDo_infinite_lives_67D4C9 = 0;
-    bDo_load_savegame_67D4F0 = 0;
-    bSkip_audio_67D6BE = 0;
-    bDo_debug_keys_67D6CF = 0;
-    bLog_input_67D4CC = 0;
-    bLog_directinput_67D6C0 = 0;
-    bIgnore_replay_header_67D4F3 = 0;
-    bSkip_trains_67D550 = 0;
-    bSkip_buses_67D558 = 0;
-    bSkip_quit_confirm_67D4E8 = 0;
-    bSkip_fire_engines_67D53A = 0;
-    bSkip_window_check_67D54E = 0;
-    gDo_miss_logging_67D6BC = 0;
-    byte_67D654 = 0;
-    bDo_police_1_67D568 = 0;
-    bDo_police_2_67D569 = 0;
-    bDo_police_3_67D56A = 0;
-    bSkip_draw_67D4EA = 0;
-    bDo_free_shopping_67D6CD = 0;
-    gCheatMiniCars_67D6C8 = 0;
-    gCheatGetPlayerPoints_67D4C8 = 0;
-    gCheatGet10MillionMoney_67D6CE = 0;
-    gCheatUnlimitedElectroGun_67D4F7 = 0;
-    gCheatAllGangMaxRespect_67D587 = 0;
-    gCheatGet99Lives_67D4F1 = 0;
-    gCheat10xMultiplier_67D589 = 0;
-    gCheatUnlockThreeLevels_67D6CB = 0;
-    gCheatUnlockLevelsOneAndTwo_67D584 = 0;
-    gCheatUnlockAllLevels_67D538 = 0;
-    gCheatGetBasicWeaponsMaxAmmo_67D545 = 0;
-    gCheatOnlyElvisPeds_67D4ED = 0;
-    gCheatOnlyMuggerPeds_67D5A4 = 0;
-    gCheatNakedPeds_67D5E8 = 0;
-    gCheatUnknown_67D4F6 = 0;
-    gCheatInvisibility_67D539 = 0;
-    gCheatUnlimitedDoubleDamage_67D57C = 0;
-    byte_67D56B = 0;
-    gCheatUnlimitedFlameThrower_67D6CC = 0;
+    bShow_all_arrows_67D6E7 = false;
+    bDo_kill_phones_on_answer_67D6E8 = false;
+    bSkip_dummies_67D4EF = false;
+    bSkip_tiles_67D655 = false;
+    bDo_test_67D4F8 = false;
+    bSkip_mission_67D4E5 = false;
+    bDo_brian_test_67D544 = false;
+    bDo_iain_test_67D4E9 = false;
+    bSkip_user_67D506 = false;
+    bSkip_traffic_lights_67D4EC = false;
+    bSkip_recycling_67D575 = false;
+    bLog_collisions_67D4E6 = false;
+    bDo_show_traffic_lights_info_67D4FA = false;
+    bLimit_recycling_67D4CA = false;
+    bNo_annoying_chars_67D586 = false;
+    bSkip_slopes_67D505 = false;
+    bSkip_left_67D6BF = false;
+    bSkip_right_67D4E4 = false;
+    bSkip_top_67D574 = false;
+    bSkip_bottom_67D4E7 = false;
+    bSkip_lid_67D546 = false;
+    bLog_routefinder_67D6D1 = false;
+    bDo_mike_67D5CC = false;
+    bSkip_particles_67D64D = false;
+    bShow_hidden_faces_67D5CD = false;
+    bGet_all_weapons_67D684 = false;
+    bDo_exit_after_replay_67D6E4 = false;
+    bDont_get_car_back_67D4F5 = false;
+    bSkip_ambulance_67D6C9 = false;
+    bSkip_frontend_67D53B = false;
+    bDo_invulnerable_67D4CB = false;
+    bKeep_weapons_after_death_67D54D = false;
+    bSkip_skidmarks_67D585 = false;
+    gDo_infinite_lives_67D4C9 = false;
+    bDo_load_savegame_67D4F0 = false;
+    bSkip_audio_67D6BE = false;
+    bDo_debug_keys_67D6CF = false;
+    bLog_input_67D4CC = false;
+    bLog_directinput_67D6C0 = false;
+    bIgnore_replay_header_67D4F3 = false;
+    bSkip_trains_67D550 = false;
+    bSkip_buses_67D558 = false;
+    bSkip_quit_confirm_67D4E8 = false;
+    bSkip_fire_engines_67D53A = false;
+    bSkip_window_check_67D54E = false;
+    gDo_miss_logging_67D6BC = false;
+    byte_67D654 = false;
+    bDo_police_1_67D568 = false;
+    bDo_police_2_67D569 = false;
+    bDo_police_3_67D56A = false;
+    bSkip_draw_67D4EA = false;
+    bDo_free_shopping_67D6CD = false;
+    gCheatMiniCars_67D6C8 = false;
+    gCheatGetPlayerPoints_67D4C8 = false;
+    gCheatGet10MillionMoney_67D6CE = false;
+    gCheatUnlimitedElectroGun_67D4F7 = false;
+    gCheatAllGangMaxRespect_67D587 = false;
+    gCheatGet99Lives_67D4F1 = false;
+    gCheat10xMultiplier_67D589 = false;
+    gCheatUnlockThreeLevels_67D6CB = false;
+    gCheatUnlockLevelsOneAndTwo_67D584 = false;
+    gCheatUnlockAllLevels_67D538 = false;
+    gCheatGetBasicWeaponsMaxAmmo_67D545 = false;
+    gCheatOnlyElvisPeds_67D4ED = false;
+    gCheatOnlyMuggerPeds_67D5A4 = false;
+    gCheatNakedPeds_67D5E8 = false;
+    gCheatUnknown_67D4F6 = false;
+    gCheatInvisibility_67D539 = false;
+    gCheatUnlimitedDoubleDamage_67D57C = false;
+    byte_67D56B = false;
+    gCheatUnlimitedFlameThrower_67D6CC = false;
 }
 
 MATCH_FUNC(0x4DB070)
@@ -1822,7 +1822,7 @@ EXPORT s32 __stdcall SkipWhiteSpace_4DA390(char_type* pStr)
         {
             do
             {
-                while (1)
+                while (true)
                 {
                     char ch = *pCur;
                     if (ch != ' ' && ch != '\n' && ch != '\r' && ch != '\t')
@@ -1903,11 +1903,11 @@ EXPORT void __stdcall ParseCommandLine_4DA320(char_type* pCommandLine)
             switch (cmd_char)
             {
                 case 'R':
-                    bPlay_replay_67D4F4 = 1;
+                    bPlay_replay_67D4F4 = true;
                     break;
 
                 case 'Q':
-                    bConstant_replay_save_67D5C4 = 1;
+                    bConstant_replay_save_67D5C4 = true;
                     break;
 
                 case 'N':
@@ -2352,7 +2352,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
 
     if (bStartNetworkGame_7081F0)
     {
-        bDoFrontEnd_626B68 = 0;
+        bDoFrontEnd_626B68 = false;
         gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.Get_Sound_Settting_586A70("do_3d_sound"));
         gRegistry_6FF968.Clear_Or_Delete_Sound_Setting_586BF0("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
     }
@@ -2361,7 +2361,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
 
     u8 bQuit = 0; //  %bl
 
-    while (1)
+    while (true)
     {
         bQuit = 0;
 
@@ -2383,7 +2383,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
         UpdateWinXY_5D8E70();
         ApplyChangedScreenSettings_5D9690();
 
-        while (1)
+        while (true)
         {
             MSG msg;
             if (PeekMessageA(&msg, nullptr, 0, 0, 1u))
@@ -2450,7 +2450,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
                                     default:
                                         state = 7;
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
                                 }
                                 break; // go to the beginning
@@ -2470,7 +2470,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
 
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 11; // 11? prob 1
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
 
                                     case GameExitType::GameOverRIP_3:
@@ -2479,7 +2479,7 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
                                         gPlyDat_6FEAC0->UpdateHiScores_56C010();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 2;
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
 
                                     case GameExitType::AreaCompleted_4:
@@ -2488,19 +2488,19 @@ s32 __stdcall WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR
                                         gPlyDat_6FEAC0->UpdateHiScores_56C010();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 3;
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
 
                                     case GameExitType::MultiplayerExit_5:
                                         state = 7;
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
 
                                     case GameExitType::ReplayExit_6:
                                         state = 0;
                                         CleanUpInputAndOthers_4DA700();
-                                        bDoFrontEnd_626B68 = 1;
+                                        bDoFrontEnd_626B68 = true;
                                         break;
 
                                     default:

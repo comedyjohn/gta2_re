@@ -62,12 +62,12 @@ bool InputDevices_1::acquire_input_device_498730(LPDIRECTINPUTDEVICEA pGamePadDe
 {
     if (!pGamePadDevice)
     {
-        return 0;
+        return false;
     }
 
     if (gNeedKbAcquire_67B66C && FAILED(gKeyboardDevice_67B5C0->Acquire()))
     {
-        return 0;
+        return false;
     }
 
     gKeyboardStatus_67B624 = -1;
@@ -106,7 +106,7 @@ BOOL __stdcall InputDevices_1::make_input_devices_498800(HINSTANCE hInstance)
 {
     DIPROPDWORD prop;
 
-    gNeedKbAcquire_67B66C = 0;
+    gNeedKbAcquire_67B66C = false;
 
     if (FAILED(gpDInput_67B804->CreateDevice(GUID_SysKeyboard, &gKeyboardDevice_67B5C0, nullptr)))
     {
@@ -257,7 +257,7 @@ bool InputDevices_1::game_pads_init_498BA0()
         // VC6-compatible path
         if (FAILED(DirectInputCreateA(gHInstance_708220, 0x700, &gpDInput_67B804, nullptr)))
         {
-            return 1;
+            return true;
         }
 #else
     #pragma comment(lib, "DInput8.lib")
@@ -282,10 +282,10 @@ bool InputDevices_1::game_pads_init_498BA0()
 
     if (!gGamePadDevice_67B6C0)
     {
-        return 0;
+        return false;
     }
     set_game_pad_device_properties_4989C0();
-    return 1;
+    return true;
 }
 
 MATCH_FUNC(0x498C00)
@@ -308,7 +308,7 @@ void __stdcall InputDevices_1::input_devices_init_498C40(HINSTANCE hInstance)
 
     if (!make_input_devices_498800(hInstance))
     {
-        gNeedKbAcquire_67B66C = 1;
+        gNeedKbAcquire_67B66C = true;
     }
     game_pads_init_498BA0();
 }
@@ -889,7 +889,7 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     gInputDevices_67B990->input_devices_init_498C40(hInstance);
     memset(this->field_3C_rec_buff, 0, sizeof(this->field_3C_rec_buff));
     this->field_75340_rec_buf_idx = 0;
-    bConstant_replay_save_67D5C4 = 0;
+    bConstant_replay_save_67D5C4 = false;
     File::Global_Open_4A7060(FileName);
     LoadReplayHeader_4CE380(0);
 
@@ -940,7 +940,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
 
     if (bPlay_replay_67D4F4 == 1)
     {
-        bConstant_replay_save_67D5C4 = 0;
+        bConstant_replay_save_67D5C4 = false;
         File::Global_Open_4A7060("test\\replay.rep");
         InputRecorder_67F8B0::LoadReplayHeader_4CE380(1);
         u32 size = 480000;

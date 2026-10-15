@@ -702,7 +702,7 @@ u32 NetPlay::AddPlayer_51E9C0(Network_8* pData, s32 player_id, DPNAME name, Netw
     u32 i = 0;
     if (pSession->field_4_players_count != MAX_PLAYERS)
     {
-        while (1)
+        while (true)
         {
             if (i >= MAX_PLAYERS)
             {
@@ -910,7 +910,7 @@ char_type NetPlay::Receive_51F010(sptr* pOutData, s32* pOutDataLen, DWORD* recvI
         goto failed;
     }
 
-    while (1)
+    while (true)
     {
         if (*senderId)
         {
@@ -1398,7 +1398,7 @@ s32 NetPlay::MovePlayerToGroup_520040(s32 toFind, Network_Game_Session* pStru, N
 
     s32 result = 0;
     u32 i = 0;
-    while (1)
+    while (true)
     {
         if (i >= 6)
         {
@@ -1722,7 +1722,7 @@ MATCH_FUNC(0x520e30)
 u32 NetPlay::IndexOf_520E30(s32 toFind, Network_Game_Session* pObj)
 {
     u32 i = 0;
-    while (1)
+    while (true)
     {
         if (i >= 6)
         {
@@ -1789,7 +1789,7 @@ s32 NetPlay::RemovePlayerByName_520F80(wchar_t* pToRemove)
 {
     u32 i = 0;
     s32 bRemoved = 0;
-    while (1)
+    while (true)
     {
         if (i >= this->field_758_n2.field_4_players_count)
         {
@@ -2171,7 +2171,7 @@ char_type NetPlay::ReceiveGameMessage_521890(Network_8* pOut, s32* pPlayerIdx, u
     // ((u8*)pData)[4] = field_4_length
     // ((u8*)pData)[5] = field_5_data
 
-    while (1)
+    while (true)
     {
         if (bTimedOut || field_8F0_disabled)
         {

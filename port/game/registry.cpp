@@ -226,7 +226,7 @@ bool Registry::Get_Debug_Setting_586E20(const char_type* lpValueName)
         DWORD cbData = sizeof(DWORD);
         if (RegQueryValueExA(hKey, lpValueName, nullptr, nullptr, reinterpret_cast<BYTE*>(&Data), &cbData) == ERROR_SUCCESS)
         {
-            bRead = 1;
+            bRead = true;
         }
     }
 

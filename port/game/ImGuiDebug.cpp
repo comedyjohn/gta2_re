@@ -1247,7 +1247,7 @@ void BootMap(char* mapName, char* styName, char* scrName)
         strcat(fullPath, scrName);
         gGameSession_67E8E0.SetScriptName_4C58B0(fullPath);
 
-        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(0);
+        gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(false);
 
         if (!HookManagement::GetEnumerateFuncsFn()) // if standalone version
         {
@@ -2663,7 +2663,7 @@ void CC ImGuiDebugDraw()
                     Ped* pPedIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
                     while (pPedIter)
                     {
-                        if (1) // pPedIter->field_168_game_object
+                        if (true) // pPedIter->field_168_game_object
                         {
                             swprintf(tmpBuff_67BD9C, L"%d", pPedIter->field_238_ped_type);
                             DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);

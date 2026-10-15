@@ -367,7 +367,7 @@ char_type Player::AddWeaponWithAmmo_564960(s32 weapon_kind, u8 ammo)
 
     if (GetPlayerPed_4A5130()->get_car_416B60())
     {
-        bHasAnyAmmo = 0;
+        bHasAnyAmmo = false;
     }
     else
     {
@@ -415,7 +415,7 @@ void Player::SelectNextOrPrevWeapon_5649D0(char_type go_forwards, char_type go_b
 
         if (go_forwards)
         {
-            while (1)
+            while (true)
             {
                 if (++field_788_curr_weapon_idx == max_idx)
                 {
@@ -455,7 +455,7 @@ void Player::SelectNextOrPrevWeapon_5649D0(char_type go_forwards, char_type go_b
                 return;
             }
         }
-        while (1)
+        while (true)
         {
             s16 dec_idx;
             if (field_788_curr_weapon_idx == -1)
@@ -1980,12 +1980,12 @@ void Player::UpdateCamera_5686D0(Camera_0xBC* pCam)
                                    this->field_79_now_down_pressed,
                                    this->field_7A_now_left_pressed,
                                    this->field_7B_now_right_pressed);
-        this->field_7A_now_left_pressed = 0;
-        this->field_7B_now_right_pressed = 0;
-        this->field_78_now_forward_pressed = 0;
-        this->field_79_now_down_pressed = 0;
-        this->field_8B_was_forward_pressed = 0;
-        this->field_8C_was_down_pressed = 0;
+        this->field_7A_now_left_pressed = false;
+        this->field_7B_now_right_pressed = false;
+        this->field_78_now_forward_pressed = false;
+        this->field_79_now_down_pressed = false;
+        this->field_8B_was_forward_pressed = false;
+        this->field_8C_was_down_pressed = false;
     }
     else
     {
@@ -2006,7 +2006,7 @@ void Player::Disconnect_568730()
     {
         pPed->BecomeDummyOnPlayerDisconnect_470300();
     }
-    set_in_use_4A5170(0);
+    set_in_use_4A5170(false);
 }
 
 MATCH_FUNC(0x5687F0)
@@ -2027,8 +2027,8 @@ void Player::Service_5687F0()
 
     if (this->field_30_disable_enter_vehicles)
     {
-        this->field_7D_now_enter_exit_pressed = 0;
-        this->field_89_was_enter_exit_pressed = 0;
+        this->field_7D_now_enter_exit_pressed = false;
+        this->field_89_was_enter_exit_pressed = false;
     }
 
     field_2D4_scores.Service_591C70();
@@ -2041,7 +2041,7 @@ void Player::Service_5687F0()
     {
         if (this->field_7C_now_attack_pressed)
         {
-            this->field_7C_now_attack_pressed = 0;
+            this->field_7C_now_attack_pressed = false;
         }
         else
         {
@@ -2101,8 +2101,8 @@ void Player::Service_5687F0()
             break;
 
         case 2:
-            this->field_7D_now_enter_exit_pressed = 0;
-            this->field_89_was_enter_exit_pressed = 0;
+            this->field_7D_now_enter_exit_pressed = false;
+            this->field_89_was_enter_exit_pressed = false;
 
             Player::UpdateCamera_5686D0(&this->field_208_aux_game_camera);
 
@@ -2875,27 +2875,27 @@ void Player::ApplyCheats_56A490()
 MATCH_FUNC(0x56A6D0)
 void Player::ClearInputs_56A6D0()
 {
-    field_78_now_forward_pressed = 0;
-    field_79_now_down_pressed = 0;
-    field_7A_now_left_pressed = 0;
-    field_7B_now_right_pressed = 0;
-    field_7C_now_attack_pressed = 0;
-    field_7D_now_enter_exit_pressed = 0;
-    field_7E_now_hand_brake_or_jump_pressed = 0;
-    field_7F_now_prev_weapon_pressed = 0;
-    field_80_now_next_weapon_pressed = 0;
-    field_81_now_special_1_pressed = 0;
-    field_82_now_special_2_pressed = 0;
-    field_83_now_special_3_pressed = 0;
+    field_78_now_forward_pressed = false;
+    field_79_now_down_pressed = false;
+    field_7A_now_left_pressed = false;
+    field_7B_now_right_pressed = false;
+    field_7C_now_attack_pressed = false;
+    field_7D_now_enter_exit_pressed = false;
+    field_7E_now_hand_brake_or_jump_pressed = false;
+    field_7F_now_prev_weapon_pressed = false;
+    field_80_now_next_weapon_pressed = false;
+    field_81_now_special_1_pressed = false;
+    field_82_now_special_2_pressed = false;
+    field_83_now_special_3_pressed = false;
 
-    field_84_was_special_1_pressed = 0;
-    field_88_was_prev_weapon_pressed = 0;
-    field_87_was_next_weapon_pressed = 0;
-    field_89_was_enter_exit_pressed = 0;
-    field_8D_was_attack_pressed = 0;
-    field_8A_was_hand_brake_or_jump_pressed = 0;
-    field_8B_was_forward_pressed = 0;
-    field_8C_was_down_pressed = 0;
+    field_84_was_special_1_pressed = false;
+    field_88_was_prev_weapon_pressed = false;
+    field_87_was_next_weapon_pressed = false;
+    field_89_was_enter_exit_pressed = false;
+    field_8D_was_attack_pressed = false;
+    field_8A_was_hand_brake_or_jump_pressed = false;
+    field_8B_was_forward_pressed = false;
+    field_8C_was_down_pressed = false;
 }
 
 // https://decomp.me/scratch/OMzHk early %ecx load
@@ -2912,7 +2912,7 @@ Player::Player(u8 player_idx)
     field_682_traffic_spawn_threshold = 1000;
     field_29_aux_ped_dying = 0;
     field_4_inputs = 0;
-    field_8E_in_use = 1;
+    field_8E_in_use = true;
 
     // early %ecx load here
 

@@ -123,7 +123,7 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
 {
     if (!pObj->GetDefHasShadowsField_40FF00())
     {
-        return 0;
+        return false;
     }
 
     field_18_object_model = pObj->field_18_model;
@@ -151,19 +151,19 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
             {
                 field_10_car = cBC;
                 field_0_type = collision_event_type::car_object_3;
-                return 1;
+                return true;
             }
             else if (gCollisionTarget_679188.field_20_pHitSprite->AsCharB4_40FEA0())
             {
                 field_0_type = collision_event_type::ped_object_7;
-                return 1;
+                return true;
             }
             else
             {
                 Object_2C* o2c = gCollisionTarget_679188.field_20_pHitSprite->AsObject2C_40FEC0();
                 if (!o2c->GetDefHasShadowsField_40FF00())
                 {
-                    return 0;
+                    return false;
                 }
 
                 field_1C_other_object_model = o2c->GetModel_40FEF0();
@@ -181,7 +181,7 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
         }
     }
 
-    return 1;
+    return true;
 }
 
 MATCH_FUNC(0x40bb90)
@@ -327,9 +327,9 @@ bool CollisionTarget_28::IsObj2C_477A10()
         {
             if (p2c->field_8->field_4C == 3)
             {
-                return 1;
+                return true;
             }
         }
     }
-    return 0;
+    return false;
 }

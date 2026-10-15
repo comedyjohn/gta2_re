@@ -4123,7 +4123,7 @@ void CarAI_78::ReactToNearbyCar_451980()
     {
         if (byte_677BBC || field_24_bf.bFlag21)
         {
-            flag1 = 1;
+            flag1 = true;
         }
         if (cBC->field_7C_ped_type == ped_type::player_2)
         {
@@ -4131,23 +4131,23 @@ void CarAI_78::ReactToNearbyCar_451980()
         }
         else if (ComputeShortestAngleDelta_4056C0(cBC->field_50_car_sprite->field_0_rotation, field_0_car->field_50_car_sprite->field_0_rotation) > kAng45_677A38)
         {
-            flag1 = 1;
+            flag1 = true;
         }
         if (bUnknown)
         {
-            flag1 = 0;
+            flag1 = false;
         }
     }
     else
     {
         if (dist_to_target > near_dist)
         {
-            flag1 = 1;
+            flag1 = true;
             if (ComputeShortestAngleDelta_4056C0(cBC->field_50_car_sprite->field_0_rotation, field_0_car->field_50_car_sprite->field_0_rotation) > kAng90_6779E4)
             {
                 if (field_24_bf.bFlag21)
                 {
-                    flag1 = 1;
+                    flag1 = true;
                 }
                 else
                 {
@@ -4200,7 +4200,7 @@ void CarAI_78::ReactToNearbyCar_451980()
             }
             else if (field_24_bf.bFlag21)
             {
-                flag1 = 1;
+                flag1 = true;
             }
             else
             {
@@ -4212,7 +4212,7 @@ void CarAI_78::ReactToNearbyCar_451980()
         {
             if (field_24_bf.bFlag21)
             {
-                flag1 = 1;
+                flag1 = true;
             }
             else
             {
@@ -4225,12 +4225,12 @@ void CarAI_78::ReactToNearbyCar_451980()
         {
             if (ComputeShortestAngleDelta_4056C0(cBC->field_50_car_sprite->field_0_rotation, field_0_car->field_50_car_sprite->field_0_rotation) > kAng90_6779E4)
             {
-                flag1 = 1;
+                flag1 = true;
             }
 
             if ((field_24_flags & 0x20000) == 0x20000)
             {
-                flag1 = 1;
+                flag1 = true;
             }
         }
     }

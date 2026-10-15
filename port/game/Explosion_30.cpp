@@ -1027,11 +1027,11 @@ void Explosion_30::Release_543610()
     this->field_6_id = 0;
     if (field_0_bIn20Pool == 0)
     {
-        gExplosionPool_7A8_6FD5F0->field_780_bUsed[this->field_4_idx] = 0;
+        gExplosionPool_7A8_6FD5F0->field_780_bUsed[this->field_4_idx] = false;
     }
     else
     {
-        gExplosionPool_3D4_6FD5EC->field_3C0_bUsed[this->field_4_idx] = 0;
+        gExplosionPool_3D4_6FD5EC->field_3C0_bUsed[this->field_4_idx] = false;
     }
 }
 
@@ -1206,7 +1206,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
             this->field_0_explosions[idx].field_6_id = gExplosionId_623F18;
             this->field_0_explosions[idx].field_0_bIn20Pool = 0;
             gExplosionId_623F18++;
-            this->field_780_bUsed[idx] = 1;
+            this->field_780_bUsed[idx] = true;
             return &this->field_0_explosions[idx];
         }
     }
@@ -1222,7 +1222,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
             this->field_0_explosions[idx].field_6_id = gExplosionId_623F18;
             this->field_0_explosions[idx].field_0_bIn20Pool = 0;
             gExplosionId_623F18++;
-            this->field_780_bUsed[idx] = 1;
+            this->field_780_bUsed[idx] = true;
             return &this->field_0_explosions[idx];
         }
     }
@@ -1235,7 +1235,7 @@ ExplosionPool_7A8::ExplosionPool_7A8()
     for (u8 i = 0; i < GTA2_COUNTOF(field_0_explosions); i++)
     {
         field_0_explosions[i].field_4_idx = i;
-        field_780_bUsed[i] = 0;
+        field_780_bUsed[i] = false;
     }
 
     gParticleInstCount_6FD5F4 = 0;
@@ -1258,7 +1258,7 @@ Explosion_30* ExplosionPool_3D4::Allocate_543900()
             this->field_0_explosions[idx].field_6_id = gExplosionId20_623F1A;
             this->field_0_explosions[idx].field_0_bIn20Pool = 1;
             gExplosionId20_623F1A++;
-            this->field_3C0_bUsed[idx] = 1;
+            this->field_3C0_bUsed[idx] = true;
             return &this->field_0_explosions[idx];
         }
     }
@@ -1271,7 +1271,7 @@ ExplosionPool_3D4::ExplosionPool_3D4()
     for (u8 i = 0; i < GTA2_COUNTOF(field_3C0_bUsed); i++)
     {
         field_0_explosions[i].field_4_idx = i;
-        field_3C0_bUsed[i] = 0;
+        field_3C0_bUsed[i] = false;
     }
     gParticleInstCount_6FD5F4 = 0;
 }

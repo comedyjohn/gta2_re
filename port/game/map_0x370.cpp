@@ -2438,7 +2438,7 @@ void Map_0x370::FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type b
     dword_6F6148 = *pY;
     dword_6F613C = *pZ;
     u16 i;
-    while (1)
+    while (true)
     {
         switch (direction)
         {

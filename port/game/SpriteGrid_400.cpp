@@ -137,7 +137,7 @@ MATCH_FUNC(0x477c30)
 bool SpriteGrid_400::CheckAndHandleAllCollisionsForSprite_477C30(Sprite* pSprite, s32 sprite_type_filter)
 {
     gSpriteGrid_sprite_type_filter_678FA8 = sprite_type_filter;
-    bool bHit = 0;
+    bool bHit = false;
     ++gCollisionCounters_6791FC->field_4_query_id;
     pSprite->UpdateCollisionBoundsIfNeeded_59E9C0();
     pSprite->field_C_pCollisionShape->SetCurrentRect_5A4D90();

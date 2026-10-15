@@ -2144,7 +2144,7 @@ char_type CarPhysics_B0::ProcessCollisionAndClampVelocity_55F280()
     Fix16_Point_POD cm1 = this->field_30_cm1;
 
     char_type stepResult;
-    while (1)
+    while (true)
     {
         gRemainingTimeStep_6FE198 = k_dword_6FE210;
         stepResult = StepMovementAndCollisions_55E470();

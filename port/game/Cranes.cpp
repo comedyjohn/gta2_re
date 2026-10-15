@@ -648,12 +648,12 @@ s32 Crane_15C::MoveTowardsTargets_47FBA0()
         this->field_8C_crane_angle == this->field_AC_crane_angle_target &&
         this->field_A0_hook_axial_angle == this->field_B4_hook_angle_target && this->field_14D_is_busy)
     {
-        bUnknown = 1;
+        bUnknown = true;
         f_B8_hook_depth_target = this->field_B8_hook_depth_target;
     }
     else
     {
-        bUnknown = 0;
+        bUnknown = false;
         f_B8_hook_depth_target = kZero_679E70;
     }
 

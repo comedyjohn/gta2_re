@@ -28,7 +28,7 @@ bool Firefighter_28::sub_4A7FC0()
     if (!field_1C_car->field_58_physics)
     {
         Firefighter_28::deinit_4A81A0();
-        return 0;
+        return false;
     }
 
     if (field_1C_car->field_58_physics->get_car_velocity_4211C0() == kFpZero_67D378)
@@ -36,7 +36,7 @@ bool Firefighter_28::sub_4A7FC0()
         if (++field_24_next_state_timer >= 1000)
         {
             Firefighter_28::deinit_4A81A0();
-            return 0;
+            return false;
         }
     }
     else
@@ -109,7 +109,7 @@ bool Firefighter_28::sub_4A7FC0()
     {
         Firefighter_28::deinit_4A81A0();
     }
-    return 1;
+    return true;
 }
 
 MATCH_FUNC(0x4a81a0)

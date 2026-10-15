@@ -455,9 +455,9 @@ bool PathFinder_2FD4::ProcessGridCell_5548C0()
         field_18_bSearching = 0;
         field_19_unused = 1;
         field_1A_unused = 1;
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 MATCH_FUNC(0x554920)
@@ -609,7 +609,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
     }
     if (field_C_node_count)
     {
-        while (1)
+        while (true)
         {
             j = 0;
             field_38_bComputePathInProgress = 1;
@@ -776,7 +776,7 @@ LABEL_35:
     field_8_pNode->field_4_zpos = cur_z;
     field_C_node_count = 1;
     pCell = &field_40_grid[(s16)(idx1 + 34 * idx2)];
-    while (2)
+    while (true)
     {
         if (pCell->field_0_idx1 == 1)
         {
@@ -894,11 +894,11 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     u8 j = 0;
     if (field_38_bComputePathInProgress && !maybe_timer)
     {
-        return 0;
+        return false;
     }
     if (*zpos > 6u || *zpos == 0)
     {
-        return 0;
+        return false;
     }
     u8 default_pos = kFpZero_6FDD98.ToUInt8();
     field_27_zpos = default_pos;
@@ -999,7 +999,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
                     *xpos = field_25_xpos;
                     *ypos = field_26_ypos;
                     *zpos = field_27_zpos;
-                    return 1;
+                    return true;
                 }
             }
             else
@@ -1047,7 +1047,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
                         {
                             if (!field_18_bSearching)
                             {
-                                return 1;
+                                return true;
                             }
                             continue;
                         }
@@ -1055,11 +1055,11 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
                 }
             }
         }
-        return 0;
+        return false;
     }
     if (bListWasEmpty)
     {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

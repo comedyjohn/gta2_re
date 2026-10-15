@@ -1745,7 +1745,7 @@ void PoliceCrew_38::Service_575590()
             if (!pPed->field_20E_offscreen_counter && pPed->GetPedState_403990() != ped_state_1::dead_9 
                 && pPed->IsActive_433B40())
             {
-                gPolice_7B8_6FEE40->field_7B4_crew_ped_onscreen = 1;
+                gPolice_7B8_6FEE40->field_7B4_crew_ped_onscreen = true;
             }
         }
         else

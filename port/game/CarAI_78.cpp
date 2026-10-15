@@ -293,7 +293,7 @@ void CarAI_78::DoShortcutsUsingJunctions_447970()
     if (field_28_junc_idx > 0)
     {
         u16 junc = gRouteFinder_6FFDC8->field_2218_routes[field_28_junc_idx].field_0_junctions[(u16)field_56_route_pos];
-        if (!junc || x == (s16)gCurrCarAI_xpos_677C38.ToInt() && y == (s16)gCurrCarAI_ypos_677C30.ToInt())
+        if (!junc || (x == (s16)gCurrCarAI_xpos_677C38.ToInt() && y == (s16)gCurrCarAI_ypos_677C30.ToInt()))
         {
             gRouteFinder_6FFDC8->CancelRoute_589930(field_28_junc_idx);
             this->field_28_junc_idx = -1;
@@ -4927,7 +4927,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
     dword_677A8C = field_74_max_speed;
     dword_677C9C = gPixelsToFix16_6F6850.list[gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_0_car->field_84_car_info_idx)->h];
 
-    field_24_flags = field_24_flags & ~0x200000u | (field_0_car->field_54_driver->field_21C_bf.bDriveAggressively << 21);
+    field_24_flags = (field_24_flags & ~0x200000u) | (field_0_car->field_54_driver->field_21C_bf.bDriveAggressively << 21);
 
     if (byte_677BBC)
     {

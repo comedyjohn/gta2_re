@@ -258,7 +258,7 @@ void RollingDigitCounter_38::UpdateRollingDigits_4925E0()
     s32 shown_value;
     sscanf(field_9_shown_digits, "%d", &shown_value);
 
-    if (field_4_target_value == -1 || shown_value == field_4_target_value && !RollingDigitCounter_38::IsAnyDigitRolling_4925C0())
+    if (field_4_target_value == -1 || (shown_value == field_4_target_value && !RollingDigitCounter_38::IsAnyDigitRolling_4925C0()))
     {
         if (field_0_value == shown_value)
         {

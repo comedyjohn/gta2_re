@@ -574,8 +574,8 @@ void Crane_15C::PickUpCar_47F930(Car_BC* pCar)
         {
             TargetTransporter_47F7F0(pCar);
         }
-        else if (field_64_drop_transporter || (field_144_crane_mode == 1) || (field_144_crane_mode == 2 || field_144_crane_mode == 3) && field_155_load_phase == 1 && !pCar->IsEngineCrushed_447EB0() ||
-                 field_155_load_phase == 2 && pCar->IsEngineCrushed_447EB0())
+        else if (field_64_drop_transporter || (field_144_crane_mode == 1) || ((field_144_crane_mode == 2 || field_144_crane_mode == 3) && field_155_load_phase == 1 && !pCar->IsEngineCrushed_447EB0()) ||
+                 (field_155_load_phase == 2 && pCar->IsEngineCrushed_447EB0()))
         {
             if (!field_150_hook_job && !pCar->field_54_driver)
             {

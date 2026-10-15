@@ -651,7 +651,7 @@ s32 ReadScreenSettings_5D8F70()
                 return 0;
             }
         }
-        else if (gStartMode_626A0C || window_width_706630 == window_width_old && window_height_706B50 == window_height_old)
+        else if (gStartMode_626A0C || (window_width_706630 == window_width_old && window_height_706B50 == window_height_old))
         {
             return 0;
         }
@@ -1474,11 +1474,11 @@ bool RunGameFrame_4DA850()
     }
     else
     {
-        if (!max_frame_rate_626A08 && !gFramesSinceDraw_6F58D8 || Time >= gMatchStartTime_6F5A28)
+        if ((!max_frame_rate_626A08 && !gFramesSinceDraw_6F58D8) || Time >= gMatchStartTime_6F5A28)
         {
             updated_logic = 1;
         }
-        if (gFramesSinceDraw_6F58D8 >= 8u || !min_frame_rate_706C50 && gFramesSinceDraw_6F58D8)
+        if (gFramesSinceDraw_6F58D8 >= 8u || (!min_frame_rate_706C50 && gFramesSinceDraw_6F58D8))
         {
             updated_logic = 0;
         }

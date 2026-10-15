@@ -1927,7 +1927,7 @@ void sound_obj::HandleCarAlarmSound_415570(Sound_Params_8* pParams, SoundPosEntr
     Car_BC* pCar = pParams->field_0_pObj->field_8_car_bc_ptr;
     if (pCar->IsFireTruck_4118F0() || !pCar->HasEmergencyLights_414F20() || !pCar->AreEmergencyLightsOn_414F80())
     {
-        if (!pCar->IsFireTruck_4118F0() && !pCar->IsTank_411900() && !pCar->IsGunJeep_411910() || !pCar->IsTurretRotated_4119F0())
+        if ((!pCar->IsFireTruck_4118F0() && !pCar->IsTank_411900() && !pCar->IsGunJeep_411910()) || !pCar->IsTurretRotated_4119F0())
         {
             if (pParams->field_0_pObj->field_8_car_bc_ptr->IsEmittingHorn_411970())
             {

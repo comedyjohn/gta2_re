@@ -1766,7 +1766,7 @@ void Char_B4::DispatchCollision_548670(char_type bFlag)
             this->field_18_collided_entity = nullptr;
         }
 
-        if (field_38_velocity == kZeroVelocity_6FD7C0 || field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2) && !this->field_8_ped_state_1)
+        if (field_38_velocity == kZeroVelocity_6FD7C0 || (field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2) && !this->field_8_ped_state_1))
         {
             this->field_1C_prev_collided_entity = nullptr;
             this->field_20 = 0;
@@ -6533,7 +6533,7 @@ char_type Char_B4::HandlePedObjectHit_5537F0(Object_2C* p2c)
 {
     const u8 idx = p2c->get_field_26_420FF0();
     const s32 pedId = gPedRefTable_7F8_703398->GetPedId_420F10(idx);
-    if (p2c->field_18_model == objects::rocket_bullet_128 || p2c->field_18_model == objects::moving_molotov_138 || p2c->field_18_model == objects::mine_10 && !gCharB4_HitByMine_6FDB59)
+    if (p2c->field_18_model == objects::rocket_bullet_128 || p2c->field_18_model == objects::moving_molotov_138 || (p2c->field_18_model == objects::mine_10 && !gCharB4_HitByMine_6FDB59))
     {
         gObject_5C_6F8F84->CreateExplosion_52A3D0(field_80_sprite_ptr->field_14_xy.x,
                                                   field_80_sprite_ptr->field_14_xy.y,

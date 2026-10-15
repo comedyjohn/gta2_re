@@ -804,7 +804,7 @@ Sprite* SpriteGrid_400::FindNearestSpriteInRow_478880(u32 y_pos, Sprite* pSprite
         {
             Sprite* pSprt = pObj->field_0_pSprite;
             if (pObj->field_0_pSprite == gSpriteGrid_exclusion_sprite_678F84 ||
-                gSpriteGrid_smallestDistSprite_678E40 && !pSprt->TypeIs_446940(gSpriteGrid_exclude_type_678F60) ||
+                (gSpriteGrid_smallestDistSprite_678E40 && !pSprt->TypeIs_446940(gSpriteGrid_exclude_type_678F60)) ||
                 pSprt->field_C_pCollisionShape->CollisionIdIs_446930(gCollisionCounters_6791FC->field_4_query_id) || !pSprt->ShouldCollideWithSprite_59E850(pSprite))
             {
                 continue;

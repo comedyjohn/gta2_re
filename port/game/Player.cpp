@@ -312,8 +312,8 @@ void Player::ClearKFWeapon_5647D0()
         }
         else
         {
-            if (gCheatUnlimitedElectroGun_67D4F7 && field_1C_kf_weapon_kind == weapon_type::shocker ||
-                gCheatUnlimitedFlameThrower_67D6CC && field_1C_kf_weapon_kind == weapon_type::flamethrower)
+            if ((gCheatUnlimitedElectroGun_67D4F7 && field_1C_kf_weapon_kind == weapon_type::shocker) ||
+                (gCheatUnlimitedFlameThrower_67D6CC && field_1C_kf_weapon_kind == weapon_type::flamethrower))
             {
                 this->field_18_pre_kf_weapon_kind = -2;
                 return;

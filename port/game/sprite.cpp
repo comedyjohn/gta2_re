@@ -815,7 +815,7 @@ void Sprite::HandleObjectCollision_59E8C0(Sprite* pSprite)
 {
     // 9.6f: AsObject2C_40FEC0 for both sprites and sub_484DD0 (inlined, using AsObject2C_40FEC0 changes the code)
     s32 sprite_type = this->field_30_sprite_type_enum;
-    if (sprite_type == sprite_types_enum::object_1 || sprite_type > sprite_types_enum::ped_3 && sprite_type <= sprite_types_enum::map_obj_5)
+    if (sprite_type == sprite_types_enum::object_1 || (sprite_type > sprite_types_enum::ped_3 && sprite_type <= sprite_types_enum::map_obj_5))
     {
         field_8_object_2C_ptr->HandleImpact_528E50(pSprite);
         s32 type = pSprite->field_30_sprite_type_enum;

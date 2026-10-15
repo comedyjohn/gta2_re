@@ -5163,8 +5163,8 @@ void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
 
         // This doesn't look right, but it matches. Might be a missing parens bug in the OG game?
         if (pPlayerPed->get_cam_x() < pCmd->field_C_rect.field_0_pos.field_0_x - pCmd->field_C_rect.field_C_size.field_0_x ||
-            pPlayerPed->get_cam_x() > pCmd->field_C_rect.field_0_pos.field_0_x + pCmd->field_C_rect.field_C_size.field_0_x &&
-                pPlayerPed->get_cam_y() < pCmd->field_C_rect.field_0_pos.field_4_y - pCmd->field_C_rect.field_C_size.field_4_y ||
+            (pPlayerPed->get_cam_x() > pCmd->field_C_rect.field_0_pos.field_0_x + pCmd->field_C_rect.field_C_size.field_0_x &&
+                pPlayerPed->get_cam_y() < pCmd->field_C_rect.field_0_pos.field_4_y - pCmd->field_C_rect.field_C_size.field_4_y) ||
             pPlayerPed->get_cam_y() > pCmd->field_C_rect.field_0_pos.field_4_y + pCmd->field_C_rect.field_C_size.field_4_y)
         {
             miss2_0x11C::EnableThread_50A9E0(pCmd->field_8_triggername);

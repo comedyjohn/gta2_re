@@ -542,7 +542,7 @@ void SpriteList_4::CleanupSpriteList_5A7080()
     {
         bool bUnlinkHead = false;
         s32 type = pIter->field_0_pSprite->GetType_416B40();
-        if ((type == sprite_types_enum::object_1 || type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5) && pIter->field_0_pSprite->field_8_object_2C_ptr->IsFlameObject_4BE830())
+        if ((type == sprite_types_enum::object_1 || (type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5)) && pIter->field_0_pSprite->field_8_object_2C_ptr->IsFlameObject_4BE830())
         {
             gObject_5C_6F8F84->RemoveAndFree_52A610(pIter->field_0_pSprite->field_8_object_2C_ptr);
             if (pLast)
@@ -647,7 +647,7 @@ void SpriteList_4::sub_5A71F0()
     for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
     {
         const s32 type = p18Iter->field_0_pSprite->GetType_416B40();
-        if (type == sprite_types_enum::object_1 || type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5)
+        if (type == sprite_types_enum::object_1 || (type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5))
         {
             Object_2C* o2c = p18Iter->field_0_pSprite->field_8_object_2C_ptr;
             if (o2c->IsFlameObject_4BE830())

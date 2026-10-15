@@ -327,7 +327,7 @@ bool Object_2C::SelectCollisionSprite_522460(Sprite* pProbe)
     gObject2C_HitWallOrDoor_6F8F94 = 0;
 
     Sprite* pSprite = pProbe->QuerySpriteCollision_59E7D0(2);
-    if (pSprite && gObject2C_LastCollisionSprite_6F8F8C && pSprite->GetType_416B40() == sprite_types_enum::car_2 // IsCar
+    if ((pSprite && gObject2C_LastCollisionSprite_6F8F8C && pSprite->GetType_416B40() == sprite_types_enum::car_2) // IsCar
         || !ShouldCollideWithSprite_522430(pSprite) || pSprite == gObject2C_LastCollisionSprite_6F8F8C)
     {
         return false;

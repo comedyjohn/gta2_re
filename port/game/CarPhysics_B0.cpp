@@ -997,9 +997,9 @@ Fix16 CarPhysics_B0::ComputeSlopeCorrection_55AB50(Fix16* pOutY)
             break;
     }
     lower = (x_val * slope_val);
-    if (!this->field_A6_current_slope_left_tiles && lower > kFP16Zero_6FE20C &&
-            (u8)(this->field_6C_cp3.ToInt()) == this->field_A7_current_tile_z ||
-        this->field_AA_sbw && this->field_AB_tpa)
+    if ((!this->field_A6_current_slope_left_tiles && lower > kFP16Zero_6FE20C &&
+            (u8)(this->field_6C_cp3.ToInt()) == this->field_A7_current_tile_z) ||
+        (this->field_AA_sbw && this->field_AB_tpa))
     {
         upper = k_dword_6FE210 - (this->field_6C_cp3.GetFracValue());
         if (lower < upper)
@@ -1101,7 +1101,7 @@ void CarPhysics_B0::UpdateZPhysics_55AD90(Fix16 dt)
             }
         }
 
-        if (zpos <= field_6C_cp3 - kFP16Half_6FE0C0 || zpos < field_6C_cp3 && field_AA_sbw && field_AB_tpa)
+        if (zpos <= field_6C_cp3 - kFP16Half_6FE0C0 || (zpos < field_6C_cp3 && field_AA_sbw && field_AB_tpa))
         {
             field_68_z_pos = ComputeSlopeCorrection_55AB50(&dt);
             zpos = field_6C_cp3 + dt;
@@ -1727,7 +1727,7 @@ void CarPhysics_B0::SpawnSkidSegment_55D200(s32 box_idx, Fix16_Point arg_4, s32 
     arg_4 += this->field_38_cp1;
 
     char_type map_ret = gMap_0x370_6F6268->sub_4E52A0(arg_4.x, arg_4.y, field_6C_cp3);
-    if (map_ret == 5 || surface == 3 && map_ret != 7)
+    if (map_ret == 5 || (surface == 3 && map_ret != 7))
     {
         Fix16_Point* pBoxCorner_ = &this->field_10_last_skid_pos[(u8)box_idx];
         pBoxCorner_->clear_41E1E0();
@@ -1847,7 +1847,7 @@ void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
             SpawnSkidSegment_55D200(1, Fix16_Point(half_width, rear_wheel_offset_), 3);
         }
         else if ((field_88_rear_skid >= gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2 ||
-                 field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFP16Zero_6FE20C) &&
+                 (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFP16Zero_6FE20C)) &&
                 field_98_surface_type != car_surface_type::air_surface_6)
         {
             SpawnSkidSegment_55D200(0, Fix16_Point(-half_width, rear_wheel_offset_), b_d9C);
@@ -1865,7 +1865,7 @@ void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
             SpawnSkidSegment_55D200(2, Fix16_Point(half_width, front_wheel_offset_), 3);
         }
         else if ((field_84_front_skid >= gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1 ||
-                  field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFP16Zero_6FE20C) &&
+                  (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFP16Zero_6FE20C)) &&
                  field_98_surface_type != car_surface_type::air_surface_6)
         {
             SpawnSkidSegment_55D200(3, Fix16_Point(-half_width, front_wheel_offset_), b_d9C);
@@ -2803,7 +2803,7 @@ void CarPhysics_B0::ProcessPedImpact_560B40(Char_B4* pCharB4, u8 hitType)
                                                        kFP16One_6FE3DC);
 
     u8 bUnknown;
-    if (field_98_surface_type == car_surface_type::air_surface_6 && pCharB4->get_sprite_zpos() != field_5C_pCar->field_50_car_sprite->field_1C_zpos ||
+    if ((field_98_surface_type == car_surface_type::air_surface_6 && pCharB4->get_sprite_zpos() != field_5C_pCar->field_50_car_sprite->field_1C_zpos) ||
         hitType == 0)
     {
         bUnknown = 1;
@@ -3006,7 +3006,7 @@ Fix16 CarPhysics_B0::ApplyDriveForce_5615D0(Fix16_Point& wheel_point, Ang16 angl
         {
             if (field_92_is_hand_brake_on)
             {
-                if ((field_AC_drive_wheels_locked_q && y_abs > kFP16Zero_6FE20C || y_abs >= dword_6FE2F4) &&
+                if (((field_AC_drive_wheels_locked_q && y_abs > kFP16Zero_6FE20C) || y_abs >= dword_6FE2F4) &&
                     field_AC_drive_wheels_locked_q < 2)
                 {
                     field_AC_drive_wheels_locked_q = 2;

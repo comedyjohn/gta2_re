@@ -317,7 +317,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
     }
     for (idx = 0; idx < GTA2_COUNTOF_S(field_46C_base_pointers) - startOff; ++idx)
     {
-        if (header = ScriptManager_C1EA8::GetBasePointer_512770(idx + startOff))
+        if ((header = ScriptManager_C1EA8::GetBasePointer_512770(idx + startOff)) != nullptr)
         {
             if (header->field_2_type == toFind)
             {

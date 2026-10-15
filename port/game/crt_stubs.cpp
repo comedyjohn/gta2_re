@@ -1,6 +1,5 @@
 #include "crt_stubs.hpp"
 #include "Function.hpp"
-#include <memory>
 
 namespace crt
 {
@@ -59,31 +58,6 @@ int __cdecl fgetc(FILE* f)
 }
 
 } // namespace crt
-
-// WARNING: This might cause some mixed new/delete of 2 crt versions due to hooks 
-// getting applied mid-way. However since after WinMain is called exit() is also
-// called we never "return" to the hook manager code nor ever remove any hooks therefore
-// this shouldn't be a problem but is something to be aware of.
-void* operator new(size_t n) throw(std::bad_alloc)
-{
-    //printf("new %d\n", n);
-    return crt::malloc(n);
-}
-void operator delete(void* p) throw()
-{
-    crt::free(p);
-}
-
-void* operator new[](size_t s) throw(std::bad_alloc)
-{
-    //printf("new[] %d\n", s);
-    return crt::malloc(s);
-}
-
-void operator delete[](void* p) throw()
-{
-    crt::free(p);
-}
 
 // Destroys count objects of size bytes at ptr, last to first (like the CRT's `??_M`).
 void __stdcall __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor)

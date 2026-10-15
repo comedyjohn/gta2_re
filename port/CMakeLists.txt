@@ -36,7 +36,8 @@ message(STATUS "GTA2 native build: ${GTA2_BITS}-bit")
 
 set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-set(CMAKE_CXX_STANDARD 14) # C++17 removed the throw(std::bad_alloc) specifications crt_stubs.cpp uses
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 # MSVC semantics the decompiled code relies on: 2-byte wchar_t, signed char (unsigned by default on
 # ARM), wrapping signed arithmetic and type punning

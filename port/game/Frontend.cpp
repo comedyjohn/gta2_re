@@ -99,7 +99,7 @@ s32 __stdcall FreeLoader::GetCityInstalled_4AE0F0()
 {
     HKEY phkResult;
     RegOpenKeyA(HKEY_LOCAL_MACHINE, "Software\\freeloader.com\\GTA2", &phkResult);
-    s32 city_installed = (s32)FreeLoader::GetRegDword_4AE010(phkResult, "CityInstalled", reinterpret_cast<LPCSTR>(-1));
+    s32 city_installed = (s32)(uintptr_t)FreeLoader::GetRegDword_4AE010(phkResult, "CityInstalled", reinterpret_cast<LPCSTR>(-1));
     RegCloseKey(phkResult);
     return city_installed;
 }

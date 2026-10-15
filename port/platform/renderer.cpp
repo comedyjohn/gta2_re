@@ -469,7 +469,7 @@ float gWindowRight;
 float gWindowTop;
 float gWindowBottom;
 int gScreenTableSize = 0;
-int gScreenTable[1700];
+intptr_t gScreenTable[1700]; // the address of each row of the surface
 float gAmbient = 1.0f;
 SImageTableEntry* gImageTable = 0;
 DWORD gImageTableCount = 0;
@@ -773,9 +773,11 @@ void CC SetShadeTableA(int, int, int, int, int)
 {
 }
 
-int* CC MakeScreenTable(int value, int elementSize, unsigned int size)
+// MakeScreenTable with pointer-sized rows (d3ddll.hpp declares it with int ones, which can't hold an
+// address at 64 bits); exported under the original name below
+static intptr_t* CC MakeScreenTablePtr(intptr_t value, int elementSize, unsigned int size)
 {
-    int* result = 0;
+    intptr_t* result = 0;
     gScreenTableSize = static_cast<int>(size);
     if (size)
     {
@@ -1216,7 +1218,7 @@ const Export kExports[] = {
     ENTRY(Vid_ShutDown_SYS),    ENTRY(Vid_EnableWrites),  ENTRY(Vid_DisableWrites),   ENTRY(Vid_GetSurface),
     ENTRY(Vid_FreeSurface),     ENTRY(Vid_ClearScreen),   ENTRY(Vid_SetGamma),        ENTRY(Vid_WindowProc),
     ENTRY(Vid_InitDLL),         ENTRY(Vid_GetVersion),    ENTRY(ConvertColourBank),   ENTRY(DrawLine),
-    ENTRY(SetShadeTableA),      ENTRY(MakeScreenTable),   ENTRY(gbh_AddLight),        ENTRY(gbh_AssignPalette),
+    ENTRY(SetShadeTableA),      {"MakeScreenTable", reinterpret_cast<FARPROC>(&MakeScreenTablePtr)},   ENTRY(gbh_AddLight),        ENTRY(gbh_AssignPalette),
     ENTRY(gbh_BeginLevel),      ENTRY(gbh_SetBeginSceneCB), ENTRY(gbh_BeginScene),    ENTRY(gbh_BlitBuffer),
     ENTRY(gbh_BlitImage),       ENTRY(gbh_CloseDLL),      ENTRY(gbh_CloseScreen),     ENTRY(gbh_Convert16BitGraphic),
     ENTRY(gbh_ConvertColour),   ENTRY(gbh_DrawFlatRect),  ENTRY(gbh_DrawQuad),        ENTRY(gbh_DrawQuadClipped),

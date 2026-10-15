@@ -127,7 +127,7 @@ void text_0x14::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
     for (u32 idx = 0; idx < field_0_tKey.field_4_tKey_count; idx++)
     {
         // The raw file record is an offset, convert it to pos32 to the string data in the TDAT
-        const s32 offsetInBytes = reinterpret_cast<int>(ptKeyIter->field_0_pwstr);
+        const s32 offsetInBytes = static_cast<s32>(reinterpret_cast<uintptr_t>(ptKeyIter->field_0_pwstr));
         ptKeyIter->field_0_pwstr = reinterpret_cast<wchar_t*>(&pDat[offsetInBytes]);
         ptKeyIter++;
     }

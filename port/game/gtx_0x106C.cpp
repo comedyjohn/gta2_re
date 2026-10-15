@@ -491,7 +491,7 @@ void gtx_0x106C::SetSpriteIndexDataPtrs_5AAC40()
     {
         field_0_pData = this->field_20_sprite_index[i].field_0_pData;
         pSpriteIndex = &this->field_20_sprite_index[i];
-        pSpriteIndex->field_0_pData = &this->field_34_sprite_graphics[(u32)field_0_pData];
+        pSpriteIndex->field_0_pData = &this->field_34_sprite_graphics[(u32)(uintptr_t)field_0_pData];
     }
 }
 

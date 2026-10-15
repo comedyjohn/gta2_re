@@ -25,7 +25,7 @@ BINKDEC s32 __stdcall BinkCopyToBuffer(BINK* hbink, void* dest, s32 destpitch, s
 {
     return 0;
 }
-BINKDEC void __stdcall BinkSetSoundSystem(void* open, s32 param)
+BINKDEC void __stdcall BinkSetSoundSystem(void* open, intptr_t param)
 {
 }
 BINKDEC void __stdcall BinkSetIOSize(s32 size)

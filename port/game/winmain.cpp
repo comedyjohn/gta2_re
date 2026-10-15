@@ -1953,7 +1953,7 @@ EXPORT void Start_GTA2Manager_5E4DE0()
     {
         LPARAM lParam; // [esp+4h] [ebp-4h]
         PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, lParam);
-        if ((u32)ShellExecuteA(0, 0, "GTA2 Manager.EXE", 0, gWorkingDir_707F64, 1) <= 0x20)
+        if ((uintptr_t)ShellExecuteA(0, 0, "GTA2 Manager.EXE", 0, gWorkingDir_707F64, 1) <= 0x20)
         {
             FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 136);
         }

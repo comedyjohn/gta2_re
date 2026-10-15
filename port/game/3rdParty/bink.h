@@ -42,7 +42,7 @@ extern "C"
     BINKDEC void __stdcall BinkNextFrame(BINK* hbink);
     BINKDEC s32 __stdcall BinkWait(BINK* hbink);
     BINKDEC s32 __stdcall BinkCopyToBuffer(BINK* hbink, void* dest, s32 destpitch, s32 destheight, s32 destx, s32 desty, s32 flags);
-    BINKDEC void __stdcall BinkSetSoundSystem(void* open, s32 param);
+    BINKDEC void __stdcall BinkSetSoundSystem(void* open, intptr_t param);
     BINKDEC void __stdcall BinkSetIOSize(s32 size);
     BINKDEC void* __stdcall BinkOpenMiles(s32 driver);
     BINKDEC BINKBUFFER* __stdcall BinkBufferOpen(HWND hwnd, s32 width, s32 height, s32 flags);

@@ -468,7 +468,7 @@ DWORD Registry::Get_Int_Setting_5874E0(HKEY hKey, const char_type* lpValueName)
         lpValueName = 0;
     }
 
-    return (DWORD)lpValueName;
+    return (DWORD)(uintptr_t)lpValueName;
 }
 
 MATCH_FUNC(0x5875A0)

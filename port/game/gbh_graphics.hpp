@@ -36,7 +36,7 @@ struct SImage;
 typedef void (CC* T_ConvertColourBank)(BYTE* unknown);
 typedef s32 (CC* T_DrawLine)(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
 typedef void (CC* T_SetShadeTableA)(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
-typedef s32* (CC* T_MakeScreenTable)(s32 result, s32 a2, u32 a3);
+typedef sptr* (CC* T_MakeScreenTable)(sptr result, s32 a2, u32 a3);
 typedef s32 (CC* T_gbh_AddLight)(SLight* pLight);
 typedef void (CC* T_gbh_AssignPalette)(STexture* pTexture, s32 palId);
 typedef void (CC* T_gbh_BeginLevel)();

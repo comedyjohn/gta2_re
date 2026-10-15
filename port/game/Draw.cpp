@@ -124,7 +124,7 @@ MATCH_FUNC(0x5D7D30)
 void __stdcall MakeScreenTableAndSetWindow_5D7D30()
 {
     pVid_GetSurface(gVidSys_7071D0);
-    pMakeScreenTable((int)gVidSys_7071D0->field_50_surface_pixels_ptr,
+    pMakeScreenTable((sptr)gVidSys_7071D0->field_50_surface_pixels_ptr,
                      gVidSys_7071D0->field_54_surface_pixels_pitch,
                      gVidSys_7071D0->field_4C_rect_bottom);
 

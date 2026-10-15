@@ -345,7 +345,7 @@ bool InputDevices_1::game_pad_read_498D20()
         HRESULT jres = gGamePadDevice_67B6C0->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), nullptr, &num_items, DIGDD_PEEK);
         if (jres >= DI_OK)
         {
-            sprintf(gTmpBuffer_67C598, "%d: num_items = %d jres = %d", gpRng_67AB34->get_cur_rng_41CFE0(), num_items, jres);
+            sprintf(gTmpBuffer_67C598, "%d: num_items = %d jres = %d", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<s32>(num_items), static_cast<s32>(jres));
         }
     }
     else
@@ -401,9 +401,9 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
                     sprintf(gTmpBuffer_67C598,
                             "%d: input num_items = %d dwOfs = %d; data = %d",
                             gpRng_67AB34->get_cur_rng_41CFE0(),
-                            padItems,
-                            gGamePadDeviceData_67B5B0.dwOfs,
-                            gGamePadDeviceData_67B5B0.dwData);
+                            static_cast<s32>(padItems),
+                            static_cast<s32>(gGamePadDeviceData_67B5B0.dwOfs),
+                            static_cast<s32>(gGamePadDeviceData_67B5B0.dwData));
                     gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
                 }
             }
@@ -574,11 +574,11 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
                 {
                     if (gKeyboardDeviceData_67B610.dwData & 0x80)
                     {
-                        sprintf(gTmpBuffer_67C598, "%d: KEY OFF: %d", gpRng_67AB34->get_cur_rng_41CFE0(), gKeyboardDeviceData_67B610.dwOfs);
+                        sprintf(gTmpBuffer_67C598, "%d: KEY OFF: %d", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<s32>(gKeyboardDeviceData_67B610.dwOfs));
                     }
                     else
                     {
-                        sprintf(gTmpBuffer_67C598, "%d: KEY ON : %d", gpRng_67AB34->get_cur_rng_41CFE0(), gKeyboardDeviceData_67B610.dwOfs);
+                        sprintf(gTmpBuffer_67C598, "%d: KEY ON : %d", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<s32>(gKeyboardDeviceData_67B610.dwOfs));
                     }
                 }
             }

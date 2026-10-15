@@ -969,6 +969,15 @@ void LoadRegistry()
         return;
     }
     gRegistryLoaded = true;
+    // What an install of the game sets up. This build is the freeloader.com edition, which
+    // downloaded the cities one at a time: before starting a level it checks that the city is
+    // installed (FreeLoader::CheckCityInstalled_4AE1F0, cities 1 to 3), and when it isn't it
+    // minimizes the game and runs WebLaunch.exe to fetch it. All three are here.
+    RegValue cities;
+    cities.mType = REG_DWORD;
+    cities.mData = {3, 0, 0, 0};
+    gRegistry["hkey_local_machine\\software\\freeloader.com\\gta2"]["cityinstalled"] = cities;
+
     FILE* f = fopen(RegistryFile().c_str(), "r");
     if (!f)
     {

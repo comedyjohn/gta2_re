@@ -83,7 +83,7 @@ int sCheatHashSecret_61F0A8[8] = {829, 761, 23, 641, 43, 809, 677, 191};
 LPCSTR FreeLoader::GetRegDword_4AE010(HKEY hKey, LPCSTR lpValueName, LPCSTR default_value)
 {
     DWORD Type = 4;
-    if (!RegQueryValueExA(hKey, lpValueName, nullptr, &Type, (LPBYTE)&lpValueName, &Type) == 0)
+    if (RegQueryValueExA(hKey, lpValueName, nullptr, &Type, (LPBYTE)&lpValueName, &Type) != ERROR_SUCCESS)
     {
         return default_value;
     }
@@ -5284,11 +5284,6 @@ bool menu_option_0x82::SelectPrevHorizontalIdx_4B6390()
         {
             bFound = 1;
         }
-
-        // Last-resort workaround, probably not the original source: a redundant self-store. VC6 deletes it, but
-        // only after it has stopped field_6E's load in the loop condition from being CSE'd with oldCount or
-        // hoisted, so it is reloaded each pass like the original.
-        field_6E_horizontal_selected_idx = field_6E_horizontal_selected_idx;
     } while (new_count != field_6E_horizontal_selected_idx && !bFound);
 
     field_6E_horizontal_selected_idx = new_count;

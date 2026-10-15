@@ -1782,11 +1782,11 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
             GetDlgItemTextA(pNetUi->Get_202E0_HWND_519E20(), 1022, text, 0x7FF);
             if (strlen(text))
             {
-                sprintf(newText, "%s\r\n%s", text, line);
+                snprintf(newText, sizeof(newText), "%s\r\n%s", text, line);
             }
             else
             {
-                sprintf(newText, "%s", line);
+                snprintf(newText, sizeof(newText), "%s", line);
             }
             SetDlgItemTextA(pNetUi->Get_202E0_HWND_519E20(), 1022, newText);
             LRESULT lineCount = SendDlgItemMessageA(pNetUi->Get_202E0_HWND_519E20(), 1022, EM_GETLINECOUNT, 0, 0);
@@ -1798,11 +1798,11 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
             GetDlgItemTextA(pNetUi->Get_202E0_HWND_519E20(), 1051, text, 0x7FF);
             if (strlen(text))
             {
-                sprintf(newText, "%s\r\n%s", text, line);
+                snprintf(newText, sizeof(newText), "%s\r\n%s", text, line);
             }
             else
             {
-                sprintf(newText, "%s", line);
+                snprintf(newText, sizeof(newText), "%s", line);
             }
             SetDlgItemTextA(pNetUi->Get_202E0_HWND_519E20(), 1051, newText);
             LRESULT lineCount = SendDlgItemMessageA(pNetUi->Get_202E0_HWND_519E20(), 1051, EM_GETLINECOUNT, 0, 0);
@@ -1853,11 +1853,11 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
             GetDlgItemTextA(Get_202E0_HWND_519E20(), 1051, text, 0x7FF);
             if (strlen(text))
             {
-                sprintf(newText, "%s\r\n%s", text, line);
+                snprintf(newText, sizeof(newText), "%s\r\n%s", text, line);
             }
             else
             {
-                sprintf(newText, "%s", line);
+                snprintf(newText, sizeof(newText), "%s", line);
             }
             SetDlgItemTextA(Get_202E0_HWND_519E20(), 1051, newText);
             LRESULT lineCount = SendDlgItemMessageA(Get_202E0_HWND_519E20(), 1051, EM_GETLINECOUNT, 0, 0);
@@ -1886,11 +1886,11 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
             GetDlgItemTextA(Get_202E0_HWND_519E20(), 1022, text, 0x7FF);
             if (strlen(text))
             {
-                sprintf(newText, "%s\r\n%s", text, line);
+                snprintf(newText, sizeof(newText), "%s\r\n%s", text, line);
             }
             else
             {
-                sprintf(newText, "%s", line);
+                snprintf(newText, sizeof(newText), "%s", line);
             }
             SetDlgItemTextA(Get_202E0_HWND_519E20(), 1022, newText);
             LRESULT lineCount = SendDlgItemMessageA(Get_202E0_HWND_519E20(), 1022, EM_GETLINECOUNT, 0, 0);

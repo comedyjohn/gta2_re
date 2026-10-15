@@ -241,7 +241,7 @@ struct NetPlay
     s32 CopyConnection_5215B0(u32 idx, uptr* ppConnection, size_t* pLen);
     s32 SendToPlayer_521630(Network_8* pSendData, s32 player_idx, char_type delayed_ticks);
     void Add_5216E0(Network_8* pData, s32 id, char_type game_tick);
-    u32 GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlayerId);
+    s32 GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlayerId);
     void sub_521820(s32** ppData, s32 idx);
     void Remove_521870(s32 idx);
     char_type ReceiveGameMessage_521890(Network_8* pOut, s32* pPlayerIdx, u32* packet_subtype);

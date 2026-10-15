@@ -1983,7 +1983,7 @@ bool NetPlay::WaitForPlayersSync_5213E0()
     // One bit per other player: waiting for their ack and for their sync data
     u32 waitingForAck = 0;
     u32 waitingForSync = 0;
-    for (u32 i = 0; i < MAX_PLAYERS; i++)
+    for (s32 i = 0; i < MAX_PLAYERS; i++)
     {
         if (field_758_n2.field_10_players[i].field_0_in_use && i != GetPlayerIdx_409C40())
         {
@@ -2092,7 +2092,7 @@ void NetPlay::Add_5216E0(Network_8* pData, s32 id, char_type game_tick)
 }
 
 // 0x521770
-u32 NetPlay::GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlayerId)
+s32 NetPlay::GetLatestPacket_521770(Network_8* pOut, char_type* pSeq, u32* pPlayerId)
 {
     u8 best_seq = 0; // read unset in the original too
     u32 best_idx = 0;
@@ -2177,7 +2177,7 @@ char_type NetPlay::ReceiveGameMessage_521890(Network_8* pOut, s32* pPlayerIdx, u
             break;
         }
 
-        u32 slot;
+        s32 slot;
         if (bCheckBuffered && (slot = GetLatestPacket_521770(pOut, &receivedTick, (u32*)pPlayerIdx)) != -1)
         {
             // The oldest buffered (out of order) packet
@@ -2214,8 +2214,9 @@ char_type NetPlay::ReceiveGameMessage_521890(Network_8* pOut, s32* pPlayerIdx, u
             {
                 *packet_subtype = ((u8*)pData)[3];
                 Network_Game_Session* pN2 = &field_758_n2;
-                *pPlayerIdx = IndexOf_520E30(senderId, pN2);
-                if (*pPlayerIdx != 0xEEEEEEEE)
+                const u32 idx = IndexOf_520E30(senderId, pN2);
+                *pPlayerIdx = idx;
+                if (idx != 0xEEEEEEEE)
                 {
                     bGotMessage = 1;
                     pOut->field_4_len = ((u8*)pData)[4];

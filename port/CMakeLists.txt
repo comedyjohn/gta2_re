@@ -76,7 +76,6 @@ execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_forwarders.sh $
 function(gta2_game_target target)
     target_compile_options(${target} PRIVATE
         -include ${CMAKE_CURRENT_SOURCE_DIR}/include/port_prelude.h
-        $<$<COMPILE_LANGUAGE:CXX>:-fpermissive> # MSVC accepted these; see port/README.md
         -Wno-write-strings -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
     target_include_directories(${target} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})

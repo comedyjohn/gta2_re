@@ -62,8 +62,7 @@ The order follows what a player notices first.
 - [x] **C++23 clean-up, first pass:** `nullptr`, `true`/`false`, `using` aliases, `<cstdio>`-style
       headers, `static_assert`, no VC6 branches or inline asm, `// 0xADDR` comments instead of the
       `MATCH_FUNC` markers, no `EXPORT`/`__stdcall`, ErrorLog on `FILE*`.
-- [ ] **Drop `-fpermissive`.** GCC 64-bit already builds without it; check GCC 32-bit and Clang,
-      then remove it from `CMakeLists.txt`.
+- [x] **No `-fpermissive`:** GCC 32/64-bit and Clang 64-bit build without it.
 - [ ] **Warnings on for `game/`** (it builds with `-w`), and fix what they find.
 - [ ] **More modernising:** `enum class`, `constexpr` instead of `#define` constants, C++ casts,
       range-for, `std::array`. Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of

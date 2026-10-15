@@ -88,8 +88,7 @@ Setup installer with `innoextract`, and starts the game in it.
   are redirected to `platform/wchar.cpp`, including MSVC's `swprintf` (no size argument; `%s` takes
   a wide string).
 - **MSVC 6 semantics:** `-fwrapv` and `-fno-strict-aliasing`, because decompiled code relies on
-  wrapping arithmetic and type punning that MSVC never exploited. `-fpermissive` still covers a few
-  MSVC-only constructs; removing it is one of the follow-ups below.
+  wrapping arithmetic and type punning that MSVC never exploited.
 - **Every `.cpp` in `game/` is part of the game.**
 - **`game/` has no compiler-specific branches:** the VC6 ones (`_MSC_VER`, inline asm, the classic
   `ofstream`) were dropped in the fork, keeping what the port compiled.
@@ -109,8 +108,8 @@ original belongs there too, under its matching rules (top-level CLAUDE.md).
 - Bink movies, with FFmpeg's Bink decoder.
 - The ImGui debug overlay (`ImGuiDebug.cpp`): needs ImGui's OpenGL backend; `gbh_SetBeginSceneCB` ignores it for now.
 - Higher resolutions than 640x480 (the game's own projection would need to know).
-- Compile without `-fpermissive`, and with warnings on for `game/`, which will turn up the
-  constructs MSVC accepted silently.
+- Warnings on for `game/` (it builds with `-w`), which will turn up the constructs MSVC accepted
+  silently.
 - Run under AddressSanitizer and UndefinedBehaviorSanitizer.
 - Floating-point: the x87 code VC6 generated and GCC's SSE differ in precision. The game's maths is
   fixed-point (`Fix16`) and the port computes the same on every system (`MULTIPLAYER.md`), but

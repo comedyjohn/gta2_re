@@ -32,7 +32,7 @@ class ExplodingScore_50
     ExplodingScore_50* mpNext;
     s16 field_48_unused; // set to 0, never used ??
     s16 field_4A_unused; // pad?
-    s32 field_4C_score;
+    u32 field_4C_score;
 };
 
 class ExplodingScorePool

@@ -42,7 +42,7 @@ struct HighScoreTable_F0
 
     void Init_56B520();
 
-    char_type InsertScore_56B550(const wchar_t* pFindStr, s32 findScore);
+    char_type InsertScore_56B550(const wchar_t* pFindStr, u32 findScore);
 
     ScoreTableLine_18 field_0_score_table_line[10];
 };

@@ -171,7 +171,7 @@ void HighScoreTable_F0::Init_56B520()
 }
 
 // 0x56B550
-char_type HighScoreTable_F0::InsertScore_56B550(const wchar_t* pFindStr, s32 findScore)
+char_type HighScoreTable_F0::InsertScore_56B550(const wchar_t* pFindStr, u32 findScore)
 {
     u16 startIdx = 10;
     for (s16 i = 9; i != -1; --i)

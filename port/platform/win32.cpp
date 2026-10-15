@@ -390,6 +390,7 @@ std::deque<MSG> gMessages;
 HWND gMainWindow = 0; // the first top-level window: where platform events go
 int gCursorCount = 0;
 bool gPumping = false;
+bool gFocused = false; // the window has focus, as last passed on to the game
 std::vector<WNDPROC>* gWndProcHandles = 0; // 64-bit: see WndProcToLong
 
 void Post(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -422,13 +423,23 @@ void port_pump_events()
             case plat::EventType::Quit:
                 Post(gMainWindow, WM_CLOSE, 0, 0);
                 break;
+            // Only on a change of focus, as on Windows (ShowWindow may have activated the window
+            // already): WM_SETFOCUS makes the game set its video mode again
             case plat::EventType::FocusGained:
-                Post(gMainWindow, WM_ACTIVATE, WA_ACTIVE, 0);
-                Post(gMainWindow, WM_SETFOCUS, 0, 0);
+                if (!gFocused)
+                {
+                    gFocused = true;
+                    Post(gMainWindow, WM_ACTIVATE, WA_ACTIVE, 0);
+                    Post(gMainWindow, WM_SETFOCUS, 0, 0);
+                }
                 break;
             case plat::EventType::FocusLost:
-                Post(gMainWindow, WM_ACTIVATE, WA_INACTIVE, 0);
-                Post(gMainWindow, WM_KILLFOCUS, 0, 0);
+                if (gFocused)
+                {
+                    gFocused = false;
+                    Post(gMainWindow, WM_ACTIVATE, WA_INACTIVE, 0);
+                    Post(gMainWindow, WM_KILLFOCUS, 0, 0);
+                }
                 break;
             case plat::EventType::Minimized:
                 Post(gMainWindow, WM_SIZE, 1, 0); // SIZE_MINIMIZED
@@ -528,9 +539,14 @@ BOOL DestroyWindow(HWND hwnd)
 
 BOOL ShowWindow(HWND hwnd, int cmd)
 {
-    if (hwnd == gMainWindow && cmd != SW_HIDE)
+    // Windows activates a window it shows, unless it is active already or the command says not to.
+    // The game shows its window whenever it sets the video mode, which it does on WM_SETFOCUS, so
+    // activating it every time would loop forever.
+    const bool activates = cmd != SW_HIDE && cmd != SW_MINIMIZE && cmd != SW_SHOWMINNOACTIVE &&
+                           cmd != SW_SHOWNA && cmd != SW_SHOWNOACTIVATE;
+    if (hwnd == gMainWindow && activates && !gFocused)
     {
-        // Windows activates a window it shows
+        gFocused = true;
         Post(hwnd, WM_ACTIVATE, WA_ACTIVE, 0);
         Post(hwnd, WM_SETFOCUS, 0, 0);
     }

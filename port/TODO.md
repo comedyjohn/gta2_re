@@ -24,6 +24,10 @@ Read this first when picking the port up again. `README.md` explains how the por
    `DDRAW.DLL`, which stopped every start with "Incorrect version of DirectX". It now gets to loading
    game data; nothing past that has been run.
 8. ARM64 builds (`cmake/aarch64-linux-gnu.cmake`): the profiler's `rdtsc` has a clock on other CPUs.
+9. The front end shows, with real game data: `ShowWindow` and focus changes no longer post
+   `WM_ACTIVATE`/`WM_SETFOCUS` to a window that is active already. The game shows its window on every
+   video mode change, which it makes on `WM_SETFOCUS`, so the queue never emptied and the front end
+   (run only when it is empty) never drew.
 
 ## Left to do
 
@@ -31,7 +35,7 @@ The order follows what a player notices first.
 
 ### Missing for players
 - [ ] **Single player with real game data.** Nobody has played the port yet: it now starts and gets
-      as far as loading the data. Everything else waits on this.
+      as far as the front end's main menu. Everything else waits on this.
 - [ ] **Bink movies.** `Source/3rdParty/bink.cpp` is still stubs, and the `.bik` files are reported
       absent, so the intros are skipped. Plan: decode them with FFmpeg's Bink decoder.
 - [ ] **3D sound.** Nothing implements `AIL_*_3D_*` yet, and `AIL_enumerate_3D_providers` offers no

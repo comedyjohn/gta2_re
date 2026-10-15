@@ -191,9 +191,11 @@ typedef struct tagWINDOWPOS
 #define SW_NORMAL 1
 #define SW_SHOWMINIMIZED 2
 #define SW_SHOWMAXIMIZED 3
+#define SW_SHOWNOACTIVATE 4
 #define SW_SHOW 5
 #define SW_MINIMIZE 6
 #define SW_SHOWMINNOACTIVE 7
+#define SW_SHOWNA 8
 #define SW_RESTORE 9
 #define VK_BACK 0x08
 #define VK_TAB 0x09

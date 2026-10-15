@@ -395,7 +395,7 @@ void UpdateGameScreenSize_5D8E00()
         }
         else
         {
-            if (gCachedScreenDimension_706C58 != gVidSys_7071D0->field_4C_rect_bottom)
+            if ((DWORD)gCachedScreenDimension_706C58 != gVidSys_7071D0->field_4C_rect_bottom)
             {
                 gGame_0x40_67E008->SetScreenSize_4B8E00(gVidSys_7071D0->field_48_rect_right, gVidSys_7071D0->field_4C_rect_bottom);
             }
@@ -609,12 +609,12 @@ char_type SetWindowedMode_5D9510()
 // 0x5D8F70
 s32 ReadScreenSettings_5D8F70()
 {
-    const u32 full_width_old = full_width_706B5C;
-    const u32 window_width_old = window_width_706630;
-    const u32 full_height_old = full_height_706798;
+    const s32 full_width_old = full_width_706B5C;
+    const s32 window_width_old = window_width_706630;
+    const s32 full_height_old = full_height_706798;
     const s32 startMode_old = gStartMode_626A0C;
     const s32 trippleBuffer_old = bTrippleBuffer_706C54;
-    const u32 window_height_old = window_height_706B50;
+    const s32 window_height_old = window_height_706B50;
 
     if (bDoFrontEnd_626B68)
     {

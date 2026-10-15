@@ -5469,11 +5469,6 @@ void miss2_0x11C::StartBonus_50DF10()
         alt_car_model = pCmd->field_12_alt_car_model;
     }
 
-    // u16 > 0xFFFF is never true, left over dead code?
-    if (pCmd->field_8_zone_str_id > 0xFFFF)
-    {
-        gMap_0x370_6F6268->zone_by_name_4DEFD0(gScriptManager_6F8060->FindStringById_503080(pCmd->field_8_zone_str_id)->get_name());
-    }
 
     pPointer->field_8_counter = gGame_0x40_67E008->field_38_local_player->field_2D4_scores.field_1A8_bonuses.AllocRule_431FE0(flag,
                                                                                                                    car_model,

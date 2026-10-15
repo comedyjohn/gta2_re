@@ -1271,8 +1271,7 @@ void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
     }
     if (pLocal->field_19_gci_sum != pRemote->field_19_gci_sum)
     {
-        // The original passes the script name too, which the format doesn't use
-        sprintf(msg, "Player %s: Car handling file 'nyc.gci' is different", name, gGameSession_67E8E0.GetScriptName_4C5960());
+        sprintf(msg, "Player %s: Car handling file 'nyc.gci' is different", name);
         FatalErrorMsg_4DB410(msg);
     }
 }

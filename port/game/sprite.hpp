@@ -656,8 +656,8 @@ class SpriteMask_14
     s16 field_4_sprite_idx;
     char_type field_6_unused;
     char_type field_7_unused;
-    s32 field_8_delta_mask;
-    s32 field_C_last_used;
+    u32 field_8_delta_mask;
+    u32 field_C_last_used;
     u16 field_10_idx;
     u16 field_12;
 };
@@ -678,7 +678,7 @@ class SpriteMaskCache_3CC
     }
 
     SpriteMask_14 field_0_masks[48];
-    s32 field_3C0_use_counter;
+    u32 field_3C0_use_counter;
     u8* field_3C4_aligned_buffer;
     s32* field_3C8_unaligned_alloc;
 };

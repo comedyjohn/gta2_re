@@ -183,7 +183,7 @@ void Sprite::set_angle_4833B0(Ang16 ang)
 void SpriteMask_14::MarkUsed_48F5A0()
 {
     SpriteMaskCache_3CC* pSprt = gSpriteMaskCache_67AF1C;
-    s32 new_idx = ++pSprt->field_3C0_use_counter;
+    u32 new_idx = ++pSprt->field_3C0_use_counter;
     field_C_last_used = new_idx;
 }
 

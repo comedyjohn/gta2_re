@@ -822,7 +822,7 @@ void Player::TeleportToDebugCam_565310()
 {
     field_2C4_player_ped->TeleportToCoord_45BC10(this->field_14C_view_camera.field_98_cur_pos.field_0_x,
                                                  this->field_14C_view_camera.field_98_cur_pos.field_4_y);
-    memcpy(&this->field_90_game_camera, &this->field_14C_view_camera, sizeof(this->field_90_game_camera));
+    memcpy((void*)&this->field_90_game_camera, &this->field_14C_view_camera, sizeof(this->field_90_game_camera));
     this->field_6C_in_debug_cam_mode = 0;
     this->field_68_camera_mode = 0;
     this->field_90_game_camera.SetSmoothFollow_475B60();
@@ -1765,7 +1765,7 @@ void Player::Wasted_567130()
             field_2C8_aux_ped->ClearAttacking_403A40();
             field_2C8_aux_ped->field_267_ped_ref_idx = 0;
             field_68_camera_mode = 2;
-            memcpy(&field_208_aux_game_camera, &field_90_game_camera, sizeof(field_208_aux_game_camera));
+            memcpy((void*)&field_208_aux_game_camera, &field_90_game_camera, sizeof(field_208_aux_game_camera));
             field_2D0_aux_cam_active = 1;
         }
         Player::RespawnPlayer_5670B0();
@@ -1861,7 +1861,7 @@ void Player::Busted_5679E0()
         field_2C8_aux_ped->field_267_ped_ref_idx = 0;
         gPolice_7B8_6FEE40->SetArrestedPed_56F8E0(field_2C4_player_ped, field_2C8_aux_ped);
         field_68_camera_mode = 2;
-        memcpy(&field_208_aux_game_camera, &field_90_game_camera, sizeof(Camera_0xBC));
+        memcpy((void*)&field_208_aux_game_camera, &field_90_game_camera, sizeof(Camera_0xBC));
         field_2D0_aux_cam_active = 1;
         Player::RespawnPlayer_5670B0();
         field_2C4_player_ped->field_210_shock_counter = 0;
@@ -2067,7 +2067,7 @@ void Player::Service_5687F0()
             field_90_game_camera.Update_435FF0();
             if (!this->field_6C_in_debug_cam_mode)
             {
-                memcpy(&this->field_14C_view_camera, &field_90_game_camera, sizeof(this->field_14C_view_camera));
+                memcpy((void*)&this->field_14C_view_camera, &field_90_game_camera, sizeof(this->field_14C_view_camera));
             }
             break;
 
@@ -2096,7 +2096,7 @@ void Player::Service_5687F0()
 
             if (!this->field_6C_in_debug_cam_mode)
             {
-                memcpy(&this->field_14C_view_camera, &field_90_game_camera, sizeof(this->field_14C_view_camera));
+                memcpy((void*)&this->field_14C_view_camera, &field_90_game_camera, sizeof(this->field_14C_view_camera));
             }
             break;
 
@@ -2119,7 +2119,7 @@ void Player::Service_5687F0()
             field_208_aux_game_camera.Update_435FF0();
             if (!this->field_6C_in_debug_cam_mode)
             {
-                memcpy(&this->field_14C_view_camera, &field_208_aux_game_camera, sizeof(this->field_14C_view_camera));
+                memcpy((void*)&this->field_14C_view_camera, &field_208_aux_game_camera, sizeof(this->field_14C_view_camera));
             }
             break;
 
@@ -2137,7 +2137,7 @@ void Player::Service_5687F0()
             field_208_aux_game_camera.Update_435FF0();
             if (!this->field_6C_in_debug_cam_mode)
             {
-                memcpy(&this->field_14C_view_camera, &field_208_aux_game_camera, sizeof(this->field_14C_view_camera));
+                memcpy((void*)&this->field_14C_view_camera, &field_208_aux_game_camera, sizeof(this->field_14C_view_camera));
             }
             break;
 
@@ -2214,7 +2214,7 @@ void Player::UpdatePaused_569410()
             pCam->RefreshBoundaries_436110();
             if (!field_6C_in_debug_cam_mode)
             {
-                memcpy(&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
+                memcpy((void*)&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
             }
             break;
         case 0:
@@ -2227,7 +2227,7 @@ void Player::UpdatePaused_569410()
             }
             if (!field_6C_in_debug_cam_mode)
             {
-                memcpy(&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
+                memcpy((void*)&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
             }
             break;
 
@@ -2238,7 +2238,7 @@ void Player::UpdatePaused_569410()
             field_208_aux_game_camera.RefreshBoundaries_436110();
             if (!field_6C_in_debug_cam_mode)
             {
-                memcpy(&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
+                memcpy((void*)&field_14C_view_camera, pCam, sizeof(field_14C_view_camera));
             }
             break;
         default:
@@ -2734,7 +2734,7 @@ void Player::RestoreCarsFromSave_56A0F0()
             pNewCar->SetDamage_4A51B0(gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_2A_damage[i]);
         }
     }
-    memset(&gGameSave_6F78C8.field_E4_car_and_script_data.field_0, 0, 68u);
+    memset((void*)&gGameSave_6F78C8.field_E4_car_and_script_data.field_0, 0, 68u);
 }
 
 // 0x56A1A0

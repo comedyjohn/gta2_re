@@ -412,7 +412,7 @@ void PlyDat_2BC0::SavePlySlotDat_56BA60(s16 slotIdx)
     GetPlySlotDatName_56B8A0(slotIdx, FileName);
 
     // The start of this object is reused as the buffer for the player slot .dat file
-    memcpy(this,
+    memcpy((void*)this,
            field_26A0_plyr_stats[(u16)slotIdx].field_90_strPlayerName,
            sizeof(field_26A0_plyr_stats[0].field_90_strPlayerName));
     len = sizeof(field_26A0_plyr_stats[0].field_90_strPlayerName);

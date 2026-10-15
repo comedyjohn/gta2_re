@@ -3725,7 +3725,7 @@ void Object_5C::RestoreObjects_52A590(SavedObjectData_164* pData)
         pPedRefIdx++;
     }
 
-    memset(pData, 0, 0x12Cu); // everything before field_12C_obj_5C_bUnCollectedTokens
+    memset((void*)pData, 0, 0x12Cu); // everything before field_12C_obj_5C_bUnCollectedTokens
 }
 
 // 0x52A610

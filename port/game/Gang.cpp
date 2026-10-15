@@ -336,11 +336,11 @@ void GangPool_CA8::SwapGangSlots_4BF230(Gang_144* pGang, u8 gang_idx)
         {
             if (pOtherGang->field_138_arrow_colour != pGang->field_138_arrow_colour)
             {
-                memcpy(&tmp_gang, pOtherGang, sizeof(tmp_gang));
-                memcpy(&gGangPool_CA8_67E274->field_0_gang_list[pOtherGang->field_1_gang_idx],
+                memcpy((void*)&tmp_gang, pOtherGang, sizeof(tmp_gang));
+                memcpy((void*)&gGangPool_CA8_67E274->field_0_gang_list[pOtherGang->field_1_gang_idx],
                        pGang,
                        sizeof(gGangPool_CA8_67E274->field_0_gang_list[pOtherGang->field_1_gang_idx]));
-                memcpy(&gGangPool_CA8_67E274->field_0_gang_list[pGang->field_1_gang_idx],
+                memcpy((void*)&gGangPool_CA8_67E274->field_0_gang_list[pGang->field_1_gang_idx],
                        &tmp_gang,
                        sizeof(gGangPool_CA8_67E274->field_0_gang_list[pGang->field_1_gang_idx]));
                 pGang->field_1_gang_idx = pOtherGang->field_1_gang_idx;

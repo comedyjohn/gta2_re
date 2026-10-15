@@ -984,7 +984,7 @@ Ped* PedManager::ClonePed_470F90(Ped* pSrc)
 {
     Ped* pDst = gPedPool_6787B8->Allocate();
     Ped* pNext = pDst->mpNext;
-    memcpy(pDst, pSrc, sizeof(Ped));
+    memcpy((void*)pDst, pSrc, sizeof(Ped));
     pDst->mpNext = pNext;
 
     if (pSrc->field_168_game_object)

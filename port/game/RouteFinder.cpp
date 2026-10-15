@@ -301,7 +301,7 @@ void RouteFinder::Load_RGEN_588B30()
 void RouteFinder::Reset_588C60()
 {
     memset(this->field_CA40_visited, 0, sizeof(this->field_CA40_visited));
-    memset(this->field_861C_nodes, 0, sizeof(this->field_861C_nodes));
+    memset((void*)this->field_861C_nodes, 0, sizeof(this->field_861C_nodes));
     memset(this->field_2218_routes, 0, sizeof(this->field_2218_routes));
 }
 
@@ -676,7 +676,7 @@ char_type RouteFinder::InitSearch_589480(u8 start_x, u8 start_y, u8 start_z, u8 
 {
     field_CC66_545_count = 0;
     memset(field_CA40_visited, 0, sizeof(field_CA40_visited));
-    memset(field_861C_nodes, 0, sizeof(field_861C_nodes));
+    memset((void*)field_861C_nodes, 0, sizeof(field_861C_nodes));
 
     field_8618_idx = FindSegmentJunction_589000(start_x, start_y, start_z, 0, arrow_type);
     if (field_8618_idx == 0)
@@ -714,7 +714,7 @@ char_type RouteFinder::sub_5895C0(u8 x, u8 y, u8 z, s32 arrow_type, s32 directio
     field_CC66_545_count = 0;
     memset(field_CA40_visited, 0, sizeof(field_CA40_visited));
     RouteFinder_10* pStart = field_861C_nodes;
-    memset(pStart, 0, sizeof(field_861C_nodes));
+    memset((void*)pStart, 0, sizeof(field_861C_nodes));
 
     field_8618_idx = FindSegmentJunction_589000(x, y, z, 0, arrow_type);
     if (field_8618_idx == 0)
@@ -1161,7 +1161,7 @@ RouteFinder::RouteFinder()
     memset(field_2218_routes, 0, sizeof(field_2218_routes));
     field_8618_idx = 0;
     field_861A_dest_idx = 0;
-    memset(field_861C_nodes, 0, sizeof(field_861C_nodes));
+    memset((void*)field_861C_nodes, 0, sizeof(field_861C_nodes));
     field_A82C_open_list = nullptr;
     memset(field_A830_horz_segments, 0, sizeof(field_A830_horz_segments));
     memset(field_B938_vert_segments, 0, sizeof(field_B938_vert_segments));

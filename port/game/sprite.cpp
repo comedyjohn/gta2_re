@@ -593,13 +593,13 @@ u8 Sprite::GetWaterCornerMask_59E250()
 void Sprite::CopyCollisionShapeToVisual_59E2E0()
 {
     EnsureVisualShape_59F990();
-    memcpy(field_4_pVisualShape, field_C_pCollisionShape, sizeof(SpriteShape_4C));
+    memcpy((void*)field_4_pVisualShape, field_C_pCollisionShape, sizeof(SpriteShape_4C));
 }
 
 // 0x59e300
 void Sprite::CopyVisualShapeToCollision_59E300()
 {
-    memcpy(field_C_pCollisionShape, field_4_pVisualShape, sizeof(SpriteShape_4C));
+    memcpy((void*)field_C_pCollisionShape, field_4_pVisualShape, sizeof(SpriteShape_4C));
 }
 
 // 0x59e320

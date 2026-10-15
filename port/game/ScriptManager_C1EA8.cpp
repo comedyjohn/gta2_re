@@ -874,7 +874,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     memset(field_188_phone_triggers, 0, sizeof(field_188_phone_triggers));
     field_278_weapon_check_count = 0;
     memset(field_27C_weapon_check_table, 0, sizeof(field_27C_weapon_check_table));
-    memset(&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
+    memset((void*)&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
 
     Miss2_25C* pMiss2_25C = new Miss2_25C();
     gMiss2_25C_6F805C = pMiss2_25C;
@@ -952,7 +952,7 @@ ScriptManager_C1EA8::~ScriptManager_C1EA8()
         field_1334C_strings = nullptr;
     }
 
-    memset(&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
+    memset((void*)&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
 
     if (gMiss2_25C_6F805C)
     {

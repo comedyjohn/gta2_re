@@ -385,7 +385,7 @@ void UpdateGameScreenSize_5D8E00()
 {
     if (gGame_0x40_67E008)
     {
-        if (gVidSys_7071D0->field_40_full_screen == -2)
+        if (gVidSys_7071D0->field_40_full_screen == (DWORD)-2)
         {
             if (gCachedScreenDimension_706C58 != window_width_706630)
             {

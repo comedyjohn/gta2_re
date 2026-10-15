@@ -128,7 +128,7 @@ void MakeScreenTableAndSetWindow_5D7D30()
                      gVidSys_7071D0->field_54_surface_pixels_pitch,
                      gVidSys_7071D0->field_4C_rect_bottom);
 
-    if (gVidSys_7071D0->field_40_full_screen == -2)
+    if (gVidSys_7071D0->field_40_full_screen == (DWORD)-2)
     {
         gWindowRight_70675C = window_width_706630 - 1;
         gWindowBottom_70679C = window_height_706B50 - 1;

@@ -107,7 +107,7 @@ s32 CarInfo_808::ReadToken_430B10(char* pOut)
     *pOut = 0;
     while (255 > i)
     {
-        u32 currentChar = 0;
+        s32 currentChar = 0;
 
         // Get the next character
         if (processedGciData_676260 == gciDataLen_675F94)

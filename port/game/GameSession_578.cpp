@@ -4,6 +4,7 @@
 #include "Globals.hpp"
 #include "Player.hpp"
 #include "registry.hpp"
+#include <cstdio>
 
 DEFINE_GLOBAL(GameSession_578, gGameSession_67E8E0, 0x67E8E0);
 EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr_67DC8C, 32);
@@ -76,25 +77,29 @@ void GameSession_578::LoadDebugSettings_4C53D0()
 // 0x4C5870
 char* GameSession_578::SetMapName_4C5870(char_type* pName)
 {
-    return strncpy(field_0_map_name, pName, 255u);
+    snprintf(field_0_map_name, sizeof(field_0_map_name), "%s", pName); // always terminated
+    return field_0_map_name;
 }
 
 // 0x4C5890
 char* GameSession_578::SetStyleName_4C5890(char_type* pName)
 {
-    return strncpy(field_100_style_name, pName, 0xFFu);
+    snprintf(field_100_style_name, sizeof(field_100_style_name), "%s", pName); // always terminated
+    return field_100_style_name;
 }
 
 // 0x4C58B0
 char* GameSession_578::SetScriptName_4C58B0(char_type* pName)
 {
-    return strncpy(field_200_script_name, pName, 0xFFu);
+    snprintf(field_200_script_name, sizeof(field_200_script_name), "%s", pName); // always terminated
+    return field_200_script_name;
 }
 
 // 0x4C58D0
 char_type* GameSession_578::DebugStr_4C58D0(char_type* pStr)
 {
-    return strncpy(field_300_debug_str, pStr, 0xFFu);
+    snprintf(field_300_debug_str, sizeof(field_300_debug_str), "%s", pStr); // always terminated
+    return field_300_debug_str;
 }
 
 // 0x4C58F0

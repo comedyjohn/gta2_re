@@ -5,6 +5,7 @@
 #include "fix16.hpp"
 #include "winmain.hpp"
 #include <cstdio>
+#include <cstring>
 #include <ctime>
 #include <windows.h>
 
@@ -16,79 +17,49 @@ EXTERN_GLOBAL(s32, gGTA2VersionMajor_708280);
 EXTERN_GLOBAL(s32, gGTA2VersionMajor_708284);
 
 MATCH_FUNC(0x4D9470)
-void ErrorLog::Open_4D9470(const char_type* path, s32 a3)
+void ErrorLog::Open_4D9470(const char* path, s32 mode)
 {
-    u8* fileNameLen = new u8;
-    if (fileNameLen)
+    if (mFile)
     {
-        *fileNameLen = strlen(path);
+        fclose(mFile);
     }
-    else
-    {
-        fileNameLen = nullptr;
-    }
-    this->field_3C_pLen = fileNameLen;
-
-    s32 mode;
-    switch (a3)
-    {
-        case 0:
-            mode = 8; // ios::app
-            break;
-
-        case 1:
-            mode = 16; // ios::trunc
-            break;
-
-        default:
-            mode = 8; // ios::app
-            break;
-    }
-
-#if defined(__clang__) || (_MSC_VER <= 1200)
-    ((ofstream&)field_0_ofstr).open(path, mode, filebuf::openprot);
-#endif
-
+    mFile = fopen(path, mode == 1 ? "w" : "a");
     log_timestamp_4D9540();
 }
 
-// The member ofstream's constructor call and EH frame come from the real ofstream member
-// (error.hpp, VC6 only)
 MATCH_FUNC(0x4D94E0)
-ErrorLog::ErrorLog(const char* FileName, int a3)
+ErrorLog::ErrorLog(const char* path, int mode)
 {
-    Open_4D9470(FileName, a3);
+    Open_4D9470(path, mode);
 }
 
-// This func matches but for some reason it's crashing the patched version
-MATCH_FUNC(0x4D9690)
-EXPORT void __cdecl log_on_line_written_cb_4D9690(void* a1)
+void ErrorLog::Write(const char* text, bool newLine)
 {
-    ((ostream_type*)a1)->flush();
+    if (mFile)
+    {
+        fputs(text, mFile);
+        if (newLine)
+        {
+            fputc('\n', mFile);
+        }
+        fflush(mFile);
+    }
 }
 
 MATCH_FUNC(0x4D9620)
-void ErrorLog::Write_4D9620(const char_type* pMsg)
+void ErrorLog::Write_4D9620(const char* pMsg)
 {
-#if defined(__clang__) || (_MSC_VER <= 1200)
-#else
-    using namespace std;
-#endif
-    ((ostream_type&)this->field_0_ofstr) << pMsg << endl << flush;
+    Write(pMsg, true);
 }
 
 MATCH_FUNC(0x4D9650)
-void ErrorLog::Write_Log_4D9650(const char_type* buffer)
+void ErrorLog::Write_Log_4D9650(const char* buffer)
 {
-#if defined(__clang__) || (_MSC_VER <= 1200)
-#else
-    using namespace std;
-#endif
-    ((ostream_type&)this->field_0_ofstr) << buffer << flush;
+    Write(buffer, false);
 }
 
 MATCH_FUNC(0x4D9540)
-EXPORT void ErrorLog::log_timestamp_4D9540()
+void ErrorLog::log_timestamp_4D9540()
 {
     time_t curTime = time(nullptr);
     char_type* buffer = ctime(&curTime);
@@ -97,22 +68,14 @@ EXPORT void ErrorLog::log_timestamp_4D9540()
     Write_4D9620(gTmpBuffer_67C598);
 }
 
-MATCH_FUNC(0x4D9670)
-void* ErrorLog::log_on_line_written_4D9670(TLogLineCallback pCallBack)
-{
-    pCallBack(this);
-    return this;
-}
-
-// Logs the intro line again on the way out, then closes the file
 MATCH_FUNC(0x4A3610)
 ErrorLog::~ErrorLog()
 {
     log_intro_4D95A0();
-#if !defined(__clang__) && (_MSC_VER <= 1200)
-    field_0_ofstr.close();
-#endif
-    delete field_3C_pLen;
+    if (mFile)
+    {
+        fclose(mFile);
+    }
 }
 
 MATCH_FUNC(0x4D95A0)
@@ -131,7 +94,7 @@ void ErrorLog::log_intro_4D95A0()
 DEFINE_GLOBAL(ErrorLog, gErrorLog_67C530, 0x67C530);
 DEFINE_GLOBAL(ErrorLog, gErrorLog_67CF58, 0x67CF58);
 DEFINE_GLOBAL(ErrorLog, gMiss2Log_6F7698, 0x6F7698);
-ErrorLog gFile_67C530; //DEFINE_GLOBAL(ErrorLog, gFile_67C530, 0x67C530);
+ErrorLog& gFile_67C530 = gErrorLog_67C530;
 
 DEFINE_GLOBAL_ARRAY(char_type, gTmpBuffer_67C598, 256, 0x67C598); // TODO: Check
 DEFINE_GLOBAL_ARRAY(char_type, gErrStr_67C29C, 256, 0x67C29C);

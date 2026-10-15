@@ -3,52 +3,30 @@
 #include "Function.hpp"
 #include <windows.h>
 
-#if defined(__clang__) || (_MSC_VER <= 1200)
-#include <fstream.h>
-#define ostream_type ostream
-#else
-#include <fstream>
-#define ostream_type std::ostream
-#endif
+#include <cstdio>
 
+// A text log file, such as the mission script's test\MISS_LOG.TXT. Writing to a log that was
+// never opened does nothing.
 class ErrorLog
 {
   public:
-    EXPORT void Open_4D9470(const char_type* path, s32 a3);
-    EXPORT ErrorLog(const char* FileName, int a3);
-    EXPORT void Write_4D9620(const char_type* pMsg);
-    EXPORT void Write_Log_4D9650(const char_type* buffer);
+    ErrorLog() = default;
+    ErrorLog(const char* path, int mode); // 0x4D94E0
+    ~ErrorLog();                          // 0x4A3610: logs the intro line again, then closes
+    ErrorLog(const ErrorLog&) = delete;
+    ErrorLog& operator=(const ErrorLog&) = delete;
 
-    EXPORT void log_timestamp_4D9540();
+    // 0x4D9470: mode 1 starts the file over, anything else appends to it
+    void Open_4D9470(const char* path, s32 mode);
+    void Write_4D9620(const char* pMsg);       // the text and a new line
+    void Write_Log_4D9650(const char* buffer); // the text as it is
+    void log_timestamp_4D9540();
+    void log_intro_4D95A0();
 
-    typedef void(__cdecl* TLogLineCallback)(void*);
-    EXPORT void* log_on_line_written_4D9670(TLogLineCallback pCallBack);
+  private:
+    void Write(const char* text, bool newLine);
 
-    EXPORT void log_intro_4D95A0();
-
-    ErrorLog()
-    {
-    }
-
-    EXPORT ~ErrorLog();
-
-    // Note: Has to use the old/classic ofstream, not the one from the std namespace
-    // although clang-cl preprocessing, bad build options or something is causing field 0x3C to
-    // end up at the wrong offset
-
-#if !defined(__clang__) && (_MSC_VER <= 1200)
-    // VC6: the real classic ofstream (0x3C bytes, checked with sizeof), so the constructor emits
-    // the original's ??0ofstream@@QAE@XZ call and EH frame (ErrorLog::ErrorLog 0x4D94E0)
-    ofstream field_0_ofstr;
-#else
-    // HACK: Isn't a pointer but just done so we can use the var in Write and some other funcs for now
-    struct fake_ofstream
-    {
-      char buffer[0x3C];
-    };
-    fake_ofstream field_0_ofstr; // Crashes standalone
-#endif
-    u8* field_3C_pLen;
+    FILE* mFile = nullptr;
 };
 
 EXPORT void __stdcall Error_SetName_4A0770(const char_type* pFileName);
@@ -67,4 +45,4 @@ EXTERN_GLOBAL(char_type, gErrStr2_67C3A8[256]);
 
 EXTERN_GLOBAL(ErrorLog, gErrorLog_67C530);
 EXTERN_GLOBAL(ErrorLog, gMiss2Log_6F7698);
-extern ErrorLog gFile_67C530; //EXTERN_GLOBAL(ErrorLog, gFile_67C530);
+extern ErrorLog& gFile_67C530; // the same log as gErrorLog_67C530 (both are 0x67C530)

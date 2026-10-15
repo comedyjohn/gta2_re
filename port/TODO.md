@@ -63,17 +63,16 @@ The order follows what a player notices first.
       headers, `static_assert`, no VC6 branches or inline asm, `// 0xADDR` comments instead of the
       `MATCH_FUNC` markers, no `EXPORT`/`__stdcall`, ErrorLog on `FILE*`.
 - [x] **No `-fpermissive`:** GCC 32/64-bit and Clang 64-bit build without it.
-- [ ] **Warnings on for `game/`** (it builds with `-w`), and fix what they find. In progress:
-      configure a build with `-DGTA2_GAME_WARNINGS=ON` (`-Wall -Wextra` for `game/`; for example
-      `build_port/warn64` with GCC and `build_port/warnclang64` with Clang 18) and count the warnings
-      by kind. Fixed so far: missing returns, mismatched `new`/`delete`, a use after `fclose`, the
-      array-bounds, sequence-point, overflow, self-assignment, address, format-security and
-      fall-through warnings, and every uninitialised variable GCC or Clang finds (a default
-      `Fix16` is zero now). Left, most first: `-Wformat` (about 190, mostly `%d` for wide or
-      unsigned types), `-Wsign-compare`, unused variables and parameters, `-Wparentheses`,
-      `-Wformat-overflow`, `-Wclass-memaccess`, `-Wchar-subscripts`, `-Wcast-function-type`,
-      `-Wunknown-pragmas` (the VC6 `#pragma warning` lines). When the build is clean, make the
-      warnings the default.
+- [ ] **Warnings on for `game/`** (it builds with `-w`). Nearly done: every kind except
+      `-Wsign-compare` (142) is fixed or off on purpose (unused parameters, char subscripts, format
+      truncation, unknown pragmas). Left: (1) `port/CMakeLists.txt` has an uncommitted change that
+      makes `-Wall -Wextra` the default for `game/`; GCC builds it with 0 warnings, but Clang still
+      prints 146 `-Wunknown-pragmas` from GTA2Hax's `ddraw_vc6.h`, because CMake drops a repeated
+      `-Wno-unknown-pragmas` and `target_compile_options(... BEFORE ...)` didn't move `-Wall` ahead
+      of `gta2_game_target`'s `-Wno-*` flags. Fix the order (e.g. put the warning flags into
+      `gta2_game_target` itself, `-Wall -Wextra` first), then rebuild all three builds, run the
+      self-tests and `tools/nettest.sh`, and commit. (2) Work through `-Wsign-compare`
+      (`-DGTA2_GAME_WARNINGS=ON` shows it).
 - [ ] **More modernising:** `enum class`, `constexpr` instead of `#define` constants, C++ casts,
       range-for, `std::array`. Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of
       clang-tidy's `modernize-use-using`: it drops calling conventions and expands macros.

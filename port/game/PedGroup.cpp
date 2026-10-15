@@ -566,10 +566,8 @@ void PedGroup::add_ped_to_list_4C9B30(Ped* ptr, u8 idx)
 }
 
 // The original never sets a return value
-#pragma warning(push)
-#pragma warning(disable : 4716)
 // 0x4c9b60
-char_type PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
+void PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
 {
     s8 i;
     field_30_panicking = 1;
@@ -679,7 +677,6 @@ char_type PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
         }
     }
 }
-#pragma warning(pop)
 
 // 0x4c9ed0
 Ped* PedGroup::sub_4C9ED0()

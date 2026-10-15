@@ -1057,8 +1057,6 @@ void Explosion_30::SetObject_543680(Object_2C* pObj)
 // Every explosion gets a priority from its type: 1 (unknown types, evicted straight away) up to 6, and a late fire or
 // explosion counts as 3. The one with the lowest priority has its timer set to 0 so that it ends on its next update.
 // The early exit returns the freed index (eax), the fall-through path returns nothing like the original.
-#pragma warning(push)
-#pragma warning(disable : 4715) // not all control paths return a value
 // 0x543690
 s32 ExplosionPool_7A8::FreeLowestPriority_543690()
 {
@@ -1187,8 +1185,8 @@ s32 ExplosionPool_7A8::FreeLowestPriority_543690()
         cur_idx = ++idx;
     } while (idx < GTA2_COUNTOF(field_0_explosions));
     this->field_0_explosions[lowest_idx].field_1A_timer = 0;
+    return lowest_idx;
 }
-#pragma warning(pop)
 
 // 0x543800
 Explosion_30* ExplosionPool_7A8::Allocate_543800()

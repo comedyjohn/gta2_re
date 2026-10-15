@@ -1661,8 +1661,6 @@ void Network_20324::ClearTreeView_51AE20(s32 nIDDlgItem)
     }
 }
 
-#pragma warning(push)
-#pragma warning(disable : 4715) // not all control paths return a value
 // 0x51ae50
 s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_PlayerPing* pPing)
 {
@@ -1701,9 +1699,8 @@ s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_Player
             return SendMessageA(hItem, LVM_SETITEMTEXTA, idx, (LPARAM)&item);
         }
     }
-    // No return here in the original either
+    return 0;
 }
-#pragma warning(pop)
 
 // 0x51afa0
 void Network_20324::PopulateMainUI_51AFA0()
@@ -1764,8 +1761,6 @@ void Network_20324::PopulateMainUI_51AFA0()
     Network_20324::SetGameTimeLimitTextBox_51D3B0(field_20088_game_settings.field_201A4_game_time_limit, field_202E0_dlg_hwnd);
 }
 
-#pragma warning(push)
-#pragma warning(disable : 4715) // not all control paths return a value
 // 0x51b2f0
 LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_ChatMessage* pMsg)
 {
@@ -1814,12 +1809,10 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
             return SendDlgItemMessageA(pNetUi->Get_202E0_HWND_519E20(), 1051, EM_LINESCROLL, 0, lineCount);
         }
     }
-    // No return here in the original either
+    return 0;
 }
-#pragma warning(pop)
 
 #pragma warning(push)
-#pragma warning(disable : 4715) // not all control paths return a value
 #pragma warning(disable : 4700) // name is never filled in, as in the original
 // 0x51b4f0
 s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMsg)
@@ -1905,7 +1898,7 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
             return SendDlgItemMessageA(Get_202E0_HWND_519E20(), 1022, EM_LINESCROLL, 0, lineCount);
         }
     }
-    // No return here in the original either
+    return 0;
 }
 #pragma warning(pop)
 

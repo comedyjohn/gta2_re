@@ -40,7 +40,7 @@ class PedGroup
     void RemovePed_4C9970(Ped* pPed);
     void add_ped_leader_4C9B10(Ped* ptr);
     void add_ped_to_list_4C9B30(Ped* ptr, u8 idx);
-    char_type MergeWithOtherGroup_4C9B60(Ped* pPed);
+    void MergeWithOtherGroup_4C9B60(Ped* pPed);
     Ped* sub_4C9ED0();
     void CoordinateGroupCarEntry_4C9F00();
     u32 sub_4CA3E0();

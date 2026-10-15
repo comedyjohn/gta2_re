@@ -336,7 +336,7 @@ class gtx_0x106C
 
     void InitTileMapping_5AA950();
 
-    void BuildCarInfoContainer_5AA9A0(s32 chunk_size);
+    void BuildCarInfoContainer_5AA9A0(u32 chunk_size);
 
     void load_delx_5AAB30(u32 delx_chunk_size);
 

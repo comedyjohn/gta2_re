@@ -350,7 +350,7 @@ void gtx_0x106C::InitTileMapping_5AA950()
 // Current WIP (lower score, but more runtime correct?):
 // https://decomp.me/scratch/CqJJm
 // 0x5AA9A0
-void gtx_0x106C::BuildCarInfoContainer_5AA9A0(s32 chunk_size)
+void gtx_0x106C::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
 {
     car_info* pCarInfoIter = (car_info*)field_58_car_info;
     u32 total_len = 0;
@@ -820,7 +820,7 @@ void gtx_0x106C::load_font_base_5AB0F0(u32 fonb_chunk_size)
     File::Global_Read_4A71C0(field_1C_font_base, fonb_chunk_size);
 
     u16 fountCount = field_1C_font_base->field_0_font_count;
-    if (fonb_chunk_size != (fountCount * 2) + 2)
+    if (fonb_chunk_size != (fountCount * 2u) + 2)
     {
         FatalError_4A38C0(Gta2Error::InvalidChunkSize, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1271, fonb_chunk_size);
     }

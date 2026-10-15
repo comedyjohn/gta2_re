@@ -203,7 +203,9 @@ class Fix16
         return (mValue / 16384.0f);
     }
 
-    Fix16()
+    // Zero rather than unset: the original reads some Fix16 locals before setting them, and every
+    // machine in a network game has to read the same value
+    constexpr Fix16() : mValue(0)
     {
     }
 

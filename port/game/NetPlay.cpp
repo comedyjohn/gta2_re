@@ -588,7 +588,7 @@ s32 NetPlay::EnumSessions_51E650()
     HRESULT hr;
     if (field_4_bModem)
     {
-        hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, (LPDPENUMSESSIONSCALLBACK2)NetPlay::EnumSessions_cb_51EAE0, this, 0);
+        hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, NetPlay::EnumSessions_cb_51EAE0, this, 0);
         while (hr == DPERR_CONNECTING)
         {
             if (PeekMessageA(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -597,7 +597,7 @@ s32 NetPlay::EnumSessions_51E650()
                 DispatchMessageA(&msg);
             }
             Sleep(500);
-            hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, (LPDPENUMSESSIONSCALLBACK2)NetPlay::EnumSessions_cb_51EAE0, this, 0);
+            hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, NetPlay::EnumSessions_cb_51EAE0, this, 0);
         }
 
         if (hr == DPERR_USERCANCEL)
@@ -608,7 +608,7 @@ s32 NetPlay::EnumSessions_51E650()
         {
             goto failed;
         }
-        hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, (LPDPENUMSESSIONSCALLBACK2)NetPlay::EnumSessions_cb_51EAE0, this, DPENUMSESSIONS_RETURNSTATUS);
+        hr = field_5E4_pDPlay3->EnumSessions(&desc, 0, NetPlay::EnumSessions_cb_51EAE0, this, DPENUMSESSIONS_RETURNSTATUS);
         if (hr == DPERR_USERCANCEL)
         {
             return 0;
@@ -623,7 +623,7 @@ s32 NetPlay::EnumSessions_51E650()
     {
         hr = field_5E4_pDPlay3->EnumSessions(&desc,
                                              0,
-                                             (LPDPENUMSESSIONSCALLBACK2)NetPlay::EnumSessions_cb_51EAE0,
+                                             NetPlay::EnumSessions_cb_51EAE0,
                                              this,
                                              DPENUMSESSIONS_AVAILABLE | DPENUMSESSIONS_ASYNC);
         if (hr < 0)
@@ -742,15 +742,15 @@ u32 NetPlay::AddPlayer_51E9C0(Network_8* pData, s32 player_id, DPNAME name, Netw
 }
 
 // 0x51eae0
-s32 NetPlay::EnumSessions_cb_51EAE0(DPSESSIONDESC2* lpThisSD, s32 lpDwTimeOut, char_type dwFlags, NetPlay* lpContext)
+BOOL NetPlay::EnumSessions_cb_51EAE0(LPCDPSESSIONDESC2 lpThisSD, LPDWORD, DWORD dwFlags, LPVOID lpContext)
 {
-    if ((dwFlags & 1) != 0)
+    if ((dwFlags & 1) != 0) // DPESC_TIMEDOUT
     {
         return 0;
     }
     else
     {
-        return ((NetPlay*)lpContext)->AddEnumeratedSession_51EB00(lpThisSD);
+        return static_cast<NetPlay*>(lpContext)->AddEnumeratedSession_51EB00(const_cast<DPSESSIONDESC2*>(lpThisSD));
     }
 }
 
@@ -852,7 +852,7 @@ void NetPlay::NetworkTick_51ED00()
                 desc.guidApplication = kGta2_DP_Guid_5FE928;
                 if (field_5E4_pDPlay3->EnumSessions(&desc,
                                                     1000,
-                                                    (LPDPENUMSESSIONSCALLBACK2)NetPlay::EnumSessions_cb_51EAE0,
+                                                    NetPlay::EnumSessions_cb_51EAE0,
                                                     this,
                                                     DPENUMSESSIONS_AVAILABLE | DPENUMSESSIONS_ASYNC) == DP_OK)
                 {
@@ -1564,7 +1564,7 @@ s32 NetPlay::JoinSession_520570(u32 session_idx, wchar_t* pPlayerName, Network_8
     }
 
     if (field_5E4_pDPlay3->EnumGroups(&field_758_n2.field_120_session_desc.guidInstance,
-                                      (LPDPENUMPLAYERSCALLBACK2)NetPlay::EnumGroups_cb_520C20,
+                                      NetPlay::EnumGroups_cb_520C20,
                                       this,
                                       0) < 0)
     {
@@ -1573,7 +1573,7 @@ s32 NetPlay::JoinSession_520570(u32 session_idx, wchar_t* pPlayerName, Network_8
 
     if (field_5E4_pDPlay3->EnumGroupPlayers(field_758_n2.field_0_group_id,
                                             &field_758_n2.field_120_session_desc.guidInstance,
-                                            (LPDPENUMPLAYERSCALLBACK2)NetPlay::EnumGroups_cb_520C20,
+                                            NetPlay::EnumGroups_cb_520C20,
                                             this,
                                             0) < 0)
     {
@@ -1640,8 +1640,9 @@ s32 NetPlay::JoinSession_520570(u32 session_idx, wchar_t* pPlayerName, Network_8
 }
 
 // 0x520c20
-s32 NetPlay::EnumGroups_cb_520C20(s32 group_id, s32 callback_type, sptr pName, char_type flags, NetPlay* pContext)
+BOOL NetPlay::EnumGroups_cb_520C20(DPID group_id, DWORD callback_type, LPCDPNAME pName, DWORD flags, LPVOID pContextArg)
 {
+    NetPlay* pContext = static_cast<NetPlay*>(pContextArg);
     if ((flags & 1) != 0)
     {
         return 0;
@@ -1655,7 +1656,7 @@ s32 NetPlay::EnumGroups_cb_520C20(s32 group_id, s32 callback_type, sptr pName, c
 
     if (callback_type == 1)
     {
-        return pContext->AddEnumeratedGroupPlayer_520CA0(group_id, (DPNAME*)pName);
+        return pContext->AddEnumeratedGroupPlayer_520CA0(group_id, const_cast<DPNAME*>(pName));
     }
 
     return 1;

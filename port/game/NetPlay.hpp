@@ -197,7 +197,7 @@ struct NetPlay
     s32 EnumSessions_51E650();
     s32 HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Network_8* pGroupData, Network_8* pPlayerData);
     u32 AddPlayer_51E9C0(Network_8* pData, s32 player_id, DPNAME name, Network_Game_Session* pStru);
-    static s32 EnumSessions_cb_51EAE0(DPSESSIONDESC2* lpThisSD, s32 lpDwTimeOut, char_type dwFlags, NetPlay* lpContext);
+    static BOOL EnumSessions_cb_51EAE0(LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
     s32 AddEnumeratedSession_51EB00(DPSESSIONDESC2* pSession);
     void Set15_51ECD0(sptr pFunc, Network_20324* pParam);
     void NetworkTick_51ED00();
@@ -213,7 +213,7 @@ struct NetPlay
     void ProcessIncomingPacket_520230(s32 idx, uptr pUnknown);
     void Set6_520530(void* pFunc, void* pParam);
     s32 JoinSession_520570(u32 session_idx, wchar_t* pPlayerName, Network_8* pPlayerData, Network_8* pOutGroupData);
-    static s32 EnumGroups_cb_520C20(s32 group_id, s32 callback_type, sptr pName, char_type flags, NetPlay* pContext);
+    static BOOL EnumGroups_cb_520C20(DPID group_id, DWORD callback_type, LPCDPNAME pName, DWORD flags, LPVOID pContextArg);
     s32 AddEnumeratedGroupPlayer_520CA0(s32 player_id, DPNAME* pName);
     void SetGroupId_520D00(s32 group_id);
     void Disconnect_520D10();

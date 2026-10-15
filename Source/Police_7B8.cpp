@@ -63,7 +63,7 @@ void Police_7B8::Init_56F400()
         field_464_pursuit_targets[i].field_78_is_actively_chased = 0;
         field_464_pursuit_targets[i].field_7A_wanted_timer = 0;
 
-        memset(field_464_pursuit_targets[i].field_20_crews, 0, 0x18);
+        memset(field_464_pursuit_targets[i].field_20_crews, 0, sizeof(field_464_pursuit_targets[i].field_20_crews));
     }
     field_654_max_wanted_level = cop_level_enum::none_0;
     field_658_police_car_count = 0;

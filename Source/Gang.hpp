@@ -103,10 +103,7 @@ class Gang_144
 
     u8 field_0_used;
     u8 field_1_gang_idx;
-    char field_2_name[4];
-    char field_6_unused;
-    char field_7_unused;
-    u32 field_8_unused[62];
+    char field_2_name[254]; // the gang's map zone name (SetName_4BF090 copies the whole name, not 4 characters)
     char field_100_unused;
     char field_101_remap;
     char field_102_unused;

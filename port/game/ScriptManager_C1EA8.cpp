@@ -157,9 +157,10 @@ void ScriptManager_C1EA8::LoadScriptCounters_511C30()
 // 0x511C60
 void ScriptManager_C1EA8::RestoreAnsweredPhones_511C60()
 {
-    for (char_type bit = 0; bit < 32; bit++)
+    // The original tested all 32 bits, and bit 31 read past the 31 phone ids
+    for (s32 bit = 0; bit < GTA2_COUNTOF_S(field_C1E32_phone_ids); bit++)
     {
-        if (((1 << bit) & gGameSave_6F78C8.field_E4_car_and_script_data.field_48_flags) != 0)
+        if (((1u << bit) & gGameSave_6F78C8.field_E4_car_and_script_data.field_48_flags) != 0)
         {
             SCR_POINTER* pPointer = (SCR_POINTER*)GetBasePointer_512770(field_C1E32_phone_ids[bit]);
             pPointer->field_8_obj->PoolGiveAndSetDone_5291E0(174);

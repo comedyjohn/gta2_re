@@ -2736,7 +2736,7 @@ void Object_2C::HandleImpactNoSprite_528BA0()
             {
                 pExplosion->SetDamageOwner_529080(get_field_26_420FF0());
             }
-            // Fall through
+            [[fallthrough]];
         }
 
         case objects::machine_gun_bullet_254:

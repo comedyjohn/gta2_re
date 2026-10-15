@@ -5674,7 +5674,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
                         rate + Fix16::Round_To_Int_410BF0(pType3Entity->field_0_pObj->field_1C_zpos * dword_6751F4);
                     break;
                 }
-                // fall through: zpos too low, play the ped voice instead
+                [[fallthrough]]; // zpos too low, play the ped voice instead
 
             default:
                 HandlePedVoiceEvent_423080(pType3Entity);

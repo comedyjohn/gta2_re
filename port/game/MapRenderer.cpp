@@ -2425,6 +2425,7 @@ void draw_4F3FB0(s32 arg)
             break;
         case 64: // rotation code 1
             arg ^= 0x18;
+            [[fallthrough]];
         default: // rotation code 3
             gUVCorner0_6F6580.SetXY_432860(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
             gUVCorner1_6F6588.SetXY_432860(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);

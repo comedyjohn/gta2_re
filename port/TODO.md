@@ -28,14 +28,18 @@ Read this first when picking the port up again. `README.md` explains how the por
    `WM_ACTIVATE`/`WM_SETFOCUS` to a window that is active already. The game shows its window on every
    video mode change, which it makes on `WM_SETFOCUS`, so the queue never emptied and the front end
    (run only when it is empty) never drew.
+10. The game code is forked into `game/` and built as C++23. `Source/` stays the byte-matching
+    decompilation; `game/` no longer has to match.
+11. The 64-bit build starts a game: the light grid was allocated for 4-byte pointers and corrupted
+    the heap. Found with AddressSanitizer.
 
 ## Left to do
 
 The order follows what a player notices first.
 
 ### Missing for players
-- [ ] **Single player with real game data.** Nobody has played the port yet: it now starts and gets
-      as far as the front end's main menu. Everything else waits on this.
+- [ ] **Single player with real game data.** Being played (32-bit, and 64-bit since the light grid
+      fix). Report what breaks; the 64-bit AddressSanitizer build points at memory bugs directly.
 - [ ] **Bink movies.** `Source/3rdParty/bink.cpp` is still stubs, and the `.bik` files are reported
       absent, so the intros are skipped. Plan: decode them with FFmpeg's Bink decoder.
 - [ ] **3D sound.** Nothing implements `AIL_*_3D_*` yet, and `AIL_enumerate_3D_providers` offers no
@@ -54,9 +58,9 @@ The order follows what a player notices first.
       `gbh_SetBeginSceneCB` ignores it.
 
 ### Code health
-- [ ] **Compile without `-fpermissive`, and with warnings on for `Source/`.** Any fix in `Source/`
-      must not change what VC6 generates: check it with `tools/check_matching.sh`, which must report
-      "changed: 0".
+- [ ] **Compile without `-fpermissive`, and with warnings on for `game/`,** with GCC and Clang
+      (Clang is needed for macOS; about five causes, mostly in headers: extra qualification on
+      members, pointers cast to 32-bit integers, addresses of temporaries).
 - [ ] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.**
 - [ ] **Floating-point.** VC6's x87 code and GCC's SSE differ in precision. Check that replays
       (`InputRecorder_67F8B0`) still play back the same.

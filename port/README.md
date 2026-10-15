@@ -1,7 +1,9 @@
 # Native Linux port
 
-A native Linux build of the decompiled game: the same `Source/` that the VC6 build compiles into a
-matching `decomp_main.exe`, compiled by GCC into a Linux executable, with no Wine and no Windows DLLs.
+A native Linux build of the decompiled game, compiled by GCC as C++23 into a Linux executable, with no
+Wine and no Windows DLLs. The game code is in `game/`: a fork of the decompilation's `Source/`, which
+stays the byte-matching reference for the VC6 build. `game/` doesn't have to match anything; the goal
+is a portable C++23 game.
 
 ```bash
 sudo apt-get install g++-multilib cmake ninja-build libsdl2-dev   # Debian/Ubuntu
@@ -40,7 +42,7 @@ games between several copies, see [MULTIPLAYER.md](MULTIPLAYER.md)). The build a
 | Rendering | `d3ddll.dll` (`gbh_*`) and `dmavideo.dll` (`Vid_*`), loaded by name | `platform/renderer.cpp`: the same 58 functions over OpenGL 2.1, following GTA2Hax's Direct3D 9 version. The game's 640x480 picture is scaled into the window, 4:3 |
 | Input | DirectInput 5 | `platform/dinput.cpp`: keyboard and SDL game controllers behind DirectInput's interfaces, laid out by the data formats the game sets, polled or buffered |
 | Audio | Miles Sound System (`AIL_*`) | `platform/mss.cpp`: the 2D samples, streams and digital driver the game uses, mixed into an SDL audio device. No 3D providers, so the game keeps to 2D samples |
-| Video | Bink | `Source/3rdParty/bink.cpp` stubs; `.bik` files are reported absent, so the game skips its movies |
+| Video | Bink | `game/3rdParty/bink.cpp` stubs; `.bik` files are reported absent, so the game skips its movies |
 | Multiplayer | DirectPlay | `platform/dplay.cpp`: DirectPlay over the port's own reliable UDP protocol (`platform/net/`), a session server in the hosting game or on its own (`gta2-server`), the lobby on the command line (`platform/lobby.cpp`). 32-bit, 64-bit and ARM builds of the same version play together; see [MULTIPLAYER.md](MULTIPLAYER.md) |
 | Settings | registry | a persistent key/value store (`platform/win32.cpp`) |
 | Files | Win32 and CRT paths | `platform/crt.cpp`: `\` becomes `/`, components matched ignoring case; a drive (`C:\GTAUDIO\`, where the game looks for the CD's music) is the game folder |
@@ -70,9 +72,9 @@ Setup installer with `innoextract`, and starts the game in it.
   `GTA2_BITS=64` the Win32 types keep their Windows widths (`DWORD` and `LONG` stay 32-bit, as on
   64-bit Windows) and the structure size checks that count 4-byte pointers are skipped. Everything
   below leaves the VC6 build unchanged:
-  - `sptr` (`Source/types.hpp`) is an integer that holds a pointer: `s32` under MSVC, pointer-sized
+  - `sptr` (`game/types.hpp`) is an integer that holds a pointer: `s32` under MSVC, pointer-sized
     otherwise.
-  - `PTR32(T)` (`Source/Ptr32.hpp`) is a pointer the game keeps in 4 bytes of file data, the mission
+  - `PTR32(T)` (`game/Ptr32.hpp`) is a pointer the game keeps in 4 bytes of file data, the mission
     script's object slots: `T*`, or at 64 bits a 32-bit handle that `platform/ptr32.cpp` maps to the
     pointer. `GTA2_ASSERT_FILE_SIZEOF` checks those structures' sizes at every width.
   - The loaders whose file records hold a pointer (the style's sprite index, the text's keys) have a
@@ -94,27 +96,11 @@ Setup installer with `innoextract`, and starts the game in it.
   `error.hpp`, `input.cpp` and friends. `include/fstream.h` provides the pre-standard `ofstream` the
   VC6 branch of `ErrorLog` holds, at its original 0x3C bytes.
 
-## Changing game sources for the port
+## Changing the game code
 
-The VC6 build must keep matching: a change in `Source/` for the port may not change what VC6
-generates. In practice the changes needed so far were:
-
-- include names spelled with the file's real case;
-- reference parameters taking temporaries made `const` (standard C++ doesn't bind a temporary to a
-  non-const reference; MSVC does);
-- inline asm given a C++ equivalent under `#if defined(GTA2_PORT)`.
-
-Check every such change against a baseline with `tools/check_matching.sh`. It rebuilds the VC6
-build under Wine (set up as described in the top-level CLAUDE.md) and runs
-`Scripts/bin_comp/compare_builds.py`:
-
-```bash
-# once, on a known-good commit
-python3 build.py --ignore_no_match && (cd Scripts/bin_comp && python3 msvc_dump_new_data.py \
-  && python3 compare_builds.py --save /some/dir/baseline)
-# after the change
-port/tools/check_matching.sh /some/dir/baseline   # must report "changed: 0"
-```
+Change `game/` freely: it is the port's own code and doesn't have to match the original. Leave
+`Source/` alone for the port; it is the decompilation, and a fix found here that also applies to the
+original belongs there too, under its matching rules (top-level CLAUDE.md).
 
 ## Follow-ups
 
@@ -125,7 +111,7 @@ port/tools/check_matching.sh /some/dir/baseline   # must report "changed: 0"
 - Bink movies, with FFmpeg's Bink decoder.
 - The ImGui debug overlay (`ImGuiDebug.cpp`): needs ImGui's OpenGL backend; `gbh_SetBeginSceneCB` ignores it for now.
 - Higher resolutions than 640x480 (the game's own projection would need to know).
-- Compile without `-fpermissive`, and with warnings on for `Source/`, which will turn up the
+- Compile without `-fpermissive`, and with warnings on for `game/`, which will turn up the
   constructs MSVC accepted silently.
 - Run under AddressSanitizer and UndefinedBehaviorSanitizer.
 - Floating-point: the x87 code VC6 generated and GCC's SSE differ in precision. The game's maths is

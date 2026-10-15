@@ -91,7 +91,13 @@ add_library(gta2_game STATIC
     ${game_sources}
     ${GAME_DIR}/3rdParty/bink.cpp) # Bink video, stubbed (the same stubs the VC6 build ships as binkw32.dll)
 gta2_game_target(gta2_game)
-target_compile_options(gta2_game PRIVATE -w) # the decompiled code is warning-heavy by nature
+# The decompiled code is warning-heavy by nature; GTA2_GAME_WARNINGS=ON shows them (port/TODO.md)
+option(GTA2_GAME_WARNINGS "Compile port/game/ with -Wall -Wextra instead of -w" OFF)
+if (GTA2_GAME_WARNINGS)
+    target_compile_options(gta2_game PRIVATE -Wall -Wextra)
+else()
+    target_compile_options(gta2_game PRIVATE -w)
+endif()
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as
 # "building for Windows"), so it is a library of its own.

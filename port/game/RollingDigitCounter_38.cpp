@@ -279,8 +279,7 @@ void RollingDigitCounter_38::UpdateRollingDigits_4925E0()
 
     for (s32 idx = field_2E_non_used_digits; idx < kNumDigits; idx++)
     {
-        // idx + 20 is field_1D_target_digits[idx]; written as an offset from field_9_shown_digits, as in the original
-        if (field_9_shown_digits[idx + 20] != field_9_shown_digits[idx] || field_13_scroll_offsets[idx])
+        if (field_1D_target_digits[idx] != field_9_shown_digits[idx] || field_13_scroll_offsets[idx])
         {
             if (field_8_bRollingUp)
             {

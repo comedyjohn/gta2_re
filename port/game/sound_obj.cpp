@@ -45,7 +45,7 @@ EXTERN_GLOBAL(s32, dword_61A6D0);
 EXTERN_GLOBAL(u8, gCarRadioStaticVolume_6FF540);
 EXTERN_GLOBAL(u16, gCarRadioStaticTimer_6FF542);
 EXTERN_GLOBAL(s32, gCarRadioStaticRate_625010);
-EXTERN_GLOBAL(s32, gCarRadioTuneRate_625014);
+EXTERN_GLOBAL(u32, gCarRadioTuneRate_625014);
 
 DEFINE_GLOBAL(sound_obj, gSound_obj_66F680, 0x66F680);
 DEFINE_GLOBAL(Fix16, kFpZero_674CD8, 0x674CD8);
@@ -4514,8 +4514,8 @@ bool Cooldown_4236C0();
 // 0x41B660
 char_type sound_obj::ComputeEmittingVolume_41B660(u8 emittingVolume, u32 maxDistance, u32 distance)
 {
-    const s32 minDistance = maxDistance / 4;
-    const s32 diffDistance = maxDistance - minDistance;
+    const u32 minDistance = maxDistance / 4;
+    const u32 diffDistance = maxDistance - minDistance;
     if (distance > diffDistance)
     {
         return (minDistance - (distance - diffDistance)) * emittingVolume / minDistance;
@@ -7532,7 +7532,7 @@ void sound_obj::sub_57EDB0(sound_f16_pos_0x1C* pEmitter, s32 type)
 DEFINE_GLOBAL(u8, gCarRadioStaticVolume_6FF540, 0x6FF540);
 DEFINE_GLOBAL(u16, gCarRadioStaticTimer_6FF542, 0x6FF542);
 DEFINE_GLOBAL_INIT(s32, gCarRadioStaticRate_625010, 11025, 0x625010);
-DEFINE_GLOBAL_INIT(s32, gCarRadioTuneRate_625014, 11025, 0x625014);
+DEFINE_GLOBAL_INIT(u32, gCarRadioTuneRate_625014, 11025, 0x625014);
 
 // 0x57EE30
 void sound_obj::RemoveSound_57EE30(Fix16 xpos, Fix16 ypos)
@@ -7633,7 +7633,7 @@ u8 sound_obj::FindEmitterByStatus_57F050(s32 status)
     for (u8 i = 0; i < 5; i++)
     {
         // TODO: Structure is wrong, maybe field_544C starts earlier or later?
-        if (*(u32*)&field_544C[i + 1].field_8.field_4_bStatus == status)
+        if (*(s32*)&field_544C[i + 1].field_8.field_4_bStatus == status)
         {
             return i;
         }

@@ -482,11 +482,12 @@ void ScriptManager_C1EA8::LoadSubScripts_5125F0()
         str_table_entry* pEntry = field_13350_pStringTbl->field_4[i];
         if ((u8)pEntry->field_4_type == 21)
         {
-            size_t length = strlen(pEntry->get_name());
-
-            ((char*)&pEntry->field_6)[length] = 'S';
-            ((char*)&pEntry->field_6)[length + 1] = 'C';
-            ((char*)&pEntry->field_6)[length + 2] = 'R';
+            // The name's last three chars become the extension "SCR"
+            char* pName = pEntry->get_name();
+            size_t length = strlen(pName);
+            pName[length - 3] = 'S';
+            pName[length - 2] = 'C';
+            pName[length - 1] = 'R';
 
             if (field_2F4_bPreloadMissionScripts == 1)
             {

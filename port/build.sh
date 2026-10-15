@@ -28,10 +28,20 @@ check_compiler() {
     fi
 }
 
+# CMake seeds the compiler, its flags and the sysroot from these, and a toolchain set up in the
+# shell (a Clang one, say, with LDFLAGS=--rtlib=compiler-rt) would hand gcc options it rejects.
+unset CC CXX CFLAGS CXXFLAGS CPPFLAGS LDFLAGS CMAKE_SYSROOT CMAKE_TOOLCHAIN_FILE
+
 build() {
     check_compiler "$1"
     if [ "$1" = 32 ] && [ ! -f "$HOME/sdl32/usr/include/SDL2/SDL.h" ]; then
         "$port/tools/setup_sdl32.sh" "$HOME/sdl32"
+    fi
+    # A configure that failed (no build.ninja) can leave bad flags in the cache, which later
+    # runs would keep using; start that one over.
+    dir="$repo/build_port/linux$1"
+    if [ -f "$dir/CMakeCache.txt" ] && [ ! -f "$dir/build.ninja" ]; then
+        rm -f "$dir/CMakeCache.txt"
     fi
     (cd "$port" && cmake --preset "linux$1" && cmake --build --preset "linux$1")
     echo "Built $repo/build_port/linux$1/gta2"

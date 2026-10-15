@@ -880,7 +880,7 @@ static void DisplayWideTextAtScreenCoords(wchar_t* pStr, s16 screen_xpos, s16 sc
     }
 }
 
-static void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
+[[maybe_unused]] static void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
 {
     DisplayWideTextAtScreenCoords(text_0x14::Ascii2Wide_5B5DF0(pStr), screen_xpos, screen_ypos);
 }
@@ -1723,11 +1723,6 @@ void CC ImGuiDebugDraw()
             Player* pPlayer = gGame_0x40_67E008->field_4_players[0];
             if (gCarManager_6C_677930 && pPlayer && pPlayer->field_2C4_player_ped && pPlayer->field_2C4_player_ped->field_168_game_object)
             {
-                Ped* pPlayerPed = pPlayer->field_2C4_player_ped;
-
-                Char_B4* pPlayerChar = pPlayerPed->field_168_game_object;
-                //Sprite* pPlayerSprite = pPlayerChar->field_80_sprite_ptr;
-
                 Fix16 xpos, ypos, zpos;
                 GetPlayerPos(xpos, ypos, zpos);
 
@@ -2797,7 +2792,6 @@ void CC ImGuiDebugDraw()
 
                 for (i = 0; i < 2; i++)
                 {
-                    Ambulance_20& a20 = gAmbulance_110_6F70A8->field_D0_tasks[i];
                 }
 
                 /*

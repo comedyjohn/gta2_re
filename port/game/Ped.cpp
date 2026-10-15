@@ -1848,7 +1848,6 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
                 }
             }
 
-        block_465F75:
             if (pTargetPed->IsActivePlayerPed_45EDC0() || pTargetPed->field_240_occupation == ped_ocupation_enum::empty)
             {
                 u8 player_idx = pTargetPed->field_15C_player->field_2E_idx;
@@ -1869,7 +1868,6 @@ inline bool Ped::IsPedAThreat_Inline_465D00(Ped* pTargetPed)
         }
     }
 
-no_my_gang:
     switch (this->field_240_occupation)
     {
         case ped_ocupation_enum::criminal_type_1:
@@ -1950,7 +1948,6 @@ block_466022:
         return true;
     }
 
-block_4660FB:
 {
     s32 target_occupation = pTargetPed->field_240_occupation;
     switch (target_occupation)
@@ -6131,7 +6128,6 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
                 }
             }
 
-        block_465F75:
             if (pTargetPed->IsActivePlayerPed_45EDC0() || pTargetPed->field_240_occupation == ped_ocupation_enum::empty)
             {
                 u8 player_idx = pTargetPed->field_15C_player->get_idx_4219D0();
@@ -6152,7 +6148,6 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
         }
     }
 
-no_my_gang:
     switch (this->field_240_occupation)
     {
         case ped_ocupation_enum::criminal_type_1:
@@ -6233,7 +6228,6 @@ block_466022:
         return true;
     }
 
-block_4660FB:
 {
     s32 target_occupation = pTargetPed->field_240_occupation;
     switch (target_occupation)
@@ -6576,7 +6570,6 @@ char_type Ped::IsThreatToSearchingPed_4661F0()
 
     goto ret_false;
 
-ret_true:
     return 1;
 
 ret_false:

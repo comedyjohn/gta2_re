@@ -432,7 +432,6 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570) //  255.0
     {
-        Fix16 temp_z;
         pCmd->field_C_pos.field_8_z =
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
@@ -548,7 +547,6 @@ void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_P
 
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_C_pos.field_8_z =
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
@@ -669,7 +667,6 @@ void miss2_0x11C::SCRCMD_CONVEYOR_DECSET1_2_5043A0(SCR_CONVEYOR* pCmd, SCR_POINT
 {
     if (pCmd->field_C_rect.field_0_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_C_rect.field_0_pos.field_8_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_rect.field_0_pos.field_0_x,
                                                                                                  pCmd->field_C_rect.field_0_pos.field_4_y);
     }
@@ -690,7 +687,6 @@ void miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(SCR_GENERATOR* pCmd, SCR_POINTE
 {
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_C_pos.field_8_z =
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
@@ -715,7 +711,6 @@ void miss2_0x11C::SCRCMD_DESTRUCTOR_DECSET_504530(SCR_DESTRUCTOR* pCmd, SCR_POIN
 {
     if (pCmd->field_C_rect.field_0_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_C_rect.field_0_pos.field_8_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_rect.field_0_pos.field_0_x,
                                                                                                  pCmd->field_C_rect.field_0_pos.field_4_y);
     }
@@ -838,7 +833,6 @@ void miss2_0x11C::SCRCMD_SET_GANG_INFO1_504830(SCR_SET_GANG_INFO* pCmd)
 
     if (pCmd->field_10_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_10_pos.field_8_z =
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_10_pos.field_0_x, pCmd->field_10_pos.field_4_y);
     }
@@ -2732,7 +2726,6 @@ void miss2_0x11C::SCRCMD_IS_CAR_IN_BLOCK_509990()
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
     {
-        Fix16 temp_z;
         pCmd->field_C_pos.field_8_z =
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }

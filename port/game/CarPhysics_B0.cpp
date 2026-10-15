@@ -2424,7 +2424,7 @@ Fix16 CarPhysics_B0::ApplyImpactForcesAndDamage_55FA60(Fix16_Point& PointOfForce
     return ImpulseIntensity;
 }
 
-static inline Fix16 DotProductInlined_49E500(Fix16_Point& Vector1, Fix16_Point& Vector2)
+[[maybe_unused]] static inline Fix16 DotProductInlined_49E500(Fix16_Point& Vector1, Fix16_Point& Vector2)
 {
     return (Vector1.x * Vector2.x) + (Vector1.y * Vector2.y);
 }

@@ -60,7 +60,6 @@ void Ped_List_4::AddPedToBackIfMissing_471160(Ped* pPed)
 void Ped_List_4::AddPedToFrontIfMissing_4711B0(Ped* pPed)
 {
     Char_8* pIter = field_0_pFirstPed;
-    Char_8* pTail = nullptr;
     if (pIter)
     {
         while (pIter)
@@ -71,7 +70,6 @@ void Ped_List_4::AddPedToFrontIfMissing_4711B0(Ped* pPed)
                 return;
             }
 
-            pTail = pIter;
             pIter = pIter->mpNext;
         }
     }

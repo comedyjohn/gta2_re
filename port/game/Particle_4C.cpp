@@ -398,7 +398,7 @@ static inline void SetFromPolar_OOL_41E210(Fix16_Point& p, const Fix16& radius, 
 }
 
 // Inlined Fix16::Max_44E540: compares and returns the values, not references
-static inline Fix16 MaxValue_44E540(const Fix16& a, const Fix16& b)
+[[maybe_unused]] static inline Fix16 MaxValue_44E540(const Fix16& a, const Fix16& b)
 {
     if (a > b)
     {

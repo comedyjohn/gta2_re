@@ -103,7 +103,7 @@ static inline s32 Min(s32 a, s32 b)
     return a < b ? a : b;
 }
 
-static inline u8 MinU8(u8 a, u8 b)
+[[maybe_unused]] static inline u8 MinU8(u8 a, u8 b)
 {
     return a < b ? a : b;
 }

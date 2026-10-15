@@ -1697,7 +1697,6 @@ void Char_B4::DispatchCollision_548670(char_type bFlag)
     Sprite* pNearSprite = field_80_sprite_ptr->QuerySpriteCollision_59E7D0(2);
     if (pNearSprite)
     {
-        s32 sprite_type_enum = pNearSprite->field_30_sprite_type_enum;
         switch (pNearSprite->GetType_416B40())
         {
 
@@ -1792,7 +1791,7 @@ static inline Ang16 AddAngles_ool_54B8F0(const Ang16& a, const Ang16& b)
     return Ang16((Ang16&)sum, 0);
 }
 
-static inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
+[[maybe_unused]] static inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
 {
     if (!pThis->field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2))
     {
@@ -1826,7 +1825,6 @@ void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
     u8 out3 = 0;
     bool bUnknown = false;
 
-    s32 phi_type = pObj->field_8->field_34_behavior_type;
 
     if (!pObj->UsesParamAsPedRef_421080() || (pObj->get_field_26_420FF0()) == 0 ||
         pObj->get_field_26_420FF0() != this->field_7C_pPed->field_267_ped_ref_idx)
@@ -5757,7 +5755,6 @@ void Char_B4::state_8_5520A0()
     Sprite* pAttachSprite;
     Sprite* pPedObjSprite;
 
-    Fix16 temp;
 
     Ang16 rotation;
 

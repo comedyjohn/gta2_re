@@ -3489,7 +3489,6 @@ void CarAI_78::UpdateStateMachine_44E560()
         }
     }
 
-    Ang16 angle_delta = ComputeShortestAngleDelta_4056C0(this->field_10_angle, target_angle);
     heading_copy = this->field_10_angle;
     aim_angle = target_angle;
     s32 face = Ang16::GetAngleFace_4F78F0(aim_angle);

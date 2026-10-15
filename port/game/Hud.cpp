@@ -226,7 +226,6 @@ void Hud_UnderRoofArrowMarker_C::Draw_5CF910()
         const s32 drawtype = 2;
         // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
     // operators no longer go out of line as in the original
-    Camera_0xBC* pCamera;
     Player* pPlayer = gGame_0x40_67E008->field_38_local_player;
         Camera_0xBC* pCam;
         pCam = pPlayer->get_camera_434900();
@@ -242,7 +241,6 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
     {
         // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
     // operators no longer go out of line as in the original
-    Camera_0xBC* pCamera;
     Player* pPlayer = gGame_0x40_67E008->field_38_local_player;
 
         Ped* pPed = pPlayer->GetActivePed_4A5150();
@@ -649,7 +647,6 @@ bool Hud_Arrow_7C::CheckVisibility_5D0530()
             }
             // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
     // operators no longer go out of line as in the original
-    Camera_0xBC* pCamera;
     Player* pPlayer = gGame_0x40_67E008->field_38_local_player;
             Gang_144* pCurrLocationGang = pPlayer->get_gang_curr_location_4766D0();
             if (pCurrLocationGang)
@@ -2758,7 +2755,6 @@ void Hud_PlayerStats_4::DrawPlayerStats_5D5C80()
 {
     // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
     // operators no longer go out of line as in the original
-    Camera_0xBC* pCamera;
     Player* pPlayer = gGame_0x40_67E008->field_38_local_player;
 
     s16 ammo_idx = pPlayer->field_788_curr_weapon_idx;
@@ -2930,7 +2926,6 @@ void Hud_PlayerStats_4::UpdateRollingDigits_5D6290()
     }
     // get_camera_434900 written out: as an inline call it shifts the inline budget and the projection's
     // operators no longer go out of line as in the original
-    Camera_0xBC* pCamera;
     Player* pPlayer = gGame_0x40_67E008->field_38_local_player;
     pPlayer->field_684_lives.UpdateRollingDigits_4925E0();
     pPlayer->field_6BC_multipliers.UpdateRollingDigits_4925E0();

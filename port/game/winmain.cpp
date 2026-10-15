@@ -1458,7 +1458,6 @@ void do_network_and_local_inputs_4DAF30()
 // 0x4DA850
 bool RunGameFrame_4DA850()
 {
-    u8 frame_due = 0;
     bool exit_requested = false;
     u8 drew_frame = 0;
     u8 updated_logic = 0;
@@ -1477,12 +1476,10 @@ bool RunGameFrame_4DA850()
     {
         if (!max_frame_rate_626A08 && !gFramesSinceDraw_6F58D8 || Time >= gMatchStartTime_6F5A28)
         {
-            frame_due = 1;
             updated_logic = 1;
         }
         if (gFramesSinceDraw_6F58D8 >= 8u || !min_frame_rate_706C50 && gFramesSinceDraw_6F58D8)
         {
-            frame_due = 0;
             updated_logic = 0;
         }
 

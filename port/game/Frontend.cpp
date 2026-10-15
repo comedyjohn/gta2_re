@@ -1817,7 +1817,6 @@ void Frontend::UpdatePageFromUserInput_4AE2D0()
     u16 target_page_idx; // ax
     u8 bonus_scan_idx; // bl
     u8 main_stage_idx; // al
-    u8 unused_idx;
     u16 current_option_idx; // cx
     menu_option_0x82* pOption_prev; // edi
     bool bWrapped_prev; // bl

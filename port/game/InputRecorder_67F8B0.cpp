@@ -46,7 +46,7 @@ DEFINE_GLOBAL_ARRAY_INIT(s32, gDefaultControls_61A9E4, 12, 0x61A9E4,
                          0xC8 COMMA 0xD0 COMMA 0xCB COMMA 0xCD COMMA 0x1D COMMA 0x1C COMMA 0x39 COMMA 0x2C COMMA 0x2D
                              COMMA 0x0F COMMA 0x38 COMMA 0x36);
 DEFINE_GLOBAL_ARRAY(s32, gMaybeDeviceType_67B91C, 12, 0x67B91C);
-DEFINE_GLOBAL_ARRAY(s32, gPlayerControlsBinding_67B6E8, 12, 0x67B6E8);
+DEFINE_GLOBAL_ARRAY(u32, gPlayerControlsBinding_67B6E8, 12, 0x67B6E8);
 
 EXTERN_GLOBAL(DIDATAFORMAT, gKeyboardDataFormat_601A54);
 EXTERN_GLOBAL(HINSTANCE, gHInstance_708220);
@@ -875,7 +875,7 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     LoadReplayHeader_4CE380(0);
 
     u32 bufLen = sizeof(field_3C_rec_buff);
-    const s32 remainderSize = File::GetRemainderSize_4A7250(this->field_3C_rec_buff, &bufLen);
+    const u32 remainderSize = File::GetRemainderSize_4A7250(this->field_3C_rec_buff, &bufLen);
     File::Global_Close_4A70C0();
     this->field_7533C_used_recs_count = remainderSize / sizeof(InputRecord_C);
     if (sizeof(InputRecord_C) * (remainderSize / sizeof(InputRecord_C)) != remainderSize)
@@ -997,7 +997,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
 {
     s32 inputs;
-    s32 saved_input = field_4_input_bits;
+    u32 saved_input = field_4_input_bits;
     u32* control_status = (u32*)&field_4_input_bits;
     InputRecorder_67F8B0::clear_inputs_4CDCE0();
 
@@ -1009,7 +1009,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
     switch (replay_state)
     {
         case Playback_1:
-            if (gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
+            if ((u32)gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;
@@ -1055,7 +1055,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             break;
 
         case Attract_3:
-            if (gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
+            if ((u32)gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;

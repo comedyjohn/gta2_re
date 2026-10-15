@@ -125,7 +125,7 @@ class InputRecorder_67F8B0
     s32 field_8_input_masks[12];
     s32 field_38_replay_state;
     InputRecord_C field_3C_rec_buff[k_max_records];
-    s32 field_7533C_used_recs_count;
+    u32 field_7533C_used_recs_count;
     u32 field_75340_rec_buf_idx;
     // front end input on/off ??
     char_type field_75344_bInputEnabled;

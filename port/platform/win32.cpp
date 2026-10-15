@@ -954,6 +954,9 @@ HGDIOBJ GetStockObject(int)
 }
 
 // ---------------------------------------------------------------- advapi32: the registry
+} // extern "C"
+
+// The registry's own helpers are C++ (they return std::string), outside the C API's extern "C"
 namespace
 {
 struct RegValue
@@ -1106,6 +1109,8 @@ HKEY OpenHandle(const std::string& path)
     return h;
 }
 } // namespace
+
+extern "C" {
 
 LSTATUS RegOpenKeyExA(HKEY key, LPCSTR subKey, DWORD, REGSAM, PHKEY result)
 {

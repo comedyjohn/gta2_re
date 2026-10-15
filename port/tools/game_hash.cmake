@@ -2,7 +2,7 @@
 # the port's headers and its C runtime, which holds rand()). Two builds with the same hash compute the
 # same game on any system, so their players can be in one network game (port/platform/dplay.cpp).
 #   cmake -DREPO=<repo root> -DOUT=<header> -P game_hash.cmake
-file(GLOB sources ${REPO}/Source/*.cpp ${REPO}/Source/*.hpp ${REPO}/Source/*.h
+file(GLOB sources ${REPO}/port/game/*.cpp ${REPO}/port/game/*.hpp ${REPO}/port/game/*.h
      ${REPO}/port/include/*.h ${REPO}/port/platform/crt.cpp)
 list(SORT sources)
 set(all "")

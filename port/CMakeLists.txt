@@ -61,16 +61,10 @@ find_path(SDL2_ARCH_INCLUDE_DIR SDL2/_real_SDL_config.h)
 find_library(SDL2_LIBRARY NAMES SDL2 SDL2-2.0 REQUIRED)
 message(STATUS "SDL2: ${SDL2_LIBRARY}")
 
-# The game's source list lives in the top-level CMakeLists.txt (gta2_lib_src); read it from there
-# so the two builds can't drift apart.
-file(READ ${REPO_ROOT}/CMakeLists.txt top_cmake)
-string(REGEX MATCH "set\\(gta2_lib_src([^)]*)\\)" _ "${top_cmake}")
-string(REGEX MATCHALL "Source/[^ \t\r\n]+\\.cpp" game_sources "${CMAKE_MATCH_1}")
-list(TRANSFORM game_sources PREPEND ${REPO_ROOT}/)
-list(LENGTH game_sources game_source_count)
-if (game_source_count LESS 100)
-    message(FATAL_ERROR "Read only ${game_source_count} sources from gta2_lib_src in ../CMakeLists.txt")
-endif()
+# The game code: port/game/, forked from the decompilation's Source/ (which still builds the
+# byte-matching VC6 executable). Every .cpp in it is part of the game.
+set(GAME_DIR ${CMAKE_CURRENT_SOURCE_DIR}/game)
+file(GLOB game_sources CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp)
 
 # GTA2Hax includes its own headers with Windows separators; forward them from the build directory
 set(FORWARDERS ${CMAKE_BINARY_DIR}/forwarders)
@@ -84,7 +78,7 @@ function(gta2_game_target target)
         $<$<COMPILE_LANGUAGE:CXX>:-fpermissive> # MSVC accepted these; see port/README.md
         -Wno-write-strings -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
     target_include_directories(${target} PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include ${FORWARDERS} ${REPO_ROOT}/Source ${REPO_ROOT})
+        ${CMAKE_CURRENT_SOURCE_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})
     target_compile_definitions(${target} PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NON_CONFORMING_SWPRINTFS)
 endfunction()
 
@@ -95,9 +89,7 @@ target_compile_options(dear_imgui PRIVATE -fshort-wchar -w)
 
 add_library(gta2_game STATIC
     ${game_sources}
-    ${REPO_ROOT}/test.cpp
-    ${REPO_ROOT}/StdAfx.cpp
-    ${REPO_ROOT}/Source/3rdParty/bink.cpp) # Bink video, stubbed (the same stubs the VC6 build ships as binkw32.dll)
+    ${GAME_DIR}/3rdParty/bink.cpp) # Bink video, stubbed (the same stubs the VC6 build ships as binkw32.dll)
 gta2_game_target(gta2_game)
 target_compile_options(gta2_game PRIVATE -w) # the decompiled code is warning-heavy by nature
 
@@ -128,7 +120,7 @@ target_compile_options(gta2-server PRIVATE -Wall)
 target_link_libraries(gta2-server PRIVATE gta2_net)
 
 # Which builds can play together: a hash of the game code, regenerated when it changes
-file(GLOB compat_inputs ${REPO_ROOT}/Source/*.cpp ${REPO_ROOT}/Source/*.hpp ${REPO_ROOT}/Source/*.h
+file(GLOB compat_inputs ${GAME_DIR}/*.cpp ${GAME_DIR}/*.hpp ${GAME_DIR}/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${CMAKE_CURRENT_SOURCE_DIR}/platform/crt.cpp)
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/gta2_compat.h
     COMMAND ${CMAKE_COMMAND} -DREPO=${REPO_ROOT} -DOUT=${CMAKE_BINARY_DIR}/gta2_compat.h

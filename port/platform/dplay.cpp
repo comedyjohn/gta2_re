@@ -1,5 +1,5 @@
 // DirectPlay for the native build: the IDirectPlay3 and IDirectPlayLobby2 calls the game makes
-// (Source/NetPlay.cpp), over the port's own UDP session protocol (net/net.h).
+// (port/game/NetPlay.cpp), over the port's own UDP session protocol (net/net.h).
 //
 // The game sees the DirectPlay it was written for: one connection ("Internet TCP/IP"), sessions it
 // finds and opens, players and their group, system messages and player messages from Receive. What

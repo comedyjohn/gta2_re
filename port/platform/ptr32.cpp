@@ -1,4 +1,4 @@
-// The handles behind PTR32 (Source/Ptr32.hpp) in the 64-bit build: pointers the game keeps in 4-byte
+// The handles behind PTR32 (port/game/Ptr32.hpp) in the 64-bit build: pointers the game keeps in 4-byte
 // slots of its mission script. A pointer gets a handle the first time it is stored and keeps it, so
 // the table only grows with the number of distinct objects a script ever points at. Those come from
 // the game's object pools (cars, peds, threads, ...), which keeps it small.

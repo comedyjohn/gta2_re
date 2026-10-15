@@ -32,6 +32,10 @@ check_compiler() {
 # shell (a Clang one, say, with LDFLAGS=--rtlib=compiler-rt) would hand gcc options it rejects.
 unset CC CXX CFLAGS CXXFLAGS CPPFLAGS LDFLAGS CMAKE_SYSROOT CMAKE_TOOLCHAIN_FILE
 
+# Ninja's status line, with the percentage done: "[ 42% 55/130] Building ...". It updates in place
+# in a terminal. Set NINJA_STATUS yourself to change it.
+export NINJA_STATUS="${NINJA_STATUS:-[%p %f/%t] }"
+
 build() {
     check_compiler "$1"
     if [ "$1" = 32 ] && [ ! -f "$HOME/sdl32/usr/include/SDL2/SDL.h" ]; then

@@ -201,7 +201,7 @@ class gmp_map_zone
     u8 field_3_w;
     u8 field_4_h;
     u8 field_5_name_length;
-    char_type field_6_name[2];
+    char_type field_6_name[]; // field_5_name_length chars, as stored in the map file
 
     s8 IsZoneVisibleToAnyPlayer_4DEF40();
     wchar_t* get_zone_str_4DEF00();

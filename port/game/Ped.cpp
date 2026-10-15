@@ -1459,7 +1459,7 @@ char_type Ped::AllocCharB4_45C830(Fix16 xpos, Fix16 ypos, Fix16 zpos)
         return 0;
     }
 
-    Sprite* pSprite = pSprite = pChar->field_80_sprite_ptr;
+    Sprite* pSprite = pChar->field_80_sprite_ptr;
     pSprite->set_xyz_lazy_420600(xpos, ypos, zpos);
 
     pChar->field_80_sprite_ptr->AllocCollisionShape_59F950(gDummyW_678530, gDummyW_678530, gDummyZ_67841C);
@@ -2650,7 +2650,6 @@ void Ped::Deallocate_45EB60()
             field_17C_pGang->field_141_always_basic_weapon = 0;
         }
     }
-    field_164_ped_group = field_164_ped_group;
     if (field_164_ped_group)
     {
         if (field_23C_group_idx == 99)
@@ -10067,7 +10066,7 @@ void Ped::ExitCarStateMachine_46C250()
     if (field_168_game_object)
     {
         if (field_154_target_to_enter && field_154_target_to_enter->IsDespawning_4215B0() ||
-            (field_150_target_objective_car = this->field_150_target_objective_car) != nullptr && field_150_target_objective_car->IsDespawning_4215B0() ||
+            field_150_target_objective_car != nullptr && field_150_target_objective_car->IsDespawning_4215B0() ||
             (this->field_158_escape_car) != nullptr && field_158_escape_car->IsDespawning_4215B0() ||
             (field_168_game_object->field_84_target_car) != nullptr && field_168_game_object->field_84_target_car->IsDespawning_4215B0())
         {

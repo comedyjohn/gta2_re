@@ -979,7 +979,7 @@ void Frontend::DrawMenu_4AD140()
 
     MenuPage_0xBCA* pMenuPage = &field_136_menu_pages_array[field_132_f136_idx];
 
-    u16 selected_option_idx;
+    u16 selected_option_idx = 0;
     u16 last_xpos;
 
     if (field_132_f136_idx == MENUPAGE_START_MENU)
@@ -1401,8 +1401,8 @@ void Frontend::DrawMenu_4AD140()
 // 0x4B7AE0
 void Frontend::DrawCredits_4B7AE0()
 {
-    u16 font_type;
-    s32 palette;
+    u16 font_type = 0;
+    s32 palette = 0;
     s32 draw_kind;
 
     u16 credit_idx = field_1EB38_credits_line_idx;

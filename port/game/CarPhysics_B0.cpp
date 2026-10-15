@@ -1383,8 +1383,8 @@ char_type CarPhysics_B0::ProcessGroundCollisionAndSurfaceType_55B970(char_type* 
     }
 
     s32 cp3_int = cp3.ToInt();
-    u8 gradient_level;
-    u8 graident_size;
+    u8 gradient_level = 0;
+    u8 graident_size = 0;
     s32 surface_type = gMap_0x370_6F6268->GetBlockSurfaceType_49EBE0(field_38_cp1.x.ToInt(), this->field_38_cp1.y.ToInt(), cp3_int, &graident_size, &gradient_level);
 
     //LABEL_37:
@@ -3673,7 +3673,7 @@ char_type CarPhysics_B0::UpdateLastMovementTimer_562FA0()
 bool CarPhysics_B0::ProcessCarPhysicsStateMachine_562FE0()
 {
     char carModel; // al
-    char flag; // bl
+    char flag = 0; // bl
 
     SetCurrentCarInfoAndModelPhysics_562EF0();
     carModel = field_5C_pCar->GetCarModelForPhysics_43A850();

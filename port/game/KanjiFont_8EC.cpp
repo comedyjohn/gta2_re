@@ -283,7 +283,7 @@ void KanjiFont_8EC::RenderLargeGlyph_4D2690(wchar_t text_char)
 // 0x4D2710
 STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
 {
-    KanjiGlyph_10* pOldest;
+    KanjiGlyph_10* pOldest = nullptr;
     KanjiGlyph_10* pCurrent;
     u32 nearestId = -1;
 
@@ -319,7 +319,7 @@ STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
 // 0x4D27D0
 STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
 {
-    KanjiGlyph_10* pOldest;
+    KanjiGlyph_10* pOldest = nullptr;
     KanjiGlyph_10* pCurrent;
     u32 nearestId = -1;
 

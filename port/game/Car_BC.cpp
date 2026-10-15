@@ -281,7 +281,7 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
     }
 
     CarThreadTriggerCmd* pCmd;
-    Car_BC* pCar;
+    Car_BC* pCar = nullptr;
     Ped* pPed;
     SCR_POINTER* pPointer;
 

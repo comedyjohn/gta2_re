@@ -5731,7 +5731,7 @@ void sound_obj::HandlePedVoiceEvent_423080(Sound_Params_8* pParams)
     Char_B4* pB4 = pParams->field_0_pObj->field_8_char_b4_ptr;
     Ped* pPed = pB4->field_7C_pPed;
     s32 voice = pPed->TakeVoiceEvent_41B0B0();
-    char_type bTank;
+    char_type bTank = 0;
     s32 samp = 321;
 
     if (!pPed->is_player_41B0A0())

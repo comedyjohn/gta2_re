@@ -225,7 +225,7 @@ void PlayerScoreTracker_36C::Service_591C70()
 
     if (bStartNetworkGame_7081F0)
     {
-        s32 frags_or_points; // edi
+        s32 frags_or_points = 0; // edi
         u8 player_idx = field_368_player->get_idx_4219D0();
         u8 gamemode = gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0();
         s32 points_limit = gGameSession_67E8E0.GetMultiplayerPointsLimit_4C5BD0();
@@ -477,10 +477,10 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     u32 score = 0;
     bool bOtherGang = false;
     bool bHasGameObject = pVictim->field_168_game_object != nullptr;
-    bool bCop;
-    bool bSwat;
-    bool bFbi;
-    bool bArmy;
+    bool bCop = false;
+    bool bSwat = false;
+    bool bFbi = false;
+    bool bArmy = false;
     bool bGangA;
     bool bGangB;
 

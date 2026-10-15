@@ -572,8 +572,8 @@ void RouteFinder::FindArrowBlockInJunction_5890D0(u16 junction_idx, s32 directio
 s32 RouteFinder::NoRefs_589210(u8 x, u8 y, s32 a4, u8 direction, s32 a6, u16 junction_idx)
 {
     Junction_10* pJunction = &field_8_junctions[junction_idx];
-    s32 dy;
-    s16 dx;
+    s32 dy = 0;
+    s16 dx = 0;
     switch (direction)
     {
         case 1:

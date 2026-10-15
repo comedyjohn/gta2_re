@@ -111,7 +111,7 @@ void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
         z_pos = kFpZero_705AC4;
     }
 
-    SpriteTreeNode_C* pParent; // TODO: not initialized before 'for' loop
+    SpriteTreeNode_C* pParent = nullptr; // TODO: not initialized before 'for' loop
     for (SpriteTreeNode_C* pIter = pRoot; pIter;)
     {
         Sprite* pSprt = pIter->field_0_pSprite;

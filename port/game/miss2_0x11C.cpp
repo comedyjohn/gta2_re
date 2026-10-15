@@ -4497,7 +4497,7 @@ void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
 {
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
 
-    s32 type;
+    s32 type = 0;
 
     switch (gBasePtr_6F8070->field_2_type)
     {
@@ -5835,7 +5835,7 @@ void miss2_0x11C::SCRCMD_CHECK_HEADS_50E9E0()
 void miss2_0x11C::SCRCMD_FINISH_LEVEL_50EA40()
 {
     SCR_FINISH_LEVEL* pCmd = (SCR_FINISH_LEVEL*)gBasePtr_6F8070;
-    char bonus_type;
+    char bonus_type = 0;
     switch (pCmd->field_A_bonus_type)
     {
         case SCR_BONUSES::NO_BONUS:

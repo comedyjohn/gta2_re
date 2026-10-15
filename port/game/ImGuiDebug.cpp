@@ -1472,7 +1472,7 @@ void CC ImGuiDebugDraw()
             while (pCarIter)
             {
                 char buffer[128];
-                sprintf(buffer, "Car %S %X", pCarIter->GetCarStr_439F80(), pCarIter);
+                snprintf(buffer, sizeof(buffer), "Car %S %p", pCarIter->GetCarStr_439F80(), (void*)pCarIter);
                 if (ImGui::TreeNode(buffer))
                 {
 

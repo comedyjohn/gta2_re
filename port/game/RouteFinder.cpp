@@ -439,7 +439,7 @@ u16 RouteFinder::FindHorzSegmentJunction_588E60(u8 x, u8 y, u8 z, char_type bIsD
     JunctionSegment_0x8* pSegment = field_A830_horz_segments;
     gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
 
-    if (block_4DFE10 != NULL)
+    if (block_4DFE10 != nullptr)
     {
         s8 bHasArrow = RouteFinder::HasBlockDesiredArrow_588CA0(block_4DFE10, arrow_type, LEFT_3);
         for (s16 junc_idx = 0; junc_idx < field_CC62_horz_segment_count; pSegment++, junc_idx++)
@@ -480,7 +480,7 @@ u16 RouteFinder::FindVertSegmentJunction_588F30(u8 x, u8 y, u8 z, char_type bIsD
     JunctionSegment_0x8* pSegment = field_B938_vert_segments;
     gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
 
-    if (block_4DFE10 != NULL)
+    if (block_4DFE10 != nullptr)
     {
         s8 bHasArrow = RouteFinder::HasBlockDesiredArrow_588CA0(block_4DFE10, arrow_type, UP_1);
         for (s16 junc_idx = 0; junc_idx < field_CC64_vert_segment_count; pSegment++, junc_idx++)
@@ -611,8 +611,8 @@ RouteFinder_10::RouteFinder_10()
     field_0_idx = 0;
     field_2_cost = -1;
     field_4_expanded = 0;
-    field_8_pParent = 0;
-    field_C_pNext = 0;
+    field_8_pParent = nullptr;
+    field_C_pNext = nullptr;
 }
 #pragma warning(pop)
 
@@ -629,7 +629,7 @@ RouteFinder_10* RouteFinder::NewChildNode_5892F0(RouteFinder_10* pRoute, u16 idx
     pNew10->field_0_idx = idx;
     pNew10->field_2_cost = cost + dist;
     pNew10->field_8_pParent = pRoute;
-    pNew10->field_C_pNext = 0;
+    pNew10->field_C_pNext = nullptr;
 
     return pNew10;
 }
@@ -645,8 +645,8 @@ RouteFinder_10* RouteFinder::NewStartNode_589390(u16 junction_idx)
     pNew10->field_0_idx = junction_idx;
     pNew10->field_4_expanded = 0;
     // field_6 is preserved by the original function.
-    pNew10->field_8_pParent = 0;
-    pNew10->field_C_pNext = 0;
+    pNew10->field_8_pParent = nullptr;
+    pNew10->field_C_pNext = nullptr;
     return pNew10;
 }
 
@@ -663,7 +663,7 @@ void RouteFinder::InsertIntoOpenList_589420(RouteFinder_10* pRoute)
     else
     {
         RouteFinder_10* pInsertAfter;
-        for (pInsertAfter = field_A82C_open_list; pInsertAfter->field_C_pNext != NULL && pInsertAfter->field_C_pNext->field_2_cost < pRoute->field_2_cost; pInsertAfter = pInsertAfter->field_C_pNext)
+        for (pInsertAfter = field_A82C_open_list; pInsertAfter->field_C_pNext != nullptr && pInsertAfter->field_C_pNext->field_2_cost < pRoute->field_2_cost; pInsertAfter = pInsertAfter->field_C_pNext)
         {
         }
         pRoute->field_C_pNext = pInsertAfter->field_C_pNext;
@@ -949,7 +949,7 @@ RouteFinder_10* RouteFinder::GetFirstUnexpandedNode_589E00()
 {
     RouteFinder_10* pNode;
 
-    for (pNode = field_A82C_open_list; pNode != NULL && pNode->field_4_expanded != 0; pNode = pNode->field_C_pNext)
+    for (pNode = field_A82C_open_list; pNode != nullptr && pNode->field_4_expanded != 0; pNode = pNode->field_C_pNext)
         ;
     return pNode;
 }
@@ -992,7 +992,7 @@ char_type RouteFinder::sub_589E70(s32 arrow_type)
     RouteFinder_10* pNode;
 
     result = '\0';
-    if (this->field_A82C_open_list != 0)
+    if (this->field_A82C_open_list != nullptr)
     {
         while (true)
         {
@@ -1002,7 +1002,7 @@ char_type RouteFinder::sub_589E70(s32 arrow_type)
             }
 
             pNode = GetFirstUnexpandedNode_589E00();
-            if (pNode == NULL)
+            if (pNode == nullptr)
             {
                 break;
             }
@@ -1028,7 +1028,7 @@ s16 RouteFinder::sub_589EB0()
         return -1;
     }
 
-    while (pNode != NULL)
+    while (pNode != nullptr)
     {
         pNode = pNode->field_8_pParent;
         count++;
@@ -1037,13 +1037,13 @@ s16 RouteFinder::sub_589EB0()
 
     pNode = &field_861C_nodes[field_CC66_545_count - 1];
 
-    if (pNode != NULL)
+    if (pNode != nullptr)
     {
         do
         {
             field_2218_routes[route_idx].field_0_junctions[--count] = pNode->field_0_idx;
             pNode = pNode->field_8_pParent;
-        } while (pNode != NULL);
+        } while (pNode != nullptr);
     }
     field_2218_routes[route_idx].field_0_junctions[gLastRouteLength_6FFDCC] = 0;
     field_0_route_count++;
@@ -1067,7 +1067,7 @@ s16 RouteFinder::sub_589F70()
         return -1;
     }
 
-    while (pNode != NULL)
+    while (pNode != nullptr)
     {
         pNode = pNode->field_8_pParent;
         length++;
@@ -1076,7 +1076,7 @@ s16 RouteFinder::sub_589F70()
 
     pNode = &field_861C_nodes[field_CC66_545_count - 1];
 
-    if (pNode != NULL)
+    if (pNode != nullptr)
     {
         do
         {
@@ -1084,7 +1084,7 @@ s16 RouteFinder::sub_589F70()
             pNode = pNode->field_8_pParent;
             out_idx++;
 
-        } while (pNode != NULL);
+        } while (pNode != nullptr);
     }
     field_0_route_count++;
     return route_idx;
@@ -1162,7 +1162,7 @@ RouteFinder::RouteFinder()
     field_8618_idx = 0;
     field_861A_dest_idx = 0;
     memset(field_861C_nodes, 0, sizeof(field_861C_nodes));
-    field_A82C_open_list = 0;
+    field_A82C_open_list = nullptr;
     memset(field_A830_horz_segments, 0, sizeof(field_A830_horz_segments));
     memset(field_B938_vert_segments, 0, sizeof(field_B938_vert_segments));
     memset(field_CA40_visited, 0, sizeof(field_CA40_visited));

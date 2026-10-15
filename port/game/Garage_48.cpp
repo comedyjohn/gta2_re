@@ -103,7 +103,7 @@ u8 Garage_48::ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor)
     field_44_wait_ticks = 0;
     field_10_door = pDoor;
     field_C_state = 1;
-    field_14_driver = 0;
+    field_14_driver = nullptr;
     field_3C_settle_ticks = 30;
     field_3D_in_position = 0;
     if (field_3E_park_ticket == 255)
@@ -343,7 +343,7 @@ void Garage_48::GaragesService_5349D0()
                         pDriver->StartPedWalking_470200(field_30_target_x, field_34_target_y, field_0_parking_car->GetZ_41E450());
                         field_0_parking_car->ClearDriver_4407F0();
                         pDriver->SetRotation_433C00(sub_5345E0(field_38_door_face));
-                        field_0_parking_car->field_54_driver = NULL;
+                        field_0_parking_car->field_54_driver = nullptr;
                         pDriver->field_168_game_object->field_5C = 20;
                     }
                     else if (field_14_driver && field_14_driver->get_cam_x() >= field_18_park_x_min && field_14_driver->get_cam_x() <= field_20_park_x_max &&
@@ -357,7 +357,7 @@ void Garage_48::GaragesService_5349D0()
             }
             field_4_parked_car = field_0_parking_car;
             field_8_parked_car_id = field_4_parked_car->field_6C_car_id;
-            field_0_parking_car = NULL;
+            field_0_parking_car = nullptr;
             Reset_489650();
             break;
         }
@@ -367,9 +367,9 @@ void Garage_48::GaragesService_5349D0()
 MATCH_FUNC(0x534e80)
 Garage_48::Garage_48()
 {
-    field_0_parking_car = 0;
-    field_10_door = 0;
-    field_14_driver = 0;
+    field_0_parking_car = nullptr;
+    field_10_door = nullptr;
+    field_14_driver = nullptr;
     field_C_state = 0;
     field_28_push_dir.x = 0;
     field_28_push_dir.y = 0;
@@ -385,6 +385,6 @@ Garage_48::Garage_48()
     field_3E_park_ticket = 0;
     field_3F_no_respawn = 0;
     field_40_long_car = 0;
-    field_4_parked_car = 0;
+    field_4_parked_car = nullptr;
     field_8_parked_car_id = 0;
 }

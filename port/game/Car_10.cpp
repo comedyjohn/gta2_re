@@ -96,7 +96,7 @@ void Car_Door_10::Service_439DA0(u32* a3a)
     {
         if (pPed->isDead_403B60() || !pPed->field_21C_bf.bLeftVehicle)
         {
-            field_8_pObj = 0;
+            field_8_pObj = nullptr;
         }
     }
 }
@@ -142,7 +142,7 @@ void Car_Door_10::Close_439EA0()
 MATCH_FUNC(0x447330)
 Car_Door_10::Car_Door_10()
 {
-    field_8_pObj = 0;
+    field_8_pObj = nullptr;
     field_2_first_delta_idx = 0;
     field_0_animation_frame = 0;
     field_1_frame_delay = 3;
@@ -153,5 +153,5 @@ Car_Door_10::Car_Door_10()
 MATCH_FUNC(0x447350)
 Car_Door_10::~Car_Door_10()
 {
-    field_8_pObj = 0;
+    field_8_pObj = nullptr;
 }

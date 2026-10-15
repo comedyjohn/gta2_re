@@ -322,7 +322,7 @@ void sound_obj::ProcessType2_412490(s32 idx)
 
     // Add first sample
     field_30_sQueueSample.field_0_EntityIndex = idx;
-    field_30_sQueueSample.field_5C = 0;
+    field_30_sQueueSample.field_5C = nullptr;
     field_30_sQueueSample.field_18_bIs2D = 1;
     field_30_sQueueSample.field_8_obj.field_0_x = kFpZero_66F3F0;
     field_30_sQueueSample.field_8_obj.field_4_y = kFpZero_66F3F0;
@@ -375,7 +375,7 @@ void sound_obj::ProcessType1_Sprite_412740(s32 idx)
                                            &field_30_sQueueSample.field_8_obj.field_8_z);
 
         this->field_30_sQueueSample.field_0_EntityIndex = idx;
-        this->field_30_sQueueSample.field_5C = 0;
+        this->field_30_sQueueSample.field_5C = nullptr;
 
         entity.field_5_bHasSolidAbove = gMap_0x370_6F6268->CheckColumnHasSolidAbove_4E7FC0(field_30_sQueueSample.field_8_obj.field_0_x,
                                                                                            field_30_sQueueSample.field_8_obj.field_4_y,
@@ -412,7 +412,7 @@ void sound_obj::ProcessType8_Crane_412820(s32 idx)
                                    &field_30_sQueueSample.field_8_obj.field_8_z);
 
             this->field_30_sQueueSample.field_0_EntityIndex = idx;
-            this->field_30_sQueueSample.field_5C = 0;
+            this->field_30_sQueueSample.field_5C = nullptr;
             char_type bSolidAbove = gMap_0x370_6F6268->CheckColumnHasSolidAbove_4E7FC0(field_30_sQueueSample.field_8_obj.field_0_x,
                                                                                          field_30_sQueueSample.field_8_obj.field_4_y,
                                                                                          field_30_sQueueSample.field_8_obj.field_8_z);
@@ -527,7 +527,7 @@ void sound_obj::ProcessType9_Crusher_412A60(s32 idx)
             this->field_30_sQueueSample.field_8_obj.field_8_z = z;
 
             this->field_30_sQueueSample.field_0_EntityIndex = idx;
-            this->field_30_sQueueSample.field_5C = 0;
+            this->field_30_sQueueSample.field_5C = nullptr;
             const char_type bSolidAbove = gMap_0x370_6F6268->CheckColumnHasSolidAbove_4E7FC0(x, y, z);
             this->field_28_dist_related = ComputeEmitterDistanceSquared_4190B0();
             this->field_2C_distCalculated = 0;
@@ -1197,7 +1197,7 @@ void sound_obj::ProcessType6_CollisionSoundQueue_413760(s32 idx)
         return;
     }
 
-    this->field_30_sQueueSample.field_5C = 0;
+    this->field_30_sQueueSample.field_5C = nullptr;
     this->field_30_sQueueSample.field_0_EntityIndex = idx;
 
     for (u8 event_idx = 0; event_idx < p88->field_C84_count; event_idx++)
@@ -3163,7 +3163,7 @@ void sound_obj::ProcessType11_HudPager_418B60(s32 entity_idx)
 
             field_30_sQueueSample.field_14_samp_idx = 57;
             field_30_sQueueSample.field_0_EntityIndex = entity_idx;
-            field_30_sQueueSample.field_5C = 0;
+            field_30_sQueueSample.field_5C = nullptr;
             field_30_sQueueSample.field_24_nVolume = vol;
             field_30_sQueueSample.field_60_nEmittingVolume = vol;
             field_30_sQueueSample.field_64_max_distance = 100;
@@ -3191,7 +3191,7 @@ void sound_obj::AddVocalsEntity_418C20()
     if (!field_544C[0].field_4_fp)
     {
         SoundObject_10* pSoundObj = &field_544C[0].field_8;
-        field_544C[0].field_8.field_C_pAny.pAny = 0;
+        field_544C[0].field_8.field_C_pAny.pAny = nullptr;
         field_544C[0].field_8.field_4_bStatus = 0;
         pSoundObj->field_0_object_type = 10;
         field_544C[0].field_4_fp = AddSoundObject_419FA0(pSoundObj);
@@ -3674,7 +3674,7 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
     }
 
     field_147C_audio_entities[idx].field_0_bUsed = 0;
-    field_147C_audio_entities[idx].field_4_pObj->field_C_pAny.pAny = 0;
+    field_147C_audio_entities[idx].field_4_pObj->field_C_pAny.pAny = nullptr;
     field_147C_audio_entities[idx].field_1_age = 0;
 
     if (field_147C_audio_entities[idx].field_4_pObj->field_0_object_type == SoundObjectTypeEnum::Camera_0xBC_5)
@@ -3977,8 +3977,8 @@ void sound_obj::ResetEntry_41A6C0(s32 idx)
 {
     field_147C_audio_entities[idx].field_0_bUsed = 0;
     field_147C_audio_entities[idx].field_1_age = 0;
-    field_147C_audio_entities[idx].field_4_pObj = 0;
-    field_147C_audio_entities[idx].field_8_pAlloc = 0;
+    field_147C_audio_entities[idx].field_4_pObj = nullptr;
+    field_147C_audio_entities[idx].field_8_pAlloc = nullptr;
 }
 
 MATCH_FUNC(0x41A6F0)
@@ -3999,14 +3999,14 @@ void sound_obj::InterrogateAudioEntities_41A730()
 {
     Camera_0xBC* pTmp;
 
-    if (field_1478_type5Idx != 0 && (pTmp = field_147C_audio_entities[field_1478_type5Idx].field_4_pObj->field_C_pAny.pCamera_0xBC) != NULL)
+    if (field_1478_type5Idx != 0 && (pTmp = field_147C_audio_entities[field_1478_type5Idx].field_4_pObj->field_C_pAny.pCamera_0xBC) != nullptr)
     {
         Ped* pPed = pTmp->GetFollowedPed_416B70();
 
-        if (pPed != NULL)
+        if (pPed != nullptr)
         {
             Car_BC* field_16C_car = pPed->get_car_416B60();
-            if (field_16C_car != NULL)
+            if (field_16C_car != nullptr)
             {
                 field_16C_car->GetXYZ_416B80(&field_1468_listener_x, &field_146C_listener_y, &field_1470_listener_z);
                 field_1474_rotation = field_16C_car->GetCarRotation_416BB0();
@@ -4566,7 +4566,7 @@ void sound_obj::ClearActivateSamples_41B7A0()
         field_DC0_ActiveSamples[i].field_48_nCalculatedVolume = 0;
         field_DC0_ActiveSamples[i].field_4C_releasing_volume_divider = 0;
         field_DC0_ActiveSamples[i].field_50_volume_change = -1;
-        field_DC0_ActiveSamples[i].field_5C = 0;
+        field_DC0_ActiveSamples[i].field_5C = nullptr;
     }
 }
 
@@ -6237,7 +6237,7 @@ MATCH_FUNC(0x426E10)
 void sound_obj::EnqueueRadioLocationPhrase_426E10(u8 xpos, u8 ypos)
 {
     char_type bUnknown = 0;
-    gmp_map_zone* pZone = 0;
+    gmp_map_zone* pZone = nullptr;
     const u32 cop_zone = sound_obj::GetCopRadioZoneIndex_427400(xpos, ypos, &pZone);
     if (!cop_zone && !pZone)
     {
@@ -6549,7 +6549,7 @@ u32 sound_obj::GetCopRadioZoneIndex_427400(u8 x, u8 y, gmp_map_zone** ppZone)
 
     if (!*ppZone || (*ppZone)->field_5_name_length != 3 || (*ppZone)->field_6_name[0] != 'm')
     {
-        *ppZone = 0;
+        *ppZone = nullptr;
         return 0;
     }
 
@@ -6570,7 +6570,7 @@ u32 sound_obj::GetCopRadioZoneIndex_427400(u8 x, u8 y, gmp_map_zone** ppZone)
             return result;
         }
     }
-    *ppZone = 0;
+    *ppZone = nullptr;
     return 0;
 }
 
@@ -6651,7 +6651,7 @@ void sound_obj::ProcessType7_Weapon_42A500(s32 idx)
                                             &this->field_30_sQueueSample.field_8_obj.field_4_y,
                                             &this->field_30_sQueueSample.field_8_obj.field_8_z);
                 this->field_30_sQueueSample.field_0_EntityIndex = idx;
-                this->field_30_sQueueSample.field_5C = 0;
+                this->field_30_sQueueSample.field_5C = nullptr;
                 bHasSolidAbove = gMap_0x370_6F6268->CheckColumnHasSolidAbove_4E7FC0(field_30_sQueueSample.field_8_obj.field_0_x,
                                                                                     field_30_sQueueSample.field_8_obj.field_4_y,
                                                                                     field_30_sQueueSample.field_8_obj.field_8_z);
@@ -7311,7 +7311,7 @@ void sound_obj::InitMusicAndCopRadio_57E960()
         DeclareRadioStation_57ECB0(1, Fix16(0, 0), Fix16(0, 0));
         if (field_5508_radio_entity_idx == 0)
         {
-            field_550C_radio_entity.field_C_pAny.pAny = NULL;
+            field_550C_radio_entity.field_C_pAny.pAny = nullptr;
             field_550C_radio_entity.field_0_object_type = SoundObjectTypeEnum::Radio_3;
             field_550C_radio_entity.field_4_bStatus = false;
             field_5508_radio_entity_idx = AddSoundObject_419FA0(&field_550C_radio_entity);

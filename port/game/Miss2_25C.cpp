@@ -17,7 +17,7 @@ Miss2_25C::Miss2_25C() throw()
     field_258_count = 0;
     for (s32 i = 0; i < 50; i++)
     {
-        field_0_entries[i].field_0_obj = 0;
+        field_0_entries[i].field_0_obj = nullptr;
         field_0_entries[i].field_8_entity_id = 0;
         field_0_entries[i].field_4_type = 0;
     }
@@ -43,14 +43,14 @@ void Miss2_25C::MissionCleanUp_502DC0()
             {
                 gStoredCar_6F7560->MarkForDespawn_421470();
             }
-            gStoredCar_6F7560 = 0;
+            gStoredCar_6F7560 = nullptr;
             gStoredCarId_6F78B4 = 0;
         }
     }
 
     for (s32 i = 0; i < GTA2_COUNTOF(field_0_entries); i++)
     {
-        if ((u32*)pIter->field_0_car != NULL)
+        if ((u32*)pIter->field_0_car != nullptr)
         {
             switch (pIter->field_4_type)
             {
@@ -87,7 +87,7 @@ void Miss2_25C::MissionCleanUp_502DC0()
                 default:
                     break;
             }
-            pIter->field_0_car = NULL;
+            pIter->field_0_car = nullptr;
             pIter->field_8_entity_id = 0;
             pIter->field_4_type = 0;
             --field_258_count;
@@ -109,7 +109,7 @@ Miss2_C* Miss2_25C::allocate_next_502F60()
         }
         pIter++;
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x502f80)

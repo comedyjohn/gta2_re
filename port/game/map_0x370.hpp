@@ -140,8 +140,8 @@ struct gmp_compressed_map_32
     // 9.6f 0x4630B0
     gmp_compressed_map_32()
     {
-        field_40008_pColumn = 0;
-        field_4000C_block = 0;
+        field_40008_pColumn = nullptr;
+        field_4000C_block = nullptr;
         field_40004_num_blocks = 0;
         field_40000_column_words = 0;
     }
@@ -624,7 +624,7 @@ class Map_0x370
             reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
         if (z >= pCol->field_0_height || z < pCol->field_1_offset)
         {
-            return 0;
+            return nullptr;
         }
         return &field_0_pDmap->field_4000C_block[pCol->field_4_blockd[z - pCol->field_1_offset]];
     }

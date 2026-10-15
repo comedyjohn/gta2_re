@@ -253,8 +253,8 @@ s32 __stdcall text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr
     s32 num_of_lines = 1;
     s32 space_width = GetSpaceWidth_4C23D0(font_type);
     s32 current_width = 0;
-    const wchar_t* pPrevSrcCheckpoint = NULL;
-    wchar_t* pPrevDestCheckpoint = NULL;
+    const wchar_t* pPrevSrcCheckpoint = nullptr;
+    wchar_t* pPrevDestCheckpoint = nullptr;
 
     for (; *pSrcStrCopy; pSrcStrCopy++, pDestStrCopy++)
     {
@@ -263,8 +263,8 @@ s32 __stdcall text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr
         switch (*pSrcStrCopy)
         {
             case '\n':
-                pPrevSrcCheckpoint = 0;
-                pPrevDestCheckpoint = NULL;
+                pPrevSrcCheckpoint = nullptr;
+                pPrevDestCheckpoint = nullptr;
                 current_width = 0;
                 num_of_lines += 1;
                 break;
@@ -289,8 +289,8 @@ s32 __stdcall text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr
                 pSrcStrCopy = pPrevSrcCheckpoint;
                 *pDestStrCopy = '\n';
 
-                pPrevSrcCheckpoint = NULL;
-                pPrevDestCheckpoint = NULL;
+                pPrevSrcCheckpoint = nullptr;
+                pPrevDestCheckpoint = nullptr;
             }
             else
             {

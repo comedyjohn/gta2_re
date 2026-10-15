@@ -23,7 +23,7 @@ class SpriteList_4
 
     void ResetHead_4207E0() // inline
     {
-        field_0_p18 = 0;
+        field_0_p18 = nullptr;
     }
 
     EXPORT AttachedSprite_18* GetSpriteForModel_5A6A50(s32 obj_type);

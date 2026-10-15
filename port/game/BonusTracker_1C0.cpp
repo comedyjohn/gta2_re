@@ -19,7 +19,7 @@ BonusRule_2C::~BonusRule_2C()
 MATCH_FUNC(0x431D50);
 void BonusRule_2C::Init_431D50()
 {
-    field_0_pZone = 0;
+    field_0_pZone = nullptr;
     field_4_event_type = bonus_event_type::any_event;
     field_8_car_model = car_model_enum::none;
     field_C_occupation = ped_ocupation_enum::no_occupation;
@@ -54,14 +54,14 @@ void BonusRule_2C::Deactivate_431DB0()
 MATCH_FUNC(0x431DC0);
 BonusTracker_1C0::BonusTracker_1C0()
 {
-    field_1B8_pScores = 0;
+    field_1B8_pScores = nullptr;
     field_1BC_cur_time = 0;
 }
 
 MATCH_FUNC(0x431DF0);
 BonusTracker_1C0::~BonusTracker_1C0()
 {
-    field_1B8_pScores = 0;
+    field_1B8_pScores = nullptr;
 }
 
 MATCH_FUNC(0x431E10);

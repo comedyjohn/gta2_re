@@ -32,7 +32,7 @@ public:
     
     ~Taxi_4_Pool()
     {
-        this->field_0_pHead = 0;
+        this->field_0_pHead = nullptr;
     }
 };
 
@@ -49,13 +49,13 @@ class Taxi_4
     // inlined
     void ClearList_4C0980()
     {
-        field_0_pFirst = 0;
+        field_0_pFirst = nullptr;
     }
 
     // 9.6f 0x434970
     inline bool IsEmpty_434970()
     {
-        return field_0_pFirst == 0;
+        return field_0_pFirst == nullptr;
     }
 
     EXPORT void PushTaxi_457BA0(Car_BC* pCar);

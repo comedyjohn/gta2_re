@@ -84,7 +84,7 @@ char* __stdcall CarInfo_808::parse_gci_file_430A30(void* pGciData,
     }
 
     *next_position = processed_output_676250;
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x430AC0)
@@ -638,7 +638,7 @@ void CarInfo_808::LoadModelPhysics_4546D0()
 
     crt::free(file_content);
 
-    if (pErrorMsg != NULL)
+    if (pErrorMsg != nullptr)
     {
         strcpy(gErrStr_67C29C, file_name_677EC4);
         strcpy(gErrStr2_67C3A8, pErrorMsg);
@@ -736,8 +736,8 @@ void CarInfo_808::Clear_454A80()
 {
     for (int i = 0; i < 0x100; i++)
     {
-        field_404_model_physics_array[i] = NULL;
-        field_0_ptr_array[i] = NULL;
+        field_404_model_physics_array[i] = nullptr;
+        field_0_ptr_array[i] = nullptr;
     }
 }
 
@@ -745,20 +745,20 @@ MATCH_FUNC(0x454aa0)
 void CarInfo_808::Free_454AA0()
 {
     delete[] field_400_raw_data;
-    field_400_raw_data = 0;
+    field_400_raw_data = nullptr;
 
     if (field_804_raw_data)
     {
         delete[] field_804_raw_data;
     }
-    field_804_raw_data = 0;
+    field_804_raw_data = nullptr;
 }
 
 MATCH_FUNC(0x454b00)
 CarInfo_808::CarInfo_808()
 {
-    field_400_raw_data = NULL;
-    field_804_raw_data = NULL;
+    field_400_raw_data = nullptr;
+    field_804_raw_data = nullptr;
     Clear_454A80();
 }
 

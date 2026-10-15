@@ -22,10 +22,10 @@ DEFINE_GLOBAL(Ang16, DAT_0067BD18, 0x67BD18);
 MATCH_FUNC(0x49c640)
 Door_38::Door_38()
 {
-    field_0_primary_door_data = 0;
-    field_4_secondary_door_data = 0;
-    field_8_door_obj = 0;
-    field_C_trigger_obj = 0;
+    field_0_primary_door_data = nullptr;
+    field_4_secondary_door_data = nullptr;
+    field_8_door_obj = nullptr;
+    field_C_trigger_obj = nullptr;
     field_20_state = 0;
     field_24_close_type = 0;
     field_10_model_id = 0;
@@ -46,10 +46,10 @@ Door_38::Door_38()
 MATCH_FUNC(0x49c690)
 Door_38::~Door_38()
 {
-    field_0_primary_door_data = 0;
-    field_4_secondary_door_data = 0;
-    field_8_door_obj = 0;
-    field_C_trigger_obj = 0;
+    field_0_primary_door_data = nullptr;
+    field_4_secondary_door_data = nullptr;
+    field_8_door_obj = nullptr;
+    field_C_trigger_obj = nullptr;
 }
 
 MATCH_FUNC(0x49c6a0)
@@ -96,7 +96,7 @@ bool Door_38::CanOpen_49C6D0(Car_BC* pCar)
             break;
 
         case door_open_type::any_player_one_car:
-            if (this->field_10_car_bc == NULL)
+            if (this->field_10_car_bc == nullptr)
             {
                 break;
             }
@@ -162,7 +162,7 @@ MATCH_FUNC(0x49c840)
 void Door_38::Open_49C840()
 {
     DoorData_10* this_00 = this->field_0_primary_door_data;
-    if (this_00 != NULL)
+    if (this_00 != nullptr)
     {
         if (this_00->field_0_state != 2)
         {
@@ -170,7 +170,7 @@ void Door_38::Open_49C840()
         }
         this_00->Open_49C4E0(0);
     }
-    if (this->field_4_secondary_door_data != NULL)
+    if (this->field_4_secondary_door_data != nullptr)
     {
         this->field_4_secondary_door_data->Open_49C4E0(this->field_2A_bDoFlip);
     }
@@ -394,11 +394,11 @@ void Door_38::UpdateAutoClose_49CD90()
 {
     if (field_29_bAuto != 0)
     {
-        if ((field_0_primary_door_data != NULL && field_0_primary_door_data->field_0_state == 2) || (field_4_secondary_door_data != NULL && field_4_secondary_door_data->field_0_state == 2))
+        if ((field_0_primary_door_data != nullptr && field_0_primary_door_data->field_0_state == 2) || (field_4_secondary_door_data != nullptr && field_4_secondary_door_data->field_0_state == 2))
         {
             if (field_24_close_type != door_close_type::close_never && field_24_close_type != door_close_type::unknown1)
             {
-                if (field_24_close_type == door_close_type::close_when_open_rule_fails && field_10_car_bc != NULL)
+                if (field_24_close_type == door_close_type::close_when_open_rule_fails && field_10_car_bc != nullptr)
                 {
                     if (CanOpen_49C6D0(field_10_car_bc) == false && CanOpenForPed_49C7F0(field_10_ped) == false &&
                         !IsSpriteClearOfDoorCollision_49C6A0(field_10_car_bc->field_50_car_sprite))
@@ -417,12 +417,12 @@ void Door_38::UpdateAutoClose_49CD90()
                 if (field_28_bClosing != '\0' && field_1E_close_timer == 0)
                 {
                     field_1E_close_timer = field_1C_close_delay;
-                    if (field_0_primary_door_data != NULL)
+                    if (field_0_primary_door_data != nullptr)
                     {
                         gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(0x117, 0x33, field_30_x, field_34_y, field_0_primary_door_data->field_6_z);
                         field_0_primary_door_data->Close_49C590(false);
                     }
-                    if (field_4_secondary_door_data != NULL)
+                    if (field_4_secondary_door_data != nullptr)
                     {
                         field_4_secondary_door_data->Close_49C590(field_2A_bDoFlip);
                     }

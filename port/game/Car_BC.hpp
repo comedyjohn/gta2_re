@@ -355,9 +355,9 @@ class Trailer
     //Inlined in CarManager_6C constructor 9.6f -> 0x4212d0
     __forceinline Trailer()
     {
-        mpNext = NULL;
-        field_8_truck_cab = NULL;
-        field_C_pCarOnTrailer = NULL;
+        mpNext = nullptr;
+        field_8_truck_cab = nullptr;
+        field_C_pCarOnTrailer = nullptr;
         field_0_hitch_angle_clamped = NULL;
         0;
     }
@@ -709,7 +709,7 @@ class Car_BC
     // FUNCTION: 96f 0x4118d0
     s32 IsDrivenByPlayer_4118D0() const
     {
-        if (field_54_driver != NULL && field_54_driver->field_15C_player != NULL)
+        if (field_54_driver != nullptr && field_54_driver->field_15C_player != nullptr)
         {
             return true;
         }
@@ -1432,7 +1432,7 @@ class TrailerPool
 
     ~TrailerPool()
     {
-       field_0_pool.field_0_pHead = 0;
+       field_0_pool.field_0_pHead = nullptr;
     }
 
     // 9.6f 0x425580

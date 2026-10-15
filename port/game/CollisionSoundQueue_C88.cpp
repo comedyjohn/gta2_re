@@ -298,7 +298,7 @@ CollisionSoundQueue_C88::CollisionSoundQueue_C88()
 {
     if (bSkip_audio_67D6BE)
     {
-        field_0_pSoundObj = NULL;
+        field_0_pSoundObj = nullptr;
     }
     else
     {
@@ -313,7 +313,7 @@ CollisionSoundQueue_C88::~CollisionSoundQueue_C88()
     if (field_0_pSoundObj)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_0_pSoundObj);
-        field_0_pSoundObj = 0;
+        field_0_pSoundObj = nullptr;
     }
 }
 

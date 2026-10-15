@@ -38,7 +38,7 @@ EmergencyCrew_30* EmergencyCrewPool_1E0::AllocateSlot_5CBB80()
             return &field_0_slots[i];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5cbbd0)
@@ -63,10 +63,10 @@ void EmergencyCrew_30::Init_5CBC00()
     field_1E_is_used = 0;
     field_20_crew_type = 0;
     field_24_phase = crew_phase::on_foot_0;
-    field_0_car = NULL;
-    field_4_ped = NULL;
+    field_0_car = nullptr;
+    field_4_ped = nullptr;
     field_28_state = crew_state::idle_0;
-    field_8_group = NULL;
+    field_8_group = nullptr;
     field_2C_ready = 0;
     field_1C_spawn_wait_ticks = 0;
 }
@@ -161,7 +161,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
         if (!field_8_group->field_34_count)
         {
             field_8_group->ClearGroupData_4C8E90();
-            field_8_group = NULL;
+            field_8_group = nullptr;
         }
     }
 
@@ -258,9 +258,9 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                 if (field_0_car->field_60_pChaseTask)
                 {
                     gCarChaseTaskTable_678E30->FreeEntry_474CC0(field_0_car->field_60_pChaseTask);
-                    field_0_car->field_60_pChaseTask = 0;
+                    field_0_car->field_60_pChaseTask = nullptr;
                 }
-                field_0_car = NULL;
+                field_0_car = nullptr;
             }
             if (bNoPedsAlive)
             {
@@ -282,8 +282,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                     }
                     field_8_group->ClearGroupData_4C8E90();
                 }
-                field_8_group = NULL;
-                field_4_ped = NULL;
+                field_8_group = nullptr;
+                field_4_ped = nullptr;
                 field_24_phase = crew_phase::finished_2;
                 return;
             }
@@ -316,7 +316,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                     {
                         field_4_ped = field_8_group->field_4_ped_list[0];
                         field_8_group->ClearGroupData_4C8E90();
-                        field_8_group = NULL;
+                        field_8_group = nullptr;
                         field_4_ped->SetObjective(objectives_enum::no_obj_0);
                         field_4_ped->SetObjective2_463830(objectives_enum::no_obj_0);
                         field_24_phase = crew_phase::on_foot_0;
@@ -324,7 +324,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                     else
                     {
                         field_8_group->field_2C_ped_leader = field_8_group->field_4_ped_list[field_8_group->field_34_count];
-                        field_8_group->field_4_ped_list[field_8_group->field_34_count] = 0;
+                        field_8_group->field_4_ped_list[field_8_group->field_34_count] = nullptr;
                         --field_8_group->field_36_count;
                         --field_8_group->field_34_count;
                         field_4_ped = field_8_group->field_2C_ped_leader;
@@ -336,7 +336,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                 {
                     field_4_ped = field_8_group->field_2C_ped_leader;
                     field_8_group->DestroyGroup_4C93A0();
-                    field_8_group = NULL;
+                    field_8_group = nullptr;
                     field_4_ped->SetObjective(objectives_enum::no_obj_0);
                     field_4_ped->SetObjective2_463830(objectives_enum::no_obj_0);
                     field_24_phase = crew_phase::on_foot_0;
@@ -419,10 +419,10 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             if (field_0_car->field_60_pChaseTask)
             {
                 gCarChaseTaskTable_678E30->FreeEntry_474CC0(field_0_car->field_60_pChaseTask);
-                field_0_car->field_60_pChaseTask = 0;
+                field_0_car->field_60_pChaseTask = nullptr;
             }
         }
-        field_0_car = NULL;
+        field_0_car = nullptr;
     }
 }
 
@@ -439,7 +439,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
         if (field_8_group->field_34_count == 0)
         {
             field_8_group->ClearGroupData_4C8E90();
-            this->field_8_group = NULL;
+            this->field_8_group = nullptr;
         }
     }
 
@@ -469,7 +469,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
             }
             else if (field_4_ped->isDead_403B60())
             {
-                this->field_4_ped = NULL;
+                this->field_4_ped = nullptr;
             }
         }
 
@@ -509,10 +509,10 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
                 if (field_0_car->field_60_pChaseTask)
                 {
                     gCarChaseTaskTable_678E30->FreeEntry_474CC0(field_0_car->field_60_pChaseTask); // something to do with car route
-                    field_0_car->field_60_pChaseTask = 0;
+                    field_0_car->field_60_pChaseTask = nullptr;
                 }
             }
-            field_0_car = NULL;
+            field_0_car = nullptr;
 
             if (bClearPedAndGroup)
             {
@@ -536,7 +536,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
                     }
                     field_8_group->ClearGroupData_4C8E90();
                 }
-                this->field_8_group = NULL;
+                this->field_8_group = nullptr;
                 this->field_2C_ready = 1;
             }
             else if (bClearCharB4F24)
@@ -641,7 +641,7 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             else
             {
-                this->field_0_car = NULL;
+                this->field_0_car = nullptr;
             }
 
             if (this->field_0_car)
@@ -661,7 +661,7 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             else
             {
-                this->field_0_car = NULL;
+                this->field_0_car = nullptr;
             }
             if (this->field_0_car)
             {
@@ -680,7 +680,7 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             else
             {
-                this->field_0_car = NULL;
+                this->field_0_car = nullptr;
             }
 
             if (this->field_0_car)
@@ -691,7 +691,7 @@ bool EmergencyCrew_30::Service_5CC480()
             break;
 
         default:
-            field_0_car = NULL;
+            field_0_car = nullptr;
             break;
     }
 

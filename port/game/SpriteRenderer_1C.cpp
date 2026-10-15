@@ -175,8 +175,8 @@ void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
 
     SpriteTreeNode_C* pAllocated = gSpriteTreeNodePool_705BBC->Alloc_4C4B40();
     pAllocated->field_0_pSprite = pSprite;
-    pAllocated->field_4_pLeft = NULL;
-    pAllocated->field_8_pRight = NULL;
+    pAllocated->field_4_pLeft = nullptr;
+    pAllocated->field_8_pRight = nullptr;
 
     if (!field_0_pRoot)
     {
@@ -223,7 +223,7 @@ MATCH_FUNC(0x5c5e50)
 void SpriteTree_4::Reset_5C5E50()
 {
     gSpriteTreeNodePool_705BBC->Reset_4C4B70();
-    field_0_pRoot = 0;
+    field_0_pRoot = nullptr;
 }
 
 // TODO: Doesn't match due to SEH stuff
@@ -247,12 +247,12 @@ SpriteTree_4::~SpriteTree_4()
 {
     // An explicit dtor call through the global plus operator delete on a saved copy gives the original's
     // test in ecx with esi pushed and loaded inside the if; `delete` keeps the pointer in esi throughout
-    if (gSpriteTreeNodePool_705BBC != NULL)
+    if (gSpriteTreeNodePool_705BBC != nullptr)
     {
         SpriteTreeNodePool_2EE4* p = gSpriteTreeNodePool_705BBC;
         gSpriteTreeNodePool_705BBC->~SpriteTreeNodePool_2EE4();
         operator delete(p);
-        gSpriteTreeNodePool_705BBC = 0;
+        gSpriteTreeNodePool_705BBC = nullptr;
     }
 
     if (gSpriteTreeStack_705BC0)
@@ -266,7 +266,7 @@ SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
 {
     for (s32 i = 0; i < GTA2_COUNTOF(field_0_entries); i++)
     {
-        field_0_entries[i].field_0_pSprite = 0;
+        field_0_entries[i].field_0_pSprite = nullptr;
     }
     Reset_4C4B70();
 }

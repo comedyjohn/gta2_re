@@ -746,6 +746,6 @@ void PlyDat_2BC0::Destroy_56C340()
     if (gPlyDat_6FEAC0)
     {
         delete gPlyDat_6FEAC0;
-        gPlyDat_6FEAC0 = 0;
+        gPlyDat_6FEAC0 = nullptr;
     }
 }

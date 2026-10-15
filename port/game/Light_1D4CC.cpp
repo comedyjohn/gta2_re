@@ -19,7 +19,7 @@ Light_28* Light_1D4CC::Alloc_5C2B70()
 {
     Light_28* result = field_0_pool.field_0_pStart;
     field_0_pool.field_0_pStart = field_0_pool.field_0_pStart->mpNext;
-    result->mpNext = 0;
+    result->mpNext = nullptr;
     result->field_0.flag = 0;
     result->field_14_on_time = 0;
     return result;

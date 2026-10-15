@@ -277,7 +277,7 @@ class Hud_Pager_C
     // 9.6f 0x4C7160
     inline bool no_ptr_counter_4C7160()
     {
-        return field_4_ptr_counter == NULL;
+        return field_4_ptr_counter == nullptr;
     }
 
     // 9.6f 0x4C7170
@@ -409,10 +409,10 @@ class ArrowTrace_24
     // inline 0x4C6F00
     void init()
     {
-        field_0_ped = NULL;
-        field_4_car = NULL;
-        field_8_obj = NULL;
-        field_C_player = NULL;
+        field_0_ped = nullptr;
+        field_4_car = nullptr;
+        field_8_obj = nullptr;
+        field_C_player = nullptr;
         field_10_target_type = ArrowTargetType::Nothing_0;
         field_20_bIsTargetVisible = false;
     }
@@ -580,7 +580,7 @@ class Hud_Arrow_7C_Array
     Hud_Arrow_7C_Array()
     {
         field_83C_show_gang_arrows = 1;
-        field_840_visible_gang_arrow = NULL;
+        field_840_visible_gang_arrow = nullptr;
         field_844_check_info_phones = 0;
     }
 
@@ -648,8 +648,8 @@ class Hud_MapZone_98
     // 9.6f 0x4A4770
     void clear_zones()
     {
-        field_88_nav_zone = NULL;
-        field_8C_local_nav_zone = NULL;
+        field_88_nav_zone = nullptr;
+        field_8C_local_nav_zone = nullptr;
     }
 
     EXPORT void DrawZoneName_5D5900();

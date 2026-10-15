@@ -39,7 +39,7 @@ str_table_entry* ScriptManager_C1EA8::FindStringById_503080(s16 stringId)
         idx++;
         result = field_13350_pStringTbl->field_4[idx];
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5030b0)
@@ -56,7 +56,7 @@ str_table_entry* ScriptManager_C1EA8::StrEntryByString_5030B0(char_type* strToFi
         idx++;
         pEntry = field_13350_pStringTbl->field_4[idx];
     }
-    return 0;
+    return nullptr;
 }
 
 EXTERN_GLOBAL_ARRAY(u8, kDecidePowerupGenTypes_6212F0, 19);
@@ -312,7 +312,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
 
     if (bSkip_mission_67D4E5)
     {
-        return 0;
+        return nullptr;
     }
     for (idx = 0; idx < GTA2_COUNTOF_S(field_46C_base_pointers) - startOff; ++idx)
     {
@@ -324,7 +324,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x512160)
@@ -518,7 +518,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::GetBasePointer_512770(u16 idx)
 {
     if (!field_46C_base_pointers[idx])
     {
-        return 0;
+        return nullptr;
     }
     return (SCR_CMD_HEADER*)&field_334C_script_data[field_46C_base_pointers[idx]];
 }
@@ -553,7 +553,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindCarThread_5128A0(s32 ped_id, s32 obj_f
         }
         pThread++;
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5128d0)
@@ -609,7 +609,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThread_512980(s32 ped_id, s32 obj
         }
         pHeader++;
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5129b0)
@@ -692,13 +692,13 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThreadByObjId_512AD0(s32 obj_f14)
         }
         pHeader++;
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x512af0)
 char_type ScriptManager_C1EA8::TestAndRecordWeaponHit_512AF0(s32 id, char_type weapon_idx, char_type bUnk)
 {
-    WeaponCheckTable* pFree = NULL;
+    WeaponCheckTable* pFree = nullptr;
     WeaponCheckTable* pTable = &field_27C_weapon_check_table[0];
 
     for (u8 i = 0; i < 15; pTable++, i++)
@@ -852,7 +852,7 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
 MATCH_FUNC(0x512ce0)
 ScriptManager_C1EA8::ScriptManager_C1EA8()
 {
-    field_13350_pStringTbl = 0;
+    field_13350_pStringTbl = nullptr;
     if (!bSkip_mission_67D4E5)
     {
         memset(field_334C_script_data, 0, sizeof(field_334C_script_data));
@@ -886,7 +886,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     memset(field_C1D34_mission_start_cmd, 0, sizeof(field_C1D34_mission_start_cmd));
     memset(field_C1D72_mission_base_ptr_idx, 0, sizeof(field_C1D72_mission_base_ptr_idx));
     memset(field_C1DB0_mission_script_data_len, 0, sizeof(field_C1DB0_mission_script_data_len));
-    field_344_mission_flag = 0;
+    field_344_mission_flag = nullptr;
     field_2F4_bPreloadMissionScripts = 1;
     field_C1E2C_bLoadedFromSave = 0;
     field_310_finish_score = 0;
@@ -895,16 +895,16 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     field_31C_gang_1_missions_total = 0;
     field_320_gang_2_missions_total = 0;
     field_324_gang_3_missions_total = 0;
-    field_328_passed_flag = 0;
-    field_32C_1_passed_flag = 0;
-    field_330_2_passed_flag = 0;
-    field_334_3_passed_flag = 0;
-    field_338_secrets_passed = 0;
-    field_33C_secrets_failed = 0;
-    field_340_car_list = 0;
-    field_348_gang_1_mission_flag = 0;
-    field_34C_gang_2_mission_flag = 0;
-    field_350_gang_3_mission_flag = 0;
+    field_328_passed_flag = nullptr;
+    field_32C_1_passed_flag = nullptr;
+    field_330_2_passed_flag = nullptr;
+    field_334_3_passed_flag = nullptr;
+    field_338_secrets_passed = nullptr;
+    field_33C_secrets_failed = nullptr;
+    field_340_car_list = nullptr;
+    field_348_gang_1_mission_flag = nullptr;
+    field_34C_gang_2_mission_flag = nullptr;
+    field_350_gang_3_mission_flag = nullptr;
     field_354_next_gang_idx = 0;
     field_C1E70_wanted_car_model = 87;
     field_356_gang_1_death_base = 0;
@@ -925,7 +925,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     memset(field_C1E2F_saved_gang_respect, 0, sizeof(field_C1E2F_saved_gang_respect));
     memset(field_C1E74_basic_kf, 0, sizeof(field_C1E74_basic_kf));
 
-    gStoredCar_6F7560 = NULL;
+    gStoredCar_6F7560 = nullptr;
     gStoredCarId_6F78B4 = 0;
 }
 
@@ -941,13 +941,13 @@ ScriptManager_C1EA8::~ScriptManager_C1EA8()
     {
         memset(field_13350_pStringTbl->field_4, 0, sizeof(field_13350_pStringTbl->field_4));
         free(field_13350_pStringTbl);
-        field_13350_pStringTbl = NULL;
+        field_13350_pStringTbl = nullptr;
     }
 
     if (field_1334C_strings)
     {
         free(field_1334C_strings);
-        field_1334C_strings = NULL;
+        field_1334C_strings = nullptr;
     }
 
     memset(&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
@@ -957,16 +957,16 @@ ScriptManager_C1EA8::~ScriptManager_C1EA8()
         GTA2_DELETE_AND_NULL(gMiss2_25C_6F805C);
     }
 
-    field_328_passed_flag = NULL;
-    field_32C_1_passed_flag = NULL;
-    field_330_2_passed_flag = NULL;
-    field_334_3_passed_flag = NULL;
-    field_340_car_list = NULL;
-    field_338_secrets_passed = NULL;
-    field_33C_secrets_failed = NULL;
-    field_348_gang_1_mission_flag = NULL;
-    field_34C_gang_2_mission_flag = NULL;
-    field_350_gang_3_mission_flag = NULL;
+    field_328_passed_flag = nullptr;
+    field_32C_1_passed_flag = nullptr;
+    field_330_2_passed_flag = nullptr;
+    field_334_3_passed_flag = nullptr;
+    field_340_car_list = nullptr;
+    field_338_secrets_passed = nullptr;
+    field_33C_secrets_failed = nullptr;
+    field_348_gang_1_mission_flag = nullptr;
+    field_34C_gang_2_mission_flag = nullptr;
+    field_350_gang_3_mission_flag = nullptr;
     gStoredCarId_6F78B4 = 0;
-    gStoredCar_6F7560 = NULL;
+    gStoredCar_6F7560 = nullptr;
 }

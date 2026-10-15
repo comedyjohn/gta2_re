@@ -185,7 +185,7 @@ void Game_0x40::LoadGameFiles_4B8C40()
 
     gCarManager_6C_677930->DistributeCarsByRating_444980();
 
-    if (gKanjiFont_6F5168 != NULL)
+    if (gKanjiFont_6F5168 != nullptr)
     {
         gKanjiFont_6F5168->InitGlyphCaches_4D2B40();
     }
@@ -690,7 +690,7 @@ Player* Game_0x40::GetFirstPlayerWithoutPed_4B9750()
             return field_4_players[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4B9790)
@@ -855,7 +855,7 @@ Camera_0xBC* Game_0x40::IteratePlayerCamera_4B9BC0()
             return &field_4_players[field_21_camera_iter_idx]->field_90_game_camera;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4B9C10)
@@ -886,7 +886,7 @@ Camera_0xBC* Game_0x40::IterateNextPlayerCamera_4B9C50()
                 return &field_4_players[field_21_camera_iter_idx]->field_90_game_camera;
             }
         }
-        return 0;
+        return nullptr;
     }
     else
     {
@@ -905,7 +905,7 @@ Player* Game_0x40::IterateFirstPlayer_4B9CD0()
             return field_4_players[field_20_player_iter_idx];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4B9D10)
@@ -918,7 +918,7 @@ Player* Game_0x40::IterateNextPlayer_4B9D10()
             return field_4_players[field_20_player_iter_idx];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4B9D60)
@@ -955,7 +955,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
 
     for (s32 ii = 0; ii < GTA2_COUNTOF(field_4_players); ii++)
     {
-        field_4_players[ii] = 0;
+        field_4_players[ii] = nullptr;
     }
 
     field_23_num_players = max_players;
@@ -1367,6 +1367,6 @@ Game_0x40::~Game_0x40()
         GTA2_DELETE_AND_NULL(gKanjiFont_6F5168);
     }
 
-    field_1C_draw_player = 0;
-    field_38_local_player = 0;
+    field_1C_draw_player = nullptr;
+    field_38_local_player = nullptr;
 }

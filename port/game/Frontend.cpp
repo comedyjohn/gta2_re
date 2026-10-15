@@ -84,7 +84,7 @@ MATCH_FUNC(0x4AE010)
 LPCSTR __stdcall FreeLoader::GetRegDword_4AE010(HKEY hKey, LPCSTR lpValueName, LPCSTR default_value)
 {
     DWORD Type = 4;
-    if (!RegQueryValueExA(hKey, lpValueName, 0, &Type, (LPBYTE)&lpValueName, &Type) == 0)
+    if (!RegQueryValueExA(hKey, lpValueName, nullptr, &Type, (LPBYTE)&lpValueName, &Type) == 0)
     {
         return default_value;
     }
@@ -113,7 +113,7 @@ void __cdecl FreeLoader::MessageBox_4AE170(UINT uType, LPCSTR lpCaption, LPCSTR 
     wvsprintfA(Buffer, lpFormat, args);
     lstrcatA(Buffer, "\r\n");
     OutputDebugStringA(Buffer);
-    MessageBoxA(0, Buffer, lpCaption, uType);
+    MessageBoxA(nullptr, Buffer, lpCaption, uType);
 }
 
 MATCH_FUNC(0x4AE1F0)
@@ -125,7 +125,7 @@ EXPORT char_type __stdcall FreeLoader::CheckCityInstalled_4AE1F0(u8 city_idx)
         PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, 0);
         tagMSG Msg;
 
-        while (PeekMessageA(&Msg, 0, 0, 0, 1u))
+        while (PeekMessageA(&Msg, nullptr, 0, 0, 1u))
         {
             TranslateMessage(&Msg);
             DispatchMessageA(&Msg);
@@ -134,7 +134,7 @@ EXPORT char_type __stdcall FreeLoader::CheckCityInstalled_4AE1F0(u8 city_idx)
         HANDLE hMutex = OpenMutexA(0x1F0001u, 0, "WEBL_COOP_MUTEX");
         if (!hMutex)
         {
-            ShellExecuteA(0, 0, "WebLaunch.exe", 0, gWorkingDir_707F64, 1);
+            ShellExecuteA(nullptr, nullptr, "WebLaunch.exe", nullptr, gWorkingDir_707F64, 1);
         }
         else
         {
@@ -240,30 +240,30 @@ DIOBJECTDATAFORMAT gInputDeviceObjectDataFormats_5EA110[44] = {{&GUID_XAxis, 0u,
                                       {&GUID_Slider, 24u, 2164260611u, 256u}, {&GUID_Slider, 28u, 2164260611u, 256u},
                                       {&GUID_POV, 32u, 2164260624u, 0u},      {&GUID_POV, 36u, 2164260624u, 0u},
                                       {&GUID_POV, 40u, 2164260624u, 0u},      {&GUID_POV, 44u, 2164260624u, 0u},
-                                      {NULL, 48u, 2164260620u, 0u},           {NULL, 49u, 2164260620u, 0u},
-                                      {NULL, 50u, 2164260620u, 0u},           {NULL, 51u, 2164260620u, 0u},
-                                      {NULL, 52u, 2164260620u, 0u},           {NULL, 53u, 2164260620u, 0u},
-                                      {NULL, 54u, 2164260620u, 0u},           {NULL, 55u, 2164260620u, 0u},
-                                      {NULL, 56u, 2164260620u, 0u},           {NULL, 57u, 2164260620u, 0u},
-                                      {NULL, 58u, 2164260620u, 0u},           {NULL, 59u, 2164260620u, 0u},
-                                      {NULL, 60u, 2164260620u, 0u},           {NULL, 61u, 2164260620u, 0u},
-                                      {NULL, 62u, 2164260620u, 0u},           {NULL, 63u, 2164260620u, 0u},
-                                      {NULL, 64u, 2164260620u, 0u},           {NULL, 65u, 2164260620u, 0u},
-                                      {NULL, 66u, 2164260620u, 0u},           {NULL, 67u, 2164260620u, 0u},
-                                      {NULL, 68u, 2164260620u, 0u},           {NULL, 69u, 2164260620u, 0u},
-                                      {NULL, 70u, 2164260620u, 0u},           {NULL, 71u, 2164260620u, 0u},
-                                      {NULL, 72u, 2164260620u, 0u},           {NULL, 73u, 2164260620u, 0u},
-                                      {NULL, 74u, 2164260620u, 0u},           {NULL, 75u, 2164260620u, 0u},
-                                      {NULL, 76u, 2164260620u, 0u},           {NULL, 77u, 2164260620u, 0u},
-                                      {NULL, 78u, 2164260620u, 0u},           {NULL, 79u, 2164260620u, 0u}};
+                                      {nullptr, 48u, 2164260620u, 0u},           {nullptr, 49u, 2164260620u, 0u},
+                                      {nullptr, 50u, 2164260620u, 0u},           {nullptr, 51u, 2164260620u, 0u},
+                                      {nullptr, 52u, 2164260620u, 0u},           {nullptr, 53u, 2164260620u, 0u},
+                                      {nullptr, 54u, 2164260620u, 0u},           {nullptr, 55u, 2164260620u, 0u},
+                                      {nullptr, 56u, 2164260620u, 0u},           {nullptr, 57u, 2164260620u, 0u},
+                                      {nullptr, 58u, 2164260620u, 0u},           {nullptr, 59u, 2164260620u, 0u},
+                                      {nullptr, 60u, 2164260620u, 0u},           {nullptr, 61u, 2164260620u, 0u},
+                                      {nullptr, 62u, 2164260620u, 0u},           {nullptr, 63u, 2164260620u, 0u},
+                                      {nullptr, 64u, 2164260620u, 0u},           {nullptr, 65u, 2164260620u, 0u},
+                                      {nullptr, 66u, 2164260620u, 0u},           {nullptr, 67u, 2164260620u, 0u},
+                                      {nullptr, 68u, 2164260620u, 0u},           {nullptr, 69u, 2164260620u, 0u},
+                                      {nullptr, 70u, 2164260620u, 0u},           {nullptr, 71u, 2164260620u, 0u},
+                                      {nullptr, 72u, 2164260620u, 0u},           {nullptr, 73u, 2164260620u, 0u},
+                                      {nullptr, 74u, 2164260620u, 0u},           {nullptr, 75u, 2164260620u, 0u},
+                                      {nullptr, 76u, 2164260620u, 0u},           {nullptr, 77u, 2164260620u, 0u},
+                                      {nullptr, 78u, 2164260620u, 0u},           {nullptr, 79u, 2164260620u, 0u}};
 
 DIOBJECTDATAFORMAT gMouseObjectDataFormats_5EA3D0[7] = {{&GUID_XAxis, 0u, 16776963u, 0u},
                                      {&GUID_YAxis, 4u, 16776963u, 0u},
                                      {&GUID_ZAxis, 8u, 2164260611u, 0u},
-                                     {NULL, 12u, 16776972u, 0u},
-                                     {NULL, 13u, 16776972u, 0u},
-                                     {NULL, 14u, 2164260620u, 0u},
-                                     {NULL, 15u, 2164260620u, 0u}};
+                                     {nullptr, 12u, 16776972u, 0u},
+                                     {nullptr, 13u, 16776972u, 0u},
+                                     {nullptr, 14u, 2164260620u, 0u},
+                                     {nullptr, 15u, 2164260620u, 0u}};
 
 DIDATAFORMAT gKeyboardDataFormat_601A54 = {24u, 16u, DIDF_RELAXIS, 256u, 256u, gKeyboardObjectDataFormats_5E9110};
 DIDATAFORMAT gInputDeviceFormat_601A6C = {24u, 16u, DIDF_ABSAXIS, 80u, 44u, gInputDeviceObjectDataFormats_5EA110};
@@ -2314,7 +2314,7 @@ static __forceinline bool CheckCdFile()
                     {
                         if (!crt::fclose(hFile))
                         {
-                            bool ok = crt::fopen(path, "wb") == 0;
+                            bool ok = crt::fopen(path, "wb") == nullptr;
                             return ok;
                         }
                     }
@@ -3422,7 +3422,7 @@ void Frontend::FreeKeyBoardDevice_4AFD00()
     {
         field_4_pKeyboardDevice->Unacquire();
         field_4_pKeyboardDevice->Release();
-        field_4_pKeyboardDevice = 0;
+        field_4_pKeyboardDevice = nullptr;
     }
 }
 
@@ -3457,9 +3457,9 @@ MATCH_FUNC(0x4AFBE0)
 void Frontend::InitKeyBoardDevice_4AFBE0()
 {
     field_0_pDInput = gpDInput_67B804;
-    field_4_pKeyboardDevice = 0;
+    field_4_pKeyboardDevice = nullptr;
 
-    if (field_0_pDInput->CreateDevice(GUID_SysKeyboard, &field_4_pKeyboardDevice, 0) < 0)
+    if (field_0_pDInput->CreateDevice(GUID_SysKeyboard, &field_4_pKeyboardDevice, nullptr) < 0)
     {
         FatalError_4A38C0(Gta2Error::DirectInputCreateFail, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 2469);
     }

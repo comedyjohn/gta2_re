@@ -285,7 +285,7 @@ class Sprite
     // copies at 0x67791C / 0x6777CC). This inline takes them as parameters for the TUs that inline it.
     inline Sprite(const Ang16& kZeroAng, const Fix16& kZero) : field_0_rotation(kZeroAng)
     {
-        field_4_pVisualShape = NULL;
+        field_4_pVisualShape = nullptr;
         field_14_xy.x = kZero;
         field_14_xy.y = kZero;
         field_1C_zpos = kZero;
@@ -298,9 +298,9 @@ class Sprite
         field_34_palette_type = 0;
         field_38_zoom = 0;
         field_39_z_col = -1;
-        field_8_car_bc_ptr = NULL;
-        mpNext = NULL;
-        field_10_sound = NULL;
+        field_8_car_bc_ptr = nullptr;
+        mpNext = nullptr;
+        field_10_sound = nullptr;
     }
 
     inline bool TypeIs_446940(s32 a2)
@@ -345,7 +345,7 @@ class Sprite
         }
         else
         {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -357,7 +357,7 @@ class Sprite
         }
         else
         {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -389,7 +389,7 @@ class Sprite
         }
         else
         {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -799,7 +799,7 @@ class SpritePool
     // 9.6f 0x48A8D0
     inline bool has_free_48A8D0()
     {
-        return field_0_pool.field_0_pHead != NULL;
+        return field_0_pool.field_0_pHead != nullptr;
     }
 
     PoolBasic<Sprite, 5031> field_0_pool;

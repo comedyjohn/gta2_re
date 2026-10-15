@@ -3916,7 +3916,7 @@ void CarPhysics_B0::PoolAllocate()
     field_30_cm1.reset();
     field_58_theta = kAngZero_6FE3C0;
     field_38_cp1.reset();
-    field_5C_pCar = NULL;
+    field_5C_pCar = nullptr;
     Init_5637A0();
     field_0_vel_read_only.reset();
 }
@@ -3939,6 +3939,6 @@ void CarPhysics_B0::SetCar_5638C0(Car_BC* pCar)
 MATCH_FUNC(0x563900)
 CarPhysics_B0::CarPhysics_B0()
 {
-    mpNext = NULL;
+    mpNext = nullptr;
     PoolAllocate();
 }

@@ -273,7 +273,7 @@ class gtx_0x106C
     // inline
     bool has_tiles_4C2EE0() const
     {
-        return field_3C_tiles != 0;
+        return field_3C_tiles != nullptr;
     }
 
     // inline
@@ -409,7 +409,7 @@ class gtx_0x106C
     // inlined v9.6f, 0x420200
     bool does_car_exist(u8 iParm1) const
     {
-        return field_5C_cari->field_0_car_info[iParm1] != NULL;
+        return field_5C_cari->field_0_car_info[iParm1] != nullptr;
     }
 
     inline bool IsElectrifiedFloorType_491F80(u16 tile_idx)

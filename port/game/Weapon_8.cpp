@@ -60,7 +60,7 @@ Weapon_30* Weapon_8::find_5E3D20(Car_BC* pCar, s32 weapon_kind)
     Weapon_30* result = gWeapon_30_Pool_707014->get_next_4CC9B0();
     if (!result)
     {
-        return 0;
+        return nullptr;
     }
 
     // TODO: Can probably invert this
@@ -69,7 +69,7 @@ Weapon_30* Weapon_8::find_5E3D20(Car_BC* pCar, s32 weapon_kind)
         result = result->mpNext;
         if (!result)
         {
-            return 0;
+            return nullptr;
         }
     }
     return result;

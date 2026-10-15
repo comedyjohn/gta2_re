@@ -39,7 +39,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFlyCarMinVelocity_7028BC, Fix16(0x666, 0), 0x7028BC);
 MATCH_FUNC(0x591bd0)
 PlayerScoreTracker_36C::PlayerScoreTracker_36C()
 {
-    field_368_player = NULL;
+    field_368_player = nullptr;
 
     field_74_car_kill_combo = 1;
     field_75_score_mult = 1;
@@ -177,8 +177,8 @@ void PlayerScoreTracker_36C::Service_591C70()
     Car_BC* pReversingCar;
     if (player_ped->get_wanted_points_433DC0() > 3000 && (player_ped->has_car_403B80()) &&
         player_ped->not_enter_car_as_passenger_4A5040() &&
-        (pReversingCar = player_ped->get_car_416B60()) != 0 && // null check optimized away ??
-        (pReversingCar->field_58_physics) != 0 &&
+        (pReversingCar = player_ped->get_car_416B60()) != nullptr && // null check optimized away ??
+        (pReversingCar->field_58_physics) != nullptr &&
 
         pReversingCar->field_58_physics->is_backward_gas_on_411810())
     {
@@ -201,7 +201,7 @@ void PlayerScoreTracker_36C::Service_591C70()
     }
 
     Car_BC* pFlyingCar = player_ped->get_car_416B60();
-    if (pFlyingCar && player_ped->not_enter_car_as_passenger_4A5040() && (pFlyingCar->field_58_physics) != 0 &&
+    if (pFlyingCar && player_ped->not_enter_car_as_passenger_4A5040() && (pFlyingCar->field_58_physics) != nullptr &&
         pFlyingCar->field_58_physics->IsInAir_55A0B0() // TODO: Wrong stack
         && pFlyingCar->GetVelocity_43A4C0() > kFlyCarMinVelocity_7028BC)
     {
@@ -476,7 +476,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
 
     u32 score = 0;
     bool bOtherGang = false;
-    bool bHasGameObject = pVictim->field_168_game_object != 0;
+    bool bHasGameObject = pVictim->field_168_game_object != nullptr;
     bool bCop;
     bool bSwat;
     bool bFbi;

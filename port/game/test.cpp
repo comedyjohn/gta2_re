@@ -22,22 +22,22 @@ extern void EnableBoot2MapDebugOptions();
 
 void test_file()
 {
-    File::GetFileSize_4A6B10(0);
+    File::GetFileSize_4A6B10(nullptr);
     File::IsCdRomDrive_4A6BB0(0);
-    File::ReadFileToBuffer_4A6C80(0, 0);
-    File::Read_4A6D90(0, 0, 0, 0);
-    File::WriteBufferToFile_4A6E80(0, 0, 0);
-    File::Write_4A6F30(0, 0, 0, 0);
-    File::AppendBufferToFile_4A6F50(0, 0, 0);
-    File::CreateFile_4A7000(0);
+    File::ReadFileToBuffer_4A6C80(nullptr, nullptr);
+    File::Read_4A6D90(nullptr, 0, 0, nullptr);
+    File::WriteBufferToFile_4A6E80(nullptr, nullptr, nullptr);
+    File::Write_4A6F30(nullptr, 0, 0, nullptr);
+    File::AppendBufferToFile_4A6F50(nullptr, nullptr, nullptr);
+    File::CreateFile_4A7000(nullptr);
     File::Global_Open_4A7060("lol.txt");
     File::Global_Close_4A70C0();
     File::Global_Close_UnChecked_4A7110();
-    File::Global_Seek_4A7140(0);
+    File::Global_Seek_4A7140(nullptr);
     File::File_Error_4A7190(0, 0, 0);
-    File::Global_Read_4A71C0(0, 0);
-    File::GetRemainderSize_4A7250(0, 0);
-    File::SkipWhitespace_4A7340(0);
+    File::Global_Read_4A71C0(nullptr, 0);
+    File::GetRemainderSize_4A7250(nullptr, nullptr);
+    File::SkipWhitespace_4A7340(nullptr);
 }
 
 void test_gtx_0x106C()
@@ -53,9 +53,9 @@ void test_gtx_0x106C()
     c.GetPalData_5AA6A0(0);
     c.get_phys_pal_5AA6F0(0);
     c.GetSpriteIdxFromFont_5AA710(0, 0);
-    c.GetFontWidth_5AA760(0, 0);
-    c.GetSpaceCharWidth_5AA7B0(0);
-    c.GetLineSpacing_5AA800(0);
+    c.GetFontWidth_5AA760(nullptr, nullptr);
+    c.GetSpaceCharWidth_5AA7B0(nullptr);
+    c.GetLineSpacing_5AA800(nullptr);
     c.IsTileRemapped_5AA850(0);
     c.GetTile_5AA870(0);
     c.GetFirstFreeReservedTileIdx_5AA890();
@@ -81,22 +81,22 @@ void test_gtx_0x106C()
     c.load_sprite_index_5AAF80(0);
     c.InitFontTypes_5AAFE0(0);
     c.load_font_base_5AB0F0(0);
-    c.ConvertToVirtualOffsets_5AB1A0(0, 0);
-    c.ConvertToVirtualOffsets_5AB1C0(0, 0);
+    c.ConvertToVirtualOffsets_5AB1A0(nullptr, 0);
+    c.ConvertToVirtualOffsets_5AB1C0(nullptr, 0);
     c.load_sprite_base_5AB210(0);
     c.load_palete_base_5AB2C0(0);
     c.IsCarModelInRecycleList_5AB380(0);
     c.load_car_recycling_info_5AB3C0(0);
     c.read_spec_5AB3F0(0);
     c.load_spec_5AB450();
-    c.LoadChunk_5AB4B0(0, 0);
+    c.LoadChunk_5AB4B0(nullptr, 0);
     c.SetDataPtrs_5AB720();
-    c.LoadSty_5AB750(0);
+    c.LoadSty_5AB750(nullptr);
 }
 
 void test_registry()
 {
-    gRegistry_6FF968.Open_Sound_Root_586A00(NULL);
+    gRegistry_6FF968.Open_Sound_Root_586A00(nullptr);
     gRegistry_6FF968.Get_Sound_Settting_586A70("lol");
     gRegistry_6FF968.Set_Sound_Setting_586AE0("lol", 5);
 }
@@ -137,7 +137,7 @@ void test_FpsCounter_54()
 
 void test_wizardly_margulis()
 {
-    gSampManager_6FFF00.SoundInit_58D6C0(0);
+    gSampManager_6FFF00.SoundInit_58D6C0(nullptr);
     gSampManager_6FFF00.AllocSamples_58D9F0(0);
 }
 

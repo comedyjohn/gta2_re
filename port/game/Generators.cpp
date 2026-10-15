@@ -51,7 +51,7 @@ EXPORT void Generator_2C::SpawnObject_4C1B10()
             }
             else
             {
-                field_24_obj = 0;
+                field_24_obj = nullptr;
                 field_28_id = 0;
                 field_18_cycle = next_cycle_4C1AB0();
             }
@@ -136,7 +136,7 @@ void Generator_2C::Init_4C1C70(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 generat
     field_20 = 1;
     field_1E_kill_timer = 0;
     field_1C_ammo = 0;
-    field_24_obj = NULL;
+    field_24_obj = nullptr;
     field_28_id = 0;
     field_21 = 1;
 }

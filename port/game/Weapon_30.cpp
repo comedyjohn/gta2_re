@@ -84,11 +84,11 @@ MATCH_FUNC(0x5DCD10)
 Weapon_30::Weapon_30()
 {
     field_0_ammo = 0;
-    field_24_pPed = 0;
-    field_14_car = 0;
+    field_24_pPed = nullptr;
+    field_14_car = nullptr;
     field_2_reload_speed = 0;
     field_4_bTargetHit = 0;
-    mpNext = 0;
+    mpNext = nullptr;
     field_1C_idx = 0;
     field_10 = 0;
     field_8 = 0;
@@ -96,28 +96,28 @@ Weapon_30::Weapon_30()
     field_20 = 0;
     field_21 = 0;
     field_2C_shot_fired = 0;
-    field_28_pSound = 0;
+    field_28_pSound = nullptr;
 }
 
 MATCH_FUNC(0x5DCD50)
 Weapon_30::~Weapon_30()
 {
-    field_24_pPed = 0;
-    mpNext = 0;
-    field_14_car = 0;
+    field_24_pPed = nullptr;
+    mpNext = nullptr;
+    field_14_car = nullptr;
     field_8 = 0;
     if (field_28_pSound)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_28_pSound);
-        field_28_pSound = 0;
+        field_28_pSound = nullptr;
     }
 }
 
 MATCH_FUNC(0x5DCD90)
 void Weapon_30::init_5DCD90()
 {
-    field_24_pPed = 0;
-    field_14_car = 0;
+    field_24_pPed = nullptr;
+    field_14_car = nullptr;
     field_1C_idx = 0;
     field_0_ammo = 0;
     field_2_reload_speed = 0;
@@ -143,7 +143,7 @@ void Weapon_30::PoolDeallocate()
     if (field_28_pSound)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_28_pSound);
-        field_28_pSound = 0;
+        field_28_pSound = nullptr;
     }
 }
 
@@ -206,7 +206,7 @@ bool Weapon_30::sub_5DCEF0()
             result = 1;
             break;
         default:
-            result = field_24_pPed->field_16C_car == 0;
+            result = field_24_pPed->field_16C_car == nullptr;
             break;
     }
     return result;
@@ -257,7 +257,7 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
     if (p5CSprite->CheckSpriteMovementRegion_5A2500())
     {
         pNewBullet->RequestRemoval_5290A0();
-        pNewBullet = NULL;
+        pNewBullet = nullptr;
         bAllowFlameSegment_706D60 = 0;
     }
     else
@@ -777,7 +777,7 @@ void Weapon_30::sub_5DE4F0()
 
             if (dist > dword_706EC4)
             {
-                field_24_pPed->field_198_hit_target_ped = NULL;
+                field_24_pPed->field_198_hit_target_ped = nullptr;
                 return;
             }
 
@@ -821,7 +821,7 @@ void Weapon_30::sub_5DE4F0()
                 {
                     case sprite_types_enum::car_2:
                         field_24_pPed->field_170_selected_weapon->SetTargetHit_433810(1);
-                        field_24_pPed->field_198_hit_target_ped = 0;
+                        field_24_pPed->field_198_hit_target_ped = nullptr;
                         return;
 
                     case sprite_types_enum::ped_3:
@@ -1137,14 +1137,14 @@ void __stdcall sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped*
                 }
                 else if (a5->field_198_hit_target_ped)
                 {
-                    a5->field_198_hit_target_ped = 0;
+                    a5->field_198_hit_target_ped = nullptr;
                 }
             }
             pHit = hits.TakeClosestSprite_5A6EA0(xpos, ypos);
         }
     }
 
-    a5->field_198_hit_target_ped = 0;
+    a5->field_198_hit_target_ped = nullptr;
     if (a5->field_170_selected_weapon)
     {
         a5->field_170_selected_weapon->SetTargetHit_433810(1);
@@ -1367,7 +1367,7 @@ void Weapon_30::electro_batton_5E0740()
             s32 target_state = field_24_pPed->field_198_hit_target_ped->field_278_ped_state_1;
             if (target_state >= 8 && target_state <= 9)
             {
-                field_24_pPed->field_198_hit_target_ped = 0;
+                field_24_pPed->field_198_hit_target_ped = nullptr;
                 return;
             }
         }
@@ -1375,7 +1375,7 @@ void Weapon_30::electro_batton_5E0740()
     }
     else
     {
-        field_24_pPed->field_198_hit_target_ped = 0;
+        field_24_pPed->field_198_hit_target_ped = nullptr;
     }
 }
 
@@ -1912,7 +1912,7 @@ void Weapon_30::pull_trigger_5E3670()
             break;
 
         case weapon_type::molotov:
-            if (field_24_pPed && (field_24_pPed->field_15C_player) != 0)
+            if (field_24_pPed && (field_24_pPed->field_15C_player) != nullptr)
             {
                 field_24_pPed->field_15C_player->IncrementThrowCharge_4CCAB0();
             }
@@ -1923,7 +1923,7 @@ void Weapon_30::pull_trigger_5E3670()
             break;
 
         case weapon_type::grenade:
-            if (field_24_pPed && (field_24_pPed->field_15C_player) != 0)
+            if (field_24_pPed && (field_24_pPed->field_15C_player) != nullptr)
             {
                 Player* p = field_24_pPed->field_15C_player;
                 p->IncrementThrowCharge_4CCAB0();

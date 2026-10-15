@@ -27,7 +27,7 @@ void RemapTextureSet_14::Alloc_5B8E90(s16 sprite_count, s16 remaps_per_sprite, s
 
             for (u32 i = 0; i < field_4_texture_count; i++)
             {
-                field_0_pTextures[i] = 0;
+                field_0_pTextures[i] = nullptr;
             }
         }
     }
@@ -96,7 +96,7 @@ RemapTextureSet_14::~RemapTextureSet_14()
         }
 
         crt::free(field_0_pTextures);
-        field_0_pTextures = 0;
+        field_0_pTextures = nullptr;
     }
 }
 
@@ -248,7 +248,7 @@ void TextureCache_15D8::LoadStyleTextures_5B9350()
 
     LoadCarDamageTextures_5B9180();
 
-    field_1544_pShared_texture = pgbh_RegisterTexture(128, 128, 0, 0, 0);
+    field_1544_pShared_texture = pgbh_RegisterTexture(128, 128, nullptr, 0, 0);
 }
 
 MATCH_FUNC(0x5B94F0)
@@ -280,7 +280,7 @@ STexture* TextureCache_15D8::GetSpriteTexture_5B94F0(s32 sprite_type, u16 sprite
             result = field_15C0_user_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
         default:
-            result = 0;
+            result = nullptr;
             break;
     }
     return result;
@@ -358,14 +358,14 @@ TextureCache_15D8::TextureCache_15D8()
 
     for (i = 0; i < GTA2_COUNTOF(field_0_tile_textures); i++)
     {
-        field_0_tile_textures[i] = 0;
+        field_0_tile_textures[i] = nullptr;
     }
 
     for (i = 0; i < GTA2_COUNTOF(field_1004_car_damage_textures); i++)
     {
-        field_1004_car_damage_textures[i] = 0;
+        field_1004_car_damage_textures[i] = nullptr;
     }
-    field_1544_pShared_texture = 0;
+    field_1544_pShared_texture = nullptr;
 }
 
 MATCH_FUNC(0x5B9900)
@@ -378,7 +378,7 @@ TextureCache_15D8::~TextureCache_15D8()
             if (field_0_tile_textures[i])
             {
                 pgbh_FreeTexture(field_0_tile_textures[i]);
-                field_0_tile_textures[i] = 0;
+                field_0_tile_textures[i] = nullptr;
             }
         }
     }
@@ -390,7 +390,7 @@ TextureCache_15D8::~TextureCache_15D8()
             if (field_1004_car_damage_textures[i])
             {
                 pgbh_FreeTexture(field_1004_car_damage_textures[i]);
-                field_1004_car_damage_textures[i] = 0;
+                field_1004_car_damage_textures[i] = nullptr;
             }
         }
     }
@@ -400,14 +400,14 @@ TextureCache_15D8::~TextureCache_15D8()
         if (field_10C4_digit_textures[i].field_4_pTexture)
         {
             pgbh_FreeTexture(field_10C4_digit_textures[i].field_4_pTexture);
-            field_10C4_digit_textures[i].field_4_pTexture = 0;
+            field_10C4_digit_textures[i].field_4_pTexture = nullptr;
         }
     }
 
     if (field_1544_pShared_texture)
     {
         pgbh_FreeTexture(field_1544_pShared_texture);
-        field_1544_pShared_texture = 0;
+        field_1544_pShared_texture = nullptr;
     }
 
     FreePals_5B9140();

@@ -357,7 +357,7 @@ EXPORT void __stdcall SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpo
                         break;
                     case cop_level_enum::none_0:
                     case cop_level_enum::police_1:
-                        pPed->field_170_selected_weapon = 0;
+                        pPed->field_170_selected_weapon = nullptr;
                         pPed->GiveWeapon_46F650(weapon_type::pistol);
                         pPed->set_health_4039A0(50);
                         pPed->field_1F0_max_speed = (kFpOneSixteenth_678448 * kFpPoint8_6784A0);
@@ -683,7 +683,7 @@ void PedManager::PedsService_4703F0()
 MATCH_FUNC(0x470650)
 PedManager::PedManager()
 {
-    field_8 = 0;
+    field_8 = nullptr;
     if (!gPedPool_6787B8)
     {
         gPedPool_6787B8 = new PedPool();
@@ -725,7 +725,7 @@ PedManager::PedManager()
     field_7_make_all_muggers = false;
 
     gPedId_61A89C = 7;
-    gLastProcessedPed_6787C0 = 0;
+    gLastProcessedPed_6787C0 = nullptr;
     gSpawnCounter_6787C6 = 0;
     gSpawnSide_6787C8 = 0;
     gSpawnIndex_6787C9 = 0;
@@ -752,7 +752,7 @@ PedManager::PedManager()
     byte_6787D9 = 0;
     bHaveThreateningPeds_6787DA = 0;
     gDistanceToTarget_678750 = kFpZero_678660;
-    gSearchingPed_6787DC = 0;
+    gSearchingPed_6787DC = nullptr;
     cameraFacingAng_678760 = gDummyPedAng_6787A8;
     byte_61A8A3 = 1;
     byte_61A8A4 = 1;
@@ -791,7 +791,7 @@ PedManager::~PedManager()
     if (field_8)
     {
         gSpritePool_703818->remove(field_8);
-        field_8 = 0;
+        field_8 = nullptr;
     }
 }
 
@@ -802,7 +802,7 @@ Ped* PedManager::SpawnPedAt(Fix16 xpos, Fix16 ypos, Fix16 zpos, u8 remap, Ang16 
 
     if (!pPed->AllocCharB4_45C830(xpos, ypos, zpos))
     {
-        return 0;
+        return nullptr;
     }
     pPed->SetRotation_433C00(rotation);
     pPed->set_remap_433B90(remap);
@@ -823,7 +823,7 @@ Ped* PedManager::SpawnDriver_470B00(Car_BC* pCar)
     pNewPed->SetPedType_403920(ped_type::dummy_3);
     pNewPed->set_occupation_403970(ped_ocupation_enum::unknown_2); //unknown_2;
     pNewPed->field_16C_car = pCar;
-    pNewPed->field_168_game_object = 0;
+    pNewPed->field_168_game_object = nullptr;
     pNewPed->ChangeNextPedState1_45C500(ped_state_1::in_car_10);
     pNewPed->ChangeNextPedState2_45C540(ped_state_2::ped2_driving_10);
     pNewPed->set_enter_car_as_passenger_4039B0(0);
@@ -845,7 +845,7 @@ Ped* PedManager::SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang)
     pNewPed->SetPedType_403920(ped_type::dummy_with_occupation_6);
     pNewPed->set_occupation_403970(ped_ocupation_enum::gang_driver_42);
     pNewPed->field_16C_car = pCar;
-    pNewPed->field_168_game_object = 0;
+    pNewPed->field_168_game_object = nullptr;
     pNewPed->ChangeNextPedState1_45C500(ped_state_1::in_car_10);
     pNewPed->ChangeNextPedState2_45C540(ped_state_2::ped2_driving_10);
     pNewPed->set_enter_car_as_passenger_4039B0(0);
@@ -889,7 +889,7 @@ Ped* PedManager::CreateDummyDriver_470CC0(Car_BC* pCar)
     pNewPed->SetPedType_403920(ped_type::dummy_3);
     pNewPed->set_occupation_403970(ped_ocupation_enum::unknown_2); //unknown_2;
     pNewPed->field_16C_car = pCar;
-    pNewPed->field_168_game_object = 0;
+    pNewPed->field_168_game_object = nullptr;
     pNewPed->ChangeNextPedState1_45C500(ped_state_1::in_car_10);
     pNewPed->ChangeNextPedState2_45C540(ped_state_2::ped2_driving_10);
     pNewPed->set_target_car_door_403A70(0);
@@ -925,7 +925,7 @@ Ped* PedManager::SpawnRunAwayGuy_470D60()
 
     pPed->SetPedType_403920(ped_type::dummy_with_occupation_6);
     pPed->set_occupation_403970(ped_ocupation_enum::robbed_driver_10);
-    pPed->field_168_game_object = 0;
+    pPed->field_168_game_object = nullptr;
     pPed->ChangeNextPedState1_45C500(ped_state_1::in_car_10);
     pPed->ChangeNextPedState2_45C540(ped_state_2::ped2_driving_10);
     pPed->set_health_4039A0(100);
@@ -962,7 +962,7 @@ Ped* PedManager::SpawnTrainLeaver_470E30()
 
     pPed->SetPedType_403920(ped_type::special_ped_4);
     pPed->set_occupation_403970(ped_ocupation_enum::train_customer_9);
-    pPed->field_168_game_object = 0;
+    pPed->field_168_game_object = nullptr;
     pPed->ChangeNextPedState1_45C500(ped_state_1::in_car_10);
     pPed->ChangeNextPedState2_45C540(ped_state_2::ped2_driving_10);
     pPed->set_health_4039A0(50);
@@ -1026,7 +1026,7 @@ Ped* PedManager::PedById(s32 pedId)
             return pPedIter;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x471110)

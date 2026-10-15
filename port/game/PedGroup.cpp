@@ -46,11 +46,11 @@ void PedGroup::ClearGroupData_4C8E90()
     field_30_panicking = 0;
     field_36_count = 0;
     field_34_count = 0;
-    if (field_2C_ped_leader != NULL)
+    if (field_2C_ped_leader != nullptr)
     {
         field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
     }
-    field_2C_ped_leader = NULL;
+    field_2C_ped_leader = nullptr;
     field_0 = 1;
     field_1_wait_for_members = false;
     field_34_count = 0;
@@ -58,11 +58,11 @@ void PedGroup::ClearGroupData_4C8E90()
 
     for (int i = 0; i < 9; ++i)
     {
-        if (field_4_ped_list[i] != NULL)
+        if (field_4_ped_list[i] != nullptr)
         {
             field_4_ped_list[i]->ClearGroupAndGroupIdx_403A30();
         }
-        field_4_ped_list[i] = NULL;
+        field_4_ped_list[i] = nullptr;
     }
 }
 
@@ -73,14 +73,14 @@ void PedGroup::Reset_4C8EF0()
     field_38_group_type = 2;
     field_30_panicking = 0;
     field_36_count = 0;
-    field_2C_ped_leader = NULL;
+    field_2C_ped_leader = nullptr;
     field_0 = 1;
     field_1_wait_for_members = false;
     field_34_count = 0;
     field_35_unused = 0;
     for (s32 i = 0; i < 9; i++)
     {
-        field_4_ped_list[i] = 0;
+        field_4_ped_list[i] = nullptr;
     }
 }
 
@@ -127,33 +127,33 @@ MATCH_FUNC(0x4c9040)
 bool PedGroup::PurgeMembersInCars_4C9040()
 {
     field_36_count = field_34_count;
-    if (field_2C_ped_leader->field_16C_car != NULL)
+    if (field_2C_ped_leader->field_16C_car != nullptr)
     {
         field_2C_ped_leader->Kill_46F9D0();
-        field_2C_ped_leader = NULL;
+        field_2C_ped_leader = nullptr;
     }
 
     u8 ped_idx;
     for (ped_idx = 0; ped_idx < field_34_count; ped_idx++)
     {
-        if (field_4_ped_list[ped_idx]->field_16C_car != NULL)
+        if (field_4_ped_list[ped_idx]->field_16C_car != nullptr)
         {
             field_4_ped_list[ped_idx]->Kill_46F9D0();
-            field_4_ped_list[ped_idx] = NULL;
+            field_4_ped_list[ped_idx] = nullptr;
         }
     }
 
     // Compacting the ped_list
     for (ped_idx = 0; ped_idx < field_34_count; ped_idx++)
     {
-        if (field_4_ped_list[ped_idx] == NULL)
+        if (field_4_ped_list[ped_idx] == nullptr)
         {
             for (u8 i = ped_idx; i < field_34_count; i++)
             {
-                if (field_4_ped_list[i] != NULL)
+                if (field_4_ped_list[i] != nullptr)
                 {
                     field_4_ped_list[ped_idx] = field_4_ped_list[i];
-                    field_4_ped_list[i] = NULL;
+                    field_4_ped_list[i] = nullptr;
                     break;
                 }
             }
@@ -161,7 +161,7 @@ bool PedGroup::PurgeMembersInCars_4C9040()
     }
 
     ped_idx = 0;
-    while (field_4_ped_list[ped_idx] != NULL)
+    while (field_4_ped_list[ped_idx] != nullptr)
     {
         ped_idx++;
     }
@@ -176,14 +176,14 @@ bool PedGroup::PurgeMembersInCars_4C9040()
 MATCH_FUNC(0x4c9150)
 char_type PedGroup::AreAllMembersOffScreen_4C9150()
 {
-    if (field_2C_ped_leader->field_168_game_object == NULL || field_2C_ped_leader->GetOffscreenCounter_4039F0() < 0x28)
+    if (field_2C_ped_leader->field_168_game_object == nullptr || field_2C_ped_leader->GetOffscreenCounter_4039F0() < 0x28)
     {
         return false;
     }
 
     for (u8 i = 0; i < field_34_count; i++)
     {
-        if (field_4_ped_list[i]->field_168_game_object == NULL || field_4_ped_list[i]->GetOffscreenCounter_4039F0() < 0x28)
+        if (field_4_ped_list[i]->field_168_game_object == nullptr || field_4_ped_list[i]->GetOffscreenCounter_4039F0() < 0x28)
         {
             return false;
         }
@@ -206,7 +206,7 @@ void PedGroup::ResetMembersToFollowLeader_4C91B0()
 MATCH_FUNC(0x4c9210)
 bool PedGroup::IsLeaderInCar_4C9210()
 {
-    if (field_2C_ped_leader->field_16C_car != NULL)
+    if (field_2C_ped_leader->field_16C_car != nullptr)
     {
         return true;
     }
@@ -252,7 +252,7 @@ void PedGroup::DisbandGroup_4C92A0()
     }
 
     field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
-    if (field_4_ped_list[0] != NULL)
+    if (field_4_ped_list[0] != nullptr)
     {
         for (u8 ped_idx = 0; ped_idx < field_34_count; ped_idx++)
         {
@@ -300,7 +300,7 @@ void PedGroup::DestroyGroup_4C93A0()
     }
 
     field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
-    if (field_4_ped_list[0] != NULL)
+    if (field_4_ped_list[0] != nullptr)
     {
         for (u8 ped_idx = 0; ped_idx < field_34_count; ped_idx++)
         {
@@ -458,8 +458,8 @@ void PedGroup::PromoteMemberToLeader_4C9680(u8 idx)
         }
         else
         {
-            field_4_ped_list[idx]->field_164_ped_group = 0;
-            field_4_ped_list[idx] = 0;
+            field_4_ped_list[idx]->field_164_ped_group = nullptr;
+            field_4_ped_list[idx] = nullptr;
         }
         field_34_count--;
         field_2C_ped_leader->field_23C_group_idx = 99;
@@ -513,7 +513,7 @@ void PedGroup::RemovePed_4C9970(Ped* pPed)
                 }
                 else if (field_34_count > 0)
                 {
-                    field_4_ped_list[field_34_count] = 0;
+                    field_4_ped_list[field_34_count] = nullptr;
                 }
                 UpdateFormation_4CA4B0();
             }
@@ -536,7 +536,7 @@ void PedGroup::RemovePed_4C9970(Ped* pPed)
                 if (pPed->get_occupation_403980() != ped_ocupation_enum::paramedic_23)
                 {
                     field_4_ped_list[field_34_count - 1]->ClearGroupAndGroupIdx_403A30();
-                    field_4_ped_list[field_34_count - 1] = 0;
+                    field_4_ped_list[field_34_count - 1] = nullptr;
                     if (pPed->field_238_ped_type == ped_type::script_created_5)
                     {
                         pPed->field_21C_bf.bScheduledForRemoval = true;
@@ -692,7 +692,7 @@ Ped* PedGroup::sub_4C9ED0()
             return field_4_ped_list[i];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4c9f00)
@@ -1123,7 +1123,7 @@ bool PedGroup::IsAllMembersInSomeCar_4CAA20()
 {
     if (field_34_count == 0)
     {
-        return field_2C_ped_leader->field_16C_car != 0;
+        return field_2C_ped_leader->field_16C_car != nullptr;
     }
 
     for (u8 i = 0; i < field_34_count; i++)
@@ -1247,7 +1247,7 @@ Ped* PedGroup::FindNearestOtherMember_4CAE80(u8 idx)
             return field_4_ped_list[nearest_idx];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4cb080)
@@ -1275,7 +1275,7 @@ PedGroup* PedGroup::New_4CB0D0()
             return &pedGroups_67EF20[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4cb860)

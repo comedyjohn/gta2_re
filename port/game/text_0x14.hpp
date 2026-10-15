@@ -15,7 +15,7 @@ class text_tdat
   public:
     text_tdat() // inline 0x4C2420
     {
-        field_0_data = 0;
+        field_0_data = nullptr;
         field_4_len = 0;
     }
 
@@ -25,7 +25,7 @@ class text_tdat
         {
             delete[] field_0_data;
         }
-        field_0_data = 0;
+        field_0_data = nullptr;
     }
     BYTE* field_0_data;
     s32 field_4_len;
@@ -37,7 +37,7 @@ class text_tkey
 public:
     text_tkey() // inline 4C23F0
     {
-        field_0_tKey = 0;
+        field_0_tKey = nullptr;
         field_4_tKey_count = 0;
     }
 
@@ -47,7 +47,7 @@ public:
         {
             delete[] field_0_tKey;
         }
-        field_0_tKey = 0;
+        field_0_tKey = nullptr;
     }
     text_0xC* field_0_tKey;
     s32 field_4_tKey_count;

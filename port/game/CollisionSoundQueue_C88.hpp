@@ -18,8 +18,8 @@ class CollisionTarget_28
     void Reset_4637B0()
     {
         this->field_0_type = collision_target_type::none_0;
-        this->field_20_pHitSprite = 0;
-        this->field_24_pSourceSprite = 0;
+        this->field_20_pHitSprite = nullptr;
+        this->field_24_pSourceSprite = nullptr;
     }
 
     // 9.6f 0x49EF10
@@ -32,14 +32,14 @@ class CollisionTarget_28
     void SetType4_482A70()
     {
         this->field_0_type = collision_target_type::floor_below_4;
-        this->field_20_pHitSprite = 0;
+        this->field_20_pHitSprite = nullptr;
     }
 
     // 9.6f 0x482A80
     void SetType5_482A80()
     {
         this->field_0_type = collision_target_type::block_at_z_5;
-        this->field_20_pHitSprite = 0;
+        this->field_20_pHitSprite = nullptr;
     }
 
     void SetMapZ_4BA2B0(Fix16 z)
@@ -53,7 +53,7 @@ class CollisionTarget_28
         this->field_0_type = collision_target_type::vertical_edge_2;
         this->field_10_vseg_y_max = y_max;
         this->field_14_vseg_x = x;
-        this->field_20_pHitSprite = 0;
+        this->field_20_pHitSprite = nullptr;
     }
 
     void SetHorizontalSegment_4BA250(Fix16 x_min, Fix16 x_max, Fix16 y)
@@ -62,7 +62,7 @@ class CollisionTarget_28
         this->field_0_type = collision_target_type::horizontal_edge_1;
         this->field_8_hseg_x_max = x_max;
         this->field_18_hseg_y = y;
-        this->field_20_pHitSprite = 0;
+        this->field_20_pHitSprite = nullptr;
     }
 
     bool IsCharB4_49EF20()

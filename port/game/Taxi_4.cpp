@@ -25,14 +25,14 @@ void Taxi_4::PopAll_457BC0()
         pIter = pIter->mpNext;
         gTaxi_4_Pool_6783F8->DeAllocate(pOldIter);
     }
-    this->field_0_pFirst = 0;
+    this->field_0_pFirst = nullptr;
 }
 
 // https://decomp.me/scratch/tPr1q
 MATCH_FUNC(0x457bf0)
 Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
 {
-    Car_BC* pCarRet = NULL;
+    Car_BC* pCarRet = nullptr;
     Fix16 smallest(99999);
 
     for (Taxi_8* pIter = field_0_pFirst; pIter; pIter = pIter->mpNext)

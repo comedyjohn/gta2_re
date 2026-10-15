@@ -8,7 +8,7 @@ DEFINE_GLOBAL(ScriptStackFramePool_25C*, gScriptStackFramePool_6F8068, 0x6F8068)
 MATCH_FUNC(0x503120)
 miss2_8::miss2_8() throw() // 503120
 {
-    field_0_current = 0;
+    field_0_current = nullptr;
     field_4_count = 0;
 }
 
@@ -38,7 +38,7 @@ ScriptStackFrame_C* miss2_8::remove_503180()
     if (pOld)
     {
         field_0_current = pOld->mpNext;
-        pOld->mpNext = 0;
+        pOld->mpNext = nullptr;
         field_4_count--;
     }
 

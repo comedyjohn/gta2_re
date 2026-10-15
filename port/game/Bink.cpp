@@ -18,10 +18,10 @@ static inline bool IsDirectBufferMode_481DF0()
 MATCH_FUNC(0x513210)
 void __stdcall Bink::Reset_513210()
 {
-    gBinkHandleSlot2_6F83B0 = 0;
-    gBinkHandleSlot1_6F8168 = 0;
-    gBinkBufferSlot2_6F80C4 = 0;
-    gBinkBufferSlot1_6F8170 = 0;
+    gBinkHandleSlot2_6F83B0 = nullptr;
+    gBinkHandleSlot1_6F8168 = nullptr;
+    gBinkBufferSlot2_6F80C4 = nullptr;
+    gBinkBufferSlot1_6F8170 = nullptr;
     gBinkDDState_6F83FE = 0;
     gBinkActiveSlot_6F83FF = 0;
 }
@@ -68,7 +68,7 @@ char_type Bink::TickFrame_513240()
     else
     {
         // Software / DirectDraw path: copy into the locked BinkBuffer, then blit.
-        if (BinkBufferLock(hbinkbuffer) != 0)
+        if (BinkBufferLock(hbinkbuffer) != nullptr)
         {
             BinkCopyToBuffer(hbink,
                              hbinkbuffer->pixels,
@@ -94,29 +94,29 @@ char_type Bink::TickFrame_513240()
 MATCH_FUNC(0x513340)
 void Bink::CloseSlot1_513340()
 {
-    if (gBinkBufferSlot1_6F8170 != 0)
+    if (gBinkBufferSlot1_6F8170 != nullptr)
     {
         BinkBufferClose(gBinkBufferSlot1_6F8170);
-        gBinkBufferSlot1_6F8170 = 0;
+        gBinkBufferSlot1_6F8170 = nullptr;
         gBinkDDState_6F83FE = 0;
         gBinkActiveSlot_6F83FF = 0;
     }
 
-    if (gBinkHandleSlot1_6F8168 != 0)
+    if (gBinkHandleSlot1_6F8168 != nullptr)
     {
         BinkGetSummary(gBinkHandleSlot1_6F8168, &gBinkSummary_6F8250);
         BinkClose(gBinkHandleSlot1_6F8168);
-        gBinkHandleSlot1_6F8168 = 0;
+        gBinkHandleSlot1_6F8168 = nullptr;
     }
 }
 
 MATCH_FUNC(0x513390)
 void Bink::CloseSlot2_513390()
 {
-    if (gBinkBufferSlot2_6F80C4 != 0)
+    if (gBinkBufferSlot2_6F80C4 != nullptr)
     {
         BinkBufferClose(gBinkBufferSlot2_6F80C4);
-        gBinkBufferSlot2_6F80C4 = 0;
+        gBinkBufferSlot2_6F80C4 = nullptr;
         gBinkDDState_6F83FE = 0;
         gBinkActiveSlot_6F83FF = 0;
     }
@@ -125,7 +125,7 @@ void Bink::CloseSlot2_513390()
     {
         BinkGetSummary(gBinkHandleSlot2_6F83B0, &gBinkSummary_6F8250);
         BinkClose(gBinkHandleSlot2_6F83B0);
-        gBinkHandleSlot2_6F83B0 = 0;
+        gBinkHandleSlot2_6F83B0 = nullptr;
     }
 }
 
@@ -139,7 +139,7 @@ void __stdcall Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDr
 
     gBinkHandleSlot2_6F83B0 = BinkOpen(pFileName, 0x4000000);
 
-    if (gBinkHandleSlot2_6F83B0 != 0)
+    if (gBinkHandleSlot2_6F83B0 != nullptr)
     {
         if (IsDirectBufferMode_481DF0())
         {
@@ -189,7 +189,7 @@ void __stdcall Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDr
         gBinkDDState_6F83FE = 1;
         gBinkBufferSlot2_6F80C4 = BinkBufferOpen(gHwnd_707F04, gBinkHandleSlot2_6F83B0->width, gBinkHandleSlot2_6F83B0->height, 0);
 
-        if (gBinkBufferSlot2_6F80C4 == 0)
+        if (gBinkBufferSlot2_6F80C4 == nullptr)
         {
             gBinkDDState_6F83FE = 0;
             FatalError_4A38C0(Gta2Error::BinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 360);
@@ -259,7 +259,7 @@ void __stdcall Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDr
         gBinkDDState_6F83FE = 1;
         gBinkBufferSlot1_6F8170 = BinkBufferOpen(gHwnd_707F04, gBinkHandleSlot1_6F8168->width, gBinkHandleSlot1_6F8168->height, 0);
 
-        if (gBinkBufferSlot1_6F8170 == 0)
+        if (gBinkBufferSlot1_6F8170 == nullptr)
         {
             gBinkDDState_6F83FE = 0;
             FatalError_4A38C0(Gta2Error::BinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 450);
@@ -279,12 +279,12 @@ void __stdcall Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDr
 MATCH_FUNC(0x5136D0)
 void __stdcall Bink::CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY)
 {
-    if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != 0)
+    if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != nullptr)
     {
         BinkBufferCheckWinPos(gBinkBufferSlot1_6F8170, pNewWindowX, pNewWindowY);
         return;
     }
-    else if (gBinkActiveSlot_6F83FF == 2 && gBinkBufferSlot2_6F80C4 != 0)
+    else if (gBinkActiveSlot_6F83FF == 2 && gBinkBufferSlot2_6F80C4 != nullptr)
     {
         BinkBufferCheckWinPos(gBinkBufferSlot2_6F80C4, pNewWindowX, pNewWindowY);
     }
@@ -293,11 +293,11 @@ void __stdcall Bink::CheckWindowPos_5136D0(s32* pNewWindowX, s32* pNewWindowY)
 MATCH_FUNC(0x513720)
 void Bink::ResetBufferOffset_513720()
 {
-    if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != 0)
+    if (gBinkActiveSlot_6F83FF == 1 && gBinkBufferSlot1_6F8170 != nullptr)
     {
         BinkBufferSetOffset(gBinkBufferSlot1_6F8170, 0, 0);
     }
-    else if (gBinkActiveSlot_6F83FF == 2 && gBinkBufferSlot2_6F80C4 != 0)
+    else if (gBinkActiveSlot_6F83FF == 2 && gBinkBufferSlot2_6F80C4 != nullptr)
     {
         BinkBufferSetOffset(gBinkBufferSlot2_6F80C4, 0, 0);
     }

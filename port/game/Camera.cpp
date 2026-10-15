@@ -580,7 +580,7 @@ MATCH_FUNC(0x4364A0)
 void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
 {
 
-    this->field_34_target_ped = 0;
+    this->field_34_target_ped = nullptr;
     this->field_38_target_car = pCar;
 
     if (pCar)
@@ -605,15 +605,15 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
     Car_BC* pCar_2;
     Fix16 zposToUse;
 
-    field_38_target_car = NULL;
+    field_38_target_car = nullptr;
     field_34_target_ped = pPed;
-    if (pPed != NULL)
+    if (pPed != nullptr)
     {
         Fix16 xpos;
         Fix16 ypos;
         Fix16 zpos;
         Car_BC* pCar = pPed->get_car_416B60();
-        if (pCar || (pCar_2 = pPed->GetCarBeingEnteredOrExited_45BBF0(), pCar_2 == 0))
+        if (pCar || (pCar_2 = pPed->GetCarBeingEnteredOrExited_45BBF0(), pCar_2 == nullptr))
         {
             xpos = pPed->get_cam_x();
             ypos = pPed->get_cam_y();
@@ -759,7 +759,7 @@ Camera_0xBC::Camera_0xBC()
     field_AC_cam_velocity.field_8_z = kZero_676818;
     field_3C_follow_mode = camera_follow_mode::none_0;
     field_30_shake_amount = kZero_676818;
-    field_34_target_ped = NULL;
+    field_34_target_ped = nullptr;
     SetScreenSize_4361B0(640, 480);
     field_44_suspicion = 0;
     ResetPanning_436830();

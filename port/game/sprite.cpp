@@ -203,7 +203,7 @@ SpriteMask_14* SpriteMaskCache_3CC::FindCachedMask_48F600(u16& sprite_idx, u32* 
 {
     s32 final_idx;
     s32 start_idx = 0;
-    SpriteMask_14* pSprt = NULL;
+    SpriteMask_14* pSprt = nullptr;
     if (!*pFlag)
     {
         final_idx = 32;
@@ -239,7 +239,7 @@ SpriteMask_14* SpriteMaskCache_3CC::FindLeastRecentlyUsed_48F690(u32* pKey)
     u32 min_value = -1;
     s32 start_idx;
     s32 final_idx;
-    SpriteMask_14* pSprt = NULL;
+    SpriteMask_14* pSprt = nullptr;
     if (!*pKey)
     {
         start_idx = 0;
@@ -294,8 +294,8 @@ SpriteMaskCache_3CC::SpriteMaskCache_3CC()
 {
     u32 row;
     field_3C0_use_counter = 0;
-    field_3C4_aligned_buffer = NULL;
-    field_3C8_unaligned_alloc = NULL;
+    field_3C4_aligned_buffer = nullptr;
+    field_3C8_unaligned_alloc = nullptr;
 
     // By the way this is later used, it seems to be an array of a structure of size 0x40.
     // For now, it's a s32* as it make the code to match.
@@ -335,8 +335,8 @@ SpriteMaskCache_3CC::~SpriteMaskCache_3CC()
     {
         crt::free(this->field_3C8_unaligned_alloc);
     }
-    this->field_3C4_aligned_buffer = 0;
-    this->field_3C8_unaligned_alloc = 0;
+    this->field_3C4_aligned_buffer = nullptr;
+    this->field_3C8_unaligned_alloc = nullptr;
 }
 
 MATCH_FUNC(0x48F820)
@@ -533,13 +533,13 @@ bool Sprite::IsControlledByActivePlayer_59E170()
 MATCH_FUNC(0x59E1B0)
 Ped* Sprite::GetPed_59E1B0()
 {
-    if (this->field_30_sprite_type_enum == sprite_types_enum::ped_3 && (this->field_8_char_b4_ptr) != 0)
+    if (this->field_30_sprite_type_enum == sprite_types_enum::ped_3 && (this->field_8_char_b4_ptr) != nullptr)
     {
         return field_8_char_b4_ptr->field_7C_pPed;
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -737,11 +737,11 @@ MATCH_FUNC(0x59e7b0)
 void Sprite::ResetZCollisionAndDebugBoxes_59E7B0()
 {
     field_39_z_col = -1;
-    if (field_C_pCollisionShape != NULL)
+    if (field_C_pCollisionShape != nullptr)
     {
         field_C_pCollisionShape->field_48_bbox_up_to_date = false;
     }
-    if (field_4_pVisualShape != NULL)
+    if (field_4_pVisualShape != nullptr)
     {
         field_4_pVisualShape->field_48_bbox_up_to_date = false;
     }
@@ -1271,7 +1271,7 @@ void Sprite::Draw_59EFF0()
 MATCH_FUNC(0x59f950)
 void Sprite::AllocCollisionShape_59F950(Fix16 width, Fix16 height, Fix16 depth)
 {
-    if (field_C_pCollisionShape == NULL)
+    if (field_C_pCollisionShape == nullptr)
     {
         field_C_pCollisionShape = gSpriteShapePool_70381C->Allocate();
     }
@@ -1282,7 +1282,7 @@ void Sprite::AllocCollisionShape_59F950(Fix16 width, Fix16 height, Fix16 depth)
 MATCH_FUNC(0x59f990)
 void Sprite::EnsureVisualShape_59F990()
 {
-    if (this->field_4_pVisualShape == NULL)
+    if (this->field_4_pVisualShape == nullptr)
     {
         this->field_4_pVisualShape = gSpriteShapePool_70381C->Allocate();
 
@@ -1334,13 +1334,13 @@ void Sprite::FreeShapes_59FAD0()
     if (field_C_pCollisionShape)
     {
         gSpriteShapePool_70381C->Remove(field_C_pCollisionShape);
-        field_C_pCollisionShape = 0;
+        field_C_pCollisionShape = nullptr;
     }
 
     if (field_4_pVisualShape)
     {
         gSpriteShapePool_70381C->Remove(field_4_pVisualShape);
-        field_4_pVisualShape = 0;
+        field_4_pVisualShape = nullptr;
     }
 }
 
@@ -1662,7 +1662,7 @@ char_type Sprite::CheckBBoxScanlineIntersection_5A0970(Fix16 scanXMin, Fix16 sca
         gCollisionTarget_679188.field_4_hseg_x_min = scanXMin;
         gCollisionTarget_679188.field_8_hseg_x_max = scanXMax;
         gCollisionTarget_679188.field_18_hseg_y = scanY;
-        gCollisionTarget_679188.field_20_pHitSprite = 0;
+        gCollisionTarget_679188.field_20_pHitSprite = nullptr;
         return 1;
     }
     return 0;
@@ -2247,7 +2247,7 @@ void Sprite::FreeSound_5A2A00()
     if (field_10_sound)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_10_sound);
-        field_10_sound = 0;
+        field_10_sound = nullptr;
     }
 }
 
@@ -2255,7 +2255,7 @@ MATCH_FUNC(0x5a2a30)
 void Sprite::ResolveCollisionWithCarPedOrObject_5A2A30()
 {
     SpriteList_4 collisions;
-    collisions.field_0_p18 = 0;
+    collisions.field_0_p18 = nullptr;
     gSpriteGrid_1_679208->CollectRectCollisions_477F30(&field_C_pCollisionShape->field_30_boundingBox, 0, 0, this, &collisions);
     for (AttachedSprite_18* pCollisionIter = collisions.field_0_p18; pCollisionIter; pCollisionIter = pCollisionIter->mpNext)
     {
@@ -2297,7 +2297,7 @@ void Sprite::PoolAllocate()
 {
     this->field_2C_flags = 0;
     this->field_28_draw_layer = 0;
-    this->field_8_car_bc_ptr = 0;
+    this->field_8_car_bc_ptr = nullptr;
     this->field_14_xy.x = gFix16_7035C0;
     this->field_14_xy.y = gFix16_7035C0;
     this->field_1C_zpos = gFix16_7035C0;
@@ -2306,10 +2306,10 @@ void Sprite::PoolAllocate()
     this->field_22_type_sprite_idx = 0;
     this->field_24_remap = 0;
     this->field_34_palette_type = palette_types_enum::sprites_2;
-    this->field_C_pCollisionShape = 0;
-    this->field_4_pVisualShape = 0;
+    this->field_C_pCollisionShape = nullptr;
+    this->field_4_pVisualShape = nullptr;
     this->field_38_zoom = 0;
-    this->field_10_sound = 0;
+    this->field_10_sound = nullptr;
 
     // TODO: Probably an inline
     this->field_20_instance_id = gSpriteManager_703820->field_4_id_base++;
@@ -2608,7 +2608,7 @@ DEFINE_GLOBAL_INIT(u16, gDebugColour_626260, 0x1111, 0x626260);
 MATCH_FUNC(0x5a57a0)
 s32 SpriteShape_4C::PoolAllocate()
 {
-    mpNext = NULL;
+    mpNext = nullptr;
     field_48_bbox_up_to_date = false;
     return 0;
 }
@@ -2641,25 +2641,25 @@ MATCH_FUNC(0x5a58a0)
 SpriteManager_8::SpriteManager_8()
 {
     gSpritePool_703818 = new SpritePool();
-    if (gSpritePool_703818 == NULL)
+    if (gSpritePool_703818 == nullptr)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5039);
     }
 
     gSpriteShapePool_70381C = new SpriteShapePool();
-    if (gSpriteShapePool_70381C == NULL)
+    if (gSpriteShapePool_70381C == nullptr)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5041);
     }
 
     gSpriteMaskCache_67AF1C = new SpriteMaskCache_3CC();
-    if (gSpriteMaskCache_67AF1C == NULL)
+    if (gSpriteMaskCache_67AF1C == nullptr)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5043);
     }
 
     gAttachedSpritePool_703B80 = new AttachedSpritePool();
-    if (gAttachedSpritePool_703B80 == NULL)
+    if (gAttachedSpritePool_703B80 == nullptr)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5046);
     }
@@ -2682,25 +2682,25 @@ SpriteManager_8::~SpriteManager_8()
     GTA2_DELETE_AND_NULL(gSpriteShapePool_70381C);
     GTA2_DELETE_AND_NULL(gSpriteMaskCache_67AF1C);
     GTA2_DELETE_AND_NULL(gAttachedSpritePool_703B80);
-    gSprite_703814 = 0;
+    gSprite_703814 = nullptr;
 }
 
 MATCH_FUNC(0x5a5be0)
 SpriteShapePool::~SpriteShapePool()
 {
-    field_0_pool.field_0_pHead = 0;
+    field_0_pool.field_0_pHead = nullptr;
 }
 
 MATCH_FUNC(0x5A5C00)
 SpritePool::~SpritePool()
 {
-    field_0_pool.field_0_pHead = 0;
+    field_0_pool.field_0_pHead = nullptr;
 }
 
 MATCH_FUNC(0x5a5c20)
 AttachedSpritePool::~AttachedSpritePool()
 {
-    field_0_pool.field_0_pHead = 0;
+    field_0_pool.field_0_pHead = nullptr;
 }
 
 MATCH_FUNC(0x5a5c40)
@@ -2717,7 +2717,7 @@ AttachedSprite_18::AttachedSprite_18()
 MATCH_FUNC(0x5a5e50)
 Sprite::Sprite() : field_0_rotation(gAng16_703804)
 {
-    field_4_pVisualShape = NULL;
+    field_4_pVisualShape = nullptr;
     field_14_xy.x = gFix16_7035C0;
     field_14_xy.y = gFix16_7035C0;
     field_1C_zpos = gFix16_7035C0;
@@ -2730,9 +2730,9 @@ Sprite::Sprite() : field_0_rotation(gAng16_703804)
     field_34_palette_type = 0;
     field_38_zoom = 0;
     field_39_z_col = -1;
-    field_8_car_bc_ptr = NULL;
-    mpNext = NULL;
-    field_10_sound = NULL;
+    field_8_car_bc_ptr = nullptr;
+    mpNext = nullptr;
+    field_10_sound = nullptr;
 }
 
 MATCH_FUNC(0x5A6910)

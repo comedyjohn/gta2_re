@@ -113,7 +113,7 @@ char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
             }
             if (field_40_pExplosion->field_1A_timer == 1)
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
             }
         }
     }
@@ -204,7 +204,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
     {
         if (field_40_pExplosion->field_6_id != field_44)
         {
-            field_40_pExplosion = NULL;
+            field_40_pExplosion = nullptr;
             field_20_speed = kFP16Zero_6FD49C;
         }
         else if (field_40_pExplosion->field_14_pObj2C)
@@ -216,12 +216,12 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
             }
             if (field_40_pExplosion->field_1A_timer == 1)
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
             }
         }
         else
         {
-            field_40_pExplosion = NULL;
+            field_40_pExplosion = nullptr;
             field_20_speed = kFP16Zero_6FD49C;
         }
     }
@@ -522,7 +522,7 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
         {
             if (field_40_pExplosion->field_6_id != field_44)
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
                 field_20_speed = kFP16Zero_6FD49C;
             }
             else if (field_40_pExplosion->field_14_pObj2C)
@@ -534,12 +534,12 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
                 }
                 if (field_40_pExplosion->field_1A_timer == 1)
                 {
-                    field_40_pExplosion = NULL;
+                    field_40_pExplosion = nullptr;
                 }
             }
             else
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
                 field_20_speed = kFP16Zero_6FD49C;
             }
         }
@@ -631,7 +631,7 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
         {
             if (field_40_pExplosion->field_6_id != field_44)
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
                 field_20_speed = kFP16Zero_6FD49C;
             }
             else if (field_40_pExplosion->field_14_pObj2C)
@@ -643,12 +643,12 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
                 }
                 if (field_40_pExplosion->field_1A_timer == 1)
                 {
-                    field_40_pExplosion = NULL;
+                    field_40_pExplosion = nullptr;
                 }
             }
             else
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
                 field_20_speed = kFP16Zero_6FD49C;
             }
         }
@@ -740,7 +740,7 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
     {
         if (field_40_pExplosion->field_6_id != field_44)
         {
-            field_40_pExplosion = NULL;
+            field_40_pExplosion = nullptr;
         }
         else if (field_40_pExplosion->field_14_pObj2C)
         {
@@ -751,12 +751,12 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
             }
             if (field_40_pExplosion->field_1A_timer == 1)
             {
-                field_40_pExplosion = NULL;
+                field_40_pExplosion = nullptr;
             }
         }
         else
         {
-            field_40_pExplosion = NULL;
+            field_40_pExplosion = nullptr;
             field_20_speed = kFP16Zero_6FD49C;
         }
     }
@@ -1415,8 +1415,8 @@ static inline void PolarToXY_6FD2E8(Ang16 angle, Fix16& x, Fix16& y)
 WIP_FUNC(0x53bac0)
 char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
 {
-    Char_B4* pB4 = NULL;
-    Car_BC* pCar = NULL;
+    Char_B4* pB4 = nullptr;
+    Car_BC* pCar = nullptr;
     Fix16_Point vel;
     Ang16 angle = 0;
 
@@ -1918,7 +1918,7 @@ void Particle_4C::PoolAllocate()
     field_8_speed_x = 0;
     field_C_speed_y = 0;
     field_10 = 0;
-    field_40_pExplosion = 0;
+    field_40_pExplosion = nullptr;
     field_4_bf.bDriverAttacking = false;
 }
 
@@ -1930,6 +1930,6 @@ void Particle_4C::PoolDeallocate()
         field_30_pNext->ClearNoLighting_433800();
         field_30_pNext->SetBlendAndAlpha_4337D0(0, 0);
         gSpritePool_703818->remove(field_30_pNext);
-        field_30_pNext = 0;
+        field_30_pNext = nullptr;
     }
 }

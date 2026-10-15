@@ -73,7 +73,7 @@ class Ped
     inline TrainStation_34* PopTrainStation_4117D0()
     {
         TrainStation_34* pStation = field_13C_pTrainStation;
-        field_13C_pTrainStation = 0;
+        field_13C_pTrainStation = nullptr;
         return pStation;
     }
 
@@ -140,7 +140,7 @@ class Ped
     // 9.6f 0x475B40
     inline void clear_last_char_punched_475B40()
     {
-        field_188_last_char_punched = 0;
+        field_188_last_char_punched = nullptr;
     }
 
     // 9.6f 0x475B10
@@ -376,7 +376,7 @@ class Ped
 
     inline void ClearGroupAndGroupIdx_403A30()
     {
-        this->field_164_ped_group = 0;
+        this->field_164_ped_group = nullptr;
         this->field_23C_group_idx = 0;
     }
 
@@ -426,7 +426,7 @@ class Ped
 
     void reset_ped_group()
     {
-        field_164_ped_group = NULL;
+        field_164_ped_group = nullptr;
         field_23C_group_idx = 0;
     }
 
@@ -448,7 +448,7 @@ class Ped
 
     bool has_car_403B80() const
     {
-        return field_16C_car != NULL;
+        return field_16C_car != nullptr;
     }
 
     s32 GetPedState_403990() const
@@ -576,7 +576,7 @@ class Ped
 
     inline bool is_player_41B0A0()
     {
-        return field_15C_player != 0;
+        return field_15C_player != nullptr;
     }
 
     // 9.6f 0x433C40
@@ -727,7 +727,7 @@ class Ped
     // 9.6f 0x433BE0
     inline void ClearAttacker_433BE0()
     {
-        field_144_attacker = 0;
+        field_144_attacker = nullptr;
     }
 
     // 9.6f 0x433C00
@@ -745,7 +745,7 @@ class Ped
     // makes the inlined IsPedAThreat in IsThreatToSearchingPed_4661F0 call the copy (nested budget 42)
     inline bool IsInvisibleOnFoot_433DA0()
     {
-        if (field_21C_bf.bInvisible && field_168_game_object != 0)
+        if (field_21C_bf.bInvisible && field_168_game_object != nullptr)
         {
             return 1;
         }
@@ -755,7 +755,7 @@ class Ped
 
     bool bHasGameObject_403B70()
     {
-        return field_168_game_object != NULL;
+        return field_168_game_object != nullptr;
     }
 
     inline u8 GetPanicking()

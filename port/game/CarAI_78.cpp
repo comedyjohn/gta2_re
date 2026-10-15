@@ -132,7 +132,7 @@ void __stdcall InitAIvars_447650()
     gCurrCarAI_TargetY_6779F4 = kF16Zero_677B90;
     gCurrCarAI_TargetZ_6779F8 = kF16Zero_677B90;
     dword_677C88 = 1;
-    gCurrCarAI_TargetCar_6779B0 = 0;
+    gCurrCarAI_TargetCar_6779B0 = nullptr;
 }
 
 MATCH_FUNC(0x4476f0)
@@ -730,7 +730,7 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
                     {
                         if (pYieldAI->field_6C_yield_to_car)
                         {
-                            pYieldAI->field_6C_yield_to_car = 0;
+                            pYieldAI->field_6C_yield_to_car = nullptr;
                         }
                     }
                     if (field_70_nearest_entity->field_8_car_bc_ptr->GetCarLinearSpeed_43A240() > kF16Zero_677B90)
@@ -878,11 +878,11 @@ MATCH_FUNC(0x448770)
 void CarAI_78::CheckRoadAhead_448770()
 {
     Fix16 toUse = kF16Zero_677B90;
-    gmp_block_info* pBlock_ = 0;
+    gmp_block_info* pBlock_ = nullptr;
     Sprite* obj_5C_f58 = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     Sprite* pCarSprite = this->field_0_car->field_50_car_sprite;
-    gmp_block_info* pBlock_____ = 0;
-    gmp_block_info* pBlock___ = 0;
+    gmp_block_info* pBlock_____ = nullptr;
+    gmp_block_info* pBlock___ = nullptr;
 
     Fix16 sprite_x = pCarSprite->field_14_xy.x;
     Fix16 sprite_y = pCarSprite->field_14_xy.y;
@@ -1079,7 +1079,7 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
                                                                  field_0_car->field_50_car_sprite->field_14_xy.y.ToInt(),
                                                                  field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
     gmp_block_info* pArrowBlock = pBlock;
-    if (pBlock != NULL && (pBlock->field_B_slope_type & 0xFC) > 0 && (pBlock->field_B_slope_type & 0xFC) < 0xB4 && (pBlock->field_B_slope_type & 3) != 0)
+    if (pBlock != nullptr && (pBlock->field_B_slope_type & 0xFC) > 0 && (pBlock->field_B_slope_type & 0xFC) < 0xB4 && (pBlock->field_B_slope_type & 3) != 0)
     {
     }
     else
@@ -1091,7 +1091,7 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
 
     CheckRoadAhead_448770();
 
-    if (pArrowBlock != NULL)
+    if (pArrowBlock != nullptr)
     {
         switch (field_4C_curr_direction)
         {
@@ -1342,7 +1342,7 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
                     off = field_0_car->field_50_car_sprite->field_14_xy.x - Fix16(frac);
                     if (!(off <= dword_6779C8) && !(off >= dword_6779D0))
                     {
-                        if (field_10_angle == kAng0_677CE8 && field_70_nearest_entity == NULL)
+                        if (field_10_angle == kAng0_677CE8 && field_70_nearest_entity == nullptr)
                         {
                             field_0_car->field_58_physics->field_8_total_damage_q = 0;
                             field_24_bf.bFlag10 = false;
@@ -2987,7 +2987,7 @@ void CarAI_78::UpdateStateMachine_44E560()
 
     s16 waitCount = 0;
     u8 police_level = 0; // 1 for 0/1 wanted stars, 2 for 2/3, 3 for 4, 4 for 5
-    CarChaseTask_40* pChase = 0;
+    CarChaseTask_40* pChase = nullptr;
     s16 maxCount = 0;
     u8 bTryLeft = 0;
     u8 bTryRight = 0;
@@ -4648,7 +4648,7 @@ void CarAI_78::ScanAheadForObstacles_452060()
         }
         else
         {
-            this->field_6C_yield_to_car = 0;
+            this->field_6C_yield_to_car = nullptr;
         }
     }
 
@@ -4882,7 +4882,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
     gCurrCarAI_xpos_677C38 = field_0_car->field_50_car_sprite->field_14_xy.x;
     gCurrCarAI_ypos_677C30 = field_0_car->field_50_car_sprite->field_14_xy.y;
     gCurrCarAI_zpos_677C48 = field_0_car->field_50_car_sprite->field_1C_zpos;
-    gCurrCarAI_TargetCar_6779B0 = 0;
+    gCurrCarAI_TargetCar_6779B0 = nullptr;
     byte_677CA8 = 0;
 
     if (field_0_car->field_60_pChaseTask && !field_3C_seeking_road)
@@ -5024,7 +5024,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
             field_70_nearest_entity->AsObject2C_40FEC0()->field_18_model == objects::pedestrian_crossing_marker_122)
         {
             field_24_bf.bFlag4 = true;
-            field_70_nearest_entity = 0;
+            field_70_nearest_entity = nullptr;
         }
         else
         {
@@ -5058,7 +5058,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
         field_24_bf.bFlag13 = true;
     }
 
-    field_68_car_in_collision = 0;
+    field_68_car_in_collision = nullptr;
     field_24_bf.bFlag12 = false;
 }
 
@@ -5100,7 +5100,7 @@ void CarAI_78::UpdateDriving_453470()
             {
                 field_0_car->DoBrake_43A950();
             }
-            this->field_68_car_in_collision = 0;
+            this->field_68_car_in_collision = nullptr;
             this->field_24_bf.bFlag12 = 0;
         }
         else
@@ -5113,7 +5113,7 @@ void CarAI_78::UpdateDriving_453470()
             {
                 field_0_car->field_58_physics->NeutralGear_42AC00();
             }
-            this->field_68_car_in_collision = 0;
+            this->field_68_car_in_collision = nullptr;
             this->field_24_bf.bFlag12 = 0;
         }
     }
@@ -5300,12 +5300,12 @@ MATCH_FUNC(0x453cb0)
 CarAI_78::CarAI_78()
 {
     this->field_10_angle = 0;
-    this->field_0_car = 0;
+    this->field_0_car = nullptr;
     this->field_4_unused = 0;
     this->field_8_maneuver_active = 0;
     this->field_9_probe_x = 0;
     this->field_A_probe_y = 0;
-    this->mpNext = 0;
+    this->mpNext = nullptr;
     this->field_10_angle = kAng0_677CE8;
     this->field_14_speed = kF16Zero_677B90;
     this->field_18_target_speed = kDefaultTargetSpeed_677CB4;
@@ -5323,8 +5323,8 @@ CarAI_78::CarAI_78()
     this->field_5C_unused = kF16Zero_677B90;
     this->field_60_unused = kF16Zero_677B90;
     this->field_64_unused = kF16Zero_677B90;
-    this->field_68_car_in_collision = 0;
-    this->field_6C_yield_to_car = 0;
+    this->field_68_car_in_collision = nullptr;
+    this->field_6C_yield_to_car = nullptr;
     this->field_34_unused = 0;
     this->field_38_junction_turn_direction = 0;
     this->field_3C_seeking_road = 0;
@@ -5332,7 +5332,7 @@ CarAI_78::CarAI_78()
     this->field_44_target_direction = car_ai_target_direction::go_straight_0;
     this->field_48_probe_direction = 0;
     this->field_4C_curr_direction = car_ai_direction::none_0;
-    this->field_70_nearest_entity = 0;
+    this->field_70_nearest_entity = nullptr;
     this->field_74_max_speed = kF16Zero_677B90;
     this->field_54_accel_cooldown = 0;
     this->field_2A_stopped_timer = 0;
@@ -5346,7 +5346,7 @@ CarAI_78::CarAI_78()
 MATCH_FUNC(0x453d80)
 void CarAI_78::PoolAllocate()
 {
-    this->field_0_car = 0;
+    this->field_0_car = nullptr;
     this->field_4_unused = 0;
     this->field_8_maneuver_active = 0;
     this->field_9_probe_x = 0;
@@ -5368,8 +5368,8 @@ void CarAI_78::PoolAllocate()
     this->field_5C_unused = kF16Zero_677B90;
     this->field_60_unused = kF16Zero_677B90;
     this->field_64_unused = kF16Zero_677B90;
-    this->field_68_car_in_collision = 0;
-    this->field_6C_yield_to_car = 0;
+    this->field_68_car_in_collision = nullptr;
+    this->field_6C_yield_to_car = nullptr;
     this->field_34_unused = 0;
     this->field_38_junction_turn_direction = 0;
     this->field_3C_seeking_road = 0;
@@ -5377,7 +5377,7 @@ void CarAI_78::PoolAllocate()
     this->field_44_target_direction = car_ai_target_direction::go_straight_0;
     this->field_48_probe_direction = 0;
     this->field_4C_curr_direction = car_ai_direction::none_0;
-    this->field_70_nearest_entity = 0;
+    this->field_70_nearest_entity = nullptr;
     this->field_74_max_speed = dword_6779D4;
     this->field_54_accel_cooldown = 0;
     this->field_2A_stopped_timer = 0;

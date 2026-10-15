@@ -67,11 +67,11 @@ EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
 EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
 
-Object_2C* spawned_obj = NULL;
-Car_BC* pNewCar = NULL;
+Object_2C* spawned_obj = nullptr;
+Car_BC* pNewCar = nullptr;
 char TmpBitSetChar[50];
 
-Hud_Arrow_7C* gpArrow = NULL;
+Hud_Arrow_7C* gpArrow = nullptr;
 
 void wchar_to_char(wchar_t* wchar, char* out, u8 size)
 {
@@ -232,7 +232,7 @@ static Sprite* GetPedSprite(Ped* pPed)
 {
     if (!pPed->field_168_game_object)
     {
-        return NULL;
+        return nullptr;
     }
 
     return pPed->field_168_game_object->field_80_sprite_ptr;
@@ -242,18 +242,18 @@ static Ped* GetPlayerPed()
 {
     if (!gGame_0x40_67E008)
     {
-        return NULL;
+        return nullptr;
     }
 
     Player* pPlayer = gGame_0x40_67E008->field_4_players[0];
     if (!pPlayer)
     {
-        return NULL;
+        return nullptr;
     }
 
     if (!pPlayer->field_2C4_player_ped)
     {
-        return NULL;
+        return nullptr;
     }
 
     return pPlayer->field_2C4_player_ped;
@@ -264,7 +264,7 @@ static Sprite* GetPlayerSprite()
     Ped* pPed = GetPlayerPed();
     if (!pPed)
     {
-        return NULL;
+        return nullptr;
     }
 
     return GetPedSprite(pPed);
@@ -275,7 +275,7 @@ static Sprite* GetPlayerAssociatedSprite()
     Ped* pPed = GetPlayerPed();
     if (!pPed)
     {
-        return NULL;
+        return nullptr;
     }
 
     if (!pPed->field_168_game_object)
@@ -284,7 +284,7 @@ static Sprite* GetPlayerAssociatedSprite()
         {
             return pPed->field_16C_car->GetSprite_440840();
         }
-        return NULL;
+        return nullptr;
     }
     return pPed->field_168_game_object->field_80_sprite_ptr;
 }
@@ -818,7 +818,7 @@ static Camera_0xBC* GetPlayerCam()
             }
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 EXTERN_GLOBAL(Fix16, kFpOne_7064C4);
@@ -1093,7 +1093,7 @@ static TEnumerateFuncsFn GetEnumerateFuncsFn()
     {
         return reinterpret_cast<TEnumerateFuncsFn>(::GetProcAddress(hMod, "EnumerateFuncs"));
     }
-    return NULL;
+    return nullptr;
 }
 
 static TChangeHookFn GetChangeHookFn()
@@ -1103,7 +1103,7 @@ static TChangeHookFn GetChangeHookFn()
     {
         return reinterpret_cast<TChangeHookFn>(::GetProcAddress(hMod, "ChangeHook"));
     }
-    return NULL;
+    return nullptr;
 }
 
 struct FuncData
@@ -1702,7 +1702,7 @@ void CC ImGuiDebugDraw()
             {
                 if (ImGui::Button("TryDispatchFirefightersToCar_4A8820"))
                 {
-                    gFirefighterPool_54_67D4C0->TryDispatchFirefightersToCar_4A8820(0);
+                    gFirefighterPool_54_67D4C0->TryDispatchFirefightersToCar_4A8820(nullptr);
                 }
             }
             ImGui::TreePop();
@@ -1953,7 +1953,7 @@ void CC ImGuiDebugDraw()
                 if (pPlayerSprt)
                 {
                     Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
-                    CarAI_78* pNearestAI = NULL;
+                    CarAI_78* pNearestAI = nullptr;
                     Fix16 smallest = Fix16(99999);
                     while (pCarIter)
                     {
@@ -1976,8 +1976,8 @@ void CC ImGuiDebugDraw()
                         char buffer[50];
                         get_car_name(pNearestAI->field_0_car, buffer);
                         ImGui::Text("AI Found! Car: %s", buffer);
-                        ImGui::Text("6C: %d", pNearestAI->field_6C_yield_to_car != NULL);
-                        if (!PointArrowToEntity(0, pNearestAI->field_6C_yield_to_car, 0))
+                        ImGui::Text("6C: %d", pNearestAI->field_6C_yield_to_car != nullptr);
+                        if (!PointArrowToEntity(nullptr, pNearestAI->field_6C_yield_to_car, nullptr))
                         {
                             //ClearGlobalArrow();
                         }
@@ -2054,7 +2054,7 @@ void CC ImGuiDebugDraw()
                 }
                 */
             }
-            if (spawned_obj != NULL && spawned_obj->field_4)
+            if (spawned_obj != nullptr && spawned_obj->field_4)
             {
                 ImGui::Text("Object spawned attributes:");
                 //ImGui::SliderU8("field_26_ped_ref_idx", &spawned_obj->field_26_ped_ref_idx, 0, 25);
@@ -2108,7 +2108,7 @@ void CC ImGuiDebugDraw()
                             && sprite_index_5AA440->field_5_height == 16)
                         {
                             bFound = true;
-                            if (spawned_obj != NULL && spawned_obj->field_4)
+                            if (spawned_obj != nullptr && spawned_obj->field_4)
                             {
                                 spawned_obj->field_4->field_30_sprite_type_enum = sprite_types_enum::code_obj1_4;
                                 spawned_obj->field_4->set_id_lazy_4206C0(id);
@@ -2133,7 +2133,7 @@ void CC ImGuiDebugDraw()
                     if (pObjIter && pObjIter->field_18_model != 0)
                     {
                         swprintf(tmpBuff_67BD9C, L"%d", pObjIter->field_18_model);
-                        if (pObjIter->field_4 != NULL)
+                        if (pObjIter->field_4 != nullptr)
                         {
                             DisplayWideTextAtSprite(tmpBuff_67BD9C, pObjIter->field_4, 0, 0);
                         }
@@ -3039,15 +3039,15 @@ void CC ImGuiDebugDraw()
                 {
                     if (gCollisionTarget_679188.field_20_pHitSprite->AsCharB4_40FEA0())
                     {
-                        PointArrowToEntity(gCollisionTarget_679188.field_20_pHitSprite->field_8_char_b4_ptr->field_7C_pPed, 0, 0);
+                        PointArrowToEntity(gCollisionTarget_679188.field_20_pHitSprite->field_8_char_b4_ptr->field_7C_pPed, nullptr, nullptr);
                     }
                     else if (gCollisionTarget_679188.field_20_pHitSprite->AsCar_40FEB0())
                     {
-                        PointArrowToEntity(0, gCollisionTarget_679188.field_20_pHitSprite->field_8_car_bc_ptr, 0);
+                        PointArrowToEntity(nullptr, gCollisionTarget_679188.field_20_pHitSprite->field_8_car_bc_ptr, nullptr);
                     }
                     else if (gCollisionTarget_679188.field_20_pHitSprite->AsObject2C_40FEC0())
                     {
-                        PointArrowToEntity(0, 0, gCollisionTarget_679188.field_20_pHitSprite->field_8_object_2C_ptr);
+                        PointArrowToEntity(nullptr, nullptr, gCollisionTarget_679188.field_20_pHitSprite->field_8_object_2C_ptr);
                     }
                 }
             }

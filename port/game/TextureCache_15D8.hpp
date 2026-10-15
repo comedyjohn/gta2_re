@@ -12,8 +12,8 @@ class DigitTexture_C
     // inlined 0x4C2F70
     DigitTexture_C()
     {
-        field_0_pPixelData = 0;
-        field_4_pTexture = 0;
+        field_0_pPixelData = nullptr;
+        field_4_pTexture = nullptr;
         field_8_height = 0;
         field_A_row_offset = 0;
     }
@@ -38,7 +38,7 @@ class RemapTextureSet_14
     // inlined 0x4C2F10
     RemapTextureSet_14()
     {
-        field_0_pTextures = 0;
+        field_0_pTextures = nullptr;
         field_4_texture_count = 0;
         field_6_remaps_per_sprite = 0;
         field_8_sprite_type = 0;

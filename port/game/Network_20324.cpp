@@ -81,7 +81,7 @@ struct Network_UI_Control_Data_Array
         data[0][6].field_0_windowParams.field_4_y = 0;
         data[0][6].field_0_windowParams.field_8_w = 0;
         data[0][6].field_0_windowParams.field_C_h = 0;
-        data[0][6].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][6].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][6].field_0_windowParams.field_14_style = 0x0;
         data[0][6].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][6].field_1C_window_class_name, "");
@@ -91,7 +91,7 @@ struct Network_UI_Control_Data_Array
         data[0][7].field_0_windowParams.field_4_y = 0;
         data[0][7].field_0_windowParams.field_8_w = 0;
         data[0][7].field_0_windowParams.field_C_h = 0;
-        data[0][7].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][7].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][7].field_0_windowParams.field_14_style = 0x0;
         data[0][7].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][7].field_1C_window_class_name, "");
@@ -101,7 +101,7 @@ struct Network_UI_Control_Data_Array
         data[0][8].field_0_windowParams.field_4_y = 0;
         data[0][8].field_0_windowParams.field_8_w = 0;
         data[0][8].field_0_windowParams.field_C_h = 0;
-        data[0][8].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][8].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][8].field_0_windowParams.field_14_style = 0x0;
         data[0][8].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][8].field_1C_window_class_name, "");
@@ -111,7 +111,7 @@ struct Network_UI_Control_Data_Array
         data[0][9].field_0_windowParams.field_4_y = 0;
         data[0][9].field_0_windowParams.field_8_w = 0;
         data[0][9].field_0_windowParams.field_C_h = 0;
-        data[0][9].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][9].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][9].field_0_windowParams.field_14_style = 0x0;
         data[0][9].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][9].field_1C_window_class_name, "");
@@ -121,7 +121,7 @@ struct Network_UI_Control_Data_Array
         data[0][10].field_0_windowParams.field_4_y = 0;
         data[0][10].field_0_windowParams.field_8_w = 0;
         data[0][10].field_0_windowParams.field_C_h = 0;
-        data[0][10].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][10].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][10].field_0_windowParams.field_14_style = 0x0;
         data[0][10].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][10].field_1C_window_class_name, "");
@@ -131,7 +131,7 @@ struct Network_UI_Control_Data_Array
         data[0][11].field_0_windowParams.field_4_y = 0;
         data[0][11].field_0_windowParams.field_8_w = 0;
         data[0][11].field_0_windowParams.field_C_h = 0;
-        data[0][11].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][11].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][11].field_0_windowParams.field_14_style = 0x0;
         data[0][11].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][11].field_1C_window_class_name, "");
@@ -141,7 +141,7 @@ struct Network_UI_Control_Data_Array
         data[0][12].field_0_windowParams.field_4_y = 0;
         data[0][12].field_0_windowParams.field_8_w = 0;
         data[0][12].field_0_windowParams.field_C_h = 0;
-        data[0][12].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][12].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][12].field_0_windowParams.field_14_style = 0x0;
         data[0][12].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][12].field_1C_window_class_name, "");
@@ -151,7 +151,7 @@ struct Network_UI_Control_Data_Array
         data[0][13].field_0_windowParams.field_4_y = 0;
         data[0][13].field_0_windowParams.field_8_w = 0;
         data[0][13].field_0_windowParams.field_C_h = 0;
-        data[0][13].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][13].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][13].field_0_windowParams.field_14_style = 0x0;
         data[0][13].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][13].field_1C_window_class_name, "");
@@ -161,7 +161,7 @@ struct Network_UI_Control_Data_Array
         data[0][14].field_0_windowParams.field_4_y = 0;
         data[0][14].field_0_windowParams.field_8_w = 0;
         data[0][14].field_0_windowParams.field_C_h = 0;
-        data[0][14].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][14].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][14].field_0_windowParams.field_14_style = 0x0;
         data[0][14].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][14].field_1C_window_class_name, "");
@@ -171,7 +171,7 @@ struct Network_UI_Control_Data_Array
         data[0][15].field_0_windowParams.field_4_y = 0;
         data[0][15].field_0_windowParams.field_8_w = 0;
         data[0][15].field_0_windowParams.field_C_h = 0;
-        data[0][15].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][15].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][15].field_0_windowParams.field_14_style = 0x0;
         data[0][15].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][15].field_1C_window_class_name, "");
@@ -181,7 +181,7 @@ struct Network_UI_Control_Data_Array
         data[0][16].field_0_windowParams.field_4_y = 0;
         data[0][16].field_0_windowParams.field_8_w = 0;
         data[0][16].field_0_windowParams.field_C_h = 0;
-        data[0][16].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][16].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][16].field_0_windowParams.field_14_style = 0x0;
         data[0][16].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][16].field_1C_window_class_name, "");
@@ -191,7 +191,7 @@ struct Network_UI_Control_Data_Array
         data[0][17].field_0_windowParams.field_4_y = 0;
         data[0][17].field_0_windowParams.field_8_w = 0;
         data[0][17].field_0_windowParams.field_C_h = 0;
-        data[0][17].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][17].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][17].field_0_windowParams.field_14_style = 0x0;
         data[0][17].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][17].field_1C_window_class_name, "");
@@ -201,7 +201,7 @@ struct Network_UI_Control_Data_Array
         data[0][18].field_0_windowParams.field_4_y = 0;
         data[0][18].field_0_windowParams.field_8_w = 0;
         data[0][18].field_0_windowParams.field_C_h = 0;
-        data[0][18].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][18].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][18].field_0_windowParams.field_14_style = 0x0;
         data[0][18].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][18].field_1C_window_class_name, "");
@@ -211,7 +211,7 @@ struct Network_UI_Control_Data_Array
         data[0][19].field_0_windowParams.field_4_y = 0;
         data[0][19].field_0_windowParams.field_8_w = 0;
         data[0][19].field_0_windowParams.field_C_h = 0;
-        data[0][19].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][19].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][19].field_0_windowParams.field_14_style = 0x0;
         data[0][19].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][19].field_1C_window_class_name, "");
@@ -221,7 +221,7 @@ struct Network_UI_Control_Data_Array
         data[0][20].field_0_windowParams.field_4_y = 0;
         data[0][20].field_0_windowParams.field_8_w = 0;
         data[0][20].field_0_windowParams.field_C_h = 0;
-        data[0][20].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][20].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][20].field_0_windowParams.field_14_style = 0x0;
         data[0][20].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][20].field_1C_window_class_name, "");
@@ -231,7 +231,7 @@ struct Network_UI_Control_Data_Array
         data[0][21].field_0_windowParams.field_4_y = 0;
         data[0][21].field_0_windowParams.field_8_w = 0;
         data[0][21].field_0_windowParams.field_C_h = 0;
-        data[0][21].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][21].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][21].field_0_windowParams.field_14_style = 0x0;
         data[0][21].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][21].field_1C_window_class_name, "");
@@ -241,7 +241,7 @@ struct Network_UI_Control_Data_Array
         data[0][22].field_0_windowParams.field_4_y = 0;
         data[0][22].field_0_windowParams.field_8_w = 0;
         data[0][22].field_0_windowParams.field_C_h = 0;
-        data[0][22].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][22].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][22].field_0_windowParams.field_14_style = 0x0;
         data[0][22].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][22].field_1C_window_class_name, "");
@@ -251,7 +251,7 @@ struct Network_UI_Control_Data_Array
         data[0][23].field_0_windowParams.field_4_y = 0;
         data[0][23].field_0_windowParams.field_8_w = 0;
         data[0][23].field_0_windowParams.field_C_h = 0;
-        data[0][23].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][23].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][23].field_0_windowParams.field_14_style = 0x0;
         data[0][23].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][23].field_1C_window_class_name, "");
@@ -261,7 +261,7 @@ struct Network_UI_Control_Data_Array
         data[0][24].field_0_windowParams.field_4_y = 0;
         data[0][24].field_0_windowParams.field_8_w = 0;
         data[0][24].field_0_windowParams.field_C_h = 0;
-        data[0][24].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][24].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][24].field_0_windowParams.field_14_style = 0x0;
         data[0][24].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][24].field_1C_window_class_name, "");
@@ -271,7 +271,7 @@ struct Network_UI_Control_Data_Array
         data[0][25].field_0_windowParams.field_4_y = 0;
         data[0][25].field_0_windowParams.field_8_w = 0;
         data[0][25].field_0_windowParams.field_C_h = 0;
-        data[0][25].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][25].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][25].field_0_windowParams.field_14_style = 0x0;
         data[0][25].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][25].field_1C_window_class_name, "");
@@ -281,7 +281,7 @@ struct Network_UI_Control_Data_Array
         data[0][26].field_0_windowParams.field_4_y = 0;
         data[0][26].field_0_windowParams.field_8_w = 0;
         data[0][26].field_0_windowParams.field_C_h = 0;
-        data[0][26].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][26].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][26].field_0_windowParams.field_14_style = 0x0;
         data[0][26].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][26].field_1C_window_class_name, "");
@@ -291,7 +291,7 @@ struct Network_UI_Control_Data_Array
         data[0][27].field_0_windowParams.field_4_y = 0;
         data[0][27].field_0_windowParams.field_8_w = 0;
         data[0][27].field_0_windowParams.field_C_h = 0;
-        data[0][27].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][27].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][27].field_0_windowParams.field_14_style = 0x0;
         data[0][27].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][27].field_1C_window_class_name, "");
@@ -301,7 +301,7 @@ struct Network_UI_Control_Data_Array
         data[0][28].field_0_windowParams.field_4_y = 0;
         data[0][28].field_0_windowParams.field_8_w = 0;
         data[0][28].field_0_windowParams.field_C_h = 0;
-        data[0][28].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][28].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][28].field_0_windowParams.field_14_style = 0x0;
         data[0][28].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][28].field_1C_window_class_name, "");
@@ -311,7 +311,7 @@ struct Network_UI_Control_Data_Array
         data[0][29].field_0_windowParams.field_4_y = 0;
         data[0][29].field_0_windowParams.field_8_w = 0;
         data[0][29].field_0_windowParams.field_C_h = 0;
-        data[0][29].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[0][29].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[0][29].field_0_windowParams.field_14_style = 0x0;
         data[0][29].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[0][29].field_1C_window_class_name, "");
@@ -501,7 +501,7 @@ struct Network_UI_Control_Data_Array
         data[1][18].field_0_windowParams.field_4_y = 0;
         data[1][18].field_0_windowParams.field_8_w = 0;
         data[1][18].field_0_windowParams.field_C_h = 0;
-        data[1][18].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][18].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][18].field_0_windowParams.field_14_style = 0x0;
         data[1][18].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][18].field_1C_window_class_name, "");
@@ -511,7 +511,7 @@ struct Network_UI_Control_Data_Array
         data[1][19].field_0_windowParams.field_4_y = 0;
         data[1][19].field_0_windowParams.field_8_w = 0;
         data[1][19].field_0_windowParams.field_C_h = 0;
-        data[1][19].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][19].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][19].field_0_windowParams.field_14_style = 0x0;
         data[1][19].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][19].field_1C_window_class_name, "");
@@ -521,7 +521,7 @@ struct Network_UI_Control_Data_Array
         data[1][20].field_0_windowParams.field_4_y = 0;
         data[1][20].field_0_windowParams.field_8_w = 0;
         data[1][20].field_0_windowParams.field_C_h = 0;
-        data[1][20].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][20].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][20].field_0_windowParams.field_14_style = 0x0;
         data[1][20].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][20].field_1C_window_class_name, "");
@@ -531,7 +531,7 @@ struct Network_UI_Control_Data_Array
         data[1][21].field_0_windowParams.field_4_y = 0;
         data[1][21].field_0_windowParams.field_8_w = 0;
         data[1][21].field_0_windowParams.field_C_h = 0;
-        data[1][21].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][21].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][21].field_0_windowParams.field_14_style = 0x0;
         data[1][21].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][21].field_1C_window_class_name, "");
@@ -541,7 +541,7 @@ struct Network_UI_Control_Data_Array
         data[1][22].field_0_windowParams.field_4_y = 0;
         data[1][22].field_0_windowParams.field_8_w = 0;
         data[1][22].field_0_windowParams.field_C_h = 0;
-        data[1][22].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][22].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][22].field_0_windowParams.field_14_style = 0x0;
         data[1][22].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][22].field_1C_window_class_name, "");
@@ -551,7 +551,7 @@ struct Network_UI_Control_Data_Array
         data[1][23].field_0_windowParams.field_4_y = 0;
         data[1][23].field_0_windowParams.field_8_w = 0;
         data[1][23].field_0_windowParams.field_C_h = 0;
-        data[1][23].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][23].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][23].field_0_windowParams.field_14_style = 0x0;
         data[1][23].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][23].field_1C_window_class_name, "");
@@ -561,7 +561,7 @@ struct Network_UI_Control_Data_Array
         data[1][24].field_0_windowParams.field_4_y = 0;
         data[1][24].field_0_windowParams.field_8_w = 0;
         data[1][24].field_0_windowParams.field_C_h = 0;
-        data[1][24].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][24].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][24].field_0_windowParams.field_14_style = 0x0;
         data[1][24].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][24].field_1C_window_class_name, "");
@@ -571,7 +571,7 @@ struct Network_UI_Control_Data_Array
         data[1][25].field_0_windowParams.field_4_y = 0;
         data[1][25].field_0_windowParams.field_8_w = 0;
         data[1][25].field_0_windowParams.field_C_h = 0;
-        data[1][25].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][25].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][25].field_0_windowParams.field_14_style = 0x0;
         data[1][25].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][25].field_1C_window_class_name, "");
@@ -581,7 +581,7 @@ struct Network_UI_Control_Data_Array
         data[1][26].field_0_windowParams.field_4_y = 0;
         data[1][26].field_0_windowParams.field_8_w = 0;
         data[1][26].field_0_windowParams.field_C_h = 0;
-        data[1][26].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][26].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][26].field_0_windowParams.field_14_style = 0x0;
         data[1][26].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][26].field_1C_window_class_name, "");
@@ -591,7 +591,7 @@ struct Network_UI_Control_Data_Array
         data[1][27].field_0_windowParams.field_4_y = 0;
         data[1][27].field_0_windowParams.field_8_w = 0;
         data[1][27].field_0_windowParams.field_C_h = 0;
-        data[1][27].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][27].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][27].field_0_windowParams.field_14_style = 0x0;
         data[1][27].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][27].field_1C_window_class_name, "");
@@ -601,7 +601,7 @@ struct Network_UI_Control_Data_Array
         data[1][28].field_0_windowParams.field_4_y = 0;
         data[1][28].field_0_windowParams.field_8_w = 0;
         data[1][28].field_0_windowParams.field_C_h = 0;
-        data[1][28].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][28].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][28].field_0_windowParams.field_14_style = 0x0;
         data[1][28].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][28].field_1C_window_class_name, "");
@@ -611,7 +611,7 @@ struct Network_UI_Control_Data_Array
         data[1][29].field_0_windowParams.field_4_y = 0;
         data[1][29].field_0_windowParams.field_8_w = 0;
         data[1][29].field_0_windowParams.field_C_h = 0;
-        data[1][29].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[1][29].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[1][29].field_0_windowParams.field_14_style = 0x0;
         data[1][29].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[1][29].field_1C_window_class_name, "");
@@ -731,7 +731,7 @@ struct Network_UI_Control_Data_Array
         data[2][11].field_0_windowParams.field_4_y = 0;
         data[2][11].field_0_windowParams.field_8_w = 0;
         data[2][11].field_0_windowParams.field_C_h = 0;
-        data[2][11].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][11].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][11].field_0_windowParams.field_14_style = 0x0;
         data[2][11].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][11].field_1C_window_class_name, "0");
@@ -741,7 +741,7 @@ struct Network_UI_Control_Data_Array
         data[2][12].field_0_windowParams.field_4_y = 0;
         data[2][12].field_0_windowParams.field_8_w = 0;
         data[2][12].field_0_windowParams.field_C_h = 0;
-        data[2][12].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][12].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][12].field_0_windowParams.field_14_style = 0x0;
         data[2][12].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][12].field_1C_window_class_name, "0");
@@ -751,7 +751,7 @@ struct Network_UI_Control_Data_Array
         data[2][13].field_0_windowParams.field_4_y = 0;
         data[2][13].field_0_windowParams.field_8_w = 0;
         data[2][13].field_0_windowParams.field_C_h = 0;
-        data[2][13].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][13].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][13].field_0_windowParams.field_14_style = 0x0;
         data[2][13].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][13].field_1C_window_class_name, "0");
@@ -761,7 +761,7 @@ struct Network_UI_Control_Data_Array
         data[2][14].field_0_windowParams.field_4_y = 0;
         data[2][14].field_0_windowParams.field_8_w = 0;
         data[2][14].field_0_windowParams.field_C_h = 0;
-        data[2][14].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][14].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][14].field_0_windowParams.field_14_style = 0x0;
         data[2][14].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][14].field_1C_window_class_name, "0");
@@ -771,7 +771,7 @@ struct Network_UI_Control_Data_Array
         data[2][15].field_0_windowParams.field_4_y = 0;
         data[2][15].field_0_windowParams.field_8_w = 0;
         data[2][15].field_0_windowParams.field_C_h = 0;
-        data[2][15].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][15].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][15].field_0_windowParams.field_14_style = 0x0;
         data[2][15].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][15].field_1C_window_class_name, "0");
@@ -781,7 +781,7 @@ struct Network_UI_Control_Data_Array
         data[2][16].field_0_windowParams.field_4_y = 0;
         data[2][16].field_0_windowParams.field_8_w = 0;
         data[2][16].field_0_windowParams.field_C_h = 0;
-        data[2][16].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][16].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][16].field_0_windowParams.field_14_style = 0x0;
         data[2][16].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][16].field_1C_window_class_name, "0");
@@ -791,7 +791,7 @@ struct Network_UI_Control_Data_Array
         data[2][17].field_0_windowParams.field_4_y = 0;
         data[2][17].field_0_windowParams.field_8_w = 0;
         data[2][17].field_0_windowParams.field_C_h = 0;
-        data[2][17].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][17].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][17].field_0_windowParams.field_14_style = 0x0;
         data[2][17].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][17].field_1C_window_class_name, "0");
@@ -801,7 +801,7 @@ struct Network_UI_Control_Data_Array
         data[2][18].field_0_windowParams.field_4_y = 0;
         data[2][18].field_0_windowParams.field_8_w = 0;
         data[2][18].field_0_windowParams.field_C_h = 0;
-        data[2][18].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][18].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][18].field_0_windowParams.field_14_style = 0x0;
         data[2][18].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][18].field_1C_window_class_name, "0");
@@ -811,7 +811,7 @@ struct Network_UI_Control_Data_Array
         data[2][19].field_0_windowParams.field_4_y = 0;
         data[2][19].field_0_windowParams.field_8_w = 0;
         data[2][19].field_0_windowParams.field_C_h = 0;
-        data[2][19].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][19].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][19].field_0_windowParams.field_14_style = 0x0;
         data[2][19].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][19].field_1C_window_class_name, "0");
@@ -821,7 +821,7 @@ struct Network_UI_Control_Data_Array
         data[2][20].field_0_windowParams.field_4_y = 0;
         data[2][20].field_0_windowParams.field_8_w = 0;
         data[2][20].field_0_windowParams.field_C_h = 0;
-        data[2][20].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][20].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][20].field_0_windowParams.field_14_style = 0x0;
         data[2][20].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][20].field_1C_window_class_name, "0");
@@ -831,7 +831,7 @@ struct Network_UI_Control_Data_Array
         data[2][21].field_0_windowParams.field_4_y = 0;
         data[2][21].field_0_windowParams.field_8_w = 0;
         data[2][21].field_0_windowParams.field_C_h = 0;
-        data[2][21].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][21].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][21].field_0_windowParams.field_14_style = 0x0;
         data[2][21].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][21].field_1C_window_class_name, "0");
@@ -841,7 +841,7 @@ struct Network_UI_Control_Data_Array
         data[2][22].field_0_windowParams.field_4_y = 0;
         data[2][22].field_0_windowParams.field_8_w = 0;
         data[2][22].field_0_windowParams.field_C_h = 0;
-        data[2][22].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][22].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][22].field_0_windowParams.field_14_style = 0x0;
         data[2][22].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][22].field_1C_window_class_name, "0");
@@ -851,7 +851,7 @@ struct Network_UI_Control_Data_Array
         data[2][23].field_0_windowParams.field_4_y = 0;
         data[2][23].field_0_windowParams.field_8_w = 0;
         data[2][23].field_0_windowParams.field_C_h = 0;
-        data[2][23].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][23].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][23].field_0_windowParams.field_14_style = 0x0;
         data[2][23].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][23].field_1C_window_class_name, "0");
@@ -861,7 +861,7 @@ struct Network_UI_Control_Data_Array
         data[2][24].field_0_windowParams.field_4_y = 0;
         data[2][24].field_0_windowParams.field_8_w = 0;
         data[2][24].field_0_windowParams.field_C_h = 0;
-        data[2][24].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][24].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][24].field_0_windowParams.field_14_style = 0x0;
         data[2][24].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][24].field_1C_window_class_name, "0");
@@ -871,7 +871,7 @@ struct Network_UI_Control_Data_Array
         data[2][25].field_0_windowParams.field_4_y = 0;
         data[2][25].field_0_windowParams.field_8_w = 0;
         data[2][25].field_0_windowParams.field_C_h = 0;
-        data[2][25].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][25].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][25].field_0_windowParams.field_14_style = 0x0;
         data[2][25].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][25].field_1C_window_class_name, "0");
@@ -881,7 +881,7 @@ struct Network_UI_Control_Data_Array
         data[2][26].field_0_windowParams.field_4_y = 0;
         data[2][26].field_0_windowParams.field_8_w = 0;
         data[2][26].field_0_windowParams.field_C_h = 0;
-        data[2][26].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][26].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][26].field_0_windowParams.field_14_style = 0x0;
         data[2][26].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][26].field_1C_window_class_name, "0");
@@ -891,7 +891,7 @@ struct Network_UI_Control_Data_Array
         data[2][27].field_0_windowParams.field_4_y = 0;
         data[2][27].field_0_windowParams.field_8_w = 0;
         data[2][27].field_0_windowParams.field_C_h = 0;
-        data[2][27].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][27].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][27].field_0_windowParams.field_14_style = 0x0;
         data[2][27].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][27].field_1C_window_class_name, "0");
@@ -901,7 +901,7 @@ struct Network_UI_Control_Data_Array
         data[2][28].field_0_windowParams.field_4_y = 0;
         data[2][28].field_0_windowParams.field_8_w = 0;
         data[2][28].field_0_windowParams.field_C_h = 0;
-        data[2][28].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][28].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][28].field_0_windowParams.field_14_style = 0x0;
         data[2][28].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][28].field_1C_window_class_name, "0");
@@ -911,7 +911,7 @@ struct Network_UI_Control_Data_Array
         data[2][29].field_0_windowParams.field_4_y = 0;
         data[2][29].field_0_windowParams.field_8_w = 0;
         data[2][29].field_0_windowParams.field_C_h = 0;
-        data[2][29].field_0_windowParams.field_10_hMenu = (HMENU)0;
+        data[2][29].field_0_windowParams.field_10_hMenu = (HMENU)nullptr;
         data[2][29].field_0_windowParams.field_14_style = 0x0;
         data[2][29].field_0_windowParams.field_18_exStyle = 0x0;
         strcpy(data[2][29].field_1C_window_class_name, "0");
@@ -1012,8 +1012,8 @@ void Network_20324::GetString_519A50(wchar_t* Dest, char_type* Source, size_t Ma
 MATCH_FUNC(0x519a90)
 Network_20324::Network_20324()
 {
-    this->field_202E4_hInstance = 0;
-    this->field_202E0_dlg_hwnd = 0;
+    this->field_202E4_hInstance = nullptr;
+    this->field_202E0_dlg_hwnd = nullptr;
     this->field_202DC_unused = 0;
     this->field_202D4_showing_specific_window_idx = 0;
     this->field_202D8_last_showing_specific_window_idx = 3;
@@ -1040,7 +1040,7 @@ Network_20324::~Network_20324()
     if (gtext_0x14_6F87F0)
     {
         delete gtext_0x14_6F87F0;
-        gtext_0x14_6F87F0 = 0;
+        gtext_0x14_6F87F0 = nullptr;
     }
 }
 
@@ -1059,7 +1059,7 @@ s32 Network_20324::ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance)
     gNetPlay_7071E8.Set27SavePlayerName_5211F0((sptr)Network_20324::cb_SavePlayerName_51BC00, (sptr)this);
     return DialogBoxParamA(this->field_202E4_hInstance,
                            (LPCSTR)103, // probably IDD_NETWORK_DIALOG
-                           0,
+                           nullptr,
                            Network_20324::DialogFunc,
                            (LPARAM)this) == 1;
 }
@@ -1224,9 +1224,9 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             {
                 gNetPlay_7071E8.EnumSessions_51E650();
                 wchar_t playerNameW[260];
-                playerData.field_0_data = 0;
+                playerData.field_0_data = nullptr;
                 playerData.field_4_len = 0;
-                groupData.field_0_data = 0;
+                groupData.field_0_data = nullptr;
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
@@ -1244,9 +1244,9 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             else
             {
                 wchar_t playerNameW[260];
-                playerData.field_0_data = 0;
+                playerData.field_0_data = nullptr;
                 playerData.field_4_len = 0;
-                groupData.field_0_data = 0;
+                groupData.field_0_data = nullptr;
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
@@ -1269,9 +1269,9 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             if (notify == LBN_DBLCLK)
             {
                 wchar_t playerNameW[260];
-                playerData.field_0_data = 0;
+                playerData.field_0_data = nullptr;
                 playerData.field_4_len = 0;
-                groupData.field_0_data = 0;
+                groupData.field_0_data = nullptr;
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
@@ -1324,7 +1324,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             NetworkGameSettings settings = pThis->field_20088_game_settings;
             groupData.field_0_data = &settings;
             groupData.field_4_len = sizeof(NetworkGameSettings);
-            playerData.field_0_data = 0;
+            playerData.field_0_data = nullptr;
             playerData.field_4_len = 0;
             GetDlgItemTextA(hDlg, 1004, playerName, 259);
             sprintf(sessionName, "%s's game", playerName);
@@ -1454,7 +1454,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
         case 1031:
             if (notify == 4)
             {
-                MessageBoxA(0, "Not implemented", "", 0);
+                MessageBoxA(nullptr, "Not implemented", "", 0);
             }
             break;
 
@@ -1536,7 +1536,7 @@ void Network_20324::CreateMainUi_51AA90(HWND hWndParent)
                                                                  hWndParent,
                                                                  gUiControlDefinitions_621430.data[i][j].field_0_windowParams.field_10_hMenu,
                                                                  this->field_202E4_hInstance,
-                                                                 0);
+                                                                 nullptr);
         }
     }
 
@@ -1584,7 +1584,7 @@ MATCH_FUNC(0x51ac60)
 s32 Network_20324::OnInitDialog_51AC60(HWND hWnd, s32 lParam, Network_20324* thisPtr)
 {
     SetWindowLongPtrA(hWnd, 8, (LONG_PTR)thisPtr);
-    gTimerId_6F8A18 = SetTimer(hWnd, 0xAu, 0xAu, 0);
+    gTimerId_6F8A18 = SetTimer(hWnd, 0xAu, 0xAu, nullptr);
     thisPtr->SetDlgHwnd_519E10(hWnd);
     thisPtr->CreateMainUi_51AA90(hWnd);
     thisPtr->PopulateMainUI_51AFA0();
@@ -2135,15 +2135,15 @@ void Network_20324::LoadPlayerNameFromRegistry_51BC90()
     if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                         "Software\\DMA Design Ltd\\GTA2\\Network",
                         0,
-                        0,
+                        nullptr,
                         0,
                         KEY_ALL_ACCESS,
-                        0,
+                        nullptr,
                         &phkResult,
                         &dwDisposition) == ERROR_SUCCESS)
     {
 
-        if (RegQueryValueExA(phkResult, "PlayerName", 0, &Type, Data, &cbData) == ERROR_SUCCESS)
+        if (RegQueryValueExA(phkResult, "PlayerName", nullptr, &Type, Data, &cbData) == ERROR_SUCCESS)
         {
             strcpy(field_1FF80_player_name, reinterpret_cast<char*>(Data));
             GetString_519A50(field_1FD78_player_name_2, reinterpret_cast<char*>(Data), GTA2_COUNTOF(field_1FD78_player_name_2));
@@ -2160,7 +2160,7 @@ void Network_20324::SetPlayNameAndSaveToRegistry_51BD40(const wchar_t* pPlayerNa
 
     HKEY hKey;
     DWORD dwDisposition;
-    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\DMA Design Ltd\\GTA2\\Network", 0, 0, 0, KEY_ALL_ACCESS, 0, &hKey, &dwDisposition) ==
+    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\DMA Design Ltd\\GTA2\\Network", 0, nullptr, 0, KEY_ALL_ACCESS, nullptr, &hKey, &dwDisposition) ==
         ERROR_SUCCESS)
     {
         RegSetValueExA(hKey,
@@ -2397,7 +2397,7 @@ void __stdcall Network_20324::ShowUnableToOpenFileError_51CAD0(const char_type* 
 {
     char Text[256];
     sprintf(Text, "Unable to open file: %s in mmpfile: %s", pFileName, pMmpName);
-    MessageBoxA(0, Text, "", MB_ICONEXCLAMATION); // TODO: blank str is byte_67DC88 ?
+    MessageBoxA(nullptr, Text, "", MB_ICONEXCLAMATION); // TODO: blank str is byte_67DC88 ?
 }
 
 MATCH_FUNC(0x51cb30)

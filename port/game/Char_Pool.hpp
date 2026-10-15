@@ -33,7 +33,7 @@ class Char_8
     // 9.6f 0x420EA0
     inline bool no_char_ped_420EA0()
     {
-        return field_0_char_ped == NULL;
+        return field_0_char_ped == nullptr;
     }
 
     void PoolAllocate()
@@ -55,7 +55,7 @@ class Char_8_Pool
 
     ~Char_8_Pool()
     {
-        field_0_pool.field_0_pHead = 0;
+        field_0_pool.field_0_pHead = nullptr;
     }
 
     // 9.6f 0x445EF0
@@ -128,7 +128,7 @@ class PedPool
     {
         field_0_pool.field_X_count = 0;
 
-        Ped* pPreviousItem = NULL;
+        Ped* pPreviousItem = nullptr;
         Ped* pCurrItem = field_0_pool.field_4_pPrev;
 
         while (pCurrItem)
@@ -143,7 +143,7 @@ class PedPool
 
                 if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
                 {
-                    pPreviousItem = NULL;
+                    pPreviousItem = nullptr;
                 }
 
                 if (pPreviousItem)

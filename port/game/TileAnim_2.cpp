@@ -19,7 +19,7 @@ void TileAnim_18::PoolAllocate()
 MATCH_FUNC(0x5bc150)
 void TileAnim_18::ApplyCurrentFrame_5BC150()
 {
-    if (field_C_ptr != NULL)
+    if (field_C_ptr != nullptr)
     {
         gGtx_0x106C_703DD4->SetTileRemap_5AA930(field_10_base, field_C_ptr->field_6_tiles[field_8_current_frame]);
         return;
@@ -108,10 +108,10 @@ void TileAnim_2::UpdateTileAnimations_5BC310()
 MATCH_FUNC(0x5bc3a0)
 TileAnim_2::TileAnim_2()
 {
-    if (gTileAnimPool_7052C8 == NULL)
+    if (gTileAnimPool_7052C8 == nullptr)
     {
         gTileAnimPool_7052C8 = new TileAnimPool();
-        if (gTileAnimPool_7052C8 == NULL)
+        if (gTileAnimPool_7052C8 == nullptr)
         {
             FatalError_4A38C0(Gta2Error::InvalidMapObjectData, "C:\\Splitting\\Gta2\\Source\\tileanim.cpp", 220);
         }
@@ -143,15 +143,15 @@ TileAnim_18::TileAnim_18()
     field_6_repeat = 0;
     field_8_current_frame = 0;
     field_A_frame_timer = 0;
-    field_C_ptr = 0;
+    field_C_ptr = nullptr;
     field_10_base = 0;
     field_12_idx = 0;
-    mpNext = 0;
+    mpNext = nullptr;
 }
 
 MATCH_FUNC(0x5bebd0)
 TileAnim_18::~TileAnim_18()
 {
-    field_C_ptr = NULL;
-    mpNext = NULL;
+    field_C_ptr = nullptr;
+    mpNext = nullptr;
 }

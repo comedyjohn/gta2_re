@@ -122,7 +122,7 @@ void Firefighter_28::deinit_4A81A0()
         if (pRoute)
         {
             gCarChaseTaskTable_678E30->FreeEntry_474CC0(pRoute);
-            this->field_1C_car->field_60_pChaseTask = 0;
+            this->field_1C_car->field_60_pChaseTask = nullptr;
         }
     }
     Ped* pPed = this->field_20_ped;
@@ -266,7 +266,7 @@ void Firefighter_28::Update_4A81F0()
                 field_1C_car->DeactivateEmergencyLights_43C9D0();
                 if (field_1C_car->field_54_driver)
                 {
-                    field_1C_car->field_54_driver->SetTargetObjectiveCar(0);
+                    field_1C_car->field_54_driver->SetTargetObjectiveCar(nullptr);
                     field_1C_car->field_54_driver->SetObjective(objectives_enum::no_obj_0);
                     field_1C_car->field_54_driver->ClearAttacking_403A40();
                 }
@@ -290,10 +290,10 @@ void Firefighter_28::init_4A85C0()
 MATCH_FUNC(0x4a85e0)
 void Firefighter_28::Reset_4A85E0()
 {
-    this->field_C_target_car = 0;
+    this->field_C_target_car = nullptr;
     this->field_8_state = firefighter_state::idle_0;
     this->field_4_bActive = 0;
-    this->field_1C_car = 0;
+    this->field_1C_car = nullptr;
 }
 
 MATCH_FUNC(0x4a85f0)
@@ -318,14 +318,14 @@ Firefighter_28* FirefighterPool_54::DispatchFirefighters_4A8620(Car_BC* pCar, Fi
 {
     if (bSkip_fire_engines_67D53A)
     {
-        return NULL;
+        return nullptr;
     }
     u8 xpos_int = xpos.ToUInt8();
     u8 ypos_int = ypos.ToUInt8();
     u8 zpos_int = (zpos + kFpHalf_67D1F0).ToUInt8();
     if (gPathFinder_6FDEF0->FindNearbyTileMatchingSlopeType_5552B0(1, &xpos_int, &ypos_int, &zpos_int, 0) != 1)
     {
-        return NULL;
+        return nullptr;
     }
     s8 sUnk;
     if (pCar->CountConsecutiveArrowBlocks_4410D0(kAng0_67D4B0, &sUnk, xpos_int, ypos_int) < 0 || sUnk <= 1)
@@ -336,7 +336,7 @@ Firefighter_28* FirefighterPool_54::DispatchFirefighters_4A8620(Car_BC* pCar, Fi
             {
                 if (pCar->CountConsecutiveArrowBlocks_4410D0(kAng270_67D2FC, &sUnk, xpos_int, ypos_int) < 0 || sUnk <= 1)
                 {
-                    return NULL;
+                    return nullptr;
                 }
             }
         }
@@ -344,7 +344,7 @@ Firefighter_28* FirefighterPool_54::DispatchFirefighters_4A8620(Car_BC* pCar, Fi
     Firefighter_28* pNewFireFighter = FirefighterPool_54::New28_4A8800();
     if (!pNewFireFighter)
     {
-        return NULL;
+        return nullptr;
     }
     pNewFireFighter->field_0_id = field_50_count;
     ++field_50_count;
@@ -373,7 +373,7 @@ Firefighter_28* FirefighterPool_54::New28_4A8800()
         }
         p++;
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4a8820)

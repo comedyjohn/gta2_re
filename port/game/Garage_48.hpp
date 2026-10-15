@@ -20,7 +20,7 @@ class Garage_48
     // inlined 0x44C870
     bool sub_44C870(Car_BC* param_1) const
     {
-        if (param_1 == this->field_4_parked_car && param_1 != NULL && param_1->field_6C_car_id == this->field_8_parked_car_id)
+        if (param_1 == this->field_4_parked_car && param_1 != nullptr && param_1->field_6C_car_id == this->field_8_parked_car_id)
         {
             return true;
         }
@@ -36,7 +36,7 @@ class Garage_48
     // 9.6f 0x489650
     inline void Reset_489650()
     {
-        field_10_door = NULL;
+        field_10_door = nullptr;
         field_C_state = 0;
         field_28_push_dir.x = 0;
         field_28_push_dir.y = 0;

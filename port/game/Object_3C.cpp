@@ -48,7 +48,7 @@ MATCH_FUNC(0x52ad80)
 Object_3C::Object_3C()
 {
     this->field_4_angle = 0;
-    this->mpNext = 0;
+    this->mpNext = nullptr;
     this->field_1C_z_accel = dword_6F8BF0;
     this->field_18_friction = dword_6F8BF0;
     this->field_10_z_speed = dword_6F8BF0;
@@ -67,7 +67,7 @@ Object_3C::Object_3C()
 MATCH_FUNC(0x52ade0)
 Object_3C::~Object_3C()
 {
-    mpNext = 0;
+    mpNext = nullptr;
 }
 
 // 9.6f 0x482BA0
@@ -95,7 +95,7 @@ AttachedSprite_18* SpriteList_4::GetSpriteForModel_5A6A50(s32 obj_type)
         }
         pIter = pIter->mpNext;
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5a6a90)
@@ -119,7 +119,7 @@ Object_2C* SpriteList_4::FindObject2CByModel_5A6A90(s32 obj_type)
         }
         pIter = pIter->mpNext;
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5a6ad0)
@@ -142,13 +142,13 @@ AttachedSprite_18* SpriteList_4::FindFirstActiveObject_5A6AD0()
         }
         pObjIter = pObjIter->mpNext;
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5a6b10)
 void SpriteList_4::RemoveSprite_5A6B10(Sprite* toFind)
 {
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
     AttachedSprite_18* pIter = this->field_0_p18;
     for (;;)
     {
@@ -174,7 +174,7 @@ void SpriteList_4::RemoveSprite_5A6B10(Sprite* toFind)
 MATCH_FUNC(0x5a6b60)
 void SpriteList_4::RemoveSpriteSafe_5A6B60(Sprite* toFind)
 {
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
     AttachedSprite_18* pIter = this->field_0_p18;
     while (pIter)
     {
@@ -227,9 +227,9 @@ void SpriteList_4::DispatchCarImpactEvents_5A6BF0(Sprite* pSprite)
 MATCH_FUNC(0x5a6c10)
 char_type SpriteList_4::TagSpriteWithRng_5A6C10(Sprite* toFind)
 {
-    if (field_0_p18 != NULL)
+    if (field_0_p18 != nullptr)
     {
-        for (AttachedSprite_18* pNext = field_0_p18; pNext != NULL; pNext = pNext->mpNext)
+        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->mpNext)
         {
             if (pNext->field_0_pSprite == toFind)
             {
@@ -245,7 +245,7 @@ MATCH_FUNC(0x5a6c40)
 void SpriteList_4::RemoveByRngValue_5A6C40(s32 toFind)
 {
     AttachedSprite_18* pIter = this->field_0_p18;
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
 
     while (pIter)
     {
@@ -276,9 +276,9 @@ void SpriteList_4::RemoveByRngValue_5A6C40(s32 toFind)
 MATCH_FUNC(0x5a6ca0)
 Sprite* SpriteList_4::FirstSpriteOfType_5A6CA0(s32 sprite_type)
 {
-    if (field_0_p18 != NULL)
+    if (field_0_p18 != nullptr)
     {
-        for (AttachedSprite_18* pNext = field_0_p18; pNext != NULL; pNext = pNext->mpNext)
+        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->mpNext)
         {
             if (pNext->field_0_pSprite->field_30_sprite_type_enum == sprite_type)
             {
@@ -286,7 +286,7 @@ Sprite* SpriteList_4::FirstSpriteOfType_5A6CA0(s32 sprite_type)
             }
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5a6cd0)
@@ -353,7 +353,7 @@ Sprite* SpriteList_4::PopFrontSprite_5A6DA0()
     AttachedSprite_18* p18 = this->field_0_p18;
     if (!this->field_0_p18)
     {
-        return 0;
+        return nullptr;
     }
     Sprite* pOld = p18->field_0_pSprite;
     this->field_0_p18 = p18->mpNext;
@@ -365,7 +365,7 @@ MATCH_FUNC(0x5a6dc0)
 Sprite* SpriteList_4::PopBackSprite_5A6DC0()
 {
     AttachedSprite_18* pIter = this->field_0_p18;
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
     while (pIter->mpNext)
     {
         pLast = pIter;
@@ -375,11 +375,11 @@ Sprite* SpriteList_4::PopBackSprite_5A6DC0()
     Sprite* result = pIter->field_0_pSprite;
     if (pLast)
     {
-        pLast->mpNext = 0;
+        pLast->mpNext = nullptr;
     }
     else
     {
-        this->field_0_p18 = 0;
+        this->field_0_p18 = nullptr;
     }
     gAttachedSpritePool_703B80->DeAllocate(pIter);
 
@@ -396,7 +396,7 @@ AttachedSprite_18* SpriteList_4::ClearList_5A6E10()
         pIter = pIter->mpNext;
         gAttachedSpritePool_703B80->DeAllocate(pLast);
     }
-    this->field_0_p18 = 0;
+    this->field_0_p18 = nullptr;
     return pIter;
 }
 
@@ -405,7 +405,7 @@ Sprite* SpriteList_4::FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff)
 {
     Fix16 smallest(99999);
 
-    Sprite* new_ret = 0;
+    Sprite* new_ret = nullptr;
     for (AttachedSprite_18* pIter = this->field_0_p18; pIter; pIter = pIter->mpNext)
     {
         Fix16 yDelta = Fix16::MaxAbsDistance_42A6B0(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
@@ -421,9 +421,9 @@ Sprite* SpriteList_4::FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff)
 MATCH_FUNC(0x5a6ea0)
 Sprite* SpriteList_4::TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos)
 {
-    AttachedSprite_18* pPrev = 0;
-    AttachedSprite_18* pClosest = 0;
-    AttachedSprite_18* pBeforeClosest = 0;
+    AttachedSprite_18* pPrev = nullptr;
+    AttachedSprite_18* pClosest = nullptr;
+    AttachedSprite_18* pBeforeClosest = nullptr;
     Fix16 smallest(99999);
     Fix16 distance;
 
@@ -441,7 +441,7 @@ Sprite* SpriteList_4::TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos)
 
     if (!pClosest)
     {
-        return 0;
+        return nullptr;
     }
 
     Sprite* pSprite = pClosest->field_0_pSprite;
@@ -464,7 +464,7 @@ void SpriteList_4::PoolUpdate_5A6F70(Sprite* pSprite)
     // argument to PoolUpdate, probably DeAllocate was inlined - need to try to consolidate and refactor
     // all of these.
     // 9.6f 0x4BEF70
-    AttachedSprite_18* pPreviousItem = 0;
+    AttachedSprite_18* pPreviousItem = nullptr;
     AttachedSprite_18* pCurrItem = field_0_p18;
     while (pCurrItem)
     {
@@ -473,7 +473,7 @@ void SpriteList_4::PoolUpdate_5A6F70(Sprite* pSprite)
         {
             if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
             {
-                pPreviousItem = 0;
+                pPreviousItem = nullptr;
             }
 
             if (pPreviousItem)
@@ -536,7 +536,7 @@ void SpriteList_4::DestroyAllSprites_5A7010()
 MATCH_FUNC(0x5a7080)
 void SpriteList_4::CleanupSpriteList_5A7080()
 {
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
     AttachedSprite_18* pIter = this->field_0_p18;
     while (pIter)
     {
@@ -576,7 +576,7 @@ MATCH_FUNC(0x5a7110)
 void SpriteList_4::ClearGangIconSprite_5A7110()
 {
     AttachedSprite_18* pIter = this->field_0_p18;
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
     Object_2C* p5C;
     if (pIter)
     {
@@ -662,7 +662,7 @@ MATCH_FUNC(0x5a7240)
 void SpriteList_4::PruneNonCollidingSprites_5A7240(Sprite* pSprite)
 {
     AttachedSprite_18* pNext = this->field_0_p18;
-    AttachedSprite_18* pLast = 0;
+    AttachedSprite_18* pLast = nullptr;
 
     pSprite->UpdateCollisionBoundsIfNeeded_59E9C0();
 

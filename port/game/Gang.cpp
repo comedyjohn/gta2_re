@@ -39,7 +39,7 @@ Gang_144* GangPool_CA8::FirstGang_4BECA0()
             return &field_0_gang_list[gGangIdx_6206B8];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4bece0)
@@ -52,7 +52,7 @@ Gang_144* GangPool_CA8::NextGang_4BECE0()
             return &field_0_gang_list[gGangIdx_6206B8];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4BED30)
@@ -273,7 +273,7 @@ Gang_144* GangPool_CA8::FindGangByName_4BF100(const char* pGangName)
             return &field_0_gang_list[i];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4BF170);
@@ -289,7 +289,7 @@ Gang_144* GangPool_CA8::AllocGang_4BF170()
             return result;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x4BF1C0);

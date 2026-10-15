@@ -68,7 +68,7 @@ class SpriteTreeNodePool_2EE4
     {
         if (field_2EE0_next_free_idx >= SpriteTreeStack_FA4::k_max_nodes)
         {
-            return NULL;
+            return nullptr;
         }
         else
         {

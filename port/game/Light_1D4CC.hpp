@@ -44,7 +44,7 @@ class Light_1D4CC : public LightBase
     {
         Light_28* pFirst = field_0_pool.field_0_pStart;
         field_0_pool.field_0_pStart = field_0_pool.field_0_pStart->mpNext;
-        pFirst->mpNext = 0;
+        pFirst->mpNext = nullptr;
         pFirst->Reset_463F50();
         return pFirst;
     }
@@ -101,14 +101,14 @@ class Light_1D4CC : public LightBase
     // matched https://decomp.me/scratch/cZQwK
     inline void RemoveFromUpdateListAndFree_47F450(Light_28* pLight)
     {
-        Light_28* pPrevious = NULL;
+        Light_28* pPrevious = nullptr;
 
         for (Light_28* pCurr = field_0_pool.field_4_pPrev; pCurr; pPrevious = pCurr, pCurr = pCurr->mpNext)
         {
             if (pCurr == pLight)
             {
                 pCurr->PoolDeallocate();
-                if (pPrevious != NULL)
+                if (pPrevious != nullptr)
                 {
                     pPrevious->mpNext = pCurr->mpNext;
                 }

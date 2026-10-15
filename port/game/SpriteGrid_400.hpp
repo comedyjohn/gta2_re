@@ -40,7 +40,7 @@ class SpriteGrid_400
 
                 if (x_len > x_find)
                 {
-                    return NULL;
+                    return nullptr;
                 }
 
                 if (x_len == x_find)
@@ -50,7 +50,7 @@ class SpriteGrid_400
             }
         }
 
-        return NULL;
+        return nullptr;
     }
 
     EXPORT void Empty_478A10();

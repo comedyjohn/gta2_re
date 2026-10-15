@@ -54,7 +54,7 @@ class Weapon_30_Pool
     {
         Weapon_30* pWeapon = field_0_pool.field_0_pStart;
         field_0_pool.field_0_pStart = pWeapon->mpNext;
-        pWeapon->mpNext = 0;
+        pWeapon->mpNext = nullptr;
         return pWeapon;
     }
 
@@ -63,7 +63,7 @@ class Weapon_30_Pool
     void DeAllocate_4A4F20(Weapon_30* pW30)
     {
         Weapon_30* pIter = this->field_0_pool.field_4_pPrev;
-        Weapon_30* pLastIter = 0;
+        Weapon_30* pLastIter = nullptr;
         while (pIter)
         {
             if (pIter == pW30)

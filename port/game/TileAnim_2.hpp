@@ -29,7 +29,7 @@ class TileAnim_18
         field_2_anim_length = length;
         field_4_frame_rate = frame_rate;
         field_6_repeat = repeat;
-        field_C_ptr = 0;
+        field_C_ptr = nullptr;
     }
 
     EXPORT void PoolAllocate();

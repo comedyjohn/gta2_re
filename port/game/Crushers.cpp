@@ -32,7 +32,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAng90_67A568, Ang16(0x168), 0x67A568);
 MATCH_FUNC(0x4882d0)
 Crusher_30::Crusher_30()
 {
-    field_18_sound = NULL;
+    field_18_sound = nullptr;
 }
 
 MATCH_FUNC(0x4882e0)
@@ -41,7 +41,7 @@ Crusher_30::~Crusher_30()
     if (field_18_sound)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_18_sound);
-        field_18_sound = NULL;
+        field_18_sound = nullptr;
     }
 }
 
@@ -116,7 +116,7 @@ void Crusher_30::Service_488350()
                 field_20_h += kCrusherSpeed_67A5F4;
                 if (field_20_h == kCrusherTargetW_67A7D0)
                 {
-                    field_14_pCarBeingCrushed = NULL;
+                    field_14_pCarBeingCrushed = nullptr;
                     field_2C_state = CrusherStates::Idle_0;
                 }
                 break;
@@ -172,7 +172,7 @@ void Crusher_30::InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_id
     field_20_h = kCrusherTargetW_67A7D0;
 
     field_2C_state = CrusherStates::Idle_0;
-    field_14_pCarBeingCrushed = NULL;
+    field_14_pCarBeingCrushed = nullptr;
 
     if (!field_18_sound && !bSkip_audio_67D6BE)
     {

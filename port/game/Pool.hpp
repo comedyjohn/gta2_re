@@ -16,7 +16,7 @@ class PoolBasic
             pIter++;
         }
 
-        field_4_pool[PoolSize - 1].mpNext = NULL;
+        field_4_pool[PoolSize - 1].mpNext = nullptr;
         field_0_pHead = field_4_pool;
     }
 
@@ -59,7 +59,7 @@ class Pool
     // 9.6f 0x48A8F0
     inline bool has_pStart_48A8F0()
     {
-        return field_0_pStart != NULL;
+        return field_0_pStart != nullptr;
     }
 
     // 9.6f 0x4B8FD0 (CokeZero_FC, 10.5 copy 0x5935C0): first used item
@@ -77,17 +77,17 @@ class Pool
             pIter++;
         }
 
-        field_8_pool[PoolSize - 1].mpNext = 0;
+        field_8_pool[PoolSize - 1].mpNext = nullptr;
         field_0_pStart = field_8_pool;
 
-        field_4_pPrev = 0;
+        field_4_pPrev = nullptr;
         field_X_count = 0;
     }
 
     ~Pool()
     {
-        field_0_pStart = 0;
-        field_4_pPrev = 0;
+        field_0_pStart = nullptr;
+        field_4_pPrev = nullptr;
     }
 
     PoolType* Allocate()
@@ -106,7 +106,7 @@ class Pool
         // Pop from free list
         PoolType* obj = field_0_pStart;
         field_0_pStart = obj->mpNext;
-        obj->mpNext = NULL;
+        obj->mpNext = nullptr;
 
         // Append to active list (FIFO style)
         if (!field_4_pPrev)
@@ -131,7 +131,7 @@ class Pool
     {
         PoolType* tmp = this->field_0_pStart;
         this->field_0_pStart = tmp->mpNext;
-        tmp->mpNext = 0;
+        tmp->mpNext = nullptr;
         tmp->PoolAllocate();
         return tmp;
     }
@@ -159,7 +159,7 @@ class Pool
     {
         field_X_count = 0;
 
-        PoolType* pPreviousItem = NULL;
+        PoolType* pPreviousItem = nullptr;
         PoolType* pCurrItem = field_4_pPrev;
 
         while (pCurrItem)
@@ -174,7 +174,7 @@ class Pool
 
                 if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
                 {
-                    pPreviousItem = NULL;
+                    pPreviousItem = nullptr;
                 }
 
                 if (pPreviousItem)
@@ -214,7 +214,7 @@ class Pool
     {
         field_X_count = 0;
 
-        PoolType* pPreviousItem = NULL;
+        PoolType* pPreviousItem = nullptr;
         PoolType* pCurrItem = field_4_pPrev;
 
         while (pCurrItem)
@@ -227,7 +227,7 @@ class Pool
             {
                 if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
                 {
-                    pPreviousItem = NULL;
+                    pPreviousItem = nullptr;
                 }
 
                 if (pPreviousItem)
@@ -265,7 +265,7 @@ class Pool
 
     PoolType* FindAndDeAllocate(PoolType* pToFind)
     {
-        PoolType* pLast = 0;
+        PoolType* pLast = nullptr;
 
         for (PoolType* pIter = field_4_pPrev; pIter; pIter = pIter->mpNext)
         {
@@ -292,7 +292,7 @@ class Pool
 
     void UnlinkFromActiveList_420F30(PoolType* toFind)
     {
-        PoolType* pLast = 0;
+        PoolType* pLast = nullptr;
         for (PoolType* pIter = this->field_4_pPrev; pIter; pIter = pIter->mpNext)
         {
             if (pIter == toFind)
@@ -305,7 +305,7 @@ class Pool
                 {
                     this->field_4_pPrev = pIter->mpNext;
                 }
-                pIter->mpNext = 0;
+                pIter->mpNext = nullptr;
                 return;
             }
             pLast = pIter;

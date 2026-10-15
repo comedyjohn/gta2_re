@@ -109,14 +109,14 @@ ExplodingScore_50::ExplodingScore_50()
     field_40 = 0;
     field_4C_score = 0;
     field_48_unused = 0;
-    mpNext = 0;
+    mpNext = nullptr;
     field_34_palette = 9;
 }
 
 MATCH_FUNC(0x596a40)
 ExplodingScore_50::~ExplodingScore_50()
 {
-    mpNext = 0;
+    mpNext = nullptr;
 }
 
 MATCH_FUNC(0x596a50)

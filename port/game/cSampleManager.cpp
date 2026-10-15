@@ -112,22 +112,22 @@ const voc_name gVocNames_5FEA5C[98] = {{"accuracyb.wav"},
 MATCH_FUNC(0x58D430)
 cSampleManager::cSampleManager()
 {
-    field_1EA8_pAudioBuffer1 = 0;
-    field_1EAC_pAudioBuffer2 = 0;
+    field_1EA8_pAudioBuffer1 = nullptr;
+    field_1EAC_pAudioBuffer2 = nullptr;
 
     for (s32 k = 0; k < 16; k++)
     {
-        field_58_hSamples[k] = 0;
+        field_58_hSamples[k] = nullptr;
     }
 
     for (s32 j = 0; j < 2; j++)
     {
-        field_9C_hStreams[j] = 0;
+        field_9C_hStreams[j] = nullptr;
     }
 
     for (s32 m = 0; m < 16; m++)
     {
-        field_26C4_3d_sample[m] = 0;
+        field_26C4_3d_sample[m] = nullptr;
     }
 
     field_A4_bLoaded = 0;
@@ -142,7 +142,7 @@ cSampleManager::cSampleManager()
         field_A8_sdt_entries[i].field_14_loop_end = -1;
     }
 
-    field_0_hDriver = 0;
+    field_0_hDriver = nullptr;
     field_1EB0_count_samples = 16;
     field_1EB1_bytes_per_sample = 2;
     field_1EB2_3d_samp_count = 0;
@@ -198,7 +198,7 @@ char_type cSampleManager::DisableA3DSplash_58D620()
     HKEY hKey;
     DWORD disposition;
 
-    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\Aureal\\A3D", 0, 0, 0, 0x20006u, 0, &hKey, &disposition))
+    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\Aureal\\A3D", 0, nullptr, 0, 0x20006u, nullptr, &hKey, &disposition))
     {
         return 0;
     }
@@ -285,7 +285,7 @@ char_type cSampleManager::OpenDigitalDriver_58D720(char_type bFlag, char_type bS
 
     AIL_set_preference(31, 1); // DIG_ENABLE_RESAMPLE_FILTER
 
-    if (AIL_waveOutOpen(&field_0_hDriver, 0, -1, &l.waveFormat))
+    if (AIL_waveOutOpen(&field_0_hDriver, nullptr, -1, &l.waveFormat))
     {
         return 0;
     }
@@ -383,7 +383,7 @@ void cSampleManager::Reset3DSamples_58D960()
         if (field_26C4_3d_sample[i])
         {
             AIL_release_3D_sample_handle(field_26C4_3d_sample[i]);
-            field_26C4_3d_sample[i] = 0;
+            field_26C4_3d_sample[i] = nullptr;
         }
     }
 
@@ -443,7 +443,7 @@ void cSampleManager::ReleaseSample_58DAC0()
     if (field_98_hSample)
     {
         AIL_release_sample_handle(field_98_hSample);
-        field_98_hSample = 0;
+        field_98_hSample = nullptr;
     }
 }
 
@@ -453,7 +453,7 @@ void cSampleManager::Terminate_58DAE0()
     for (u8 i = 0; i < field_1EB0_count_samples; i++)
     {
         AIL_release_sample_handle(field_58_hSamples[i]);
-        field_58_hSamples[i] = 0;
+        field_58_hSamples[i] = nullptr;
     }
 }
 
@@ -488,7 +488,7 @@ void cSampleManager::Shutdown_58DB30()
         if (field_9C_hStreams[i])
         {
             AIL_close_stream(field_9C_hStreams[i]);
-            field_9C_hStreams[i] = 0;
+            field_9C_hStreams[i] = nullptr;
         }
     }
 
@@ -497,8 +497,8 @@ void cSampleManager::Shutdown_58DB30()
     Terminate_58DAE0();
 
     AIL_mem_free_lock(field_1EA8_pAudioBuffer1);
-    field_1EA8_pAudioBuffer1 = 0;
-    field_1EAC_pAudioBuffer2 = 0;
+    field_1EA8_pAudioBuffer1 = nullptr;
+    field_1EAC_pAudioBuffer2 = nullptr;
     AIL_waveOutClose(field_0_hDriver);
     AIL_shutdown();
 }
@@ -869,7 +869,7 @@ void cSampleManager::OpenStream_58E320(u32 stream_idx)
             strcat(wavPath, dma_wav_5FF5D8[stream_idx]);
             HSTREAM tmp = AIL_open_stream(field_0_hDriver, wavPath, 0);
             field_9C_hStreams[0] = tmp;
-            if (tmp == 0)
+            if (tmp == nullptr)
             {
                 if (stream_idx == 1)
                 {
@@ -897,7 +897,7 @@ void cSampleManager::CloseStream_58E460()
         if (field_9C_hStreams[0])
         {
             AIL_close_stream(field_9C_hStreams[0]);
-            field_9C_hStreams[0] = 0;
+            field_9C_hStreams[0] = nullptr;
         }
     }
 }
@@ -921,7 +921,7 @@ void cSampleManager::FadeOut_58E490()
             } while (volR);
         }
         AIL_close_stream(field_9C_hStreams[0]);
-        field_9C_hStreams[0] = 0;
+        field_9C_hStreams[0] = nullptr;
     }
 }
 
@@ -985,7 +985,7 @@ void cSampleManager::CloseVocalStream_58E6A0(s32 stream_idx)
     if (field_9C_hStreams[stream_idx])
     {
         AIL_close_stream(field_9C_hStreams[stream_idx]);
-        field_9C_hStreams[stream_idx] = 0;
+        field_9C_hStreams[stream_idx] = nullptr;
     }
 }
 
@@ -1034,7 +1034,7 @@ s32 cSampleManager::GetVocalPosMs_58E770(long stream_idx)
 {
     if (field_9C_hStreams[stream_idx])
     {
-        AIL_stream_ms_position(field_9C_hStreams[stream_idx], 0, &stream_idx);
+        AIL_stream_ms_position(field_9C_hStreams[stream_idx], nullptr, &stream_idx);
         return stream_idx;
     }
     return 0;
@@ -1045,7 +1045,7 @@ s32 cSampleManager::GetVocalLengthMs_58E7A0(long stream_idx)
 {
     if (field_9C_hStreams[stream_idx])
     {
-        AIL_stream_ms_position(field_9C_hStreams[stream_idx], &stream_idx, 0);
+        AIL_stream_ms_position(field_9C_hStreams[stream_idx], &stream_idx, nullptr);
         return stream_idx;
     }
     return 0;

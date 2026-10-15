@@ -51,7 +51,7 @@ class Player
     // 9.6f 0x45B0C0
     inline bool has_player_ped_45B0C0()
     {
-        return field_2C4_player_ped != NULL;
+        return field_2C4_player_ped != nullptr;
     }
 
     // 9.6f 0x4766D0
@@ -94,14 +94,14 @@ class Player
     inline bool IsBustedNotObjective54_476700()
     {
         Ped* pPed;
-        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && ((pPed = field_2C4_player_ped) == NULL || pPed->get_objective_403A80() != objectives_enum::objective_54);
+        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != objectives_enum::objective_54);
     }
 
     // 9.6f 0x476730
     inline bool IsBustedObjective54_476730()
     {
         Ped* pPed;
-        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != NULL && pPed->get_objective_403A80() == objectives_enum::objective_54;
+        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr && pPed->get_objective_403A80() == objectives_enum::objective_54;
     }
 
     // 9.6f 0x4766C0

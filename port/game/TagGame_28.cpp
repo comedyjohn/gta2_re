@@ -18,7 +18,7 @@ DEFINE_GLOBAL(s32, gNetTimeLimitEnabled_6F58A4, 0x6F58A4);
 MATCH_FUNC(0x516560)
 void TagGame_28::Init_516560() // For some reason, it's a function instead of a proper ctor
 {
-    field_0_fugitive = NULL;
+    field_0_fugitive = nullptr;
     field_1C_tick_timer = 0;
     memset(field_4_it_time_secs, 0, sizeof(field_4_it_time_secs));
     memset(field_20_bHasQuit, 0, sizeof(field_20_bHasQuit));
@@ -27,7 +27,7 @@ void TagGame_28::Init_516560() // For some reason, it's a function instead of a 
 MATCH_FUNC(0x516590)
 void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
 {
-    if (pNewFugitive == NULL)
+    if (pNewFugitive == nullptr)
     {
         pNewFugitive = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0();
     }
@@ -37,7 +37,7 @@ void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
     field_0_fugitive->RemovePlayerWeapons_564C50();
     field_0_fugitive->ClearPowerUps_564CC0();
 
-    if (field_0_fugitive->GetPlayerPed_41D020() != NULL)
+    if (field_0_fugitive->GetPlayerPed_41D020() != nullptr)
     {
         field_0_fugitive->GetPlayerPed_41D020()->SetVisible();
         field_0_fugitive->GetPlayerPed_41D020()->ClearInvulnerable_45C050();
@@ -49,7 +49,7 @@ void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
         Hud_Arrow_7C* pArrow = gHud_2B00_706620->field_1F18_arrows.AllocArrow_5D1050();
         pArrow->field_18.field_18_primary_target.SetTargetPlayer_4820A0(field_0_fugitive);
 
-        if (field_0_fugitive->field_2C4_player_ped != NULL)
+        if (field_0_fugitive->field_2C4_player_ped != nullptr)
         {
             pArrow->SetPlayerArrowColour_5D0DC0(field_0_fugitive->field_2C4_player_ped);
         }
@@ -82,7 +82,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
             }
             if (!field_0_fugitive)
             {
-                SetNewFugitive_516590(NULL);
+                SetNewFugitive_516590(nullptr);
             }
 
             if (field_0_fugitive && field_0_fugitive->field_2C4_player_ped &&
@@ -104,18 +104,18 @@ void TagGame_28::UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pP
     if (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() == TAG_GAME_3
         && field_0_fugitive == pFormerPlayerFugitive)
     {
-        if (pPlayer_killer != NULL)
+        if (pPlayer_killer != nullptr)
         {
             TagGame_28::SetNewFugitive_516590(pPlayer_killer); //  Make him "IT"
         }
         else
         {
             Player* PlayerIter = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0();
-            Player* pChosenPlayer = NULL;
+            Player* pChosenPlayer = nullptr;
             Fix16 fugitive_x = field_0_fugitive->field_2C4_player_ped->field_1AC_cam.x;
             Fix16 fugitive_y = field_0_fugitive->field_2C4_player_ped->field_1AC_cam.y;
 
-            for (; PlayerIter != NULL; PlayerIter = gGame_0x40_67E008->IterateNextPlayer_4B9D10())
+            for (; PlayerIter != nullptr; PlayerIter = gGame_0x40_67E008->IterateNextPlayer_4B9D10())
             {
                 if (PlayerIter != field_0_fugitive)
                 {
@@ -135,7 +135,7 @@ void TagGame_28::UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pP
             the player closest to the former fugitive (in taxicab geometry)
             will be the "pChosenPlayer"
             */
-            if (pChosenPlayer != NULL)
+            if (pChosenPlayer != nullptr)
             {
                 TagGame_28::SetNewFugitive_516590(pChosenPlayer); //  Make him "IT"
             }

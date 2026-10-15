@@ -144,7 +144,7 @@ void keybrd_0x204::destroy_4D5FA0()
     if (gKeybrd_0x204_6F52F4)
     {
         delete gKeybrd_0x204_6F52F4;
-        gKeybrd_0x204_6F52F4 = 0;
+        gKeybrd_0x204_6F52F4 = nullptr;
     }
 }
 

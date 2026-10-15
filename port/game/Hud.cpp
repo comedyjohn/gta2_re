@@ -131,12 +131,12 @@ MATCH_FUNC(0x4be650)
 Hud_Pager_C::~Hud_Pager_C()
 {
     field_0_timer = -1;
-    field_4_ptr_counter = NULL;
+    field_4_ptr_counter = nullptr;
 
-    if (field_8_sound != NULL)
+    if (field_8_sound != nullptr)
     {
         gRoot_sound_66B038.DestroySoundObj_40FE60(field_8_sound);
-        field_8_sound = NULL;
+        field_8_sound = nullptr;
     }
 }
 
@@ -154,7 +154,7 @@ EXPORT wchar_t* gmp_map_zone::get_zone_str_4DEF00()
         buf[3] = 0;
         return gText_0x14_704DFC->Find_5B5F90(buf);
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5cf620)
@@ -656,7 +656,7 @@ bool Hud_Arrow_7C::CheckVisibility_5D0530()
             {
                 if (pPlayer->get_arrow_blocker_zone_4C7340())
                 {
-                    pCurrLocationGang = NULL;
+                    pCurrLocationGang = nullptr;
                 }
             }
             if (field_18.field_60_curr_target->field_10_target_type == ArrowTargetType::InfoPhone_5)
@@ -997,8 +997,8 @@ void Hud_Arrow_7C_Array::DrawArrows_5D0E90()
         // Limit drawn arrows in multiplayer
         for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
         {
-            if (field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30() == NULL ||
-                field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020() == NULL ||
+            if (field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30() == nullptr ||
+                field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020() == nullptr ||
                 field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020()->field_21C_bf.bInvisible == 0)
             {
                 field_0_array[i].DrawArrow_5D0C90();
@@ -1033,7 +1033,7 @@ void Hud_Arrow_7C_Array::FindVisibleGangArrow_5D0EF0()
             return;
         }
     }
-    this->field_840_visible_gang_arrow = 0;
+    this->field_840_visible_gang_arrow = nullptr;
 }
 
 // ----------------------------------------------------
@@ -1111,7 +1111,7 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::FindFreeArrow_5D1020(s32* pOutIdx)
             return pIter;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5d1050)
@@ -1155,7 +1155,7 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::FindGangPhoneArrow_5D10D0(Gang_144* pZone, s32
         i++;
         pIter++;
     }
-    return 0;
+    return nullptr;
 }
 
 MATCH_FUNC(0x5d1110)
@@ -1423,7 +1423,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
     s32 text_ypos = 480 - line_spacing;
     if (bStartNetworkGame_7081F0)
     {
-        for (Player* pPlayerIter = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0(); pPlayerIter != NULL;
+        for (Player* pPlayerIter = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0(); pPlayerIter != nullptr;
              pPlayerIter = gGame_0x40_67E008->IterateNextPlayer_4B9D10())
         {
             if (pPlayerIter->field_794_is_chatting)
@@ -1673,7 +1673,7 @@ inline void Hud_Pager_C::SetCounter_4C7130(s32* pCounter)
 MATCH_FUNC(0x5d2050)
 void Hud_TextList_968::RemoveExpired_5D2050()
 {
-    Hud_TextEntry_C4* pAltIter = NULL;
+    Hud_TextEntry_C4* pAltIter = nullptr;
     Hud_TextEntry_C4* pIter = field_960_pFirst;
     while (pIter)
     {
@@ -1714,8 +1714,8 @@ Hud_TextList_968::Hud_TextList_968()
     }
 
     field_964_pFreeList = &field_0_29_ary[0];
-    field_0_29_ary[30 - 1].field_C0_pNext = NULL;
-    field_960_pFirst = NULL;
+    field_0_29_ary[30 - 1].field_C0_pNext = nullptr;
+    field_960_pFirst = nullptr;
 }
 
 MATCH_FUNC(0x5d2320)
@@ -1729,7 +1729,7 @@ void Hud_Pager_C::Service_5D2320()
     field_0_timer--;
     if (field_0_timer == -1)
     {
-        field_4_ptr_counter = NULL;
+        field_4_ptr_counter = nullptr;
     }
 }
 
@@ -1942,14 +1942,14 @@ void Hud_Pager_C_Array::ClearPager_5D3280(s32 idx)
     SoundObject_10* pSound = field_0_pagers_array[idx].field_8_sound;
     Hud_Pager_C* pPager = &field_0_pagers_array[idx];
     pPager->field_0_timer = -1;
-    pPager->field_4_ptr_counter = NULL;
+    pPager->field_4_ptr_counter = nullptr;
 
     if (pSound)
     {
         pSound->Release_40EF20();
         pSound->field_C_pAny.pNextFree = gRoot_sound_66B038.field_0_pFreeList;
         gRoot_sound_66B038.field_0_pFreeList = pSound;
-        pPager->field_8_sound = NULL;
+        pPager->field_8_sound = nullptr;
     }
 }
 
@@ -1969,7 +1969,7 @@ void Hud_Pager_C_Array::AddTime_5D32F0(s32 pager_idx, s32 time_to_add)
 MATCH_FUNC(0x5d3310)
 void Hud_Pager_C_Array::ClearCounterOnly_5D3310(s32 pager_idx)
 {
-    field_0_pagers_array[pager_idx].field_4_ptr_counter = NULL;
+    field_0_pagers_array[pager_idx].field_4_ptr_counter = nullptr;
 }
 
 MATCH_FUNC(0x5d3330)
@@ -2014,7 +2014,7 @@ void Hud_Brief_704::AppendCurrentBriefToPrev_5D33A0()
     pBrief->field_C_pNext = field_6F8_curr_briefs;
     field_6F8_curr_briefs->field_8_brief_priority = 0;
     field_6F8_curr_briefs = field_6F8_curr_briefs->field_C_pNext;
-    pBrief->field_C_pNext->field_C_pNext = NULL;
+    pBrief->field_C_pNext->field_C_pNext = nullptr;
 }
 
 // https://decomp.me/scratch/L1e5G reg swap
@@ -2043,16 +2043,16 @@ Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
                 } while (result->field_C_pNext);
                 if (pPrev)
                 {
-                    pPrev->field_C_pNext = NULL;
+                    pPrev->field_C_pNext = nullptr;
                 }
                 else
                 {
-                    field_700_prev_briefs = NULL;
+                    field_700_prev_briefs = nullptr;
                 }
             }
             else
             {
-                field_700_prev_briefs = NULL;
+                field_700_prev_briefs = nullptr;
             }
         }
         else
@@ -2061,7 +2061,7 @@ Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
             pIter = result->field_C_pNext;
             if (!pIter)
             {
-                field_6F8_curr_briefs = NULL;
+                field_6F8_curr_briefs = nullptr;
             }
             else
             {
@@ -2072,11 +2072,11 @@ Hud_BriefEntry_18* Hud_Brief_704::AllocBrief_5D33F0()
                 } while (result->field_C_pNext);
                 if (pPrev)
                 {
-                    pPrev->field_C_pNext = NULL;
+                    pPrev->field_C_pNext = nullptr;
                 }
                 else
                 {
-                    field_6F8_curr_briefs = NULL;
+                    field_6F8_curr_briefs = nullptr;
                 }
             }
         }
@@ -2253,7 +2253,7 @@ void Hud_Brief_704::SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32
     if (!this->field_6F8_curr_briefs)
     {
         this->field_6F8_curr_briefs = pNewBrief;
-        pNewBrief->field_C_pNext = NULL;
+        pNewBrief->field_C_pNext = nullptr;
         StartCurrentBrief_5D39D0();
     }
     else if (this->field_6F8_curr_briefs->field_8_brief_priority >= priority && priority != 3)
@@ -2273,7 +2273,7 @@ void Hud_Brief_704::SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32
         else
         {
             pIter->field_C_pNext = pNewBrief;
-            pNewBrief->field_C_pNext = NULL;
+            pNewBrief->field_C_pNext = nullptr;
         }
     }
     else
@@ -2296,7 +2296,7 @@ inline void Hud_Arrow_7C::Reset_4CA610()
     SetArrowColour_5D0510(4);
     field_18.field_10.field_5_is_visible = true;
     field_18.field_2C_arrow_sprt_idx = 0;
-    field_18.field_10.field_30_gang = NULL;
+    field_18.field_10.field_30_gang = nullptr;
     field_18.field_10.field_34_min_respect = 0;
 }
 
@@ -2373,7 +2373,7 @@ void Hud_Brief_704::ShowBrief_5D4850()
 MATCH_FUNC(0x5d4890)
 void Hud_Brief_704::ClearAllBriefsWithPriority_5D4890(s32 priority)
 {
-    Hud_BriefEntry_18* pLast = NULL;
+    Hud_BriefEntry_18* pLast = nullptr;
     Hud_BriefEntry_18* pIter = field_6F8_curr_briefs;
     while (pIter)
     {
@@ -2420,8 +2420,8 @@ Hud_Brief_704::Hud_Brief_704()
     field_50C_face_variant = 0;
     field_510_time_to_show = 0;
     field_514_upward_timer = 0;
-    field_6F8_curr_briefs = 0;
-    field_700_prev_briefs = 0;
+    field_6F8_curr_briefs = nullptr;
+    field_700_prev_briefs = nullptr;
     field_504_tick_timer = 0;
 
     for (s32 i = 0; i < GTA2_COUNTOF(field_518_briefs) - 1; i++)
@@ -2429,7 +2429,7 @@ Hud_Brief_704::Hud_Brief_704()
         field_518_briefs[i].field_C_pNext = &field_518_briefs[i + 1];
     }
 
-    field_518_briefs[GTA2_COUNTOF(field_518_briefs) - 1].field_C_pNext = NULL;
+    field_518_briefs[GTA2_COUNTOF(field_518_briefs) - 1].field_C_pNext = nullptr;
 }
 
 // TODO: Calls 2 Fix16 ctors that are exactly the same but are 2 unique functions ??
@@ -2734,7 +2734,7 @@ void Hud_MapZone_98::UpdateZoneName_5D5B60()
     else
     {
         field_0_timer = 0;
-        field_88_nav_zone = 0;
+        field_88_nav_zone = nullptr;
     }
 }
 
@@ -2749,8 +2749,8 @@ MATCH_FUNC(0x5d5c60)
 Hud_MapZone_98::Hud_MapZone_98()
 {
     field_0_timer = 0;
-    field_88_nav_zone = NULL;
-    field_8C_local_nav_zone = NULL;
+    field_88_nav_zone = nullptr;
+    field_8C_local_nav_zone = nullptr;
 }
 
 MATCH_FUNC(0x5d5c80)
@@ -2824,7 +2824,7 @@ void Hud_PlayerStats_4::DrawPlayerStats_5D5C80()
         }
 
         s32 ypos = 8;
-        for (Player* pMultiPlayer = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0(); pMultiPlayer != NULL;
+        for (Player* pMultiPlayer = gGame_0x40_67E008->IterateFirstPlayer_4B9CD0(); pMultiPlayer != nullptr;
              pMultiPlayer = gGame_0x40_67E008->IterateNextPlayer_4B9D10())
         {
             if (pMultiPlayer->IsUser_41DC70() == 0)
@@ -3305,7 +3305,7 @@ Hud_CopHead_C::Hud_CopHead_C()
 MATCH_FUNC(0x5d7600)
 Hud_Arrow_7C::Hud_Arrow_7C()
 {
-    field_18.field_10.field_30_gang = NULL;
+    field_18.field_10.field_30_gang = nullptr;
     field_18.field_10.field_34_min_respect = 0;
     field_18.field_10.field_5_is_visible = 0;
 
@@ -3321,7 +3321,7 @@ MATCH_FUNC(0x5d7650)
 Hud_Pager_C::Hud_Pager_C()
 {
     field_0_timer = -1;
-    field_4_ptr_counter = NULL;
-    field_8_sound = NULL;
+    field_4_ptr_counter = nullptr;
+    field_8_sound = nullptr;
 }
 

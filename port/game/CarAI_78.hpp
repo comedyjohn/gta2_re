@@ -75,7 +75,7 @@ class CarAI_78
 
     void PoolDeallocate()
     {
-        field_0_car = 0;
+        field_0_car = nullptr;
     }
 
     Car_BC* field_0_car;
@@ -141,7 +141,7 @@ class CarAI_78_Pool
 
     ~CarAI_78_Pool()
     {
-        field_0_pool.field_0_pHead = 0;
+        field_0_pool.field_0_pHead = nullptr;
     }
 
     CarAI_78* Allocate()

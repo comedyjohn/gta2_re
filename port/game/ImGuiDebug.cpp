@@ -3031,7 +3031,7 @@ void CC ImGuiDebugDraw()
                 ImGui::TreePop();
             }
             
-            if (&gCollisionTarget_679188 && ImGui::TreeNode("Show collision target"))
+            if (ImGui::TreeNode("Show collision target"))
             {
                 ImGui::Value("Type", gCollisionTarget_679188.field_0_type);
                 if (gCollisionTarget_679188.field_20_pHitSprite)
@@ -3523,33 +3523,30 @@ void CC ImGuiDebugDraw()
             static s32 override_idx = 0;
             ImGui::SliderInt("MapObjectOverride_54 idx", &override_idx, 0, 23);
 
-            if (gMapObjectOverrides_6FC5F8)
+            MapObjectOverride_54* phi_54 = &gMapObjectOverrides_6FC5F8[override_idx];
+            if (phi_54)
             {
-                MapObjectOverride_54* phi_54 = &gMapObjectOverrides_6FC5F8[override_idx];
-                if (phi_54)
-                {
-                    ImGui::Value("field_0", phi_54->field_0_definition_idx);
-                    ImGui::Value("field_4", phi_54->field_4_behavior_type);
-                    ImGui::Value("field_8", phi_54->field_8_next_definition_idx);
-                    ImGui::Value("field_C", phi_54->field_C);
-                    ImGui::Value("field_10", phi_54->field_10);
-                    ImGui::Value("field_14", phi_54->field_14);
-                    ImGui::Value("field_18", phi_54->field_18_collision_bucket_category);
-                    ImGui::Value("field_1C", phi_54->field_1C_speed.mValue);
-                    ImGui::Value("field_20", phi_54->field_20_friction.mValue);
-                    ImGui::Value("field_24", phi_54->field_24);
-                    ImGui::Value("field_28", phi_54->field_28);
-                    ImGui::Value("field_2C", phi_54->field_2C);
-                    ImGui::Value("field_30", phi_54->field_30_next_frame_max);
-                    ImGui::Value("field_34", phi_54->field_34);
-                    ImGui::Value("field_38", phi_54->field_38_mass.mValue);
-                    ImGui::Value("field_3C_draw_layer", phi_54->field_3C_draw_layer);
-                    ImGui::Value("field_40", phi_54->field_40_sprite_flags);
-                    ImGui::Value("field_44", phi_54->field_44_has_sound);
-                    ImGui::Value("field_48", phi_54->field_48_has_shadows);
-                    ImGui::Value("field_4C", phi_54->field_4C);
-                    ImGui::Value("field_50", phi_54->field_50);
-                }
+                ImGui::Value("field_0", phi_54->field_0_definition_idx);
+                ImGui::Value("field_4", phi_54->field_4_behavior_type);
+                ImGui::Value("field_8", phi_54->field_8_next_definition_idx);
+                ImGui::Value("field_C", phi_54->field_C);
+                ImGui::Value("field_10", phi_54->field_10);
+                ImGui::Value("field_14", phi_54->field_14);
+                ImGui::Value("field_18", phi_54->field_18_collision_bucket_category);
+                ImGui::Value("field_1C", phi_54->field_1C_speed.mValue);
+                ImGui::Value("field_20", phi_54->field_20_friction.mValue);
+                ImGui::Value("field_24", phi_54->field_24);
+                ImGui::Value("field_28", phi_54->field_28);
+                ImGui::Value("field_2C", phi_54->field_2C);
+                ImGui::Value("field_30", phi_54->field_30_next_frame_max);
+                ImGui::Value("field_34", phi_54->field_34);
+                ImGui::Value("field_38", phi_54->field_38_mass.mValue);
+                ImGui::Value("field_3C_draw_layer", phi_54->field_3C_draw_layer);
+                ImGui::Value("field_40", phi_54->field_40_sprite_flags);
+                ImGui::Value("field_44", phi_54->field_44_has_sound);
+                ImGui::Value("field_48", phi_54->field_48_has_shadows);
+                ImGui::Value("field_4C", phi_54->field_4C);
+                ImGui::Value("field_50", phi_54->field_50);
             }
 
             ImGui::TreePop();

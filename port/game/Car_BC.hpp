@@ -358,8 +358,7 @@ class Trailer
         mpNext = nullptr;
         field_8_truck_cab = nullptr;
         field_C_pCarOnTrailer = nullptr;
-        field_0_hitch_angle_clamped = NULL;
-        0;
+        field_0_hitch_angle_clamped = 0;
     }
 
     char_type field_0_hitch_angle_clamped; // set by UpdateTrailerAlignment_407CE0 when the trailer angle hits its window, cleared on hitching

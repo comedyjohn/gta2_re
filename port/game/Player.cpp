@@ -205,7 +205,7 @@ bool Player::PromoteCarInHistory_564610(Car_BC* pCar, bool dont_modify)
                 }
                 return true;
             }
-            *ppCarIter--;
+            ppCarIter--;
         }
     }
     return false;

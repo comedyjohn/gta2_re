@@ -554,7 +554,7 @@ class Ped
     }
 
     // 9.6f 0x420B60, 0x4C4F20
-    u32 get_id() const
+    s32 get_id() const
     {
         return field_200_id;
     }
@@ -895,7 +895,7 @@ class Ped
     Fix16 field_1F4_walk_speed;
     Fix16 field_1F8_run_speed;
     Fix16 field_1FC_follow_car_offset_distance;
-    u32 field_200_id;
+    s32 field_200_id;
     s32 field_204_killer_id;
     u16 field_208_invulnerability;
     s16 field_20A_wanted_points;

@@ -62,7 +62,7 @@ class Network_20324
     EXPORT Network_20324();
     EXPORT virtual ~Network_20324();
     EXPORT s32 ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance);
-    EXPORT static int __stdcall DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+    EXPORT static INT_PTR __stdcall DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
     EXPORT static s32 __stdcall cb_FillSessionList_519D30(Network_20324* pThis, Network_NameList* pSessions);
     EXPORT void SetDlgHwnd_519E10(HWND hDlg);
     EXPORT HWND Get_202E0_HWND_519E20();

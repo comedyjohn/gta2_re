@@ -385,7 +385,7 @@ namespace
 {
 std::map<std::string, WNDPROC> gWindowClasses; // lower-case class name -> window procedure
 std::map<HWND, WNDPROC> gWindowProcs;
-std::map<HWND, LONG> gWindowLongs[2];
+std::map<HWND, LONG_PTR> gWindowLongs[2];
 std::deque<MSG> gMessages;
 HWND gMainWindow = 0; // the first top-level window: where platform events go
 int gCursorCount = 0;
@@ -611,8 +611,8 @@ LONG SetWindowLongA(HWND hwnd, int index, LONG value)
         gWindowProcs[hwnd] = LongToWndProc(value);
         return old;
     }
-    std::map<HWND, LONG>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
-    LONG old = longs[hwnd];
+    std::map<HWND, LONG_PTR>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
+    LONG old = static_cast<LONG>(longs[hwnd]);
     longs[hwnd] = value;
     return old;
 }
@@ -622,6 +622,30 @@ LONG GetWindowLongA(HWND hwnd, int index)
     if (index == GWL_WNDPROC)
     {
         return WndProcToLong(gWindowProcs[hwnd]);
+    }
+    return static_cast<LONG>(gWindowLongs[index == GWL_EXSTYLE ? 1 : 0][hwnd]);
+}
+
+// The pointer-sized versions 64-bit Windows added: a procedure or a pointer travels whole.
+LONG_PTR SetWindowLongPtrA(HWND hwnd, int index, LONG_PTR value)
+{
+    if (index == GWL_WNDPROC)
+    {
+        WNDPROC old = gWindowProcs[hwnd];
+        gWindowProcs[hwnd] = reinterpret_cast<WNDPROC>(value);
+        return reinterpret_cast<LONG_PTR>(old);
+    }
+    std::map<HWND, LONG_PTR>& longs = gWindowLongs[index == GWL_EXSTYLE ? 1 : 0];
+    LONG_PTR old = longs[hwnd];
+    longs[hwnd] = value;
+    return old;
+}
+
+LONG_PTR GetWindowLongPtrA(HWND hwnd, int index)
+{
+    if (index == GWL_WNDPROC)
+    {
+        return reinterpret_cast<LONG_PTR>(gWindowProcs[hwnd]);
     }
     return gWindowLongs[index == GWL_EXSTYLE ? 1 : 0][hwnd];
 }

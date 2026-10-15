@@ -1065,7 +1065,7 @@ s32 Network_20324::ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance)
 }
 
 MATCH_FUNC(0x519c80)
-int __stdcall Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR __stdcall Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -1230,7 +1230,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
-                Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                 pThis->SetPlayNameAndSaveToRegistry_51BD40(playerNameW, playerName);
                 if (gNetPlay_7071E8.field_C4_sessions.field_5C4_session_count > 0)
                 {
@@ -1250,7 +1250,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
-                Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                 pThis->SetPlayNameAndSaveToRegistry_51BD40(playerNameW, playerName);
                 LRESULT sel = SendDlgItemMessageA(hDlg, 1000, LB_GETCURSEL, 0, 0);
                 if (sel != -1)
@@ -1275,7 +1275,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
                 groupData.field_4_len = 0;
                 GetDlgItemTextA(hDlg, 1004, playerName, 259);
                 Network_20324::GetString_519A50(playerNameW, playerName, 260);
-                Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                 pThis->SetPlayNameAndSaveToRegistry_51BD40(playerNameW, playerName);
                 LRESULT sel = SendDlgItemMessageA(hDlg, 1000, LB_GETCURSEL, 0, 0);
                 if (sel != -1)
@@ -1291,7 +1291,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 
         case IDCANCEL:
         {
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             switch (pThis->Get_202D4_active_control_idx_51ACC0())
             {
                 case 0:
@@ -1320,7 +1320,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 
         case 1002: // "Create" button
         {
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             NetworkGameSettings settings = pThis->field_20088_game_settings;
             groupData.field_0_data = &settings;
             groupData.field_4_len = sizeof(NetworkGameSettings);
@@ -1343,12 +1343,12 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 
         case 1023: // "Send" button ?
         {
-            GetWindowLongA(hDlg, 8);
+            GetWindowLongPtrA(hDlg, 8);
             GetDlgItemTextA(hDlg, 1025, chatText, 127);
             Network_20324::GetString_519A50(textW, chatText, 260);
             gNetPlay_7071E8.SendChatMessage_521060(textW, -1);
             SetDlgItemTextA(hDlg, 1025, "");
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             pThis->AppendChatMessage_51B4F0(1022, chatText);
             break;
         }
@@ -1359,7 +1359,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             Sleep(100);
             GetDlgItemTextA(hDlg, 1004, playerName, 260);
             Network_20324::GetString_519A50(textW, playerName, 260);
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             pThis->SetPlayNameAndSaveToRegistry_51BD40(textW, playerName);
             gNetPlay_7071E8.DisableJoining_521220();
             EndDialog(hDlg, 1);
@@ -1368,7 +1368,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 
         case 1020: // "Reject" button
         {
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             HWND hList = GetDlgItem(pThis->Get_202E0_HWND_519E20(), 1024);
             LRESULT item = SendMessageA(hList, LVM_GETNEXTITEM, -1, LVNI_SELECTED);
             LVITEMA lvItem;
@@ -1389,7 +1389,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             {
                 case CBN_SELCHANGE:
                 {
-                    Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                     LRESULT sel = SendDlgItemMessageA(hDlg, 1026, CB_GETCURSEL, 0, 0);
                     pThis->SetSetting_51B9C0(1, SendDlgItemMessageA(hDlg, 1026, CB_GETITEMDATA, sel, 0));
                     pThis->UpdateButtonsEnabledState_51CBC0();
@@ -1400,7 +1400,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 
         case 1052: // "Send" again?
         {
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             GetDlgItemTextA(hDlg, 1053, chatText, 127);
             Network_20324::GetString_519A50(textW, chatText, 260);
             gNetPlay_7071E8.SendChatMessage_521060(textW, -1);
@@ -1414,7 +1414,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
             {
                 case CBN_SELCHANGE:
                 {
-                    Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                     s32 gameType = SendDlgItemMessageA(hDlg, 1036, CB_GETCURSEL, 0, 0) + 1;
                     pThis->SetSetting_51B9C0(3, gameType);
                     pThis->SetFragsNumberAndLabel_51CDC0(gameType, pThis->field_20088_game_settings.field_20194_frag_limit, hDlg);
@@ -1430,7 +1430,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
                 if (strlen(chatText))
                 {
                     sscanf(chatText, "%d", &value);
-                    Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                     pThis->SetSetting_51B9C0(2, value);
                 }
             }
@@ -1439,7 +1439,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
         case 1027:
         {
             LRESULT state = SendDlgItemMessageA(hDlg, 1027, BM_GETCHECK, 0, 0);
-            Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+            Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
             if ((state & 3) == BST_CHECKED)
             {
                 pThis->SetSetting_51B9C0(6, 1);
@@ -1465,7 +1465,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
                 if (strlen(chatText))
                 {
                     sscanf(chatText, "%d", &value);
-                    Network_20324* pThis = (Network_20324*)GetWindowLongA(hDlg, 8);
+                    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hDlg, 8);
                     pThis->SetSetting_51B9C0(7, value);
                 }
             }
@@ -1476,7 +1476,7 @@ void __stdcall Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s
 MATCH_FUNC(0x51a9d0)
 void __stdcall Network_20324::OnTimer_51A9D0(HWND hWnd, s32 timer_id)
 {
-    Network_20324* pThis = (Network_20324*)GetWindowLongA(hWnd, 8);
+    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hWnd, 8);
     int hadSelection = 0;
     if (!pThis->GetEndDialog_51BC80())
     {
@@ -1543,10 +1543,10 @@ void Network_20324::CreateMainUi_51AA90(HWND hWndParent)
     SetWindowTextA(hWndParent, GetString_519A00("netui08")); // "Network GTA2"
 
     // Subclass to handle enter key pressing
-    this->field_1FD70_old_proc = (WNDPROC)GetWindowLongA(GetDlgItem(hWndParent, 1053), GWL_WNDPROC);
-    this->field_1FD74_old_proc = (WNDPROC)GetWindowLongA(GetDlgItem(hWndParent, 1025), GWL_WNDPROC);
-    SetWindowLongA(GetDlgItem(hWndParent, 1053), GWL_WNDPROC, (LONG)Network_20324::subclass_proc_51BDD0);
-    SetWindowLongA(GetDlgItem(hWndParent, 1025), GWL_WNDPROC, (LONG)Network_20324::subclass_proc_51BDD0);
+    this->field_1FD70_old_proc = (WNDPROC)GetWindowLongPtrA(GetDlgItem(hWndParent, 1053), GWL_WNDPROC);
+    this->field_1FD74_old_proc = (WNDPROC)GetWindowLongPtrA(GetDlgItem(hWndParent, 1025), GWL_WNDPROC);
+    SetWindowLongPtrA(GetDlgItem(hWndParent, 1053), GWL_WNDPROC, (LONG_PTR)Network_20324::subclass_proc_51BDD0);
+    SetWindowLongPtrA(GetDlgItem(hWndParent, 1025), GWL_WNDPROC, (LONG_PTR)Network_20324::subclass_proc_51BDD0);
 
     SendDlgItemMessageA(hWndParent, 1031, 0x406, 0x1, 0x20000);
 
@@ -1583,7 +1583,7 @@ void Network_20324::ShowSpecificWindow_51ABF0(s32 showing_specific_window_idx)
 MATCH_FUNC(0x51ac60)
 s32 Network_20324::OnInitDialog_51AC60(HWND hWnd, s32 lParam, Network_20324* thisPtr)
 {
-    SetWindowLongA(hWnd, 8, (LONG)thisPtr);
+    SetWindowLongPtrA(hWnd, 8, (LONG_PTR)thisPtr);
     gTimerId_6F8A18 = SetTimer(hWnd, 0xAu, 0xAu, 0);
     thisPtr->SetDlgHwnd_519E10(hWnd);
     thisPtr->CreateMainUi_51AA90(hWnd);
@@ -2181,7 +2181,7 @@ LRESULT __stdcall Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARA
     HWND parentHwnd = GetParent(hWnd);
     if (parentHwnd)
     {
-        Network_20324* pThis = (Network_20324*)GetWindowLongA(parentHwnd, 8);
+        Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(parentHwnd, 8);
         if (Msg == WM_KEYUP && wParam == VK_RETURN && (lParam & (KF_ALTDOWN << 16)) == 0)
         {
             switch (pThis->Get_202D4_active_control_idx_51ACC0())
@@ -2315,7 +2315,7 @@ void Network_20324::EnumerateMaps_51BFA0()
 MATCH_FUNC(0x51c630)
 void __stdcall Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 code, s32 pos)
 {
-    Network_20324* pThis = (Network_20324*)GetWindowLongA(hWnd, 8);
+    Network_20324* pThis = (Network_20324*)GetWindowLongPtrA(hWnd, 8);
     if (GetDlgCtrlID(hTrackBar) == 1031)
     {
         switch (code)

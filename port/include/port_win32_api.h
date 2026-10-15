@@ -270,6 +270,8 @@ BOOL UpdateWindow(HWND hwnd);
 BOOL SetForegroundWindow(HWND hwnd);
 LONG SetWindowLongA(HWND hwnd, int index, LONG value);
 LONG GetWindowLongA(HWND hwnd, int index);
+LONG_PTR SetWindowLongPtrA(HWND hwnd, int index, LONG_PTR value);
+LONG_PTR GetWindowLongPtrA(HWND hwnd, int index);
 BOOL SetWindowPos(HWND hwnd, HWND after, int x, int y, int cx, int cy, UINT flags);
 BOOL GetClientRect(HWND hwnd, LPRECT rect);
 BOOL GetWindowRect(HWND hwnd, LPRECT rect);

@@ -436,7 +436,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
         for (u32 i = 0; i < pSrc->field_2_delta_count; i++)
         {
             pDst->field_4_deltas[i].field_4_len = pSrc->field_4_delta[i];
-            pDst->field_4_deltas[i].field_0_pData = (delta_store_entry*)total;
+            pDst->field_4_deltas[i].field_0_pData = (delta_store_entry*)(uptr)total; // an offset until the deltas are loaded
             total += pDst->field_4_deltas[i].field_4_len;
         }
 

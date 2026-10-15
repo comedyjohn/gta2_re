@@ -64,7 +64,7 @@ void ErrorLog::log_timestamp_4D9540()
     time_t curTime = time(nullptr);
     char_type* buffer = ctime(&curTime);
     buffer[strlen(buffer) - 1] = 0; // remove the new line it  adds
-    sprintf(gTmpBuffer_67C598, "\n------ %s ------", buffer);
+    snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "\n------ %s ------", buffer);
     Write_4D9620(gTmpBuffer_67C598);
 }
 
@@ -81,13 +81,13 @@ ErrorLog::~ErrorLog()
 // 0x4D95A0
 void ErrorLog::log_intro_4D95A0()
 {
-    sprintf(gTmpBuffer_67C598, "Coop v%d.%d", gGTA2VersionMajor_708280, gGTA2VersionMajor_708284);
+    snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Coop v%d.%d", gGTA2VersionMajor_708280, gGTA2VersionMajor_708284);
     Write_4D9620(gTmpBuffer_67C598);
 
     time_t curTime = time(nullptr);
     char_type* buffer = ctime(&curTime);
     buffer[strlen(buffer) - 1] = 0; // remove the new line it  adds
-    sprintf(gTmpBuffer_67C598, "\n------ %s ------", buffer);
+    snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "\n------ %s ------", buffer);
     Write_4D9620(gTmpBuffer_67C598);
 }
 
@@ -171,49 +171,49 @@ struct Coord2
 // 0x4A07C0
 static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, va_list va)
 {
-    sprintf(gTmpBuffer_67C598, "Fatal Error %d in %s(%d)", code, SourceFileNameFromPath_4A07A0(pFileName), lineNo);
+    snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Fatal Error %d in %s(%d)", code, SourceFileNameFromPath_4A07A0(pFileName), lineNo);
     gErrorLog_67CF58.Write_4D9620(gTmpBuffer_67C598);
 
     switch (code)
     {
         case 2:
-            sprintf(gTmpBuffer_67C598, "Can't Init DMAVideo.");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Can't Init DMAVideo.");
             break;
 
         case 72:
-            sprintf(gTmpBuffer_67C598, "security failure");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "security failure");
             break;
 
         case 5:
-            sprintf(gTmpBuffer_67C598, "Failed to set WindowMode");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to set WindowMode");
             break;
 
         case 6:
-            sprintf(gTmpBuffer_67C598, "Failed to get a valid HDC");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to get a valid HDC");
             break;
 
         case 7:
-            sprintf(gTmpBuffer_67C598, "Failed to SetWindowPos properly");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to SetWindowPos properly");
             break;
 
         case 8:
-            sprintf(gTmpBuffer_67C598, "Failed to Initialise DirectInput");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to Initialise DirectInput");
             break;
 
         case 9:
-            sprintf(gTmpBuffer_67C598, "Failed to set Data Format for DirectInput");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to set Data Format for DirectInput");
             break;
 
         case 10:
-            sprintf(gTmpBuffer_67C598, "Failed to set Cooperative Level for DirectInput");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to set Cooperative Level for DirectInput");
             break;
 
         case 30:
-            sprintf(gTmpBuffer_67C598, "No DirectInput Object");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No DirectInput Object");
             break;
 
         case 31:
-            sprintf(gTmpBuffer_67C598, "Failed to create DirectInput object");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create DirectInput object");
             break;
 
         case 28:
@@ -221,33 +221,33 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 13:
-            sprintf(gTmpBuffer_67C598, "Ftell error in file: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Ftell error in file: %s", gGlobalFileName_67C6AC);
             break;
 
         case 15:
-            sprintf(gTmpBuffer_67C598, "Read failure in file: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Read failure in file: %s", gGlobalFileName_67C6AC);
             break;
 
         case 16:
-            sprintf(gTmpBuffer_67C598,
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598),
                     "Install Next freeloader episode please. [Temp message].Unable to open file : %s",
                     gGlobalFileName_67C6AC);
             break;
 
         case 17:
-            sprintf(gTmpBuffer_67C598, "Unable to close file: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to close file: %s", gGlobalFileName_67C6AC);
             break;
 
         case 18:
-            sprintf(gTmpBuffer_67C598, "Trying to a load a file too big for buffer: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to a load a file too big for buffer: %s", gGlobalFileName_67C6AC);
             break;
 
         case 19:
-            sprintf(gTmpBuffer_67C598, "Writing zero bytes to file : %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Writing zero bytes to file : %s", gGlobalFileName_67C6AC);
             break;
 
         case 20:
-            sprintf(gTmpBuffer_67C598, "Write failure on file : %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Write failure on file : %s", gGlobalFileName_67C6AC);
             break;
 
         case 21:
@@ -255,15 +255,15 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 24:
-            sprintf(gTmpBuffer_67C598, "ungetc failure in file %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "ungetc failure in file %s", gGlobalFileName_67C6AC);
             break;
 
         case 25:
-            sprintf(gTmpBuffer_67C598, "invalid integer encountered in file %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "invalid integer encountered in file %s", gGlobalFileName_67C6AC);
             break;
 
         case 26:
-            sprintf(gTmpBuffer_67C598, "End of file in text string in file %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "End of file in text string in file %s", gGlobalFileName_67C6AC);
             break;
 
         case 27:
@@ -283,11 +283,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 36:
-            sprintf(gTmpBuffer_67C598, "Invalid string in parameter list: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid string in parameter list: %s", gGlobalFileName_67C6AC);
             break;
 
         case 37:
-            sprintf(gTmpBuffer_67C598, "Repeated file in parameter list : %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Repeated file in parameter list : %s", gGlobalFileName_67C6AC);
             break;
 
         case 39:
@@ -335,7 +335,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 50:
-            sprintf(gTmpBuffer_67C598, "Failed writing a byte to file %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed writing a byte to file %s", gGlobalFileName_67C6AC);
             break;
 
         case 53:
@@ -343,15 +343,15 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 54:
-            sprintf(gTmpBuffer_67C598, "Invalid corners");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid corners");
             break;
 
         case 55:
-            sprintf(gTmpBuffer_67C598, "Failed to allocate memory for new mission process");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to allocate memory for new mission process");
             break;
 
         case 56:
-            sprintf(gTmpBuffer_67C598, "No more process slots available for mission processes");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No more process slots available for mission processes");
             break;
 
         case 59:
@@ -359,15 +359,15 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 66:
-            sprintf(gTmpBuffer_67C598, "Too many PLAYER_PED declarations in scriptfile");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many PLAYER_PED declarations in scriptfile");
             break;
 
         case 65:
-            sprintf(gTmpBuffer_67C598, "No LEVELSTART declaration in scriptfile");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No LEVELSTART declaration in scriptfile");
             break;
 
         case 69:
-            sprintf(gTmpBuffer_67C598, "Failed to create a ped in scriptfile");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a ped in scriptfile");
             break;
 
         case 67:
@@ -407,11 +407,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 91:
-            sprintf(gTmpBuffer_67C598, "Sid has negative references");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Sid has negative references");
             break;
 
         case 90:
-            sprintf(gTmpBuffer_67C598, "Sid has too many references");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Sid has too many references");
             break;
 
         case 92:
@@ -419,67 +419,67 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 93:
-            sprintf(gTmpBuffer_67C598, "Invalid file type in %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid file type in %s", gGlobalFileName_67C6AC);
             break;
 
         case 94:
-            sprintf(gTmpBuffer_67C598, "Invalid file version in %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid file version in %s", gGlobalFileName_67C6AC);
             break;
 
         case 61:
         case 81:
-            sprintf(gTmpBuffer_67C598, "Character has no ped pointer, bad ");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Character has no ped pointer, bad ");
             break;
 
         case 64:
-            sprintf(gTmpBuffer_67C598, "Invalid objective coordinates");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid objective coordinates");
             break;
 
         case 60:
-            sprintf(gTmpBuffer_67C598, "No Player pointer");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No Player pointer");
             break;
 
         case 79:
         case 80:
-            sprintf(gTmpBuffer_67C598, "Character has no car objective pointer,very bad");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Character has no car objective pointer,very bad");
             break;
 
         case 97:
-            sprintf(gTmpBuffer_67C598, "Character has no in_car pointer, bad");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Character has no in_car pointer, bad");
             break;
 
         case 62:
-            sprintf(gTmpBuffer_67C598, "Character Default Case error");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Character Default Case error");
             break;
 
         case 85:
-            sprintf(gTmpBuffer_67C598, "Ped Default Case error");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Ped Default Case error");
             break;
 
         case 88:
-            sprintf(gTmpBuffer_67C598, "Ped Sprite Z is 0, not good");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Ped Sprite Z is 0, not good");
             break;
 
         case 89:
-            sprintf(gTmpBuffer_67C598, "Peds Car Info is NULL , error indeed");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Peds Car Info is NULL , error indeed");
             break;
 
         case 82:
-            sprintf(gTmpBuffer_67C598, "Group member not removed");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Group member not removed");
             break;
         case 83:
-            sprintf(gTmpBuffer_67C598, "Too many members for the group to manage");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many members for the group to manage");
             break;
         case 84:
-            sprintf(gTmpBuffer_67C598, "Cant create a group too many in use");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Cant create a group too many in use");
             break;
 
         case 95:
-            sprintf(gTmpBuffer_67C598, "Character not got a foot or car pointer, very bad");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Character not got a foot or car pointer, very bad");
             break;
 
         case 96:
-            sprintf(gTmpBuffer_67C598, "Unable to Create A Medical Unit");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to Create A Medical Unit");
             break;
 
         case 98:
@@ -559,7 +559,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 123:
-            sprintf(gTmpBuffer_67C598, "assertion failure in %s(line %d)", SourceFileNameFromPath_4A07A0(pFileName), lineNo);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "assertion failure in %s(line %d)", SourceFileNameFromPath_4A07A0(pFileName), lineNo);
             break;
 
         case 124:
@@ -603,7 +603,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 134:
-            sprintf(gTmpBuffer_67C598, "Invalid mission script file specified in Bob");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid mission script file specified in Bob");
             break;
 
         case 136:
@@ -619,15 +619,15 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 139:
-            sprintf(gTmpBuffer_67C598, "Error doing car routefind: no routefinder data in map.");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Error doing car routefind: no routefinder data in map.");
             break;
 
         case 143:
-            sprintf(gTmpBuffer_67C598, "Illegal Train Station: no platform zone");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal Train Station: no platform zone");
             break;
 
         case 144:
-            sprintf(gTmpBuffer_67C598, "Unable to create train: no more space! The game has too many trains/carriages/buses.");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to create train: no more space! The game has too many trains/carriages/buses.");
             break;
 
         case 145:
@@ -795,546 +795,546 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1001:
-            vsprintf(gTmpBuffer_67C598, "Invalid car model : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid car model : %d", va);
             break;
 
         case 1002:
-            vsprintf(gTmpBuffer_67C598, "Sprite %d has multiple delta entries", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Sprite %d has multiple delta entries", va);
             break;
 
         case 1003:
-            vsprintf(gTmpBuffer_67C598, "Too many sprites with deltas at %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many sprites with deltas at %d", va);
             break;
 
         case 1004:
-            vsprintf(gTmpBuffer_67C598, "Invalid absolute sprite number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid absolute sprite number: %d", va);
             break;
 
         case 1005:
-            vsprintf(gTmpBuffer_67C598, "Too many sprites at %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many sprites at %d", va);
             break;
 
         case 1006:
-            vsprintf(gTmpBuffer_67C598, "Invalid case : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid case : %d", va);
             break;
 
         case 1007:
-            vsprintf(gTmpBuffer_67C598, "Invalid absolute virtual palette number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid absolute virtual palette number: %d", va);
             break;
 
         case 1008:
-            vsprintf(gTmpBuffer_67C598, "Invalid font number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid font number: %d", va);
             break;
 
         case 1009:
-            vsprintf(gTmpBuffer_67C598, "Invalid tile number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid tile number: %d", va);
             break;
 
         case 1010:
-            vsprintf(gTmpBuffer_67C598, "Invalid new tile number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid new tile number: %d", va);
             break;
 
         case 1011:
-            vsprintf(gTmpBuffer_67C598, "Unable to load DLL: %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to load DLL: %s", va);
             break;
 
         case 1012:
-            vsprintf(gTmpBuffer_67C598, "Invalid physical palette number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid physical palette number: %d", va);
             break;
 
         case 1016:
-            vsprintf(gTmpBuffer_67C598, "Too many zones at %d (max is 999)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many zones at %d (max is 999)", va);
             break;
 
         case 1017:
-            vsprintf(gTmpBuffer_67C598, "Invalid zone number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid zone number: %d", va);
             break;
 
         case 1013:
-            vsprintf(gTmpBuffer_67C598, "Zone not found : %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Zone not found : %s", va);
             break;
 
         case 1014:
-            vsprintf(gTmpBuffer_67C598, "car model %d has invalid gear speeds in gci file", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "car model %d has invalid gear speeds in gci file", va);
             break;
 
         case 1018:
-            vsprintf(gTmpBuffer_67C598, "Invalid map object number: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid map object number: %d", va);
             break;
 
         case 1022:
         {
             s32 excess = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "File too large: %s exceeds max size by %d bytes", gGlobalFileName_67C6AC, excess);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "File too large: %s exceeds max size by %d bytes", gGlobalFileName_67C6AC, excess);
             break;
         }
 
         case 1029:
-            vsprintf(gTmpBuffer_67C598, "Out of memory allocating %d bytes", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Out of memory allocating %d bytes", va);
             break;
 
         case 1033:
-            vsprintf(gTmpBuffer_67C598, "Invalid chunk size : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid chunk size : %d", va);
             break;
 
         case 1034:
-            vsprintf(gTmpBuffer_67C598, "Invalid switch in parameter list: %c", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid switch in parameter list: %c", va);
             break;
 
         case 1073:
-            vsprintf(gTmpBuffer_67C598, "Invalid line (info:%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid line (info:%d)", va);
             break;
 
         case 1035:
-            vsprintf(gTmpBuffer_67C598, "Replay File larger than maximum: size %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Replay File larger than maximum: size %d", va);
             break;
 
         case 1036:
-            vsprintf(gTmpBuffer_67C598, "Invalid Videomode to search for: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid Videomode to search for: %d", va);
             break;
 
         case 1037:
-            vsprintf(gTmpBuffer_67C598, "Failed to set fullscreen videomode: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to set fullscreen videomode: %d", va);
             break;
 
         case 1020:
-            vsprintf(gTmpBuffer_67C598, "Too many loaded object infos at %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many loaded object infos at %d", va);
             break;
 
         case 1023:
-            vsprintf(gTmpBuffer_67C598, "Too many players at %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many players at %d", va);
             break;
 
         case 1024:
-            vsprintf(gTmpBuffer_67C598, "Invalid player number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid player number : %d", va);
             break;
 
         case 1025:
-            vsprintf(gTmpBuffer_67C598, "Invalid grid width : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid grid width : %d", va);
             break;
 
         case 1026:
-            vsprintf(gTmpBuffer_67C598, "Invalid grid height : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid grid height : %d", va);
             break;
 
         case 1027:
-            vsprintf(gTmpBuffer_67C598, "Invalid z coordinate : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid z coordinate : %d", va);
             break;
 
         case 1028:
-            vsprintf(gTmpBuffer_67C598, "Event left unprocessed : %08X", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Event left unprocessed : %08X", va);
             break;
 
         case 1040:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Out of space for list type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Out of space for list type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1039:
-            vsprintf(gTmpBuffer_67C598, "No collision box in sprite %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No collision box in sprite %d", va);
             break;
 
         case 1021:
-            vsprintf(gTmpBuffer_67C598, "Collision box invalid in sprite %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Collision box invalid in sprite %d", va);
             break;
 
         case 1041:
-            vsprintf(gTmpBuffer_67C598, "Invalid object model number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid object model number : %d", va);
             break;
 
         case 1042:
-            vsprintf(gTmpBuffer_67C598, "object model number %d already added", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "object model number %d already added", va);
             break;
 
         case 1043:
-            vsprintf(gTmpBuffer_67C598, "no space for object model number %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "no space for object model number %d", va);
             break;
 
         case 1044:
-            vsprintf(gTmpBuffer_67C598, "check walls slope size too big : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "check walls slope size too big : %d", va);
             break;
 
         case 1045:
-            vsprintf(gTmpBuffer_67C598, "Failed to create an object in scriptfile. Object type: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create an object in scriptfile. Object type: %d", va);
             break;
 
         case 1046:
-            vsprintf(gTmpBuffer_67C598, "Attempt to kill an already dead mission thread. Debug line %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempt to kill an already dead mission thread. Debug line %d", va);
             break;
 
         case 1047:
-            vsprintf(gTmpBuffer_67C598, "Car model %d has too many doors", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Car model %d has too many doors", va);
             break;
 
         case 1048:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Releasing null ptr in release_passive. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing null ptr in release_passive. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
         case 1049:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Trying to 'pacify' a NULL list element. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to 'pacify' a NULL list element. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
         case 1050:
-            vsprintf(gTmpBuffer_67C598, "Object back pointer missing in sprite %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Object back pointer missing in sprite %d", va);
             break;
 
         case 1051:
-            vsprintf(gTmpBuffer_67C598, "No rigid body in car ID %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No rigid body in car ID %d", va);
             break;
         case 1052:
-            vsprintf(gTmpBuffer_67C598, "No free Sid for character %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No free Sid for character %d", va);
             break;
         case 1053:
-            vsprintf(gTmpBuffer_67C598, "Invalid door info number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid door info number : %d", va);
             break;
         case 1054:
-            vsprintf(gTmpBuffer_67C598, "Illegal Value for an angle: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal Value for an angle: %d", va);
             break;
         case 1055:
-            vsprintf(gTmpBuffer_67C598, "Invalid tile texture: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid tile texture: %d", va);
             break;
         case 1056:
-            vsprintf(gTmpBuffer_67C598, "Invalid cache number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid cache number : %d", va);
             break;
         case 1068:
-            vsprintf(gTmpBuffer_67C598, "Invalid score texture number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid score texture number : %d", va);
             break;
 
         case 1019:
-            vsprintf(gTmpBuffer_67C598, "Setting invalid zone information : %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Setting invalid zone information : %s", va);
             break;
 
         case 1057:
-            vsprintf(gTmpBuffer_67C598, "Counter has out of bounds internal count: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Counter has out of bounds internal count: %d", va);
             break;
 
         case 1058:
-            vsprintf(gTmpBuffer_67C598, "Out of range route id: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Out of range route id: %d", va);
             break;
 
         case 1066:
-            vsprintf(gTmpBuffer_67C598, "Invalid score position: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid score position: %d", va);
             break;
 
         case 1067:
-            vsprintf(gTmpBuffer_67C598, "Invalid player ID: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid player ID: %d", va);
             break;
 
         case 1069:
-            vsprintf(gTmpBuffer_67C598, "Too characters in score : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too characters in score : %d", va);
             break;
 
         case 1071:
-            vsprintf(gTmpBuffer_67C598, "Invalid text file : %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid text file : %s", va);
             break;
 
         case 1072:
-            vsprintf(gTmpBuffer_67C598, "String starts with end-of-line : %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "String starts with end-of-line : %s", va);
             break;
 
         case 1076:
-            vsprintf(gTmpBuffer_67C598, "car ID %d in collision with wall at safe position", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "car ID %d in collision with wall at safe position", va);
             break;
 
         case 1080:
-            vsprintf(gTmpBuffer_67C598, "object ID %d in collision with wall at safe position", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "object ID %d in collision with wall at safe position", va);
             break;
 
         case 1077:
-            vsprintf(gTmpBuffer_67C598, "Illegal device code for this machine: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal device code for this machine: %d", va);
             break;
 
         case 1078:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Activating null ptr in activate. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Activating null ptr in activate. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1079:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Activating item twice. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Activating item twice. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1081:
-            vsprintf(gTmpBuffer_67C598, "Illegal index into turntable: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal index into turntable: %d", va);
             break;
 
         case 1082:
-            vsprintf(gTmpBuffer_67C598, "Too many Y road segments. Num: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many Y road segments. Num: %d", va);
             break;
 
         case 1083:
-            vsprintf(gTmpBuffer_67C598, "Too many X road segments. Num: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many X road segments. Num: %d", va);
             break;
         case 1084:
-            vsprintf(gTmpBuffer_67C598, "Invalid timer handle : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid timer handle : %d", va);
             break;
 
         case 1085:
-            vsprintf(gTmpBuffer_67C598, "Invalid arrow handle : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid arrow handle : %d", va);
             break;
 
         case 1086:
-            vsprintf(gTmpBuffer_67C598, "Unallocated arrow handle : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unallocated arrow handle : %d", va);
             break;
 
         case 1090:
-            vsprintf(gTmpBuffer_67C598, "Car already doing routefind, but requested another. Car ID: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Car already doing routefind, but requested another. Car ID: %d", va);
             break;
 
         case 1137:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Counter check failed for list type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Counter check failed for list type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1107:
-            vsprintf(gTmpBuffer_67C598, "Car model %d has invalid style data", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Car model %d has invalid style data", va);
             break;
 
         case 1138:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Releasing twice in release_passive. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing twice in release_passive. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1139:
         {
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Releasing twice in release. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing twice in release. List type %s", gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1095:
         {
             const char_type* pMsg = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "assertion failure in %s(line %d): %s", SourceFileNameFromPath_4A07A0(pFileName), lineNo, pMsg);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "assertion failure in %s(line %d): %s", SourceFileNameFromPath_4A07A0(pFileName), lineNo, pMsg);
             break;
         }
         case 1096:
-            vsprintf(gTmpBuffer_67C598, "Too many symbols at %d (max is 999)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many symbols at %d (max is 999)", va);
             break;
 
         case 1098:
-            vsprintf(gTmpBuffer_67C598, "Failed to create_a_character in script: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create_a_character in script: uid: %d", va);
             break;
 
         case 1099:
-            vsprintf(gTmpBuffer_67C598, "Failed to find a uid in script: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to find a uid in script: uid: %d", va);
             break;
 
         case 1100:
-            vsprintf(gTmpBuffer_67C598, "Illegal zone id in symbol table: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal zone id in symbol table: %d", va);
             break;
 
         case 1101:
-            vsprintf(gTmpBuffer_67C598, "Failed to create arrow in script: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create arrow in script: uid: %d", va);
             break;
 
         case 1102:
-            vsprintf(gTmpBuffer_67C598, "Line accessing car that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing car that hasn't been created: uid: %d", va);
             break;
 
         case 1103:
-            vsprintf(gTmpBuffer_67C598, "Line accessing character that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing character that hasn't been created: uid: %d", va);
             break;
 
         case 1104:
-            vsprintf(gTmpBuffer_67C598, "Line accessing object that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing object that hasn't been created: uid: %d", va);
             break;
 
         case 1110:
-            vsprintf(gTmpBuffer_67C598, "Line accessing counter that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing counter that hasn't been created: uid: %d", va);
             break;
 
         case 1111:
-            vsprintf(gTmpBuffer_67C598, "Line accessing character with no group when it should have group: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing character with no group when it should have group: uid: %d", va);
             break;
 
         case 1106:
-            vsprintf(gTmpBuffer_67C598, "Line accessing trigger that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing trigger that hasn't been created: uid: %d", va);
             break;
 
         case 1108:
-            vsprintf(gTmpBuffer_67C598, "Line accessing crane that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing crane that hasn't been created: uid: %d", va);
             break;
 
         case 1109:
-            vsprintf(gTmpBuffer_67C598, "Line attempting to order driver out of car, but char_type isn't a driver!: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line attempting to order driver out of car, but char_type isn't a driver!: %d", va);
             break;
 
         case 1112:
-            vsprintf(gTmpBuffer_67C598, "Line accessing arrow that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing arrow that hasn't been created: uid: %d", va);
             break;
 
         case 1113:
-            vsprintf(gTmpBuffer_67C598, "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d", va);
             break;
 
         case 1114:
-            vsprintf(gTmpBuffer_67C598, "Failed to create a crane in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a crane in script line: %d", va);
             break;
 
         case 1115:
-            vsprintf(gTmpBuffer_67C598, "Failed to create a conveyor in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a conveyor in script line: %d", va);
             break;
 
         case 1116:
-            vsprintf(gTmpBuffer_67C598, "Failed to create a generator in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a generator in script line: %d", va);
             break;
 
         case 1117:
-            vsprintf(gTmpBuffer_67C598, "Failed to create a destructor in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a destructor in script line: %d", va);
             break;
 
         case 1118:
-            vsprintf(gTmpBuffer_67C598, "Attempted to pos32 arrow at a 'logical' item, not a physical item. Script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempted to pos32 arrow at a 'logical' item, not a physical item. Script line: %d", va);
             break;
 
         case 1119:
-            vsprintf(gTmpBuffer_67C598, "Line accessing door that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing door that hasn't been created: uid: %d", va);
             break;
 
         case 1120:
-            vsprintf(gTmpBuffer_67C598, "Failed to create a crusher in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create a crusher in script line: %d", va);
             break;
 
         case 1121:
-            vsprintf(gTmpBuffer_67C598, "Line accessing conveyor that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing conveyor that hasn't been created: uid: %d", va);
             break;
 
         case 1123:
-            vsprintf(gTmpBuffer_67C598, "Line accessing generator that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing generator that hasn't been created: uid: %d", va);
             break;
 
         case 1124:
-            vsprintf(gTmpBuffer_67C598, "Invalid special tile number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid special tile number : %d", va);
             break;
 
         case 1125:
-            vsprintf(gTmpBuffer_67C598, "Repeated special tile number : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Repeated special tile number : %d", va);
             break;
 
         case 1122:
-            vsprintf(gTmpBuffer_67C598, "Line accessing destructor that hasn't been created: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing destructor that hasn't been created: uid: %d", va);
             break;
 
         case 1126:
-            vsprintf(gTmpBuffer_67C598, "Checking phone in missionscript without executing ANSWER_PHONE: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Checking phone in missionscript without executing ANSWER_PHONE: uid: %d", va);
             break;
 
         case 1127:
-            vsprintf(gTmpBuffer_67C598, "map has too many columns by %d words", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "map has too many columns by %d words", va);
             break;
 
         case 1129:
-            vsprintf(gTmpBuffer_67C598, "map has %d blocks too many ", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "map has %d blocks too many ", va);
             break;
 
         case 1128:
-            vsprintf(gTmpBuffer_67C598, "style file contains unexpected number of fonts %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "style file contains unexpected number of fonts %d", va);
             break;
 
         case 1130:
-            vsprintf(gTmpBuffer_67C598, "Attempting 'is_item_onscreen' on an illegal type: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting 'is_item_onscreen' on an illegal type: uid: %d", va);
             break;
 
         case 1131:
-            vsprintf(gTmpBuffer_67C598, "Unable to create car to place on top of trailer in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to create car to place on top of trailer in script. uid: %d", va);
             break;
 
         case 1132:
-            vsprintf(gTmpBuffer_67C598, "Unable to find zonename to 'setup' info for in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zonename to 'setup' info for in script. uid: %d", va);
             break;
 
         case 1133:
-            vsprintf(gTmpBuffer_67C598, "Unable to find zonename in 'set_gang_info' in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zonename in 'set_gang_info' in script. uid: %d", va);
             break;
 
         case 1134:
-            vsprintf(gTmpBuffer_67C598, "Unable to find zonename in 'set_station_info' in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zonename in 'set_station_info' in script. uid: %d", va);
             break;
 
         case 1135:
-            vsprintf(gTmpBuffer_67C598, "Unable to find platform in 'set_station_info' in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find platform in 'set_station_info' in script. uid: %d", va);
             break;
 
         case 1136:
-            vsprintf(gTmpBuffer_67C598, "Unable to find trainstation associated with platform in 'set_station_info' in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find trainstation associated with platform in 'set_station_info' in script. uid: %d", va);
             break;
 
         case 1140:
-            vsprintf(gTmpBuffer_67C598, "Unable to find gang matching name of gangone in a 'set gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name of gangone in a 'set gang respect'. uid: %d", va);
             break;
 
         case 1141:
-            vsprintf(gTmpBuffer_67C598, "Unable to find gang matching name of gangtwo in a 'set gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name of gangtwo in a 'set gang respect'. uid: %d", va);
             break;
 
         case 1142:
-            vsprintf(gTmpBuffer_67C598, "Unable to find gangname in an 'alter gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gangname in an 'alter gang respect'. uid: %d", va);
             break;
 
         case 1143:
-            vsprintf(gTmpBuffer_67C598, "Trying to change gangrespect on a non-player controlled character. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to change gangrespect on a non-player controlled character. uid: %d", va);
             break;
 
         case 1144:
-            vsprintf(gTmpBuffer_67C598, "Unable to find gang matching name in a 'check gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name in a 'check gang respect'. uid: %d", va);
             break;
 
         case 1145:
-            vsprintf(gTmpBuffer_67C598, "Unable to find zone matching name in a 'is char_type in gangzone'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zone matching name in a 'is char_type in gangzone'. uid: %d", va);
             break;
 
         case 1146:
-            vsprintf(gTmpBuffer_67C598, "Unable to find zone matching name in a 'is char_type in zone'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zone matching name in a 'is char_type in zone'. uid: %d", va);
             break;
 
         case 1147:
-            vsprintf(gTmpBuffer_67C598, "Unable to find gang matching name in a 'add char_type to gang'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name in a 'add char_type to gang'. uid: %d", va);
             break;
 
         case 1148:
-            vsprintf(gTmpBuffer_67C598, "Mission script is referring to a 'text id' that doesn't exist. ID: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Mission script is referring to a 'text id' that doesn't exist. ID: %d", va);
             break;
 
         case 1400:
-            vsprintf(gTmpBuffer_67C598, "Error with 1 param: %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Error with 1 param: %d", va);
             break;
 
         case 2001:
-            vsprintf(gTmpBuffer_67C598, "Invalid relative sprite number %d in %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid relative sprite number %d in %s", va);
             break;
 
         case 2002:
-            vsprintf(gTmpBuffer_67C598, "Invalid relative virtual palette number %d in %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid relative virtual palette number %d in %s", va);
             break;
 
         case 2003:
-            vsprintf(gTmpBuffer_67C598, "Invalid relative font sprite number %d in font %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid relative font sprite number %d in font %d", va);
             break;
 
         case 2004:
-            vsprintf(gTmpBuffer_67C598, "Incorrect aspect ratio in screen mode : %d x %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Incorrect aspect ratio in screen mode : %d x %d", va);
             break;
 
         case 2024:
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "List type %s corrupted at grab at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at grab at %d elements", gListTypes_61AB70[list_type], count);
             break;
         }
 
@@ -1342,7 +1342,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "List type %s corrupted at release at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at release at %d elements", gListTypes_61AB70[list_type], count);
             break;
         }
 
@@ -1350,7 +1350,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "List type %s corrupted at traverse at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at traverse at %d elements", gListTypes_61AB70[list_type], count);
             break;
         }
 
@@ -1358,7 +1358,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "List type %s corrupted at activate at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at activate at %d elements", gListTypes_61AB70[list_type], count);
             break;
         }
 
@@ -1366,7 +1366,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "List type %s corrupted at pacify at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at pacify at %d elements", gListTypes_61AB70[list_type], count);
             break;
         }
 
@@ -1374,28 +1374,28 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             s32 element = va_arg(va, int);
             u32 list_type = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "Can't delete element %d from list type %s", element, gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Can't delete element %d from list type %s", element, gListTypes_61AB70[list_type]);
             break;
         }
 
         case 2006:
-            vsprintf(gTmpBuffer_67C598, "invalid zs in sprite %d : %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "invalid zs in sprite %d : %d", va);
             break;
 
         case 2007:
-            vsprintf(gTmpBuffer_67C598, "Door %d of car model %d too close", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Door %d of car model %d too close", va);
             break;
 
         case 2008:
-            vsprintf(gTmpBuffer_67C598, "Invalid sprite type %d number %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid sprite type %d number %d", va);
             break;
 
         case 2009:
-            vsprintf(gTmpBuffer_67C598, "traffic lights at (%d,%d) are too close to the edge of the world", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "traffic lights at (%d,%d) are too close to the edge of the world", va);
             break;
 
         case 2010:
-            vsprintf(gTmpBuffer_67C598, "Invalid frame %d in object model %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid frame %d in object model %d", va);
             break;
 
         case 2011:
@@ -1403,108 +1403,108 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             Coord2 c;
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Illegal coordinate: (%.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal coordinate: (%.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat());
             break;
         }
 
         case 2012:
-            vsprintf(gTmpBuffer_67C598, "Illegal good/bad ratio for car model choice: good %d, bad %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal good/bad ratio for car model choice: good %d, bad %d", va);
             break;
 
         case 2019:
         {
             s32 model = va_arg(va, int);
             const char_type* pFile = va_arg(va, const char_type*);
-            sprintf(gTmpBuffer_67C598, "model %d repeated in %s", model, SourceFileNameFromPath_4A07A0(pFile));
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "model %d repeated in %s", model, SourceFileNameFromPath_4A07A0(pFile));
             break;
         }
 
         case 2014:
-            sprintf(gTmpBuffer_67C598, "%s binmake error : %s", SourceFileNameFromPath_4A07A0(gErrStr_67C29C), gErrStr2_67C3A8);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%s binmake error : %s", SourceFileNameFromPath_4A07A0(gErrStr_67C29C), gErrStr2_67C3A8);
             break;
 
         case 2018:
         {
             const char_type* pFile = va_arg(va, const char_type*);
             s32 size = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "%s invalid size at %d bytes", SourceFileNameFromPath_4A07A0(pFile), size);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%s invalid size at %d bytes", SourceFileNameFromPath_4A07A0(pFile), size);
             break;
         }
 
         case 2015:
-            vsprintf(gTmpBuffer_67C598, "car ID %d in collision with %s sprite at safe position", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "car ID %d in collision with %s sprite at safe position", va);
             break;
 
         case 2016:
-            vsprintf(gTmpBuffer_67C598, "objecct ID %d in collision with %s sprite at safe position", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "objecct ID %d in collision with %s sprite at safe position", va);
             break;
 
         case 2017:
-            vsprintf(gTmpBuffer_67C598, "Invalid crane target : (%d,%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid crane target : (%d,%d)", va);
             break;
 
         case 2020:
-            vsprintf(gTmpBuffer_67C598, "Too many door infos declared in script: curr door: closedframe %d openframe %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many door infos declared in script: curr door: closedframe %d openframe %d", va);
             break;
 
         case 2021:
-            vsprintf(gTmpBuffer_67C598, "Illegal Train Station (%d, %d): no entry zone", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal Train Station (%d, %d): no entry zone", va);
             break;
 
         case 2022:
-            vsprintf(gTmpBuffer_67C598, "Illegal Train Station (%d, %d): no exit zone", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal Train Station (%d, %d): no exit zone", va);
             break;
 
         case 2023:
-            vsprintf(gTmpBuffer_67C598, "Illegal Train Station (%d, %d): no stop zone", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal Train Station (%d, %d): no stop zone", va);
             break;
 
         case 2401:
-            vsprintf(gTmpBuffer_67C598, "Error with 2 param: %d,%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Error with 2 param: %d,%d", va);
             break;
 
         case 2027:
-            vsprintf(gTmpBuffer_67C598, "incorrect replay version : %d.%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "incorrect replay version : %d.%d", va);
             break;
 
         case 2028:
-            vsprintf(gTmpBuffer_67C598, "Sync error (random) remote=%d local=%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Sync error (random) remote=%d local=%d", va);
             break;
 
         case 2029:
-            vsprintf(gTmpBuffer_67C598, "Sync error (mission) remote=%d local=%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Sync error (mission) remote=%d local=%d", va);
             break;
 
         case 3003:
-            vsprintf(gTmpBuffer_67C598, "Videomode %dx%dx%d is not available", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Videomode %dx%dx%d is not available", va);
             break;
 
         case 3004:
-            vsprintf(gTmpBuffer_67C598, "Failed to set videomode %dx%dx%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to set videomode %dx%dx%d", va);
             break;
 
         case 3005:
-            vsprintf(gTmpBuffer_67C598, "Can't delete sprite %d from collision list at : %d,%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Can't delete sprite %d from collision list at : %d,%d", va);
             break;
 
         case 3006:
-            vsprintf(gTmpBuffer_67C598, "Adding sprite %d to collision list twice at : %d,%d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Adding sprite %d to collision list twice at : %d,%d", va);
             break;
 
         case 3007:
-            vsprintf(gTmpBuffer_67C598, "invalid map access : (%d,%d,%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "invalid map access : (%d,%d,%d)", va);
             break;
 
         case 3008:
-            vsprintf(gTmpBuffer_67C598, "invalid map change access : (%d,%d,%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "invalid map change access : (%d,%d,%d)", va);
             break;
 
         case 3009:
-            vsprintf(gTmpBuffer_67C598, "Invalid palette type %d for sprite type %d, number %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid palette type %d for sprite type %d, number %d", va);
             break;
 
         case 3010:
-            vsprintf(gTmpBuffer_67C598, "Invalid sprite type %d number %d remap %d", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid sprite type %d number %d remap %d", va);
             break;
 
         case 3013:
@@ -1512,36 +1512,36 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             s32 file_models = va_arg(va, int);
             const char_type* pFile = va_arg(va, const char_type*);
             s32 style_models = va_arg(va, int);
-            sprintf(gTmpBuffer_67C598, "%d models in %s but %d models in style", file_models, SourceFileNameFromPath_4A07A0(pFile), style_models);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%d models in %s but %d models in style", file_models, SourceFileNameFromPath_4A07A0(pFile), style_models);
             break;
         }
 
         case 3011:
-            vsprintf(gTmpBuffer_67C598, "Invalid block in train code : (%d,%d,%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid block in train code : (%d,%d,%d)", va);
             break;
 
         case 3012:
-            vsprintf(gTmpBuffer_67C598, "Train on a block with incorrect arrow : (%d,%d,%d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Train on a block with incorrect arrow : (%d,%d,%d)", va);
             break;
 
         case 3014:
-            vsprintf(gTmpBuffer_67C598, "Attempting to disable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to disable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
             break;
 
         case 3015:
-            vsprintf(gTmpBuffer_67C598, "Attempting to enable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to enable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
             break;
 
         case 3016:
-            vsprintf(gTmpBuffer_67C598, "Illegal block for train creation. Coordinates: check stopzone! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal block for train creation. Coordinates: check stopzone! ( %d, %d, %d)", va);
             break;
 
         case 3017:
-            vsprintf(gTmpBuffer_67C598, "Failed to create carriage at: (%d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Failed to create carriage at: (%d, %d, %d)", va);
             break;
 
         case 3018:
-            vsprintf(gTmpBuffer_67C598, "Error in set-up of park command. Walls intruding on the park's triggerspace! Door coords: (%d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Error in set-up of park command. Walls intruding on the park's triggerspace! Door coords: (%d, %d, %d)", va);
             break;
 
         case 4001:
@@ -1551,7 +1551,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Invalid x co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid x co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
         break;
@@ -1563,7 +1563,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Invalid y co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid y co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
 
@@ -1574,7 +1574,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Invalid z co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid z co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
 
@@ -1584,7 +1584,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             Coord2 c;
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Placing gang phone when no gang at: (%.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Placing gang phone when no gang at: (%.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat());
             break;
         }
 
@@ -1595,7 +1595,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Illegal coordinate: (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal coordinate: (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
 
@@ -1606,7 +1606,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "Invalid diagonal block at (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid diagonal block at (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
 
@@ -1617,49 +1617,49 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            sprintf(gTmpBuffer_67C598, "No direction arrow found in block (with slope!!). ( %f, %f, %f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No direction arrow found in block (with slope!!). ( %f, %f, %f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
             break;
         }
 
         case 9011:
-            vsprintf(gTmpBuffer_67C598, "DirectX Error: %s", va);
+            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "DirectX Error: %s", va);
             break;
 
         case 8001:
-            sprintf(gTmpBuffer_67C598, "Too many %s phones for %s gang", gErrStr_67C29C, gErrStr2_67C3A8);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many %s phones for %s gang", gErrStr_67C29C, gErrStr2_67C3A8);
             break;
         case 7004:
 
-            sprintf(gTmpBuffer_67C598, "Too many lines in briefing %s", gErrStr_67C29C);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many lines in briefing %s", gErrStr_67C29C);
             break;
 
         case 7006:
-            sprintf(gTmpBuffer_67C598, "Couldn't find attract mode file %s", gErrStr_67C29C);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Couldn't find attract mode file %s", gErrStr_67C29C);
             break;
 
         case 7001:
-            sprintf(gTmpBuffer_67C598, "text identifier not found : %s", gErrStr_67C29C);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "text identifier not found : %s", gErrStr_67C29C);
             break;
 
         case 7002:
-            sprintf(gTmpBuffer_67C598, "Briefing %s too long", gErrStr_67C29C);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Briefing %s too long", gErrStr_67C29C);
             break;
 
         case 7003:
-            sprintf(gTmpBuffer_67C598, "Briefing %s too long to wrap", gErrStr_67C29C);
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Briefing %s too long to wrap", gErrStr_67C29C);
             break;
 
         case 5001:
         {
             Fix16 value = *va_arg(va, Fix16*);
-            sprintf(gTmpBuffer_67C598, "Invalid fraction : %f", value.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid fraction : %f", value.AsFloat());
             break;
         }
 
         case 5002:
         {
             Fix16 value = *va_arg(va, Fix16*);
-            sprintf(gTmpBuffer_67C598, "Invalid ambient light value : %f", value.AsFloat());
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid ambient light value : %f", value.AsFloat());
             break;
         }
         case 6001:
@@ -1678,7 +1678,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             coords[4] = *va_arg(va, s32*);
             coords[3] = *va_arg(va, s32*);
 
-            sprintf(gTmpBuffer_67C598,
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598),
                     "Unable to find a route from (%.4f, %.4f, %.4f) to (%.4f, %.4f, %.4f) in car id: %d model: %d",
                     coords[0] / 16384.0f,
                     coords[1] / 16384.0f,
@@ -1692,11 +1692,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         break;
 
         case 666: // moved case
-            sprintf(gTmpBuffer_67C598, "List Error see Kivlin");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List Error see Kivlin");
             break;
 
         default:
-            sprintf(gTmpBuffer_67C598, "No Error Message Declared");
+            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No Error Message Declared");
             break;
     }
 

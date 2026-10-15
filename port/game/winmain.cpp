@@ -1246,32 +1246,32 @@ void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
 
     if (pLocal->field_1D_bFrench != pRemote->field_1D_bFrench)
     {
-        sprintf(msg, "Player %s: Language version is different", name);
+        snprintf(msg, sizeof(msg), "Player %s: Language version is different", name);
         FatalErrorMsg_4DB410(msg);
     }
     if (pLocal->field_1_flags != pRemote->field_1_flags)
     {
-        sprintf(msg, "Player %s: Debug flags are different", name);
+        snprintf(msg, sizeof(msg), "Player %s: Debug flags are different", name);
         FatalErrorMsg_4DB410(msg);
     }
     if (pLocal->field_5_map_size != pRemote->field_5_map_size)
     {
-        sprintf(msg, "Player %s: Level file '%s' is different", name, gGameSession_67E8E0.GetMapName_4C5940());
+        snprintf(msg, sizeof(msg), "Player %s: Level file '%s' is different", name, gGameSession_67E8E0.GetMapName_4C5940());
         FatalErrorMsg_4DB410(msg);
     }
     if (pLocal->field_D_script_sum != pRemote->field_D_script_sum)
     {
-        sprintf(msg, "Player %s: Script file '%s' is different", name, gGameSession_67E8E0.GetScriptName_4C5960());
+        snprintf(msg, sizeof(msg), "Player %s: Script file '%s' is different", name, gGameSession_67E8E0.GetScriptName_4C5960());
         FatalErrorMsg_4DB410(msg);
     }
     if (pLocal->field_11_exe_a != pRemote->field_11_exe_a || pLocal->field_15_exe_b != pRemote->field_15_exe_b)
     {
-        sprintf(msg, "Player %s: Game file 'GTA2.EXE' is different", name);
+        snprintf(msg, sizeof(msg), "Player %s: Game file 'GTA2.EXE' is different", name);
         FatalErrorMsg_4DB410(msg);
     }
     if (pLocal->field_19_gci_sum != pRemote->field_19_gci_sum)
     {
-        sprintf(msg, "Player %s: Car handling file 'nyc.gci' is different", name);
+        snprintf(msg, sizeof(msg), "Player %s: Car handling file 'nyc.gci' is different", name);
         FatalErrorMsg_4DB410(msg);
     }
 }

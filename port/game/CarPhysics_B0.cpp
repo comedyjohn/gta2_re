@@ -1359,8 +1359,8 @@ char_type CarPhysics_B0::ProcessGroundCollisionAndSurfaceType_55B970(char_type* 
                 {
                     if (((u8)mask_ & (u8)*check_mask) != mask_)
                     {
-                        // Temporaries chained: corner, corner - cm1, / 50, each with its own EH state
-                        ApplyImpulseWithTrailerRedirect_55FA10(&pSprite->GetBoundingBoxCorner_562450(corner_idx_).Sub_40AC80(field_30_cm1).Divide_442CB0(Fix16(50)));
+                        Fix16_Point impulse = pSprite->GetBoundingBoxCorner_562450(corner_idx_).Sub_40AC80(field_30_cm1).Divide_442CB0(Fix16(50));
+                        ApplyImpulseWithTrailerRedirect_55FA10(&impulse);
                     }
                     ++corner_idx_;
                     mask_ *= 2;
@@ -1409,7 +1409,8 @@ char_type CarPhysics_B0::ProcessGroundCollisionAndSurfaceType_55B970(char_type* 
                 {
                     if ((water_mask & mask_) != mask_)
                     {
-                        ApplyImpulseWithTrailerRedirect_55FA10(&field_30_cm1.Sub_40AC80(pSprite->GetBoundingBoxCorner_562450(corner_idx)).Divide_442CB0(Fix16(50)));
+                        Fix16_Point impulse = field_30_cm1.Sub_40AC80(pSprite->GetBoundingBoxCorner_562450(corner_idx)).Divide_442CB0(Fix16(50));
+                        ApplyImpulseWithTrailerRedirect_55FA10(&impulse);
                     }
                     ++corner_idx;
                     mask_ *= 2;

@@ -3783,7 +3783,8 @@ void Car_BC::HandleCarExplosion_43D840(s32 type)
 
         KillContainedPeds_43DB80();
 
-        ApplyExplosionImpulse_443710(&field_50_car_sprite->get_x_y());
+        Fix16_Point pos = field_50_car_sprite->get_x_y();
+        ApplyExplosionImpulse_443710(&pos);
 
         this->field_74_damage = 32001;
 
@@ -4307,9 +4308,8 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::moving_molotov_138:
             if (!IsFlagSet_411930(car_flag::Rocketproof) && !IsMaxDamage_40F890())
             {
-                damage = AccumulateDamage_43DA90(
-                    32000,
-                    &((pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218));
+                Fix16_Point hit_pos = (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
+                damage = AccumulateDamage_43DA90(32000, &hit_pos);
                 if (!IsMaxDamage_40F890())
                 {
                     offset = pObj->field_4->get_x_y_late_443580().SubLate_40AC80(field_50_car_sprite->get_x_y_late_443580());
@@ -4334,9 +4334,8 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
                 {
                     if (!IsFlagSet_411930(car_flag::Rocketproof))
                     {
-                        damage = AccumulateDamage_43DA90(
-                            32000,
-                            &((pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218));
+                        Fix16_Point hit_pos = (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
+                        damage = AccumulateDamage_43DA90(32000, &hit_pos);
                     }
 
                     if (!IsMaxDamage_40F890())
@@ -4352,18 +4351,16 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::fire_hitting_194:
             if (!IsFlameproof_425770())
             {
-                damage = AccumulateDamage_43DA90(
-                    100 * GetDamageMultiplier_45CF90(pFoundPed),
-                    &((pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218));
+                Fix16_Point hit_pos = (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
+                damage = AccumulateDamage_43DA90(100 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
             break;
 
         case objects::pistol_bullet_265:
             if (!IsFlagSet_411930(car_flag::Bulletproof))
             {
-                damage = AccumulateDamage_43DA90(
-                    1600 * GetDamageMultiplier_45CF90(pFoundPed),
-                    &((pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218));
+                Fix16_Point hit_pos = (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
+                damage = AccumulateDamage_43DA90(1600 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
             // Like 9.6f, 265 and default pass `offset`, which only the explosion cases set
             gParticle_8_6FD5E8->EmitImpactParticles_53FE40(pObj->field_4->field_14_xy.x,
@@ -4375,9 +4372,8 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         default:
             if (!IsFlagSet_411930(car_flag::Bulletproof))
             {
-                damage = AccumulateDamage_43DA90(
-                    800 * GetDamageMultiplier_45CF90(pFoundPed),
-                    &((pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218));
+                Fix16_Point hit_pos = (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
+                damage = AccumulateDamage_43DA90(800 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
             gParticle_8_6FD5E8->EmitImpactParticles_53FE40(pObj->field_4->field_14_xy.x,
                                                            pObj->field_4->field_14_xy.y,
@@ -6977,7 +6973,8 @@ void Trailer::UpdateTrailerAlignment_407CE0()
     {
         if (IsVelocityAlignedWithHeading_40F840(pCabPhys) && pCabPhys->IsGasPedalPressedEnough_5626A0())
         {
-            new_theta = sub_405DA0(new_theta, &cab_theta, &field_8_truck_cab->GetMaxTurnRate_440510());
+            Fix16 cab_max_turn = field_8_truck_cab->GetMaxTurnRate_440510();
+            new_theta = sub_405DA0(new_theta, &cab_theta, &cab_max_turn);
         }
     }
 

@@ -544,7 +544,8 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                     {
                         if (Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x, pSprite->field_14_xy.y, field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
                         {
-                            pCar->ApplyExplosionImpulse_443710(&this->field_14_pObj2C->field_4->get_x_y_443580());
+                            Fix16_Point pos = this->field_14_pObj2C->field_4->get_x_y_443580();
+                            pCar->ApplyExplosionImpulse_443710(&pos);
                         }
                     }
                 }

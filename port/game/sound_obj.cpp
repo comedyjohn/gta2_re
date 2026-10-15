@@ -1400,7 +1400,7 @@ MATCH_FUNC(0x413C50)
 void sound_obj::ProcessOtherCarTypes_413C50(Sound_Params_8* pParams, SoundPosEntry_C* pAlloc)
 {
     Car_BC* cBC = pParams->field_0_pObj->field_8_car_bc_ptr;
-    pAlloc->field_4 = (u32)cBC; // TODO: Likely another union??
+    pAlloc->field_4 = (u32)(uintptr_t)cBC; // never read back as a pointer
     if (cBC->field_68_scale != kFpOne_66F3F4)
     {
         if (cBC->field_58_physics)
@@ -2974,12 +2974,7 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
             {
                 if (gCarInfo_48_6FE258->field_28_max_speed > kFpZero_66F3F0)
                 {
-                    // The copy through a pointer to the returned temporary is folded into the /= below, so the
-                    // speed is read through the returned pointer after the divisor's load, like the original.
-                    // speed has to be declared before pSpeed.
-                    Fix16 speed;
-                    Fix16* pSpeed = &pCar->GetCarLinearSpeed_43A240();
-                    speed = *pSpeed;
+                    Fix16 speed = pCar->GetCarLinearSpeed_43A240();
                     speed /= gCarInfo_48_6FE258->field_28_max_speed;
                     emitVol = Fix16::Round_To_Int_410BF0(Fix16(983040, 0) * speed) + 10;
                 }
@@ -5248,7 +5243,7 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             {
                 return;
             }
-            rate_displacement = ((u32)pParams * 8) % 760;
+            rate_displacement = ((u32)(uintptr_t)pParams * 8) % 760;
             samp_idx = 30;
             volume = 85;
             emit_distance = Fix16(15) / Fix16(2);
@@ -5524,7 +5519,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
             if (animation_state == 4 || animation_state == 1 || animation_state == 0)
             {
                 animation_frame = pB4->field_68_animation_frame;
-                if ((animation_frame == 1 || animation_frame == 5) && (((s32)pB4 + this->field_5448_m_FrameCounter) & 1) != 0)
+                if ((animation_frame == 1 || animation_frame == 5) && (((s32)(uintptr_t)pB4 + this->field_5448_m_FrameCounter) & 1) != 0)
                 {
                     switch (pB4->field_7C_pPed->field_254_block_spec)
                     {

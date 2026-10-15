@@ -73,9 +73,11 @@ execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_forwarders.sh $
 
 # Everything that sees the game's view of the world: the game itself and the platform code that
 # implements Win32/DirectX for it. The prelude defines _WIN32 and friends for these only.
+# The arguments after the target are its warning options. They go ahead of the -Wno-* options here,
+# since Clang's -Wall would turn those back on (-Wunknown-pragmas for GTA2Hax's VC6 headers)
 function(gta2_game_target target)
     target_compile_options(${target} PRIVATE
-        -include ${CMAKE_CURRENT_SOURCE_DIR}/include/port_prelude.h
+        -include ${CMAKE_CURRENT_SOURCE_DIR}/include/port_prelude.h ${ARGN}
         -Wno-write-strings -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
     target_include_directories(${target} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})
@@ -90,14 +92,16 @@ target_compile_options(dear_imgui PRIVATE -fshort-wchar -w)
 add_library(gta2_game STATIC
     ${game_sources}
     ${GAME_DIR}/3rdParty/bink.cpp) # Bink video, stubbed (the same stubs the VC6 build ships as binkw32.dll)
-gta2_game_target(gta2_game)
-# The decompiled code is warning-heavy by nature; GTA2_GAME_WARNINGS=ON shows them (port/TODO.md)
-option(GTA2_GAME_WARNINGS "Compile port/game/ with -Wall -Wextra instead of -w" OFF)
-if (GTA2_GAME_WARNINGS)
-    target_compile_options(gta2_game PRIVATE -Wall -Wextra)
-else()
-    target_compile_options(gta2_game PRIVATE -w)
+# Warnings for the game code. Off for good: unused parameters (the signatures are the original
+# game's), char subscripts (chars are signed on purpose and the indices small), format truncation
+# (snprintf cuts long messages short on purpose) and unknown pragmas (GTA2Hax's headers have VC6
+# ones). -Wsign-compare is still to be worked through (port/TODO.md); GTA2_GAME_WARNINGS=ON shows it.
+option(GTA2_GAME_WARNINGS "Also show the warnings port/game/ doesn't pass yet (-Wsign-compare)" OFF)
+set(game_warnings -Wall -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
+if (NOT GTA2_GAME_WARNINGS)
+    list(APPEND game_warnings -Wno-sign-compare)
 endif()
+gta2_game_target(gta2_game ${game_warnings})
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as
 # "building for Windows"), so it is a library of its own.
@@ -151,7 +155,6 @@ add_executable(gta2
     platform/ptr32.cpp
     platform/selftest.cpp
     platform/audiotest.cpp)
-gta2_game_target(gta2)
-target_compile_options(gta2 PRIVATE -Wall -Wno-unused-function)
+gta2_game_target(gta2 -Wall -Wno-unused-function)
 target_include_directories(gta2 PRIVATE ${CMAKE_BINARY_DIR})
 target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl gta2_net)

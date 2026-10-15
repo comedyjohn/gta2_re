@@ -1159,7 +1159,7 @@ char_type cSampleManager::LoadWavSdtData_58E980(const char_type* pRawOrSdtName)
     hSdtFile = fopen(sdtName, "rb");
     if (!hSdtFile)
     {
-        fclose(hRawFile_);
+        return 0; // the original closed the raw file a second time here and read from a null FILE*
     }
 
     fread(field_A8_sdt_entries, sizeof(sdt_entry_0x18), 320u, hSdtFile);

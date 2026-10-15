@@ -660,7 +660,7 @@ s32 NetPlay::HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Net
             name.lpszShortName = pPlayerName;
             name.lpszLongName = nullptr;
             name.dwSize = sizeof(DPNAME);
-            field_5E4_pDPlay3->CreatePlayer((LPDPID)&field_5D8_player_id,
+            field_5E4_pDPlay3->CreatePlayer(&field_5D8_player_id,
                                             &name,
                                             field_5DC_handle,
                                             pPlayerData->field_0_data,
@@ -679,7 +679,7 @@ s32 NetPlay::HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Net
                 name.dwSize = sizeof(DPNAME);
                 name.lpszShortName = L"GBH Group";
                 name.lpszLongName = nullptr;
-                if (field_5E4_pDPlay3->CreateGroup((LPDPID)&field_758_n2.field_0_group_id,
+                if (field_5E4_pDPlay3->CreateGroup(&field_758_n2.field_0_group_id,
                                                    &name,
                                                    field_758_n2.field_118_game_settings,
                                                    field_758_n2.field_11C_group_data_len,
@@ -698,7 +698,7 @@ s32 NetPlay::HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Net
 }
 
 // 0x51e9c0
-u32 NetPlay::AddPlayer_51E9C0(Network_8* pData, s32 player_id, DPNAME name, Network_Game_Session* pSession)
+u32 NetPlay::AddPlayer_51E9C0(Network_8* pData, DPID player_id, DPNAME name, Network_Game_Session* pSession)
 {
     u32 i = 0;
     if (pSession->field_4_players_count != MAX_PLAYERS)
@@ -1392,7 +1392,7 @@ void NetPlay::OnPacketReceived_51F870(void* pPacket, s32 packetLen, s32 recvId, 
 
 // Register allocation differs, see docs/match_attempts.md
 // 0x520040
-s32 NetPlay::MovePlayerToGroup_520040(s32 toFind, Network_Game_Session* pStru, Network_Game_Session* pDst, u32* pOutIdx)
+s32 NetPlay::MovePlayerToGroup_520040(DPID toFind, Network_Game_Session* pStru, Network_Game_Session* pDst, u32* pOutIdx)
 {
 
     *pOutIdx = 0xEEEEEEEE;
@@ -1553,7 +1553,7 @@ s32 NetPlay::JoinSession_520570(u32 session_idx, wchar_t* pPlayerName, Network_8
     name.lpszShortName = pPlayerName;
     name.dwSize = sizeof(DPNAME);
     name.lpszLongName = nullptr;
-    if (field_5E4_pDPlay3->CreatePlayer((LPDPID)&field_5D8_player_id,
+    if (field_5E4_pDPlay3->CreatePlayer(&field_5D8_player_id,
                                         &name,
                                         field_5DC_handle,
                                         pPlayerData->field_0_data,
@@ -1663,7 +1663,7 @@ BOOL NetPlay::EnumGroups_cb_520C20(DPID group_id, DWORD callback_type, LPCDPNAME
 }
 
 // 0x520ca0
-s32 NetPlay::AddEnumeratedGroupPlayer_520CA0(s32 player_id, DPNAME* pName)
+s32 NetPlay::AddEnumeratedGroupPlayer_520CA0(DPID player_id, DPNAME* pName)
 {
     Network_8 data;
     data.field_0_data = nullptr;
@@ -1672,7 +1672,7 @@ s32 NetPlay::AddEnumeratedGroupPlayer_520CA0(s32 player_id, DPNAME* pName)
 }
 
 // 0x520d00
-void NetPlay::SetGroupId_520D00(s32 group_id)
+void NetPlay::SetGroupId_520D00(DPID group_id)
 {
     field_758_n2.field_0_group_id = group_id;
 }
@@ -1721,7 +1721,7 @@ void NetPlay::ClearPlayersAndSession_520DE0(Network_Game_Session* pStru)
 }
 
 // 0x520e30
-u32 NetPlay::IndexOf_520E30(s32 toFind, Network_Game_Session* pObj)
+u32 NetPlay::IndexOf_520E30(DPID toFind, Network_Game_Session* pObj)
 {
     u32 i = 0;
     while (true)
@@ -1761,7 +1761,7 @@ void NetPlay::NoRefs_null_520EA0()
 }
 
 // 0x520eb0
-void NetPlay::UpdatePlayerPing_520EB0(s32 player_id, s32 ping, Network_Game_Session* pSession)
+void NetPlay::UpdatePlayerPing_520EB0(DPID player_id, s32 ping, Network_Game_Session* pSession)
 {
     Network_PlayerPing info;
 
@@ -1813,7 +1813,7 @@ s32 NetPlay::DeletePlayerFromGroup_521000(u32 idx)
 {
     if (idx < MAX_PLAYERS && field_758_n2.field_10_players[idx].field_0_in_use)
     {
-        s32 idPlayer = field_758_n2.field_10_players[idx].field_10_player_id;
+        DPID idPlayer = field_758_n2.field_10_players[idx].field_10_player_id;
         FreePlayerSlot_5201A0(idx, &field_758_n2);
         field_5E4_pDPlay3->DeletePlayerFromGroup(field_758_n2.field_0_group_id, idPlayer);
         return 1;
@@ -1824,7 +1824,7 @@ s32 NetPlay::DeletePlayerFromGroup_521000(u32 idx)
 // 0x521060
 s32 NetPlay::SendChatMessage_521060(wchar_t* pMsg, s32 idx_always_m1)
 {
-    s32 id_to; // edx
+    DPID id_to;
     DPCHAT chatMsg; // [esp+0h] [ebp-Ch] BYREF
     memset(&chatMsg, 0, sizeof(chatMsg));
 

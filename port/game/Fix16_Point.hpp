@@ -330,9 +330,7 @@ class Fix16_Point
     // It needs to be in the header
     // 0x563970
 
-    Fix16_Point()
-    {
-    }
+    Fix16_Point() = default;
 
     // No user-defined copy ctor: 9.6f copies points with plain movs (no call even at /Ob0), and the
     // implicit one does not use up VC6's inline budget (SpawnCabAndTrailerHelper_408370 needs that).

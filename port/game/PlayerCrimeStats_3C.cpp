@@ -8,10 +8,7 @@ PlayerCrimeStats_3C::PlayerCrimeStats_3C() // 0x484ED0
 }
 
 // 0x484EE0
-PlayerCrimeStats_3C::~PlayerCrimeStats_3C() // 0x484EE0
-{
-    // Empty
-}
+PlayerCrimeStats_3C::~PlayerCrimeStats_3C() = default; // 0x484EE0
 
 // 0x484EF0
 void PlayerCrimeStats_3C::Reset_484EF0()

@@ -36,10 +36,7 @@ class PathFinder_2FD4
     void ClearGrid_5545C0();
     void Init_5545E0();
 
-    ~PathFinder_2FD4()
-    {
-        // TODO: Should this be empty?
-    }
+    ~PathFinder_2FD4() = default; // TODO: Should this be empty?
     void RemovePed_554620(s32 ped_id);
     char_type EvaluateGridCell_554640();
     void AddGridCell_554710();

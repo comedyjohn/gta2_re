@@ -67,10 +67,7 @@ class FirefighterPool_54
         ResetCount_4A88D0();
     }
 
-    ~FirefighterPool_54()
-    {
-        // TODO: Should this be empty?
-    }
+    ~FirefighterPool_54() = default; // TODO: Should this be empty?
 
     void FireEnginesService_4A85F0();
     Firefighter_28* DispatchFirefighters_4A8620(Car_BC* pCar, Fix16 x, Fix16 y, Fix16 z);

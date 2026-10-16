@@ -86,7 +86,7 @@ execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_forwarders.sh $
 function(gta2_game_target target)
     target_compile_options(${target} PRIVATE
         -include ${PORT_DIR}/include/port_prelude.h ${ARGN}
-        -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
+        -Wno-narrowing -Wno-unknown-pragmas -Wno-invalid-offsetof)
     # REPO_ROOT is a system directory: it is how the game reaches 3rdParty/GTA2Hax's headers, whose warnings are not ours
     target_include_directories(${target} PRIVATE
         ${PORT_DIR}/include ${FORWARDERS} ${GAME_DIR})

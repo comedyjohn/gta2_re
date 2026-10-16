@@ -68,6 +68,7 @@ struct Object
     LONG mMax;
     DWORD mDeadZone; // 0..10000
     DWORD mLast; // last value reported, for buffered events
+    mutable int mDirection = 0; // an axis held past its trigger point: -1, 0 or 1
 };
 
 class DirectInputDevice final : public IDirectInputDevice2A
@@ -457,6 +458,27 @@ class DirectInputDevice final : public IDirectInputDevice2A
         return mObjects.empty() ? 0 : &mObjects[0];
     }
 
+    // The game reads a stick as four buttons: it acts when the axis passes 75% of its range, which
+    // takes a stick pushed nearly to the rim (and its dead zone of 25% comes on top). So the stick
+    // is turned into those buttons here: on at 40% of its travel, off again at 25%, and then fully
+    // deflected. The d-pad already reports full deflection.
+    static int32_t Trigger(const Object& o, int32_t raw)
+    {
+        const int32_t on = 32767 * 40 / 100;
+        const int32_t off = 32767 * 25 / 100;
+        const int sign = raw < 0 ? -1 : 1;
+        const int32_t size = raw < 0 ? -raw : raw;
+        if (o.mDirection != 0 && (o.mDirection != sign || size < off))
+        {
+            o.mDirection = 0;
+        }
+        if (o.mDirection == 0 && size > on)
+        {
+            o.mDirection = sign;
+        }
+        return o.mDirection * 32767;
+    }
+
     static DWORD ScaleAxis(const Object& o, int32_t raw)
     {
         // Dead zone in ten-thousandths of the full deflection, then into the object's range
@@ -496,9 +518,9 @@ class DirectInputDevice final : public IDirectInputDevice2A
                 switch (o.mSource)
                 {
                     case Source::AxisX:
-                        return ScaleAxis(o, pad.axisX);
+                        return ScaleAxis(o, Trigger(o, pad.axisX));
                     case Source::AxisY:
-                        return ScaleAxis(o, pad.axisY);
+                        return ScaleAxis(o, Trigger(o, pad.axisY));
                     case Source::AxisZ:
                         return ScaleAxis(o, 0);
                     case Source::Pov:

@@ -174,7 +174,7 @@ void Game_0x40::LoadGameFiles_4B8C40()
 
     strcat(tmp_array, gTmpBuffer_67C598);
 
-    if (strcmp(tmp_array, "data\\"))
+    if (strcmp(tmp_array, "data\\") != 0)
     {
         gCarInfo_808_678098->LoadFromGciFile_454A00(tmp_array);
     }

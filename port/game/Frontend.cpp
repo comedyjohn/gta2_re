@@ -5078,21 +5078,21 @@ void Frontend::sub_4B4EC0()
     char_type path[256];
     strcpy(path, "data\\");
     strcat(path, field_C9E8_blocks[main_stage][bonus_stage].field_0_debug_str);
-    if (strcmp(svg.field_0_map_name, path))
+    if (strcmp(svg.field_0_map_name, path) != 0)
     {
         FatalError_4A38C0(Gta2Error::GmpFilenameMismatch, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 5254);
     }
 
     strcpy(path, "data\\");
     strcat(path, field_C9E8_blocks[main_stage][bonus_stage].field_100_map_name);
-    if (strcmp(svg.field_19_style_name, path))
+    if (strcmp(svg.field_19_style_name, path) != 0)
     {
         FatalError_4A38C0(Gta2Error::StyFilenameMismatch, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 5262);
     }
 
     strcpy(path, "data\\");
     strcat(path, field_C9E8_blocks[main_stage][bonus_stage].field_200_sty_name);
-    if (strcmp(svg.field_32_script_name, path))
+    if (strcmp(svg.field_32_script_name, path) != 0)
     {
         FatalError_4A38C0(Gta2Error::ScrFilenameMismatch, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 5270);
     }

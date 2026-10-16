@@ -67,6 +67,8 @@ The order follows what a player notices first.
       in `platform/mss.cpp`'s mixer.
 - [ ] **Higher resolutions than 640x480.** The picture is scaled into the window at 4:3. The game's
       projection code would need to know the new size.
+- [ ] **3D renderer and RTX Remix** (from gebdag/gta2-rtx-remix): planned in `world3d/PLAN.md`. Also does
+      the item above (any window size, 16:9).
 - [ ] **Multiplayer with real game data.** Built and tested without game data (`MULTIPLAYER.md`);
       next is a real match: two copies on one PC, two machines, then mixed systems. Then, if wanted, a
       graphical lobby (the original dialog's controls drawn with Dear ImGui) and NAT hole punching.

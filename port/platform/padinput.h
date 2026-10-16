@@ -43,6 +43,7 @@ struct Settings
     Layout layout[2];
     bool worldDirections = true; // on foot, the stick walks the way it points
     bool legend = true; // the overlay's binding legend
+    bool escMenu = true; // Esc (Start on the pad) opens the port's menu; off: the game's own quit question
 };
 
 Settings Defaults();

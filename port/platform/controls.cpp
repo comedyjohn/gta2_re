@@ -271,6 +271,11 @@ PortPadFrame port_input_read()
     return out;
 }
 
+bool port_game_frozen()
+{
+    return overlay::FreezesGame();
+}
+
 unsigned int port_input_analog()
 {
     return gAnalog;

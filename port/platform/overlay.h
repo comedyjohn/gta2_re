@@ -1,7 +1,8 @@
 // The controller overlay: a legend of what each key and pad button does (F1), a settings screen (F2,
-// or the pad's Guide / Home button, or Back + Start together) that rebinds the game's twelve controls
-// to keys and pad inputs, and a car spawn menu (Start or F5). It draws into a 640x480 picture that the
-// renderer lays over the game's.
+// or the pad's Guide / Home button) that rebinds the game's twelve controls to keys and pad inputs, a
+// car spawn menu (F5 or Back), and a pause menu (Esc or Start: Settings, Quit game) that stands in for
+// the game's own quit question unless switched off. It draws into a 640x480 picture that the renderer
+// lays over the game's. In a single player game, the game stands still while any of them is open.
 //
 // Each control has a key and a pad input, and both work. The key is the game's own binding (the
 // registry's control settings, which the game's options menu edits too); the pad input comes from the
@@ -22,6 +23,9 @@ bool OnKey(uint8_t dik, bool down);
 
 // True while a menu of the overlay is open: the game gets neither keyboard nor pad input
 bool Captured();
+
+// True while a menu is open in a single player game: the game stands still and its sound pauses
+bool FreezesGame();
 
 // Once per presented frame. Returns the picture to draw over the game (ARGB, 640x480, transparent
 // where nothing is drawn), or null when there is nothing to show.

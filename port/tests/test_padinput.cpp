@@ -171,17 +171,20 @@ TEST_CASE("the settings file keeps the layouts and survives damage")
     Settings s = Load(file);
     CHECK(s.layout[OnFoot].source[4] == DefaultLayout(OnFoot).source[4]);
     CHECK(s.worldDirections);
+    CHECK(s.escMenu);
 
     s.layout[InCar].source[4] = 7;
     s.layout[OnFoot].source[0] = kNone;
     s.worldDirections = false;
     s.legend = false;
+    s.escMenu = false;
     REQUIRE(Save(file, s));
     const Settings back = Load(file);
     CHECK(back.layout[InCar].source[4] == 7);
     CHECK(back.layout[OnFoot].source[0] == kNone);
     CHECK_FALSE(back.worldDirections);
     CHECK_FALSE(back.legend);
+    CHECK_FALSE(back.escMenu);
 
     // Bad values and junk lines are skipped
     FILE* f = fopen(file.c_str(), "w");

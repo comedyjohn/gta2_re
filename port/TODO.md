@@ -46,8 +46,10 @@ Read this first when picking the port up again. `README.md` explains how the por
       (`port_input_apply`, `port_walk_speed` in `char.cpp`). Driving: triggers bound to Forward/Backward
       are analog pedals (`port_gas_scale` in `CarPhysics_B0::ComputeEngineTorque_561970`), right stick
       turns turrets.
-    - F1 legend, F2 / Guide / Back+Start settings, Start / F5 car spawn menu; the pad drives the
-      front end's menus. A button held when the layout changes or a menu closes waits to be let go.
+    - Esc / Start: pause menu (Settings, Quit game) in place of the game's quit question; `esc_menu = 0`
+      in `pad.txt` (or E / Back in the settings) gives the original Esc back. F1 legend, F2 / Guide
+      settings, F5 / Back car spawn menu. In single player any of these menus freezes the game and its
+      sound (`port_game_frozen` in `RunGameFrame_4DA850`); the pad drives the front end's menus. A button held when the layout changes or a menu closes waits to be let go.
     - `GTA2_TEST_PAD=file` replaces the pad with a script (`tests/fixtures/pad-session.txt`).
     - The registry is saved through a temporary file, so it can't be left half written.
 
@@ -74,8 +76,7 @@ The order follows what a player notices first.
       analog speed, driving, turret, the new input layer); F1/F2 shadow the game's radio keys (move the overlay to F7/F8, or
       put the radio on the pad); the turret turn sound (`field_B8_turret_rotated` is reset by
       `HandleUserInput`) and an analog turret speed; spawned cars' facing and the other models; names of
-      controls 9..11 against the game's options menu; a tank page of its own; pausing the world while a
-      menu is open; the spawn position uses the C library's sin/cos (a pad replay with a spawn could
+      controls 9..11 against the game's options menu; a tank page of its own; the spawn position uses the C library's sin/cos (a pad replay with a spawn could
       differ between x86 and ARM).
 - [ ] **ASan: texture upload reads past the tile buffer, sometimes.** `SetTexture` (`renderer.cpp:428`,
       from `TextureCache_15D8::ReadTextures_5B92E0`) reads one byte after the 4,128,768-byte tile buffer

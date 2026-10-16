@@ -48,6 +48,19 @@ uint32_t gCanvas[kWidth * kHeight];
 
 bool gSettingsOpen = false;
 bool gSpawnOpen = false; // the car menu
+bool gMenuOpen = false; // the Esc menu
+bool gSettingsFromMenu = false; // closing the settings goes back to the Esc menu
+int gMenuRow = 0;
+bool gAudioPaused = false;
+
+// The Esc menu's entries
+enum MenuEntry
+{
+    MenuSettings,
+    MenuQuit,
+    kMenuEntries
+};
+const char* const kMenuNames[kMenuEntries] = {"Settings", "Quit game"};
 int gTab = padinput::OnFoot; // the pad layout the settings screen shows
 int gCar = 0; // the car menu's selected entry
 
@@ -136,6 +149,14 @@ int gNavHeld = 0; // frames the stick or d-pad has been held up or down
 bool InGame()
 {
     return gGame_0x40_67E008 && !gFrontend_67DC84;
+}
+
+// Esc (Start on the pad) opens the port's menu instead of the game's own quit question. Not in a
+// network game, which can't stand still. Off in the settings (or esc_menu = 0 in pad.txt) gives
+// the original behaviour back.
+bool EscOpensMenu()
+{
+    return controls::Pad().escMenu && InGame() && !bStartNetworkGame_7081F0;
 }
 
 // ---------------------------------------------------------------- the controls
@@ -241,11 +262,21 @@ void CloseSettings()
     gSettingsOpen = false;
     gListening = false;
     gStatus.clear();
+    gMenuOpen = gSettingsFromMenu && EscOpensMenu();
+    gSettingsFromMenu = false;
 }
 
 bool Modal()
 {
-    return gSettingsOpen || gSpawnOpen;
+    return gSettingsOpen || gSpawnOpen || gMenuOpen;
+}
+
+void ToggleEscMenuSetting()
+{
+    padinput::Settings& pad = controls::Pad();
+    pad.escMenu = !pad.escMenu;
+    controls::SavePad();
+    gStatus = pad.escMenu ? "Esc and Start open this menu" : "Esc asks the game's own quit question";
 }
 
 // Up or down on the stick or d-pad: -1, 0 or 1, once on the press and then repeating while held
@@ -305,9 +336,43 @@ void ToggleSettings()
     }
     gTab = InGame() ? controls::CurrentContext() : padinput::OnFoot;
     gSpawnOpen = false;
+    gSettingsFromMenu = gMenuOpen;
+    gMenuOpen = false;
     gSettingsOpen = true;
     gListening = false;
     gStatus.clear();
+}
+
+void ToggleMenu()
+{
+    gMenuOpen = !gMenuOpen;
+    gMenuRow = 0;
+    gSpawnOpen = false;
+}
+
+void MoveMenu(int delta)
+{
+    gMenuRow = (gMenuRow + delta + kMenuEntries) % kMenuEntries;
+}
+
+void ChooseMenu()
+{
+    switch (gMenuRow)
+    {
+        case MenuSettings:
+            ToggleSettings();
+            break;
+        case MenuQuit:
+            // As confirming the game's own quit question (Hud_QuitMessage_1::IsOnQuitMessage_5D13C0)
+            gMenuOpen = false;
+            if (InGame())
+            {
+                gGame_0x40_67E008->ExitGameNoBonus_4B8C00(1, GameExitType::PlayerQuit_2);
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 // ---------------------------------------------------------------- drawing
@@ -377,13 +442,13 @@ void DrawLegend()
     {
         DrawRow(x + 8, y + 4 + (i + 1) * kCharH, context, i, false, w);
     }
-    Text(x + 8, y + 4 + (kActions + 1) * kCharH, kDim, "F1 hide  F2 settings  Start or F5 cars");
+    Text(x + 8, y + 4 + (kActions + 1) * kCharH, kDim, "F1 hide  F2 settings  Back or F5 cars");
 }
 
 void DrawSettings()
 {
     const int w = 600;
-    const int h = (kActions + 13) * kCharH + 16;
+    const int h = (kActions + 14) * kCharH + 16;
     const int x = (kWidth - w) / 2;
     const int y = (kHeight - h) / 2;
     Fill(x, y, w, h, kPanel);
@@ -415,6 +480,33 @@ void DrawSettings()
     line += kCharH;
     Text(x + 8, line, kDim,
          std::string("M or R3 stick walks the way it points: ") + (controls::Pad().worldDirections ? "on" : "off"));
+    line += kCharH;
+    Text(x + 8, line, kDim,
+         std::string("E or Back  Esc and Start open the pause menu: ") + (controls::Pad().escMenu ? "on" : "off"));
+}
+
+void DrawMenu()
+{
+    const int w = 280;
+    const int h = (kMenuEntries + 5) * kCharH + 16;
+    const int x = (kWidth - w) / 2;
+    const int y = (kHeight - h) / 2;
+    Fill(x, y, w, h, kPanel);
+    Text(x + 8, y + 8, kAccent, "Paused");
+    int line = y + 8 + kCharH * 2;
+    for (int i = 0; i < kMenuEntries; i++)
+    {
+        if (i == gMenuRow)
+        {
+            Fill(x + 4, line, w - 8, kCharH, kSelect);
+        }
+        Text(x + 12, line, kText, kMenuNames[i]);
+        line += kCharH;
+    }
+    line += kCharH;
+    Text(x + 8, line, kDim, "Enter or A choose");
+    line += kCharH;
+    Text(x + 8, line, kDim, "Esc, B or Start back to the game");
 }
 
 void DrawSpawnMenu()
@@ -440,7 +532,7 @@ void DrawSpawnMenu()
     line += kCharH / 2;
     Text(x + 8, line, kAccent, gStatus);
     line += kCharH;
-    Text(x + 8, line, kDim, "Up/Down choose  LB/RB page  A spawn  B or Start close");
+    Text(x + 8, line, kDim, "Up/Down choose  LB/RB page  A spawn  B or Back close");
 }
 
 // ---------------------------------------------------------------- pad navigation
@@ -461,11 +553,22 @@ void UpdatePad()
     const plat::PadState& prev = gPrevPad;
     auto pressed = [&](int slot) { return pad.buttons[slot] && !prev.buttons[slot]; };
 
-    const bool chord = (pad.buttons[6] && pad.buttons[7]) && (pressed(6) || pressed(7));
     const bool guide = pad.guide && !prev.guide;
-    if (chord || guide)
+    if (guide)
     {
         ToggleSettings();
+    }
+    else if (gMenuOpen)
+    {
+        MoveMenu(NavDelta(pad, prev));
+        if (pressed(0))
+        {
+            ChooseMenu();
+        }
+        else if (pressed(1) || pressed(7))
+        {
+            gMenuOpen = false;
+        }
     }
     else if (gSpawnOpen)
     {
@@ -482,12 +585,16 @@ void UpdatePad()
         {
             ChooseCar();
         }
-        else if (pressed(1) || pressed(7))
+        else if (pressed(1) || pressed(6))
         {
             gSpawnOpen = false;
         }
     }
-    else if (!gSettingsOpen && pressed(7) && !pad.buttons[6])
+    else if (!gSettingsOpen && pressed(7) && EscOpensMenu())
+    {
+        ToggleMenu();
+    }
+    else if (!gSettingsOpen && (pressed(6) || (pressed(7) && !EscOpensMenu())))
     {
         ToggleSpawnMenu();
     }
@@ -534,6 +641,10 @@ void UpdatePad()
             else if (pressed(9))
             {
                 ToggleWorldDirections();
+            }
+            else if (pressed(6))
+            {
+                ToggleEscMenuSetting();
             }
             else if (pressed(8))
             {
@@ -678,6 +789,17 @@ bool Captured()
     return Modal();
 }
 
+bool FreezesGame()
+{
+    const bool frozen = Modal() && InGame() && !bStartNetworkGame_7081F0;
+    if (frozen != gAudioPaused)
+    {
+        gAudioPaused = frozen;
+        plat::PauseAudio(frozen);
+    }
+    return frozen;
+}
+
 bool OnKey(uint8_t dik, bool down)
 {
     if (dik == DIK_F1 || dik == DIK_F2)
@@ -700,6 +822,39 @@ bool OnKey(uint8_t dik, bool down)
             }
         }
         return true;
+    }
+    if (gMenuOpen)
+    {
+        if (down)
+        {
+            switch (dik)
+            {
+                case DIK_UP:
+                    MoveMenu(-1);
+                    break;
+                case DIK_DOWN:
+                    MoveMenu(1);
+                    break;
+                case DIK_RETURN:
+                case DIK_NUMPADENTER:
+                    ChooseMenu();
+                    break;
+                case DIK_ESCAPE:
+                    gMenuOpen = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return down;
+    }
+    if (dik == DIK_ESCAPE && !gSettingsOpen && !gSpawnOpen && EscOpensMenu())
+    {
+        if (down)
+        {
+            ToggleMenu();
+        }
+        return down;
     }
     if (dik == DIK_F5 && InGame())
     {
@@ -794,6 +949,9 @@ bool OnKey(uint8_t dik, bool down)
         case DIK_M:
             ToggleWorldDirections();
             break;
+        case DIK_E:
+            ToggleEscMenuSetting();
+            break;
         case DIK_ESCAPE:
             CloseSettings();
             break;
@@ -810,7 +968,9 @@ const uint32_t* Frame()
     if (!InGame())
     {
         gSpawnOpen = false;
+        gMenuOpen = false;
     }
+    FreezesGame(); // resumes the sound when a menu closed outside a game frame (quitting)
     if (havePad || Modal())
     {
         UpdatePad();
@@ -824,6 +984,10 @@ const uint32_t* Frame()
     if (gSpawnOpen)
     {
         DrawSpawnMenu();
+    }
+    else if (gMenuOpen)
+    {
+        DrawMenu();
     }
     else if (gSettingsOpen)
     {

@@ -107,6 +107,10 @@ Settings Load(const std::string& file)
         {
             s.legend = value != 0;
         }
+        else if (!strcmp(key, "esc_menu"))
+        {
+            s.escMenu = value != 0;
+        }
         else
         {
             for (int context = 0; context < 2; context++)
@@ -137,7 +141,8 @@ bool Save(const std::string& file, const Settings& settings)
                "# 224..227 stick or d-pad left, right, up, down, 255 none. Actions: 0 forward, 1 backward,\n"
                "# 2 left, 3 right, 4 fire, 5 enter/exit car, 6 jump/handbrake, 7 previous weapon,\n"
                "# 8 next weapon, 9..11 specials.\n");
-    fprintf(f, "world_directions = %d\nlegend = %d\n", settings.worldDirections ? 1 : 0, settings.legend ? 1 : 0);
+    fprintf(f, "world_directions = %d\nlegend = %d\nesc_menu = %d\n", settings.worldDirections ? 1 : 0, settings.legend ? 1 : 0,
+            settings.escMenu ? 1 : 0);
     for (int context = 0; context < 2; context++)
     {
         for (int action = 0; action < kActions; action++)

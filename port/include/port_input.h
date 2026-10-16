@@ -41,5 +41,9 @@ unsigned int port_input_apply(unsigned int bits);
 // Only the local player's car on a pad's analog trigger gets less than full.
 int port_gas_scale(const void* driverPed);
 
+// True while a menu of the overlay is open in a single player game: the game is not updated, and
+// its sound is paused (RunGameFrame_4DA850)
+bool port_game_frozen();
+
 // The walking speed of this ped (raw Fix16) with the stick's push applied, for the local player
 int port_walk_speed(const void* ped, int speed);

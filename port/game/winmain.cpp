@@ -30,6 +30,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <port_replay.h>
+#include <port_input.h>
 #include <windows.h>
 //#include <dmusics.h>
 
@@ -1472,6 +1473,16 @@ bool RunGameFrame_4DA850()
             do_network_and_local_inputs_4DAF30();
             gMatchStartTime_6F5A28 = Time + gGame_0x40_67E008->GetFrameDurationMs_4B8BB0();
         }
+    }
+    else if (port_game_frozen())
+    {
+        // port: a menu of the overlay is open (platform/overlay.cpp): the game stands still, nothing
+        // is updated or recorded, and it carries on from the same moment when the menu closes
+        gMatchStartTime_6F5A28 = Time;
+        Draw_4DA7B0();
+        gFramesSinceDraw_6F58D8 = 0;
+        drew_frame = 1;
+        Sleep(10);
     }
     else
     {

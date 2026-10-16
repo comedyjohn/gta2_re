@@ -40,19 +40,25 @@ The pad's defaults:
 
 The port's overlay:
 
+- **Esc**, or **Start** on the pad, pauses the game and opens a menu: **Settings** (the controls, see
+  below) and **Quit game** (back to the main menu, as answering yes to the game's own quit question).
+  Esc, B or Start goes back to the game. Not in a network game, where Esc asks the game's question as
+  before. To get the original Esc back everywhere, switch the menu off in the settings (**E**, or Back
+  on the pad) or put `esc_menu = 0` in `pad.txt`.
 - **F1** shows or hides a legend of the controls (shown by default when a controller is connected).
-- **F2**, the controller's **Guide / Home** button, or **Back + Start** together opens the settings:
+- **F2**, the controller's **Guide / Home** button, or Settings in the Esc menu opens the settings:
   pick a control with Up/Down (or the d-pad), press Enter (or A) and then the key or pad button to
   bind: a key sets the control's key, a pad button its pad input on the page shown. The pages are
   **On foot** and **In a car** (LB/RB or Left/Right); keys are the same on both. Delete (or X) resets
   the control, **N** (or L3) takes its pad input away, **P** (or Y) puts both pad layouts back to the
   defaults, **K** the keys, **M** (or R3) switches the stick between walking the way it points and the
-  game's own turn-left/turn-right controls. The game sees no input while the settings are open, and a
-  button still held when they close does nothing until it is let go. Pad buttons are named by position,
+  game's own turn-left/turn-right controls, **E** (or Back) the Esc menu on and off. A button still held
+  when the settings close does nothing until it is let go.
+- In a single player game the game stands still, sound included, while any of these menus is open. Pad buttons are named by position,
   as on an Xbox pad: A bottom, B right, X left, Y top (8BitDo pads in Switch mode label them
   differently).
-- **F5**, or **Start** on the pad, opens a list of cars: Up/Down (or the stick) to choose, LB/RB to page,
-  Enter or A to spawn it next to you (on open ground, in front of you if there is room), B, Start or
+- **F5**, or **Back** on the pad (Start too when the Esc menu is off), opens a list of cars: Up/Down (or the stick) to choose, LB/RB to page,
+  Enter or A to spawn it next to you (on open ground, in front of you if there is room), B, Back or
   Esc to close. Not in a network game.
 - Getting into or out of a car switches the pad layout. A button held at that moment does nothing until
   it is let go, so the Y that got you in does not get you straight out again.

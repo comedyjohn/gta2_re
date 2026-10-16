@@ -1740,8 +1740,8 @@ void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
 // 0x506a60
 void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
 {
-    auto* pThread =
-        (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
+    auto* pThread = static_cast<SCR_THREAD*>(
+        gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type));
     miss2_0x11C* pScriptThread = nullptr;
     s16 threadId = 0;
 
@@ -2020,8 +2020,8 @@ void miss2_0x11C::SCRCMD_I_OP_S_507110()
 {
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type);
     auto* pCmd = reinterpret_cast<SCR_OPERATE_INT_AND_COUNTER*>(gBasePtr_6F8070);
-    auto* pOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-        (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type); // pCmd->field_A_counter_idx
+    auto* pOperand = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+        (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type)); // pCmd->field_A_counter_idx
 
     switch (operation_type)
     {
@@ -2267,8 +2267,8 @@ void miss2_0x11C::SCRCMD_SET_DENSITY_508280()
 void miss2_0x11C::SCRCMD_POINT_ARROW_3D_508550() //  SCRCMD_POINT_ARROW_3D and SCRCMD_LEVEL_END_ARROW2
 {
     auto* pCmd = reinterpret_cast<SCR_LEVEL_END_ARROW2*>(gBasePtr_6F8070);
-    auto* pPointer =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[2].field_4_cmd_next);
+    auto* pPointer = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[2].field_4_cmd_next));
     if (pPointer->field_8_arrow == nullptr)
     {
         pPointer->field_8_arrow = gHud_2B00_706620->field_1F18_arrows.AllocArrow_5D1050();
@@ -3839,8 +3839,8 @@ void miss2_0x11C::SCRCMD_CAR_DRIVE_AWAY_50B440()
 void miss2_0x11C::SCRCMD_GET_CAR_FROM_CRANE_50B470()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer1 =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
+    auto* pPointer1 = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type));
     auto* pPointer2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1));
     Crane_15C* pCrane = pPointer1->field_8_crane;
 

@@ -12,6 +12,8 @@ typedef unsigned char GLubyte;
 typedef float GLfloat;
 typedef unsigned int GLbitfield;
 typedef char GLchar;
+typedef double GLdouble;
+typedef ptrdiff_t GLsizeiptr;
 
 #define GL_FALSE 0
 #define GL_TRUE 1
@@ -28,6 +30,14 @@ typedef char GLchar;
 #define GL_SRC_ALPHA 0x0302
 #define GL_ONE_MINUS_SRC_ALPHA 0x0303
 #define GL_COLOR_BUFFER_BIT 0x00004000
+#define GL_DEPTH_BUFFER_BIT 0x00000100
+#define GL_LESS 0x0201
+#define GL_LEQUAL 0x0203
+#define GL_UNSIGNED_INT 0x1405
+#define GL_ARRAY_BUFFER 0x8892
+#define GL_ELEMENT_ARRAY_BUFFER 0x8893
+#define GL_STATIC_DRAW 0x88E4
+#define GL_DYNAMIC_DRAW 0x88E8
 #define GL_TEXTURE_2D 0x0DE1
 #define GL_TEXTURE0 0x84C0
 #define GL_RGBA 0x1908
@@ -82,6 +92,16 @@ typedef char GLchar;
     X(void, glVertexAttribPointer, (GLuint index, GLint size, GLenum type, GLboolean normalized,     \
                                     GLsizei stride, const void* pointer))                            \
     X(void, glEnableVertexAttribArray, (GLuint index))                                               \
+    X(void, glGenBuffers, (GLsizei n, GLuint * buffers))                                             \
+    X(void, glDeleteBuffers, (GLsizei n, const GLuint* buffers))                                     \
+    X(void, glBindBuffer, (GLenum target, GLuint buffer))                                            \
+    X(void, glBufferData, (GLenum target, GLsizeiptr size, const void* data, GLenum usage))          \
+    X(void, glBufferSubData, (GLenum target, GLsizeiptr offset, GLsizeiptr size, const void* data))  \
+    X(void, glUniformMatrix4fv, (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value)) \
+    X(void, glDepthFunc, (GLenum func))                                                              \
+    X(void, glDepthMask, (GLboolean flag))                                                           \
+    X(void, glClearDepth, (GLdouble depth))                                                          \
+    X(void, glDrawElements, (GLenum mode, GLsizei count, GLenum type, const void* indices))          \
     X(void, glDrawArrays, (GLenum mode, GLint first, GLsizei count))                                 \
     X(const GLubyte*, glGetString, (GLenum name))                                                    \
     X(void, glReadPixels, (GLint x, GLint y, GLsizei w, GLsizei h, GLenum format, GLenum type, void* data))

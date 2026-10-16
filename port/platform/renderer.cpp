@@ -116,6 +116,7 @@ class GLRenderer
         glUniform1i(mModulateAlphaLoc, 0);
         glActiveTexture(GL_TEXTURE0);
         glDisable(GL_DEPTH_TEST);
+        glClearDepth(1.0);
         glDisable(GL_CULL_FACE);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -257,7 +258,8 @@ class GLRenderer
         // The bars around the 4:3 picture (glClear ignores the viewport), and the viewport for a window
         // that may have changed size
         glClearColor(0, 0, 0, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glDepthMask(GL_TRUE);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         SetViewport();
     }
 

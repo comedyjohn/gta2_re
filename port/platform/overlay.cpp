@@ -625,8 +625,9 @@ uint32_t SteerWithStick(uint32_t bits)
         // The stick's own trigger point (see dinput.cpp's Trigger)
         if (gWorldDirections && ped && !ped->get_car_416B60() && ped->field_168_game_object && x * x + y * y > 0.4 * 0.4)
         {
-            // Rotation 0 faces up the screen and grows to the left, 1440 to a turn
-            const double wanted = atan2(-x, -y) * 1440.0 / (2.0 * M_PI);
+            // Rotation 0 faces down the screen and grows to the left (found by playing: up walked down),
+            // 1440 to a turn
+            const double wanted = atan2(x, y) * 1440.0 / (2.0 * M_PI);
             int diff = static_cast<int>(lround(wanted)) - ped->GetRotation().rValue;
             diff = ((diff % 1440) + 1440 + 720) % 1440 - 720;
             // Stop pressing a turn once the speed it has built up would carry it there

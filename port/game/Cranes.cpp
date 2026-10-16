@@ -808,7 +808,7 @@ void Crane_15C::UpdateCraneSprites_47FE10()
     if (field_74_pSprite_on_hook)
     {
         a4 += field_10_hooked_sprite_offset;
-        field_74_pSprite_on_hook->set_xyz_lazy_inlined_420600(a4.x, a4.y, field_80_ground_z - field_84_hook_depth); // INLINED_MODE required
+        field_74_pSprite_on_hook->set_xyz_lazy_420600(a4.x, a4.y, field_80_ground_z - field_84_hook_depth); // INLINED_MODE required
         field_74_pSprite_on_hook->set_ang_lazy_420690(Ang16::Fix16_To_Ang16_40F540(field_A0_hook_axial_angle));
     }
 

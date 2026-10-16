@@ -546,18 +546,6 @@ class Sprite
         }
     }
 
-    // 9.6f inline 0x420600
-    inline void set_xyz_lazy_inlined_420600(Fix16 xpos, Fix16 ypos, Fix16 zpos)
-    {
-        if (field_14_xy.x != xpos || field_14_xy.y != ypos || field_1C_zpos != zpos)
-        {
-            field_14_xy.x = xpos;
-            field_14_xy.y = ypos;
-            field_1C_zpos = zpos;
-            ResetZCollisionAndDebugBoxes_59E7B0();
-        }
-    }
-
     // 9.6f inline 0x447E20
     void set_xy_lazy_447E20(Fix16 x_target, Fix16 y_target)
     {

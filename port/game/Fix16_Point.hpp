@@ -332,14 +332,6 @@ class Fix16_Point
     // 10.0 0x442CB0
     Fix16_Point operator/(const Fix16& in) const;
 
-    // MultiplyByFix16_49E3A0 as inlined into CarPhysics_B0::CalculateRearWheelForce_5620D0: the
-    // second *= is the out-of-line copy
-    void MultiplyByFix16_inline_5620D0(const Fix16& factor)
-    {
-        x *= factor;
-        y.MultiplyAssign_562430(factor);
-    }
-
     Fix16_Point NormalizeSafe_442AD0();
 
     Ang16 atan2_40ACD0();

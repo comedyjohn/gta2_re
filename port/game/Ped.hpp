@@ -671,7 +671,7 @@ class Ped
     inline void SetRemap_433C10(const u8& remap)
     {
         Char_B4* p_B4 = field_168_game_object; // local necessary to match Ped::SetupFollower_46DF70
-        p_B4->SetRemap_Inline(remap);
+        p_B4->SetRemap_46DD50(remap);
     }
 
     inline void TriggerVoiceEventRateLimited_433E50()

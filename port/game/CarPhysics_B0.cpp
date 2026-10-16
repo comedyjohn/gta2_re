@@ -3296,7 +3296,7 @@ Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
     }
 
     rear_force.SetXY_432860(new_x, brake_force1 + brake_force2 + brake_force3);
-    rear_force.MultiplyByFix16_inline_5620D0(gCarInfo_48_6FE258->field_1C_rear_end_stability);
+    rear_force.MultiplyByFix16_49E3A0(gCarInfo_48_6FE258->field_1C_rear_end_stability);
 
     // The function is at VC6's inline budget: Fix16_To_Ang16_40F540 / Ang16 - Ang16 here push the Ang16
     // constructors and y * y out of line, so the angle is built and normalised (Normalize_406C20) by hand.
@@ -3375,14 +3375,6 @@ static inline void MultiplyAssign_ProductTemp(Fix16& value, const Fix16& factor)
 {
     __int64 product = static_cast<__int64>(value.mValue) * factor.mValue;
     value.mValue = static_cast<s32>(product >> 14);
-}
-
-// `a = a * b` through an inline `*=`-style wrapper. The multiply is past the inline budget, so it
-// calls the operator* copy (0x408680), like the rotations' multiplies. Written directly (9.6f has
-// `a = a * b`), the multiply in the else branch's product-temp helper gets the operands swapped.
-static inline void MultiplyAssign_inline_408680(Fix16& a, const Fix16& b)
-{
-    a = a * b;
 }
 
 // https://decomp.me/scratch/f2UpJ
@@ -3572,7 +3564,7 @@ void CarPhysics_B0::StabilizeVelocityAtSpeed_562910()
                 field_40_linvel_1.y *= dword_6FE0FC;
             }
             field_40_linvel_1.RotateByAngle_40F6B0(field_58_theta);
-            MultiplyAssign_inline_408680(field_74_ang_vel_rad, dword_6FE318);
+            field_74_ang_vel_rad = field_74_ang_vel_rad * dword_6FE318;
         }
     }
 }

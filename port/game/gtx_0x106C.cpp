@@ -638,7 +638,7 @@ void gtx_0x106C::build_delta_container_5AAC70()
 void gtx_0x106C::load_car_info_5AAD50(u32 cari_chunk_size)
 {
     field_58_car_info = static_cast<car_info**>(Memory::malloc_4FE4D0(cari_chunk_size));
-    File::Global_Read_4A71C0(field_58_car_info, cari_chunk_size);
+    File::Global_Read_4A71C0(reinterpret_cast<void*>(field_58_car_info), cari_chunk_size);
 
     BuildCarInfoContainer_5AA9A0(cari_chunk_size);
 }
@@ -1222,7 +1222,7 @@ gtx_0x106C::~gtx_0x106C()
     {
         crt::free(local_field_50_delta_buffer);
     }
-    local_field_58_car_info = field_58_car_info;
+    local_field_58_car_info = reinterpret_cast<void*>(field_58_car_info);
     field_50_delta_buffer = nullptr;
     if (local_field_58_car_info)
     {

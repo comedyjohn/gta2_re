@@ -89,7 +89,7 @@ void LightGrid::FreeGrid_4D6E30()
 {
     if (gLightGrid_6F5400)
     {
-        crt::free(gLightGrid_6F5400);
+        crt::free(reinterpret_cast<void*>(gLightGrid_6F5400));
         gLightGrid_6F5400 = nullptr;
     }
 }

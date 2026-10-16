@@ -2944,7 +2944,7 @@ Player::Player(u8 player_idx)
     field_74_dbg_cam_zooming_out = 0;
     field_77_dbg_zoom_out = 0;
     field_76_dbg_zoom_in = 0;
-    memset(field_718_weapons, 0, sizeof(field_718_weapons));
+    memset(reinterpret_cast<void*>(field_718_weapons), 0, sizeof(field_718_weapons));
 
     for (auto& i : field_54_car_history)
     {
@@ -2975,7 +2975,7 @@ Player::~Player()
     field_34_gang_curr_location = nullptr;
     field_38_local_navigation_zone = nullptr;
     field_3C_navigation_zone = nullptr;
-    memset(field_54_car_history, 0, sizeof(field_54_car_history));
+    memset(reinterpret_cast<void*>(field_54_car_history), 0, sizeof(field_54_car_history));
 
     if (field_4C_sound_obj)
     {

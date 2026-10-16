@@ -941,7 +941,7 @@ ScriptManager_C1EA8::~ScriptManager_C1EA8()
 
     if (field_13350_pStringTbl)
     {
-        memset(field_13350_pStringTbl->field_4, 0, sizeof(field_13350_pStringTbl->field_4));
+        memset(reinterpret_cast<void*>(field_13350_pStringTbl->field_4), 0, sizeof(field_13350_pStringTbl->field_4));
         free(field_13350_pStringTbl);
         field_13350_pStringTbl = nullptr;
     }

@@ -79,7 +79,7 @@ char_type Bink::TickFrame_513240()
                              hbinkbuffer->surface_type | 0x4000000);
             BinkBufferUnlock(hbinkbuffer);
         }
-        BinkBufferBlit(hbinkbuffer, &hbink->rects, 1);
+        BinkBufferBlit(hbinkbuffer, reinterpret_cast<void*>(&hbink->rects), 1);
     }
 
     if (hbink->current_frame == hbink->total_frames)

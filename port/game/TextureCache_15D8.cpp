@@ -95,7 +95,7 @@ RemapTextureSet_14::~RemapTextureSet_14()
             pgbh_FreeTexture(field_0_pTextures[i]);
         }
 
-        crt::free(field_0_pTextures);
+        crt::free(reinterpret_cast<void*>(field_0_pTextures));
         field_0_pTextures = nullptr;
     }
 }

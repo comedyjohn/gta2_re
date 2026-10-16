@@ -103,7 +103,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
         text_0xC& entry = field_0_tKey.field_0_tKey[i];
         memset(&entry, 0, sizeof(entry));
         entry.field_0_pwstr = (wchar_t*)static_cast<sptr>(pFileEntries[i].field_0_offset);
-        memcpy(&entry.field_4_pKey, pFileEntries[i].field_4_key, sizeof(pFileEntries[i].field_4_key));
+        memcpy(reinterpret_cast<void*>(&entry.field_4_pKey), reinterpret_cast<const void*>(pFileEntries[i].field_4_key), sizeof(pFileEntries[i].field_4_key));
     }
     delete[] pFileEntries;
 #else

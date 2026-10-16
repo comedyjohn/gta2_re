@@ -147,7 +147,7 @@ struct car_info_container
     car_info_container()
     {
         field_400_count = 0;
-        memset(field_0_car_info, 0, sizeof(field_0_car_info));
+        memset(reinterpret_cast<void*>(field_0_car_info), 0, sizeof(field_0_car_info));
     }
     car_info* field_0_car_info[256];
     u8 field_400_count;

@@ -33,3 +33,15 @@ reproduces the game's own screen positions of unsloped blocks to at most 0.12 / 
 (walk / downtown / industrial). Blocks with a slope are not compared: for them the game's world
 vertices (`verts[4..7]`) are not the corners it projected (a ramp's z is fractional), so the check
 counts them apart (errors of hundreds of px there are expected, not a camera error).
+
+Frame comparison (task 3.6, `tools/world3d/compare_frames.sh`, classic against world3d, share of pixels
+differing by more than 24 in a channel; only edges and seams differ in the difference pictures):
+
+| Replay | update 200 | update 400 | update 600 |
+|---|---|---|---|
+| 00-synthetic-pad | 0.47% | 0.50% | 0.38% |
+| 00-synthetic-walk | 0.60% | 0.38% | 0.81% |
+| 11-attract-downtown | 0.06% | 0.59% | 0.35% |
+| 11-attract-industrial | 0.01% | 0.12% | 0.07% |
+
+A task that raises any of these by more than 2 points must say why in its commit message.

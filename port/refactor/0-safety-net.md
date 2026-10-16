@@ -259,9 +259,9 @@ No game data needed, so they run in public CI.
 
 Replays don't see drawing. Phase 2 to 6 touch the renderer front end, HUD and menus too.
 
-- [ ] `--replay ... --screenshot-at F1,F2,... --screenshot-dir D` renders through the real OpenGL
+- [x] `--replay ... --draw --screenshot N:FILE` renders through the real OpenGL
       renderer under Xvfb (Mesa llvmpipe, deterministic) and writes PNGs.
-- [ ] Ten reference frames per corpus replay plus the front-end menus (driven by recorded menu input),
+- [x] (menus: not yet) Ten reference frames per corpus replay plus the front-end menus (driven by recorded menu input),
       compared pixel-exact on the self-hosted runner (same Mesa version), with a diff image on failure.
 
 ### 0.11 Audio event log

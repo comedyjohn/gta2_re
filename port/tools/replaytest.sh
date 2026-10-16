@@ -6,6 +6,9 @@
 #   port/tools/replaytest.sh BUILD_DIR...            check each build against the expected logs
 #   port/tools/replaytest.sh --update BUILD_DIR      write the expected logs from this build
 #   port/tools/replaytest.sh --add NAME FILE.rep [NOTE]   add a replay (gta2 --record) to the corpus
+#   port/tools/replaytest.sh --frames BUILD_DIR...   draw 10 frames of every replay (classic renderer, under
+#                            Xvfb, about a minute per replay) and compare them with expected/NAME/frame-N.ppm,
+#                            pixel for pixel; --frames --update BUILD_DIR writes them
 #
 # The corpus holds game data, so it lives outside the repository: $GTA2_CORPUS (default
 # ~/Games/gta2/corpus), with replays/NAME.rep, expected/NAME.log and corpus.txt (name, updates,
@@ -19,7 +22,7 @@ game="${GTA2_GAME_DIR:-$HOME/Games/gta2/game}"
 jobs="${JOBS:-$(nproc 2>/dev/null || echo 4)}"
 
 usage() {
-    sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//' >&2
+    sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//' >&2
     exit 2
 }
 
@@ -63,6 +66,12 @@ case "${1:-}" in
         ;;
 esac
 
+frames=0
+if [ "${1:-}" = --frames ]; then
+    frames=1
+    shift
+fi
+
 update=0
 if [ "$1" = --update ]; then
     update=1
@@ -74,6 +83,58 @@ ls "$corpus"/replays/*.rep >/dev/null 2>&1 || fail "no replays in $corpus/replay
 
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
+
+if [ $frames = 1 ]; then
+    # Ten frames per replay, after update len*k/10 - 1, drawn through the real renderer. Mesa's software
+    # rasteriser makes them the same on every build and run (checked 2026-10-16 on four builds and two runs).
+    i=0
+    for build in "$@"; do
+        [ -x "$build/gta2" ] || fail "no gta2 in $build"
+        for rep in "$corpus"/replays/*.rep; do
+            name=$(basename "$rep" .rep)
+            tag=$(echo "$build" | tr '/' '_')
+            i=$((i + 1))
+            len=$(grep -vc '^#' "$corpus/expected/$name.log")
+            mkdir -p "$work/$tag.$name"
+            shots=""
+            for k in 1 2 3 4 5 6 7 8 9 10; do
+                shots="$shots --screenshot $((len * k / 10 - 1)):$work/$tag.$name/frame-$k.ppm"
+            done
+            echo "$build $rep $work/$tag.$name $((100 + i * 3)) $shots"
+        done
+    done >"$work/pairs"
+    xargs -P "$jobs" -L 1 sh -c '
+        b=$1; r=$2; d=$3; x=$4
+        shift 4
+        xvfb-run -a -n "$x" "$b/gta2" --replay "$r" --game-dir "'"$game"'" --hash-log "$d/log" --draw "$@" >"$d/out" 2>&1
+        echo $? >"$d/status"' sh <"$work/pairs"
+    failed=0
+    while read -r build rep dir _; do
+        name=$(basename "$rep" .rep)
+        if [ "$(cat "$dir/status" 2>/dev/null)" != 0 ]; then
+            echo "FAIL $name frames ($build): gta2 failed; $(tail -n 3 "$dir/out" | tr '\n' ' ')"
+            failed=1
+            continue
+        fi
+        if [ $update = 1 ]; then
+            mkdir -p "$corpus/expected/$name"
+            cp "$dir"/frame-*.ppm "$corpus/expected/$name/"
+            echo "UPDATED $name: 10 frames"
+            continue
+        fi
+        bad=""
+        for k in 1 2 3 4 5 6 7 8 9 10; do
+            cmp -s "$corpus/expected/$name/frame-$k.ppm" "$dir/frame-$k.ppm" || bad="$bad $k"
+        done
+        if [ -z "$bad" ]; then
+            echo "PASS $name frames ($build)"
+        else
+            echo "FAIL $name frames ($build): frames$bad differ (cmp $corpus/expected/$name/frame-N.ppm $dir/frame-N.ppm)"
+            failed=1
+        fi
+    done <"$work/pairs"
+    exit $failed
+fi
 
 # Every (build, replay) pair, played $jobs at a time. The fourth field spreads the X displays
 # xvfb-run picks, which can clash when several start at once.

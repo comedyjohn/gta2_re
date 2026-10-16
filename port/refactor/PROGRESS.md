@@ -10,6 +10,8 @@
 
 - R0.4 (2026-10-16): headless replays: no-op GL functions + SDL dummy video driver; `replaytest.sh` uses Xvfb only with `--draw`. 12 PASS with no DISPLAY; `--draw` and `--selftest` unchanged.
 
+- R0.5 (2026-10-16): `replaytest.sh --frames`: 10 frames per replay, identical on 3 builds and across runs; changing the HUD `$` colour turned all 4 replays red. Front-end menus are not covered (needs menu recordings, R0.8).
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

@@ -9,6 +9,12 @@
 | `tools/refactor/init_order.py` | no | no global is initialised from another file's global | `python3 port/tools/refactor/init_order.py` |
 | **Replay tests** (`tools/replaytest.sh`) | yes | **what the game computes**: the simulation's state after every update | `port/tools/replaytest.sh build_port/linux32 build_port/linux64` |
 
+**Golden frames** (`port/tools/replaytest.sh --frames BUILD_DIR...`, about 3 minutes for three builds): 10
+frames per replay drawn through the classic renderer under Xvfb, compared pixel for pixel with
+`expected/NAME/frame-N.ppm` in the corpus (`--frames --update BUILD_DIR` writes them). The frames are
+identical on linux32, linux64 and clang64 and between runs (Mesa llvmpipe). Run it after any change to
+drawing, the HUD, text or menus; `check.sh` doesn't, since the replays' hashes don't see drawing.
+
 **The check** (`port/tools/refactor/check.sh`, `--quick` to iterate) runs all of the above in one
 command: builds of four presets, no new warnings, unit tests, selftest, audiotest, simcheck, nettest,
 replays on three builds. It ends with `CHECK OK` or `CHECK FAILED: <step>`; logs are in

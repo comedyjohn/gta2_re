@@ -33,6 +33,9 @@ void port_world3d_sprite(const Sprite* sprite);
 // renderer's raw gZCoord_6F63E0)
 void port_world3d_block(int x, int y, unsigned int z);
 
+// Map_0x370: the map's blocks changed (a block changed, added or removed, a saved game or a level loaded)
+void port_world3d_map_changed();
+
 // ---- from the renderer (platform/renderer.cpp)
 // True when the 3D renderer took the draw; false: the classic renderer draws it
 bool port_world3d_draw(PortWorld3dDraw kind, int flags, STexture* texture, Vert* verts, int colour);
@@ -45,6 +48,7 @@ inline void port_world3d_hud(bool) {}
 inline void port_world3d_world_text(bool) {}
 inline void port_world3d_sprite(const Sprite*) {}
 inline void port_world3d_block(int, int, unsigned int) {}
+inline void port_world3d_map_changed() {}
 inline bool port_world3d_draw(PortWorld3dDraw, int, STexture*, Vert*, int) { return false; }
 inline void port_world3d_present() {}
 

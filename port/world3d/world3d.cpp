@@ -21,6 +21,7 @@ struct DrawContext
     unsigned int blockZ = 0;
 };
 DrawContext gContext;
+bool gMapDirty = true; // the game's map changed since the scene was last built
 
 enum SettingRow
 {
@@ -52,6 +53,11 @@ void port_world3d_block(int x, int y, unsigned int z)
     gContext.blockX = x;
     gContext.blockY = y;
     gContext.blockZ = z;
+}
+
+void port_world3d_map_changed()
+{
+    gMapDirty = true;
 }
 
 bool port_world3d_draw(PortWorld3dDraw, int, STexture*, Vert*, int)

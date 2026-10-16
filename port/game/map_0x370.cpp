@@ -2,6 +2,7 @@
 #define FIX16_POINT_ZERO kFpZero_6F610C
 
 #include "map_0x370.hpp"
+#include "port_world3d.h" // port: world3d
 #include "Fix16_Rect.hpp"
 #include "Function.hpp"
 #include "Car_BC.hpp"
@@ -4358,8 +4359,10 @@ void Map_0x370::ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u1
             gBlockInfo0_6F5EB0->field_A_arrows = info_value;
             break;
         default:
+            port_world3d_map_changed(); // port: world3d
             return;
     }
+    port_world3d_map_changed(); // port: world3d
 }
 
 // 0x4E87C0
@@ -4379,6 +4382,7 @@ void Map_0x370::AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockDa
     {
         field_0_pDmap->field_4000C_block[block_id] = *pBlockData;
     }
+    port_world3d_map_changed(); // port: world3d
 }
 
 // 0x4E8940
@@ -4390,6 +4394,7 @@ void Map_0x370::RemoveBlock_4E8940(s32 x_pos, s32 y_pos, s32 offset, char_type d
         *field_0_pDmap->get_base_42A830(y_pos, x_pos) = column_idx;
         field_4_obj.AddOrUpdateDmapInfo_4E80E0(x_pos, y_pos, column_idx);
     }
+    port_world3d_map_changed(); // port: world3d
 }
 
 // 0x4E8A10
@@ -4439,6 +4444,7 @@ void Map_0x370::OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes
     this->field_354_num_blocks = block_bytes / 0xC + field_0_pDmap->field_40004_num_blocks;
     this->field_4_obj.field_320_max_idx = obj_bytes >> 3;
     field_0_pDmap->ApplyDmapInfos_4E80A0(&field_4_obj);
+    port_world3d_map_changed(); // port: world3d
 }
 
 // 0x4E8CF0
@@ -4752,6 +4758,7 @@ void Map_0x370::LoadMap_4E95B0(const char_type* pGmpFileName)
     {
         FatalError_4A38C0(Gta2Error::MapNotCompressed, "C:\\Splitting\\Gta2\\Source\\map.cpp", 6329);
     }
+    port_world3d_map_changed(); // port: world3d
 }
 
 // 0x4E9660

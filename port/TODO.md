@@ -68,8 +68,8 @@ The order follows what a player notices first.
       subscripts, format truncation, unknown pragmas (`port/CMakeLists.txt` says why). Warning
       options for a game target go through `gta2_game_target(<target> <options>)`, which puts them
       ahead of its `-Wno-*` options: Clang's `-Wall` turns those back on when it comes later.
-- [ ] **Refactoring to a maintainable code base:** the plan, its order and its exit criteria are in
-      `REFACTOR.md`. Next: phase 0 (state hash, headless replay runner, golden replays).
+- [ ] **Refactoring to a maintainable code base:** the plan, its order, tasks and exit criteria are in
+      `refactor/README.md` (one file per phase). Next: phase 0 (state hash, headless replay runner, golden replays).
 - [ ] **More modernising** (done: C++ casts, range-for, `= default`, constexpr limits, `ReplayState`, `CrusherStates`,
       `GameExitType`, and clang-tidy's `bugprone-*`/`performance-*` fixes that were mechanical: loop counters as wide
       as their bounds, `GTA2_COUNTOF` as a constexpr template, explicit `strcmp` compares, default-case in every

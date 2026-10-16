@@ -1441,7 +1441,7 @@ bool Hud_ChatInput_1::IsTypingOnChat_5D15E0(s32 action, Player* pPlayer)
 // 0x5d16b0
 void Hud_ChatInput_1::DrawChatMessages_5D16B0()
 {
-    s32 line_spacing = GetLineSpacingFromFontType_5D7700_inlined(word_70643E);
+    s32 line_spacing = GetLineSpacingFromFontType_5D7700(word_70643E);
     s32 text_ypos = 480 - line_spacing;
     if (bStartNetworkGame_7081F0)
     {
@@ -2329,7 +2329,7 @@ void Hud_Brief_704::DrawBrief_5D3B80()
                                 0);
 
         // u32: converts with the Fix16(u32) constructor, whose out-of-line copy is 0x4926F0
-        u32 first_line_ypos = 480 - GetLineSpacingFromFontType_5D7700_inlined(gBriefFont_7065C4) * field_508_num_lines;
+        u32 first_line_ypos = 480 - GetLineSpacingFromFontType_5D7700(gBriefFont_7065C4) * field_508_num_lines;
         DrawText_5D7720(field_0_str, // str
                         (64), // x
                         first_line_ypos, // y

@@ -2878,7 +2878,7 @@ void Frontend::DrawBonusRating_4B7D60()
     u16 font_type = field_11E;
     char_type text_id[12];
     wchar_t text[256];
-    GetLineSpacingFromFontType_5D7700_inlined(font_type);
+    GetLineSpacingFromFontType_5D7700(font_type);
     u16 rating_idx = gGameSession_67E8E0.GetBonusRatingTextIdx_4C5AC0();
     _itoa(rating_idx, text_id, 10);
     if (rating_idx)

@@ -71,12 +71,6 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
 
 void DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, s32 a7, u8 a8);
 
-// 9.6f 0x4539B0, the inlined copy of GetLineSpacingFromFontType_5D7700
-inline s32 GetLineSpacingFromFontType_5D7700_inlined(u16 font_type)
-{
-    return static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type));
-}
-
 // 9.6f 0x4539D0
 inline s32 GetCharWidth_4539D0(u16 font_type, wchar_t chr)
 {

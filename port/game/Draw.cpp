@@ -345,7 +345,7 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
 // 0x5D8940
 s32 CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
 {
-    s32 line_spacing = GetLineSpacingFromFontType_5D7700_inlined(font_type);
+    s32 line_spacing = GetLineSpacingFromFontType_5D7700(font_type);
 
     s32 result = line_spacing;
     for (wchar_t* i = pStr; *i; ++i)

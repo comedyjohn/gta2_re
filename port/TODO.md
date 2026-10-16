@@ -68,9 +68,16 @@ The order follows what a player notices first.
       subscripts, format truncation, unknown pragmas (`port/CMakeLists.txt` says why). Warning
       options for a game target go through `gta2_game_target(<target> <options>)`, which puts them
       ahead of its `-Wno-*` options: Clang's `-Wall` turns those back on when it comes later.
-- [ ] **More modernising** (done: C++ casts, range-for, `= default`, constexpr limits, `ReplayState`; left: more `enum class`,
-      `std::array`). Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of
-      clang-tidy's `modernize-use-using`: it drops calling conventions and expands macros.
+- [ ] **More modernising** (done: C++ casts, range-for, `= default`, constexpr limits, `ReplayState`, `CrusherStates`,
+      `GameExitType`, and clang-tidy's `bugprone-*`/`performance-*` fixes that were mechanical: loop counters as wide
+      as their bounds, `GTA2_COUNTOF` as a constexpr template, explicit `strcmp` compares, default-case in every
+      switch, no reserved identifiers, trivial destructors, explicit casts for `T**` to `void*`). Left, none of them
+      worth the risk of changing decompiled control flow: more `enum class` (`GameState`, `Gta2Error`, the Frontend
+      and `gmp_*` enums), `std::array`, `bugprone-branch-clone` (70: merge case labels / `||` conditions),
+      `bugprone-assignment-in-if-condition` (87), `modernize-use-std-print` (22), `modernize-use-std-numbers`
+      (`fix16.cpp`'s pi literal: changes the constant), `bugprone-signed-char-misuse` (24: VC6's signed `char` is
+      intended). Keep `typedef struct` blocks, `resource.h` and Miles' `3rdParty/mss.h` out of clang-tidy's
+      `modernize-use-using` and `modernize-macro-to-enum`: they drop calling conventions and break the resource compiler.
 - [ ] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.**
 - [ ] **Floating-point.** VC6's x87 code and GCC's SSE differ in precision. Check that replays
       (`InputRecorder_67F8B0`) still play back the same.

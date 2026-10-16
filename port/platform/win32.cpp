@@ -1059,9 +1059,13 @@ void LoadRegistry()
     fclose(f);
 }
 
+// Written to a temporary file and renamed over the old one, so a crash or a second copy of the game
+// writing at the same time can never leave it half written (and the settings lost)
 void SaveRegistry()
 {
-    FILE* f = fopen(RegistryFile().c_str(), "w");
+    const std::string file = RegistryFile();
+    const std::string temp = file + ".new." + std::to_string(getpid());
+    FILE* f = fopen(temp.c_str(), "w");
     if (!f)
     {
         return;
@@ -1078,7 +1082,12 @@ void SaveRegistry()
             fputc('\n', f);
         }
     }
+    const bool ok = fflush(f) == 0 && !ferror(f);
     fclose(f);
+    if (!ok || rename(temp.c_str(), file.c_str()) != 0)
+    {
+        remove(temp.c_str());
+    }
 }
 
 bool KeyPath(HKEY key, LPCSTR subKey, std::string& out)

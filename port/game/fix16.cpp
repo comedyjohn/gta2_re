@@ -354,7 +354,10 @@ void arc_tan_table_init_4052D0()
     for (s32 i = 1440; i != 0; i--)
     {
         f64 radians = arg * 3.141592654;
-        *pTan = Fix16(tan(radians * 0.001388888888888889));
+        const f64 value = tan(radians * 0.001388888888888889) * 16384.0;
+        // tan(90) and tan(270) don't fit a Fix16. The original's conversion (x87 fistp) gives
+        // 0x80000000 for them, as x86's SSE one does; C++ leaves it undefined, and ARM saturates.
+        *pTan = Fix16(value >= -2147483648.0 && value < 2147483648.0 ? static_cast<s32>(value) : INT32_MIN, 0);
         arg++;
         pTan++;
     }

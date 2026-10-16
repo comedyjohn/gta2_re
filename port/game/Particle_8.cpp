@@ -526,12 +526,12 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
         {
             ang1 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(32)));
             // 9.6f: t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(..)) in both branches
-            t.RotateByAngle_40F6B0_all_out_of_line((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(16)));
+            t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(16)));
         }
         else
         {
             ang1 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(360)));
-            t.RotateByAngle_40F6B0_all_out_of_line(ang1 + tanAng - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(180)));
+            t.RotateByAngle_40F6B0(ang1 + tanAng - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(180)));
         }
 
         Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(t.x,

@@ -1732,7 +1732,7 @@ void CarPhysics_B0::SpawnSkidSegment_55D200(s32 box_idx, Fix16_Point arg_4, s32 
     Fix16_Point skid_mid;
     Fix16 len; // declared up here: its stack slot is the dead box_idx one, shared with the / 2 temporary
 
-    arg_4.RotateByAngle_40F6B0_out_of_line(field_58_theta);
+    arg_4.RotateByAngle_40F6B0(field_58_theta);
 
     arg_4 += this->field_38_cp1;
 
@@ -3575,19 +3575,6 @@ void CarPhysics_B0::StabilizeVelocityAtSpeed_562910()
             MultiplyAssign_inline_408680(field_74_ang_vel_rad, dword_6FE318);
         }
     }
-}
-
-// Out-of-line copy of Fix16_Point::RotateByAngle_40F6B0
-// 0x562c20
-void Fix16_Point::RotateVelocity_562C20(const Ang16& angle)
-{
-    const Fix16 sin = Ang16::sine_40F500(angle);
-    const Fix16 cos = Ang16::cosine_40F520(angle);
-
-    const Fix16 x_old = x;
-
-    x = (sin * y) + (cos * x);
-    y = (cos * y) + ((-x_old) * sin);
 }
 
 // https://decomp.me/scratch/0X4pK

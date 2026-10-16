@@ -1050,7 +1050,7 @@ char_type Particle_4C::UpdateSkidOrScrapeSpark_state_40_41_53A280()
             offset.x = -dword_6FD46C;
             offset.y = dword_6FD2F8;
         }
-        offset.RotateByAngle_OneMulInline_40F6B0(field_28_pSprite->field_0_rotation);
+        offset.RotateByAngle_40F6B0(field_28_pSprite->field_0_rotation);
         offset = offset.Add_40AC50(pB4->field_98_velocity_vector);
 
         field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + field_46_sub_state + 197);
@@ -1494,7 +1494,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
             }
             attach.y = dword_6FD2D4;
             attach.x = 0;
-            attach.RotateByAngle_OneMulInline_40F6B0(car_angle);
+            attach.RotateByAngle_40F6B0(car_angle);
             offset.y = kFP16Eighth_6FD2D0;
             offset.x = 0;
         }
@@ -1503,11 +1503,11 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
             car_angle = pCar->field_0_attachments.GetSpriteForModel_5A6A50(248)->field_0_pSprite->field_0_rotation;
             attach.x = 0;
             attach.y = dword_6FD48C;
-            attach.RotateByAngle_OneMulInline_40F6B0(car_angle);
+            attach.RotateByAngle_40F6B0(car_angle);
             offset.x = 0;
             offset.y = dword_6FD4CC;
         }
-        offset.RotateByAngle_OneMulInline_40F6B0(pCar->field_50_car_sprite->field_0_rotation);
+        offset.RotateByAngle_40F6B0(pCar->field_50_car_sprite->field_0_rotation);
         attach += offset.Add_40AC50(pCar->field_50_car_sprite->get_x_y());
         vel = pCar->field_58_physics->GetPointVelocity_561350(&attach);
         angle = car_angle;

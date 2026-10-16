@@ -1492,14 +1492,14 @@ void SpawnCabAndTrailerHelper_408370(Fix16 xpos,
     Fix16_Point hitch = gTrailerHitchOffset_66AAC8;
     Fix16_Point cab_offset = gTrailerCabOffset_66AAE0;
 
-    hitch.RotateByAngle_40F6B0_out_of_line(rot);
+    hitch.RotateByAngle_40F6B0(rot);
     hitch_pos = pos.Add_40AC50(hitch);
 
-    cab_offset.RotateByAngle_40F6B0_all_out_of_line(rot);
+    cab_offset.RotateByAngle_40F6B0(rot);
     // 9.6f 0x40F760: negate in place
     cab_offset.x = cab_offset.x.Negate_4086A0();
     cab_offset.y = cab_offset.y.Negate_4086A0();
-    cab_offset.RotateByAngle_40F6B0_all_out_of_line(uknown_rot);
+    cab_offset.RotateByAngle_40F6B0(uknown_rot);
     trailer_pos = hitch_pos.Add_40AC50(cab_offset);
 
     *pOutZ = zpos;

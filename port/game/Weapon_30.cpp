@@ -949,7 +949,7 @@ void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
     {
         start.x = -dword_706E7C;
         start.y = dword_706CF8 + dword_706E80;
-        start.RotateByAngle_40F6B0_all_out_of_line(word_707004);
+        start.RotateByAngle_40F6B0(word_707004);
         start = start.Add_40AC50(a1);
         start.x += stru_706E58.x;
         start.y += stru_706E58.y;
@@ -987,7 +987,7 @@ void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
 
         step.x = seg_len.Multiply_408680(Ang16::sine_40F500(angle));
         step.y = seg_len.Multiply_408680(Ang16::cosine_40F520(angle));
-        step.RotateByAngle_40F6B0_all_out_of_line(jitter);
+        step.RotateByAngle_40F6B0(jitter);
         seg_angle = step.atan2_40F790();
 
         next = cur.Add_40AC50(step);

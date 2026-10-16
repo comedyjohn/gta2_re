@@ -2529,10 +2529,10 @@ void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix
     corner2.SetXY_432860(width_over_2, height_over_2);
     corner3.SetXY_432860(width_over_2.Negate_4086A0(), height_over_2);
 
-    corner0.RotateVelocity_562C20(rotation);
-    corner1.RotateVelocity_562C20(rotation);
-    corner2.RotateVelocity_562C20(rotation);
-    corner3.RotateVelocity_562C20(rotation);
+    corner0.RotateByAngle_40F6B0(rotation);
+    corner1.RotateByAngle_40F6B0(rotation);
+    corner2.RotateByAngle_40F6B0(rotation);
+    corner3.RotateByAngle_40F6B0(rotation);
 }
 
 // 0x5A4D90

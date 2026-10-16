@@ -181,7 +181,7 @@ void ToggleWorldDirections()
     LoadWorldSetting();
     gWorldDirections = !gWorldDirections;
     gRegistry_6FF968.Write_Control_Setting(kWorldDirectionsSetting, gWorldDirections ? 1 : 0);
-    gStatus = gWorldDirections ? "Stick: walks the way it points; in cars it steers, RT gas, LT brake"
+    gStatus = gWorldDirections ? "Stick: walks as it points; in cars it steers, RT gas, LT brake, RB fires"
                                : "Stick: left and right turn the character, up walks forward";
 }
 
@@ -960,7 +960,17 @@ uint32_t SteerWithStick(uint32_t bits)
             // and 3 on foot, so those two are held back while driving.
             const bool gas = pad.triggerRight > kTriggerDead;
             const bool brake = pad.triggerLeft > kTriggerDead;
-            if (size > 0.25 || gas || brake)
+            // R1 shoots from a car (Fire; next weapon is held back if it is on R1 too)
+            const bool fire = pad.buttons[5] != 0;
+            if (fire)
+            {
+                mine |= 0x10;
+                if (gMaybeDeviceType_67B91C[8] == 1 && gPlayerControlsBinding_67B6E8[8] == 5)
+                {
+                    clearBits |= 0x100;
+                }
+            }
+            if (size > 0.25 || gas || brake || fire)
             {
                 // The trigger's travel sets how hard the engine pulls (CarPhysics_B0::ComputeEngineTorque_561970)
                 const int pressed = gas ? pad.triggerRight : pad.triggerLeft;

@@ -25,8 +25,8 @@ mostly follows already, but 182 of the 265 files in `game/` differ from it (abou
       `clang-format -i port/game/*.{cpp,hpp,h} port/platform/**/*.{cpp,h}`.
 - [ ] Add that commit to `.git-blame-ignore-revs` (and run `git config blame.ignoreRevsFile
       .git-blame-ignore-revs`), so `git blame` skips it.
-- [ ] CI job `port-format`: `clang-format --dry-run -Werror` on the same globs.
-- [ ] Optional: `port/tools/refactor/pre-commit` (formats staged files), installed with
+- [x] CI job `port-format`: `clang-format --dry-run -Werror` on the same globs.
+- [x] Optional: `port/tools/refactor/pre-commit` (formats staged files), installed with
       `ln -s ../../port/tools/refactor/pre-commit .git/hooks/pre-commit`.
 
 Merge or rebase open branches before this commit; afterwards they can be rebased with

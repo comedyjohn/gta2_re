@@ -1,0 +1,7 @@
+#!/bin/bash
+# Formats the staged C++ files of port/game, port/platform and port/tests (not port/world3d) with the
+# repository's .clang-format. Install: ln -s ../../port/tools/refactor/pre-commit .git/hooks/pre-commit
+# Needs clang-format 18 on PATH (port/tools/refactor/requirements.txt).
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^port/(game|platform|tests)/.*\.(cpp|hpp|h)$')
+[ -z "$files" ] && exit 0
+echo "$files" | xargs clang-format -i && echo "$files" | xargs git add

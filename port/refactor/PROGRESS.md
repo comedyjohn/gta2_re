@@ -23,6 +23,8 @@
 
 - R1.2 (2026-10-16): clang-format 18.1.8 over port/game, port/platform, port/tests (205 files). Hash in .git-blame-ignore-revs.
 
+- R1.3 (2026-10-16): `.github/workflows/port.yml` (job port-format) and `tools/refactor/pre-commit`. Not run on GitHub yet.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

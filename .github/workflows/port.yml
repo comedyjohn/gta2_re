@@ -1,0 +1,21 @@
+name: Port
+
+on:
+  push:
+    paths: ['port/**', '.github/workflows/port.yml']
+  pull_request:
+    paths: ['port/**', '.github/workflows/port.yml']
+
+jobs:
+  port-format:
+    runs-on: ubuntu-24.04
+    name: port-format
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install clang-format 18.1.8 (the version in port/tools/refactor/requirements.txt)
+      run: pip install clang-format==18.1.8
+    - name: clang-format --dry-run -Werror
+      run: |
+        shopt -s globstar nullglob
+        clang-format --dry-run -Werror port/game/*.{cpp,hpp,h} port/platform/**/*.{cpp,h} port/tests/*.{cpp,hpp}
+      shell: bash

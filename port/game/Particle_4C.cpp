@@ -1389,24 +1389,6 @@ char_type Particle_4C::UpdateBurstAnimation_state_29_30_53B9F0()
     return false;
 }
 
-// Fix16_Point::GetLength with the operators out of line, compared against kFP16Zero_6FD49C. Only the
-// first Abs is inline, the second is the out-of-line Abs_436A50 (as in MinDistanceToAnySpriteBBoxCorner_5A22B0)
-static inline Fix16 GetLength_OOL_6FD49C(Fix16_Point& v)
-{
-    if (v.x == kFP16Zero_6FD49C)
-    {
-        return Fix16::Abs(v.y);
-    }
-    else if (v.y == kFP16Zero_6FD49C)
-    {
-        return Fix16::Abs_436A50(v.x);
-    }
-    else
-    {
-        return Fix16::SquareRoot_436A70(v.x.Multiply_408680(v.x).Add_408660(v.y.Multiply_408680(v.y)));
-    }
-}
-
 // Polar offset of length dword_6FD2E8 with the Ang16 by value (the original keeps the table index
 // in a register across the first multiply instead of reloading the angle)
 static inline void PolarToXY_6FD2E8(Ang16 angle, Fix16& x, Fix16& y)
@@ -1531,7 +1513,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
         angle = car_angle;
     }
 
-    GetLength_OOL_6FD49C(vel);
+    vel.GetLength_41E260();
 
     u8 max_sub_state = 12;
     Fix16 dx;

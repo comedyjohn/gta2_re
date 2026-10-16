@@ -453,8 +453,7 @@ void CarPhysics_B0::ScarePedsOnDrivingFast_559C30()
                     //Fix16 linvel_length = get_car_lin_vel_4754D0();
                     // 9.6f: CarPhysics_B0::GetLinearSpeed_4211A0 (inlined, using it makes the diff worse)
 
-                    if (field_40_linvel_1.GetLength_out_of_line_x_squared() > FastCarMinVelocity_6FE1CC ||
-                        field_5C_pCar->IsEmittingHorn_411970())
+                    if (field_40_linvel_1.GetLength_41E260() > FastCarMinVelocity_6FE1CC || field_5C_pCar->IsEmittingHorn_411970())
                     {
                         field_5C_pCar->field_54_driver->AddThreateningPedToList_46FC70();
                     }
@@ -1754,7 +1753,7 @@ void CarPhysics_B0::SpawnSkidSegment_55D200(s32 box_idx, Fix16_Point arg_4, s32 
             Fix16 obj_y = skid_mid.y;
 
             Ang16 r = t.atan2_40F790();
-            len = t.GetLength_all_out_of_line_abs();
+            len = t.GetLength_41E260();
             if (len > kFP16Zero_6FE20C)
             {
                 Object_2C* pObj =
@@ -2319,28 +2318,6 @@ void CarPhysics_B0::ApplyForceAndIntegrate_55F7A0(Fix16_Point* pPoint, Fix16_Poi
     IntegrateAndClampVelocities_5610B0();
 }
 
-// GetLength_41E260 as inlined into ApplyImpactForcesAndDamage_55FA60: both Abs are called out of line
-// (Abs_436A50) although the first multiply is inlined, which the plain inline can't give (Abs and operator*
-// have the same front-end size, 57).
-static inline Fix16 GetLength_AbsOutOfLine_41E260(const Fix16_Point& p)
-{
-    if (p.x == FIX16_POINT_ZERO)
-    {
-        return Fix16::Abs_436A50(p.y);
-    }
-    else
-    {
-        if (p.y == FIX16_POINT_ZERO)
-        {
-            return Fix16::Abs_436A50(p.x);
-        }
-        else
-        {
-            return Fix16::SquareRoot(p.x * p.x + p.y * p.y);
-        }
-    }
-}
-
 // 9.6f 0x4A0850
 // 0x55f800
 void CarPhysics_B0::ApplyForceAtPoint_55F800(Fix16_Point* pPoint, Fix16_Point* pForce, s32 bRotate)
@@ -2413,7 +2390,7 @@ void CarPhysics_B0::ApplyImpulseWithTrailerRedirect_55FA10(Fix16_Point* pPoint)
 Fix16 CarPhysics_B0::ApplyImpactForcesAndDamage_55FA60(Fix16_Point& PointOfForce, const Fix16_Point& Impulse, s32 base_dmg)
 {
     Fix16_Point NewImpulse;
-    Fix16 ImpulseIntensity = GetLength_AbsOutOfLine_41E260(Impulse);
+    Fix16 ImpulseIntensity = Impulse.GetLength_41E260();
 
     if ((ImpulseIntensity / CalculateMass_559FF0()) > dword_6FE37C)
     {
@@ -2619,7 +2596,7 @@ void CarPhysics_B0::HandleCarCollision_55FF20(Car_BC* pOtherCar)
     if (gGtx_0x106C_703DD4->get_car_info_5AA3B0(pThisCar->field_84_car_info_idx)->IsHeavy_41FF00() &&
         (pThisCar->IsTank_411900() || !pThisCar->HasNonPlayerDriver_4214F0()) &&
         !gGtx_0x106C_703DD4->get_car_info_5AA3B0(pOtherCar->field_84_car_info_idx)->IsHeavy_41FF00() &&
-        ImpulseForce.GetLength_all_out_of_line_abs_y_negate_2() > dword_6FDFD8 && GetLinearSpeed_4211A0() > dword_6FE1C4)
+        ImpulseForce.GetLength_41E260() > dword_6FDFD8 && GetLinearSpeed_4211A0() > dword_6FE1C4)
     {
         bGreatCollision = true;
         field_5C_pCar->SetCrushFlag_49EFC0();
@@ -2679,7 +2656,7 @@ void CarPhysics_B0::HandleCarCollision_55FF20(Car_BC* pOtherCar)
         SetCurrentCarInfoAndModelPhysics_562EF0();
     }
 
-    if (field_40_linvel_1.GetLength_all_out_of_line_abs_y_negate_2() > FastCarMinVelocity_6FE1CC && !field_5C_pCar->IsMaxDamage_40F890())
+    if (field_40_linvel_1.GetLength_41E260() > FastCarMinVelocity_6FE1CC && !field_5C_pCar->IsMaxDamage_40F890())
     {
         EmitImpact_55FD00(field_6C_cp3, RelativeVelocity.Negate_40ACB0());
     }
@@ -3070,7 +3047,7 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
         {
             // Assigned, not initialised: the slot is then free for the temporaries of each branch
             Fix16 vel_len;
-            vel_len = field_40_linvel_1.GetLength_ool_abs_mul();
+            vel_len = field_40_linvel_1.GetLength_41E260();
 
             if (field_94_is_backward_gas_on)
             {
@@ -3323,7 +3300,7 @@ Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
 
     // The function is at VC6's inline budget: Fix16_To_Ang16_40F540 / Ang16 - Ang16 here push the Ang16
     // constructors and y * y out of line, so the angle is built and normalised (Normalize_406C20) by hand.
-    v = dword_6FE228 - field_40_linvel_1.GetLength_inline_5620D0();
+    v = dword_6FE228 - field_40_linvel_1.GetLength_41E260();
     v = v / (dword_6FE340 * dword_6FE228);
     {
         Ang16 ang((pointing_ang_rad * v).GetRaw_40F4B0() / 71);
@@ -3418,7 +3395,7 @@ void CarPhysics_B0::UpdateSteeringAngle_562560()
     }
     else
     {
-        Fix16 speed_factor = dword_6FE228 - field_40_linvel_1.GetLength_out_of_line_x_squared();
+        Fix16 speed_factor = dword_6FE228 - field_40_linvel_1.GetLength_41E260();
         if (speed_factor.mValue < dword_6FE374.mValue)
         {
             speed_factor = dword_6FE374;

@@ -6678,23 +6678,6 @@ char_type Char_B4::HandlePedObjectHit_5537F0(Object_2C* p2c)
     }
 }
 
-// GetLength_41E260 as inlined into HandleCarImpact_5538A0: kFP16Zero_6FD9E4 as the zero, out of line helpers
-static inline Fix16 GetLength_inline_5538A0(Fix16_Point& p)
-{
-    if (p.x == kFP16Zero_6FD9E4)
-    {
-        return Fix16::Abs_negate_out_of_line(p.y);
-    }
-    else if (p.y == kFP16Zero_6FD9E4)
-    {
-        return Fix16::Abs_negate_out_of_line(p.x);
-    }
-    else
-    {
-        return Fix16::SquareRoot_436A70(p.x.Multiply_408680(p.x).Add_408660(p.y.Multiply_408680(p.y)));
-    }
-}
-
 // 0x5538A0
 #define SPAWN_KNOCKDOWN_OBJ(speed)                                                      \
     gObject_5C_6F8F84->NewMovingObj_52A240(110,                                         \
@@ -6709,7 +6692,7 @@ static inline Fix16 GetLength_inline_5538A0(Fix16_Point& p)
 void Char_B4::HandleCarImpact_5538A0(Car_BC* pCar, u8 bUnknown, Fix16 x, Fix16 y)
 {
     Fix16_Point p(x, y);
-    Fix16 vecLen = GetLength_inline_5538A0(p);
+    Fix16 vecLen = p.GetLength_41E260();
     Ang16 tanVec;
     tanVec = p.atan2_40F790();
 
@@ -6959,4 +6942,3 @@ void ResetCharStatics_553F90()
 void Char_B4::nullsub_28()
 {
 }
-

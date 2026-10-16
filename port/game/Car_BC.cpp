@@ -1976,11 +1976,10 @@ bool Car_BC::HasSpriteZoom_43A230()
     return field_50_car_sprite->field_38_zoom != 0;
 }
 
-// CarPhysics_B0::GetLinearSpeed_4211A0 with the square root forced inline (see
-// Fix16_Point::GetLength_SqrtForced_43A240)
+// CarPhysics_B0::GetLinearSpeed_4211A0
 static inline Fix16 GetLinearSpeed_43A240(CarPhysics_B0* pPhysics)
 {
-    return pPhysics->field_40_linvel_1.GetLength_SqrtForced_43A240();
+    return pPhysics->field_40_linvel_1.GetLength_41E260();
 }
 
 // 0x43a240

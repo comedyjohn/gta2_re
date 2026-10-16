@@ -329,12 +329,6 @@ class Fix16
         return Fix16(sqrt(value));
     }
 
-    // SquareRoot forced inline, only for Fix16_Point::GetLength_SqrtForced_43A240 (unexplained)
-    inline static Fix16 SquareRoot_forced(const Fix16& input)
-    {
-        return Fix16(sqrt(input.AsDouble()));
-    }
-
     static Fix16 Max_44E540(const Fix16& pLhs, const Fix16& pRhs);
     // 9.6f 0x41E130, out-of-line copy Max_44E540. Small functions inline it (Ped_List_4::FindClosestActivePed_471340),
     // and as a site after the two Abs it sets their nested budget in MaxAbsDistance_42A6B0

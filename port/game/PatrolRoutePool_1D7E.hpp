@@ -10,7 +10,7 @@ class PatrolPoint_3
     // ctor 463F90
     // dtor 463FA0
     PatrolPoint_3();
-    ~PatrolPoint_3();
+    ~PatrolPoint_3() = default; // 0x463FA0
 
     u8 field_0_x;
     u8 field_1_y;

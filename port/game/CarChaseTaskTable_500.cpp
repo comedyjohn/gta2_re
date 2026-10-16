@@ -258,9 +258,6 @@ CarChaseTask_40::CarChaseTask_40()
     ResetEntry_4747B0();
 }
 
-// 0x474cb0
-CarChaseTask_40::~CarChaseTask_40() = default;
-
 // 0x474cc0
 void CarChaseTaskTable_500::FreeEntry_474CC0(CarChaseTask_40* toFind)
 {

@@ -14,7 +14,7 @@ class CrimeReport_14
 {
   public:
     CrimeReport_14();
-    ~CrimeReport_14();
+    ~CrimeReport_14() = default; // 0x484ce0
     void SetReport(s32 crime_type, s32 ped_id);
     void GetReport(s32* pCrimeType, Fix16* pXPos, Fix16* yPos, Fix16* zPos);
 

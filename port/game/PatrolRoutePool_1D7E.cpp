@@ -10,9 +10,6 @@ PatrolPoint_3::PatrolPoint_3()
     field_2_z = 0;
 }
 
-// 0x463FA0
-PatrolPoint_3::~PatrolPoint_3() = default;
-
 // 0x4bdf70
 PatrolRoutePool_1D7E::~PatrolRoutePool_1D7E() = default;
 

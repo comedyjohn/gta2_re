@@ -8,7 +8,7 @@ class ProfilerTimer_C
     void AccumulateElapsed_5BEBF0();
 
     ProfilerTimer_C();
-    ~ProfilerTimer_C();
+    ~ProfilerTimer_C() = default; // 0x5BEC20
 
     s32 field_0_time_percent;
     s32 field_4_start_time;

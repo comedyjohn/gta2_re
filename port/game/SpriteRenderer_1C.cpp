@@ -251,6 +251,3 @@ SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
     }
     Reset_4C4B70();
 }
-
-// 0x5c5f90
-SpriteTreeNodePool_2EE4::~SpriteTreeNodePool_2EE4() = default;

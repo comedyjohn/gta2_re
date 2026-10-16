@@ -79,7 +79,7 @@ class Camera_0xBC
     void ResetPanning_436830();
     void ApplyZOffsetToScreenPosition_436860(Ped* pPed, Fix16& x_pos, Fix16& y_pos, Fix16 z_pos);
     Camera_0xBC(); // 4368E0
-    ~Camera_0xBC(); // empty 4369E0
+    ~Camera_0xBC() = default; // empty 4369E0
     void SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom);
     bool IsPointInBoundaries_58CF10(Fix16 x, Fix16 y);
 

@@ -19,9 +19,6 @@ Gang_144::Gang_144()
     Init_4BED70();
 }
 
-// 0x4BE4F0
-Gang_144::~Gang_144() = default;
-
 // 0x4be500
 GangPool_CA8::~GangPool_CA8() = default;
 

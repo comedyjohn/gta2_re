@@ -204,9 +204,6 @@ Fix16_Point CarPhysics_B0::get_cp1_40B560()
     return field_38_cp1;
 }
 
-// 0x446ee0
-CarPhysics_B0::~CarPhysics_B0() = default;
-
 // 0x447010
 Fix16_Point CarPhysics_B0::get_linvel_447010()
 {

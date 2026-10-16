@@ -57,7 +57,7 @@ class PedGroup
     static void ResetAllGroups_4CB080();
     static PedGroup* New_4CB0D0();
     PedGroup();
-    ~PedGroup();
+    ~PedGroup() = default; // 0x4cb870
 
     // 9.6f 0x433360
     inline void SetCounts_433360(u8 count)

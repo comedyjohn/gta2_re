@@ -42,5 +42,3 @@ PedRefTable_7F8::PedRefTable_7F8()
     }
 }
 
-// 0x59b110
-PedRefTable_7F8::~PedRefTable_7F8() = default;

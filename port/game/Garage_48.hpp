@@ -11,7 +11,7 @@ class Door_38;
 class Garage_48
 {
   public:
-    ~Garage_48();
+    ~Garage_48() = default; // 0x4bbc60
     void ValidateParkCommand_534650();
     u8 ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor);
     void GaragesService_5349D0();

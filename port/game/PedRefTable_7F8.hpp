@@ -18,7 +18,7 @@ class PedRefTable_7F8
     void IncrementRefCount_59B0B0(u8 idx);
     void DecrementRefCount_59B0D0(u8 idx);
     PedRefTable_7F8();
-    ~PedRefTable_7F8();
+    ~PedRefTable_7F8() = default; // 0x59b110
 
     inline void Clear_434070(u8 idx)
     {

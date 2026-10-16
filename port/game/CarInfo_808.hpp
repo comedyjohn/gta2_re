@@ -88,7 +88,7 @@ class CarInfo_2C
 {
   public:
     CarInfo_2C();
-    ~CarInfo_2C();
+    ~CarInfo_2C() = default; // 0x4549B0
     void CalculateCarInfo_4542A0(s32 idx);
 
     Fix16 field_0_moment_of_inertia;

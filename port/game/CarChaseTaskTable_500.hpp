@@ -16,7 +16,7 @@ class CarChaseTask_40
   public:
     void ResetEntry_4747B0();
     CarChaseTask_40();
-    ~CarChaseTask_40();
+    ~CarChaseTask_40() = default; // 0x474cb0
 
     char_type field_0_in_use;
     Ped* field_4_pDriver;

@@ -130,7 +130,7 @@ class CarPhysics_B0
     Fix16 ComputeZPosition_559E90();
 
     Fix16_Point get_cp1_40B560();
-    ~CarPhysics_B0();
+    ~CarPhysics_B0() = default; // 0x446ee0
     void ShowPhysicsDebug_559430();
     void ShowSpeedRevsDamage_5597B0();
     bool IsNotMoving_5599D0();

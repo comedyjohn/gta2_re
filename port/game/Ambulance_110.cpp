@@ -26,9 +26,6 @@ Ambulance_20::Ambulance_20()
     ClearTask_4FA7D0();
 }
 
-// 0x4bead0
-Ambulance_20::~Ambulance_20() = default;
-
 // 0x4beae0
 Ambulance_110::~Ambulance_110() = default;
 

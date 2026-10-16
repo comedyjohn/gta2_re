@@ -15,6 +15,3 @@ ProfilerTimer_C::ProfilerTimer_C()
     field_8_accum_time = 0;
     field_4_start_time = 0;
 }
-
-// 0x5BEC20
-ProfilerTimer_C::~ProfilerTimer_C() = default;

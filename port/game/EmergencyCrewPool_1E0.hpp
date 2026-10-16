@@ -36,7 +36,7 @@ class EmergencyCrew_30
 {
   public:
     EmergencyCrew_30();
-    ~EmergencyCrew_30();
+    ~EmergencyCrew_30() = default; // 0x4beb10
     void Init_5CBC00();
     void ReInit_5CBC30();
     void RemovePed_5CBC40(Ped* pPed);

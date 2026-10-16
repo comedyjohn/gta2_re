@@ -20,7 +20,7 @@ struct PlySlot_A4
     wchar_t field_90_strPlayerName[9];
 
     PlySlot_A4();
-    ~PlySlot_A4();
+    ~PlySlot_A4() = default; // 0x56B620
 
     void ResetPlayerSlot_56B630();
     s32 GetTotalLatestScore_56B680();
@@ -38,7 +38,7 @@ struct ScoreTableLine_18
 struct HighScoreTable_F0
 {
     HighScoreTable_F0();
-    ~HighScoreTable_F0();
+    ~HighScoreTable_F0() = default; // 0x56B510
 
     void Init_56B520();
 

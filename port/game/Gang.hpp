@@ -84,7 +84,7 @@ class Gang_144
     }
 
     Gang_144(); //  0x4BE4E0
-    ~Gang_144(); // 0x4BE4F0
+    ~Gang_144() = default; // 0x4BE4F0
 
     wchar_t* GetNameWide_4BED30();
     void Init_4BED70();

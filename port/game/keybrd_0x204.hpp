@@ -8,7 +8,7 @@ class keybrd_0x204
   public:
     keybrd_0x204();
 
-    ~keybrd_0x204();
+    ~keybrd_0x204() = default; // 0x4D5D90
 
     void ReadCfg_4D5DA0(FILE* Stream, wchar_t* pOut);
 

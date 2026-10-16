@@ -25,9 +25,6 @@ CrimeReport_14::CrimeReport_14()
     field_8_pos.z = kFP16Zero_67A370;
 }
 
-// 0x484ce0
-CrimeReport_14::~CrimeReport_14() = default;
-
 // 0x484cf0
 void CrimeReport_14::SetReport(s32 crime_type, s32 ped_id)
 {

@@ -10,7 +10,3 @@ CreditsLine_6C::CreditsLine_6C() // 483E30
     field_6_string_category = 0;
     memset(field_8_text, 0, sizeof(field_8_text));
 }
-
-// 0x483E60
-CreditsLine_6C::~CreditsLine_6C() // 483E60
-= default;

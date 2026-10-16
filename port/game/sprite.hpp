@@ -169,7 +169,7 @@ class SpriteShape_4C
     void DrawCollisionBox_5A4DA0(Fix16 zpos);
 
     SpriteShape_4C();
-    ~SpriteShape_4C();
+    ~SpriteShape_4C() = default; // 0x5a5840
 
     Fix16 field_0_width;
     Fix16 field_4_height;
@@ -698,7 +698,7 @@ class SpriteManager_8
 class AttachedSprite_18
 {
   public:
-    ~AttachedSprite_18();
+    ~AttachedSprite_18() = default; // 0x5a5c40
     AttachedSprite_18();
 
     void PoolAllocate()

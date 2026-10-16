@@ -155,9 +155,6 @@ HighScoreTable_F0::HighScoreTable_F0()
     Init_56B520();
 }
 
-// 0x56B510
-HighScoreTable_F0::~HighScoreTable_F0() = default;
-
 // 0x56B520
 void HighScoreTable_F0::Init_56B520()
 {
@@ -210,9 +207,6 @@ PlySlot_A4::PlySlot_A4()
 {
     ResetPlayerSlot_56B630();
 }
-
-// 0x56B620
-PlySlot_A4::~PlySlot_A4() = default;
 
 // 0x56B630
 void PlySlot_A4::ResetPlayerSlot_56B630()

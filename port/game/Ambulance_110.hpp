@@ -19,7 +19,7 @@ class Ambulance_20
 {
   public:
     Ambulance_20();
-    ~Ambulance_20();
+    ~Ambulance_20() = default; // 0x4bead0
     void ClearTask_4FA7D0();
     void AddPassenger_4FA800(Ped* pPed);
     bool SpawnParamedicCrew_4FA820();

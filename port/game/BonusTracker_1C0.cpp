@@ -11,9 +11,6 @@ BonusRule_2C::BonusRule_2C()
     Init_431D50();
 }
 
-// 0x431D40
-BonusRule_2C::~BonusRule_2C() = default;
-
 // 0x431D50
 void BonusRule_2C::Init_431D50()
 {

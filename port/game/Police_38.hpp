@@ -40,7 +40,7 @@ class PoliceCrew_38
 {
   public:
     PoliceCrew_38();
-    ~PoliceCrew_38();
+    ~PoliceCrew_38() = default; // 0x4beb40
     void Init_5709C0();
     void AddToPursuit_570A10();
     void RemoveFromPursuit_570AB0();

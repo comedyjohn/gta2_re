@@ -83,7 +83,7 @@ class SpriteTreeNodePool_2EE4
     }
 
     SpriteTreeNodePool_2EE4();
-    ~SpriteTreeNodePool_2EE4();
+    ~SpriteTreeNodePool_2EE4() = default; // 0x5c5f90
     SpriteTreeNode_C field_0_entries[SpriteTreeStack_FA4::k_max_nodes];
     u32 field_2EE0_next_free_idx;
 };

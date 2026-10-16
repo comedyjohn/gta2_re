@@ -26,9 +26,6 @@ DEFINE_GLOBAL_INIT(Fix16, kFpEighth_6FCF60, kFpQuarter_6FD04C / kFpTwo_6FD128, 0
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FD0D8, Fix16(0x100, 0), 0x6FD0D8);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FD1D8, kFpOne64th_6FD0D8, 0x6FD1D8);
 
-// 0x4bbc60
-Garage_48::~Garage_48() = default;
-
 // The heading for a ped leaving through a door facing `face`.
 // 0x5345E0
 Ang16 sub_5345E0(s32 face)

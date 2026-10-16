@@ -765,9 +765,6 @@ Camera_0xBC::Camera_0xBC()
     ResetPanning_436830();
 }
 
-// 0x4369E0
-Camera_0xBC::~Camera_0xBC() = default;
-
 // 0x4397D0
 void Camera_0xBC::SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom)
 {

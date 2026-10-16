@@ -29,9 +29,6 @@ PoliceCrew_38::PoliceCrew_38()
     Init_5709C0();
 }
 
-// 0x4beb40
-PoliceCrew_38::~PoliceCrew_38() = default;
-
 // 0x5709c0
 void PoliceCrew_38::Init_5709C0()
 {

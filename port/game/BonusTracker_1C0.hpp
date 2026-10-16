@@ -10,7 +10,7 @@ class BonusRule_2C
 {
   public:
     BonusRule_2C(); // 0x431D30
-    ~BonusRule_2C(); // 0x431D40
+    ~BonusRule_2C() = default; // 0x431D40
     void Init_431D50();
     void Reset_431DA0();
     void Deactivate_431DB0();

@@ -1280,6 +1280,3 @@ PedGroup::PedGroup()
 {
     Reset_4C8EF0();
 }
-
-// 0x4cb870
-PedGroup::~PedGroup() = default;

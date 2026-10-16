@@ -228,7 +228,7 @@ enum
 class ObjectDefinition_74
 {
   public:
-    ~ObjectDefinition_74();
+    ~ObjectDefinition_74() = default; // 0x4bdf60
     void SetDimensions_533060(Fix16 width, Fix16 height, Fix16 depth);
     void SetDimensionsFromSprite_533090();
     void SetRemap_533110(s16 remap);

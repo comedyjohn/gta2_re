@@ -1,6 +1,7 @@
 #include "overlay.h"
 #include "overlay_font.h"
 
+#include "Car_BC.hpp"
 #include "Game_0x40.hpp"
 #include "char.hpp"
 #include "winmain.hpp"
@@ -59,6 +60,82 @@ const uint32_t kSelect = 0xFF2848A0;
 uint32_t gCanvas[kWidth * kHeight];
 
 bool gSettingsOpen = false;
+bool gSpawnOpen = false; // the car menu
+int gCar = 0; // its selected entry
+int gSpawnRequest = -1; // a model to spawn at the next game frame
+
+// The cars the menu offers (car_model_enum): not trains, trailers, wrecks or unused slots
+struct CarEntry
+{
+    int model;
+    const char* name;
+};
+const CarEntry kCars[] = {
+    {car_model_enum::alfa, "Alfa"},
+    {car_model_enum::allard, "Allard"},
+    {car_model_enum::amdb4, "Aston Martin DB4"},
+    {car_model_enum::apc, "APC"},
+    {car_model_enum::bank_van, "Bank van"},
+    {car_model_enum::bmw, "BMW"},
+    {car_model_enum::boxtruck, "Box truck"},
+    {car_model_enum::bug, "Bug"},
+    {car_model_enum::BUICK, "Buick"},
+    {car_model_enum::BUS, "Bus"},
+    {car_model_enum::COPCAR, "Police car"},
+    {car_model_enum::DART, "Dart"},
+    {car_model_enum::EDSEL, "Edsel"},
+    {car_model_enum::EDSELFBI, "Edsel (FBI)"},
+    {car_model_enum::FIAT, "Fiat"},
+    {car_model_enum::FIRETRUK, "Fire truck"},
+    {car_model_enum::GRAHAM, "Graham"},
+    {car_model_enum::GT24640, "GT 24640"},
+    {car_model_enum::GTRUCK, "G-truck"},
+    {car_model_enum::GUNJEEP, "Gun jeep"},
+    {car_model_enum::HOTDOG, "Hot dog van"},
+    {car_model_enum::ICECREAM, "Ice cream van"},
+    {car_model_enum::ISETLIMO, "Isetta limo"},
+    {car_model_enum::ISETTA, "Isetta"},
+    {car_model_enum::JEEP, "Jeep"},
+    {car_model_enum::JEFFREY, "Jeffrey"},
+    {car_model_enum::KRSNABUS, "Krishna bus"},
+    {car_model_enum::LIMO, "Limo"},
+    {car_model_enum::LIMO2, "Limo 2"},
+    {car_model_enum::MEDICAR, "Ambulance"},
+    {car_model_enum::MERC, "Merc"},
+    {car_model_enum::MESSER, "Messerschmitt"},
+    {car_model_enum::MIURA, "Miura"},
+    {car_model_enum::MONSTER, "Monster truck"},
+    {car_model_enum::MORGAN, "Morgan"},
+    {car_model_enum::MORRIS, "Morris"},
+    {car_model_enum::PICKUP, "Pickup"},
+    {car_model_enum::RTYPE, "R-type"},
+    {car_model_enum::SPIDER, "Spider"},
+    {car_model_enum::SPRITE, "Sprite"},
+    {car_model_enum::STINGRAY, "Stingray"},
+    {car_model_enum::STRATOS, "Stratos"},
+    {car_model_enum::STRATOSB, "Stratos B"},
+    {car_model_enum::STRIPETB, "Stripe TB"},
+    {car_model_enum::STYPE, "S-type"},
+    {car_model_enum::STYPECAB, "S-type cab"},
+    {car_model_enum::SWATVAN, "SWAT van"},
+    {car_model_enum::T2000GT, "T2000 GT"},
+    {car_model_enum::TANK, "Tank"},
+    {car_model_enum::TAXI, "Taxi"},
+    {car_model_enum::TBIRD, "T-bird"},
+    {car_model_enum::TOWTRUCK, "Tow truck"},
+    {car_model_enum::TRANCEAM, "Trans-Am"},
+    {car_model_enum::TRUKCAB1, "Truck cab"},
+    {car_model_enum::TRUKCAB2, "Truck cab 2"},
+    {car_model_enum::TVVAN, "TV van"},
+    {car_model_enum::VAN, "Van"},
+    {car_model_enum::VESPA, "Vespa"},
+    {car_model_enum::VTYPE, "V-type"},
+    {car_model_enum::WBTWIN, "WB twin"},
+    {car_model_enum::XK120, "XK 120"},
+    {car_model_enum::ZCX5, "ZCX5"},
+};
+const int kCarCount = static_cast<int>(sizeof(kCars) / sizeof(kCars[0]));
+const int kCarRows = 20; // shown at once
 bool gLegendOn = true;
 bool gLegendLoaded = false;
 bool gWorldDirections = true;
@@ -210,6 +287,55 @@ void CloseSettings()
     gStatus.clear();
 }
 
+bool Modal()
+{
+    return gSettingsOpen || gSpawnOpen;
+}
+
+// Up or down on the stick or d-pad: -1, 0 or 1, once on the press and then repeating while held
+int NavDelta(const plat::PadState& pad, const plat::PadState& prev)
+{
+    const int dir = StickDirection(pad);
+    const int prevDir = StickDirection(prev);
+    if (dir == kStickUp || dir == kStickDown)
+    {
+        gNavHeld = dir == prevDir ? gNavHeld + 1 : 0;
+        if (gNavHeld == 0 || (gNavHeld > 20 && gNavHeld % 5 == 0))
+        {
+            return dir == kStickUp ? -1 : 1;
+        }
+    }
+    else
+    {
+        gNavHeld = 0;
+    }
+    return 0;
+}
+
+void MoveCar(int delta)
+{
+    gCar = ((gCar + delta) % kCarCount + kCarCount) % kCarCount;
+}
+
+void ToggleSpawnMenu()
+{
+    gSettingsOpen = false;
+    gListening = false;
+    gSpawnOpen = !gSpawnOpen;
+    gStatus.clear();
+}
+
+void ChooseCar()
+{
+    if (bStartNetworkGame_7081F0)
+    {
+        gStatus = "Not in a network game: the other players would not see it";
+        return;
+    }
+    gSpawnRequest = kCars[gCar].model;
+    gSpawnOpen = false;
+}
+
 void ToggleSettings()
 {
     if (gSettingsOpen)
@@ -218,6 +344,7 @@ void ToggleSettings()
         return;
     }
     Refresh();
+    gSpawnOpen = false;
     gSettingsOpen = true;
     gListening = false;
     gStatus.clear();
@@ -290,7 +417,7 @@ void DrawLegend()
     {
         DrawRow(x + 8, y + 4 + (i + 1) * kCharH, i, false, w);
     }
-    Text(x + 8, y + 4 + (kActions + 1) * kCharH, kDim, "F1 hide  F2 settings");
+    Text(x + 8, y + 4 + (kActions + 1) * kCharH, kDim, "F1 hide  F2 settings  Start cars");
 }
 
 void DrawSettings()
@@ -324,6 +451,32 @@ void DrawSettings()
     Text(x + 8, line, kDim, "Pad buttons by position: A bottom, B right, X left, Y top");
 }
 
+void DrawSpawnMenu()
+{
+    const int w = 360;
+    const int h = (kCarRows + 5) * kCharH + 16;
+    const int x = (kWidth - w) / 2;
+    const int y = (kHeight - h) / 2;
+    Fill(x, y, w, h, kPanel);
+    Text(x + 8, y + 8, kAccent, "Spawn a car");
+    int top = gCar - kCarRows / 2;
+    top = top < 0 ? 0 : (top > kCarCount - kCarRows ? kCarCount - kCarRows : top);
+    int line = y + 8 + kCharH * 2;
+    for (int i = top; i < top + kCarRows && i < kCarCount; i++)
+    {
+        if (i == gCar)
+        {
+            Fill(x + 4, line, w - 8, kCharH, kSelect);
+        }
+        Text(x + 12, line, kText, kCars[i].name);
+        line += kCharH;
+    }
+    line += kCharH / 2;
+    Text(x + 8, line, kAccent, gStatus);
+    line += kCharH;
+    Text(x + 8, line, kDim, "Up/Down choose  LB/RB page  A spawn  B or Start close");
+}
+
 // ---------------------------------------------------------------- pad navigation
 
 void UpdatePad()
@@ -348,6 +501,30 @@ void UpdatePad()
     {
         ToggleSettings();
     }
+    else if (gSpawnOpen)
+    {
+        MoveCar(NavDelta(pad, prev));
+        if (pressed(4))
+        {
+            MoveCar(-kCarRows);
+        }
+        else if (pressed(5))
+        {
+            MoveCar(kCarRows);
+        }
+        else if (pressed(0))
+        {
+            ChooseCar();
+        }
+        else if (pressed(1) || pressed(7))
+        {
+            gSpawnOpen = false;
+        }
+    }
+    else if (!gSettingsOpen && pressed(7))
+    {
+        ToggleSpawnMenu();
+    }
     else if (gSettingsOpen)
     {
         if (gListening)
@@ -368,22 +545,7 @@ void UpdatePad()
         }
         else
         {
-            const int dir = StickDirection(pad);
-            const int prevDir = StickDirection(prev);
-            int delta = 0;
-            if (dir == kStickUp || dir == kStickDown)
-            {
-                // Once on the press, then repeating while it is held
-                gNavHeld = dir == prevDir ? gNavHeld + 1 : 0;
-                if (gNavHeld == 0 || (gNavHeld > 20 && gNavHeld % 5 == 0))
-                {
-                    delta = dir == kStickUp ? -1 : 1;
-                }
-            }
-            else
-            {
-                gNavHeld = 0;
-            }
+            const int delta = NavDelta(pad, prev);
             if (delta)
             {
                 Move(delta);
@@ -539,7 +701,7 @@ int GasScale()
 
 bool Captured()
 {
-    return gSettingsOpen;
+    return Modal();
 }
 
 bool OnKey(uint8_t dik, bool down)
@@ -564,6 +726,45 @@ bool OnKey(uint8_t dik, bool down)
             }
         }
         return true;
+    }
+    if (dik == DIK_F5)
+    {
+        if (down)
+        {
+            ToggleSpawnMenu();
+        }
+        return true;
+    }
+    if (gSpawnOpen)
+    {
+        if (down)
+        {
+            switch (dik)
+            {
+                case DIK_UP:
+                    MoveCar(-1);
+                    break;
+                case DIK_DOWN:
+                    MoveCar(1);
+                    break;
+                case DIK_PRIOR:
+                    MoveCar(-kCarRows);
+                    break;
+                case DIK_NEXT:
+                    MoveCar(kCarRows);
+                    break;
+                case DIK_RETURN:
+                case DIK_NUMPADENTER:
+                    ChooseCar();
+                    break;
+                case DIK_ESCAPE:
+                    gSpawnOpen = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return down;
     }
     if (!gSettingsOpen || !down)
     {
@@ -621,8 +822,73 @@ bool OnKey(uint8_t dik, bool down)
 
 static int gLastWanted = 0;
 
+// Puts the chosen car down in front of the player (or of the car the player is in)
+void SpawnRequested()
+{
+    const int model = gSpawnRequest;
+    gSpawnRequest = -1;
+    Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+    Ped* ped = player ? player->field_2C4_player_ped : nullptr;
+    if (!ped || !gCarManager_6C_677930)
+    {
+        return;
+    }
+    Fix16 x;
+    Fix16 y;
+    double ahead = 3.0; // map blocks
+    double playerZ = 0.0;
+    if (Car_BC* car = ped->get_car_416B60())
+    {
+        x = car->field_50_car_sprite->GetXPos();
+        y = car->field_50_car_sprite->GetYPos();
+        playerZ = car->field_50_car_sprite->field_1C_zpos.AsDouble();
+        ahead = 4.0;
+    }
+    else if (ped->field_168_game_object)
+    {
+        x = ped->field_168_game_object->field_80_sprite_ptr->GetXPos();
+        y = ped->field_168_game_object->field_80_sprite_ptr->GetYPos();
+        playerZ = ped->field_168_game_object->field_80_sprite_ptr->field_1C_zpos.AsDouble();
+    }
+    else
+    {
+        return;
+    }
+    const Ang16 rotation = ped->GetRotation();
+    const double angle = rotation.rValue * 2.0 * M_PI / 1440.0; // as the stick's direction: 0 is down the screen
+    // In front if there is open ground there (as high as the player stands), else to either side or behind
+    const double kTurns[] = {0, M_PI / 4, -M_PI / 4, M_PI / 2, -M_PI / 2, 3 * M_PI / 4, -3 * M_PI / 4, M_PI};
+    Fix16 spawnX = x + Fix16(sin(angle) * ahead);
+    Fix16 spawnY = y + Fix16(cos(angle) * ahead);
+    bool found = false;
+    for (int ring = 0; ring < 2 && !found; ring++)
+    {
+        for (double turn : kTurns)
+        {
+            const double dist = ahead + ring * 1.5;
+            const Fix16 cx = x + Fix16(sin(angle + turn) * dist);
+            const Fix16 cy = y + Fix16(cos(angle + turn) * dist);
+            if (gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(cx, cy).AsDouble() <= playerZ + 0.5)
+            {
+                spawnX = cx;
+                spawnY = cy;
+                found = true;
+                break;
+            }
+        }
+    }
+    x = spawnX;
+    y = spawnY;
+    Car_BC* made = gCarManager_6C_677930->SpawnCarAtCorrectZ_426E40(x, y, rotation, model);
+    (void)made;
+}
+
 uint32_t SteerWithStick(uint32_t bits)
 {
+    if (gSpawnRequest >= 0)
+    {
+        SpawnRequested();
+    }
     static bool injected = false;
     static uint32_t injectedClear = 0; // the bits the last injection took over
     static bool scaled = false; // the character's run speed is scaled to the stick
@@ -757,22 +1023,26 @@ const uint32_t* Frame()
     {
         LoadWorldSetting();
     }
-    if (havePad || gSettingsOpen)
+    if (havePad || Modal())
     {
         UpdatePad();
     }
-    const bool legend = !gSettingsOpen && gLegendOn && gLegendLoaded && (havePad || gLegendShown);
-    if (!gSettingsOpen && !legend)
+    const bool legend = !Modal() && gLegendOn && gLegendLoaded && (havePad || gLegendShown);
+    if (!Modal() && !legend)
     {
         return nullptr;
     }
     static int frames = 0;
-    if (!gSettingsOpen && frames++ % 30 == 0)
+    if (!Modal() && frames++ % 30 == 0)
     {
         Refresh();
     }
     memset(gCanvas, 0, sizeof(gCanvas));
-    if (gSettingsOpen)
+    if (gSpawnOpen)
+    {
+        DrawSpawnMenu();
+    }
+    else if (gSettingsOpen)
     {
         DrawSettings();
     }

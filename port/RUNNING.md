@@ -28,6 +28,9 @@ controls are set in the game's own options menu, or in the port's overlay:
   that drives with the d-pad, **K** restores the keyboard keys. The game is paused from input while the
   settings are open. Pad buttons are named by position, as on an Xbox pad: A bottom, B right, X left,
   Y top (8BitDo pads in Switch mode label them differently).
+- **F5**, or **Start** on the pad, opens a list of cars: Up/Down (or the stick) to choose, LB/RB to page,
+  Enter or A to spawn it next to you (on open ground, in front of you if there is room), B, Start or
+  Esc to close. Not in a network game.
 - The game binds each control to a key *or* a pad button, not both, so binding a pad button takes the
   control off its key.
 

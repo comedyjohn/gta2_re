@@ -20,7 +20,7 @@ bool Registry::Open_Sound_Root_586A00(PHKEY phkResult)
         if (::RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                               "SOFTWARE\\DMA Design Ltd\\GTA2\\Sound",
                               0,
-                              "", //byte_67DC88,
+                              const_cast<LPSTR>(""), // lpClass: the API takes a writable string, byte_67DC88
                               0,
                               KEY_ALL_ACCESS,
                               nullptr,
@@ -131,7 +131,7 @@ char_type Registry::Open_Debug_Root_586C60(PHKEY phkResult)
         if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                             "SOFTWARE\\DMA Design Ltd\\GTA2\\Debug",
                             0,
-                            "", //byte_67DC88,
+                            const_cast<LPSTR>(""), // lpClass: the API takes a writable string, byte_67DC88
                             0,
                             KEY_ALL_ACCESS,
                             nullptr,
@@ -154,7 +154,7 @@ char_type Registry::Open_Options_Root_586CD0(PHKEY phkResult)
         if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                             "SOFTWARE\\DMA Design Ltd\\GTA2\\Option",
                             0,
-                            "", //byte_67DC88,
+                            const_cast<LPSTR>(""), // lpClass: the API takes a writable string, byte_67DC88
                             0,
                             KEY_ALL_ACCESS,
                             nullptr,
@@ -177,7 +177,7 @@ char_type Registry::Open_Control_Root_586D40(PHKEY phkResult)
         if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                             "SOFTWARE\\DMA Design Ltd\\GTA2\\Control",
                             0,
-                            "", //byte_67DC88,
+                            const_cast<LPSTR>(""), // lpClass: the API takes a writable string, byte_67DC88
                             0,
                             KEY_ALL_ACCESS,
                             nullptr,
@@ -200,7 +200,7 @@ char_type Registry::Open_Screen_Root_586DB0(PHKEY phkResult)
         if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                             "SOFTWARE\\DMA Design Ltd\\GTA2\\Screen",
                             0,
-                            "", //byte_67DC88,
+                            const_cast<LPSTR>(""), // lpClass: the API takes a writable string, byte_67DC88
                             0,
                             KEY_ALL_ACCESS,
                             nullptr,
@@ -463,7 +463,8 @@ char_type Registry::CreateNetworkRoot_587420(PHKEY phkResult)
     strcpy(SubKey, "SOFTWARE\\DMA Design Ltd\\GTA2");
     strcat(SubKey, "\\Network");
 
-    if (RegCreateKeyExA(kRegistryRootKey_625018, SubKey, 0, "", 0, KEY_ALL_ACCESS, nullptr, phkResult, &dwDisposition) != ERROR_SUCCESS)
+    if (RegCreateKeyExA(kRegistryRootKey_625018, SubKey, 0, const_cast<LPSTR>(""), 0, KEY_ALL_ACCESS, nullptr, phkResult, &dwDisposition) !=
+        ERROR_SUCCESS)
     {
         FatalError_4A38C0(Gta2Error::CreateRegistryKeyFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 910);
     }
@@ -588,7 +589,7 @@ char_type Registry::Open_Player_Root_5877A0(PHKEY phkResult)
         if (RegCreateKeyExA(HKEY_LOCAL_MACHINE,
                             "SOFTWARE\\DMA Design Ltd\\GTA2\\Player",
                             0,
-                            "",
+                            const_cast<LPSTR>(""),
                             0,
                             KEY_ALL_ACCESS,
                             nullptr,

@@ -165,7 +165,8 @@ wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
                                                   TKeySearch_5B5A10));
     if (!pFound)
     {
-        return L" ";
+        static wchar_t kBlank[] = L" "; // writable, like the text the callers usually get
+        return kBlank;
     }
     else
     {
@@ -347,7 +348,7 @@ char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
 }
 
 // 0x5B5DF0
-wchar_t* text_0x14::Ascii2Wide_5B5DF0(char_type* pStr)
+wchar_t* text_0x14::Ascii2Wide_5B5DF0(const char_type* pStr)
 {
     // movsx vs movzx caused by unsigned vs s8
     wchar_t* pDst = tmpAscii2WideStr_70488C;

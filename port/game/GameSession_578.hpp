@@ -105,7 +105,7 @@ struct GameSession_578
 
     char* SetScriptName_4C58B0(char_type* pName);
 
-    char_type* DebugStr_4C58D0(char_type* pStr);
+    char_type* DebugStr_4C58D0(const char_type* pStr);
 
     void SetMainStageIdx_4C58F0(char_type main_stage);
 

@@ -426,7 +426,7 @@ static void ShowPedBitMaskSetting(PedFlags32* flags)
     }
 }
 
-static char_type* GetOccupationStrFromPed(Ped* pPed)
+static const char_type* GetOccupationStrFromPed(Ped* pPed)
 {
     if (pPed)
     {
@@ -1000,7 +1000,7 @@ static void DisplayWideTextAtSprite(wchar_t* pStr, Sprite* pSprt, s16 x_offset, 
 }
 
 // Draw Text with char_type
-static void DisplayTextAtSprite(char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
+static void DisplayTextAtSprite(const char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
 {
     DisplayWideTextAtSprite(text_0x14::Ascii2Wide_5B5DF0(pStr), pSprt, x_offset, y_offset);
 }
@@ -1020,7 +1020,7 @@ static void DisplayWideTextAtScreenCoords(wchar_t* pStr, s16 screen_xpos, s16 sc
 }
 
 // Draw Text with wchar_t
-static void DisplayWideTextAtXYZ(wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fix16 zpos)
+static void DisplayWideTextAtXYZ(const wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
     if (gHud_2B00_706620)
     {
@@ -1045,7 +1045,7 @@ static void DisplayWideTextAtXYZ(wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fix16 zp
     }
 }
 
-void AddMenuOption(u32 page_idx, s16 xpos, s16 ypos, wchar_t* pLabelStr, s16 target_page)
+void AddMenuOption(u32 page_idx, s16 xpos, s16 ypos, const wchar_t* pLabelStr, s16 target_page)
 {
     u16 num_options = gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_0_number_of_options;
     gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_4_options_array[num_options].field_0_option_type = STRING_TEXT_1;

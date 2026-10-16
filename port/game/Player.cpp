@@ -2614,7 +2614,7 @@ void Player::DebugToggleRemoteControl_569E70()
 }
 
 // 0x569F00
-char* Player::GetDeathText_569F00()
+const char* Player::GetDeathText_569F00()
 {
     switch (field_44_death_type)
     {

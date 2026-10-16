@@ -1525,7 +1525,7 @@ void Network_20324::CreateMainUi_51AA90(HWND hWndParent)
     {
         for (u32 j = 0; j < 30; j++)
         {
-            char* pNewWindowStr;
+            const char* pNewWindowStr;
             if (gUiControlDefinitions_621430.data[i][j].field_6C_gtx_string_name[0])
             {
                 pNewWindowStr = GetString_519A00(gUiControlDefinitions_621430.data[i][j].field_6C_gtx_string_name);

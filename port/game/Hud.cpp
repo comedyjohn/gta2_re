@@ -270,7 +270,7 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
         }
 
         Car_BC* pCar = pPed->field_16C_car;
-        wchar_t* pCarOrPedStr;
+        const wchar_t* pCarOrPedStr;
         if (pCar)
         {
             pCarOrPedStr = pCar->GetCarStr_439F80();
@@ -1240,7 +1240,7 @@ s32 GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx)
 // ----------------------------------------------------
 
 // 0x5D12B0
-char_type* get_phone_colour_5D12B0(s32 phone_type)
+const char_type* get_phone_colour_5D12B0(s32 phone_type)
 {
     switch (phone_type)
     {

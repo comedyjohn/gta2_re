@@ -725,7 +725,7 @@ EXTERN_GLOBAL(s16, gDebugFont_706600);
 EXTERN_GLOBAL_ARRAY(char, gTmpGxtKey_67CE50, 264);
 
 s32 GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx);
-char_type* get_phone_colour_5D12B0(s32 phone_type);
+const char_type* get_phone_colour_5D12B0(s32 phone_type);
 u8 GetMinRespectForPhoneType_5D12E0(s32 phone_type);
 
 void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count);

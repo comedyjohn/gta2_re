@@ -96,7 +96,7 @@ char* GameSession_578::SetScriptName_4C58B0(char_type* pName)
 }
 
 // 0x4C58D0
-char_type* GameSession_578::DebugStr_4C58D0(char_type* pStr)
+char_type* GameSession_578::DebugStr_4C58D0(const char_type* pStr)
 {
     snprintf(field_300_debug_str, sizeof(field_300_debug_str), "%s", pStr); // always terminated
     return field_300_debug_str;

@@ -674,7 +674,7 @@ s32 NetPlay::HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Net
 
                 memset(&name, 0, sizeof(name));
                 name.dwSize = sizeof(DPNAME);
-                name.lpszShortName = L"GBH Group";
+                name.lpszShortName = const_cast<LPWSTR>(L"GBH Group"); // the DirectPlay API takes a writable string and only reads it
                 name.lpszLongName = nullptr;
                 if (field_5E4_pDPlay3->CreateGroup(&field_758_n2.field_0_group_id,
                                                    &name,

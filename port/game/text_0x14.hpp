@@ -91,7 +91,7 @@ class text_0x14
 
     static char_type* Wide2PesudoAscii_5B5D10(const wchar_t* pText);
 
-    static wchar_t* Ascii2Wide_5B5DF0(char_type* pStr);
+    static wchar_t* Ascii2Wide_5B5DF0(const char_type* pStr);
 
     void load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len);
 

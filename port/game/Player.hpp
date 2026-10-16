@@ -275,7 +275,7 @@ class Player
     void SetScoreTextColour_569C20();
     void InitializePlayerState_569CB0();
     void DebugToggleRemoteControl_569E70();
-    char* GetDeathText_569F00();
+    const char* GetDeathText_569F00();
     void DisableInputs_569F40();
     void DisableAllControls_569FF0();
     void EnableAllControls_56A000();

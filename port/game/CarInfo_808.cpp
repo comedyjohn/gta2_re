@@ -34,7 +34,7 @@ DEFINE_GLOBAL_INIT(Fix16, kOneTenth_677D74, Fix16(0x666, 0), 0x677D74);
 DEFINE_GLOBAL_INIT(Fix16, kZero_6761A4, Fix16(0), 0x6761a4);
 DEFINE_GLOBAL_ARRAY(char, Buffer_675FD4, 80, 0x675FD4);
 DEFINE_GLOBAL_ARRAY(char, token_buffer_676024, 256, 0x676024);
-DEFINE_GLOBAL_ARRAY_INIT(char*,
+DEFINE_GLOBAL_ARRAY_INIT(const char*,
                          error_table_61A6D4,
                          13,
                          0x61A6D4,

@@ -3786,11 +3786,11 @@ DXDEC S32        AILCALL AIL_enumerate_3D_provider_attributes
                                                       RIB_INTERFACE_ENTRY FAR *  dest);
 
 DXDEC void       AILCALL AIL_3D_provider_attribute   (HPROVIDER   lib,
-                                                      C8 FAR *    name, 
+                                                      const C8 FAR *    name, 
                                                       void FAR *  val);
 
 DXDEC void       AILCALL AIL_set_3D_provider_preference(HPROVIDER   lib,
-                                                        C8 FAR *    name,
+                                                        const C8 FAR *    name,
                                                         void FAR *  val);
 
 struct H3D

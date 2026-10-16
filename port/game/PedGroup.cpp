@@ -3,7 +3,6 @@
 #include "Char_Pool.hpp"
 #include "Globals.hpp"
 #include "Ped.hpp"
-#include "crt_stubs.hpp"
 #include "enums.hpp"
 #include "rng.hpp"
 
@@ -16,20 +15,15 @@ DEFINE_GLOBAL_INIT(Fix16, k_dword_67EEE4, Fix16(0x500, 0), 0x67EEE4);
 DEFINE_GLOBAL_INIT(char_type, byte_620838, 1, 0x620838);
 DEFINE_GLOBAL_INIT(Fix16, dword_67F630, Fix16(4), 0x67F630);
 
-// The original is the compiler generated static destructor of pedGroups_67EF20: a call to the
-// CRT's vector destructor iterator `??_M` (`EhVecDtor`, which VC6 maps to that name). The CRT's
-// version takes a destructor pointer (`P6E`), which VC6 can't declare (no
-// keyword), and a destructor's address can't be taken, so EhVecDtor (crt_stubs.cpp) takes a
-// pointer to a destructor thunk here.
-static void PedGroup_dtor_4CB870(void* pGroup)
-{
-    static_cast<PedGroup*>(pGroup)->~PedGroup();
-}
-
 // 0x4c8e60
 void PedGroup::sub_4C8E60()
 {
-    EhVecDtor(pedGroups_67EF20, sizeof(PedGroup), GTA2_COUNTOF(pedGroups_67EF20), PedGroup_dtor_4CB870);
+    // The original is the compiler generated static destructor of pedGroups_67EF20: the CRT's vector destructor
+    // iterator, last element first
+    for (s32 i = GTA2_COUNTOF(pedGroups_67EF20) - 1; i >= 0; i--)
+    {
+        pedGroups_67EF20[i].~PedGroup();
+    }
 }
 
 // 0x4c8e80

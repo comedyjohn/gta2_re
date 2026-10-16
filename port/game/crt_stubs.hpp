@@ -25,10 +25,3 @@ void* malloc(size_t Size);
 // TODO: crt::malloc, crt::free
 
 } // namespace crt
-
-// VC6 maps this name to the CRT's vector destructor iterator `??_M`, which compiler generated
-// static array destructors call. The CRT's version takes a destructor; VC6 has no
-// keyword, so this one (`??_M@YGXPAXIHP6AX0@Z@Z`, defined in crt_stubs.cpp) takes a
-// destructor thunk instead.
-using EhVecDtorFn = void (*)(void*);
-void EhVecDtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);

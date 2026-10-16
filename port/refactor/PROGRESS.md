@@ -25,6 +25,8 @@
 
 - R1.3 (2026-10-16): `.github/workflows/port.yml` (job port-format) and `tools/refactor/pre-commit`. Not run on GitHub yet.
 
+- R1.4 (2026-10-16): scaffolding removed, 14 commits (HookLoader, test.cpp and force_link, globals registry, decompme_context, StdAfx, crt_stubs, NOT_IMPLEMENTED, COMMA, __forceinline/INLINE_MODE, CC, SIZEOF_ALWAYS, pragma pack). The entry point is now port/platform/main.cpp calling WinMain_5E53F0.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

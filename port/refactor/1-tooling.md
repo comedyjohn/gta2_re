@@ -48,7 +48,7 @@ Merge or rebase open branches before this commit; afterwards they can be rebased
 | `__forceinline`, `CC`, `__stdcall` remnants | VC6 calling conventions and inlining | Delete or `inline` |
 | `// 9.6f 0x...`, `// FUNCTION: 96f 0x...`, `// https://decomp.me/scratch/...` comments (728 + 235) | Research links | Move into `address_map.csv` in phase 2 (columns `addr_96f`, `decompme`); keep the plain `// 0xADDR` |
 
-- [ ] One commit per row. Hash-neutral except where marked.
+- [x] One commit per row. Hash-neutral except where marked. (Done 2026-10-16 except the research-link comments, which move in R2.2; `Globals.hpp` stays as an include list until R1.11; `3rdParty/bink` keeps its `__stdcall`.)
 
 ## 1.3 Merge duplicate copies
 

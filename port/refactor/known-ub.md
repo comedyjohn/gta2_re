@@ -20,6 +20,12 @@ done 2>&1 | grep 'runtime error' | sort | uniq -c
 | `InputDevices_1::make_input_devices_498800` | reference to a misaligned `GUID` at address 1 | `DIPROP_BUFFERSIZE` is DirectInput's `MAKEDIPROP(1)`, a GUID reference that is really an integer, as in the real `dinput.h`; the port's DirectInput compares the address. Goes with the platform interfaces in phase 6 |
 | `Draw.cpp` (`pConvertColourBank`) | call through a pointer to another function type | The game's type takes `BYTE*`, GTA2Hax's `d3ddll.hpp` (the real DLL's interface) declares `s32`. The port's renderer ignores the call. Phase 6 replaces the `gbh_*` table with an interface |
 
+## Original quirks kept on purpose (defined behaviour, but probably not intended)
+
+| Where | What | Pinned by |
+|---|---|---|
+| `miss2_0x11C::SCRCMD_S_OP_S_506ED0` with `GetOperationType_506BC0` | The four ordering opcodes on two counters compare with the operands swapped: `S_LESS_S` evaluates `left > right`, `S_LEQUAL_S` `left >= right`, and `S_GREATER_S`/`S_GEQUAL_S` the reverse. The same function with a constant (`..._I`) is right. The function matches the original, so the original does this; the shipped scripts either don't use these opcodes or were written for it. | `tests/test_script_vm.cpp` |
+
 ## Fixed
 
 | Commit | What |

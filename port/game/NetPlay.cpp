@@ -1491,8 +1491,8 @@ void NetPlay::ProcessIncomingPacket_520230(s32 idx, uptr pUnknown)
                     // pUnknown is a Network_Player: its name and the address of its data
                     (reinterpret_cast<T3>(field_4C_func_ptrs_and_params[idx].field_0_param_fn_callback))(
                         field_4C_func_ptrs_and_params[idx].field_4_param_context,
-                        (sptr)(reinterpret_cast<Network_Player*>(pUnknown))->field_1C_player_name,
-                        (sptr) & (reinterpret_cast<Network_Player*>(pUnknown))->field_24_pData);
+                        reinterpret_cast<sptr>((reinterpret_cast<Network_Player*>(pUnknown))->field_1C_player_name),
+                        reinterpret_cast<sptr>(&(reinterpret_cast<Network_Player*>(pUnknown))->field_24_pData));
                 }
                 break;
             case 3:

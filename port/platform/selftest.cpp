@@ -59,23 +59,23 @@ void Quad(Vert* v, float x0, float y0, float x1, float y1)
 
 int port_selftest()
 {
-    SVideo* video = Get<SVideo*(CC*)(HINSTANCE, u16)>("Vid_Init_SYS")(0, 0);
-    if (Get<s32(CC*)(SVideo*, HWND, s32)>("Vid_SetMode")(video, 0, 1) != 0)
+    SVideo* video = Get<SVideo* (*)(HINSTANCE, u16)>("Vid_Init_SYS")(0, 0);
+    if (Get<s32 (*)(SVideo*, HWND, s32)>("Vid_SetMode")(video, 0, 1) != 0)
     {
         printf("FAIL couldn't open the window\n");
         return 1;
     }
-    Get<u32(CC*)(SVideo*)>("gbh_InitDLL")(video);
-    Get<void(CC*)(float)>("gbh_SetAmbient")(1.0f);
+    Get<u32 (*)(SVideo*)>("gbh_InitDLL")(video);
+    Get<void (*)(float)>("gbh_SetAmbient")(1.0f);
 
     // Blue background
-    Get<s32(CC*)(SVideo*, u8, u8, u8, s32, s32, s32, s32)>("Vid_ClearScreen")(video, 0, 0, 255, 0, 0, 0, 0);
+    Get<s32 (*)(SVideo*, u8, u8, u8, s32, s32, s32, s32)>("Vid_ClearScreen")(video, 0, 0, 255, 0, 0, 0, 0);
 
     // A palette (stored in columns, 64 DWORDs apart): 1 red, 2 green
     static DWORD pal[256 * 64];
     pal[1 * 64] = 0xFF0000;
     pal[2 * 64] = 0x00FF00;
-    Get<unsigned(CC*)(int, DWORD*)>("gbh_RegisterPalette")(7, pal);
+    Get<unsigned (*)(int, DWORD*)>("gbh_RegisterPalette")(7, pal);
 
     // A 64x64 tile in a 256-wide page: left half red, right half green, top-left 16x16 transparent
     static BYTE page[256 * 64];
@@ -86,15 +86,15 @@ int port_selftest()
             page[y * 256 + x] = (x < 16 && y < 16) ? 0 : (x < 32 ? 1 : 2);
         }
     }
-    STexture* tile = Get<STexture*(CC*)(s32, s32, BYTE*, s32, char_type)>("gbh_RegisterTexture")(64, 64, page, 7, 0);
+    STexture* tile = Get<STexture* (*)(s32, s32, BYTE*, s32, char_type)>("gbh_RegisterTexture")(64, 64, page, 7, 0);
 
     Vert v[8];
     Quad(v, 100, 100, 228, 228); // the 64x64 tile drawn at twice its size
-    Get<s32(CC*)(unsigned, STexture*, Vert*, int)>("gbh_DrawTilePart")(0, tile, v, 255);
+    Get<s32 (*)(unsigned, STexture*, Vert*, int)>("gbh_DrawTilePart")(0, tile, v, 255);
 
     // The same tile rotated a quarter turn (flags 0x20): the tile's bottom-left texel lands top-left
     Quad(v, 300, 100, 428, 228);
-    Get<s32(CC*)(unsigned, STexture*, Vert*, int)>("gbh_DrawTilePart")(0x20, tile, v, 255);
+    Get<s32 (*)(unsigned, STexture*, Vert*, int)>("gbh_DrawTilePart")(0x20, tile, v, 255);
 
     // Additive blending (0x200): the red half added onto the blue background is magenta
     Quad(v, 100, 300, 228, 428);
@@ -103,7 +103,7 @@ int port_selftest()
         v[i].u = (i == 1 || i == 2) ? 64.0f : 0.0f;
         v[i].v = (i >= 2) ? 64.0f : 0.0f;
     }
-    Get<void(CC*)(int, STexture*, Vert*, int)>("gbh_DrawQuad")(0x200, tile, v, 255);
+    Get<void (*)(int, STexture*, Vert*, int)>("gbh_DrawQuad")(0x200, tile, v, 255);
 
     // A 16-bit TGA, bottom row first: white above, yellow below
     const int w = 8;
@@ -121,9 +121,9 @@ int port_selftest()
             memcpy(&tga[0x12 + (row * w + x) * 2], &colour, 2);
         }
     }
-    Get<signed(CC*)(int)>("gbh_InitImageTable")(4);
-    const int image = Get<signed(CC*)(SImage*)>("gbh_LoadImage")(reinterpret_cast<SImage*>(tga.data()));
-    Get<int(CC*)(int, int, int, int, int, int, int)>("gbh_BlitImage")(image, 0, 0, w, h, 500, 300);
+    Get<signed (*)(int)>("gbh_InitImageTable")(4);
+    const int image = Get<signed (*)(SImage*)>("gbh_LoadImage")(reinterpret_cast<SImage*>(tga.data()));
+    Get<int (*)(int, int, int, int, int, int, int)>("gbh_BlitImage")(image, 0, 0, w, h, 500, 300);
 
     Picture pic;
     port_renderer_read_pixels(pic.mPixels, pic.mW, pic.mH);
@@ -138,7 +138,7 @@ int port_selftest()
     Expect(pic, 503, 301, 0xFFFFFF, "TGA image: top half white");
     Expect(pic, 503, 306, 0xFFFF00, "TGA image: bottom half yellow");
 
-    Get<void(CC*)(SVideo*)>("Vid_FlipBuffers")(video);
+    Get<void (*)(SVideo*)>("Vid_FlipBuffers")(video);
     printf(gFailures ? "SELFTEST FAILED (%d)\n" : "SELFTEST PASSED\n", gFailures);
     return gFailures ? 1 : 0;
 }

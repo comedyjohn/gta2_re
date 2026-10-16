@@ -1235,7 +1235,7 @@ void ConvertBitSetIntoString(char* pOut, u8 max_width, s32 bitset, u8 max_num_bi
     *pOut = 0;
 }
 
-void CC ImGuiDebugDraw()
+void ImGuiDebugDraw()
 {
     ImGui::Begin("Debugger");
 

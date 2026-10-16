@@ -782,7 +782,7 @@ void port_renderer_restore_state() // port: world3d
 }
 
 // ================================================================ dmavideo.dll
-SVideo* CC Vid_Init_SYS(HINSTANCE, u16)
+SVideo* Vid_Init_SYS(HINSTANCE, u16)
 {
     memset(&gVideo, 0, sizeof(gVideo));
     memset(&gDevice, 0, sizeof(gDevice));
@@ -809,44 +809,44 @@ SVideo* CC Vid_Init_SYS(HINSTANCE, u16)
 }
 
 // The game always draws at 640x480; any 16-bit mode it asks for maps to that, scaled to the window
-s32 CC Vid_CheckMode(SVideo*, s32, s32, s32 bpp)
+s32 Vid_CheckMode(SVideo*, s32, s32, s32 bpp)
 {
     return bpp == 16 ? kModeId : 0;
 }
 
-SDevice* CC Vid_FindDevice(SVideo*, s32)
+SDevice* Vid_FindDevice(SVideo*, s32)
 {
     return &gDevice;
 }
 
-SDisplayMode* CC Vid_FindMode(SVideo*, s32 modeId)
+SDisplayMode* Vid_FindMode(SVideo*, s32 modeId)
 {
     return modeId == kModeId ? &gMode : 0;
 }
 
-s32 CC Vid_FindFirstMode(SVideo* pVideo, s32)
+s32 Vid_FindFirstMode(SVideo* pVideo, s32)
 {
     pVideo->field_3C_current_enum_ptr = &gMode;
     return kModeId;
 }
 
-s32 CC Vid_FindNextMode(SVideo* pVideo)
+s32 Vid_FindNextMode(SVideo* pVideo)
 {
     pVideo->field_3C_current_enum_ptr = 0;
     return 0;
 }
 
-void CC Vid_CloseScreen(SVideo*)
+void Vid_CloseScreen(SVideo*)
 {
 }
 
-s32 CC Vid_SetDevice(SVideo* pVideo, s32 deviceId)
+s32 Vid_SetDevice(SVideo* pVideo, s32 deviceId)
 {
     pVideo->field_34_active_device_id = deviceId;
     return 0;
 }
 
-s32 CC Vid_SetMode(SVideo* pVideo, HWND hWnd, s32 modeId)
+s32 Vid_SetMode(SVideo* pVideo, HWND hWnd, s32 modeId)
 {
     pVideo->field_4C0_hwnd = hWnd;
     pVideo->field_80_active_mode_q = modeId;
@@ -863,86 +863,86 @@ s32 CC Vid_SetMode(SVideo* pVideo, HWND hWnd, s32 modeId)
     return 0;
 }
 
-void CC Vid_GrabSurface(SVideo*)
+void Vid_GrabSurface(SVideo*)
 {
 }
 
-void CC Vid_ReleaseSurface(SVideo*)
+void Vid_ReleaseSurface(SVideo*)
 {
 }
 
-void CC Vid_FlipBuffers(SVideo*)
+void Vid_FlipBuffers(SVideo*)
 {
     gRenderer.Present();
 }
 
-void CC Vid_ShutDown_SYS(SVideo*)
+void Vid_ShutDown_SYS(SVideo*)
 {
 }
 
-s32 CC Vid_EnableWrites(SVideo*)
-{
-    return 0;
-}
-
-s32 CC Vid_DisableWrites(SVideo*)
+s32 Vid_EnableWrites(SVideo*)
 {
     return 0;
 }
 
-s32 CC Vid_GetSurface(SVideo*)
+s32 Vid_DisableWrites(SVideo*)
 {
     return 0;
 }
 
-s32 CC Vid_FreeSurface(SVideo*)
+s32 Vid_GetSurface(SVideo*)
 {
     return 0;
 }
 
-s32 CC Vid_ClearScreen(SVideo*, u8 aR, u8 aG, u8 aB, s32 aLeft, s32 aTop, s32 aRight, s32 aBottom)
+s32 Vid_FreeSurface(SVideo*)
+{
+    return 0;
+}
+
+s32 Vid_ClearScreen(SVideo*, u8 aR, u8 aG, u8 aB, s32 aLeft, s32 aTop, s32 aRight, s32 aBottom)
 {
     gRenderer.Clear(aR, aG, aB, aLeft, aTop, aRight, aBottom);
     return 0;
 }
 
-s32 CC Vid_SetGamma(SVideo*, f32, f32, f32)
+s32 Vid_SetGamma(SVideo*, f32, f32, f32)
 {
     return 0;
 }
 
-s32 CC Vid_WindowProc(SVideo*, HWND, DWORD, WPARAM, LPARAM)
+s32 Vid_WindowProc(SVideo*, HWND, DWORD, WPARAM, LPARAM)
 {
     return 0;
 }
 
-s32 CC Vid_InitDLL(HINSTANCE, SVideoFunctions*)
+s32 Vid_InitDLL(HINSTANCE, SVideoFunctions*)
 {
     return 1;
 }
 
-SVidVersion* CC Vid_GetVersion()
+SVidVersion* Vid_GetVersion()
 {
     return &gVersion;
 }
 
 // ================================================================ d3ddll.dll
-void CC ConvertColourBank(s32)
+void ConvertColourBank(s32)
 {
 }
 
-int CC DrawLine(int, int a2, int, int a4, int)
+int DrawLine(int, int a2, int, int a4, int)
 {
     return abs(a4 - a2);
 }
 
-void CC SetShadeTableA(int, int, int, int, int)
+void SetShadeTableA(int, int, int, int, int)
 {
 }
 
 // MakeScreenTable with pointer-sized rows (d3ddll.hpp declares it with int ones, which can't hold an
 // address at 64 bits); exported under the original name below
-static intptr_t* CC MakeScreenTablePtr(intptr_t value, int elementSize, unsigned int size)
+static intptr_t* MakeScreenTablePtr(intptr_t value, int elementSize, unsigned int size)
 {
     intptr_t* result = 0;
     gScreenTableSize = static_cast<int>(size);
@@ -958,7 +958,7 @@ static intptr_t* CC MakeScreenTablePtr(intptr_t value, int elementSize, unsigned
     return result;
 }
 
-int CC gbh_AddLight(SLight* pLight)
+int gbh_AddLight(SLight* pLight)
 {
     if (gNumLights >= 256)
     {
@@ -980,7 +980,7 @@ int CC gbh_AddLight(SLight* pLight)
     return static_cast<int>(idx * sizeof(SLightInternal));
 }
 
-void CC gbh_AssignPalette(STexture* pTexture, int palId)
+void gbh_AssignPalette(STexture* pTexture, int palId)
 {
     const bool needUnlock = !(pTexture->field_13_flags & 1);
     if (needUnlock)
@@ -995,25 +995,25 @@ void CC gbh_AssignPalette(STexture* pTexture, int palId)
     }
 }
 
-void CC gbh_BeginLevel()
+void gbh_BeginLevel()
 {
 }
 
-void CC gbh_SetBeginSceneCB(TBeginSceneCB)
+void gbh_SetBeginSceneCB(TBeginSceneCB)
 {
     // The ImGui debug overlay needs an ImGui backend for OpenGL first; until then it is left out
 }
 
-void CC gbh_BeginScene()
+void gbh_BeginScene()
 {
 }
 
-int CC gbh_BlitBuffer(int, int, int, int, int, int)
+int gbh_BlitBuffer(int, int, int, int, int, int)
 {
     return 0;
 }
 
-int CC gbh_BlitImage(int imageIndex, int srcLeft, int srcTop, int srcRight, int srcBottom, int dstX, int dstY)
+int gbh_BlitImage(int imageIndex, int srcLeft, int srcTop, int srcRight, int srcBottom, int dstX, int dstY)
 {
     if (imageIndex < 0 || static_cast<DWORD>(imageIndex) >= gImageTableCount || !gImageTable[imageIndex].bLoaded)
     {
@@ -1056,30 +1056,30 @@ int CC gbh_BlitImage(int imageIndex, int srcLeft, int srcTop, int srcRight, int 
     return 0;
 }
 
-void CC gbh_CloseDLL()
+void gbh_CloseDLL()
 {
 }
 
-void CC gbh_CloseScreen(SVideo*)
+void gbh_CloseScreen(SVideo*)
 {
 }
 
-unsigned int CC gbh_Convert16BitGraphic(int, unsigned int, WORD*, signed int)
+unsigned int gbh_Convert16BitGraphic(int, unsigned int, WORD*, signed int)
 {
     return 0;
 }
 
-unsigned int CC gbh_ConvertColour(unsigned __int8 r, unsigned __int8 g, unsigned __int8 b)
+unsigned int gbh_ConvertColour(unsigned __int8 r, unsigned __int8 g, unsigned __int8 b)
 {
     return RGB888ToRGB565((static_cast<u32>(r) << 16) | (static_cast<u32>(g) << 8) | b);
 }
 
-int CC gbh_DrawFlatRect(int, int)
+int gbh_DrawFlatRect(int, int)
 {
     return 0;
 }
 
-void CC gbh_DrawQuad(int flags, STexture* pTexture, Vert* pVerts, int baseColour)
+void gbh_DrawQuad(int flags, STexture* pTexture, Vert* pVerts, int baseColour)
 {
     if (port_world3d_draw(kPortWorld3dQuad, flags, pTexture, pVerts, baseColour)) // port: world3d
     {
@@ -1088,11 +1088,11 @@ void CC gbh_DrawQuad(int flags, STexture* pTexture, Vert* pVerts, int baseColour
     RenderVerts(flags, pTexture, pVerts, 4, baseColour);
 }
 
-void CC gbh_DrawQuadClipped(int, int, int, int, int)
+void gbh_DrawQuadClipped(int, int, int, int, int)
 {
 }
 
-void CC gbh_DrawTriangle(int flags, STexture* pTexture, Vert* pVerts, int diffuseColour)
+void gbh_DrawTriangle(int flags, STexture* pTexture, Vert* pVerts, int diffuseColour)
 {
     if (port_world3d_draw(kPortWorld3dTriangle, flags, pTexture, pVerts, diffuseColour)) // port: world3d
     {
@@ -1102,7 +1102,7 @@ void CC gbh_DrawTriangle(int flags, STexture* pTexture, Vert* pVerts, int diffus
 }
 
 // GTA2Hax's gbh_DrawTilePart: a 64x64 tile, rotated (flags & 0x60) and flipped (0x08, 0x10) by its UVs
-s32 CC gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int diffuseColour)
+s32 gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int diffuseColour)
 {
     if (port_world3d_draw(kPortWorld3dTile, static_cast<int>(flags), pTexture, pData, diffuseColour)) // port: world3d
     {
@@ -1187,20 +1187,20 @@ s32 CC gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int
 }
 
 // d3ddll.dll exports the same function under both names
-s32 CC gbh_DrawTile(unsigned int flags, STexture* pTexture, Vert* pData, int diffuseColour)
+s32 gbh_DrawTile(unsigned int flags, STexture* pTexture, Vert* pData, int diffuseColour)
 {
     return gbh_DrawTilePart(flags, pTexture, pData, diffuseColour);
 }
 
-void CC gbh_EndLevel()
+void gbh_EndLevel()
 {
 }
 
-void CC gbh_EndScene()
+void gbh_EndScene()
 {
 }
 
-int CC gbh_FreeImageTable()
+int gbh_FreeImageTable()
 {
     for (DWORD i = 0; i < gImageTableCount; i++)
     {
@@ -1217,13 +1217,13 @@ int CC gbh_FreeImageTable()
     return 0;
 }
 
-void CC gbh_FreePalette(int palId)
+void gbh_FreePalette(int palId)
 {
     free(gPals[palId].mPData);
     gPals[palId].mPData = 0;
 }
 
-void CC gbh_FreeTexture(STexture* pTexture)
+void gbh_FreeTexture(STexture* pTexture)
 {
     if (!pTexture)
     {
@@ -1233,22 +1233,22 @@ void CC gbh_FreeTexture(STexture* pTexture)
     free(pTexture);
 }
 
-u32* CC gbh_GetGlobals()
+u32* gbh_GetGlobals()
 {
     return reinterpret_cast<u32*>(&gGlobals);
 }
 
-int CC gbh_GetUsedCache(int)
+int gbh_GetUsedCache(int)
 {
     return 0;
 }
 
-s32 CC gbh_Init(int)
+s32 gbh_Init(int)
 {
     return 0;
 }
 
-u32 CC gbh_InitDLL(SVideo*)
+u32 gbh_InitDLL(SVideo*)
 {
     for (int i = 0; i < 12; i++)
     {
@@ -1257,7 +1257,7 @@ u32 CC gbh_InitDLL(SVideo*)
     return 1;
 }
 
-signed int CC gbh_InitImageTable(int tableSize)
+signed int gbh_InitImageTable(int tableSize)
 {
     gImageTable = static_cast<SImageTableEntry*>(calloc(tableSize, sizeof(SImageTableEntry)));
     if (!gImageTable)
@@ -1269,7 +1269,7 @@ signed int CC gbh_InitImageTable(int tableSize)
 }
 
 // A 16-bit uncompressed TGA (SImage is its header)
-signed int CC gbh_LoadImage(SImage* pToLoad)
+signed int gbh_LoadImage(SImage* pToLoad)
 {
     DWORD slot = 0;
     while (slot < gImageTableCount && gImageTable[slot].bLoaded)
@@ -1299,7 +1299,7 @@ signed int CC gbh_LoadImage(SImage* pToLoad)
     return static_cast<signed int>(slot);
 }
 
-STexture* CC gbh_LockTexture(STexture* pTexture)
+STexture* gbh_LockTexture(STexture* pTexture)
 {
     pTexture->field_8_locked_pixels_ptr = pTexture->field_14_original_pixel_data_ptr;
     pTexture->field_13_flags |= 1;
@@ -1307,17 +1307,17 @@ STexture* CC gbh_LockTexture(STexture* pTexture)
     return pTexture;
 }
 
-void CC gbh_Plot(int, int, int, int)
+void gbh_Plot(int, int, int, int)
 {
 }
 
-int CC gbh_PrintBitmap(int, int)
+int gbh_PrintBitmap(int, int)
 {
     return 0;
 }
 
 // Palettes are stored in columns: entry i is 64 DWORDs after entry i - 1
-unsigned int CC gbh_RegisterPalette(int palId, DWORD* pData)
+unsigned int gbh_RegisterPalette(int palId, DWORD* pData)
 {
     DWORD* pOriginal = pData;
     for (int i = 0; i < 256; i++, pData += 64)
@@ -1344,32 +1344,32 @@ unsigned int CC gbh_RegisterPalette(int palId, DWORD* pData)
     return static_cast<unsigned int>(palId);
 }
 
-STexture* CC gbh_RegisterTexture(s32 width, s32 height, BYTE* pData, s32 palIdx, char_type)
+STexture* gbh_RegisterTexture(s32 width, s32 height, BYTE* pData, s32 palIdx, char_type)
 {
     return InternalRegisterTexture(width, height, pData, &palIdx, 0);
 }
 
-void CC gbh_ResetLights()
+void gbh_ResetLights()
 {
     gNumLights = 0;
 }
 
-void CC gbh_SetAmbient(float ambient)
+void gbh_SetAmbient(float ambient)
 {
     gAmbient = ambient * 255.0f;
 }
 
-int CC gbh_SetCamera(float, float, float, float)
+int gbh_SetCamera(float, float, float, float)
 {
     return 0;
 }
 
-int CC gbh_SetColourDepth()
+int gbh_SetColourDepth()
 {
     return 1;
 }
 
-void CC gbh_SetWindow(float left, float top, float right, float bottom)
+void gbh_SetWindow(float left, float top, float right, float bottom)
 {
     gWindowLeft = left;
     gWindowRight = right;
@@ -1377,7 +1377,7 @@ void CC gbh_SetWindow(float left, float top, float right, float bottom)
     gWindowBottom = bottom;
 }
 
-STexture* CC gbh_UnlockTexture(STexture* pTexture)
+STexture* gbh_UnlockTexture(STexture* pTexture)
 {
     pTexture->field_6_pal_size = 0;
     pTexture->field_8_locked_pixels_ptr = 0;

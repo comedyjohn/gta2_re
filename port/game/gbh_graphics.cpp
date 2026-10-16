@@ -111,7 +111,7 @@ s32 GBH_Graphics_Free_5EA640()
     {                                                                  \
         char_type Text[120];                                           \
         sprintf(Text, "Can't Find Function Called %s", funcName);      \
-        MessageBoxA(0, Text, "Error Patching DLL Function", MB_OK);    \
+        MessageBoxA(nullptr, Text, "Error Patching DLL Function", MB_OK);    \
         FreeLibrary(gGbhDllHandle_7085D8);                             \
         return -1;                                                     \
     }

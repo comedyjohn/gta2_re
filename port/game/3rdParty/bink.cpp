@@ -2,7 +2,7 @@
 
 BINKDEC BINK* __stdcall BinkOpen(const char* name, s32 flags)
 {
-    return 0;
+    return nullptr;
 }
 BINKDEC void __stdcall BinkClose(BINK* hbink)
 {
@@ -33,18 +33,18 @@ BINKDEC void __stdcall BinkSetIOSize(s32 size)
 }
 BINKDEC void* __stdcall BinkOpenMiles(s32 driver)
 {
-    return 0;
+    return nullptr;
 }
 BINKDEC BINKBUFFER* __stdcall BinkBufferOpen(HWND hwnd, s32 width, s32 height, s32 flags)
 {
-    return 0;
+    return nullptr;
 }
 BINKDEC void __stdcall BinkBufferClose(BINKBUFFER* hbinkbuffer)
 {
 }
 BINKDEC void* __stdcall BinkBufferLock(BINKBUFFER* hbinkbuffer)
 {
-    return 0;
+    return nullptr;
 }
 BINKDEC void __stdcall BinkBufferUnlock(BINKBUFFER* hbinkbuffer)
 {

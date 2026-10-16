@@ -77,7 +77,7 @@ void DMA_Video_Unload_5EB8C0(SVideo* pVidSys)
     {                                                                 \
         char_type Text[120];                                          \
         sprintf(Text, "Can't Find Function Called %s", funcName);     \
-        MessageBoxA(0, Text, "Error Patching DLL Function", MB_OK);   \
+        MessageBoxA(nullptr, Text, "Error Patching DLL Function", MB_OK);   \
         FreeLibrary(hDmaVideoDll_7085E8);                             \
         return -1;                                                    \
     }

@@ -79,7 +79,7 @@ From `metrics.py`, `clang-tidy` 18 and a `-fsyntax-only` pass with the strict wa
 | clang-tidy findings (bugprone, cert, cppcoreguidelines, misc, modernize, performance, readability) | 37,189 unique; the breakdown and the phase that clears each check are in [1-tooling.md](1-tooling.md) |
 | Strict-warning findings (`-Wconversion -Wshadow -Wold-style-cast` ...) | 3,839; breakdown in [1-tooling.md](1-tooling.md) |
 | Files not matching `.clang-format` | 182 of 265 (about 10,100 lines would change) |
-| Tests | `--selftest` (renderer), `--audiotest`, `--simcheck` (maths tables), `tools/nettest.sh` (lockstep, no game data). **Nothing runs gameplay.** |
+| Tests | `--selftest` (renderer), `--audiotest`, `--simcheck` (maths tables), `tools/nettest.sh` (lockstep, no game data). **Nothing runs gameplay.** *Since phase 0 started: replay tests (`tools/replaytest.sh`, 3 replays so far) and unit tests (17 cases); see [0-safety-net.md](0-safety-net.md)* |
 
 ## Ground rules
 

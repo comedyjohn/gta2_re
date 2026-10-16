@@ -69,7 +69,9 @@ The order follows what a player notices first.
       options for a game target go through `gta2_game_target(<target> <options>)`, which puts them
       ahead of its `-Wno-*` options: Clang's `-Wall` turns those back on when it comes later.
 - [ ] **Refactoring to a maintainable code base:** the plan, its order, tasks and exit criteria are in
-      `refactor/README.md` (one file per phase). Next: phase 0 (state hash, headless replay runner, golden replays).
+      `refactor/README.md` (one file per phase). Phase 0 (safety net) is mostly done: state hash,
+      `gta2 --replay`/`--record`, `tools/replaytest.sh`, unit tests ([TESTING.md](TESTING.md)); what is left
+      is in `refactor/0-safety-net.md`, first of all recording the corpus sessions.
 - [ ] **More modernising** (done: C++ casts, range-for, `= default`, constexpr limits, `ReplayState`, `CrusherStates`,
       `GameExitType`, and clang-tidy's `bugprone-*`/`performance-*` fixes that were mechanical: loop counters as wide
       as their bounds, `GTA2_COUNTOF` as a constexpr template, explicit `strcmp` compares, default-case in every
@@ -80,9 +82,14 @@ The order follows what a player notices first.
       (`fix16.cpp`'s pi literal: changes the constant), `bugprone-signed-char-misuse` (24: VC6's signed `char` is
       intended). Keep `typedef struct` blocks, `resource.h` and Miles' `3rdParty/mss.h` out of clang-tidy's
       `modernize-use-using` and `modernize-macro-to-enum`: they drop calling conventions and break the resource compiler.
-- [ ] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.**
+- [x] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.** Presets `asan64` and `ubsan64`; the
+      unit tests run under both in CI, the replay corpus passes under both locally. What stays is listed
+      in `refactor/known-ub.md`.
 - [ ] **Floating-point.** VC6's x87 code and GCC's SSE differ in precision. Check that replays
-      (`InputRecorder_67F8B0`) still play back the same.
+      (`InputRecorder_67F8B0`) still play back the same. *The port's builds agree with each other
+      (GCC/Clang, 32/64 bits: identical replay logs). Against the original, the attract replays (recorded
+      by the 9.6 build) drift at updates 191 and 581; a replay recorded by 10.5.exe would tell whether
+      the port and 10.5 compute the same.*
 - [ ] **Play-test the 64-bit build.** `port/build.sh 64` builds and its renderer and audio
       self-tests pass (CI runs both widths). The known 64-bit problems are fixed, without changing
       what VC6 generates, but nobody has played it yet:

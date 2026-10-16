@@ -10,14 +10,48 @@ of `Ped.cpp` could change how pedestrians behave and every check would stay gree
 **Exit criteria**
 
 - [ ] The golden corpus (task 0.5) replays to identical hash logs on GCC 32, GCC 64, Clang 64 and ARM64
-      (qemu), run twice in a row on each.
+      (qemu), run twice in a row on each. *So far: the three replays there are give identical logs on
+      GCC 32 (twice), GCC 64, Clang 64, UBSan and ASan. Missing: the recorded sessions, ARM64 (no
+      cross toolchain or qemu on the development machine yet).*
 - [ ] A deliberate one-character behaviour change turns at least one replay red, and the report names
       the first differing frame and component: try `<` to `<=` in `CarAI_78::DetectCarAhead_44D1D0`, a
       changed constant in `Ped::Threat_Reaction_AI_465270`, and a skipped `rand` call in
-      `Particle_8`.
-- [ ] Unit tests run in public CI (no game data needed), under ASan and UBSan.
-- [ ] `port/tools/replaytest.sh` documented in `port/RUNNING.md` and run by the self-hosted runner (or
-      locally, per decision 3 in [README.md](README.md)).
+      `Particle_8`. *So far: `<= 20` to `< 20` in DetectCarAhead (red at update 709, sprites and
+      cars) and a skipped `rand` in `Particle_8::EmitBloodBurst_53E450` (update 166, rng first) are
+      caught; `FindBestTargetPed_Mode5_466BD0(3)` to `(4)` in `Threat_Reaction_AI` is not: no replay
+      has armed peds threatening the player yet (05 in the corpus table).*
+- [x] Unit tests run in public CI (no game data needed), under ASan and UBSan (job
+      `Linux_Native_Sanitizers` in `.github/workflows/ci.yml`).
+- [ ] `port/tools/replaytest.sh` documented (in [`port/TESTING.md`](../TESTING.md), not RUNNING.md, which is
+      for players) and run by the self-hosted runner (or locally, per decision 3 in
+      [README.md](README.md)). *Documented; it runs locally until decision 3.*
+
+## Status (2026-10-16)
+
+Done: the state hash (tier 1 plus the police crews and pursuits), `gta2 --replay` and `gta2 --record`,
+`replaytest.sh`, a corpus of three replays (`~/Games/gta2/corpus`), the unit tests and the sanitizer
+presets and CI job. Replays reproduce: a session recorded live (real time, drawing) plays back headless
+with exactly the live log on every build, drawing doesn't change the simulation, and every build logs
+the same. The whole corpus runs in under 10 seconds per build.
+
+What the safety net found before any refactoring, each fixed in a `Fix:` commit:
+
+- `kFpEight_6FED48` was 0 in GCC builds (8 in Clang ones and the original): a static initialiser read
+  another file's global before that file's initialiser had run. It changed how police crews pursue.
+  `gDummyH_678584` (0 instead of 0.2) had the same cause, and the registry could be used before it was
+  constructed. `port/tools/refactor/init_order.py` (in CI) keeps globals from being initialised from
+  another file's.
+- `PoliceCrew_38::field_35` was read without ever being set (in the original too); a roadblock's
+  rectangle was freed with `delete[]`; tan(90) and tan(270) were converted to int out of range
+  (undefined; ARM would have differed from x86). What UBSan reports and stays is in
+  [known-ub.md](known-ub.md).
+
+The attract replays were recorded by the 9.6 build, and drift from their recorded random numbers at
+updates 191 and 581: their logs are the port's own, not a comparison with the original.
+
+Left: recording the corpus sessions (0.5, needs a player), the network desync check (0.7), the text,
+map and script VM unit tests (0.8), Valgrind (0.9, not installed), golden frames (0.10), the audio
+event log (0.11), a null renderer so replays need no X server (0.3), tier 2 of the hash per subsystem.
 
 ## How the game runs a frame (what the safety net builds on)
 
@@ -49,11 +83,13 @@ of `Ped.cpp` could change how pedestrians behave and every check would stay gree
 
 Nobody has checked since the port started. Do this first, because everything else rests on it.
 
-- [ ] Record a 2-minute session in the 32-bit build (`do_release_replay` = 1), on foot and in a car,
-      with police.
-- [ ] Play it back twice with `-r`, with drawing (normal) and with `skip_draw` = 1. Watch whether the
-      player ends in the same place.
-- [ ] Play it back in the 64-bit build.
+- [x] Record a 2-minute session in the 32-bit build (`do_release_replay` = 1), on foot and in a car,
+      with police. *Done with `gta2 --record` and synthetic key presses (on foot only); the attract
+      replays have cars and police.*
+- [x] Play it back twice with `-r`, with drawing (normal) and with `skip_draw` = 1. Watch whether the
+      player ends in the same place. *The hash logs are identical.*
+- [x] Play it back in the 64-bit build. *Identical, and with Clang once the static initialisation
+      order bugs were fixed.*
 
 If playback diverges, the cause is the first thing to fix (as a `Fix:` commit): the usual suspects are
 reads of uninitialised memory (Valgrind finds them; `Fix16_Point` and `Fix16_Rect` locals are left
@@ -110,23 +146,23 @@ position or the number of random numbers drawn:
 
 `gta2 --replay <file.rep> [--frames N] [--hash-log out.txt] [--hash-every K] [--break-at FRAME]`:
 
-- [ ] Starts the game with a scratch registry (a temporary `XDG_CONFIG_HOME`), copies the replay to
+- [x] Starts the game with a scratch registry (a temporary `XDG_CONFIG_HOME`), copies the replay to
       `test/replay.rep` in a temporary game directory that links to the real data, and sets
       `play_replay`, `do_exit_after_replay` and `skip_draw` (headless: no waiting, no drawing).
 - [ ] Opens no window: a null renderer (`port_renderer_lookup` hands out no-op `gbh_*`/`Vid_*`
       functions) and `SDL_AUDIODRIVER=dummy`. Sound logic still runs, so audio code is covered.
-- [ ] After every `ExecuteGame_4DA780`, writes `frame rng_count total rng sprites peds cars objects
+- [x] After every `ExecuteGame_4DA780`, writes `frame rng_count total rng sprites peds cars objects
       players script police` (hex) to the hash log, every K frames (default 1).
-- [ ] `--break-at` stops at a frame and dumps the full tier-2 state as text, to diff two builds when
+- [x] `--break-at` stops at a frame and dumps the full tier-2 state as text, to diff two builds when
       a hash differs.
-- [ ] Exits with the replay's end (or after N frames) with status 0, or 2 if the game hit a fatal error.
+- [x] Exits with the replay's end (or after N frames) with status 0, or 2 if the game hit a fatal error.
 
 Check: running the same replay twice gives byte-identical logs; a 10-minute replay takes under a
 minute.
 
 ### 0.4 Is drawing simulation-neutral?
 
-- [ ] Run each replay headless and with drawing under Xvfb (`skip_draw` = 0), and compare the logs. They
+- [x] Run each replay headless and with drawing under Xvfb (`skip_draw` = 0), and compare the logs. They
       must match: if they don't, drawing changes simulation state (for example camera code that the
       simulation reads, or sprite visibility flags set while drawing) and the first refactor of the
       renderer would reveal it. Find and document the cause before going on; fixing it is a `Fix:`
@@ -152,17 +188,19 @@ Recorded once from the build at the start of phase 1, stored outside the public 
 | 11 | The three attract replays (`data/attract/attr1-3.rep`) | ships with the game, free to use |
 | 12 | 4-player network deathmatch (four replays recorded together, `nettest`-style, one machine) | lockstep, `NetPlay`, `TagGame_28` |
 
-- [ ] Record them with real input. The attract replays (11) can be used before anything is recorded.
+- [ ] Record them with real input (`gta2 --record`, see [TESTING.md](../TESTING.md)). The attract
+      replays (11) are in, plus `00-synthetic-walk`.
 - [ ] Check each with task 0.1's procedure (twice, 32 and 64, Clang).
-- [ ] Generate the expected logs with the runner.
-- [ ] Keep a `corpus.txt` manifest (name, length in frames, what it covers, SHA-256 of the `.rep`).
+- [x] Generate the expected logs with the runner (`replaytest.sh --update`). One expected log per
+      replay, shared by every build: they all log the same.
+- [x] Keep a `corpus.txt` manifest (name, length in frames, what it covers, SHA-256 of the `.rep`).
 
 ### 0.6 `port/tools/replaytest.sh`
 
-- [ ] `replaytest.sh <build-dir> [corpus-dir]`: runs every replay of the corpus in parallel, compares
+- [x] `replaytest.sh <build-dir> [corpus-dir]`: runs every replay of the corpus in parallel, compares
       each log with the expected one, prints `PASS`/`FAIL name: first difference at frame F, component
       C`, exits 1 on any failure.
-- [ ] `replaytest.sh --update <build-dir>`: rewrites the expected logs, for `Fix:` commits only.
+- [x] `replaytest.sh --update <build-dir>`: rewrites the expected logs, for `Fix:` commits only.
 - [ ] Self-hosted runner (decision 3): a GitHub Actions job `port-replays`, `runs-on: [self-hosted,
       gta2-data]`, that builds `linux32` and `linux64` and runs the script.
 
@@ -179,10 +217,12 @@ The state hash doubles as a desync detector for real network games:
 
 No game data needed, so they run in public CI.
 
-- [ ] Add doctest (single header, `3rdParty/doctest/doctest.h`, pinned version) and `port/tests/` with a
+- [x] Add doctest (single header, `3rdParty/doctest/doctest.h`, pinned version) and `port/tests/` with a
       `gta2_tests` executable built against `gta2_game` (same prelude and options) and registered with
       `enable_testing()`/`add_test()`; `ctest --preset linux64` runs it.
-- [ ] First tests, chosen because later phases change exactly this code:
+- [ ] First tests, chosen because later phases change exactly this code. *Done: `test_fix16`,
+      `test_tables` (the ang16 row, plus `--simcheck`'s hashes), `test_rng`, `test_pool`, `test_bitset`.
+      Left: text, map reader, script VM.*
 
 | Test file | Covers | Golden values from |
 |---|---|---|
@@ -197,12 +237,14 @@ No game data needed, so they run in public CI.
 
 ### 0.9 Sanitizers and Valgrind
 
-- [ ] CMake presets `asan64`, `ubsan64` (`-fsanitize=undefined -fno-sanitize-recover=undefined`) next to
+- [x] CMake presets `asan64`, `ubsan64` (`-fsanitize=undefined`; it recovers, so one run lists every
+      report, and `UBSAN_OPTIONS=halt_on_error=1` stops at the first) next to
       the existing `build_port/asan64`.
-- [ ] Public CI: unit tests under ASan+UBSan.
-- [ ] Self-hosted: the corpus under ASan+UBSan (`ASAN_OPTIONS=detect_leaks=0`), and weekly under
+- [x] Public CI: unit tests under ASan+UBSan.
+- [ ] Self-hosted: the corpus under ASan+UBSan (`ASAN_OPTIONS=detect_leaks=0`; *done locally: the
+      corpus passes under both, see [known-ub.md](known-ub.md)*), and weekly under
       Valgrind memcheck (uninitialised reads, which the hash would otherwise turn into flaky failures).
-- [ ] Every finding is a `Fix:` commit or an entry in `port/refactor/known-ub.md` with its reason (some
+- [x] Every finding is a `Fix:` commit or an entry in `port/refactor/known-ub.md` with its reason (some
       undefined behaviour is the original's and is reproduced on purpose, like the input mask read above).
 
 ### 0.10 Golden frames (presentation)

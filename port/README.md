@@ -28,9 +28,10 @@ ARM (Debian/Ubuntu's `g++-aarch64-linux-gnu`; it says how to point it at ARM SDL
 
 Run `build_port/linux32/gta2` from a directory holding the game's `data/` folder, or use
 `port/gta2-launch` as described in [RUNNING.md](RUNNING.md). `gta2 --selftest` (renderer) and
-`gta2 --audiotest` (sound) check a build without game data, and so does `tools/nettest.sh` (network
-games between several copies, see [MULTIPLAYER.md](MULTIPLAYER.md)). The build also makes
-`gta2-server`, a network game server that needs no game data.
+`gta2 --audiotest` (sound) check a build without game data, and so do the unit tests (`ctest`) and
+`tools/nettest.sh` (network games between several copies, see [MULTIPLAYER.md](MULTIPLAYER.md)). With
+the game data, the replay tests check what the game computes: [TESTING.md](TESTING.md) has them all.
+The build also makes `gta2-server`, a network game server that needs no game data.
 
 ## Status
 

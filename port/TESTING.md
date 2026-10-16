@@ -2,7 +2,7 @@
 
 | Test | Needs game data | Checks | Run |
 |---|---|---|---|
-| Unit tests (`port/tests/`) | no | `Fix16`, angles and tables, `rand()`, pools, `BitSet32` | `ctest --test-dir build_port/linux64 --output-on-failure` |
+| Unit tests (`port/tests/`) | no | `Fix16`, angles and tables, `rand()`, pools, `BitSet32`, text lookups, the script interpreter's control flow, map block queries | `ctest --test-dir build_port/linux64 --output-on-failure` |
 | `gta2 --selftest` | no | the renderer, pixel by pixel | `xvfb-run -a build_port/linux64/gta2 --selftest` |
 | `gta2 --audiotest` | no | the sound mixer | `build_port/linux64/gta2 --audiotest` |
 | `tools/nettest.sh` | no | network games, also between 32 and 64-bit builds | `port/tools/nettest.sh build_port/linux32 build_port/linux64` |
@@ -18,7 +18,7 @@ The game is deterministic: a replay is the player's input, keyed to the update i
 so playing it back computes the same game again. `gta2 --replay` plays one headless (no window
 content, no waiting for the clock: about 1,000 updates a second) and logs a hash of the
 simulation after every update: one per component (random numbers, sprites, peds, cars, objects,
-players, script, police) and their total. A refactor must leave every log exactly as it was. Every
+players, script, police), their total and the audio event hash (what the sound code asked the mixer to do; not part of the total). A refactor must leave every log exactly as it was. Every
 build logs the same: GCC and Clang, 32 and 64 bits.
 
 ```bash
@@ -70,6 +70,17 @@ Use `--update` after adding a replay, and in a `Fix:` commit that changes what t
    `kFpEight_6FED48` (a static initialiser reading another file's global) was found.
 3. Before a refactor of a subsystem, check that the corpus reaches it: a deliberate one-character
    change in it must turn a replay red. Record a session that exercises it if not.
+
+`--audio-log FILE` also writes every call the sound code makes to the mixer, one per line (`update event
+slot arg1 arg2`), to see what a changed audio hash is about. A replay mixes 33 ms of sound per update, in
+step with the simulation, instead of on the audio thread's clock: the sound code polls when samples finish,
+and with the real clock that depended on how fast the replay ran.
+
+A log that differs between two runs of the same build is a bug in the game (reading memory it never
+set, an address or the clock reaching the simulation), not noise: run a replay a dozen times in parallel
+(`for i in $(seq 12); do ... --hash-log run$i.log & done`) and compare. That is how the uninitialised
+count of kind 10 cars (a spawn decision that flipped about one run in three) and the ringing phone's pitch
+(taken from a stack address) were found; both are fixed.
 
 ### What the hash covers
 

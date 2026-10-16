@@ -49,9 +49,15 @@ What the safety net found before any refactoring, each fixed in a `Fix:` commit:
 The attract replays were recorded by the 9.6 build, and drift from their recorded random numbers at
 updates 191 and 581: their logs are the port's own, not a comparison with the original.
 
-Left: recording the corpus sessions (0.5, needs a player), the network desync check (0.7), the text,
-map and script VM unit tests (0.8), Valgrind (0.9, not installed), golden frames (0.10), the audio
-event log (0.11), a null renderer so replays need no X server (0.3), tier 2 of the hash per subsystem.
+Also done since: the unit tests for text, the script interpreter and the map block queries (0.8), and
+the audio event log (0.11), with the mixer stepped by the simulation. Running a replay many times in
+parallel found two more bugs, both fixed: `CarManager_6C::field_48_kind10_cars` was never initialised
+(about one run in three spawned a different kind of police car at update 3342 of attract-downtown),
+and a ringing phone's pitch came from a stack address. The car counts are in the cars hash now.
+
+Left: recording the corpus sessions (0.5, needs a player), the network desync check (0.7), Valgrind
+(0.9, not installed), golden frames (0.10), a null renderer so replays need no X server (0.3), tier 2 of
+the hash per subsystem.
 
 ## How the game runs a frame (what the safety net builds on)
 
@@ -220,9 +226,11 @@ No game data needed, so they run in public CI.
 - [x] Add doctest (single header, `3rdParty/doctest/doctest.h`, pinned version) and `port/tests/` with a
       `gta2_tests` executable built against `gta2_game` (same prelude and options) and registered with
       `enable_testing()`/`add_test()`; `ctest --preset linux64` runs it.
-- [ ] First tests, chosen because later phases change exactly this code. *Done: `test_fix16`,
-      `test_tables` (the ang16 row, plus `--simcheck`'s hashes), `test_rng`, `test_pool`, `test_bitset`.
-      Left: text, map reader, script VM.*
+- [x] First tests, chosen because later phases change exactly this code. *Done: `test_fix16`,
+      `test_tables` (the ang16 row, plus `--simcheck`'s hashes), `test_rng`, `test_pool`, `test_bitset`,
+      `test_text` (lookups and remapping; the file loading is covered by the replays), `test_script_vm`
+      (control flow, counters and conditions on hand-assembled bytecode) and `test_map_reader` (block
+      queries on a synthetic map; the `.gmp` loader is covered by the replays).*
 
 | Test file | Covers | Golden values from |
 |---|---|---|
@@ -258,9 +266,10 @@ Replays don't see drawing. Phase 2 to 6 touch the renderer front end, HUD and me
 
 ### 0.11 Audio event log
 
-- [ ] `--audio-log out.txt`: every sample start/stop/volume/pitch/position call the sound logic makes
+- [x] `--audio-log out.txt`: every sample start/stop/volume/pitch/position call the sound logic makes
       to `cSampleManager`, per frame. Hash it into the log as an extra component, so `sound_obj.cpp`
-      (7,700 lines) is covered when it is refactored.
+      (7,700 lines) is covered when it is refactored. *Done: an `audio` column next to the total (not in it),
+      by sample and stream slot, in `platform/mss.cpp`, over the calls to the mixer rather than the cSampleManager.*
 
 ## Risks
 

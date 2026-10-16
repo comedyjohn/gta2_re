@@ -407,14 +407,14 @@ int FindMap(Network_20324* ui, const std::string& wanted)
     int n;
     if (ParseInt(wanted.c_str(), n))
     {
-        return n >= 1 && n <= ui->field_1FD64_total_map_count ? n - 1 : -1;
+        return n >= 1 && n <= static_cast<int>(ui->field_1FD64_total_map_count) ? n - 1 : -1;
     }
     std::string w = wanted;
     for (char& c : w)
     {
         c = static_cast<char>(tolower(c));
     }
-    for (int i = 0; i < ui->field_1FD64_total_map_count; i++)
+    for (u32 i = 0; i < ui->field_1FD64_total_map_count; i++)
     {
         const Network_Enumerated_Map& m = ui->field_4_maps[i];
         for (const char* field : {m.field_30C_description, m.field_410_mmp_name, m.field_0_map_name})
@@ -435,9 +435,9 @@ int FindMap(Network_20324* ui, const std::string& wanted)
 
 void ListMaps(Network_20324* ui)
 {
-    for (int i = 0; i < ui->field_1FD64_total_map_count; i++)
+    for (u32 i = 0; i < ui->field_1FD64_total_map_count; i++)
     {
-        printf("  %d: %s (%u players)\n", i + 1, ui->field_4_maps[i].field_30C_description, ui->field_4_maps[i].field_514_player_count);
+        printf("  %u: %s (%u players)\n", i + 1, ui->field_4_maps[i].field_30C_description, ui->field_4_maps[i].field_514_player_count);
     }
 }
 
@@ -649,7 +649,7 @@ INT_PTR Join(Network_20324* ui, const std::string& name, const std::u16string& w
     // The host's map has to be here too
     const NetworkGameSettings& s = ui->field_20088_game_settings;
     bool haveMap = false;
-    for (int i = 0; i < ui->field_1FD64_total_map_count; i++)
+    for (u32 i = 0; i < ui->field_1FD64_total_map_count; i++)
     {
         haveMap = haveMap || !strcmp(ui->field_4_maps[i].field_410_mmp_name, s.field_20088_default_map);
     }

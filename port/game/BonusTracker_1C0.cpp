@@ -83,8 +83,9 @@ void BonusTracker_1C0::Service_431E30()
         {
             if (pIter->field_2B_bActive)
             {
-                const u32 f1c = pIter->field_1C_time_limit;
-                if (f1c != -1 && field_1BC_cur_time - pIter->field_20_start_time > f1c)
+                const s32 time_limit = pIter->field_1C_time_limit;
+                if (time_limit != -1 &&
+                    static_cast<u32>(field_1BC_cur_time - pIter->field_20_start_time) > static_cast<u32>(time_limit))
                 {
                     pIter->field_26_progress_count = 0;
                     pIter->Deactivate_431DB0();

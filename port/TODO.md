@@ -63,12 +63,11 @@ The order follows what a player notices first.
       headers, `static_assert`, no VC6 branches or inline asm, `// 0xADDR` comments instead of the
       `MATCH_FUNC` markers, no `EXPORT`/`__stdcall`, ErrorLog on `FILE*`.
 - [x] **No `-fpermissive`:** GCC 32/64-bit and Clang 64-bit build without it.
-- [ ] **Warnings on for `game/`.** `game/` builds with `-Wall -Wextra` and 0 warnings in GCC 32/64-bit
-      and Clang 64-bit. Off on purpose: unused parameters, char subscripts, format truncation,
-      unknown pragmas (`port/CMakeLists.txt` says why). Left: `-Wsign-compare` (19 of 142, from BonusTracker, CarInfo, Draw, Frontend, Generators, miss2, Ped, root_sound, SpriteGrid;
-      `-DGTA2_GAME_WARNINGS=ON` shows it). Warning options for a game target go through
-      `gta2_game_target(<target> <options>)`, which puts them ahead of its `-Wno-*` options:
-      Clang's `-Wall` turns those back on when it comes later.
+- [x] **Warnings on for `game/`.** `game/` builds with `-Wall -Wextra` (including `-Wsign-compare`) and
+      0 warnings in GCC 32/64-bit and Clang 64-bit. Off on purpose: unused parameters, char
+      subscripts, format truncation, unknown pragmas (`port/CMakeLists.txt` says why). Warning
+      options for a game target go through `gta2_game_target(<target> <options>)`, which puts them
+      ahead of its `-Wno-*` options: Clang's `-Wall` turns those back on when it comes later.
 - [ ] **More modernising:** `enum class`, `constexpr` instead of `#define` constants, C++ casts,
       range-for, `std::array`. Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of
       clang-tidy's `modernize-use-using`: it drops calling conventions and expands macros.

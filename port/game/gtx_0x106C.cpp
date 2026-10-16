@@ -468,7 +468,7 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
     s32 size;
     delta_entry* i = (delta_entry*)field_50_delta_buffer;
 
-    for (u32 offset = 0; offset < field_60_delta_len; offset += size)
+    for (u32 offset = 0; offset < static_cast<u32>(field_60_delta_len); offset += size)
     {
         for (u32 delta_idx = 0; delta_idx < i->field_2_delta_count; delta_idx++)
         {

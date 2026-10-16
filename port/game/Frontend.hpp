@@ -277,7 +277,7 @@ struct Frontend
     char_type field_C9D9_delete_key_down;
     char_type field_C9DA_unused;
     char_type field_C9DB_unused;
-    s32 field_C9DC_next_frame_time;
+    u32 field_C9DC_next_frame_time;
     char_type field_C9E0_updates_since_render;
     char_type field_C9E1_bCheatsEnabled;
     char_type field_C9E2_unused;

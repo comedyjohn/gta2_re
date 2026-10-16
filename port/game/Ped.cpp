@@ -2727,7 +2727,7 @@ bool Ped::PedTypeIs_45EDE0(s32 type)
 // 0x45ee00
 void Ped::SetOccupation_45EE00(u32 occupation)
 {
-    if (field_240_occupation <= (u32)ped_ocupation_enum::bank_robber)
+    if (static_cast<u32>(field_240_occupation) <= (u32)ped_ocupation_enum::bank_robber)
     {
         switch (field_240_occupation)
         {

@@ -378,7 +378,7 @@ void DrawText_5D8A10(const wchar_t* pText,
     Fix16 lineHeight = scale_fp * (u16)gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type);
 
     u16 curr_palette = og_palette;
-    u32 curr_palette_type = og_palette_type;
+    s32 curr_palette_type = og_palette_type;
 
     if (scale_fp == kFpOne_706A6C)
     {

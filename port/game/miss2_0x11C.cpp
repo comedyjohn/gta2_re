@@ -6259,7 +6259,7 @@ void miss2_0x11C::SCRCMD_CHECK_OBJ_MODEL_50F4D0()
     SCR_POINTER* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
 
     Object_2C* pObj = pPointer->field_8_obj;
-    u32 model_idx = pCmd->field_C_u32;
+    const s32 model_idx = static_cast<s32>(pCmd->field_C_u32);
 
     if (pObj != nullptr && pObj->field_18_model == model_idx)
     {
@@ -6710,7 +6710,7 @@ void miss2_0x11C::SCRCMD_CHECK_CURRENT_WEAPON_510090()
 
     Weapon_30* pWeapon = pPointer->field_8_char->field_15C_player->GetCurrPlayerWeapon_5648F0();
 
-    if (pWeapon != nullptr && pWeapon->field_1C_idx == pCmd->field_C_weapon_idx)
+    if (pWeapon != nullptr && static_cast<u32>(pWeapon->field_1C_idx) == pCmd->field_C_weapon_idx)
     {
         field_8_cond_result = true;
     }

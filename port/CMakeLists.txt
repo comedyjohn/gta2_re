@@ -95,12 +95,8 @@ add_library(gta2_game STATIC
 # Warnings for the game code. Off for good: unused parameters (the signatures are the original
 # game's), char subscripts (chars are signed on purpose and the indices small), format truncation
 # (snprintf cuts long messages short on purpose) and unknown pragmas (GTA2Hax's headers have VC6
-# ones). -Wsign-compare is still to be worked through (port/TODO.md); GTA2_GAME_WARNINGS=ON shows it.
-option(GTA2_GAME_WARNINGS "Also show the warnings port/game/ doesn't pass yet (-Wsign-compare)" OFF)
+# ones).
 set(game_warnings -Wall -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
-if (NOT GTA2_GAME_WARNINGS)
-    list(APPEND game_warnings -Wno-sign-compare)
-endif()
 gta2_game_target(gta2_game ${game_warnings})
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as

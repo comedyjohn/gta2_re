@@ -2307,7 +2307,7 @@ static __forceinline bool CheckCdFile()
                 FILE* hFile = crt::fopen(path, "rb");
                 if (hFile)
                 {
-                    if (File::GetFileSize_4A6B10(hFile) == gCdCheckFiles_6252E8[idx].field_80_size)
+                    if (static_cast<u32>(File::GetFileSize_4A6B10(hFile)) == gCdCheckFiles_6252E8[idx].field_80_size)
                     {
                         if (!crt::fclose(hFile))
                         {
@@ -3241,7 +3241,7 @@ void Frontend::Load_tga_4B6520(u16 idx)
         FatalError_4A38C0(Gta2Error::TargaMemoryAllocationError, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 6523);
     }
 
-    if (crt::fread(pAlloc, 1u, tgaArray_61F0C8[idx].field_80_len, hFile) != tgaArray_61F0C8[idx].field_80_len)
+    if (crt::fread(pAlloc, 1u, tgaArray_61F0C8[idx].field_80_len, hFile) != static_cast<size_t>(tgaArray_61F0C8[idx].field_80_len))
     {
         FatalError_4A38C0(Gta2Error::InvalidBackgroundImageSize, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 6529);
     }

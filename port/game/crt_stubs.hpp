@@ -31,4 +31,4 @@ void* malloc(size_t Size);
 // keyword, so this one (`??_M@YGXPAXIHP6AX0@Z@Z`, defined in crt_stubs.cpp) takes a
 // destructor thunk instead.
 using EhVecDtorFn = void (*)(void*);
-void __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);
+void EhVecDtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor);

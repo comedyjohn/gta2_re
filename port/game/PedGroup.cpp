@@ -17,9 +17,9 @@ DEFINE_GLOBAL_INIT(char_type, byte_620838, 1, 0x620838);
 DEFINE_GLOBAL_INIT(Fix16, dword_67F630, Fix16(4), 0x67F630);
 
 // The original is the compiler generated static destructor of pedGroups_67EF20: a call to the
-// CRT's vector destructor iterator `??_M` (`__ehvec_dtor`, which VC6 maps to that name). The CRT's
+// CRT's vector destructor iterator `??_M` (`EhVecDtor`, which VC6 maps to that name). The CRT's
 // version takes a destructor pointer (`P6E`), which VC6 can't declare (no 
-// keyword), and a destructor's address can't be taken, so __ehvec_dtor (crt_stubs.cpp) takes a
+// keyword), and a destructor's address can't be taken, so EhVecDtor (crt_stubs.cpp) takes a
 // pointer to a destructor thunk here.
 static void PedGroup_dtor_4CB870(void* pGroup)
 {
@@ -29,7 +29,7 @@ static void PedGroup_dtor_4CB870(void* pGroup)
 // 0x4c8e60
 void PedGroup::sub_4C8E60()
 {
-    __ehvec_dtor(pedGroups_67EF20, sizeof(PedGroup), GTA2_COUNTOF(pedGroups_67EF20), PedGroup_dtor_4CB870);
+    EhVecDtor(pedGroups_67EF20, sizeof(PedGroup), GTA2_COUNTOF(pedGroups_67EF20), PedGroup_dtor_4CB870);
 }
 
 // 0x4c8e80

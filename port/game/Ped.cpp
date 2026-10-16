@@ -7569,7 +7569,7 @@ void Ped::GotoAreaInCar_468310()
     Ped* pDriver;
     Car_BC* pCar;
     Car_BC* pCar_;
-    Car_BC* pCar__;
+    Car_BC* pChaseCar;
 
     if (this->field_225_objective_status != objective_status::passed_1)
     {
@@ -7620,21 +7620,21 @@ void Ped::GotoAreaInCar_468310()
             }
             else
             {
-                pCar__ = this->field_16C_car;
-                if (pCar__->field_60_pChaseTask->field_26_route_finished)
+                pChaseCar = this->field_16C_car;
+                if (pChaseCar->field_60_pChaseTask->field_26_route_finished)
                 {
                     this->field_225_objective_status = objective_status::passed_1;
-                    gCarChaseTaskTable_678E30->FreeEntry_474CC0(pCar__->field_60_pChaseTask);
+                    gCarChaseTaskTable_678E30->FreeEntry_474CC0(pChaseCar->field_60_pChaseTask);
                     this->field_16C_car->field_60_pChaseTask = nullptr;
                     this->field_16C_car->SetAIHalted_421540();
                 }
-                else if (!pCar__)
+                else if (!pChaseCar)
                 {
                     this->field_218_objective_timer = 9999;
                 }
                 else
                 {
-                    if (pCar__->GetVelocity_43A4C0() == kFpZero_678660)
+                    if (pChaseCar->GetVelocity_43A4C0() == kFpZero_678660)
                     {
                         ++this->field_218_objective_timer;
                     }

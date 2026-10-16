@@ -60,7 +60,7 @@ int fgetc(FILE* f)
 } // namespace crt
 
 // Destroys count objects of size bytes at ptr, last to first (like the CRT's `??_M`).
-void __ehvec_dtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor)
+void EhVecDtor(void* ptr, unsigned size, int count, EhVecDtorFn pDtor)
 {
     char* p = static_cast<char*>(ptr) + size * count;
     while (--count >= 0)

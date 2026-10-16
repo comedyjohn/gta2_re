@@ -301,8 +301,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
             if (pSprite->GetType_416B40() == sprite_types_enum::car_2)
             {
                 pCar = pSprite->field_8_car_bc_ptr;
-                pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                    (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                    (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                 if (pCar->field_6C_car_id == pPointer->field_8_car->field_6C_car_id)
                 {
                     pEntry->field_14_enable_state = 0;
@@ -392,8 +392,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 pPed = pCar->GetDriver_4118B0();
                 if (pPed)
                 {
-                    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                     if (pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
@@ -409,8 +409,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 pPed = pSprite->AsCharB4_40FEA0()->get_ped_433A20();
                 if (pPed)
                 {
-                    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                     if (pPed->GetGameObjectVelocity_433C20() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
@@ -425,8 +425,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 pPed = pSprite->AsCharB4_40FEA0()->get_ped_433A20();
                 if (pPed)
                 {
-                    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                     if (pPed->GetGameObjectVelocity_433C20() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
@@ -439,8 +439,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 pPed = pCar->GetDriver_4118B0();
                 if (pPed)
                 {
-                    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                     if (pPed->GetPedVelocity_45C920() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
@@ -456,8 +456,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 pPed = pCar->GetDriver_4118B0();
                 if (pPed)
                 {
-                    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx);
+                    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
+                        (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
                     if (pPed->GetPedVelocity_45C920() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;

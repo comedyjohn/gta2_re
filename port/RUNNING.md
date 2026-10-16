@@ -31,6 +31,10 @@ controls are set in the game's own options menu, or in the port's overlay:
 - **F5**, or **Start** on the pad, opens a list of cars: Up/Down (or the stick) to choose, LB/RB to page,
   Enter or A to spawn it next to you (on open ground, in front of you if there is room), B, Start or
   Esc to close. Not in a network game.
+- The settings have two pages, **On foot** and **In a car** (LB/RB or Left/Right to switch). The game
+  uses the one that fits where you are, and swaps when you get in or out of a car. In a car, the
+  triggers bound to Forward and Backward are analog pedals: how far you press sets how hard the
+  engine pulls. **N** or L3 unbinds a control.
 - The game binds each control to a key *or* a pad button, not both, so binding a pad button takes the
   control off its key.
 

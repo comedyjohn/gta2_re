@@ -51,6 +51,31 @@ const int kPadPreset[kActions] = {kStickUp, kStickDown, kStickLeft, kStickRight,
                                   2 /* X */, 3 /* Y */, 0 /* A */, 4 /* LB */, 5 /* RB */,
                                   1 /* B */, 10 /* LT */, 11 /* RT */};
 
+// The pad is laid out once for walking and once for driving; the game's own binding arrays hold the one
+// that fits where the player is, and swap when a car is entered or left
+enum Context
+{
+    OnFoot = 0,
+    InCar = 1,
+};
+const char* const kContextNames[2] = {"On foot", "In a car"};
+const int kNone = 255; // a pad binding no button has
+const int kCarSettingBase = 20; // the registry's control settings 20..31 are the driving layout
+const int kFollowFoot = 0x7FFFFFF; // ... until set: then it is the walking one
+
+// Driving: the triggers are the pedals (analog), the stick steers, R1 shoots (a tank's gun too)
+const int kCarPadPreset[kActions] = {11 /* RT */, 10 /* LT */, kStickLeft, kStickRight, 5 /* RB */, 3 /* Y */,
+                                     0 /* A */,  4 /* LB */,  kNone,      1 /* B */,     2 /* X */,  kNone};
+
+struct Layout
+{
+    int device[kActions];
+    int binding[kActions];
+};
+Layout gLayout[2];
+int gTab = OnFoot; // the one the settings screen shows
+int gActive = OnFoot; // the one the game has
+
 const uint32_t kPanel = 0xC0101820;
 const uint32_t kText = 0xFFFFFFFF;
 const uint32_t kDim = 0xFF98A0B0;
@@ -160,12 +185,32 @@ void LoadLegendSetting()
     }
 }
 
-// The game reads the registry into its binding arrays when it starts a game, and the options menu
-// changes both; read them again so the overlay shows what the registry says
+void ApplyActive()
+{
+    for (int i = 0; i < kActions; i++)
+    {
+        gMaybeDeviceType_67B91C[i] = gLayout[gActive].device[i];
+        gPlayerControlsBinding_67B6E8[i] = static_cast<uint32_t>(gLayout[gActive].binding[i]);
+    }
+}
+
+// Reads both layouts from the registry (the walking one is the game's own, so its options menu edits it)
+// and gives the game the one that fits. The driving one follows the walking one until it is set.
 void Refresh()
 {
-    InputDevices_1 devices;
-    devices.get_registry_controls_498C00();
+    for (int i = 0; i < kActions; i++)
+    {
+        const int foot = gRegistry_6FF968.Set_Control_Setting_587010(i, gDefaultControls_61A9E4[i]);
+        gLayout[OnFoot].device[i] = foot >> 15;
+        gLayout[OnFoot].binding[i] = foot & 0xFF;
+    }
+    for (int i = 0; i < kActions; i++)
+    {
+        const int car = gRegistry_6FF968.Set_Control_Setting_587010(kCarSettingBase + i, kFollowFoot);
+        gLayout[InCar].device[i] = car == kFollowFoot ? gLayout[OnFoot].device[i] : car >> 15;
+        gLayout[InCar].binding[i] = car == kFollowFoot ? gLayout[OnFoot].binding[i] : car & 0xFF;
+    }
+    ApplyActive();
 }
 
 void LoadWorldSetting()
@@ -182,7 +227,7 @@ void ToggleWorldDirections()
     LoadWorldSetting();
     gWorldDirections = !gWorldDirections;
     gRegistry_6FF968.Write_Control_Setting(kWorldDirectionsSetting, gWorldDirections ? 1 : 0);
-    gStatus = gWorldDirections ? "Stick: walks as it points; in cars it steers, RT gas, LT brake, RB fires"
+    gStatus = gWorldDirections ? "Stick: walks the way it points"
                                : "Stick: left and right turn the character, up walks forward";
 }
 
@@ -221,32 +266,36 @@ int StickDirection(const plat::PadState& pad)
 
 // ---------------------------------------------------------------- the controls
 
-void Store(int action, int device, int binding)
+void Store(int tab, int action, int device, int binding)
 {
-    gMaybeDeviceType_67B91C[action] = device;
-    gPlayerControlsBinding_67B6E8[action] = static_cast<uint8_t>(binding);
-    gRegistry_6FF968.Write_Control_Setting(action, (device << 15) | binding);
+    gLayout[tab].device[action] = device;
+    gLayout[tab].binding[action] = binding;
+    gRegistry_6FF968.Write_Control_Setting(tab == OnFoot ? action : kCarSettingBase + action, (device << 15) | binding);
+    if (tab == gActive)
+    {
+        ApplyActive();
+    }
 }
 
 // Gives `action` the binding. Another control that had it takes the old one, so none is left dead.
-void Assign(int action, int device, int binding)
+void Assign(int tab, int action, int device, int binding)
 {
-    const int oldDevice = gMaybeDeviceType_67B91C[action];
-    const int oldBinding = static_cast<int>(gPlayerControlsBinding_67B6E8[action]);
+    Layout& layout = gLayout[tab];
+    const int oldDevice = layout.device[action];
+    const int oldBinding = layout.binding[action];
     for (int other = 0; other < kActions; other++)
     {
-        if (other != action && gMaybeDeviceType_67B91C[other] == device &&
-            static_cast<int>(gPlayerControlsBinding_67B6E8[other]) == binding)
+        if (other != action && binding != kNone && layout.device[other] == device && layout.binding[other] == binding)
         {
-            Store(other, oldDevice, oldBinding);
+            Store(tab, other, oldDevice, oldBinding);
         }
     }
-    Store(action, device, binding);
+    Store(tab, action, device, binding);
 }
 
-void ResetKeyboard(int action)
+void ResetKeyboard(int tab, int action)
 {
-    Assign(action, 0, gDefaultControls_61A9E4[action]);
+    Assign(tab, action, 0, gDefaultControls_61A9E4[action]);
 }
 
 void ApplyPadPreset()
@@ -254,18 +303,26 @@ void ApplyPadPreset()
     // Every control moves at once, so there are no swaps to make
     for (int i = 0; i < kActions; i++)
     {
-        Store(i, 1, kPadPreset[i]);
+        Store(OnFoot, i, 1, kPadPreset[i]);
+        Store(InCar, i, 1, kCarPadPreset[i]);
     }
-    gStatus = "Pad preset applied";
+    gStatus = "Pad layouts applied, for walking and for driving";
 }
 
 void ApplyKeyboardDefaults()
 {
     for (int i = 0; i < kActions; i++)
     {
-        Store(i, 0, gDefaultControls_61A9E4[i]);
+        Store(OnFoot, i, 0, gDefaultControls_61A9E4[i]);
+        Store(InCar, i, 0, gDefaultControls_61A9E4[i]);
     }
     gStatus = "Keyboard defaults restored";
+}
+
+void SwitchTab(int delta)
+{
+    gTab = (gTab + delta + 2) % 2;
+    gStatus.clear();
 }
 
 void Move(int delta)
@@ -345,6 +402,7 @@ void ToggleSettings()
         return;
     }
     Refresh();
+    gTab = gActive;
     gSpawnOpen = false;
     gSettingsOpen = true;
     gListening = false;
@@ -394,16 +452,15 @@ std::string Pad(const std::string& s, size_t width)
     return s.size() >= width ? s : s + std::string(width - s.size(), ' ');
 }
 
-void DrawRow(int x, int y, int action, bool selected, int panelW)
+void DrawRow(int x, int y, int tab, int action, bool selected, int panelW)
 {
     if (selected)
     {
         Fill(x - 4, y, panelW - 8, kCharH, kSelect);
     }
-    const bool pad = gMaybeDeviceType_67B91C[action] == 1;
+    const bool pad = gLayout[tab].device[action] == 1;
     Text(x, y, kText, Pad(kActionNames[action], 19));
-    Text(x + 19 * kCharW, y, pad ? kAccent : kDim,
-         BindingLabel(gMaybeDeviceType_67B91C[action], static_cast<int>(gPlayerControlsBinding_67B6E8[action])));
+    Text(x + 19 * kCharW, y, pad ? kAccent : kDim, BindingLabel(gLayout[tab].device[action], gLayout[tab].binding[action]));
 }
 
 void DrawLegend()
@@ -413,10 +470,10 @@ void DrawLegend()
     const int x = kWidth - w - 8;
     const int y = 8;
     Fill(x, y, w, h, kPanel);
-    Text(x + 8, y + 4, kText, "Controls");
+    Text(x + 8, y + 4, kText, std::string("Controls: ") + kContextNames[gActive]);
     for (int i = 0; i < kActions; i++)
     {
-        DrawRow(x + 8, y + 4 + (i + 1) * kCharH, i, false, w);
+        DrawRow(x + 8, y + 4 + (i + 1) * kCharH, gActive, i, false, w);
     }
     Text(x + 8, y + 4 + (kActions + 1) * kCharH, kDim, "F1 hide  F2 settings  Start cars");
 }
@@ -435,19 +492,20 @@ void DrawSettings()
     const int index = FirstPad(pad);
     Text(x + 8, line, kDim, index >= 0 ? std::string("Pad: ") + plat::PadName(index) : "No controller connected");
     line += kCharH * 2;
+    Text(x + 8, line - kCharH, kText, std::string("<  ") + kContextNames[gTab] + "  >   (LB/RB or Left/Right)");
     for (int i = 0; i < kActions; i++)
     {
-        DrawRow(x + 8, line, i, i == gRow, w - 8);
+        DrawRow(x + 8, line, gTab, i, i == gRow, w - 8);
         line += kCharH;
     }
     line += kCharH;
     Text(x + 8, line, kAccent, gStatus);
     line += kCharH * 2;
-    Text(x + 8, line, kDim, "Up/Down select   Enter or A rebind   Del or X reset this one");
+    Text(x + 8, line, kDim, "Up/Down select  Enter or A rebind  Del or X reset  N or L3 unbind");
     line += kCharH;
-    Text(x + 8, line, kDim, "P or Y pad preset   K keyboard defaults   Esc, B or F2 close");
+    Text(x + 8, line, kDim, "P or Y pad layouts   K keyboard defaults   Esc, B or F2 close");
     line += kCharH;
-    Text(x + 8, line, kDim, std::string("M or R3 stick walks as it points, cars: RT/LT: ") + (gWorldDirections ? "on" : "off"));
+    Text(x + 8, line, kDim, std::string("M or R3 stick walks the way it points: ") + (gWorldDirections ? "on" : "off"));
     line += kCharH;
     Text(x + 8, line, kDim, "Pad buttons by position: A bottom, B right, X left, Y top");
 }
@@ -534,7 +592,7 @@ void UpdatePad()
             if (CapturePadBinding(prev, pad, binding))
             {
                 const int action = gRow;
-                Assign(action, 1, binding);
+                Assign(gTab, action, 1, binding);
                 gStatus = std::string(kActionNames[action]) + ": " + BindingLabel(1, binding);
                 gListening = false;
             }
@@ -561,7 +619,7 @@ void UpdatePad()
             }
             else if (pressed(2))
             {
-                ResetKeyboard(gRow);
+                ResetKeyboard(gTab, gRow);
                 gStatus = std::string(kActionNames[gRow]) + ": back to its key";
             }
             else if (pressed(3))
@@ -571,6 +629,19 @@ void UpdatePad()
             else if (pressed(9))
             {
                 ToggleWorldDirections();
+            }
+            else if (pressed(8))
+            {
+                Assign(gTab, gRow, 1, kNone);
+                gStatus = std::string(kActionNames[gRow]) + ": unbound";
+            }
+            else if (pressed(4))
+            {
+                SwitchTab(-1);
+            }
+            else if (pressed(5))
+            {
+                SwitchTab(1);
             }
         }
     }
@@ -655,6 +726,10 @@ std::string BindingLabel(int device, int binding)
     if (device == 0)
     {
         return KeyName(binding);
+    }
+    if (binding == kNone)
+    {
+        return "None";
     }
     switch (binding)
     {
@@ -780,7 +855,7 @@ bool OnKey(uint8_t dik, bool down)
         }
         else
         {
-            Assign(gRow, 0, dik);
+            Assign(gTab, gRow, 0, dik);
             gStatus = std::string(kActionNames[gRow]) + ": " + KeyName(dik);
             gListening = false;
         }
@@ -800,8 +875,18 @@ bool OnKey(uint8_t dik, bool down)
             break;
         case DIK_DELETE:
         case DIK_BACK:
-            ResetKeyboard(gRow);
+            ResetKeyboard(gTab, gRow);
             gStatus = std::string(kActionNames[gRow]) + ": back to " + KeyName(gDefaultControls_61A9E4[gRow]);
+            break;
+        case DIK_N:
+            Assign(gTab, gRow, 1, kNone);
+            gStatus = std::string(kActionNames[gRow]) + ": unbound";
+            break;
+        case DIK_LEFT:
+            SwitchTab(-1);
+            break;
+        case DIK_RIGHT:
+            SwitchTab(1);
             break;
         case DIK_P:
             ApplyPadPreset();
@@ -895,6 +980,28 @@ uint32_t SteerWithStick(uint32_t bits)
         // A menu is open: the character stands still, whatever was held when it opened
         return bits & ~0xFFFu;
     }
+    {
+        // The layout that fits where the player is: walking or driving
+        plat::PadState now;
+        if (FirstPad(now) >= 0)
+        {
+            static bool loaded = false;
+            if (!loaded)
+            {
+                loaded = true;
+                Refresh();
+            }
+            Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+            Ped* ped = player ? player->field_2C4_player_ped : nullptr;
+            const int context = (ped && ped->get_car_416B60()) ? InCar : OnFoot;
+            if (context != gActive)
+            {
+                gActive = context;
+                ApplyActive();
+                return bits & ~0xFFFu; // what was held means something else now
+            }
+        }
+    }
     static bool injected = false;
     static uint32_t injectedClear = 0; // the bits the last injection took over
     static bool scaled = false; // the character's run speed is scaled to the stick
@@ -959,36 +1066,33 @@ uint32_t SteerWithStick(uint32_t bits)
             }
             active = true;
         }
-        else if (gWorldDirections && ped && ped->get_car_416B60())
+        else if (ped && ped->get_car_416B60())
         {
-            // In a car the stick only steers (the game's steering is left or right, nothing between),
-            // and the triggers drive: right is the gas, left the brake and reverse. They are Special 2
-            // and 3 on foot, so those two are held back while driving.
-            const bool gas = pad.triggerRight > kTriggerDead;
-            const bool brake = pad.triggerLeft > kTriggerDead;
-            // R1 shoots from a car (Fire; next weapon is held back if it is on R1 too)
-            const bool fire = pad.buttons[5] != 0;
-            if (fire)
+            // The triggers are analog pedals when they are bound to Forward or Backward: how far one is
+            // pressed sets how hard the engine pulls (CarPhysics_B0::ComputeEngineTorque_561970). The
+            // game's own binding only sees them past half way.
+            clearBits = 0;
+            int travelled = 0;
+            for (int control = 0; control < 2; control++)
             {
-                mine |= 0x10;
-                if (gMaybeDeviceType_67B91C[8] == 1 && gPlayerControlsBinding_67B6E8[8] == 5)
+                const int slot = gLayout[InCar].binding[control];
+                if (gLayout[InCar].device[control] == 1 && (slot == 10 || slot == 11))
                 {
-                    clearBits |= 0x100;
+                    const int travel = slot == 11 ? pad.triggerRight : pad.triggerLeft;
+                    clearBits |= 1u << control;
+                    if (travel > kTriggerDead)
+                    {
+                        mine |= 1u << control;
+                        travelled = travel > travelled ? travel : travelled;
+                    }
+                    active = true;
                 }
             }
-            if (size > 0.25 || gas || brake || fire)
+            if (travelled)
             {
-                // The trigger's travel sets how hard the engine pulls (CarPhysics_B0::ComputeEngineTorque_561970)
-                const int pressed = gas ? pad.triggerRight : pad.triggerLeft;
-                double fraction = static_cast<double>(pressed - kTriggerDead) / (32767 - kTriggerDead);
+                double fraction = static_cast<double>(travelled - kTriggerDead) / (32767 - kTriggerDead);
                 fraction = fraction > 1.0 ? 1.0 : (fraction < 0.1 ? 0.1 : fraction);
                 gGasScale = bStartNetworkGame_7081F0 ? kFull : static_cast<int>(fraction * kFull);
-                mine |= gas ? 1 : 0;
-                mine |= brake ? 2 : 0;
-                mine |= x < -0.25 ? 4 : 0;
-                mine |= x > 0.25 ? 8 : 0;
-                clearBits |= 0xC00;
-                active = true;
             }
         }
     }
@@ -1066,7 +1170,7 @@ const uint32_t* Frame()
         return nullptr;
     }
     static int frames = 0;
-    if (!Modal() && frames++ % 30 == 0)
+    if (!Modal() && havePad && frames++ % 30 == 0)
     {
         Refresh();
     }

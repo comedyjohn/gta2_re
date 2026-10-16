@@ -25,6 +25,7 @@ TEST_CASE("overlay names keys and bindings")
     CHECK(overlay::BindingLabel(1, 224) == "D-pad Left");
     CHECK(overlay::BindingLabel(1, 227) == "D-pad Down");
     CHECK(overlay::BindingLabel(1, 20) == "Button 21");
+    CHECK(overlay::BindingLabel(1, 255) == "None");
     CHECK(std::string(overlay::ActionName(4)) == "Fire");
 }
 

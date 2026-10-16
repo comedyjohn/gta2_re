@@ -779,7 +779,7 @@ void InitializeGame_4DA4D0()
         ClearDebugFlags_4DB170();
 
         gGame_0x40_67E008 = new Game_0x40(gNetPlay_7071E8.GetMaxPlayers_521350(), gNetPlay_7071E8.GetPlayerIdx_409C40());
-        gNetPlay_7071E8.SetExitGameCallBack_521330((sptr)ExitGameCallback_4DB0D0, gGame_0x40_67E008);
+        gNetPlay_7071E8.SetExitGameCallBack_521330(reinterpret_cast<sptr>(ExitGameCallback_4DB0D0), gGame_0x40_67E008);
 
         memset(&gCurrentNetInputs_6F57D8, 0, sizeof(gCurrentNetInputs_6F57D8));
         memset(&gPrevNetInputs_6F5B28, 0, sizeof(gPrevNetInputs_6F5B28));
@@ -1610,7 +1610,7 @@ void Start_GTA2Manager_5E4DE0()
         HWND hwndGta2Manager = FindWindowExA(nullptr, nullptr, nullptr, "GTA2 Manager");
         if (hwndGta2Manager)
         {
-            PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, (LPARAM)hwndGta2Manager);
+            PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, reinterpret_cast<LPARAM>(hwndGta2Manager));
             if (!SetForegroundWindow(hwndGta2Manager))
             {
                 FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 125);
@@ -1620,7 +1620,7 @@ void Start_GTA2Manager_5E4DE0()
     else
     {
         PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, 0); // the original passed an uninitialised lParam
-        if ((uintptr_t)ShellExecuteA(nullptr, nullptr, "GTA2 Manager.EXE", nullptr, gWorkingDir_707F64, 1) <= 0x20)
+        if (reinterpret_cast<uintptr_t>(ShellExecuteA(nullptr, nullptr, "GTA2 Manager.EXE", nullptr, gWorkingDir_707F64, 1)) <= 0x20)
         {
             FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 136);
         }
@@ -1943,8 +1943,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     WndClass.cbClsExtra = 0;
     WndClass.cbWndExtra = 0;
     WndClass.hInstance = hInstance;
-    WndClass.hIcon = LoadIconA(hInstance, (LPCSTR)0x65);
-    WndClass.hCursor = LoadCursorA(nullptr, (LPCSTR)0x7F00);
+    WndClass.hIcon = LoadIconA(hInstance, reinterpret_cast<LPCSTR>(0x65));
+    WndClass.hCursor = LoadCursorA(nullptr, reinterpret_cast<LPCSTR>(0x7F00));
     WndClass.hbrBackground = nullptr;
     WndClass.lpszMenuName = "WinMain";
     WndClass.lpszClassName = "WinMain";

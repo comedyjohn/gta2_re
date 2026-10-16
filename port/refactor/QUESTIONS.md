@@ -6,4 +6,4 @@ What I saw (the replay hashes are unaffected today, the reads are of heap/static
 3. `SetTexture` (`platform/renderer.cpp:484`): `pPixelData` from `load_tiles_5AADF0` (`gtx_0x106C.cpp:669`, `Aligned_malloc`) has bytes never written. Drawing only, no effect on the hash.
 Options: A) `Fix:` commits that give the fields the value the original's allocator gave (zero) and rewrite the logs; B) record all three in `known-ub.md` as the original's.
 My recommendation: A for 3 (zeroing the buffer, the original zeroed heap pages) and A for 1 and 2 if the user agrees that zero is right. I can't tell whether "zero" is what the original had (§0 rule 2), so I have not changed anything.
-Status: open
+Status: answered: fix them (A). Done in the three Fix: commits; valgrind is clean on linux64.

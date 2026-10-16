@@ -6,7 +6,7 @@
 - R0.2 (2026-10-16): `requirements.txt`; a fresh venv from it passes the three checks of EXECUTOR.md §1.2.
   replays PASS on linux32, linux64, clang64.
 
-- R0.3 (2026-10-16): `valgrind.sh` written and run on linux64; 3 findings, see Q1 (open). Not done until answered.
+- R0.3 (2026-10-16): `valgrind.sh`; 3 findings fixed (Q1, A); all 4 replays CLEAN under valgrind on linux64.
 
 ## Notes
 

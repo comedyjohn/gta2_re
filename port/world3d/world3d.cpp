@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "camera_check.h"
 #include "game_view.h"
+#include "gl/world_pass.h"
 #include "scene.h"
 #include "settings.h"
 
@@ -28,6 +29,18 @@ struct DrawContext
 DrawContext gContext;
 Scene gScene;
 bool gMapDirty = true; // the game's map changed since the scene was last built
+bool gWorldTried = false; // this frame's world pass was attempted
+bool gWorldDrawn = false; // ... and drew
+
+// Brings the scene up to date with the game's map, and the GL copy of it
+void SyncScene()
+{
+    if (UpdateScene(gScene, gMapDirty))
+    {
+        WorldPassUpload(gScene);
+    }
+    gMapDirty = false;
+}
 
 enum SettingRow
 {
@@ -68,20 +81,37 @@ void port_world3d_map_changed()
 
 bool port_world3d_draw(PortWorld3dDraw kind, int, STexture*, Vert* verts, int)
 {
-    if (ActiveRenderer() == Renderer::World3d && kind == kPortWorld3dTile)
+    if (ActiveRenderer() != Renderer::World3d || kind != kPortWorld3dTile || gContext.hud || gContext.sprite ||
+        gContext.worldText)
     {
-        CheckCamera(verts, BlockSlopeType(gContext.blockX, gContext.blockY, static_cast<int>(gContext.blockZ)));
+        return false;
     }
-    return false; // phase 3 so far: the classic renderer draws everything
+    CheckCamera(verts, BlockSlopeType(gContext.blockX, gContext.blockY, static_cast<int>(gContext.blockZ)));
+    if (!gWorldTried)
+    {
+        // The first map tile of the frame: the lights are in and the whole world can be drawn
+        gWorldTried = true;
+        SyncScene();
+        gWorldDrawn = WorldPassDraw(gScene);
+    }
+    if (!gWorldDrawn)
+    {
+        return false;
+    }
+    // Blocks the mesh draws are skipped by the classic renderer; the others (triangular sides, partial
+    // blocks: slope types 49..61) it keeps drawing, over the world
+    const int slope = BlockSlopeType(gContext.blockX, gContext.blockY, static_cast<int>(gContext.blockZ));
+    return slope >= 0 && !(slope >= 49 && slope <= 61);
 }
 
 void port_world3d_present()
 {
     if (ActiveRenderer() == Renderer::World3d)
     {
-        UpdateScene(gScene, gMapDirty);
-        gMapDirty = false;
+        SyncScene();
     }
+    gWorldTried = false;
+    gWorldDrawn = false;
     gContext = DrawContext();
 }
 

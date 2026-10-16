@@ -6,6 +6,8 @@
 #include "MapRenderer.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
+#include "renderer.h"
+#include "winmain.hpp"
 #include "TextureCache_15D8.hpp"
 
 namespace world3d
@@ -57,6 +59,42 @@ int BlockSlopeType(int x, int y, int level)
     }
     const gmp_block_info* block = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(x, y, level);
     return block ? block->field_B_slope_type >> 2 : -1;
+}
+
+Shades ReadShades()
+{
+    Shades s;
+    const MapRenderer* m = gpMapRenderer_6F66E4;
+    s.lit = (gLightingDrawFlag_7068F4 & 0x8000) != 0;
+    if (!m)
+    {
+        return s;
+    }
+    s.level[0] = 255;
+    s.level[1] = m->field_C_colour_t1;
+    s.level[2] = m->field_E_colour_t2;
+    s.level[3] = m->field_F_colour_t3;
+    s.level[4] = m->field_D_right_colour;
+    s.level[5] = m->field_10_diag_up_left_colour;
+    s.level[6] = m->field_11_diag_up_right_colour;
+    s.level[7] = m->field_12_diag_down_left_colour;
+    s.level[8] = m->field_13_diag_down_right_colour;
+    s.level[9] = m->field_14_dcolour;
+    return s;
+}
+
+unsigned TileTexture(int tile)
+{
+    if (!gGtx_0x106C_703DD4 || !gTextureCache_15D8_705064)
+    {
+        return 0;
+    }
+    u16 idx = gGtx_0x106C_703DD4->GetTile_5AA870(static_cast<u16>(tile));
+    if (!idx)
+    {
+        return 0;
+    }
+    return port_renderer_texture_id(gTextureCache_15D8_705064->GetTexture_46BB50(idx));
 }
 
 std::string StylePath()

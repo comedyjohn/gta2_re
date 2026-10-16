@@ -287,6 +287,24 @@ class GLRenderer
         Draw(quad, 4, mOverlayTexture);
     }
 
+    // port: world3d: the classic renderer's program, buffers and vertex arrays after another pass drew
+    void RestoreState()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        glUseProgram(mProgram);
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(GLVertex), &mVerts[0].x);
+        glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLVertex), &mVerts[0].diff);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GLVertex), &mVerts[0].u);
+        glActiveTexture(GL_TEXTURE0);
+        glDisable(GL_DEPTH_TEST);
+        glDepthMask(GL_TRUE);
+        glDisable(GL_CULL_FACE);
+    }
+
     // Reads back the game's 640x480 picture (for the headless self-test)
     void ReadPixels(std::vector<DWORD>& out, int& w, int& h)
     {
@@ -484,16 +502,7 @@ struct SPalData
     DWORD mbLoaded;
 };
 
-struct SLightInternal
-{
-    DWORD flags;
-    float brightness;
-    float radius;
-    float radiusSquared;
-    float radiusNormalized;
-    float x, y, z;
-    float r, g, b;
-};
+using SLightInternal = PortLight; // port: world3d
 
 float gWindowLeft;
 float gWindowRight;
@@ -644,6 +653,24 @@ STexture* InternalRegisterTexture(s32 width, s32 height, BYTE* pData, s32* palId
     return pTexture;
 }
 } // namespace
+
+// ---------------------------------------------------------------- for the 3D renderer
+int port_renderer_lights(const PortLight** out, float* ambient) // port: world3d
+{
+    *out = gLights;
+    *ambient = gAmbient;
+    return static_cast<int>(gNumLights);
+}
+
+unsigned port_renderer_texture_id(const STexture* texture) // port: world3d
+{
+    return texture ? TextureId(texture) : 0;
+}
+
+void port_renderer_restore_state() // port: world3d
+{
+    gRenderer.RestoreState();
+}
 
 // ================================================================ dmavideo.dll
 SVideo* CC Vid_Init_SYS(HINSTANCE, u16)

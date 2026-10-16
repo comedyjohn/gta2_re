@@ -15,7 +15,7 @@
 #include <ctime>
 #include "GameSession_578.hpp"
 
-#define ATTRACT_COUNT 3
+constexpr s32 ATTRACT_COUNT = 3;
 
 // TODO: From frontend.cpp
 extern DIDATAFORMAT gInputDeviceFormat_601A6C;

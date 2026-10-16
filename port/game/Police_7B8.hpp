@@ -22,10 +22,10 @@ EXTERN_GLOBAL(s32, gCrewKind_6FEDB8);
 EXTERN_GLOBAL(Police_7B8*, gPolice_7B8_6FEE40);
 
 // Number of criminals the police can pursue at once (not the player count: MAX_PLAYERS is 6)
-#define MAX_PURSUIT_TARGETS 4
+inline constexpr s32 MAX_PURSUIT_TARGETS = 4;
 
 // Size of the pool of police crews
-#define MAX_POLICE_CREWS 20
+inline constexpr s32 MAX_POLICE_CREWS = 20;
 
 class Police_7B8
 {

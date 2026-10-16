@@ -28,6 +28,9 @@ DEFINE_GLOBAL_INIT(Ang16, kAngZero_6FD5D4, Ang16(0), 0x6FD5D4);
 EXTERN_GLOBAL(Ang16, kAng180_6FD3EE);
 
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD448, Fix16(0x100, 0), 0x6FD448);
+// Particle_4C.cpp uses these two. They are defined here, after what they are computed from, so their
+// initialisers don't depend on the order the files' initialisers run in
+DEFINE_GLOBAL_INIT(Fix16, dword_6FD554, dword_6FD448, 0x6FD554);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD328, dword_6FD448, 0x6FD328);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD330, dword_6FD328 * 2, 0x6FD330);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD450, dword_6FD328 / 100, 0x6FD450);
@@ -54,6 +57,7 @@ DEFINE_GLOBAL(u8, unk_6FD5F6, 0x6FD5F6);
 
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD548, Fix16(0x20, 0), 0x6FD548);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Eight_6FD4C0, Fix16(8), 0x6FD4C0);
+DEFINE_GLOBAL_INIT(Fix16, dword_6FD28C, kFP16Eight_6FD4C0 - dword_6FD554, 0x6FD28C);
 DEFINE_GLOBAL_INIT(Ang16, dword_6FD350, Ang16(96), 0x6FD350);
 DEFINE_GLOBAL_INIT(Ang16, kAng135_6FD40C, Ang16(540), 0x6FD40C);
 DEFINE_GLOBAL_INIT(Ang16, kAng315_6FD418, Ang16(1260), 0x6FD418);

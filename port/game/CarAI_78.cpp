@@ -3022,8 +3022,6 @@ static inline Fix16 MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, F
 // 0x44e560
 void CarAI_78::UpdateStateMachine_44E560()
 {
-    NOT_IMPLEMENTED;
-
     Ang16 target_angle = kAng0_677CE8;
     Ang16 heading_copy = kAng0_677CE8;
     Ang16 aim_angle = kAng0_677CE8;

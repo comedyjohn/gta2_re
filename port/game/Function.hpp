@@ -14,18 +14,6 @@
 // but not confuse the compiler with extra parameters.
 #define COMMA ,
 
-// Report unfinished code the first time the game reaches it
-#define NOT_IMPLEMENTED                                          \
-    do                                                           \
-    {                                                            \
-        static bool logged___ = false;                           \
-        if (!logged___)                                          \
-        {                                                        \
-            logged___ = true;                                    \
-            printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
-        }                                                        \
-    } while (0)
-
 #define DEFINE_GLOBAL(type, name, addr) type name
 #define DEFINE_GLOBAL_INIT(type, name, value, addr) type name = value
 

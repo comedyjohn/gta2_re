@@ -2161,7 +2161,6 @@ void Frontend::SetWinMainStateToBootMap_4AE990()
 // 0x4B2F60
 void Frontend::HandlePlayerNameTyping_4B2F60()
 {
-    //NOT_IMPLEMENTED;
     s16 scan_code;
     s16 input;
     u8* pKeys;

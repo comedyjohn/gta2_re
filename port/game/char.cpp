@@ -6958,11 +6958,6 @@ void ResetCharStatics_553F90()
 
 void Char_B4::nullsub_28()
 {
-    NOT_IMPLEMENTED;
 }
 
 // 0x5519f0
-//void j_Char_B4::state_1_5504F0()
-//{
-//    NOT_IMPLEMENTED;
-//}

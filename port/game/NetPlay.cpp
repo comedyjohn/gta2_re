@@ -759,8 +759,6 @@ BOOL NetPlay::EnumSessions_cb_51EAE0(LPCDPSESSIONDESC2 lpThisSD, LPDWORD, DWORD 
 // 0x51eb00
 s32 NetPlay::AddEnumeratedSession_51EB00(DPSESSIONDESC2* pSession)
 {
-    //NOT_IMPLEMENTED;
-
     if (field_C4_sessions.field_5C4_session_count < 16)
     {
         memset(&field_C4_sessions.field_C4_sessions[field_C4_sessions.field_5C4_session_count], 0, sizeof(DPSESSIONDESC2));

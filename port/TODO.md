@@ -33,10 +33,18 @@ Read this first when picking the port up again. `README.md` explains how the por
 11. The 64-bit build starts a game: the light grid was allocated for 4-byte pointers and corrupted
     the heap. Found with AddressSanitizer.
 
-12. The controller overlay (`platform/overlay.cpp`): F1 legend of the bindings, F2 / Guide settings screen
-    that rebinds the twelve controls to pad buttons or keys (and a pad preset). Checked headless under
-    Xvfb with a pad connected; not yet played with an 8BitDo pad. The names of controls 9..11 come from
-    `Player::CharacterControls_566520`'s comments; check them against the game's options menu.
+12. The controller overlay (`platform/overlay.cpp`, `overlay.h`, `include/port_overlay.h`; tests in
+    `tests/test_overlay.cpp`). Checked headless under Xvfb with a pad connected, not yet played much:
+    - F1 legend of the bindings; F2 / Guide / Back+Start settings with an On foot and an In a car page
+      (LB/RB), rebinding, N/L3 unbind, P/Y pad layouts, K keyboard defaults, M/R3 world-direction walking.
+    - Start / F5: car spawn menu (`SpawnRequested`, spawns on open ground next to the player).
+    - Walking: the stick sets the heading (the character turns to it), speed follows the push
+      (`SteerWithStick`, called from `InputRecorder_67F8B0::get_input_bits_4CEAC0`'s live branch).
+    - Driving: triggers bound to Forward/Backward are analog pedals (`port_gas_scale` in
+      `CarPhysics_B0::ComputeEngineTorque_561970`), RB fires, right stick turns turrets.
+    - The stick counts as four buttons at 40% of travel (`Trigger` in `platform/dinput.cpp`).
+    - Menus stand the character still and hold the game off the pad until its buttons are let go.
+    - `GTA2_STEERLOG=file` logs the walking steering.
 
 ## Left to do
 
@@ -57,6 +65,13 @@ The order follows what a player notices first.
       graphical lobby (the original dialog's controls drawn with Dear ImGui) and NAT hole punching.
 
 ### Polish
+- [ ] **Controller overlay follow-ups** (see item 12): play-test on the 8BitDo Pro 2 (walking directions,
+      analog speed, driving, turret); F1/F2 shadow the game's radio keys (move the overlay to F7/F8, or
+      put the radio on the pad); the turret turn sound (`field_B8_turret_rotated` is reset by
+      `HandleUserInput`) and an analog turret speed; spawned cars' facing and the other models; names of
+      controls 9..11 against the game's options menu; a tank page of its own; pausing the world while a
+      menu is open; run `tools/replaytest.sh` and the 32-bit build (the input hook and the torque scale
+      changed game code); the stick labels say "D-pad" for the stick too.
 - [ ] **Radio hitch.** Streams are decoded whole when opened (`SDL_LoadWAV`). Decode in chunks to
       remove the hitch when the radio station changes.
 - [ ] **ImGui debug overlay** (`ImGuiDebug.cpp`). It needs ImGui's OpenGL backend; until then

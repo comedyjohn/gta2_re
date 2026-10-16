@@ -101,7 +101,7 @@ void ToggleWorldDirections()
     LoadWorldSetting();
     gWorldDirections = !gWorldDirections;
     gRegistry_6FF968.Write_Control_Setting(kWorldDirectionsSetting, gWorldDirections ? 1 : 0);
-    gStatus = gWorldDirections ? "Stick: the character walks the way the stick points"
+    gStatus = gWorldDirections ? "Stick: walks the way it points; in cars it steers, RT gas, LT brake"
                                : "Stick: left and right turn the character, up walks forward";
 }
 
@@ -316,7 +316,7 @@ void DrawSettings()
     line += kCharH;
     Text(x + 8, line, kDim, "P or Y pad preset   K keyboard defaults   Esc, B or F2 close");
     line += kCharH;
-    Text(x + 8, line, kDim, std::string("M or R3 stick moves the way it points: ") + (gWorldDirections ? "on" : "off"));
+    Text(x + 8, line, kDim, std::string("M or R3 stick walks as it points, cars: RT/LT: ") + (gWorldDirections ? "on" : "off"));
     line += kCharH;
     Text(x + 8, line, kDim, "Pad buttons by position: A bottom, B right, X left, Y top");
 }
@@ -616,12 +616,14 @@ static int gLastWanted = 0;
 uint32_t SteerWithStick(uint32_t bits)
 {
     static bool injected = false;
+    static uint32_t injectedClear = 0; // the bits the last injection took over
     static bool scaled = false; // the character's run speed is scaled to the stick
     static Fix16 baseSpeed;
     const uint32_t kMoveBits = 0xF; // Forward, Backward, Left, Right
     plat::PadState pad;
     bool active = false;
     uint32_t mine = 0;
+    uint32_t clearBits = kMoveBits;
     if (FirstPad(pad) >= 0 && !gSettingsOpen)
     {
         LoadWorldSetting();
@@ -676,6 +678,23 @@ uint32_t SteerWithStick(uint32_t bits)
             }
             active = true;
         }
+        else if (gWorldDirections && ped && ped->get_car_416B60())
+        {
+            // In a car the stick only steers (the game's steering is left or right, nothing between),
+            // and the triggers drive: right is the gas, left the brake and reverse. They are Special 2
+            // and 3 on foot, so those two are held back while driving.
+            const bool gas = pad.buttons[11] != 0;
+            const bool brake = pad.buttons[10] != 0;
+            if (size > 0.25 || gas || brake)
+            {
+                mine |= gas ? 1 : 0;
+                mine |= brake ? 2 : 0;
+                mine |= x < -0.25 ? 4 : 0;
+                mine |= x > 0.25 ? 8 : 0;
+                clearBits |= 0xC00;
+                active = true;
+            }
+        }
     }
     // GTA2_STEERLOG=file: one line per frame the stick steers, for working out why it walks wrong
     static FILE* log = getenv("GTA2_STEERLOG") ? fopen(getenv("GTA2_STEERLOG"), "w") : nullptr;
@@ -701,12 +720,13 @@ uint32_t SteerWithStick(uint32_t bits)
     if (active)
     {
         injected = true;
-        return (bits & ~kMoveBits) | mine;
+        injectedClear = clearBits;
+        return (bits & ~clearBits) | mine;
     }
     if (injected)
     {
         injected = false;
-        return bits & ~kMoveBits;
+        return bits & ~injectedClear;
     }
     return bits;
 }

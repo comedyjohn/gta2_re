@@ -259,6 +259,10 @@ jobs:
     - name: Build
       run: port/build.sh ${{ matrix.bits }}
 
+    # port/tests/: no game data needed
+    - name: Unit tests
+      run: ctest --test-dir build_port/linux${{ matrix.bits }} --output-on-failure
+
     # Draws through the renderer's entry points on a virtual display (Mesa) and checks the pixels
     - name: Renderer self-test
       run: xvfb-run -a -s "-screen 0 1600x1200x24" build_port/linux${{ matrix.bits }}/gta2 --selftest
@@ -285,6 +289,41 @@ jobs:
         name: linux_native_${{ matrix.bits }}bit
         path: gta2-native-linux${{ matrix.bits }}.tar.gz
         retention-days: 7
+
+  # The unit tests under AddressSanitizer (GCC) and UndefinedBehaviorSanitizer (Clang), and the
+  # check that no global is initialised from another file's (port/tools/refactor/init_order.py)
+  linux-native-sanitizers:
+    runs-on: ubuntu-24.04
+    name: Linux_Native_Sanitizers
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Fetch submodules
+      run: |
+        git submodule update --init 3rdParty/GTA2Hax
+        git -C 3rdParty/GTA2Hax submodule update --init 3rdParty/imgui
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build g++ clang-18 libsdl2-dev libgl1 libgl1-mesa-dri
+
+    - name: Static initialisation order
+      run: python3 port/tools/refactor/init_order.py
+
+    - name: Build (ASan, UBSan)
+      run: |
+        cd port
+        cmake --preset asan64 && cmake --build --preset asan64
+        cmake --preset ubsan64 && cmake --build --preset ubsan64
+
+    - name: Unit tests under AddressSanitizer
+      run: ASAN_OPTIONS=detect_leaks=0 ctest --test-dir build_port/asan64 --output-on-failure
+
+    - name: Unit tests under UndefinedBehaviorSanitizer
+      run: UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 ctest --test-dir build_port/ubsan64 --output-on-failure
 
   # A network game between the 32-bit and the 64-bit build: the same simulation (gta2 --simcheck)
   # and the network tests with the players mixed across the two

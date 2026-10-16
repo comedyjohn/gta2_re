@@ -11,7 +11,7 @@ struct AttractFile
 };
 
 // InputRecorder_67F8B0::field_38_replay_state
-enum ReplayState
+enum class ReplayState : s32
 {
     Live_0 = 0,     // reads the real input devices and records them (test\replay.rep)
     Playback_1 = 1, // plays back test\replay.rep, goes back to Live_0 when it ends
@@ -101,7 +101,7 @@ class InputRecorder_67F8B0
     // 9.6f 0x44AA60
     bool inlined_check()
     {
-        if (field_38_replay_state == Playback_1 || field_38_replay_state == Attract_3)
+        if (field_38_replay_state == ReplayState::Playback_1 || field_38_replay_state == ReplayState::Attract_3)
         {
             return true;
         }
@@ -123,7 +123,7 @@ class InputRecorder_67F8B0
     char_type field_0_bShutDown;
     s32 field_4_input_bits;
     s32 field_8_input_masks[12];
-    s32 field_38_replay_state;
+    ReplayState field_38_replay_state;
     InputRecord_C field_3C_rec_buff[k_max_records];
     u32 field_7533C_used_recs_count;
     u32 field_75340_rec_buf_idx;

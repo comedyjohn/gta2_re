@@ -640,7 +640,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
 
     if (inputs)
     {
-        if (field_75340_rec_buf_idx < k_max_records && field_38_replay_state == Live_0)
+        if (field_75340_rec_buf_idx < k_max_records && field_38_replay_state == ReplayState::Live_0)
         {
             field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs = inputs;
             field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx = gpRng_67AB34->get_cur_rng_41CFE0();
@@ -661,7 +661,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
 // 0x4cded0
 void InputRecorder_67F8B0::SaveReplay_4CDED0()
 {
-    if (bConstant_replay_save_67D5C4 != 1 && bDo_release_replay_67D4EB && field_38_replay_state != Disabled_2 && field_75340_rec_buf_idx > 0 &&
+    if (bConstant_replay_save_67D5C4 != 1 && bDo_release_replay_67D4EB && field_38_replay_state != ReplayState::Disabled_2 && field_75340_rec_buf_idx > 0 &&
         !RecOrPlayBackState_4CEDF0())
     {
         u32 len = sizeof(InputRecord_C) * field_75340_rec_buf_idx;
@@ -866,7 +866,7 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     this->field_8_input_masks[10] = 0x400;
     this->field_8_input_masks[11] = 0x800;
     this->field_4_input_bits = 0;
-    this->field_38_replay_state = Attract_3;
+    this->field_38_replay_state = ReplayState::Attract_3;
     gInputDevices_67B990->input_devices_init_498C40(hInstance);
     memset(this->field_3C_rec_buff, 0, sizeof(this->field_3C_rec_buff));
     this->field_75340_rec_buf_idx = 0;
@@ -906,7 +906,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     field_8_input_masks[10] = 1024;
     field_8_input_masks[11] = 0x800;
     field_4_input_bits = 0;
-    field_38_replay_state = Live_0;
+    field_38_replay_state = ReplayState::Live_0;
 
     gInputDevices_67B990 = new InputDevices_1();
     if (!gInputDevices_67B990)
@@ -932,7 +932,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
         {
             FatalError_4A38C0(Gta2Error::ReplayFileTooLarge, "C:\\Splitting\\Gta2\\Source\\input.cpp", 702, remainderSize);
         }
-        field_38_replay_state = field_7533C_used_recs_count != 0;
+        field_38_replay_state = field_7533C_used_recs_count != 0 ? ReplayState::Playback_1 : ReplayState::Live_0;
     }
     else
     {
@@ -941,7 +941,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
             File::CreateFile_4A7000("test\\replay.rep");
             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
         }
-        field_38_replay_state = Live_0;
+        field_38_replay_state = ReplayState::Live_0;
     }
     if (bConstant_replay_save_67D5C4)
     {
@@ -973,7 +973,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 {
     if ((*input_bits & 0xFFFFF000) == 0x37000)
     {
-        field_38_replay_state = Live_0;
+        field_38_replay_state = ReplayState::Live_0;
 
         if (bDo_release_replay_67D4EB)
         {
@@ -1001,14 +1001,14 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
     u32* control_status = (u32*)&field_4_input_bits;
     InputRecorder_67F8B0::clear_inputs_4CDCE0();
 
-    s32 replay_state = field_38_replay_state;
+    const ReplayState replay_state = field_38_replay_state;
 
     *control_status &= ~0x200000;
     u32 remove_bit = *control_status;
 
     switch (replay_state)
     {
-        case Playback_1:
+        case ReplayState::Playback_1:
             if ((u32)gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
@@ -1026,7 +1026,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                             File::CreateFile_4A7000("test\\replay.rep");
                             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
                         }
-                        field_38_replay_state = Live_0;
+                        field_38_replay_state = ReplayState::Live_0;
                     }
                 }
 
@@ -1054,7 +1054,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             }
             break;
 
-        case Attract_3:
+        case ReplayState::Attract_3:
             if ((u32)gpRng_67AB34->get_cur_rng_41CFE0() >= (u32)field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx)
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
@@ -1092,7 +1092,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             }
             break;
 
-        case Live_0:
+        case ReplayState::Live_0:
             if (field_75344_bInputEnabled)
             {
                 if (!gGame_0x40_67E008->IsPaused_416BC0())
@@ -1110,6 +1110,9 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                 }
                 InputRecorder_67F8B0::replay_save_4CEA40(control_status);
             }
+            break;
+
+        case ReplayState::Disabled_2:
             break;
     }
 
@@ -1211,7 +1214,7 @@ void InputRecorder_67F8B0::DisplayInputBits_4CED90()
 // 0x4cedf0
 bool InputRecorder_67F8B0::RecOrPlayBackState_4CEDF0()
 {
-    if (field_38_replay_state == Playback_1 || field_38_replay_state == Attract_3)
+    if (field_38_replay_state == ReplayState::Playback_1 || field_38_replay_state == ReplayState::Attract_3)
     {
         return true;
     }

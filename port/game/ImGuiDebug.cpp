@@ -193,7 +193,7 @@ void Init_InputRecorder()
     gInputRecorder_67F8B0.field_0_bShutDown = false;
     gInputRecorder_67F8B0.field_4_input_bits = 0;
     gInputRecorder_67F8B0.field_75344_bInputEnabled = true;
-    gInputRecorder_67F8B0.field_38_replay_state = Disabled_2;
+    gInputRecorder_67F8B0.field_38_replay_state = ReplayState::Disabled_2;
     gInputRecorder_67F8B0.field_75345_attract_idx = 0;
     memset(gInputRecorder_67F8B0.field_8_input_masks, 0, sizeof(gInputRecorder_67F8B0.field_8_input_masks));
     memset(gInputRecorder_67F8B0.field_3C_rec_buff, 0, sizeof(gInputRecorder_67F8B0.field_3C_rec_buff));

@@ -889,6 +889,11 @@ uint32_t SteerWithStick(uint32_t bits)
     {
         SpawnRequested();
     }
+    if (Modal())
+    {
+        // A menu is open: the character stands still, whatever was held when it opened
+        return bits & ~0xFFFu;
+    }
     static bool injected = false;
     static uint32_t injectedClear = 0; // the bits the last injection took over
     static bool scaled = false; // the character's run speed is scaled to the stick
@@ -899,7 +904,7 @@ uint32_t SteerWithStick(uint32_t bits)
     uint32_t mine = 0;
     gGasScale = kFull;
     uint32_t clearBits = kMoveBits;
-    if (FirstPad(pad) >= 0 && !gSettingsOpen)
+    if (FirstPad(pad) >= 0 && !Modal())
     {
         LoadWorldSetting();
         Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;

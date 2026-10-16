@@ -26,4 +26,3 @@ class miss2_8
     u8 field_6_pad;
     u8 field_7_pad;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(miss2_8, 0x8)

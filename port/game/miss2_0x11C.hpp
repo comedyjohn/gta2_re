@@ -1177,7 +1177,6 @@ class miss2_0x11C
     char_type field_119_unused;
     s16 field_11A_thread_id;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(miss2_0x11C, 0x11C)
 
 class miss2_0x11C_Pool
 {

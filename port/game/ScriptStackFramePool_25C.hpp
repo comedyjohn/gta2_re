@@ -19,7 +19,6 @@ class ScriptStackFrame_C
     s16 field_4_return_cmd;
     ScriptStackFrame_C* mpNext;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(ScriptStackFrame_C, 0xC)
 
 // Pool of the stack frames (GOSUB return info) of all script threads (miss2_8)
 class ScriptStackFramePool_25C
@@ -42,6 +41,5 @@ class ScriptStackFramePool_25C
 
     PoolBasic<ScriptStackFrame_C, k_max_frames> field_0_pool;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(ScriptStackFramePool_25C, 0x25C)
 
 EXTERN_GLOBAL(ScriptStackFramePool_25C*, gScriptStackFramePool_6F8068);

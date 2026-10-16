@@ -367,7 +367,7 @@ int PrintPlayers()
 }
 
 // NetPlay's chat callback (slot 7), printing instead of filling the dialog's edit box
-void __stdcall OnChat(void*, sptr message)
+void OnChat(void*, sptr message)
 {
     const Network_ChatMessage* m = reinterpret_cast<const Network_ChatMessage*>(message);
     printf("%s: %s\n", Narrow(m->field_100_name).c_str(), Narrow(m->field_0_message).c_str());

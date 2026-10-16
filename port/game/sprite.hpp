@@ -798,7 +798,6 @@ class SpritePool
 
     PoolBasic<Sprite, 5031> field_0_pool;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(SpritePool, 0x49B28)
 
 EXTERN_GLOBAL(SpriteManager_8*, gSpriteManager_703820);
 

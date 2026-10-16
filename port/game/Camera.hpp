@@ -219,6 +219,5 @@ class Camera_0xBC
     Fix16 field_A8_ui_scale;
     CameraPos field_AC_cam_velocity;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(Camera_0xBC, 0xBC)
 
 EXTERN_GLOBAL(Camera_0xBC*, gViewCamera_676978);

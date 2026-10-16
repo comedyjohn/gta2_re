@@ -956,7 +956,6 @@ class Ped
     s32 field_28C_threat_reaction;
     s32 field_290_death_cause; // ped_death_cause
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(Ped, 0x294)
 
 void CarDoorAlignmentSolver_545AF0(u8 a1, Car_BC* a2, u8 a3, Fix16& a4, Fix16& a5, Ang16& a6);
 

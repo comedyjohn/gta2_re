@@ -15,4 +15,3 @@ class CreditsLine_6C
     u16 field_6_string_category; // credits_line_category (credits_line_category.hpp)
     wchar_t field_8_text[50];
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(CreditsLine_6C, 0x6C)

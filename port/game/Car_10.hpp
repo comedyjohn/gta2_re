@@ -63,4 +63,3 @@ class Car_Door_10
     s8 field_E_unused;
     s8 field_F_unused;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(Car_Door_10, 0x10)

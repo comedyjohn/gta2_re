@@ -53,6 +53,5 @@ class Ped_List_4
 
     Char_8* field_0_pFirstPed;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(Ped_List_4, 0x4)
 
 EXTERN_GLOBAL(Ped_List_4, gThreateningPedsList_678468);

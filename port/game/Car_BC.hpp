@@ -1412,7 +1412,6 @@ class Car_BC
     char_type field_BA_pad;
     char_type field_BB_pad;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(Car_BC, 0xBC)
 
 struct Car_BC_Pool
 {

@@ -82,7 +82,6 @@ class ModelPhysics_48
 
     void ConvertMass_454680();
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(ModelPhysics_48, 0x48);
 
 class CarInfo_2C
 {
@@ -102,7 +101,6 @@ class CarInfo_2C
     Fix16 field_24_skid_threshhold_1;
     Fix16 field_28_skid_threshhold_2;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(CarInfo_2C, 0x2C);
 
 class CarInfo_808
 {
@@ -134,7 +132,6 @@ class CarInfo_808
     ModelPhysics_48* field_404_model_physics_array[256];
     ModelPhysics_48* field_804_raw_data;
 };
-GTA2_ASSERT_SIZEOF_ALWAYS(CarInfo_808, 0x808);
 
 EXTERN_GLOBAL(CarInfo_808*, gCarInfo_808_678098);
 

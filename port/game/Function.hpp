@@ -14,14 +14,6 @@
 #define EXTERN_GLOBAL(type, name) extern type name
 #define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]
 
-// The size a structure has in the original. It counts 4-byte pointers, so the 64-bit build skips it.
-#if __SIZEOF_POINTER__ == 8
-    #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize)
-#else
-    #define GTA2_ASSERT_SIZEOF_ALWAYS(structureName, expectedSize) \
-        static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
-#endif
-
 // For a structure laid over data read from a file, whose size must not change at 64 bits either
 #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) \
     static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);

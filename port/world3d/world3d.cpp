@@ -45,6 +45,7 @@ void SyncScene()
 enum SettingRow
 {
     RowRenderer,
+    RowWorld,
     kRows
 };
 } // namespace
@@ -87,6 +88,10 @@ bool port_world3d_draw(PortWorld3dDraw kind, int, STexture*, Vert* verts, int)
         return false;
     }
     CheckCamera(verts, BlockSlopeType(gContext.blockX, gContext.blockY, static_cast<int>(gContext.blockZ)));
+    if (!Current().worldMesh)
+    {
+        return false;
+    }
     if (!gWorldTried)
     {
         // The first map tile of the frame: the lights are in and the whole world can be drawn
@@ -125,11 +130,15 @@ int PageRows()
 
 const char* PageName(int row)
 {
-    return row == RowRenderer ? "Renderer" : "";
+    return row == RowRenderer ? "Renderer" : row == RowWorld ? "World" : "";
 }
 
 const char* PageValue(int row)
 {
+    if (row == RowWorld)
+    {
+        return Current().worldMesh ? "mesh" : "classic tiles";
+    }
     if (row != RowRenderer)
     {
         return "";
@@ -140,11 +149,17 @@ const char* PageValue(int row)
     {
         return chosen == Renderer::World3d ? "3D (after a restart)" : "Classic (after a restart)";
     }
-    return chosen == Renderer::World3d ? "3D (in development: draws as classic)" : "Classic";
+    return chosen == Renderer::World3d ? "3D" : "Classic";
 }
 
 void PageChange(int row, int)
 {
+    if (row == RowWorld)
+    {
+        Current().worldMesh = !Current().worldMesh;
+        SaveCurrent();
+        return;
+    }
     if (row == RowRenderer)
     {
         Settings& s = Current();

@@ -67,6 +67,10 @@ Settings Load(const std::string& file)
         {
             ParseRenderer(value, s.renderer);
         }
+        else if (!strcmp(key, "world_mesh") && (!strcmp(value, "0") || !strcmp(value, "1")))
+        {
+            s.worldMesh = value[0] == '1';
+        }
     }
     fclose(f);
     return s;
@@ -81,8 +85,10 @@ bool Save(const std::string& file, const Settings& settings)
         return false;
     }
     fprintf(f, "# GTA2 graphics settings (port/world3d/PLAN.md).\n"
-               "# renderer: classic (the game's own picture) or world3d (the 3D renderer, in development)\n");
+               "# renderer: classic (the game's own picture) or world3d (the 3D renderer)\n"
+               "# world_mesh: 1 draws the map from the 3D mesh, 0 leaves it to the classic tiles (3D renderer only)\n");
     fprintf(f, "renderer = %s\n", RendererName(settings.renderer));
+    fprintf(f, "world_mesh = %d\n", settings.worldMesh ? 1 : 0);
     const bool ok = fclose(f) == 0;
     return ok && rename(temp.c_str(), file.c_str()) == 0;
 }

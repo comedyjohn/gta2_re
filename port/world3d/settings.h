@@ -2,6 +2,7 @@
 // `key = value` per line, edited by the overlay's Graphics page too.
 //
 //   renderer = classic     classic: the game's own picture, as without world3d; world3d: the 3D renderer
+//   world_mesh = 1         with the 3D renderer: 1 draws the map from the mesh, 0 leaves it to the classic tiles
 //
 // $GTA2_RENDERER overrides `renderer` for one run (for tests), without being saved. The renderer is
 // fixed for a run: a change takes effect on the next start (ActiveRenderer).
@@ -20,6 +21,7 @@ enum class Renderer
 struct Settings
 {
     Renderer renderer = Renderer::Classic;
+    bool worldMesh = true; // changes live
 
     bool operator==(const Settings&) const = default;
 };

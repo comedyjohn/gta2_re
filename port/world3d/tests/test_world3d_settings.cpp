@@ -22,15 +22,26 @@ TEST_CASE("graphics.txt keeps the renderer and survives damage")
     Settings s = Load(file);
     CHECK(s.renderer == Renderer::Classic);
 
+    CHECK(s.worldMesh); // on by default
+
     s.renderer = Renderer::World3d;
     REQUIRE(Save(file, s));
     CHECK(Load(file) == s);
 
+    s.worldMesh = false;
+    REQUIRE(Save(file, s));
+    CHECK(Load(file) == s);
+    CHECK_FALSE(Load(file).worldMesh);
+    s.worldMesh = true;
+    REQUIRE(Save(file, s));
+    CHECK(Load(file).worldMesh);
+
     // Junk lines and unknown values are skipped
     FILE* f = fopen(file.c_str(), "w");
-    fputs("garbage\nrenderer = vulkan\nsomething = 1\n", f);
+    fputs("garbage\nrenderer = vulkan\nsomething = 1\nworld_mesh = maybe\n", f);
     fclose(f);
     CHECK(Load(file).renderer == Renderer::Classic);
+    CHECK(Load(file).worldMesh);
 
     f = fopen(file.c_str(), "w");
     fputs("# comment\n  renderer=world3d\n", f);

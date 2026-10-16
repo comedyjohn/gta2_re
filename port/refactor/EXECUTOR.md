@@ -78,14 +78,13 @@ replay green in a refactor commit.
 
 Do these once per machine; check each with the command after it.
 
-The refactor has its own branch, `claude/port-refactor`, checked out in its own worktree
-`~/Documents/Code/gta2_re-refactor` (made 2026-10-16 from `claude/nice-feynman-sw4r6m`, submodules
-initialised, all four presets built, baseline replays green). Work only there; the main checkout
-`~/Documents/Code/gta2_re` belongs to the world3d work. Bring world3d changes in with
+The refactor has its own branch, `claude/port-refactor`, checked out in the main checkout
+`~/Documents/Code/gta2_re`. The world3d work has its own worktree, `~/Documents/Code/gta2_re-world3d`
+(branch `claude/nice-feynman-sw4r6m`); never edit files there. Bring world3d changes in with
 `git merge claude/nice-feynman-sw4r6m` only when the user asks, never during a task.
 
 ```bash
-cd ~/Documents/Code/gta2_re-refactor
+cd ~/Documents/Code/gta2_re
 git status -sb                                   # on claude/port-refactor, never master
 git log --oneline -5
 ```

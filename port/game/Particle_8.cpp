@@ -14,7 +14,6 @@
 #include "sprite.hpp"
 
 // Forward declarations: the functions below are in address order
-static inline Ang16 AddAng16_ool(const Ang16& a, const Ang16& b);
 
 EXTERN_GLOBAL(Fix16, dword_6FD46C);
 //EXTERN_GLOBAL(Fix16_Point, stru_6FD388);
@@ -81,13 +80,6 @@ Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
         ++gParticleInstCount_6FD5F4;
     }
     return pNew4C;
-}
-
-// Ang16::operator- (9.6f 0x40E5D0) with the normalizing ctor called out of line (AssignNormalized_409300)
-static inline Ang16 SubAng16_ool(const Ang16& a, const Ang16& b)
-{
-    s16 value = a.rValue - b.rValue;
-    return Ang16(&value, 0);
 }
 
 // RotateByAngle_40F6B0 with the x_old negate as the named out-of-line Negate_4086A0: the rotations and the
@@ -534,13 +526,12 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
         {
             ang1 = word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(gRng_6F6784.get_int_4F7AE0(32)));
             // 9.6f: t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(..)) in both branches
-            t.RotateByAngle_40F6B0_all_out_of_line(SubAng16_ool(ang1 + tanAng, word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(16))));
+            t.RotateByAngle_40F6B0_all_out_of_line((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(16)));
         }
         else
         {
             ang1 = word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(gRng_6F6784.get_int_4F7AE0(360)));
-            t.RotateByAngle_40F6B0_all_out_of_line(
-                SubAng16_ool(AddAng16_ool(ang1, tanAng), word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(180))));
+            t.RotateByAngle_40F6B0_all_out_of_line(ang1 + tanAng - word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(180)));
         }
 
         Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(t.x,
@@ -694,13 +685,6 @@ void Particle_8::SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnkn
             }
         }
     }
-}
-
-// Ang16::operator+ (9.6f 0x40E5A0) with the normalizing ctor called out of line (AssignNormalized_409300)
-static inline Ang16 AddAng16_ool(const Ang16& a, const Ang16& b)
-{
-    s16 value = a.rValue + b.rValue;
-    return Ang16(&value, 0);
 }
 
 // 0x5439d0

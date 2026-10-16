@@ -1803,13 +1803,6 @@ static inline void PolarToCartesian_OutOfLineMul(Ang16& angle, const Fix16& radi
     ret2 = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
 
-// Ang16 operator+ with the normalizing ctor called out of line (AssignNormalized_409300)
-static inline Ang16 AddAngles_ool_54B8F0(const Ang16& a, const Ang16& b)
-{
-    s16 sum = a.rValue + b.rValue;
-    return Ang16((Ang16&)sum, 0);
-}
-
 [[maybe_unused]] static inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
 {
     if (!pThis->field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2))
@@ -2595,7 +2588,7 @@ char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
 
             // Try stepping back away from the obstacle
             field_40_rotation = field_28;
-            Ang16 back_angle = AddAngles_ool_54B8F0(kAng180_6FD936, AddAngles_ool_54B8F0(field_28, field_2A));
+            Ang16 back_angle = kAng180_6FD936 + (field_28 + field_2A);
             PolarToCartesian_OutOfLineMul(back_angle, field_38_velocity * kFP16Four_6FD9F4, x_vec, y_vec);
             field_80_sprite_ptr->set_xyz_lazy_420600(field_80_sprite_ptr->field_14_xy.x + x_vec,
                                                      field_80_sprite_ptr->field_14_xy.y + y_vec,
@@ -2605,7 +2598,7 @@ char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
             {
                 // Free behind: turn around
                 field_80_sprite_ptr->set_xy_lazy_447E20(gCharB4_Saved_Xpos_6FD7F8, gCharB4_Saved_Ypos_6FD800);
-                field_28.rValue += AddAngles_ool_54B8F0(kAng180_6FD936, field_2A).rValue;
+                field_28.rValue += (kAng180_6FD936 + field_2A).rValue;
                 field_28.Normalize_406C20();
                 field_24 = 2;
                 field_40_rotation = field_28;
@@ -2985,7 +2978,7 @@ void Char_B4::ApplyRandomRotationJitter_54C6C0()
     if (gRng_6F6784.get_int_4F7AE0(32) > 22)
     {
         Ang16 old_angle = field_42_rotation_jitter;
-        field_42_rotation_jitter = Ang16::Fix16_To_Ang16_inlined_40F540(
+        field_42_rotation_jitter = Ang16::Fix16_To_Ang16_40F540(
             k_dword_6FD868 * (Fix16(gRng_6F6784.get_int_4F7AE0(16)) - kFP16Eight_6FDA08)); // INLINED_MODE required
         if (old_angle > kAng180_6FD936 && field_42_rotation_jitter > kAng180_6FD936)
         {

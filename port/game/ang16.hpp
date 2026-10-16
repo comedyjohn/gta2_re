@@ -76,14 +76,6 @@ class Ang16
         return Ang16(value, 0);
     }
 
-    // operator+ with the normalizing constructor called out of line (AssignNormalized_409300), for
-    // functions that ran out of inline expansions (Explosion_30::EmitBuildingDebris_22_23_24_25_542E30)
-    Ang16 Add_ool(const Ang16& rhs)
-    {
-        s16 value = rValue + rhs.rValue;
-        return Ang16(&value, 0);
-    }
-
     // 9.6f 0x40E5D0
     Ang16 operator-(const Ang16& other)
     {
@@ -270,23 +262,9 @@ class Ang16
     }
 
     // Reverse of above func
-    inline static Ang16 Fix16_To_Ang16_inlined_40F540(const Fix16& a2)
-    {
-        return Ang16(a2.GetRaw_40F4B0() / 71, 0);
-    }
-
     inline static Ang16 Fix16_To_Ang16_40F540(const Fix16& a2)
     {
         return Ang16(a2.GetRaw_40F4B0() / 71, 0);
-    }
-
-    // Fix16_To_Ang16_40F540 with the normalizing Ang16 ctor called out of line (AssignNormalized_409300),
-    // Trailer::UpdateTrailerAlignment_407CE0
-    inline static Ang16 Fix16_To_Ang16_ool_40F540(const Fix16& a2)
-    {
-        // The quotient is stored as a dword, like 9.6f's 0x40F540 passing it to 0x401C60
-        s32 value = a2.GetRaw_40F4B0() / 71;
-        return Ang16(&value, 0);
     }
 
     // 9.6f 0x41E110

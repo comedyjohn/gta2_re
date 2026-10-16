@@ -982,8 +982,8 @@ void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
         // 9.6f: Fix16(s16) 0x401AE0 minus Fix16(u16) 0x41F990, times dword_706D34. The kink stays a
         // temporary (a named local moves the frame slots) and `-=` evaluates the half first.
         u16 spread = (gRng_6F6784.get_int_4F7AE0(4) + 1) * 32;
-        Ang16 jitter = Ang16::Fix16_To_Ang16_ool_40F540(
-            (Fix16(gRng_6F6784.get_int_4F7AE0(spread)) -= Fix16(static_cast<u16>(spread >> 1))) * dword_706D34);
+        Ang16 jitter = Ang16::Fix16_To_Ang16_40F540((Fix16(gRng_6F6784.get_int_4F7AE0(spread)) -= Fix16(static_cast<u16>(spread >> 1))) *
+                                                    dword_706D34);
 
         step.x = seg_len.Multiply_408680(Ang16::sine_40F500(angle));
         step.y = seg_len.Multiply_408680(Ang16::cosine_40F520(angle));

@@ -5042,13 +5042,6 @@ static inline void PolarToCartesianMulInlSin_4645B0(Ang16& angle, Fix16& radius,
     y = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
 
-// Ang16::operator+ with the normalizing ctor called out of line (AssignNormalized_409300)
-static inline Ang16 AddAng16_ool_4645B0(const Ang16& a, const Ang16& b)
-{
-    s16 value = a.rValue + b.rValue;
-    return Ang16(&value, 0);
-}
-
 // 0x4645b0
 void Ped::CalcApproachPointNearTargetPed_4645B0()
 {
@@ -5107,7 +5100,7 @@ void Ped::CalcApproachPointNearTargetPed_4645B0()
                 field_1C8_move_target_y += vec_y;
                 break;
             case 2:
-                angle = AddAng16_ool_4645B0(kAng180_6785A6, angle);
+                angle = kAng180_6785A6 + angle;
                 if (bUnk)
                 {
                     angle += kAng180_6785A6;

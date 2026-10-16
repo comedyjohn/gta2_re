@@ -597,7 +597,7 @@ void Explosion_30::EmitExplosion_18_33_541D60()
                 Fix16 radius;
                 radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(8));
 
-                this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_inlined_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
+                this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
 
                 // 9.6f calls Ang16::PolarToCartesian_41FC20
                 Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -647,7 +647,7 @@ void Explosion_30::EmitExplosion_19_32_542060()
         {
             Fix16 radius;
             radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(48));
-            this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_inlined_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
+            this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
 
             // 9.6f calls Ang16::PolarToCartesian_41FC20
             Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -696,7 +696,7 @@ void Explosion_30::EmitExplosion_20_542340()
         {
             Fix16 radius;
             radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(80));
-            this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_inlined_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
+            this->field_22_spawn_angle = Ang16::Fix16_To_Ang16_40F540(dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(360)));
 
             // 9.6f calls Ang16::PolarToCartesian_41FC20
             Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -894,9 +894,8 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_225_2:
                     {
                         pParticle->field_38_state = 23;
-                        this->field_22_spawn_angle =
-                            (kAng225_6FD3E0 + dword_6FD350)
-                                .Add_ool(Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
+                        this->field_22_spawn_angle = kAng225_6FD3E0 + dword_6FD350 +
+                            Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -908,9 +907,8 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_45_3:
                     {
                         pParticle->field_38_state = 22;
-                        this->field_22_spawn_angle =
-                            kAng45_6FD35C.Add_ool(dword_6FD350)
-                                .Add_ool(Ang16::Fix16_To_Ang16_ool_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
+                        this->field_22_spawn_angle = kAng45_6FD35C + dword_6FD350 +
+                            Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 

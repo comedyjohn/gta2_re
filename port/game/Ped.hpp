@@ -528,13 +528,13 @@ class Ped
     {
         Fix16 x_pos = field_1AC_cam.x;
         Fix16 width = rect->field_C_size.field_0_x;
-        Fix16 y_pos, z_pos;
-        Fix16 height;
-        Fix16 z_target;
+        Fix16 y_pos = field_1AC_cam.y;
+        Fix16 height = rect->field_C_size.field_4_y;
+        Fix16 z_pos = field_1AC_cam.z;
+        Fix16 z_target = rect->field_0_pos.field_8_z;
         return (x_pos >= rect->field_0_pos.field_0_x - width && x_pos <= rect->field_0_pos.field_0_x + width &&
-                (y_pos = field_1AC_cam.y, height = rect->field_C_size.field_4_y, y_pos >= rect->field_0_pos.field_4_y - height) &&
-                field_1AC_cam.y <= rect->field_0_pos.field_4_y + height &&
-                (z_pos = field_1AC_cam.z, z_target = rect->field_0_pos.field_8_z, z_pos.ToUInt8() == z_target.ToUInt8()));
+                y_pos >= rect->field_0_pos.field_4_y - height && field_1AC_cam.y <= rect->field_0_pos.field_4_y + height &&
+                z_pos.ToUInt8() == z_target.ToUInt8());
     }
 
     inline s16 get_wanted_points_433DC0()

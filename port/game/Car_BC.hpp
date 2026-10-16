@@ -768,27 +768,24 @@ class Car_BC
     {
         Fix16 x_pos = field_50_car_sprite->field_14_xy.x;
         Fix16 width = rect->field_C_size.field_0_x;
-        Fix16 y_pos, z_pos;
-        Fix16 height;
-        Fix16 z_target;
-        return (
-            x_pos >= rect->field_0_pos.field_0_x - width && x_pos <= rect->field_0_pos.field_0_x + width &&
-            (y_pos = field_50_car_sprite->field_14_xy.y,
-             height = rect->field_C_size.field_4_y,
-             y_pos >= rect->field_0_pos.field_4_y - height) &&
-            field_50_car_sprite->field_14_xy.y <= rect->field_0_pos.field_4_y + height &&
-            (z_pos = field_50_car_sprite->field_1C_zpos, z_target = rect->field_0_pos.field_8_z, z_pos.ToUInt8() == z_target.ToUInt8()));
+        Fix16 y_pos = field_50_car_sprite->field_14_xy.y;
+        Fix16 height = rect->field_C_size.field_4_y;
+        Fix16 z_pos = field_50_car_sprite->field_1C_zpos;
+        Fix16 z_target = rect->field_0_pos.field_8_z;
+        return (x_pos >= rect->field_0_pos.field_0_x - width && x_pos <= rect->field_0_pos.field_0_x + width &&
+                y_pos >= rect->field_0_pos.field_4_y - height &&
+                field_50_car_sprite->field_14_xy.y <= rect->field_0_pos.field_4_y + height && z_pos.ToUInt8() == z_target.ToUInt8());
     }
 
     inline bool IsWithinBlock(SCR_XYZ_f* pos)
     {
         Sprite* pSprite = field_50_car_sprite;
-        Fix16 car_z_pos;
+        Fix16 car_z_pos = pSprite->field_1C_zpos;
         return (pSprite->field_14_xy.x >= pos->field_0_x.ToUInt8() && pSprite->field_14_xy.x < (pos->field_0_x.ToUInt8() + 1)
 
                 && pSprite->field_14_xy.y >= pos->field_4_y.ToUInt8() && pSprite->field_14_xy.y < (pos->field_4_y.ToUInt8() + 1)
 
-                && (car_z_pos = pSprite->field_1C_zpos, car_z_pos.ToUInt8() == pos->field_8_z.ToUInt8()));
+                && car_z_pos.ToUInt8() == pos->field_8_z.ToUInt8());
     }
 
     bool IsTrainModel_403BA0()

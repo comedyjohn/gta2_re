@@ -370,7 +370,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPoi
         {
             pPointer->field_8_obj->set_field_26(pCmd->field_1C_value_shop_type);
         }
-        else if (pObj = pPointer->field_8_obj, pObj->IsPickup_421060())
+        else if ((pObj = pPointer->field_8_obj)->IsPickup_421060())
         {
             pObj->set_field_26(pCmd->field_1C_value_shop_type);
         }
@@ -2939,7 +2939,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STOPPED_509E70()
 
     Fix16 temp;
 
-    if (pPed != nullptr && (temp = pPed->field_168_game_object->field_38_velocity, temp == kFpZero_6F77C0))
+    if (pPed != nullptr && (temp = pPed->field_168_game_object->field_38_velocity) == kFpZero_6F77C0)
     {
         field_8_cond_result = true;
     }
@@ -3080,7 +3080,7 @@ void miss2_0x11C::Locate_509FD0()
                     break;
                 case SCRCMD_STOP_LOCATE_CHAR_ANY:
                     if (pPointer->field_8_char->field_168_game_object &&
-                        (vel = pPointer->field_8_char->field_168_game_object->field_38_velocity, vel == kFpZero_6F77C0))
+                        (vel = pPointer->field_8_char->field_168_game_object->field_38_velocity) == kFpZero_6F77C0)
                     {
                         field_8_cond_result = true;
                     }
@@ -4385,9 +4385,8 @@ void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
     Car_BC* pCarOnTrailer;
 
     if (pSprite != nullptr &&
-        (pSprite->field_30_sprite_type_enum == sprite_types_enum::car_2 ? (pCarOnTrailer = pSprite->field_8_car_bc_ptr) :
-                                                                          (pCarOnTrailer = nullptr),
-         pCarOnTrailer == pCarPointer->field_8_car))
+        (pCarOnTrailer = pSprite->field_30_sprite_type_enum == sprite_types_enum::car_2 ? pSprite->field_8_car_bc_ptr : nullptr) ==
+            pCarPointer->field_8_car)
     {
         field_8_cond_result = true;
     }
@@ -5021,8 +5020,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
         pOnMission2->field_8_counter == 0 && pOnMission3->field_8_counter == 0)
     {
         // If enough respect.
-        if ((player_idx1 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(),
-             pGang->GetRespectForPlayer_4BEEF0(player_idx1) / 20 >= pCmd->field_1A_respect))
+        player_idx1 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+        if (pGang->GetRespectForPlayer_4BEEF0(player_idx1) / 20 >= pCmd->field_1A_respect)
         {
             gScriptManager_6F8060->field_C1E2E_death_arrest_flag = 0;
             str_table_entry* mission2_str_table = gScriptManager_6F8060->FindStringById_503080(pCmd->field_E_mission2);
@@ -5046,8 +5045,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
         pOnMission2->field_8_counter == 0 && pOnMission3->field_8_counter == 0)
     {
         // If enough respect.
-        if ((player_idx2 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(),
-             pGang->GetRespectForPlayer_4BEEF0(player_idx2) / 20 >= pCmd->field_1A_respect))
+        player_idx2 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+        if (pGang->GetRespectForPlayer_4BEEF0(player_idx2) / 20 >= pCmd->field_1A_respect)
         {
             gScriptManager_6F8060->field_C1E2E_death_arrest_flag = 0;
             str_table_entry* mission2_str_table = gScriptManager_6F8060->FindStringById_503080(pCmd->field_E_mission2);
@@ -5117,8 +5116,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
     s8 player_idx3;
 
     // Start mission 1 if enough respect.
-    if ((player_idx3 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(),
-         pGang->GetRespectForPlayer_4BEEF0(player_idx3) / 20 >= pCmd->field_1A_respect))
+    player_idx3 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if (pGang->GetRespectForPlayer_4BEEF0(player_idx3) / 20 >= pCmd->field_1A_respect)
     {
         gScriptManager_6F8060->field_C1E2E_death_arrest_flag = 0;
         str_table_entry* mission1_str_table = gScriptManager_6F8060->FindStringById_503080(pCmd->field_1C_mission1);
@@ -5130,8 +5129,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
     s8 player_idx4;
 
     // If zero respect.
-    if ((player_idx4 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(),
-         (pGang->GetRespectForPlayer_4BEEF0(player_idx4) / 20) == 0))
+    player_idx4 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if ((pGang->GetRespectForPlayer_4BEEF0(player_idx4) / 20) == 0)
     {
         s32 brief_id = pCmd->field_8_brief_id - 6;
         sprintf(gTmpBuffer_67C598, "%d", brief_id);
@@ -5143,7 +5142,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
     s8 player_idx5;
 
     // If negative respect.
-    if ((player_idx5 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(), pGang->GetRespectForPlayer_4BEEF0(player_idx5) / 20 < 0))
+    player_idx5 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if (pGang->GetRespectForPlayer_4BEEF0(player_idx5) / 20 < 0)
     {
         s32 brief_id = pCmd->field_8_brief_id - 4;
         sprintf(gTmpBuffer_67C598, "%d", brief_id);
@@ -6110,8 +6110,8 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
     }
     s8 idx1;
     //  Check if the player has respect enough to launch the mission
-    if ((idx1 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(),
-         pGang_zone->GetRespectForPlayer_4BEEF0(idx1) / 20 >= pCmd->field_1A_respect))
+    idx1 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if (pGang_zone->GetRespectForPlayer_4BEEF0(idx1) / 20 >= pCmd->field_1A_respect)
     {
         str_table_entry* mission1_str_table = gScriptManager_6F8060->FindStringById_503080(pCmd->field_1C_mission1);
         auto* mission1_name = reinterpret_cast<char_type*>(&mission1_str_table[1]);
@@ -6120,7 +6120,8 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
     }
     s8 idx2;
     //  Check if the player has respect = 0
-    if ((idx2 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(), (pGang_zone->GetRespectForPlayer_4BEEF0(idx2) / 20) == 0))
+    idx2 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if ((pGang_zone->GetRespectForPlayer_4BEEF0(idx2) / 20) == 0)
     {
         s32 briefId = pCmd->field_8_brief_id - 6;
         sprintf(gTmpBuffer_67C598, "%d", briefId);
@@ -6130,7 +6131,8 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
     }
     s8 idx3;
     //  Check if the player has negative respect
-    if ((idx3 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0(), pGang_zone->GetRespectForPlayer_4BEEF0(idx3) / 20 < 0))
+    idx3 = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
+    if (pGang_zone->GetRespectForPlayer_4BEEF0(idx3) / 20 < 0)
     {
         s32 briefId = pCmd->field_8_brief_id - 4;
         sprintf(gTmpBuffer_67C598, "%d", briefId);
@@ -6454,11 +6456,10 @@ void miss2_0x11C::LocSecChar_50F7B0()
     Fix16 testX = pChar1->field_8_char->field_1AC_cam.x;
     Fix16 testY = pChar1->field_8_char->field_1AC_cam.y;
     Fix16 testZ = pChar1->field_8_char->field_1AC_cam.z;
-    Fix16 maxX;
     field_8_cond_result = false;
 
-    if (testX >= centerX - width && (maxX = centerX + width, testX <= maxX) && testY >= centerY - height &&
-        (centerY = centerY + height, testY <= centerY) && testZ.ToUInt8() == centerZ.ToUInt8())
+    if (testX >= centerX - width && testX <= centerX + width && testY >= centerY - height && testY <= centerY + height &&
+        testZ.ToUInt8() == centerZ.ToUInt8())
     {
         switch (gBasePtr_6F8070->field_2_type)
         {
@@ -6668,10 +6669,10 @@ void miss2_0x11C::GroupInArea_50FC60()
         {
             Fix16 charX = pMember->field_1AC_cam.x;
             Fix16 centerX = pCmd->field_C_rect.field_0_pos.field_0_x;
-            Fix16 centerY, charY;
+            Fix16 centerY = pCmd->field_C_rect.field_0_pos.field_4_y;
+            Fix16 charY = pMember->field_1AC_cam.y;
 
-            if (charX >= centerX - halfwidth && charX <= centerX + halfwidth &&
-                (centerY = pCmd->field_C_rect.field_0_pos.field_4_y, charY = pMember->field_1AC_cam.y, charY >= centerY - halfheight) &&
+            if (charX >= centerX - halfwidth && charX <= centerX + halfwidth && charY >= centerY - halfheight &&
                 charY <= centerY + halfheight)
             {
                 field_8_cond_result = true;
@@ -6689,10 +6690,10 @@ void miss2_0x11C::GroupInArea_50FC60()
     Ped* pLeader = pGroup->field_2C_ped_leader;
     Fix16 leaderX = pLeader->field_1AC_cam.x;
     Fix16 centerX = pCmd->field_C_rect.field_0_pos.field_0_x;
-    Fix16 centerY, leaderY;
+    Fix16 centerY = pCmd->field_C_rect.field_0_pos.field_4_y;
+    Fix16 leaderY = pLeader->field_1AC_cam.y;
 
-    if (leaderX >= centerX - halfwidth && leaderX <= centerX + halfwidth &&
-        (centerY = pCmd->field_C_rect.field_0_pos.field_4_y, leaderY = pLeader->field_1AC_cam.y, leaderY >= centerY - halfheight) &&
+    if (leaderX >= centerX - halfwidth && leaderX <= centerX + halfwidth && leaderY >= centerY - halfheight &&
         leaderY <= centerY + halfheight)
     {
         field_8_cond_result = true;

@@ -2472,7 +2472,7 @@ char_type Car_BC::CanCarCollideWithSprite_43AAF0(Sprite* pSprite)
             if (phi_type == object_behavior_type::pickup_6 || phi_type == object_behavior_type::pickup_physics_7 ||
                 phi_type == object_behavior_type::pickup_animated_8 || phi_type == object_behavior_type::pickup_physics_animated_9 ||
                 phi_type == object_behavior_type::shop_10 || phi_type == object_behavior_type::static_collision_check_1 ||
-                phi_type == object_behavior_type::effect_only_12 || (field_18_model = o2c->field_18_model, field_18_model == 182) ||
+                phi_type == object_behavior_type::effect_only_12 || (field_18_model = o2c->field_18_model) == 182 ||
                 field_18_model == objects::grenade_obj_183)
             {
                 if (pDefinition->field_40_collision_bucket_category == 3)
@@ -7634,7 +7634,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     s32 car_model;
                     u16 car_kind;
                     u8 rng_val;
-                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.get_int_4F7AE0(40), rng_val <= 20u) ||
+                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.get_int_4F7AE0(40)) <= 20u ||
                         rng_val >= 30u)
                     {
                         car_model =

@@ -4007,8 +4007,12 @@ void Ped::UpdateCharB4_462B80()
             else
             {
                 field_16C_car->ShowCarName_4406B0(this);
-                if ((field_25C_internal_objective == objectives_enum::enter_train_37 && field_238_ped_type == ped_type::dummy_3) ||
-                    (field_16C_car->field_4_passengers_list.AddPedToFront_471140(this), field_238_ped_type == ped_type::dummy_3))
+                bool train_dummy = field_25C_internal_objective == objectives_enum::enter_train_37 && field_238_ped_type == ped_type::dummy_3;
+                if (!train_dummy)
+                {
+                    field_16C_car->field_4_passengers_list.AddPedToFront_471140(this);
+                }
+                if (field_238_ped_type == ped_type::dummy_3)
                 {
                     if (field_25C_internal_objective == objectives_enum::enter_train_37)
                     {
@@ -4017,9 +4021,12 @@ void Ped::UpdateCharB4_462B80()
                     }
                 }
             }
-            if ((field_25C_internal_objective == objectives_enum::enter_car_as_driver_35 ||
-                 field_25C_internal_objective == objectives_enum::enter_train_37) &&
-                (field_226_internal_objective_status = 1, field_25C_internal_objective == objectives_enum::enter_train_37))
+            if (field_25C_internal_objective == objectives_enum::enter_car_as_driver_35 ||
+                field_25C_internal_objective == objectives_enum::enter_train_37)
+            {
+                field_226_internal_objective_status = 1;
+            }
+            if (field_25C_internal_objective == objectives_enum::enter_train_37)
             {
                 if (field_238_ped_type == ped_type::dummy_3)
                 {

@@ -313,11 +313,15 @@ void SetFullScreenMode_5D93A0()
     s32 bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, full_width_706B5C, full_height_706798, 16);
     if (!bcheckModeRet)
     {
-        if (full_width_706B5C == 640 ||
-            (full_width_706B5C = 640,
-             bModeChanged = true,
-             full_height_706798 = 480,
-             (bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, 640, 480, 16)) == 0))
+        bool failed = full_width_706B5C == 640;
+        if (!failed)
+        {
+            full_width_706B5C = 640;
+            bModeChanged = true;
+            full_height_706798 = 480;
+            failed = (bcheckModeRet = pVid_CheckMode(gVidSys_7071D0, 640, 480, 16)) == 0;
+        }
+        if (failed)
         {
             FatalError_4A38C0(0xBBB, // Gta2Error::VideomodeNotAvailable
                               "C:\\Splitting\\Gta2\\Source\\video.cpp",
@@ -513,7 +517,14 @@ void SetVideoModeFromSettings_5D92D0()
     {
         if (!SetWindowedMode_5D9510())
         {
-            if (window_width_706630 == 640 || (window_width_706630 = 640, window_height_706B50 = 480, !SetWindowedMode_5D9510()))
+            bool failed = window_width_706630 == 640;
+            if (!failed)
+            {
+                window_width_706630 = 640;
+                window_height_706B50 = 480;
+                failed = !SetWindowedMode_5D9510();
+            }
+            if (failed)
             {
                 SetFullScreenMode_5D93A0();
                 gStartMode_626A0C = 1;

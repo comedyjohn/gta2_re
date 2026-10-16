@@ -541,7 +541,7 @@ void CarInfo_2C::CalculateCarInfo_4542A0(s32 idx)
     Fix16 gear2_speed = pModelPhysics->field_40_gear2_speed;
     Fix16 gear3_speed = pModelPhysics->field_44_gear3_speed;
     Fix16 max_speed;
-    if (gear2_speed > gear3_speed || (max_speed = pModelPhysics->field_28_max_speed, gear3_speed > max_speed) || gear2_speed > max_speed)
+    if (gear2_speed > gear3_speed || gear3_speed > (max_speed = pModelPhysics->field_28_max_speed) || gear2_speed > max_speed)
     {
         FatalError_4A38C0(0x3F6, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 91, static_cast<u8>(idx));
     }

@@ -2634,6 +2634,14 @@ gmp_block_info* Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z
     return nullptr;
 }
 
+// Helper of the ground-Z searches: new_z is z rounded, adjusted by the slope at (x, y); true if it is above z
+bool Map_0x370::RoundedZIsAboveSlope(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos, Fix16& new_z)
+{
+    new_z = z_pos.GetRoundValue();
+    UpdateZFromSlopeAtCoord_4E5BF0(x_pos, y_pos, new_z);
+    return new_z > z_pos;
+}
+
 // 0x4E4D40
 Fix16 Map_0x370::FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
 {
@@ -2641,7 +2649,7 @@ Fix16 Map_0x370::FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_
     Fix16 new_z;
 
     if (z_pos.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
-        (new_z = z_pos.GetRoundValue(), Map_0x370::UpdateZFromSlopeAtCoord_4E5BF0(x_pos, y_pos, new_z), new_z > z_pos))
+        RoundedZIsAboveSlope(x_pos, y_pos, z_pos, new_z))
     {
         s32 below_z = z_pos.ToInt() - 1;
         gmp_block_info* pBlock = Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(x_pos.ToInt(), y_pos.ToInt(), below_z);
@@ -2672,8 +2680,7 @@ Fix16 Map_0x370::sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
     {
         gmp_block_info* block_4DFE10 = get_block_4DFE10(x_pos.ToInt(), y_pos.ToInt(), curr_z.ToInt());
         gBlockInfo0_6F5EB0 = block_4DFE10;
-        u8 slope_byte;
-        if (block_4DFE10 == nullptr || (slope_byte = block_4DFE10->field_B_slope_type, is_air_type(slope_byte)))
+        if (block_4DFE10 == nullptr || is_air_type(block_4DFE10->field_B_slope_type))
         {
             gmp_block_info* pBlock = get_block_4DFE10(x_pos.ToInt(), y_pos.ToInt(), (curr_z - kFpOne_6F6110).ToInt());
             gBlockInfo0_6F5EB0 = pBlock;
@@ -2693,6 +2700,7 @@ Fix16 Map_0x370::sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
         }
         else
         {
+            u8 slope_byte = block_4DFE10->field_B_slope_type;
             if (is_gradient_slope(slope_byte))
             {
                 Fix16 unk_z_coord = curr_z.GetRoundValue();
@@ -2713,7 +2721,7 @@ Fix16 Map_0x370::GetGroundZBelowCoord_4E4F40(Fix16 x, Fix16 y, Fix16 z)
     Fix16 new_z;
 
     if (z.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x.ToInt(), y.ToInt(), z.ToInt()) ||
-        (new_z = z.GetRoundValue(), Map_0x370::UpdateZFromSlopeAtCoord_4E5BF0(x, y, new_z), new_z > z))
+        RoundedZIsAboveSlope(x, y, z, new_z))
     {
         s32 int_z = z.ToInt() - 1;
         gBlockInfo0_6F5EB0 = Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(x.ToInt(), y.ToInt(), int_z);
@@ -3478,7 +3486,7 @@ Fix16 Map_0x370::GetRailwayZBelowCoord_4E6400(Fix16 x_pos, Fix16 y_pos, Fix16 z_
     Fix16 new_z;
 
     if (z_pos.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
-        (new_z = z_pos.GetRoundValue(), Map_0x370::UpdateZFromSlopeAtCoord_4E5BF0(x_pos, y_pos, new_z), new_z > z_pos))
+        RoundedZIsAboveSlope(x_pos, y_pos, z_pos, new_z))
     {
         s32 below_z = z_pos.ToInt() - 1;
         gmp_block_info* pBlock = Map_0x370::FindRailwayBelowZAtCoord_4E6360(x_pos.ToInt(), y_pos.ToInt(), below_z);

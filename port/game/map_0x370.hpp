@@ -467,6 +467,7 @@ class Map_0x370
     char_type sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_1, Fix16 y_1, Fix16 z_1, Fix16 x_2, Fix16 y_2, Fix16 z_2);
     Fix16 FindGroundZForCoord_4E5B60(Fix16 x_pos, Fix16 y_pos);
     u8 UpdateZFromSlopeAtCoord_4E5BF0(Fix16 x_pos, Fix16 y_pos, Fix16& z_pos);
+    bool RoundedZIsAboveSlope(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos, Fix16& new_z);
     char_type HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock, s32 direction, char_type bDefault);
     s32 GetArrowDirectionFromBlock_4E5FC0(gmp_block_info* pBlock, char_type bDontFlip);
     s16 sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bFlag);

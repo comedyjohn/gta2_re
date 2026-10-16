@@ -1474,7 +1474,7 @@ void PoliceCrew_38::State1_Patrol_574F10()
     u8 idx = 0;
 
     if (field_10_subObj->field_24_phase == crew_phase::finished_2 || !field_10_subObj->field_24_phase ||
-        (pCarUnk = field_10_subObj->field_0_car, pCarUnk->field_76_last_seen_timer > 80))
+        (pCarUnk = field_10_subObj->field_0_car)->field_76_last_seen_timer > 80)
     {
         field_24_state = police_crew_state::shutdown_6;
     }

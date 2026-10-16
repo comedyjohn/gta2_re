@@ -61,6 +61,7 @@ uint32_t gCanvas[kWidth * kHeight];
 
 bool gSettingsOpen = false;
 bool gSpawnOpen = false; // the car menu
+bool gHoldoff = false; // a menu just closed: the game sees nothing until the pad's buttons are let go
 int gCar = 0; // its selected entry
 int gSpawnRequest = -1; // a model to spawn at the next game frame
 
@@ -701,7 +702,7 @@ int GasScale()
 
 bool Captured()
 {
-    return Modal();
+    return Modal() || gHoldoff;
 }
 
 bool OnKey(uint8_t dik, bool down)
@@ -889,7 +890,7 @@ uint32_t SteerWithStick(uint32_t bits)
     {
         SpawnRequested();
     }
-    if (Modal())
+    if (Captured())
     {
         // A menu is open: the character stands still, whatever was held when it opened
         return bits & ~0xFFFu;
@@ -1030,6 +1031,23 @@ const uint32_t* Frame()
 {
     plat::PadState pad;
     const bool havePad = FirstPad(pad) >= 0;
+    // The button that picked a car (A) is still down when the menu closes, and would be a jump
+    static bool wasModal = false;
+    if (wasModal && !Modal())
+    {
+        gHoldoff = true;
+    }
+    wasModal = Modal();
+    if (gHoldoff && !Modal())
+    {
+        bool held = false;
+        for (int slot = 0; havePad && slot < kButtonSlots; slot++)
+        {
+            held = held || pad.buttons[slot];
+        }
+        held = held || (havePad && (StickDirection(pad) != 0 || pad.guide));
+        gHoldoff = held;
+    }
     if (havePad)
     {
         LoadLegendSetting();

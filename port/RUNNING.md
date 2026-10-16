@@ -34,7 +34,7 @@ controls are set in the game's own options menu, or in the port's overlay:
 - The settings have two pages, **On foot** and **In a car** (LB/RB or Left/Right to switch). The game
   uses the one that fits where you are, and swaps when you get in or out of a car. In a car, the
   triggers bound to Forward and Backward are analog pedals: how far you press sets how hard the
-  engine pulls. **N** or L3 unbinds a control.
+  engine pulls. The right stick turns a tank's, fire truck's or gun jeep's turret. **N** or L3 unbinds a control.
 - The game binds each control to a key *or* a pad button, not both, so binding a pad button takes the
   control off its key.
 

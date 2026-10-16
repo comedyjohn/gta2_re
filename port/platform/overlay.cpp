@@ -1088,6 +1088,12 @@ uint32_t SteerWithStick(uint32_t bits)
                     active = true;
                 }
             }
+            // The right stick turns a turret (fire truck's cannon, tank, gun jeep) while it is pushed sideways
+            Car_BC* car = ped->get_car_416B60();
+            if (!bStartNetworkGame_7081F0 && pad.rightX * pad.rightX > 0.35 * 0.35 * 32767.0 * 32767.0)
+            {
+                car->HandleRoofTurretRotation_440D90(pad.rightX < 0 ? 1 : 0);
+            }
             if (travelled)
             {
                 double fraction = static_cast<double>(travelled - kTriggerDead) / (32767 - kTriggerDead);

@@ -430,6 +430,8 @@ bool GetPadState(int index, PadState& out)
     // Triggers as two more buttons
     out.buttons[b++] = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERLEFT) > 16000 ? 0x80 : 0;
     out.buttons[b++] = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) > 16000 ? 0x80 : 0;
+    out.rightX = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_RIGHTX);
+    out.rightY = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_RIGHTY);
     out.triggerLeft = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
     out.triggerRight = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
     out.guide = SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_GUIDE) != 0;

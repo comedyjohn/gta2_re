@@ -1437,9 +1437,9 @@ s32 NetPlay::MovePlayerToGroup_520040(DPID toFind, Network_Game_Session* pStru, 
                                            name,
                                            pDst);
 #else
-            u32 new_idx = AddPlayer_51E9C0((Network_8*)&pStru->field_10_players[i].field_24_pData,
+            u32 new_idx = AddPlayer_51E9C0(reinterpret_cast<Network_8*>(&pStru->field_10_players[i].field_24_pData),
                                            pStru->field_10_players[i].field_10_player_id,
-                                           *(DPNAME*)&pStru->field_10_players[i].field_14_dpname,
+                                           *reinterpret_cast<DPNAME*>(&pStru->field_10_players[i].field_14_dpname),
                                            pDst);
 #endif
             if (new_idx != 0xEEEEEEEE)

@@ -71,15 +71,15 @@ void DMA_Video_Unload_5EB8C0(SVideo* pVidSys)
     pVid_InitDLL = reinterpret_cast<T_Vid_InitDLL>(DMA_Video_Stub_5EB810);
 }
 
-#define load_gbh_func(varName, varType, funcName)                         \
-    varName = (varType)GetProcAddress(hDmaVideoDll_7085E8, funcName);     \
-    if (!varName)                                                         \
-    {                                                                     \
-        char_type Text[120];                                              \
-        sprintf(Text, "Can't Find Function Called %s", funcName);         \
-        MessageBoxA(nullptr, Text, "Error Patching DLL Function", MB_OK); \
-        FreeLibrary(hDmaVideoDll_7085E8);                                 \
-        return -1;                                                        \
+#define load_gbh_func(varName, varType, funcName)                                       \
+    varName = reinterpret_cast<varType>(GetProcAddress(hDmaVideoDll_7085E8, funcName)); \
+    if (!varName)                                                                       \
+    {                                                                                   \
+        char_type Text[120];                                                            \
+        sprintf(Text, "Can't Find Function Called %s", funcName);                       \
+        MessageBoxA(nullptr, Text, "Error Patching DLL Function", MB_OK);               \
+        FreeLibrary(hDmaVideoDll_7085E8);                                               \
+        return -1;                                                                      \
     }
 
 // 0x5EB970

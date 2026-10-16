@@ -57,6 +57,7 @@ endif()
 
 # The 3D renderer (port/world3d/PLAN.md). Off: nothing of it is compiled and its hooks in the game, the
 # renderer and the overlay (include/port_world3d.h) are empty inlines.
+option(GTA2_WERROR "Warnings in the game code are errors (the presets and check.sh turn it on)" OFF)
 option(GTA2_WORLD3D "Build the 3D renderer (port/world3d)" ON) # port: world3d
 if (GTA2_WORLD3D) # port: world3d
     add_compile_definitions(GTA2_WORLD3D) # port: world3d
@@ -107,7 +108,10 @@ add_library(gta2_game STATIC
 # game's), char subscripts (chars are signed on purpose and the indices small), format truncation
 # (snprintf cuts long messages short on purpose) and unknown pragmas (GTA2Hax's headers have VC6
 # ones).
-set(game_warnings -Wall -Wextra -Wextra-semi -Wundef -Wformat=2 -Wimplicit-fallthrough -Wzero-as-null-pointer-constant -Wwrite-strings -Wshadow $<$<CXX_COMPILER_ID:Clang>:-Wcomma> -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
+if (GTA2_WERROR)
+    set(game_werror -Werror)
+endif()
+set(game_warnings ${game_werror} -Wall -Wextra -Wextra-semi -Wundef -Wformat=2 -Wimplicit-fallthrough -Wzero-as-null-pointer-constant -Wwrite-strings -Wshadow -Wold-style-cast $<$<CXX_COMPILER_ID:Clang>:-Wcomma> -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
 gta2_game_target(gta2_game ${game_warnings})
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as

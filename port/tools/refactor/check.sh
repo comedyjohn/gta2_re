@@ -36,7 +36,7 @@ builds="linux32 linux64"
 [ $quick = 0 ] && builds="$builds clang64 noworld3d64"
 
 for p in $builds; do
-    step "build-$p" bash -c "cd port && $E cmake --build --preset $p"
+    step "build-$p" bash -c "cd port && $E cmake --preset $p >/dev/null && $E cmake --build --preset $p"
 done
 
 # A warning shows only when its TU is compiled, so this judges the files this change rebuilt.

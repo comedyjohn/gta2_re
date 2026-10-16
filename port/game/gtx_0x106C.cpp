@@ -473,16 +473,16 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
     }
 #else
     s32 size;
-    delta_entry* i = (delta_entry*)field_50_delta_buffer;
+    delta_entry* i = reinterpret_cast<delta_entry*>(field_50_delta_buffer);
 
     for (u32 offset = 0; offset < static_cast<u32>(field_60_delta_len); offset += size)
     {
         for (u32 delta_idx = 0; delta_idx < i->field_2_delta_count; delta_idx++)
         {
-            *(u32*)&i->field_4_delta[4 * delta_idx] += *(u32*)&field_48_delta_store; // TODO: fix me
+            *reinterpret_cast<u32*>(&i->field_4_delta[4 * delta_idx]) += *reinterpret_cast<u32*>(&field_48_delta_store); // TODO: fix me
         }
-        size = 8 * (u8)i->field_2_delta_count + 4;
-        i = (delta_entry*)((char_type*)i + size);
+        size = 8 * static_cast<u8>(i->field_2_delta_count) + 4;
+        i = reinterpret_cast<delta_entry*>(reinterpret_cast<char_type*>(i) + size);
     }
 #endif
 }
@@ -766,7 +766,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     }
     ::free(pFileEntries);
 #else
-    field_20_sprite_index = (sprite_index*)Memory::malloc_4FE4D0(sprx_chunk_size + 8);
+    field_20_sprite_index = reinterpret_cast<sprite_index*>(Memory::malloc_4FE4D0(sprx_chunk_size + 8));
     File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
 #endif
     if ((sprx_chunk_size & ~7u) > 524280)

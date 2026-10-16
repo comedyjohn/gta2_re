@@ -40,7 +40,8 @@ int main(int argc, char** argv)
                "  --audiotest          check the sound mixer\n"
                "  --nettest ...        check the network layer (see port/tools/nettest.sh)\n"
                "  --simcheck           print what network games compare between systems\n"
-               "  --replay FILE ...    play a replay headless and log the state hash (see port/platform/replay.cpp)\n\n%s",
+               "  --replay FILE ...    play a replay headless and log the state hash (see port/platform/replay.cpp)\n"
+               "  --record FILE ...    play, and save the session as a replay\n\n%s",
                PortNetUsage());
         return 0;
     }
@@ -48,7 +49,7 @@ int main(int argc, char** argv)
     // The network options are the port's (the lobby reads them); the rest is the game's
     std::vector<std::string> gameArgs;
     std::string error;
-    const bool replay = first == "--replay";
+    const bool replay = first == "--replay" || first == "--record";
     if (replay)
     {
         if (!port_replay_setup(argc, argv))

@@ -7,6 +7,11 @@
 // and "player" folders) and with a scratch registry, so a replay run never touches the real settings,
 // saves or replay. The debug settings it sets: play_replay, do_exit_after_replay, skip_frontend and
 // (unless --draw) skip_draw, which updates without waiting for the clock and never draws.
+//
+// gta2 --record FILE [--map wil|ste|bil|NAME]: plays the game normally, straight into a level, and
+// writes the replay of the session to FILE (debug setting do_release_replay). The registry is a
+// copy of the real one (controls, screen), without its debug settings. With --hash-log it logs the
+// hashes while playing: playing the replay back must log exactly the same.
 #include "port_replay.h"
 #include "statehash.h"
 
@@ -16,8 +21,10 @@
 
 #include <dirent.h>
 #include <ftw.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -31,8 +38,10 @@ namespace
 struct Options
 {
     std::string replay;
+    std::string record; // absolute
+    std::string map = "wil";
     std::string gameDir = ".";
-    std::string hashLog; // empty: stdout
+    std::string hashLog; // empty: stdout when replaying, none when recording
     long frames = -1; // stop after this many updates
     long hashEvery = 1;
     long breakAt = -1; // dump the state after this update, then stop
@@ -48,9 +57,16 @@ std::string gScratch;
 u32 gLastRecord; // replay records applied before this update
 long gSyncMismatches;
 bool gFinished; // the game returned normally
+volatile sig_atomic_t gStopRequested; // Ctrl+C or SIGTERM: end the game at the next update
+
+void OnStopSignal(int)
+{
+    gStopRequested = 1;
+}
 
 const char* const kUsage = "usage: gta2 --replay FILE [--game-dir DIR] [--hash-log FILE] [--frames N]\n"
-                           "                         [--hash-every K] [--break-at FRAME] [--draw] [--keep]\n";
+                           "                         [--hash-every K] [--break-at FRAME] [--draw] [--keep]\n"
+                           "       gta2 --record FILE [--map wil|ste|bil|NAME] [--game-dir DIR] [--hash-log FILE]\n";
 
 bool ParseLong(const char* s, long& out)
 {
@@ -68,6 +84,19 @@ bool Parse(int argc, char** argv, Options& o, std::string& error)
         if (a == "--replay" && hasValue)
         {
             o.replay = argv[++i];
+        }
+        else if (a == "--record" && hasValue)
+        {
+            o.record = argv[++i];
+            if (o.record[0] != '/')
+            {
+                char cwd[4096];
+                o.record = std::string(getcwd(cwd, sizeof(cwd)) ? cwd : ".") + "/" + o.record;
+            }
+        }
+        else if (a == "--map" && hasValue)
+        {
+            o.map = argv[++i];
         }
         else if (a == "--game-dir" && hasValue)
         {
@@ -115,30 +144,93 @@ bool Parse(int argc, char** argv, Options& o, std::string& error)
             return false;
         }
     }
-    if (o.replay.empty())
+    if (o.replay.empty() == o.record.empty())
     {
-        error = "no replay file";
+        error = "give either --replay or --record";
         return false;
     }
     return true;
 }
 
-// The registry file of win32.cpp: key, value name, type (4: DWORD) and the value's bytes in hex
-bool WriteRegistry(const std::string& file, bool draw)
+// The real registry file (platform/win32.cpp), before XDG_CONFIG_HOME is moved
+std::string RealRegistryFile()
+{
+    const char* base = getenv("XDG_CONFIG_HOME");
+    const char* home = getenv("HOME");
+    return (base && *base ? std::string(base) : std::string(home ? home : ".") + "/.config") + "/gta2-native/registry.txt";
+}
+
+const char* const kDebugKey = "hkey_local_machine\\software\\dma design ltd\\gta2\\debug";
+
+void WriteDword(FILE* f, const char* name)
+{
+    fprintf(f, "%s\t%s\t4\t01000000\n", kDebugKey, name);
+}
+
+// A string value (type 1), with its terminating zero
+void WriteString(FILE* f, const char* name, const std::string& value)
+{
+    fprintf(f, "%s\t%s\t1\t", kDebugKey, name);
+    for (char c : value)
+    {
+        fprintf(f, "%02x", static_cast<unsigned char>(c));
+    }
+    fprintf(f, "00\n");
+}
+
+// The registry file of win32.cpp: key, value name, type (4: DWORD, 1: string) and the value's bytes
+// in hex
+bool WriteRegistry(const std::string& file, const Options& o)
 {
     FILE* f = fopen(file.c_str(), "w");
     if (!f)
     {
         return false;
     }
-    std::vector<const char*> settings = {"play_replay", "do_exit_after_replay", "skip_frontend"};
-    if (!draw)
+    if (!o.record.empty())
     {
-        settings.push_back("skip_draw");
+        // The player's own settings, without debug settings that would change the game
+        if (FILE* real = fopen(RealRegistryFile().c_str(), "r"))
+        {
+            char line[4096];
+            while (fgets(line, sizeof(line), real))
+            {
+                if (strncmp(line, kDebugKey, strlen(kDebugKey)) != 0)
+                {
+                    fputs(line, f);
+                }
+            }
+            fclose(real);
+        }
+        WriteDword(f, "do_release_replay");
+        WriteDword(f, "skip_frontend");
+        // A known level, or any map with a style and script of the same name
+        std::string base = o.map;
+        if (base == "1" || base == "downtown")
+        {
+            base = "wil";
+        }
+        else if (base == "2" || base == "residential")
+        {
+            base = "ste";
+        }
+        else if (base == "3" || base == "industrial")
+        {
+            base = "bil";
+        }
+        WriteString(f, "mapname", base + ".gmp");
+        WriteString(f, "stylename", base + ".sty");
+        WriteString(f, "scriptname", base + ".scr");
     }
-    for (const char* name : settings)
+    else
     {
-        fprintf(f, "hkey_local_machine\\software\\dma design ltd\\gta2\\debug\t%s\t4\t01000000\n", name);
+        WriteDword(f, "play_replay");
+        WriteDword(f, "do_exit_after_replay");
+        WriteDword(f, "skip_frontend");
+        if (!o.draw)
+        {
+            WriteDword(f, "skip_draw");
+        }
     }
     fclose(f);
     return true;
@@ -218,9 +310,9 @@ std::string Lower(std::string s)
 bool MakeScratch(const Options& o, std::string& error)
 {
     const std::string game = Absolute(o.gameDir);
-    const std::string replay = Absolute(o.replay);
+    const std::string replay = o.replay.empty() ? "" : Absolute(o.replay);
     struct stat st;
-    if (replay.empty() || stat(replay.c_str(), &st) != 0 || !S_ISREG(st.st_mode))
+    if (!o.replay.empty() && (replay.empty() || stat(replay.c_str(), &st) != 0 || !S_ISREG(st.st_mode)))
     {
         error = "no replay at " + o.replay;
         return false;
@@ -272,12 +364,12 @@ bool MakeScratch(const Options& o, std::string& error)
         return false;
     }
     mkdir((scratchGame + "/test").c_str(), 0755);
-    if (!ok || !CopyFile(replay, scratchGame + "/test/replay.rep"))
+    if (!ok || (!replay.empty() && !CopyFile(replay, scratchGame + "/test/replay.rep")))
     {
         error = "can't set up the scratch folder " + gScratch;
         return false;
     }
-    if (!WriteRegistry(gScratch + "/config/gta2-native/registry.txt", o.draw))
+    if (!WriteRegistry(gScratch + "/config/gta2-native/registry.txt", o))
     {
         error = "can't write the scratch registry";
         return false;
@@ -340,8 +432,9 @@ bool port_replay_setup(int argc, char** argv)
         return false;
     }
     // Before MakeScratch moves into the scratch folder, so a relative path means the caller's folder
-    gLog = gOptions.hashLog.empty() ? stdout : fopen(gOptions.hashLog.c_str(), "w");
-    if (!gLog)
+    const bool recording = !gOptions.record.empty();
+    gLog = gOptions.hashLog.empty() ? (recording ? nullptr : stdout) : fopen(gOptions.hashLog.c_str(), "w");
+    if (!gLog && !gOptions.hashLog.empty())
     {
         fprintf(stderr, "gta2 --replay: can't write %s\n", gOptions.hashLog.c_str());
         return false;
@@ -354,11 +447,20 @@ bool port_replay_setup(int argc, char** argv)
     }
     setenv("XDG_CONFIG_HOME", (gScratch + "/config").c_str(), 1);
     port_registry_reload();
-    setenv("GTA2_NO_MESSAGE_BOX", "1", 1); // fatal errors go to stderr only
-    setenv("SDL_AUDIODRIVER", "dummy", 0);
-    fprintf(gLog, "# frame rng_count total rng sprites peds cars objects players script police\n");
+    if (!recording)
+    {
+        setenv("GTA2_NO_MESSAGE_BOX", "1", 1); // fatal errors go to stderr only
+        setenv("SDL_AUDIODRIVER", "dummy", 0);
+    }
+    if (gLog)
+    {
+        fprintf(gLog, "# frame rng_count total rng sprites peds cars objects players script police\n");
+    }
     gActive = true;
     atexit(AtExit);
+    // Ends the game as quitting it does, so a recording is saved
+    signal(SIGINT, OnStopSignal);
+    signal(SIGTERM, OnStopSignal);
     return true;
 }
 
@@ -372,13 +474,25 @@ int port_replay_finish(int result)
                 gSyncMismatches);
     }
     fprintf(stderr, "gta2 --replay: %ld updates\n", gFrame);
+    if (!gOptions.record.empty())
+    {
+        if (CopyFile(gScratch + "/game/test/replay.rep", gOptions.record))
+        {
+            fprintf(stderr, "gta2 --record: wrote %s\n", gOptions.record.c_str());
+        }
+        else
+        {
+            fprintf(stderr, "gta2 --record: no replay was written (%s)\n", gOptions.record.c_str());
+            result = result ? result : 1;
+        }
+    }
     Cleanup();
     return result;
 }
 
 void port_replay_before_update()
 {
-    if (!gActive)
+    if (!gActive || !gOptions.record.empty())
     {
         return;
     }
@@ -411,7 +525,7 @@ void port_replay_after_update()
         return;
     }
     gFrame++;
-    if (gFrame % gOptions.hashEvery == 0)
+    if (gLog && gFrame % gOptions.hashEvery == 0)
     {
         const StateHashes s = port_state_hash();
         fprintf(gLog, "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n", gFrame,
@@ -424,10 +538,10 @@ void port_replay_after_update()
     if (gFrame == gOptions.breakAt)
     {
         const std::string dump = port_state_dump();
-        fprintf(gLog, "# state after update %ld\n%s", gFrame, dump.c_str());
+        fprintf(gLog ? gLog : stdout, "# state after update %ld\n%s", gFrame, dump.c_str());
         RequestExit();
     }
-    if (gFrame == gOptions.frames)
+    if (gFrame == gOptions.frames || gStopRequested)
     {
         RequestExit();
     }

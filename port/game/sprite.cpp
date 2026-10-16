@@ -899,27 +899,6 @@ void Sprite::SetDefaultDrawLayerBySpriteType_59E960()
     }
 }
 
-// RotateAndTranslatePoint_42A720 with the out-of-line Fix16 operator copies
-static inline void RotateAndTranslatePoint_ool_42A720(const Fix16& pInX,
-                                                      const Fix16& pInY,
-                                                      const Ang16& pRotAng,
-                                                      Fix16& pTransX,
-                                                      Fix16& pTransY,
-                                                      Fix16& pRotTransX,
-                                                      Fix16& pRotTransY)
-{
-    pRotTransX = ((pInX - pTransX) * Ang16::cosine_40F520(pRotAng)).Add_408660((pInY - pTransY) * Ang16::sine_40F500(pRotAng));
-    pRotTransY =
-        ((pInX - pTransX).Negate_4086A0() * Ang16::sine_40F500(pRotAng)).Add_408660((pInY - pTransY) * Ang16::cosine_40F520(pRotAng));
-}
-
-// SpriteShape_4C::GetHalfExtents_4BA0A0 with the out-of-line Fix16 / s32 copy
-static inline void GetHalfExtents_ool_4BA0A0(SpriteShape_4C* pThis, Fix16* pHalfW, Fix16* pHalfH)
-{
-    *pHalfW = pThis->field_0_width.DivideInt_53E860(2);
-    *pHalfH = pThis->field_4_height.DivideInt_53E860(2);
-}
-
 // 0x59e9c0
 void Sprite::UpdateCollisionBoundsIfNeeded_59E9C0()
 {
@@ -974,21 +953,6 @@ s16 Sprite::GetTruePalette_59EAA0()
         return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(palette_types_enum::sprites_2, sprite_idx);
     }
     return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(field_34_palette_type, field_24_remap);
-}
-
-// https://decomp.me/scratch/5emc4
-// RotateAndTranslatePoint_42A720 as RotatedRectCollisionSAT_5A0380 gets it once it has run out of
-// inline expansions: the unary minus is the out-of-line copy (Negate_4086A0)
-static inline void RotateAndTranslatePoint_NegOOL_42A720(Fix16& pInX,
-                                                         Fix16& pInY,
-                                                         const Ang16& pRotAng,
-                                                         Fix16& pTransX,
-                                                         Fix16& pTransY,
-                                                         Fix16& pRotTransX,
-                                                         Fix16& pRotTransY)
-{
-    pRotTransX = (((pInX - pTransX) * Ang16::cosine_40F520(pRotAng)) + ((pInY - pTransY) * Ang16::sine_40F500(pRotAng)));
-    pRotTransY = (((pInX - pTransX).Negate_4086A0() * Ang16::sine_40F500(pRotAng)) + ((pInY - pTransY) * Ang16::cosine_40F520(pRotAng)));
 }
 
 // 0x59eae0
@@ -1376,19 +1340,19 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
     Fix16 half_width;
     Fix16 half_height;
 
-    GetHalfExtents_ool_4BA0A0(field_C_pCollisionShape, &half_width, &half_height);
+    field_C_pCollisionShape->GetHalfExtents_4BA0A0(&half_width, &half_height);
 
     Fix16 pRotTransX;
     Fix16 pRotTransY;
 
     // First rotation
-    RotateAndTranslatePoint_ool_42A720(pOtherRect->get_left_45ADB0(),
-                                       pOtherRect->get_top_45ADD0(),
-                                       -field_0_rotation,
-                                       field_14_xy.x,
-                                       field_14_xy.y,
-                                       pRotTransX,
-                                       pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRect->get_left_45ADB0(),
+                                   pOtherRect->get_top_45ADD0(),
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1399,13 +1363,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
     }
 
     // Second rotation
-    RotateAndTranslatePoint_ool_42A720(pOtherRect->get_right_45ADA0(),
-                                       pOtherRect->get_top_45ADD0(),
-                                       -field_0_rotation,
-                                       field_14_xy.x,
-                                       field_14_xy.y,
-                                       pRotTransX,
-                                       pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRect->get_right_45ADA0(),
+                                   pOtherRect->get_top_45ADD0(),
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1416,13 +1380,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
     }
 
     // Third rotation
-    RotateAndTranslatePoint_ool_42A720(pOtherRect->get_right_45ADA0(),
-                                       pOtherRect->get_bottom_45ADC0(),
-                                       -field_0_rotation,
-                                       field_14_xy.x,
-                                       field_14_xy.y,
-                                       pRotTransX,
-                                       pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRect->get_right_45ADA0(),
+                                   pOtherRect->get_bottom_45ADC0(),
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1433,13 +1397,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
     }
 
     // Fourth rotation
-    RotateAndTranslatePoint_ool_42A720(pOtherRect->get_left_45ADB0(),
-                                       pOtherRect->get_bottom_45ADC0(),
-                                       -field_0_rotation,
-                                       field_14_xy.x,
-                                       field_14_xy.y,
-                                       pRotTransX,
-                                       pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRect->get_left_45ADB0(),
+                                   pOtherRect->get_bottom_45ADC0(),
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1587,13 +1551,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     Fix16 pRotTransY;
 
     // First rotation
-    RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[0].x,
-                                          pOtherRenderRect[0].y,
-                                          -field_0_rotation,
-                                          field_14_xy.x,
-                                          field_14_xy.y,
-                                          pRotTransX,
-                                          pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRenderRect[0].x,
+                                   pOtherRenderRect[0].y,
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1604,13 +1568,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Second rotation
-    RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[1].x,
-                                          pOtherRenderRect[1].y,
-                                          -field_0_rotation,
-                                          field_14_xy.x,
-                                          field_14_xy.y,
-                                          pRotTransX,
-                                          pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRenderRect[1].x,
+                                   pOtherRenderRect[1].y,
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1621,13 +1585,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Third rotation
-    RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[2].x,
-                                          pOtherRenderRect[2].y,
-                                          -field_0_rotation,
-                                          field_14_xy.x,
-                                          field_14_xy.y,
-                                          pRotTransX,
-                                          pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRenderRect[2].x,
+                                   pOtherRenderRect[2].y,
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1638,13 +1602,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Fourth rotation
-    RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[3].x,
-                                          pOtherRenderRect[3].y,
-                                          -field_0_rotation,
-                                          field_14_xy.x,
-                                          field_14_xy.y,
-                                          pRotTransX,
-                                          pRotTransY);
+    RotateAndTranslatePoint_42A720(pOtherRenderRect[3].x,
+                                   pOtherRenderRect[3].y,
+                                   -field_0_rotation,
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   pRotTransX,
+                                   pRotTransY);
 
     if (pRotTransX >= half_width.Negate_4086A0() && pRotTransX <= half_width)
     {

@@ -371,8 +371,8 @@ class Ang8
     u8 rValue;
 };
 
-inline void RotateAndTranslatePoint_42A720(Fix16& pInX,
-                                           Fix16& pInY,
+inline void RotateAndTranslatePoint_42A720(const Fix16& pInX,
+                                           const Fix16& pInY,
                                            const Ang16& pRotAng,
                                            Fix16& pTransX,
                                            Fix16& pTransY,

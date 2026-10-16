@@ -14,6 +14,7 @@
 #include <cstring>
 #include <ctime>
 #include "GameSession_578.hpp"
+#include "port_overlay.h"
 
 constexpr s32 ATTRACT_COUNT = 3;
 
@@ -1098,6 +1099,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                 if (!gGame_0x40_67E008->IsPaused_416BC0())
                 {
                     gInputDevices_67B990->read_input_device_498DA0(reinterpret_cast<s32*>(control_status), 1);
+                    *control_status = port_steer_with_stick(*control_status); // port: the stick walks the way it points
                     InputRecorder_67F8B0::save_replay_inputs_4CED00(*control_status, saved_input);
                 }
                 else

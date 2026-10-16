@@ -1,10 +1,14 @@
 #include "overlay.h"
 #include "overlay_font.h"
 
+#include "Game_0x40.hpp"
 #include "InputRecorder_67F8B0.hpp"
+#include "Ped.hpp"
+#include "Player.hpp"
 #include "registry.hpp"
 
 #include <dinput.h>
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -27,6 +31,7 @@ const int kButtonSlots = 12; // PadState::buttons the game can bind: the ten but
 
 // The registry's control settings 0..11 are the game's; 12 is the overlay's own
 const int kLegendSetting = 12;
+const int kWorldDirectionsSetting = 13;
 
 // What each control does, from Player::CharacterControls_566520
 const char* const kActionNames[kActions] = {"Forward",     "Backward",     "Left",
@@ -50,6 +55,8 @@ uint32_t gCanvas[kWidth * kHeight];
 bool gSettingsOpen = false;
 bool gLegendOn = true;
 bool gLegendLoaded = false;
+bool gWorldDirections = true;
+bool gWorldLoaded = false;
 bool gLegendShown = false; // F1 pressed this run: show it even without a pad
 int gRow = 0;
 bool gListening = false;
@@ -75,6 +82,24 @@ void Refresh()
 {
     InputDevices_1 devices;
     devices.get_registry_controls_498C00();
+}
+
+void LoadWorldSetting()
+{
+    if (!gWorldLoaded)
+    {
+        gWorldLoaded = true;
+        gWorldDirections = gRegistry_6FF968.Set_Control_Setting_587010(kWorldDirectionsSetting, 1) != 0;
+    }
+}
+
+void ToggleWorldDirections()
+{
+    LoadWorldSetting();
+    gWorldDirections = !gWorldDirections;
+    gRegistry_6FF968.Write_Control_Setting(kWorldDirectionsSetting, gWorldDirections ? 1 : 0);
+    gStatus = gWorldDirections ? "Stick: the character walks the way the stick points"
+                               : "Stick: left and right turn the character, up walks forward";
 }
 
 int FirstPad(plat::PadState& pad)
@@ -265,7 +290,7 @@ void DrawLegend()
 void DrawSettings()
 {
     const int w = 592;
-    const int h = (kActions + 11) * kCharH + 16;
+    const int h = (kActions + 12) * kCharH + 16;
     const int x = (kWidth - w) / 2;
     const int y = (kHeight - h) / 2;
     Fill(x, y, w, h, kPanel);
@@ -287,6 +312,8 @@ void DrawSettings()
     Text(x + 8, line, kDim, "Up/Down select   Enter or A rebind   Del or X reset this one");
     line += kCharH;
     Text(x + 8, line, kDim, "P or Y pad preset   K keyboard defaults   Esc, B or F2 close");
+    line += kCharH;
+    Text(x + 8, line, kDim, std::string("M or R3 stick moves the way it points: ") + (gWorldDirections ? "on" : "off"));
     line += kCharH;
     Text(x + 8, line, kDim, "Pad buttons by position: A bottom, B right, X left, Y top");
 }
@@ -371,6 +398,10 @@ void UpdatePad()
             else if (pressed(3))
             {
                 ApplyPadPreset();
+            }
+            else if (pressed(9))
+            {
+                ToggleWorldDirections();
             }
         }
     }
@@ -565,6 +596,9 @@ bool OnKey(uint8_t dik, bool down)
         case DIK_K:
             ApplyKeyboardDefaults();
             break;
+        case DIK_M:
+            ToggleWorldDirections();
+            break;
         case DIK_ESCAPE:
             CloseSettings();
             break;
@@ -574,6 +608,59 @@ bool OnKey(uint8_t dik, bool down)
     return true;
 }
 
+uint32_t SteerWithStick(uint32_t bits)
+{
+    static bool injected = false;
+    const uint32_t kMoveBits = 0xF; // Forward, Backward, Left, Right
+    plat::PadState pad;
+    bool active = false;
+    uint32_t mine = 0;
+    if (FirstPad(pad) >= 0 && !gSettingsOpen)
+    {
+        LoadWorldSetting();
+        Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+        Ped* ped = player ? player->field_2C4_player_ped : nullptr;
+        const double x = pad.axisX / 32767.0;
+        const double y = pad.axisY / 32767.0;
+        // The stick's own trigger point (see dinput.cpp's Trigger)
+        if (gWorldDirections && ped && !ped->get_car_416B60() && ped->field_168_game_object && x * x + y * y > 0.4 * 0.4)
+        {
+            // Rotation 0 faces up the screen and grows to the left, 1440 to a turn
+            const double wanted = atan2(-x, -y) * 1440.0 / (2.0 * M_PI);
+            int diff = static_cast<int>(lround(wanted)) - ped->GetRotation().rValue;
+            diff = ((diff % 1440) + 1440 + 720) % 1440 - 720;
+            // Stop pressing a turn once the speed it has built up would carry it there
+            const int speed = player->field_8_turn_speed.rValue < 0 ? -player->field_8_turn_speed.rValue
+                                                                     : player->field_8_turn_speed.rValue;
+            const int dead = speed > 12 ? speed : 12;
+            if (diff > dead)
+            {
+                mine |= 4;
+            }
+            else if (diff < -dead)
+            {
+                mine |= 8;
+            }
+            if (diff < 300 && diff > -300)
+            {
+                mine |= 1;
+            }
+            active = true;
+        }
+    }
+    if (active)
+    {
+        injected = true;
+        return (bits & ~kMoveBits) | mine;
+    }
+    if (injected)
+    {
+        injected = false;
+        return bits & ~kMoveBits;
+    }
+    return bits;
+}
+
 const uint32_t* Frame()
 {
     plat::PadState pad;
@@ -581,6 +668,10 @@ const uint32_t* Frame()
     if (havePad)
     {
         LoadLegendSetting();
+    }
+    if (havePad)
+    {
+        LoadWorldSetting();
     }
     if (havePad || gSettingsOpen)
     {
@@ -608,3 +699,8 @@ const uint32_t* Frame()
     return gCanvas;
 }
 } // namespace overlay
+
+unsigned int port_steer_with_stick(unsigned int bits)
+{
+    return overlay::SteerWithStick(bits);
+}

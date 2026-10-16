@@ -26,6 +26,11 @@ bool Captured();
 // where nothing is drawn), or null when there is nothing to show.
 const uint32_t* Frame();
 
+// Called with the control bits of a live game frame (bit i is control i) before they are recorded:
+// with "world directions" on and the player on foot, the stick or d-pad sets Forward, Left and Right
+// so that the character turns to the direction the stick points, whichever way it is facing now.
+uint32_t SteerWithStick(uint32_t bits);
+
 // What the controls are called, in the game's order (mask indices 0..11 of InputRecorder_67F8B0)
 const char* ActionName(int action);
 // "Ctrl", "Space", "F5"; "Key 0x7F" for a code without a name

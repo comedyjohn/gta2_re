@@ -51,6 +51,33 @@ way it was recorded (each input record holds the random number of its moment, an
 compares them); a replay recorded with this port must not. `--record ... --hash-log live.log`
 also logs the hashes while you play: the playback's log must equal it.
 
+The playback ends with the last input record, so its log is the start of the live one: a session that
+ends standing still for a while has a longer live log.
+
+### The pad in replays
+
+The pad is read once per update (`platform/controls.cpp`), next to the keyboard, and its buttons
+become the same control bits the keys do. What the control bits can't hold is recorded as port
+records (`field_4_inputs` with bit 31 set, which the original's records never have; see
+`port/include/port_input.h`): the stick's heading and push, the gas trigger and the turret stick
+as small integers when they change, and a car spawned from the overlay's menu. Records written for
+the same update carry bit 30 and are applied with the one before them. The game applies these
+values in its own code (`port_input_apply`, `port_walk_speed`, `port_gas_scale`), so a pad session
+plays back exactly. Replays of the original game have none of them and play as before.
+
+`GTA2_TEST_PAD=FILE` replaces the pad with a script, to record a pad session headless:
+
+```bash
+Xvfb :97 &
+DISPLAY=:97 SDL_AUDIODRIVER=dummy GTA2_TEST_PAD=port/tests/fixtures/pad-session.txt \
+    timeout -s INT 60 build_port/linux32/gta2 --record pad.rep --map wil --game-dir ~/Games/gta2/game --hash-log live.log
+build_port/linux32/gta2 --replay pad.rep --game-dir ~/Games/gta2/game --hash-log play.log
+n=$(wc -l < play.log)   # the simulation's columns are equal up to the end of play.log; the audio
+diff <(cut -d' ' -f1-11 play.log) <(head -n $n live.log | cut -d' ' -f1-11)   # column may differ live
+```
+
+The corpus's `00-synthetic-pad` was recorded this way.
+
 Use `--update` after adding a replay, and in a `Fix:` commit that changes what the game does
 (port/refactor/README.md, rule 2); never to make a refactor pass.
 

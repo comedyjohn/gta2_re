@@ -387,6 +387,17 @@ bool MakeScratch(const Options& o, std::string& error)
         error = "can't write the scratch registry";
         return false;
     }
+    // A made-up pad (platform/controls.cpp) given relative to where gta2 was started
+    if (const char* pad = getenv("GTA2_TEST_PAD"); pad && *pad && *pad != '/')
+    {
+        const std::string path = Absolute(pad);
+        if (path.empty())
+        {
+            error = std::string("no GTA2_TEST_PAD file ") + pad;
+            return false;
+        }
+        setenv("GTA2_TEST_PAD", path.c_str(), 1);
+    }
     if (chdir(scratchGame.c_str()) != 0)
     {
         error = "can't enter " + scratchGame;

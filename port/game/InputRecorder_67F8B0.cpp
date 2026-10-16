@@ -14,7 +14,13 @@
 #include <cstring>
 #include <ctime>
 #include "GameSession_578.hpp"
-#include "port_overlay.h"
+#include "port_input.h"
+
+namespace
+{
+// port: the keyboard's part of the control bits, kept apart from the pad's (get_input_bits_4CEAC0)
+u32 gPortKeyboardBits = 0;
+} // namespace
 
 constexpr s32 ATTRACT_COUNT = 3;
 
@@ -275,8 +281,15 @@ void InputDevices_1::get_registry_controls_498C00()
 {
     for (u32 i = 0; i < 12; ++i)
     {
-        const u32 setting = gRegistry_6FF968.Set_Control_Setting_587010(i, gDefaultControls_61A9E4[i]);
-        gMaybeDeviceType_67B91C[i] = setting >> 15;
+        u32 setting = gRegistry_6FF968.Set_Control_Setting_587010(i, gDefaultControls_61A9E4[i]);
+        // port: the game's bindings are the keyboard's, the pad has its own (platform/padinput.h). A pad
+        // binding or no key, as older builds of the port left in the registry, goes back to the default key.
+        if ((setting >> 15) != 0 || (setting & 0xFF) == 0)
+        {
+            setting = gDefaultControls_61A9E4[i];
+            gRegistry_6FF968.Write_Control_Setting(i, setting);
+        }
+        gMaybeDeviceType_67B91C[i] = 0;
         gPlayerControlsBinding_67B6E8[i] = static_cast<u8>(setting);
     }
 }
@@ -868,6 +881,8 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     this->field_8_input_masks[11] = 0x800;
     this->field_4_input_bits = 0;
     this->field_38_replay_state = ReplayState::Attract_3;
+    port_input_reset(); // port
+    gPortKeyboardBits = 0;
     gInputDevices_67B990->input_devices_init_498C40(hInstance);
     memset(this->field_3C_rec_buff, 0, sizeof(this->field_3C_rec_buff));
     this->field_75340_rec_buf_idx = 0;
@@ -908,6 +923,8 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     field_8_input_masks[11] = 0x800;
     field_4_input_bits = 0;
     field_38_replay_state = ReplayState::Live_0;
+    port_input_reset(); // port
+    gPortKeyboardBits = 0;
 
     gInputDevices_67B990 = new InputDevices_1();
     if (!gInputDevices_67B990)
@@ -994,6 +1011,76 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 }
 
 // https://decomp.me/scratch/t5tNu
+// port: the pad's records in a replay (port/include/port_input.h)
+namespace
+{
+// As save_replay_record_4CDE20, without its filtering of key codes (a port record has none)
+void SavePortRecord(InputRecorder_67F8B0& rec, u32 inputs)
+{
+    if (rec.field_75340_rec_buf_idx < InputRecorder_67F8B0::k_max_records && rec.field_38_replay_state == ReplayState::Live_0)
+    {
+        InputRecord_C& r = rec.field_3C_rec_buff[rec.field_75340_rec_buf_idx];
+        r.field_4_inputs = inputs;
+        r.field_0_rng_idx = gpRng_67AB34->get_cur_rng_41CFE0();
+        r.field_8_rng_rnd = gpRng_67AB34->get_rnd_45F9E0();
+        if (bConstant_replay_save_67D5C4 == 1)
+        {
+            u32 rec_len = sizeof(InputRecord_C);
+            File::AppendBufferToFile_4A6F50("test\\replay.rep", &r, &rec_len);
+        }
+        rec.field_75340_rec_buf_idx++;
+    }
+}
+
+// Live: records the pad's analog state when it changed, and a car spawn, and puts them in force.
+// `withPrevious`: a record of the control bits was just written for this update.
+void RecordPad(InputRecorder_67F8B0& rec, const PortPadFrame& pad, bool withPrevious)
+{
+    if (pad.analog != port_input_analog())
+    {
+        SavePortRecord(rec, kPortRecord | (withPrevious ? kPortWithPrevious : 0) | pad.analog);
+        port_input_set_analog(pad.analog);
+        withPrevious = true;
+    }
+    if (pad.spawn >= 0)
+    {
+        SavePortRecord(rec, kPortRecord | kPortSpawn | (withPrevious ? kPortWithPrevious : 0) | (pad.spawn & 0xFF));
+        port_input_spawn(pad.spawn);
+    }
+}
+
+void ApplyPortRecord(u32 inputs)
+{
+    if (inputs & kPortSpawn)
+    {
+        port_input_spawn(inputs & 0xFF);
+    }
+    else
+    {
+        port_input_set_analog(inputs & kPortPayload);
+    }
+}
+
+// Playback: the record just taken (`inputs`) may be a port record, and port records written for the
+// same update follow it. Applies them and returns the control bits to toggle.
+u32 TakePortRecords(InputRecorder_67F8B0& rec, u32 inputs)
+{
+    if (inputs & kPortRecord)
+    {
+        ApplyPortRecord(inputs);
+        inputs = 0;
+    }
+    while (rec.field_75340_rec_buf_idx < rec.field_7533C_used_recs_count &&
+           (rec.field_3C_rec_buff[rec.field_75340_rec_buf_idx].field_4_inputs & (kPortRecord | kPortWithPrevious)) ==
+               (kPortRecord | kPortWithPrevious))
+    {
+        ApplyPortRecord(rec.field_3C_rec_buff[rec.field_75340_rec_buf_idx].field_4_inputs);
+        rec.field_75340_rec_buf_idx++;
+    }
+    return inputs;
+}
+} // namespace
+
 // 0x4ceac0
 u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
 {
@@ -1014,6 +1101,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;
+                inputs = TakePortRecords(*this, inputs); // port
                 if (field_75340_rec_buf_idx >= field_7533C_used_recs_count)
                 {
                     if (bDo_exit_after_replay_67D6E4)
@@ -1060,6 +1148,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;
+                inputs = TakePortRecords(*this, inputs); // port
                 if (field_75340_rec_buf_idx >= field_7533C_used_recs_count)
                 {
                     gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, GameExitType::ReplayExit_6);
@@ -1098,9 +1187,16 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             {
                 if (!gGame_0x40_67E008->IsPaused_416BC0())
                 {
+                    // port: the keyboard's controls (those still held: unpausing or a menu clears them), then
+                    // the pad's on top, and its analog state recorded after the control bits
+                    *control_status = (*control_status & ~0xFFFu) | (gPortKeyboardBits & *control_status);
                     gInputDevices_67B990->read_input_device_498DA0(reinterpret_cast<s32*>(control_status), 1);
-                    *control_status = port_steer_with_stick(*control_status); // port: the stick walks the way it points
+                    gPortKeyboardBits = *control_status & 0xFFF;
+                    const PortPadFrame pad = port_input_read();
+                    *control_status = pad.captured ? (*control_status & ~0xFFFu) : (*control_status | pad.bits);
+                    const u32 records = field_75340_rec_buf_idx;
                     InputRecorder_67F8B0::save_replay_inputs_4CED00(*control_status, saved_input);
+                    RecordPad(*this, pad, field_75340_rec_buf_idx != records);
                 }
                 else
                 {
@@ -1126,7 +1222,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         }
     }
-    return *control_status;
+    return port_input_apply(*control_status); // port: the stick's heading turns the character
 }
 
 // 0x4ced00

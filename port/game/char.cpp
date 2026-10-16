@@ -31,6 +31,7 @@
 #include "sprite.hpp"
 #include "winmain.hpp"
 #include "ped_graphic_type.hpp"
+#include "port_input.h"
 
 // Ped.cpp
 EXTERN_GLOBAL(Fix16, kFpPoint02_6FD9AC);
@@ -3563,21 +3564,23 @@ void Char_B4::state_0_54DDF0()
         {
             if (field_7C_pPed->GetMoveDirection_45C9B0() > kFP16Zero_6FD9E4) // line 53c
             {
+                // port: the pad's stick walks as fast as it is pushed (port/include/port_input.h)
+                const Fix16 walk_speed(port_walk_speed(field_7C_pPed, field_3C_run_or_jump_speed.mValue), 0);
                 if (field_38_velocity == kZeroVelocity_6FD7C0)
                 {
-                    this->field_38_velocity = this->field_3C_run_or_jump_speed;
+                    this->field_38_velocity = walk_speed;
                     field_58_flags &= ~8;
                 }
                 else
                 {
-                    if (field_38_velocity < field_3C_run_or_jump_speed)
+                    if (field_38_velocity < walk_speed)
                     {
                         this->field_38_velocity += dword_6FD99C;
                         field_58_flags &= ~8;
                     }
                     else
                     {
-                        if (field_38_velocity > field_3C_run_or_jump_speed)
+                        if (field_38_velocity > walk_speed)
                         {
                             this->field_38_velocity -= dword_6FD99C;
                         }

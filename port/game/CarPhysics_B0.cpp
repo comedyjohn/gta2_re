@@ -4,7 +4,7 @@
 #include "ped_death_cause.hpp"
 #include "explosion_type.hpp"
 #include "CarPhysics_B0.hpp"
-#include "port_overlay.h"
+#include "port_input.h"
 #include "CarAI_78.hpp"
 #include "CarInfo_808.hpp"
 #include "Globals.hpp"

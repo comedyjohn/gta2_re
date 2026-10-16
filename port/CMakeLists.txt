@@ -152,6 +152,8 @@ add_library(gta2_platform STATIC
     platform/dinput.cpp
     platform/renderer.cpp
     platform/overlay.cpp
+    platform/controls.cpp
+    platform/padinput.cpp
     platform/mss.cpp
     platform/ptr32.cpp
     platform/selftest.cpp

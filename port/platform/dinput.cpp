@@ -2,6 +2,7 @@
 // controllers as joysticks. As real DirectInput does, a device lays out its state and its buffered
 // events by the data format the game sets (the game defines its own: gKeyboardDataFormat_601A54,
 // gInputDeviceFormat_601A6C, gMouseDataFormat_601A84).
+#include "controls.h"
 #include "events.h"
 #include "overlay.h"
 #include "platform.h"
@@ -25,13 +26,6 @@ enum class Kind
 };
 
 // A pad's instance GUID: GUID_Joystick with the pad index in the last byte
-GUID PadGuid(int index)
-{
-    GUID g = GUID_Joystick;
-    g.Data4[7] = static_cast<BYTE>(index + 1);
-    return g;
-}
-
 int PadIndexFromGuid(const GUID& g)
 {
     GUID base = g;
@@ -237,6 +231,7 @@ class DirectInputDevice final : public IDirectInputDevice2A
             if (mKind == Kind::Keyboard && size >= 256 && !overlay::Captured())
             {
                 plat::GetKeyboardState(out);
+                controls::MenuKeys(out); // the pad in the front end's menus
             }
             return DI_OK;
         }
@@ -634,27 +629,10 @@ class DirectInput final : public IDirectInputA
         }
         return DI_OK;
     }
-    HRESULT EnumDevices(DWORD devType, LPDIENUMDEVICESCALLBACKA callback, LPVOID ref, DWORD) override
+    HRESULT EnumDevices(DWORD, LPDIENUMDEVICESCALLBACKA, LPVOID, DWORD) override
     {
-        if (devType != 0 && devType != DIDEVTYPE_JOYSTICK)
-        {
-            return DI_OK;
-        }
-        for (int i = 0; i < plat::PadCount(); i++)
-        {
-            DIDEVICEINSTANCEA info;
-            memset(&info, 0, sizeof(info));
-            info.dwSize = sizeof(info);
-            info.guidInstance = PadGuid(i);
-            info.guidProduct = PadGuid(i);
-            info.dwDevType = DIDEVTYPE_JOYSTICK;
-            snprintf(info.tszInstanceName, sizeof(info.tszInstanceName), "%s", plat::PadName(i));
-            snprintf(info.tszProductName, sizeof(info.tszProductName), "%s", plat::PadName(i));
-            if (callback(&info, ref) == DIENUM_STOP)
-            {
-                break;
-            }
-        }
+        // No joysticks: the game's own pad support (one device per control, the stick as four
+        // buttons) is not offered. The pad is read by platform/controls.cpp, next to the keyboard.
         return DI_OK;
     }
     HRESULT GetDeviceStatus(REFGUID guid) override

@@ -16,27 +16,48 @@ You need your own copy of GTA2: an installed game folder, or its installer (an I
 3. Run `./gta2-launch`. The first time, it unpacks the installer into `game/` (this takes a minute);
    after that it starts straight away.
 
-Settings are kept in `~/.config/gta2-native/registry.txt`; delete it to go back to the defaults.
-Alt+Enter switches between a window and fullscreen. Keyboards and game controllers work; the
-controls are set in the game's own options menu, or in the port's overlay:
+Settings are kept in `~/.config/gta2-native/registry.txt` and the pad's layouts in
+`~/.config/gta2-native/pad.txt`; delete them to go back to the defaults. Alt+Enter switches between a
+window and fullscreen.
 
-- **F1** shows or hides a legend of what each control is bound to (shown by default when a controller
-  is connected).
+The keyboard and a game controller work at the same time: every control has a key and a pad input,
+and either one works. The keys are the game's own (set in its options menu or in the overlay); the pad
+has a layout for walking and one for driving. In the menus the pad works as the arrow keys (stick or
+d-pad), Enter (A or Start) and Esc (B or Back).
+
+The pad's defaults:
+
+| | On foot | In a car |
+|---|---|---|
+| Left stick, d-pad | walk the way it points, as fast as it is pushed | steer |
+| RT / LT | special 3 / special 2 | gas / brake and reverse, analog |
+| X | fire (punch) | special 2 |
+| Y | enter a car | leave the car |
+| A | jump | handbrake |
+| B | special 1 | horn |
+| RB / LB | next / previous weapon | fire / previous weapon |
+| Right stick | | turns a tank's, fire truck's or gun jeep's turret |
+
+The port's overlay:
+
+- **F1** shows or hides a legend of the controls (shown by default when a controller is connected).
 - **F2**, the controller's **Guide / Home** button, or **Back + Start** together opens the settings:
-  pick a control with Up/Down (or the d-pad), press Enter (or A) and then the pad button or key to
-  bind. Delete (or X) puts the control back on its key, **P** (or Y) binds the whole pad to a layout
-  that drives with the d-pad, **K** restores the keyboard keys. The game is paused from input while the
-  settings are open. Pad buttons are named by position, as on an Xbox pad: A bottom, B right, X left,
-  Y top (8BitDo pads in Switch mode label them differently).
+  pick a control with Up/Down (or the d-pad), press Enter (or A) and then the key or pad button to
+  bind: a key sets the control's key, a pad button its pad input on the page shown. The pages are
+  **On foot** and **In a car** (LB/RB or Left/Right); keys are the same on both. Delete (or X) resets
+  the control, **N** (or L3) takes its pad input away, **P** (or Y) puts both pad layouts back to the
+  defaults, **K** the keys, **M** (or R3) switches the stick between walking the way it points and the
+  game's own turn-left/turn-right controls. The game sees no input while the settings are open, and a
+  button still held when they close does nothing until it is let go. Pad buttons are named by position,
+  as on an Xbox pad: A bottom, B right, X left, Y top (8BitDo pads in Switch mode label them
+  differently).
 - **F5**, or **Start** on the pad, opens a list of cars: Up/Down (or the stick) to choose, LB/RB to page,
   Enter or A to spawn it next to you (on open ground, in front of you if there is room), B, Start or
   Esc to close. Not in a network game.
-- The settings have two pages, **On foot** and **In a car** (LB/RB or Left/Right to switch). The game
-  uses the one that fits where you are, and swaps when you get in or out of a car. In a car, the
-  triggers bound to Forward and Backward are analog pedals: how far you press sets how hard the
-  engine pulls. The right stick turns a tank's, fire truck's or gun jeep's turret. **N** or L3 unbinds a control.
-- The game binds each control to a key *or* a pad button, not both, so binding a pad button takes the
-  control off its key.
+- Getting into or out of a car switches the pad layout. A button held at that moment does nothing until
+  it is let go, so the Y that got you in does not get you straight out again.
+- Everything the pad does, the stick's direction and speed, the pedals, the turret and a spawned car
+  included, is in a recorded replay (`gta2 --record`) and plays back exactly.
 
 The game plays its music from a `GTAUDIO` folder, which came on the original CD (the game looks for
 it as `GTAUDIO` on every drive letter). Copy that folder into the game folder, next to `data/`, to

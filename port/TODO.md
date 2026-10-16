@@ -33,18 +33,23 @@ Read this first when picking the port up again. `README.md` explains how the por
 11. The 64-bit build starts a game: the light grid was allocated for 4-byte pointers and corrupted
     the heap. Found with AddressSanitizer.
 
-12. The controller overlay (`platform/overlay.cpp`, `overlay.h`, `include/port_overlay.h`; tests in
-    `tests/test_overlay.cpp`). Checked headless under Xvfb with a pad connected, not yet played much:
-    - F1 legend of the bindings; F2 / Guide / Back+Start settings with an On foot and an In a car page
-      (LB/RB), rebinding, N/L3 unbind, P/Y pad layouts, K keyboard defaults, M/R3 world-direction walking.
-    - Start / F5: car spawn menu (`SpawnRequested`, spawns on open ground next to the player).
+12. Keyboard and pad input (`platform/padinput.cpp` the pad layer, `platform/controls.cpp` its link to
+    the game, `include/port_input.h` the game's hooks, `platform/overlay.cpp` the menus; tests in
+    `tests/test_padinput.cpp`, `tests/test_overlay.cpp` and the corpus replay `00-synthetic-pad`):
+    - Every control has a key (the game's own binding) and a pad input (a layout for walking and one
+      for driving, in `pad.txt`); both work at once. The game's own one-device-per-control pad support
+      is no longer offered to it. Keys bound to pad buttons by older builds go back to their default.
+    - The pad is read once per update; the stick's heading and push, the gas trigger, the turret stick
+      and a spawned car are recorded in replays as port records and applied by game code, so pad
+      sessions replay exactly (on every build).
     - Walking: the stick sets the heading (the character turns to it), speed follows the push
-      (`SteerWithStick`, called from `InputRecorder_67F8B0::get_input_bits_4CEAC0`'s live branch).
-    - Driving: triggers bound to Forward/Backward are analog pedals (`port_gas_scale` in
-      `CarPhysics_B0::ComputeEngineTorque_561970`), RB fires, right stick turns turrets.
-    - The stick counts as four buttons at 40% of travel (`Trigger` in `platform/dinput.cpp`).
-    - Menus stand the character still and hold the game off the pad until its buttons are let go.
-    - `GTA2_STEERLOG=file` logs the walking steering.
+      (`port_input_apply`, `port_walk_speed` in `char.cpp`). Driving: triggers bound to Forward/Backward
+      are analog pedals (`port_gas_scale` in `CarPhysics_B0::ComputeEngineTorque_561970`), right stick
+      turns turrets.
+    - F1 legend, F2 / Guide / Back+Start settings, Start / F5 car spawn menu; the pad drives the
+      front end's menus. A button held when the layout changes or a menu closes waits to be let go.
+    - `GTA2_TEST_PAD=file` replaces the pad with a script (`tests/fixtures/pad-session.txt`).
+    - The registry is saved through a temporary file, so it can't be left half written.
 
 ## Left to do
 
@@ -66,12 +71,16 @@ The order follows what a player notices first.
 
 ### Polish
 - [ ] **Controller overlay follow-ups** (see item 12): play-test on the 8BitDo Pro 2 (walking directions,
-      analog speed, driving, turret); F1/F2 shadow the game's radio keys (move the overlay to F7/F8, or
+      analog speed, driving, turret, the new input layer); F1/F2 shadow the game's radio keys (move the overlay to F7/F8, or
       put the radio on the pad); the turret turn sound (`field_B8_turret_rotated` is reset by
       `HandleUserInput`) and an analog turret speed; spawned cars' facing and the other models; names of
       controls 9..11 against the game's options menu; a tank page of its own; pausing the world while a
-      menu is open; run `tools/replaytest.sh` and the 32-bit build (the input hook and the torque scale
-      changed game code); the stick labels say "D-pad" for the stick too.
+      menu is open; the spawn position uses the C library's sin/cos (a pad replay with a spawn could
+      differ between x86 and ARM).
+- [ ] **ASan: texture upload reads past the tile buffer, sometimes.** `SetTexture` (`renderer.cpp:428`,
+      from `TextureCache_15D8::ReadTextures_5B92E0`) reads one byte after the 4,128,768-byte tile buffer
+      `gtx_0x106C::load_tiles_5AADF0` allocates. Seen 2026-10-16 in about one corpus replay in four under
+      `asan64`, a different one each run (also before the input rework); the plain builds don't notice.
 - [ ] **Radio hitch.** Streams are decoded whole when opened (`SDL_LoadWAV`). Decode in chunks to
       remove the hitch when the radio station changes.
 - [ ] **ImGui debug overlay** (`ImGuiDebug.cpp`). It needs ImGui's OpenGL backend; until then

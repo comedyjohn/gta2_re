@@ -52,12 +52,29 @@
 
 DEFINE_GLOBAL_INIT(s16, gNextThreadId_6212EE, 1, 0x6212EE);
 
-DEFINE_GLOBAL_ARRAY_INIT(
-    u8,
-    kDecidePowerupGenTypes_6212F0,
-    19,
-    0x6212F0,
-    0x41u COMMA 0x42u COMMA 0x43u COMMA 0x44u COMMA 0x45u COMMA 0x46u COMMA 0x47u COMMA 0x48u COMMA 0x49u COMMA 0x5Eu COMMA 0x5Fu COMMA 0x60u COMMA 0x61u COMMA 0x62u COMMA 0x63u COMMA 0x64u COMMA 0x65u COMMA 0x66u COMMA 0x67u);
+DEFINE_GLOBAL_ARRAY_INIT(u8,
+                         kDecidePowerupGenTypes_6212F0,
+                         19,
+                         0x6212F0,
+                         0x41u,
+                         0x42u,
+                         0x43u,
+                         0x44u,
+                         0x45u,
+                         0x46u,
+                         0x47u,
+                         0x48u,
+                         0x49u,
+                         0x5Eu,
+                         0x5Fu,
+                         0x60u,
+                         0x61u,
+                         0x62u,
+                         0x63u,
+                         0x64u,
+                         0x65u,
+                         0x66u,
+                         0x67u);
 
 DEFINE_GLOBAL(miss2_0x11C_Pool*, miss2_0x11C_Pool_6F8064, 0x6F8064);
 DEFINE_GLOBAL(SCR_POINTER*, gBasePtr_6F8070, 0x6F8070);

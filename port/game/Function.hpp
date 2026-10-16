@@ -5,20 +5,11 @@
 #include <cstddef>
 #include <cstdio>
 
-// Variadic macros were added in C99, but this is not supported by VC6.
-// We need to use variadic args for the DEFINE_GLOBAL_ARRAY_INIT macro.
-// If we use a regular parameter instead of the ellipsis and ignore the
-// C4002 "too many parameters for macro" warning, this will not properly
-// initialize the array. An array of structs will fail to compile at all.
-// This leads us to this ugly hack to include commas in macro expansion
-// but not confuse the compiler with extra parameters.
-#define COMMA ,
-
 #define DEFINE_GLOBAL(type, name, addr) type name
 #define DEFINE_GLOBAL_INIT(type, name, value, addr) type name = value
 
 #define DEFINE_GLOBAL_ARRAY(type, name, size, addr) type name[size]
-#define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, va_args) type name[size] = {va_args}
+#define DEFINE_GLOBAL_ARRAY_INIT(type, name, size, addr, ...) type name[size] = {__VA_ARGS__}
 
 #define EXTERN_GLOBAL(type, name) extern type name
 #define EXTERN_GLOBAL_ARRAY(type, name, size) extern type name[size]

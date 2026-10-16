@@ -14,44 +14,140 @@ DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine_18,
                          gDefaultHiScores_6242B0,
                          10,
                          0x6242B0,
-                         {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {
-                             L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {
-                             L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA);
-DEFINE_GLOBAL_ARRAY_INIT(
-    ScoreTableLine_18,
-    gDefaultStageHiScores_6243A0,
-    120,
-    0x6243A0, //, , 3][4][10, 0xUNKNOWN);
-    {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {
-        L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {
-        L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {
-        L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {
-        L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {
-        L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {
-        L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {
-        L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA {L"ALISDAIR" COMMA 50000} COMMA {L"BILLY" COMMA 40000} COMMA {
-        L"BRIAN" COMMA 30000} COMMA {L"COLIN" COMMA 20000} COMMA {L"IAIN" COMMA 10000} COMMA {L"IAN" COMMA 9000} COMMA {
-        L"KEITH" COMMA 8000} COMMA {L"MARTIN" COMMA 7000} COMMA {L"STEPHEN" COMMA 6000} COMMA {L"WILLIAM" COMMA 5000} COMMA);
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000}, );
+DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine_18,
+                         gDefaultStageHiScores_6243A0,
+                         120,
+                         0x6243A0, //, , 3][4][10, 0xUNKNOWN);
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000},
+                         {L"ALISDAIR", 50000},
+                         {L"BILLY", 40000},
+                         {L"BRIAN", 30000},
+                         {L"COLIN", 20000},
+                         {L"IAIN", 10000},
+                         {L"IAN", 9000},
+                         {L"KEITH", 8000},
+                         {L"MARTIN", 7000},
+                         {L"STEPHEN", 6000},
+                         {L"WILLIAM", 5000}, );
 
 // TODO
 EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);

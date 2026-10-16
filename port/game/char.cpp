@@ -6960,4 +6960,3 @@ void Char_B4::nullsub_28()
 {
 }
 
-// 0x5519f0

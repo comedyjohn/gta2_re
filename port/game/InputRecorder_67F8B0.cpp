@@ -49,12 +49,22 @@ DEFINE_GLOBAL(mini_device_obj_data, gGamePadDeviceData_67B5B0, 0x67B5B0);
 
 // The default key for each control, as DirectInput key codes: Up, Down, Left, Right, left Ctrl,
 // Enter, Space, Z, X, Tab, left Alt, right Shift (values from 10.5.exe)
-DEFINE_GLOBAL_ARRAY_INIT(
-    s32,
-    gDefaultControls_61A9E4,
-    12,
-    0x61A9E4,
-    0xC8 COMMA 0xD0 COMMA 0xCB COMMA 0xCD COMMA 0x1D COMMA 0x1C COMMA 0x39 COMMA 0x2C COMMA 0x2D COMMA 0x0F COMMA 0x38 COMMA 0x36);
+DEFINE_GLOBAL_ARRAY_INIT(s32,
+                         gDefaultControls_61A9E4,
+                         12,
+                         0x61A9E4,
+                         0xC8,
+                         0xD0,
+                         0xCB,
+                         0xCD,
+                         0x1D,
+                         0x1C,
+                         0x39,
+                         0x2C,
+                         0x2D,
+                         0x0F,
+                         0x38,
+                         0x36);
 DEFINE_GLOBAL_ARRAY(s32, gMaybeDeviceType_67B91C, 12, 0x67B91C);
 DEFINE_GLOBAL_ARRAY(u32, gPlayerControlsBinding_67B6E8, 12, 0x67B6E8);
 

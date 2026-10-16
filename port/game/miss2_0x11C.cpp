@@ -670,7 +670,7 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
 
     if (pTargetCmd->field_C_homecrane)
     {
-        auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pTargetCmd->field_C_homecrane);
+        auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pTargetCmd->field_C_homecrane));
         pBasicCmd->field_8_crane->set_maybe_homecrane_476900(pPointer->field_8_crane);
     }
 }
@@ -748,8 +748,8 @@ void miss2_0x11C::SCRCMD_CRUSHER_BASIC_5045A0(SCR_CRUSHER_BASIC* pCmd, SCR_POINT
 void miss2_0x11C::SCRCMD_THREAD_DECLARE2_5045D0(SCR_THREAD* pThread, s16* pThreadIdx)
 {
     SCR_THREAD* pCmd = pThread;
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_car_or_phone_idx);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_car_or_phone_idx));
 
     if (pParam1->field_8_char && pParam2->field_8_car)
     {
@@ -763,7 +763,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660(SCR_THREAD* pThread)
 {
     SCR_THREAD* pCmd = pThread;
 
-    if (((SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_char_idx))->field_8_char)
+    if ((static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_char_idx)))->field_8_char)
     {
         pCmd->field_15_trigger_idx = gCarThreadTriggers_214_705F20->AddThreadTrigger_5C86C0(4,
                                                                                             2,
@@ -780,7 +780,7 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660(SCR_THREAD* pThread)
 // 0x504710
 void miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(SCR_CHAR_AREA_ANY* pCmd)
 {
-    if (((SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_24_char_idx))->field_8_char)
+    if ((static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_24_char_idx)))->field_8_char)
     {
         pCmd->field_27_flag = 1;
 
@@ -818,8 +818,8 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(SCR_CHAR_AREA_ANY* pCmd)
 void miss2_0x11C::SCRCMD_THREAD_DECLARE4_5047C0(SCR_THREAD* pThread, s16* pThreadIdx)
 {
     SCR_THREAD* pCmd = pThread;
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_car_or_phone_idx);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_car_or_phone_idx));
 
     if (pParam1->field_8_char && pParam2->field_8_car)
     {
@@ -1073,7 +1073,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
         case SCR_DOOR_OPENTYPES::one_car:
         case SCR_DOOR_OPENTYPES::any_player_one_car:
         {
-            auto* tmp = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_30_somename);
+            auto* tmp = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_30_somename));
             Car_BC* ped_ptr = tmp->field_8_car;
             if (ped_ptr != nullptr)
             {
@@ -1089,7 +1089,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
 
         case SCR_DOOR_OPENTYPES::one_char_on_foot:
         {
-            auto* tmp = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_30_somename);
+            auto* tmp = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_30_somename));
             Ped* ped_ptr = tmp->field_8_char;
             if (ped_ptr != nullptr)
             {
@@ -1137,7 +1137,7 @@ void miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0(SCR_TWO_PARAMS* pCmd)
     SCR_POINTER* pPointer;
 
     gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1); //  player pointer not used because missions are singleplayer
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
     if (pCmd->field_2_type == SCRCMD_DEC_GANG_1_FLAG)
     {
         gScriptManager_6F8060->field_348_gang_1_mission_flag = &pPointer->field_8_counter;
@@ -1294,7 +1294,7 @@ void miss2_0x11C::SCRCMD_SET_MISSIONS_TOTAL_505430(SCR_TWO_PARAMS* pCmd)
 // 0x505580
 void miss2_0x11C::SCRCMD_PASSED_FAILED_FLAGS_505580(SCR_TWO_PARAMS* pCmd)
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1));
 
     switch (pCmd->field_2_type)
     {
@@ -1342,9 +1342,9 @@ void miss2_0x11C::DisableThread_505790(u16 idx)
     {
         case SCRCMD_THREAD_DECLARE4:
         {
-            auto* pThread = (SCR_THREAD*)pCmd;
-            auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pThread->field_10);
-            auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pThread->field_12_car_or_phone_idx);
+            auto* pThread = static_cast<SCR_THREAD*>(pCmd);
+            auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pThread->field_10));
+            auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pThread->field_12_car_or_phone_idx));
 
             if (pParam2->field_8_obj->IsAnimatedBehavior_475A80() && pParam2->field_8_obj->field_24_touched_result != 174)
             {
@@ -1355,17 +1355,17 @@ void miss2_0x11C::DisableThread_505790(u16 idx)
             break;
         }
         case SCRCMD_THREAD_DECLARE3:
-            gCarThreadTriggers_214_705F20->SetTriggerEnableState_4768C0(((SCR_THREAD*)pCmd)->field_15_trigger_idx, 2);
+            gCarThreadTriggers_214_705F20->SetTriggerEnableState_4768C0((static_cast<SCR_THREAD*>(pCmd))->field_15_trigger_idx, 2);
             break;
         case SCRCMD_THREAD_DECLARE5:
         case SCRCMD_CHAR_AREA_ANY_MEANS:
-            gCarThreadTriggers_214_705F20->SetTriggerEnableState_4768C0(((SCR_CHAR_AREA_ANY*)pCmd)->field_26_result, 2);
+            gCarThreadTriggers_214_705F20->SetTriggerEnableState_4768C0((static_cast<SCR_CHAR_AREA_ANY*>(pCmd))->field_26_result, 2);
             break;
         case SCRCMD_THREAD_DECLARE2:
         {
-            auto* pThread = (SCR_THREAD*)pCmd;
-            auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pThread->field_10);
-            auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pThread->field_12_car_or_phone_idx);
+            auto* pThread = static_cast<SCR_THREAD*>(pCmd);
+            auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pThread->field_10));
+            auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pThread->field_12_car_or_phone_idx));
 
             s32 charId = pParam1->field_8_char->get_id();
             ThreadTrigger_C* pThreadC = gScriptManager_6F8060->FindCarThread_5128A0(charId, pParam2->field_8_car->field_6C_car_id);
@@ -1395,11 +1395,11 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
     SCR_POINTER* pLghtCmdPointer;
     SCR_DELETE_SOUND* pSoundCmdPointer;
 
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
     switch (miss2_0x11C::GetEntityTypeOfCommand_503410(pPointer->field_2_type))
     {
         case 2:
-            pCarCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pCarCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             if (pCarCmdPointer->field_8_car)
             {
                 gScriptManager_6F8060->ClearWeaponHitFlag_512BA0(pCarCmdPointer->field_8_car->field_6C_car_id, 0);
@@ -1409,7 +1409,7 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
             break;
 
         case 1:
-            pPedCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pPedCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             if (pPedCmdPointer->field_8_char)
             {
                 pPedCmdPointer->field_8_char->Deallocate_45EB60();
@@ -1418,7 +1418,7 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
             break;
 
         case 3:
-            pObjCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pObjCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             if (pObjCmdPointer->field_8_obj)
             {
                 pObjCmdPointer->field_8_obj->Dealloc_5291B0();
@@ -1426,7 +1426,7 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
             }
             break;
         case 8:
-            pLghtCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pLghtCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             if (pLghtCmdPointer->field_8_light)
             {
                 gLight_1D4CC_6F5520->DeallocLight_47F4F0(pLghtCmdPointer->field_8_light);
@@ -1435,12 +1435,12 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
             break;
 
         case 9:
-            pSoundCmdPointer = (SCR_DELETE_SOUND*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pSoundCmdPointer = static_cast<SCR_DELETE_SOUND*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             gRoot_sound_66B038.RemoveSound_40F050(pSoundCmdPointer->field_8_xpos, pSoundCmdPointer->field_C_ypos);
             break;
 
         case 10:
-            pObjCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+            pObjCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
             if (pObjCmdPointer->field_8_obj)
             {
                 pObjCmdPointer->field_8_obj->Dealloc_5291B0();
@@ -1455,7 +1455,7 @@ void miss2_0x11C::DeallocOrDeleteItem_505B10(u16 idx)
 // 0x505ea0
 s16 miss2_0x11C::GetBonusResult_505EA0(u16 idx)
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(idx);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(idx));
     s16 result = pPointer->field_8_counter;
     if (result != -3 && result != -4)
     {
@@ -1504,7 +1504,7 @@ void miss2_0x11C::SCRCMD_DEC_DEATH_BASE_506010(SCR_FOUR_PARAMS* pCmd)
 // 0x5060d0
 void miss2_0x11C::SCRCMD_DO_CRANE_POWERUP_5060D0(SCR_DECLARE_CRANE_POWERUP* pCmd)
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_crane_idx);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_crane_idx));
     pPointer->field_8_crane->field_140_powerup_cmd = pCmd->field_0_cmd_this;
 }
 
@@ -1538,115 +1538,120 @@ void miss2_0x11C::ExecOpCode_5061C0()
                 case SCRCMD_CAR_DECSET_3D:
                 case SCRCMD_CAR_DECSET_2D_STR:
                 case SCRCMD_CAR_DECSET_3D_STR:
-                    miss2_0x11C::SCRCMD_CAR_DECSET_503BC0((SCR_CAR_DATA_DEC*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(static_cast<SCR_CAR_DATA_DEC*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_CHAR_DECSET_2D:
                 case SCRCMD_CHAR_DECSET_3D:
-                    miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0((SCR_CHAR_DATA_DEC*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(static_cast<SCR_CHAR_DATA_DEC*>(pBasePtr),
+                                                                 static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_OBJ_DECSET_2D:
                 case SCRCMD_OBJ_DECSET_3D:
-                    miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680((SCR_OBJ_DATA*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(static_cast<SCR_OBJ_DATA*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_OBJ_DECSET_2D_INT:
                 case SCRCMD_OBJ_DECSET_3D_INT:
                 case SCRCMD_OBJ_DECSET_2D_STR:
                 case SCRCMD_OBJ_DECSET_3D_STR:
-                    miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0((SCR_OBJ_DATA*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(static_cast<SCR_OBJ_DATA*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_MAP_ZONE_SET:
-                    miss2_0x11C::SCRCMD_MAP_ZONE_SET_504150((SCR_MAP_ZONE_SET*)pBasePtr);
+                    miss2_0x11C::SCRCMD_MAP_ZONE_SET_504150(static_cast<SCR_MAP_ZONE_SET*>(pBasePtr));
                     break;
                 case SCRCMD_ARROW_DEC:
-                    miss2_0x11C::SCRCMD_ARROW_DEC_5041B0((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_ARROW_DEC_5041B0(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_CRANE_BASIC_DEC:
                 case SCRCMD_CRANE_TARGET_DEC:
                 case SCRCMD_CRANE2TARGET_DEC:
-                    miss2_0x11C::SCRCMD_CRANE_5041C0((SCR_CRANE_TARGET_DEC*)pBasePtr, (SCR_CRANE_BASIC_DEC*)pBasePtr);
+                    miss2_0x11C::SCRCMD_CRANE_5041C0(static_cast<SCR_CRANE_TARGET_DEC*>(pBasePtr),
+                                                     static_cast<SCR_CRANE_BASIC_DEC*>(pBasePtr));
                     break;
                 case SCRCMD_CONVEYOR_DECSET1:
                 case SCRCMD_CONVEYOR_DECSET2:
-                    miss2_0x11C::SCRCMD_CONVEYOR_DECSET1_2_5043A0((SCR_CONVEYOR*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_CONVEYOR_DECSET1_2_5043A0(static_cast<SCR_CONVEYOR*>(pBasePtr),
+                                                                  static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_GENERATOR_DECSET1:
                 case SCRCMD_GENERATOR_DECSET2:
                 case SCRCMD_GENERATOR_DECSET3:
                 case SCRCMD_GENERATOR_DECSET4:
-                    miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420((SCR_GENERATOR*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(static_cast<SCR_GENERATOR*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_DESTRUCTOR_DECSET1:
                 case SCRCMD_DESTRUCTOR_DECSET2:
-                    miss2_0x11C::SCRCMD_DESTRUCTOR_DECSET_504530((SCR_DESTRUCTOR*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DESTRUCTOR_DECSET_504530(static_cast<SCR_DESTRUCTOR*>(pBasePtr),
+                                                                 static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_THREAD_DECLARE2:
-                    miss2_0x11C::SCRCMD_THREAD_DECLARE2_5045D0((SCR_THREAD*)pBasePtr, &pBasePtr->field_0_cmd_this);
+                    miss2_0x11C::SCRCMD_THREAD_DECLARE2_5045D0(static_cast<SCR_THREAD*>(pBasePtr), &pBasePtr->field_0_cmd_this);
                     break;
                 case SCRCMD_THREAD_DECLARE4:
-                    miss2_0x11C::SCRCMD_THREAD_DECLARE4_5047C0((SCR_THREAD*)pBasePtr, &pBasePtr->field_0_cmd_this);
+                    miss2_0x11C::SCRCMD_THREAD_DECLARE4_5047C0(static_cast<SCR_THREAD*>(pBasePtr), &pBasePtr->field_0_cmd_this);
                     break;
                 case SCRCMD_THREAD_DECLARE3:
-                    miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660((SCR_THREAD*)pBasePtr);
+                    miss2_0x11C::SCRCMD_THREAD_DECLARE3_504660(static_cast<SCR_THREAD*>(pBasePtr));
                     break;
                 case SCRCMD_SET_GANG_INFO1:
-                    miss2_0x11C::SCRCMD_SET_GANG_INFO1_504830((SCR_SET_GANG_INFO*)pBasePtr);
+                    miss2_0x11C::SCRCMD_SET_GANG_INFO1_504830(static_cast<SCR_SET_GANG_INFO*>(pBasePtr));
                     break;
                 case SCRCMD_SET_DOOR_INFO:
-                    miss2_0x11C::SCRCMD_SET_DOOR_INFO_504950((SCR_FOUR_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_SET_DOOR_INFO_504950(static_cast<SCR_FOUR_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_CRUSHER_BASIC:
-                    miss2_0x11C::SCRCMD_CRUSHER_BASIC_5045A0((SCR_CRUSHER_BASIC*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_CRUSHER_BASIC_5045A0(static_cast<SCR_CRUSHER_BASIC*>(pBasePtr),
+                                                             static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_CHAR_AREA_ANY_MEANS:
                 case SCRCMD_THREAD_DECLARE5:
-                    miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710((SCR_CHAR_AREA_ANY*)pBasePtr);
+                    miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(static_cast<SCR_CHAR_AREA_ANY*>(pBasePtr));
                     break;
                 case SCRCMD_DOOR_DECLARE_S1:
                 case SCRCMD_DOOR_DECLARE_D1:
-                    miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970((SCR_DOOR_DATA_DEC*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(static_cast<SCR_DOOR_DATA_DEC*>(pBasePtr));
                     break;
                 case SCRCMD_DOOR_DECLARE_S2:
                 case SCRCMD_DOOR_DECLARE_D2:
-                    miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80((SCR_DOOR_DATA_DEC*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(static_cast<SCR_DOOR_DATA_DEC*>(pBasePtr));
                     break;
                 case SCRCMD_DEC_GANG_1_FLAG:
                 case SCRCMD_DEC_GANG_2_FLAG:
                 case SCRCMD_DEC_GANG_3_FLAG:
                 case SCRCMD_DECLARE_MISSION:
-                    miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_CREATE_LIGHT2:
                 case SCRCMD_LIGHT_DEC:
-                    miss2_0x11C::CreateLight_504EE0((SCR_CREATE_LIGHT*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::CreateLight_504EE0(static_cast<SCR_CREATE_LIGHT*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_SET_STATION:
                 case SCRCMD_SET_EMPTY_STATION:
-                    miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030((SCR_SET_STATION*)pBasePtr);
+                    miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030(static_cast<SCR_SET_STATION*>(pBasePtr));
                     break;
                 case SCRCMD_RADIOSTATION_DEC:
-                    miss2_0x11C::SCRCMD_RADIOSTATION_DEC_5051D0((SCR_RADIOSTATION_DEC*)pBasePtr);
+                    miss2_0x11C::SCRCMD_RADIOSTATION_DEC_5051D0(static_cast<SCR_RADIOSTATION_DEC*>(pBasePtr));
                     break;
                 case SCRCMD_SET_STATION_4:
                 case SCRCMD_SET_STATION_3:
                 case SCRCMD_SET_STATION_2:
                 case SCRCMD_SET_STATION_1:
-                    miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_DECLARE_POLICE:
-                    miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0((SCR_DECLARE_POLICELEVEL*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0(static_cast<SCR_DECLARE_POLICELEVEL*>(pBasePtr));
                     break;
                 case SCRCMD_SOUND_DECSET:
-                    miss2_0x11C::SCRCMD_SOUND_DECSET_505340((SCR_SOUND_DECSET*)pBasePtr, (SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_SOUND_DECSET_505340(static_cast<SCR_SOUND_DECSET*>(pBasePtr), static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_FINISH_SCORE:
-                    miss2_0x11C::SCRCMD_FINISH_SCORE_505710((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_FINISH_SCORE_505710(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_TOTAL_MISSIONS:
                 case SCRCMD_TOTAL_SECRETS:
                 case SCRCMD_GANG_1_MISSION_TOTAL:
                 case SCRCMD_GANG_2_MISSION_TOTAL:
                 case SCRCMD_GANG_3_MISSION_TOTAL:
-                    miss2_0x11C::SCRCMD_SET_MISSIONS_TOTAL_505430((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_SET_MISSIONS_TOTAL_505430(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_PASSED_FLAG:
                 case SCRCMD_1_PASSED_FLAG:
@@ -1654,30 +1659,30 @@ void miss2_0x11C::ExecOpCode_5061C0()
                 case SCRCMD_3_PASSED_FLAG:
                 case SCRCMD_SECRETS_PASSED:
                 case SCRCMD_SECRETS_FAILED:
-                    miss2_0x11C::SCRCMD_PASSED_FAILED_FLAGS_505580((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_PASSED_FAILED_FLAGS_505580(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_DECLARE_CARLIST:
-                    miss2_0x11C::SCRCMD_DECLARE_CARLIST_505750((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DECLARE_CARLIST_505750(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_DISPLAY_MESSAGE:
                 case SCRCMD_DISPLAY_BRIEF:
                 case SCRCMD_DISPLAY_BRIEF_NOW:
                 case SCRCMD_DISPLAY_BRIEF_SOON:
-                    miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50((SCR_TWO_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50(static_cast<SCR_TWO_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_PARKED_CAR_DECSET_2D:
                 case SCRCMD_PARKED_CAR_DECSET_3D:
                 case SCRCMD_PARKED_CAR_DECSET_2D_STR:
                 case SCRCMD_PARKED_CAR_DECSET_3D_STR:
-                    miss2_0x11C::SCRCMD_PARKED_CAR_DECSET_503F80((SCR_POINTER*)pBasePtr);
+                    miss2_0x11C::SCRCMD_PARKED_CAR_DECSET_503F80(static_cast<SCR_POINTER*>(pBasePtr));
                     break;
                 case SCRCMD_DEC_DEATH_BASE_1:
                 case SCRCMD_DEC_DEATH_BASE_2:
                 case SCRCMD_DEC_DEATH_BASE_3:
-                    miss2_0x11C::SCRCMD_DEC_DEATH_BASE_506010((SCR_FOUR_PARAMS*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DEC_DEATH_BASE_506010(static_cast<SCR_FOUR_PARAMS*>(pBasePtr));
                     break;
                 case SCRCMD_DO_CRANE_POWERUP:
-                    miss2_0x11C::SCRCMD_DO_CRANE_POWERUP_5060D0((SCR_DECLARE_CRANE_POWERUP*)pBasePtr);
+                    miss2_0x11C::SCRCMD_DO_CRANE_POWERUP_5060D0(static_cast<SCR_DECLARE_CRANE_POWERUP*>(pBasePtr));
                     break;
                 case SCRCMD_START_BASIC_KF:
                     miss2_0x11C::SCRCMD_START_BASIC_KF_506140(reinterpret_cast<u16*>(&pBasePtr->field_0_cmd_this));
@@ -1723,7 +1728,7 @@ void miss2_0x11C::SCRCMD_LEVELEND_5069F0()
 void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pThread = (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pThread = static_cast<SCR_THREAD*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     miss2_0x11C* pScriptThread = miss2_0x11C::SpawnThread_511960(pCmd->field_8_unsigned_1);
     pThread->field_8_script_thread = pScriptThread;
@@ -1735,7 +1740,8 @@ void miss2_0x11C::SCRCMD_CREATE_THREAD_506A00()
 // 0x506a60
 void miss2_0x11C::SCRCMD_STOP_THREAD_506A60()
 {
-    auto* pThread = (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
+    auto* pThread =
+        (SCR_THREAD*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
     miss2_0x11C* pScriptThread = nullptr;
     s16 threadId = 0;
 
@@ -1865,7 +1871,7 @@ void miss2_0x11C::SCRCMD_S_OP_I_506D60()
 {
     auto* pCmd = reinterpret_cast<SCR_OPERATE_COUNTER_AND_INT*>(gBasePtr_6F8070);
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(pCmd->field_2_type);
-    auto* pLeftOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_counter_idx);
+    auto* pLeftOperand = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_counter_idx));
 
     switch (operation_type)
     {
@@ -1942,9 +1948,9 @@ void miss2_0x11C::SCRCMD_S_OP_S_506ED0()
 {
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type);
     auto* pCmd = reinterpret_cast<SCR_OPERATE_COUNTER_AND_COUNTER_2*>(gBasePtr_6F8070);
-    auto* pLeftOperand =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index); // pCmd->field_8_left_counter_idx
-    auto* pRightOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_right_counter_idx);
+    auto* pLeftOperand = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index)); // pCmd->field_8_left_counter_idx
+    auto* pRightOperand = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_right_counter_idx));
     switch (operation_type)
     {
         case 0:
@@ -2015,7 +2021,7 @@ void miss2_0x11C::SCRCMD_I_OP_S_507110()
     u8 operation_type = miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type);
     auto* pCmd = reinterpret_cast<SCR_OPERATE_INT_AND_COUNTER*>(gBasePtr_6F8070);
     auto* pOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-        ((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type); // pCmd->field_A_counter_idx
+        (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type); // pCmd->field_A_counter_idx
 
     switch (operation_type)
     {
@@ -2124,7 +2130,7 @@ void miss2_0x11C::SCRCMD_INCREMENT_507A70()
 {
     SCR_POINTER* pPointer;
 
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     ++pPointer->field_8_counter; //  Increment Counter
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -2135,7 +2141,7 @@ void miss2_0x11C::SCRCMD_DECREMENT_507B50()
 {
     SCR_POINTER* pPointer;
 
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     --pPointer->field_8_counter; //  Decrement Counter
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -2144,7 +2150,7 @@ void miss2_0x11C::SCRCMD_DECREMENT_507B50()
 // 0x507ce0
 void miss2_0x11C::SCRCMD_CREATE_OBJ_507CE0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     auto* pObjData = reinterpret_cast<SCR_OBJ_DATA*>(gBasePtr_6F8070);
 
     switch (pObjData->field_2_type)
@@ -2175,15 +2181,15 @@ void miss2_0x11C::SCRCMD_CREATE_CAR_507F80()
     auto* pCmd = reinterpret_cast<SCR_CAR_DATA_DEC*>(gBasePtr_6F8070);
 
     //  TODO: gBasePtr_6F8070 may be an extended union of SCR_CMD_HEADER
-    auto* z_coord = reinterpret_cast<Fix16*>(&((SCR_CMD_HEADER*)gBasePtr_6F8070)[2].field_4_cmd_next);
+    auto* z_coord = reinterpret_cast<Fix16*>(&(static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[2].field_4_cmd_next);
 
     if (*z_coord == kFp255_6F7570)
     {
         *z_coord = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(
-            *reinterpret_cast<Fix16*>(&((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_4_cmd_next),
-            *reinterpret_cast<Fix16*>(&((SCR_CMD_HEADER*)gBasePtr_6F8070)[2].field_0_cmd_this));
+            *reinterpret_cast<Fix16*>(&(static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_4_cmd_next),
+            *reinterpret_cast<Fix16*>(&(static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[2].field_0_cmd_this));
     }
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_car_idx);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_car_idx));
     miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(reinterpret_cast<SCR_CAR_DATA_DEC*>(gBasePtr_6F8070), pPointer);
     if (this->field_118_in_level_start == 0)
     {
@@ -2195,7 +2201,7 @@ void miss2_0x11C::SCRCMD_CREATE_CAR_507F80()
 // 0x508220
 void miss2_0x11C::SCRCMD_MAKE_CAR_DUMMY_508220()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_car != nullptr)
     {
@@ -2261,7 +2267,8 @@ void miss2_0x11C::SCRCMD_SET_DENSITY_508280()
 void miss2_0x11C::SCRCMD_POINT_ARROW_3D_508550() //  SCRCMD_POINT_ARROW_3D and SCRCMD_LEVEL_END_ARROW2
 {
     auto* pCmd = reinterpret_cast<SCR_LEVEL_END_ARROW2*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(((SCR_CMD_HEADER*)gBasePtr_6F8070)[2].field_4_cmd_next);
+    auto* pPointer =
+        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[2].field_4_cmd_next);
     if (pPointer->field_8_arrow == nullptr)
     {
         pPointer->field_8_arrow = gHud_2B00_706620->field_1F18_arrows.AllocArrow_5D1050();
@@ -2282,8 +2289,8 @@ void miss2_0x11C::SCRCMD_POINT_ARROW_AT_5086F0()
     auto* pParams = reinterpret_cast<SCR_POINT_ARROW_AT*>(gBasePtr_6F8070);
     auto* pCmd = reinterpret_cast<SCR_POINT_ARROW_AT*>(gBasePtr_6F8070);
 
-    auto* pArrowPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pParams->field_C_arrow_idx);
-    auto* pEntityPtr = (SCR_ARROW_ENTITY*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_target_entity_idx);
+    auto* pArrowPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pParams->field_C_arrow_idx));
+    auto* pEntityPtr = static_cast<SCR_ARROW_ENTITY*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_target_entity_idx));
 
     if (pArrowPtr->field_8_arrow == nullptr)
     {
@@ -2344,7 +2351,7 @@ void miss2_0x11C::SCRCMD_POINT_ARROW_AT_5086F0()
 void miss2_0x11C::SCRCMD_ARROW_COLOUR_508DC0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_arrow == nullptr)
     {
         pPointer->field_8_arrow = gHud_2B00_706620->field_1F18_arrows.AllocArrow_5D1050();
@@ -2356,7 +2363,7 @@ void miss2_0x11C::SCRCMD_ARROW_COLOUR_508DC0()
 // 0x508e80
 void miss2_0x11C::SCRCMD_REMOVE_ARROW_508E80()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Hud_Arrow_7C* pArrow = pPointer->field_8_arrow;
 
     if (pArrow != nullptr)
@@ -2371,7 +2378,7 @@ void miss2_0x11C::SCRCMD_REMOVE_ARROW_508E80()
 void miss2_0x11C::SCRCMD_CHECK_CAR_DAMAGE_508F00()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_car;
     if (pCar->field_74_damage >= 320 * pCmd->field_A_signed_2)
     {
@@ -2388,7 +2395,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DAMAGE_508F00()
 void miss2_0x11C::SCRCMD_CHECK_HEALTH_509030()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Ped* pPed = pPointer->field_8_char;
     s16 health_param = pCmd->field_A_signed_2;
@@ -2414,8 +2421,8 @@ void miss2_0x11C::SCRCMD_CHECK_HEALTH_509030()
 void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
     Ped* pChar = pPointer->field_8_char;
 
     if (pChar != nullptr)
@@ -2638,7 +2645,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_MESSAGE_5093C0()
 void miss2_0x11C::SCRCMD_DISPLAY_TIMER_5096E0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_index = gHud_2B00_706620->field_620_pagers.CreateTimer_5D31F0(pCmd->field_A_signed_2);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -2647,7 +2654,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_TIMER_5096E0()
 // 0x509730
 void miss2_0x11C::SCRCMD_CREATE_CHAR_509730()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(reinterpret_cast<SCR_CHAR_DATA_DEC*>(gBasePtr_6F8070), pPointer);
     if (!field_118_in_level_start)
     {
@@ -2660,7 +2667,7 @@ void miss2_0x11C::SCRCMD_CREATE_CHAR_509730()
 void miss2_0x11C::SCRCMD_SET_CHAR_OCCUPATION_509790()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_char->field_240_occupation = pCmd->field_C_u32;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -2671,8 +2678,8 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ1_5097D0()
 {
     SCR_POINTER* BasePointer_512770;
 
-    BasePointer_512770 =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index); //  TODO: fix gBasePtr_6F8070
+    BasePointer_512770 = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index)); //  TODO: fix gBasePtr_6F8070
     miss2_0x11C::SetCharObjective_504110(reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070), BasePointer_512770);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -2680,7 +2687,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ1_5097D0()
 // 0x509810
 void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_PASS_509810()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -2704,7 +2711,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_PASS_509810()
 // 0x509880
 void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_FAIL_509880()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -2727,7 +2734,7 @@ void miss2_0x11C::SCRCMD_GIVE_WEAPON_5098E0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
     auto* pCmd4 = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (miss2_0x11C::GetEntityTypeOfCommand_503410(pPointer->field_2_type) == 1)
     {
@@ -2752,7 +2759,7 @@ void miss2_0x11C::SCRCMD_GIVE_WEAPON_5098E0()
 void miss2_0x11C::SCRCMD_IS_CAR_IN_BLOCK_509990()
 {
     auto* pCmd = reinterpret_cast<SCR_IS_CAR_IN_BLOCK*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pCmd->field_C_pos.field_8_z == kFp255_6F7570)
     {
         pCmd->field_C_pos.field_8_z =
@@ -2776,7 +2783,7 @@ void miss2_0x11C::SCRCMD_IS_CAR_IN_BLOCK_509990()
 void miss2_0x11C::SCRCMD_CAR_IN_AREA_509A70()
 {
     auto* pCmd = reinterpret_cast<SCR_ONEVAR_RECT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Fix16 height = pCmd->field_C_rect.field_C_size.field_4_y;
     Fix16 width = pCmd->field_C_rect.field_C_size.field_0_x;
@@ -2808,7 +2815,7 @@ void miss2_0x11C::SCRCMD_HAS_CHAR_DIED_509BB0()
 {
     SCR_POINTER* pPointer;
 
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_char && pPointer->field_8_char->field_278_ped_state_1 == ped_state_1::dead_9)
     {
@@ -2825,8 +2832,8 @@ void miss2_0x11C::SCRCMD_HAS_CHAR_DIED_509BB0()
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_CAR_509C10()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     Ped* pPed = pParam1->field_8_char;
 
@@ -2847,7 +2854,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_CAR_509C10()
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_MODEL_509C90()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Ped* pPed = pParam1->field_8_char;
 
@@ -2865,7 +2872,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_MODEL_509C90()
 // 0x509d00
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_ANY_CAR_509D00()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr && pPed->has_car_403B80())
@@ -2890,7 +2897,7 @@ void miss2_0x11C::SCRCMD_DELETE_ITEM_509D60()
 void miss2_0x11C::SCRCMD_ADD_SCORE_509D90()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Ped* pPed = pPointer->field_8_char;
 
@@ -2916,8 +2923,8 @@ void miss2_0x11C::SCRCMD_ADD_SCORE_509D90()
 void miss2_0x11C::SCRCMD_ADD_SCORE2_509E00()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_s32);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_s32));
 
     Ped* pPed = pPointer->field_8_char;
 
@@ -2934,7 +2941,7 @@ void miss2_0x11C::SCRCMD_ADD_SCORE2_509E00()
 // 0x509e70
 void miss2_0x11C::SCRCMD_IS_CHAR_STOPPED_509E70()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     Fix16 temp;
@@ -3042,7 +3049,7 @@ void miss2_0x11C::SCRCMD_EXPLODE_BUILDING_509F60()
 void miss2_0x11C::Locate_509FD0()
 {
     auto* pCmd = reinterpret_cast<SCR_ONEVAR_RECT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_varname);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_varname));
     void* pObj;
     Fix16 vel;
 
@@ -3125,7 +3132,7 @@ void miss2_0x11C::Locate_509FD0()
 void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     miss2_0x11C::SetCharObjective_504110(reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070), pPointer);
 
     SCR_POINTER* pParam;
@@ -3140,11 +3147,11 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
         case objectives_enum::kill_char_any_means_19:
         case objectives_enum::kill_char_on_foot_20:
         case objectives_enum::punch_char_23:
-            pParam = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx);
+            pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->set_objective_target_ped_403AC0(pParam->field_8_char);
             break;
         case objectives_enum::enter_car_as_driver_35:
-            pParam = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx);
+            pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->SetTargetObjectiveCar(pParam->field_8_car);
             if (pCmd->field_E_variant == 1)
             {
@@ -3160,12 +3167,12 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
         case objectives_enum::leave_car_36:
         case objectives_enum::follow_car_in_car_55:
         case objectives_enum::destroy_car_59:
-            pParam = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx);
+            pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->SetTargetObjectiveCar(pParam->field_8_car);
             break;
         case objectives_enum::fire_at_object_from_vehicle_57:
         case objectives_enum::destroy_object_58:
-            pParam = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx);
+            pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->field_1A0_objective_target_object = pParam->field_8_obj;
             break;
         default:
@@ -3185,7 +3192,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ3_50A3E0()
     SCR_POINTER* pPointer;
 
     pCmd = reinterpret_cast<SCR_CHAR_OBJ3*>(gBasePtr_6F8070);
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     miss2_0x11C::SetCharObjective_504110(reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070), pPointer);
 
     if (pPointer->field_8_char)
@@ -3206,11 +3213,11 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ_FOLLOW_50A460()
     SCR_POINTER* pPointer;
 
     pCmd = reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070);
-    pPointer =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index); //  TODO: fix gBasePtr_6F8070 type
+    pPointer = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index)); //  TODO: fix gBasePtr_6F8070 type
     miss2_0x11C::SetCharObjective_504110(reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070), pPointer);
 
-    auto* pCarPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_car_idx);
+    auto* pCarPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_car_idx));
 
     if (pPointer->field_8_char)
     {
@@ -3241,7 +3248,7 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ_FOLLOW_50A460()
 void miss2_0x11C::SCRCMD_CHANGE_CAR_REMAP_50A570()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pCmd->field_A_unsigned_2 != 0xFFu) //  field_A_unsigned_2 = remap
     {
         pPointer->field_8_car->SetCarRemap(pCmd->field_A_unsigned_2);
@@ -3253,7 +3260,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_REMAP_50A570()
 void miss2_0x11C::SCRCMD_CHANGE_CHAR_REMAP_50A5B0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_char)
     {
@@ -3266,7 +3273,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CHAR_REMAP_50A5B0()
 void miss2_0x11C::SCRCMD_CHECK_CAR_MODEL_50A610()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar = pPointer->field_8_car;
     s16 car_model_index = pCmd->field_A_signed_2;
@@ -3286,7 +3293,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_MODEL_50A610()
 void miss2_0x11C::SCRCMD_CHECK_CAR_REMAP_50A670()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar = pPointer->field_8_car;
     s16 remap = pCmd->field_A_signed_2;
@@ -3307,7 +3314,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_REMAP_50A670()
 void miss2_0x11C::SCRCMD_CHECK_CAR_BOTH_50A6E0()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar = pPointer->field_8_car;
     s16 car_model_idx = pCmd->field_A_signed_2;
@@ -3329,7 +3336,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_BOTH_50A6E0()
 // 0x50a760
 void miss2_0x11C::IsOnScreen_50A760()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     s8 onScreen;
 
@@ -3443,11 +3450,11 @@ void miss2_0x11C::IsOnScreen_50A760()
 // 0x50a940
 void miss2_0x11C::SCRCMD_DELAY_HERE_50A940()
 {
-    SCR_CMD_HEADER* pNextCmd = ((SCR_CMD_HEADER*)gBasePtr_6F8070) + 1; //  TODO: remove this hack
+    SCR_CMD_HEADER* pNextCmd = (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070)) + 1; //  TODO: remove this hack
 
     if (static_cast<s16>(gBasePtr_6F8070->field_8_index) == -1)
     {
-        pNextCmd->field_0_cmd_this = ((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type;
+        pNextCmd->field_0_cmd_this = (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type;
     }
     else
     {
@@ -3464,11 +3471,11 @@ void miss2_0x11C::SCRCMD_DELAY_HERE_50A940()
 void miss2_0x11C::SCRCMD_DELAY_50A980()
 {
     s16 param_1 = gBasePtr_6F8070->field_8_index;
-    SCR_CMD_HEADER* pNextCmd = ((SCR_CMD_HEADER*)gBasePtr_6F8070) + 1; //  TODO: remove this hack
+    SCR_CMD_HEADER* pNextCmd = (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070)) + 1; //  TODO: remove this hack
 
     if (param_1 == -1)
     {
-        pNextCmd->field_0_cmd_this = ((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type;
+        pNextCmd->field_0_cmd_this = (static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type;
         field_8_cond_result = true;
     }
     else
@@ -3495,11 +3502,11 @@ void miss2_0x11C::EnableThread_50A9E0(u16 idx)
     switch (pCmd->field_2_type)
     {
         case SCRCMD_THREAD_DECLARE2:
-            SCRCMD_THREAD_DECLARE2_5045D0((SCR_THREAD*)pCmd, reinterpret_cast<s16*>(pCmd));
+            SCRCMD_THREAD_DECLARE2_5045D0(static_cast<SCR_THREAD*>(pCmd), reinterpret_cast<s16*>(pCmd));
             break;
         case SCRCMD_THREAD_DECLARE3:
         {
-            auto* pThread = (SCR_THREAD*)pCmd;
+            auto* pThread = static_cast<SCR_THREAD*>(pCmd);
 
             if (pThread->field_16_flag)
             {
@@ -3507,18 +3514,18 @@ void miss2_0x11C::EnableThread_50A9E0(u16 idx)
             }
             else
             {
-                SCRCMD_THREAD_DECLARE3_504660((SCR_THREAD*)pCmd);
+                SCRCMD_THREAD_DECLARE3_504660(static_cast<SCR_THREAD*>(pCmd));
             }
 
             break;
         }
         case SCRCMD_THREAD_DECLARE4:
-            SCRCMD_THREAD_DECLARE4_5047C0((SCR_THREAD*)pCmd, reinterpret_cast<s16*>(pCmd));
+            SCRCMD_THREAD_DECLARE4_5047C0(static_cast<SCR_THREAD*>(pCmd), reinterpret_cast<s16*>(pCmd));
             break;
         case SCRCMD_THREAD_DECLARE5:
         case SCRCMD_CHAR_AREA_ANY_MEANS:
         {
-            auto* pAny = (SCR_CHAR_AREA_ANY*)pCmd;
+            auto* pAny = static_cast<SCR_CHAR_AREA_ANY*>(pCmd);
 
             if (pAny->field_27_flag)
             {
@@ -3591,7 +3598,7 @@ void miss2_0x11C::SCRCMD_CHANGE_RESPECT_50ACF0()
 
     char* gang_zone_name = reinterpret_cast<char*>(&StringById_503080[1]);
     Gang_144* pGang = gGangPool_CA8_67E274->FindGangByName_4BF100(gang_zone_name);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_unsigned_3);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_unsigned_3));
 
     // pCmd->field_A_signed_2 = respect parameter
 
@@ -3628,7 +3635,7 @@ void miss2_0x11C::SCRCMD_CHANGE_RESPECT_50ACF0()
 void miss2_0x11C::RespectOperator_50AEF0()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1));
     str_table_entry* pStr = gScriptManager_6F8060->FindStringById_503080(pCmd->field_C_unsigned_3);
     Gang_144* pGang = gGangPool_CA8_67E274->FindGangByName_4BF100(pStr->get_name());
 
@@ -3690,7 +3697,7 @@ void miss2_0x11C::RespectOperator_50AEF0()
 void miss2_0x11C::SCRCMD_ADD_PATROL_POINT_50B0E0()
 {
     auto* pCmd = reinterpret_cast<SCR_ADD_PATROL_POINT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
     if (pPed)
     {
@@ -3717,8 +3724,8 @@ void miss2_0x11C::SCRCMD_SET_AMBIENT_50B150()
 void miss2_0x11C::SCRCMD_ANSWER_PHONE_50B180()
 {
     auto* pCmd = reinterpret_cast<SCR_ANSWER_PHONE*>(gBasePtr_6F8070);
-    auto* pPtrPed = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_ped_idx);
-    auto* pPtrObj = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_obj_idx);
+    auto* pPtrPed = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_ped_idx));
+    auto* pPtrObj = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_obj_idx));
     Object_2C* pPhoneObj = pPtrObj->field_8_obj;
     if (pPhoneObj && pPtrPed->field_8_char)
     {
@@ -3743,9 +3750,9 @@ void miss2_0x11C::SCRCMD_ANSWER_PHONE_50B180()
 // 0x50b230
 void miss2_0x11C::SCRCMD_CHECK_PHONE_50B230()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     ThreadTrigger_C* pHeader = gScriptManager_6F8060->FindPhoneThreadByObjId_512AD0(pPointer->field_8_obj->field_14_id);
-    auto* pThreadPtr = (SCR_ANSWER_PHONE*)gScriptManager_6F8060->GetBasePointer_512770(pHeader->field_8_cmd_line);
+    auto* pThreadPtr = static_cast<SCR_ANSWER_PHONE*>(gScriptManager_6F8060->GetBasePointer_512770(pHeader->field_8_cmd_line));
     if (pThreadPtr->field_12_answered == 1)
     {
         gScriptManager_6F8060->RemovePhoneThread_512A70(pHeader->field_0_ped_id, pHeader->field_4_obj_f14);
@@ -3761,11 +3768,11 @@ void miss2_0x11C::SCRCMD_CHECK_PHONE_50B230()
 // 0x50b2c0
 void miss2_0x11C::SCRCMD_CHECK_PHONETIMER_50B2C0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     ThreadTrigger_C* pHeader = gScriptManager_6F8060->FindPhoneThreadByObjId_512AD0(pPointer->field_8_obj->field_14_id);
     if (pHeader)
     {
-        auto* pAnswer = (SCR_ANSWER_PHONE*)gScriptManager_6F8060->GetBasePointer_512770(pHeader->field_8_cmd_line);
+        auto* pAnswer = static_cast<SCR_ANSWER_PHONE*>(gScriptManager_6F8060->GetBasePointer_512770(pHeader->field_8_cmd_line));
         if (static_cast<u16>(field_E_phone_timer) != 0xFFFF)
         {
             if (field_E_phone_timer == 0 && pAnswer->field_12_answered == 0)
@@ -3790,7 +3797,7 @@ void miss2_0x11C::SCRCMD_CHECK_PHONETIMER_50B2C0()
 // 0x50b360
 void miss2_0x11C::SCRCMD_STOP_PHONE_RING_50B360()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Object_2C* pObj = pPointer->field_8_obj;
     if (pObj)
     {
@@ -3807,7 +3814,7 @@ void miss2_0x11C::SCRCMD_STOP_PHONE_RING_50B360()
 // 0x50b3d0
 void miss2_0x11C::SCRCMD_IS_CHAR_FIRE_ONSCREEN_50B3D0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
     if (pPed->GetAttacking_433CA0() && pPed->GetOffscreenCounter_4039F0() == 0 && pPed->field_170_selected_weapon)
     {
@@ -3823,7 +3830,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_FIRE_ONSCREEN_50B3D0()
 // 0x50b440
 void miss2_0x11C::SCRCMD_CAR_DRIVE_AWAY_50B440()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_car->InitCarAIControl_440590();
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -3832,8 +3839,9 @@ void miss2_0x11C::SCRCMD_CAR_DRIVE_AWAY_50B440()
 void miss2_0x11C::SCRCMD_GET_CAR_FROM_CRANE_50B470()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
-    auto* pPointer2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1);
+    auto* pPointer1 =
+        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
+    auto* pPointer2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_unsigned_1));
     Crane_15C* pCrane = pPointer1->field_8_crane;
 
     if (pCrane != nullptr)
@@ -3859,8 +3867,8 @@ void miss2_0x11C::SCRCMD_GET_CAR_FROM_CRANE_50B470()
 void miss2_0x11C::SCRCMD_CHAR_TO_DRIVE_CAR_50B4F0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_ENTER_CAR*>(gBasePtr_6F8070);
-    auto* pPtrPed = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pPtrCar = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_car_idx);
+    auto* pPtrPed = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pPtrCar = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_car_idx));
 
     if (pPtrPed->field_8_char)
     {
@@ -3882,7 +3890,7 @@ void miss2_0x11C::SCRCMD_CHAR_TO_DRIVE_CAR_50B4F0()
 // 0x50b5a0
 void miss2_0x11C::SCRCMD_DRIVER_OUT_CAR_50B5A0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char)
     {
         pPointer->field_8_char->SetObjective2_463830(objectives_enum::no_obj_0);
@@ -3895,7 +3903,7 @@ void miss2_0x11C::SCRCMD_DRIVER_OUT_CAR_50B5A0()
 // 0x50b600
 void miss2_0x11C::SCRCMD_GIVE_DRIVER_BRAKE_50B600()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_car)
     {
         if (pPointer->field_8_car->GetDriver_4118B0() == nullptr)
@@ -3920,7 +3928,7 @@ void miss2_0x11C::SCRCMD_SET_GANG_INFO1_50B670()
 // 0x50b690
 void miss2_0x11C::SCRCMD_CLEAR_TIMERS_50B690()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_index != 0xFFFF)
     {
@@ -3934,7 +3942,7 @@ void miss2_0x11C::SCRCMD_CLEAR_TIMERS_50B690()
 void miss2_0x11C::SCRCMD_CHECK_SCORE_50B6F0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_SCORE_GREATER*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -3955,8 +3963,8 @@ void miss2_0x11C::SCRCMD_CHECK_SCORE_50B6F0()
 void miss2_0x11C::SCRCMD_GET_SCORE_50B760()
 {
     auto* pCmd = reinterpret_cast<SCR_GET_SCORE*>(gBasePtr_6F8070);
-    auto* pPtrPed = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pPtrCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx);
+    auto* pPtrPed = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pPtrCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx));
 
     if (pPtrPed->field_8_char)
     {
@@ -3972,7 +3980,7 @@ void miss2_0x11C::SCRCMD_GET_SCORE_50B760()
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_GANG_50B7D0()
 {
     auto* pCmd = reinterpret_cast<SCR_IS_CHAR_IN_GANG_ZONE*>(gBasePtr_6F8070);
-    auto* BasePointer_512770 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* BasePointer_512770 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     str_table_entry* StringById_503080 = gScriptManager_6F8060->FindStringById_503080(pCmd->field_A_gang_idx);
     const char_type* GangName = reinterpret_cast<char*>(&StringById_503080[1]);
     Gang_144* pGang = gGangPool_CA8_67E274->FindGangByName_4BF100(GangName);
@@ -4006,7 +4014,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_GANG_50B7D0()
 // 0x50b8b0
 void miss2_0x11C::SCRCMD_SET_NO_COLLIDE_50B8B0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_car;
 
     if (pCar)
@@ -4028,7 +4036,7 @@ void miss2_0x11C::SCRCMD_SET_NO_COLLIDE_50B8B0()
 void miss2_0x11C::SCRCMD_IS_CHAR_FIRING_AREA_50B910()
 {
     auto* pCmd = reinterpret_cast<SCR_ONEVAR_RECT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Ped* pPed = pPointer->field_8_char;
 
@@ -4047,7 +4055,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_FIRING_AREA_50B910()
 void miss2_0x11C::SCRCMD_GET_PASSENGER_NUM_50B9C0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar = pPointer->field_8_car;
 
@@ -4065,7 +4073,7 @@ void miss2_0x11C::SCRCMD_GET_PASSENGER_NUM_50B9C0()
 // 0x50ba30
 void miss2_0x11C::SCRCMD_CLEAR_WANTED_LEVEL_50BA30()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_char->ClearWantedPoints_420B80();
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -4074,7 +4082,7 @@ void miss2_0x11C::SCRCMD_CLEAR_WANTED_LEVEL_50BA30()
 void miss2_0x11C::SCRCMD_ALT_WANTED_LEVEL_50BA70()
 {
     auto* kGlobal = reinterpret_cast<SCR_CMD_ALTER_WANTED_LEVEL*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (gBasePtr_6F8070->field_2_type == SCRCMD_ALTER_WANTED_LEVEL)
     {
@@ -4095,7 +4103,7 @@ void miss2_0x11C::SCRCMD_ALT_WANTED_LEVEL_50BA70()
 void miss2_0x11C::SCRCMD_CAR_WRECK_IN_LOCATION_50BAD0()
 {
     auto* pCmd = reinterpret_cast<SCR_ONEVAR_RECT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_car;
 
     if ((pCar->field_74_damage >= 32000 || pCar->field_88_despawn_status == car_despawn_status::despawning_5) &&
@@ -4114,7 +4122,7 @@ void miss2_0x11C::SCRCMD_CAR_WRECK_IN_LOCATION_50BAD0()
 void miss2_0x11C::SCRCMD_SEND_CAR_TO_BLOCK_50BB80()
 {
     auto* pCmd = reinterpret_cast<SCR_CAR_DATA_DEC*>(gBasePtr_6F8070);
-    auto* pScrPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_car_idx);
+    auto* pScrPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_car_idx));
     pScrPtr->field_8_car->GotoBlock_441080(pCmd->field_C_pos.field_0_x.ToUInt8(),
                                            pCmd->field_C_pos.field_4_y.ToUInt8(),
                                            pCmd->field_C_pos.field_8_z.ToUInt8(),
@@ -4126,7 +4134,7 @@ void miss2_0x11C::SCRCMD_SEND_CAR_TO_BLOCK_50BB80()
 void miss2_0x11C::SCRCMD_SET_CHAR_BRAVERY_50BBD0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070);
-    auto* pScrPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char_idx);
+    auto* pScrPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char_idx));
 
     switch (gBasePtr_6F8070->field_2_type)
     {
@@ -4150,8 +4158,8 @@ void miss2_0x11C::SCRCMD_SET_CHAR_BRAVERY_50BBD0()
 void miss2_0x11C::SCRCMD_CHECK_NUM_ALIVE_50BC60()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070);
-    auto* pScrPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-        (reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070))->field_8_char_idx);
+    auto* pScrPtr = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770((reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070))->field_8_char_idx));
     PedGroup* pPedGroup = pScrPtr->field_8_char->field_164_ped_group;
 
     if (pPedGroup != nullptr && static_cast<s16>(pPedGroup->field_34_count) >= pCmd->field_A_objective)
@@ -4170,8 +4178,8 @@ void miss2_0x11C::SCRCMD_CHECK_NUM_ALIVE_50BC60()
 void miss2_0x11C::SCRCMD_SET_MIN_ALIVE_50BCD0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(
-        (reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070))->field_8_char_idx);
+    auto* pPointer = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770((reinterpret_cast<SCR_CHAR_OBJECTIVE*>(gBasePtr_6F8070))->field_8_char_idx));
     pPointer->field_8_char->field_164_ped_group->field_35_unused = pCmd->field_A_objective;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -4183,8 +4191,8 @@ void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
     auto* pParams = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
 
-    auto* pPtr1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pParams->field_8_unsigned_1);
-    auto* pPtr2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pPtr1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pParams->field_8_unsigned_1));
+    auto* pPtr2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     Ped* pChar = pPtr1->field_8_char;
     PedGroup* pGroup = pChar->GetGroup_475AF0();
@@ -4213,7 +4221,7 @@ void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
 void miss2_0x11C::SCRCMD_SET_COUNTER_50BDC0() // Set counter to a given constant value
 {
     auto* pCmd = reinterpret_cast<SCR_SET_COUNTER*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_counter = pCmd->field_A_value;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -4222,7 +4230,7 @@ void miss2_0x11C::SCRCMD_SET_COUNTER_50BDC0() // Set counter to a given constant
 void miss2_0x11C::SCRCMD_HAS_CAR_WEAPON_50BE00()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     s16 weapon_idx = pCmd->field_A_signed_2;
 
     if (gWeapon_8_707018->find_5E3D20(pPointer->field_8_car, weapon_idx))
@@ -4239,7 +4247,7 @@ void miss2_0x11C::SCRCMD_HAS_CAR_WEAPON_50BE00()
 // 0x50be70
 void miss2_0x11C::SCRCMD_IS_CHAR_HORN_50BE70()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
     Car_BC* pCar = pPed->field_16C_car;
 
@@ -4258,7 +4266,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_HORN_50BE70()
 void miss2_0x11C::SCRCMD_CHECK_MAX_PASS_50BED0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_char->get_car_416B60();
 
     if (pCar && static_cast<u8>(pCar->GetPassengersCount_440570()) >= pCmd->field_A_signed_2)
@@ -4276,7 +4284,7 @@ void miss2_0x11C::SCRCMD_CHECK_MAX_PASS_50BED0()
 void miss2_0x11C::SCRCMD_IS_CHAR_IN_ZONE_50BF40()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     str_table_entry* pStrEntry = gScriptManager_6F8060->FindStringById_503080(pCmd->field_A_signed_2);
     Player* pPlayer = pPointer->field_8_char->field_15C_player;
 
@@ -4315,7 +4323,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_ZONE_50BF40()
 void miss2_0x11C::SCRCMD_SET_PHONE_DEAD_50C040()
 {
     u16* pIndex = &gBasePtr_6F8070->field_8_index;
-    auto* pScrPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(*pIndex);
+    auto* pScrPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(*pIndex));
 
     pScrPtr->field_8_obj->PoolGiveAndSetDone_5291E0(174);
     gScriptManager_6F8060->RemovePhoneThreadByObjId_512AA0(pScrPtr->field_8_obj->field_14_id);
@@ -4339,8 +4347,8 @@ void miss2_0x11C::SCRCMD_SET_PHONE_DEAD_50C040()
 void miss2_0x11C::SCRCMD_IS_TRAILER_ATT_50C0E0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     Car_BC* pCar;
 
@@ -4377,8 +4385,8 @@ void miss2_0x11C::SCRCMD_IS_TRAILER_ATT_50C0E0()
 void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pCarPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pTrailerPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pCarPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pTrailerPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     //Sprite* pSprite = pTrailerPointer->field_8_sprite->sub_5A6CA0(2);
     Sprite* pSprite = pTrailerPointer->field_8_car->field_0_attachments.FirstSpriteOfType_5A6CA0(2);
@@ -4400,7 +4408,7 @@ void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
 // 0x50c230
 void miss2_0x11C::SCRCMD_ENABLE_DISABLE_CRANE_50C230()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     s16 type = gBasePtr_6F8070->field_2_type;
 
     if (type == SCRCMD_ENABLE_CRANE)
@@ -4417,7 +4425,7 @@ void miss2_0x11C::SCRCMD_ENABLE_DISABLE_CRANE_50C230()
 // 0x50c2a0
 void miss2_0x11C::SCRCMD_CAR_GOT_DRIVER_50C2A0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_car->field_54_driver)
     {
         field_8_cond_result = true;
@@ -4432,7 +4440,7 @@ void miss2_0x11C::SCRCMD_CAR_GOT_DRIVER_50C2A0()
 // 0x50c2f0
 void miss2_0x11C::SCRCMD_SPOTTED_PLAYER_50C2F0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char->HasSpottedPlayer())
     {
         field_8_cond_result = true;
@@ -4448,8 +4456,8 @@ void miss2_0x11C::SCRCMD_SPOTTED_PLAYER_50C2F0()
 void miss2_0x11C::SCRCMD_GET_LAST_PUNCHED_50C350()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pCharTargetPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pCharPunchedPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pCharTargetPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pCharPunchedPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     pCharPunchedPointer->field_8_char = pCharTargetPointer->field_8_char->get_last_char_punched_475B10();
     pCharTargetPointer->field_8_char->clear_last_char_punched_475B40();
@@ -4460,7 +4468,7 @@ void miss2_0x11C::SCRCMD_GET_LAST_PUNCHED_50C350()
 // 0x50c3b0
 void miss2_0x11C::SCRCMD_IS_CHAR_STUNNED_50C3B0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed->field_27C_ped_state_2 == ped_state_2::lying_on_floor_22 || pPed->field_216_health <= 25)
@@ -4477,7 +4485,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STUNNED_50C3B0()
 // 0x50c410
 void miss2_0x11C::SCRCMD_KILL_ALL_PASSENG_50C410()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_car->field_4_passengers_list.KillAndClearAllPeds_4715A0();
 
     if (gPublicTransport_181C_6FF1D4->is_bus_579AA0(pPointer->field_8_car))
@@ -4490,7 +4498,7 @@ void miss2_0x11C::SCRCMD_KILL_ALL_PASSENG_50C410()
 // 0x50c470
 void miss2_0x11C::SCRCMD_IS_GROUP_IN_CAR_50C470()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pGroupLeader = pPointer->field_8_char;
     PedGroup* pGroup = pGroupLeader->field_164_ped_group;
 
@@ -4517,7 +4525,7 @@ void miss2_0x11C::SCRCMD_IS_GROUP_IN_CAR_50C470()
 // 0x50c4e0
 void miss2_0x11C::SCRCMD_PUNCHED_SOMEONE_50C4E0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char->field_188_last_char_punched != nullptr)
     {
         field_8_cond_result = true;
@@ -4533,7 +4541,7 @@ void miss2_0x11C::SCRCMD_PUNCHED_SOMEONE_50C4E0()
 void miss2_0x11C::SCRCMD_ADD_CHAR_TO_GANG_50C540()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     str_table_entry* StringById_503080 = gScriptManager_6F8060->FindStringById_503080(pCmd->field_A_unsigned_2);
 
     char* gang_zone_name = reinterpret_cast<char*>(&StringById_503080[1]);
@@ -4546,7 +4554,7 @@ void miss2_0x11C::SCRCMD_ADD_CHAR_TO_GANG_50C540()
 // 0x50c5a0
 void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     s32 type = 0;
 
@@ -4615,8 +4623,8 @@ void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
 void miss2_0x11C::SCRCMD_PARK_50C6F0() // PARK and PARK_NO_RESPAWN
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     gGarage_48_6FD26C->ParkCarAtDoor_534700(pParam1->field_8_car, pParam2->field_8_door);
     if (gBasePtr_6F8070->field_2_type == SCRCMD_PARK_NO_RESPAWN)
@@ -4630,8 +4638,8 @@ void miss2_0x11C::SCRCMD_PARK_50C6F0() // PARK and PARK_NO_RESPAWN
 void miss2_0x11C::SCRCMD_BEEN_PUNCHED_BY_50C760()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointerVictim = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pPointerAttacker = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pPointerVictim = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pPointerAttacker = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     if (pPointerAttacker->field_8_char->field_188_last_char_punched == pPointerVictim->field_8_char)
     {
@@ -4648,26 +4656,26 @@ void miss2_0x11C::SCRCMD_BEEN_PUNCHED_BY_50C760()
 void miss2_0x11C::SCRCMD_UPDATE_DOOR_50C7D0()
 {
     auto* pCmd = reinterpret_cast<SCR_UPDATE_DOOR*>(gBasePtr_6F8070);
-    auto* pDoorPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_door_idx);
+    auto* pDoorPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_door_idx));
 
     SCR_POINTER* pTarget;
 
     switch (pDoorPointer->field_8_door->get_state_476A90())
     {
         case 5:
-            pTarget = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx);
+            pTarget = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx));
 
             pDoorPointer->field_8_door->set_open_details_ped(5, pTarget->field_8_char);
             pDoorPointer->field_8_door->set_target_id(pTarget->field_8_char->field_200_id);
             break;
         case 3:
-            pTarget = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx);
+            pTarget = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx));
 
             pDoorPointer->field_8_door->set_open_details_car_bc(3, pTarget->field_8_car);
             pDoorPointer->field_8_door->set_target_id(pTarget->field_8_car->field_6C_car_id);
             break;
         case 6:
-            pTarget = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx);
+            pTarget = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_target_idx));
 
             pDoorPointer->field_8_door->set_open_details_car_bc(6, pTarget->field_8_car);
             pDoorPointer->field_8_door->set_target_id(pTarget->field_8_car->field_6C_car_id);
@@ -4681,7 +4689,7 @@ void miss2_0x11C::SCRCMD_UPDATE_DOOR_50C7D0()
 // 0x50c8a0
 void miss2_0x11C::SCRCMD_DOOR_50C8A0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     switch (gBasePtr_6F8070->field_2_type)
     {
@@ -4738,7 +4746,7 @@ void miss2_0x11C::SCRCMD_DOOR_50C8A0()
 // 0x50c990
 void miss2_0x11C::SCRCMD_REMOVE_WEAPON_50C990()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Ped* pPed = pPointer->field_8_char;
     Player* player = pPed->field_15C_player;
@@ -4823,7 +4831,7 @@ void miss2_0x11C::SCRCMD_ROAD_ON_OFF_50CB20()
 // 0x50cb70
 void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     field_8_cond_result = false;
 
     switch (gBasePtr_6F8070->field_2_type)
@@ -4906,7 +4914,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
 void miss2_0x11C::SCRCMD_SWITCH_GENERATOR1_50CCB0()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     u16 killTimer = pCmd->field_A_unsigned_2;
     Generator_2C* pGen = pPointer->field_8_generator;
@@ -4931,7 +4939,7 @@ void miss2_0x11C::SCRCMD_SWITCH_GENERATOR1_50CCB0()
 void miss2_0x11C::SCRCMD_SWITCH_GENERATOR3_50CD30()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_generator->field_0_gen_type = pCmd->field_C_signed_3;
 
     Generator_2C* pGen = pPointer->field_8_generator;
@@ -4960,7 +4968,7 @@ void miss2_0x11C::SCRCMD_CAR_DAMAGE_POS_50CDB0()
     SCR_POINTER* pPointer;
 
     pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if ((pPointer->field_8_car)->IsAreaDamaged_43D1C0(pCmd->field_A_signed_2)) // field_A_signed_2 = damage pos
     {
@@ -5002,12 +5010,12 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
 {
     auto* pCmd = reinterpret_cast<SCR_PHONE_TEMPLATE*>(gBasePtr_6F8070);
 
-    auto* pPassedFlag = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter1);
-    auto* pFailedFlag = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_counter2);
-    auto* pOnMission0 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_counter3b);
-    auto* pOnMission1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_counter3);
-    auto* pOnMission2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_14_counter4);
-    auto* pOnMission3 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_16_counter5);
+    auto* pPassedFlag = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter1));
+    auto* pFailedFlag = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_counter2));
+    auto* pOnMission0 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_counter3b));
+    auto* pOnMission1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_counter3));
+    auto* pOnMission2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_14_counter4));
+    auto* pOnMission3 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_16_counter5));
 
     str_table_entry* pGangNameEntry = gScriptManager_6F8060->FindStringById_503080(pCmd->field_18_gangname);
     auto* gang_name = reinterpret_cast<char_type*>(&pGangNameEntry[1]);
@@ -5163,8 +5171,8 @@ void miss2_0x11C::SCRCMD_PHONE_TEMPLATE_50CE90()
 void miss2_0x11C::SCRCMD_REMOTE_CONTROL_50D200()
 {
     auto* pCmd = reinterpret_cast<SCR_REMOTE_CONTROL*>(gBasePtr_6F8070);
-    auto* pPlayerPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pCarPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_car_idx);
+    auto* pPlayerPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pCarPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_car_idx));
     pPlayerPtr->field_8_char->field_15C_player->DisableInputs_569F40();
     pPlayerPtr->field_8_char->field_15C_player->ResetAuxCamera_5695A0();
     pPlayerPtr->field_8_char->field_15C_player->StartRemoteControl_569600(pCarPtr->field_8_car);
@@ -5248,7 +5256,7 @@ void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
 void miss2_0x11C::SCRCMD_CHANGE_CAR_LOCK_50D680()
 {
     auto* pCmd = reinterpret_cast<SCR_CHANGE_CAR_LOCK*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar;
 
@@ -5297,7 +5305,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_LOCK_50D680()
 void miss2_0x11C::SCRCMD_CHANGE_INTENSITY_50D870()
 {
     auto* pCmd = reinterpret_cast<SCR_CHANGE_LIGHT_INTENSITY*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_light->SetIntensity_476AE0(pCmd->field_A_intensity);
 
@@ -5308,7 +5316,7 @@ void miss2_0x11C::SCRCMD_CHANGE_INTENSITY_50D870()
 void miss2_0x11C::SCRCMD_CHANGE_COLOUR_50D900()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     u32 rgb = pCmd->field_C_u32;
     pPointer->field_8_light->field_10_argb = rgb;
@@ -5319,7 +5327,7 @@ void miss2_0x11C::SCRCMD_CHANGE_COLOUR_50D900()
 void miss2_0x11C::SCRCMD_CHANGE_RADIUS_50D9A0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHANGE_LIGHT_RADIUS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_light->field_0.SetRadius_463F10(pCmd->field_A_radius);
 
@@ -5330,7 +5338,8 @@ void miss2_0x11C::SCRCMD_CHANGE_RADIUS_50D9A0()
 void miss2_0x11C::SCRCMD_CREATE_LIGHT_50DA50() // CREATE_LIGHT1 or LIGHT_DECSET2
 {
     //SCR_CREATE_LIGHT* pCmd = (SCR_CREATE_LIGHT*)gBasePtr_6F8070;
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index); // pCmd->field_8_light_idx
+    auto* pPointer =
+        static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index)); // pCmd->field_8_light_idx
     miss2_0x11C::CreateLight_504EE0(reinterpret_cast<SCR_CREATE_LIGHT*>(gBasePtr_6F8070), pPointer);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -5339,7 +5348,7 @@ void miss2_0x11C::SCRCMD_CREATE_LIGHT_50DA50() // CREATE_LIGHT1 or LIGHT_DECSET2
 void miss2_0x11C::GetSetLivesAndMultiplier_50DB70()
 {
     auto* pCmd = reinterpret_cast<SCR_GET_NUM_LIVES_MULTIPLIERS*>(gBasePtr_6F8070);
-    auto* pPlayerPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_player_ped_idx);
+    auto* pPlayerPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_player_ped_idx));
 
     switch (pCmd->field_2_type)
     {
@@ -5396,9 +5405,9 @@ void miss2_0x11C::GetSetLivesAndMultiplier_50DB70()
 void miss2_0x11C::SCRCMD_GET_LIVES_MULT_50DD00() // GET_NUM_LIVES or GET_NUM_MULT
 {
     auto* pCmd = reinterpret_cast<SCR_GET_NUM_LIVES_MULTIPLIERS*>(gBasePtr_6F8070);
-    auto* pPlayerPtr =
-        (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index); // pCmd->field_8_player_ped_idx
-    auto* pCounterPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx);
+    auto* pPlayerPtr = static_cast<SCR_POINTER*>(
+        gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index)); // pCmd->field_8_player_ped_idx
+    auto* pCounterPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx));
     if (gBasePtr_6F8070->field_2_type == SCRCMD_GET_NUM_LIVES)
     {
         pCounterPtr->field_8_counter = pPlayerPtr->field_8_char->field_15C_player->get_lives_4766C0();
@@ -5439,7 +5448,7 @@ void miss2_0x11C::SCRCMD_POINT_ONSCREEN_50DE00()
 // 0x50de50
 void miss2_0x11C::SCRCMD_CHAR_IN_AIR_50DE50()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed->field_27C_ped_state_2 == ped_state_2::falling_19 && pPed->field_278_ped_state_1 == ped_state_1::immobilized_8)
@@ -5456,7 +5465,7 @@ void miss2_0x11C::SCRCMD_CHAR_IN_AIR_50DE50()
 // 0x50deb0
 void miss2_0x11C::SCRCMD_CHAR_SUNK_50DEB0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed->field_27C_ped_state_2 == ped_state_2::sinking_20 && pPed->field_278_ped_state_1 == ped_state_1::immobilized_8)
@@ -5480,7 +5489,7 @@ void miss2_0x11C::StartBonus_50DF10()
     s32 alt_car_model = car_model;
     s32 occupation = ped_ocupation_enum::no_occupation;
 
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_18_ptr);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_18_ptr));
 
     s32 flag;
 
@@ -5610,8 +5619,8 @@ void miss2_0x11C::SCRCMD_MODEL_CHECK_50E150()
 void miss2_0x11C::GetSpeed_50E190()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     // 9.6f 0x47D070. The cases are in ascending order (the layout doesn't follow it): that order gives
     // the original's inline cut-offs, GetLength_41E260 inlined (with one Abs) for the char's car and
@@ -5658,7 +5667,7 @@ void miss2_0x11C::GetSpeed_50E190()
 void miss2_0x11C::SCRCMD_CHECK_CAR_SPEED_50E360()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_CAR_SPEED*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_car->field_58_physics &&
         pPointer->field_8_car->field_58_physics->get_car_velocity_4211C0().get_value_4754D0() > pCmd->field_A_value)
@@ -5677,7 +5686,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_SPEED_50E360()
 void miss2_0x11C::SCRCMD_SET_CAR_GRAPHIC_50E460()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_CAR_GRAPHIC*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_car->SetCarGraphic_43CDF0(pCmd->field_C_number); // set the number on the top of the car
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -5686,7 +5695,7 @@ void miss2_0x11C::SCRCMD_SET_CAR_GRAPHIC_50E460()
 // 0x50e4a0
 void miss2_0x11C::SCRCMD_CHAR_ARRESTED_50E4A0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char->field_21C_bf.bBusted)
     {
         field_8_cond_result = true;
@@ -5704,9 +5713,10 @@ void miss2_0x11C::SCRCMD_S_IS_S_OP_S_50E4F0()
     auto* pCmd = reinterpret_cast<SCR_OPERATE_COUNTER_AND_COUNTER*>(gBasePtr_6F8070);
     u8 type = miss2_0x11C::GetOperationType_506BC0(static_cast<u16>(gBasePtr_6F8070->field_2_type));
 
-    auto* pDestCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_destination_counter_idx);
-    auto* pFirstOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_first_operand_counter_idx);
-    auto* pSecondOperand = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_operand_counter_idx);
+    auto* pDestCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_destination_counter_idx));
+    auto* pFirstOperand = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_first_operand_counter_idx));
+    auto* pSecondOperand =
+        static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_operand_counter_idx));
     switch (type)
     {
         case 0:
@@ -5734,8 +5744,8 @@ void miss2_0x11C::SCRCMD_S_IS_S_OP_S_50E4F0()
 void miss2_0x11C::SCRCMD_S_IS_S_OP_I_50E610()
 {
     auto* pCmd = reinterpret_cast<SCR_OPERATE_COUNTER_AND_OPERAND_INT*>(gBasePtr_6F8070);
-    auto* pDestCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_destination_counter_idx);
-    auto* pOperandCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_operand_counter_idx);
+    auto* pDestCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_destination_counter_idx));
+    auto* pOperandCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_operand_counter_idx));
 
     switch (miss2_0x11C::GetOperationType_506BC0(gBasePtr_6F8070->field_2_type))
     {
@@ -5764,7 +5774,7 @@ void miss2_0x11C::SCRCMD_S_IS_S_OP_I_50E610()
 void miss2_0x11C::SCRCMD_CHAR_DRIVE_AGGR_50E730()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_CHAR_DRIVE_AGGR*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     pPointer->field_8_char->field_21C_bf.bDriveAggressively = pCmd->field_A_status;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -5774,7 +5784,7 @@ void miss2_0x11C::SCRCMD_CHAR_DRIVE_AGGR_50E730()
 void miss2_0x11C::SCRCMD_SET_SPEED_50E780()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_RUN_SPEED*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (gBasePtr_6F8070->field_2_type == SCRCMD_SET_RUN_SPEED)
     {
         pPointer->field_8_char->field_1F0_max_speed = pCmd->field_A_value;
@@ -5789,7 +5799,7 @@ void miss2_0x11C::SCRCMD_SET_SPEED_50E780()
 // 0x50e7f0
 void miss2_0x11C::SCRCMD_GIVE_CAR_ALARM_50E7F0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     pPointer->field_8_car->field_78_flags |= car_flag::CarAlarm;
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -5798,7 +5808,7 @@ void miss2_0x11C::SCRCMD_GIVE_CAR_ALARM_50E7F0()
 void miss2_0x11C::SCRCMD_CAR_WEAPON_KIND_PROOF_50E820()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_CAR_DAMAGE_PROOF*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Car_BC* pCar;
 
@@ -5847,8 +5857,8 @@ void miss2_0x11C::SCRCMD_CAR_WEAPON_KIND_PROOF_50E820()
 void miss2_0x11C::SCRCMD_PUT_CAR_ON_TRAILER_50E900()
 {
     auto* pCmd = reinterpret_cast<SCR_PUT_CAR_ON_TRAILER*>(gBasePtr_6F8070);
-    auto* pCarPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pDstCarPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_trailer_car_idx);
+    auto* pCarPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pDstCarPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_trailer_car_idx));
 
     Car_BC* pDstCar = pDstCarPointer->field_8_car;
     if (pDstCar->field_88_despawn_status != car_despawn_status::despawned_6)
@@ -5885,7 +5895,7 @@ void miss2_0x11C::SCRCMD_CLEAR_BRIEFS_50E9A0()
 void miss2_0x11C::SCRCMD_CHECK_HEADS_50E9E0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_HEADS_GREATER*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_char->get_wanted_star_count_46EF00() > pCmd->field_A_wanted_level)
     {
@@ -5942,7 +5952,7 @@ void miss2_0x11C::SCRCMD_FINISH_LEVEL_50EA40()
 void miss2_0x11C::SCRCMD_CHECK_WEAPONHIT_50EB00()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_WEAPONHIT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (!pCmd->field_A_status)
     {
@@ -5970,7 +5980,7 @@ void miss2_0x11C::SCRCMD_CHECK_WEAPONHIT_50EB00()
 void miss2_0x11C::SCRCMD_WEAP_HIT_CAR_50EBD0()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_WEAPONHIT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (!pCmd->field_A_status)
     {
@@ -6012,7 +6022,7 @@ void miss2_0x11C::SCRCMD_WEAP_HIT_CAR_50EBD0()
 // 0x50ece0
 void miss2_0x11C::SCRCMD_IS_CHAR_ON_FIRE_50ECE0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char->IsOnFire_475B50())
     {
         field_8_cond_result = true;
@@ -6042,7 +6052,7 @@ void miss2_0x11C::SCRCMD_BRIEF_ONSCREEN_50ED40()
 // 0x50ed80
 void miss2_0x11C::SCRCMD_CREATE_SOUND_50ED80()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     miss2_0x11C::SCRCMD_SOUND_DECSET_505340(reinterpret_cast<SCR_SOUND_DECSET*>(gBasePtr_6F8070), pPointer);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -6058,11 +6068,11 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
     SCR_POINTER* pParam1;
     SCR_POINTER* pParam2;
 
-    pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter1);
-    pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_counter2);
-    pParam3 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_counter3);
-    pParam4 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_14_counter4);
-    pParam5 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_16_counter5);
+    pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter1));
+    pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_counter2));
+    pParam3 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_counter3));
+    pParam4 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_14_counter4));
+    pParam5 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_16_counter5));
     str_table_entry* StringById = gScriptManager_6F8060->FindStringById_503080(pCmd->field_18_gangname);
     auto* gang_name = reinterpret_cast<char_type*>(&StringById[1]);
     Gang_144* pGang_zone = gGangPool_CA8_67E274->FindGangByName_4BF100(gang_name);
@@ -6153,8 +6163,8 @@ void miss2_0x11C::SCRCMD_DO_EASY_PHONE_50EDC0() //  EASY_PHONE_TEMPLATE
 void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
 {
     auto* pCmd = reinterpret_cast<SCR_CHAR_INTO_CAR*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char_idx);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_car_idx);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char_idx));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_car_idx));
 
     Ped* pNewPed = gPedManager_6787BC->AllocatePed_470F30();
     pParam1->field_8_char = pNewPed;
@@ -6197,8 +6207,8 @@ void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
 void miss2_0x11C::SCRCMD_DECIDE_POWERUP_50F150()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pParam1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pParam2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2);
+    auto* pParam1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pParam2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_unsigned_2));
 
     Car_BC* pCar = pParam1->field_8_car;
     u8* pCarList = reinterpret_cast<u8*>(gScriptManager_6F8060->field_340_car_list);
@@ -6258,7 +6268,7 @@ void miss2_0x11C::SCRCMD_SUPPRESS_MODEL_50F220()
 void miss2_0x11C::SCRCMD_WARP_CHAR_50F270() // WARP_FROM_CAR_TO_POINT
 {
     auto* pCmd = reinterpret_cast<SCR_WARP_FROM_CAR*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
     Car_BC* pCar = pPed->get_car_416B60();
 
@@ -6289,7 +6299,7 @@ void miss2_0x11C::SCRCMD_WARP_CHAR_50F270() // WARP_FROM_CAR_TO_POINT
 void miss2_0x11C::SCRCMD_SET_GROUP_TYPE_50F3D0()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_GROUP_TYPE*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
     PedGroup* pGroup = pPed->field_164_ped_group;
 
@@ -6303,7 +6313,7 @@ void miss2_0x11C::SCRCMD_SET_GROUP_TYPE_50F3D0()
 // 0x50f410
 void miss2_0x11C::SCRCMD_CHAR_DO_NOTHING_50F410()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -6317,7 +6327,7 @@ void miss2_0x11C::SCRCMD_CHAR_DO_NOTHING_50F410()
 void miss2_0x11C::SCRCMD_EMERG_LIGHTS_50F450()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_car->HasEmergencyLights_414F20())
     {
@@ -6337,7 +6347,7 @@ void miss2_0x11C::SCRCMD_EMERG_LIGHTS_50F450()
 void miss2_0x11C::SCRCMD_CHECK_OBJ_MODEL_50F4D0()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Object_2C* pObj = pPointer->field_8_obj;
     const s32 model_idx = static_cast<s32>(pCmd->field_C_u32);
@@ -6357,7 +6367,7 @@ void miss2_0x11C::SCRCMD_CHECK_OBJ_MODEL_50F4D0()
 void miss2_0x11C::SCRCMD_PED_GRAPHIC_50F550()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_CHAR_GRAPHIC_TYPE*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_char != nullptr)
     {
@@ -6371,9 +6381,9 @@ void miss2_0x11C::SCRCMD_PED_GRAPHIC_50F550()
 void miss2_0x11C::SCRCMD_SET_CHAR_FLAGS_50F5E0()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_STATE*>(gBasePtr_6F8070);
-    Ped* pPed =
-        ((SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770((reinterpret_cast<SCR_SET_STATE*>(gBasePtr_6F8070))->field_8_unk))
-            ->field_8_char;
+    Ped* pPed = (static_cast<SCR_POINTER*>(
+                     gScriptManager_6F8060->GetBasePointer_512770((reinterpret_cast<SCR_SET_STATE*>(gBasePtr_6F8070))->field_8_unk)))
+                    ->field_8_char;
 
     if (pPed)
     {
@@ -6442,8 +6452,8 @@ void miss2_0x11C::SCRCMD_MAKE_MUGGERS_50F770()
 void miss2_0x11C::LocSecChar_50F7B0()
 {
     auto* pCmd = reinterpret_cast<SCR_LOC_SEC_CHAR*>(gBasePtr_6F8070);
-    auto* pChar1 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char1_idx);
-    auto* pChar2 = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_char2_idx);
+    auto* pChar1 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_char1_idx));
+    auto* pChar2 = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_char2_idx));
 
     Ped* pCenter = pChar2->field_8_char;
     Fix16 centerX = pCenter->field_1AC_cam.x;
@@ -6491,7 +6501,7 @@ void miss2_0x11C::LocSecChar_50F7B0()
 // 0x50f900
 void miss2_0x11C::SCRCMD_STOP_CAR_DRIVE_50F900()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_char->field_16C_car;
 
     if (pCar)
@@ -6504,7 +6514,7 @@ void miss2_0x11C::SCRCMD_STOP_CAR_DRIVE_50F900()
 // 0x50f940
 void miss2_0x11C::SCRCMD_IS_BUS_FULL_50F940()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     field_8_cond_result = false;
     Ped* pPed = pPointer->field_8_char;
 
@@ -6540,7 +6550,7 @@ void miss2_0x11C::SCRCMD_NO_CHARS_OFF_BUS_50F9B0()
 // 0x50fa00
 void miss2_0x11C::SCRCMD_KILL_CHAR_50FA00()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -6553,7 +6563,7 @@ void miss2_0x11C::SCRCMD_KILL_CHAR_50FA00()
 // 0x50fa40
 void miss2_0x11C::SCRCMD_SET_SHADING_LEV_50FA40()
 {
-    gpMapRenderer_6F66E4->set_shading_lev_4E9DB0(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
+    gpMapRenderer_6F66E4->set_shading_lev_4E9DB0((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
@@ -6561,7 +6571,7 @@ void miss2_0x11C::SCRCMD_SET_SHADING_LEV_50FA40()
 void miss2_0x11C::SCRCMD_SET_CAR_JAMMED_50FA70()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_CAR_JAMMED*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Car_BC* pCar = pPointer->field_8_car;
 
     if (pCar)
@@ -6589,8 +6599,8 @@ void miss2_0x11C::SCRCMD_FINISH_MISSION_50FAD0()
 void miss2_0x11C::SCRCMD_STORE_BONUS_50FAF0()
 {
     auto* pCmd = reinterpret_cast<SCR_STORE_BONUS_COUNT*>(gBasePtr_6F8070);
-    auto* pPointerBonus = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pPointerCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx);
+    auto* pPointerBonus = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pPointerCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx));
 
     s32 bonus_unk = pPointerBonus->field_8_counter;
 
@@ -6639,7 +6649,7 @@ void miss2_0x11C::SCRCMD_SET_ENTER_STATUS_50FB60() // SCRCMD_SET_ENTER_STATUS an
 void miss2_0x11C::SCRCMD_SET_FAV_CAR_50FC20()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_FAV_CAR*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
     if (pPed != nullptr)
@@ -6653,7 +6663,7 @@ void miss2_0x11C::SCRCMD_SET_FAV_CAR_50FC20()
 void miss2_0x11C::GroupInArea_50FC60()
 {
     auto* pCmd = reinterpret_cast<SCR_ONEVAR_RECT*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Fix16 halfwidth = pCmd->field_C_rect.field_C_size.field_0_x / kFpTwo_6F77C8;
     Fix16 halfheight = pCmd->field_C_rect.field_C_size.field_4_y / kFpTwo_6F77C8;
@@ -6710,7 +6720,7 @@ void miss2_0x11C::GroupInArea_50FC60()
 void miss2_0x11C::SCRCMD_SET_KF_WEAPON_50FE00()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_KF_WEAPON*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     s32 weapon_idx = pCmd->field_C_weapon_idx;
 
@@ -6728,7 +6738,7 @@ void miss2_0x11C::SCRCMD_SET_KF_WEAPON_50FE00()
 // 0x50fed0
 void miss2_0x11C::SCRCMD_CLEAR_KF_WEAPON_50FED0()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Player* pPlayer = pPointer->field_8_char->field_15C_player;
 
     pPlayer->ClearKFWeapon_5647D0(); // clear kill frenzy weapon
@@ -6739,8 +6749,8 @@ void miss2_0x11C::SCRCMD_CLEAR_KF_WEAPON_50FED0()
 void miss2_0x11C::SCRCMD_ADD_ONSCREEN_COUNTER_50FF50()
 {
     auto* pCmd = reinterpret_cast<SCR_ADD_ONSCREEN_COUNTER*>(gBasePtr_6F8070);
-    auto* pOnScreenCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
-    auto* pCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx);
+    auto* pOnScreenCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
+    auto* pCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_counter_idx));
 
     pOnScreenCounter->field_8_index = gHud_2B00_706620->field_620_pagers.AddOnScreenCounter_5D3220(&pCounter->field_8_counter);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -6749,7 +6759,7 @@ void miss2_0x11C::SCRCMD_ADD_ONSCREEN_COUNTER_50FF50()
 // 0x50ffb0
 void miss2_0x11C::SCRCMD_CLEAR_COUNTER_50FFB0() // SCRCMD_CLEAR_COUNTER and SCRCMD_CLEAR_CLOCK_ONLY
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     u16 idx = pPointer->field_8_index;
 
     if (idx != 0xFFFF)
@@ -6776,7 +6786,7 @@ void miss2_0x11C::SCRCMD_CHANGE_POLICE_510030()
 // 0x510050
 void miss2_0x11C::SCRCMD_DESTROY_GROUP_510050()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pGroupLeader = pPointer->field_8_char;
     PedGroup* pGroup = pGroupLeader->field_164_ped_group;
 
@@ -6791,7 +6801,7 @@ void miss2_0x11C::SCRCMD_DESTROY_GROUP_510050()
 void miss2_0x11C::SCRCMD_CHECK_CURRENT_WEAPON_510090()
 {
     auto* pCmd = reinterpret_cast<SCR_CHECK_CURRENT_WEAPON*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     Weapon_30* pWeapon = pPointer->field_8_char->field_15C_player->GetCurrPlayerWeapon_5648F0();
 
@@ -6822,14 +6832,14 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
         gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("kfstart"),
                                                                 hud_message_priority::important_3); // KILL FRENZY!
         gRoot_sound_66B038.PlayVoice_40F090(voice_line::killfrenzy_12); // KILL FRENZY voice
-        auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_objname); // Skull icon?
+        auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_objname)); // Skull icon?
         if (miss2_0x11C::GetEntityTypeOfCommand_503410(pPointer->field_2_type) == 3)
         {
             miss2_0x11C::DeallocOrDeleteItem_505B10(pCmd->field_C_objname); // Delete skull icon?
         }
         sprintf(gTmpBuffer_67C598, "%d", pCmd->field_A_brief_id);
         gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(1, gTmpBuffer_67C598);
-        auto* pPlayerPedPtr = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_E_playername);
+        auto* pPlayerPedPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_E_playername));
         u8 weapon_idx = pCmd->field_10_weapon;
         if (weapon_idx < weapon_type::car_bomb || weapon_idx > 27)
         {
@@ -6866,14 +6876,14 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
     SCR_POINTER* pTimerIDPointer;
 
     auto* pCmd = reinterpret_cast<SCR_DO_BASIC_KF_TEMPLATE*>(gBasePtr_6F8070);
-    auto* pPlayerPedCmdPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_18_playername);
+    auto* pPlayerPedCmdPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_18_playername));
 
     if (field_C_cmd_initialised == 0)
     {
-        pTimerIDPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_timername);
+        pTimerIDPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_timername));
         pTimerIDPointer->field_8_index = gHud_2B00_706620->field_620_pagers.CreateTimer_5D31F0(pCmd->field_C_time_limit);
-        auto* pOnScreenCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_onscreenname);
-        auto* pCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_countername);
+        auto* pOnScreenCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_10_onscreenname));
+        auto* pCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_countername));
         pOnScreenCounter->field_8_index = gHud_2B00_706620->field_620_pagers.AddOnScreenCounter_5D3220(&pCounter->field_8_counter);
         ++field_C_cmd_initialised;
     }
@@ -6881,8 +6891,8 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
     {
         if (miss2_0x11C::GetBonusResult_505EA0(pCmd->field_8_bonusname) == -2)
         {
-            auto* pBonusType = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_bonusname);
-            auto* pCounter = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_countername);
+            auto* pBonusType = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_8_bonusname));
+            auto* pCounter = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_12_countername));
             pCounter->field_8_counter = pCmd->field_14_target_total -
                 gGame_0x40_67E008->field_38_local_player->field_2D4_scores.field_1A8_bonuses.GetProgressCount_476660(
                     pBonusType->field_8_index);
@@ -6898,7 +6908,7 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
         }
         else
         {
-            pTimerIDPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_timername);
+            pTimerIDPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_A_timername));
             if (pTimerIDPointer->field_8_index != 0xFFFF)
             {
                 gHud_2B00_706620->field_620_pagers.ClearPager_5D3280(pTimerIDPointer->field_8_index);
@@ -6947,7 +6957,7 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
 // 0x510530
 void miss2_0x11C::SCRCMD_SET_BONUS_RATING_510530()
 {
-    gGameSession_67E8E0.SetBonusRatingTextIdx_4C5AB0(((SCR_CMD_HEADER*)gBasePtr_6F8070)[1].field_2_type);
+    gGameSession_67E8E0.SetBonusRatingTextIdx_4C5AB0((static_cast<SCR_CMD_HEADER*>(gBasePtr_6F8070))[1].field_2_type);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
@@ -6955,7 +6965,7 @@ void miss2_0x11C::SCRCMD_SET_BONUS_RATING_510530()
 void miss2_0x11C::SCRCMD_ADD_TIME_510560()
 {
     auto* pCmd = reinterpret_cast<SCR_FOUR_PARAMS*>(gBasePtr_6F8070);
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     gHud_2B00_706620->field_620_pagers.AddTime_5D32F0(pPointer->field_8_index, 30 * pCmd->field_C_u32);
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -6995,7 +7005,7 @@ void miss2_0x11C::SCRCMD_CHECK_DEATH_ARR_510600()
 // 0x510660
 void miss2_0x11C::SCRCMD_FORCE_CLEANUP_510660()
 {
-    auto* pPointer = (SCR_POINTER*)gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index);
+    auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (miss2_0x11C::GetEntityTypeOfCommand_503410(pPointer->field_2_type) == 3)
     {
@@ -7037,7 +7047,7 @@ void miss2_0x11C::PreExecOpCode_5108D0()
     if (field_10_stopped != 1)
     {
         SCR_CMD_HEADER* pCmd = gScriptManager_6F8060->GetBasePointer_512770(field_4_next_cmd);
-        gBasePtr_6F8070 = (SCR_POINTER*)pCmd;
+        gBasePtr_6F8070 = static_cast<SCR_POINTER*>(pCmd);
         switch (pCmd->field_2_type)
         {
             case SCRCMD_LEVELSTART:
@@ -7891,8 +7901,8 @@ void miss2_0x11C::DisableBasicKfsFromSave_511CD0()
     {
         if ((1 << i) & gGameSave_6F78C8.field_E4_car_and_script_data.field_4C)
         {
-            auto* pPtr =
-                (SCR_START_BASIC_KF_TEMPLATE*)gScriptManager_6F8060->GetBasePointer_512770(gScriptManager_6F8060->field_C1E74_basic_kf[i]);
+            auto* pPtr = static_cast<SCR_START_BASIC_KF_TEMPLATE*>(
+                gScriptManager_6F8060->GetBasePointer_512770(gScriptManager_6F8060->field_C1E74_basic_kf[i]));
             miss2_0x11C::DisableThread_505790(pPtr->field_8_triggername);
             miss2_0x11C::DeallocOrDeleteItem_505B10(pPtr->field_C_objname);
         }

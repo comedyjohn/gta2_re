@@ -20,6 +20,7 @@ change, how to do it, how to check it, and what is done when.
 | [6-architecture.md](6-architecture.md) | 6 | Layered libraries, `World` instead of globals, platform interfaces instead of Win32 |
 | [7-concurrency.md](7-concurrency.md) | 7 | Render, audio and loading threads around a deterministic simulation |
 | [8-documentation.md](8-documentation.md) | 8 | Architecture docs, interface docs, contributor guide |
+| [EXECUTOR.md](EXECUTOR.md) | all | The runbook: task order, commands, checks, when to stop and ask |
 
 Tools that measure and drive the work live in `port/tools/refactor/`:
 
@@ -171,27 +172,24 @@ presentation, network, app. `subsystems.py` lists the files of each.
 
 (Function and field counts are per subsystem and overlap where a subsystem calls into another.)
 
-## Decisions needed before phase 2
+## Decisions (made 2026-10-16)
 
-Phase 0 and 1 can start without these. Phase 2 can't.
+The user adopted all six proposals; [EXECUTOR.md](EXECUTOR.md) §0 lists them as the executor applies
+them.
 
-1. **Naming convention.** Proposal: Google C++ style naming (`PascalCase` types and functions,
-   `snake_case` variables, `snake_case_` members, `kPascalCase` constants and enumerators, `snake_case`
-   files). It maps mechanically from today's names (`field_2C_game_exit_type` to `game_exit_type_`),
-   which keeps the renames tool-driven. Alternative: `m_camelCase` members. See [2-names.md](2-names.md).
-2. **Address suffixes.** Proposal: drop them from identifiers; keep each as a `// 0xADDR` comment and in
+1. **Naming convention:** Google C++ style naming (`PascalCase` types and functions, `snake_case`
+   variables, `snake_case_` members, `kPascalCase` constants and enumerators, `snake_case` files). See
+   [2-names.md](2-names.md).
+2. **Address suffixes:** dropped from identifiers; each stays as a `// 0xADDR` comment and in
    `address_map.csv`.
-3. **Golden replays and game data.** The replays need the game data, which can't go in the public
-   repository. Options: run them only locally (`port/tools/replaytest.sh`), or on a self-hosted CI
-   runner that has the data. Proposal: both, with the runner as the gate.
-4. **File compatibility.** Should saves, replays, player data and mission scripts of the original game
-   keep loading? Proposal: yes, read-compatible forever; the port may write a new format for its own
-   saves. Network play is already port-only.
-5. **Text encoding.** Proposal: decode GXT text to UTF-8 at load, use `std::string`/`std::format`
-   everywhere, decode code points only when drawing. Alternative: `char16_t`/`std::u16string`, closer to
-   the data but without `std::format` support. See [3-types-and-data.md](3-types-and-data.md).
-6. **Exceptions.** Proposal: none in the simulation (`std::expected` for fallible operations,
-   `FatalError` for broken invariants); allowed at load time and in tools.
+3. **Golden replays:** run locally (`port/tools/replaytest.sh`) and on a self-hosted CI runner with the
+   game data, the runner being the gate once it exists.
+4. **File compatibility:** saves, replays, player data and mission scripts of the original game stay
+   read-compatible forever; the port may write a new format for its own saves.
+5. **Text encoding:** GXT text decoded to UTF-8 at load, `std::string`/`std::format` everywhere, code
+   points decoded only when drawing. See [3-types-and-data.md](3-types-and-data.md).
+6. **Exceptions:** none in the simulation (`std::expected` for fallible operations, `FatalError` for
+   broken invariants); allowed at load time and in tools.
 
 ## Glossary
 

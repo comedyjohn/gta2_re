@@ -104,6 +104,8 @@ The order follows what a player notices first.
       `refactor/README.md` (one file per phase). Phase 0 (safety net) is mostly done: state hash,
       `gta2 --replay`/`--record`, `tools/replaytest.sh`, unit tests ([TESTING.md](TESTING.md)); what is left
       is in `refactor/0-safety-net.md`, first of all recording the corpus sessions.
+      The six decisions are made (2026-10-16); `refactor/EXECUTOR.md` is the step-by-step runbook for
+      finishing phases 0 to 4.
 - [ ] **More modernising** (done: C++ casts, range-for, `= default`, constexpr limits, `ReplayState`, `CrusherStates`,
       `GameExitType`, and clang-tidy's `bugprone-*`/`performance-*` fixes that were mechanical: loop counters as wide
       as their bounds, `GTA2_COUNTOF` as a constexpr template, explicit `strcmp` compares, default-case in every

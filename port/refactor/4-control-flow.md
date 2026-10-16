@@ -28,14 +28,14 @@ on phase 0's replays, and before that on knowing that the replays actually run t
 A refactor is only as safe as the tests that run the code. Before restructuring a function, know whether
 the corpus reaches it.
 
-- [ ] Clang build with `-fprofile-instr-generate -fcoverage-mapping` (preset `coverage64`).
-- [ ] `port/tools/refactor/coverage.sh`: runs the whole corpus, merges the profiles (`llvm-profdata
+- [x] Clang build with `-fprofile-instr-generate -fcoverage-mapping` (preset `coverage64`).
+- [x] `port/tools/refactor/coverage.sh`: runs the whole corpus, merges the profiles (`llvm-profdata
       merge`), and writes per-function line and branch coverage (`llvm-cov report
       --show-functions`) to `coverage.csv`, plus an HTML report.
 - [ ] Rule: a function is restructured only if the corpus covers at least 80% of its lines and all of
       its branches that the change touches. Otherwise: record a replay that reaches it, or write a unit
       test that drives it, first. The coverage report says which branches are missing.
-- [ ] The script VM gets its own report: which of the 449 opcodes (`SCRCMD`) the corpus executes. The
+- [x] (report done; hand-assembled opcode tests not yet) The script VM gets its own report: which of the 449 opcodes (`SCRCMD`) the corpus executes. The
       ones it doesn't are covered by hand-assembled scripts in `test_script_vm.cpp`.
 
 ## 4.2 Patterns and what replaces them

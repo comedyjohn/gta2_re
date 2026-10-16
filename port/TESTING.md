@@ -15,6 +15,13 @@ frames per replay drawn through the classic renderer under Xvfb, compared pixel 
 identical on linux32, linux64 and clang64 and between runs (Mesa llvmpipe). Run it after any change to
 drawing, the HUD, text or menus; `check.sh` doesn't, since the replays' hashes don't see drawing.
 
+**Coverage** (`port/tools/refactor/coverage.sh`, about 10 s once built; build with `cmake --preset coverage64 &&
+cmake --build --preset coverage64` in `port/`): plays the corpus with a Clang source-coverage build and writes
+`build_port/coverage64/coverage.csv` (per function: lines, missed lines, line %, branches, branch %),
+`opcodes.csv` (how often each script opcode's `case` was entered) and `html/index.html`. Phase 4's rule:
+restructure a function only if it is at least 80% line-covered and the branches the change touches are
+covered.
+
 **The check** (`port/tools/refactor/check.sh`, `--quick` to iterate) runs all of the above in one
 command: builds of four presets, no new warnings, unit tests, selftest, audiotest, simcheck, nettest,
 replays on three builds. It ends with `CHECK OK` or `CHECK FAILED: <step>`; logs are in

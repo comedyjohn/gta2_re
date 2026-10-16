@@ -14,6 +14,8 @@
 
 - R0.6 (2026-10-16): `gta2 --nettest` exchanges a per-frame hash of a rand() sequence and reports `DESYNC at frame N`; `nettest.sh` scenario "a skipped rand() call is reported as a desync" passes (and failed without the check). The game's own message is untouched: Q2.
 
+- R0.7 (2026-10-16): preset `coverage64`, `coverage.sh`, `coverage_report.py`. The corpus covers 68.6% of the lines of the code it links (4,554 functions in coverage.csv) and enters 124 of 404 script opcodes. `Ped::Threat_Reaction_AI_465270`: 75.6% lines, 63.3% branches; `CarAI_78::DetectCarAhead_44D1D0`: 76.6% lines, 73.0% branches. Both are under the 80% rule of phase 4.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

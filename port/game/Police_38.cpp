@@ -28,6 +28,8 @@ DEFINE_GLOBAL_INIT(Fix16, kFpEight_6FED48, Fix16(8), 0x6FED48);
 // 0x4beb30
 PoliceCrew_38::PoliceCrew_38()
 {
+    // Not set by Init_5709C0, in the original either: it started as whatever the heap held
+    field_35 = 0;
     Init_5709C0();
 }
 
@@ -3128,5 +3130,5 @@ PoliceRoadblock_A4::PoliceRoadblock_A4()
 // 0x5774a0
 PoliceRoadblock_A4::~PoliceRoadblock_A4()
 {
-    delete[] field_A0_rect;
+    delete field_A0_rect;
 }

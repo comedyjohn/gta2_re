@@ -28,11 +28,11 @@ namespace pursuit_state
 {
 enum
 {
-    idle_0 = 0,       // criminal registered, no crew sent yet
+    idle_0 = 0, // criminal registered, no crew sent yet
     responding_1 = 1, // first crew sent, waiting until the criminal is spotted
-    active_3 = 3,     // crews engaged, more are sent or sent away as the wanted level changes
-    ended_4 = 4,      // wanted level gone or criminal dead: release the crews and clear the target
-    searching_5 = 5,  // criminal not seen for a while: crews search, a new one is sent if none is
+    active_3 = 3, // crews engaged, more are sent or sent away as the wanted level changes
+    ended_4 = 4, // wanted level gone or criminal dead: release the crews and clear the target
+    searching_5 = 5, // criminal not seen for a while: crews search, a new one is sent if none is
 };
 } // namespace pursuit_state
 
@@ -94,7 +94,7 @@ class PoliceCrew_38
     char_type field_37_unused;
 };
 
-class PolicePursuitTarget_7C  // Pursuit of one wanted criminal by police crews
+class PolicePursuitTarget_7C // Pursuit of one wanted criminal by police crews
 {
   public:
     Ped* field_0_criminal_ped;

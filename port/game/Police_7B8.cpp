@@ -1,16 +1,16 @@
 #include "Police_7B8.hpp"
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
+#include "EmergencyCrewPool_1E0.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
-#include "EmergencyCrewPool_1E0.hpp"
 #include "Object_5C.hpp"
 #include "PathFinder_2FD4.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"
 #include "Player.hpp"
-#include "winmain.hpp"
 #include "ped_graphic_type.hpp"
+#include "winmain.hpp"
 
 DEFINE_GLOBAL(Police_7B8*, gPolice_7B8_6FEE40, 0x6FEE40);
 DEFINE_GLOBAL(s32, gCrewKind_6FEDB8, 0x6FEDB8);
@@ -268,7 +268,8 @@ bool Police_7B8::IsBeingPursued_56F800(Ped* pCriminal)
     {
         if (pursuit_target.field_0_criminal_ped == pCriminal)
         {
-            if (pursuit_target.field_75_num_crews > 0 && (pursuit_target.field_8_state == pursuit_state::active_3 || pursuit_target.field_C_timer != 0))
+            if (pursuit_target.field_75_num_crews > 0 &&
+                (pursuit_target.field_8_state == pursuit_state::active_3 || pursuit_target.field_C_timer != 0))
             {
                 return true;
             }
@@ -359,8 +360,8 @@ void Police_7B8::UpdateFirstPursuitTimer_56FA40()
 {
     if (field_464_pursuit_targets[0].field_0_criminal_ped)
     {
-        if (!field_464_pursuit_targets[0].field_0_criminal_ped->IsActive_433B40() 
-            || field_464_pursuit_targets[0].field_0_criminal_ped->isDead_403B60())
+        if (!field_464_pursuit_targets[0].field_0_criminal_ped->IsActive_433B40() ||
+            field_464_pursuit_targets[0].field_0_criminal_ped->isDead_403B60())
         {
             field_464_pursuit_targets[0].field_8_state = pursuit_state::ended_4;
         }
@@ -505,7 +506,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
             case cop_level_enum::fbi_5:
                 pPursuitTarget->field_4_wanted_level = cop_level_enum::fbi_5;
                 gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit = crew_type::fbi_4;
-                if (!pPursuitTarget->field_70_num_police_crews && !pPursuitTarget->field_72_num_swat_crews && pPursuitTarget->field_73_num_fbi_crews <= 1)
+                if (!pPursuitTarget->field_70_num_police_crews && !pPursuitTarget->field_72_num_swat_crews &&
+                    pPursuitTarget->field_73_num_fbi_crews <= 1)
                 {
                     field_659_max_police_cars = 2;
                 }
@@ -644,7 +646,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
                         }
                         break;
                     case cop_level_enum::army_6:
-                        if (pPursuitTarget->field_70_num_police_crews > 0 || pPursuitTarget->field_72_num_swat_crews || pPursuitTarget->field_73_num_fbi_crews)
+                        if (pPursuitTarget->field_70_num_police_crews > 0 || pPursuitTarget->field_72_num_swat_crews ||
+                            pPursuitTarget->field_73_num_fbi_crews)
                         {
                             numCrews = pPursuitTarget->field_75_num_crews;
                             for (crewIdx = 0; crewIdx < numCrews; crewIdx++)
@@ -667,7 +670,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
                     for (crewIdx = 0; crewIdx < numCrews; crewIdx++)
                     {
                         PoliceCrew_38* pCrew = pPursuitTarget->field_20_crews[crewIdx];
-                        if (pCrew && pCrew->field_1C_used == 1 && pCrew->field_20_crew_kind == crew_kind::police_1 && pCrew->field_10_subObj->field_0_car)
+                        if (pCrew && pCrew->field_1C_used == 1 && pCrew->field_20_crew_kind == crew_kind::police_1 &&
+                            pCrew->field_10_subObj->field_0_car)
                         {
                             pPursuitTarget->field_20_crews[crewIdx]->field_34_is_dismissed = 1;
                             pPursuitTarget->field_20_crews[crewIdx]->RemoveFromPursuit_570AB0();
@@ -1092,7 +1096,8 @@ void Police_7B8::UpdateCriminalLatestPosition_570940(Ped* pPed)
 // 0x577320
 bool Police_7B8::TryBeginRoadblock_577320()
 {
-    if (this->field_654_max_wanted_level < cop_level_enum::police_3 || this->field_664_roadblock_1.field_0_bActive || this->field_7AC_roadblock_cooldown)
+    if (this->field_654_max_wanted_level < cop_level_enum::police_3 || this->field_664_roadblock_1.field_0_bActive ||
+        this->field_7AC_roadblock_cooldown)
     {
         return false;
     }

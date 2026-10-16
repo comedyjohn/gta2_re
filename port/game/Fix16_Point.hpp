@@ -250,7 +250,6 @@ class Fix16_Point
         y = radius * Ang16::cosine_40F520(angle);
     }
 
-
     Fix16_Point& operator+=(const Fix16_Point& other)
     {
         x += other.x;

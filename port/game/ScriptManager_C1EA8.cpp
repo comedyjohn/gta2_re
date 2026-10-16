@@ -1,6 +1,7 @@
 #include "ScriptManager_C1EA8.hpp"
 #include "Car_BC.hpp"
 #include "Function.hpp"
+#include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Generators.hpp"
 #include "Globals.hpp"
@@ -11,7 +12,6 @@
 #include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
-#include "GameSession_578.hpp"
 #include "map_0x370.hpp"
 #include "memory.hpp"
 #include "miss2_0x11C.hpp"
@@ -49,7 +49,8 @@ str_table_entry* ScriptManager_C1EA8::StrEntryByString_5030B0(char_type* strToFi
     str_table_entry* pEntry = field_13350_pStringTbl->field_4[idx];
     while (pEntry)
     {
-        if (_strnicmp(strToFind, reinterpret_cast<const char*>(&pEntry[1]), pEntry->field_8_length) == 0) // string data is after the end of the structure
+        if (_strnicmp(strToFind, reinterpret_cast<const char*>(&pEntry[1]), pEntry->field_8_length) ==
+            0) // string data is after the end of the structure
         {
             return pEntry;
         }
@@ -101,13 +102,13 @@ char_type ScriptManager_C1EA8::AddCranePowerupTrigger_511B10(s16 idx)
     auto* pCmd = (SCR_DECLARE_CRANE_POWERUP*)GetBasePointer_512770(idx);
     auto* pGenerator = (SCR_POINTER*)GetBasePointer_512770(pCmd->field_A_generator);
     return gCarThreadTriggers_214_705F20->AddThreadTrigger_5C86C0(1,
-                                       3,
-                                       (SCR_THREAD*)pGenerator->field_8_generator,
-                                       Fix16(pCmd->field_C_pos.field_0_x) + kFpHalf_6F75F0,
-                                       Fix16(pCmd->field_C_pos.field_1_y) + kFpHalf_6F75F0,
-                                       Fix16(pCmd->field_C_pos.field_2_z),
-                                       kFpHalf_6F75F0,
-                                       kFpHalf_6F75F0);
+                                                                  3,
+                                                                  (SCR_THREAD*)pGenerator->field_8_generator,
+                                                                  Fix16(pCmd->field_C_pos.field_0_x) + kFpHalf_6F75F0,
+                                                                  Fix16(pCmd->field_C_pos.field_1_y) + kFpHalf_6F75F0,
+                                                                  Fix16(pCmd->field_C_pos.field_2_z),
+                                                                  kFpHalf_6F75F0,
+                                                                  kFpHalf_6F75F0);
 }
 
 // 0x511b90
@@ -260,7 +261,8 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
     gmp_block_info* pBlockInfo;
     DmapInfoList* pMapSub;
 
-    gMap_0x370_6F6268->GetModifiedMapData_4E8CF0(&pColData, &colDataLen, &pBlockInfo, &blockInfoLen, &pMapSub, reinterpret_cast<s32*>(&mapSubLen));
+    gMap_0x370_6F6268
+        ->GetModifiedMapData_4E8CF0(&pColData, &colDataLen, &pBlockInfo, &blockInfoLen, &pMapSub, reinterpret_cast<s32*>(&mapSubLen));
     File::Global_Open_4A7060(pFileName);
 
     File::Global_Read_4A71C0(&gGameSave_6F78C8, 0x748);
@@ -380,8 +382,9 @@ void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
     u32 total_str_length_ = 0;
     while (total_str_length_ < tableSize)
     {
-        pStringDataIter2->field_2_zone_idx = gMap_0x370_6F6268->zone_idx_by_name_4DF050(reinterpret_cast<char_type*>(&pStringDataIter2[1]),
-                                                                                        strlen(reinterpret_cast<const char_type*>(&pStringDataIter2[1])));
+        pStringDataIter2->field_2_zone_idx =
+            gMap_0x370_6F6268->zone_idx_by_name_4DF050(reinterpret_cast<char_type*>(&pStringDataIter2[1]),
+                                                       strlen(reinterpret_cast<const char_type*>(&pStringDataIter2[1])));
         field_13350_pStringTbl->field_4[str_count] = pStringDataIter2;
         s32 str_length_ = pStringDataIter2->field_8_length + 9;
         total_str_length_ += str_length_;

@@ -11,13 +11,31 @@ namespace padinput
 namespace
 {
 // Walking: the stick and d-pad move, the face buttons act (slots as plat::PadButtonName names them)
-const Layout kFootDefault = {{kStickUp, kStickDown, kStickLeft, kStickRight, 2 /* X: fire */, 3 /* Y: enter car */,
-                              0 /* A: jump */, 4 /* LB: previous weapon */, 5 /* RB: next weapon */, 1 /* B: special 1 */,
-                              10 /* LT */, 11 /* RT */}};
+const Layout kFootDefault = {{kStickUp,
+                              kStickDown,
+                              kStickLeft,
+                              kStickRight,
+                              2 /* X: fire */,
+                              3 /* Y: enter car */,
+                              0 /* A: jump */,
+                              4 /* LB: previous weapon */,
+                              5 /* RB: next weapon */,
+                              1 /* B: special 1 */,
+                              10 /* LT */,
+                              11 /* RT */}};
 // Driving: the triggers are the pedals (analog), the stick steers, RB shoots (a tank's gun too)
-const Layout kCarDefault = {{11 /* RT: gas */, 10 /* LT: brake, reverse */, kStickLeft, kStickRight, 5 /* RB: fire */,
-                             3 /* Y: leave the car */, 0 /* A: handbrake */, 4 /* LB: previous weapon */, kNone,
-                             1 /* B: horn */, 2 /* X: special 2 */, kNone}};
+const Layout kCarDefault = {{11 /* RT: gas */,
+                             10 /* LT: brake, reverse */,
+                             kStickLeft,
+                             kStickRight,
+                             5 /* RB: fire */,
+                             3 /* Y: leave the car */,
+                             0 /* A: handbrake */,
+                             4 /* LB: previous weapon */,
+                             kNone,
+                             1 /* B: horn */,
+                             2 /* X: special 2 */,
+                             kNone}};
 
 const char* const kContextKeys[2] = {"foot", "car"};
 
@@ -117,8 +135,8 @@ Settings Load(const std::string& file)
             {
                 const size_t n = strlen(kContextKeys[context]);
                 int action = -1;
-                if (!strncmp(key, kContextKeys[context], n) && key[n] == '.' && sscanf(key + n + 1, "%d", &action) == 1 &&
-                    action >= 0 && action < kActions && ValidSource(value))
+                if (!strncmp(key, kContextKeys[context], n) && key[n] == '.' && sscanf(key + n + 1, "%d", &action) == 1 && action >= 0 &&
+                    action < kActions && ValidSource(value))
                 {
                     s.layout[context].source[action] = value;
                 }
@@ -137,11 +155,15 @@ bool Save(const std::string& file, const Settings& settings)
     {
         return false;
     }
-    fprintf(f, "# GTA2 pad settings. Sources: 0..11 the buttons A B X Y LB RB Back Start L3 R3 LT RT,\n"
-               "# 224..227 stick or d-pad left, right, up, down, 255 none. Actions: 0 forward, 1 backward,\n"
-               "# 2 left, 3 right, 4 fire, 5 enter/exit car, 6 jump/handbrake, 7 previous weapon,\n"
-               "# 8 next weapon, 9..11 specials.\n");
-    fprintf(f, "world_directions = %d\nlegend = %d\nesc_menu = %d\n", settings.worldDirections ? 1 : 0, settings.legend ? 1 : 0,
+    fprintf(f,
+            "# GTA2 pad settings. Sources: 0..11 the buttons A B X Y LB RB Back Start L3 R3 LT RT,\n"
+            "# 224..227 stick or d-pad left, right, up, down, 255 none. Actions: 0 forward, 1 backward,\n"
+            "# 2 left, 3 right, 4 fire, 5 enter/exit car, 6 jump/handbrake, 7 previous weapon,\n"
+            "# 8 next weapon, 9..11 specials.\n");
+    fprintf(f,
+            "world_directions = %d\nlegend = %d\nesc_menu = %d\n",
+            settings.worldDirections ? 1 : 0,
+            settings.legend ? 1 : 0,
             settings.escMenu ? 1 : 0);
     for (int context = 0; context < 2; context++)
     {

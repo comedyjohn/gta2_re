@@ -21,18 +21,16 @@ struct Taxi_8
     Taxi_8* mpNext;
 };
 
-
 class Taxi_4_Pool : public PoolBasic<Taxi_8, 100>
 {
-public:
+  public:
     Taxi_4_Pool() = default;
-    
+
     ~Taxi_4_Pool()
     {
         this->field_0_pHead = nullptr;
     }
 };
-
 
 class Taxi_4
 {

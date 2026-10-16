@@ -26,7 +26,7 @@ namespace
 padinput::Settings gSettings;
 bool gSettingsLoaded = false;
 padinput::Reader gReader;
-unsigned int gAnalog = padinput::Pack(padinput::Analog{});
+unsigned int gAnalog = padinput::Pack(padinput::Analog {});
 int gSpawnRequest = -1;
 
 // GTA2_TEST_PAD=FILE: a made-up pad for tests, one line per change: "READ X Y BUTTONS LT RT RX" (from
@@ -288,7 +288,7 @@ void port_input_set_analog(unsigned int packed)
 
 void port_input_reset()
 {
-    gAnalog = padinput::Pack(padinput::Analog{});
+    gAnalog = padinput::Pack(padinput::Analog {});
     gSpawnRequest = -1;
 }
 

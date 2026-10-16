@@ -4,11 +4,10 @@
 #include <windows.h>
 
 #ifndef DIRECTINPUT_VERSION
-#define DIRECTINPUT_VERSION 0x0700
+    #define DIRECTINPUT_VERSION 0x0700
 #endif
 
 #include <dinput.h>
-
 
 class Input
 {

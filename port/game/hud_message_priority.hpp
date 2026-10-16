@@ -7,7 +7,7 @@ namespace hud_message_priority
 {
 enum
 {
-    normal_1 = 1,    // in game events: bonuses, pickups, death text
+    normal_1 = 1, // in game events: bonuses, pickups, death text
     important_3 = 3, // mission messages, game over, "you're IT"
 };
 } // namespace hud_message_priority

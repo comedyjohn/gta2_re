@@ -1,7 +1,7 @@
 #include "Taxi_4.hpp"
+#include "Car_BC.hpp"
 #include "Globals.hpp"
 #include "error.hpp"
-#include "Car_BC.hpp"
 
 DEFINE_GLOBAL(Taxi_4_Pool*, gTaxi_4_Pool_6783F8, 0x6783F8);
 DEFINE_GLOBAL(Taxi_4*, gTaxi_4_704130, 0x704130);
@@ -39,9 +39,9 @@ Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
     {
         // 9.6f passes references to the sprite position, not get_x/get_y copies
         Fix16 distance = Fix16::MaxAbsDistance_42A6B0(xpos,
-                                                             ypos,
-                                                             pIter->field_0_pCar->field_50_car_sprite->field_14_xy.x,
-                                                             pIter->field_0_pCar->field_50_car_sprite->field_14_xy.y);
+                                                      ypos,
+                                                      pIter->field_0_pCar->field_50_car_sprite->field_14_xy.x,
+                                                      pIter->field_0_pCar->field_50_car_sprite->field_14_xy.y);
         if (distance < smallest)
         {
             pCarRet = pIter->field_0_pCar;

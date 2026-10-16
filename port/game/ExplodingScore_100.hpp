@@ -1,8 +1,8 @@
 #pragma once
 
-#include "fix16.hpp"
 #include "Function.hpp"
 #include "Pool.hpp"
+#include "fix16.hpp"
 
 class ExplodingScore_50
 {
@@ -49,8 +49,8 @@ class ExplodingScorePool
     u16 field_0_last_palette;
     u16 field_2_free_scores;
 
-    // NOTE: Nearly all other pools start at offset 0, this object is some 
-    // suggestion its composition and not inheritance unless this object 
+    // NOTE: Nearly all other pools start at offset 0, this object is some
+    // suggestion its composition and not inheritance unless this object
     // has an additional unknown base that been melted by the compiler :']
     Pool<ExplodingScore_50, 3> field_4_pool;
 };

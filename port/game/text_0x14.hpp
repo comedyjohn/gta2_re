@@ -34,7 +34,7 @@ class text_tdat
 
 class text_tkey
 {
-public:
+  public:
     text_tkey() // inline 4C23F0
     {
         field_0_tKey = nullptr;
@@ -52,7 +52,6 @@ public:
     text_0xC* field_0_tKey;
     u32 field_4_tKey_count;
 };
-
 
 class text_0x14
 {

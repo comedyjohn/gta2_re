@@ -2,10 +2,10 @@
 #define FIX16_POINT_ZERO kFpZero_6F8E10
 #include "Object_3C.hpp"
 #include "Car_BC.hpp"
-#include "char.hpp"
+#include "Explosion_30.hpp"
 #include "Globals.hpp"
 #include "Object_5C.hpp"
-#include "Explosion_30.hpp"
+#include "char.hpp"
 #include "enums.hpp"
 #include "rng.hpp"
 #include "sprite.hpp"
@@ -129,7 +129,8 @@ AttachedSprite_18* SpriteList_4::FindFirstActiveObject_5A6AD0()
     while (pObjIter)
     {
         const s32 sprite_type = pObjIter->field_0_pSprite->field_30_sprite_type_enum;
-        if (sprite_type == sprite_types_enum::code_obj1_4 || sprite_type == sprite_types_enum::map_obj_5 || sprite_type == sprite_types_enum::object_1)
+        if (sprite_type == sprite_types_enum::code_obj1_4 || sprite_type == sprite_types_enum::map_obj_5 ||
+            sprite_type == sprite_types_enum::object_1)
         {
             Object_2C* o2c = pObjIter->field_0_pSprite->field_8_object_2C_ptr;
             if (o2c)
@@ -408,7 +409,8 @@ Sprite* SpriteList_4::FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff)
     Sprite* new_ret = nullptr;
     for (AttachedSprite_18* pIter = this->field_0_p18; pIter; pIter = pIter->mpNext)
     {
-        Fix16 yDelta = Fix16::MaxAbsDistance_42A6B0(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
+        Fix16 yDelta =
+            Fix16::MaxAbsDistance_42A6B0(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
         if (yDelta < smallest)
         {
             new_ret = pIter->field_0_pSprite;
@@ -542,7 +544,8 @@ void SpriteList_4::CleanupSpriteList_5A7080()
     {
         bool bUnlinkHead = false;
         s32 type = pIter->field_0_pSprite->GetType_416B40();
-        if ((type == sprite_types_enum::object_1 || (type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5)) && pIter->field_0_pSprite->field_8_object_2C_ptr->IsFlameObject_4BE830())
+        if ((type == sprite_types_enum::object_1 || (type > sprite_types_enum::ped_3 && type <= sprite_types_enum::map_obj_5)) &&
+            pIter->field_0_pSprite->field_8_object_2C_ptr->IsFlameObject_4BE830())
         {
             gObject_5C_6F8F84->RemoveAndFree_52A610(pIter->field_0_pSprite->field_8_object_2C_ptr);
             if (pLast)

@@ -15,7 +15,6 @@ class SpriteTreeNode_C
 
 EXTERN_GLOBAL(class SpriteTreeStack_FA4*, gSpriteTreeStack_705BC0);
 
-
 // Explicit stack used by SpriteTree_4::Draw_5C5DF0 for the in-order walk of a sprite tree
 class SpriteTreeStack_FA4
 {
@@ -61,7 +60,6 @@ class SpriteTreeStack_FA4
 class SpriteTreeNodePool_2EE4
 {
   public:
-
     inline SpriteTreeNode_C* Alloc_4C4B40()
     {
         if (field_2EE0_next_free_idx >= SpriteTreeStack_FA4::k_max_nodes)
@@ -99,7 +97,6 @@ class SpriteTree_4
     ~SpriteTree_4();
     SpriteTreeNode_C* field_0_pRoot;
 };
-
 
 // The 7 draw layers (by sprite z), sprites are added with DisplayAdd and drawn layer by layer from MapRenderer
 class SpriteRenderer_1C

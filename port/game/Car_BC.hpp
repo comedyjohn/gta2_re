@@ -1,20 +1,20 @@
 #pragma once
 
-#include "car_flags.hpp"
 #include "BitSet32.hpp"
 #include "Car_10.hpp"
-#include "fix16.hpp"
 #include "Function.hpp"
 #include "Object_3C.hpp"
 #include "Ped.hpp"
 #include "Ped_List_4.hpp"
 #include "Pool.hpp"
 #include "ang16.hpp"
+#include "car_despawn_status.hpp"
+#include "car_flags.hpp"
+#include "fix16.hpp"
 #include "gtx_0x106C.hpp"
+#include "map_0x370.hpp"
 #include "miss2_xyz.hpp"
 #include "sprite.hpp"
-#include "car_despawn_status.hpp"
-#include "map_0x370.hpp"
 #include <wchar.h>
 
 struct gmp_zone_info;
@@ -76,7 +76,7 @@ struct car_rng_list
     {
         this->unknown = unk;
     }
-    
+
     Fix16 unknown;
     s32 values[256];
 };
@@ -97,7 +97,14 @@ class CarThreadTriggers_214
 {
   public:
     void FreeTrigger_5C8680(u8 idx);
-    char_type AddThreadTrigger_5C86C0(const s32& type, const s32& param, SCR_THREAD* pScriptThread, Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16 width, Fix16 height);
+    char_type AddThreadTrigger_5C86C0(const s32& type,
+                                      const s32& param,
+                                      SCR_THREAD* pScriptThread,
+                                      Fix16 xpos,
+                                      Fix16 ypos,
+                                      Fix16 zpos,
+                                      Fix16 width,
+                                      Fix16 height);
     void Reset_5C8750();
     void CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite);
 
@@ -185,11 +192,11 @@ class CarManager_6C
     Car_BC* GetNearestCarFromCoord_444F80(Fix16 x, Fix16 y, Fix16 z, Ped* pPed);
     Car_BC* GetNearestEnterableCarFromCoord_444FA0(Fix16 x, Fix16 y, Fix16 z, Ped* pPed);
     Car_BC* DoGetNearestCarFromCoord_444FC0(Fix16 xpos,
-                                                   Fix16 ypos,
-                                                   Fix16 zpos,
-                                                   s32 bMatchDriverless,
-                                                   Ped* pPed,
-                                                   char_type bIgnorePedRestrictions);
+                                            Fix16 ypos,
+                                            Fix16 zpos,
+                                            s32 bMatchDriverless,
+                                            Ped* pPed,
+                                            char_type bIgnorePedRestrictions);
 
     Car_BC* GetNearestFrontVehicle_445210(Sprite* pSprite, u8 k3);
     Car_BC* SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 side, const s32& car_model);
@@ -269,11 +276,21 @@ class CarManager_6C
         if (car_model == car_model_enum::TRAIN || car_model == car_model_enum::TRAINCAB || car_model == car_model_enum::TRAINFB ||
             car_model == car_model_enum::boxcar)
         {
-            return SpawnCarAt_446230(xpos, ypos, gMap_0x370_6F6268->GetRailwayZCoordAtXY_4E6510(xpos, ypos), rotation, car_model, kFP16One_6777D0);
+            return SpawnCarAt_446230(xpos,
+                                     ypos,
+                                     gMap_0x370_6F6268->GetRailwayZCoordAtXY_4E6510(xpos, ypos),
+                                     rotation,
+                                     car_model,
+                                     kFP16One_6777D0);
         }
         else
         {
-            return SpawnCarAt_446230(xpos, ypos, gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos), rotation, car_model, kFP16One_6777D0);
+            return SpawnCarAt_446230(xpos,
+                                     ypos,
+                                     gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos),
+                                     rotation,
+                                     car_model,
+                                     kFP16One_6777D0);
         }
     }
 
@@ -361,7 +378,8 @@ class Trailer
         field_0_hitch_angle_clamped = 0;
     }
 
-    char_type field_0_hitch_angle_clamped; // set by UpdateTrailerAlignment_407CE0 when the trailer angle hits its window, cleared on hitching
+    char_type
+        field_0_hitch_angle_clamped; // set by UpdateTrailerAlignment_407CE0 when the trailer angle hits its window, cleared on hitching
     char_type field_1_unused;
     char_type field_2_unused;
     char_type field_3_unused;
@@ -539,7 +557,7 @@ class Car_BC
     void AssignDriverBlameForExplosion_43B7B0(Car_BC* pCar);
     bool IsImmuneToExplosionType_43B850(s32 explosion_type);
     void SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos);
-    // Called without this in SpawnDamageFireEffect_43B870: a static 
+    // Called without this in SpawnDamageFireEffect_43B870: a static
     static s32 GetFireExplosionType_43BB90(u8 fire_level);
     void SpawnFire_43BBC0();
     void SetupCarPhysicsAndSpriteBinding_43BC30();
@@ -623,13 +641,13 @@ class Car_BC
     void DoDetachTrailer_4418A0();
     void DetachTrailerAndUpdateDamage_4418B0();
     void HandleUserInput_4418D0(char_type forward_gas_on,
-                                    char_type foot_brake_on,
-                                    char_type left_on,
-                                    char_type right_on,
-                                    char_type hand_brake_on,
-                                    char_type now_special_pressed,
-                                    char_type was_special_pressed,
-                                    char_type attack);
+                                char_type foot_brake_on,
+                                char_type left_on,
+                                char_type right_on,
+                                char_type hand_brake_on,
+                                char_type now_special_pressed,
+                                char_type was_special_pressed,
+                                char_type attack);
     void AllocCarPhysics_4419E0();
     void DeAllocateCarPhysics_441A10();
     char_type AreAllDoorsClosed_441A40();
@@ -789,7 +807,8 @@ class Car_BC
     // TODO: Find 9.6f addr
     inline bool HasEmergencyInfoFlag()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::emergency) == car_info_flag::emergency;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::emergency) ==
+            car_info_flag::emergency;
     }
 
     bool IsMaxDamage_40F890()
@@ -832,36 +851,42 @@ class Car_BC
     // 9.6f inline 0x421700
     inline bool HasPopupHeadlights_421700()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags_2 & car_info_flag2::popup_headlights) == car_info_flag2::popup_headlights;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags_2 & car_info_flag2::popup_headlights) ==
+            car_info_flag2::popup_headlights;
     }
 
     // 9.6f inline 0x421660
     inline bool HasRoofLight_421660()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::roof_light) == car_info_flag::roof_light;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::roof_light) ==
+            car_info_flag::roof_light;
     }
 
     inline bool IsTrailerInfo_421640()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::trailer) == car_info_flag::trailer;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::trailer) ==
+            car_info_flag::trailer;
     }
 
     // 9.6f inline 0x4216C0
     inline bool HasTaxiLight_4216C0()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::taxi_light) == car_info_flag::taxi_light;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::taxi_light) ==
+            car_info_flag::taxi_light;
     }
 
     // 9.6f inline 0x421680
     inline bool HasBottomLeftRoofLight_421680()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::bottom_roof_light) == car_info_flag::bottom_roof_light;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::bottom_roof_light) ==
+            car_info_flag::bottom_roof_light;
     }
 
     // 9.6f inline 0x4216A0
     inline bool HasTopRoofLights_4216A0()
     {
-        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::top_roof_lights) == car_info_flag::top_roof_lights;
+        return (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::top_roof_lights) ==
+            car_info_flag::top_roof_lights;
     }
 
     void SetBottomLeftRoofLightDelta_421810()
@@ -1044,7 +1069,9 @@ class Car_BC
 
     bool IsMarkedForDespawn_4214B0()
     {
-        return field_88_despawn_status == car_despawn_status::despawn_pending_2 || field_88_despawn_status == car_despawn_status::marked_for_despawn_4 || field_88_despawn_status == car_despawn_status::despawn_soon_3;
+        return field_88_despawn_status == car_despawn_status::despawn_pending_2 ||
+            field_88_despawn_status == car_despawn_status::marked_for_despawn_4 ||
+            field_88_despawn_status == car_despawn_status::despawn_soon_3;
     }
 
     // 9.6f 0x421870
@@ -1062,7 +1089,9 @@ class Car_BC
     // 9.6f 0x4215F0
     inline void CancelDespawn_4215F0()
     {
-        if (field_88_despawn_status == car_despawn_status::despawn_pending_2 || field_88_despawn_status == car_despawn_status::marked_for_despawn_4 || field_88_despawn_status == car_despawn_status::despawn_soon_3)
+        if (field_88_despawn_status == car_despawn_status::despawn_pending_2 ||
+            field_88_despawn_status == car_despawn_status::marked_for_despawn_4 ||
+            field_88_despawn_status == car_despawn_status::despawn_soon_3)
         {
             field_88_despawn_status = car_despawn_status::active_1;
         }
@@ -1109,7 +1138,9 @@ class Car_BC
 
     void MarkForDespawn_421470()
     {
-        if (field_88_despawn_status != car_despawn_status::despawning_5 && field_88_despawn_status != car_despawn_status::despawn_pending_2 && field_88_despawn_status != car_despawn_status::despawn_soon_3)
+        if (field_88_despawn_status != car_despawn_status::despawning_5 &&
+            field_88_despawn_status != car_despawn_status::despawn_pending_2 &&
+            field_88_despawn_status != car_despawn_status::despawn_soon_3)
         {
             field_88_despawn_status = car_despawn_status::marked_for_despawn_4;
         }
@@ -1256,7 +1287,7 @@ class Car_BC
 
     bool IsTruckCab_421620()
     {
-        car_info* v1 =  gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+        car_info* v1 = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
         return v1->IsTruckCab_41FEA0();
     }
 
@@ -1267,7 +1298,8 @@ class Car_BC
 
     bool CanBeLiftedByCrane_447F00()
     {
-        return !IsTruckCab_421620() && !gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->IsTrailer() && !IsTrainModel_403BA0() && !IsLongerThanOneBlock_447ED0();
+        return !IsTruckCab_421620() && !gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->IsTrailer() &&
+            !IsTrainModel_403BA0() && !IsLongerThanOneBlock_447ED0();
     }
 
     void StartEngine_426E00()
@@ -1424,7 +1456,7 @@ class TrailerPool
 
     ~TrailerPool()
     {
-       field_0_pool.field_0_pHead = nullptr;
+        field_0_pool.field_0_pHead = nullptr;
     }
 
     // 9.6f 0x425580

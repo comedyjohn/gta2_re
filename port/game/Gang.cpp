@@ -76,7 +76,7 @@ void Gang_144::Init_4BED70()
         field_122_gang_kill_reaction[i] = 0;
     }
 
-    for (signed char & j : field_11C_respect)
+    for (signed char& j : field_11C_respect)
     {
         j = 0;
     }

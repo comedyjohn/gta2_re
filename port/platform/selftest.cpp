@@ -1,8 +1,8 @@
 // gta2 --selftest: draws through the renderer's entry points the way the game does (a palette, a
 // paletted 64x64 tile with a transparent corner, an additive quad, a 16-bit TGA image), reads the
 // pixels back and checks them. Needs a display (Xvfb will do); no game data.
-#include "renderer.h"
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
+#include "renderer.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -11,7 +11,7 @@
 
 namespace
 {
-template <class T>
+template<class T>
 T Get(const char* name)
 {
     return reinterpret_cast<T>(port_renderer_lookup(name));

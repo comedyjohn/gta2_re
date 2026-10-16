@@ -181,9 +181,9 @@ enum cop_level_enum
     police_1 = 1, // one police car
     police_2 = 2, // two police cars
     police_3 = 3, // roadblocks start
-    swat_4 = 4,   // a SWAT crew is added
-    fbi_5 = 5,    // FBI crews
-    army_6 = 6,   // army
+    swat_4 = 4, // a SWAT crew is added
+    fbi_5 = 5, // FBI crews
+    army_6 = 6, // army
 };
 } // namespace cop_level_enum
 
@@ -766,7 +766,7 @@ enum
     shop_car_smg_250 = 250,
     shop_car_oil_stain_251 = 251,
     shop_car_mines_252 = 252,
-    
+
     machine_gun_bullet_254 = 254,
     traffic_light_lighting_255 = 255,
     ped_crossing_trigger_258 = 258,
@@ -939,7 +939,7 @@ enum
     dead_9 = 9,
     in_car_10 = 10,
 };
-} // namespace threat_search_enum
+} // namespace ped_state_1
 
 namespace CarDamageAreas
 {

@@ -7,7 +7,7 @@
 class File
 {
   public:
-    // or static with explicit 
+    // or static with explicit
     static s32 GetFileSize_4A6B10(FILE* Stream);
 
     static bool IsCdRomDrive_4A6BB0(char_type driveLetter);

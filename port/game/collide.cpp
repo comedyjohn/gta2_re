@@ -1,8 +1,8 @@
 #include "collide.hpp"
-#include "SpriteGrid_400.hpp"
-#include "error.hpp"
 #include "Globals.hpp"
+#include "SpriteGrid_400.hpp"
 #include "enums.hpp"
+#include "error.hpp"
 
 DEFINE_GLOBAL(CollisionCounters_C*, gCollisionCounters_6791FC, 0x6791FC);
 DEFINE_GLOBAL(GridSpriteLink_Pool*, gGridSpriteLink_Pool_679200, 0x679200);
@@ -19,7 +19,7 @@ CollisionCounters_C::CollisionCounters_C()
 {
     field_0_test_count = 0;
     field_4_query_id = 0;
-    
+
     field_8_bUnknown = 0;
 
     gGridSpriteLink_Pool_679200 = new GridSpriteLink_Pool();

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Fix16_Point.hpp"
 #include "Function.hpp"
 #include "fix16.hpp"
-#include "Fix16_Point.hpp"
 
 class Ped;
 class Player;
@@ -45,7 +45,8 @@ class CrimeReportQueue_CC
     CrimeReport_14 field_4_reports[10];
 };
 
-class CrimeReportQueue_CC_Sub : public CrimeReportQueue_CC {
+class CrimeReportQueue_CC_Sub : public CrimeReportQueue_CC
+{
   public:
     CrimeReportQueue_CC_Sub();
     ~CrimeReportQueue_CC_Sub() = default; // 0x484fd0

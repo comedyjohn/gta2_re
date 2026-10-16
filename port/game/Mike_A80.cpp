@@ -1,14 +1,14 @@
 #include "Mike_A80.hpp"
-#include "Globals.hpp"
 #include "Draw.hpp"
-#include "gbh_graphics.hpp"
 #include "Frontend.hpp"
+#include "Globals.hpp"
 #include "fix16.hpp"
+#include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
-#include <cstdio>
 #include <cstdarg>
-#include <windows.h>
+#include <cstdio>
 #include <mmsystem.h>
+#include <windows.h>
 
 DEFINE_GLOBAL(Mike_A80*, gMike_A80_6F7328, 0x6F7328);
 
@@ -124,8 +124,8 @@ void Mike_A80::DebugDrawProfiling_4FF250()
     }
     sDrawString_4FF910(0, 380, L"Mem Total %5d", gMemTotal_6F7360);
 
-    s32 total = field_28_m80_1.Average() + field_28_m80_2.Average() + field_28_m80_3.Average() +
-        field_28_m80_5.Average() + field_28_m80_4.Average();
+    s32 total = field_28_m80_1.Average() + field_28_m80_2.Average() + field_28_m80_3.Average() + field_28_m80_5.Average() +
+        field_28_m80_4.Average();
     sDrawString_4FF910(280, 20, L"Process %3d", field_28_m80_1.Average());
     sDrawString_4FF910(280, 40, L"Draw    %3d", field_28_m80_2.Average());
     sDrawString_4FF910(280, 60, L"Render  %3d", field_28_m80_3.Average());

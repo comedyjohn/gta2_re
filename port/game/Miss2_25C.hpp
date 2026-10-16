@@ -31,7 +31,7 @@ class Miss2_25C
     Miss2_C* allocate_next_502F60();
     void push_type_1_car_502F80(Car_BC* pCar);
     void push_type_3_ped_502FB0(Ped* pPed);
-    void push_type_2_502FF0(Object_2C *pObj, char_type a3);
+    void push_type_2_502FF0(Object_2C* pObj, char_type a3);
     void push_type_2_503050(Object_2C* pObj);
 
     Miss2_C field_0_entries[50];

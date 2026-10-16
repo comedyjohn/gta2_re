@@ -1,6 +1,6 @@
 #include "EmergencyCrewPool_1E0.hpp"
-#include "Car_BC.hpp"
 #include "CarChaseTaskTable_500.hpp"
+#include "Car_BC.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"
 
@@ -350,35 +350,35 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
         }
         else
         {
-                bCarGone = 1;
+            bCarGone = 1;
 
-                if (field_8_group)
+            if (field_8_group)
+            {
+                idx = 0;
+                for (Ped* pMember = field_8_group->field_4_ped_list[0]; pMember; pMember = field_8_group->field_4_ped_list[++idx])
                 {
-                    idx = 0;
-                    for (Ped* pMember = field_8_group->field_4_ped_list[0]; pMember; pMember = field_8_group->field_4_ped_list[++idx])
+                    if (!pMember->isDead_403B60())
                     {
-                        if (!pMember->isDead_403B60())
-                        {
-                            bCarGone = 0;
-                        }
+                        bCarGone = 0;
                     }
                 }
+            }
 
-                if (bCarGone)
+            if (bCarGone)
+            {
+                if (!field_4_ped || field_4_ped->isDead_403B60())
                 {
-                    if (!field_4_ped || field_4_ped->isDead_403B60())
-                    {
-                        field_24_phase = crew_phase::finished_2;
-                    }
+                    field_24_phase = crew_phase::finished_2;
                 }
-                if (field_24_phase == crew_phase::finished_2)
+            }
+            if (field_24_phase == crew_phase::finished_2)
+            {
+                if (field_0_car)
                 {
-                    if (field_0_car)
-                    {
-                        field_0_car->SetDriverPedType_421560(ped_type::dummy_3);
-                        field_0_car->field_76_last_seen_timer = -200;
-                    }
+                    field_0_car->SetDriverPedType_421560(ped_type::dummy_3);
+                    field_0_car->field_76_last_seen_timer = -200;
                 }
+            }
         }
     }
     else if (!field_24_phase)
@@ -576,7 +576,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
         if (field_8_group)
         {
             Ped* pPedListIter = field_8_group->field_4_ped_list[0];
-            while(pPedListIter)
+            while (pPedListIter)
             {
                 pPedListIter->ClearGroupAndGroupIdx_403A30();
                 pPedListIter->Deallocate_45EB60();
@@ -627,9 +627,9 @@ bool EmergencyCrew_30::Service_5CC480()
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::paramedic_car_4))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::MEDICAR,
-                                                                                   this->field_C_spawn_x,
-                                                                                   this->field_10_spawn_y,
-                                                                                   this->field_14_spawn_z);
+                                                                                          this->field_C_spawn_x,
+                                                                                          this->field_10_spawn_y,
+                                                                                          this->field_14_spawn_z);
             }
             else
             {
@@ -647,9 +647,9 @@ bool EmergencyCrew_30::Service_5CC480()
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::COPCAR,
-                                                                                   this->field_C_spawn_x,
-                                                                                   this->field_10_spawn_y,
-                                                                                   this->field_14_spawn_z);
+                                                                                          this->field_C_spawn_x,
+                                                                                          this->field_10_spawn_y,
+                                                                                          this->field_14_spawn_z);
             }
             else
             {
@@ -666,9 +666,9 @@ bool EmergencyCrew_30::Service_5CC480()
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::SWATVAN,
-                                                                                   this->field_C_spawn_x,
-                                                                                   this->field_10_spawn_y,
-                                                                                   this->field_14_spawn_z);
+                                                                                          this->field_C_spawn_x,
+                                                                                          this->field_10_spawn_y,
+                                                                                          this->field_14_spawn_z);
             }
             else
             {

@@ -10,7 +10,7 @@ struct naughty_sinoussi_0x800;
 class Game_0x40;
 class Network_20324;
 
-#pragma pack(push,1)
+#pragma pack(push, 1)
 class PacketHeader
 {
   public:

@@ -1,10 +1,10 @@
 #include "CollisionSoundQueue_C88.hpp"
 #include "Object_5C.hpp"
+#include "collision_event_type.hpp"
 #include "debug.hpp"
 #include "map_0x370.hpp"
 #include "root_sound.hpp"
 #include "sprite.hpp"
-#include "collision_event_type.hpp"
 
 DEFINE_GLOBAL(CollisionSoundQueue_C88*, gCollisionSoundQueue_66AFE0, 0x66AFE0);
 DEFINE_GLOBAL(CollisionTarget_28, gCollisionTarget_679188, 0x679188);
@@ -28,14 +28,16 @@ void CollisionEvent_28::SetupForCar_40B890(Car_BC* pCar)
     {
         case collision_target_type::horizontal_edge_1:
             field_0_type = collision_event_type::car_wall_5;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min, gCollisionTarget_679188.field_18_hseg_y, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min,
+                                                                               gCollisionTarget_679188.field_18_hseg_y,
+                                                                               gCollisionTarget_679188.field_1C_z);
             break;
 
         case collision_target_type::vertical_edge_2:
             field_0_type = collision_event_type::car_wall_5;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_C_vseg_y_min, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x,
+                                                                                gCollisionTarget_679188.field_C_vseg_y_min,
+                                                                                gCollisionTarget_679188.field_1C_z);
             break;
 
         case collision_target_type::sprite_3:
@@ -79,14 +81,16 @@ void CollisionEvent_28::SetupForPed_40B980()
     {
         case collision_target_type::horizontal_edge_1:
             field_0_type = collision_event_type::ped_wall_8;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min, gCollisionTarget_679188.field_18_hseg_y, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min,
+                                                                               gCollisionTarget_679188.field_18_hseg_y,
+                                                                               gCollisionTarget_679188.field_1C_z);
             break;
 
         case collision_target_type::vertical_edge_2:
             field_0_type = collision_event_type::ped_wall_8;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_C_vseg_y_min, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x,
+                                                                                gCollisionTarget_679188.field_C_vseg_y_min,
+                                                                                gCollisionTarget_679188.field_1C_z);
             break;
 
         case collision_target_type::sprite_3:
@@ -136,15 +140,17 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
     {
         case collision_target_type::horizontal_edge_1:
             field_0_type = collision_event_type::object_wall_10;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min, gCollisionTarget_679188.field_18_hseg_y, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetTopEdgeSpec_4E0000(gCollisionTarget_679188.field_4_hseg_x_min,
+                                                                               gCollisionTarget_679188.field_18_hseg_y,
+                                                                               gCollisionTarget_679188.field_1C_z);
 
             break;
 
         case collision_target_type::vertical_edge_2:
             field_0_type = collision_event_type::object_wall_10;
-            field_20_map_block_spec =
-                gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_C_vseg_y_min, gCollisionTarget_679188.field_1C_z);
+            field_20_map_block_spec = gMap_0x370_6F6268->GetLeftEdgeSpec_4DFF60(gCollisionTarget_679188.field_14_vseg_x,
+                                                                                gCollisionTarget_679188.field_C_vseg_y_min,
+                                                                                gCollisionTarget_679188.field_1C_z);
 
             break;
 
@@ -253,9 +259,8 @@ void CollisionSoundQueue_C88::AddFloorCollision_40BC40(Sprite* pSprite)
             pEvent->field_0_type = collision_event_type::object_floor_1;
             pEvent->field_18_object_model = p2c->GetModel_40FEF0();
         }
-        pEvent->field_20_map_block_spec = gMap_0x370_6F6268->GetBlockSpec_4E00A0(pSprite->field_14_xy.x,
-                                                                              pSprite->field_14_xy.y,
-                                                                              pSprite->field_1C_zpos - kFpOne_66AE9C);
+        pEvent->field_20_map_block_spec =
+            gMap_0x370_6F6268->GetBlockSpec_4E00A0(pSprite->field_14_xy.x, pSprite->field_14_xy.y, pSprite->field_1C_zpos - kFpOne_66AE9C);
         field_C84_count++;
     }
 }

@@ -68,8 +68,8 @@ struct Object
 class DirectInputDevice final : public IDirectInputDevice2A
 {
   public:
-    DirectInputDevice(Kind kind, const GUID& guid, int padIndex)
-        : mKind(kind), mGuid(guid), mPadIndex(padIndex), mRefs(1), mStateSize(0), mBufferSize(0), mAcquired(false)
+    DirectInputDevice(Kind kind, const GUID& guid, int padIndex) :
+        mKind(kind), mGuid(guid), mPadIndex(padIndex), mRefs(1), mStateSize(0), mBufferSize(0), mAcquired(false)
     {
         if (mKind == Kind::Keyboard)
         {

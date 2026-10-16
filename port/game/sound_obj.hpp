@@ -64,7 +64,7 @@ struct sound_f16_pos_0x1C
     u8 field_1_unused;
     u8 field_2_unused;
     u8 field_3;
-    
+
     Fix16 field_4_xpos;
     Fix16 field_8_ypos;
 

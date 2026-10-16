@@ -1,21 +1,20 @@
 #include "Particle_8.hpp"
-#include "Car_BC.hpp"
 #include "CarPhysics_B0.hpp"
+#include "Car_BC.hpp"
 #include "Globals.hpp"
-#include "Particle_4C.hpp"
 #include "ObjectDefinitions_8CA8.hpp"
+#include "Object_5C.hpp"
+#include "Particle_4C.hpp"
 #include "Pool.hpp"
 #include "SpriteGrid_400.hpp"
 #include "debug.hpp"
 #include "enums.hpp"
 #include "error.hpp"
-#include "Object_5C.hpp"
-#include "sprite.hpp"
 #include "rng.hpp"
+#include "sprite.hpp"
 
 // Forward declarations: the functions below are in address order
 static inline Ang16 AddAng16_ool(const Ang16& a, const Ang16& b);
-
 
 EXTERN_GLOBAL(Fix16, dword_6FD46C);
 //EXTERN_GLOBAL(Fix16_Point, stru_6FD388);
@@ -60,7 +59,12 @@ void Particle_8::ParticlesService_53E320()
 }
 
 // 0x53E3C0
-Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x, Fix16 speed_y, Fix16 field_10_value, Fix16 additional_speed_x, Fix16 additional_speed_y, Fix16 field_1C_value)
+Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
+                                    Fix16 speed_y,
+                                    Fix16 field_10_value,
+                                    Fix16 additional_speed_x,
+                                    Fix16 additional_speed_y,
+                                    Fix16 field_1C_value)
 {
     Particle_4C* pNew4C = nullptr;
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0() && gSpritePool_703818->has_free_48A8D0())
@@ -123,8 +127,12 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
             angle = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(16)));
             vector.RotateByAngle_40F6B0((angle + ang) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(8)));
 
-            Particle_4C* pBloodParticle =
-                gParticle_8_6FD5E8->New_53E3C0(vector.x, vector.y, dword_6FD330, -vector.x.DivideInt_53E860(15), -vector.y.DivideInt_53E860(15), 0);
+            Particle_4C* pBloodParticle = gParticle_8_6FD5E8->New_53E3C0(vector.x,
+                                                                         vector.y,
+                                                                         dword_6FD330,
+                                                                         -vector.x.DivideInt_53E860(15),
+                                                                         -vector.y.DivideInt_53E860(15),
+                                                                         0);
 
             if (pBloodParticle)
             {
@@ -368,7 +376,9 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                 pParticle->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
                 pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 73);
                 Particle_4C* tmp = pParticle;
-                tmp->field_30_pNext->AllocCollisionShape_59F950(dword_6FD554 * dword_6FD508, dword_6FD554 * dword_6FD508, kFP16Quarter_6FD2EC);
+                tmp->field_30_pNext->AllocCollisionShape_59F950(dword_6FD554 * dword_6FD508,
+                                                                dword_6FD554 * dword_6FD508,
+                                                                kFP16Quarter_6FD2EC);
                 pParticle->field_38_state = 31;
                 pParticle->field_34_unused = 0;
                 Fix16 vec_x;
@@ -415,7 +425,9 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                     ped_offset.RotateByAngle_40F6B0(pSprt->field_0_rotation);
                     ped_offset = ped_offset + *reinterpret_cast<Fix16_Point*>(&pPed->field_98_velocity_vector);
                     pParticle->field_30_pNext->set_ang_lazy_420690(pSprt->field_0_rotation);
-                    pParticle->field_30_pNext->set_xyz_lazy_420600(pSprt->field_14_xy.x + ped_offset.x, pSprt->field_14_xy.y + ped_offset.y, zpos);
+                    pParticle->field_30_pNext->set_xyz_lazy_420600(pSprt->field_14_xy.x + ped_offset.x,
+                                                                   pSprt->field_14_xy.y + ped_offset.y,
+                                                                   zpos);
                 }
                 pParticle->field_28_pSprite = pSprt;
                 if (pParticle->field_30_pNext->CheckSpriteMovementRegion_5A2500() != 0)
@@ -450,7 +462,9 @@ void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
             pParticle->field_4_bf.bDriverAttacking = true;
             pParticle->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 111);
-            pParticle->field_30_pNext->AllocCollisionShape_59F950(dword_6FD554 * dword_6FD508, dword_6FD554 * dword_6FD508, kFP16Quarter_6FD2EC);
+            pParticle->field_30_pNext->AllocCollisionShape_59F950(dword_6FD554 * dword_6FD508,
+                                                                  dword_6FD554 * dword_6FD508,
+                                                                  kFP16Quarter_6FD2EC);
             pParticle->field_34_unused = 0;
             pParticle->field_38_state = 34;
             Fix16 vec_x;
@@ -525,10 +539,16 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
         else
         {
             ang1 = word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(gRng_6F6784.get_int_4F7AE0(360)));
-            t.RotateByAngle_40F6B0_all_out_of_line(SubAng16_ool(AddAng16_ool(ang1, tanAng), word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(180))));
+            t.RotateByAngle_40F6B0_all_out_of_line(
+                SubAng16_ool(AddAng16_ool(ang1, tanAng), word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(180))));
         }
 
-        Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(t.x, t.y, dword_6FD330, t.x.DivideInt_53E860(15).Negate_4086A0(), t.y.DivideInt_53E860(15).Negate_4086A0(), 0);
+        Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(t.x,
+                                                             t.y,
+                                                             dword_6FD330,
+                                                             t.x.DivideInt_53E860(15).Negate_4086A0(),
+                                                             t.y.DivideInt_53E860(15).Negate_4086A0(),
+                                                             0);
         if (pNew4C)
         {
             pNew4C->field_34_unused = 1;
@@ -580,7 +600,8 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             pNew4C->field_30_pNext->set_xyz_lazy_420600(xpos, ypos, zpos);
             pNew4C->field_30_pNext->set_ang_lazy_420690(ang);
-            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng_6F6784.get_int_4F7AE0(4) + gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 175);
+            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng_6F6784.get_int_4F7AE0(4) +
+                                                       gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 175);
             pNew4C->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pNew4C->field_30_pNext);

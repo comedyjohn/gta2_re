@@ -198,10 +198,7 @@ Ang16 Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
 }
 
 // 0x438FB0
-bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
-                                                     const Fix16& intervalEnd,
-                                                     const Fix16& rangeMin,
-                                                     const Fix16& rangeMax)
+bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax)
 {
     if (intervalStart < rangeMin)
     {
@@ -453,15 +450,15 @@ void FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16
 
 void Init_trigonometry_tables()
 {
-    s16 arg = 0; 
+    s16 arg = 0;
     for (u32 idx = 0; idx < GTA2_COUNTOF(gSin_table_667A80); idx++, arg++)
     {
-        gSin_table_667A80[idx] = Fix16( sin((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654) );
+        gSin_table_667A80[idx] = Fix16(sin((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
     }
     arg = 0;
     for (u32 entry = 0; entry < GTA2_COUNTOF(gCos_table_669260); entry++, arg++)
     {
-        gCos_table_669260[entry] = Fix16( cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654) );
+        gCos_table_669260[entry] = Fix16(cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
     }
     arc_tan_table_init_4052D0();
     printf("Sine, cosine and tangent tables initialized!\n");

@@ -1,21 +1,19 @@
-#include "StdAfx.h"
-#include "resource.h"
-#include "gtx_0x106C.hpp"
-#include "registry.hpp"
-#include "file.hpp"
 #include "FpsCounter_54.hpp"
 #include "GameSession_578.hpp"
-#include "winmain.hpp"
-#include "text_0x14.hpp"
-#include "GlobalsRegistry.hpp"
-#include "gbh_graphics.hpp"
-#include "ProfilerTimer_C.hpp"
-#include "FpsCounter_54.hpp"
-#include "cSampleManager.hpp"
-#include "map_0x370.hpp"
-#include "ScriptManager_C1EA8.hpp"
 #include "Globals.hpp"
-
+#include "GlobalsRegistry.hpp"
+#include "ProfilerTimer_C.hpp"
+#include "ScriptManager_C1EA8.hpp"
+#include "StdAfx.h"
+#include "cSampleManager.hpp"
+#include "file.hpp"
+#include "gbh_graphics.hpp"
+#include "gtx_0x106C.hpp"
+#include "map_0x370.hpp"
+#include "registry.hpp"
+#include "resource.h"
+#include "text_0x14.hpp"
+#include "winmain.hpp"
 
 extern void EnableBoot2MapDebugOptions();
 
@@ -154,11 +152,8 @@ void test_ScriptManager_C1EA8()
 
 void force_link();
 
-s32 APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR     lpCmdLine,
-                     s32       nCmdShow)
- {
+s32 APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, s32 nCmdShow)
+{
     if (lpCmdLine && strstr(lpCmdLine, "billybobbins"))
     {
         test_text_0x14();

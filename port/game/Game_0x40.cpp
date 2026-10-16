@@ -1,67 +1,67 @@
 #include "Game_0x40.hpp"
-#include "port_world3d.h" // port: world3d
-#include "ped_class.hpp"
 #include "Ambulance_110.hpp"
-#include "InputRecorder_67F8B0.hpp"
 #include "Camera.hpp"
+#include "CarChaseTaskTable_500.hpp"
 #include "CarInfo_808.hpp"
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
+#include "CollisionSoundQueue_C88.hpp"
 #include "Cranes.hpp"
+#include "CrimeReportQueue_CC.hpp"
 #include "Crushers.hpp"
 #include "Door_4D4.hpp"
+#include "EmergencyCrewPool_1E0.hpp"
 #include "ExplodingScore_100.hpp"
+#include "Explosion_30.hpp"
 #include "Firefighters.hpp"
 #include "Fix16_Rect.hpp"
-#include "ScriptStackFramePool_25C.hpp"
+#include "FpsCounter_54.hpp"
 #include "Frontend.hpp"
 #include "Function.hpp"
+#include "GameSession_578.hpp"
 #include "Gang.hpp"
 #include "Garage_48.hpp"
 #include "Generators.hpp"
 #include "Globals.hpp"
-#include "CarChaseTaskTable_500.hpp"
 #include "Hud.hpp"
-#include "EmergencyCrewPool_1E0.hpp"
+#include "InputRecorder_67F8B0.hpp"
+#include "KanjiFont_8EC.hpp"
 #include "Light_1D4CC.hpp"
 #include "MapRenderer.hpp"
 #include "Mike_A80.hpp"
-#include "SpriteRenderer_1C.hpp"
+#include "ObjectDefinitions_8CA8.hpp"
 #include "Object_5C.hpp"
-#include "PathFinder_2FD4.hpp"
 #include "Particle_8.hpp"
+#include "PathFinder_2FD4.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"
-#include "ObjectDefinitions_8CA8.hpp"
+#include "PedRefTable_7F8.hpp"
 #include "Player.hpp"
+#include "PlyDat_2BC0.hpp"
 #include "Police_7B8.hpp"
 #include "PublicTransport.hpp"
-#include "SpriteGrid_400.hpp"
 #include "RouteFinder.hpp"
-#include "CollisionSoundQueue_C88.hpp"
-#include "CrimeReportQueue_CC.hpp"
+#include "ScriptManager_C1EA8.hpp"
+#include "ScriptStackFramePool_25C.hpp"
+#include "SpriteGrid_400.hpp"
+#include "SpriteRenderer_1C.hpp"
 #include "Taxi_4.hpp"
+#include "TextureCache_15D8.hpp"
 #include "TileAnim_2.hpp"
 #include "TrafficLights_194.hpp"
-#include "PedRefTable_7F8.hpp"
 #include "Weapon_8.hpp"
-#include "Explosion_30.hpp"
 #include "char.hpp"
 #include "collide.hpp"
 #include "debug.hpp"
 #include "error.hpp"
-#include "ScriptManager_C1EA8.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
-#include "PlyDat_2BC0.hpp"
-#include "GameSession_578.hpp"
-#include "KanjiFont_8EC.hpp"
 #include "map_0x370.hpp"
+#include "ped_class.hpp"
+#include "port_world3d.h" // port: world3d
 #include "registry.hpp"
 #include "rng.hpp"
 #include "root_sound.hpp"
-#include "FpsCounter_54.hpp"
-#include "TextureCache_15D8.hpp"
 #include "sprite.hpp"
 #include "text_0x14.hpp"
 #include "winmain.hpp"
@@ -357,7 +357,9 @@ void Game_0x40::ShowCounters_4B8FF0()
     Player* pLocalPlayer = gGame_0x40_67E008->field_38_local_player;
     if (pLocalPlayer)
     {
-        swprintf(tmpBuff_67BD9C, L"accuracy_count : %d", static_cast<unsigned __int8>(pLocalPlayer->field_2D4_scores.get_accuracy_count_45B0A0()));
+        swprintf(tmpBuff_67BD9C,
+                 L"accuracy_count : %d",
+                 static_cast<unsigned __int8>(pLocalPlayer->field_2D4_scores.get_accuracy_count_45B0A0()));
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 128, gDebugFont_706600, 1);
 
         swprintf(tmpBuff_67BD9C, L"reverse_count : %d", pLocalPlayer->field_2D4_scores.get_reverse_count_45B0B0());
@@ -762,8 +764,10 @@ bool Game_0x40::IsSpriteInPlayerView_4B98E0(Sprite* pSprite, u8 player_idx, s32 
         {
             return true;
         }
-        return field_4_players[player_idx]->field_2D0_aux_cam_active && field_4_players[player_idx]->field_208_aux_game_camera.IsSpriteInView_435630(pSprite, wide_view) ? true :
-                                                                                                                                   false;
+        return field_4_players[player_idx]->field_2D0_aux_cam_active &&
+                field_4_players[player_idx]->field_208_aux_game_camera.IsSpriteInView_435630(pSprite, wide_view) ?
+            true :
+            false;
     }
     return false;
 }
@@ -799,7 +803,10 @@ bool Game_0x40::IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player
         {
             return true;
         }
-        return field_4_players[player_idx]->field_2D0_aux_cam_active && field_4_players[player_idx]->field_208_aux_game_camera.IsSpriteTheCameraSubject_4355D0(pSprite) ? true : false;
+        return field_4_players[player_idx]->field_2D0_aux_cam_active &&
+                field_4_players[player_idx]->field_208_aux_game_camera.IsSpriteTheCameraSubject_4355D0(pSprite) ?
+            true :
+            false;
     }
     return false;
 }

@@ -4,20 +4,18 @@
 //
 
 #if !defined(AFX_STDAFX_H_A9DB83DB_A9FD_11D0_BFD1_444553540000_INCLUDED)
-#define AFX_STDAFX_H_A9DB83DB_A9FD_11D0_BFD1_444553540000_INCLUDED
+    #define AFX_STDAFX_H_A9DB83DB_A9FD_11D0_BFD1_444553540000_INCLUDED
 
+    #define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+    // Windows Header Files:
+    #include <windows.h>
 
-
-// Windows Header Files:
-#include <windows.h>
-
-// C RunTime Header Files
-#include <stdlib.h>
-#include <malloc.h>
-#include <memory.h>
-#include <tchar.h>
+    // C RunTime Header Files
+    #include <malloc.h>
+    #include <memory.h>
+    #include <stdlib.h>
+    #include <tchar.h>
 
 // Local Header Files
 

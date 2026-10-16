@@ -1,6 +1,6 @@
 #include "miss2_8.hpp"
-#include "ScriptStackFramePool_25C.hpp"
 #include "Globals.hpp"
+#include "ScriptStackFramePool_25C.hpp"
 
 // TODO: move
 DEFINE_GLOBAL(ScriptStackFramePool_25C*, gScriptStackFramePool_6F8068, 0x6F8068);
@@ -54,7 +54,7 @@ ScriptStackFrame_C* miss2_8::AllocFrame_5031A0()
     return pFrame;
 
     // TOOD: Pools - this should match but doesn't ??
-//    return gScriptStackFramePool_6F8068->field_0_pool.Allocate();
+    //    return gScriptStackFramePool_6F8068->field_0_pool.Allocate();
 }
 
 // 0x5031C0

@@ -1,9 +1,9 @@
 #include "BonusTracker_1C0.hpp"
 #include "Function.hpp"
 #include "Player.hpp" // PlayerScoreTracker_36C
-#include "rng.hpp"
 #include "bonus_event_type.hpp"
 #include "ped_death_cause.hpp"
+#include "rng.hpp"
 
 // 0x431D30
 BonusRule_2C::BonusRule_2C()
@@ -79,8 +79,7 @@ void BonusTracker_1C0::Service_431E30()
             if (pIter->field_2B_bActive)
             {
                 const s32 time_limit = pIter->field_1C_time_limit;
-                if (time_limit != -1 &&
-                    static_cast<u32>(field_1BC_cur_time - pIter->field_20_start_time) > static_cast<u32>(time_limit))
+                if (time_limit != -1 && static_cast<u32>(field_1BC_cur_time - pIter->field_20_start_time) > static_cast<u32>(time_limit))
                 {
                     pIter->field_26_progress_count = 0;
                     pIter->Deactivate_431DB0();
@@ -106,14 +105,14 @@ u16 BonusTracker_1C0::FindFreeRule_431E90()
 
 // 0x431EC0
 u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
-                                s16 event_type,
-                                s32 car_model,
-                                s32 occupation,
-                                s16 gang_idx,
-                                s16 remap,
-                                s32 death_cause,
-                                s32 alt_car_model,
-                                gmp_map_zone* pZone)
+                                              s16 event_type,
+                                              s32 car_model,
+                                              s32 occupation,
+                                              s16 gang_idx,
+                                              s16 remap,
+                                              s32 death_cause,
+                                              s32 alt_car_model,
+                                              gmp_map_zone* pZone)
 {
     u16 i;
     BonusRule_2C* pBonus;
@@ -142,10 +141,12 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
             continue;
         }
         bonus_occupation = pBonus->field_C_occupation;
-        if (bonus_occupation == occupation || bonus_occupation == ped_ocupation_enum::no_occupation || IsOccupationInGroup_432240(occupation, pBonus->field_C_occupation))
+        if (bonus_occupation == occupation || bonus_occupation == ped_ocupation_enum::no_occupation ||
+            IsOccupationInGroup_432240(occupation, pBonus->field_C_occupation))
         {
             bonus_car_model = pBonus->field_8_car_model;
-            if (bonus_car_model == car_model || bonus_car_model == car_model_enum::none || AreCarModelsEquivalent_432300(car_model, pBonus->field_8_car_model))
+            if (bonus_car_model == car_model || bonus_car_model == car_model_enum::none ||
+                AreCarModelsEquivalent_432300(car_model, pBonus->field_8_car_model))
             {
                 bonus_gang_idx = pBonus->field_10_gang_idx;
                 if (bonus_gang_idx == gang_idx || bonus_gang_idx == -1)
@@ -154,10 +155,12 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
                     if (bonus_remap == remap || bonus_remap == -2)
                     {
                         bonus_death_cause = pBonus->field_14_death_cause;
-                        if (bonus_death_cause == death_cause || bonus_death_cause == ped_death_cause::any_23 || IsDeathCauseInGroup_432170(death_cause, pBonus->field_14_death_cause))
+                        if (bonus_death_cause == death_cause || bonus_death_cause == ped_death_cause::any_23 ||
+                            IsDeathCauseInGroup_432170(death_cause, pBonus->field_14_death_cause))
                         {
                             bonus_alt_car_model = pBonus->field_18_alt_car_model;
-                            if ((bonus_alt_car_model == alt_car_model || bonus_alt_car_model == car_model_enum::none) && (pBonus->field_0_pZone == pZone || !pBonus->field_0_pZone))
+                            if ((bonus_alt_car_model == alt_car_model || bonus_alt_car_model == car_model_enum::none) &&
+                                (pBonus->field_0_pZone == pZone || !pBonus->field_0_pZone))
                             {
                                 return i;
                             }
@@ -176,17 +179,17 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
 
 // 0x431FE0
 s16 BonusTracker_1C0::AllocRule_431FE0(s16 event_type,
-                                      s32 car_model,
-                                      s32 occupation,
-                                      s16 gang_idx,
-                                      s16 remap,
-                                      s32 death_cause,
-                                      s32 alt_car_model,
-                                      s32 time_limit,
-                                      s8 check_mode,
-                                      s8 target_count,
-                                      u16 reward,
-                                      gmp_map_zone* pZone)
+                                       s32 car_model,
+                                       s32 occupation,
+                                       s16 gang_idx,
+                                       s16 remap,
+                                       s32 death_cause,
+                                       s32 alt_car_model,
+                                       s32 time_limit,
+                                       s8 check_mode,
+                                       s8 target_count,
+                                       u16 reward,
+                                       gmp_map_zone* pZone)
 {
     const s16 idx = FindFreeRule_431E90();
     if (idx == k_max_rules)
@@ -241,7 +244,14 @@ s16 BonusTracker_1C0::GetBonusResult_432080(u16 idx)
 }
 
 // 0x4320D0
-void BonusTracker_1C0::ProcessBonusEvent_4320D0(s16 event_type, s32 car_model, s32 occupation, s16 gang_idx, s16 remap, s32 death_cause, s32 alt_car_model, gmp_map_zone* pZone)
+void BonusTracker_1C0::ProcessBonusEvent_4320D0(s16 event_type,
+                                                s32 car_model,
+                                                s32 occupation,
+                                                s16 gang_idx,
+                                                s16 remap,
+                                                s32 death_cause,
+                                                s32 alt_car_model,
+                                                gmp_map_zone* pZone)
 {
     for (u16 i = 0; i < k_max_rules; i++)
     {
@@ -379,7 +389,8 @@ s8 BonusTracker_1C0::IsOccupationInGroup_432240(int occupation, int rule_occupat
     }
     else if (rule_occupation == ped_ocupation_enum::any_gang_member)
     {
-        if (occupation == ped_ocupation_enum::armed_gang_member_19 || occupation == ped_ocupation_enum::guard || occupation == ped_ocupation_enum::gang_driver_42)
+        if (occupation == ped_ocupation_enum::armed_gang_member_19 || occupation == ped_ocupation_enum::guard ||
+            occupation == ped_ocupation_enum::gang_driver_42)
         {
             return 1;
         }

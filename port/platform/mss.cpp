@@ -115,9 +115,23 @@ enum AudioEvent
     EV_STREAM_POSITION,
 };
 
-const char* const kAudioEventNames[] = {"", "set_address", "start_sample", "end_sample", "sample_rate", "sample_volume", "sample_pan",
-                                        "sample_loop_count", "sample_loop_block", "master_volume", "open_stream", "close_stream",
-                                        "start_stream", "stream_volume", "stream_rate", "stream_loop_count", "stream_position"};
+const char* const kAudioEventNames[] = {"",
+                                        "set_address",
+                                        "start_sample",
+                                        "end_sample",
+                                        "sample_rate",
+                                        "sample_volume",
+                                        "sample_pan",
+                                        "sample_loop_count",
+                                        "sample_loop_block",
+                                        "master_volume",
+                                        "open_stream",
+                                        "close_stream",
+                                        "start_stream",
+                                        "stream_volume",
+                                        "stream_rate",
+                                        "stream_loop_count",
+                                        "stream_position"};
 
 void HashValue(uint64_t v)
 {
@@ -137,7 +151,12 @@ void LogAudio(AudioEvent ev, int slot, int64_t a = 0, int64_t b = 0)
     HashValue(static_cast<uint64_t>(b));
     if (gAudioText)
     {
-        fprintf(gAudioText, "%ld %s %d %lld %lld\n", port_audio_frame, kAudioEventNames[ev], slot, static_cast<long long>(a),
+        fprintf(gAudioText,
+                "%ld %s %d %lld %lld\n",
+                port_audio_frame,
+                kAudioEventNames[ev],
+                slot,
+                static_cast<long long>(a),
                 static_cast<long long>(b));
     }
 }

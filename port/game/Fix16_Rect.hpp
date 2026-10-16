@@ -44,7 +44,7 @@ class Fix16_Rect
     // 9.6f 0x4204D0
     void ComputeCollisionPrism_4204D0(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
     {
-        Fix16 tmp =  offset / 2;
+        Fix16 tmp = offset / 2;
 
         field_0_left = x - tmp;
         field_4_right = x + tmp;
@@ -150,7 +150,9 @@ class Fix16_Rect
         // TODO: HACK - made 0x438FB0 a method of Fix16 to fix crazy compiler inlining behaviour/force it to do what we need
         return field_0_left.IntervalIntersectsRange_438FB0_inline(this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
                 field_8_top.IntervalIntersectsRange_438FB0_inline(this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
-                field_10_low_z.IntervalIntersectsRange_438FB0_inline( this->field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z) ?
+                field_10_low_z.IntervalIntersectsRange_438FB0_inline(this->field_14_high_z,
+                                                                     pOther->field_10_low_z,
+                                                                     pOther->field_14_high_z) ?
             true :
             false;
     }

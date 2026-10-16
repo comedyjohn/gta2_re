@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Function.hpp"
-#include "multiplayer_game_type.hpp"
 #include "CreditsLine_6C.hpp"
 #include "CreditsText_FD22.hpp"
+#include "Function.hpp"
 #include "TagGame_28.hpp"
+#include "multiplayer_game_type.hpp"
 #include <windows.h>
 
 #ifndef DIRECTINPUT_VERSION
@@ -58,9 +58,9 @@ struct menu_element_0x6E
     char_type field_1_is_it_displayed;
     s16 field_2_xpos;
     s16 field_4_ypos;
-    union 
+    union
     {
-        struct  // if field_0_element_type == STRING_TEXT_1 or STRING_TEXT_2
+        struct // if field_0_element_type == STRING_TEXT_1 or STRING_TEXT_2
         {
             wchar_t field_6_element_name_str[50];
             u16 field_6A_font_type;
@@ -109,7 +109,7 @@ struct MenuOption_6
 
     s16 field_0;
     s16 field_2_unused;
-    char_type field_4_is_option_unlocked;   // this control if the menu selection will skip a option or not
+    char_type field_4_is_option_unlocked; // this control if the menu selection will skip a option or not
     char_type field_5_unused;
 };
 
@@ -211,10 +211,10 @@ enum MenuPages // enum for field_132_f136_idx
 
 enum ElementType
 {
-    NULL_TYPE_0 = 0,    //  i.e. don't exists
+    NULL_TYPE_0 = 0, //  i.e. don't exists
     STRING_TEXT_1 = 1,
     STRING_TEXT_2 = 2,
-    GEOMETRIC_SHAPE_3 = 3,  //  triangles, circles
+    GEOMETRIC_SHAPE_3 = 3, //  triangles, circles
 };
 
 struct MainBlockStrings
@@ -314,7 +314,11 @@ struct Frontend
 
     // todo: ordering
     void LoadStringsFromStage_4B4C60(u16 mainBlockIdx, u16 bounusBlockIdx, char* pDebugStr, char* pMapName, char* pStyName);
-    void StoreStringsForStage_4B4BC0(u16 mainBlockIdx, u16 bounusBlockIdx, const char* pDebugStr, const char* pMapName, const char* pStyName);
+    void StoreStringsForStage_4B4BC0(u16 mainBlockIdx,
+                                     u16 bounusBlockIdx,
+                                     const char* pDebugStr,
+                                     const char* pMapName,
+                                     const char* pStyName);
     void DrawSavedStage_4B5270();
 
     // todo move to another file for ordering
@@ -413,7 +417,7 @@ struct Frontend
 
     void GetMainAndBonusStagesFromSeqFile_4B4440();
 
-    void GetSeqItem_4B48D0(s32 type, char_type *ppRet, FILE *hSeqFile);
+    void GetSeqItem_4B48D0(s32 type, char_type* ppRet, FILE* hSeqFile);
 
     void LoadPlySlotSvgs_4B53C0();
 
@@ -479,15 +483,22 @@ struct Frontend
 
     void DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos);
 
-    void DrawTextFixedWidth_4B78B0(wchar_t* pString, u16 text_xpos, u16 text_ypos, u16 font_type, u16 palette, u16 scale, u16 char_width, u8 pStr);
+    void DrawTextFixedWidth_4B78B0(wchar_t* pString,
+                                   u16 text_xpos,
+                                   u16 text_ypos,
+                                   u16 font_type,
+                                   u16 palette,
+                                   u16 scale,
+                                   u16 char_width,
+                                   u8 pStr);
 
     void DrawScoreTable_4B5430(ScoreTableLine_18* pStrings,
-                           u16 text_xpos,
-                           u16 text_ypos,
-                           u16 num_entries,
-                           u16 arg_fontType,
-                           u16 palette,
-                           u8 spacing_type);
+                               u16 text_xpos,
+                               u16 text_ypos,
+                               u16 num_entries,
+                               u16 arg_fontType,
+                               u16 palette,
+                               u8 spacing_type);
 };
 
 class FreeLoader
@@ -505,7 +516,6 @@ s32 SetGamma_5D9910(s32 gamma);
 EXTERN_GLOBAL(Frontend*, gFrontend_67DC84);
 
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
-
 
 void MakeScreenTableAndSetWindow_5D7D30();
 void FreeSurface_5D7DC0();

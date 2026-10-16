@@ -1,10 +1,10 @@
 #pragma once
 
+#include "Fix16_Point.hpp"
 #include "Function.hpp"
 #include "Particle_4C.hpp"
-#include "ang16.hpp"
-#include "Fix16_Point.hpp"
 #include "Pool.hpp"
+#include "ang16.hpp"
 
 class Fix16;
 class Sprite;
@@ -15,7 +15,12 @@ class Object_2C;
 class Particle_8
 {
   public:
-    Particle_4C* New_53E3C0(Fix16 speed_x, Fix16 speed_y, Fix16 field_10_value, Fix16 additional_speed_x, Fix16 additional_speed_y, Fix16 field_1C_value);
+    Particle_4C* New_53E3C0(Fix16 speed_x,
+                            Fix16 speed_y,
+                            Fix16 field_10_value,
+                            Fix16 additional_speed_x,
+                            Fix16 additional_speed_y,
+                            Fix16 field_1C_value);
 
     void ParticlesService_53E320();
     void EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang);

@@ -109,10 +109,10 @@ class Crane_15C
     Fix16 field_94_hook_radius_speed;
     Fix16 field_98_crane_angle_speed;
     Fix16 field_9C_unused;
-    Fix16 field_A0_hook_axial_angle;  // The angle in its own rotation axis, e.g. the angle of the lifted car
+    Fix16 field_A0_hook_axial_angle; // The angle in its own rotation axis, e.g. the angle of the lifted car
     Fix16 field_A4_hook_axial_angle_speed;
     Fix16 field_A8_home_angle;
-    Fix16 field_AC_crane_angle_target;  // the crane will rotate until match this angle
+    Fix16 field_AC_crane_angle_target; // the crane will rotate until match this angle
     Fix16 field_B0_hook_radius_target;
     Fix16 field_B4_hook_angle_target;
     Fix16 field_B8_hook_depth_target;
@@ -136,8 +136,8 @@ class Crane_15C
     Fix16 field_104_transporter_cargo_z;
     Fix16 field_108_transporter_cargo_rot;
     Fix16 field_10C_transporter_cargo_hook_depth;
-    Fix16 field_110_drop_angle;  // something to do with the crane angle
-    Fix16 field_114_drop_radius;  // something to do with the hook radius
+    Fix16 field_110_drop_angle; // something to do with the crane angle
+    Fix16 field_114_drop_radius; // something to do with the hook radius
     Fix16 field_118_drop_rot;
     Fix16 field_11C_drop_hook_depth;
     Fix16 field_120_target1_radius;

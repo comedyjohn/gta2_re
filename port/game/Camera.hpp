@@ -64,7 +64,12 @@ class Camera_0xBC
     Fix16 ReturnOwnerVelocity_435A20();
     s32 IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z);
     void UpdateBoundaries_435B90();
-    void MoveTarget_435D20(char_type move_north, char_type move_south, char_type move_west, char_type move_east, char_type zoom_in, char_type zoom_out);
+    void MoveTarget_435D20(char_type move_north,
+                           char_type move_south,
+                           char_type move_west,
+                           char_type move_east,
+                           char_type zoom_in,
+                           char_type zoom_out);
     void ResetCameraSmoothing_435DD0();
     void AccumulateSuspicionOnDriver_435F90(Car_BC* pCar);
     void Update_435FF0();
@@ -147,8 +152,8 @@ class Camera_0xBC
     // 9.6f 0x40CF60
     inline bool IsPointInViewBounds_40CF60(Fix16 x, Fix16 y)
     {
-        return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right &&
-            y >= field_78_view_bounds.field_8_top && y <= field_78_view_bounds.field_C_bottom;
+        return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right && y >= field_78_view_bounds.field_8_top &&
+            y <= field_78_view_bounds.field_C_bottom;
     }
 
     inline void CommitPendingTarget_41E410()
@@ -217,4 +222,3 @@ class Camera_0xBC
 GTA2_ASSERT_SIZEOF_ALWAYS(Camera_0xBC, 0xBC)
 
 EXTERN_GLOBAL(Camera_0xBC*, gViewCamera_676978);
-

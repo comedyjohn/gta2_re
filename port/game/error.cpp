@@ -171,7 +171,12 @@ struct Coord2
 // 0x4A07C0
 static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, va_list va)
 {
-    snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Fatal Error %d in %s(%d)", code, SourceFileNameFromPath_4A07A0(pFileName), lineNo);
+    snprintf(gTmpBuffer_67C598,
+             sizeof(gTmpBuffer_67C598),
+             "Fatal Error %d in %s(%d)",
+             code,
+             SourceFileNameFromPath_4A07A0(pFileName),
+             lineNo);
     gErrorLog_67CF58.Write_4D9620(gTmpBuffer_67C598);
 
     switch (code)
@@ -229,9 +234,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 16:
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598),
-                    "Install Next freeloader episode please. [Temp message].Unable to open file : %s",
-                    gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Install Next freeloader episode please. [Temp message].Unable to open file : %s",
+                     gGlobalFileName_67C6AC);
             break;
 
         case 17:
@@ -239,7 +245,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 18:
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to a load a file too big for buffer: %s", gGlobalFileName_67C6AC);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Trying to a load a file too big for buffer: %s",
+                     gGlobalFileName_67C6AC);
             break;
 
         case 19:
@@ -559,7 +568,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 123:
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "assertion failure in %s(line %d)", SourceFileNameFromPath_4A07A0(pFileName), lineNo);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "assertion failure in %s(line %d)",
+                     SourceFileNameFromPath_4A07A0(pFileName),
+                     lineNo);
             break;
 
         case 124:
@@ -627,7 +640,9 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 144:
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to create train: no more space! The game has too many trains/carriages/buses.");
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Unable to create train: no more space! The game has too many trains/carriages/buses.");
             break;
 
         case 145:
@@ -865,7 +880,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 1022:
         {
             s32 excess = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "File too large: %s exceeds max size by %d bytes", gGlobalFileName_67C6AC, excess);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "File too large: %s exceeds max size by %d bytes",
+                     gGlobalFileName_67C6AC,
+                     excess);
             break;
         }
 
@@ -971,13 +990,19 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 1048:
         {
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing null ptr in release_passive. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Releasing null ptr in release_passive. List type %s",
+                     gListTypes_61AB70[list_type]);
             break;
         }
         case 1049:
         {
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to 'pacify' a NULL list element. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Trying to 'pacify' a NULL list element. List type %s",
+                     gListTypes_61AB70[list_type]);
             break;
         }
         case 1050:
@@ -1053,7 +1078,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 1078:
         {
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Activating null ptr in activate. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Activating null ptr in activate. List type %s",
+                     gListTypes_61AB70[list_type]);
             break;
         }
 
@@ -1105,21 +1133,32 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         case 1138:
         {
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing twice in release_passive. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Releasing twice in release_passive. List type %s",
+                     gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1139:
         {
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Releasing twice in release. List type %s", gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Releasing twice in release. List type %s",
+                     gListTypes_61AB70[list_type]);
             break;
         }
 
         case 1095:
         {
             const char_type* pMsg = va_arg(va, const char_type*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "assertion failure in %s(line %d): %s", SourceFileNameFromPath_4A07A0(pFileName), lineNo, pMsg);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "assertion failure in %s(line %d): %s",
+                     SourceFileNameFromPath_4A07A0(pFileName),
+                     lineNo,
+                     pMsg);
             break;
         }
         case 1096:
@@ -1159,7 +1198,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1111:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line accessing character with no group when it should have group: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Line accessing character with no group when it should have group: uid: %d",
+                      va);
             break;
 
         case 1106:
@@ -1171,7 +1213,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1109:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Line attempting to order driver out of car, but char_type isn't a driver!: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Line attempting to order driver out of car, but char_type isn't a driver!: %d",
+                      va);
             break;
 
         case 1112:
@@ -1179,7 +1224,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1113:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Attempting to do 'SET_GANG_INFO' on invalid gang name in script line: %d",
+                      va);
             break;
 
         case 1114:
@@ -1199,7 +1247,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1118:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempted to pos32 arrow at a 'logical' item, not a physical item. Script line: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Attempted to pos32 arrow at a 'logical' item, not a physical item. Script line: %d",
+                      va);
             break;
 
         case 1119:
@@ -1231,7 +1282,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1126:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Checking phone in missionscript without executing ANSWER_PHONE: uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Checking phone in missionscript without executing ANSWER_PHONE: uid: %d",
+                      va);
             break;
 
         case 1127:
@@ -1251,7 +1305,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1131:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to create car to place on top of trailer in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to create car to place on top of trailer in script. uid: %d",
+                      va);
             break;
 
         case 1132:
@@ -1271,15 +1328,24 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1136:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find trainstation associated with platform in 'set_station_info' in script. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find trainstation associated with platform in 'set_station_info' in script. uid: %d",
+                      va);
             break;
 
         case 1140:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name of gangone in a 'set gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find gang matching name of gangone in a 'set gang respect'. uid: %d",
+                      va);
             break;
 
         case 1141:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name of gangtwo in a 'set gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find gang matching name of gangtwo in a 'set gang respect'. uid: %d",
+                      va);
             break;
 
         case 1142:
@@ -1287,27 +1353,45 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 1143:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Trying to change gangrespect on a non-player controlled character. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Trying to change gangrespect on a non-player controlled character. uid: %d",
+                      va);
             break;
 
         case 1144:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name in a 'check gang respect'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find gang matching name in a 'check gang respect'. uid: %d",
+                      va);
             break;
 
         case 1145:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zone matching name in a 'is char_type in gangzone'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find zone matching name in a 'is char_type in gangzone'. uid: %d",
+                      va);
             break;
 
         case 1146:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find zone matching name in a 'is char_type in zone'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find zone matching name in a 'is char_type in zone'. uid: %d",
+                      va);
             break;
 
         case 1147:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Unable to find gang matching name in a 'add char_type to gang'. uid: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Unable to find gang matching name in a 'add char_type to gang'. uid: %d",
+                      va);
             break;
 
         case 1148:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Mission script is referring to a 'text id' that doesn't exist. ID: %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Mission script is referring to a 'text id' that doesn't exist. ID: %d",
+                      va);
             break;
 
         case 1400:
@@ -1334,7 +1418,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at grab at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "List type %s corrupted at grab at %d elements",
+                     gListTypes_61AB70[list_type],
+                     count);
             break;
         }
 
@@ -1342,7 +1430,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at release at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "List type %s corrupted at release at %d elements",
+                     gListTypes_61AB70[list_type],
+                     count);
             break;
         }
 
@@ -1350,7 +1442,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at traverse at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "List type %s corrupted at traverse at %d elements",
+                     gListTypes_61AB70[list_type],
+                     count);
             break;
         }
 
@@ -1358,7 +1454,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at activate at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "List type %s corrupted at activate at %d elements",
+                     gListTypes_61AB70[list_type],
+                     count);
             break;
         }
 
@@ -1366,7 +1466,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             u32 list_type = va_arg(va, int);
             s32 count = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "List type %s corrupted at pacify at %d elements", gListTypes_61AB70[list_type], count);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "List type %s corrupted at pacify at %d elements",
+                     gListTypes_61AB70[list_type],
+                     count);
             break;
         }
 
@@ -1374,7 +1478,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         {
             s32 element = va_arg(va, int);
             u32 list_type = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Can't delete element %d from list type %s", element, gListTypes_61AB70[list_type]);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Can't delete element %d from list type %s",
+                     element,
+                     gListTypes_61AB70[list_type]);
             break;
         }
 
@@ -1420,14 +1528,22 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
         }
 
         case 2014:
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%s binmake error : %s", SourceFileNameFromPath_4A07A0(gErrStr_67C29C), gErrStr2_67C3A8);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "%s binmake error : %s",
+                     SourceFileNameFromPath_4A07A0(gErrStr_67C29C),
+                     gErrStr2_67C3A8);
             break;
 
         case 2018:
         {
             const char_type* pFile = va_arg(va, const char_type*);
             s32 size = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%s invalid size at %d bytes", SourceFileNameFromPath_4A07A0(pFile), size);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "%s invalid size at %d bytes",
+                     SourceFileNameFromPath_4A07A0(pFile),
+                     size);
             break;
         }
 
@@ -1444,7 +1560,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 2020:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Too many door infos declared in script: curr door: closedframe %d openframe %d", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Too many door infos declared in script: curr door: closedframe %d openframe %d",
+                      va);
             break;
 
         case 2021:
@@ -1512,7 +1631,12 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             s32 file_models = va_arg(va, int);
             const char_type* pFile = va_arg(va, const char_type*);
             s32 style_models = va_arg(va, int);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "%d models in %s but %d models in style", file_models, SourceFileNameFromPath_4A07A0(pFile), style_models);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "%d models in %s but %d models in style",
+                     file_models,
+                     SourceFileNameFromPath_4A07A0(pFile),
+                     style_models);
             break;
         }
 
@@ -1525,15 +1649,24 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 3014:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to disable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Attempting to disable road at illegal coordinates: check Z! ( %d, %d, %d)",
+                      va);
             break;
 
         case 3015:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Attempting to enable road at illegal coordinates: check Z! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Attempting to enable road at illegal coordinates: check Z! ( %d, %d, %d)",
+                      va);
             break;
 
         case 3016:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal block for train creation. Coordinates: check stopzone! ( %d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Illegal block for train creation. Coordinates: check stopzone! ( %d, %d, %d)",
+                      va);
             break;
 
         case 3017:
@@ -1541,7 +1674,10 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             break;
 
         case 3018:
-            vsnprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Error in set-up of park command. Walls intruding on the park's triggerspace! Door coords: (%d, %d, %d)", va);
+            vsnprintf(gTmpBuffer_67C598,
+                      sizeof(gTmpBuffer_67C598),
+                      "Error in set-up of park command. Walls intruding on the park's triggerspace! Door coords: (%d, %d, %d)",
+                      va);
             break;
 
         case 4001:
@@ -1551,7 +1687,13 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid x co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Invalid x co-ord in sprite type %d at (%f,%f,%f)",
+                     sprite_type,
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
         break;
@@ -1563,7 +1705,13 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid y co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Invalid y co-ord in sprite type %d at (%f,%f,%f)",
+                     sprite_type,
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
 
@@ -1574,7 +1722,13 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid z co-ord in sprite type %d at (%f,%f,%f)", sprite_type, c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Invalid z co-ord in sprite type %d at (%f,%f,%f)",
+                     sprite_type,
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
 
@@ -1584,7 +1738,11 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             Coord2 c;
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Placing gang phone when no gang at: (%.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Placing gang phone when no gang at: (%.4f, %.4f)",
+                     c.x.AsFloat(),
+                     c.y.AsFloat());
             break;
         }
 
@@ -1595,7 +1753,12 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Illegal coordinate: (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Illegal coordinate: (%.4f, %.4f, %.4f)",
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
 
@@ -1606,7 +1769,12 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "Invalid diagonal block at (%.4f, %.4f, %.4f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Invalid diagonal block at (%.4f, %.4f, %.4f)",
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
 
@@ -1617,7 +1785,12 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             c.x = *va_arg(va, s32*);
             c.y = *va_arg(va, s32*);
             c.z = *va_arg(va, s32*);
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598), "No direction arrow found in block (with slope!!). ( %f, %f, %f)", c.x.AsFloat(), c.y.AsFloat(), c.z.AsFloat());
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "No direction arrow found in block (with slope!!). ( %f, %f, %f)",
+                     c.x.AsFloat(),
+                     c.y.AsFloat(),
+                     c.z.AsFloat());
             break;
         }
 
@@ -1678,16 +1851,17 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
             coords[4] = *va_arg(va, s32*);
             coords[3] = *va_arg(va, s32*);
 
-            snprintf(gTmpBuffer_67C598, sizeof(gTmpBuffer_67C598),
-                    "Unable to find a route from (%.4f, %.4f, %.4f) to (%.4f, %.4f, %.4f) in car id: %d model: %d",
-                    coords[0] / 16384.0f,
-                    coords[1] / 16384.0f,
-                    coords[2] / 16384.0f,
-                    coords[5] / 16384.0f,
-                    coords[4] / 16384.0f,
-                    coords[3] / 16384.0f,
-                    va_1,
-                    va_2);
+            snprintf(gTmpBuffer_67C598,
+                     sizeof(gTmpBuffer_67C598),
+                     "Unable to find a route from (%.4f, %.4f, %.4f) to (%.4f, %.4f, %.4f) in car id: %d model: %d",
+                     coords[0] / 16384.0f,
+                     coords[1] / 16384.0f,
+                     coords[2] / 16384.0f,
+                     coords[5] / 16384.0f,
+                     coords[4] / 16384.0f,
+                     coords[3] / 16384.0f,
+                     va_1,
+                     va_2);
         }
         break;
 
@@ -1776,7 +1950,10 @@ void FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo)
             break;
 
         case 0x80040206: // DIERR_INCOMPLETEEFFECT
-            FatalError_4A38C0(Gta2Error::DirectXError, pSourceFile, lineNo, "effect could not be downloaded because essential information is missing");
+            FatalError_4A38C0(Gta2Error::DirectXError,
+                              pSourceFile,
+                              lineNo,
+                              "effect could not be downloaded because essential information is missing");
             break;
 
         case 0x80040207: // DIERR_NOTBUFFERED
@@ -1816,11 +1993,17 @@ void FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo)
             break;
 
         case 0x80070077: // DIERR_BADDRIVERVER
-            FatalError_4A38C0(Gta2Error::DirectXError, pSourceFile, lineNo, "incompatible driver version or mismatched or incomplete driver components");
+            FatalError_4A38C0(Gta2Error::DirectXError,
+                              pSourceFile,
+                              lineNo,
+                              "incompatible driver version or mismatched or incomplete driver components");
             break;
 
         case 0x80070481: // DIERR_BETADIRECTINPUTVERSION
-            FatalError_4A38C0(Gta2Error::DirectXError, pSourceFile, lineNo, "application was written for an unsupported prerelease version of DirectInput");
+            FatalError_4A38C0(Gta2Error::DirectXError,
+                              pSourceFile,
+                              lineNo,
+                              "application was written for an unsupported prerelease version of DirectInput");
             break;
 
         case 0x8007047E: // DIERR_OLDDIRECTINPUTVERSION
@@ -1859,7 +2042,10 @@ void FatalDXError_4A3CF0(HRESULT hr, const char_type* pSourceFile, s32 lineNo)
             break;
 
         case 12: // DI_TRUNCATEDANDRESTARTED
-            FatalError_4A38C0(Gta2Error::DirectXError, pSourceFile, lineNo, "effect parameters have been truncated and effect has been restarted");
+            FatalError_4A38C0(Gta2Error::DirectXError,
+                              pSourceFile,
+                              lineNo,
+                              "effect parameters have been truncated and effect has been restarted");
             break;
 
         default:

@@ -12,11 +12,12 @@ DEFINE_GLOBAL(Weapon_8*, gWeapon_8_707018, 0x707018);
 // Read only in Weapon_30.cpp, defined here: see the comment there.
 DEFINE_GLOBAL_INIT(Ang16, word_706D5E, Ang16(48), 0x706D5E);
 
-DEFINE_GLOBAL_ARRAY_INIT(u8, max_ammo_capacity_5FF75C, 28, 0x5FF75C, 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA
-                                                                      99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 1u COMMA  99u COMMA 99u COMMA 99u COMMA 99u COMMA
-                                                                      99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u);
-
-                                                                      
+DEFINE_GLOBAL_ARRAY_INIT(
+    u8,
+    max_ammo_capacity_5FF75C,
+    28,
+    0x5FF75C,
+    99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 1u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u COMMA 99u);
 
 u8 byte_5FF778[40] = {10u, 10u, 5u,  20u, 5u, 5u, 10u, 20u, 20u, 10u, 10u, 0u, 0u,  0u,  0u,  1u,  5u,   5u,  10u, 50u,
                       50u, 20u, 50u, 1u,  0u, 0u, 0u,  0u,  0u,  0u,  0u,  0u, 80u, 69u, 82u, 84u, 251u, 33u, 9u,  64u};
@@ -118,15 +119,15 @@ void Weapon_8::dealloc_car_weapon_5E3DF0(Car_BC* pCar)
     Weapon_30* pIter = gWeapon_30_Pool_707014->get_next_4CC9B0();
     while (pIter)
     {
-        if ( pIter->field_14_car == pCar )
+        if (pIter->field_14_car == pCar)
         {
-          Weapon_30* pOldIter = pIter;
-          pIter = pIter->mpNext;
-          gWeapon_30_Pool_707014->DeAllocate_4A4F20(pOldIter);
+            Weapon_30* pOldIter = pIter;
+            pIter = pIter->mpNext;
+            gWeapon_30_Pool_707014->DeAllocate_4A4F20(pOldIter);
         }
         else
         {
-          pIter = pIter->mpNext;
+            pIter = pIter->mpNext;
         }
     }
 }

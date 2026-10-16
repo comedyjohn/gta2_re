@@ -5,9 +5,9 @@
 #include "Pool.hpp"
 #include "ang16.hpp"
 #include "enums.hpp"
-#include "sprite_flags.hpp"
 #include "fix16.hpp"
 #include "gbh_graphics.hpp"
+#include "sprite_flags.hpp"
 
 EXTERN_GLOBAL(Ang16, gAng16_703804);
 EXTERN_GLOBAL(Fix16, gFix16_7035C0);
@@ -262,11 +262,11 @@ class Sprite
     char_type CheckSpriteMovementRegion_5A2500();
     Ang16 GetNegatedAngle_5A26E0();
     Fix16_Point FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
-                                                              Fix16_Point& newPos,
-                                                              Ang16 newAng,
-                                                              u8& pOutSideSelf,
-                                                              u8& pOutSideOther,
-                                                              u8& pOutHitType);
+                                                      Fix16_Point& newPos,
+                                                      Ang16 newAng,
+                                                      u8& pOutSideSelf,
+                                                      u8& pOutSideOther,
+                                                      u8& pOutHitType);
     void CreateSoundObj_5A29D0();
     bool IsObjectModelEqual_59E930(s32 model);
     void FreeSound_5A2A00();
@@ -378,7 +378,8 @@ class Sprite
 
     bool IsObject2CType_40FE80()
     {
-        return field_30_sprite_type_enum == sprite_types_enum::code_obj1_4 || field_30_sprite_type_enum == sprite_types_enum::map_obj_5 || field_30_sprite_type_enum == sprite_types_enum::object_1;
+        return field_30_sprite_type_enum == sprite_types_enum::code_obj1_4 || field_30_sprite_type_enum == sprite_types_enum::map_obj_5 ||
+            field_30_sprite_type_enum == sprite_types_enum::object_1;
     }
 
     Object_2C* AsObject2C_40FEC0()

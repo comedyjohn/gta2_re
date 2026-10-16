@@ -32,10 +32,18 @@ const int kCharW = 8;
 const int kCharH = 16;
 
 // What each control does, from Player::CharacterControls_566520
-const char* const kActionNames[kActions] = {"Forward",     "Backward",     "Left",
-                                            "Right",       "Fire",         "Enter/exit car",
-                                            "Handbrake/jump", "Prev weapon", "Next weapon",
-                                            "Special 1 (horn)", "Special 2 (camera)", "Special 3"};
+const char* const kActionNames[kActions] = {"Forward",
+                                            "Backward",
+                                            "Left",
+                                            "Right",
+                                            "Fire",
+                                            "Enter/exit car",
+                                            "Handbrake/jump",
+                                            "Prev weapon",
+                                            "Next weapon",
+                                            "Special 1 (horn)",
+                                            "Special 2 (camera)",
+                                            "Special 3"};
 const char* const kContextNames[2] = {"On foot", "In a car"};
 
 const uint32_t kPanel = 0xC0101820;
@@ -542,11 +550,9 @@ void DrawSettings()
     line += kCharH;
     Text(x + 8, line, kDim, "on foot and in a car, as in the game's own options menu.");
     line += kCharH;
-    Text(x + 8, line, kDim,
-         std::string("M or R3 stick walks the way it points: ") + (controls::Pad().worldDirections ? "on" : "off"));
+    Text(x + 8, line, kDim, std::string("M or R3 stick walks the way it points: ") + (controls::Pad().worldDirections ? "on" : "off"));
     line += kCharH;
-    Text(x + 8, line, kDim,
-         std::string("E or Back  Esc and Start open the pause menu: ") + (controls::Pad().escMenu ? "on" : "off"));
+    Text(x + 8, line, kDim, std::string("E or Back  Esc and Start open the pause menu: ") + (controls::Pad().escMenu ? "on" : "off"));
     if (HasGraphics())
     {
         line += kCharH;
@@ -646,7 +652,10 @@ void UpdatePad()
         gHavePrev = true;
     }
     const plat::PadState& prev = gPrevPad;
-    auto pressed = [&](int slot) { return pad.buttons[slot] && !prev.buttons[slot]; };
+    auto pressed = [&](int slot)
+    {
+        return pad.buttons[slot] && !prev.buttons[slot];
+    };
 
     const bool guide = pad.guide && !prev.guide;
     if (guide)
@@ -787,16 +796,26 @@ std::string KeyName(int dik)
         const char* name;
     };
     static const Named kNames[] = {
-        {DIK_ESCAPE, "Esc"},      {DIK_MINUS, "-"},       {DIK_EQUALS, "="},        {DIK_BACK, "Backspace"},
-        {DIK_TAB, "Tab"},         {DIK_RETURN, "Enter"},  {DIK_LCONTROL, "Ctrl"},   {DIK_RCONTROL, "Right Ctrl"},
-        {DIK_LSHIFT, "Shift"},    {DIK_RSHIFT, "Right Shift"}, {DIK_LMENU, "Alt"},  {DIK_RMENU, "Right Alt"},
-        {DIK_SPACE, "Space"},     {DIK_UP, "Up"},         {DIK_DOWN, "Down"},       {DIK_LEFT, "Left"},
-        {DIK_RIGHT, "Right"},     {DIK_INSERT, "Insert"}, {DIK_DELETE, "Delete"},   {DIK_HOME, "Home"},
-        {DIK_END, "End"},         {DIK_PRIOR, "Page Up"}, {DIK_NEXT, "Page Down"},  {DIK_CAPITAL, "Caps Lock"},
-        {DIK_COMMA, ","},         {DIK_PERIOD, "."},      {DIK_SLASH, "/"},         {DIK_SEMICOLON, ";"},
-        {DIK_APOSTROPHE, "'"},    {DIK_LBRACKET, "["},    {DIK_RBRACKET, "]"},      {DIK_BACKSLASH, "\\"},
-        {DIK_GRAVE, "`"},         {DIK_NUMPADENTER, "Num Enter"}, {DIK_ADD, "Num +"}, {DIK_SUBTRACT, "Num -"},
-        {DIK_MULTIPLY, "Num *"},  {DIK_DIVIDE, "Num /"},  {DIK_DECIMAL, "Num ."},
+        {DIK_ESCAPE, "Esc"},     {DIK_MINUS, "-"},
+        {DIK_EQUALS, "="},       {DIK_BACK, "Backspace"},
+        {DIK_TAB, "Tab"},        {DIK_RETURN, "Enter"},
+        {DIK_LCONTROL, "Ctrl"},  {DIK_RCONTROL, "Right Ctrl"},
+        {DIK_LSHIFT, "Shift"},   {DIK_RSHIFT, "Right Shift"},
+        {DIK_LMENU, "Alt"},      {DIK_RMENU, "Right Alt"},
+        {DIK_SPACE, "Space"},    {DIK_UP, "Up"},
+        {DIK_DOWN, "Down"},      {DIK_LEFT, "Left"},
+        {DIK_RIGHT, "Right"},    {DIK_INSERT, "Insert"},
+        {DIK_DELETE, "Delete"},  {DIK_HOME, "Home"},
+        {DIK_END, "End"},        {DIK_PRIOR, "Page Up"},
+        {DIK_NEXT, "Page Down"}, {DIK_CAPITAL, "Caps Lock"},
+        {DIK_COMMA, ","},        {DIK_PERIOD, "."},
+        {DIK_SLASH, "/"},        {DIK_SEMICOLON, ";"},
+        {DIK_APOSTROPHE, "'"},   {DIK_LBRACKET, "["},
+        {DIK_RBRACKET, "]"},     {DIK_BACKSLASH, "\\"},
+        {DIK_GRAVE, "`"},        {DIK_NUMPADENTER, "Num Enter"},
+        {DIK_ADD, "Num +"},      {DIK_SUBTRACT, "Num -"},
+        {DIK_MULTIPLY, "Num *"}, {DIK_DIVIDE, "Num /"},
+        {DIK_DECIMAL, "Num ."},
     };
     for (const Named& n : kNames)
     {
@@ -805,9 +824,8 @@ std::string KeyName(int dik)
             return n.name;
         }
     }
-    static const int kLetters[] = {DIK_A, DIK_B, DIK_C, DIK_D, DIK_E, DIK_F, DIK_G, DIK_H, DIK_I,
-                                   DIK_J, DIK_K, DIK_L, DIK_M, DIK_N, DIK_O, DIK_P, DIK_Q, DIK_R,
-                                   DIK_S, DIK_T, DIK_U, DIK_V, DIK_W, DIK_X, DIK_Y, DIK_Z};
+    static const int kLetters[] = {DIK_A, DIK_B, DIK_C, DIK_D, DIK_E, DIK_F, DIK_G, DIK_H, DIK_I, DIK_J, DIK_K, DIK_L, DIK_M,
+                                   DIK_N, DIK_O, DIK_P, DIK_Q, DIK_R, DIK_S, DIK_T, DIK_U, DIK_V, DIK_W, DIK_X, DIK_Y, DIK_Z};
     for (int i = 0; i < 26; i++)
     {
         if (kLetters[i] == dik)
@@ -823,8 +841,7 @@ std::string KeyName(int dik)
             return std::string(1, static_cast<char>(i == 9 ? '0' : '1' + i));
         }
     }
-    static const int kFunction[] = {DIK_F1, DIK_F2, DIK_F3, DIK_F4,  DIK_F5,  DIK_F6,
-                                    DIK_F7, DIK_F8, DIK_F9, DIK_F10, DIK_F11, DIK_F12};
+    static const int kFunction[] = {DIK_F1, DIK_F2, DIK_F3, DIK_F4, DIK_F5, DIK_F6, DIK_F7, DIK_F8, DIK_F9, DIK_F10, DIK_F11, DIK_F12};
     for (int i = 0; i < 12; i++)
     {
         if (kFunction[i] == dik)
@@ -832,8 +849,8 @@ std::string KeyName(int dik)
             return "F" + std::to_string(i + 1);
         }
     }
-    static const int kNumpad[] = {DIK_NUMPAD0, DIK_NUMPAD1, DIK_NUMPAD2, DIK_NUMPAD3, DIK_NUMPAD4,
-                                  DIK_NUMPAD5, DIK_NUMPAD6, DIK_NUMPAD7, DIK_NUMPAD8, DIK_NUMPAD9};
+    static const int kNumpad[] =
+        {DIK_NUMPAD0, DIK_NUMPAD1, DIK_NUMPAD2, DIK_NUMPAD3, DIK_NUMPAD4, DIK_NUMPAD5, DIK_NUMPAD6, DIK_NUMPAD7, DIK_NUMPAD8, DIK_NUMPAD9};
     for (int i = 0; i < 10; i++)
     {
         if (kNumpad[i] == dik)

@@ -1,11 +1,11 @@
 #include "TileAnim_2.hpp"
 
 #include "Globals.hpp"
+#include "enums.hpp"
 #include "error.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 #include <cstdio>
-#include "enums.hpp"
 
 DEFINE_GLOBAL(TileAnim_2*, gTileAnim_2_7052C4, 0x7052C4);
 DEFINE_GLOBAL(TileAnimPool*, gTileAnimPool_7052C8, 0x7052C8);

@@ -18,7 +18,10 @@
 
 - R0.8 (2026-10-16): the recording request is Q3 (open, for the user).
 
+- R1.1 (2026-10-16): the user said go for the format commit (reply: "Yes do it").
 - R0.9 (2026-10-16): mutation re-run, see the exit criteria of 0-safety-net.md. 2 of 4 mutations red; the 2 gaps are tied to the Q3 recordings. Phase 0 is done except R0.8 (Q3, user) and Q2 (open, no block).
+
+- R1.2 (2026-10-16): clang-format 18.1.8 over port/game, port/platform, port/tests (205 files). Hash in .git-blame-ignore-revs.
 
 ## Notes
 

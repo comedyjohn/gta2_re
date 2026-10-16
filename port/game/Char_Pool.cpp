@@ -1,6 +1,4 @@
 #include "Char_Pool.hpp"
-#include "ped_class.hpp"
-#include "ped_fire_mode.hpp"
 #include "Car_BC.hpp"
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
@@ -15,12 +13,14 @@
 #include "char.hpp"
 #include "debug.hpp"
 #include "error.hpp"
+#include "ped_class.hpp"
+#include "ped_fire_mode.hpp"
 #include "rng.hpp"
 
 #include "Frontend.hpp" // For the cheat bools
 
-#include <dinput.h>
 #include "ped_graphic_type.hpp"
+#include <dinput.h>
 
 // Defined in Ped.cpp
 EXTERN_GLOBAL(s16, k_word_678656);
@@ -168,19 +168,21 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
     {
         kind = 2; // car thief
     }
-    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) + static_cast<u16>(pZone->field_10_elvis_ratio))
+    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) +
+                 static_cast<u16>(pZone->field_10_elvis_ratio))
     {
         // 1 in 50 chance of elvis
         kind = gRng_6F6784.get_int_4F7AE0(50) == 25 ? 3 : 0;
     }
-    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) + static_cast<u16>(pZone->field_10_elvis_ratio) +
-                 static_cast<u16>(pZone->field_12_gangchar_ratio))
+    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) +
+                 static_cast<u16>(pZone->field_10_elvis_ratio) + static_cast<u16>(pZone->field_12_gangchar_ratio))
     {
         // Gang member, limited to 8
         kind = gNumberArmedGangMembers_6787CE < 8u ? 4 : 0;
     }
-    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) + static_cast<u16>(pZone->field_10_elvis_ratio) +
-                 static_cast<u16>(pZone->field_12_gangchar_ratio) + static_cast<u16>(pZone->field_14_policeped_ratio))
+    else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) +
+                 static_cast<u16>(pZone->field_10_elvis_ratio) + static_cast<u16>(pZone->field_12_gangchar_ratio) +
+                 static_cast<u16>(pZone->field_14_policeped_ratio))
     {
         kind = 5;
     }
@@ -337,7 +339,8 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                 break;
             }
             case 5:
-                if (gNumberWalkingCopsSpawned_6787CD || bSkip_police_67D4F9 || gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit == crew_type::army_6)
+                if (gNumberWalkingCopsSpawned_6787CD || bSkip_police_67D4F9 ||
+                    gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit == crew_type::army_6)
                 {
                 delloc_ret_2:
                     pPed->Deallocate_45EB60();
@@ -565,8 +568,7 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
         xpos += jitterX;
         ypos += jitterY;
 
-        if (xpos > kFpOne_678664 && xpos < kFp255_678414 - kFpOne_678664 && ypos > kFpOne_678664 &&
-            ypos < kFp255_678414 - kFpOne_678664)
+        if (xpos > kFpOne_678664 && xpos < kFp255_678414 - kFpOne_678664 && ypos > kFpOne_678664 && ypos < kFp255_678414 - kFpOne_678664)
         {
             gmp_zone_info* pZoneInfo = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(xpos.ToInt(), ypos.ToInt());
             if (static_cast<u8>(field_6_num_peds_on_screen) < static_cast<u16>(pZoneInfo->field_A_ped_density) / 25)
@@ -578,7 +580,9 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
                     pSprite->AllocCollisionShape_59F950(gDummyW_678530, gDummyH_678584, gDummyZ_67841C);
                     if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(pSprite->field_14_xy.x, pSprite->field_14_xy.y))
                     {
-                        if (!gMap_0x370_6F6268->IsSlopeB4ToD0At_433430(static_cast<u8>(xpos.ToInt()), static_cast<u8>(ypos.ToInt()), static_cast<u8>(zpos) + 1))
+                        if (!gMap_0x370_6F6268->IsSlopeB4ToD0At_433430(static_cast<u8>(xpos.ToInt()),
+                                                                       static_cast<u8>(ypos.ToInt()),
+                                                                       static_cast<u8>(zpos) + 1))
                         {
                             SpawnPedestrianAt_46E380(xpos, ypos, Fix16(zpos + 1), rotation);
                         }
@@ -600,7 +604,8 @@ void PedManager::Dummies_470330()
     }
     if (gNumDummyChars_6787E2 < max_dummies)
     {
-        for (Camera_0xBC* pCam = gGame_0x40_67E008->IteratePlayerCamera_4B9BC0(); pCam; pCam = gGame_0x40_67E008->IterateNextPlayerCamera_4B9C50())
+        for (Camera_0xBC* pCam = gGame_0x40_67E008->IteratePlayerCamera_4B9BC0(); pCam;
+             pCam = gGame_0x40_67E008->IterateNextPlayerCamera_4B9C50())
         {
             spawnSideLocked_6787D5 = 0;
             if (pCam->HasFollowTarget_433E90())

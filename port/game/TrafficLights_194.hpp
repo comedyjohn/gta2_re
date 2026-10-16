@@ -47,7 +47,7 @@ class TrafficLights_194
     ~TrafficLights_194();
     bool ArePedsCrossing_434960() const
     {
-      return field_192_phase == traffic_light_phase::peds_crossing_7;
+        return field_192_phase == traffic_light_phase::peds_crossing_7;
     }
     TrafficLight_20* field_0_traffic_lights[100];
     u16 field_190_array_used_count;

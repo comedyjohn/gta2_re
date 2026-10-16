@@ -1,13 +1,13 @@
 #include "TagGame_28.hpp"
-#include "hud_message_priority.hpp"
 #include "Frontend.hpp"
+#include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
 #include "Hud.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
-#include "GameSession_578.hpp"
 #include "error.hpp"
+#include "hud_message_priority.hpp"
 #include "text_0x14.hpp"
 #include <string>
 
@@ -56,7 +56,8 @@ void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
     }
     else
     {
-        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("yourit"), hud_message_priority::important_3);
+        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("yourit"),
+                                                                hud_message_priority::important_3);
     }
 }
 
@@ -85,8 +86,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
                 SetNewFugitive_516590(nullptr);
             }
 
-            if (field_0_fugitive && field_0_fugitive->field_2C4_player_ped &&
-                field_0_fugitive->field_2C4_player_ped->field_16C_car)
+            if (field_0_fugitive && field_0_fugitive->field_2C4_player_ped && field_0_fugitive->field_2C4_player_ped->field_16C_car)
             {
                 field_0_fugitive->GetPlayerPed_41D020()->get_car_416B60()->AccumulateDamage_43DA90(17, &stru_6F8720);
             }
@@ -101,8 +101,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
 void TagGame_28::UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pPlayer_killer)
 {
     Fix16 threshold_distance(65535); // 65535.0 (raw 0x3FFFC000): start value of the nearest player search
-    if (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() == TAG_GAME_3
-        && field_0_fugitive == pFormerPlayerFugitive)
+    if (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() == TAG_GAME_3 && field_0_fugitive == pFormerPlayerFugitive)
     {
         if (pPlayer_killer != nullptr)
         {

@@ -14,17 +14,16 @@
 // but not confuse the compiler with extra parameters.
 #define COMMA ,
 
-
 // Report unfinished code the first time the game reaches it
-#define NOT_IMPLEMENTED                                        \
-    do                                                         \
-    {                                                          \
-        static bool logged___ = false;                         \
-        if (!logged___)                                        \
-        {                                                      \
-            logged___ = true;                                  \
+#define NOT_IMPLEMENTED                                          \
+    do                                                           \
+    {                                                            \
+        static bool logged___ = false;                           \
+        if (!logged___)                                          \
+        {                                                        \
+            logged___ = true;                                    \
             printf("NOT IMPLEMENTED %s\n", __PRETTY_FUNCTION__); \
-        }                                                      \
+        }                                                        \
     } while (0)
 
 #define DEFINE_GLOBAL(type, name, addr) type name
@@ -49,7 +48,7 @@
     static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
 
 // Only accepts arrays (a pointer does not compile), unlike sizeof(x) / sizeof(*x)
-template <class T, std::size_t N>
+template<class T, std::size_t N>
 constexpr std::size_t Gta2CountOf(const T (&)[N])
 {
     return N;

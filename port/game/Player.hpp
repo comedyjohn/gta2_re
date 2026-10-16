@@ -1,14 +1,14 @@
 #pragma once
 
+#include "BonusTracker_1C0.hpp"
 #include "Camera.hpp"
 #include "Draw.hpp"
 #include "Function.hpp"
-#include "ang16.hpp"
-#include "PlayerScoreTracker_36C.hpp"
-#include "fix16.hpp"
-#include "BonusTracker_1C0.hpp"
-#include "TagGame_28.hpp"
 #include "PlayerCrimeStats_3C.hpp"
+#include "PlayerScoreTracker_36C.hpp"
+#include "TagGame_28.hpp"
+#include "ang16.hpp"
+#include "fix16.hpp"
 #include <windows.h>
 
 class SoundObject_10;
@@ -94,14 +94,16 @@ class Player
     inline bool IsBustedNotObjective54_476700()
     {
         Ped* pPed;
-        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != objectives_enum::objective_54);
+        return field_28_wasted_or_busted && field_2C_death_countdown == 2 &&
+            ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != objectives_enum::objective_54);
     }
 
     // 9.6f 0x476730
     inline bool IsBustedObjective54_476730()
     {
         Ped* pPed;
-        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr && pPed->get_objective_403A80() == objectives_enum::objective_54;
+        return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr &&
+            pPed->get_objective_403A80() == objectives_enum::objective_54;
     }
 
     // 9.6f 0x4766C0

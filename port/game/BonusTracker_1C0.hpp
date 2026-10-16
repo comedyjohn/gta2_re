@@ -59,21 +59,36 @@ class BonusTracker_1C0
     void Init_431E10(class PlayerScoreTracker_36C* pScores);
     void Service_431E30();
     u16 FindFreeRule_431E90();
-    u16 FindMatchingRule_431EC0(u16 start_idx, s16 event_type, s32 car_model, s32 occupation, s16 gang_idx, s16 remap, s32 death_cause, s32 alt_car_model, gmp_map_zone* pZone);
+    u16 FindMatchingRule_431EC0(u16 start_idx,
+                                s16 event_type,
+                                s32 car_model,
+                                s32 occupation,
+                                s16 gang_idx,
+                                s16 remap,
+                                s32 death_cause,
+                                s32 alt_car_model,
+                                gmp_map_zone* pZone);
     s16 AllocRule_431FE0(s16 event_type,
-                                 s32 car_model,
-                                 s32 occupation,
-                                 s16 gang_idx,
-                                 s16 remap,
-                                 s32 death_cause,
-                                 s32 alt_car_model,
-                                 s32 time_limit,
-                                 s8 check_mode,
-                                 s8 target_count,
-                                 u16 reward,
-                                 gmp_map_zone* pZone);
+                         s32 car_model,
+                         s32 occupation,
+                         s16 gang_idx,
+                         s16 remap,
+                         s32 death_cause,
+                         s32 alt_car_model,
+                         s32 time_limit,
+                         s8 check_mode,
+                         s8 target_count,
+                         u16 reward,
+                         gmp_map_zone* pZone);
     s16 GetBonusResult_432080(u16 idx);
-    void ProcessBonusEvent_4320D0(s16 event_type, s32 car_model, s32 occupation, s16 gang_idx, s16 remap, s32 death_cause, s32 alt_car_model, gmp_map_zone* pZone);
+    void ProcessBonusEvent_4320D0(s16 event_type,
+                                  s32 car_model,
+                                  s32 occupation,
+                                  s16 gang_idx,
+                                  s16 remap,
+                                  s32 death_cause,
+                                  s32 alt_car_model,
+                                  gmp_map_zone* pZone);
     s8 IsDeathCauseInGroup_432170(int death_cause, int rule_death_cause);
     s8 IsOccupationInGroup_432240(int occupation, int rule_occupation);
     bool AreCarModelsEquivalent_432300(int car_model_1, int car_model_2);

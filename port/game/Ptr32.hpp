@@ -31,7 +31,7 @@ inline void* Ptr32_FromHandle(u32 handle)
 
 void Ptr32_NoteSlot(const void* slot, u32 handle);
 
-template <typename T>
+template<typename T>
 struct Ptr32
 {
     // No constructors, so it can sit in the unions of the script structures
@@ -48,7 +48,7 @@ struct Ptr32
     }
 
     // An explicit cast to another pointer type, as the code does with the raw pointer
-    template <typename U>
+    template<typename U>
     explicit operator U*() const
     {
         return (U*)Ptr32_FromHandle(field_0_handle);

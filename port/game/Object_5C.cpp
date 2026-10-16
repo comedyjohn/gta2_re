@@ -1,31 +1,31 @@
 // GetLength_41E260 compares against this TU's zero
 #define FIX16_POINT_ZERO kFpZero_6F8E10
 #include "Object_5C.hpp"
-#include "explosion_type.hpp"
-#include "ped_death_cause.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
+#include "CollisionSoundQueue_C88.hpp"
 #include "Door_4D4.hpp"
+#include "Explosion_30.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
 #include "Light_1D4CC.hpp"
+#include "ObjectDefinitions_8CA8.hpp"
 #include "Object_2C_Pool.hpp"
 #include "Object_3C_Pool.hpp"
 #include "Object_8_Pool.hpp"
 #include "Particle_8.hpp"
-#include "ObjectDefinitions_8CA8.hpp"
-#include "SpriteGrid_400.hpp"
-#include "CollisionSoundQueue_C88.hpp"
-#include "TrafficLights_194.hpp"
 #include "PedRefTable_7F8.hpp"
+#include "ScriptManager_C1EA8.hpp"
+#include "SpriteGrid_400.hpp"
+#include "TrafficLights_194.hpp"
 #include "Weapon_8.hpp"
-#include "Explosion_30.hpp"
 #include "collide.hpp"
 #include "enums.hpp"
 #include "error.hpp"
-#include "ScriptManager_C1EA8.hpp"
+#include "explosion_type.hpp"
 #include "map_0x370.hpp"
+#include "ped_death_cause.hpp"
 #include "sprite.hpp"
 
 EXTERN_GLOBAL(PedRefTable_7F8*, gPedRefTable_7F8_703398);
@@ -333,7 +333,8 @@ bool Object_2C::SelectCollisionSprite_522460(Sprite* pProbe)
         return false;
     }
 
-    if (pSprite->field_8_object_2C_ptr->field_18_model == objects::diagonal_wall_collision_obj_166 || pSprite->field_8_object_2C_ptr->field_18_model == objects::door_unknown_169)
+    if (pSprite->field_8_object_2C_ptr->field_18_model == objects::diagonal_wall_collision_obj_166 ||
+        pSprite->field_8_object_2C_ptr->field_18_model == objects::door_unknown_169)
     {
         gObject2C_HitWallOrDoor_6F8F94 = 1;
     }
@@ -408,15 +409,15 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* 
     {
         rel_velocity = (GetSpeedVector_52AE90() - pObj->GetSpeedVector_52AE90());
         impulse = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
-                                                 pObj->GetMass_482C80(),
-                                                 rel_velocity,
-                                                 offset,
-                                                 *pPoint,
-                                                 my_pos,
-                                                 other_pos,
-                                                 kFP16One_6F8D38,
-                                                 kFP16One_6F8D38,
-                                                 kFP16One_6F8D24);
+                                                     pObj->GetMass_482C80(),
+                                                     rel_velocity,
+                                                     offset,
+                                                     *pPoint,
+                                                     my_pos,
+                                                     other_pos,
+                                                     kFP16One_6F8D38,
+                                                     kFP16One_6F8D38,
+                                                     kFP16One_6F8D24);
 
         pObj->SetMovementVectorWithRandomState_522640(impulse.Negate_40ACB0() / pObj->GetMass_482C80());
     }
@@ -429,15 +430,15 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* 
         }
 
         impulse = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
-                                                 kFP16MinusOne_6F8BE8,
-                                                 rel_velocity,
-                                                 offset,
-                                                 *pPoint,
-                                                 my_pos,
-                                                 other_pos,
-                                                 kFP16One_6F8D38,
-                                                 kFP16One_6F8D38,
-                                                 kFP16Half_6F8F2C);
+                                                     kFP16MinusOne_6F8BE8,
+                                                     rel_velocity,
+                                                     offset,
+                                                     *pPoint,
+                                                     my_pos,
+                                                     other_pos,
+                                                     kFP16One_6F8D38,
+                                                     kFP16One_6F8D38,
+                                                     kFP16Half_6F8F2C);
     }
 
     if (field_10_obj_3c)
@@ -501,15 +502,15 @@ void Object_2C::ResolveCollisionWithWorld_522B20(Fix16_Point* f18, Fix16_Point* 
 {
     // GetXY_52AE70() is a temporary argument, not a local: that gives the original EH states (0, 2, 3) and frame
     Fix16_Point impulse = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
-                                                        kFP16MinusOne_6F8BE8,
-                                                        *speed,
-                                                        *pPoint,
-                                                        *f18,
-                                                        GetXY_52AE70(),
-                                                        gZeroVector_6F8EF0,
-                                                        kFP16One_6F8D38,
-                                                        kFpZero_6F8E10,
-                                                        kFP16Half_6F8D3C);
+                                                             kFP16MinusOne_6F8BE8,
+                                                             *speed,
+                                                             *pPoint,
+                                                             *f18,
+                                                             GetXY_52AE70(),
+                                                             gZeroVector_6F8EF0,
+                                                             kFP16One_6F8D38,
+                                                             kFpZero_6F8E10,
+                                                             kFP16Half_6F8D3C);
     SetMovementVectorWithRandomState_522640(impulse.Divide_442CB0(GetMass_482C80()));
     HandleImpact_528E50(nullptr);
 }
@@ -607,7 +608,12 @@ void Object_2C::HandleCollision_522E10(Fix16_Point* pPoint)
             u8 a7;
             u8 a8;
             u8 a9;
-            hit_point = field_4->FindCollisionIntersectionPoint_5A2710(gCollisionTarget_679188.field_20_pHitSprite, *pPoint, field_4->field_0_rotation, a7, a8, a9);
+            hit_point = field_4->FindCollisionIntersectionPoint_5A2710(gCollisionTarget_679188.field_20_pHitSprite,
+                                                                       *pPoint,
+                                                                       field_4->field_0_rotation,
+                                                                       a7,
+                                                                       a8,
+                                                                       a9);
             Car_BC* pCar = gCollisionTarget_679188.field_20_pHitSprite->AsCar_40FEB0();
             if (pCar)
             {
@@ -762,7 +768,9 @@ bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Poi
     Fix16 temp_z;
     bool bOnGround;
     field_10_obj_3c->field_2A_bAirborne = 0;
-    if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprite->field_14_xy.x.ToInt(), pSprite->field_14_xy.y.ToInt(), pSprite->field_1C_zpos.ToInt()))
+    if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprite->field_14_xy.x.ToInt(),
+                                                    pSprite->field_14_xy.y.ToInt(),
+                                                    pSprite->field_1C_zpos.ToInt()))
     {
         temp_z = gMap_0x370_6F6268->sub_4E5050(pSprite->field_14_xy.x, pSprite->field_14_xy.y, pSprite->field_1C_zpos, bOnGround);
 
@@ -888,11 +896,13 @@ bool Object_2C::HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoi
     // non-slope `bAirborne = 1` block (and lets the two `bAirborne = 1` tails merge there).
     bool bLanded = false;
 
-    if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprite->field_14_xy.x.ToInt(), pSprite->field_14_xy.y.ToInt(), pSprite->field_1C_zpos.ToInt()))
+    if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprite->field_14_xy.x.ToInt(),
+                                                    pSprite->field_14_xy.y.ToInt(),
+                                                    pSprite->field_1C_zpos.ToInt()))
     {
         if (gMap_0x370_6F6268->GetBlockTypeAtCoord_420420(pSprite->field_14_xy.x.ToInt(),
-                                                           pSprite->field_14_xy.y.ToInt(),
-                                                           pSprite->field_1C_zpos.ToInt()) != AIR)
+                                                          pSprite->field_14_xy.y.ToInt(),
+                                                          pSprite->field_1C_zpos.ToInt()) != AIR)
         {
             ground_z = gMap_0x370_6F6268->sub_4E5050(pSprite->field_14_xy.x, pSprite->field_14_xy.y, pSprite->field_1C_zpos, bOverGap);
             if (!bOverGap)
@@ -1056,7 +1066,9 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
         pSprt->AllocCollisionShape_59F950(field_8->field_0_width, field_8->field_4_height, field_8->field_8_depth);
         pSprt->SetType_4206F0(field_4->GetType_416B40());
         pSprt->SetObject2C_482A30(field_4->field_8_object_2C_ptr);
-        if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprt->field_14_xy.x.ToInt(), pSprt->field_14_xy.y.ToInt(), pSprt->field_1C_zpos.ToInt()))
+        if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pSprt->field_14_xy.x.ToInt(),
+                                                        pSprt->field_14_xy.y.ToInt(),
+                                                        pSprt->field_1C_zpos.ToInt()))
         {
             field_10_obj_3c->field_2F_bOnSlope = true;
         }
@@ -1198,8 +1210,8 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
         }
 
         Object_2C::TryStartSlide_5233A0(mov_speed);
-        if (field_4->field_14_xy.x < kFpZero_6F8E10 || field_4->field_14_xy.x >= kMapSize_6F8BF4 || field_4->field_14_xy.y < kFpZero_6F8E10 ||
-            field_4->field_14_xy.y >= kMapSize_6F8BF4)
+        if (field_4->field_14_xy.x < kFpZero_6F8E10 || field_4->field_14_xy.x >= kMapSize_6F8BF4 ||
+            field_4->field_14_xy.y < kFpZero_6F8E10 || field_4->field_14_xy.y >= kMapSize_6F8BF4)
         {
             Object_2C::RequestRemoval_5290A0();
         }
@@ -1299,7 +1311,9 @@ void Object_2C::IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, 
             start_rotation = pProbe->field_0_rotation;
             field_10_obj_3c->field_2A_bAirborne = 0;
 
-            if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pProbe->field_14_xy.x.ToInt(), pProbe->field_14_xy.y.ToInt(), pProbe->field_1C_zpos.ToInt()))
+            if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pProbe->field_14_xy.x.ToInt(),
+                                                            pProbe->field_14_xy.y.ToInt(),
+                                                            pProbe->field_1C_zpos.ToInt()))
             {
                 bOnSlope = true;
             }
@@ -1307,7 +1321,9 @@ void Object_2C::IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, 
             pProbe->set_xy_lazy_447E20(pProbe->field_14_xy.x + step_dx, pProbe->field_14_xy.y + step_dy);
             pProbe->set_ang_lazy_420690(move_angle);
 
-            if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pProbe->field_14_xy.x.ToInt(), pProbe->field_14_xy.y.ToInt(), pProbe->field_1C_zpos.ToInt()))
+            if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pProbe->field_14_xy.x.ToInt(),
+                                                            pProbe->field_14_xy.y.ToInt(),
+                                                            pProbe->field_1C_zpos.ToInt()))
             {
                 Sprite_UpdateZFromSlopeAndTile_522FA0(pProbe);
             }
@@ -1456,8 +1472,10 @@ bool Object_2C::ShouldStopAtTrafficLight_525290(Sprite* pSprite)
     {
         if (byte_6771DC)
         {
-            if ((field_4->field_0_rotation != kZeroAng_6F8F68 || gTrafficLights_194_705958->field_192_phase != traffic_light_phase::north_south_green_1) &&
-                (field_4->field_0_rotation != kAng90_6F8C88 || gTrafficLights_194_705958->field_192_phase != traffic_light_phase::east_west_green_4))
+            if ((field_4->field_0_rotation != kZeroAng_6F8F68 ||
+                 gTrafficLights_194_705958->field_192_phase != traffic_light_phase::north_south_green_1) &&
+                (field_4->field_0_rotation != kAng90_6F8C88 ||
+                 gTrafficLights_194_705958->field_192_phase != traffic_light_phase::east_west_green_4))
             {
                 return true;
             }
@@ -1748,7 +1766,8 @@ void Object_2C::UpdatePhysicsAndMovement_525B80()
             field_10_obj_3c->field_0.PoolUpdate_5A6F70(field_4);
         }
 
-        if (mov_speed != kFpZero_6F8E10 || (field_10_obj_3c->field_2A_bAirborne) || field_10_obj_3c->field_34 == 2 || CheckWaterDeath_525B60())
+        if (mov_speed != kFpZero_6F8E10 || (field_10_obj_3c->field_2A_bAirborne) || field_10_obj_3c->field_34 == 2 ||
+            CheckWaterDeath_525B60())
         {
             if (field_10_obj_3c->field_28_next_definition_timer > 0)
             {
@@ -1815,8 +1834,8 @@ void Object_2C::UpdatePhysicsMovementAndAnimation_525D90()
     field_10_obj_3c->field_C_speed = field_10_obj_3c->field_C_speed.ZeroIfNegligible_482730();
 
     ObjectDefinition_74* pDefinition = this->field_8;
-    if (pDefinition->field_65 != -1 || pDefinition->field_34_behavior_type == object_behavior_type::pickup_physics_animated_9 || (field_4->field_14_xy.x != x_val) || field_4->field_14_xy.y != y_val ||
-        field_4->field_1C_zpos != zpos)
+    if (pDefinition->field_65 != -1 || pDefinition->field_34_behavior_type == object_behavior_type::pickup_physics_animated_9 ||
+        (field_4->field_14_xy.x != x_val) || field_4->field_14_xy.y != y_val || field_4->field_1C_zpos != zpos)
     {
         if (!this->field_10_obj_3c->field_30_bSkipAnim)
         {
@@ -1837,7 +1856,8 @@ void Object_2C::UpdatePhysicsMovementAndAnimation_525D90()
 
         if (mov_speed == kFpZero_6F8E10)
         {
-            if (!field_10_obj_3c->field_2A_bAirborne && field_10_obj_3c->field_34 == 2 && !CheckWaterDeath_525B60() && !gObject2C_LastCollisionSprite_6F8F8C)
+            if (!field_10_obj_3c->field_2A_bAirborne && field_10_obj_3c->field_34 == 2 && !CheckWaterDeath_525B60() &&
+                !gObject2C_LastCollisionSprite_6F8F8C)
             {
                 field_10_obj_3c->field_1C_z_accel = kFpZero_6F8E10;
                 field_10_obj_3c->field_10_z_speed = kFpZero_6F8E10;
@@ -1954,7 +1974,9 @@ bool Object_2C::PoolUpdate()
         Object_2C::Update_525F30();
     }
 
-    if (field_25_removal_state <= object_removal_state::none_0 || (field_25_removal_state == object_removal_state::when_off_screen_2 && gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(field_4, kFpZero_6F8E10)))
+    if (field_25_removal_state <= object_removal_state::none_0 ||
+        (field_25_removal_state == object_removal_state::when_off_screen_2 &&
+         gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(field_4, kFpZero_6F8E10)))
     {
         return false;
     }
@@ -2387,12 +2409,13 @@ void Object_2C::TickObject_5283C0(s32 obj_type)
     {
         if (IsExplosiveItemDefinition_482400(obj_type))
         {
-            Object_2C* pExplosion = gObject_5C_6F8F84->CreateExplosion_52A3D0(field_4->field_14_xy.x,
-                                                                              field_4->field_14_xy.y,
-                                                                              field_4->field_1C_zpos,
-                                                                              kZeroAng_6F8F68,
-                                                                              GetExplosionTypeForItemDefinition_526830(obj_type),
-                                                                              gPedRefTable_7F8_703398->GetPedId_420F10(field_26_ped_ref_idx));
+            Object_2C* pExplosion =
+                gObject_5C_6F8F84->CreateExplosion_52A3D0(field_4->field_14_xy.x,
+                                                          field_4->field_14_xy.y,
+                                                          field_4->field_1C_zpos,
+                                                          kZeroAng_6F8F68,
+                                                          GetExplosionTypeForItemDefinition_526830(obj_type),
+                                                          gPedRefTable_7F8_703398->GetPedId_420F10(field_26_ped_ref_idx));
             if (pExplosion)
             {
                 pExplosion->SetDamageOwner_529080(this->field_26_ped_ref_idx);
@@ -2404,10 +2427,7 @@ void Object_2C::TickObject_5283C0(s32 obj_type)
             if (obj_type == 259)
             {
                 dir.SetFromPolar_41E210(k_dword_6F8C9C, field_4->field_0_rotation);
-                gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x,
-                                                               field_4->field_14_xy.y,
-                                                               field_4->field_1C_zpos,
-                                                               dir);
+                gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x, field_4->field_14_xy.y, field_4->field_1C_zpos, dir);
                 Object_2C::RequestRemoval_5290A0();
             }
             else
@@ -2489,7 +2509,8 @@ void Object_2C::TickObject_5283C0(s32 obj_type)
                                                                this->field_4->field_14_xy.y,
                                                                this->field_4->field_1C_zpos,
                                                                this->field_4->field_0_rotation);
-                            field_4->set_id_lazy_4206C0(this->field_8->field_1E_base_sprite_idx + this->field_C_pAny.o8->field_7_anim_speed_counter);
+                            field_4->set_id_lazy_4206C0(this->field_8->field_1E_base_sprite_idx +
+                                                        this->field_C_pAny.o8->field_7_anim_speed_counter);
                             break;
                         }
 
@@ -2531,7 +2552,8 @@ void Object_2C::TickObject_5283C0(s32 obj_type)
                                                                this->field_4->field_14_xy.y,
                                                                this->field_4->field_1C_zpos,
                                                                this->field_4->field_0_rotation);
-                            field_4->set_id_lazy_4206C0(this->field_8->field_1E_base_sprite_idx + this->field_C_pAny.o8->field_7_anim_speed_counter);
+                            field_4->set_id_lazy_4206C0(this->field_8->field_1E_base_sprite_idx +
+                                                        this->field_C_pAny.o8->field_7_anim_speed_counter);
                             this->field_10_obj_3c->field_18_friction = pDefinition->field_14_friction;
                             this->field_10_obj_3c->field_1C_z_accel = kFpZero_6F8E10;
                             this->field_10_obj_3c->field_10_z_speed = kFpZero_6F8E10;
@@ -2683,12 +2705,13 @@ void Object_2C::ProcessObjectExplosionImpact_528A20(Object_2C* pObj)
                     remapped = 18;
                 }
             }
-            Object_2C* pExplosion = gObject_5C_6F8F84->CreateExplosion_52A3D0(this->field_4->field_14_xy.x,
-                                                                              this->field_4->field_14_xy.y,
-                                                                              this->field_4->field_1C_zpos,
-                                                                              kZeroAng_6F8F68,
-                                                                              remapped,
-                                                                              gPedRefTable_7F8_703398->GetPedId_420F10(get_field_26_420FF0()));
+            Object_2C* pExplosion =
+                gObject_5C_6F8F84->CreateExplosion_52A3D0(this->field_4->field_14_xy.x,
+                                                          this->field_4->field_14_xy.y,
+                                                          this->field_4->field_1C_zpos,
+                                                          kZeroAng_6F8F68,
+                                                          remapped,
+                                                          gPedRefTable_7F8_703398->GetPedId_420F10(get_field_26_420FF0()));
             if (pExplosion)
             {
                 pExplosion->SetDamageOwner_529080(get_field_26_420FF0());
@@ -2742,12 +2765,13 @@ void Object_2C::HandleImpactNoSprite_528BA0()
         case objects::rocket_bullet_128:
         case objects::moving_molotov_138:
         {
-            Object_2C* pExplosion = gObject_5C_6F8F84->CreateExplosion_52A3D0(field_4->field_14_xy.x,
-                                                                              field_4->field_14_xy.y,
-                                                                              field_4->field_1C_zpos,
-                                                                              kZeroAng_6F8F68,
-                                                                              GetExplosionTypeForWallSide_528E00(gObject2C_WallHitSide_6F8F90),
-                                                                              gPedRefTable_7F8_703398->GetPedId_420F10(get_field_26_420FF0()));
+            Object_2C* pExplosion =
+                gObject_5C_6F8F84->CreateExplosion_52A3D0(field_4->field_14_xy.x,
+                                                          field_4->field_14_xy.y,
+                                                          field_4->field_1C_zpos,
+                                                          kZeroAng_6F8F68,
+                                                          GetExplosionTypeForWallSide_528E00(gObject2C_WallHitSide_6F8F90),
+                                                          gPedRefTable_7F8_703398->GetPedId_420F10(get_field_26_420FF0()));
             if (pExplosion)
             {
                 pExplosion->SetDamageOwner_529080(get_field_26_420FF0());
@@ -2759,10 +2783,7 @@ void Object_2C::HandleImpactNoSprite_528BA0()
         case objects::pistol_bullet_265:
         {
             point.FromPolar_41E210(k_dword_6F8C9C, field_4->field_0_rotation + kAng180_6F8D62);
-            gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x,
-                                                           field_4->field_14_xy.y,
-                                                           field_4->field_1C_zpos,
-                                                           point);
+            gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x, field_4->field_14_xy.y, field_4->field_1C_zpos, point);
             break;
         }
 
@@ -3164,7 +3185,7 @@ void Object_5C::ObjectsService_5293A0()
 // 0x529430
 Object_5C::Object_5C()
 {
-    for (unsigned char & field_20_uncollected_token : field_20_uncollected_tokens)
+    for (unsigned char& field_20_uncollected_token : field_20_uncollected_tokens)
     {
         field_20_uncollected_token = 1;
     }
@@ -3353,14 +3374,14 @@ Object_2C* Object_5C::NewLight_529AB0(s32 light_type, Fix16 xpos, Fix16 ypos, Fi
 
 // 0x529B20
 Object_2C* Object_5C::NewFlashingLight_529B20(Fix16 xpos,
-                                             Fix16 ypos,
-                                             Fix16 zpos,
-                                             s32 argb,
-                                             Fix16 radius,
-                                             u8 intensity,
-                                             u8 on_time,
-                                             u8 off_time,
-                                             u8 shape)
+                                              Fix16 ypos,
+                                              Fix16 zpos,
+                                              s32 argb,
+                                              Fix16 radius,
+                                              u8 intensity,
+                                              u8 on_time,
+                                              u8 off_time,
+                                              u8 shape)
 {
     Object_2C* pNewObj = CreateObject_529C00(165, xpos, ypos, zpos, kZeroAng_6F8F68, 0);
     if (pNewObj)
@@ -3543,7 +3564,8 @@ Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypo
 
     if (pNew2C->field_18_model == objects::power_generator_281)
     {
-        Object_2C* pLight = NewPhysicsObj_5299B0(objects::powergen_light_284, kFpZero_6F8E10, kFpZero_6F8E10, kFpZero_6F8E10, kZeroAng_6F8F68);
+        Object_2C* pLight =
+            NewPhysicsObj_5299B0(objects::powergen_light_284, kFpZero_6F8E10, kFpZero_6F8E10, kFpZero_6F8E10, kZeroAng_6F8F68);
         pNew2C->field_4->DispatchCollisionEvent_5A3100(pLight->field_4,
                                                        (dword_6F8CE8 * dword_6F8ECC), // x?
                                                        (kFP16One_6F8CEC * dword_6F8ECC), // y?
@@ -3570,43 +3592,43 @@ char_type Object_5C::SetPendingDamageOwner_52A210(char_type owner)
 
 // 0x52a240
 Object_2C* Object_5C::NewMovingObj_52A240(s32 object_type,
-                                        Fix16 xpos,
-                                        Fix16 ypos,
-                                        Fix16 zpos,
-                                        Ang16 move_angle,
-                                        Ang16 rotation,
-                                        Fix16 speed,
-                                        Fix16 friction,
-                                        Fix16 z_speed)
+                                          Fix16 xpos,
+                                          Fix16 ypos,
+                                          Fix16 zpos,
+                                          Ang16 move_angle,
+                                          Ang16 rotation,
+                                          Fix16 speed,
+                                          Fix16 friction,
+                                          Fix16 z_speed)
 {
     return Object_5C::CreateMovingObj_52A2C0(object_type, xpos, ypos, zpos, move_angle, rotation, speed, friction, z_speed, 0);
 }
 
 // 0x52a280
 Object_2C* Object_5C::NewMovingObjUnlessBlocked_52A280(s32 object_type,
-                                 Fix16 xpos,
-                                 Fix16 ypos,
-                                 Fix16 zpos,
-                                 Ang16 move_angle,
-                                 Ang16 rotation,
-                                 Fix16 speed,
-                                 Fix16 friction,
-                                 Fix16 z_speed)
+                                                       Fix16 xpos,
+                                                       Fix16 ypos,
+                                                       Fix16 zpos,
+                                                       Ang16 move_angle,
+                                                       Ang16 rotation,
+                                                       Fix16 speed,
+                                                       Fix16 friction,
+                                                       Fix16 z_speed)
 {
     return Object_5C::CreateMovingObj_52A2C0(object_type, xpos, ypos, zpos, move_angle, rotation, speed, friction, z_speed, 1);
 }
 
 // 0x52a2c0
 Object_2C* Object_5C::CreateMovingObj_52A2C0(s32 object_type,
-                                 Fix16 xpos,
-                                 Fix16 ypos,
-                                 Fix16 zpos,
-                                 Ang16 move_angle,
-                                 Ang16 rotation,
-                                 Fix16 speed,
-                                 Fix16 friction,
-                                 Fix16 z_speed,
-                                 char_type fail_if_blocked)
+                                             Fix16 xpos,
+                                             Fix16 ypos,
+                                             Fix16 zpos,
+                                             Ang16 move_angle,
+                                             Ang16 rotation,
+                                             Fix16 speed,
+                                             Fix16 friction,
+                                             Fix16 z_speed,
+                                             char_type fail_if_blocked)
 {
     Object_2C* pNewObj = Object_5C::CreateObject_529C00(object_type, xpos, ypos, zpos, rotation, fail_if_blocked);
 

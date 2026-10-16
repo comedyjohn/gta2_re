@@ -1,18 +1,18 @@
 #include "Ambulance_110.hpp"
-#include "ped_jump_over_mode.hpp"
-#include "Char_Pool.hpp"
-#include "Ped.hpp"
-#include "PedGroup.hpp"
-#include "EmergencyCrewPool_1E0.hpp"
-#include "Car_BC.hpp"
-#include "Globals.hpp"
-#include "error.hpp"
-#include "PathFinder_2FD4.hpp"
 #include "CarAI_78.hpp"
 #include "CarChaseTaskTable_500.hpp"
+#include "Car_BC.hpp"
+#include "Char_Pool.hpp"
+#include "EmergencyCrewPool_1E0.hpp"
+#include "Globals.hpp"
+#include "PathFinder_2FD4.hpp"
+#include "Ped.hpp"
+#include "PedGroup.hpp"
 #include "RouteFinder.hpp"
-#include <cstdio>
+#include "error.hpp"
 #include "ped_graphic_type.hpp"
+#include "ped_jump_over_mode.hpp"
+#include <cstdio>
 
 DEFINE_GLOBAL(Ambulance_110*, gAmbulance_110_6F70A8, 0x6F70A8);
 
@@ -81,7 +81,8 @@ bool Ambulance_110::HandlePedDeath_4FA330(Ped* pDeadPed)
                 return false;
             }
 
-            if (pIter->field_4_paramedics_crew->field_8_group && pIter->field_4_paramedics_crew->field_8_group->field_4_ped_list[0] == pDeadPed)
+            if (pIter->field_4_paramedics_crew->field_8_group &&
+                pIter->field_4_paramedics_crew->field_8_group->field_4_ped_list[0] == pDeadPed)
             {
                 if (pDeadPed->field_16C_car)
                 {
@@ -317,7 +318,7 @@ bool Ambulance_20::SpawnParamedicCrew_4FA820()
     pGroup->SetCounts_433360(1);
     pGroup->add_ped_to_list_4C9B30(pPed2, 0);
     pGroup->field_0 = 0;
-    
+
     field_4_paramedics_crew->field_4_ped = pPed1;
     field_4_paramedics_crew->field_28_state = crew_state::update_6;
     field_4_paramedics_crew->field_0_car->SetDriverPedType_421560(ped_type::special_ped_4);
@@ -371,7 +372,8 @@ void Ambulance_20::EvaluatePickupState_4FA9D0()
             field_4_paramedics_crew->field_28_state = crew_state::clean_up_5;
             field_4_paramedics_crew->field_2C_ready = 0;
         }
-        else if (gParamedicCrewPed_6F6D60->field_16C_car && gParamedicCrewPed_6F6D60 == gParamedicCrewPed_6F6D60->field_16C_car->field_54_driver)
+        else if (gParamedicCrewPed_6F6D60->field_16C_car &&
+                 gParamedicCrewPed_6F6D60 == gParamedicCrewPed_6F6D60->field_16C_car->field_54_driver)
         {
             if (field_4_paramedics_crew->field_8_group)
             {
@@ -465,9 +467,9 @@ void Ambulance_20::HandleObjectiveState_4FAAC0()
                     {
                         // 9.6f calls MaxAbsDistance_42A6B0(get_cam_x(), get_cam_y(), ...)
                         if (Fix16::MaxAbsDistance_42A6B0(gParamedicCrewPed_6F6D60->get_cam_x(),
-                                                            gParamedicCrewPed_6F6D60->get_cam_y(),
-                                                            Fix16(field_0_target_x),
-                                                            Fix16(field_1_target_y)) >= dword_6F6FC0)
+                                                         gParamedicCrewPed_6F6D60->get_cam_y(),
+                                                         Fix16(field_0_target_x),
+                                                         Fix16(field_1_target_y)) >= dword_6F6FC0)
                         {
                             break;
                         }

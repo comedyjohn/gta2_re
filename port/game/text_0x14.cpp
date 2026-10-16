@@ -1,12 +1,12 @@
 #include "text_0x14.hpp"
 #include "Function.hpp"
+#include "Globals.hpp"
 #include "chunk.hpp"
+#include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
-#include "registry.hpp"
-#include "Globals.hpp"
 #include "gtx_0x106C.hpp"
-#include "enums.hpp"
+#include "registry.hpp"
 
 DEFINE_GLOBAL(text_0x14*, gText_0x14_704DFC, 0x704DFC);
 DEFINE_GLOBAL(text_0x14*, gtext_0x14_6F87F0, 0x6F87F0);
@@ -27,12 +27,12 @@ const wchar_t word_626590[256] = {
     220u, 221u, 222u, 223u, 224u, 225u, 226u, 227u, 228u, 229u, 230u, 231u, 232u, 233u, 234u, 235u, 236u, 237u, 238u, 239u, 240u, 241u,
     242u, 243u, 244u, 245u, 246u, 247u, 248u, 249u, 250u, 251u, 252u, 253u, 254u, 255u};
 
-const s16 kExtendedRussianCharMap_626490[128] = {0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-                        0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   177, 0,   0,   0,
-                        0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   210, 0,   0,   0,   0,   0,   0,   0,   193, 208,
-                        192, 184, 198, 182, 199, 187, 205, 178, 181, 197, 204, 183, 196, 194, 195, 203, 206, 180, 190, 188, 179, 202,
-                        185, 186, 189, 191, 207, 200, 209, 201, 226, 241, 225, 217, 231, 215, 232, 220, 238, 211, 214, 230, 237, 216,
-                        229, 227, 228, 236, 239, 213, 223, 221, 212, 235, 218, 219, 222, 224, 240, 233, 242, 234};
+const s16 kExtendedRussianCharMap_626490[128] = {
+    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   177, 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+    0,   0,   0,   0,   210, 0,   0,   0,   0,   0,   0,   0,   193, 208, 192, 184, 198, 182, 199, 187, 205, 178, 181, 197, 204, 183,
+    196, 194, 195, 203, 206, 180, 190, 188, 179, 202, 185, 186, 189, 191, 207, 200, 209, 201, 226, 241, 225, 217, 231, 215, 232, 220,
+    238, 211, 214, 230, 237, 216, 229, 227, 228, 236, 239, 213, 223, 221, 212, 235, 218, 219, 222, 224, 240, 233, 242, 234};
 
 // Extended characters 128-255, corresponding to original data at 0x626390.
 static const u16 kExtendedWesternCharMap[128] = {
@@ -103,7 +103,9 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
         text_0xC& entry = field_0_tKey.field_0_tKey[i];
         memset(&entry, 0, sizeof(entry));
         entry.field_0_pwstr = (wchar_t*)static_cast<sptr>(pFileEntries[i].field_0_offset);
-        memcpy(reinterpret_cast<void*>(&entry.field_4_pKey), reinterpret_cast<const void*>(pFileEntries[i].field_4_key), sizeof(pFileEntries[i].field_4_key));
+        memcpy(reinterpret_cast<void*>(&entry.field_4_pKey),
+               reinterpret_cast<const void*>(pFileEntries[i].field_4_key),
+               sizeof(pFileEntries[i].field_4_key));
     }
     delete[] pFileEntries;
 #else
@@ -157,10 +159,10 @@ s32 text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
 wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
 {
     auto* pFound = static_cast<text_0xC*>(bsearch(pIdStr, // key
-                                          field_0_tKey.field_0_tKey, // array
-                                          field_0_tKey.field_4_tKey_count, // array count
-                                          sizeof(text_0xC), // element size
-                                          TKeySearch_5B5A10));
+                                                  field_0_tKey.field_0_tKey, // array
+                                                  field_0_tKey.field_4_tKey_count, // array count
+                                                  sizeof(text_0xC), // element size
+                                                  TKeySearch_5B5A10));
     if (!pFound)
     {
         return L" ";

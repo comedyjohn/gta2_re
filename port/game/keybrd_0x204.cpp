@@ -1,10 +1,10 @@
 #include "keybrd_0x204.hpp"
 #include "Function.hpp"
 #include "Globals.hpp"
+#include "enums.hpp"
 #include "error.hpp"
 #include <cstdlib>
 #include <windows.h>
-#include "enums.hpp"
 
 DEFINE_GLOBAL(keybrd_0x204*, gKeybrd_0x204_6F52F4, 0x6F52F4);
 
@@ -16,7 +16,6 @@ keybrd_0x204::keybrd_0x204()
     field_200_keyBoardLayout = 0;
     memset(field_0_keys, 0, sizeof(field_0_keys));
 }
-
 
 static inline bool is_line_break_or_space(wchar_t letter)
 {
@@ -38,7 +37,6 @@ void keybrd_0x204::ReadCfg_4D5DA0(FILE* Stream, wchar_t* pOut)
         pOut[i++] = read_char;
     }
 }
-
 
 // 0x4D5E00
 void keybrd_0x204::LoadKbCfg_4D5E00()
@@ -91,7 +89,7 @@ void keybrd_0x204::LoadKbCfg_4D5E00()
         FatalError_4A38C0(Gta2Error::KeyboardTypeFileOpenError, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 187);
     }
 
-    for (short & field_0_key : field_0_keys)
+    for (short& field_0_key : field_0_keys)
     {
         wchar_t tmpBuffer[16];
         ReadCfg_4D5DA0(hConfigFile, tmpBuffer);
@@ -118,7 +116,6 @@ wchar_t keybrd_0x204::GetKey_4D5F40(u16 key_idx)
     return field_0_keys[key_idx];
 }
 
-
 // 0x4D5F50
 void keybrd_0x204::create_4D5F50()
 {
@@ -142,7 +139,6 @@ void keybrd_0x204::destroy_4D5FA0()
         gKeybrd_0x204_6F52F4 = nullptr;
     }
 }
-
 
 // 0x4D5FD0
 void keybrd_0x204::RecreateIfLayoutChanged_4D5FD0()

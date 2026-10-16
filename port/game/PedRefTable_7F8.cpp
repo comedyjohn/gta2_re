@@ -41,4 +41,3 @@ PedRefTable_7F8::PedRefTable_7F8()
         entry.field_4_ref_count = 0;
     }
 }
-

@@ -2,17 +2,17 @@
 #define FIX16_POINT_ZERO kFpZero_6F610C
 
 #include "map_0x370.hpp"
-#include "port_world3d.h" // port: world3d
+#include "Car_BC.hpp"
+#include "CollisionSoundQueue_C88.hpp"
 #include "Fix16_Rect.hpp"
 #include "Function.hpp"
-#include "Car_BC.hpp"
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
 #include "Globals.hpp"
 #include "Light_1D4CC.hpp"
 #include "Object_5C.hpp"
-#include "SpriteGrid_400.hpp"
 #include "RouteFinder.hpp"
+#include "SpriteGrid_400.hpp"
 #include "TileAnim_2.hpp"
 #include "chunk.hpp"
 #include "crt_stubs.hpp"
@@ -21,8 +21,8 @@
 #include "file.hpp"
 #include "gtx_0x106C.hpp"
 #include "memory.hpp"
+#include "port_world3d.h" // port: world3d
 #include "sprite.hpp"
-#include "CollisionSoundQueue_C88.hpp"
 
 DEFINE_GLOBAL(Map_0x370*, gMap_0x370_6F6268, 0x6F6268);
 DEFINE_GLOBAL(gmp_block_info*, gBlockInfo0_6F5EB0, 0x6F5EB0);
@@ -80,7 +80,6 @@ DEFINE_GLOBAL(gmp_block_info*, dword_6F6060, 0x6F6060);
 DEFINE_GLOBAL(gmp_block_info*, dword_6F5FB0, 0x6F5FB0);
 DEFINE_GLOBAL(gmp_block_info*, dword_6F5F54, 0x6F5F54);
 DEFINE_GLOBAL_INIT(Ang16, word_6F603E, Ang16(720), 0x6F603E);
-
 
 Fix16 kFpOne_6F6110 = Fix16(1); // = 0x4000; // todo
 
@@ -348,8 +347,7 @@ gmp_map_zone* Map_0x370::GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_t
     {
         gmp_map_zone* pZone = Map_0x370::get_zone_4DFB30(zone_idx);
 
-        if (pZone->field_0_zone_type == zone_type
-            && !pZone->IsZoneVisibleToAnyPlayer_4DEF40())
+        if (pZone->field_0_zone_type == zone_type && !pZone->IsZoneVisibleToAnyPlayer_4DEF40())
         {
             Fix16 dist;
             dist = Fix16::MaxAbsDistance_42A6B0(Fix16(pZone->field_1_x), Fix16(pZone->field_2_y), Fix16(xpos), Fix16(ypos));
@@ -468,9 +466,8 @@ gmp_map_zone* Map_0x370::nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y)
         for (field_364_cur_zone_idx = 0; field_364_cur_zone_idx < field_32C_pZones->field_0_num_zones; field_364_cur_zone_idx++)
         {
             gmp_map_zone* pZone = get_zone_4DFB30(field_364_cur_zone_idx);
-            if ((pZone->field_0_zone_type == Information_10 
-                || pZone->field_0_zone_type == Navigation_1 
-                || pZone->field_0_zone_type == Local_Navigation_15) &&
+            if ((pZone->field_0_zone_type == Information_10 || pZone->field_0_zone_type == Navigation_1 ||
+                 pZone->field_0_zone_type == Local_Navigation_15) &&
                 pZone->ContainsPoint_463020(field_36A_zone_x, field_36B_zone_y))
             {
                 return pZone;
@@ -556,17 +553,17 @@ gmp_zone_info* Map_0x370::GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y)
 
 // 0x4DF8C0
 void Map_0x370::SetZoneInfo_4DF8C0(s32 zone_idx,
-                                            s16 car_density,
-                                            s16 goodcar_ratio,
-                                            s16 badcar_ratio,
-                                            s16 policecar_ratio,
-                                            s16 gangcar_ratio,
-                                            s16 ped_density,
-                                            s16 mugger_ratio,
-                                            s16 carthief_ratio,
-                                            s16 elvis_ratio,
-                                            s16 gangchar_ratio,
-                                            s16 policeped_ratio)
+                                   s16 car_density,
+                                   s16 goodcar_ratio,
+                                   s16 badcar_ratio,
+                                   s16 policecar_ratio,
+                                   s16 gangcar_ratio,
+                                   s16 ped_density,
+                                   s16 mugger_ratio,
+                                   s16 carthief_ratio,
+                                   s16 elvis_ratio,
+                                   s16 gangchar_ratio,
+                                   s16 policeped_ratio)
 {
     get_zone_4DFB30(zone_idx);
     gmp_zone_info* pZoneInfo = &field_334_pUnknownZoneData[field_330_pZoneArray[zone_idx]];
@@ -776,7 +773,10 @@ void Map_0x370::update_lights_4DFCD0()
 
         if (pMapLight->field_E_on_time)
         {
-            gLight_1D4CC_6F5520->SetFlashing_469070(pLight, pMapLight->field_E_on_time, pMapLight->field_F_off_time, pMapLight->field_D_shape);
+            gLight_1D4CC_6F5520->SetFlashing_469070(pLight,
+                                                    pMapLight->field_E_on_time,
+                                                    pMapLight->field_F_off_time,
+                                                    pMapLight->field_D_shape);
         }
     }
 }
@@ -784,8 +784,7 @@ void Map_0x370::update_lights_4DFCD0()
 // 0x4DFE10
 gmp_block_info* Map_0x370::get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord)
 {
-    auto* pCol =
-        reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
+    auto* pCol = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
     if (z_coord < pCol->field_0_height)
     {
         s32 offset = pCol->field_1_offset;
@@ -800,7 +799,7 @@ gmp_block_info* Map_0x370::get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coor
 // 0x4DFE60
 gmp_block_info* Map_0x370::GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z)
 {
-    // If it's a partial block, get a null/empty block. 
+    // If it's a partial block, get a null/empty block.
     // If it's a tridiagonal block (four-sided or tri-sided), replace it by a flat solid block
     // Otherwise, return the original block. It's ideal for checking collisions
     auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
@@ -2041,7 +2040,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionTop < tileY)
         {
-            if (dword_6F606C && dword_6F5BA0 <= dword_6F5FAC && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_0_left) != 0 &&
+            if (dword_6F606C && dword_6F5BA0 <= dword_6F5FAC &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_0_left) != 0 &&
                 dword_6F6084->field_0_gradient_direction != 1 && dword_6F6084->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX))
@@ -2050,7 +2050,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6078 && dword_6F5FAC <= dword_6F5BA0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_4_top) != 0 &&
+            if (dword_6F6078 && dword_6F5FAC <= dword_6F5BA0 &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_4_top) != 0 &&
                 dword_6F608C->field_0_gradient_direction != 3 && dword_6F608C->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY))
@@ -2081,7 +2082,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionBottom > tileY)
         {
-            if (dword_6F6070 && dword_6F5BA0 <= dword_6F6248 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_0_left) != 0 &&
+            if (dword_6F6070 && dword_6F5BA0 <= dword_6F6248 &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_0_left) != 0 &&
                 dword_6F6088->field_0_gradient_direction != 1 && dword_6F6088->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX))
@@ -2090,7 +2092,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6078 && dword_6F6248 <= dword_6F5BA0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_6_bottom) != 0 &&
+            if (dword_6F6078 && dword_6F6248 <= dword_6F5BA0 &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_6_bottom) != 0 &&
                 dword_6F608C->field_0_gradient_direction != 3 && dword_6F608C->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY + 1))
@@ -2111,7 +2114,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
                 if (dword_6F5FB0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5FB0->field_4_top) != 0)
                 {
-                    if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY + 1))
+                    if (!gSprite_6F61E8 ||
+                        gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY + 1))
                     {
                         return 1;
                     }
@@ -2157,7 +2161,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionTop < tileY)
         {
-            if (dword_6F606C && dword_6F620C <= dword_6F5FAC && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_2_right) != 0 &&
+            if (dword_6F606C && dword_6F620C <= dword_6F5FAC &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_2_right) != 0 &&
                 dword_6F6084->field_0_gradient_direction != 1 && dword_6F6084->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX + 1))
@@ -2166,7 +2171,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6060 && dword_6F5FAC <= dword_6F620C && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_4_top) != 0 &&
+            if (dword_6F6060 && dword_6F5FAC <= dword_6F620C &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_4_top) != 0 &&
                 dword_6F6080->field_0_gradient_direction != 3 && dword_6F6080->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY))
@@ -2197,7 +2203,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionBottom > tileY)
         {
-            if (dword_6F6070 && dword_6F620C <= dword_6F6248 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_2_right) != 0 &&
+            if (dword_6F6070 && dword_6F620C <= dword_6F6248 &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_2_right) != 0 &&
                 dword_6F6088->field_0_gradient_direction != 1 && dword_6F6088->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX + 1))
@@ -2206,7 +2213,8 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6060 && dword_6F6248 <= dword_6F620C && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_6_bottom) != 0 &&
+            if (dword_6F6060 && dword_6F6248 <= dword_6F620C &&
+                (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_6_bottom) != 0 &&
                 dword_6F6080->field_0_gradient_direction != 3 && dword_6F6080->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY + 1))
@@ -2243,7 +2251,8 @@ char_type Map_0x370::CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y,
 {
     gSprite_6F61E8 = pSprite;
     gFaceCollisionMask_6F6002 = collision_mask;
-    if (gSpriteGrid_right_6F5B80 - gSpriteGrid_left_6F5FD4 >= 3 || tile_x > gSpriteGrid_left_6F5FD4 + 1 || tile_x < gSpriteGrid_right_6F5B80 - 1)
+    if (gSpriteGrid_right_6F5B80 - gSpriteGrid_left_6F5FD4 >= 3 || tile_x > gSpriteGrid_left_6F5FD4 + 1 ||
+        tile_x < gSpriteGrid_right_6F5B80 - 1)
     {
         if (CanSpriteEnterTile_4E1E00(tile_x - 1, tile_x + 1, gSpriteGrid_top_6F6108, gSpriteGrid_bottom_6F5F38, tile_x, tile_y, tile_z))
         {
@@ -2270,7 +2279,8 @@ char_type Map_0x370::CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y,
                                              dword_6F5BA0);
         }
     }
-    else if (gSpriteGrid_bottom_6F5F38 - gSpriteGrid_top_6F6108 >= 3 || tile_y > gSpriteGrid_top_6F6108 + 1 || tile_y < gSpriteGrid_bottom_6F5F38 - 1)
+    else if (gSpriteGrid_bottom_6F5F38 - gSpriteGrid_top_6F6108 >= 3 || tile_y > gSpriteGrid_top_6F6108 + 1 ||
+             tile_y < gSpriteGrid_bottom_6F5F38 - 1)
     {
         if (CanSpriteEnterTile_4E1E00(gSpriteGrid_left_6F5FD4, gSpriteGrid_right_6F5B80, tile_y - 1, tile_y + 1, tile_x, tile_y, tile_z))
         {
@@ -2299,7 +2309,13 @@ char_type Map_0x370::CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y,
     }
     else
     {
-        return CanSpriteEnterTile_4E1E00(gSpriteGrid_left_6F5FD4, gSpriteGrid_right_6F5B80, gSpriteGrid_top_6F6108, gSpriteGrid_bottom_6F5F38, tile_x, tile_y, tile_z);
+        return CanSpriteEnterTile_4E1E00(gSpriteGrid_left_6F5FD4,
+                                         gSpriteGrid_right_6F5B80,
+                                         gSpriteGrid_top_6F6108,
+                                         gSpriteGrid_bottom_6F5F38,
+                                         tile_x,
+                                         tile_y,
+                                         tile_z);
     }
 }
 
@@ -2996,7 +3012,8 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
     for (s32 i = 1; i <= value_1.ToInt(); i++)
     {
         Fix16 ground_z;
-        ground_z = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pObjSprt->field_14_xy.x, pObjSprt->field_14_xy.y, pObjSprt->field_1C_zpos);
+        ground_z =
+            gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pObjSprt->field_14_xy.x, pObjSprt->field_14_xy.y, pObjSprt->field_1C_zpos);
         if (value_3 == kFpZero_6F610C)
         {
             pObjSprt->set_xyz_lazy_420600(pObjSprt->field_14_xy.x + vec_x,
@@ -3058,8 +3075,8 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
                                                                       pObjSprt->field_1C_zpos.ToInt()))
                     {
                         ground_z = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pObjSprt->field_14_xy.x,
-                                                                            pObjSprt->field_14_xy.y,
-                                                                            pObjSprt->field_1C_zpos);
+                                                                                   pObjSprt->field_14_xy.y,
+                                                                                   pObjSprt->field_1C_zpos);
                         if (ground_z > pObjSprt->field_1C_zpos)
                         {
                             return 0;
@@ -3257,7 +3274,8 @@ char_type Map_0x370::HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock
                 return gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, DOWN_2);
             }
         case 2:
-            return bDefault ? gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, DOWN_2) : gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, UP_1);
+            return bDefault ? gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, DOWN_2) :
+                              gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, UP_1);
         case 3:
             if (bDefault)
             {
@@ -3268,7 +3286,8 @@ char_type Map_0x370::HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock
                 return gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, LEFT_3);
             }
         case 4:
-            return bDefault ? gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, LEFT_3) : gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, RIGHT_4);
+            return bDefault ? gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, LEFT_3) :
+                              gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, RIGHT_4);
         default:
             break;
     }
@@ -4092,7 +4111,6 @@ char_type Map_0x370::CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z)
     return 0;
 }
 
-
 // 0x4E80A0
 void gmp_compressed_map_32::ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub)
 {
@@ -4449,11 +4467,11 @@ void Map_0x370::OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes
 
 // 0x4E8CF0
 void Map_0x370::GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
-                           u32* outColumnBytes,
-                           gmp_block_info** outBlockPtr,
-                           u32* outBlockBytes,
-                           DmapInfoList** outSubObj,
-                           s32* outSubObjBytes)
+                                          u32* outColumnBytes,
+                                          gmp_block_info** outBlockPtr,
+                                          u32* outBlockBytes,
+                                          DmapInfoList** outSubObj,
+                                          s32* outSubObjBytes)
 {
     *outColumnPtr = &this->field_0_pDmap->field_40008_pColumn[this->field_0_pDmap->field_40000_column_words];
 

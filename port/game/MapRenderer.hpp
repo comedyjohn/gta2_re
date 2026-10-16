@@ -1,22 +1,22 @@
 #pragma once
 
+#include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp" // Vert
 #include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "map_0x370.hpp"
 #include "fix16.hpp"
-#include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp" // Vert
+#include "map_0x370.hpp"
 
 class Fix16_Point;
 
-class Nanobotz_8  // Maybe Fix16_Point
+class Nanobotz_8 // Maybe Fix16_Point
 {
   public:
     inline s32 IsEqual_46BB60(Nanobotz_8* other)
     {
         return field_0_x == other->field_0_x && field_4_y == other->field_4_y;
     }
-    s32 field_0_x;  // x?
-    s32 field_4_y;  // y?
+    s32 field_0_x; // x?
+    s32 field_4_y; // y?
 };
 
 EXTERN_GLOBAL(Fix16, gXCoord_6F63AC);
@@ -25,9 +25,7 @@ EXTERN_GLOBAL(Fix16, gYCoord_6F63B8);
 
 EXTERN_GLOBAL(u32, gZCoord_6F63E0);
 
-
 EXTERN_GLOBAL(gmp_map_slope, gCurrentSlope_6F646C);
-
 
 EXTERN_GLOBAL(u32, gGradientSize_6F6480);
 
@@ -143,8 +141,8 @@ class MapRenderer
         Nanobotz_8* pPos = &field_1C_draw_list[field_2EFC_curr_draw_layer_size];
         pPos->field_0_x = maybe_x;
         pPos->field_4_y = maybe_y;
-        
-        Nanobotz_8* pIter = &field_1C_draw_list[field_2EFC_curr_draw_layer_size-1];
+
+        Nanobotz_8* pIter = &field_1C_draw_list[field_2EFC_curr_draw_layer_size - 1];
         for (s32 i = field_2EFC_curr_draw_layer_size - 1; i >= 0; i--, pIter--)
         {
             if (pIter->IsEqual_46BB60(pPos))

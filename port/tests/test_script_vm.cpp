@@ -40,7 +40,7 @@ class Script
     Script& operator=(const Script&) = delete;
 
     // Command `idx` of the given type, running on to `next` (0xFFFF ends the thread).
-    template <class T = SCR_CMD_HEADER>
+    template<class T = SCR_CMD_HEADER>
     T* Add(u16 idx, u16 type, u16 next)
     {
         const u16 offset = static_cast<u16>(idx * 16);
@@ -120,9 +120,15 @@ TEST_CASE("comparing a counter with a constant sets the condition")
         bool expected;
     };
     const Case cases[] = {
-        {SCRCMD_S_LESS_I, 3, 5, true},     {SCRCMD_S_LESS_I, 5, 5, false},    {SCRCMD_S_LEQUAL_I, 5, 5, true},
-        {SCRCMD_S_GREATER_I, 6, 5, true},  {SCRCMD_S_GREATER_I, 5, 5, false}, {SCRCMD_S_GEQUAL_I, 5, 5, true},
-        {SCRCMD_S_GEQUAL_I, 4, 5, false},  {SCRCMD_S_EQUAL_I, 5, 5, true},   {SCRCMD_S_EQUAL_I, 4, 5, false},
+        {SCRCMD_S_LESS_I, 3, 5, true},
+        {SCRCMD_S_LESS_I, 5, 5, false},
+        {SCRCMD_S_LEQUAL_I, 5, 5, true},
+        {SCRCMD_S_GREATER_I, 6, 5, true},
+        {SCRCMD_S_GREATER_I, 5, 5, false},
+        {SCRCMD_S_GEQUAL_I, 5, 5, true},
+        {SCRCMD_S_GEQUAL_I, 4, 5, false},
+        {SCRCMD_S_EQUAL_I, 5, 5, true},
+        {SCRCMD_S_EQUAL_I, 4, 5, false},
     };
     for (const Case& c : cases)
     {
@@ -152,10 +158,18 @@ TEST_CASE("comparing two counters")
     // comparison (LESS_S evaluates "left > right", LEQUAL_S "left >= right", and the reverse for
     // GREATER_S and GEQUAL_S). Reproduced on purpose.
     const Case cases[] = {
-        {SCRCMD_S_LESS_S, 3, 5, false},     {SCRCMD_S_LESS_S, 5, 3, true},      {SCRCMD_S_GREATER_S, 3, 5, true},
-        {SCRCMD_S_GREATER_S, 5, 3, false},  {SCRCMD_S_LEQUAL_S, 5, 5, true},    {SCRCMD_S_LEQUAL_S, 4, 5, false},
-        {SCRCMD_S_LEQUAL_S, 6, 5, true},    {SCRCMD_S_GEQUAL_S, 5, 5, true},    {SCRCMD_S_GEQUAL_S, 6, 5, false},
-        {SCRCMD_S_GEQUAL_S, 4, 5, true},    {SCRCMD_S_EQUAL_S, 7, 7, true},     {SCRCMD_S_EQUAL_S, 7, 8, false},
+        {SCRCMD_S_LESS_S, 3, 5, false},
+        {SCRCMD_S_LESS_S, 5, 3, true},
+        {SCRCMD_S_GREATER_S, 3, 5, true},
+        {SCRCMD_S_GREATER_S, 5, 3, false},
+        {SCRCMD_S_LEQUAL_S, 5, 5, true},
+        {SCRCMD_S_LEQUAL_S, 4, 5, false},
+        {SCRCMD_S_LEQUAL_S, 6, 5, true},
+        {SCRCMD_S_GEQUAL_S, 5, 5, true},
+        {SCRCMD_S_GEQUAL_S, 6, 5, false},
+        {SCRCMD_S_GEQUAL_S, 4, 5, true},
+        {SCRCMD_S_EQUAL_S, 7, 7, true},
+        {SCRCMD_S_EQUAL_S, 7, 8, false},
     };
     for (const Case& c : cases)
     {

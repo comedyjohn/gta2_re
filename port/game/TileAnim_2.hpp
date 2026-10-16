@@ -35,7 +35,6 @@ class TileAnim_18
     void PoolAllocate();
     void PoolDeallocate()
     {
-      
     }
     void ApplyCurrentFrame_5BC150();
     void InitFromGmpAnim_5BC190(const gmp_tile_animation* pStru);

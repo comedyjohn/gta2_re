@@ -1,9 +1,9 @@
 #include "rng.hpp"
 #include "Globals.hpp"
-#include "debug.hpp"
-#include "error.hpp"
 #include "Hud.hpp"
 #include "InputRecorder_67F8B0.hpp"
+#include "debug.hpp"
+#include "error.hpp"
 #include <cstdio>
 #include <cstdlib>
 
@@ -24,17 +24,11 @@ void rng::ShowCycle_48B920()
 {
     if (gInputRecorder_67F8B0.inlined_check())
     {
-        swprintf(tmpBuff_67BD9C,
-                 L"%d / %d",
-                 this->field_0_rng,
-                 gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
-
+        swprintf(tmpBuff_67BD9C, L"%d / %d", this->field_0_rng, gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
     }
     else
     {
         swprintf(tmpBuff_67BD9C, L"%d", this->field_0_rng);
-
-
     }
     gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 460, gDebugFont_706600, 1);
 }
@@ -58,7 +52,10 @@ s16 rng::get_int_4F7AE0(const s16& max_rnd)
         {
             this->field_0_rng = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598, "%d: random (get_int) %d", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<s16>(this->get_cur_rng_41CFE0()));
+        sprintf(gTmpBuffer_67C598,
+                "%d: random (get_int) %d",
+                gpRng_67AB34->get_cur_rng_41CFE0(),
+                static_cast<s16>(this->get_cur_rng_41CFE0()));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         return static_cast<s16>(this->get_cur_rng_41CFE0());
     }

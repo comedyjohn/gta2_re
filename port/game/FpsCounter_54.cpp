@@ -10,7 +10,6 @@ DEFINE_GLOBAL(FpsCounter_54*, gFpsCounter_7055D4, 0x7055D4);
 // TODO
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
-
 // 0x5BEC30
 void FpsCounter_54::ShowFps_5BEC30()
 {

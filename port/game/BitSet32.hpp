@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.hpp"
 #include "Function.hpp"
+#include "types.hpp"
 
 EXTERN_GLOBAL(u32, kGlobalMask0_61A9AC);
 EXTERN_GLOBAL(u32, kGlobalMask1_61A9A8);
@@ -134,8 +134,7 @@ class BitSet32
     }
 
     // 9.6f 0x420D80
-    BitSet32()
-     : m_var(0)
+    BitSet32() : m_var(0)
     {
     }
 

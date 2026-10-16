@@ -51,9 +51,12 @@ bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
 {
     if (field_25_xpos > 1u && field_25_xpos < 254u && field_26_ypos > 1u && field_26_ypos < 254u)
     {
-        bool result =
-            gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(field_25_xpos, field_26_ypos, field_27_zpos, path_direction, &gPathFinder_SlopeZDelta_6FDEEC, 1) ==
-            0;
+        bool result = gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(field_25_xpos,
+                                                                     field_26_ypos,
+                                                                     field_27_zpos,
+                                                                     path_direction,
+                                                                     &gPathFinder_SlopeZDelta_6FDEEC,
+                                                                     1) == 0;
         return result;
     }
     return false;
@@ -119,11 +122,13 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
                         return false;
                     }
                     return gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos,
-                                                                              this->field_26_ypos + 1,
-                                                                              this->field_27_zpos,
-                                                                              path_direction::right_3,
-                                                                              &gPathFinder_SlopeZDelta_6FDEEC,
-                                                                              1) ? false : true;
+                                                                          this->field_26_ypos + 1,
+                                                                          this->field_27_zpos,
+                                                                          path_direction::right_3,
+                                                                          &gPathFinder_SlopeZDelta_6FDEEC,
+                                                                          1) ?
+                        false :
+                        true;
                 }
                 return false;
             }
@@ -143,19 +148,25 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
                 return false;
             }
 
-            if (gMap_0x370_6F6268
-                    ->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos + 1, this->field_26_ypos, this->field_27_zpos, path_direction::up_1, &gPathFinder_SlopeZDelta_6FDEEC, 1))
+            if (gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos + 1,
+                                                               this->field_26_ypos,
+                                                               this->field_27_zpos,
+                                                               path_direction::up_1,
+                                                               &gPathFinder_SlopeZDelta_6FDEEC,
+                                                               1))
             {
                 return false;
             }
             //v29 = 3;
             //LABEL_73:
             return gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos,
-                                                                      this->field_26_ypos - 1,
-                                                                      this->field_27_zpos,
-                                                                      path_direction::right_3,
-                                                                      &gPathFinder_SlopeZDelta_6FDEEC,
-                                                                      1) ? false : true;
+                                                                  this->field_26_ypos - 1,
+                                                                  this->field_27_zpos,
+                                                                  path_direction::right_3,
+                                                                  &gPathFinder_SlopeZDelta_6FDEEC,
+                                                                  1) ?
+                false :
+                true;
         }
 
         if (yd == 1)
@@ -175,13 +186,23 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
                 return false;
             }
 
-            if (gMap_0x370_6F6268
-                    ->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos - 1, this->field_26_ypos, this->field_27_zpos, path_direction::down_2, &gPathFinder_SlopeZDelta_6FDEEC, 1))
+            if (gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos - 1,
+                                                               this->field_26_ypos,
+                                                               this->field_27_zpos,
+                                                               path_direction::down_2,
+                                                               &gPathFinder_SlopeZDelta_6FDEEC,
+                                                               1))
             {
                 return false;
             }
-            return gMap_0x370_6F6268
-                       ->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos, this->field_26_ypos + 1, this->field_27_zpos, path_direction::left_4, &gPathFinder_SlopeZDelta_6FDEEC, 1) ? false : true;
+            return gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos,
+                                                                  this->field_26_ypos + 1,
+                                                                  this->field_27_zpos,
+                                                                  path_direction::left_4,
+                                                                  &gPathFinder_SlopeZDelta_6FDEEC,
+                                                                  1) ?
+                false :
+                true;
         }
 
         if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(this->field_25_xpos, this->field_26_ypos - 1, this->field_27_zpos))
@@ -199,19 +220,25 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
             return false;
         }
 
-        if (gMap_0x370_6F6268
-                ->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos - 1, this->field_26_ypos, this->field_27_zpos, path_direction::up_1, &gPathFinder_SlopeZDelta_6FDEEC, 1))
+        if (gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos - 1,
+                                                           this->field_26_ypos,
+                                                           this->field_27_zpos,
+                                                           path_direction::up_1,
+                                                           &gPathFinder_SlopeZDelta_6FDEEC,
+                                                           1))
         {
             return false;
         }
         //v29 = 4;
         //goto LABEL_73;
         return gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(this->field_25_xpos,
-                                                                  this->field_26_ypos - 1,
-                                                                  this->field_27_zpos,
-                                                                  path_direction::left_4,
-                                                                  &gPathFinder_SlopeZDelta_6FDEEC,
-                                                                  1) ? false : true;
+                                                              this->field_26_ypos - 1,
+                                                              this->field_27_zpos,
+                                                              path_direction::left_4,
+                                                              &gPathFinder_SlopeZDelta_6FDEEC,
+                                                              1) ?
+            false :
+            true;
     }
 
     if (xd != 0)
@@ -522,15 +549,15 @@ s32 PathFinder_2FD4::IsFirstPassenger_554A90(Ped* pPed)
 // https://decomp.me/scratch/Fr0bT
 // 0x554ab0
 char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
-                                        Ped* pPed,
-                                        u8 x_start,
-                                        u8 y_start,
-                                        u8 z_start,
-                                        u8 x_end,
-                                        u8 y_end,
-                                        u8 z_end,
-                                        s32 angle_face,
-                                        u8* pOutPathFailCount)
+                                              Ped* pPed,
+                                              u8 x_start,
+                                              u8 y_start,
+                                              u8 z_start,
+                                              u8 x_end,
+                                              u8 y_end,
+                                              u8 z_end,
+                                              s32 angle_face,
+                                              u8* pOutPathFailCount)
 {
     PathNode_8* pBestNode; // eax
     PathNode_8* pCell; // ecx
@@ -917,7 +944,8 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
 
     if (!gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(field_E_xStart, field_F_yStart, field_10_zStart))
     {
-        field_10_zStart = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(Fix16(field_E_xStart), Fix16(field_F_yStart), Fix16(field_10_zStart)).ToUInt8();
+        field_10_zStart =
+            gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(Fix16(field_E_xStart), Fix16(field_F_yStart), Fix16(field_10_zStart)).ToUInt8();
     }
     field_16_start_cost = 0;
     field_11_xEnd = 0;
@@ -996,7 +1024,8 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
         {
             if (block_type == 1)
             {
-                if ((gMap_0x370_6F6268->get_block_4DFE10(field_25_xpos, field_26_ypos, field_27_zpos - 1)->field_A_arrows & block_arrow::green_mask) != 0)
+                if ((gMap_0x370_6F6268->get_block_4DFE10(field_25_xpos, field_26_ypos, field_27_zpos - 1)->field_A_arrows &
+                     block_arrow::green_mask) != 0)
                 {
                     field_18_bSearching = 0;
                     *xpos = field_25_xpos;

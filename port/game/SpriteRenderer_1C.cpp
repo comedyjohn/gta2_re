@@ -2,8 +2,8 @@
 #include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
-#include "sprite.hpp"
 #include "port_world3d.h" // port: world3d
+#include "sprite.hpp"
 #include <chrono>
 
 // Forward declarations: the functions below are in address order

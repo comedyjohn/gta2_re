@@ -1,6 +1,6 @@
 // SDL2 implementation of port/platform/platform.h. Compiled without port_prelude.h.
-#include "../platform.h"
 #include "../../include/port_replay.h"
+#include "../platform.h"
 
 #include <SDL.h>
 
@@ -251,7 +251,11 @@ bool OpenWindow(int width, int height, const char* title)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    gWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+    gWindow = SDL_CreateWindow(title,
+                               SDL_WINDOWPOS_CENTERED,
+                               SDL_WINDOWPOS_CENTERED,
+                               width,
+                               height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     if (!gWindow)
     {
@@ -404,11 +408,16 @@ const char* PadName(int index)
 }
 
 // Button order as a typical DirectInput pad of the time reports them (the triggers follow as two more)
-static const SDL_GameControllerButton kPadButtons[] = {
-    SDL_CONTROLLER_BUTTON_A,         SDL_CONTROLLER_BUTTON_B,          SDL_CONTROLLER_BUTTON_X,
-    SDL_CONTROLLER_BUTTON_Y,         SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
-    SDL_CONTROLLER_BUTTON_BACK,      SDL_CONTROLLER_BUTTON_START,      SDL_CONTROLLER_BUTTON_LEFTSTICK,
-    SDL_CONTROLLER_BUTTON_RIGHTSTICK};
+static const SDL_GameControllerButton kPadButtons[] = {SDL_CONTROLLER_BUTTON_A,
+                                                       SDL_CONTROLLER_BUTTON_B,
+                                                       SDL_CONTROLLER_BUTTON_X,
+                                                       SDL_CONTROLLER_BUTTON_Y,
+                                                       SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+                                                       SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+                                                       SDL_CONTROLLER_BUTTON_BACK,
+                                                       SDL_CONTROLLER_BUTTON_START,
+                                                       SDL_CONTROLLER_BUTTON_LEFTSTICK,
+                                                       SDL_CONTROLLER_BUTTON_RIGHTSTICK};
 
 const char* PadButtonName(int slot)
 {

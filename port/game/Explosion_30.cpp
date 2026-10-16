@@ -1,6 +1,4 @@
 #include "Explosion_30.hpp"
-#include "ped_death_cause.hpp"
-#include "explosion_type.hpp"
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Game_0x40.hpp"
@@ -8,10 +6,12 @@
 #include "Object_5C.hpp"
 #include "Particle_4C.hpp"
 #include "Particle_8.hpp"
+#include "PedRefTable_7F8.hpp"
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"
-#include "PedRefTable_7F8.hpp"
 #include "debug.hpp"
+#include "explosion_type.hpp"
+#include "ped_death_cause.hpp"
 #include "rng.hpp"
 
 DEFINE_GLOBAL(ExplosionPool_7A8*, gExplosionPool_7A8_6FD5F0, 0x6FD5F0);
@@ -156,7 +156,9 @@ void Explosion_30::EmitRandomDiagonalParticle_540A40()
             pParticle->field_2E = 100;
             pParticle->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette);
-            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y, field_14_pObj2C->field_4->field_1C_zpos);
+            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x,
+                                                           field_14_pObj2C->field_4->field_14_xy.y,
+                                                           field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
             this->field_18_particle_cooldown = gRng_6F6784.get_int_4F7AE0(5);
         }
@@ -198,7 +200,9 @@ void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
             pParticle->field_38_state = 3;
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 96);
             pParticle->field_30_pNext->SetNoLighting_4337F0();
-            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y, field_14_pObj2C->field_4->field_1C_zpos);
+            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x,
+                                                           field_14_pObj2C->field_4->field_14_xy.y,
+                                                           field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
             this->field_18_particle_cooldown = gRng_6F6784.get_int_4F7AE0(2);
         }
@@ -241,7 +245,9 @@ void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
             pParticle->field_38_state = 4;
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette);
             pParticle->field_30_pNext->SetNoLighting_4337F0();
-            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y, field_14_pObj2C->field_4->field_1C_zpos);
+            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x,
+                                                           field_14_pObj2C->field_4->field_14_xy.y,
+                                                           field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
             this->field_18_particle_cooldown = gRng_6F6784.get_int_4F7AE0(2);
         }
@@ -283,7 +289,9 @@ void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
             pParticle->field_38_state = 36;
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette);
             pParticle->field_30_pNext->SetNoLighting_4337F0();
-            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y, field_14_pObj2C->field_4->field_1C_zpos);
+            pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x,
+                                                           field_14_pObj2C->field_4->field_14_xy.y,
+                                                           field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
             this->field_18_particle_cooldown = gRng_6F6784.get_int_4F7AE0(2);
         }
@@ -328,8 +336,8 @@ void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
             pParticle->field_38_state = 5;
             pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 96);
             pParticle->field_30_pNext->set_xyz_lazy_420600(field_14_pObj2C->field_4->field_14_xy.x,
-                                                      field_14_pObj2C->field_4->field_14_xy.y,
-                                                      field_14_pObj2C->field_4->field_1C_zpos);
+                                                           field_14_pObj2C->field_4->field_14_xy.y,
+                                                           field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
             this->field_18_particle_cooldown = gRng_6F6784.get_int_4F7AE0(2);
             pParticle->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
@@ -370,7 +378,6 @@ Fix16 Explosion_30::GetBlastRadius_541680()
     }
     return radius;
 }
-
 
 // 0x541710
 Fix16 Explosion_30::GetBlastHeight_541710()
@@ -473,7 +480,10 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                     Ang16 ang;
                     ang = Fix16::atan2_fixed_405320(dy, dx);
 
-                    Fix16 distance = Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x, pSprite->field_14_xy.y, field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y);
+                    Fix16 distance = Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x,
+                                                                  pSprite->field_14_xy.y,
+                                                                  field_14_pObj2C->field_4->field_14_xy.x,
+                                                                  field_14_pObj2C->field_4->field_14_xy.y);
                     if (distance > this->field_28_blast_radius)
                     {
                         if (timerVal < 70u)
@@ -506,12 +516,17 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                 {
                     if ((timerVal > explosion_timer::damage_phase_50 && timerVal < 60u) || (timerVal > 80u && timerVal < 90u))
                     {
-                        if (!pCar->IsMaxDamage_40F890() && !pCar->IsTrainModel_403BA0() && !pCar->IsImmuneToExplosionType_43B850(field_10_type))
+                        if (!pCar->IsMaxDamage_40F890() && !pCar->IsTrainModel_403BA0() &&
+                            !pCar->IsImmuneToExplosionType_43B850(field_10_type))
                         {
-                            if (Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x, pSprite->field_14_xy.y, field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
+                            if (Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x,
+                                                             pSprite->field_14_xy.y,
+                                                             field_14_pObj2C->field_4->field_14_xy.x,
+                                                             field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
                             {
                                 // 9.6f: PedRefTable_7F8::GetPedId_420F10 (inlined, using it here makes the diff worse)
-                                s32 exploder_ped_id = gPedRefTable_7F8_703398->field_0_entries[this->field_14_pObj2C->field_26_ped_ref_idx].field_0_ped_id;
+                                s32 exploder_ped_id =
+                                    gPedRefTable_7F8_703398->field_0_entries[this->field_14_pObj2C->field_26_ped_ref_idx].field_0_ped_id;
                                 if (!exploder_ped_id)
                                 {
                                     pCar->field_70_exploder_ped_id = this->field_2C_owner_ped_id;
@@ -546,7 +561,10 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                     }
                     else if (timerVal == explosion_timer::first_tick_99)
                     {
-                        if (Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x, pSprite->field_14_xy.y, field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
+                        if (Fix16::MaxAbsDistance_42A6B0(pSprite->field_14_xy.x,
+                                                         pSprite->field_14_xy.y,
+                                                         field_14_pObj2C->field_4->field_14_xy.x,
+                                                         field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
                         {
                             Fix16_Point pos = this->field_14_pObj2C->field_4->get_x_y_443580();
                             pCar->ApplyExplosionImpulse_443710(&pos);
@@ -722,7 +740,8 @@ void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
     bool isOnScreen = true;
     if (this->field_1A_timer < 90u)
     {
-        if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(this->field_14_pObj2C->field_4->field_14_xy.x, this->field_14_pObj2C->field_4->field_14_xy.y))
+        if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(this->field_14_pObj2C->field_4->field_14_xy.x,
+                                                       this->field_14_pObj2C->field_4->field_14_xy.y))
         {
             isOnScreen = false;
         }
@@ -757,18 +776,23 @@ void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
             case 79:
             case 89:
             {
-                Object_2C* pExplosionObj = gObject_5C_6F8F84->CreateExplosion_52A3D0(Fix16(113), Fix16(145), 2, kAngZero_6FD5D4, explosion_type::molotov_fire_5, field_2C_owner_ped_id);
+                Object_2C* pExplosionObj = gObject_5C_6F8F84->CreateExplosion_52A3D0(Fix16(113),
+                                                                                     Fix16(145),
+                                                                                     2,
+                                                                                     kAngZero_6FD5D4,
+                                                                                     explosion_type::molotov_fire_5,
+                                                                                     field_2C_owner_ped_id);
                 if (pExplosionObj)
                 {
                     Object_2C* pDebris = gObject_5C_6F8F84->NewMovingObj_52A240(127,
-                                                                             field_14_pObj2C->field_4->field_14_xy.x,
-                                                                             field_14_pObj2C->field_4->field_14_xy.y,
-                                                                             field_14_pObj2C->field_4->field_1C_zpos,
-                                                                             this->field_22_spawn_angle,
-                                                                             kAngZero_6FD5D4,
-                                                                             dword_6FD484,
-                                                                             -dword_6FD540,
-                                                                             dword_6FD2F0);
+                                                                                field_14_pObj2C->field_4->field_14_xy.x,
+                                                                                field_14_pObj2C->field_4->field_14_xy.y,
+                                                                                field_14_pObj2C->field_4->field_1C_zpos,
+                                                                                this->field_22_spawn_angle,
+                                                                                kAngZero_6FD5D4,
+                                                                                dword_6FD484,
+                                                                                -dword_6FD540,
+                                                                                dword_6FD2F0);
                     pDebris->field_4->DispatchCollisionEvent_5A3100(pExplosionObj->field_4, 0, 0, kAngZero_6FD5D4);
 
                     Object_2C* pLight = gObject_5C_6F8F84->NewLight_529A40(94, 138, 2, 0xFF8000, 3, 255);
@@ -808,7 +832,9 @@ void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
     if (this->field_1A_timer == explosion_timer::first_tick_99)
     {
         // TODO: Arg order correct?
-        gGame_0x40_67E008->ShakeCamerasAtPos_4B9790(8, this->field_14_pObj2C->field_4->field_14_xy.x, this->field_14_pObj2C->field_4->field_14_xy.y);
+        gGame_0x40_67E008->ShakeCamerasAtPos_4B9790(8,
+                                                    this->field_14_pObj2C->field_4->field_14_xy.x,
+                                                    this->field_14_pObj2C->field_4->field_14_xy.y);
     }
 
     if (this->field_1A_timer != explosion_timer::forever_9999)
@@ -842,7 +868,8 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_135_0:
                     {
                         pParticle->field_38_state = 24;
-                        this->field_22_spawn_angle = (kAng135_6FD40C + dword_6FD350) + Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(45))));
+                        this->field_22_spawn_angle = (kAng135_6FD40C + dword_6FD350) +
+                            Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(45))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -854,8 +881,8 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_315_1:
                     {
                         pParticle->field_38_state = 25;
-                        this->field_22_spawn_angle = (kAng315_6FD418 + dword_6FD350) + Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90))));
-
+                        this->field_22_spawn_angle = (kAng315_6FD418 + dword_6FD350) +
+                            Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -867,8 +894,9 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_225_2:
                     {
                         pParticle->field_38_state = 23;
-                        this->field_22_spawn_angle = (kAng225_6FD3E0 + dword_6FD350).Add_ool(Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
-
+                        this->field_22_spawn_angle =
+                            (kAng225_6FD3E0 + dword_6FD350)
+                                .Add_ool(Ang16::Fix16_To_Ang16_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -880,8 +908,9 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     case building_debris_dir::towards_45_3:
                     {
                         pParticle->field_38_state = 22;
-                        this->field_22_spawn_angle = kAng45_6FD35C.Add_ool(dword_6FD350).Add_ool(Ang16::Fix16_To_Ang16_ool_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
-
+                        this->field_22_spawn_angle =
+                            kAng45_6FD35C.Add_ool(dword_6FD350)
+                                .Add_ool(Ang16::Fix16_To_Ang16_ool_40F540((dword_6FD448 * Fix16(gRng_6F6784.get_int_4F7AE0(90)))));
 
                         Ang16::PolarToCartesian_41FC20(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -914,7 +943,9 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                 }
                 else
                 {
-                    pParticle->field_30_pNext->set_xyz_lazy_420600(stru_6FD388, stru_6FD38C, field_14_pObj2C->field_4->field_1C_zpos + kFP16One_6FD4A0);
+                    pParticle->field_30_pNext->set_xyz_lazy_420600(stru_6FD388,
+                                                                   stru_6FD38C,
+                                                                   field_14_pObj2C->field_4->field_1C_zpos + kFP16One_6FD4A0);
                 }
                 gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
                 pParticle->field_30_pNext->SetNoLighting_4337F0();
@@ -923,7 +954,9 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
 
         if (this->field_1A_timer == explosion_timer::first_tick_99)
         {
-            gGame_0x40_67E008->ShakeCamerasAtPos_4B9790(8, field_14_pObj2C->field_4->field_14_xy.x, field_14_pObj2C->field_4->field_14_xy.y);
+            gGame_0x40_67E008->ShakeCamerasAtPos_4B9790(8,
+                                                        field_14_pObj2C->field_4->field_14_xy.x,
+                                                        field_14_pObj2C->field_4->field_14_xy.y);
         }
 
         if (this->field_1A_timer > explosion_timer::damage_phase_50)

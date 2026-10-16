@@ -8,12 +8,12 @@
 // calls replaced by OpenGL ones. The game draws pre-transformed vertices in a 640x480 space; that is
 // scaled into the window, keeping 4:3 with black bars.
 #include "renderer.h"
+#include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 #include "gl.h"
 #include "overlay.h"
 #include "platform.h"
 #include "port_replay.h"
 #include "port_world3d.h" // port: world3d
-#include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 
 #include <math.h>
 #include <stdio.h>
@@ -31,12 +31,12 @@ PORT_GL_FUNCTIONS(PORT_GL_DEFINE)
 bool port_gl_load()
 {
     bool ok = true;
-#define PORT_GL_LOAD(ret, name, params)                                       \
-    name = reinterpret_cast<PFN_##name>(plat::GLGetProcAddress(#name));       \
-    if (!name)                                                                \
-    {                                                                         \
-        fprintf(stderr, "OpenGL function %s is unavailable\n", #name);        \
-        ok = false;                                                           \
+#define PORT_GL_LOAD(ret, name, params)                                 \
+    name = reinterpret_cast<PFN_##name>(plat::GLGetProcAddress(#name)); \
+    if (!name)                                                          \
+    {                                                                   \
+        fprintf(stderr, "OpenGL function %s is unavailable\n", #name);  \
+        ok = false;                                                     \
     }
     PORT_GL_FUNCTIONS(PORT_GL_LOAD)
 #undef PORT_GL_LOAD
@@ -91,8 +91,11 @@ void NullRead(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, void* data)
 void port_gl_load_null()
 {
     // Every function does nothing; the few below that return something or fill an output are replaced
-#define PORT_GL_NULL(ret, name, params) \
-    name = [] params -> std::type_identity_t<ret> { return std::type_identity_t<ret>(); };
+#define PORT_GL_NULL(ret, name, params)           \
+    name = [] params -> std::type_identity_t<ret> \
+    {                                             \
+        return std::type_identity_t<ret>();       \
+    };
     PORT_GL_FUNCTIONS(PORT_GL_NULL)
 #undef PORT_GL_NULL
     glGenTextures = NullIds;
@@ -147,36 +150,34 @@ class GLRenderer
         }
         printf("OpenGL %s on %s\n", glGetString(GL_VERSION), glGetString(GL_RENDERER));
 
-        static const char* kVertex =
-            "#version 120\n"
-            "attribute vec4 aPos;\n" // x, y in game pixels; w = 1/w for perspective-correct texturing
-            "attribute vec4 aColor;\n"
-            "attribute vec2 aUV;\n"
-            "uniform vec2 uScale;\n"
-            "varying vec4 vColor;\n"
-            "varying vec2 vUV;\n"
-            "void main()\n"
-            "{\n"
-            "    float w = aPos.w > 0.0 ? 1.0 / aPos.w : 1.0;\n"
-            "    vec2 ndc = vec2(aPos.x * uScale.x - 1.0, 1.0 - aPos.y * uScale.y);\n"
-            "    gl_Position = vec4(ndc * w, 0.0, w);\n"
-            "    vColor = aColor.bgra;\n" // D3DCOLOR is ARGB: B, G, R, A in memory
-            "    vUV = aUV;\n"
-            "}\n";
-        static const char* kFragment =
-            "#version 120\n"
-            "uniform sampler2D uTex;\n"
-            "uniform int uModulateAlpha;\n"
-            "varying vec4 vColor;\n"
-            "varying vec2 vUV;\n"
-            "void main()\n"
-            "{\n"
-            "    vec4 t = texture2D(uTex, vUV);\n"
-            "    if (t.a < 0.5)\n" // palette colour 0 is transparent
-            "        discard;\n"
-            "    float a = uModulateAlpha != 0 ? t.a * vColor.a : t.a;\n"
-            "    gl_FragColor = vec4(t.rgb * vColor.rgb, a);\n"
-            "}\n";
+        static const char* kVertex = "#version 120\n"
+                                     "attribute vec4 aPos;\n" // x, y in game pixels; w = 1/w for perspective-correct texturing
+                                     "attribute vec4 aColor;\n"
+                                     "attribute vec2 aUV;\n"
+                                     "uniform vec2 uScale;\n"
+                                     "varying vec4 vColor;\n"
+                                     "varying vec2 vUV;\n"
+                                     "void main()\n"
+                                     "{\n"
+                                     "    float w = aPos.w > 0.0 ? 1.0 / aPos.w : 1.0;\n"
+                                     "    vec2 ndc = vec2(aPos.x * uScale.x - 1.0, 1.0 - aPos.y * uScale.y);\n"
+                                     "    gl_Position = vec4(ndc * w, 0.0, w);\n"
+                                     "    vColor = aColor.bgra;\n" // D3DCOLOR is ARGB: B, G, R, A in memory
+                                     "    vUV = aUV;\n"
+                                     "}\n";
+        static const char* kFragment = "#version 120\n"
+                                       "uniform sampler2D uTex;\n"
+                                       "uniform int uModulateAlpha;\n"
+                                       "varying vec4 vColor;\n"
+                                       "varying vec2 vUV;\n"
+                                       "void main()\n"
+                                       "{\n"
+                                       "    vec4 t = texture2D(uTex, vUV);\n"
+                                       "    if (t.a < 0.5)\n" // palette colour 0 is transparent
+                                       "        discard;\n"
+                                       "    float a = uModulateAlpha != 0 ? t.a * vColor.a : t.a;\n"
+                                       "    gl_FragColor = vec4(t.rgb * vColor.rgb, a);\n"
+                                       "}\n";
         mProgram = Link(kVertex, kFragment);
         if (!mProgram)
         {
@@ -229,8 +230,10 @@ class GLRenderer
             glEnable(GL_SCISSOR_TEST);
             const float sx = mViewW / kGameWidth;
             const float sy = mViewH / kGameHeight;
-            glScissor(mViewX + static_cast<int>(left * sx), mViewY + static_cast<int>((kGameHeight - bottom) * sy),
-                      static_cast<int>((right - left) * sx), static_cast<int>((bottom - top) * sy));
+            glScissor(mViewX + static_cast<int>(left * sx),
+                      mViewY + static_cast<int>((kGameHeight - bottom) * sy),
+                      static_cast<int>((right - left) * sx),
+                      static_cast<int>((bottom - top) * sy));
         }
         glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -1028,8 +1031,14 @@ int CC gbh_BlitImage(int imageIndex, int srcLeft, int srcTop, int srcRight, int 
     const float y0 = static_cast<float>(dstY);
     const float x1 = static_cast<float>(dstX + (srcRight - srcLeft));
     const float y1 = static_cast<float>(dstY + (srcBottom - srcTop));
-    const float u[4] = {static_cast<float>(srcLeft), static_cast<float>(srcRight), static_cast<float>(srcRight), static_cast<float>(srcLeft)};
-    const float v[4] = {static_cast<float>(srcTop), static_cast<float>(srcTop), static_cast<float>(srcBottom), static_cast<float>(srcBottom)};
+    const float u[4] = {static_cast<float>(srcLeft),
+                        static_cast<float>(srcRight),
+                        static_cast<float>(srcRight),
+                        static_cast<float>(srcLeft)};
+    const float v[4] = {static_cast<float>(srcTop),
+                        static_cast<float>(srcTop),
+                        static_cast<float>(srcBottom),
+                        static_cast<float>(srcBottom)};
     const float x[4] = {x0, x1, x1, x0};
     const float y[4] = {y0, y0, y1, y1};
     for (int i = 0; i < 4; i++)
@@ -1126,14 +1135,16 @@ s32 CC gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int
         uvs[i].u = pData[i].u;
         uvs[i].v = pData[i].v;
     }
-    auto setFrom = [&](const int order[4]) {
+    auto setFrom = [&](const int order[4])
+    {
         for (int i = 0; i < 4; i++)
         {
             pData[i].u = uvs[order[i]].u;
             pData[i].v = uvs[order[i]].v;
         }
     };
-    auto reload = [&]() {
+    auto reload = [&]()
+    {
         for (int i = 0; i < 4; i++)
         {
             uvs[i].u = pData[i].u;
@@ -1278,8 +1289,8 @@ signed int CC gbh_LoadImage(SImage* pToLoad)
     img.field_4_w = pToLoad->field_C_width;
     img.field_8_h = pToLoad->field_E_height;
     s32 pitch = pToLoad->field_0; // the TGA's ID length: pixels start after it
-    img.field_C_pTexture = InternalRegisterTexture(pToLoad->field_C_width, pToLoad->field_E_height,
-                                                   reinterpret_cast<BYTE*>(&pToLoad->field_12), 0, &pitch);
+    img.field_C_pTexture =
+        InternalRegisterTexture(pToLoad->field_C_width, pToLoad->field_E_height, reinterpret_cast<BYTE*>(&pToLoad->field_12), 0, &pitch);
     if (!img.field_C_pTexture)
     {
         img.bLoaded = FALSE;
@@ -1371,8 +1382,13 @@ STexture* CC gbh_UnlockTexture(STexture* pTexture)
     pTexture->field_6_pal_size = 0;
     pTexture->field_8_locked_pixels_ptr = 0;
     pTexture->field_13_flags &= 0xFE;
-    SetTextureId(pTexture, SetTexture(TextureId(pTexture), pTexture->field_E_width, pTexture->field_10_height,
-                                      pTexture->field_14_original_pixel_data_ptr, pTexture->field_18_pPaltData, 0));
+    SetTextureId(pTexture,
+                 SetTexture(TextureId(pTexture),
+                            pTexture->field_E_width,
+                            pTexture->field_10_height,
+                            pTexture->field_14_original_pixel_data_ptr,
+                            pTexture->field_18_pPaltData,
+                            0));
     return pTexture;
 }
 
@@ -1388,22 +1404,70 @@ struct Export
 };
 
 const Export kExports[] = {
-    ENTRY(Vid_Init_SYS),        ENTRY(Vid_CheckMode),     ENTRY(Vid_FindDevice),      ENTRY(Vid_FindMode),
-    ENTRY(Vid_FindFirstMode),   ENTRY(Vid_FindNextMode),  ENTRY(Vid_CloseScreen),     ENTRY(Vid_SetDevice),
-    ENTRY(Vid_SetMode),         ENTRY(Vid_GrabSurface),   ENTRY(Vid_ReleaseSurface),  ENTRY(Vid_FlipBuffers),
-    ENTRY(Vid_ShutDown_SYS),    ENTRY(Vid_EnableWrites),  ENTRY(Vid_DisableWrites),   ENTRY(Vid_GetSurface),
-    ENTRY(Vid_FreeSurface),     ENTRY(Vid_ClearScreen),   ENTRY(Vid_SetGamma),        ENTRY(Vid_WindowProc),
-    ENTRY(Vid_InitDLL),         ENTRY(Vid_GetVersion),    ENTRY(ConvertColourBank),   ENTRY(DrawLine),
-    ENTRY(SetShadeTableA),      {"MakeScreenTable", reinterpret_cast<FARPROC>(&MakeScreenTablePtr)},   ENTRY(gbh_AddLight),        ENTRY(gbh_AssignPalette),
-    ENTRY(gbh_BeginLevel),      ENTRY(gbh_SetBeginSceneCB), ENTRY(gbh_BeginScene),    ENTRY(gbh_BlitBuffer),
-    ENTRY(gbh_BlitImage),       ENTRY(gbh_CloseDLL),      ENTRY(gbh_CloseScreen),     ENTRY(gbh_Convert16BitGraphic),
-    ENTRY(gbh_ConvertColour),   ENTRY(gbh_DrawFlatRect),  ENTRY(gbh_DrawQuad),        ENTRY(gbh_DrawQuadClipped),
-    ENTRY(gbh_DrawTilePart),    ENTRY(gbh_DrawTile),      ENTRY(gbh_DrawTriangle),    ENTRY(gbh_EndLevel),
-    ENTRY(gbh_EndScene),        ENTRY(gbh_FreeImageTable), ENTRY(gbh_FreePalette),    ENTRY(gbh_FreeTexture),
-    ENTRY(gbh_GetGlobals),      ENTRY(gbh_GetUsedCache),  ENTRY(gbh_Init),            ENTRY(gbh_InitDLL),
-    ENTRY(gbh_InitImageTable),  ENTRY(gbh_LoadImage),     ENTRY(gbh_LockTexture),     ENTRY(gbh_Plot),
-    ENTRY(gbh_PrintBitmap),     ENTRY(gbh_RegisterPalette), ENTRY(gbh_RegisterTexture), ENTRY(gbh_ResetLights),
-    ENTRY(gbh_SetAmbient),      ENTRY(gbh_SetCamera),     ENTRY(gbh_SetColourDepth),  ENTRY(gbh_SetWindow),
+    ENTRY(Vid_Init_SYS),
+    ENTRY(Vid_CheckMode),
+    ENTRY(Vid_FindDevice),
+    ENTRY(Vid_FindMode),
+    ENTRY(Vid_FindFirstMode),
+    ENTRY(Vid_FindNextMode),
+    ENTRY(Vid_CloseScreen),
+    ENTRY(Vid_SetDevice),
+    ENTRY(Vid_SetMode),
+    ENTRY(Vid_GrabSurface),
+    ENTRY(Vid_ReleaseSurface),
+    ENTRY(Vid_FlipBuffers),
+    ENTRY(Vid_ShutDown_SYS),
+    ENTRY(Vid_EnableWrites),
+    ENTRY(Vid_DisableWrites),
+    ENTRY(Vid_GetSurface),
+    ENTRY(Vid_FreeSurface),
+    ENTRY(Vid_ClearScreen),
+    ENTRY(Vid_SetGamma),
+    ENTRY(Vid_WindowProc),
+    ENTRY(Vid_InitDLL),
+    ENTRY(Vid_GetVersion),
+    ENTRY(ConvertColourBank),
+    ENTRY(DrawLine),
+    ENTRY(SetShadeTableA),
+    {"MakeScreenTable", reinterpret_cast<FARPROC>(&MakeScreenTablePtr)},
+    ENTRY(gbh_AddLight),
+    ENTRY(gbh_AssignPalette),
+    ENTRY(gbh_BeginLevel),
+    ENTRY(gbh_SetBeginSceneCB),
+    ENTRY(gbh_BeginScene),
+    ENTRY(gbh_BlitBuffer),
+    ENTRY(gbh_BlitImage),
+    ENTRY(gbh_CloseDLL),
+    ENTRY(gbh_CloseScreen),
+    ENTRY(gbh_Convert16BitGraphic),
+    ENTRY(gbh_ConvertColour),
+    ENTRY(gbh_DrawFlatRect),
+    ENTRY(gbh_DrawQuad),
+    ENTRY(gbh_DrawQuadClipped),
+    ENTRY(gbh_DrawTilePart),
+    ENTRY(gbh_DrawTile),
+    ENTRY(gbh_DrawTriangle),
+    ENTRY(gbh_EndLevel),
+    ENTRY(gbh_EndScene),
+    ENTRY(gbh_FreeImageTable),
+    ENTRY(gbh_FreePalette),
+    ENTRY(gbh_FreeTexture),
+    ENTRY(gbh_GetGlobals),
+    ENTRY(gbh_GetUsedCache),
+    ENTRY(gbh_Init),
+    ENTRY(gbh_InitDLL),
+    ENTRY(gbh_InitImageTable),
+    ENTRY(gbh_LoadImage),
+    ENTRY(gbh_LockTexture),
+    ENTRY(gbh_Plot),
+    ENTRY(gbh_PrintBitmap),
+    ENTRY(gbh_RegisterPalette),
+    ENTRY(gbh_RegisterTexture),
+    ENTRY(gbh_ResetLights),
+    ENTRY(gbh_SetAmbient),
+    ENTRY(gbh_SetCamera),
+    ENTRY(gbh_SetColourDepth),
+    ENTRY(gbh_SetWindow),
     ENTRY(gbh_UnlockTexture),
 };
 } // namespace

@@ -1,11 +1,11 @@
 #include "registry.hpp"
 #include "Function.hpp"
 #include "Globals.hpp"
-#include "error.hpp"
 #include "StdAfx.h"
+#include "enums.hpp"
+#include "error.hpp"
 #include <cstdio>
 #include <windows.h>
-#include "enums.hpp"
 
 HKEY kRegistryRootKey_625018 = HKEY_LOCAL_MACHINE; // Note: should be const, but can't be
 
@@ -477,7 +477,8 @@ DWORD Registry::Get_Int_Setting_5874E0(HKEY hKey, const char_type* lpValueName)
 {
     DWORD cbData = 4;
 
-    if (RegQueryValueExA(hKey, lpValueName, nullptr, reinterpret_cast<LPDWORD>(&hKey), reinterpret_cast<LPBYTE>(&lpValueName), &cbData) != ERROR_SUCCESS)
+    if (RegQueryValueExA(hKey, lpValueName, nullptr, reinterpret_cast<LPDWORD>(&hKey), reinterpret_cast<LPBYTE>(&lpValueName), &cbData) !=
+        ERROR_SUCCESS)
     {
         // Zeroing the value instead of returning 0 keeps VC6 from going branchless
         lpValueName = nullptr;

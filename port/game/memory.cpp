@@ -1,9 +1,9 @@
 #include "memory.hpp"
 #include "Function.hpp"
-#include "error.hpp"
 #include "crt_stubs.hpp"
-#include <cstdlib>
 #include "enums.hpp"
+#include "error.hpp"
+#include <cstdlib>
 
 // 0x4FE4D0
 void* Memory::malloc_4FE4D0(size_t Size)

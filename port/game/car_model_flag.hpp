@@ -6,7 +6,7 @@ namespace car_model_flag
 {
 enum
 {
-    stolen_1 = 1,    // the player has hijacked this model (all of them: "stl_all" bonus)
+    stolen_1 = 1, // the player has hijacked this model (all of them: "stl_all" bonus)
     destroyed_2 = 2, // the player has destroyed this model (all of them: "dst_all" bonus)
     both_3 = stolen_1 | destroyed_2,
 };

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "char_b4_flags.hpp"
 #include "BitSet32.hpp"
 #include "Function.hpp"
 #include "Object_3C.hpp"
 #include "Pool.hpp"
 #include "ang16.hpp"
+#include "char_b4_flags.hpp"
 #include "sprite.hpp"
 
 class Sprite_3C;
@@ -291,7 +291,7 @@ class Char_B4
     inline void IncreaseSpeedIfAllowed_433940()
     {
         field_38_velocity += kFpOne128th_6784BC;
-        
+
         if (field_38_velocity > field_3C_run_or_jump_speed)
         {
             field_38_velocity = field_3C_run_or_jump_speed;

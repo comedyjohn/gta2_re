@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
 #include "BonusTracker_1C0.hpp"
+#include "Function.hpp"
 #include "RollingDigitCounter_38.hpp"
 
 class Player;

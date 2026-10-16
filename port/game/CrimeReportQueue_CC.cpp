@@ -1,10 +1,10 @@
 #include "CrimeReportQueue_CC.hpp"
-#include "PlayerCrimeStats_3C.hpp"
 #include "Char_Pool.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
+#include "PlayerCrimeStats_3C.hpp"
 #include "Police_7B8.hpp"
 #include "char.hpp"
 
@@ -13,7 +13,6 @@ DEFINE_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8, 0x67A4B8);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Zero_67A370, Fix16(0), 0x67A370);
 
 EXTERN_GLOBAL(u8, gCharB4_HitByMine_6FDB59);
-
 
 // 0x484cb0
 CrimeReport_14::CrimeReport_14()

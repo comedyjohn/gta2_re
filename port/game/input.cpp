@@ -2,13 +2,12 @@
 #include "Function.hpp"
 #include "Globals.hpp"
 
-#include "error.hpp"
 #include "enums.hpp"
+#include "error.hpp"
 
 DEFINE_GLOBAL(LPDIRECTINPUTA, gpDInput_67B804, 0x67B804);
 DEFINE_GLOBAL(LPDIRECTINPUTDEVICEA, gKeyboardDevice_67B5C0, 0x67B5C0);
 DEFINE_GLOBAL(LPDIRECTINPUTDEVICEA, gGamePadDevice_67B6C0, 0x67B6C0);
-
 
 // 0x4986D0
 void Input::DirectInputCreate_4986D0(HINSTANCE hInstance)
@@ -18,7 +17,6 @@ void Input::DirectInputCreate_4986D0(HINSTANCE hInstance)
     {
         FatalError_4A38C0(8, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 129);
     }
-
 }
 
 // 0x498710

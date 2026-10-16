@@ -7,9 +7,9 @@
 // FNV-1a 64 over little-endian bytes. The same walk can write every value out as text instead.
 #include "statehash.h"
 
-#include "Car_BC.hpp"
 #include "CarAI_78.hpp"
 #include "CarPhysics_B0.hpp"
+#include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Cranes.hpp"
 #include "Crushers.hpp"
@@ -112,7 +112,7 @@ class Hasher
 class PoolMap
 {
   public:
-    template <typename T, size_t N>
+    template<typename T, size_t N>
     void Add(T (&items)[N], int id)
     {
         mRanges.push_back({reinterpret_cast<const char*>(&items[0]), reinterpret_cast<const char*>(&items[0] + N), sizeof(T), id});
@@ -202,7 +202,7 @@ PoolMap MakePoolMap()
 }
 
 // Which items of a pool are in use: everything not on its free list
-template <typename T, s32 N>
+template<typename T, s32 N>
 std::vector<bool> UsedItems(PoolBasic<T, N>& pool)
 {
     std::vector<bool> used(N, true);
@@ -213,7 +213,7 @@ std::vector<bool> UsedItems(PoolBasic<T, N>& pool)
     return used;
 }
 
-template <typename T, s32 N>
+template<typename T, s32 N>
 std::vector<bool> UsedItems(Pool<T, N>& pool)
 {
     std::vector<bool> used(N, true);
@@ -225,7 +225,7 @@ std::vector<bool> UsedItems(Pool<T, N>& pool)
 }
 
 // The used list of a Pool, in order (the order the game updates its items in)
-template <typename T, s32 N>
+template<typename T, s32 N>
 void AddUsedOrder(Hasher& h, const PoolMap& pools, Pool<T, N>& pool)
 {
     int count = 0;
@@ -236,7 +236,7 @@ void AddUsedOrder(Hasher& h, const PoolMap& pools, Pool<T, N>& pool)
     h.Add("used_count", count);
 }
 
-template <typename T, s32 N>
+template<typename T, s32 N>
 int CountUsed(PoolBasic<T, N>& pool)
 {
     int count = 0;
@@ -508,7 +508,7 @@ uint64_t HashScript(std::string* dump, const PoolMap& pools)
     {
         unsigned char* data;
         const PoolMap* pools;
-    } ctx{data.data(), &pools};
+    } ctx {data.data(), &pools};
     Ptr32_SlotsIn(
         sm->field_334C_script_data,
         sizeof(sm->field_334C_script_data),

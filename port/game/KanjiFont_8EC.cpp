@@ -1,14 +1,14 @@
 #include "KanjiFont_8EC.hpp"
 #include "Function.hpp"
+#include "Game_0x40.hpp"
 #include "Globals.hpp"
+#include "TextureCache_15D8.hpp"
 #include "chunk.hpp"
+#include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
-#include "gtx_0x106C.hpp"
-#include "Game_0x40.hpp"
 #include "gbh_graphics.hpp"
-#include "enums.hpp"
-#include "TextureCache_15D8.hpp"
+#include "gtx_0x106C.hpp"
 
 DEFINE_GLOBAL(KanjiFont_8EC*, gKanjiFont_6F5168, 0x6F5168);
 
@@ -67,7 +67,7 @@ void KanjiFont_8EC::Load_kanji_dat_4D2090()
 // 0x4D2150
 void KanjiFont_8EC::OutlineGlyph_4D2150(sptr pPixels_addr, u16 width, u16 height)
 {
-    auto *pPixels = reinterpret_cast<u8(*)[256]>(pPixels_addr);
+    auto* pPixels = reinterpret_cast<u8(*)[256]>(pPixels_addr);
     for (s32 y = 0; y < height; y++)
     {
         for (s32 x = 0; x < width; x++)
@@ -290,7 +290,8 @@ STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
     for (auto& small_glyph : field_0_small_glyphs)
     {
         pCurrent = &small_glyph;
-        if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour && pCurrent->field_1_outline_colour == field_8E9_outline_colour)
+        if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour &&
+            pCurrent->field_1_outline_colour == field_8E9_outline_colour)
         {
             pCurrent->field_C_last_used = field_8C0_use_counter++;
             return pCurrent->field_4_pTexture;
@@ -326,7 +327,8 @@ STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
     for (auto& large_glyph : field_780_large_glyphs)
     {
         pCurrent = &large_glyph;
-        if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour && pCurrent->field_1_outline_colour == field_8E9_outline_colour)
+        if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour &&
+            pCurrent->field_1_outline_colour == field_8E9_outline_colour)
         {
             pCurrent->field_C_last_used = field_8C0_use_counter++;
             return pCurrent->field_4_pTexture;
@@ -506,7 +508,8 @@ void KanjiFont_8EC::InitGlyphCaches_4D2B40()
         u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703C3E, i);
         u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::font_7, font_idx);
         pKanji->field_8_sprt_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
-        pKanji->field_4_pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7, font_idx, palette_types_enum::sprites_2, 0);
+        pKanji->field_4_pTexture =
+            gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7, font_idx, palette_types_enum::sprites_2, 0);
     }
 
     u16 font_idx2 = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703D9A, 0);
@@ -525,7 +528,8 @@ void KanjiFont_8EC::InitGlyphCaches_4D2B40()
         u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703D9A, j);
         u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::font_7, font_idx);
         pKanji_2->field_8_sprt_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
-        pKanji_2->field_4_pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7, font_idx, palette_types_enum::sprites_2, 0);
+        pKanji_2->field_4_pTexture =
+            gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7, font_idx, palette_types_enum::sprites_2, 0);
     }
 }
 

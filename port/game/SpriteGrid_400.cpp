@@ -2,8 +2,8 @@
 #include "Camera.hpp"
 #include "Car_BC.hpp"
 #include "Globals.hpp"
-#include "SpriteRenderer_1C.hpp"
 #include "Object_5C.hpp"
+#include "SpriteRenderer_1C.hpp"
 #include "collide.hpp"
 #include "error.hpp"
 #include "map_0x370.hpp"
@@ -150,11 +150,11 @@ bool SpriteGrid_400::CheckAndHandleAllCollisionsForSprite_477C30(Sprite* pSprite
 
 // 0x477c90
 Sprite* SpriteGrid_400::FindNearestSprite_SpiralSearch_477C90(s32 primary_sprite_type,
-                                                          s32 secondary_sprite_type,
-                                                          Sprite* pExclude,
-                                                          u8 max_rings,
-                                                          s32 search_mode,
-                                                          char_type bUseSpriteZ)
+                                                              s32 secondary_sprite_type,
+                                                              Sprite* pExclude,
+                                                              u8 max_rings,
+                                                              s32 search_mode,
+                                                              char_type bUseSpriteZ)
 {
     gSpriteGrid_start_x_679090 = pExclude->field_14_xy.x.ToInt();
     gSpriteGrid_start_y_679098 = pExclude->field_14_xy.y.ToInt();
@@ -275,7 +275,11 @@ Sprite* SpriteGrid_400::FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desi
 }
 
 // 0x477f30
-bool SpriteGrid_400::CollectRectCollisions_477F30(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude, SpriteList_4* pOutList)
+bool SpriteGrid_400::CollectRectCollisions_477F30(Fix16_Rect* pRect,
+                                                  char_type bDeepCheck,
+                                                  s32 exclude_sprite_type,
+                                                  Sprite* pExclude,
+                                                  SpriteList_4* pOutList)
 {
     gSpriteGrid_list_679214 = pOutList;
     bool bRet = SpriteGrid_400::CheckRectForCollisions_477F60(pRect, bDeepCheck, exclude_sprite_type, pExclude);
@@ -700,7 +704,8 @@ char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect
                 Fix16_Rect* pBBox = &pObj->field_0_pSprite->field_C_pCollisionShape->field_30_boundingBox;
                 if (pRect->AABB_Intersects_41E2F0(pBBox) &&
                     (!bDoCollisionCheck_679006 || pObj->field_0_pSprite->field_C_pCollisionShape->IsZeroWidth_41E390() ||
-                     pObj->field_0_pSprite->field_0_rotation.jIsAxisAligned_41E3C0() || pObj->field_0_pSprite->IntersectsRectSAT_59FB10(pRect) ||
+                     pObj->field_0_pSprite->field_0_rotation.jIsAxisAligned_41E3C0() ||
+                     pObj->field_0_pSprite->IntersectsRectSAT_59FB10(pRect) ||
                      pRect->IntersectsSpriteRenderingRect_59DDF0(pObj->field_0_pSprite)))
                 {
                     if (gSpriteGrid_list_679214)
@@ -805,7 +810,8 @@ Sprite* SpriteGrid_400::FindNearestSpriteInRow_478880(u32 y_pos, Sprite* pSprite
             Sprite* pSprt = pObj->field_0_pSprite;
             if (pObj->field_0_pSprite == gSpriteGrid_exclusion_sprite_678F84 ||
                 (gSpriteGrid_smallestDistSprite_678E40 && !pSprt->TypeIs_446940(gSpriteGrid_exclude_type_678F60)) ||
-                pSprt->field_C_pCollisionShape->CollisionIdIs_446930(gCollisionCounters_6791FC->field_4_query_id) || !pSprt->ShouldCollideWithSprite_59E850(pSprite))
+                pSprt->field_C_pCollisionShape->CollisionIdIs_446930(gCollisionCounters_6791FC->field_4_query_id) ||
+                !pSprt->ShouldCollideWithSprite_59E850(pSprite))
             {
                 continue;
             }

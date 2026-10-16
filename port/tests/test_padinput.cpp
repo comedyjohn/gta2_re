@@ -82,7 +82,7 @@ TEST_CASE("on foot with world directions the stick gives a heading and a speed, 
     // In a network game the speed is not the stick's: the other machines would not know it
     CHECK(r.Read(&p, OnFoot, s, false, false).analog.walk == 7);
     p.axisY = 0;
-    CHECK(r.Read(&p, OnFoot, s, true, false).analog == Analog{});
+    CHECK(r.Read(&p, OnFoot, s, true, false).analog == Analog {});
 }
 
 TEST_CASE("in a car the triggers are analog pedals and the right stick turns the turret")
@@ -158,7 +158,7 @@ TEST_CASE("analog state packs into 17 bits and back")
             }
         }
     }
-    CHECK(Pack(Analog{}) == Pack(Unpack(Pack(Analog{}))));
+    CHECK(Pack(Analog {}) == Pack(Unpack(Pack(Analog {}))));
 }
 
 TEST_CASE("the settings file keeps the layouts and survives damage")

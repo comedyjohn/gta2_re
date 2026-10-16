@@ -1,12 +1,12 @@
 #include "Firefighters.hpp"
-#include "car_despawn_status.hpp"
-#include "Car_BC.hpp"
 #include "CarAI_78.hpp"
+#include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"
+#include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Game_0x40.hpp"
-#include "CarChaseTaskTable_500.hpp"
 #include "PathFinder_2FD4.hpp"
+#include "car_despawn_status.hpp"
 #include "debug.hpp"
 
 // Forward declarations: the functions below are in address order
@@ -55,8 +55,9 @@ bool Firefighter_28::sub_4A7FC0()
 
     if (field_C_target_car)
     {
-        if (field_C_target_car->field_88_despawn_status == car_despawn_status::despawned_6 || field_C_target_car->field_88_despawn_status == car_despawn_status::deactivated_7 ||
-            field_C_target_car->IsDespawning_4215B0() || field_C_target_car->IsMarkedForDespawn_4214B0())
+        if (field_C_target_car->field_88_despawn_status == car_despawn_status::despawned_6 ||
+            field_C_target_car->field_88_despawn_status == car_despawn_status::deactivated_7 || field_C_target_car->IsDespawning_4215B0() ||
+            field_C_target_car->IsMarkedForDespawn_4214B0())
         {
             if (field_20_ped)
             {
@@ -88,7 +89,8 @@ bool Firefighter_28::sub_4A7FC0()
     {
         if (field_C_target_car)
         {
-            if (field_C_target_car->field_88_despawn_status != car_despawn_status::despawned_6 && !field_C_target_car->IsDespawning_4215B0())
+            if (field_C_target_car->field_88_despawn_status != car_despawn_status::despawned_6 &&
+                !field_C_target_car->IsDespawning_4215B0())
             {
                 if (field_20_ped)
                 {
@@ -153,7 +155,10 @@ void Firefighter_28::Update_4A81F0()
             if (field_C_target_car && field_C_target_car->field_88_despawn_status != car_despawn_status::despawned_6 &&
                 !field_C_target_car->IsDespawning_4215B0() && gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::firefighter_5))
             {
-                field_1C_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::FIRETRUK, field_10_xpos, field_14_ypos, field_18_zpos);
+                field_1C_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::FIRETRUK,
+                                                                                     field_10_xpos,
+                                                                                     field_14_ypos,
+                                                                                     field_18_zpos);
                 if (field_1C_car)
                 {
                     field_1C_car->IncrementCarStats_443D70(5);
@@ -199,9 +204,9 @@ void Firefighter_28::Update_4A81F0()
             else if (sub_4A7FC0())
             {
                 if (Fix16::MaxAbsDistance_42A6B0(field_1C_car->GetX_41E430(),
-                                          field_1C_car->GetY_41E440(),
-                                          field_C_target_car->GetX_41E430(),
-                                          field_C_target_car->GetY_41E440()) < dword_67D384 &&
+                                                 field_1C_car->GetY_41E440(),
+                                                 field_C_target_car->GetX_41E430(),
+                                                 field_C_target_car->GetY_41E440()) < dword_67D384 &&
                     field_24_next_state_timer > 100)
                 {
                     field_8_state = firefighter_state::arrived_3;
@@ -257,8 +262,8 @@ void Firefighter_28::Update_4A81F0()
             break;
 
         case firefighter_state::finished_5:
-            if (field_1C_car && field_1C_car->field_88_despawn_status != car_despawn_status::despawned_6 && !field_1C_car->IsDespawning_4215B0() &&
-                !field_1C_car->IsMarkedForDespawn_4214B0())
+            if (field_1C_car && field_1C_car->field_88_despawn_status != car_despawn_status::despawned_6 &&
+                !field_1C_car->IsDespawning_4215B0() && !field_1C_car->IsMarkedForDespawn_4214B0())
             {
                 if (field_1C_car->field_54_driver)
                 {
@@ -400,8 +405,10 @@ char_type FirefighterPool_54::TryDispatchFirefightersToCar_4A8820(Car_BC* pCar)
         return 0;
     }
 
-    Firefighter_28* pFoundCar =
-        DispatchFirefighters_4A8620(pCar, pCar->field_50_car_sprite->GetXPos(), pCar->field_50_car_sprite->GetYPos(), pCar->field_50_car_sprite->GetZPos());
+    Firefighter_28* pFoundCar = DispatchFirefighters_4A8620(pCar,
+                                                            pCar->field_50_car_sprite->GetXPos(),
+                                                            pCar->field_50_car_sprite->GetYPos(),
+                                                            pCar->field_50_car_sprite->GetZPos());
 
     if (!pFoundCar)
     {

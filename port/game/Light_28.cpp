@@ -4,7 +4,7 @@
 #include "gbh_graphics.hpp"
 #include <cstdlib>
 
-DEFINE_GLOBAL(Light_28**, gLightGrid_6F5400, 0x6F5400) ;
+DEFINE_GLOBAL(Light_28**, gLightGrid_6F5400, 0x6F5400);
 
 // 0x4D6D20
 Light_28::Light_28()
@@ -37,7 +37,7 @@ void Light_28::AddToGrid_4D6D70()
 {
     u32 cell_idx = (field_4_x.ToInt() >> 2) + ((field_8_y.ToInt() >> 2) * 64);
     Light_28* pFirst = gLightGrid_6F5400[cell_idx];
-    
+
     if (!pFirst)
     {
         gLightGrid_6F5400[cell_idx] = this;

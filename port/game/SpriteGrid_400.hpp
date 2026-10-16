@@ -63,18 +63,18 @@ class SpriteGrid_400
     char_type CheckAndHandleCollisionInStrips_477BD0(Sprite* pSprite);
     bool CheckAndHandleAllCollisionsForSprite_477C30(Sprite* pSprite, s32 sprite_type_filter);
     Sprite* FindNearestSprite_SpiralSearch_477C90(s32 primary_sprite_type,
-                                                         s32 secondary_sprite_type,
-                                                         Sprite* pExclude,
-                                                         u8 max_rings,
-                                                         s32 search_mode,
-                                                         char_type bUseSpriteZ);
+                                                  s32 secondary_sprite_type,
+                                                  Sprite* pExclude,
+                                                  u8 max_rings,
+                                                  s32 search_mode,
+                                                  char_type bUseSpriteZ);
     void SetSpriteToExclude_477E50(Sprite* pSprite);
     Sprite* FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desired_sprite_type);
     bool CollectRectCollisions_477F30(Fix16_Rect* pRect,
-                                             char_type bDeepCheck,
-                                             s32 exclude_sprite_type,
-                                             Sprite* pExclude,
-                                             SpriteList_4* pOutList);
+                                      char_type bDeepCheck,
+                                      s32 exclude_sprite_type,
+                                      Sprite* pExclude,
+                                      SpriteList_4* pOutList);
     bool CheckRectForCollisions_477F60(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude);
     SpriteGrid_400();
     ~SpriteGrid_400();

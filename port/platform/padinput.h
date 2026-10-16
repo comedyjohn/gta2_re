@@ -61,7 +61,7 @@ bool Save(const std::string& file, const Settings& settings);
 struct Analog
 {
     int heading = -1; // on foot with world directions: where the stick points, 0..127 (0 is down the
-                      // screen, growing to the left as the game's rotations do), -1 when not steering
+        // screen, growing to the left as the game's rotations do), -1 when not steering
     int walk = 7; // with a heading: how far the stick is pushed, 0 (a light push) to 7 (all the way)
     int gas = 0; // in a car: how far the pedal trigger is pressed, 1..15, or 0 for "the game's own"
     int turret = 0; // in a car: the right stick turns the turret, 1 left, 2 right

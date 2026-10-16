@@ -2,9 +2,9 @@
 
 #include "Fix16_Point.hpp"
 #include "Function.hpp"
+#include "ObjectDefinitions_8CA8.hpp"
 #include "Object_3C.hpp"
 #include "Object_8.hpp"
-#include "ObjectDefinitions_8CA8.hpp"
 #include "ang16.hpp"
 #include "fix16.hpp"
 #include "sprite.hpp"
@@ -169,7 +169,8 @@ class Object_2C
     bool IsAnimatedBehavior_475A80()
     {
         s32 t = this->field_8->field_34_behavior_type;
-        return t == object_behavior_type::animated_2 || t == object_behavior_type::physics_animated_4 || t == object_behavior_type::pickup_animated_8 || t == object_behavior_type::pickup_physics_animated_9;
+        return t == object_behavior_type::animated_2 || t == object_behavior_type::physics_animated_4 ||
+            t == object_behavior_type::pickup_animated_8 || t == object_behavior_type::pickup_physics_animated_9;
     }
 
     inline bool IsDestroyedPowergen_434140()
@@ -185,7 +186,9 @@ class Object_2C
     {
         s32 f34 = field_8->field_34_behavior_type;
         if (f34 == object_behavior_type::physics_3 || f34 == object_behavior_type::physics_animated_4 ||
-            ((f34 == object_behavior_type::static_object_0 || f34 == object_behavior_type::static_collision_check_1 || f34 == object_behavior_type::animated_2) && field_8->field_44 == 2))
+            ((f34 == object_behavior_type::static_object_0 || f34 == object_behavior_type::static_collision_check_1 ||
+              f34 == object_behavior_type::animated_2) &&
+             field_8->field_44 == 2))
         {
             return true;
         }
@@ -382,38 +385,46 @@ class Object_5C
     Object_2C* NewWithPedRefIdx_5299F0(s32 object_type, u32 ped_ref_idx, Fix16 xpos, Fix16 ypos, Fix16 zpos);
     Object_2C* NewLight_529A40(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity);
     Object_2C* NewLight_529AB0(s32 light_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, u32 argb, Fix16 radius, u8 intensity);
-    Object_2C* NewFlashingLight_529B20(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity, u8 on_time, u8 off_time, u8 shape);
+    Object_2C* NewFlashingLight_529B20(Fix16 xpos,
+                                       Fix16 ypos,
+                                       Fix16 zpos,
+                                       s32 argb,
+                                       Fix16 radius,
+                                       u8 intensity,
+                                       u8 on_time,
+                                       u8 off_time,
+                                       u8 shape);
     Object_2C* NewPhysicsObjUnlessBlocked_529BC0(s32 object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation);
     Object_2C* CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char fail_if_blocked);
     char_type SetPendingDamageOwner_52A210(char_type owner);
     Object_2C* NewMovingObj_52A240(s32 object_type,
-                                        Fix16 xpos,
-                                        Fix16 ypos,
-                                        Fix16 zpos,
-                                        Ang16 move_angle,
-                                        Ang16 rotation,
-                                        Fix16 speed,
-                                        Fix16 friction,
-                                        Fix16 z_speed);
+                                   Fix16 xpos,
+                                   Fix16 ypos,
+                                   Fix16 zpos,
+                                   Ang16 move_angle,
+                                   Ang16 rotation,
+                                   Fix16 speed,
+                                   Fix16 friction,
+                                   Fix16 z_speed);
     Object_2C* NewMovingObjUnlessBlocked_52A280(s32 object_type,
-                                 Fix16 xpos,
-                                 Fix16 ypos,
-                                 Fix16 zpos,
-                                 Ang16 move_angle,
-                                 Ang16 rotation,
-                                 Fix16 speed,
-                                 Fix16 friction,
-                                 Fix16 z_speed);
+                                                Fix16 xpos,
+                                                Fix16 ypos,
+                                                Fix16 zpos,
+                                                Ang16 move_angle,
+                                                Ang16 rotation,
+                                                Fix16 speed,
+                                                Fix16 friction,
+                                                Fix16 z_speed);
     Object_2C* CreateMovingObj_52A2C0(s32 object_type,
-                                 Fix16 xpos,
-                                 Fix16 ypos,
-                                 Fix16 zpos,
-                                 Ang16 move_angle,
-                                 Ang16 rotation,
-                                 Fix16 speed,
-                                 Fix16 friction,
-                                 Fix16 z_speed,
-                                 char_type fail_if_blocked);
+                                      Fix16 xpos,
+                                      Fix16 ypos,
+                                      Fix16 zpos,
+                                      Ang16 move_angle,
+                                      Ang16 rotation,
+                                      Fix16 speed,
+                                      Fix16 friction,
+                                      Fix16 z_speed,
+                                      char_type fail_if_blocked);
     Object_2C* CreateExplosion_52A3D0(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 kind, s32 ped_id);
 
     void SaveObjects_52A500(SavedObjectData_164* pUnknownObj);

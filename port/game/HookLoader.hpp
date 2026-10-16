@@ -1,9 +1,9 @@
 #pragma once
 
-#include <windows.h>
-#include <string>
-#include <map>
 #include "types.hpp"
+#include <map>
+#include <string>
+#include <windows.h>
 
 class FunctionCollector
 {
@@ -22,23 +22,23 @@ class FunctionCollector
 
     bool IsOgFunctionAddr(u32 addr)
     {
-      auto it = mFunctionsToHookMap.begin();
-      while (it != mFunctionsToHookMap.end())
-      {
-        if (it->second.mOgAddr == addr)
+        auto it = mFunctionsToHookMap.begin();
+        while (it != mFunctionsToHookMap.end())
         {
-          return true;
+            if (it->second.mOgAddr == addr)
+            {
+                return true;
+            }
+            it++;
         }
-        it++;
-      }
-      return false;
+        return false;
     }
 
     struct HookEntry
     {
-      void* trampoline; // detour trampoline
-      void* target;     // original function
-      void* detour;     // replacement function
+        void* trampoline; // detour trampoline
+        void* target; // original function
+        void* detour; // replacement function
     };
     std::map<std::string, HookEntry*> mHooks;
 };
@@ -46,10 +46,10 @@ class FunctionCollector
 // Dynamically loaded API
 extern "C"
 {
-  using TOnEntryFn = void (*)(const char* funcName, u32 ogAddr, u32 status);
-  using TEnumerateFuncsFn = void (*)(TOnEntryFn callback);
-  __declspec(dllexport) void EnumerateFuncs(TOnEntryFn callback);
+    using TOnEntryFn = void (*)(const char* funcName, u32 ogAddr, u32 status);
+    using TEnumerateFuncsFn = void (*)(TOnEntryFn callback);
+    __declspec(dllexport) void EnumerateFuncs(TOnEntryFn callback);
 
-  using TChangeHookFn = void (*)(const char* pFuncName, u32 ogAddr, bool hook);
-  __declspec(dllexport) void ChangeHook(const char* pFuncName, u32 ogAddr, bool hook);
+    using TChangeHookFn = void (*)(const char* pFuncName, u32 ogAddr, bool hook);
+    __declspec(dllexport) void ChangeHook(const char* pFuncName, u32 ogAddr, bool hook);
 }

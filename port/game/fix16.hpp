@@ -26,7 +26,6 @@ class Fix16
         return (v + 0x2000) >> 14;
     }
 
-
     // TODO: BIG HACK!!! Makes no sense for this to be a method but its the only way to force certain inlining behaviour
     // ideally we'll figure out how to get the inlining we need without doing this in the future.
     bool IntervalIntersectsRange_438FB0_inline(const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax) const
@@ -497,10 +496,7 @@ class Fix16
     s32 mValue;
 };
 
-bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart,
-                                                     const Fix16& intervalEnd,
-                                                     const Fix16& rangeMin,
-                                                     const Fix16& rangeMax);
+bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax);
 
 class Ang16;
 Ang16 ArcTanLookup_405500(const Fix16& targetTan);

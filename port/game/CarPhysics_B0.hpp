@@ -28,15 +28,15 @@ EXTERN_GLOBAL(Fix16, kF16Zero_677B90);
 EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
 
 Fix16_Point ComputeLineLineIntersection_55F3B0(Fix16 OwnerMass,
-                                                                Fix16 TargetMass,
-                                                                const Fix16_Point& RelativeVelocity,
-                                                                Fix16_Point& DistToCollision_ByRef,
-                                                                Fix16_Point& CollisionIntersectPoint,
-                                                                const Fix16_Point& CoM_related,
-                                                                Fix16_Point& a8,
-                                                                Fix16 OwnerMomOfInertia,
-                                                                Fix16 TargetMomOfInertia,
-                                                                Fix16 offset);
+                                               Fix16 TargetMass,
+                                               const Fix16_Point& RelativeVelocity,
+                                               Fix16_Point& DistToCollision_ByRef,
+                                               Fix16_Point& CollisionIntersectPoint,
+                                               const Fix16_Point& CoM_related,
+                                               Fix16_Point& a8,
+                                               Fix16 OwnerMomOfInertia,
+                                               Fix16 TargetMomOfInertia,
+                                               Fix16 offset);
 
 namespace car_turn_direction
 {
@@ -47,7 +47,7 @@ enum
     anticlockwise_1 = 1,
 };
 } // namespace car_turn_direction
-                                                                
+
 class CarPhysics_B0
 {
   public:
@@ -163,10 +163,10 @@ class CarPhysics_B0
     Fix16 ComputeRequiredSweepSteps_55A6A0();
     void ResetForceAccumulators_55A840();
     void HandleUserInputs_55A860(char_type bForwardGasOn,
-                                            char_type bFootBrakeOn,
-                                            char_type bLeftOn,
-                                            char_type bRightOn,
-                                            char_type bHandBrakeOn);
+                                 char_type bFootBrakeOn,
+                                 char_type bLeftOn,
+                                 char_type bRightOn,
+                                 char_type bHandBrakeOn);
     void HandleGravityOnSlope_55AA00();
     Fix16 ComputeSlopeCorrection_55AB50(Fix16* pOutY);
     void UpdateZPhysics_55AD90(Fix16 dt);
@@ -466,7 +466,6 @@ class CarPhysics_B0
     void ClearDriverInputs_453F90();
     void ForceNeutralInput_453F50();
     void ForceForwardAcceleration_453F70();
-
 
     Fix16_Point field_0_vel_read_only;
     u32 field_8_total_damage_q;

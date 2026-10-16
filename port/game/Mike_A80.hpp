@@ -12,7 +12,7 @@ class Mike_78
 
     void Clear()
     {
-        for (int & i : field_0)
+        for (int& i : field_0)
         {
             i = 0;
         }

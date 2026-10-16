@@ -4,7 +4,7 @@
 
 TEST_CASE("BitSet32 sets, clears and tests bits")
 {
-    BitSet32 b{};
+    BitSet32 b {};
     b.set_bit(0);
     b.set_bit(31);
     CHECK(b.check_bit(0));

@@ -1,7 +1,7 @@
 #include "debug.hpp"
 #include "Function.hpp"
-#include "registry.hpp"
 #include "Globals.hpp"
+#include "registry.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(bool, gDo_infinite_lives_67D4C9, 0x67D4C9);

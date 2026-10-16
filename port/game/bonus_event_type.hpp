@@ -6,9 +6,9 @@ namespace bonus_event_type
 {
 enum
 {
-    ped_killed_0 = 0,    // PlayerScoreTracker_36C::AwardPedKilledScore_592660
+    ped_killed_0 = 0, // PlayerScoreTracker_36C::AwardPedKilledScore_592660
     car_destroyed_1 = 1, // AwardCarDestroyedScore_592DD0
-    car_hijacked_2 = 2,  // AwardCarHijackedScore_593240
-    any_event = -1,      // wildcard in a bonus definition
+    car_hijacked_2 = 2, // AwardCarHijackedScore_593240
+    any_event = -1, // wildcard in a bonus definition
 };
 } // namespace bonus_event_type

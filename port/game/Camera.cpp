@@ -1,11 +1,11 @@
 #define FIX16_POINT_ZERO kZero_676818
 #include "Camera.hpp"
-#include "Car_BC.hpp"
+#include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"
+#include "Car_BC.hpp"
 #include "Function.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
-#include "CarChaseTaskTable_500.hpp"
 #include "Ped.hpp"
 #include "Police_7B8.hpp"
 #include "sprite.hpp"
@@ -13,12 +13,12 @@
 // Forward declarations: the functions below are in address order
 void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3);
 void SmoothApproachClamped_4F75D0(Fix16* target_coord,
-                                                   Fix16* coord_velocity,
-                                                   Fix16* curr_coord,
-                                                   Fix16* velocity_1,
-                                                   Fix16* velocity_2,
-                                                   Fix16* velocity_3,
-                                                   Fix16* maybe_decrement);
+                                  Fix16* coord_velocity,
+                                  Fix16* curr_coord,
+                                  Fix16* velocity_1,
+                                  Fix16* velocity_2,
+                                  Fix16* velocity_3,
+                                  Fix16* maybe_decrement);
 
 DEFINE_GLOBAL(Camera_0xBC*, gViewCamera_676978, 0x676978);
 DEFINE_GLOBAL_INIT(Fix16, dword_676840, Fix16(0x20000, 0), 0x676840);
@@ -76,8 +76,6 @@ DEFINE_GLOBAL_INIT(Ang16, kAng315_67679C, Ang16(0x04EC, 0), 0x67679C);
 // lea; the original's 16-bit `mov 0x676772,%cx; add %dx,%cx` needs an extern (ComputeTargetFacingAngle_4358D0)
 EXTERN_GLOBAL(Ang16, kAng180_676772);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_676964, Ang16(0), 0x676964);
-
-
 
 // 0x4355D0
 bool Camera_0xBC::IsSpriteTheCameraSubject_4355D0(Sprite* pSprite)
@@ -139,8 +137,8 @@ char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
     {
         SpriteShape_4C* p4C = pSprite->field_C_pCollisionShape;
         if ((p4C->field_0_width == p4C->field_4_height && p4C->field_0_width <= dword_676694) || pSprite->field_0_rotation.rValue == 0 ||
-            pSprite->field_0_rotation == 360 || pSprite->field_0_rotation == 720 || pSprite->field_0_rotation == 1080 || pSprite->IntersectsRectSAT_59FB10(&rect) ||
-            rect.IntersectsSpriteRenderingRect_59DDF0(pSprite))
+            pSprite->field_0_rotation == 360 || pSprite->field_0_rotation == 720 || pSprite->field_0_rotation == 1080 ||
+            pSprite->IntersectsRectSAT_59FB10(&rect) || rect.IntersectsSpriteRenderingRect_59DDF0(pSprite))
         {
             return 1;
         }
@@ -416,7 +414,12 @@ void Camera_0xBC::UpdateBoundaries_435B90()
 }
 
 // 0x435D20
-void Camera_0xBC::MoveTarget_435D20(char_type move_north, char_type move_south, char_type move_west, char_type move_east, char_type zoom_in, char_type zoom_out)
+void Camera_0xBC::MoveTarget_435D20(char_type move_north,
+                                    char_type move_south,
+                                    char_type move_west,
+                                    char_type move_east,
+                                    char_type zoom_in,
+                                    char_type zoom_out)
 {
     ResetPendingTarget();
     if (move_north)
@@ -576,7 +579,6 @@ void Camera_0xBC::SetScreenSize_4361B0(u32 width, u32 height)
 
     field_A8_ui_scale = Fix16(width) / 640;
 }
-
 
 // 0x4364A0
 void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
@@ -839,12 +841,12 @@ void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fi
 // https://decomp.me/scratch/kwM8W
 // 0x4F75D0
 void SmoothApproachClamped_4F75D0(Fix16* target_coord,
-                                                   Fix16* coord_velocity,
-                                                   Fix16* curr_coord,
-                                                   Fix16* velocity_1,
-                                                   Fix16* velocity_2,
-                                                   Fix16* velocity_3,
-                                                   Fix16* maybe_decrement)
+                                  Fix16* coord_velocity,
+                                  Fix16* curr_coord,
+                                  Fix16* velocity_1,
+                                  Fix16* velocity_2,
+                                  Fix16* velocity_3,
+                                  Fix16* maybe_decrement)
 {
     Fix16 DeltaCoord = *target_coord - *curr_coord;
     if (DeltaCoord > kZero_6F6C50)
@@ -898,6 +900,6 @@ void SmoothApproachClamped_4F75D0(Fix16* target_coord,
 // 0x58CF10
 bool Camera_0xBC::IsPointInBoundaries_58CF10(Fix16 x, Fix16 y)
 {
-    return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right &&
-        y >= field_78_view_bounds.field_8_top && y <= field_78_view_bounds.field_C_bottom;
+    return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right && y >= field_78_view_bounds.field_8_top &&
+        y <= field_78_view_bounds.field_C_bottom;
 }

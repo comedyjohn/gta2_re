@@ -126,7 +126,7 @@ struct Frame
 // message; once a frame is complete everyone compares the others' hash with their own. A player that
 // skips one rand() call (GTA2_NET_TEST_SKIP_RAND=FRAME) differs from that frame on.
 uint32_t gSimHash = 2166136261u;
-std::vector<uint32_t> gMyHashes;                   // by frame
+std::vector<uint32_t> gMyHashes; // by frame
 std::map<DPID, std::map<uint32_t, uint32_t>> gTheirHashes; // by player, by frame
 int gDesyncs = 0;
 

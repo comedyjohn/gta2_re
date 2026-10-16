@@ -12,13 +12,13 @@ class ErrorLog
   public:
     ErrorLog() = default;
     ErrorLog(const char* path, int mode); // 0x4D94E0
-    ~ErrorLog();                          // 0x4A3610: logs the intro line again, then closes
+    ~ErrorLog(); // 0x4A3610: logs the intro line again, then closes
     ErrorLog(const ErrorLog&) = delete;
     ErrorLog& operator=(const ErrorLog&) = delete;
 
     // 0x4D9470: mode 1 starts the file over, anything else appends to it
     void Open_4D9470(const char* path, s32 mode);
-    void Write_4D9620(const char* pMsg);       // the text and a new line
+    void Write_4D9620(const char* pMsg); // the text and a new line
     void Write_Log_4D9650(const char* buffer); // the text as it is
     void log_timestamp_4D9540();
     void log_intro_4D95A0();

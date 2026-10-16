@@ -6,7 +6,7 @@ namespace car_score_tier
 {
 enum
 {
-    hijacked_0 = 0,  // x1 (AwardCarHijackedScore_593240)
+    hijacked_0 = 0, // x1 (AwardCarHijackedScore_593240)
     unused_x2_1 = 1, // x2, no caller
     destroyed_2 = 2, // x5 (AwardCarDestroyedScore_592DD0)
 };

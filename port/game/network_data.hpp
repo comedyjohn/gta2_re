@@ -36,7 +36,6 @@ union ReceivedPacket
 };
 */
 
-
 namespace pkt_data_type // first byte of data sent/received
 {
 enum
@@ -53,7 +52,6 @@ enum
 };
 } // namespace pkt_data_type
 
-
 namespace packet_type
 {
 enum
@@ -62,7 +60,6 @@ enum
     Type2_2 = 2,
 };
 } // namespace packet_type
-
 
 namespace packet_subtype
 {
@@ -75,7 +72,6 @@ enum
 };
 } // namespace packet_subtype
 
-
 namespace std_packet_subtype
 {
 enum
@@ -86,4 +82,3 @@ enum
     SyncCheckData_5 = 5,
 };
 } // namespace std_packet_subtype
-

@@ -61,7 +61,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
     gGameSession_67E8E0.SetPlySlotIdx_4C5920(0);
     gGameSession_67E8E0.SetLevelFinishBonusType_4C5930(0);
 
-    for (int & field_408_statistic : field_408_statistics)
+    for (int& field_408_statistic : field_408_statistics)
     {
         field_408_statistic = 0;
     }
@@ -269,7 +269,7 @@ void GameSession_578::init_4C5AF0()
 
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_490_frags_list); i++)
     {
-        for (short & j : field_448_frags_by_victim[i].field_0_frags_on_victim)
+        for (short& j : field_448_frags_by_victim[i].field_0_frags_on_victim)
         {
             j = 0;
         }
@@ -280,7 +280,11 @@ void GameSession_578::init_4C5AF0()
 }
 
 // 0x4C5B80
-void GameSession_578::SetMultiplayerParams_4C5B80(char_type game_type, s32 points_limit, char_type user_idx, char_type max_players, s32 time_limit)
+void GameSession_578::SetMultiplayerParams_4C5B80(char_type game_type,
+                                                  s32 points_limit,
+                                                  char_type user_idx,
+                                                  char_type max_players,
+                                                  s32 time_limit)
 {
     field_43B_game_type = game_type;
     field_43C_points_limit = points_limit;

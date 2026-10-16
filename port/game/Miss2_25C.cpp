@@ -1,13 +1,13 @@
 #include "Miss2_25C.hpp"
-#include "miss2_0x11C.hpp"
 #include "Car_BC.hpp"
-#include "ScriptManager_C1EA8.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"
 #include "Player.hpp"
+#include "ScriptManager_C1EA8.hpp"
+#include "miss2_0x11C.hpp"
 
 DEFINE_GLOBAL(Miss2_25C*, gMiss2_25C_6F805C, 0x6F805C);
 
@@ -143,7 +143,9 @@ void Miss2_25C::push_type_3_ped_502FB0(Ped* pPed)
 // 0x502ff0
 void Miss2_25C::push_type_2_502FF0(Object_2C* pObj, char_type bUnknown)
 {
-    if (bUnknown || (pObj && ((pObj->GetModel_40FEF0() < 64) || pObj->GetModel_40FEF0() > 108) && (pObj->GetModel_40FEF0() < 200 || pObj->GetModel_40FEF0() > 244)))
+    if (bUnknown ||
+        (pObj && ((pObj->GetModel_40FEF0() < 64) || pObj->GetModel_40FEF0() > 108) &&
+         (pObj->GetModel_40FEF0() < 200 || pObj->GetModel_40FEF0() > 244)))
     {
         Miss2_C* pC = allocate_next_502F60();
         if (pC)

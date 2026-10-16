@@ -17,7 +17,7 @@ enum
 
 struct PixelsToFix16Table
 {
-    
+
     PixelsToFix16Table()
     {
         Init_4F79F0();
@@ -119,11 +119,7 @@ class CarInfo_808
     CarInfo_808();
     ~CarInfo_808();
 
-    static char* parse_gci_file_430A30(void* input,
-                                                        size_t input_size,
-                                                        ModelPhysics_48* output,
-                                                        size_t output_size,
-                                                        u32* next_position);
+    static char* parse_gci_file_430A30(void* input, size_t input_size, ModelPhysics_48* output, size_t output_size, u32* next_position);
     static char* SetErr_430AC0(s32 error_code);
     static s32 ReadToken_430B10(char* pOut);
     static s32 PushData_430E60(void* pSrc, u32 size);

@@ -1,6 +1,6 @@
 #include "Fix16_Rect.hpp"
-#include "map_0x370.hpp"
 #include "SpriteGrid_400.hpp"
+#include "map_0x370.hpp"
 #include "sprite.hpp"
 
 DEFINE_GLOBAL_INIT(Fix16, kSmallWidthEpslion_703450, Fix16(0xCCC, 0), 0x703450);
@@ -30,8 +30,8 @@ bool Fix16_Rect::IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite)
 {
     Fix16_Point* pCorners = pSprite->field_C_pCollisionShape->field_C_corners;
 
-    return (IsPointInRect_4B9FD0(&pCorners[0]) || IsPointInRect_4B9FD0(&pCorners[1]) 
-        || IsPointInRect_4B9FD0(&pCorners[2]) || IsPointInRect_4B9FD0(&pCorners[3]));
+    return (IsPointInRect_4B9FD0(&pCorners[0]) || IsPointInRect_4B9FD0(&pCorners[1]) || IsPointInRect_4B9FD0(&pCorners[2]) ||
+            IsPointInRect_4B9FD0(&pCorners[3]));
 }
 
 // 0x59de80
@@ -115,20 +115,23 @@ bool Fix16_Rect::EveryTileMatchesArrowType_59DFB0(s32 arrow_type)
             gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x_pos, y_pos, field_10_low_z.ToInt());
             if (block_4DFE10)
             {
-                
+
                 switch (arrow_type)
                 {
                     case 1:
-                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_up_4;  //  green arrow up
+                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_up_4; //  green arrow up
                         break;
                     case 2:
-                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_down_8;  //  green arrow down
+                        bMatches =
+                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_down_8; //  green arrow down
                         break;
                     case 3:
-                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_right_2;  //  green arrow right
+                        bMatches =
+                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_right_2; //  green arrow right
                         break;
                     case 4:
-                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_left_1;  //  green arrow left
+                        bMatches =
+                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_left_1; //  green arrow left
                         break;
                     default:
                         break;

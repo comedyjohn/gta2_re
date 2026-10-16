@@ -1,12 +1,10 @@
 #pragma once
 
 #include "Function.hpp"
-#include "fix16.hpp"
 #include "car_chase_state.hpp"
+#include "fix16.hpp"
 
 class Ped;
-
-
 
 // The chase task of a car whose driver is following / chasing another ped (police cars chasing a wanted player).
 // The cars of a chase try to box in the target car, the chase state says what each one is doing at the moment.
@@ -32,7 +30,7 @@ class CarChaseTask_40
     char_type field_23_unused;
     char_type field_24;
     char_type field_25_unused;
-    char_type field_26_route_finished;  // the route ended, Ped completes the goto_position objective
+    char_type field_26_route_finished; // the route ended, Ped completes the goto_position objective
     char_type field_27_pad[3];
     s16 field_2A_settle_counter;
     u16 field_2C_side_counter;

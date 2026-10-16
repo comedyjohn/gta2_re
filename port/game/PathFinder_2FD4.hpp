@@ -44,20 +44,20 @@ class PathFinder_2FD4
     void RestoreSavedPosition_554920();
     s32 IsFirstPassenger_554A90(Ped* pPed);
     char_type ComputePath_554AB0(s32 ped_id,
-                                        Ped* pPed,
-                                        u8 x_start,
-                                        u8 y_start,
-                                        u8 z_start,
-                                        u8 x_end,
-                                        u8 y_end,
-                                        u8 z_end,
-                                        s32 angle_face,
-                                        u8* pOutPathFailCount);
+                                 Ped* pPed,
+                                 u8 x_start,
+                                 u8 y_start,
+                                 u8 z_start,
+                                 u8 x_end,
+                                 u8 y_end,
+                                 u8 z_end,
+                                 s32 angle_face,
+                                 u8* pOutPathFailCount);
     bool FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer);
 
     s32 field_0_ped_id;
     char_type field_4_bFindTileMode; // 1: FindNearbyTileMatchingSlopeType, 0: ComputePath
-    PathNode_8 * field_8_pNode;
+    PathNode_8* field_8_pNode;
     u16 field_C_node_count;
     u8 field_E_xStart;
     u8 field_F_yStart;

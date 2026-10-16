@@ -4,8 +4,8 @@
 #include "crt_stubs.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
-#include "sprite.hpp"
 #include "memory.hpp"
+#include "sprite.hpp"
 
 DEFINE_GLOBAL(TextureCache_15D8*, gTextureCache_15D8_705064, 0x705064);
 DEFINE_GLOBAL(u32, gRemappedSpriteCounter_704ED0, 0x704ED0);
@@ -76,8 +76,11 @@ void RemapTextureSet_14::LoadRemappedTextures_5B8F70()
             {
                 const s16 converted_pal_idx = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(field_C_pal_type, texture_idx);
                 const u16 physPal = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(converted_pal_idx);
-                field_0_pTextures[texture_idx + (pal_idx * field_6_remaps_per_sprite)] =
-                    pgbh_RegisterTexture(pSpriteIndex->field_4_width, pSpriteIndex->field_5_height, pSpriteIndex->field_0_pData, physPal, 1);
+                field_0_pTextures[texture_idx + (pal_idx * field_6_remaps_per_sprite)] = pgbh_RegisterTexture(pSpriteIndex->field_4_width,
+                                                                                                              pSpriteIndex->field_5_height,
+                                                                                                              pSpriteIndex->field_0_pData,
+                                                                                                              physPal,
+                                                                                                              1);
 
                 gRemappedTextureCounter_704F28++;
             }
@@ -151,11 +154,8 @@ void TextureCache_15D8::LoadCarDamageTextures_5B9180()
                 width_height = 128;
             }
 
-            field_1004_car_damage_textures[idx] = pgbh_RegisterTexture(width_height, 
-                width_height, 
-                gSpriteMaskCache_67AF1C->GetMaskPixels(idx), 
-                pal_idx, 
-                0);
+            field_1004_car_damage_textures[idx] =
+                pgbh_RegisterTexture(width_height, width_height, gSpriteMaskCache_67AF1C->GetMaskPixels(idx), pal_idx, 0);
         }
     }
 }
@@ -167,14 +167,18 @@ s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
     const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, palette);
     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u8* field_0_pData = sprite_index_5AA440->field_0_pData;
-    const u16 phys_pal_5AA6F0 = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(palette_types_enum::sprites_2, sprite_idx));
+    const u16 phys_pal_5AA6F0 =
+        gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(palette_types_enum::sprites_2, sprite_idx));
 
     field_15D4_next_digit_idx += num_of_digits;
 
     for (s32 i = 0; i < num_of_digits; i++)
     {
-        field_10C4_digit_textures[og_idx + i].field_4_pTexture =
-            pgbh_RegisterTexture(sprite_index_5AA440->field_4_width, sprite_index_5AA440->field_5_height, field_0_pData, phys_pal_5AA6F0, 0);
+        field_10C4_digit_textures[og_idx + i].field_4_pTexture = pgbh_RegisterTexture(sprite_index_5AA440->field_4_width,
+                                                                                      sprite_index_5AA440->field_5_height,
+                                                                                      field_0_pData,
+                                                                                      phys_pal_5AA6F0,
+                                                                                      0);
         field_10C4_digit_textures[og_idx + i].field_0_pPixelData = field_0_pData;
     }
     return og_idx;
@@ -207,7 +211,10 @@ void TextureCache_15D8::LoadStyleTextures_5B9350()
     LoadPals_5B90F0();
     ReadTextures_5B92E0();
 
-    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(palette_types_enum::sprites_2), 1, sprite_types_enum::unknown_0, palette_types_enum::sprites_2);
+    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(palette_types_enum::sprites_2),
+                                            1,
+                                            sprite_types_enum::unknown_0,
+                                            palette_types_enum::sprites_2);
     field_1548_sprite_textures.LoadTextures_5B8F00();
 
     field_155C_car_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(sprite_types_enum::car_2),

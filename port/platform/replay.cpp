@@ -524,8 +524,7 @@ int port_replay_finish(int result)
     gFinished = true;
     if (gSyncMismatches)
     {
-        fprintf(stderr, "gta2 --replay: %ld replay records found a different random number than at recording\n",
-                gSyncMismatches);
+        fprintf(stderr, "gta2 --replay: %ld replay records found a different random number than at recording\n", gSyncMismatches);
     }
     fprintf(stderr, "gta2 --replay: %ld updates\n", gFrame);
     if (!gOptions.record.empty())
@@ -564,7 +563,12 @@ void port_replay_before_update()
                 fprintf(stderr,
                         "gta2 --replay: out of sync with the recording from update %ld (record %u: recorded at "
                         "count %d with random number %d, applied at count %d with %d)\n",
-                        gFrame, i, r.field_0_rng_idx, r.field_8_rng_rnd, gpRng_67AB34->field_0_rng, gpRng_67AB34->field_4_rnd);
+                        gFrame,
+                        i,
+                        r.field_0_rng_idx,
+                        r.field_8_rng_rnd,
+                        gpRng_67AB34->field_0_rng,
+                        gpRng_67AB34->field_4_rnd);
             }
             gSyncMismatches++;
         }
@@ -590,12 +594,20 @@ void port_replay_after_update()
     if (gLog && gFrame % gOptions.hashEvery == 0)
     {
         const StateHashes s = port_state_hash();
-        fprintf(gLog, "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n", gFrame,
-                gpRng_67AB34->field_0_rng, static_cast<unsigned long long>(s.total), static_cast<unsigned long long>(s.rng),
-                static_cast<unsigned long long>(s.sprites), static_cast<unsigned long long>(s.peds),
-                static_cast<unsigned long long>(s.cars), static_cast<unsigned long long>(s.objects),
-                static_cast<unsigned long long>(s.players), static_cast<unsigned long long>(s.script),
-                static_cast<unsigned long long>(s.police), static_cast<unsigned long long>(port_audio_event_hash(nullptr)));
+        fprintf(gLog,
+                "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n",
+                gFrame,
+                gpRng_67AB34->field_0_rng,
+                static_cast<unsigned long long>(s.total),
+                static_cast<unsigned long long>(s.rng),
+                static_cast<unsigned long long>(s.sprites),
+                static_cast<unsigned long long>(s.peds),
+                static_cast<unsigned long long>(s.cars),
+                static_cast<unsigned long long>(s.objects),
+                static_cast<unsigned long long>(s.players),
+                static_cast<unsigned long long>(s.script),
+                static_cast<unsigned long long>(s.police),
+                static_cast<unsigned long long>(port_audio_event_hash(nullptr)));
     }
     if (gFrame == gOptions.breakAt)
     {

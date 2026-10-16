@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Function.hpp"
+#include "collision_target_type.hpp"
 #include "fix16.hpp"
 #include "sprite.hpp"
-#include "collision_target_type.hpp"
 
 class SoundObject_10;
 class Car_BC;

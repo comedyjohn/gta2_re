@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Function.hpp"
-#include "fix16.hpp"
 #include "ang16.hpp"
+#include "fix16.hpp"
 
 class Object_2C;
 class Sprite;

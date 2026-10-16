@@ -2,8 +2,8 @@
 
 #include "Function.hpp"
 #include "Light_28.hpp"
-#include "rng.hpp"
 #include "Pool.hpp"
+#include "rng.hpp"
 
 class LightBase
 {
@@ -55,7 +55,7 @@ class Light_1D4CC : public LightBase
         pLight->SetCurrentIntensity_45B2D0(0);
         AddToUpdateList_464C60(pLight);
     }
-    
+
     inline Light_28* Init_469010(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
     {
         Light_28* pLight = Alloc_464C40();

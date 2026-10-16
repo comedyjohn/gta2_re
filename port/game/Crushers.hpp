@@ -43,9 +43,9 @@ class Crusher_30
     void Service_488350();
     void InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_idx);
 
-    Car_BC* GetCarBeingCrushed() const 
+    Car_BC* GetCarBeingCrushed() const
     {
-      return field_14_pCarBeingCrushed;
+        return field_14_pCarBeingCrushed;
     }
 
   private:
@@ -63,7 +63,8 @@ class Crusher_30
     // Target of crusher walls
     Fix16 field_1C_w;
     Fix16 field_20_h;
-public:
+
+  public:
     // Location of the crusher
     Fix16 field_24_xpos;
     Fix16 field_28_ypos;

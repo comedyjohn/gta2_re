@@ -97,7 +97,7 @@ void ExplodingScorePool::DrawExplodingScores_5969E0()
 ExplodingScore_50::ExplodingScore_50()
 {
     field_0_numbers_count = 0;
-    for (int & field_4_digit : field_4_digits)
+    for (int& field_4_digit : field_4_digits)
     {
         field_4_digit = 0;
     }

@@ -1,35 +1,41 @@
 #include "sprite.hpp"
-#include "explosion_type.hpp"
-#include "car_despawn_status.hpp"
+#include "Camera.hpp"
 #include "CarInfo_808.hpp" // TODO: only because of gPixelsToFix16_6F6850
 #include "Car_BC.hpp"
-#include "Globals.hpp"
-#include "Ped.hpp"
-#include "Frontend.hpp"
-#include "Camera.hpp"
+#include "CollisionSoundQueue_C88.hpp"
 #include "Draw.hpp"
+#include "Frontend.hpp"
+#include "Globals.hpp"
 #include "Object_2C_Pool.hpp"
 #include "Object_5C.hpp"
 #include "PathFinder_2FD4.hpp"
+#include "Ped.hpp"
 #include "Player.hpp"
 #include "Police_7B8.hpp"
 #include "SpriteGrid_400.hpp"
-#include "CollisionSoundQueue_C88.hpp"
+#include "TextureCache_15D8.hpp"
+#include "car_despawn_status.hpp"
 #include "char.hpp"
 #include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "enums.hpp"
 #include "error.hpp"
+#include "explosion_type.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 #include "memory.hpp"
 #include "root_sound.hpp"
-#include "TextureCache_15D8.hpp"
 #include "winmain.hpp" // TODO: only because of gLighting_626A09
 
 // Forward declarations: the functions below are in address order
-void ProjectOntoAxis_5A5AA0(const Fix16& xpos1, const Fix16& ypos1, const Ang16& angle, Fix16& xpos2, Fix16& ypos2, Fix16& outX, Fix16& outY);
+void ProjectOntoAxis_5A5AA0(const Fix16& xpos1,
+                            const Fix16& ypos1,
+                            const Ang16& angle,
+                            Fix16& xpos2,
+                            Fix16& ypos2,
+                            Fix16& outX,
+                            Fix16& outY);
 static inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2);
 EXTERN_GLOBAL(u16, gDebugColour_626260);
 
@@ -93,10 +99,14 @@ static inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pV
 {
     SaveUnprojectedVertex_4B9990(point.x.ToFloat(), point.y.ToFloat(), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
-    pVert->x = ((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) * (((point.x.ToFloat()) - (gViewCamera_676978->field_98_cur_pos.field_0_x.ToFloat())))) * (pVert->z)) +
+    pVert->x = ((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) *
+                 (((point.x.ToFloat()) - (gViewCamera_676978->field_98_cur_pos.field_0_x.ToFloat())))) *
+                (pVert->z)) +
         static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
-    pVert->y = (((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) * ((point.y.ToFloat() - (gViewCamera_676978->field_98_cur_pos.field_4_y.ToFloat())))) * (pVert->z)) +
-        static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y));
+    pVert->y = (((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) *
+                  ((point.y.ToFloat() - (gViewCamera_676978->field_98_cur_pos.field_4_y.ToFloat())))) *
+                 (pVert->z)) +
+                static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y));
 }
 
 static inline f32 Fix16ToFloat_Paren(const Fix16& v)
@@ -111,9 +121,12 @@ static inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Ve
 {
     SaveUnprojectedVertex_4B9990((Fix16ToFloat_Paren(point.x)), (point.y.ToFloat()), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
-    pVert->x = ((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) * (((point.x.ToFloat()) - (gViewCamera_676978->field_98_cur_pos.field_0_x.ToFloat())))) * (pVert->z)) +
+    pVert->x = ((((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) *
+                 (((point.x.ToFloat()) - (gViewCamera_676978->field_98_cur_pos.field_0_x.ToFloat())))) *
+                (pVert->z)) +
         static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
-    pVert->y = ((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) * ((point.y.ToFloat() - (gViewCamera_676978->field_98_cur_pos.field_4_y.ToFloat()))) * pVert->z +
+    pVert->y = ((gViewCamera_676978->field_60_screen_scale.x.ToFloat())) *
+            ((point.y.ToFloat() - (gViewCamera_676978->field_98_cur_pos.field_4_y.ToFloat()))) * pVert->z +
         static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
 }
 
@@ -224,7 +237,8 @@ SpriteMask_14* SpriteMaskCache_3CC::FindCachedMask_48F600(u16& sprite_idx, u32* 
             {
                 return pIter;
             }
-            if (pIter->field_8_delta_mask < *pDeltaMask && (pIter->field_8_delta_mask | (*pDeltaMask - pIter->field_8_delta_mask)) == *pDeltaMask)
+            if (pIter->field_8_delta_mask < *pDeltaMask &&
+                (pIter->field_8_delta_mask | (*pDeltaMask - pIter->field_8_delta_mask)) == *pDeltaMask)
             {
                 pSprt = pIter;
             }
@@ -411,11 +425,11 @@ s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, cons
         {
             pSprt14->ClearMask_48F5C0(sprite_index_5AA440->field_4_width, sprite_index_5AA440->field_5_height);
         }
-        
+
         Delta_48F820(sprite_idx, pSprt14->field_0_pixels, m_var, sprite_index_5AA440->field_4_width);
         pSprt14->SetKey_44AF50(sprite_idx, m_var, a4);
     }
-    
+
     pSprt14->MarkUsed_48F5A0();
     return pSprt14->field_10_idx;
 }
@@ -751,7 +765,15 @@ static inline void DrawTextScaled_4BA2C0(const wchar_t* pStr, Fix16 x, Fix16 y, 
 {
     s32 palette_type = palette_types_enum::sprites_2;
     Fix16 scale_y = y * gViewCamera_676978->field_A8_ui_scale;
-    DrawText_5D8A10(pStr, x * gViewCamera_676978->field_A8_ui_scale, scale_y, font, gViewCamera_676978->field_A8_ui_scale, palette_type, 0, 0, 0);
+    DrawText_5D8A10(pStr,
+                    x * gViewCamera_676978->field_A8_ui_scale,
+                    scale_y,
+                    font,
+                    gViewCamera_676978->field_A8_ui_scale,
+                    palette_type,
+                    0,
+                    0,
+                    0);
 }
 
 // 0x59e7d0
@@ -815,7 +837,8 @@ void Sprite::HandleObjectCollision_59E8C0(Sprite* pSprite)
 {
     // 9.6f: AsObject2C_40FEC0 for both sprites and sub_484DD0 (inlined, using AsObject2C_40FEC0 changes the code)
     s32 sprite_type = this->field_30_sprite_type_enum;
-    if (sprite_type == sprite_types_enum::object_1 || (sprite_type > sprite_types_enum::ped_3 && sprite_type <= sprite_types_enum::map_obj_5))
+    if (sprite_type == sprite_types_enum::object_1 ||
+        (sprite_type > sprite_types_enum::ped_3 && sprite_type <= sprite_types_enum::map_obj_5))
     {
         field_8_object_2C_ptr->HandleImpact_528E50(pSprite);
         s32 type = pSprite->field_30_sprite_type_enum;
@@ -877,17 +900,16 @@ void Sprite::SetDefaultDrawLayerBySpriteType_59E960()
 
 // RotateAndTranslatePoint_42A720 with the out-of-line Fix16 operator copies
 static inline void RotateAndTranslatePoint_ool_42A720(const Fix16& pInX,
-                                                                const Fix16& pInY,
-                                                                const Ang16& pRotAng,
-                                                                Fix16& pTransX,
-                                                                Fix16& pTransY,
-                                                                Fix16& pRotTransX,
-                                                                Fix16& pRotTransY)
+                                                      const Fix16& pInY,
+                                                      const Ang16& pRotAng,
+                                                      Fix16& pTransX,
+                                                      Fix16& pTransY,
+                                                      Fix16& pRotTransX,
+                                                      Fix16& pRotTransY)
 {
-    pRotTransX = ((pInX - pTransX) * Ang16::cosine_40F520(pRotAng))
-                     .Add_408660((pInY - pTransY) * Ang16::sine_40F500(pRotAng));
-    pRotTransY = ((pInX - pTransX).Negate_4086A0() * Ang16::sine_40F500(pRotAng))
-                     .Add_408660((pInY - pTransY) * Ang16::cosine_40F520(pRotAng));
+    pRotTransX = ((pInX - pTransX) * Ang16::cosine_40F520(pRotAng)).Add_408660((pInY - pTransY) * Ang16::sine_40F500(pRotAng));
+    pRotTransY =
+        ((pInX - pTransX).Negate_4086A0() * Ang16::sine_40F500(pRotAng)).Add_408660((pInY - pTransY) * Ang16::cosine_40F520(pRotAng));
 }
 
 // SpriteShape_4C::GetHalfExtents_4BA0A0 with the out-of-line Fix16 / s32 copy
@@ -957,12 +979,12 @@ s16 Sprite::GetTruePalette_59EAA0()
 // RotateAndTranslatePoint_42A720 as RotatedRectCollisionSAT_5A0380 gets it once it has run out of
 // inline expansions: the unary minus is the out-of-line copy (Negate_4086A0)
 static inline void RotateAndTranslatePoint_NegOOL_42A720(Fix16& pInX,
-                                                                  Fix16& pInY,
-                                                                  const Ang16& pRotAng,
-                                                                  Fix16& pTransX,
-                                                                  Fix16& pTransY,
-                                                                  Fix16& pRotTransX,
-                                                                  Fix16& pRotTransY)
+                                                         Fix16& pInY,
+                                                         const Ang16& pRotAng,
+                                                         Fix16& pTransX,
+                                                         Fix16& pTransY,
+                                                         Fix16& pRotTransX,
+                                                         Fix16& pRotTransY)
 {
     pRotTransX = (((pInX - pTransX) * Ang16::cosine_40F520(pRotAng)) + ((pInY - pTransY) * Ang16::sine_40F500(pRotAng)));
     pRotTransY = (((pInX - pTransX).Negate_4086A0() * Ang16::sine_40F500(pRotAng)) + ((pInY - pTransY) * Ang16::cosine_40F520(pRotAng)));
@@ -1012,9 +1034,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             if (pB4)
             {
                 Fix16 xpos;
-            xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
+                xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
                 Fix16 ypos;
-            ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
+                ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
                 swprintf(tmpBuff_67BD9C, L"%d", pB4->field_7C_pPed->field_200_id);
                 s32 palette_type = 2;
                 DrawText_5D8A10(tmpBuff_67BD9C,
@@ -1115,15 +1137,18 @@ void Sprite::Draw_59EFF0()
         pSpriteIndex->field_0_pData = &pSpriteIndex2->field_0_pData[257 * static_cast<u8>(field_38_zoom)];
         pal = Sprite::GetTruePalette_59EAA0();
         pTexture = gTextureCache_15D8_705064->SetSharedTextureData_5B9710(pSpriteIndex->field_4_width,
-                                                         pSpriteIndex->field_5_height,
-                                                         pSpriteIndex->field_0_pData,
-                                                         pal);
+                                                                          pSpriteIndex->field_5_height,
+                                                                          pSpriteIndex->field_0_pData,
+                                                                          pal);
     }
     else
     {
         sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
         pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
-        pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(field_30_sprite_type_enum, field_22_type_sprite_idx, field_34_palette_type, field_24_remap);
+        pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(field_30_sprite_type_enum,
+                                                                      field_22_type_sprite_idx,
+                                                                      field_34_palette_type,
+                                                                      field_24_remap);
     }
 
     if (!field_4_pVisualShape->field_48_bbox_up_to_date)
@@ -1178,9 +1203,9 @@ void Sprite::Draw_59EFF0()
             if (bRet)
             {
                 gTextureCache_15D8_705064->SetCarDamageTextureSizeAndPalette_5B96B0(unkDeltaRelated,
-                                                      pSpriteIndex->field_4_width,
-                                                      pSpriteIndex->field_5_height,
-                                                      Sprite::GetTruePalette_59EAA0());
+                                                                                    pSpriteIndex->field_4_width,
+                                                                                    pSpriteIndex->field_5_height,
+                                                                                    Sprite::GetTruePalette_59EAA0());
             }
             pTexture = gTextureCache_15D8_705064->GetCarDamageTexture_5B95D0(unkDeltaRelated);
         }
@@ -1244,9 +1269,9 @@ void Sprite::Draw_59EFF0()
             if (bRet)
             {
                 gTextureCache_15D8_705064->SetCarDamageTextureSizeAndPalette_5B96B0(unkDeltaRelated,
-                                                      pSpriteIndex->field_4_width,
-                                                      pSpriteIndex->field_5_height,
-                                                      Sprite::GetTruePalette_59EAA0());
+                                                                                    pSpriteIndex->field_4_width,
+                                                                                    pSpriteIndex->field_5_height,
+                                                                                    Sprite::GetTruePalette_59EAA0());
             }
             pTexture = gTextureCache_15D8_705064->GetCarDamageTexture_5B95D0(unkDeltaRelated);
             SetUV_4B9BC0(u, v);
@@ -1357,12 +1382,12 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
 
     // First rotation
     RotateAndTranslatePoint_ool_42A720(pOtherRect->get_left_45ADB0(),
-                                   pOtherRect->get_top_45ADD0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                       pOtherRect->get_top_45ADD0(),
+                                       -field_0_rotation,
+                                       field_14_xy.x,
+                                       field_14_xy.y,
+                                       pRotTransX,
+                                       pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1374,12 +1399,12 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
 
     // Second rotation
     RotateAndTranslatePoint_ool_42A720(pOtherRect->get_right_45ADA0(),
-                                   pOtherRect->get_top_45ADD0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                       pOtherRect->get_top_45ADD0(),
+                                       -field_0_rotation,
+                                       field_14_xy.x,
+                                       field_14_xy.y,
+                                       pRotTransX,
+                                       pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1391,12 +1416,12 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
 
     // Third rotation
     RotateAndTranslatePoint_ool_42A720(pOtherRect->get_right_45ADA0(),
-                                   pOtherRect->get_bottom_45ADC0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                       pOtherRect->get_bottom_45ADC0(),
+                                       -field_0_rotation,
+                                       field_14_xy.x,
+                                       field_14_xy.y,
+                                       pRotTransX,
+                                       pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1408,12 +1433,12 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
 
     // Fourth rotation
     RotateAndTranslatePoint_ool_42A720(pOtherRect->get_left_45ADB0(),
-                                   pOtherRect->get_bottom_45ADC0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                       pOtherRect->get_bottom_45ADC0(),
+                                       -field_0_rotation,
+                                       field_14_xy.x,
+                                       field_14_xy.y,
+                                       pRotTransX,
+                                       pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1562,12 +1587,12 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 
     // First rotation
     RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[0].x,
-                                   pOtherRenderRect[0].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                          pOtherRenderRect[0].y,
+                                          -field_0_rotation,
+                                          field_14_xy.x,
+                                          field_14_xy.y,
+                                          pRotTransX,
+                                          pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1579,12 +1604,12 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 
     // Second rotation
     RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[1].x,
-                                   pOtherRenderRect[1].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                          pOtherRenderRect[1].y,
+                                          -field_0_rotation,
+                                          field_14_xy.x,
+                                          field_14_xy.y,
+                                          pRotTransX,
+                                          pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1596,12 +1621,12 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 
     // Third rotation
     RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[2].x,
-                                   pOtherRenderRect[2].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                          pOtherRenderRect[2].y,
+                                          -field_0_rotation,
+                                          field_14_xy.x,
+                                          field_14_xy.y,
+                                          pRotTransX,
+                                          pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1613,12 +1638,12 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 
     // Fourth rotation
     RotateAndTranslatePoint_NegOOL_42A720(pOtherRenderRect[3].x,
-                                   pOtherRenderRect[3].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+                                          pOtherRenderRect[3].y,
+                                          -field_0_rotation,
+                                          field_14_xy.x,
+                                          field_14_xy.y,
+                                          pRotTransX,
+                                          pRotTransY);
 
     if (pRotTransX >= half_width.Negate_4086A0() && pRotTransX <= half_width)
     {
@@ -1852,13 +1877,27 @@ bool Sprite::PointInsideRotatedBounds_5A1490(Fix16_Point& point1, Fix16_Point& p
     field_C_pCollisionShape->GetHalfExtents_4BA0A0(&half_width, &half_height);
 
     // The plain mValue compares are cheaper than the Fix16 operators (inline budget).
-    RotateAndTranslatePoint_42A720(point1.x, point1.y, NegateAng16_401C80(field_0_rotation), field_14_xy.x, field_14_xy.y, rotated_1.x, rotated_1.y);
-    if (rotated_1.x.mValue >= -half_width.mValue && rotated_1.x.mValue <= half_width.mValue && rotated_1.y.mValue >= -half_height.mValue && rotated_1.y.mValue <= half_height.mValue)
+    RotateAndTranslatePoint_42A720(point1.x,
+                                   point1.y,
+                                   NegateAng16_401C80(field_0_rotation),
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   rotated_1.x,
+                                   rotated_1.y);
+    if (rotated_1.x.mValue >= -half_width.mValue && rotated_1.x.mValue <= half_width.mValue && rotated_1.y.mValue >= -half_height.mValue &&
+        rotated_1.y.mValue <= half_height.mValue)
     {
         return true;
     }
-    RotateAndTranslatePoint_42A720(point2.x, point2.y, NegateAng16_401C80(field_0_rotation), field_14_xy.x, field_14_xy.y, rotated_2.x, rotated_2.y);
-    if (rotated_2.x.mValue >= -half_width.mValue && rotated_2.x.mValue <= half_width.mValue && rotated_2.y.mValue >= -half_height.mValue && rotated_2.y.mValue <= half_height.mValue)
+    RotateAndTranslatePoint_42A720(point2.x,
+                                   point2.y,
+                                   NegateAng16_401C80(field_0_rotation),
+                                   field_14_xy.x,
+                                   field_14_xy.y,
+                                   rotated_2.x,
+                                   rotated_2.y);
+    if (rotated_2.x.mValue >= -half_width.mValue && rotated_2.x.mValue <= half_width.mValue && rotated_2.y.mValue >= -half_height.mValue &&
+        rotated_2.y.mValue <= half_height.mValue)
     {
         return true;
     }
@@ -2064,7 +2103,8 @@ Fix16 Sprite::MinDistanceToAnySpriteBBoxCorner_5A22B0(Sprite* pOther)
     do
     {
         SpriteShape_4C* p4C = pOther->field_C_pCollisionShape;
-        Fix16 d = Fix16::MaxAbsDistance_42A6B0(field_14_xy.x, field_14_xy.y, p4C->field_C_corners[box_idx].x, p4C->field_C_corners[box_idx].y);
+        Fix16 d =
+            Fix16::MaxAbsDistance_42A6B0(field_14_xy.x, field_14_xy.y, p4C->field_C_corners[box_idx].x, p4C->field_C_corners[box_idx].y);
         if (d < xy_pos_max)
         {
             xy_pos_max = d;
@@ -2101,28 +2141,36 @@ char_type Sprite::CheckSpriteMovementRegion_5A2500()
     {
         if (field_14_xy.x < kFP16One_7035C4)
         {
-            gCollisionTarget_679188.SetVerticalSegment_4BA280(field_14_xy.y.GetRoundValue(), (field_14_xy.y.GetRoundValue()) + kFP16One_7035C4, kFP16One_7035C4);
+            gCollisionTarget_679188.SetVerticalSegment_4BA280(field_14_xy.y.GetRoundValue(),
+                                                              (field_14_xy.y.GetRoundValue()) + kFP16One_7035C4,
+                                                              kFP16One_7035C4);
             gCollisionTarget_679188.SetMapZ_4BA2B0(field_1C_zpos);
             return 1;
         }
 
         if (field_14_xy.x > k_dword_7033B4)
         {
-            gCollisionTarget_679188.SetVerticalSegment_4BA280(field_14_xy.y.GetRoundValue(), (field_14_xy.y.GetRoundValue()) + kFP16One_7035C4, k_dword_7033B4);
+            gCollisionTarget_679188.SetVerticalSegment_4BA280(field_14_xy.y.GetRoundValue(),
+                                                              (field_14_xy.y.GetRoundValue()) + kFP16One_7035C4,
+                                                              k_dword_7033B4);
             gCollisionTarget_679188.SetMapZ_4BA2B0(field_1C_zpos);
             return 1;
         }
 
         if (field_14_xy.y < kFP16One_7035C4)
         {
-            gCollisionTarget_679188.SetHorizontalSegment_4BA250(field_14_xy.x.GetRoundValue(), (field_14_xy.x.GetRoundValue()) + kFP16One_7035C4, kFP16One_7035C4);
+            gCollisionTarget_679188.SetHorizontalSegment_4BA250(field_14_xy.x.GetRoundValue(),
+                                                                (field_14_xy.x.GetRoundValue()) + kFP16One_7035C4,
+                                                                kFP16One_7035C4);
             gCollisionTarget_679188.SetMapZ_4BA2B0(field_1C_zpos);
             return 1;
         }
 
         if (field_14_xy.y > k_dword_7033B4)
         {
-            gCollisionTarget_679188.SetHorizontalSegment_4BA250(field_14_xy.x.GetRoundValue(), (field_14_xy.x.GetRoundValue()) + kFP16One_7035C4, k_dword_7033B4);
+            gCollisionTarget_679188.SetHorizontalSegment_4BA250(field_14_xy.x.GetRoundValue(),
+                                                                (field_14_xy.x.GetRoundValue()) + kFP16One_7035C4,
+                                                                k_dword_7033B4);
             gCollisionTarget_679188.SetMapZ_4BA2B0(field_1C_zpos);
             return 1;
         }
@@ -2501,19 +2549,9 @@ void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix
         top = field_30_boundingBox.get_top_45ADD0();
         bottom = field_30_boundingBox.get_bottom_45ADC0();
 
-        FindMinMax_5A57E0(left,
-                          right,
-                          field_C_corners[0].x,
-                          field_C_corners[1].x,
-                          field_C_corners[2].x,
-                          field_C_corners[3].x);
+        FindMinMax_5A57E0(left, right, field_C_corners[0].x, field_C_corners[1].x, field_C_corners[2].x, field_C_corners[3].x);
 
-        FindMinMax_5A57E0(top,
-                          bottom,
-                          field_C_corners[0].y,
-                          field_C_corners[1].y,
-                          field_C_corners[2].y,
-                          field_C_corners[3].y);
+        FindMinMax_5A57E0(top, bottom, field_C_corners[0].y, field_C_corners[1].y, field_C_corners[2].y, field_C_corners[3].y);
 
         field_30_boundingBox.SetRect_5A5E30(left, right, top, bottom);
     }
@@ -2557,20 +2595,52 @@ void SpriteShape_4C::DrawCollisionBox_5A4DA0(Fix16 zpos)
         ProjectToScreen_5A5690(field_30_boundingBox.get_right_45ADA0(), field_30_boundingBox.get_top_45ADD0(), zpos, &x2, &y2);
         ProjectToScreen_5A5690(field_30_boundingBox.get_right_45ADA0(), field_30_boundingBox.get_bottom_45ADC0(), zpos, &x3, &y3);
         ProjectToScreen_5A5690(field_30_boundingBox.get_left_45ADB0(), field_30_boundingBox.get_bottom_45ADC0(), zpos, &x4, &y4);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x1.ToInt()), static_cast<s16>(y1.ToInt()), static_cast<s16>(x2.ToInt()), static_cast<s16>(y2.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x2.ToInt()), static_cast<s16>(y2.ToInt()), static_cast<s16>(x3.ToInt()), static_cast<s16>(y3.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x3.ToInt()), static_cast<s16>(y3.ToInt()), static_cast<s16>(x4.ToInt()), static_cast<s16>(y4.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x4.ToInt()), static_cast<s16>(y4.ToInt()), static_cast<s16>(x1.ToInt()), static_cast<s16>(y1.ToInt()), gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x1.ToInt()),
+                             static_cast<s16>(y1.ToInt()),
+                             static_cast<s16>(x2.ToInt()),
+                             static_cast<s16>(y2.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x2.ToInt()),
+                             static_cast<s16>(y2.ToInt()),
+                             static_cast<s16>(x3.ToInt()),
+                             static_cast<s16>(y3.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x3.ToInt()),
+                             static_cast<s16>(y3.ToInt()),
+                             static_cast<s16>(x4.ToInt()),
+                             static_cast<s16>(y4.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x4.ToInt()),
+                             static_cast<s16>(y4.ToInt()),
+                             static_cast<s16>(x1.ToInt()),
+                             static_cast<s16>(y1.ToInt()),
+                             gDebugColour_626260);
 
         gDebugColour_626260 = 0xFFFF;
         ProjectToScreen_5A5690(field_C_corners[0].x, field_C_corners[0].y, zpos, &x1, &y1);
         ProjectToScreen_5A5690(field_C_corners[1].x, field_C_corners[1].y, zpos, &x2, &y2);
         ProjectToScreen_5A5690(field_C_corners[2].x, field_C_corners[2].y, zpos, &x3, &y3);
         sub_5A5690(field_C_corners[3].x, field_C_corners[3].y, zpos, &x4, &y4);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x1.ToInt()), static_cast<s16>(y1.ToInt()), static_cast<s16>(x2.ToInt()), static_cast<s16>(y2.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x2.ToInt()), static_cast<s16>(y2.ToInt()), static_cast<s16>(x3.ToInt()), static_cast<s16>(y3.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x3.ToInt()), static_cast<s16>(y3.ToInt()), static_cast<s16>(x4.ToInt()), static_cast<s16>(y4.ToInt()), gDebugColour_626260);
-        DrawDebugLine_5D7DD0(static_cast<s16>(x4.ToInt()), static_cast<s16>(y4.ToInt()), static_cast<s16>(x1.ToInt()), static_cast<s16>(y1.ToInt()), gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x1.ToInt()),
+                             static_cast<s16>(y1.ToInt()),
+                             static_cast<s16>(x2.ToInt()),
+                             static_cast<s16>(y2.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x2.ToInt()),
+                             static_cast<s16>(y2.ToInt()),
+                             static_cast<s16>(x3.ToInt()),
+                             static_cast<s16>(y3.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x3.ToInt()),
+                             static_cast<s16>(y3.ToInt()),
+                             static_cast<s16>(x4.ToInt()),
+                             static_cast<s16>(y4.ToInt()),
+                             gDebugColour_626260);
+        DrawDebugLine_5D7DD0(static_cast<s16>(x4.ToInt()),
+                             static_cast<s16>(y4.ToInt()),
+                             static_cast<s16>(x1.ToInt()),
+                             static_cast<s16>(y1.ToInt()),
+                             gDebugColour_626260);
     }
 }
 
@@ -2664,7 +2734,13 @@ SpriteManager_8::SpriteManager_8()
 }
 
 // 0x5A5AA0
-void ProjectOntoAxis_5A5AA0(const Fix16& xpos1, const Fix16& ypos1, const Ang16& angle, Fix16& xpos2, Fix16& ypos2, Fix16& outX, Fix16& outY)
+void ProjectOntoAxis_5A5AA0(const Fix16& xpos1,
+                            const Fix16& ypos1,
+                            const Ang16& angle,
+                            Fix16& xpos2,
+                            Fix16& ypos2,
+                            Fix16& outX,
+                            Fix16& outY)
 {
     outX = (Ang16::cosine_40F520(angle) * (xpos1 - xpos2)) + (Ang16::sine_40F500(angle) * (ypos1 - ypos2));
     outY = (Ang16::sine_40F500(angle) * (xpos2 - xpos1)) + (Ang16::cosine_40F520(angle) * (ypos1 - ypos2));
@@ -2784,7 +2860,9 @@ void AttachedSprite_18::SinkAttachedCar_5A6A20()
     Car_BC* cBC = this->field_0_pSprite->AsCar_40FEB0();
     if (cBC)
     {
-        if (cBC->field_88_despawn_status != car_despawn_status::despawn_pending_2 && cBC->field_88_despawn_status != car_despawn_status::marked_for_despawn_4 && cBC->field_88_despawn_status != car_despawn_status::despawn_soon_3)
+        if (cBC->field_88_despawn_status != car_despawn_status::despawn_pending_2 &&
+            cBC->field_88_despawn_status != car_despawn_status::marked_for_despawn_4 &&
+            cBC->field_88_despawn_status != car_despawn_status::despawn_soon_3)
         {
             cBC->DestroyWhileSinking_43DD60();
         }

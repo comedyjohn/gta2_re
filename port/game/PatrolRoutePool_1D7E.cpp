@@ -18,7 +18,7 @@ void PatrolRoute_96::sub_543EC0()
 // 0x543ed0
 PatrolRoutePool_1D7E::PatrolRoutePool_1D7E()
 {
-    for (unsigned char & i : field_1D4C_bUsed)
+    for (unsigned char& i : field_1D4C_bUsed)
     {
         i = 0;
     }

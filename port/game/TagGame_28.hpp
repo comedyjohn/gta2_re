@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Function.hpp"
-#include "fix16.hpp"
 #include "GameSession_578.hpp"
+#include "fix16.hpp"
 
 class Player;
 class Ped;
@@ -48,7 +48,7 @@ class TagGame_28
     // 9.6f 0x453AB0, defined in Frontend.cpp
     inline s32 GetLeaderIdx_453AB0();
 
-    Player* field_0_fugitive;  //  the player who is "IT"
+    Player* field_0_fugitive; //  the player who is "IT"
     s32 field_4_it_time_secs[MAX_PLAYERS]; //  seconds each player has spent as "IT" (counted while the net time limit is enabled)
     s32 field_1C_tick_timer;
     u8 field_20_bHasQuit[MAX_PLAYERS];

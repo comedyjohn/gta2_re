@@ -1,12 +1,12 @@
 #include "Draw.hpp"
 #include "Camera.hpp"
-#include "dma_video.hpp"
 #include "Fix16_Point.hpp"
 #include "Function.hpp"
-#include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 #include "KanjiFont_8EC.hpp"
 #include "TextureCache_15D8.hpp"
+#include "dma_video.hpp"
+#include "gbh_graphics.hpp"
+#include "gtx_0x106C.hpp"
 
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_706A6C, Fix16(1), 0x706A6C);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_706C3C, Ang16(0), 0x706C3C);
@@ -25,14 +25,14 @@ DEFINE_GLOBAL(DWORD, gWindowBottom_70679C, 0x70679C);
 void DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, s32 a7, u8 a8)
 {
     DrawTexture_5D8470(pTexture,
-               x_pos * gViewCamera_676978->field_A8_ui_scale,
-               y_pos * gViewCamera_676978->field_A8_ui_scale,
-               width,
-               height,
-               rotation,
-               gViewCamera_676978->field_A8_ui_scale,
-               a7,
-               a8);
+                       x_pos * gViewCamera_676978->field_A8_ui_scale,
+                       y_pos * gViewCamera_676978->field_A8_ui_scale,
+                       width,
+                       height,
+                       rotation,
+                       gViewCamera_676978->field_A8_ui_scale,
+                       a7,
+                       a8);
 }
 
 // 0x4B87A0
@@ -42,19 +42,27 @@ void DrawText_4B87A0(const wchar_t* pBuffer, Fix16 xpos_fp, Fix16 ypos_fp, s16 f
 }
 
 // 0x5D7670
-void DrawFigureScaled_5D7670(s32 sprite_type, s16 sprite_idx, Fix16 x_pos, Fix16 y_pos, Ang16 rotation, const s32& palette_type, s16 palette, s32 alpha_value, u8 flags)
+void DrawFigureScaled_5D7670(s32 sprite_type,
+                             s16 sprite_idx,
+                             Fix16 x_pos,
+                             Fix16 y_pos,
+                             Ang16 rotation,
+                             const s32& palette_type,
+                             s16 palette,
+                             s32 alpha_value,
+                             u8 flags)
 {
     DrawFigure_5D7EC0(sprite_type,
-               sprite_idx,
-               x_pos * gViewCamera_676978->field_A8_ui_scale,
-               y_pos * gViewCamera_676978->field_A8_ui_scale,
-               rotation,
-               gViewCamera_676978->field_A8_ui_scale,
-               palette_type,
-               palette,
-               alpha_value,
-               flags,
-               0);
+                      sprite_idx,
+                      x_pos * gViewCamera_676978->field_A8_ui_scale,
+                      y_pos * gViewCamera_676978->field_A8_ui_scale,
+                      rotation,
+                      gViewCamera_676978->field_A8_ui_scale,
+                      palette_type,
+                      palette,
+                      alpha_value,
+                      flags,
+                      0);
 }
 
 // 0x5D7700
@@ -64,7 +72,14 @@ s32 GetLineSpacingFromFontType_5D7700(u16 font_type)
 }
 
 // 0x5D7720
-void DrawText_5D7720(const wchar_t* pStr, Fix16 xoff, Fix16 yoff, u16 fontType, const s32& palette_type, u16 palette, s32 alpha, u8 alpha_flag)
+void DrawText_5D7720(const wchar_t* pStr,
+                     Fix16 xoff,
+                     Fix16 yoff,
+                     u16 fontType,
+                     const s32& palette_type,
+                     u16 palette,
+                     s32 alpha,
+                     u8 alpha_flag)
 {
     DrawText_5D8A10(pStr,
                     xoff * gViewCamera_676978->field_A8_ui_scale,
@@ -149,16 +164,16 @@ void MakeScreenTableAndSetWindow_5D7D30()
 // original's inline cut-offs: the second rotation's Negate_4086A0 inline, the others out of line.
 // 0x5D7EC0
 void DrawFigure_5D7EC0(s32 sprite_type,
-                          s16 sprite_idx,
-                          Fix16 x_pos,
-                          Fix16 y_pos,
-                          Ang16 rotation,
-                          Fix16 scale,
-                          const s32& palette_type,
-                          s16 palette,
-                          s32 alpha_value,
-                          u8 og_flags,
-                          char_type a11)
+                       s16 sprite_idx,
+                       Fix16 x_pos,
+                       Fix16 y_pos,
+                       Ang16 rotation,
+                       Fix16 scale,
+                       const s32& palette_type,
+                       s16 palette,
+                       s32 alpha_value,
+                       u8 og_flags,
+                       char_type a11)
 {
     sprite_index* sprite_index_5AA440 =
         gGtx_0x106C_703DD4->get_sprite_index_5AA440(gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_idx));
@@ -204,7 +219,6 @@ void DrawFigure_5D7EC0(s32 sprite_type,
     gQuadVerts_706B88.field_0_verts[3].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[3].y = ((y_pos + point.y).ToFloat());
     gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997f;
-
 
     f32 u = sprite_index_5AA440->field_4_width - 0.000099999997f;
     f32 v = sprite_index_5AA440->field_5_height - 0.000099999997f;
@@ -258,15 +272,7 @@ static inline f32 Fix16ToF32_Rounded(const Fix16& v)
 
 // https://decomp.me/scratch/SCz1D
 // 0x5D8470
-void DrawTexture_5D8470(STexture* pTexture,
-                                 Fix16 x_pos,
-                                 Fix16 y_pos,
-                                 u8 width,
-                                 u8 height,
-                                 Ang16 rotation,
-                                 Fix16 scale,
-                                 s32 a8,
-                                 u8 a9)
+void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, Fix16 scale, s32 a8, u8 a9)
 {
     Fix16_Point point;
     u32 flags;
@@ -355,14 +361,14 @@ s32 CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
 // https://decomp.me/scratch/HX0q9
 // 0x5D8A10
 void DrawText_5D8A10(const wchar_t* pText,
-                               Fix16 xpos_fp,
-                               Fix16 ypos_fp,
-                               u16 font_type,
-                               Fix16 scale_fp,
-                               const s32& og_palette_type,
-                               u16 og_palette,
-                               s32 alpha_value,
-                               u8 flags)
+                     Fix16 xpos_fp,
+                     Fix16 ypos_fp,
+                     u16 font_type,
+                     Fix16 scale_fp,
+                     const s32& og_palette_type,
+                     u16 og_palette,
+                     s32 alpha_value,
+                     u8 flags)
 {
     s32 new_Flags = CalcQuadFlags_5D83E0(alpha_value, flags) | 0x20000;
 
@@ -451,7 +457,10 @@ void DrawText_5D8A10(const wchar_t* pText,
                     u16 sprt_relative_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(font_type, text_char - 33);
                     u16 sprt_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::font_7, sprt_relative_idx);
                     pSprIdx = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprt_idx);
-                    pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7, sprt_relative_idx, curr_palette_type, curr_palette);
+                    pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(sprite_types_enum::font_7,
+                                                                                  sprt_relative_idx,
+                                                                                  curr_palette_type,
+                                                                                  curr_palette);
                 }
                 else
                 {

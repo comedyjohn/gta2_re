@@ -1,66 +1,66 @@
 #include "winmain.hpp"
-#include "hud_message_priority.hpp"
 #include "Bink.hpp"
-#include "InputRecorder_67F8B0.hpp"
 #include "Char_Pool.hpp"
+#include "FpsCounter_54.hpp"
 #include "Frontend.hpp"
 #include "Function.hpp"
+#include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Globals.hpp"
+#include "InputRecorder_67F8B0.hpp"
 #include "NetPlay.hpp"
 #include "Particle_4C.hpp"
+#include "PlyDat_2BC0.hpp"
+#include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "dma_video.hpp"
 #include "error.hpp"
 #include "gbh_graphics.hpp"
+#include "hud_message_priority.hpp"
 #include "input.hpp"
-#include "PlyDat_2BC0.hpp"
 #include "keybrd_0x204.hpp"
-#include "GameSession_578.hpp"
-#include "crt_stubs.hpp"
-#include "registry.hpp"
-#include "rng.hpp"
-#include "resource.h"
-#include "root_sound.hpp"
 #include "network_data.hpp"
-#include "FpsCounter_54.hpp"
+#include "registry.hpp"
+#include "resource.h"
+#include "rng.hpp"
+#include "root_sound.hpp"
+#include <cstdio>
 #include <ddraw.h>
 #include <direct.h>
-#include <cstdio>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <port_replay.h>
 #include <port_input.h>
+#include <port_replay.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <windows.h>
 //#include <dmusics.h>
 
 // for force links
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 #include "Ambulance_110.hpp"
-#include "InputRecorder_67F8B0.hpp"
 #include "Camera.hpp"
+#include "CarChaseTaskTable_500.hpp"
 #include "Car_BC.hpp"
+#include "CollisionSoundQueue_C88.hpp"
+#include "CrimeReportQueue_CC.hpp"
 #include "Crushers.hpp"
 #include "Firefighters.hpp"
 #include "Fix16_Rect.hpp"
 #include "Generators.hpp"
-#include "CarChaseTaskTable_500.hpp"
 #include "Hud.hpp"
 #include "ImGuiDebug.hpp"
+#include "InputRecorder_67F8B0.hpp"
+#include "Light_28.hpp"
 #include "MapRenderer.hpp"
 #include "Mike_A80.hpp"
-#include "SpriteRenderer_1C.hpp"
 #include "Network_20324.hpp"
-#include "Ped.hpp"
 #include "ObjectDefinitions_8CA8.hpp"
+#include "Ped.hpp"
 #include "Player.hpp"
-#include "CollisionSoundQueue_C88.hpp"
-#include "CrimeReportQueue_CC.hpp"
+#include "SpriteRenderer_1C.hpp"
 #include "cSampleManager.hpp"
 #include "char.hpp"
 #include "collide.hpp"
 #include "miss2_8.hpp"
-#include "Light_28.hpp"
 #include "sound_obj.hpp"
 #include "sprite.hpp"
 #include "text_0x14.hpp"
@@ -89,7 +89,7 @@ DEFINE_GLOBAL(u32, dword_6F5AC0, 0x6F5AC0); // TODO: move
 DEFINE_GLOBAL(s32, dword_6F5858, 0x6F5858); // TODO: move
 DEFINE_GLOBAL(s32, dword_6F5B74, 0x6F5B74);
 DEFINE_GLOBAL(s32, dword_6F5944, 0x6F5944);
-s32 dword_67ED24;//DEFINE_GLOBAL(s32, dword_67ED24, 0x67ED24); // global crashing standalone
+s32 dword_67ED24; //DEFINE_GLOBAL(s32, dword_67ED24, 0x67ED24); // global crashing standalone
 DEFINE_GLOBAL(u8, byte_6F59C0, 0x6F59C0); // TODO: move
 
 static T_gbh_SetBeginSceneCB pBeginSceneCB = nullptr;
@@ -1040,7 +1040,7 @@ void Draw_4DA7B0()
 
 DEFINE_GLOBAL(Network_PlayerInputs_0x30, gNetInputsHistory1_6F56E0, 0x6F56E0);
 DEFINE_GLOBAL(Network_PlayerInputs_0x30, gNetInputsHistory2_6F5798, 0x6F5798);
-u8 gNetPlayerDropped_6F8470[6];//DEFINE_GLOBAL_ARRAY(u8, gNetPlayerDropped_6F8470, 6, 0x6F8470);  // global crashing standalone
+u8 gNetPlayerDropped_6F8470[6]; //DEFINE_GLOBAL_ARRAY(u8, gNetPlayerDropped_6F8470, 6, 0x6F8470);  // global crashing standalone
 
 // Re-sends our inputs of a previous frame to one player.
 // 0x4DA9B0
@@ -1328,7 +1328,8 @@ void TagGameHudUpdate_4DADA0()
                 if (--gNetTimeLimit_6F573C < 0)
                 {
                     gNetTimeLimitEnabled_6F58A4 = 0;
-                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("g_over"), hud_message_priority::important_3);
+                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("g_over"),
+                                                                            hud_message_priority::important_3);
                     gGame_0x40_67E008->ExitGameNoBonus_4B8C00(2, GameExitType::MultiplayerExit_5);
                 }
             }
@@ -1423,7 +1424,8 @@ void do_network_and_local_inputs_4DAF30()
                 } while (gNetInUsePlayerBits_6F56B8);
             }
 
-            gCurrentNetInputs_6F57D8.field_0_inputs[gNetworkPlayerIdx_6F56C8].field_0_Inputs = gInputRecorder_67F8B0.get_input_bits_4CEAC0();
+            gCurrentNetInputs_6F57D8.field_0_inputs[gNetworkPlayerIdx_6F56C8].field_0_Inputs =
+                gInputRecorder_67F8B0.get_input_bits_4CEAC0();
             Net_Send_Our_Inputs_4DACB0();
             Draw_4DA7B0();
             Net_Receive_Players_Inputs_4DA9F0();
@@ -2381,7 +2383,8 @@ void Shutdown_4DA740()
     }
 }
 
-NetworkGameSettings gNetworkGameSettings_707098;//DEFINE_GLOBAL(NetworkGameSettings, gNetworkGameSettings_707098, 0x707098);  // global crashing standalone
+NetworkGameSettings
+    gNetworkGameSettings_707098; //DEFINE_GLOBAL(NetworkGameSettings, gNetworkGameSettings_707098, 0x707098);  // global crashing standalone
 
 // 0x5E5A30
 char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
@@ -2465,14 +2468,13 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
         gGameSession_67E8E0.SetScriptName_4C58B0(path);
 
         gGameSession_67E8E0.SetMultiplayerParams_4C5B80(gNetworkGameSettings_707098.field_20198_game_type,
-                                                           gNetworkGameSettings_707098.field_20194_frag_limit,
-                                                           gNetPlay_7071E8.GetPlayerIdx_409C40(),
-                                                           gNetPlay_7071E8.GetMaxPlayers_521350(),
-                                                           gNetworkGameSettings_707098.field_201A4_game_time_limit);
+                                                        gNetworkGameSettings_707098.field_20194_frag_limit,
+                                                        gNetPlay_7071E8.GetPlayerIdx_409C40(),
+                                                        gNetPlay_7071E8.GetMaxPlayers_521350(),
+                                                        gNetworkGameSettings_707098.field_201A4_game_time_limit);
     }
     return bRet;
 }
-
 
 // 0x5E5D60
 void GetGTA2Version_5E5D60(s32* pVerMinor, s32* pVerMajor)

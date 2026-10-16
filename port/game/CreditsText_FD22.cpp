@@ -1,6 +1,6 @@
 #include "CreditsText_FD22.hpp"
-#include "text_0x14.hpp"
 #include "credits_line_category.hpp"
+#include "text_0x14.hpp"
 
 // 0x483E70
 CreditsText_FD22::CreditsText_FD22() // 483E70

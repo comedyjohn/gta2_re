@@ -1,11 +1,11 @@
 #pragma once
 
 #include "BitSet32.hpp"
-#include "car_ai_flags.hpp"
-#include "fix16.hpp"
 #include "Function.hpp"
 #include "Pool.hpp"
 #include "ang16.hpp"
+#include "car_ai_flags.hpp"
+#include "fix16.hpp"
 
 class Car_BC;
 class Sprite;

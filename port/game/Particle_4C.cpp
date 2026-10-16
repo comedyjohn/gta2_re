@@ -1,18 +1,18 @@
 #include "Particle_4C.hpp"
-#include "map_0x370.hpp"
-#include "Object_5C.hpp"
+#include "CarPhysics_B0.hpp"
+#include "Car_BC.hpp"
+#include "Explosion_30.hpp"
 #include "ObjectDefinitions_8CA8.hpp"
+#include "Object_3C.hpp"
+#include "Object_5C.hpp"
+#include "Particle_8.hpp"
+#include "Ped.hpp"
+#include "ScriptManager_C1EA8.hpp"
 #include "SpriteGrid_400.hpp"
+#include "char.hpp"
+#include "map_0x370.hpp"
 #include "rng.hpp"
 #include "sprite.hpp"
-#include "Explosion_30.hpp"
-#include "char.hpp"
-#include "Ped.hpp"
-#include "Particle_8.hpp"
-#include "Car_BC.hpp"
-#include "ScriptManager_C1EA8.hpp"
-#include "Object_3C.hpp"
-#include "CarPhysics_B0.hpp"
 
 EXTERN_GLOBAL(Fix16, kFP16Zero_6FD49C);
 EXTERN_GLOBAL(Fix16, dword_6FD2F0);
@@ -313,8 +313,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
     stru_6FD388 = xpos;
     stru_6FD38C = ypos;
 
-    if (xpos > kFP16One_6FD4A0 && xpos < dword_6FD280 - kFP16One_6FD4A0 && ypos > kFP16One_6FD4A0 &&
-        ypos < dword_6FD280 - kFP16One_6FD4A0)
+    if (xpos > kFP16One_6FD4A0 && xpos < dword_6FD280 - kFP16One_6FD4A0 && ypos > kFP16One_6FD4A0 && ypos < dword_6FD280 - kFP16One_6FD4A0)
     {
         field_30_pNext->set_xyz_lazy_420600(xpos, ypos, zpos);
     }
@@ -484,9 +483,10 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
             case 4:
             case 5:
             {
-                SetFromPolar_OOL_41E210(src,
-                                        Fix16(field_46_sub_state) * dword_6FD46C + dword_6FD45C,
-                                        NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue).rValue + jitter.rValue));
+                SetFromPolar_OOL_41E210(
+                    src,
+                    Fix16(field_46_sub_state) * dword_6FD46C + dword_6FD45C,
+                    NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue).rValue + jitter.rValue));
                 break;
             }
             default:
@@ -900,8 +900,7 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
     stru_6FD388 = xpos;
     stru_6FD38C = ypos;
 
-    if (xpos > kFP16One_6FD4A0 && xpos < dword_6FD280 - kFP16One_6FD4A0 && ypos > kFP16One_6FD4A0 &&
-        ypos < dword_6FD280 - kFP16One_6FD4A0)
+    if (xpos > kFP16One_6FD4A0 && xpos < dword_6FD280 - kFP16One_6FD4A0 && ypos > kFP16One_6FD4A0 && ypos < dword_6FD280 - kFP16One_6FD4A0)
     {
         field_30_pNext->set_xyz_lazy_420600(xpos, ypos, zpos);
     }
@@ -1488,7 +1487,8 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
         }
     }
 
-    Fix16 spread_val = dword_6FD328 * (Fix16(field_46_sub_state) + Fix16(gRng_6F6784.get_int_4F7AE0(static_cast<s16>(field_46_sub_state))) - dword_6FD4AC);
+    Fix16 spread_val =
+        dword_6FD328 * (Fix16(field_46_sub_state) + Fix16(gRng_6F6784.get_int_4F7AE0(static_cast<s16>(field_46_sub_state))) - dword_6FD4AC);
     Ang16 spread(spread_val.GetRaw_40F4B0() / 71);
     spread.Normalize_406C20();
 
@@ -1728,7 +1728,9 @@ char_type Particle_4C::PoolUpdate()
 
                 if (field_30_pNext->field_1C_zpos + dword_6FD2F0 < dword_6FD28C)
                 {
-                    field_30_pNext->set_xyz_lazy_420600(field_30_pNext->field_14_xy.x, field_30_pNext->field_14_xy.y, field_30_pNext->field_1C_zpos + dword_6FD2E8);
+                    field_30_pNext->set_xyz_lazy_420600(field_30_pNext->field_14_xy.x,
+                                                        field_30_pNext->field_14_xy.y,
+                                                        field_30_pNext->field_1C_zpos + dword_6FD2E8);
                 }
 
                 gSpriteGrid_3_679210->AddToSingleBucket_477AE0(this->field_30_pNext);
@@ -1812,7 +1814,6 @@ char_type Particle_4C::PoolUpdate()
 
             stru_6FD388 = this->field_30_pNext->field_14_xy.x + stru_6FD388;
             stru_6FD38C = this->field_30_pNext->field_14_xy.y + stru_6FD38C;
-
 
             if (this->field_46_sub_state < 9u)
             {

@@ -102,29 +102,29 @@ class Door_4D4
     Door_38* RegisterSingleDoorNoCheck_49CF50(u8 gr_id, u8 x, u8 y, u8 z, u32 face, u8 flip, u8 reversed);
     Door_38* RegisterDoubleDoorNoCheck_49CFA0(u8 gr_id, u8 x, u8 y, u8 z, s32 face, u8 flip, u8 reversed);
     Door_38* RegisterSingleDoor_49D170(u8 gr_id,
-                                              u8 x,
-                                              u8 y,
-                                              u8 z,
-                                              s32 face,
-                                              Fix16 check_x,
-                                              Fix16 check_y,
-                                              Fix16 check_z,
-                                              Fix16 check_width,
-                                              Fix16 check_height,
-                                              u8 flip,
-                                              u8 reversed);
+                                       u8 x,
+                                       u8 y,
+                                       u8 z,
+                                       s32 face,
+                                       Fix16 check_x,
+                                       Fix16 check_y,
+                                       Fix16 check_z,
+                                       Fix16 check_width,
+                                       Fix16 check_height,
+                                       u8 flip,
+                                       u8 reversed);
     Door_38* RegisterDoubleDoor_49D1F0(u8 gr_id,
-                                              u8 x,
-                                              u8 y,
-                                              u8 z,
-                                              s32 face,
-                                              Fix16 check_x,
-                                              Fix16 check_y,
-                                              Fix16 check_z,
-                                              Fix16 check_width,
-                                              Fix16 check_height,
-                                              u8 flip,
-                                              u8 reversed);
+                                       u8 x,
+                                       u8 y,
+                                       u8 z,
+                                       s32 face,
+                                       Fix16 check_x,
+                                       Fix16 check_y,
+                                       Fix16 check_z,
+                                       Fix16 check_width,
+                                       Fix16 check_height,
+                                       u8 flip,
+                                       u8 reversed);
     void RegisterDoorInfo_49D2D0(s16 start_frame, s16 end_frame, char_type speed);
     void TryOpenDoorForCar_49D340(Car_BC* pCar, u8 door_idx);
     void TryOpenDoorForPed_49D370(Ped* pPed, u8 idx);

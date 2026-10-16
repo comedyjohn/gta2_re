@@ -1,18 +1,18 @@
 #include "Crushers.hpp"
-#include "explosion_type.hpp"
-#include "ped_death_cause.hpp"
-#include "car_despawn_status.hpp"
 #include "Camera.hpp"
 #include "Car_BC.hpp"
-#include "Globals.hpp"
-#include "SoundObject_10.hpp"
-#include "root_sound.hpp"
-#include "Object_5C.hpp"
-#include "debug.hpp"
-#include "map_0x370.hpp"
-#include "winmain.hpp"
 #include "Game_0x40.hpp"
+#include "Globals.hpp"
+#include "Object_5C.hpp"
 #include "Player.hpp"
+#include "SoundObject_10.hpp"
+#include "car_despawn_status.hpp"
+#include "debug.hpp"
+#include "explosion_type.hpp"
+#include "map_0x370.hpp"
+#include "ped_death_cause.hpp"
+#include "root_sound.hpp"
+#include "winmain.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(CrusherPool_94*, gCrusherPool_94_67A830, 0x67A830);
@@ -48,7 +48,8 @@ Crusher_30::~Crusher_30()
 // 0x488310
 void Crusher_30::CrushCar_488310(Car_BC* pCar)
 {
-    if (field_2C_state == CrusherStates::Idle_0 && !pCar->IsDespawning_4215B0() && !pCar->IsSpriteShrunk_43DC00() && !pCar->IsEngineCrushed_447EB0())
+    if (field_2C_state == CrusherStates::Idle_0 && !pCar->IsDespawning_4215B0() && !pCar->IsSpriteShrunk_43DC00() &&
+        !pCar->IsEngineCrushed_447EB0())
     {
         field_14_pCarBeingCrushed = pCar;
         field_2C_state = CrusherStates::CrushW_1;
@@ -61,7 +62,9 @@ void Crusher_30::Service_488350()
 {
     if (field_2C_state != CrusherStates::Idle_0)
     {
-        if (field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::despawn_pending_2 || field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::marked_for_despawn_4 || field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::despawn_soon_3)
+        if (field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::despawn_pending_2 ||
+            field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::marked_for_despawn_4 ||
+            field_14_pCarBeingCrushed->field_88_despawn_status == car_despawn_status::despawn_soon_3)
         {
             field_14_pCarBeingCrushed->field_88_despawn_status = car_despawn_status::active_1;
         }
@@ -75,7 +78,8 @@ void Crusher_30::Service_488350()
                     field_2C_state = CrusherStates::UnCrushW_2;
                     if (!bStartNetworkGame_7081F0)
                     {
-                        field_14_pCarBeingCrushed->field_70_exploder_ped_id = gGame_0x40_67E008->field_38_local_player->field_2C4_player_ped->field_200_id;
+                        field_14_pCarBeingCrushed->field_70_exploder_ped_id =
+                            gGame_0x40_67E008->field_38_local_player->field_2C4_player_ped->field_200_id;
                         field_14_pCarBeingCrushed->field_90_death_cause = ped_death_cause::unknown_4;
                         field_14_pCarBeingCrushed->field_94_exploder_timer = 50;
                     }
@@ -158,10 +162,14 @@ void Crusher_30::InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_id
     field_10_central_spot = gObject_5C_6F8F84->NewPhysicsObj_5299B0(143, xpos, ypos, zpos, kAngZero_67A820);
     field_10_central_spot->field_26_ped_ref_idx = crusher_idx;
 
-    field_0_piston_top = gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos, field_28_ypos - kCrusherTargetW_67A7D0, zpos, kAngZero_67A820);
-    field_4_piston_right = gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos + kCrusherTargetW_67A7D0, field_28_ypos, zpos, kAng270_67A660);
-    field_8_piston_bottom = gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos, kCrusherTargetW_67A7D0 + field_28_ypos, zpos, kAng180_67A63A);
-    field_C_piston_left = gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos - kCrusherTargetW_67A7D0, field_28_ypos, zpos, kAng90_67A568);
+    field_0_piston_top =
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos, field_28_ypos - kCrusherTargetW_67A7D0, zpos, kAngZero_67A820);
+    field_4_piston_right =
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos + kCrusherTargetW_67A7D0, field_28_ypos, zpos, kAng270_67A660);
+    field_8_piston_bottom =
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos, kCrusherTargetW_67A7D0 + field_28_ypos, zpos, kAng180_67A63A);
+    field_C_piston_left =
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(142, field_24_xpos - kCrusherTargetW_67A7D0, field_28_ypos, zpos, kAng90_67A568);
 
     gObject_5C_6F8F84->NewPhysicsObj_5299B0(150, field_24_xpos, field_28_ypos - kCrusherPistonBaseDist_67A664, zpos, kAngZero_67A820);
     gObject_5C_6F8F84->NewPhysicsObj_5299B0(150, field_24_xpos + kCrusherPistonBaseDist_67A664, field_28_ypos, zpos, kAng270_67A660);

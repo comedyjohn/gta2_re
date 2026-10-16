@@ -1,8 +1,8 @@
 #pragma once
 
-#include "particle_flags.hpp"
 #include "Function.hpp"
 #include "ang16.hpp"
+#include "particle_flags.hpp"
 
 class Sprite;
 class Explosion_30;
@@ -31,7 +31,7 @@ class Particle_4C
     char_type PoolUpdate();
     void PoolAllocate();
     void PoolDeallocate();
-    
+
     s32 field_0_id;
     union
     {

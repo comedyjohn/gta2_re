@@ -318,7 +318,7 @@ enum
     right_3 = 3, // notice that right and left are swapped in comparison with gmp_arrow_direction
     left_4 = 4, // notice that right and left are swapped in comparison with gmp_arrow_direction
 };
-} // namespace path_direction
+} // namespace road_direction
 
 enum gmp_arrow_type
 {
@@ -382,17 +382,17 @@ class Map_0x370
     gmp_zone_info* GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y);
 
     void SetZoneInfo_4DF8C0(s32 zone_idx,
-                                            s16 car_density,
-                                            s16 goodcar_ratio,
-                                            s16 badcar_ratio,
-                                            s16 policecar_ratio,
-                                            s16 gangcar_ratio,
-                                            s16 ped_density,
-                                            s16 mugger_ratio,
-                                            s16 carthief_ratio,
-                                            s16 elvis_ratio,
-                                            s16 gangchar_ratio,
-                                            s16 policeped_ratio);
+                            s16 car_density,
+                            s16 goodcar_ratio,
+                            s16 badcar_ratio,
+                            s16 policecar_ratio,
+                            s16 gangcar_ratio,
+                            s16 ped_density,
+                            s16 mugger_ratio,
+                            s16 carthief_ratio,
+                            s16 elvis_ratio,
+                            s16 gangchar_ratio,
+                            s16 policeped_ratio);
 
     gmp_zone_info* GetZoneInfo_4DF9A0(u16 zone_idx);
 
@@ -554,11 +554,11 @@ class Map_0x370
     void LowerLevel_4E8B70(s32 x_min, s32 x_max, s32 y_min, s32 y_max);
     void OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes, u32 obj_bytes);
     void GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
-                           u32* outColumnBytes,
-                           gmp_block_info** outBlockPtr,
-                           u32* outBlockBytes,
-                           DmapInfoList** outSubObj,
-                           s32* outSubObjBytes);
+                                   u32* outColumnBytes,
+                                   gmp_block_info** outBlockPtr,
+                                   u32* outBlockBytes,
+                                   DmapInfoList** outSubObj,
+                                   s32* outSubObjBytes);
 
     void do_process_loaded_zone_data_4E8E30();
 
@@ -618,8 +618,7 @@ class Map_0x370
     gmp_block_info* get_block_42A850(u8 x, u8 y, u8 z)
     {
         u32 col_idx = *field_0_pDmap->get_base_42A830(y, x);
-        auto* pCol =
-            reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
+        auto* pCol = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
         if (z >= pCol->field_0_height || z < pCol->field_1_offset)
         {
             return nullptr;
@@ -728,11 +727,10 @@ class Map_0x370
         field_36E_bBlockedByTerrain = 0;
     }
 
-    bool IsNorthOrSouthGradSlope_4634B0(gmp_block_info* pBlock) 
+    bool IsNorthOrSouthGradSlope_4634B0(gmp_block_info* pBlock)
     {
         gmp_map_slope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
-        if (gradient_slope->field_0_gradient_direction == NORTH_1 
-            || gradient_slope->field_0_gradient_direction == SOUTH_2)
+        if (gradient_slope->field_0_gradient_direction == NORTH_1 || gradient_slope->field_0_gradient_direction == SOUTH_2)
         {
             return true;
         }
@@ -740,11 +738,10 @@ class Map_0x370
     }
 
     // 9.6f 0x463480 (the name's 0x4634B0 is the north/south one)
-    bool IsWestOrEastGradSlope_4634B0(gmp_block_info* pBlock) 
+    bool IsWestOrEastGradSlope_4634B0(gmp_block_info* pBlock)
     {
         gmp_map_slope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
-        if (gradient_slope->field_0_gradient_direction == WEST_3 
-            || gradient_slope->field_0_gradient_direction == EAST_4)
+        if (gradient_slope->field_0_gradient_direction == WEST_3 || gradient_slope->field_0_gradient_direction == EAST_4)
         {
             return true;
         }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
 #include "3rdParty/GTA2Hax/DmaVideo/DmaVideo.hpp"
+#include "Function.hpp"
 #include <windows.h>
 
 EXTERN_GLOBAL(SVideo*, gVidSys_7071D0);

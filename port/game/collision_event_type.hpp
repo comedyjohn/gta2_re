@@ -8,7 +8,7 @@ namespace collision_event_type
 {
 enum
 {
-    object_floor_1 = 1,  // AddFloorCollision / AddBlockCollision with an object
+    object_floor_1 = 1, // AddFloorCollision / AddBlockCollision with an object
     car_car_2 = 2,
     car_object_3 = 3,
     car_ped_4 = 4,

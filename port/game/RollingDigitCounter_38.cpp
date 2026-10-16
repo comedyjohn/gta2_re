@@ -1,10 +1,10 @@
 #include "RollingDigitCounter_38.hpp"
 #include "Draw.hpp"
-#include "gtx_0x106C.hpp"
 #include "TextureCache_15D8.hpp"
+#include "gtx_0x106C.hpp"
 
 // Forward declarations: the functions below are in address order
-s32 GetMaxNumOfDigits_4F7660(s32 &max_value);
+s32 GetMaxNumOfDigits_4F7660(s32& max_value);
 
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_67B210, Ang16(0), 0x67B210);
 
@@ -59,14 +59,14 @@ void RollingDigitCounter_38::ChangeStatByAmount_4921B0(s32 amount)
 {
     if (amount > 0)
     {
-        if(amount >= field_30_max_value)
+        if (amount >= field_30_max_value)
         {
             field_0_value = field_30_max_value;
         }
         else
         {
             field_0_value += amount;
-            if (field_0_value > field_30_max_value )
+            if (field_0_value > field_30_max_value)
             {
                 field_0_value = field_30_max_value;
             }
@@ -74,10 +74,10 @@ void RollingDigitCounter_38::ChangeStatByAmount_4921B0(s32 amount)
     }
     else
     {
-        if(amount > -field_30_max_value)
+        if (amount > -field_30_max_value)
         {
             field_0_value += amount;
-            if(field_0_value < 0 )
+            if (field_0_value < 0)
             {
                 field_0_value = 0;
             }
@@ -145,30 +145,34 @@ s32 RollingDigitCounter_38::DrawDigitsRightAligned_492260(s32 base_xpos, s32 bas
             u16 v = field_28_sprite_h_calc * (kDigitAfterNine - curr_char) - offset;
             curr_xpos = (field_27_sprite_w >> 1) - field_27_sprite_w * (kNumDigits - idx) + base_xpos;
             s32 ypos = base_ypos + static_cast<s8>(height) / 2;
-            DrawTextureScaled_495470(gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits, v, height),
-                       curr_xpos,
-                       ypos,
-                       field_27_sprite_w,
-                       height,
-                       kAngZero_67B210,
-                       0,
-                       0);
+            DrawTextureScaled_495470(
+                gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
+                                                                  v,
+                                                                  height),
+                curr_xpos,
+                ypos,
+                field_27_sprite_w,
+                height,
+                kAngZero_67B210,
+                0,
+                0);
             bFirst = false;
         }
         else
         {
             u16 v = field_28_sprite_h_calc * (kDigitAfterNine - field_9_shown_digits[idx]) - offset;
             s32 xpos = (field_27_sprite_w >> 1) - field_27_sprite_w * (kNumDigits - idx) + base_xpos;
-            DrawTextureScaled_495470(gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
-                                                             v,
-                                                             field_28_sprite_h_calc),
-                       xpos,
-                       ypos_default,
-                       field_27_sprite_w,
-                       field_28_sprite_h_calc,
-                       kAngZero_67B210,
-                       0,
-                       0);
+            DrawTextureScaled_495470(
+                gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
+                                                                  v,
+                                                                  field_28_sprite_h_calc),
+                xpos,
+                ypos_default,
+                field_27_sprite_w,
+                field_28_sprite_h_calc,
+                kAngZero_67B210,
+                0,
+                0);
         }
     }
     return curr_xpos - (field_27_sprite_w >> 1);
@@ -206,30 +210,34 @@ s32 RollingDigitCounter_38::DrawDigitsLeftAligned_492430(s32 base_xpos, s32 base
 
             u16 v = field_28_sprite_h_calc * (kDigitAfterNine - field_9_shown_digits[idx]) - offset;
             u32 ypos = base_ypos + static_cast<s8>(height) / 2;
-            DrawTextureScaled_495470(gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits, v, height),
-                       curr_xpos,
-                       ypos,
-                       field_27_sprite_w,
-                       height,
-                       kAngZero_67B210,
-                       0,
-                       0);
+            DrawTextureScaled_495470(
+                gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
+                                                                  v,
+                                                                  height),
+                curr_xpos,
+                ypos,
+                field_27_sprite_w,
+                height,
+                kAngZero_67B210,
+                0,
+                0);
             bFirst = false;
             curr_xpos += field_27_sprite_w;
         }
         else
         {
             u16 v = field_28_sprite_h_calc * (kDigitAfterNine - field_9_shown_digits[idx]) - offset;
-            DrawTextureScaled_495470(gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
-                                                             v,
-                                                             field_28_sprite_h_calc),
-                       curr_xpos,
-                       ypos_default,
-                       field_27_sprite_w,
-                       field_28_sprite_h_calc,
-                       kAngZero_67B210,
-                       0,
-                       0);
+            DrawTextureScaled_495470(
+                gTextureCache_15D8_705064->GetDigitTexture_5B95F0(idx + field_34_first_digit_texture_idx - field_2E_non_used_digits,
+                                                                  v,
+                                                                  field_28_sprite_h_calc),
+                curr_xpos,
+                ypos_default,
+                field_27_sprite_w,
+                field_28_sprite_h_calc,
+                kAngZero_67B210,
+                0,
+                0);
             curr_xpos += field_27_sprite_w;
         }
     }
@@ -318,7 +326,7 @@ void RollingDigitCounter_38::UpdateRollingDigits_4925E0()
 }
 
 // 0x4f7660
-s32 GetMaxNumOfDigits_4F7660(s32 &max_value)
+s32 GetMaxNumOfDigits_4F7660(s32& max_value)
 {
     s32 num_digits = 1;
     s32 abs_value = max_value;
@@ -328,6 +336,7 @@ s32 GetMaxNumOfDigits_4F7660(s32 &max_value)
         abs_value = -abs_value;
     }
     for (; 10 <= abs_value; abs_value /= 10, num_digits++)
-    {}
+    {
+    }
     return num_digits;
 }

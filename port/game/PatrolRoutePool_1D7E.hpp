@@ -27,7 +27,6 @@ class PatrolRoute_96
         k_max_points = 50
     };
 
-
     ~PatrolRoute_96() = default; // 0x4bdf90
     void sub_543EC0();
     PatrolRoute_96();
@@ -42,7 +41,6 @@ class PatrolRoutePool_1D7E
     {
         k_max_routes = 50
     };
-
 
     ~PatrolRoutePool_1D7E() = default; // 0x4bdf70
     PatrolRoutePool_1D7E();

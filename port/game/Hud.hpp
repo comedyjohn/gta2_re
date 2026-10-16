@@ -427,7 +427,7 @@ class ArrowTrace_24
     {
         return field_10_target_type == ArrowTargetType::Nothing_0;
     }
-    
+
     // 9.6f 0x4C6F30
     inline Player* GetTargetPlayer_4C6F30()
     {
@@ -456,7 +456,6 @@ class ArrowTrace_24
 class Hud_ArrowTargets_64
 {
   public:
-
     inline bool HasBothTargets_4C6FB0()
     {
         return !field_18_primary_target.HasNoTarget_4C6F20() && !field_3C_secondary_target.HasNoTarget_4C6F20();

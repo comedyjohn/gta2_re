@@ -7,8 +7,8 @@ namespace ped_graphic_type
 {
 enum
 {
-    civilian_0 = 0,  // pedestrians, paramedics
+    civilian_0 = 0, // pedestrians, paramedics
     character_1 = 1, // the default; the player, gang members, FBI, script created chars
-    cop_2 = 2,       // police, SWAT, army
+    cop_2 = 2, // police, SWAT, army
 };
 } // namespace ped_graphic_type

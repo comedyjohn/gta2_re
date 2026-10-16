@@ -152,7 +152,7 @@ class Weapon_30
     {
         return field_1C_idx;
     }
-    
+
     void SetTargetHit_433810(s32 value)
     {
         field_4_bTargetHit = value;

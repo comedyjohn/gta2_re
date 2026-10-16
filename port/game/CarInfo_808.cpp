@@ -37,26 +37,17 @@ DEFINE_GLOBAL_ARRAY_INIT(char*,
                          error_table_61A6D4,
                          13,
                          0x61A6D4,
-                         "Invalid integer" COMMA
-                         "Number too big" COMMA
-                         "Write error" COMMA
-                         "EOF in comment" COMMA
-                         "Token too big" COMMA
-                         "Input file not found" COMMA
-                         "Can't open output file" COMMA
-                         "Invalid long integer" COMMA
-                         "Invalid hex integer" COMMA
-                         "Invalid hex long integer" COMMA
-                         "Invalid f32" COMMA
-                         "Output too big" COMMA
+                         "Invalid integer" COMMA "Number too big" COMMA "Write error" COMMA "EOF in comment" COMMA "Token too big" COMMA
+                         "Input file not found" COMMA "Can't open output file" COMMA "Invalid long integer" COMMA
+                         "Invalid hex integer" COMMA "Invalid hex long integer" COMMA "Invalid f32" COMMA "Output too big" COMMA
                          "Unknown error");
 
 // 0x430a30
 char* CarInfo_808::parse_gci_file_430A30(void* pGciData,
-                                                   size_t gciDataLen,
-                                                   ModelPhysics_48* pModelPhyArr,
-                                                   size_t modelPhyArrLen,
-                                                   u32* next_position)
+                                         size_t gciDataLen,
+                                         ModelPhysics_48* pModelPhyArr,
+                                         size_t modelPhyArrLen,
+                                         u32* next_position)
 {
     input_data_676170 = static_cast<u8*>(pGciData);
     line_number_676258 = 1;

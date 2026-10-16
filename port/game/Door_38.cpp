@@ -109,7 +109,8 @@ bool Door_38::CanOpen_49C6D0(Car_BC* pCar)
                 break;
             }
 
-            if (IsSpriteClearOfDoorCollision_49C6A0(pCar->field_50_car_sprite) && (!pCar->IsDrivenByPlayer_4118D0() || gGarage_48_6FD26C->sub_44C870(pCar)))
+            if (IsSpriteClearOfDoorCollision_49C6A0(pCar->field_50_car_sprite) &&
+                (!pCar->IsDrivenByPlayer_4118D0() || gGarage_48_6FD26C->sub_44C870(pCar)))
             {
                 if (pCar->IsDrivenByPlayer_4118D0())
                 {
@@ -263,7 +264,9 @@ void Door_38::InitSingleNoCheck_49C8D0(u8 door_group, u8 gr_id, u8 x, u8 y, u8 z
     field_28_bClosing = 1;
     field_2C_bCanAutoOpen = 1;
 
-    field_1E_close_timer = field_1C_close_delay = (gDoorAnimInfo_67BB38[gr_id].field_2_end_frame - gDoorAnimInfo_67BB38[gr_id].field_0_start_frame) * gDoorAnimInfo_67BB38[gr_id].field_8_speed;
+    field_1E_close_timer = field_1C_close_delay =
+        (gDoorAnimInfo_67BB38[gr_id].field_2_end_frame - gDoorAnimInfo_67BB38[gr_id].field_0_start_frame) *
+        gDoorAnimInfo_67BB38[gr_id].field_8_speed;
 
     field_C_trigger_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(0xa7, trigger_x, trigger_y, z, DAT_0067BD18);
     field_C_trigger_obj->set_field_26(door_group);
@@ -290,7 +293,14 @@ void Door_38::AddDoorData_49CA50(u8 gr_id, char_type x, char_type y, char_type z
 }
 
 // 0x49cac0
-void Door_38::InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h)
+void Door_38::InitSingle_49CAC0(DoorData_10* pDoorData,
+                                char_type bFlip,
+                                u8 obj_id,
+                                Fix16 trigger_x,
+                                Fix16 trigger_y,
+                                Fix16 trigger_z,
+                                Fix16 trigger_w,
+                                Fix16 trigger_h)
 {
     Fix16 z(pDoorData->field_6_z);
     Fix16 x = Fix16(pDoorData->field_4_x) + kFpHalf_67BA20;
@@ -326,11 +336,14 @@ void Door_38::InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_
     }
     field_28_bClosing = 1;
     field_2C_bCanAutoOpen = 1;
-    u16 anim_frames = (gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_2_end_frame - gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_0_start_frame);
+    u16 anim_frames = (gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_2_end_frame -
+                       gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_0_start_frame);
     field_1E_close_timer = field_1C_close_delay = anim_frames * gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_8_speed + 0x28;
     if (bFlip)
     {
-        field_C_trigger_obj = gObject_5C_6F8F84->NewTouchPoint_529950(0xa7, trigger_x, trigger_y, trigger_z, DAT_0067BD18, trigger_w, trigger_h, kFpOne_67BBE4);
+        field_C_trigger_obj =
+            gObject_5C_6F8F84
+                ->NewTouchPoint_529950(0xa7, trigger_x, trigger_y, trigger_z, DAT_0067BD18, trigger_w, trigger_h, kFpOne_67BBE4);
         field_C_trigger_obj->set_field_26(obj_id);
     }
     field_8_door_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(0xa9, x, y, z, DAT_0067BD18);
@@ -340,7 +353,14 @@ void Door_38::InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_
 }
 
 // 0x49cc00
-void Door_38::InitDouble_49CC00(DoorData_10* pDoorData, char_type bFlip, u8 obj_id, Fix16 trigger_x, Fix16 trigger_y, Fix16 trigger_z, Fix16 trigger_w, Fix16 trigger_h)
+void Door_38::InitDouble_49CC00(DoorData_10* pDoorData,
+                                char_type bFlip,
+                                u8 obj_id,
+                                Fix16 trigger_x,
+                                Fix16 trigger_y,
+                                Fix16 trigger_z,
+                                Fix16 trigger_w,
+                                Fix16 trigger_h)
 {
     Ang16 door_angle;
     Fix16 z(pDoorData->field_6_z);
@@ -386,11 +406,14 @@ void Door_38::InitDouble_49CC00(DoorData_10* pDoorData, char_type bFlip, u8 obj_
     }
     field_28_bClosing = 1;
     field_2C_bCanAutoOpen = 1;
-    u16 anim_frames = (gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_2_end_frame - gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_0_start_frame);
+    u16 anim_frames = (gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_2_end_frame -
+                       gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_0_start_frame);
     field_1E_close_timer = field_1C_close_delay = anim_frames * gDoorAnimInfo_67BB38[pDoorData->field_7_gr_id].field_8_speed + 0x28;
     if (bFlip)
     {
-        field_C_trigger_obj = gObject_5C_6F8F84->NewTouchPoint_529950(0xa7, trigger_x, trigger_y, trigger_z, DAT_0067BD18, trigger_w, trigger_h, kFpOne_67BBE4);
+        field_C_trigger_obj =
+            gObject_5C_6F8F84
+                ->NewTouchPoint_529950(0xa7, trigger_x, trigger_y, trigger_z, DAT_0067BD18, trigger_w, trigger_h, kFpOne_67BBE4);
         field_C_trigger_obj->set_field_26(obj_id);
     }
     field_8_door_obj = gObject_5C_6F8F84->NewTouchPoint_529950(0xa9, x, y, z, door_angle, kFpOne_67BBE4, kFpTwo_67BBE8, kFpOne_67BBE4);
@@ -404,7 +427,8 @@ void Door_38::UpdateAutoClose_49CD90()
 {
     if (field_29_bAuto != 0)
     {
-        if ((field_0_primary_door_data != nullptr && field_0_primary_door_data->field_0_state == 2) || (field_4_secondary_door_data != nullptr && field_4_secondary_door_data->field_0_state == 2))
+        if ((field_0_primary_door_data != nullptr && field_0_primary_door_data->field_0_state == 2) ||
+            (field_4_secondary_door_data != nullptr && field_4_secondary_door_data->field_0_state == 2))
         {
             if (field_24_close_type != door_close_type::close_never && field_24_close_type != door_close_type::unknown1)
             {
@@ -429,7 +453,11 @@ void Door_38::UpdateAutoClose_49CD90()
                     field_1E_close_timer = field_1C_close_delay;
                     if (field_0_primary_door_data != nullptr)
                     {
-                        gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(0x117, 0x33, field_30_x, field_34_y, field_0_primary_door_data->field_6_z);
+                        gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(0x117,
+                                                                   0x33,
+                                                                   field_30_x,
+                                                                   field_34_y,
+                                                                   field_0_primary_door_data->field_6_z);
                         field_0_primary_door_data->Close_49C590(false);
                     }
                     if (field_4_secondary_door_data != nullptr)

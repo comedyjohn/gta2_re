@@ -47,7 +47,11 @@ void DoorData_10::Init_49C340(u8 id, u8 x, u8 y, u8 z, u32 face, u8 bDoFlip)
     if (gMap_0x370_6F6268->get_block_4DFE10(this->field_4_x, this->field_5_y, this->field_6_z))
     {
         gMap_0x370_6F6268->ChangeBlock_4E8620(this->field_4_x, this->field_5_y, this->field_6_z, this->field_8_face, tile_word);
-        gMap_0x370_6F6268->ChangeBlock_4E8620(this->field_4_x, this->field_5_y, this->field_6_z, GetOppositeFace_4DEEB0(this->field_8_face), pInfo->field_4_internal_tile_idx);
+        gMap_0x370_6F6268->ChangeBlock_4E8620(this->field_4_x,
+                                              this->field_5_y,
+                                              this->field_6_z,
+                                              GetOppositeFace_4DEEB0(this->field_8_face),
+                                              pInfo->field_4_internal_tile_idx);
     }
     else
     {
@@ -92,8 +96,16 @@ void DoorData_10::Open_49C4E0(u8 bFlip)
             tile_idx |= 0x2000;
         }
         gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x, field_5_y, field_6_z, field_8_face, tile_idx);
-        gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x, field_5_y, field_6_z, GetOppositeFace_4DEEB0(field_8_face), tmp->field_6_open_internal_tile_idx);
-        gTileAnim_2_7052C4->AddAnim_5BC260(tmp->field_6_open_internal_tile_idx, tmp->field_0_start_frame, tmp->field_2_end_frame, tmp->field_8_speed, 1);
+        gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x,
+                                              field_5_y,
+                                              field_6_z,
+                                              GetOppositeFace_4DEEB0(field_8_face),
+                                              tmp->field_6_open_internal_tile_idx);
+        gTileAnim_2_7052C4->AddAnim_5BC260(tmp->field_6_open_internal_tile_idx,
+                                           tmp->field_0_start_frame,
+                                           tmp->field_2_end_frame,
+                                           tmp->field_8_speed,
+                                           1);
     }
 }
 
@@ -110,8 +122,16 @@ void DoorData_10::Close_49C590(u8 bDoFlip)
             block_side_word |= 0x2000; // flip
         }
         gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x, field_5_y, field_6_z, field_8_face, block_side_word);
-        gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x, field_5_y, field_6_z, GetOppositeFace_4DEEB0(field_8_face), tmp->field_4_internal_tile_idx);
-        gTileAnim_2_7052C4->AddAnim_5BC260(tmp->field_4_internal_tile_idx, tmp->field_2_end_frame, tmp->field_0_start_frame, tmp->field_8_speed, 1);
+        gMap_0x370_6F6268->ChangeBlock_4E8620(field_4_x,
+                                              field_5_y,
+                                              field_6_z,
+                                              GetOppositeFace_4DEEB0(field_8_face),
+                                              tmp->field_4_internal_tile_idx);
+        gTileAnim_2_7052C4->AddAnim_5BC260(tmp->field_4_internal_tile_idx,
+                                           tmp->field_2_end_frame,
+                                           tmp->field_0_start_frame,
+                                           tmp->field_8_speed,
+                                           1);
     }
 }
 
@@ -191,7 +211,8 @@ Door_38* Door_4D4::RegisterDoubleDoorNoCheck_49CFA0(u8 gr_id, u8 x, u8 y, u8 z, 
     }
     pDoor->AddDoorData_49CA50(gr_id, x, y, z, face);
     pDoor->AddDoorData_49CA50(gr_id, x2, y2, z, face);
-    pDoor->InitDouble_49CC00(pDoor->field_0_primary_door_data, 1, field_4D0_count - 1, check_x, check_y, check_z, check_width, check_height);
+    pDoor
+        ->InitDouble_49CC00(pDoor->field_0_primary_door_data, 1, field_4D0_count - 1, check_x, check_y, check_z, check_width, check_height);
     return pDoor;
 }
 
@@ -214,7 +235,14 @@ Door_38* Door_4D4::RegisterSingleDoor_49D170(u8 gr_id,
     this_00->field_2A_bDoFlip = flip;
     this_00->field_2B_bReversed = reversed;
     this_00->AddDoorData_49CA50(gr_id, x, y, z, face);
-    this_00->InitSingle_49CAC0(this_00->field_0_primary_door_data, 1, field_4D0_count + -1, check_x, check_y, check_z, check_width, check_height);
+    this_00->InitSingle_49CAC0(this_00->field_0_primary_door_data,
+                               1,
+                               field_4D0_count + -1,
+                               check_x,
+                               check_y,
+                               check_z,
+                               check_width,
+                               check_height);
 
     return this_00;
 }
@@ -258,7 +286,14 @@ Door_38* Door_4D4::RegisterDoubleDoor_49D1F0(u8 gr_id,
     }
     this_00->AddDoorData_49CA50(gr_id, x, y, z, face);
     this_00->AddDoorData_49CA50(gr_id, reversed, flip, z, face);
-    this_00->InitDouble_49CC00(this_00->field_0_primary_door_data, 1, field_4D0_count - 1, check_x, check_y, check_z, check_width, check_height);
+    this_00->InitDouble_49CC00(this_00->field_0_primary_door_data,
+                               1,
+                               field_4D0_count - 1,
+                               check_x,
+                               check_y,
+                               check_z,
+                               check_width,
+                               check_height);
     return this_00;
 }
 

@@ -13,10 +13,10 @@ struct AttractFile
 // InputRecorder_67F8B0::field_38_replay_state
 enum class ReplayState : s32
 {
-    Live_0 = 0,     // reads the real input devices and records them (test\replay.rep)
+    Live_0 = 0, // reads the real input devices and records them (test\replay.rep)
     Playback_1 = 1, // plays back test\replay.rep, goes back to Live_0 when it ends
     Disabled_2 = 2, // nothing is recorded
-    Attract_3 = 3,  // plays an attract replay, any input exits
+    Attract_3 = 3, // plays an attract replay, any input exits
 };
 
 #pragma pack(push)

@@ -136,7 +136,7 @@ class cSampleManager
     void PlayAtIdx_58E7F0(s32 idx);
 
     bool SampleNotDone_58E880();
-    
+
     void EndSample_58E8A0();
 
     void EndSample_58E960();

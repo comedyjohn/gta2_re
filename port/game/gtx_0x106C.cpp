@@ -4,13 +4,13 @@
 #include "Globals.hpp"
 #include "chunk.hpp"
 #include "crt_stubs.hpp"
+#include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
 #include "memory.hpp"
 #include <cstdio>
 #include <cstring>
 #include <windows.h>
-#include "enums.hpp"
 
 // Forward declarations: the functions below are in address order
 void ClearPixelsOfColourInRow_5ABAE0(u8* pData, int width, u8 clear_target);
@@ -235,7 +235,9 @@ u16 gtx_0x106C::GetFontWidth_5AA760(u16* font_type, wchar_t* pStr)
     else
     {
         // In this case letters have different widths
-        return this->field_20_sprite_index[this->field_14_sprite_base2->field_A_font + gtx_0x106C::GetSpriteIdxFromFont_5AA710(*font_type, *pStr - 33)]
+        return this
+            ->field_20_sprite_index[this->field_14_sprite_base2->field_A_font +
+                                    gtx_0x106C::GetSpriteIdxFromFont_5AA710(*font_type, *pStr - 33)]
             .field_4_width;
     }
 }
@@ -262,7 +264,8 @@ s16 gtx_0x106C::GetLineSpacing_5AA800(u16* font_type)
     }
     else
     {
-        return this->field_20_sprite_index[this->field_14_sprite_base2->field_A_font + 32 + this->field_1C_font_base->field_2_base[*font_type]]
+        return this
+            ->field_20_sprite_index[this->field_14_sprite_base2->field_A_font + 32 + this->field_1C_font_base->field_2_base[*font_type]]
             .field_5_height;
     }
 }
@@ -461,7 +464,8 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
         for (u32 delta_idx = 0; delta_idx < pDeltas->field_2_count; delta_idx++)
         {
             sprite_delta& delta = pDeltas->field_4_deltas[delta_idx];
-            delta.field_0_pData = reinterpret_cast<delta_store_entry*>(reinterpret_cast<u8*>(field_48_delta_store) + (sptr)delta.field_0_pData);
+            delta.field_0_pData =
+                reinterpret_cast<delta_store_entry*>(reinterpret_cast<u8*>(field_48_delta_store) + (sptr)delta.field_0_pData);
         }
         offset += SPRITE_DELTAS_SIZE(pDeltas->field_2_count);
     }
@@ -932,7 +936,7 @@ bool gtx_0x106C::IsCarModelInRecycleList_5AB380(u8 car_id)
         return true;
     }
 
-    // This while only ends if it finds 'car_id' or if it reaches the 
+    // This while only ends if it finds 'car_id' or if it reaches the
     // sentinel value 255, which is surely greater than 'car_id'
     while (field_64_car_recycling_info[i] < car_id)
     {

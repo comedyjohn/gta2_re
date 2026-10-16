@@ -19,8 +19,6 @@ enum class ReplayState : s32
     Attract_3 = 3, // plays an attract replay, any input exits
 };
 
-#pragma pack(push)
-#pragma pack(1)
 // DirectInput keyboard and game pads (the object has no data of its own)
 class InputDevices_1
 {
@@ -43,7 +41,6 @@ class InputDevices_1
 
     u8 field_0;
 };
-#pragma pack(pop)
 
 // One recorded input change: the rng index it happened at, the input bits and the random number
 struct InputRecord_C

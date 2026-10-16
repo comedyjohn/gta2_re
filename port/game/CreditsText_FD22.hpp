@@ -3,8 +3,6 @@
 #include "CreditsLine_6C.hpp"
 #include "Function.hpp"
 
-#pragma pack(push)
-#pragma pack(1)
 class CreditsText_FD22
 {
   public:
@@ -17,4 +15,3 @@ class CreditsText_FD22
     s16 field_0_line_count;
     CreditsLine_6C field_2_lines[600];
 };
-#pragma pack(pop)

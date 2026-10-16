@@ -2,8 +2,6 @@
 
 #include "Function.hpp"
 
-#pragma pack(push)
-#pragma pack(1)
 class PatrolPoint_3
 {
   public:
@@ -16,7 +14,6 @@ class PatrolPoint_3
     u8 field_1_y;
     u8 field_2_z;
 };
-#pragma pack(pop)
 
 // A patrol route of up to 50 waypoints
 class PatrolRoute_96

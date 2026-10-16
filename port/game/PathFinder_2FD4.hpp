@@ -6,8 +6,6 @@
 class Ped;
 
 // Entry of the search grid and of the open node list (the fields mean different things in each, see the cpp)
-#pragma pack(push)
-#pragma pack(1)
 class PathNode_8
 {
   public:
@@ -19,7 +17,6 @@ class PathNode_8
     char_type field_5_unused;
     s16 field_6_cost;
 };
-#pragma pack(pop)
 
 // Local path search for peds. Searches a 34x33 window of map tiles around the start (field_40_grid) with a best-first
 // search over field_2350_nodes, and is spread over several frames (field_2E_iteration_budget).

@@ -17,8 +17,6 @@ class Player;
 class Ang16;
 struct ScoreTableLine_18;
 
-#pragma pack(push)
-#pragma pack(1)
 struct SaveSlotInfo_52
 {
     char_type field_0_map_name[25];
@@ -30,7 +28,6 @@ struct SaveSlotInfo_52
     short field_4E_unused;
     s16 field_50_unused;
 };
-#pragma pack(pop)
 
 // todo: move
 struct SaveSlotSummary_4
@@ -71,8 +68,6 @@ struct menu_element_0x6E
 };
 
 // todo: move
-#pragma pack(push)
-#pragma pack(1)
 struct menu_option_0x82
 {
   public:
@@ -97,7 +92,6 @@ struct menu_option_0x82
     u16 field_7E_horizontal_max_idx;
     s16 field_80_menu_page_target;
 };
-#pragma pack(pop)
 
 // todo: move
 struct MenuOption_6

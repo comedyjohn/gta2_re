@@ -134,9 +134,11 @@ add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/gta2_compat.h
     DEPENDS ${compat_inputs} ${CMAKE_CURRENT_SOURCE_DIR}/tools/game_hash.cmake
     COMMENT "Hashing the game code for network compatibility")
 
-add_executable(gta2
+# The platform layer (port/platform/): Win32, DirectX, DirectPlay and Miles for the game, plus the
+# port's own tests. A library, so the unit tests link the same code as the game. The game and
+# the platform call each other, which CMake allows between static libraries.
+add_library(gta2_platform STATIC
     ${CMAKE_BINARY_DIR}/gta2_compat.h
-    platform/main.cpp
     platform/crt.cpp
     platform/wchar.cpp
     platform/win32.cpp
@@ -153,6 +155,24 @@ add_executable(gta2
     platform/ptr32.cpp
     platform/selftest.cpp
     platform/audiotest.cpp)
-gta2_game_target(gta2 -Wall -Wno-unused-function)
-target_include_directories(gta2 PRIVATE ${CMAKE_BINARY_DIR})
-target_link_libraries(gta2 PRIVATE gta2_game dear_imgui gta2_sdl gta2_net)
+gta2_game_target(gta2_platform -Wall -Wno-unused-function)
+target_include_directories(gta2_platform PRIVATE ${CMAKE_BINARY_DIR})
+target_link_libraries(gta2_platform PUBLIC gta2_game dear_imgui gta2_sdl gta2_net)
+target_link_libraries(gta2_game PUBLIC gta2_platform)
+
+add_executable(gta2 platform/main.cpp)
+gta2_game_target(gta2 -Wall)
+target_link_libraries(gta2 PRIVATE gta2_platform)
+
+# Unit tests (port/tests/): no game data, no display. `ctest --test-dir build_port/linux64`
+enable_testing()
+file(GLOB test_sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+add_library(doctest_main OBJECT tests/main/doctest_main.cpp)
+target_include_directories(doctest_main PRIVATE ${REPO_ROOT}/3rdParty/doctest)
+add_executable(gta2_tests ${test_sources} $<TARGET_OBJECTS:doctest_main>)
+gta2_game_target(gta2_tests -Wall -Wextra -Wno-unused-parameter)
+target_include_directories(gta2_tests PRIVATE ${REPO_ROOT}/3rdParty/doctest ${CMAKE_CURRENT_SOURCE_DIR}/platform)
+target_link_libraries(gta2_tests PRIVATE gta2_platform)
+add_test(NAME unit COMMAND gta2_tests)
+# The game's static initialisers write the registry: not the user's
+set_tests_properties(unit PROPERTIES ENVIRONMENT "XDG_CONFIG_HOME=${CMAKE_BINARY_DIR}/test-config")

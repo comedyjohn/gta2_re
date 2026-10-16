@@ -2,6 +2,8 @@
 // runs the whole simulation (lockstep), so the numbers it draws and the tables its maths uses must be
 // the same on a 32-bit PC, a 64-bit one and an ARM handheld. port/tools/nettest.sh compares the
 // output of builds for different systems; it must be identical.
+#include "simcheck.h"
+
 #include "ang16.hpp"
 #include "fix16.hpp"
 
@@ -25,7 +27,7 @@ struct Hash
 };
 } // namespace
 
-int port_simcheck()
+SimcheckHashes port_simcheck_hashes()
 {
     Init_trigonometry_tables();
 
@@ -60,9 +62,15 @@ int port_simcheck()
         }
     }
 
+    return {trig.h, random.h, maths.h};
+}
+
+int port_simcheck()
+{
+    const SimcheckHashes h = port_simcheck_hashes();
     printf("sin(90) %d, cos(180) %d\n", gSin_table_667A80[360].mValue, gCos_table_669260[720].mValue);
-    printf("trigonometry %016llx\n", static_cast<unsigned long long>(trig.h));
-    printf("random %016llx\n", static_cast<unsigned long long>(random.h));
-    printf("maths %016llx\n", static_cast<unsigned long long>(maths.h));
+    printf("trigonometry %016llx\n", static_cast<unsigned long long>(h.trigonometry));
+    printf("random %016llx\n", static_cast<unsigned long long>(h.random));
+    printf("maths %016llx\n", static_cast<unsigned long long>(h.maths));
     return 0;
 }

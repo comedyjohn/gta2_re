@@ -13,7 +13,7 @@ enum
     dword = 2,
     fix16_float = 3,
 };
-}; // namespace DataType
+} // namespace DataType
 
 struct PixelsToFix16Table
 {

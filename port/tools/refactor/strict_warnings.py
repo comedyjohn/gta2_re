@@ -3,6 +3,8 @@
 
     python3 port/tools/refactor/strict_warnings.py build_port/clang64 "-Wconversion -Wshadow"
     python3 port/tools/refactor/strict_warnings.py build_port/clang64 "-Wconversion" --files
+    python3 port/tools/refactor/strict_warnings.py build_port/clang64 "-Wshadow" --list -Wshadow
+(Give the flags with a leading space, " -Wshadow", or argparse takes them for options.)
 
 Replays every game/ compile command of <build-dir>/compile_commands.json with -fsyntax-only, the extra
 flags, and the -Wno-* options that hide narrowing, writable strings, multi-character constants and
@@ -52,6 +54,7 @@ def main():
     ap.add_argument("build_dir")
     ap.add_argument("flags")
     ap.add_argument("--files", action="store_true", help="counts per file instead of per warning")
+    ap.add_argument("--list", metavar="WARNING", help="prints the locations of this warning (e.g. -Wshadow) instead of counts")
     ap.add_argument("-j", type=int, default=os.cpu_count())
     args = ap.parse_args()
 
@@ -68,8 +71,12 @@ def main():
                 if key in seen:
                     continue
                 seen.add(key)
+                if args.list and m.group(4) == args.list:
+                    print(f"{m.group(1)}:{m.group(2)}:{m.group(3)}")
                 per_warning[m.group(4)] += 1
                 per_file[os.path.basename(m.group(1))] += 1
+    if args.list:
+        return
     counts = per_file if args.files else per_warning
     for name, n in counts.most_common():
         print(f"{n:6} {name}")

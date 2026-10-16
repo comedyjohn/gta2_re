@@ -87,8 +87,10 @@ function(gta2_game_target target)
     target_compile_options(${target} PRIVATE
         -include ${PORT_DIR}/include/port_prelude.h ${ARGN}
         -Wno-write-strings -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
+    # REPO_ROOT is a system directory: it is how the game reaches 3rdParty/GTA2Hax's headers, whose warnings are not ours
     target_include_directories(${target} PRIVATE
-        ${PORT_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})
+        ${PORT_DIR}/include ${FORWARDERS} ${GAME_DIR})
+    target_include_directories(${target} SYSTEM PRIVATE ${REPO_ROOT})
     target_compile_definitions(${target} PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NON_CONFORMING_SWPRINTFS)
 endfunction()
 
@@ -104,7 +106,7 @@ add_library(gta2_game STATIC
 # game's), char subscripts (chars are signed on purpose and the indices small), format truncation
 # (snprintf cuts long messages short on purpose) and unknown pragmas (GTA2Hax's headers have VC6
 # ones).
-set(game_warnings -Wall -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
+set(game_warnings -Wall -Wextra -Wextra-semi -Wundef -Wformat=2 -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
 gta2_game_target(gta2_game ${game_warnings})
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as

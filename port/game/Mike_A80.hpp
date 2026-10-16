@@ -89,7 +89,7 @@ class Mike_A80
     void sub_4FF980();
     void sub_4FF990(u32 idx);
     void sub_4FF9F0(u32 idx);
-    void sub_4FFA50(const char_type* pFormat, ...);
+    void sub_4FFA50(const char_type* pFormat, ...) __attribute__((format(printf, 2, 3)));
     void sub_4FFA90();
     void sub_4FFD90();
 

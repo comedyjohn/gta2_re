@@ -240,6 +240,7 @@ void PathFinder_2FD4::ClearGrid_5545C0()
 void PathFinder_2FD4::Init_5545E0()
 {
     memset(this->field_40_grid, 0, sizeof(this->field_40_grid));
+    field_0_ped_id = 0; // was never set before the first RemovePed_554620 (valgrind)
     field_38_bComputePathInProgress = 0;
     field_34_unused = 1;
     field_36_unused = 0;

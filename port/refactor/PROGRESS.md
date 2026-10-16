@@ -12,6 +12,8 @@
 
 - R0.5 (2026-10-16): `replaytest.sh --frames`: 10 frames per replay, identical on 3 builds and across runs; changing the HUD `$` colour turned all 4 replays red. Front-end menus are not covered (needs menu recordings, R0.8).
 
+- R0.6 (2026-10-16): `gta2 --nettest` exchanges a per-frame hash of a rand() sequence and reports `DESYNC at frame N`; `nettest.sh` scenario "a skipped rand() call is reported as a desync" passes (and failed without the check). The game's own message is untouched: Q2.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

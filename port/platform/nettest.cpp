@@ -121,12 +121,33 @@ struct Frame
     uint32_t value;
 };
 
-std::vector<uint8_t> Pack(uint8_t tag, uint32_t frame, uint32_t value)
+// The desync check (port/refactor/0-safety-net.md 0.7): every frame each player draws one rand() number,
+// as the game's simulation does, and folds it into a running hash. The hash goes out with the frame's
+// message; once a frame is complete everyone compares the others' hash with their own. A player that
+// skips one rand() call (GTA2_NET_TEST_SKIP_RAND=FRAME) differs from that frame on.
+uint32_t gSimHash = 2166136261u;
+std::vector<uint32_t> gMyHashes;                   // by frame
+std::map<DPID, std::map<uint32_t, uint32_t>> gTheirHashes; // by player, by frame
+int gDesyncs = 0;
+
+uint32_t SimStep(uint32_t frame)
 {
-    std::vector<uint8_t> b(9);
+    static const long skipFrame = getenv("GTA2_NET_TEST_SKIP_RAND") ? atol(getenv("GTA2_NET_TEST_SKIP_RAND")) : -1;
+    if (static_cast<long>(frame) != skipFrame)
+    {
+        gSimHash = (gSimHash ^ static_cast<uint32_t>(rand())) * 16777619u;
+    }
+    gMyHashes.push_back(gSimHash);
+    return gSimHash;
+}
+
+std::vector<uint8_t> Pack(uint8_t tag, uint32_t frame, uint32_t value, uint32_t hash = 0)
+{
+    std::vector<uint8_t> b(13);
     b[0] = tag;
     memcpy(&b[1], &frame, 4);
     memcpy(&b[5], &value, 4);
+    memcpy(&b[9], &hash, 4);
     return b;
 }
 
@@ -196,11 +217,13 @@ void Handle(DPID from, const uint8_t* data, DWORD size)
         }
         return;
     }
-    Check(size == 9, "message size " + std::to_string(size));
+    Check(size == 13, "message size " + std::to_string(size));
     uint32_t frame;
     uint32_t value;
     memcpy(&frame, data + 1, 4);
     memcpy(&value, data + 5, 4);
+    uint32_t hash;
+    memcpy(&hash, data + 9, 4);
     if (data[0] == 'S')
     {
         // Frames from the other players can follow in the same batch
@@ -214,6 +237,7 @@ void Handle(DPID from, const uint8_t* data, DWORD size)
     Check(frame == it->second,
           "out of order: frame " + std::to_string(frame) + " from " + gNames[from] + ", expected " + std::to_string(it->second));
     it->second++;
+    gTheirHashes[from][frame] = hash;
 }
 
 void Pump(int sleepMs)
@@ -421,6 +445,7 @@ int Run(const Options& o)
     dpchat.lpszMessage = reinterpret_cast<LPWSTR>(&chat[0]);
     Check(gDp->SendChatMessage(gMe, gGroup, 0, &dpchat) == DP_OK, "SendChatMessage");
 
+    srand(1);
     for (int frame = 0; frame < o.frames; frame++)
     {
         if (frame == o.leaveAfter)
@@ -432,7 +457,7 @@ int Run(const Options& o)
             gDp->Release();
             return 0;
         }
-        std::vector<uint8_t> m = Pack('F', frame, Expected(gMe, frame));
+        std::vector<uint8_t> m = Pack('F', frame, Expected(gMe, frame), SimStep(frame));
         if (gDp->Send(gMe, DPID_ALLPLAYERS, 0, m.data(), static_cast<DWORD>(m.size())) != DP_OK)
         {
             // Only once the session is gone, which the next message says
@@ -461,6 +486,21 @@ int Run(const Options& o)
             }
             if (all)
             {
+                // The frame is complete: compare the simulation hashes
+                for (auto& kv : gTheirHashes)
+                {
+                    auto h = kv.second.find(frame);
+                    if (h != kv.second.end() && h->second != gMyHashes[frame] && gDesyncs++ == 0)
+                    {
+                        printf("nettest %s: DESYNC at frame %d: hash %08x from %s, ours %08x\n",
+                               o.name.c_str(),
+                               frame,
+                               h->second,
+                               gNames[kv.first].c_str(),
+                               gMyHashes[frame]);
+                        fflush(stdout);
+                    }
+                }
                 break;
             }
             Pump(0);
@@ -468,6 +508,10 @@ int Run(const Options& o)
         }
     }
     Check(!o.expectLost, "the session wasn't lost");
+    if (gDesyncs)
+    {
+        Fail(std::to_string(gDesyncs) + " frames out of sync");
+    }
 
     // Wait for the chats of the players who are still here
     const uint32_t chatWait = timeGetTime();

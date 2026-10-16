@@ -124,6 +124,18 @@ r=0; for p in host p1 p2; do expect $p || r=1; done
 kill "$server"; wait "$server" 2>/dev/null
 result $r
 
+scenario "a skipped rand() call is reported as a desync at its frame"
+next_port
+run host "$a" host --players 2 --frames 100 --port $port
+GTA2_NET_TEST_SKIP_RAND=40 run p1 "$b" join --frames 100 --port $port
+wait "$pid_host" 2>/dev/null; wait "$pid_p1" 2>/dev/null
+r=0
+for p in host p1; do
+    grep -q "DESYNC at frame 40:" "$work/$p.log" || { echo "  $p didn't report a desync at frame 40"; r=1; }
+    grep -q ": OK" "$work/$p.log" && { echo "  $p said OK"; r=1; }
+done
+result $r
+
 if [ "$a" != "$b" ]; then
     scenario "the two builds compute the same simulation"
     "$a/gta2" --simcheck >"$work/sim_a.log" 2>&1

@@ -214,10 +214,10 @@ Recorded once from the build at the start of phase 1, stored outside the public 
 
 The state hash doubles as a desync detector for real network games:
 
-- [ ] Every 30 frames, each machine sends its `total` hash with its inputs (`NetPlay`'s per-frame
+- [~] (harness only, see QUESTIONS Q2) Every 30 frames, each machine sends its `total` hash with its inputs (`NetPlay`'s per-frame
       message); a mismatch is logged with the frame and the component hashes. That turns a "the game
       went strange" report into a frame number.
-- [ ] `nettest.sh` checks that all players report the same hashes.
+- [x] `nettest.sh` checks that all players report the same hashes.
 
 ### 0.8 Unit tests
 

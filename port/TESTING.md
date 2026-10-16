@@ -5,7 +5,7 @@
 | Unit tests (`port/tests/`) | no | `Fix16`, angles and tables, `rand()`, pools, `BitSet32`, text lookups, the script interpreter's control flow, map block queries | `ctest --test-dir build_port/linux64 --output-on-failure` |
 | `gta2 --selftest` | no | the renderer, pixel by pixel | `xvfb-run -a build_port/linux64/gta2 --selftest` |
 | `gta2 --audiotest` | no | the sound mixer | `build_port/linux64/gta2 --audiotest` |
-| `tools/nettest.sh` | no | network games, also between 32 and 64-bit builds | `port/tools/nettest.sh build_port/linux32 build_port/linux64` |
+| `tools/nettest.sh` | no | network games, also between 32 and 64-bit builds; every frame carries a hash of the players' `rand()` sequence, and a desync is reported with its frame | `port/tools/nettest.sh build_port/linux32 build_port/linux64` |
 | `tools/refactor/init_order.py` | no | no global is initialised from another file's global | `python3 port/tools/refactor/init_order.py` |
 | **Replay tests** (`tools/replaytest.sh`) | yes | **what the game computes**: the simulation's state after every update | `port/tools/replaytest.sh build_port/linux32 build_port/linux64` |
 

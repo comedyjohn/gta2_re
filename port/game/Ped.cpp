@@ -107,6 +107,9 @@ DEFINE_GLOBAL_INIT(Fix16, kFpQuarter_678484, Fix16(0x1000, 0), 0x678484);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint2_678488, Fix16(0xCCC, 0), 0x678488);
 DEFINE_GLOBAL(Ped*, gLastProcessedPed_6787C0, 0x6787C0);
 DEFINE_GLOBAL_INIT(Fix16, gDummyW_678530, kFpPoint2_678488, 0x678530);
+// Here, after gDummyW_678530, as in the original (0x462D80): in Char_Pool.cpp its initialiser ran
+// before this file's and read 0
+DEFINE_GLOBAL_INIT(Fix16, gDummyH_678584, gDummyW_678530, 0x678584);
 DEFINE_GLOBAL_INIT(Fix16, gDummyZ_67841C, kFpQuarter_678484, 0x67841C);
 DEFINE_GLOBAL(Object_2C*, dword_678558, 0x678558);
 DEFINE_GLOBAL(char_type, gNumberBusCustomers_6787D3, 0x6787D3);

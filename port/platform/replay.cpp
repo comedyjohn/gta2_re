@@ -613,6 +613,11 @@ void port_replay_after_update()
     }
 }
 
+bool port_replay_headless()
+{
+    return gActive && gOptions.record.empty() && !gOptions.draw;
+}
+
 const char* port_replay_capture_file()
 {
     if (!gActive)

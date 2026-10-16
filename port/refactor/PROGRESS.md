@@ -8,6 +8,8 @@
 
 - R0.3 (2026-10-16): `valgrind.sh`; 3 findings fixed (Q1, A); all 4 replays CLEAN under valgrind on linux64.
 
+- R0.4 (2026-10-16): headless replays: no-op GL functions + SDL dummy video driver; `replaytest.sh` uses Xvfb only with `--draw`. 12 PASS with no DISPLAY; `--draw` and `--selftest` unchanged.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

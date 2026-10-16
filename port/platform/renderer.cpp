@@ -20,6 +20,7 @@
 #include <string.h>
 
 #include <algorithm>
+#include <type_traits>
 #include <vector>
 
 // ---------------------------------------------------------------- OpenGL loading
@@ -40,6 +41,71 @@ bool port_gl_load()
     PORT_GL_FUNCTIONS(PORT_GL_LOAD)
 #undef PORT_GL_LOAD
     return ok;
+}
+
+// The functions of a headless replay (port_replay_headless): they draw nothing, and answer what the
+// renderer asks of them (ids, compile and link status) so that it runs unchanged
+namespace
+{
+GLuint gNullIds = 0;
+void NullIds(GLsizei n, GLuint* ids)
+{
+    for (GLsizei i = 0; i < n; i++)
+    {
+        ids[i] = ++gNullIds;
+    }
+}
+void NullStatus(GLuint, GLenum, GLint* params)
+{
+    *params = 1;
+}
+GLuint NullCreate(GLenum)
+{
+    return ++gNullIds;
+}
+GLuint NullCreateProgram()
+{
+    return ++gNullIds;
+}
+GLint NullLocation(GLuint, const GLchar*)
+{
+    return 0;
+}
+const GLubyte* NullString(GLenum)
+{
+    return reinterpret_cast<const GLubyte*>("headless");
+}
+void NullLog(GLuint, GLsizei, GLsizei* len, GLchar*)
+{
+    if (len)
+    {
+        *len = 0;
+    }
+}
+void NullRead(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, void* data)
+{
+    memset(data, 0, static_cast<size_t>(w) * h * 4);
+}
+} // namespace
+
+void port_gl_load_null()
+{
+    // Every function does nothing; the few below that return something or fill an output are replaced
+#define PORT_GL_NULL(ret, name, params) \
+    name = [] params -> std::type_identity_t<ret> { return std::type_identity_t<ret>(); };
+    PORT_GL_FUNCTIONS(PORT_GL_NULL)
+#undef PORT_GL_NULL
+    glGenTextures = NullIds;
+    glGenBuffers = NullIds;
+    glGetShaderiv = NullStatus;
+    glGetProgramiv = NullStatus;
+    glCreateShader = NullCreate;
+    glCreateProgram = NullCreateProgram;
+    glGetUniformLocation = NullLocation;
+    glGetString = NullString;
+    glGetShaderInfoLog = NullLog;
+    glGetProgramInfoLog = NullLog;
+    glReadPixels = NullRead;
 }
 
 namespace
@@ -64,13 +130,20 @@ class GLRenderer
         {
             return true;
         }
-        if (!plat::OpenWindow(1280, 960, "GTA2"))
+        if (port_replay_headless())
         {
-            return false;
+            port_gl_load_null();
         }
-        if (!port_gl_load())
+        else
         {
-            return false;
+            if (!plat::OpenWindow(1280, 960, "GTA2"))
+            {
+                return false;
+            }
+            if (!port_gl_load())
+            {
+                return false;
+            }
         }
         printf("OpenGL %s on %s\n", glGetString(GL_VERSION), glGetString(GL_RENDERER));
 

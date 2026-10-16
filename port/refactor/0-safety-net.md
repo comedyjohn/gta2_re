@@ -155,7 +155,7 @@ position or the number of random numbers drawn:
 - [x] Starts the game with a scratch registry (a temporary `XDG_CONFIG_HOME`), copies the replay to
       `test/replay.rep` in a temporary game directory that links to the real data, and sets
       `play_replay`, `do_exit_after_replay` and `skip_draw` (headless: no waiting, no drawing).
-- [ ] Opens no window: a null renderer (`port_renderer_lookup` hands out no-op `gbh_*`/`Vid_*`
+- [x] Opens no window: a null renderer (`port_renderer_lookup` hands out no-op `gbh_*`/`Vid_*`
       functions) and `SDL_AUDIODRIVER=dummy`. Sound logic still runs, so audio code is covered.
 - [x] After every `ExecuteGame_4DA780`, writes `frame rng_count total rng sprites peds cars objects
       players script police` (hex) to the hash log, every K frames (default 1).

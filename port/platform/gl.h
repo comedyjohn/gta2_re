@@ -114,3 +114,5 @@ PORT_GL_FUNCTIONS(PORT_GL_DECLARE)
 
 // Loads every function above; false (with the missing name printed) if one is unavailable
 bool port_gl_load();
+// Loads functions that draw nothing (headless replays, see port_replay_headless)
+void port_gl_load_null();

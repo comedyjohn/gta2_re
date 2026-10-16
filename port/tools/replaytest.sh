@@ -87,11 +87,11 @@ for build in "$@"; do
         echo "$build $rep $work/$tag.$name.log $((100 + i * 3))"
     done
 done >"$work/pairs"
-# One game a pair; xvfb-run keeps its window off the screen (it doesn't draw anyway: skip_draw)
+# One game a pair. Without --draw the game opens no window (a headless replay); with it, xvfb-run keeps the window off the screen
 export game
 export GTA2_REPLAY_ARGS="${GTA2_REPLAY_ARGS:-}"
 xargs -P "$jobs" -L 1 sh -c '
-    if command -v xvfb-run >/dev/null 2>&1; then
+    if command -v xvfb-run >/dev/null 2>&1 && case " $GTA2_REPLAY_ARGS " in *" --draw "*) true ;; *) false ;; esac; then
         xvfb-run -a -n "$4" "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" $GTA2_REPLAY_ARGS >"$3.out" 2>&1
     else
         "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" $GTA2_REPLAY_ARGS >"$3.out" 2>&1

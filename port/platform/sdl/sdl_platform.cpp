@@ -1,5 +1,6 @@
 // SDL2 implementation of port/platform/platform.h. Compiled without port_prelude.h.
 #include "../platform.h"
+#include "../../include/port_replay.h"
 
 #include <SDL.h>
 
@@ -202,6 +203,10 @@ bool Init()
     for (const ScancodeDik& m : kScancodeDik)
     {
         gScancodeToDik[m.mScancode] = m.mDik;
+    }
+    if (port_replay_headless())
+    {
+        setenv("SDL_VIDEODRIVER", "dummy", 1); // no display needed
     }
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS) != 0)
     {

@@ -9,3 +9,7 @@ void port_replay_after_update();
 // Present (renderer.cpp): the file the picture just drawn should be written to as a PPM (--screenshot N:FILE,
 // after update N has been drawn), or null
 const char* port_replay_capture_file();
+
+// True for gta2 --replay without --draw: nothing is drawn, so the renderer needs no window and no OpenGL
+// (renderer.cpp uses no-op GL functions, platform.cpp the SDL dummy video driver)
+bool port_replay_headless();

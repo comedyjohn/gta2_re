@@ -14,7 +14,7 @@ mkdir -p "$out"
 failed=0
 for rep in "$corpus"/replays/*.rep; do
     name=$(basename "$rep" .rep)
-    if xvfb-run -a valgrind --error-exitcode=1 --track-origins=yes --log-file="$out/$name.vg" \
+    if valgrind --error-exitcode=1 --track-origins=yes --log-file="$out/$name.vg" \
         "$build/gta2" --replay "$rep" --game-dir "$game" --hash-log "$out/$name.log" >"$out/$name.out" 2>&1; then
         echo "CLEAN $name"
     else

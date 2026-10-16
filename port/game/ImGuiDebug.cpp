@@ -1076,7 +1076,7 @@ void LoadMapsFromData(Network_Enumerated_Map* pOut, u16& num_maps_loaded)
 
     u32 map_count = 0;
     HANDLE hFindFile = FindFirstFileA(FileName, &findFileData);
-    if (hFindFile != (HANDLE)-1)
+    if (hFindFile != reinterpret_cast<HANDLE>(-1))
     {
         map_count = 1;
         strcpy(enumerated_mmp_name[0].field_0_map_name, findFileData.cFileName);
@@ -1099,21 +1099,36 @@ void LoadMapsFromData(Network_Enumerated_Map* pOut, u16& num_maps_loaded)
         for (u32 i = 0; i < map_count; i++)
         {
             strcpy(FileName, "data\\");
-            strcat(FileName, (const char*)enumerated_mmp_name[i].field_0_map_name);
-            GetPrivateProfileStringA("MapFiles", "GMPFile", "", (LPSTR)(enumerated_mmp_name[i].field_0_map_name), 0x103u, FileName);
-            GetPrivateProfileStringA("MapFiles", "STYFile", "", (LPSTR)(enumerated_mmp_name[i].field_104_style_name), 0x103u, FileName);
-            GetPrivateProfileStringA("MapFiles", "SCRFile", "", (LPSTR)(enumerated_mmp_name[i].field_208_script_name), 0x103u, FileName);
+            strcat(FileName, static_cast<const char*>(enumerated_mmp_name[i].field_0_map_name));
+            GetPrivateProfileStringA("MapFiles",
+                                     "GMPFile",
+                                     "",
+                                     static_cast<LPSTR>(enumerated_mmp_name[i].field_0_map_name),
+                                     0x103u,
+                                     FileName);
+            GetPrivateProfileStringA("MapFiles",
+                                     "STYFile",
+                                     "",
+                                     static_cast<LPSTR>(enumerated_mmp_name[i].field_104_style_name),
+                                     0x103u,
+                                     FileName);
+            GetPrivateProfileStringA("MapFiles",
+                                     "SCRFile",
+                                     "",
+                                     static_cast<LPSTR>(enumerated_mmp_name[i].field_208_script_name),
+                                     0x103u,
+                                     FileName);
             GetPrivateProfileStringA("MapFiles",
                                      "Description",
                                      "",
-                                     (LPSTR)(enumerated_mmp_name[i].field_30C_description),
+                                     static_cast<LPSTR>(enumerated_mmp_name[i].field_30C_description),
                                      0x103u,
                                      FileName);
             // Now check if the map exists
             _chdir("data");
-            if (GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_0_map_name) != INVALID_FILE_ATTRIBUTES &&
-                GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_104_style_name) != INVALID_FILE_ATTRIBUTES &&
-                GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_208_script_name) != INVALID_FILE_ATTRIBUTES)
+            if (GetFileAttributesA(static_cast<LPCSTR>(enumerated_mmp_name[i].field_0_map_name)) != INVALID_FILE_ATTRIBUTES &&
+                GetFileAttributesA(static_cast<LPCSTR>(enumerated_mmp_name[i].field_104_style_name)) != INVALID_FILE_ATTRIBUTES &&
+                GetFileAttributesA(static_cast<LPCSTR>(enumerated_mmp_name[i].field_208_script_name)) != INVALID_FILE_ATTRIBUTES)
             {
                 memcpy(&pOut[total_map_count], &enumerated_mmp_name[i], sizeof(Network_Enumerated_Map));
                 strcpy(&mmp_maps_description[total_map_count][0],
@@ -1438,7 +1453,7 @@ void ImGuiDebugDraw()
             while (pCarIter)
             {
                 char buffer[128];
-                snprintf(buffer, sizeof(buffer), "Car %S %p", pCarIter->GetCarStr_439F80(), (void*)pCarIter);
+                snprintf(buffer, sizeof(buffer), "Car %S %p", pCarIter->GetCarStr_439F80(), static_cast<void*>(pCarIter));
                 if (ImGui::TreeNode(buffer))
                 {
 
@@ -2560,7 +2575,7 @@ void ImGuiDebugDraw()
                             {
                                 if (brief->field_C_pNext)
                                 {
-                                    ImGui::Text("Text: %s", (const char*)brief->field_C_pNext->field_0_brief_id_str);
+                                    ImGui::Text("Text: %s", static_cast<const char*>(brief->field_C_pNext->field_0_brief_id_str));
                                 }
                                 else
                                 {
@@ -3308,10 +3323,11 @@ void ImGuiDebugDraw()
             {
                 ImGui::Value("Total loaded maps", total_num_maps_loaded);
                 static int currentMapIndex = 0;
-                if (ImGui::Combo("Map",
-                                 &currentMapIndex,
-                                 (const char*)flat_char_array(reinterpret_cast<char*>(mmp_maps_description), total_num_maps_loaded),
-                                 total_num_maps_loaded))
+                if (ImGui::Combo(
+                        "Map",
+                        &currentMapIndex,
+                        static_cast<const char*>(flat_char_array(reinterpret_cast<char*>(mmp_maps_description), total_num_maps_loaded)),
+                        total_num_maps_loaded))
                 {
                     // Map selection changed
                 }

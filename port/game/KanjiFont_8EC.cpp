@@ -256,7 +256,7 @@ void KanjiFont_8EC::RenderSmallGlyph_4D2610(wchar_t text_char)
     }
     pgbh_LockTexture(field_8D8_pTexture);
     KanjiFont_8EC::ExpandSmallGlyph_4D2240(reinterpret_cast<char_type*>(&field_8C8_pKBIT[32 * glyph_idx])); // OBS: probably a pointer
-    KanjiFont_8EC::OutlineGlyph_4D2150((sptr)field_8D0_pSprtData, 16, 17);
+    KanjiFont_8EC::OutlineGlyph_4D2150(reinterpret_cast<sptr>(field_8D0_pSprtData), 16, 17);
     pgbh_UnlockTexture(field_8D8_pTexture);
 }
 
@@ -276,7 +276,7 @@ void KanjiFont_8EC::RenderLargeGlyph_4D2690(wchar_t text_char)
     }
     pgbh_LockTexture(field_8E4_pTexture);
     KanjiFont_8EC::ExpandLargeGlyph_4D23B0(reinterpret_cast<char_type*>(&field_8C8_pKBIT[32 * glyph_idx])); // OBS: probably a pointer
-    KanjiFont_8EC::OutlineGlyph_4D2150((sptr)field_8DC_pSprtData, 32, 34);
+    KanjiFont_8EC::OutlineGlyph_4D2150(reinterpret_cast<sptr>(field_8DC_pSprtData), 32, 34);
     pgbh_UnlockTexture(field_8E4_pTexture);
 }
 

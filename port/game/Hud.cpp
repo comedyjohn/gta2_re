@@ -2244,7 +2244,7 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                 field_502_face_idx = 8; // neutral face
             }
             field_508_num_lines = gText_0x14_704DFC->InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                           (const wchar_t*)_5B5F90,
+                                                                                           static_cast<const wchar_t*>(_5B5F90),
                                                                                            MaxLineWidth_62689C,
                                                                                            gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);

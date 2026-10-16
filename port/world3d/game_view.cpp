@@ -1,4 +1,5 @@
 #include "game_view.h"
+#include "camera.h"
 
 #include "Camera.hpp"
 #include "GameSession_578.hpp"
@@ -52,5 +53,26 @@ std::string StylePath()
 {
     const char* name = gGameSession_67E8E0.GetStyleName_4C5950();
     return name ? name : "";
+}
+} // namespace world3d
+
+namespace world3d
+{
+GameCamera ReadCamera()
+{
+    GameCamera cam;
+    const Camera_0xBC* c = gViewCamera_676978;
+    if (!c)
+    {
+        return cam;
+    }
+    cam.camX = c->field_98_cur_pos.field_0_x.ToFloat();
+    cam.camY = c->field_98_cur_pos.field_4_y.ToFloat();
+    cam.camZ = c->field_98_cur_pos.field_8_z.ToFloat();
+    cam.f = c->field_60_screen_scale.x.ToFloat();
+    cam.cx = static_cast<float>(c->field_70_screen_px_center_x);
+    cam.cy = static_cast<float>(c->field_74_screen_px_center_y);
+    cam.valid = true;
+    return cam;
 }
 } // namespace world3d

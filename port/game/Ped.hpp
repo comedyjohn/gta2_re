@@ -244,7 +244,6 @@ class Ped
     void ReactToAttacker_465B20();
     bool IsAttackingTargetPed_465CD0();
     bool IsPedAThreat_465D00(Ped* pTargetPed);
-    inline bool IsPedAThreat_Inline_465D00(Ped* pTargetPed);
     char_type IsInvisibleOnFoot_466B70();
     char_type IsThreatToSearchingPed_4661F0();
     Ped* FindBestTargetPed_Mode1_466B90(s32 max_x_check);

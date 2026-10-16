@@ -2,6 +2,8 @@
 #include "overlay_font.h"
 
 #include "Game_0x40.hpp"
+#include "char.hpp"
+#include "winmain.hpp"
 #include "InputRecorder_67F8B0.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
@@ -10,6 +12,7 @@
 #include <dinput.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 namespace overlay
@@ -608,9 +611,13 @@ bool OnKey(uint8_t dik, bool down)
     return true;
 }
 
+static int gLastWanted = 0;
+
 uint32_t SteerWithStick(uint32_t bits)
 {
     static bool injected = false;
+    static bool scaled = false; // the character's run speed is scaled to the stick
+    static Fix16 baseSpeed;
     const uint32_t kMoveBits = 0xF; // Forward, Backward, Left, Right
     plat::PadState pad;
     bool active = false;
@@ -623,16 +630,37 @@ uint32_t SteerWithStick(uint32_t bits)
         const double x = pad.axisX / 32767.0;
         const double y = pad.axisY / 32767.0;
         // The stick's own trigger point (see dinput.cpp's Trigger)
-        if (gWorldDirections && ped && !ped->get_car_416B60() && ped->field_168_game_object && x * x + y * y > 0.4 * 0.4)
+        const double size = sqrt(x * x + y * y);
+        if (gWorldDirections && ped && !ped->get_car_416B60() && ped->field_168_game_object && size > 0.25)
         {
+            // The game has one walking speed and its ramp up to it; a light push gets a slower one. Not
+            // in a network game: the other machines would not know about it.
+            Char_B4* body = ped->field_168_game_object;
+            if (!scaled)
+            {
+                baseSpeed = body->field_3C_run_or_jump_speed;
+            }
+            if (!bStartNetworkGame_7081F0)
+            {
+                double factor = (size - 0.25) / 0.65;
+                factor = factor > 1.0 ? 1.0 : (factor < 0.2 ? 0.2 : factor);
+                body->field_3C_run_or_jump_speed = Fix16(static_cast<s32>(baseSpeed.mValue * factor), 0);
+                scaled = true;
+            }
             // Rotation 0 faces down the screen and grows to the left (found by playing: up walked down),
             // 1440 to a turn
             const double wanted = atan2(x, y) * 1440.0 / (2.0 * M_PI);
-            int diff = static_cast<int>(lround(wanted)) - ped->GetRotation().rValue;
+            gLastWanted = static_cast<int>(lround(wanted));
+            int diff = gLastWanted - ped->GetRotation().rValue;
             diff = ((diff % 1440) + 1440 + 720) % 1440 - 720;
             // Stop pressing a turn once the speed it has built up would carry it there
-            const int speed = player->field_8_turn_speed.rValue < 0 ? -player->field_8_turn_speed.rValue
-                                                                     : player->field_8_turn_speed.rValue;
+            // The turn speed is an angle: a speed to the right is just under 1440
+            int speed = player->field_8_turn_speed.rValue;
+            speed = ((speed + 720) % 1440 + 1440) % 1440 - 720;
+            if (speed < 0)
+            {
+                speed = -speed;
+            }
             const int dead = speed > 12 ? speed : 12;
             if (diff > dead)
             {
@@ -648,6 +676,27 @@ uint32_t SteerWithStick(uint32_t bits)
             }
             active = true;
         }
+    }
+    // GTA2_STEERLOG=file: one line per frame the stick steers, for working out why it walks wrong
+    static FILE* log = getenv("GTA2_STEERLOG") ? fopen(getenv("GTA2_STEERLOG"), "w") : nullptr;
+    if (log && (active || injected))
+    {
+        Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+        Ped* ped = player ? player->field_2C4_player_ped : nullptr;
+        fprintf(log, "stick %6d %6d  rot %4d  turn %4d  wanted %4d  keys %c%c%c  inBefore %x out %x\n", pad.axisX, pad.axisY,
+                ped ? ped->GetRotation().rValue : -1, player ? player->field_8_turn_speed.rValue : 0, gLastWanted,
+                (mine & 1) ? 'F' : '-', (mine & 4) ? 'L' : '-', (mine & 8) ? 'R' : '-', bits & 0xF, active ? (bits & ~kMoveBits) | mine : bits & ~kMoveBits);
+        fflush(log);
+    }
+    if (!active && scaled)
+    {
+        Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+        Ped* ped = player ? player->field_2C4_player_ped : nullptr;
+        if (ped && ped->field_168_game_object)
+        {
+            ped->field_168_game_object->field_3C_run_or_jump_speed = baseSpeed;
+        }
+        scaled = false;
     }
     if (active)
     {

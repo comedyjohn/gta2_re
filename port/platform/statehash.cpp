@@ -387,6 +387,17 @@ uint64_t HashCars(std::string* dump, const PoolMap& pools)
         }
     }
     h.EndItem();
+    // How many cars of each kind exist: decides which kind the next spawn is (CanAllocateCarOfKind)
+    const CarManager_6C& m = *gCarManager_6C_677930;
+    h.Add("count_recycled", m.field_28_recycled_cars);
+    h.Add("count_paramedic", m.field_2C_paramedic_cars);
+    h.Add("count_firefighter", m.field_30_firefighter_cars);
+    h.Add("count_unit", m.field_34_unit_cars);
+    h.Add("count_roadblock", m.field_38_roadblock_cars);
+    h.Add("count_mission", m.field_3C_mission_cars);
+    h.Add("count_proto_recycled", m.field_40_proto_recycled_cars);
+    h.Add("count_parked", m.field_44_parked_cars);
+    h.Add("count_kind10", m.field_48_kind10_cars);
     return h.Value();
 }
 

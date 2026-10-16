@@ -17,6 +17,7 @@
 #include "3rdParty/mss.h"
 
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,6 +25,13 @@
 #include <vector>
 
 bool port_audio_manual; // --audiotest: no device; the test pulls frames with port_audio_mix
+
+// The audio event log (see port_audio_log_open): what the game's sound code asked the mixer to do,
+// hashed into a running value the replay tests compare, and optionally written out as text.
+long port_audio_frame; // the update the replay is at, for the text log
+static uint64_t gAudioHash = 14695981039346656037ull; // FNV-1a basis
+static uint64_t gAudioEvents;
+static FILE* gAudioText;
 
 namespace
 {
@@ -86,6 +94,63 @@ struct Lock
         plat::UnlockAudio();
     }
 };
+
+enum AudioEvent
+{
+    EV_SET_ADDRESS = 1,
+    EV_START_SAMPLE,
+    EV_END_SAMPLE,
+    EV_SAMPLE_RATE,
+    EV_SAMPLE_VOLUME,
+    EV_SAMPLE_PAN,
+    EV_SAMPLE_LOOP_COUNT,
+    EV_SAMPLE_LOOP_BLOCK,
+    EV_MASTER_VOLUME,
+    EV_OPEN_STREAM,
+    EV_CLOSE_STREAM,
+    EV_START_STREAM,
+    EV_STREAM_VOLUME,
+    EV_STREAM_RATE,
+    EV_STREAM_LOOP_COUNT,
+    EV_STREAM_POSITION,
+};
+
+const char* const kAudioEventNames[] = {"", "set_address", "start_sample", "end_sample", "sample_rate", "sample_volume", "sample_pan",
+                                        "sample_loop_count", "sample_loop_block", "master_volume", "open_stream", "close_stream",
+                                        "start_stream", "stream_volume", "stream_rate", "stream_loop_count", "stream_position"};
+
+void HashValue(uint64_t v)
+{
+    for (int i = 0; i < 8; i++)
+    {
+        gAudioHash = (gAudioHash ^ ((v >> (8 * i)) & 0xFF)) * 1099511628211ull;
+    }
+}
+
+// Handles are slots of the driver's tables, so the log is the same from run to run (never addresses)
+void LogAudio(AudioEvent ev, int slot, int64_t a = 0, int64_t b = 0)
+{
+    gAudioEvents++;
+    HashValue(ev);
+    HashValue(static_cast<uint64_t>(slot));
+    HashValue(static_cast<uint64_t>(a));
+    HashValue(static_cast<uint64_t>(b));
+    if (gAudioText)
+    {
+        fprintf(gAudioText, "%ld %s %d %lld %lld\n", port_audio_frame, kAudioEventNames[ev], slot, static_cast<long long>(a),
+                static_cast<long long>(b));
+    }
+}
+
+int SlotOf(HSAMPLE s)
+{
+    return static_cast<int>(reinterpret_cast<Sample*>(s) - gDriver.mSamples);
+}
+
+int SlotOf(HSTREAM s)
+{
+    return static_cast<int>(reinterpret_cast<Stream*>(s) - gDriver.mStreams);
+}
 
 Sample* ToSample(HSAMPLE s)
 {
@@ -478,6 +543,7 @@ DXDEC void AILCALL AIL_set_sample_address(HSAMPLE S, void FAR* start, U32 len)
     {
         Lock lock;
         Sample& s = *ToSample(S);
+        LogAudio(EV_SET_ADDRESS, SlotOf(S), len);
         s.mStatus = SMP_DONE; // a new address stops what was playing
         s.mData = static_cast<const U8*>(start);
         s.mLen = len;
@@ -501,6 +567,7 @@ DXDEC void AILCALL AIL_start_sample(HSAMPLE S)
     {
         Lock lock;
         Sample& s = *ToSample(S);
+        LogAudio(EV_START_SAMPLE, SlotOf(S), s.mLen, s.mRate);
         s.mPos = 0;
         s.mLoopsLeft = LoopsLeft(s.mLoopCount);
         s.mStatus = s.mData && s.mLen ? SMP_PLAYING : SMP_DONE;
@@ -512,6 +579,7 @@ DXDEC void AILCALL AIL_end_sample(HSAMPLE S)
     if (S)
     {
         Lock lock;
+        LogAudio(EV_END_SAMPLE, SlotOf(S));
         ToSample(S)->mStatus = SMP_DONE;
     }
 }
@@ -521,6 +589,7 @@ DXDEC void AILCALL AIL_set_sample_playback_rate(HSAMPLE S, S32 playback_rate)
     if (S)
     {
         Lock lock;
+        LogAudio(EV_SAMPLE_RATE, SlotOf(S), playback_rate);
         ToSample(S)->mRate = playback_rate;
     }
 }
@@ -530,6 +599,7 @@ DXDEC void AILCALL AIL_set_sample_volume(HSAMPLE S, S32 volume)
     if (S)
     {
         Lock lock;
+        LogAudio(EV_SAMPLE_VOLUME, SlotOf(S), volume);
         ToSample(S)->mVolume = volume;
     }
 }
@@ -539,6 +609,7 @@ DXDEC void AILCALL AIL_set_sample_pan(HSAMPLE S, S32 pan)
     if (S)
     {
         Lock lock;
+        LogAudio(EV_SAMPLE_PAN, SlotOf(S), pan);
         ToSample(S)->mPan = pan;
     }
 }
@@ -549,6 +620,7 @@ DXDEC void AILCALL AIL_set_sample_loop_count(HSAMPLE S, S32 loop_count)
     {
         Lock lock;
         Sample& s = *ToSample(S);
+        LogAudio(EV_SAMPLE_LOOP_COUNT, SlotOf(S), loop_count);
         s.mLoopCount = loop_count;
         if (s.mStatus == SMP_PLAYING)
         {
@@ -562,6 +634,7 @@ DXDEC void AILCALL AIL_set_sample_loop_block(HSAMPLE S, S32 loop_start_offset, S
     if (S)
     {
         Lock lock;
+        LogAudio(EV_SAMPLE_LOOP_BLOCK, SlotOf(S), loop_start_offset, loop_end_offset);
         ToSample(S)->mLoopStart = loop_start_offset;
         ToSample(S)->mLoopEnd = loop_end_offset;
     }
@@ -580,6 +653,7 @@ DXDEC U32 AILCALL AIL_sample_status(HSAMPLE S)
 DXDEC void AILCALL AIL_set_digital_master_volume(HDIGDRIVER dig, S32 master_volume)
 {
     Lock lock;
+    LogAudio(EV_MASTER_VOLUME, 0, master_volume);
     gDriver.mMasterVolume = master_volume;
 }
 
@@ -624,6 +698,12 @@ DXDEC HSTREAM AILCALL AIL_open_stream(HDIGDRIVER dig, char FAR* filename, S32 st
             s.mVolume = 127;
             s.mPan = 64;
             s.mLoopCount = 1;
+            uint64_t nameHash = 14695981039346656037ull; // which file, by its name's characters
+            for (const char* c = filename; *c; c++)
+            {
+                nameHash = (nameHash ^ static_cast<unsigned char>(*c)) * 1099511628211ull;
+            }
+            LogAudio(EV_OPEN_STREAM, SlotOf(reinterpret_cast<HSTREAM>(&s)), static_cast<int64_t>(nameHash), wav.frames);
             return reinterpret_cast<HSTREAM>(&s);
         }
     }
@@ -639,6 +719,7 @@ DXDEC void AILCALL AIL_close_stream(HSTREAM stream)
         {
             Lock lock;
             Stream& s = *ToStream(stream);
+            LogAudio(EV_CLOSE_STREAM, SlotOf(stream));
             wav = s.mWav;
             s.mAllocated = false;
             s.mStatus = SMP_FREE;
@@ -654,6 +735,7 @@ DXDEC void AILCALL AIL_start_stream(HSTREAM stream)
     {
         Lock lock;
         Stream& s = *ToStream(stream);
+        LogAudio(EV_START_STREAM, SlotOf(stream), s.mWav.frames);
         s.mPos = 0;
         s.mLoopsLeft = LoopsLeft(s.mLoopCount);
         s.mStatus = SMP_PLAYING;
@@ -665,6 +747,7 @@ DXDEC void AILCALL AIL_set_stream_volume(HSTREAM stream, S32 volume)
     if (stream)
     {
         Lock lock;
+        LogAudio(EV_STREAM_VOLUME, SlotOf(stream), volume);
         ToStream(stream)->mVolume = volume;
     }
 }
@@ -684,6 +767,7 @@ DXDEC void AILCALL AIL_set_stream_playback_rate(HSTREAM stream, S32 rate)
     if (stream)
     {
         Lock lock;
+        LogAudio(EV_STREAM_RATE, SlotOf(stream), rate);
         ToStream(stream)->mRate = rate;
     }
 }
@@ -704,6 +788,7 @@ DXDEC void AILCALL AIL_set_stream_loop_count(HSTREAM stream, S32 count)
     {
         Lock lock;
         Stream& s = *ToStream(stream);
+        LogAudio(EV_STREAM_LOOP_COUNT, SlotOf(stream), count);
         s.mLoopCount = count;
         if (s.mStatus == SMP_PLAYING)
         {
@@ -728,6 +813,7 @@ DXDEC void AILCALL AIL_set_stream_ms_position(HSTREAM S, S32 milliseconds)
     {
         Lock lock;
         Stream& s = *ToStream(S);
+        LogAudio(EV_STREAM_POSITION, SlotOf(S), milliseconds);
         const double frame = static_cast<double>(milliseconds < 0 ? 0 : milliseconds) * s.mWav.rate / 1000.0;
         s.mPos = frame < s.mWav.frames ? frame : s.mWav.frames;
     }
@@ -825,4 +911,21 @@ DXDEC void AILCALL AIL_set_3D_position(H3DPOBJECT obj, F32 X, F32 Y, F32 Z)
 DXDEC void AILCALL
 AIL_set_3D_sample_float_distances(H3DSAMPLE S, F32 max_front_dist, F32 min_front_dist, F32 max_back_dist, F32 min_back_dist)
 {
+}
+// The audio event log: a running hash of every call the game's sound code made to the mixer, and how
+// many there were. Hashed values only, so it is the same in every build; sample completion (which
+// depends on the mixer thread's timing) is deliberately not part of it, only what the game asked for.
+uint64_t port_audio_event_hash(uint64_t* events)
+{
+    if (events)
+    {
+        *events = gAudioEvents;
+    }
+    return gAudioHash;
+}
+
+// Also writes every call as a line of text: "update event slot arg1 arg2"
+void port_audio_log_open(FILE* f)
+{
+    gAudioText = f;
 }

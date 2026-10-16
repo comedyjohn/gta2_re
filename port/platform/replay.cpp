@@ -33,6 +33,14 @@
 
 // No std::filesystem: the prelude's _WIN32 gives it wchar_t paths
 
+// The audio event log (platform/mss.cpp)
+extern long port_audio_frame;
+uint64_t port_audio_event_hash(uint64_t* events);
+void port_audio_log_open(FILE* f);
+extern bool port_audio_manual;
+void port_audio_mix(int16_t* out, int frames);
+int port_audio_rate();
+
 namespace
 {
 struct Options
@@ -42,6 +50,7 @@ struct Options
     std::string map = "wil";
     std::string gameDir = ".";
     std::string hashLog; // empty: stdout when replaying, none when recording
+    std::string audioLog; // every call the sound code makes to the mixer, as text (empty: none)
     long frames = -1; // stop after this many updates
     long hashEvery = 1;
     long breakAt = -1; // dump the state after this update, then stop
@@ -65,7 +74,7 @@ void OnStopSignal(int)
 }
 
 const char* const kUsage = "usage: gta2 --replay FILE [--game-dir DIR] [--hash-log FILE] [--frames N]\n"
-                           "                         [--hash-every K] [--break-at FRAME] [--draw] [--keep]\n"
+                           "                         [--hash-every K] [--break-at FRAME] [--audio-log FILE] [--draw] [--keep]\n"
                            "       gta2 --record FILE [--map wil|ste|bil|NAME] [--game-dir DIR] [--hash-log FILE]\n";
 
 bool ParseLong(const char* s, long& out)
@@ -113,6 +122,10 @@ bool Parse(int argc, char** argv, Options& o, std::string& error)
                 error = "--frames needs a number";
                 return false;
             }
+        }
+        else if (a == "--audio-log" && hasValue)
+        {
+            o.audioLog = argv[++i];
         }
         else if (a == "--hash-every" && hasValue)
         {
@@ -439,6 +452,16 @@ bool port_replay_setup(int argc, char** argv)
         fprintf(stderr, "gta2 --replay: can't write %s\n", gOptions.hashLog.c_str());
         return false;
     }
+    if (!gOptions.audioLog.empty())
+    {
+        FILE* audio = fopen(gOptions.audioLog.c_str(), "w");
+        if (!audio)
+        {
+            fprintf(stderr, "gta2 --replay: can't write %s\n", gOptions.audioLog.c_str());
+            return false;
+        }
+        port_audio_log_open(audio);
+    }
     if (!MakeScratch(gOptions, error))
     {
         fprintf(stderr, "gta2 --replay: %s\n%s", error.c_str(), kUsage);
@@ -451,10 +474,15 @@ bool port_replay_setup(int argc, char** argv)
     {
         setenv("GTA2_NO_MESSAGE_BOX", "1", 1); // fatal errors go to stderr only
         setenv("SDL_AUDIODRIVER", "dummy", 0);
+        // The mixer runs on the audio thread's clock, so when a sample finishes (which the sound code
+        // polls, and which decides what it plays next) would depend on how fast the replay runs. A
+        // replay mixes in step with the simulation instead: 33 ms of sound per update, in
+        // port_replay_after_update.
+        port_audio_manual = true;
     }
     if (gLog)
     {
-        fprintf(gLog, "# frame rng_count total rng sprites peds cars objects players script police\n");
+        fprintf(gLog, "# frame rng_count total rng sprites peds cars objects players script police audio\n");
     }
     gActive = true;
     atexit(AtExit);
@@ -525,15 +553,23 @@ void port_replay_after_update()
         return;
     }
     gFrame++;
+    port_audio_frame = gFrame;
+    if (port_audio_manual)
+    {
+        static std::vector<int16_t> samples;
+        const int frames = port_audio_rate() * 33 / 1000;
+        samples.resize(static_cast<size_t>(frames) * 2);
+        port_audio_mix(samples.data(), frames);
+    }
     if (gLog && gFrame % gOptions.hashEvery == 0)
     {
         const StateHashes s = port_state_hash();
-        fprintf(gLog, "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n", gFrame,
+        fprintf(gLog, "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n", gFrame,
                 gpRng_67AB34->field_0_rng, static_cast<unsigned long long>(s.total), static_cast<unsigned long long>(s.rng),
                 static_cast<unsigned long long>(s.sprites), static_cast<unsigned long long>(s.peds),
                 static_cast<unsigned long long>(s.cars), static_cast<unsigned long long>(s.objects),
                 static_cast<unsigned long long>(s.players), static_cast<unsigned long long>(s.script),
-                static_cast<unsigned long long>(s.police));
+                static_cast<unsigned long long>(s.police), static_cast<unsigned long long>(port_audio_event_hash(nullptr)));
     }
     if (gFrame == gOptions.breakAt)
     {

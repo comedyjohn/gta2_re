@@ -34,7 +34,7 @@ first_difference() {
     paste -d '\n' "$1" "$2" | awk '
         NR % 2 == 1 { a = $0; next }
         a != $0 {
-            n = split("frame rng_count total rng sprites peds cars objects players script police", names, " ")
+            n = split("frame rng_count total rng sprites peds cars objects players script police audio", names, " ")
             split(a, x, " "); split($0, y, " ")
             if (x[1] == "" || y[1] == "") { print "one log is longer (" (x[1] == "" ? "actual" : "expected") ")"; exit }
             s = ""

@@ -1466,7 +1466,7 @@ void sound_obj::ProcessTank_413BF0(Sound_Params_8* pParams, SoundPosEntry_C* pAl
 void sound_obj::ProcessOtherCarTypes_413C50(Sound_Params_8* pParams, SoundPosEntry_C* pAlloc)
 {
     Car_BC* cBC = pParams->field_0_pObj->field_8_car_bc_ptr;
-    pAlloc->field_4 = static_cast<u32>((uintptr_t)cBC); // never read back as a pointer
+    pAlloc->field_4 = static_cast<u32>(reinterpret_cast<uintptr_t>(cBC)); // never read back as a pointer
     if (cBC->field_68_scale != kFpOne_66F3F4)
     {
         if (cBC->field_58_physics)
@@ -5621,7 +5621,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
             {
                 animation_frame = pB4->field_68_animation_frame;
                 if ((animation_frame == 1 || animation_frame == 5) &&
-                    ((static_cast<s32>((uintptr_t)pB4) + this->field_5448_m_FrameCounter) & 1) != 0)
+                    ((static_cast<s32>(reinterpret_cast<uintptr_t>(pB4)) + this->field_5448_m_FrameCounter) & 1) != 0)
                 {
                     switch (pB4->field_7C_pPed->field_254_block_spec)
                     {

@@ -37,3 +37,4 @@
   to `<= 19`: first difference at update 3892 of 11-attract-industrial). Changes at `>` / `>=` of
   `dword_677A74 > kF16Zero` and `dword_677A8C > pOtherAI->field_74_max_speed` are also not caught. This
   gap belongs to R0.9.
+- R1.6 (2026-10-17, review): `-Wcomma` was skipped (47 findings, Clang-only flag; GCC rejects it), and `-Wshadow` and `-Wold-style-cast` are still to do. EXECUTOR.md R1.6 now says how.

@@ -277,6 +277,15 @@ jobs:
     - name: Network test
       run: port/tools/nettest.sh build_port/linux${{ matrix.bits }}
 
+    # The 3D renderer can be left out (port/world3d/PLAN.md): the port builds and passes without it
+    - name: Build and test without the 3D renderer
+      if: matrix.bits == 64
+      run: |
+        cd port && cmake --preset noworld3d64 && cmake --build --preset noworld3d64 && cd ..
+        ctest --test-dir build_port/noworld3d64 --output-on-failure
+        xvfb-run -a -s "-screen 0 1600x1200x24" build_port/noworld3d64/gta2 --selftest
+        ! nm -C build_port/noworld3d64/gta2 | grep -q world3d
+
     - name: Package
       run: |
         mkdir -p gta2-native

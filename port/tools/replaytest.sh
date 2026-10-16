@@ -10,6 +10,7 @@
 # The corpus holds game data, so it lives outside the repository: $GTA2_CORPUS (default
 # ~/Games/gta2/corpus), with replays/NAME.rep, expected/NAME.log and corpus.txt (name, updates,
 # SHA-256, note). The game folder is $GTA2_GAME_DIR (default ~/Games/gta2/game).
+# $GTA2_REPLAY_ARGS is added to every gta2 --replay command line (e.g. --draw, to draw every frame).
 # Every build must log the same: the game's maths is the same on every system (gta2 --simcheck).
 set -u
 
@@ -88,11 +89,12 @@ for build in "$@"; do
 done >"$work/pairs"
 # One game a pair; xvfb-run keeps its window off the screen (it doesn't draw anyway: skip_draw)
 export game
+export GTA2_REPLAY_ARGS="${GTA2_REPLAY_ARGS:-}"
 xargs -P "$jobs" -L 1 sh -c '
     if command -v xvfb-run >/dev/null 2>&1; then
-        xvfb-run -a -n "$4" "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" >"$3.out" 2>&1
+        xvfb-run -a -n "$4" "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" $GTA2_REPLAY_ARGS >"$3.out" 2>&1
     else
-        "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" >"$3.out" 2>&1
+        "$1/gta2" --replay "$2" --game-dir "$game" --hash-log "$3" $GTA2_REPLAY_ARGS >"$3.out" 2>&1
     fi
     echo $? >"$3.status"' sh <"$work/pairs"
 

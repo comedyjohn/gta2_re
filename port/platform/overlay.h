@@ -31,6 +31,21 @@ bool FreezesGame();
 // where nothing is drawn), or null when there is nothing to show.
 const uint32_t* Frame();
 
+// A page of settings that another part of the port adds to the pause menu, under its title (and to
+// the settings screen, on G): rows of a name and a value, each changed one step at a time. The 3D
+// renderer's Graphics page (port/world3d) is one; a build without it has no such entry.
+struct SettingsPage
+{
+    const char* title; // "Graphics"
+    const char* file; // where it is saved, for the hint line
+    int (*rows)();
+    const char* (*name)(int row);
+    const char* (*value)(int row);
+    void (*change)(int row, int delta); // delta 1: the next value, -1: the previous one; saved at once
+};
+// One page; it must stay valid for the run
+void AddSettingsPage(const SettingsPage* page);
+
 // What the controls are called, in the game's order (mask indices 0..11 of InputRecorder_67F8B0)
 const char* ActionName(int action);
 // "Ctrl", "Space", "F5"; "Key 0x7F" for a code without a name

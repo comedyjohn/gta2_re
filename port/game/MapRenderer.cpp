@@ -1,6 +1,7 @@
 #include "MapRenderer.hpp"
 #include "Camera.hpp"
 #include "winmain.hpp"
+#include "port_world3d.h" // port: world3d
 #include "gbh_graphics.hpp"
 #include "Globals.hpp"
 #include "debug.hpp"
@@ -3428,6 +3429,7 @@ void MapRenderer::RenderFlatBlock_4F66C0()
 // 0x4f6880
 void MapRenderer::RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord)
 {
+    port_world3d_block(pXCoord, pYCoord, gZCoord_6F63E0); // port: world3d
     gmp_block_info* pBlock = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(pXCoord, pYCoord, gZCoord_6F63E0);
     gpBlock_6F6478 = pBlock;
     if (pBlock)

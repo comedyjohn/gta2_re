@@ -35,6 +35,7 @@ endif()
 message(STATUS "GTA2 native build: ${GTA2_BITS}-bit")
 
 set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
+set(PORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}) # for gta2_game_target, which port/world3d uses too
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -53,6 +54,13 @@ add_compile_options(-ffp-contract=off)
 if (CMAKE_SIZEOF_VOID_P EQUAL 4 AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86|i.86|AMD64")
     add_compile_options(-msse2 -mfpmath=sse)
 endif()
+
+# The 3D renderer (port/world3d/PLAN.md). Off: nothing of it is compiled and its hooks in the game, the
+# renderer and the overlay (include/port_world3d.h) are empty inlines.
+option(GTA2_WORLD3D "Build the 3D renderer (port/world3d)" ON) # port: world3d
+if (GTA2_WORLD3D) # port: world3d
+    add_compile_definitions(GTA2_WORLD3D) # port: world3d
+endif() # port: world3d
 
 # SDL2 for the target architecture (Debian/Ubuntu: libsdl2-dev for 64-bit; for 32-bit see
 # tools/setup_sdl32.sh). SDL_config.h forwards to an architecture directory, so both include
@@ -77,10 +85,10 @@ execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_forwarders.sh $
 # since Clang's -Wall would turn those back on (-Wunknown-pragmas for GTA2Hax's VC6 headers)
 function(gta2_game_target target)
     target_compile_options(${target} PRIVATE
-        -include ${CMAKE_CURRENT_SOURCE_DIR}/include/port_prelude.h ${ARGN}
+        -include ${PORT_DIR}/include/port_prelude.h ${ARGN}
         -Wno-write-strings -Wno-narrowing -Wno-multichar -Wno-unknown-pragmas -Wno-invalid-offsetof)
     target_include_directories(${target} PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})
+        ${PORT_DIR}/include ${FORWARDERS} ${GAME_DIR} ${REPO_ROOT})
     target_compile_definitions(${target} PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NON_CONFORMING_SWPRINTFS)
 endfunction()
 
@@ -163,6 +171,12 @@ target_include_directories(gta2_platform PRIVATE ${CMAKE_BINARY_DIR})
 target_link_libraries(gta2_platform PUBLIC gta2_game dear_imgui gta2_sdl gta2_net)
 target_link_libraries(gta2_game PUBLIC gta2_platform)
 
+if (GTA2_WORLD3D) # port: world3d
+    add_subdirectory(world3d) # port: world3d
+    target_link_libraries(gta2_platform PUBLIC gta2_world3d) # port: world3d
+    target_link_libraries(gta2_game PUBLIC gta2_world3d) # port: world3d
+endif() # port: world3d
+
 add_executable(gta2 platform/main.cpp)
 gta2_game_target(gta2 -Wall)
 target_link_libraries(gta2 PRIVATE gta2_platform)
@@ -172,7 +186,7 @@ enable_testing()
 file(GLOB test_sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
 add_library(doctest_main OBJECT tests/main/doctest_main.cpp)
 target_include_directories(doctest_main PRIVATE ${REPO_ROOT}/3rdParty/doctest)
-add_executable(gta2_tests ${test_sources} $<TARGET_OBJECTS:doctest_main>)
+add_executable(gta2_tests ${test_sources} ${WORLD3D_TEST_SOURCES} $<TARGET_OBJECTS:doctest_main>) # port: world3d
 gta2_game_target(gta2_tests -Wall -Wextra -Wno-unused-parameter)
 target_include_directories(gta2_tests PRIVATE ${REPO_ROOT}/3rdParty/doctest ${CMAKE_CURRENT_SOURCE_DIR}/platform)
 target_link_libraries(gta2_tests PRIVATE gta2_platform)

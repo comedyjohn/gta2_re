@@ -3,6 +3,7 @@
 #include "enums.hpp"
 #include "error.hpp"
 #include "sprite.hpp"
+#include "port_world3d.h" // port: world3d
 #include <chrono>
 
 // Forward declarations: the functions below are in address order
@@ -193,7 +194,9 @@ void SpriteTree_4::Draw_5C5DF0()
         }
 
         pIter = gSpriteTreeStack_705BC0->Pop_4C4BA0();
+        port_world3d_sprite(pIter->field_0_pSprite); // port: world3d
         pIter->field_0_pSprite->Draw_59EFF0();
+        port_world3d_sprite(nullptr); // port: world3d
         pIter = pIter->field_8_pRight;
     }
 }

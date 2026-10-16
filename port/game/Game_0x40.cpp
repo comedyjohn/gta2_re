@@ -1,4 +1,5 @@
 #include "Game_0x40.hpp"
+#include "port_world3d.h" // port: world3d
 #include "ped_class.hpp"
 #include "Ambulance_110.hpp"
 #include "InputRecorder_67F8B0.hpp"
@@ -409,10 +410,14 @@ void Game_0x40::Draw_4B92D0()
 
     if (!bExplodingScoresOff_67D4FB)
     {
+        port_world3d_world_text(true); // port: world3d
         gExplodingScorePool->DrawExplodingScores_5969E0();
+        port_world3d_world_text(false); // port: world3d
     }
 
+    port_world3d_hud(true); // port: world3d
     gHud_2B00_706620->DrawGui_5D6860(); // user
+    port_world3d_hud(false); // port: world3d
 
     if (bDo_mike_67D5CC)
     {

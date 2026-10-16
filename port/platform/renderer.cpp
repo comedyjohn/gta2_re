@@ -11,6 +11,7 @@
 #include "gl.h"
 #include "overlay.h"
 #include "platform.h"
+#include "port_world3d.h" // port: world3d
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 
 #include <math.h>
@@ -245,6 +246,7 @@ class GLRenderer
         {
             return;
         }
+        port_world3d_present(); // port: world3d
         DrawOverlay();
         plat::SwapWindow();
         if (!mFreeLater.empty())
@@ -935,6 +937,10 @@ int CC gbh_DrawFlatRect(int, int)
 
 void CC gbh_DrawQuad(int flags, STexture* pTexture, Vert* pVerts, int baseColour)
 {
+    if (port_world3d_draw(kPortWorld3dQuad, flags, pTexture, pVerts, baseColour)) // port: world3d
+    {
+        return;
+    }
     RenderVerts(flags, pTexture, pVerts, 4, baseColour);
 }
 
@@ -944,12 +950,20 @@ void CC gbh_DrawQuadClipped(int, int, int, int, int)
 
 void CC gbh_DrawTriangle(int flags, STexture* pTexture, Vert* pVerts, int diffuseColour)
 {
+    if (port_world3d_draw(kPortWorld3dTriangle, flags, pTexture, pVerts, diffuseColour)) // port: world3d
+    {
+        return;
+    }
     RenderVerts(flags, pTexture, pVerts, 3, diffuseColour);
 }
 
 // GTA2Hax's gbh_DrawTilePart: a 64x64 tile, rotated (flags & 0x60) and flipped (0x08, 0x10) by its UVs
 s32 CC gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int diffuseColour)
 {
+    if (port_world3d_draw(kPortWorld3dTile, static_cast<int>(flags), pTexture, pData, diffuseColour)) // port: world3d
+    {
+        return 0;
+    }
     unsigned int drawFlags = flags;
     if (!(flags & 0x4000))
     {
@@ -1022,7 +1036,7 @@ s32 CC gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int
     {
         setFrom(kFlipLeftRight);
     }
-    gbh_DrawQuad(static_cast<int>(drawFlags), pTexture, pData, diffuseColour);
+    RenderVerts(static_cast<int>(drawFlags), pTexture, pData, 4, diffuseColour);
     return 0;
 }
 

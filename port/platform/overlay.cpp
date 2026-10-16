@@ -50,17 +50,43 @@ bool gSettingsOpen = false;
 bool gSpawnOpen = false; // the car menu
 bool gMenuOpen = false; // the Esc menu
 bool gSettingsFromMenu = false; // closing the settings goes back to the Esc menu
+const SettingsPage* gPage = nullptr; // another part's settings (AddSettingsPage), or none
+bool gGraphicsOpen = false; // that page is open
+bool gGraphicsFromMenu = false; // closing it goes back to the Esc menu
+int gGraphicsRow = 0;
 int gMenuRow = 0;
 bool gAudioPaused = false;
 
-// The Esc menu's entries
+// The Esc menu's entries. The page's entry (its title) only when a page was added.
 enum MenuEntry
 {
     MenuSettings,
+    MenuGraphics,
     MenuQuit,
     kMenuEntries
 };
-const char* const kMenuNames[kMenuEntries] = {"Settings", "Quit game"};
+const char* const kMenuNames[kMenuEntries] = {"Settings", "", "Quit game"};
+
+bool HasGraphics()
+{
+    return gPage && gPage->rows() > 0;
+}
+
+const char* MenuName(MenuEntry entry)
+{
+    return entry == MenuGraphics ? gPage->title : kMenuNames[entry];
+}
+
+// The entries shown, in order
+int MenuCount()
+{
+    return HasGraphics() ? kMenuEntries : kMenuEntries - 1;
+}
+
+MenuEntry MenuAt(int row)
+{
+    return (!HasGraphics() && row >= MenuGraphics) ? static_cast<MenuEntry>(row + 1) : static_cast<MenuEntry>(row);
+}
 int gTab = padinput::OnFoot; // the pad layout the settings screen shows
 int gCar = 0; // the car menu's selected entry
 
@@ -268,7 +294,7 @@ void CloseSettings()
 
 bool Modal()
 {
-    return gSettingsOpen || gSpawnOpen || gMenuOpen;
+    return gSettingsOpen || gSpawnOpen || gMenuOpen || gGraphicsOpen;
 }
 
 void ToggleEscMenuSetting()
@@ -336,6 +362,7 @@ void ToggleSettings()
     }
     gTab = InGame() ? controls::CurrentContext() : padinput::OnFoot;
     gSpawnOpen = false;
+    gGraphicsOpen = false;
     gSettingsFromMenu = gMenuOpen;
     gMenuOpen = false;
     gSettingsOpen = true;
@@ -350,17 +377,54 @@ void ToggleMenu()
     gSpawnOpen = false;
 }
 
+// The added page: rows, each with values to step through
+void OpenGraphics()
+{
+    if (!HasGraphics())
+    {
+        return;
+    }
+    gGraphicsFromMenu = gMenuOpen;
+    gMenuOpen = false;
+    gSettingsOpen = false;
+    gListening = false;
+    gSpawnOpen = false;
+    gGraphicsOpen = true;
+    gGraphicsRow = 0;
+}
+
+void CloseGraphics()
+{
+    gGraphicsOpen = false;
+    gMenuOpen = gGraphicsFromMenu && EscOpensMenu();
+    gGraphicsFromMenu = false;
+}
+
+void MoveGraphics(int delta)
+{
+    const int rows = gPage->rows();
+    gGraphicsRow = rows ? (gGraphicsRow + delta + rows) % rows : 0;
+}
+
+void ChangeGraphics(int delta)
+{
+    gPage->change(gGraphicsRow, delta);
+}
+
 void MoveMenu(int delta)
 {
-    gMenuRow = (gMenuRow + delta + kMenuEntries) % kMenuEntries;
+    gMenuRow = (gMenuRow + delta + MenuCount()) % MenuCount();
 }
 
 void ChooseMenu()
 {
-    switch (gMenuRow)
+    switch (MenuAt(gMenuRow))
     {
         case MenuSettings:
             ToggleSettings();
+            break;
+        case MenuGraphics:
+            OpenGraphics();
             break;
         case MenuQuit:
             // As confirming the game's own quit question (Hud_QuitMessage_1::IsOnQuitMessage_5D13C0)
@@ -483,30 +547,61 @@ void DrawSettings()
     line += kCharH;
     Text(x + 8, line, kDim,
          std::string("E or Back  Esc and Start open the pause menu: ") + (controls::Pad().escMenu ? "on" : "off"));
+    if (HasGraphics())
+    {
+        line += kCharH;
+        Text(x + 8, line, kDim, std::string("G ") + gPage->title);
+    }
 }
 
 void DrawMenu()
 {
     const int w = 280;
-    const int h = (kMenuEntries + 5) * kCharH + 16;
+    const int h = (MenuCount() + 5) * kCharH + 16;
     const int x = (kWidth - w) / 2;
     const int y = (kHeight - h) / 2;
     Fill(x, y, w, h, kPanel);
     Text(x + 8, y + 8, kAccent, "Paused");
     int line = y + 8 + kCharH * 2;
-    for (int i = 0; i < kMenuEntries; i++)
+    for (int i = 0; i < MenuCount(); i++)
     {
         if (i == gMenuRow)
         {
             Fill(x + 4, line, w - 8, kCharH, kSelect);
         }
-        Text(x + 12, line, kText, kMenuNames[i]);
+        Text(x + 12, line, kText, MenuName(MenuAt(i)));
         line += kCharH;
     }
     line += kCharH;
     Text(x + 8, line, kDim, "Enter or A choose");
     line += kCharH;
     Text(x + 8, line, kDim, "Esc, B or Start back to the game");
+}
+
+void DrawGraphics()
+{
+    const int rows = gPage->rows();
+    const int w = 520;
+    const int h = (rows + 6) * kCharH + 16;
+    const int x = (kWidth - w) / 2;
+    const int y = (kHeight - h) / 2;
+    Fill(x, y, w, h, kPanel);
+    Text(x + 8, y + 8, kAccent, gPage->title);
+    int line = y + 8 + kCharH * 2;
+    for (int i = 0; i < rows; i++)
+    {
+        if (i == gGraphicsRow)
+        {
+            Fill(x + 4, line, w - 8, kCharH, kSelect);
+        }
+        Text(x + 12, line, kText, Pad(gPage->name(i), 14));
+        Text(x + 12 + 14 * kCharW, line, kAccent, gPage->value(i));
+        line += kCharH;
+    }
+    line += kCharH;
+    Text(x + 8, line, kDim, "Up/Down select  Left/Right, Enter or A change");
+    line += kCharH;
+    Text(x + 8, line, kDim, std::string("Esc or B back   Saved in ") + gPage->file);
 }
 
 void DrawSpawnMenu()
@@ -557,6 +652,20 @@ void UpdatePad()
     if (guide)
     {
         ToggleSettings();
+    }
+    else if (gGraphicsOpen)
+    {
+        MoveGraphics(NavDelta(pad, prev));
+        const int dir = padinput::StickDirection(pad);
+        const bool sideways = dir != padinput::StickDirection(prev) && (dir == kStickLeft || dir == kStickRight);
+        if (pressed(0) || sideways)
+        {
+            ChangeGraphics(dir == kStickLeft ? -1 : 1);
+        }
+        else if (pressed(1) || pressed(7))
+        {
+            CloseGraphics();
+        }
     }
     else if (gMenuOpen)
     {
@@ -784,6 +893,11 @@ bool CapturePadBinding(const plat::PadState& prev, const plat::PadState& now, in
     return false;
 }
 
+void AddSettingsPage(const SettingsPage* page)
+{
+    gPage = page;
+}
+
 bool Captured()
 {
     return Modal();
@@ -822,6 +936,35 @@ bool OnKey(uint8_t dik, bool down)
             }
         }
         return true;
+    }
+    if (gGraphicsOpen)
+    {
+        if (down)
+        {
+            switch (dik)
+            {
+                case DIK_UP:
+                    MoveGraphics(-1);
+                    break;
+                case DIK_DOWN:
+                    MoveGraphics(1);
+                    break;
+                case DIK_LEFT:
+                    ChangeGraphics(-1);
+                    break;
+                case DIK_RIGHT:
+                case DIK_RETURN:
+                case DIK_NUMPADENTER:
+                    ChangeGraphics(1);
+                    break;
+                case DIK_ESCAPE:
+                    CloseGraphics();
+                    break;
+                default:
+                    break;
+            }
+        }
+        return down;
     }
     if (gMenuOpen)
     {
@@ -952,6 +1095,9 @@ bool OnKey(uint8_t dik, bool down)
         case DIK_E:
             ToggleEscMenuSetting();
             break;
+        case DIK_G:
+            OpenGraphics();
+            break;
         case DIK_ESCAPE:
             CloseSettings();
             break;
@@ -969,6 +1115,7 @@ const uint32_t* Frame()
     {
         gSpawnOpen = false;
         gMenuOpen = false;
+        gGraphicsFromMenu = false;
     }
     FreezesGame(); // resumes the sound when a menu closed outside a game frame (quitting)
     if (havePad || Modal())
@@ -992,6 +1139,10 @@ const uint32_t* Frame()
     else if (gSettingsOpen)
     {
         DrawSettings();
+    }
+    else if (gGraphicsOpen)
+    {
+        DrawGraphics();
     }
     else
     {

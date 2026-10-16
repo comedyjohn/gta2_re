@@ -32,6 +32,19 @@
       }
     },
     {
+      "name": "noworld3d64",
+      "displayName": "Linux, 64-bit, without the 3D renderer (port/world3d: checks it can be removed)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/noworld3d64",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "GTA2_BITS": "64",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "GTA2_WORLD3D": "OFF"
+      }
+    },
+    {
       "name": "clang64",
       "displayName": "Linux, 64-bit, Clang 18 (warnings and clang-tidy)",
       "generator": "Ninja",
@@ -83,6 +96,10 @@
     {
       "name": "linux64",
       "configurePreset": "linux64"
+    },
+    {
+      "name": "noworld3d64",
+      "configurePreset": "noworld3d64"
     },
     {
       "name": "clang64",

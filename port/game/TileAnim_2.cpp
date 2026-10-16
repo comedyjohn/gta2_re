@@ -66,9 +66,13 @@ char_type TileAnim_18::PoolUpdate()
         }
         if (bAtEnd)
         {
-            if (field_6_repeat > 0 && --field_6_repeat == 0)
+            if (field_6_repeat > 0)
             {
-                return 1;
+                field_6_repeat--;
+                if (field_6_repeat == 0)
+                {
+                    return 1;
+                }
             }
             field_8_current_frame = field_0_start_frame;
         }

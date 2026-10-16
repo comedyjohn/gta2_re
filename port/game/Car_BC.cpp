@@ -1730,6 +1730,7 @@ CarManager_6C::CarManager_6C()
     field_38_roadblock_cars = 0;
     field_3C_mission_cars = 0;
     field_44_parked_cars = 0;
+    field_48_kind10_cars = 0; // the original never set it: whatever the new memory held decided if kind 10 cars could spawn
 
     stru_67727C.ResetHead_4207E0();
     stru_67737C.ResetHead_4207E0();

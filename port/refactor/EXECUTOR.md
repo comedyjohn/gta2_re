@@ -78,9 +78,15 @@ replay green in a refactor commit.
 
 Do these once per machine; check each with the command after it.
 
+The refactor has its own branch, `claude/port-refactor`, checked out in its own worktree
+`~/Documents/Code/gta2_re-refactor` (made 2026-10-16 from `claude/nice-feynman-sw4r6m`, submodules
+initialised, all four presets built, baseline replays green). Work only there; the main checkout
+`~/Documents/Code/gta2_re` belongs to the world3d work. Bring world3d changes in with
+`git merge claude/nice-feynman-sw4r6m` only when the user asks, never during a task.
+
 ```bash
-cd ~/Documents/Code/gta2_re
-git status -sb                                   # on claude/<branch>, never master
+cd ~/Documents/Code/gta2_re-refactor
+git status -sb                                   # on claude/port-refactor, never master
 git log --oneline -5
 ```
 
@@ -113,8 +119,8 @@ yet it still returns a cursor tree. That tree is corrupt: game types come out in
 TU's arguments, and must refuse to continue when a TU has any diagnostic of severity error or fatal.
 (The pip `clang-tidy` doesn't have this problem.)
 
-Two system packages are needed, and installing them needs the user (`sudo`). Ask once, at R0.1:
-`! sudo apt install valgrind clang-tools-18`. `valgrind` is for R0.3. `clang-tools-18` provides
+Two system packages are needed (installed 2026-10-16; on a new machine the user installs them):
+`sudo apt install valgrind clang-tools-18`. `valgrind` is for R0.3. `clang-tools-18` provides
 `clang-apply-replacements-18` for §4.1.
 
 Task R1.0 below writes these pins into `port/tools/refactor/requirements.txt` so the next machine

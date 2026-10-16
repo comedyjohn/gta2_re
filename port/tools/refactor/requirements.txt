@@ -1,0 +1,4 @@
+# Tools of the refactor (port/refactor/EXECUTOR.md §1.2); the same LLVM major version as clang++-18.
+clang-tidy==18.1.8
+clang-format==18.1.8
+libclang==18.1.1

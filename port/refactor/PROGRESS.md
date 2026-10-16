@@ -3,6 +3,7 @@
 ## Done
 
 - R0.1 (2026-10-16): `port/tools/refactor/check.sh` (full ~57 s, `--quick` ~9 s). Baseline before it: all
+- R0.2 (2026-10-16): `requirements.txt`; a fresh venv from it passes the three checks of EXECUTOR.md §1.2.
   replays PASS on linux32, linux64, clang64.
 
 ## Notes

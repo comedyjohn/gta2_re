@@ -14,6 +14,10 @@ command: builds of four presets, no new warnings, unit tests, selftest, audiotes
 replays on three builds. It ends with `CHECK OK` or `CHECK FAILED: <step>`; logs are in
 `build_port/check/`. Run the full check before every refactor commit.
 
+The refactor's tools (clang-tidy, clang-format, libclang, all LLVM 18) live in a venv outside the
+repository: `python3 -m venv ~/.venvs/gta2-refactor && ~/.venvs/gta2-refactor/bin/pip install -r
+port/tools/refactor/requirements.txt`.
+
 CI runs everything that needs no game data, the unit tests also under AddressSanitizer and
 UndefinedBehaviorSanitizer (presets `asan64`, `ubsan64`). The replay tests run locally.
 

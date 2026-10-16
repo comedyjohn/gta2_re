@@ -5257,7 +5257,10 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             {
                 return;
             }
-            rate_displacement = (static_cast<u32>((uintptr_t)pParams) * 8) % 760;
+            // The original took the pitch from the address of its caller's stack frame, a different
+            // value for every build and (here, with address space randomisation) every run, and the
+            // same for every phone within one. A fixed value is that, made reproducible.
+            rate_displacement = 0;
             samp_idx = 30;
             volume = 85;
             emit_distance = Fix16(15) / Fix16(2);

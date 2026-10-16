@@ -233,19 +233,6 @@ struct VertProjector4
 
 static VertProjector4 gVertProjector4;
 
-static inline void set_vert_xyz_relative_to_cam_inlined(Fix16 xCoord, Fix16 yCoord, Fix16 z_val, Vert* pVerts)
-{
-    Camera_0xBC* pCam = gViewCamera_676978;
-
-    s32 next_idx = (pVerts - gTileVerts_6F65A8) + 4;
-
-    // Only ProjectVert_4EB940 inlines this copy. The f32 locals (Fix16ToF32_Rounded) move the index
-    // computation's mov behind the z temp store, as in the original (22 -> 4 lines).
-    gTileVerts_6F65A8[next_idx].x = Fix16ToF32_Rounded(xCoord + pCam->field_98_cur_pos.field_0_x);
-    gTileVerts_6F65A8[next_idx].y = Fix16ToF32_Rounded(yCoord + pCam->field_98_cur_pos.field_4_y);
-    gTileVerts_6F65A8[next_idx].z = z_val.ToFloat();
-}
-
 static inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
 {
     s32 vert_idx;
@@ -944,7 +931,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
 // 0x4EB940
 void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const Fix16& zpos, Vert* pVert)
 {
-    set_vert_xyz_relative_to_cam_inlined(xpos, ypos, zpos, pVert);
+    set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, zpos, pVert);
 
     // The same conversion forms as VertProjector3::ProjectVert_46BC70 (field_60 is loaded first here too).
     pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));

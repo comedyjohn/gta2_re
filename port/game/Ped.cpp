@@ -6283,7 +6283,7 @@ char_type Ped::IsThreatToSearchingPed_4661F0()
                 {
                     dz = gSearchingPed_6787DC->field_1AC_cam.z - this->field_1AC_cam.z;
 
-                    if (Fix16::Abs_negate_out_of_line(dz) >= kFpOne_678664)
+                    if (Fix16::Abs(dz) >= kFpOne_678664)
                     {
                         goto ret_false;
                     }

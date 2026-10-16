@@ -1576,8 +1576,8 @@ void CarPhysics_B0::HandleMapBoundaryCollisionY_55C5C0(Fix16_Point& pPoint, Ang1
         CollisionIntersectionPoint_6FE1A0.x += field_38_cp1.x;
         CollisionIntersectionPoint_6FE1A0.y = gCollisionTarget_679188.field_18_hseg_y;
 
-        if (Fix16::Abs_negate_out_of_line(CollisionIntersectionPoint_6FE1A0.x - gCollisionTarget_679188.field_4_hseg_x_min) <
-            Fix16::Abs_negate_out_of_line(CollisionIntersectionPoint_6FE1A0.x - gCollisionTarget_679188.field_8_hseg_x_max))
+        if (Fix16::Abs(CollisionIntersectionPoint_6FE1A0.x - gCollisionTarget_679188.field_4_hseg_x_min) <
+            Fix16::Abs(CollisionIntersectionPoint_6FE1A0.x - gCollisionTarget_679188.field_8_hseg_x_max))
         {
             CollisionIntersectionPoint_6FE1A0.x = gCollisionTarget_679188.field_4_hseg_x_min;
         }
@@ -1622,8 +1622,8 @@ void CarPhysics_B0::HandleMapBoundaryCollisionX_55C820(Fix16_Point& pPoint, Ang1
         CollisionIntersectionPoint_6FE1A0.y += field_38_cp1.y;
         CollisionIntersectionPoint_6FE1A0.x = gCollisionTarget_679188.field_14_vseg_x;
 
-        if (Fix16::Abs_negate_out_of_line(CollisionIntersectionPoint_6FE1A0.y - gCollisionTarget_679188.field_C_vseg_y_min) <
-            Fix16::Abs_negate_out_of_line(CollisionIntersectionPoint_6FE1A0.y - gCollisionTarget_679188.field_10_vseg_y_max))
+        if (Fix16::Abs(CollisionIntersectionPoint_6FE1A0.y - gCollisionTarget_679188.field_C_vseg_y_min) <
+            Fix16::Abs(CollisionIntersectionPoint_6FE1A0.y - gCollisionTarget_679188.field_10_vseg_y_max))
         {
             CollisionIntersectionPoint_6FE1A0.y = gCollisionTarget_679188.field_C_vseg_y_min;
         }
@@ -2043,14 +2043,6 @@ void CarPhysics_B0::ApplyForwardEngineForce_55EC30()
 
     ApplyForceScaledByMass_55F9A0(stru_6FE1F0.NormalizeSafe_442AD0() * stru_6FDF80);
     field_AA_sbw = 1;
-}
-
-// https://decomp.me/scratch/foNCl
-// The largest of the three values
-// 0x55EEE0
-Fix16 Fix16::ClampToRangeFlexible_ool_55EEE0(Fix16& a2, Fix16& a3, Fix16& a4)
-{
-    return ClampToRangeFlexible_55EEE0(a2, a3, a4);
 }
 
 // 0x55ef20
@@ -2758,7 +2750,7 @@ void CarPhysics_B0::HandleObjectCollision_5606C0(Object_2C* p2C, char_type damag
         {
             p2C->SetMovementVectorWithRandomState_522640(arg0a.Negate_40ACB0());
         }
-        gCollisionDamage_6FE33C = (CarMass * Fix16::Abs_negate_out_of_line(field_70_z_vel)) * 50;
+        gCollisionDamage_6FE33C = (CarMass * Fix16::Abs(field_70_z_vel)) * 50;
     }
     else
     {

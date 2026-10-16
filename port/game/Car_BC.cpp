@@ -6019,7 +6019,7 @@ char_type Car_BC::TrainUpdate_442D70()
     {
         gGame_0x40_67E008->field_38_local_player->get_pos_569920(&player_x, &player_y, &player_z);
 
-        if (Fix16::Abs_negate_out_of_line(field_50_car_sprite->field_14_xy.x - player_x) >= Fix16(0x28000, 0) ||
+        if (Fix16::Abs(field_50_car_sprite->field_14_xy.x - player_x) >= Fix16(0x28000, 0) ||
             Fix16::Abs(field_50_car_sprite->field_14_xy.y - player_y) >= Fix16(0x28000, 0))
         {
             field_A8_horn_cooldown = 0;

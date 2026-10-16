@@ -340,17 +340,6 @@ class Fix16
     Fix16& MultiplyAssign_562430(const Fix16& rhs);
     Fix16 Negate_4086A0() const throw();
 
-    // Needed this for a GetLength variant used by miss2_0x11C::GetSpeed_50E190.
-    inline static Fix16 Abs_negate_out_of_line(const Fix16& input)
-    {
-        if (input.mValue > 0)
-        {
-            return input;
-        }
-
-        return input.Negate_4086A0();
-    }
-
     // 0x436A20
     Fix16 operator/(const Fix16& in) const
     {
@@ -400,10 +389,6 @@ class Fix16
         result = Fix16::Max_41E130(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
         return result;
     }
-
-    // Out-of-line copy of the inline below, at its address (callers use the inline, which VC6 emits as
-    // its own COMDAT copy). Defined in CarPhysics_B0.cpp.
-    static Fix16 ClampToRangeFlexible_ool_55EEE0(Fix16& a2, Fix16& a3, Fix16& a4);
 
     // NOTE: 10.5 function - matched but inlined
     static inline Fix16 ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)

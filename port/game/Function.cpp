@@ -48,16 +48,16 @@ std::string extractJsonStringValue(const std::string& objectStr, const std::stri
     if (keyPos == std::string::npos)
         return value;
     // Find the colon after the key.
-    std::string::size_type colonPos = objectStr.find(":", keyPos);
+    std::string::size_type colonPos = objectStr.find(':', keyPos);
     if (colonPos == std::string::npos)
         return value;
     // Find the starting quote for the value.
-    std::string::size_type valueStart = objectStr.find("\"", colonPos);
+    std::string::size_type valueStart = objectStr.find('\"', colonPos);
     if (valueStart == std::string::npos)
         return value;
     ++valueStart; // Skip the quote.
     // Find the ending quote.
-    std::string::size_type valueEnd = objectStr.find("\"", valueStart);
+    std::string::size_type valueEnd = objectStr.find('\"', valueStart);
     if (valueEnd == std::string::npos)
         return value;
     value = objectStr.substr(valueStart, valueEnd - valueStart);
@@ -99,7 +99,7 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
         return functions;
     }
     // Locate the start of the array '[' following the "functions" key.
-    std::string::size_type arrayStart = fileContent.find("[", functionsPos);
+    std::string::size_type arrayStart = fileContent.find('[', functionsPos);
     if (arrayStart == std::string::npos)
     {
         printf("No array '[' found after \"functions\" key.\n");
@@ -111,10 +111,10 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
     // Loop through each JSON object in the array.
     while (true)
     {
-        std::string::size_type objStart = fileContent.find("{", pos);
+        std::string::size_type objStart = fileContent.find('{', pos);
         if (objStart == std::string::npos)
             break;
-        std::string::size_type objEnd = fileContent.find("}", objStart);
+        std::string::size_type objEnd = fileContent.find('}', objStart);
         if (objEnd == std::string::npos)
             break;
 
@@ -141,7 +141,7 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
         }
 
         pos = objEnd + 1;
-        std::string::size_type arrayEnd = fileContent.find("]", pos);
+        std::string::size_type arrayEnd = fileContent.find(']', pos);
         if (arrayEnd != std::string::npos && pos > arrayEnd)
             break;
     }

@@ -95,7 +95,7 @@ static T_gbh_SetBeginSceneCB pBeginSceneCB = nullptr;
 class DllRaii
 {
   public:
-    explicit DllRaii(const char* pDllName) : mDll(nullptr)
+    explicit DllRaii(const char* pDllName)
     {
         mDll = ::LoadLibrary(pDllName);
     }
@@ -119,7 +119,7 @@ class DllRaii
     }
 
   private:
-    HMODULE mDll;
+    HMODULE mDll = nullptr;
 };
 
 // Not in the original: hooks the ImGui debug draw into d3ddll. Called by our entry points before WinMain_5E53F0

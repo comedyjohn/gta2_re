@@ -88,9 +88,10 @@ function(gta2_game_target target)
         -include ${PORT_DIR}/include/port_prelude.h ${ARGN}
         -Wno-narrowing -Wno-unknown-pragmas -Wno-invalid-offsetof)
     # REPO_ROOT is a system directory: it is how the game reaches 3rdParty/GTA2Hax's headers, whose warnings are not ours
-    target_include_directories(${target} PRIVATE
-        ${PORT_DIR}/include ${FORWARDERS} ${GAME_DIR})
-    target_include_directories(${target} SYSTEM PRIVATE ${REPO_ROOT})
+    target_include_directories(${target} PRIVATE ${FORWARDERS} ${GAME_DIR})
+    # PORT_DIR/include is the Win32/DirectX API as the game sees it: its macros (HKEY_LOCAL_MACHINE,
+    # SUCCEEDED, ...) hold C casts that are not ours to rewrite
+    target_include_directories(${target} SYSTEM PRIVATE ${PORT_DIR}/include ${REPO_ROOT})
     target_compile_definitions(${target} PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NON_CONFORMING_SWPRINTFS)
 endfunction()
 

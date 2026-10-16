@@ -507,7 +507,7 @@ s32 Registry::Set_WString_Value_5875E0(HKEY hKey, const char_type* keyPath, cons
 {
     s32 ret = 0;
     u32 size = 2 * wcslen(pStr) + 2;
-    if (gRegistry_6FF968.Set_Binary_5872A0(hKey, keyPath, (BYTE*)pStr, size))
+    if (gRegistry_6FF968.Set_Binary_5872A0(hKey, keyPath, reinterpret_cast<BYTE*>(const_cast<wchar_t*>(pStr)), size))
     {
         ret = 1;
     }

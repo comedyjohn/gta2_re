@@ -312,7 +312,7 @@ s32 NetPlay::DirectPlayCreate_51DED0()
     }
 
     IDirectPlay3* pDirectPlay3;
-    if (FAILED(pDirectPlay->QueryInterface(IID_IDirectPlay3, (void**)&pDirectPlay3)))
+    if (FAILED(pDirectPlay->QueryInterface(IID_IDirectPlay3, reinterpret_cast<void**>(&pDirectPlay3))))
     {
         return 0;
     }

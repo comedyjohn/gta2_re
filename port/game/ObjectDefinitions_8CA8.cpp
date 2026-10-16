@@ -5420,7 +5420,7 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::CloneDefinition_534370(s32 dst_idx,
     ObjectDefinition_74* result = &field_4_definitions[field_0_next_idx];
     field_87F4_definition_by_idx[dst_idx] = result;
     ++field_0_next_idx;
-    memcpy((void*)result, field_87F4_definition_by_idx[src_idx], sizeof(ObjectDefinition_74));
+    memcpy(static_cast<void*>(result), field_87F4_definition_by_idx[src_idx], sizeof(ObjectDefinition_74));
     result->field_24_object_idx = dst_idx;
     return result;
 }

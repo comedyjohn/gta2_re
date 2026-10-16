@@ -51,7 +51,7 @@ struct Ptr32
     template<typename U>
     explicit operator U*() const
     {
-        return (U*)Ptr32_FromHandle(field_0_handle);
+        return reinterpret_cast<U*>(Ptr32_FromHandle(field_0_handle));
     }
 
     Ptr32& operator=(T* p)

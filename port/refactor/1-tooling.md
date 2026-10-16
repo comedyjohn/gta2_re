@@ -97,7 +97,7 @@ The full target set, added to `game_warnings` as each one reaches 0:
 # Clang also: -Wcomma -Wzero-as-null-pointer-constant -Wshorten-64-to-32 -Wunreachable-code
 ```
 
-- [ ] Phase 1 turns on: `-Wold-style-cast -Wwrite-strings -Wzero-as-null-pointer-constant -Wcomma -Wshadow
+- [x] Phase 1 turns on: `-Wold-style-cast -Wwrite-strings -Wzero-as-null-pointer-constant -Wcomma -Wshadow
       -Wimplicit-fallthrough -Wextra-semi -Wundef -Wformat=2`, and drops `-Wno-write-strings`,
       `-Wno-multichar`. One commit per warning, as before.
 - [ ] `-Wno-narrowing`, `-Wno-invalid-offsetof`, `-Wno-char-subscripts`, `-Wconversion`,

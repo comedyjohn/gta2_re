@@ -31,6 +31,7 @@
 
 - R1.6 (2026-10-17): `-Wcomma` on for Clang (`$<$<CXX_COMPILER_ID:Clang>:-Wcomma>`), 0 findings: 47 comma expressions in conditions rewritten by hand (hoisted reads, `(x = e) op y`, a helper `Map_0x370::RoundedZIsAboveSlope`, split `if`s in `Ped::` and `winmain.cpp`). Left for R1.6: `-Wold-style-cast`.
 - R1.6 (2026-10-17): `-Wshadow` on for both compilers, 0 findings (46 Clang, 7 GCC sites: renamed inner variables, `load_gbh_func` macro local, two redeclarations in Police_38.cpp turned into assignments of the outer, never-read-before-set locals).
+- R1.6 (2026-10-17) done: `-Wold-style-cast` on, 0 findings on Clang and GCC. `port/tools/refactor/cstyle_cast.py` (scan/apply/selftest; picks the cast from the types, refuses casts that drop const while converting) made 640 edits in 14 subsystem commits (2 rounds: nested casts need a second scan). `port/include` (the Win32/DirectX shims) is now a SYSTEM include dir, which silences the C casts inside their macros (HKEY_LOCAL_MACHINE, SUCCEEDED, ...). By hand: `load_gbh_func`, the 20 DMA_Video stubs, 4 single casts, and `const_cast<GUID*>(&DPSPGUID_*)` in NetPlay.cpp (the GUID is const in GCC's headers, not in the Clang ones, so the tool's Clang-only view needed a fix: the tool sees only one configuration).
 
 ## Notes
 

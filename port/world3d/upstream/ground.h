@@ -13,8 +13,8 @@
 
 #include <array>
 
-#include "../../src/gta2_map.h"
-#include "../../src/world_mesh.h"
+#include "gta2_map.h"
+#include "world_mesh.h"
 
 namespace gta2dx9 {
 

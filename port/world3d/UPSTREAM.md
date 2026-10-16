@@ -11,8 +11,9 @@ Copyright (c) 2026 gebdag (the full licence text is `upstream/LICENSE`; the noti
 | gta2_map.h, gta2_map.cpp | src/ | no |
 | gta2_style.h, gta2_style.cpp | src/ | no |
 | world_mesh.h, world_mesh.cpp | src/ | no |
-| ground.h, ground.cpp | dll/src/ | no |
+| ground.h, ground.cpp | dll/src/ | ground.h: 2 includes |
 
 ## Changes
 
-(none yet)
+- ground.h: its two includes of `../../src/` now name `gta2_map.h` and `world_mesh.h` (task 2.2).
+- CMake compiles the four .cpp files with `-w`, no source changes.

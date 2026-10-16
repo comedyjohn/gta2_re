@@ -31,6 +31,9 @@ const uint32_t* Frame();
 // so that the character turns to the direction the stick points, whichever way it is facing now.
 uint32_t SteerWithStick(uint32_t bits);
 
+// The gas pedal's strength this frame, as a Fix16 raw value (16384 is full)
+int GasScale();
+
 // What the controls are called, in the game's order (mask indices 0..11 of InputRecorder_67F8B0)
 const char* ActionName(int action);
 // "Ctrl", "Space", "F5"; "Key 0x7F" for a code without a name

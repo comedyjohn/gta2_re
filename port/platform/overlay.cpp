@@ -35,6 +35,9 @@ const int kButtonSlots = 12; // PadState::buttons the game can bind: the ten but
 // The registry's control settings 0..11 are the game's; 12 is the overlay's own
 const int kLegendSetting = 12;
 const int kWorldDirectionsSetting = 13;
+const int kFull = 16384; // Fix16 1.0
+const int kTriggerDead = 2600; // of 32767
+int gGasScale = kFull;
 
 // What each control does, from Player::CharacterControls_566520
 const char* const kActionNames[kActions] = {"Forward",     "Backward",     "Left",
@@ -529,6 +532,11 @@ bool CapturePadBinding(const plat::PadState& prev, const plat::PadState& now, in
     return false;
 }
 
+int GasScale()
+{
+    return gGasScale;
+}
+
 bool Captured()
 {
     return gSettingsOpen;
@@ -623,6 +631,7 @@ uint32_t SteerWithStick(uint32_t bits)
     plat::PadState pad;
     bool active = false;
     uint32_t mine = 0;
+    gGasScale = kFull;
     uint32_t clearBits = kMoveBits;
     if (FirstPad(pad) >= 0 && !gSettingsOpen)
     {
@@ -683,10 +692,15 @@ uint32_t SteerWithStick(uint32_t bits)
             // In a car the stick only steers (the game's steering is left or right, nothing between),
             // and the triggers drive: right is the gas, left the brake and reverse. They are Special 2
             // and 3 on foot, so those two are held back while driving.
-            const bool gas = pad.buttons[11] != 0;
-            const bool brake = pad.buttons[10] != 0;
+            const bool gas = pad.triggerRight > kTriggerDead;
+            const bool brake = pad.triggerLeft > kTriggerDead;
             if (size > 0.25 || gas || brake)
             {
+                // The trigger's travel sets how hard the engine pulls (CarPhysics_B0::ComputeEngineTorque_561970)
+                const int pressed = gas ? pad.triggerRight : pad.triggerLeft;
+                double fraction = static_cast<double>(pressed - kTriggerDead) / (32767 - kTriggerDead);
+                fraction = fraction > 1.0 ? 1.0 : (fraction < 0.1 ? 0.1 : fraction);
+                gGasScale = bStartNetworkGame_7081F0 ? kFull : static_cast<int>(fraction * kFull);
                 mine |= gas ? 1 : 0;
                 mine |= brake ? 2 : 0;
                 mine |= x < -0.25 ? 4 : 0;
@@ -773,4 +787,10 @@ const uint32_t* Frame()
 unsigned int port_steer_with_stick(unsigned int bits)
 {
     return overlay::SteerWithStick(bits);
+}
+
+int port_gas_scale(const void* driverPed)
+{
+    Player* player = gGame_0x40_67E008 ? gGame_0x40_67E008->field_38_local_player : nullptr;
+    return (player && driverPed && driverPed == player->field_2C4_player_ped) ? overlay::GasScale() : 16384;
 }

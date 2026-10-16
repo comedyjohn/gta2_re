@@ -33,6 +33,8 @@ struct PadState
     int32_t axisY;
     int32_t pov; // hundredths of a degree clockwise from up, -1 when centred
     uint8_t buttons[32]; // 0x80 when held
+    int32_t triggerLeft; // 0..32767, how far the trigger is pressed
+    int32_t triggerRight;
     bool guide; // the Guide / Home button, which the game has no slot for
 };
 

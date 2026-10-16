@@ -4,6 +4,7 @@
 #include "ped_death_cause.hpp"
 #include "explosion_type.hpp"
 #include "CarPhysics_B0.hpp"
+#include "port_overlay.h"
 #include "CarAI_78.hpp"
 #include "CarInfo_808.hpp"
 #include "Globals.hpp"
@@ -3109,6 +3110,12 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
     else
     {
         torque = kFP16Zero_6FE20C;
+    }
+    // Port: the player's car pulls as hard as its trigger is pressed
+    const s32 gas_scale = port_gas_scale(field_5C_pCar->field_54_driver);
+    if (gas_scale != 0x4000)
+    {
+        torque = torque * Fix16(gas_scale, 0);
     }
     return torque;
 }

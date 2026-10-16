@@ -77,7 +77,7 @@ void wchar_to_char(wchar_t* wchar, char* out, u8 size)
     u16 i = 0;
     for (; wchar[i]; i++)
     {
-        out[(s8)i] = wchar[i];
+        out[static_cast<s8>(i)] = wchar[i];
     }
     // clear remaining slots
     for (s8 j = i; j < size; j++)
@@ -1005,7 +1005,7 @@ void LoadMapsFromData(Network_Enumerated_Map* pOut, u16& num_maps_loaded)
                 && GetFileAttributesA((LPCSTR)enumerated_mmp_name[i].field_208_script_name) != INVALID_FILE_ATTRIBUTES)
             {
                 memcpy(&pOut[total_map_count], &enumerated_mmp_name[i], sizeof(Network_Enumerated_Map));
-                strcpy(&mmp_maps_description[total_map_count][0], (const char*)&enumerated_mmp_name[i].field_30C_description);
+                strcpy(&mmp_maps_description[total_map_count][0], reinterpret_cast<const char*>(&enumerated_mmp_name[i].field_30C_description));
                 total_map_count++;
             }
             _chdir("..");
@@ -1659,7 +1659,7 @@ void CC ImGuiDebugDraw()
 
                     ImGui::SliderInt("gXCoord_6F63AC", &gXCoord_6F63AC.mValue, 0, 2000);
                     ImGui::SliderInt("gYCoord_6F63B8", &gYCoord_6F63B8.mValue, 0, 2000);
-                    ImGui::SliderInt("gZCoord_6F63E0", (int*)&gZCoord_6F63E0, 0, 2000);
+                    ImGui::SliderInt("gZCoord_6F63E0", reinterpret_cast<int*>(&gZCoord_6F63E0), 0, 2000);
                 }
 
                 if (ImGui::Button("PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0"))
@@ -2241,7 +2241,7 @@ void CC ImGuiDebugDraw()
                                         ImGui::SliderInt("Skid Threshold", &pModelPhy->field_30_sked_threshold.mValue, 0, 10 * 16384);
                                         ImGui::SliderInt("Front Drive Bias", &pModelPhy->field_8_front_drive_bias.mValue, 0, 10 * 16384);
                                         ImGui::SliderInt("Front Mass Bias", &pModelPhy->field_C_front_mass_bias.mValue, 0, 10 * 16384);
-                                        ImGui::SliderS8("Turbo", (char_type*)&pModelPhy->field_1_turbo, 0, 10);
+                                        ImGui::SliderS8("Turbo", reinterpret_cast<char_type*>(&pModelPhy->field_1_turbo), 0, 10);
                                     }
                                     ImGui::TreePop();
                                 }
@@ -2313,8 +2313,8 @@ void CC ImGuiDebugDraw()
                         ImGui::InputInt("B4 F_10", &pPlayerPed->field_168_game_object->field_10_char_state, 1, 1);
                         ImGui::InputU8("B4 f_68", &pPlayerPed->field_168_game_object->field_68_animation_frame, 1, 1);
                         ImGui::InputInt("B4 f_6C", &pPlayerPed->field_168_game_object->field_6C_animation_state, 1, 1);
-                        ImGui::Input_char_type("B4 f_70", (char_type*)&pPlayerPed->field_168_game_object->field_70_frame_timer, 1, 1);
-                        ImGui::Input_char_type("B4 f_71", (char_type*)&pPlayerPed->field_168_game_object->field_71_frame_delay, 1, 1);
+                        ImGui::Input_char_type("B4 f_70", reinterpret_cast<char_type*>(&pPlayerPed->field_168_game_object->field_70_frame_timer), 1, 1);
+                        ImGui::Input_char_type("B4 f_71", reinterpret_cast<char_type*>(&pPlayerPed->field_168_game_object->field_71_frame_delay), 1, 1);
 
                         if (ImGui::TreeNode("Display CharB4 flags"))
                         {
@@ -2503,7 +2503,7 @@ void CC ImGuiDebugDraw()
                     }
 
                     static s32 v = 0;
-                    ImGui::InputInt("Timer num", (s32*)&v, 1, 1);
+                    ImGui::InputInt("Timer num", &v, 1, 1);
                     if (ImGui::Button("Stop timer") && v <= 3)
                     {
                         gHud_2B00_706620->field_620_pagers.ClearClockOnly_5D32D0(v);
@@ -2548,13 +2548,13 @@ void CC ImGuiDebugDraw()
 
                         if (ImGui::TreeNode("Try field_6FC_free_briefs as text"))
                         {
-                            ImGui::Text("Text: %s", (const char*)pHud_Brief_704->field_6FC_free_briefs);
+                            ImGui::Text("Text: %s", reinterpret_cast<const char*>(pHud_Brief_704->field_6FC_free_briefs));
                             ImGui::TreePop();
                         }
 
                         if (ImGui::TreeNode("Try field_700 as text"))
                         {
-                            ImGui::Text("Text: %s", (const char*)pHud_Brief_704->field_700_prev_briefs);
+                            ImGui::Text("Text: %s", reinterpret_cast<const char*>(pHud_Brief_704->field_700_prev_briefs));
                             ImGui::TreePop();
                         }
 
@@ -2565,7 +2565,7 @@ void CC ImGuiDebugDraw()
                             ImGui::Value("curr brief f_10", curr_brief->field_10_was_displayed);
                             if (ImGui::TreeNode("Try field_C as text"))
                             {
-                                ImGui::Text("Text: %s", (const char*)curr_brief->field_C_pNext);
+                                ImGui::Text("Text: %s", reinterpret_cast<const char*>(curr_brief->field_C_pNext));
                                 ImGui::TreePop();
                             }
                         }
@@ -2635,8 +2635,8 @@ void CC ImGuiDebugDraw()
             {
                 static s32 ped_state = 0;
                 static s32 move_state = 0;
-                ImGui::InputInt("Ped state", (s32*)&ped_state, 1, 1);
-                ImGui::InputInt("Move state", (s32*)&move_state, 1, 1);
+                ImGui::InputInt("Ped state", &ped_state, 1, 1);
+                ImGui::InputInt("Move state", &move_state, 1, 1);
                 
                 if (ImGui::Button("Apply states globally"))
                 {
@@ -3320,7 +3320,7 @@ void CC ImGuiDebugDraw()
             {
                 ImGui::Value("Total loaded maps", total_num_maps_loaded);
                 static int currentMapIndex = 0;
-                if (ImGui::Combo("Map", &currentMapIndex, (const char*)flat_char_array((char*)mmp_maps_description, total_num_maps_loaded), total_num_maps_loaded))
+                if (ImGui::Combo("Map", &currentMapIndex, (const char*)flat_char_array(reinterpret_cast<char*>(mmp_maps_description), total_num_maps_loaded), total_num_maps_loaded))
                 {
                     // Map selection changed
                 }

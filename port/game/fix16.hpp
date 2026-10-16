@@ -95,21 +95,21 @@ class Fix16
 
     Fix16 operator*(const Fix16& in) const
     {
-        s32 value = (s32)((mValue * (__int64)in.mValue) >> 14);
+        s32 value = static_cast<s32>((mValue * static_cast<__int64>(in.mValue)) >> 14);
         return Fix16(value, 0);
     }
 
     // 10.5 non inline addr is 0x539F90
     Fix16& operator/=(const Fix16& rhs)
     {
-        mValue = (s32)(((__int64)mValue << 14) / rhs.mValue);
+        mValue = static_cast<s32>((static_cast<__int64>(mValue) << 14) / rhs.mValue);
         return *this;
     }
 
     // 10.5 non inline addr is 0x562430
     Fix16& operator*=(const Fix16& rhs)
     {
-        mValue = (s32)((mValue * (__int64)rhs.mValue) >> 14);
+        mValue = static_cast<s32>((mValue * static_cast<__int64>(rhs.mValue)) >> 14);
         return *this;
     }
 
@@ -295,8 +295,8 @@ class Fix16
 
     inline s32 MultiplyInt64(Fix16 a2)
     {
-        __int64 t = (mValue * (__int64)a2.mValue) >> 14;
-        return (s32)t;
+        __int64 t = (mValue * static_cast<__int64>(a2.mValue)) >> 14;
+        return static_cast<s32>(t);
     }
 
     //  inline sub_4B9E10 in 9.6f
@@ -387,7 +387,7 @@ class Fix16
     // 0x436A20
     Fix16 operator/(const Fix16& in) const
     {
-        s32 value = (s32)(((__int64)mValue << 14) / in.mValue);
+        s32 value = static_cast<s32>((static_cast<__int64>(mValue) << 14) / in.mValue);
         return Fix16(value, 0);
     }
 

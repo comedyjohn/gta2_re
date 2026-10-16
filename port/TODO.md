@@ -68,8 +68,8 @@ The order follows what a player notices first.
       subscripts, format truncation, unknown pragmas (`port/CMakeLists.txt` says why). Warning
       options for a game target go through `gta2_game_target(<target> <options>)`, which puts them
       ahead of its `-Wno-*` options: Clang's `-Wall` turns those back on when it comes later.
-- [ ] **More modernising:** `enum class`, `constexpr` instead of `#define` constants, C++ casts,
-      range-for, `std::array`. Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of
+- [ ] **More modernising** (done: C++ casts, constexpr limits, `ReplayState`; left: more `enum class`,
+      range-for, `std::array`). Keep `typedef struct` blocks and Miles' `3rdParty/mss.h` out of
       clang-tidy's `modernize-use-using`: it drops calling conventions and expands macros.
 - [ ] **Run under AddressSanitizer and UndefinedBehaviorSanitizer.**
 - [ ] **Floating-point.** VC6's x87 code and GCC's SSE differ in precision. Check that replays

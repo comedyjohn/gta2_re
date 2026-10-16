@@ -186,8 +186,8 @@ void Gang_144::ApplyKillRespectChange_4BEF70(u8 player_idx, u8 respect)
         {
             // The sum is written out twice in the checks and stored with +=, not kept in a local
             s8 change = respect * field_122_gang_kill_reaction[i];
-            if ((s8)(pGang->field_11C_respect[player_idx] + change) < pGang->field_11C_respect[player_idx] ||
-                (s8)(pGang->field_11C_respect[player_idx] + change) > 100)
+            if (static_cast<s8>(pGang->field_11C_respect[player_idx] + change) < pGang->field_11C_respect[player_idx] ||
+                static_cast<s8>(pGang->field_11C_respect[player_idx] + change) > 100)
             {
                 pGang->field_11C_respect[player_idx] = 100;
             }
@@ -327,7 +327,7 @@ void GangPool_CA8::SwapGangSlots_4BF230(Gang_144* pGang, u8 gang_idx)
 {
     // The original only calls Init_4BED70 on this local, no Gang_144 ctor/dtor
     u8 gang_buf[sizeof(Gang_144)];
-    Gang_144& tmp_gang = *(Gang_144*)gang_buf;
+    Gang_144& tmp_gang = *reinterpret_cast<Gang_144*>(gang_buf);
     tmp_gang.Init_4BED70();
     if (pGang->field_1_gang_idx != gang_idx)
     {

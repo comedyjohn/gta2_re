@@ -802,7 +802,7 @@ gmp_block_info* Map_0x370::GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z)
     // If it's a partial block, get a null/empty block. 
     // If it's a tridiagonal block (four-sided or tri-sided), replace it by a flat solid block
     // Otherwise, return the original block. It's ideal for checking collisions
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
     if (z < pColumn->field_0_height)
     {
         if (z >= pColumn->field_1_offset)
@@ -855,11 +855,11 @@ gmp_block_info* Map_0x370::GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 
     }
 
     field_0_pDmap = this->field_0_pDmap;
-    pColInfo = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)];
+    pColInfo = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
 
-    if (z_coord < (u8)pColInfo->field_0_height)
+    if (z_coord < static_cast<u8>(pColInfo->field_0_height))
     {
-        offset = (u8)pColInfo->field_1_offset;
+        offset = static_cast<u8>(pColInfo->field_1_offset);
         if (z_coord >= offset)
         {
             return &field_0_pDmap->field_4000C_block[pColInfo->field_4_blockd[z_coord - offset]];
@@ -1719,8 +1719,8 @@ bool Map_0x370::SpriteHitsDiagonalWall_4E1520(s32 z_pos)
                         Sprite* pSprt = gObject_5C_6F8F84->GetDirectionalObject_5298E0(slope_type)->field_4;
                         // (u32): the block centre goes through the Fix16(u32) constructor (out-of-line copy 0x4926F0);
                         // z is converted inline in its argument slot
-                        pSprt->set_xyz_lazy_451950(Fix16((u32)x_pos) + kFpHalf_6F5FE0,
-                                                   Fix16((u32)y_pos) + kFpHalf_6F5FE0,
+                        pSprt->set_xyz_lazy_451950(Fix16(static_cast<u32>(x_pos)) + kFpHalf_6F5FE0,
+                                                   Fix16(static_cast<u32>(y_pos)) + kFpHalf_6F5FE0,
                                                    z_pos);
                         pSprt->UpdateCollisionBoundsIfNeeded_59E9C0();
                         gCollisionTarget_679188.SetSprite_40FEE0(pSprt);
@@ -1801,11 +1801,11 @@ bool Map_0x370::sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tile
                 gmp_block_info* pBlock1 = Map_0x370::GetEffectiveBlock_4DFE60(x, y, zLevel);
                 if (pBlock1)
                 {
-                    if (((u16)gFaceCollisionMask_6F6002 & pBlock1->field_2_right) != 0)
+                    if ((static_cast<u16>(gFaceCollisionMask_6F6002) & pBlock1->field_2_right) != 0)
                     {
                         if (!IsNorthOrSouthGradSlope_4634B0(pBlock1))
                         {
-                            if (gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)y, y + 1, x + 1))
+                            if (gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(y), y + 1, x + 1))
                             {
                                 return true;
                             }
@@ -1815,11 +1815,11 @@ bool Map_0x370::sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tile
                 gmp_block_info* pBlock2 = Map_0x370::GetEffectiveBlock_4DFE60(x + 1, y, zLevel);
                 if (pBlock2)
                 {
-                    if (((u16)gFaceCollisionMask_6F6002 & pBlock2->field_0_left) != 0)
+                    if ((static_cast<u16>(gFaceCollisionMask_6F6002) & pBlock2->field_0_left) != 0)
                     {
                         if (!IsNorthOrSouthGradSlope_4634B0(pBlock2))
                         {
-                            if (gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)y, y + 1, x + 1))
+                            if (gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(y), y + 1, x + 1))
                             {
                                 return true;
                             }
@@ -1833,11 +1833,11 @@ bool Map_0x370::sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tile
                 gmp_block_info* pBlock3 = Map_0x370::GetEffectiveBlock_4DFE60(x, y, zLevel);
                 if (pBlock3)
                 {
-                    if (((u16)gFaceCollisionMask_6F6002 & pBlock3->field_6_bottom) != 0)
+                    if ((static_cast<u16>(gFaceCollisionMask_6F6002) & pBlock3->field_6_bottom) != 0)
                     {
                         if (!IsWestOrEastGradSlope_4634B0(pBlock3))
                         {
-                            if (gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)x, x + 1, y + 1))
+                            if (gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(x), x + 1, y + 1))
                             {
                                 return true;
                             }
@@ -1848,11 +1848,11 @@ bool Map_0x370::sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tile
                 gmp_block_info* pBlock4 = Map_0x370::GetEffectiveBlock_4DFE60(x, y + 1, zLevel);
                 if (pBlock4)
                 {
-                    if (((u16)gFaceCollisionMask_6F6002 & pBlock4->field_4_top) != 0)
+                    if ((static_cast<u16>(gFaceCollisionMask_6F6002) & pBlock4->field_4_top) != 0)
                     {
                         if (!IsWestOrEastGradSlope_4634B0(pBlock4))
                         {
-                            if (gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)x, x + 1, y + 1))
+                            if (gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(x), x + 1, y + 1))
                             {
                                 return true;
                             }
@@ -1936,18 +1936,18 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
     {
         if (gradient_direction == 1)
         {
-            if (dword_6F6054 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6054->field_4_top) != 0)
+            if (dword_6F6054 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6054->field_4_top) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY))
                 {
                     return 1;
                 }
             }
         }
-        else if (((u16)gFaceCollisionMask_6F6002 & gBlockInfo0_6F5EB0->field_4_top) != 0 &&
+        else if ((static_cast<u16>(gFaceCollisionMask_6F6002) & gBlockInfo0_6F5EB0->field_4_top) != 0 &&
                  dword_6F5EC8->field_0_gradient_direction != 3 && dword_6F5EC8->field_0_gradient_direction != 4)
         {
-            if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY))
+            if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY))
             {
                 return 1;
             }
@@ -1956,9 +1956,9 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
         dword_6F606C = GetEffectiveBlock_4DFE60(tileX, tileY - 1, dword_6F5FAC);
         if (dword_6F606C)
         {
-            if (((u16)gFaceCollisionMask_6F6002 & dword_6F606C->field_6_bottom) != 0)
+            if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_6_bottom) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY))
                 {
                     return 1;
                 }
@@ -1972,18 +1972,18 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
     {
         if (gradient_direction == 2)
         {
-            if (dword_6F6054 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6054->field_6_bottom) != 0)
+            if (dword_6F6054 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6054->field_6_bottom) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY + 1))
                 {
                     return 1;
                 }
             }
         }
-        else if (((u16)gFaceCollisionMask_6F6002 & gBlockInfo0_6F5EB0->field_6_bottom) != 0 &&
+        else if ((static_cast<u16>(gFaceCollisionMask_6F6002) & gBlockInfo0_6F5EB0->field_6_bottom) != 0 &&
                  dword_6F5EC8->field_0_gradient_direction != 3 && dword_6F5EC8->field_0_gradient_direction != 4)
         {
-            if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY + 1))
+            if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY + 1))
             {
                 return 1;
             }
@@ -1992,9 +1992,9 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
         dword_6F6070 = GetEffectiveBlock_4DFE60(tileX, tileY + 1, dword_6F6248);
         if (dword_6F6070)
         {
-            if (((u16)gFaceCollisionMask_6F6002 & dword_6F6070->field_4_top) != 0)
+            if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_4_top) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970((u32)tileX, tileX + 1, tileY + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(static_cast<u32>(tileX), tileX + 1, tileY + 1))
                 {
                     return 1;
                 }
@@ -2008,18 +2008,18 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
     {
         if (gradient_direction == 3)
         {
-            if (dword_6F6054 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6054->field_0_left) != 0)
+            if (dword_6F6054 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6054->field_0_left) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX))
                 {
                     return 1;
                 }
             }
         }
-        else if (((u16)gFaceCollisionMask_6F6002 & gBlockInfo0_6F5EB0->field_0_left) != 0 &&
+        else if ((static_cast<u16>(gFaceCollisionMask_6F6002) & gBlockInfo0_6F5EB0->field_0_left) != 0 &&
                  dword_6F5EC8->field_0_gradient_direction != 1 && dword_6F5EC8->field_0_gradient_direction != 2)
         {
-            if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX))
+            if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX))
             {
                 return 1;
             }
@@ -2028,9 +2028,9 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
         dword_6F6078 = GetEffectiveBlock_4DFE60(tileX - 1, tileY, dword_6F5BA0);
         if (dword_6F6078)
         {
-            if (((u16)gFaceCollisionMask_6F6002 & dword_6F6078->field_2_right) != 0)
+            if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_2_right) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX))
                 {
                     return 1;
                 }
@@ -2040,19 +2040,19 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionTop < tileY)
         {
-            if (dword_6F606C && dword_6F5BA0 <= dword_6F5FAC && ((u16)gFaceCollisionMask_6F6002 & dword_6F606C->field_0_left) != 0 &&
+            if (dword_6F606C && dword_6F5BA0 <= dword_6F5FAC && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_0_left) != 0 &&
                 dword_6F6084->field_0_gradient_direction != 1 && dword_6F6084->field_0_gradient_direction != 2)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, (u32)tileY, tileX))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX))
                 {
                     return 1;
                 }
             }
 
-            if (dword_6F6078 && dword_6F5FAC <= dword_6F5BA0 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6078->field_4_top) != 0 &&
+            if (dword_6F6078 && dword_6F5FAC <= dword_6F5BA0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_4_top) != 0 &&
                 dword_6F608C->field_0_gradient_direction != 3 && dword_6F608C->field_0_gradient_direction != 4)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, (u32)tileX, tileY))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY))
                 {
                     return 1;
                 }
@@ -2061,16 +2061,16 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
             dword_6F5F90 = GetEffectiveBlock_4DFE60(tileX - 1, tileY - 1, dword_6F5FAC > dword_6F5BA0 ? dword_6F5FAC : dword_6F5BA0);
             if (dword_6F5F90)
             {
-                if (((u16)gFaceCollisionMask_6F6002 & dword_6F5F90->field_2_right) != 0)
+                if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F90->field_2_right) != 0)
                 {
-                    if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, (u32)tileY, tileX))
+                    if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX))
                     {
                         return 1;
                     }
                 }
-                if (dword_6F5F90 && ((u16)gFaceCollisionMask_6F6002 & dword_6F5F90->field_6_bottom) != 0)
+                if (dword_6F5F90 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F90->field_6_bottom) != 0)
                 {
-                    if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, (u32)tileX, tileY))
+                    if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY))
                     {
                         return 1;
                     }
@@ -2080,7 +2080,7 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionBottom > tileY)
         {
-            if (dword_6F6070 && dword_6F5BA0 <= dword_6F6248 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6070->field_0_left) != 0 &&
+            if (dword_6F6070 && dword_6F5BA0 <= dword_6F6248 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_0_left) != 0 &&
                 dword_6F6088->field_0_gradient_direction != 1 && dword_6F6088->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX))
@@ -2089,10 +2089,10 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6078 && dword_6F6248 <= dword_6F5BA0 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6078->field_6_bottom) != 0 &&
+            if (dword_6F6078 && dword_6F6248 <= dword_6F5BA0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6078->field_6_bottom) != 0 &&
                 dword_6F608C->field_0_gradient_direction != 3 && dword_6F608C->field_0_gradient_direction != 4)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, (u32)tileX, tileY + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY + 1))
                 {
                     return 1;
                 }
@@ -2101,16 +2101,16 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
             dword_6F5FB0 = GetEffectiveBlock_4DFE60(tileX - 1, tileY + 1, dword_6F6248 > dword_6F5BA0 ? dword_6F6248 : dword_6F5BA0);
             if (dword_6F5FB0)
             {
-                if (((u16)gFaceCollisionMask_6F6002 & dword_6F5FB0->field_2_right) != 0)
+                if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5FB0->field_2_right) != 0)
                 {
                     if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX))
                     {
                         return 1;
                     }
                 }
-                if (dword_6F5FB0 && ((u16)gFaceCollisionMask_6F6002 & dword_6F5FB0->field_4_top) != 0)
+                if (dword_6F5FB0 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5FB0->field_4_top) != 0)
                 {
-                    if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, (u32)tileX, tileY + 1))
+                    if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX - 1, static_cast<u32>(tileX), tileY + 1))
                     {
                         return 1;
                     }
@@ -2124,18 +2124,18 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
     {
         if (gradient_direction == 4)
         {
-            if (dword_6F6054 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6054->field_2_right) != 0)
+            if (dword_6F6054 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6054->field_2_right) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX + 1))
                 {
                     return 1;
                 }
             }
         }
-        else if (((u16)gFaceCollisionMask_6F6002 & gBlockInfo0_6F5EB0->field_2_right) != 0 &&
+        else if ((static_cast<u16>(gFaceCollisionMask_6F6002) & gBlockInfo0_6F5EB0->field_2_right) != 0 &&
                  dword_6F5EC8->field_0_gradient_direction != 1 && dword_6F5EC8->field_0_gradient_direction != 2)
         {
-            if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX + 1))
+            if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX + 1))
             {
                 return 1;
             }
@@ -2144,9 +2144,9 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
         dword_6F6060 = GetEffectiveBlock_4DFE60(tileX + 1, tileY, dword_6F620C);
         if (dword_6F6060)
         {
-            if (((u16)gFaceCollisionMask_6F6002 & dword_6F6060->field_0_left) != 0)
+            if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_0_left) != 0)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0((u32)tileY, tileY + 1, tileX + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(static_cast<u32>(tileY), tileY + 1, tileX + 1))
                 {
                     return 1;
                 }
@@ -2156,16 +2156,16 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionTop < tileY)
         {
-            if (dword_6F606C && dword_6F620C <= dword_6F5FAC && ((u16)gFaceCollisionMask_6F6002 & dword_6F606C->field_2_right) != 0 &&
+            if (dword_6F606C && dword_6F620C <= dword_6F5FAC && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F606C->field_2_right) != 0 &&
                 dword_6F6084->field_0_gradient_direction != 1 && dword_6F6084->field_0_gradient_direction != 2)
             {
-                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, (u32)tileY, tileX + 1))
+                if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX + 1))
                 {
                     return 1;
                 }
             }
 
-            if (dword_6F6060 && dword_6F5FAC <= dword_6F620C && ((u16)gFaceCollisionMask_6F6002 & dword_6F6060->field_4_top) != 0 &&
+            if (dword_6F6060 && dword_6F5FAC <= dword_6F620C && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_4_top) != 0 &&
                 dword_6F6080->field_0_gradient_direction != 3 && dword_6F6080->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY))
@@ -2177,14 +2177,14 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
             dword_6F5F54 = GetEffectiveBlock_4DFE60(tileX + 1, tileY - 1, dword_6F5FAC > dword_6F620C ? dword_6F5FAC : dword_6F620C);
             if (dword_6F5F54)
             {
-                if (((u16)gFaceCollisionMask_6F6002 & dword_6F5F54->field_0_left) != 0)
+                if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F54->field_0_left) != 0)
                 {
-                    if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, (u32)tileY, tileX + 1))
+                    if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY - 1, static_cast<u32>(tileY), tileX + 1))
                     {
                         return 1;
                     }
                 }
-                if (dword_6F5F54 && ((u16)gFaceCollisionMask_6F6002 & dword_6F5F54->field_6_bottom) != 0)
+                if (dword_6F5F54 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F54->field_6_bottom) != 0)
                 {
                     if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY))
                     {
@@ -2196,7 +2196,7 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
 
         if (regionBottom > tileY)
         {
-            if (dword_6F6070 && dword_6F620C <= dword_6F6248 && ((u16)gFaceCollisionMask_6F6002 & dword_6F6070->field_2_right) != 0 &&
+            if (dword_6F6070 && dword_6F620C <= dword_6F6248 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6070->field_2_right) != 0 &&
                 dword_6F6088->field_0_gradient_direction != 1 && dword_6F6088->field_0_gradient_direction != 2)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX + 1))
@@ -2205,7 +2205,7 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
                 }
             }
 
-            if (dword_6F6060 && dword_6F6248 <= dword_6F620C && ((u16)gFaceCollisionMask_6F6002 & dword_6F6060->field_6_bottom) != 0 &&
+            if (dword_6F6060 && dword_6F6248 <= dword_6F620C && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F6060->field_6_bottom) != 0 &&
                 dword_6F6080->field_0_gradient_direction != 3 && dword_6F6080->field_0_gradient_direction != 4)
             {
                 if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY + 1))
@@ -2217,14 +2217,14 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
             dword_6F5F98 = GetEffectiveBlock_4DFE60(tileX + 1, tileY + 1, dword_6F6248 > dword_6F620C ? dword_6F6248 : dword_6F620C);
             if (dword_6F5F98)
             {
-                if (((u16)gFaceCollisionMask_6F6002 & dword_6F5F98->field_0_left) != 0)
+                if ((static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F98->field_0_left) != 0)
                 {
                     if (!gSprite_6F61E8 || gSprite_6F61E8->HitTestVerticalLine_5A0EF0(tileY + 1, tileY + 2, tileX + 1))
                     {
                         return 1;
                     }
                 }
-                if (dword_6F5F98 && ((u16)gFaceCollisionMask_6F6002 & dword_6F5F98->field_4_top) != 0)
+                if (dword_6F5F98 && (static_cast<u16>(gFaceCollisionMask_6F6002) & dword_6F5F98->field_4_top) != 0)
                 {
                     if (!gSprite_6F61E8 || gSprite_6F61E8->CheckBBoxScanlineIntersection_5A0970(tileX + 1, tileX + 2, tileY + 1))
                     {
@@ -2551,7 +2551,7 @@ bool Map_0x370::CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* p
 // 0x4E4BB0
 gmp_block_info* Map_0x370::FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
     for (s32 curr_z_pos = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z_pos >= 0; curr_z_pos--)
     {
         //  Begin with the highest non-empty block in the column
@@ -2573,7 +2573,7 @@ gmp_block_info* Map_0x370::FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z
 // 0x4E4C30
 gmp_block_info* Map_0x370::FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&this->field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     for (s32 curr_z_pos = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z_pos >= 0; curr_z_pos--)
     {
@@ -2591,7 +2591,7 @@ gmp_block_info* Map_0x370::FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* fo
 // 0x4E4CB0
 gmp_block_info* Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&this->field_0_pDmap->field_40008_pColumn[*this->field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*this->field_0_pDmap->get_base_42A830(y, x)]);
 
     if (z < pColumn->field_1_offset)
     {
@@ -3392,7 +3392,7 @@ Fix16 Map_0x370::FloorPlusOne_4E62B0(Fix16 value)
 // 0x4E62D0
 gmp_block_info* Map_0x370::FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     for (s32 curr_z = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z >= 0; curr_z--)
     {
@@ -3409,7 +3409,7 @@ gmp_block_info* Map_0x370::FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z)
 // 0x4E6360
 gmp_block_info* Map_0x370::FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     if (z >= pColumn->field_1_offset)
     {
@@ -4011,7 +4011,7 @@ char_type Map_0x370::CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z)
     gmp_compressed_map_32* pDMap = this->field_0_pDmap;
 
     s32 z_int = z.ToInt();
-    gmp_col_info* pColInfo = (gmp_col_info*)&pDMap->field_40008_pColumn[*pDMap->get_base_42A830(y.ToInt(), x.ToInt())];
+    gmp_col_info* pColInfo = reinterpret_cast<gmp_col_info*>(&pDMap->field_40008_pColumn[*pDMap->get_base_42A830(y.ToInt(), x.ToInt())]);
     if (z_int < pColInfo->field_0_height)
     {
         if (z_int < pColInfo->field_1_offset)
@@ -4120,7 +4120,7 @@ s32 Map_0x370::CloneOriginalColumn_4E81D0(u32 column_idx)
 
     if (column_idx < field_358_column_words)
     {
-        gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[column_idx];
+        gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
         s32 len = pColumn->field_0_height - pColumn->field_1_offset + 1;
         idx = field_360_column_words;
         field_360_column_words += len;
@@ -4132,14 +4132,14 @@ s32 Map_0x370::CloneOriginalColumn_4E81D0(u32 column_idx)
 // 0x4E8220
 s32 Map_0x370::CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z)
 {
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[column_idx];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
 
     if (z < pColumn->field_0_height && z >= pColumn->field_1_offset)
     {
         return Map_0x370::CloneOriginalColumn_4E81D0(column_idx);
     }
 
-    gmp_col_info* pNewColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[field_360_column_words];
+    gmp_col_info* pNewColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[field_360_column_words]);
     s32 local_column_words = field_360_column_words;
 
     if (z >= pColumn->field_0_height)
@@ -4162,7 +4162,7 @@ s32 Map_0x370::CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z)
         pNewColumn->field_0_height = pColumn->field_0_height;
         pNewColumn->field_1_offset = z;
 
-        s32 height_diff = pColumn->field_1_offset - (u8)z;
+        s32 height_diff = pColumn->field_1_offset - static_cast<u8>(z);
 
         for (s32 j = 0; j < height_diff; j++)
         {
@@ -4182,7 +4182,7 @@ s32 Map_0x370::CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z)
 s32 Map_0x370::sub_4E8370(u32 column_idx, s32 z, char_type do_drop)
 {
     s32 offset;
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[column_idx];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
     s32 height = pColumn->field_0_height;
     if (z >= height || z < (offset = pColumn->field_1_offset))
     {
@@ -4199,7 +4199,7 @@ s32 Map_0x370::sub_4E8370(u32 column_idx, s32 z, char_type do_drop)
         const u8& new_height = pColumn->field_0_height;
         gmp_col_info* pNew;
         new_idx = field_360_column_words;
-        pNew = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[new_idx];
+        pNew = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[new_idx]);
         if (do_drop)
         {
             if (z == height - 1)
@@ -4295,7 +4295,7 @@ void Map_0x370::ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u1
     *field_0_pDmap->get_base_42A830(y, x) = column_idx;
     field_4_obj.AddOrUpdateDmapInfo_4E80E0(x, y, column_idx);
 
-    gmp_col_info* pColumn = (gmp_col_info*)&this->field_0_pDmap->field_40008_pColumn[column_idx];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[column_idx]);
 
     s32 block_idx = Map_0x370::CloneOriginalBlock_4E8180(pColumn->field_4_blockd[z - pColumn->field_1_offset]);
 
@@ -4336,7 +4336,7 @@ void Map_0x370::AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockDa
     s32 column_idx = Map_0x370::CloneColumnExtendedToZ_4E8220(*field_0_pDmap->get_base_42A830(y, x), z);
     *field_0_pDmap->get_base_42A830(y, x) = column_idx;
     field_4_obj.AddOrUpdateDmapInfo_4E80E0(x, y, column_idx);
-    gmp_col_info* pColumn = (gmp_col_info*)&field_0_pDmap->field_40008_pColumn[column_idx];
+    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
     u32 block_id = pColumn->field_4_blockd[z - pColumn->field_1_offset];
 
     if (block_id < field_34C_num_blocks)
@@ -4444,7 +4444,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
     u16 zonesSize = field_328_pZoneData ? num_zones : 0;
     if (zonesSize)
     {
-        field_330_pZoneArray = (u8*)Memory::malloc_4FE4D0(zonesSize);
+        field_330_pZoneArray = static_cast<u8*>(Memory::malloc_4FE4D0(zonesSize));
     }
 
     for (u16 zoneIdx = 0; zoneIdx < zonesSize; zoneIdx++)
@@ -4464,7 +4464,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
             {
                 gmp_map_zone* zone2 = get_zone_4DFB30(src_idx);
                 if (zone1->field_5_name_length == zone2->field_5_name_length &&
-                    !strncmp(zone1->field_6_name, zone2->field_6_name, (u8)zone1->field_5_name_length))
+                    !strncmp(zone1->field_6_name, zone2->field_6_name, static_cast<u8>(zone1->field_5_name_length)))
                 {
                     field_330_pZoneArray[zoneIdx] = zone_char;
                     done = true;
@@ -4480,7 +4480,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
     }
 
     s32 zoneCount = zone_count + 1;
-    gmp_zone_info* pZoneInfo = (gmp_zone_info*)Memory::malloc_4FE4D0(sizeof(gmp_zone_info) * zoneCount);
+    gmp_zone_info* pZoneInfo = static_cast<gmp_zone_info*>(Memory::malloc_4FE4D0(sizeof(gmp_zone_info) * zoneCount));
     field_334_pUnknownZoneData = pZoneInfo;
     s32 t = 0;
     do
@@ -4514,9 +4514,9 @@ void Map_0x370::build_zone_list_4E90E0(u32 chunk_size)
     {
         zone_data_size = pZone->field_5_name_length + 6;
         in_use_size += zone_data_size;
-        pZone = (gmp_map_zone*)((u8*)pZone + zone_data_size);
+        pZone = reinterpret_cast<gmp_map_zone*>(reinterpret_cast<u8*>(pZone) + zone_data_size);
     }
-    field_32C_pZones = (gmp_zone_list*)Memory::malloc_4FE4D0(GMP_ZONE_LIST_SIZE(num_zones));
+    field_32C_pZones = static_cast<gmp_zone_list*>(Memory::malloc_4FE4D0(GMP_ZONE_LIST_SIZE(num_zones)));
 
     in_use_size = 0;
     field_32C_pZones->field_0_num_zones = num_zones;
@@ -4527,17 +4527,17 @@ void Map_0x370::build_zone_list_4E90E0(u32 chunk_size)
         field_32C_pZones->field_4_zone_array[zone_idx] = pZoneIter;
         zone_data_size = pZoneIter->field_5_name_length + 6;
         in_use_size += zone_data_size;
-        pZoneIter = (gmp_map_zone*)((BYTE*)pZoneIter + zone_data_size);
+        pZoneIter = reinterpret_cast<gmp_map_zone*>(reinterpret_cast<BYTE*>(pZoneIter) + zone_data_size);
     }
 }
 
 // 0x4E9160
 void Map_0x370::AddTileAnimations_4E9160(s32 size)
 {
-    u8* pTileAnimDataIter = (u8*)this->field_340_pTileAnimData;
-    while (pTileAnimDataIter != (u8*)this->field_340_pTileAnimData + size)
+    u8* pTileAnimDataIter = reinterpret_cast<u8*>(this->field_340_pTileAnimData);
+    while (pTileAnimDataIter != reinterpret_cast<u8*>(this->field_340_pTileAnimData) + size)
     {
-        const gmp_tile_animation* pAnim = (const gmp_tile_animation*)pTileAnimDataIter;
+        const gmp_tile_animation* pAnim = reinterpret_cast<const gmp_tile_animation*>(pTileAnimDataIter);
         gTileAnim_2_7052C4->AddGmpAnim_5BC2C0(pAnim);
         pTileAnimDataIter += (sizeof(u16) * pAnim->field_4_anim_length) +
             (sizeof(gmp_tile_animation) -
@@ -4548,7 +4548,7 @@ void Map_0x370::AddTileAnimations_4E9160(s32 size)
 // 0x4E91A0
 void Map_0x370::load_mobj_4E91A0(size_t len)
 {
-    gmp_map_object* pData = (gmp_map_object*)Memory::malloc_4FE4D0(len);
+    gmp_map_object* pData = static_cast<gmp_map_object*>(Memory::malloc_4FE4D0(len));
     field_338_pMapObjects = pData;
     File::Global_Read_4A71C0(pData, len);
     field_344_map_object_count = len / 6;
@@ -4561,7 +4561,7 @@ void Map_0x370::load_mobj_4E91A0(size_t len)
 // 0x4E9200
 void Map_0x370::load_lght_4E9200(size_t size)
 {
-    gmp_map_light* pData = (gmp_map_light*)Memory::malloc_4FE4D0(size);
+    gmp_map_light* pData = static_cast<gmp_map_light*>(Memory::malloc_4FE4D0(size));
     field_33C_pLightData = pData;
     File::Global_Read_4A71C0(pData, size);
     field_348_num_lights = size >> 4;
@@ -4574,7 +4574,7 @@ void Map_0x370::load_lght_4E9200(size_t size)
 // 0x4E9250
 void Map_0x370::load_zone_4E9250(size_t size)
 {
-    gmp_map_zone* pData = (gmp_map_zone*)Memory::malloc_4FE4D0(size);
+    gmp_map_zone* pData = static_cast<gmp_map_zone*>(Memory::malloc_4FE4D0(size));
     field_328_pZoneData = pData;
     File::Global_Read_4A71C0(pData, size);
     build_zone_list_4E90E0(size);
@@ -4614,7 +4614,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     u32 m_size = field_35C_column_word_extra * sizeof(DWORD);
     u32 column_data_size = field_0_pDmap->field_40000_column_words * sizeof(DWORD);
 
-    field_0_pDmap->field_40008_pColumn = (gmp_column_word*)Memory::malloc_4FE4D0(m_size);
+    field_0_pDmap->field_40008_pColumn = static_cast<gmp_column_word*>(Memory::malloc_4FE4D0(m_size));
 
     File::Global_Read_4A71C0(field_0_pDmap->field_40008_pColumn, column_data_size);
 
@@ -4635,7 +4635,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     u32 m_size2 = field_350_num_blocks_extra * sizeof(gmp_block_info);
     u32 block_info_size = field_0_pDmap->field_40004_num_blocks * sizeof(gmp_block_info);
 
-    field_0_pDmap->field_4000C_block = (gmp_block_info*)Memory::malloc_4FE4D0(m_size2);
+    field_0_pDmap->field_4000C_block = static_cast<gmp_block_info*>(Memory::malloc_4FE4D0(m_size2));
 
     File::Global_Read_4A71C0(field_0_pDmap->field_4000C_block, block_info_size);
 

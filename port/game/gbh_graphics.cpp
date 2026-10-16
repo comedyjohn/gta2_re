@@ -60,35 +60,35 @@ void GBH_Graphics_Stub_5EA4D0()
 void GBH_Graphics_Unload_5EA500()
 {
     FreeLibrary(gGbhDllHandle_7085D8);
-    pgbh_InitDLL = (T_gbh_InitDLL)GBH_Graphics_Stub_5EA4D0;
-    pgbh_CloseDLL = (T_gbh_CloseDLL)GBH_Graphics_Stub_5EA4D0;
-    pgbh_Init = (T_gbh_Init)GBH_Graphics_Stub_5EA4D0;
-    pgbh_DrawTile = (T_gbh_DrawTile)GBH_Graphics_Stub_5EA4D0;
-    pgbh_DrawQuad = (T_gbh_DrawQuad)GBH_Graphics_Stub_5EA4D0;
-    pgbh_DrawQuadClipped = (T_gbh_DrawQuadClipped)GBH_Graphics_Stub_5EA4D0;
-    pgbh_DrawTriangle = (T_gbh_DrawTriangle)GBH_Graphics_Stub_5EA4D0;
-    pgbh_Plot = (T_gbh_Plot)GBH_Graphics_Stub_5EA4D0;
-    pgbh_SetWindow = (T_gbh_SetWindow)GBH_Graphics_Stub_5EA4D0;
-    pgbh_PrintBitmap = (T_gbh_PrintBitmap)GBH_Graphics_Stub_5EA4D0;
-    pgbh_SetColourDepth = (T_gbh_SetColourDepth)GBH_Graphics_Stub_5EA4D0;
-    pgbh_GetGlobals = (T_gbh_GetGlobals)GBH_Graphics_Stub_5EA4D0;
-    pgbh_ConvertColour = (T_gbh_ConvertColour)GBH_Graphics_Stub_5EA4D0;
-    pgbh_RegisterTexture = (T_gbh_RegisterTexture)GBH_Graphics_Stub_5EA4D0;
-    pConvertColourBank = (T_ConvertColourBank)GBH_Graphics_Stub_5EA4D0;
-    pDrawLine = (FARPROC)GBH_Graphics_Stub_5EA4D0;
-    pMakeScreenTable = (T_MakeScreenTable)GBH_Graphics_Stub_5EA4D0;
-    pSetShadeTableA = (T_SetShadeTableA)GBH_Graphics_Stub_5EA4D0;
-    pgbh_GetUsedCache = (T_gbh_GetUsedCache)GBH_Graphics_Stub_5EA4D0;
-    pgbh_SetCamera = (T_gbh_SetCamera)GBH_Graphics_Stub_5EA4D0;
-    pgbh_ResetLights = (T_gbh_ResetLights)GBH_Graphics_Stub_5EA4D0;
-    pgbh_AddLight = (T_gbh_AddLight)GBH_Graphics_Stub_5EA4D0;
-    pgbh_SetAmbient = (T_gbh_SetAmbient)GBH_Graphics_Stub_5EA4D0;
-    pgbh_InitImageTable = (T_gbh_InitImageTable)GBH_Graphics_Stub_5EA4D0;
-    pgbh_FreeImageTable = (T_gbh_FreeImageTable)GBH_Graphics_Stub_5EA4D0;
-    pgbh_LoadImage = (T_gbh_LoadImage)GBH_Graphics_Stub_5EA4D0;
-    pgbh_BlitImage = (T_gbh_BlitImage)GBH_Graphics_Stub_5EA4D0;
-    pgbh_BlitBuffer = (T_gbh_BlitBuffer)GBH_Graphics_Stub_5EA4D0;
-    pgbh_DrawFlatRect = (T_gbh_DrawFlatRect)GBH_Graphics_Stub_5EA4D0;
+    pgbh_InitDLL = reinterpret_cast<T_gbh_InitDLL>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_CloseDLL = static_cast<T_gbh_CloseDLL>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_Init = reinterpret_cast<T_gbh_Init>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_DrawTile = reinterpret_cast<T_gbh_DrawTile>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_DrawQuad = reinterpret_cast<T_gbh_DrawQuad>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_DrawQuadClipped = reinterpret_cast<T_gbh_DrawQuadClipped>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_DrawTriangle = reinterpret_cast<T_gbh_DrawTriangle>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_Plot = reinterpret_cast<T_gbh_Plot>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_SetWindow = reinterpret_cast<T_gbh_SetWindow>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_PrintBitmap = reinterpret_cast<T_gbh_PrintBitmap>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_SetColourDepth = reinterpret_cast<T_gbh_SetColourDepth>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_GetGlobals = reinterpret_cast<T_gbh_GetGlobals>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_ConvertColour = reinterpret_cast<T_gbh_ConvertColour>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_RegisterTexture = reinterpret_cast<T_gbh_RegisterTexture>(GBH_Graphics_Stub_5EA4D0);
+    pConvertColourBank = reinterpret_cast<T_ConvertColourBank>(GBH_Graphics_Stub_5EA4D0);
+    pDrawLine = static_cast<FARPROC>(GBH_Graphics_Stub_5EA4D0);
+    pMakeScreenTable = reinterpret_cast<T_MakeScreenTable>(GBH_Graphics_Stub_5EA4D0);
+    pSetShadeTableA = reinterpret_cast<T_SetShadeTableA>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_GetUsedCache = reinterpret_cast<T_gbh_GetUsedCache>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_SetCamera = reinterpret_cast<T_gbh_SetCamera>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_ResetLights = static_cast<T_gbh_ResetLights>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_AddLight = reinterpret_cast<T_gbh_AddLight>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_SetAmbient = reinterpret_cast<T_gbh_SetAmbient>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_InitImageTable = reinterpret_cast<T_gbh_InitImageTable>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_FreeImageTable = reinterpret_cast<T_gbh_FreeImageTable>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_LoadImage = reinterpret_cast<T_gbh_LoadImage>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_BlitImage = reinterpret_cast<T_gbh_BlitImage>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_BlitBuffer = reinterpret_cast<T_gbh_BlitBuffer>(GBH_Graphics_Stub_5EA4D0);
+    pgbh_DrawFlatRect = reinterpret_cast<T_gbh_DrawFlatRect>(GBH_Graphics_Stub_5EA4D0);
 }
 
 // 0x5EA640

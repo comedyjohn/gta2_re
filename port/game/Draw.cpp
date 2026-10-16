@@ -60,7 +60,7 @@ void DrawFigureScaled_5D7670(s32 sprite_type, s16 sprite_idx, Fix16 x_pos, Fix16
 // 0x5D7700
 s32 GetLineSpacingFromFontType_5D7700(u16 font_type)
 {
-    return (u16)gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type);
+    return static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type));
 }
 
 // 0x5D7720
@@ -106,7 +106,7 @@ void ConvertColourBanks_5D7CC0()
     if (gGtx_0x106C_703DD4 && gGtx_0x106C_703DD4->field_6A_palettes_converted == 0)
     {
         s32 phys_pal_len = gGtx_0x106C_703DD4->get_physical_palettes_len_5AA900();
-        u32 max_idx = (u32)phys_pal_len / 64;
+        u32 max_idx = static_cast<u32>(phys_pal_len) / 64;
 
         if (phys_pal_len % 64 != 0)
         {
@@ -128,7 +128,7 @@ void MakeScreenTableAndSetWindow_5D7D30()
                      gVidSys_7071D0->field_54_surface_pixels_pitch,
                      gVidSys_7071D0->field_4C_rect_bottom);
 
-    if (gVidSys_7071D0->field_40_full_screen == (DWORD)-2)
+    if (gVidSys_7071D0->field_40_full_screen == static_cast<DWORD>(-2))
     {
         gWindowRight_70675C = window_width_706630 - 1;
         gWindowBottom_70679C = window_height_706B50 - 1;
@@ -139,7 +139,7 @@ void MakeScreenTableAndSetWindow_5D7D30()
         gWindowBottom_70679C = gVidSys_7071D0->field_4C_rect_bottom - 1;
     }
 
-    pgbh_SetWindow(0, 0, (f32)gWindowRight_70675C, (f32)gWindowBottom_70679C);
+    pgbh_SetWindow(0, 0, static_cast<f32>(gWindowRight_70675C), static_cast<f32>(gWindowBottom_70679C));
 }
 
 // https://decomp.me/scratch/Zmms7
@@ -375,7 +375,7 @@ void DrawText_5D8A10(const wchar_t* pText,
     Fix16 cur_xpos = xpos_fp;
 
     Fix16 spaceWidth = scale_fp * gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);
-    Fix16 lineHeight = scale_fp * (u16)gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type);
+    Fix16 lineHeight = scale_fp * static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type));
 
     u16 curr_palette = og_palette;
     s32 curr_palette_type = og_palette_type;

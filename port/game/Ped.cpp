@@ -240,7 +240,7 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
                 if (bUnk)
                 {
                     y_pos -= kFpPoint1_6FD824;
-                    switch ((u8)animPhase)
+                    switch (animPhase)
                     {
                         case 0:
                             x_pos -= dword_6FD82C;
@@ -271,7 +271,7 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
             // VC6 threads the bFront/bUnk tests below away, but they set the block and register order
             if (bFront)
             {
-                switch ((u8)animPhase)
+                switch (animPhase)
                 {
                     case 0:
                         y_pos += dword_6FD82C;
@@ -300,7 +300,7 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
             }
             else if (!bUnk)
             {
-                switch ((u8)animPhase)
+                switch (animPhase)
                 {
                     case 0:
                         y_pos -= kFpPoint1_6FD824;
@@ -388,7 +388,7 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
             if (bUnk)
             {
                 y_pos -= kFpPoint1_6FD824;
-                switch ((u8)animPhase)
+                switch (animPhase)
                 {
                     case 0:
                         x_pos += dword_6FD82C;
@@ -417,7 +417,7 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
             }
             else
             {
-                switch ((u8)animPhase)
+                switch (animPhase)
                 {
                     case 0:
                         y_pos -= kFpPoint1_6FD824;
@@ -1602,7 +1602,7 @@ void Ped::HandleClosePedInteraction_45CAA0()
                         {
                             pNearPed_->field_15C_player->AddScore_41DC40(-10);
                             this->field_229_mug_count++;
-                            if ((u8)field_229_mug_count > 9u)
+                            if (field_229_mug_count > 9u)
                             {
                                 this->field_226_internal_objective_status = 1;
                             }
@@ -2431,7 +2431,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 0;
             max_north = 2;
-            if ((u8)gRng_6F6784.get_int_4F7AE0(max_north) > 0)
+            if (static_cast<u8>(gRng_6F6784.get_int_4F7AE0(max_north)) > 0)
             {
                 break;
             }
@@ -2441,7 +2441,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 1;
             max_east = 2;
-            if ((u8)gRng_6F6784.get_int_4F7AE0(max_east) > 0)
+            if (static_cast<u8>(gRng_6F6784.get_int_4F7AE0(max_east)) > 0)
             {
                 break;
             }
@@ -2727,7 +2727,7 @@ bool Ped::PedTypeIs_45EDE0(s32 type)
 // 0x45ee00
 void Ped::SetOccupation_45EE00(u32 occupation)
 {
-    if (static_cast<u32>(field_240_occupation) <= (u32)ped_ocupation_enum::bank_robber)
+    if (static_cast<u32>(field_240_occupation) <= static_cast<u32>(ped_ocupation_enum::bank_robber))
     {
         switch (field_240_occupation)
         {
@@ -4365,7 +4365,7 @@ bool Ped::PoolUpdate()
         SetStateInitPending_433B50();
     }
 
-    if ((u32)field_210_shock_counter > field_212_electrocution_threshold)
+    if (static_cast<u32>(field_210_shock_counter) > field_212_electrocution_threshold)
     {
         field_210_shock_counter = field_212_electrocution_threshold;
     }
@@ -6500,7 +6500,7 @@ char_type Ped::IsThreatToSearchingPed_4661F0()
                 }
             }
 
-            word_6784F0.rValue = *(s16*)&kAng90_6784B0;
+            word_6784F0.rValue = *reinterpret_cast<s16*>(&kAng90_6784B0);
 
             {
                 Ped* pS = gSearchingPed_6787DC;
@@ -6796,7 +6796,7 @@ char_type Ped::FindUsableCarDoor_467090()
             u8 door = this->field_24C_target_car_door;
             if (!this->field_248_enter_car_as_passenger)
             {
-                for (; door < (u8)pTargetToEnter->GetRemap(); door++)
+                for (; door < static_cast<u8>(pTargetToEnter->GetRemap()); door++)
                 {
                     if (pTargetToEnter->IsDoorAccessible_43AFE0(door))
                     {
@@ -6816,7 +6816,7 @@ char_type Ped::FindUsableCarDoor_467090()
             }
             else
             {
-                for (; door < (u8)pTargetToEnter->GetRemap(); door++)
+                for (; door < static_cast<u8>(pTargetToEnter->GetRemap()); door++)
                 {
                     if (pTargetToEnter->IsDoorAccessible_43AFE0(door))
                     {
@@ -7607,8 +7607,8 @@ void Ped::GotoAreaInCar_468310()
                 }
             }
 
-            if ((u8)(this->field_1AC_cam.x.ToInt()) == (u8)(this->field_1DC_objective_target_x.ToInt()) &&
-                (u8)(this->field_1AC_cam.y.ToInt()) == (u8)(this->field_1E0_objective_target_y.ToInt()) &&
+            if (static_cast<u8>(this->field_1AC_cam.x.ToInt()) == static_cast<u8>(this->field_1DC_objective_target_x.ToInt()) &&
+                static_cast<u8>(this->field_1AC_cam.y.ToInt()) == static_cast<u8>(this->field_1E0_objective_target_y.ToInt()) &&
                 this->field_1AC_cam.z == this->field_1E4_objective_target_z)
             {
                 pCar_ = this->field_16C_car;
@@ -9378,7 +9378,7 @@ void Ped::PullDriverOutOfCarStateMachine_46B2F0()
         return;
     }
 
-    for (door_num = 0; door_num < (u8)pCar->GetRemap(); door_num++)
+    for (door_num = 0; door_num < static_cast<u8>(pCar->GetRemap()); door_num++)
     {
         if (pCar->IsDoorAccessible_43AFE0(door_num))
         {
@@ -9741,7 +9741,7 @@ char_type Ped::IsOtherPedEnteringAsDriver_46BD50(Car_BC* pCar)
 {
     u8 new_door_idx = 0;
     u8 door_idx = 0;
-    while (new_door_idx < (u8)pCar->GetRemap())
+    while (new_door_idx < static_cast<u8>(pCar->GetRemap()))
     {
         Car_Door_10* pDoor = pCar->GetDoor(door_idx);
         if (pDoor)
@@ -10431,7 +10431,7 @@ void Ped::EnterTrainStateMachine_46D0D0()
             best_door = 0;
             new_door_idx = 0;
             door_idx = new_door_idx;
-            while (new_door_idx < (u8)field_154_target_to_enter->GetRemap())
+            while (new_door_idx < static_cast<u8>(field_154_target_to_enter->GetRemap()))
             {
                 if (field_154_target_to_enter->IsDoorAccessible_43AFE0(door_idx))
                 {

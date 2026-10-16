@@ -77,7 +77,7 @@ Light_28* Light_28::RemoveFromGrid_4D6DC0()
 // 0x4D6E00
 void LightGrid::AllocGrid_4D6E00()
 {
-    gLightGrid_6F5400 = (Light_28**)crt::malloc(4096 * sizeof(Light_28*));
+    gLightGrid_6F5400 = static_cast<Light_28**>(crt::malloc(4096 * sizeof(Light_28*)));
     for (s32 i = 0; i < 4096; i++)
     {
         gLightGrid_6F5400[i] = nullptr;

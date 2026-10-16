@@ -462,7 +462,7 @@ EXTERN_GLOBAL(gtx_0x106C*, gGtx_0x106C_703DD4);
 // 9.6f 0x4C23D0
 inline s32 GetSpaceWidth_4C23D0(u16 font_type)
 {
-    return (u16)gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);
+    return gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);
 }
 
 EXTERN_GLOBAL(s16, word_703D98);

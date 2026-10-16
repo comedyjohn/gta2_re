@@ -934,16 +934,16 @@ void WideToDbcs_519960(char_type* pDst, wchar_t* pSrc)
             {
                 *pDst = HIBYTE(c);
                 pDst += 2;
-                pDst[-1] = *(char_type*)pSrc;
+                pDst[-1] = *reinterpret_cast<char_type*>(pSrc);
             }
             else
             {
-                *pDst = *(char_type*)pSrc;
+                *pDst = *reinterpret_cast<char_type*>(pSrc);
                 pDst++;
             }
             c = *++pSrc;
         } while (c);
-        *pDst = (char_type)c;
+        *pDst = static_cast<char_type>(c);
     }
     else
     {
@@ -966,7 +966,7 @@ void Network_20324::DbcsToWide_5199B0(wchar_t* pDst, char_type* pSrc)
             }
             else
             {
-                *pDst = (u8)c;
+                *pDst = static_cast<u8>(c);
                 pSrc++;
             }
             c = *pSrc;
@@ -1050,7 +1050,7 @@ s32 Network_20324::ShowNetworkUiBlocking_519BD0(HINSTANCE hInstance)
 {
     this->field_202E4_hInstance = hInstance;
     gNetPlay_7071E8.Set15_51ECD0((sptr)Network_20324::cb_FillSessionList_519D30, this);
-    gNetPlay_7071E8.Set6_520530((void*)Network_20324::cb_AddPlayerToList_519E30, (void*)this);
+    gNetPlay_7071E8.Set6_520530(reinterpret_cast<void*>(Network_20324::cb_AddPlayerToList_519E30), (void*)this);
     gNetPlay_7071E8.Set9_520E60((sptr)Network_20324::cb_sub_51ACD0, (sptr)this);
     gNetPlay_7071E8.Set3_Disconnect_520E80((sptr)Network_20324::cb_Disconnect_51ADE0, (sptr)this);
     gNetPlay_7071E8.Set18_520F50((sptr)Network_20324::cb_SetPlayerPing_51AE50, (sptr)this);
@@ -1077,7 +1077,7 @@ INT_PTR Network_20324::DialogFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM
         {
             HWND hwndCtl = (HWND)lParam;
             int scrollCode = LOWORD(wParam);
-            int thumbPos = (short)HIWORD(wParam);
+            int thumbPos = static_cast<short>HIWORD(wParam);
 
             Network_20324::OnWmHScroll_51C630(hDlg, hwndCtl, scrollCode, thumbPos);
             return 0;
@@ -1236,7 +1236,7 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                 {
                     if (gNetPlay_7071E8.JoinSession_520570(0, playerNameW, &playerData, &groupData))
                     {
-                        pThis->ApplyHostGameSettings_51B810((const char_type*)groupData.field_0_data);
+                        pThis->ApplyHostGameSettings_51B810(static_cast<const char_type*>(groupData.field_0_data));
                         pThis->ShowSpecificWindow_51ABF0(2);
                     }
                 }
@@ -1258,7 +1258,7 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                     LRESULT idx = SendDlgItemMessageA(hDlg, 1000, LB_GETITEMDATA, sel, 0);
                     if (gNetPlay_7071E8.JoinSession_520570(idx, playerNameW, &playerData, &groupData))
                     {
-                        pThis->ApplyHostGameSettings_51B810((const char_type*)groupData.field_0_data);
+                        pThis->ApplyHostGameSettings_51B810(static_cast<const char_type*>(groupData.field_0_data));
                         pThis->ShowSpecificWindow_51ABF0(2);
                     }
                 }
@@ -1495,7 +1495,7 @@ void Network_20324::OnTimer_51A9D0(HWND hWnd, s32 timer_id)
 
         if (hadSelection)
         {
-            SendDlgItemMessageA(hWnd, 1000, LB_SELECTSTRING, (WPARAM)-1, (LPARAM)textBuf);
+            SendDlgItemMessageA(hWnd, 1000, LB_SELECTSTRING, static_cast<WPARAM>(-1), (LPARAM)textBuf);
         }
         else
         {
@@ -1925,7 +1925,7 @@ void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
     wchar_t wmsg[520];
     const char_type* pSpeedText = ""; // unset in the original for an unknown speed
 
-    const NetworkGameSettings* pSettings = (const NetworkGameSettings*)pData;
+    const NetworkGameSettings* pSettings = reinterpret_cast<const NetworkGameSettings*>(pData);
     if (pSettings)
     {
         field_20088_game_settings = *pSettings;
@@ -2312,7 +2312,7 @@ void Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 code, s32 
             case 7:
             {
                 const int pos2 = SendDlgItemMessageA(hWnd, 1031, TBM_GETPOS, 0, 0);
-                pThis->SetSetting_51B9C0(5, (s32)pos2); // set game speed
+                pThis->SetSetting_51B9C0(5, static_cast<s32>(pos2)); // set game speed
             }
             break;
 

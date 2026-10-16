@@ -25,7 +25,7 @@ Fix16 Fix16::Add_408660(const Fix16& rhs) const throw()
 // 0x408680
 Fix16 Fix16::Multiply_408680(const Fix16& in) const throw()
 {
-    s32 value = (s32)((mValue * (__int64)in.mValue) >> 14);
+    s32 value = static_cast<s32>((mValue * static_cast<__int64>(in.mValue)) >> 14);
     return Fix16(value, 0);
 }
 
@@ -39,7 +39,7 @@ Fix16 Fix16::Subtract_436A00(const Fix16& in) const
 // 0x436A20
 Fix16 Fix16::Divide_436A20(const Fix16& in) const
 {
-    s32 value = (s32)(((__int64)mValue << 14) / in.mValue);
+    s32 value = static_cast<s32>((static_cast<__int64>(mValue) << 14) / in.mValue);
     return Fix16(value, 0);
 }
 
@@ -58,7 +58,7 @@ s32 Fix16::IsGreater_451690(const Fix16& other) const
 // 0x539F90
 Fix16& Fix16::DivideAssign_539F90(const Fix16& rhs)
 {
-    mValue = (s32)(((__int64)mValue << 14) / rhs.mValue);
+    mValue = static_cast<s32>((static_cast<__int64>(mValue) << 14) / rhs.mValue);
     return *this;
 }
 
@@ -80,7 +80,7 @@ Fix16 Fix16::MultiplyInt_561DB0(const s32& in) const
 // 0x562430
 Fix16& Fix16::MultiplyAssign_562430(const Fix16& rhs)
 {
-    mValue = (s32)((mValue * (__int64)rhs.mValue) >> 14);
+    mValue = static_cast<s32>((mValue * static_cast<__int64>(rhs.mValue)) >> 14);
     return *this;
 }
 
@@ -337,7 +337,7 @@ s32 sub_405E80(Fix16* pTarget, Fix16* pCur)
         }
     }
 
-    if ((u8)sub_405E20(pCur, &lo) || (u8)sub_405E20(pCur, &hi))
+    if (static_cast<u8>(sub_405E20(pCur, &lo)) || static_cast<u8>(sub_405E20(pCur, &hi)))
     {
         return 1;
     }
@@ -453,12 +453,12 @@ void Init_trigonometry_tables()
     s16 arg = 0; 
     for (u32 idx = 0; idx < GTA2_COUNTOF(gSin_table_667A80); idx++, arg++)
     {
-        gSin_table_667A80[idx] = Fix16( sin(((f64)arg / 1440.0) * 2 * 3.141592654) );
+        gSin_table_667A80[idx] = Fix16( sin((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654) );
     }
     arg = 0;
     for (u32 entry = 0; entry < GTA2_COUNTOF(gCos_table_669260); entry++, arg++)
     {
-        gCos_table_669260[entry] = Fix16( cos(((f64)arg / 1440.0) * 2 * 3.141592654) );
+        gCos_table_669260[entry] = Fix16( cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654) );
     }
     arc_tan_table_init_4052D0();
     printf("Sine, cosine and tangent tables initialized!\n");

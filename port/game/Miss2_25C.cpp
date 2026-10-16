@@ -50,7 +50,7 @@ void Miss2_25C::MissionCleanUp_502DC0()
 
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_entries); i++)
     {
-        if ((u32*)pIter->field_0_car != nullptr)
+        if (reinterpret_cast<u32*>(pIter->field_0_car) != nullptr)
         {
             switch (pIter->field_4_type)
             {

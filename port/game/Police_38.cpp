@@ -1716,7 +1716,7 @@ void PoliceCrew_38::sub_575310()
                 break;
         }
 
-        if ((u8)field_14_pPursuitTarget->field_E > 0)
+        if (static_cast<u8>(field_14_pPursuitTarget->field_E) > 0)
         {
             field_10_subObj->field_0_car->field_60_pChaseTask->field_3C_block_counter = field_14_pPursuitTarget->field_E;
         }

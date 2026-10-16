@@ -382,7 +382,7 @@ void Registry::Set_Screen_Setting_5871E0(const char_type* lpValueName, BYTE* lpD
 
     cbData = maxLen;
     if (RegQueryValueExA(hKey, lpValueName, nullptr, nullptr, lpData, &cbData) &&
-        RegSetValueExA(hKey, lpValueName, 0, 1u, lpData, strlen((const char_type*)lpData) + 1))
+        RegSetValueExA(hKey, lpValueName, 0, 1u, lpData, strlen(reinterpret_cast<const char_type*>(lpData)) + 1))
     {
         FatalError_4A38C0(Gta2Error::SetRegistryValueFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 781);
     }
@@ -462,13 +462,13 @@ DWORD Registry::Get_Int_Setting_5874E0(HKEY hKey, const char_type* lpValueName)
 {
     DWORD cbData = 4;
 
-    if (RegQueryValueExA(hKey, lpValueName, nullptr, (LPDWORD)&hKey, (LPBYTE)&lpValueName, &cbData) != ERROR_SUCCESS)
+    if (RegQueryValueExA(hKey, lpValueName, nullptr, reinterpret_cast<LPDWORD>(&hKey), reinterpret_cast<LPBYTE>(&lpValueName), &cbData) != ERROR_SUCCESS)
     {
         // Zeroing the value instead of returning 0 keeps VC6 from going branchless
         lpValueName = nullptr;
     }
 
-    return (DWORD)(uintptr_t)lpValueName;
+    return static_cast<DWORD>((uintptr_t)lpValueName);
 }
 
 // 0x5875A0
@@ -623,7 +623,7 @@ void Registry::Set_Player_Setting_5878C0(const char_type* lpValueName, DWORD Dat
     HKEY hKey;
     if (Open_Player_Root_5877A0(&hKey))
     {
-        if (RegSetValueExA(hKey, lpValueName, 0, REG_DWORD, (BYTE*)&Data, sizeof(DWORD)) != ERROR_SUCCESS)
+        if (RegSetValueExA(hKey, lpValueName, 0, REG_DWORD, reinterpret_cast<BYTE*>(&Data), sizeof(DWORD)) != ERROR_SUCCESS)
         {
             FatalError_4A38C0(Gta2Error::SetRegistryValueFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 1171);
         }

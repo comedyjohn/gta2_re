@@ -714,7 +714,7 @@ void Char_B4::UpdateAnimState_546360()
 
     if (field_7C_pPed->field_244_remap > -1)
     {
-        field_80_sprite_ptr->SetRemap((u8)field_7C_pPed->field_244_remap);
+        field_80_sprite_ptr->SetRemap(static_cast<u8>(field_7C_pPed->field_244_remap));
     }
     else
     {
@@ -764,7 +764,7 @@ void Char_B4::UpdateAnimState_546360()
     {
         case 0:
         {
-            if ((u8)field_70_frame_timer > 2)
+            if (static_cast<u8>(field_70_frame_timer) > 2)
             {
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
@@ -795,7 +795,7 @@ void Char_B4::UpdateAnimState_546360()
 
         case 1:
         {
-            if ((u8)field_70_frame_timer > 1)
+            if (static_cast<u8>(field_70_frame_timer) > 1)
             {
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
@@ -834,7 +834,7 @@ void Char_B4::UpdateAnimState_546360()
                 u8 smoke_ofs;
                 if (field_10_char_state != Char_B4_state::Smoking_35)
                 {
-                    if ((u8)field_70_frame_timer > 8)
+                    if (static_cast<u8>(field_70_frame_timer) > 8)
                     {
                         field_68_animation_frame++;
                         if (field_68_animation_frame > 3)
@@ -862,7 +862,7 @@ void Char_B4::UpdateAnimState_546360()
                     }
 
                     smoke_ofs = 4;
-                    if ((u8)field_70_frame_timer > limit)
+                    if (static_cast<u8>(field_70_frame_timer) > limit)
                     {
                         field_68_animation_frame++;
                         if (field_68_animation_frame > 7)
@@ -884,7 +884,7 @@ void Char_B4::UpdateAnimState_546360()
         case 4:
             if (field_38_velocity > kZeroVelocity_6FD7C0)
             {
-                if ((u8)field_70_frame_timer > 2)
+                if (static_cast<u8>(field_70_frame_timer) > 2)
                 {
                     field_68_animation_frame++;
                     if (field_68_animation_frame > 7)
@@ -897,7 +897,7 @@ void Char_B4::UpdateAnimState_546360()
             }
             else
             {
-                if ((u8)field_70_frame_timer > 2)
+                if (static_cast<u8>(field_70_frame_timer) > 2)
                 {
                     field_68_animation_frame++;
                     if (field_68_animation_frame > 7)
@@ -1132,7 +1132,7 @@ void Char_B4::UpdateAnimState_546360()
                 field_40_rotation = TurnBy180Deg_546360(field_40_rotation);
             }
 
-            if ((u8)field_70_frame_timer > frame_limit)
+            if (static_cast<u8>(field_70_frame_timer) > frame_limit)
             {
                 field_68_animation_frame++;
                 field_70_frame_timer = 0;
@@ -1176,7 +1176,7 @@ void Char_B4::UpdateAnimState_546360()
                                                                       field_80_sprite_ptr->field_14_xy.y.ToInt(),
                                                                       field_80_sprite_ptr->field_1C_zpos.ToInt() - 1);
             ManageZCoordAndSlopes_548590();
-            if ((u8)field_70_frame_timer > 2)
+            if (static_cast<u8>(field_70_frame_timer) > 2)
             {
                 field_70_frame_timer = 0;
                 field_68_animation_frame++;
@@ -1334,7 +1334,7 @@ void Char_B4::UpdateAnimState_546360()
                     }
                     pDoor->set_ped_421380(nullptr);
 
-                    if ((u8)IsOnWater_545570())
+                    if (static_cast<u8>(IsOnWater_545570()))
                     {
                         field_7C_pPed->PutOutFire();
                         DrownPed_5459E0();
@@ -1355,7 +1355,7 @@ void Char_B4::UpdateAnimState_546360()
                 newy,
                 gMap_0x370_6F6268->sub_4E4E50(newx, newy, pCar->field_50_car_sprite->field_1C_zpos));
 
-            if ((u8)field_70_frame_timer > frame_limit)
+            if (static_cast<u8>(field_70_frame_timer) > frame_limit)
             {
                 field_68_animation_frame++;
                 field_70_frame_timer = 0;
@@ -1476,7 +1476,7 @@ void Char_B4::UpdateAnimState_546360()
 
             field_54_jump_scale_counter++;
             s16 jumpId = field_68_animation_frame + baseId + 16;
-            if ((u8)field_70_frame_timer > (u8)field_71_frame_delay)
+            if (static_cast<u8>(field_70_frame_timer) > static_cast<u8>(field_71_frame_delay))
             {
                 field_70_frame_timer = 0;
                 field_68_animation_frame++;
@@ -1484,15 +1484,15 @@ void Char_B4::UpdateAnimState_546360()
             field_80_sprite_ptr->set_id_lazy_4206C0(197);
             field_80_sprite_ptr->set_id_lazy_4206C0(jumpId);
 
-            if ((u8)field_54_jump_scale_counter < 12)
+            if (static_cast<u8>(field_54_jump_scale_counter) < 12)
             {
-                field_80_sprite_ptr->ApplyScaleToDimensions_59E4C0(kFP16One_6FD9E8 + Fix16((u8)field_54_jump_scale_counter) * dword_6FD9A8,
+                field_80_sprite_ptr->ApplyScaleToDimensions_59E4C0(kFP16One_6FD9E8 + Fix16(static_cast<u8>(field_54_jump_scale_counter)) * dword_6FD9A8,
                                                                    0);
             }
-            else if ((u8)field_54_jump_scale_counter < 24)
+            else if (static_cast<u8>(field_54_jump_scale_counter) < 24)
             {
                 field_80_sprite_ptr->ApplyScaleToDimensions_59E4C0(kFP16One_6FD9E8 +
-                                                                       Fix16(25 - (u8)field_54_jump_scale_counter) * dword_6FD9A8,
+                                                                       Fix16(25 - static_cast<u8>(field_54_jump_scale_counter)) * dword_6FD9A8,
                                                                    0);
             }
             return;
@@ -1529,7 +1529,7 @@ void Char_B4::UpdateAnimState_546360()
                     break;
             }
 
-            if ((u8)field_70_frame_timer > (u8)field_71_frame_delay)
+            if (static_cast<u8>(field_70_frame_timer) > static_cast<u8>(field_71_frame_delay))
             {
                 if (field_68_animation_frame < 16)
                 {
@@ -1564,7 +1564,7 @@ void Char_B4::UpdateAnimState_546360()
             break;
 
         case 15:
-            if ((u8)field_70_frame_timer > FrameDelay_546360(this))
+            if (static_cast<u8>(field_70_frame_timer) > FrameDelay_546360(this))
             {
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
@@ -1585,7 +1585,7 @@ void Char_B4::UpdateAnimState_546360()
             break;
 
         case 16:
-            if ((u8)field_70_frame_timer > FrameDelay_546360(this))
+            if (static_cast<u8>(field_70_frame_timer) > FrameDelay_546360(this))
             {
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
@@ -1609,7 +1609,7 @@ void Char_B4::UpdateAnimState_546360()
             break;
 
         case 17:
-            if ((u8)field_70_frame_timer > 3)
+            if (static_cast<u8>(field_70_frame_timer) > 3)
             {
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 4)
@@ -3405,7 +3405,7 @@ void Char_B4::state_0_54DDF0()
             }
         }
     }
-    if ((u8)Char_B4::IsOnWater_545570())
+    if (static_cast<u8>(Char_B4::IsOnWater_545570()))
     {
         field_7C_pPed->PutOutFire();
         Char_B4::DrownPed_5459E0();
@@ -3795,7 +3795,7 @@ LABEL_152:
                 Fix16 old_ypos = field_80_sprite_ptr->field_14_xy.y;
                 char_type tile_x = old_xpos.ToInt();
                 char_type tile_y = old_ypos.ToInt();
-                if ((char_type)gCharB4_Saved_Xpos_6FD7F8.ToInt() != tile_x || (char_type)gCharB4_Saved_Ypos_6FD800.ToInt() != tile_y)
+                if (static_cast<char_type>(gCharB4_Saved_Xpos_6FD7F8.ToInt()) != tile_x || static_cast<char_type>(gCharB4_Saved_Ypos_6FD800.ToInt()) != tile_y)
                 {
                     field_80_sprite_ptr->set_xyz_lazy_420600(gCharB4_Saved_Xpos_6FD7F8, gCharB4_Saved_Ypos_6FD800, gCharB4_Saved_Zpos_6FD7FC);
 
@@ -4318,7 +4318,7 @@ bool Char_B4::CanStepForward_54FEC0(s32 direction)
         check_z = zpos_int;
     }
 
-    if (gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(xpos.ToInt(), ypos.ToInt(), zpos_int, direction, (u8*)&slope_z_adjust, 0))
+    if (gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(xpos.ToInt(), ypos.ToInt(), zpos_int, direction, reinterpret_cast<u8*>(&slope_z_adjust), 0))
     {
         gCharB4_PathDirection_623F44 = direction;
         return false;
@@ -4679,7 +4679,7 @@ void Char_B4::state_1_5504F0()
         }
     }
 
-    if ((u8)Char_B4::IsOnWater_545570())
+    if (static_cast<u8>(Char_B4::IsOnWater_545570()))
     {
         field_7C_pPed->PutOutFire();
         Char_B4::DrownPed_5459E0();
@@ -4725,7 +4725,7 @@ void Char_B4::state_1_5504F0()
     if (field_38_velocity < kFP16Zero_6FD9E4)
     {
         field_58_flags_bf.bReverseVelocity = true;
-        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, (u8)0);
+        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, static_cast<u8>(0));
         field_38_velocity = -field_38_velocity;
     }
     field_44_block_type = block_type;
@@ -5014,7 +5014,7 @@ LABEL_65:
     }
     if (field_58_flags_bf.bReverseVelocity)
     {
-        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, (u8)0);
+        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, static_cast<u8>(0));
         field_38_velocity = -field_38_velocity;
     }
     Char_B4::sub_54DD70();
@@ -5515,7 +5515,7 @@ void Char_B4::state_4_551B30()
         field_7C_pPed->ChangeNextPedState1_45C500(ped_state_1::walking_0);
         field_7C_pPed->ChangeNextPedState2_45C540(ped_state_2::ped2_walking_0);
     }
-    if ((u8)Char_B4::IsOnWater_545570())
+    if (static_cast<u8>(Char_B4::IsOnWater_545570()))
     {
         field_7C_pPed->PutOutFire();
         Char_B4::DrownPed_5459E0();
@@ -5661,7 +5661,7 @@ void Char_B4::state_7_551CB0()
             block_type = gMap_0x370_6F6268->GetBlockTypeAtCoord_420420(gCharB4_Saved_Xpos_6FD7F8.ToInt(), gCharB4_Saved_Ypos_6FD800.ToInt(), gCharB4_Saved_Zpos_6FD7FC.ToInt());
         }
 
-        if ((u8)Char_B4::IsOnWater_545570())
+        if (static_cast<u8>(Char_B4::IsOnWater_545570()))
         {
             field_7C_pPed->PutOutFire();
             Char_B4::DrownPed_5459E0();
@@ -6129,7 +6129,7 @@ void Char_B4::state_8_5520A0()
                     field_7C_pPed->field_184_pObj2C->RequestRemoval_5290A0();
                     field_7C_pPed->field_184_pObj2C = nullptr;
                     Char_B4::ManageZCoordAndSlopes_548590();
-                    if ((u8)Char_B4::IsOnWater_545570())
+                    if (static_cast<u8>(Char_B4::IsOnWater_545570()))
                     {
                         field_7C_pPed->PutOutFire();
                         Char_B4::DrownPed_5459E0();
@@ -6207,7 +6207,7 @@ void Char_B4::state_8_5520A0()
                 break;
         }
     }
-    if (field_7C_pPed->field_210_shock_counter < (u32)field_7C_pPed->field_212_electrocution_threshold)
+    if (field_7C_pPed->field_210_shock_counter < static_cast<u32>(field_7C_pPed->field_212_electrocution_threshold))
     {
         --field_48_lying_on_floor_timer;
     }

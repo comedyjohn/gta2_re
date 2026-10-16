@@ -245,7 +245,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
         off_y = -dword_6FD45C;
     }
 
-    switch ((u8)(field_2C_counter >> 2))
+    switch (static_cast<u8>(field_2C_counter >> 2))
     {
         case 2:
             if (gRng_6F6784.get_int_4F7AE0(2))
@@ -776,7 +776,7 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
     Fix16 ypos = field_30_pNext->field_14_xy.y;
     Fix16 off_y = -dword_6FD45C;
 
-    switch ((u8)(field_2C_counter >> 2))
+    switch (static_cast<u8>(field_2C_counter >> 2))
     {
         case 2:
             if (gRng_6F6784.get_int_4F7AE0(2))
@@ -1484,7 +1484,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
         }
     }
 
-    Fix16 spread_val = dword_6FD328 * (Fix16(field_46_sub_state) + Fix16(gRng_6F6784.get_int_4F7AE0((s16)field_46_sub_state)) - dword_6FD4AC);
+    Fix16 spread_val = dword_6FD328 * (Fix16(field_46_sub_state) + Fix16(gRng_6F6784.get_int_4F7AE0(static_cast<s16>(field_46_sub_state))) - dword_6FD4AC);
     Ang16 spread(spread_val.GetRaw_40F4B0() / 71);
     spread.Normalize_406C20();
 

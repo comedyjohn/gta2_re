@@ -702,7 +702,7 @@ bool Object_2C::TryStartSlide_5233A0(Fix16 value)
 // 0x523440
 void Object_2C::HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnknown1, char_type bUnknown2)
 {
-    if ((u8)field_4->IsOnWater_59E1D0())
+    if (static_cast<u8>(field_4->IsOnWater_59E1D0()))
     {
         this->field_10_obj_3c->field_C_speed = kFpZero_6F8E10;
         this->field_10_obj_3c->field_10_z_speed = kFpZero_6F8E10;
@@ -1130,7 +1130,7 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
             field_4->set_ang_lazy_420690(pSprt->field_0_rotation);
             if (bHitSomething)
             {
-                if ((u8)field_4->IsOnWater_59E1D0())
+                if (static_cast<u8>(field_4->IsOnWater_59E1D0()))
                 {
                     field_10_obj_3c->field_C_speed = kFpZero_6F8E10;
                     field_10_obj_3c->field_10_z_speed = kFpZero_6F8E10;
@@ -3544,7 +3544,7 @@ Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypo
 char_type Object_5C::SetPendingDamageOwner_52A210(char_type owner)
 {
     // TODO: Why is it a byte here? enum ??
-    *(u8*)&field_18_pending_damage_owner = owner;
+    *&field_18_pending_damage_owner = owner;
     return owner;
 }
 

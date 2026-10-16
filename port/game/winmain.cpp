@@ -127,7 +127,7 @@ void LoadBeginSceneCBPtr()
 {
     static DllRaii hD3Ddll("d3ddll.dll"); // freed after WinMain return, only if this func is called
 
-    pBeginSceneCB = (T_gbh_SetBeginSceneCB)hD3Ddll.GetProcAddress("gbh_SetBeginSceneCB");
+    pBeginSceneCB = reinterpret_cast<T_gbh_SetBeginSceneCB>(hD3Ddll.GetProcAddress("gbh_SetBeginSceneCB"));
     if (!pBeginSceneCB)
     {
         printf("Using OG Render - no ImGui debug will function/display\n");
@@ -385,7 +385,7 @@ void UpdateGameScreenSize_5D8E00()
 {
     if (gGame_0x40_67E008)
     {
-        if (gVidSys_7071D0->field_40_full_screen == (DWORD)-2)
+        if (gVidSys_7071D0->field_40_full_screen == static_cast<DWORD>(-2))
         {
             if (gCachedScreenDimension_706C58 != window_width_706630)
             {
@@ -395,7 +395,7 @@ void UpdateGameScreenSize_5D8E00()
         }
         else
         {
-            if ((DWORD)gCachedScreenDimension_706C58 != gVidSys_7071D0->field_4C_rect_bottom)
+            if (static_cast<DWORD>(gCachedScreenDimension_706C58) != gVidSys_7071D0->field_4C_rect_bottom)
             {
                 gGame_0x40_67E008->SetScreenSize_4B8E00(gVidSys_7071D0->field_48_rect_right, gVidSys_7071D0->field_4C_rect_bottom);
             }
@@ -1004,7 +1004,7 @@ void OnVideoModeChanged_5D9680()
 void ApplyChangedScreenSettings_5D9690()
 {
     Init_FrameRateLightAndUnknown_5D8EB0();
-    if ((u8)ReadScreenSettings_5D8F70() || bVideoModeResetPending_706C5D)
+    if (static_cast<u8>(ReadScreenSettings_5D8F70()) || bVideoModeResetPending_706C5D)
     {
         SetVideoModeFromSettings_5D92D0();
         OnVideoModeChanged_5D9680();
@@ -1079,17 +1079,17 @@ void Net_Receive_Players_Inputs_4DA9F0()
 
         s32 player_idx;
         u32 packet_subtype;
-        if (gNetPlay_7071E8.ReceiveGameMessage_521890((Network_8*)&gpInputBuffer_6F58C0, &player_idx, &packet_subtype))
+        if (gNetPlay_7071E8.ReceiveGameMessage_521890(reinterpret_cast<Network_8*>(&gpInputBuffer_6F58C0), &player_idx, &packet_subtype))
         {
             switch (packet_subtype)
             {
                 case packet_subtype::StandardPacket_2:
                 {
-                    switch (*(u8*)gpInputBuffer_6F58C0) // std_packet_subtype
+                    switch (*reinterpret_cast<u8*>(gpInputBuffer_6F58C0)) // std_packet_subtype
                     {
                         case std_packet_subtype::GiveUp_1:
-                            waiting_bits &= ~(1 << *(s32*)((u8*)gpInputBuffer_6F58C0 + 1));
-                            gNetInUsePlayerBits_6F56B8 |= 1 << *(s32*)((u8*)gpInputBuffer_6F58C0 + 1);
+                            waiting_bits &= ~(1 << *reinterpret_cast<s32*>(reinterpret_cast<u8*>(gpInputBuffer_6F58C0) + 1));
+                            gNetInUsePlayerBits_6F56B8 |= 1 << *reinterpret_cast<s32*>(reinterpret_cast<u8*>(gpInputBuffer_6F58C0) + 1);
                             break;
                         case std_packet_subtype::KeepAlive_2:
                             waiting_bits &= ~(1 << player_idx);
@@ -1174,7 +1174,7 @@ s32 FileByteSum_4DB120(FILE* hFile)
 // 0x4DB2E0
 void MakeInitialSyncData_4DB2E0(u8* pSyncData)
 {
-    SyncCheckData_1F* pData = (SyncCheckData_1F*)pSyncData;
+    SyncCheckData_1F* pData = reinterpret_cast<SyncCheckData_1F*>(pSyncData);
     struct _stat st;
 
     memset(pData, 0, sizeof(SyncCheckData_1F));
@@ -1235,8 +1235,8 @@ void FatalErrorMsg_4DB410(const char_type* pMsg)
 // 0x4DB440
 void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
 {
-    SyncCheckData_1F* pLocal = (SyncCheckData_1F*)pLocalSyncData;
-    SyncCheckData_1F* pRemote = (SyncCheckData_1F*)pRemoteSyncData;
+    SyncCheckData_1F* pLocal = reinterpret_cast<SyncCheckData_1F*>(pLocalSyncData);
+    SyncCheckData_1F* pRemote = reinterpret_cast<SyncCheckData_1F*>(pRemoteSyncData);
     char_type msg[260];
     char_type name[260];
     wchar_t wname[260];
@@ -1541,7 +1541,7 @@ void GetDirectMusicVer_4A0650()
     hDMusic = LoadLibraryA("DMUSIC.DLL");
     if (hDMusic)
     {
-        if (CoCreateInstance(IID_DirectMusic, nullptr, 1u, IDD_IDirectMusic, (LPVOID*)&pDMusic) >= 0)
+        if (CoCreateInstance(IID_DirectMusic, nullptr, 1u, IDD_IDirectMusic, reinterpret_cast<LPVOID*>(&pDMusic)) >= 0)
         {
             gDMusicVer_67BD32 = 0x601;
             pDMusic->Release();
@@ -1573,8 +1573,8 @@ void Video_Render_Inits_5D90E0()
     gVideodevice_70694C = gRegistry_6FF968.Get_Screen_Setting_5870D0("videodevice", 1);
     strcpy(gRenderDllName_7067F0, kDefaultDllNames_626A00[0]);
     strcpy(gVideoDllName_706654, kDefaultDllNames_626A00[1]);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("rendername", (BYTE*)gRenderDllName_7067F0, 0xFFu);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("videoname", (BYTE*)gVideoDllName_706654, 0xFFu);
+    gRegistry_6FF968.Set_Screen_Setting_5871E0("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFu);
+    gRegistry_6FF968.Set_Screen_Setting_5871E0("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFu);
 
     if (strcmp(gRenderDllName_7067F0, "softdll.dll") == 0)
     {
@@ -1862,7 +1862,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
                     Input_Read_498D10();
                 }
 
-                if (gVidSys_7071D0 && !(u8)Bink::IsUsingDDBuffer_513770())
+                if (gVidSys_7071D0 && !static_cast<u8>(Bink::IsUsingDDBuffer_513770()))
                 {
                     SetVideoModeFromSettings_5D92D0();
                     OnVideoModeChanged_5D9680();
@@ -1887,7 +1887,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
                 gRoot_sound_66B038.Set3DSound_40F160(0);
                 gRoot_sound_66B038.Release_40F130();
 
-                if (gFrontend_67DC84 && (u8)Bink::IsDDBufferOpen_513760())
+                if (gFrontend_67DC84 && static_cast<u8>(Bink::IsDDBufferOpen_513760()))
                 {
                     Bink::CloseSlot1_513340();
                     Bink::CloseSlot2_513390();
@@ -1907,7 +1907,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             }
 
         case WM_ACTIVATE: // order ok
-            switch ((u8)wParam)
+            switch (static_cast<u8>(wParam))
             {
                 case WA_ACTIVE:
                 case WA_CLICKACTIVE:
@@ -2077,7 +2077,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     u32 osKind;
     GetDirectXVersion_4C4EC0(&dxVer, &osKind);
 
-    if ((u32)dxVer < 0x601)
+    if (dxVer < 0x601)
     {
         ErrorMsgBox_5E4EC0("ERROR: Incorrect version of DirectX");
         ReleaseMutex(gMutex_707078);
@@ -2140,8 +2140,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
     else
     {
-        gWindowX_706B60 = (int)(GetSystemMetrics(0) - window_w) / 2;
-        gWindowY_706B64 = (int)(GetSystemMetrics(1) - window_h) / 2;
+        gWindowX_706B60 = (GetSystemMetrics(0) - window_w) / 2;
+        gWindowY_706B64 = (GetSystemMetrics(1) - window_h) / 2;
     }
 
     if (!SetWindowPos(gHwnd_707F04, nullptr, gWindowX_706B60, gWindowY_706B64, window_w, window_h, 0x314u))
@@ -2389,7 +2389,7 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
         else
         {
             GUID protocolGuid;
-            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseProtocol", sizeof(GUID), (LPBYTE)&protocolGuid))
+            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseProtocol", sizeof(GUID), reinterpret_cast<LPBYTE>(&protocolGuid)))
             {
                 RegCloseKey(hKey);
                 return 0;
@@ -2398,7 +2398,7 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
             Network_Buffer_8 connection;
             connection.field_4_len = gRegistry_6FF968.Get_Int_5873E0(hKey, "UseConnection");
             connection.field_0 = operator new(connection.field_4_len);
-            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseConnection", connection.field_4_len, (LPBYTE)connection.field_0))
+            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseConnection", connection.field_4_len, static_cast<LPBYTE>(connection.field_0)))
             {
                 operator delete(connection.field_0);
                 RegCloseKey(hKey);
@@ -2420,7 +2420,7 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
                     return 0;
                 }
                 wchar_t modemNumber[128];
-                gRegistry_6FF968.Get_Binary_587340(hKey, "ModemNumber", len, (LPBYTE)modemNumber);
+                gRegistry_6FF968.Get_Binary_587340(hKey, "ModemNumber", len, reinterpret_cast<LPBYTE>(modemNumber));
                 gNetPlay_7071E8.field_5_modem_num = modemNumber[0] != 0;
             }
         }

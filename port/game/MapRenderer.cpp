@@ -117,8 +117,8 @@ struct VertProjector
     inline void ProjectVertTop_46BD40(const Fix16& x, const Fix16& y, Vert* pVert)
     {
         set_vert_xyz_relative_to_cam_4EAD90(x, y, gZCoordTop_6F62B0, pVert);
-        pVert->x = x.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = y.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->x = x.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = y.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
         pVert->z = gInvDepthTop_6F656C.ToFloat();
     }
 
@@ -126,8 +126,8 @@ struct VertProjector
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, gZCoord_6F63E0, pVert);
     
-        pVert->x = gScreenScaleBottom_6F633C.ToFloat() * xpos.ToFloat() + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = gScreenScaleBottom_6F633C.ToFloat() * ypos.ToFloat() + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->x = gScreenScaleBottom_6F633C.ToFloat() * xpos.ToFloat() + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = gScreenScaleBottom_6F633C.ToFloat() * ypos.ToFloat() + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
         pVert->z = gInvDepthBottom_6F6318.ToFloat();
     }
 
@@ -135,8 +135,8 @@ struct VertProjector
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, zpos, pVert);
         pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));
-        pVert->x = xpos.ToFloat() * Fix16ToFloat_Paren(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = ypos.ToFloat() * Fix16ToFloat_Paren(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->x = xpos.ToFloat() * Fix16ToFloat_Paren(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = ypos.ToFloat() * Fix16ToFloat_Paren(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
     }
 };
 
@@ -158,8 +158,8 @@ struct VertProjector2
     inline void ProjectVertTop_46BD40(const Fix16& x, const Fix16& y, Vert* pVert)
     {
         set_vert_xyz_relative_to_cam_4EAD90(x, y, gZCoordTop_6F62B0, pVert);
-        pVert->x = (((x.ToFloat())) * gScreenScaleTop_6F628C.ToFloat()) + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = (((Fix16ToF32_Rounded(y)) * gScreenScaleTop_6F628C.ToFloat()) + (u32)gViewCamera_676978->field_74_screen_px_center_y);
+        pVert->x = (((x.ToFloat())) * gScreenScaleTop_6F628C.ToFloat()) + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = (((Fix16ToF32_Rounded(y)) * gScreenScaleTop_6F628C.ToFloat()) + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y));
         pVert->z = gInvDepthTop_6F656C.ToFloat();
     }
 
@@ -167,8 +167,8 @@ struct VertProjector2
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, gZCoord_6F63E0, pVert);
 
-        pVert->x = (gScreenScaleBottom_6F633C.ToFloat() * ((xpos.ToFloat()))) + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = ((gScreenScaleBottom_6F633C.ToFloat() * (Fix16ToF32_Rounded(ypos))) + (u32)gViewCamera_676978->field_74_screen_px_center_y);
+        pVert->x = (gScreenScaleBottom_6F633C.ToFloat() * ((xpos.ToFloat()))) + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = ((gScreenScaleBottom_6F633C.ToFloat() * (Fix16ToF32_Rounded(ypos))) + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y));
         pVert->z = gInvDepthBottom_6F6318.ToFloat();
     }
 
@@ -176,8 +176,8 @@ struct VertProjector2
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, zpos, pVert);
         pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));
-        pVert->x = Fix16ToF32_Rounded3(xpos) * Fix16ToF32_Rounded2(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = Fix16ToF32_Rounded3(ypos) * Fix16ToF32_Rounded2(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->x = Fix16ToF32_Rounded3(xpos) * Fix16ToF32_Rounded2(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = Fix16ToF32_Rounded3(ypos) * Fix16ToF32_Rounded2(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
     }
 };
 
@@ -190,9 +190,9 @@ struct VertProjector3
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, zpos, pVert);
         pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));
-        pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_70_screen_px_center_x;
+        pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
         // No f32 local for field_60 and a no-op after the product: S 8 -> 4, E 16 -> 8 (docs/match_attempts.md).
-        pVert->y = Fix16ToF32_Rounded2(ypos) * Fix16ToF32_P3(gViewCamera_676978->field_60_screen_scale.x) * (pVert->z) + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->y = Fix16ToF32_Rounded2(ypos) * Fix16ToF32_P3(gViewCamera_676978->field_60_screen_scale.x) * (pVert->z) + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
     }
 };
 
@@ -215,8 +215,8 @@ struct VertProjector4
     {
         set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, zpos, pVert);
         pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));
-        pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * (pVert->z) + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-        pVert->y = (Fix16ToF32_Stored(gViewCamera_676978->field_60_screen_scale.x) * Fix16ToF32_Stored(ypos)) * (pVert->z) + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+        pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * (pVert->z) + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+        pVert->y = (Fix16ToF32_Stored(gViewCamera_676978->field_60_screen_scale.x) * Fix16ToF32_Stored(ypos)) * (pVert->z) + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
     }
 };
 
@@ -617,7 +617,7 @@ void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
 
                 // now set u
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&left_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&left_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 63.999901f;
                     gTileVerts_6F65A8[1].u = 63.999901f;
@@ -668,7 +668,7 @@ void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
                 }
                 // now set u
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&left_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&left_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 63.999901f;
                     gTileVerts_6F65A8[1].u = 63.999901f;
@@ -702,7 +702,7 @@ void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
         u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(left_word & 0x3FF);
         if (texture_idx)
         {
-            if ((*(((u8*)&left_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&left_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -735,8 +735,8 @@ void MapRenderer::ProjectVertTop_4EAE00(const Fix16& xpos, const Fix16& ypos, Ve
 {
     set_vert_xyz_relative_to_cam_4EAD90(xpos, ypos, gZCoordTop_6F62B0, pVert);
     
-    pVert->x = xpos.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + (u32)gViewCamera_676978->field_70_screen_px_center_x;
-    pVert->y = ypos.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+    pVert->x = xpos.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
+    pVert->y = ypos.ToFloat() * gScreenScaleTop_6F628C.ToFloat() + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
     pVert->z = gInvDepthTop_6F656C.ToFloat();
 }
 
@@ -745,8 +745,8 @@ void MapRenderer::ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCo
 {
     set_vert_xyz_relative_to_cam_4EAD90(xCoord, yCoord, gZCoord_6F63E0, pVert);
 
-    pVert->x = (u32)gViewCamera_676978->field_70_screen_px_center_x + gScreenScaleBottom_6F633C.ToFloat() * xCoord.ToFloat();
-    pVert->y = (u32)gViewCamera_676978->field_74_screen_px_center_y + gScreenScaleBottom_6F633C.ToFloat() * yCoord.ToFloat();
+    pVert->x = static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x) + gScreenScaleBottom_6F633C.ToFloat() * xCoord.ToFloat();
+    pVert->y = static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y) + gScreenScaleBottom_6F633C.ToFloat() * yCoord.ToFloat();
     pVert->z = gInvDepthBottom_6F6318.ToFloat();
 }
 
@@ -800,7 +800,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
 
                 // now set u
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&right_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&right_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 0.0f;
                     gTileVerts_6F65A8[1].u = 0.0f;
@@ -855,7 +855,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
                 }
                 // now set u
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&right_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&right_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 0.0f;
                     gTileVerts_6F65A8[1].u = 0.0f;
@@ -889,7 +889,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
         u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(right_word & 0x3FF);
         if (texture_idx)
         {
-            if ((*(((u8*)&right_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&right_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -910,10 +910,10 @@ void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const
 
     // The same conversion forms as VertProjector3::ProjectVert_46BC70 (field_60 is loaded first here too).
     pVert->z = 1.0f / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0f - zpos.ToFloat()));
-    pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + (u32)gViewCamera_676978->field_70_screen_px_center_x;
+    pVert->x = Fix16ToF32_Rounded2(xpos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x) * pVert->z + static_cast<u32>(gViewCamera_676978->field_70_screen_px_center_x);
     // The y line's parentheses are x87 no-op nodes: the one after the product delays `pop ebx` past
     // `fmuls 8(%ecx)` in the epilogue (see Scripts/x87_sched).
-    pVert->y = (Fix16ToF32_Rounded2(ypos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x)) * (pVert->z) + (u32)gViewCamera_676978->field_74_screen_px_center_y;
+    pVert->y = (Fix16ToF32_Rounded2(ypos) * Fix16ToF32_Rounded3(gViewCamera_676978->field_60_screen_scale.x)) * (pVert->z) + static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
 }
 
 // https://decomp.me/scratch/a6z18
@@ -957,7 +957,7 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
                     gTileVerts_6F65A8[2].v = 63.999901f - (unk_z_2 * kTileTexSize_6F6548).ToFloat();
                 }
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&top_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&top_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 0.0f;
                     gTileVerts_6F65A8[1].u = 63.999901f;
@@ -1011,7 +1011,7 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
                 }
 
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&top_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&top_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 0.0f;
                     gTileVerts_6F65A8[1].u = 63.999901f;
@@ -1046,7 +1046,7 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
         u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(top_word & 0x3FF);
         if (texture_idx != 0)
         {
-            if ((*(((u8*)&top_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&top_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -1230,7 +1230,7 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
                 }
 
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&bottom_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&bottom_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 63.999901f;
                     gTileVerts_6F65A8[1].u = 0.0f;
@@ -1293,7 +1293,7 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
                     gTileVerts_6F65A8[0].v = 63.999901f - (z_unk_4 * kTileTexSize_6F6548).ToFloat();
                 }
                 gTileDrawFlags_6F6560 = 16389;
-                if ((*(((u8*)&bottom_word) + 1) & 0x20) != 0)
+                if ((*((reinterpret_cast<u8*>(&bottom_word)) + 1) & 0x20) != 0)
                 {
                     gTileVerts_6F65A8[0].u = 63.999901f;
                     gTileVerts_6F65A8[1].u = 0.0f;
@@ -1327,7 +1327,7 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
         u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(bottom_word & 0x3FF);
         if (texture_idx)
         {
-            if ((*(((u8*)&bottom_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&bottom_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -1358,7 +1358,7 @@ void MapRenderer::draw_lid_4EE130()
             switch (gDiagonalLidType_620F20)
             {
                 case -1:
-                    gTileDrawFlags_6F6560 = kLidFlags_620FA4[(u16)gLidType_6F6274 >> 13];
+                    gTileDrawFlags_6F6560 = kLidFlags_620FA4[gLidType_6F6274 >> 13];
                     break;
                 case 0:
                     memcpy(&gTileVerts_6F65A8[0], &gTileVerts_6F65A8[1], sizeof(Vert));
@@ -1369,12 +1369,12 @@ void MapRenderer::draw_lid_4EE130()
                     memcpy(&gTileVerts_6F65A8[6], &gTileVerts_6F65A8[7], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[3], &gTileVerts_6F65A8[0], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[7], &gTileVerts_6F65A8[4], sizeof(Vert));
-                    gTileDrawFlags_6F6560 = dword_621004[(u16)gLidType_6F6274 >> 13];
+                    gTileDrawFlags_6F6560 = dword_621004[gLidType_6F6274 >> 13];
                     break;
                 case 1:
                     memcpy(&gTileVerts_6F65A8[1], &gTileVerts_6F65A8[2], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[5], &gTileVerts_6F65A8[6], sizeof(Vert));
-                    gTileDrawFlags_6F6560 = dword_621024[(u16)gLidType_6F6274 >> 13];
+                    gTileDrawFlags_6F6560 = dword_621024[gLidType_6F6274 >> 13];
                     break;
                 case 2:
                     memcpy(&gTileVerts_6F65A8[2], &gTileVerts_6F65A8[1], sizeof(Vert));
@@ -1383,12 +1383,12 @@ void MapRenderer::draw_lid_4EE130()
                     memcpy(&gTileVerts_6F65A8[5], &gTileVerts_6F65A8[4], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[0], &gTileVerts_6F65A8[3], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[4], &gTileVerts_6F65A8[7], sizeof(Vert));
-                    gTileDrawFlags_6F6560 = dword_620FE4[(u16)gLidType_6F6274 >> 13];
+                    gTileDrawFlags_6F6560 = dword_620FE4[gLidType_6F6274 >> 13];
                     break;
                 case 3:
                     memcpy(&gTileVerts_6F65A8[3], &gTileVerts_6F65A8[0], sizeof(Vert));
                     memcpy(&gTileVerts_6F65A8[7], &gTileVerts_6F65A8[4], sizeof(Vert));
-                    gTileDrawFlags_6F6560 = dword_621024[(u16)gLidType_6F6274 >> 13];
+                    gTileDrawFlags_6F6560 = dword_621024[gLidType_6F6274 >> 13];
                     break;
                 default:
                     break;
@@ -1418,11 +1418,11 @@ void MapRenderer::DrawDiagonalWallUpLeft_4EE7D0()
     {
         MapRenderer::DrawDiagonalUpLeftFace_4EC450(gBlockLeft_6F62F6);
     }
-    if ((u16)gBlockBottom_6F6468)
+    if (gBlockBottom_6F6468)
     {
         MapRenderer::draw_bottom_4ED290(gBlockBottom_6F6468);
     }
-    if ((u16)gLidType_6F6274)
+    if (gLidType_6F6274)
     {
         gDiagonalLidType_620F20 = 0;
         MapRenderer::draw_lid_4EE130();
@@ -1441,11 +1441,11 @@ void MapRenderer::DrawDiagonalWallUpRight_4EE8A0()
     {
         MapRenderer::DrawDiagonalUpRightFace_4EC7A0(gBlockRight_6F63C6);
     }
-    if ((u16)gBlockBottom_6F6468)
+    if (gBlockBottom_6F6468)
     {
         MapRenderer::draw_bottom_4ED290(gBlockBottom_6F6468);
     }
-    if ((u16)gLidType_6F6274)
+    if (gLidType_6F6274)
     {
         gDiagonalLidType_620F20 = 1;
         MapRenderer::draw_lid_4EE130();
@@ -1468,7 +1468,7 @@ void MapRenderer::DrawDiagonalWallDownLeft_4EE970()
     {
         MapRenderer::DrawTopSide_4EBA60(gBlockTop_6F62F4);
     }
-    if ((u16)gLidType_6F6274)
+    if (gLidType_6F6274)
     {
         gDiagonalLidType_620F20 = 3;
         MapRenderer::draw_lid_4EE130();
@@ -1491,7 +1491,7 @@ void MapRenderer::DrawDiagonalWallDownRight_4EEA40()
     {
         MapRenderer::DrawTopSide_4EBA60(gBlockTop_6F62F4);
     }
-    if ((u16)gLidType_6F6274)
+    if (gLidType_6F6274)
     {
         gDiagonalLidType_620F20 = 2;
         MapRenderer::draw_lid_4EE130();
@@ -2392,7 +2392,7 @@ void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a,
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
             //if (word.flat)
-            if ((*(((u8*)&side_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&side_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -2500,7 +2500,7 @@ void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
             //if (word.flat)
-            if ((*(((u8*)&side_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&side_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -2541,7 +2541,7 @@ void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
             //if (word.flat)
-            if ((*(((u8*)&side_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&side_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -2582,7 +2582,7 @@ void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_of
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
             //if (word.flat)
-            if ((*(((u8*)&side_word) + 1) & 0x10) != 0)
+            if ((*((reinterpret_cast<u8*>(&side_word)) + 1) & 0x10) != 0)
             {
                 gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
             }
@@ -2606,7 +2606,7 @@ void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& 
         gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC + unk2, gYCoord_6F63B8 + unk4, &gTileVerts_6F65A8[2]);
         gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC + unk1, gYCoord_6F63B8 + unk4, &gTileVerts_6F65A8[3]);
 
-        draw_4F3FB0(kLidFlags_620FA4[(u16)gLidType_6F6274 >> 13]);
+        draw_4F3FB0(kLidFlags_620FA4[gLidType_6F6274 >> 13]);
 
         Set_UV_4F4190(unk1, unk3, 0);
         Set_UV_4F4190(unk2, unk3, 1);
@@ -2625,7 +2625,7 @@ void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& 
             // 9.6f: GetColour_46B5E0 (inlined, using it changes the code: 43 -> 105)
             u8 diffuse_color;
 
-            switch (((u16)gLidType_6F6274 >> 10) & 3)
+            switch ((gLidType_6F6274 >> 10) & 3)
             {
                 case 0:
                     diffuse_color = -1;
@@ -3615,7 +3615,7 @@ void MapRenderer::Draw_4F6A20()
             if (zLayer == 0 && gLighting_626A09)
             {
                 pgbh_ResetLights();
-                pgbh_SetCamera((f32)min_x, (f32)min_y, (f32)max_x, (f32)max_y);
+                pgbh_SetCamera(static_cast<f32>(min_x), static_cast<f32>(min_y), static_cast<f32>(max_x), static_cast<f32>(max_y));
                 LightGrid::SubmitLightsInArea_4D6E50(min_x, min_y, max_x, max_y);
             }
 

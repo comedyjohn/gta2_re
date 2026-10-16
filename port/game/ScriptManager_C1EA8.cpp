@@ -49,7 +49,7 @@ str_table_entry* ScriptManager_C1EA8::StrEntryByString_5030B0(char_type* strToFi
     str_table_entry* pEntry = field_13350_pStringTbl->field_4[idx];
     while (pEntry)
     {
-        if (_strnicmp(strToFind, (const char*)&pEntry[1], pEntry->field_8_length) == 0) // string data is after the end of the structure
+        if (_strnicmp(strToFind, reinterpret_cast<const char*>(&pEntry[1]), pEntry->field_8_length) == 0) // string data is after the end of the structure
         {
             return pEntry;
         }
@@ -66,7 +66,7 @@ EXTERN_GLOBAL_ARRAY(u8, kDecidePowerupGenTypes_6212F0, 19);
 // 0x511A70
 void ScriptManager_C1EA8::SetGeneratorTypeForCar_511A70(s32 car_model, Generator_2C* pGen)
 {
-    u8* pList = (u8*)gScriptManager_6F8060->field_340_car_list;
+    u8* pList = reinterpret_cast<u8*>(gScriptManager_6F8060->field_340_car_list);
     u8 i;
     for (i = 0; i < 19; pList++, i++)
     {
@@ -245,7 +245,7 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
         File::AppendBufferToFile_4A6F50(pFileName, &mapSubBytes, &writeLen);
         if (mapSubBytes)
         {
-            File::AppendBufferToFile_4A6F50(pFileName, pMapSub, (u32*)&mapSubBytes);
+            File::AppendBufferToFile_4A6F50(pFileName, pMapSub, reinterpret_cast<u32*>(&mapSubBytes));
         }
     }
 }
@@ -260,7 +260,7 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
     gmp_block_info* pBlockInfo;
     DmapInfoList* pMapSub;
 
-    gMap_0x370_6F6268->GetModifiedMapData_4E8CF0(&pColData, &colDataLen, &pBlockInfo, &blockInfoLen, &pMapSub, (s32*)&mapSubLen);
+    gMap_0x370_6F6268->GetModifiedMapData_4E8CF0(&pColData, &colDataLen, &pBlockInfo, &blockInfoLen, &pMapSub, reinterpret_cast<s32*>(&mapSubLen));
     File::Global_Open_4A7060(pFileName);
 
     File::Global_Read_4A71C0(&gGameSave_6F78C8, 0x748);
@@ -354,7 +354,7 @@ void ScriptManager_C1EA8::Update_512160()
 void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
 {
     u32 total_str_length = 0;
-    BYTE* pStringDataIter1 = (BYTE*)field_1334C_strings;
+    BYTE* pStringDataIter1 = reinterpret_cast<BYTE*>(field_1334C_strings);
     while (total_str_length < tableSize)
     {
         s32 str_length = pStringDataIter1[8] + 9;
@@ -380,12 +380,12 @@ void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
     u32 total_str_length_ = 0;
     while (total_str_length_ < tableSize)
     {
-        pStringDataIter2->field_2_zone_idx = gMap_0x370_6F6268->zone_idx_by_name_4DF050((char_type*)&pStringDataIter2[1],
-                                                                                        strlen((const char_type*)&pStringDataIter2[1]));
+        pStringDataIter2->field_2_zone_idx = gMap_0x370_6F6268->zone_idx_by_name_4DF050(reinterpret_cast<char_type*>(&pStringDataIter2[1]),
+                                                                                        strlen(reinterpret_cast<const char_type*>(&pStringDataIter2[1])));
         field_13350_pStringTbl->field_4[str_count] = pStringDataIter2;
         s32 str_length_ = pStringDataIter2->field_8_length + 9;
         total_str_length_ += str_length_;
-        pStringDataIter2 = (str_table_entry*)((char_type*)pStringDataIter2 + str_length_);
+        pStringDataIter2 = reinterpret_cast<str_table_entry*>(reinterpret_cast<char_type*>(pStringDataIter2) + str_length_);
         ++str_count;
     }
     field_13350_pStringTbl->field_0_string_count = str_count;
@@ -446,19 +446,19 @@ u16 ScriptManager_C1EA8::LoadMissionScript_512400(const char_type* String1, u16*
     {
         u32 remainder;
         strcpy(gTmpBuffer_67C598, "data\\");
-        strcat(gTmpBuffer_67C598, (const char*)String1);
+        strcat(gTmpBuffer_67C598, static_cast<const char*>(String1));
         Error_SetName_4A0770(gTmpBuffer_67C598);
         File::Global_Open_4A7060(gTmpBuffer_67C598);
         File::Global_Read_4A71C0(&Buffer, 2);
         File::Global_Read_4A71C0(pStartCmd, 2);
         File::Global_Read_4A71C0(&remainder, 4);
-        File::Global_Read_4A71C0(&field_46C_base_pointers[(u16)Buffer], 0xC00);
-        File::GetRemainderSize_4A7250(&field_334C_script_data[field_46C_base_pointers[(u16)Buffer]], &remainder);
+        File::Global_Read_4A71C0(&field_46C_base_pointers[Buffer], 0xC00);
+        File::GetRemainderSize_4A7250(&field_334C_script_data[field_46C_base_pointers[Buffer]], &remainder);
         File::Global_Close_4A70C0();
     }
     else
     {
-        str_table_entry* pStrEntry = gScriptManager_6F8060->StrEntryByString_5030B0((char_type*)String1);
+        str_table_entry* pStrEntry = gScriptManager_6F8060->StrEntryByString_5030B0(const_cast<char_type*>(String1));
         u16 field_2_zone_idx = pStrEntry->field_2_zone_idx;
         Buffer = gScriptManager_6F8060->field_C1D72_mission_base_ptr_idx[field_2_zone_idx];
         *pStartCmd = gScriptManager_6F8060->field_C1D34_mission_start_cmd[field_2_zone_idx];
@@ -481,7 +481,7 @@ void ScriptManager_C1EA8::LoadSubScripts_5125F0()
     for (u16 i = 0; i < field_13350_pStringTbl->field_0_string_count; i++)
     {
         str_table_entry* pEntry = field_13350_pStringTbl->field_4[i];
-        if ((u8)pEntry->field_4_type == 21)
+        if (static_cast<u8>(pEntry->field_4_type) == 21)
         {
             // The name's last three chars become the extension "SCR"
             char* pName = pEntry->get_name();
@@ -522,7 +522,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::GetBasePointer_512770(u16 idx)
     {
         return nullptr;
     }
-    return (SCR_CMD_HEADER*)&field_334C_script_data[field_46C_base_pointers[idx]];
+    return reinterpret_cast<SCR_CMD_HEADER*>(&field_334C_script_data[field_46C_base_pointers[idx]]);
 }
 
 // 0x5127a0
@@ -640,7 +640,7 @@ bool ScriptManager_C1EA8::AnswerPhone_5129F0(s32 ped_idx, s32 phone_idx)
         switch (pPtr->field_2_type)
         {
             case SCRCMD_ANSWER_PHONE:
-                pTriggerCmd = (SCR_ANSWER_PHONE*)pPtr;
+                pTriggerCmd = reinterpret_cast<SCR_ANSWER_PHONE*>(pPtr);
                 pTriggerCmd->field_12_answered = 1;
                 return true;
             case SCRCMD_THREAD_DECLARE4:
@@ -863,7 +863,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
             miss2_0x11C_Pool_6F8064 = new miss2_0x11C_Pool();
         }
     }
-    field_1334C_strings = (str_table_entry*)Memory::malloc_4FE4D0(0x1400u);
+    field_1334C_strings = static_cast<str_table_entry*>(Memory::malloc_4FE4D0(0x1400u));
     memset(field_35C_full_scr_file_name, 0, sizeof(field_35C_full_scr_file_name));
     memset(field_334C_script_data, 0, sizeof(field_334C_script_data));
     memset(field_46C_base_pointers, 0, sizeof(field_46C_base_pointers));

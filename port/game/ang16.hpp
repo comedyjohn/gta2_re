@@ -170,7 +170,7 @@ class Ang16
 
     inline s32 FromUnsignedToFloat()
     {
-        return (u16)rValue << 14;
+        return static_cast<u16>(rValue) << 14;
     }
 
     inline void ConvertAndMultiply(Ang16* a1, Ang16* a2)
@@ -231,7 +231,7 @@ class Ang16
     // The value is stored as a dword, as 9.6f's 0x40F540 passes it to 0x401C60; the copy reads its low word
     Ang16(const s32* value, s32 a3)
     {
-        AssignNormalized_409300(*(const s16*)value, a3);
+        AssignNormalized_409300(*reinterpret_cast<const s16*>(value), a3);
     }
 
     // The out-of-line copy of Ang16(Fix16& value, u8) (9.6f 0x401C40). A real constructor, not a
@@ -345,7 +345,7 @@ class Ang16
     // (Particle_8::EmitImpactParticles_53FE40)
     Ang16 MultiplyByFix16_401CB0_out_of_line(const Fix16& a2)
     {
-        return Ang16((Fix16*)&(const Fix16&)Fix16(rValue).Multiply_408680(a2), 0);
+        return Ang16(const_cast<Fix16*>(&(const Fix16&)Fix16(rValue).Multiply_408680(a2)), 0);
     }
 
     // MultiplyByFix16_401CB0 with the multiply inline and the Fix16* constructor out of line

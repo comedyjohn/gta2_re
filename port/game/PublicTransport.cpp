@@ -96,7 +96,7 @@ gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
 
     gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(zone_type);
     gNameCompareLen_6FF158 = 6;
-    while (!CompareNameChars_577E90((char_type*)&pZone->field_6_name, pChar))
+    while (!CompareNameChars_577E90(reinterpret_cast<char_type*>(&pZone->field_6_name), pChar))
     {
         pZone = gMap_0x370_6F6268->next_zone_4DF770();
         if (!pZone)
@@ -405,7 +405,7 @@ void Train_58::UpdatePassengerAI_578390()
                     {
                         if (this->field_54_passenger_timer <= 0)
                         {
-                            for (gTargetCarDoor_6FF1D8 = gRng_6F6784.get_int_4F7AE0(4); gTargetCarDoor_6FF1D8 < (u8)(*pTrainCar)->GetRemap();
+                            for (gTargetCarDoor_6FF1D8 = gRng_6F6784.get_int_4F7AE0(4); gTargetCarDoor_6FF1D8 < static_cast<u8>((*pTrainCar)->GetRemap());
                                  gTargetCarDoor_6FF1D8++)
                             {
                                 if ((*pTrainCar)->IsStoppedWithPavementAtDoor_43B140(gTargetCarDoor_6FF1D8) && this->field_56_passenger_count > 0)
@@ -522,7 +522,7 @@ void Train_58::ProcessTrainExplosionChain_578670()
             {
                 if (car_idx > 0)
                 {
-                    *((u8*)&field_C_carriages[10] + car_idx + 3) = 10;
+                    *(reinterpret_cast<u8*>(&field_C_carriages[10]) + car_idx + 3) = 10;
                 }
                 else if (car_idx < field_43_idx - 1)
                 {
@@ -542,7 +542,7 @@ void Train_58::ProcessTrainExplosionChain_578670()
                     field_C_carriages[car_idx + 1]->AccumulateDamage_43DA90(32000, &kZeroPoint_6FF150);
                     if (car_idx > 0)
                     {
-                        *((u8*)&field_C_carriages[10] + car_idx + 3) = 10;
+                        *(reinterpret_cast<u8*>(&field_C_carriages[10]) + car_idx + 3) = 10;
                     }
                     if (car_idx < field_43_idx - 1)
                     {
@@ -855,9 +855,9 @@ void PublicTransport_181C::InitTrainStations_579440()
             case 0:
                 break;
             case 2:
-                pStation->field_4_entry_point = FindStationZoneByName_577EE0((char_type*)&pStation->field_10_pZone->field_6_name, 0);
-                pStation->field_8_exit_point = FindStationZoneByName_577EE0((char_type*)&pStation->field_10_pZone->field_6_name, 1);
-                pStation->field_C_stop_point = FindStationZoneByName_577EE0((char_type*)&pStation->field_10_pZone->field_6_name, 2);
+                pStation->field_4_entry_point = FindStationZoneByName_577EE0(reinterpret_cast<char_type*>(&pStation->field_10_pZone->field_6_name), 0);
+                pStation->field_8_exit_point = FindStationZoneByName_577EE0(reinterpret_cast<char_type*>(&pStation->field_10_pZone->field_6_name), 1);
+                pStation->field_C_stop_point = FindStationZoneByName_577EE0(reinterpret_cast<char_type*>(&pStation->field_10_pZone->field_6_name), 2);
                 break;
             case 1:
                 break;
@@ -909,7 +909,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
             for (i = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(gmp_zone_type_enum::railway_station_platform); i != nullptr;
                  i = gMap_0x370_6F6268->next_zone_4DF770())
             {
-                *(u8*)&gNameCompareLen_6FF158 = 5; //LOBYTE(gNameCompareLen_6FF158) = 5; part of a object???????
+                *&gNameCompareLen_6FF158 = 5; //LOBYTE(gNameCompareLen_6FF158) = 5; part of a object???????
                 if (CompareNameChars_577E90(Buffer, i->field_6_name))
                 {
                     TrainStation_34* pStation = gPublicTransport_181C_6FF1D4->AllocateTrainStation_5787E0();
@@ -920,7 +920,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
                     pStation->field_18_pStoppedTrain = nullptr;
                     pStation->field_2F_track_idx = station_zone_kind;
                     ++gStationCount_6FF1CC;
-                    switch (i->field_6_name[(u8)gNameCompareLen_6FF158])
+                    switch (i->field_6_name[gNameCompareLen_6FF158])
                     {
                         case '0':
                             gTrainStationList_6FEE68.field_0_list[0] = pStation;
@@ -1543,14 +1543,14 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                     }
                     else if (!bStopped)
                     {
-                        if (((u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt() == pStation->field_C_stop_point->field_1_x && (u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt() == pStation->field_C_stop_point->field_2_y))
+                        if ((static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt()) == pStation->field_C_stop_point->field_1_x && static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt()) == pStation->field_C_stop_point->field_2_y))
                         {
                             pTrain->field_48_stop_phase = 4;
                             break;
                         }
                         pTrain->field_48_stop_phase = 11;
                     }
-                    if (((u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt() == pStation->field_8_exit_point->field_1_x && (u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt() == pStation->field_8_exit_point->field_2_y))
+                    if ((static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt()) == pStation->field_8_exit_point->field_1_x && static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt()) == pStation->field_8_exit_point->field_2_y))
                     {
                         pTrain->field_48_stop_phase = 0;
                         pTrain->IncrementState_578180();
@@ -1585,7 +1585,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                     }
                     if (!pTrain->field_0)
                     {
-                        if (((u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt() == pStation->field_4_entry_point->field_1_x && (u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt() == pStation->field_4_entry_point->field_2_y))
+                        if ((static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt()) == pStation->field_4_entry_point->field_1_x && static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt()) == pStation->field_4_entry_point->field_2_y))
                         {
                             SetDriverStation(pTrain, pStation);
                             pTrain->field_48_stop_phase = 2;
@@ -1617,7 +1617,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                 case 2:
                     pStation = pTrain->field_4C_maybe_train_station;
                     pStation->field_18_pStoppedTrain = pTrain;
-                    if (((u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt() == pStation->field_C_stop_point->field_1_x && (u8)pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt() == pStation->field_C_stop_point->field_2_y))
+                    if ((static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.x.ToInt()) == pStation->field_C_stop_point->field_1_x && static_cast<u8>(pTrain->field_C_carriages[0]->field_50_car_sprite->field_14_xy.y.ToInt()) == pStation->field_C_stop_point->field_2_y))
                     {
                         pTrain->field_48_stop_phase = 4;
                     }

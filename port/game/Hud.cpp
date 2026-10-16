@@ -196,7 +196,7 @@ void Hud_UnderRoofArrowMarker_C::Update_5CF730()
 {
     Ped* pPed = gGame_0x40_67E008->field_38_local_player->GetCameraModePed();
 
-    if (!pPed || (u8)pPed->IsInTrain_470F00())
+    if (!pPed || static_cast<u8>(pPed->IsInTrain_470F00()))
     {
         field_A_ped_under_solid = 0;
     }
@@ -297,9 +297,9 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
         s8 respect = pGang->GetRespectForPlayer_4BEEF0(PlayerIdx);
 
         s32 arrow_colour = pGang->field_138_arrow_colour - 1;
-        DrawFigureScaled_5D7670(6, arrow_colour + 64, 16, (u32)(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, arrow_colour + 64, 16, static_cast<u32>(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(6, arrow_colour + 78, 64u, (u32)(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, arrow_colour + 78, 64u, static_cast<u32>(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
 
         DrawFigureScaled_5D7670(6, arrow_colour + 71, 64u, ypos + 1, kAngZero_706610, 2, 0, 0, 0);
 
@@ -308,7 +308,7 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
         s32 curr_bar_respect = 20;
         for (s32 i = 69; i <= 84 && respect_i >= curr_bar_respect; i += 5)
         {
-            DrawFigureScaled_5D7670(6, arrow_colour + 71, (u32)i, ypos + 1, kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, arrow_colour + 71, static_cast<u32>(i), ypos + 1, kAngZero_706610, 2, 0, 0, 0);
             curr_bar_respect += 20;
         }
 
@@ -316,7 +316,7 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
         curr_bar_respect = -20;
         for (s32 j = 59; j >= 44 && respect_i <= curr_bar_respect; j -= 5)
         {
-            DrawFigureScaled_5D7670(6, arrow_colour + 71, (u32)j, ypos + 1, kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, arrow_colour + 71, static_cast<u32>(j), ypos + 1, kAngZero_706610, 2, 0, 0, 0);
             curr_bar_respect -= 20;
         }
 
@@ -392,7 +392,7 @@ void Hud_PlayerNames_4::DrawPlayerNames_5CFE40()
                     Fix16 y = pPlayerPed->field_1AC_cam.y;
                     Fix16 z = pPlayerPed->field_1AC_cam.z;
                     // The original tests only al (bool return?)
-                    if ((u8)pCam->IsCoordsPosVisible_435A70(x, y, z))
+                    if (static_cast<u8>(pCam->IsCoordsPosVisible_435A70(x, y, z)))
                     {
                         Fix16 xCalc;
                         Fix16 yCalc;
@@ -513,7 +513,7 @@ void Hud_Health_4::DrawHealth_5D0260()
     // Draw complete hearts
     for (s32 complete_hearts = half_hearts / 2; complete_hearts > 0; complete_hearts--, xpos += 20)
     {
-        DrawFigureScaled_5D7670(6, 113, xpos, (u32)34, kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, 113, xpos, static_cast<u32>(34), kAngZero_706610, 2, 0, 0, 0);
     }
 
     // Draw half heart
@@ -523,14 +523,14 @@ void Hud_Health_4::DrawHealth_5D0260()
         {
             xpos -= 2;
         }
-        DrawFigureScaled_5D7670(6, 114, xpos, (u32)34, kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, 114, xpos, static_cast<u32>(34), kAngZero_706610, 2, 0, 0, 0);
     }
 
     // Draw debug stuff
     if (bDo_show_instruments_67D64C)
     {
         swprintf(tmpBuff_67BD9C, L"%d%%", health);
-        DrawText_5D7720(tmpBuff_67BD9C, (u32)551, (u32)34, gDebugFont_706600, 2, 0, 0, 0);
+        DrawText_5D7720(tmpBuff_67BD9C, static_cast<u32>(551), static_cast<u32>(34), gDebugFont_706600, 2, 0, 0, 0);
     }
 }
 
@@ -865,7 +865,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
     {
         if (IsVisible_4C7050())
         {
-            if (field_18.field_28_arrow_colour != 5 || ((u32)gpRng_67AB34->get_cur_rng_41CFE0() % 6 >= 3))
+            if (field_18.field_28_arrow_colour != 5 || (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) % 6 >= 3))
             {
                 drawKind_ = 2;
             }
@@ -1271,7 +1271,7 @@ void Hud_Arrow_7C_Array::SetNewGangArrow_5D1310(Gang_144* pZone)
 // 0x5d1350
 void Hud_Arrow_7C_Array::CreatePlayerArrows_5D1350()
 {
-    if ((u8)bStartNetworkGame_7081F0)
+    if (static_cast<u8>(bStartNetworkGame_7081F0))
     {
         if (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() != TAG_GAME_3)
         {
@@ -1337,17 +1337,17 @@ void Hud_QuitMessage_1::DrawQuitMessage_5D1430()
         s32 line_spacing_added = CountLineSpacing_5D8940(pQuitText, word_7064D8);
         s32 line2_ypos = ((3 * (160 - line_spacing_added)) / 2);
 
-        DrawText_5D7720(pQuitText, (u32)((640 - max_text_width) / 2), line2_ypos - line_spacing_added, word_7064D8, 2, 0, 0, 0);
+        DrawText_5D7720(pQuitText, static_cast<u32>((640 - max_text_width) / 2), line2_ypos - line_spacing_added, word_7064D8, 2, 0, 0, 0);
 
         wchar_t* pQuitText2 = gText_0x14_704DFC->Find_5B5F90("quit2");
         s32 max_text_width_2 = Frontend::GetMaxTextWidth_5D8990(pQuitText2, word_7064D8);
 
-        DrawText_5D7720(pQuitText2, (u32)((640 - max_text_width_2) / 2), (u32)line2_ypos, word_7064D8, 2, 0, 0, 0);
+        DrawText_5D7720(pQuitText2, static_cast<u32>((640 - max_text_width_2) / 2), static_cast<u32>(line2_ypos), word_7064D8, 2, 0, 0, 0);
 
         wchar_t* pQuitText3 = gText_0x14_704DFC->Find_5B5F90("quit3");
         s32 max_text_width_3 = Frontend::GetMaxTextWidth_5D8990(pQuitText3, word_7064D8);
 
-        DrawText_5D7720(pQuitText3, (u32)((640 - max_text_width_3) / 2), line2_ypos + line_spacing_added, word_7064D8, 2, 0, 0, 0);
+        DrawText_5D7720(pQuitText3, static_cast<u32>((640 - max_text_width_3) / 2), line2_ypos + line_spacing_added, word_7064D8, 2, 0, 0, 0);
     }
 }
 
@@ -1493,8 +1493,8 @@ void Hud_Message_1C8::FormatMessage_5D1860()
     if (this->field_0_time_to_show)
     {
         text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(&this->field_2_str[100], this->field_2_str, 580, gMessageFont_7062F0);
-        this->field_1BC_str_width = (u16)((640 - Frontend::GetMaxTextWidth_5D8990(&this->field_2_str[100], gMessageFont_7062F0)) / 2);
-        this->field_1C0_num_lines = (u16)((480 - CountLineSpacing_5D8940(&this->field_2_str[100], gMessageFont_7062F0)) / 4);
+        this->field_1BC_str_width = static_cast<u16>((640 - Frontend::GetMaxTextWidth_5D8990(&this->field_2_str[100], gMessageFont_7062F0)) / 2);
+        this->field_1C0_num_lines = static_cast<u16>((480 - CountLineSpacing_5D8940(&this->field_2_str[100], gMessageFont_7062F0)) / 4);
     }
 }
 
@@ -1848,7 +1848,7 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
         DrawFigureScaled_5D7670(sprite_types_enum::user_6, 117, xpos, ypos - top_height / 2 - middle_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
 
         // The middle sprite's y goes through the Fix16(u32) constructor (out-of-line copy 0x4926F0) like x does
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 119, xpos, (u32)ypos, kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 119, xpos, static_cast<u32>(ypos), kAngZero_706610, palette_type, 0, 0, 0);
 
         DrawFigureScaled_5D7670(sprite_types_enum::user_6, 118, xpos, ypos + middle_height / 2 + bottom_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
         Hud_Pager_C::DrawCounterDigits_5D2380(xpos, ypos - 6);
@@ -2437,16 +2437,16 @@ void Hud_CarName_4C::DrawCarName_5D4A10()
     {
         // u32: converts with the Fix16(u32) constructor, whose out-of-line copy is 0x4926F0
         u32 sprite_w = get_sprite_width_4C7220(11);
-        if (field_44_xpos_offset > (s32)(sprite_w * 2 - 10))
+        if (field_44_xpos_offset > static_cast<s32>(sprite_w * 2 - 10))
         {
-            DrawFigureScaled_5D7670(6, 13, 320 + sprite_w, (u32)field_48_ypos, kAngZero_706610, 2, 0, 0, 0);
-            DrawFigureScaled_5D7670(6, 12, 320, (u32)field_48_ypos, kAngZero_706610, 2, 0, 0, 0);
-            DrawFigureScaled_5D7670(6, 11, 320 - sprite_w, (u32)field_48_ypos, kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, 13, 320 + sprite_w, static_cast<u32>(field_48_ypos), kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, 12, 320, static_cast<u32>(field_48_ypos), kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, 11, 320 - sprite_w, static_cast<u32>(field_48_ypos), kAngZero_706610, 2, 0, 0, 0);
         }
         else
         {
-            DrawFigureScaled_5D7670(6, 11, 320 - ((s32)sprite_w / 2), (u32)field_48_ypos, kAngZero_706610, 2, 0, 0, 0);
-            DrawFigureScaled_5D7670(6, 13, 320 + ((s32)sprite_w / 2), (u32)field_48_ypos, kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, 11, 320 - (static_cast<s32>(sprite_w) / 2), static_cast<u32>(field_48_ypos), kAngZero_706610, 2, 0, 0, 0);
+            DrawFigureScaled_5D7670(6, 13, 320 + (static_cast<s32>(sprite_w) / 2), static_cast<u32>(field_48_ypos), kAngZero_706610, 2, 0, 0, 0);
         }
 
         DrawTextScaled_5D77A0(field_2_car_name, ((640 - field_44_xpos_offset) / 2), (field_48_ypos - GetLineSpacingFromFontType_5D7700(gCarNameFont_706508) / 2), gCarNameFont_706508);
@@ -2459,7 +2459,7 @@ void Hud_2B00::CalcCarNameXPosOffset_5D5190()
     if (field_0_car_name.field_0_display_time)
     {
         // TODO: Structure seems wrong, probablty field_2 to field_4C of Hud_2B00 is a string buffer?
-        field_0_car_name.field_44_xpos_offset = Frontend::GetMaxTextWidth_5D8990((wchar_t*)&field_0_car_name.field_2_car_name, gCarNameFont_706508);
+        field_0_car_name.field_44_xpos_offset = Frontend::GetMaxTextWidth_5D8990(reinterpret_cast<wchar_t*>(&field_0_car_name.field_2_car_name), gCarNameFont_706508);
     }
 }
 
@@ -2557,7 +2557,7 @@ void Hud_MpMessage_D0::Draw_5D56D0()
 {
     if (this->field_0_timer)
     {
-        DrawText_5D7720(this->field_2_str, (u32)((640 - this->field_CC_text_width) / 2), (u32)16, word_7064D8, 8, 5, 0, 0);
+        DrawText_5D7720(this->field_2_str, static_cast<u32>((640 - this->field_CC_text_width) / 2), static_cast<u32>(16), word_7064D8, 8, 5, 0, 0);
     }
 }
 
@@ -2630,13 +2630,13 @@ void Hud_MapZone_98::DrawZoneName_5D5900()
     {
         s32 width = get_sprite_width_4C7220(159);
 
-        DrawFigureScaled_5D7670(6, 159, (u32)(320 - (width / 2) - width), (u32)27, kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
+        DrawFigureScaled_5D7670(6, 159, static_cast<u32>(320 - (width / 2) - width), static_cast<u32>(27), kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
 
-        DrawFigureScaled_5D7670(6, 160, 320 - (width / 2), (u32)27, kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
+        DrawFigureScaled_5D7670(6, 160, 320 - (width / 2), static_cast<u32>(27), kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
 
-        DrawFigureScaled_5D7670(6, 161, (width / 2) + 320, (u32)27, kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
+        DrawFigureScaled_5D7670(6, 161, (width / 2) + 320, static_cast<u32>(27), kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
 
-        DrawFigureScaled_5D7670(6, 162, (u32)((width / 2) + width + 320), (u32)27, kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
+        DrawFigureScaled_5D7670(6, 162, static_cast<u32>((width / 2) + width + 320), static_cast<u32>(27), kAngZero_706610, 2, 0, field_90_alpha_flag, field_94_transparency);
 
         DrawText_5D7720(field_2_wstr,
                         (640 - field_84_xpos_offset) / 2,
@@ -2838,7 +2838,7 @@ void Hud_PlayerStats_4::DrawPlayerStats_5D5C80()
                              gTagGame_6F8450.GetPlayerTime_4C7380(pMultiPlayer) % 60);
 
                     const s32 very_unknown = (pMultiPlayer->field_78C_hud_palette_type != 7) ? 2 : 8;
-                    DrawText_5D7720(Buffer, score_end_xpos + 20, (u32)ypos, word_703BAA, very_unknown, pMultiPlayer->field_790_hud_palette - 1, 0, 0);
+                    DrawText_5D7720(Buffer, score_end_xpos + 20, static_cast<u32>(ypos), word_703BAA, very_unknown, pMultiPlayer->field_790_hud_palette - 1, 0, 0);
                 }
                 else
                 {
@@ -2879,7 +2879,7 @@ void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count)
             {
                 swprintf(tmpBuff_67BD9C, L"%d", ammo_count);
             }
-            DrawText_5D7720(tmpBuff_67BD9C, (u32)(638 - Frontend::GetMaxTextWidth_5D8990(tmpBuff_67BD9C, gPlayerStatsFont_70646C)), 82, gPlayerStatsFont_70646C, 8, 6, 0, 0);
+            DrawText_5D7720(tmpBuff_67BD9C, static_cast<u32>(638 - Frontend::GetMaxTextWidth_5D8990(tmpBuff_67BD9C, gPlayerStatsFont_70646C)), 82, gPlayerStatsFont_70646C, 8, 6, 0, 0);
         }
     }
 }
@@ -2905,7 +2905,7 @@ s32 DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_nu
         // The x goes through the Fix16(u32) constructor (out-of-line copy 0x4926F0). The offset is
         // computed before the y constructor call, so it is a local
         s32 x_offset = optional_number < 10 ? 18 : 22;
-        DrawText_5D7720(tmpBuff_67BD9C, (u32)(base_xpos - x_offset), 127, gPlayerStatsFont_70646C, 8, 6, 0, 0);
+        DrawText_5D7720(tmpBuff_67BD9C, static_cast<u32>(base_xpos - x_offset), 127, gPlayerStatsFont_70646C, 8, 6, 0, 0);
     }
     return base_xpos - width;
 }
@@ -3133,7 +3133,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                 text_xpos = (640 - max_width_2) / 2;
             }
             // (u32): Fix16(u32) constructor (0x4926F0), the 220 goes through Fix16(s32) (0x4369F0)
-            DrawText_5D7720(tmpBuff_67BD9C, (u32)text_xpos, 220, word_7064D8, 8, 6, 0, 0);
+            DrawText_5D7720(tmpBuff_67BD9C, static_cast<u32>(text_xpos), 220, word_7064D8, 8, 6, 0, 0);
         }
     }
 }

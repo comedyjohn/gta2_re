@@ -521,7 +521,7 @@ void CarManager_6C::DistributeCarsByRating_444980()
 
     for (; i < 256; i++)
     {
-        if (gGtx_0x106C_703DD4->does_car_exist((u8)i))
+        if (gGtx_0x106C_703DD4->does_car_exist(static_cast<u8>(i)))
         {
             if (bStartNetworkGame_7081F0 || gGtx_0x106C_703DD4->IsCarModelInRecycleList_5AB380(i))
             {
@@ -591,7 +591,7 @@ u32 CarManager_6C::SelectTrafficCarModel_444AB0(Player* pPlayer, gmp_zone_info* 
         }
 
         pPlayer->field_682_traffic_spawn_threshold = 100 - density;
-        if (pPlayer->field_680_traffic_spawn_counter < (u16)(100 - density))
+        if (pPlayer->field_680_traffic_spawn_counter < static_cast<u16>(100 - density))
         {
             *pOut = 0;
             return car_model_enum::none;
@@ -1134,7 +1134,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
     s32 x_int = xpos.ToInt();
     s32 y_int = ypos.ToInt();
     gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x_int, y_int, &found_z);
-    s16 route_idx = (char_type)gRouteFinder_6FFDC8->sub_58A130(x_int, y_int, found_z, &unused, 1, road_direction);
+    s16 route_idx = static_cast<char_type>(gRouteFinder_6FFDC8->sub_58A130(x_int, y_int, found_z, &unused, 1, road_direction));
     if (route_idx <= 0)
     {
         return nullptr;
@@ -1144,7 +1144,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
     u16 junction_idx = gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[0];
     u16 next_idx = gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[1];
     s32 dir;
-    switch ((s16)pJunction->GetDirectionToJunction_5885C0(next_idx))
+    switch (static_cast<s16>(pJunction->GetDirectionToJunction_5885C0(next_idx)))
     {
         case 1:
             dir = road_direction::up_1;
@@ -1581,7 +1581,7 @@ void CarManager_6C::EnableFreeShoppingIfAllKFsPassed_446760()
         const u32 total_secrets = gScriptManager_6F8060->field_318_total_secrets;
         if (total_secrets > 0)
         {
-            if (!this->field_69_do_free_shopping && (u32)*pSecretsPassed >= total_secrets)
+            if (!this->field_69_do_free_shopping && static_cast<u32>(*pSecretsPassed) >= total_secrets)
             {
                 this->field_69_do_free_shopping = 1;
             }
@@ -2380,7 +2380,7 @@ char_type Car_BC::CanCarCollideWithSprite_43AAF0(Sprite* pSprite)
 
                 our_flags = this->field_78_flags;
                 their_flags = cBC->field_78_flags;
-                if ((((u8)their_flags ^ (u8)our_flags) & 0x10) != 0)
+                if (((static_cast<u8>(their_flags) ^ static_cast<u8>(our_flags)) & 0x10) != 0)
                 {
                     return 0;
                 }
@@ -2730,7 +2730,7 @@ void Car_BC::CloseAllDoors_43B3D0()
 // 0x43b420
 void Car_BC::GetDoorWorldPos_43B420(u8 door_idx, Fix16* pOutX, Fix16* pOutY)
 {
-    door_info* pDoor = (door_info*)(gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx) + 1) + door_idx;
+    door_info* pDoor = reinterpret_cast<door_info*>(gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx) + 1) + door_idx;
     Fix16 door_x = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(pDoor->rx);
     Fix16 door_y = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(pDoor->ry);
 
@@ -2751,7 +2751,7 @@ void Car_BC::GetDoorWorldPos_43B420(u8 door_idx, Fix16* pOutX, Fix16* pOutY)
 // 0x43B540
 bool Car_BC::IsDoorOffsetLarge_43B540(u8 targetDoor)
 {
-    s8* array = (s8*)gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx);
+    s8* array = reinterpret_cast<s8*>(gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx));
     if (Fix16::Abs(gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(array[2 * targetDoor + 1])) >= kFpOne_677908)
     {
         return true;
@@ -2944,7 +2944,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos
 
     if (pPos->IsNull_420360())
     {
-        switch ((u8)fire_size)
+        switch (static_cast<u8>(fire_size))
         {
             case 1u: // small fire
                 y_hit = Get_rear_window_offset(pCarInfo);
@@ -5847,7 +5847,7 @@ void Car_BC::TryHitchTrailer_442810()
         if (!pHitchSprite)
         {
             //goto LABEL_28;
-            this->field_78_flags &= (u16)~car_flag::TrailerDetached;
+            this->field_78_flags &= static_cast<u16>(~car_flag::TrailerDetached);
         }
         else
         {
@@ -7233,7 +7233,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
                 if (!SpawnTrafficCar_582480(1, 2, 0) && !SpawnTrafficCar_582480(2, 1, 0) && !SpawnTrafficCar_582480(4, 3, 0) &&
                     !SpawnTrafficCar_582480(3, 4, 0) && gPolice_7B8_6FEE40->field_654_max_wanted_level < 3)
                 {
-                    if ((u8)maybe_vel)
+                    if (static_cast<u8>(maybe_vel))
                     {
                         SpawnTrafficCarFacing_583260(angleFace);
                     }
@@ -7243,7 +7243,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
             case 1:
                 this->field_8_spawn_side = 0;
                 if (!SpawnTrafficCar_582480(2, 1, 0) && !SpawnTrafficCar_582480(4, 3, 0) && !SpawnTrafficCar_582480(3, 4, 0) &&
-                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !(u8)maybe_vel || !SpawnTrafficCarFacing_583260(angleFace)))
+                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !static_cast<u8>(maybe_vel) || !SpawnTrafficCarFacing_583260(angleFace)))
                 {
                     SpawnTrafficCar_582480(1, 2, 0);
                 }
@@ -7252,7 +7252,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
             case 2:
                 this->field_8_spawn_side = 1;
                 if (!SpawnTrafficCar_582480(4, 3, 0) && !SpawnTrafficCar_582480(3, 4, 0) &&
-                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !(u8)maybe_vel || !SpawnTrafficCarFacing_583260(angleFace)) &&
+                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !static_cast<u8>(maybe_vel) || !SpawnTrafficCarFacing_583260(angleFace)) &&
                     !SpawnTrafficCar_582480(1, 2, 0))
                 {
                     SpawnTrafficCar_582480(2, 1, 0);
@@ -7262,7 +7262,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
             case 3:
                 this->field_8_spawn_side = 0;
                 if (!SpawnTrafficCar_582480(3, 4, 0) &&
-                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !(u8)maybe_vel || !SpawnTrafficCarFacing_583260(angleFace)) &&
+                    (gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !static_cast<u8>(maybe_vel) || !SpawnTrafficCarFacing_583260(angleFace)) &&
                     !SpawnTrafficCar_582480(1, 2, 0) && !TrafficSpawner_14::SpawnTrafficCar_582480(2, 1, 0))
                 {
                     SpawnTrafficCar_582480(4, 3, 0);
@@ -7271,7 +7271,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
 
             case 4:
                 field_8_spawn_side = 1;
-                if ((gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !(u8)maybe_vel || !SpawnTrafficCarFacing_583260(angleFace)) &&
+                if ((gPolice_7B8_6FEE40->field_654_max_wanted_level >= 3 || !static_cast<u8>(maybe_vel) || !SpawnTrafficCarFacing_583260(angleFace)) &&
                     !SpawnTrafficCar_582480(1, 2, 0) && !SpawnTrafficCar_582480(2, 1, 0) && !SpawnTrafficCar_582480(4, 3, 0))
                 {
                     SpawnTrafficCar_582480(3, 4, 0);
@@ -7561,7 +7561,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     {
                         if (car_model == car_model_enum::COPCAR)
                         {
-                            if (gPolice_7B8_6FEE40->field_658_police_car_count >= (u8)gPolice_7B8_6FEE40->field_659_max_police_cars || bSkip_police_67D4F9)
+                            if (gPolice_7B8_6FEE40->field_658_police_car_count >= static_cast<u8>(gPolice_7B8_6FEE40->field_659_max_police_cars) || bSkip_police_67D4F9)
                             {
                                 car_model =
                                     gCarManager_6C_677930->SelectTrafficCarModel_444AB0(field_C_player, field_10_zone, dword_6FF7E8, &car_kind);
@@ -7719,13 +7719,13 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     Fix16 spawn_y;
                     if (speed_kind == 2)
                     {
-                        if ((u8)DAT_006FF8C4 > 2u)
+                        if (static_cast<u8>(DAT_006FF8C4) > 2u)
                         {
                             spawn_x = back_x;
                             spawn_y = back_y;
                             ResolveSpawnDirection_583930(2, road_len);
                         }
-                        else if ((u8)DAT_006FF8C4 > 0u)
+                        else if (static_cast<u8>(DAT_006FF8C4) > 0u)
                         {
                             spawn_x = mid_x;
                             spawn_y = mid_y;
@@ -7740,7 +7740,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     }
                     else if (speed_kind == 1)
                     {
-                        if ((u8)DAT_006FF8C4 > 1u)
+                        if (static_cast<u8>(DAT_006FF8C4) > 1u)
                         {
                             spawn_x = mid_x;
                             spawn_y = mid_y;

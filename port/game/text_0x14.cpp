@@ -102,7 +102,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
     {
         text_0xC& entry = field_0_tKey.field_0_tKey[i];
         memset(&entry, 0, sizeof(entry));
-        entry.field_0_pwstr = (wchar_t*)(sptr)pFileEntries[i].field_0_offset;
+        entry.field_0_pwstr = (wchar_t*)static_cast<sptr>(pFileEntries[i].field_0_offset);
         memcpy(&entry.field_4_pKey, pFileEntries[i].field_4_key, sizeof(pFileEntries[i].field_4_key));
     }
     delete[] pFileEntries;
@@ -148,19 +148,19 @@ bool text_0x14::TKeyFind_5B59E0(const char_type* pIdStr)
 // 0x5B5A10
 s32 text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
 {
-    const char_type* pIdStr = (const char_type*)a;
-    const text_0xC* a2 = (const text_0xC*)b;
-    return strcmp(pIdStr, (const char_type*)&a2->field_4_pKey); // TODO: ???
+    const char_type* pIdStr = static_cast<const char_type*>(a);
+    const text_0xC* a2 = static_cast<const text_0xC*>(b);
+    return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->field_4_pKey)); // TODO: ???
 }
 
 // 0x5B5A50
 wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
 {
-    text_0xC* pFound = (text_0xC*)bsearch(pIdStr, // key
+    text_0xC* pFound = static_cast<text_0xC*>(bsearch(pIdStr, // key
                                           field_0_tKey.field_0_tKey, // array
                                           field_0_tKey.field_4_tKey_count, // array count
                                           sizeof(text_0xC), // element size
-                                          TKeySearch_5B5A10);
+                                          TKeySearch_5B5A10));
     if (!pFound)
     {
         return L" ";
@@ -242,7 +242,7 @@ wchar_t* text_0x14::StrToUpper_5B5B80(wchar_t* pWideStr)
 // 9.6f 0x4539D0, file-local copy of GetCharWidth_4539D0 (Draw.hpp): including Draw.hpp changes this file's static init code
 static inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
 {
-    return (u16)gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
+    return gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
 }
 
 // https://decomp.me/scratch/JzIDq

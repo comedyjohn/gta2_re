@@ -84,7 +84,7 @@ s32 get_rdtsc_5BEE90()
 // 0x5BEED0
 s32 sub_5BEED0(s32 cycles)
 {
-    return (u32)cycles / dword_705334;
+    return static_cast<u32>(cycles) / dword_705334;
 }
 
 // https://decomp.me/scratch/qyVgM

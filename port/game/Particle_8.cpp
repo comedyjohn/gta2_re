@@ -413,7 +413,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                     ped_offset.x = -dword_6FD464;
                     ped_offset.y = dword_6FD468 + dword_6FD2E8;
                     ped_offset.RotateByAngle_40F6B0(pSprt->field_0_rotation);
-                    ped_offset = ped_offset + *(Fix16_Point*)&pPed->field_98_velocity_vector;
+                    ped_offset = ped_offset + *reinterpret_cast<Fix16_Point*>(&pPed->field_98_velocity_vector);
                     pParticle->field_30_pNext->set_ang_lazy_420690(pSprt->field_0_rotation);
                     pParticle->field_30_pNext->set_xyz_lazy_420600(pSprt->field_14_xy.x + ped_offset.x, pSprt->field_14_xy.y + ped_offset.y, zpos);
                 }

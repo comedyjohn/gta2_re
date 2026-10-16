@@ -216,6 +216,8 @@ void Game_0x40::ApplyNetworkGameSettings_4B8E50()
         case network_game_speed::fast_2:
             field_34_network_frame_ms = 33;
             break;
+        default:
+            break;
     }
 
     bSkip_police_67D4F9 = gNetworkPolice_7071B0 == 0;

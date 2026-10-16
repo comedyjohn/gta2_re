@@ -1306,7 +1306,7 @@ char_type CarPhysics_B0::ProcessGroundCollisionAndSurfaceType_55B970(char_type* 
     Sprite* pSprite = this->field_5C_pCar->field_50_car_sprite;
     // The original has an EH state from entry for an object with a destructor that has no storage
     // (declared here: declared first it moves the `xor edi` zero above the sprite loads)
-    Fix16_Point unused_point;
+    [[maybe_unused]] Fix16_Point unused_point;
     s32 corner_idx_ = 0;
     u8 mask_;
     u32 corner_result;
@@ -1638,7 +1638,7 @@ void CarPhysics_B0::HandleMapBoundaryCollisionX_55C820(Fix16_Point& pPoint, Ang1
 // 0x55ca70
 void CarPhysics_B0::DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle)
 {
-    Fix16_Point arg0;
+    [[maybe_unused]] Fix16_Point arg0;
     u8 hitType;
     //v7 = 0;
     switch (gCollisionTarget_679188.field_0_type)
@@ -1650,6 +1650,7 @@ void CarPhysics_B0::DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle)
             HandleMapBoundaryCollisionX_55C820(point, angle);
             break;
         case collision_target_type::sprite_3:
+        {
             // TODO: Likely wrong arguments here
             CollisionIntersectionPoint_6FE1A0 = field_5C_pCar->field_50_car_sprite->FindCollisionIntersectionPoint_5A2710(gCollisionTarget_679188.field_20_pHitSprite,
                                                                                                      point,
@@ -1676,6 +1677,9 @@ void CarPhysics_B0::DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle)
                     HandleObjectCollision_5606C0(p2C, gCollisionArea_6FDFC4);
                 }
             }
+            break;
+        }
+        default:
             break;
     }
 
@@ -1771,6 +1775,8 @@ s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx)
                 return 118;
             case 3:
                 return 126;
+            default:
+                break;
         }
     }
     else if (box_idx <= kFP16Quarter_6FDFD4)
@@ -1801,6 +1807,8 @@ s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx)
                 return 253;
             case 3:
                 return 124;
+            default:
+                break;
         }
     }
     else
@@ -1815,6 +1823,8 @@ s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx)
                 return 144;
             case 3:
                 return 145;
+            default:
+                break;
         }
     }
     return 117;
@@ -2127,6 +2137,8 @@ char_type CarPhysics_B0::ApplyMovementCommand_55F240()
             ApplyTurningForce_55F020();
             field_AA_sbw = 0;
             break;
+        default:
+            break;
     }
     return 0;
 }
@@ -2326,6 +2338,8 @@ void CarPhysics_B0::ApplyForceAtPoint_55F800(Fix16_Point* pPoint, Fix16_Point* p
         case 1:
             point.RotateByAngle_40F6B0(field_58_theta);
             point += field_38_cp1;
+            break;
+        default:
             break;
     }
 
@@ -2948,7 +2962,7 @@ Fix16_Point CarPhysics_B0::ComputePointVelocity_561380(Fix16_Point& point)
     // after the second rotation, so later temporaries reuse local_pos's slot.
     Fix16_Point old_pos;
     Fix16_Point new_pos;
-    Fix16_Point unused;
+    [[maybe_unused]] Fix16_Point unused;
 
     {
         Fix16_Point local_pos;

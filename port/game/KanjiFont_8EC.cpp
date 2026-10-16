@@ -436,6 +436,8 @@ void KanjiFont_8EC::SetGlyphParamsFromRemap_4D29D0(u16 remap)
                 field_8E8_colour = 0xFC;
                 field_8E9_outline_colour = 0xFA;
                 break;
+            default:
+                break;
         }
     }
     else
@@ -479,6 +481,8 @@ void KanjiFont_8EC::SetGlyphParamsFromRemap_4D29D0(u16 remap)
             case 14:
                 field_8E8_colour = 0x69;
                 field_8E9_outline_colour = 0x6D;
+                break;
+            default:
                 break;
         }
     }

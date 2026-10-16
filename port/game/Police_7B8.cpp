@@ -173,6 +173,8 @@ Ped* Police_7B8::SpawnRoadblockGuard_56F5C0(Fix16 xpos, Fix16 ypos, Fix16 zpos, 
             pCop->field_288_threat_search = threat_search_enum::area_2;
             pCop->field_28C_threat_reaction = threat_reaction_enum::react_as_emergency_1;
             break;
+        default:
+            break;
     }
     return pCop;
 }
@@ -517,6 +519,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
                 pPursuitTarget->field_4_wanted_level = cop_level_enum::army_6;
                 gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit = crew_type::army_6;
                 break;
+            default:
+                break;
         }
 
         if (pPursuitTarget->field_4_wanted_level > field_654_max_wanted_level)
@@ -653,6 +657,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
                             gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit = crew_type::army_6;
                         }
                         break;
+                    default:
+                        break;
                 }
 
                 if (pPursuitTarget->field_70_num_police_crews > pPursuitTarget->field_71_target_police_crews)
@@ -754,6 +760,8 @@ void Police_7B8::UpdatePursuitTargets_56FBD0()
                 gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit = crew_type::police_3;
                 break;
             }
+            default:
+                break;
         }
 
         if (++targetIdx < MAX_PURSUIT_TARGETS)
@@ -1109,6 +1117,8 @@ void Police_7B8::TryCreateRoadblockAt_577370(u8 tileX, u8 tileY, s32 roadblock_t
             break;
         case cop_level_enum::army_6:
             gCrewKind_6FEDB8 = crew_kind::army_4;
+            break;
+        default:
             break;
     }
 

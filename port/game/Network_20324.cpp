@@ -1196,6 +1196,8 @@ void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pN
             SendMessageA(hList, LVM_INSERTITEMA, 0, (LPARAM)&item);
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -1314,6 +1316,8 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                     pThis->ResetCount_51BBF0();
                     pThis->ShowSpecificWindow_51ABF0(0);
                     break;
+                default:
+                    break;
             }
             break;
         }
@@ -1395,6 +1399,8 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                     pThis->UpdateButtonsEnabledState_51CBC0();
                     break;
                 }
+                default:
+                    break;
             }
             break;
 
@@ -1420,6 +1426,8 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                     pThis->SetFragsNumberAndLabel_51CDC0(gameType, pThis->field_20088_game_settings.field_20194_frag_limit, hDlg);
                     break;
                 }
+                default:
+                    break;
             }
             break;
 
@@ -1469,6 +1477,8 @@ void Network_20324::OnWmCommand_519FE0(HWND hDlg, s32 id, HWND hCtl, s32 notify)
                     pThis->SetSetting_51B9C0(7, value);
                 }
             }
+            break;
+        default:
             break;
     }
 }
@@ -1639,6 +1649,8 @@ void Network_20324::cb_sub_51ACD0(Network_20324* pNetUi, wchar_t* Source)
             SendMessageA(hItem, LVM_DELETEITEM, sendRet, 0);
         }
         break;
+        default:
+            break;
     }
 }
 
@@ -1698,6 +1710,8 @@ s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_Player
             item.pszText = pingText;
             return SendMessageA(hItem, LVM_SETITEMTEXTA, idx, (LPARAM)&item);
         }
+        default:
+            break;
     }
     return 0;
 }
@@ -1808,6 +1822,8 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
             LRESULT lineCount = SendDlgItemMessageA(pNetUi->Get_202E0_HWND_519E20(), 1051, EM_GETLINECOUNT, 0, 0);
             return SendDlgItemMessageA(pNetUi->Get_202E0_HWND_519E20(), 1051, EM_LINESCROLL, 0, lineCount);
         }
+        default:
+            break;
     }
     return 0;
 }
@@ -1896,6 +1912,8 @@ s32 Network_20324::AppendChatMessage_51B4F0(s32 player_idx, const char_type* pMs
             LRESULT lineCount = SendDlgItemMessageA(Get_202E0_HWND_519E20(), 1022, EM_GETLINECOUNT, 0, 0);
             return SendDlgItemMessageA(Get_202E0_HWND_519E20(), 1022, EM_LINESCROLL, 0, lineCount);
         }
+        default:
+            break;
     }
     return 0;
 }
@@ -1966,6 +1984,8 @@ void Network_20324::ApplyHostGameSettings_51B810(const char_type* pData)
                 break;
             case 0:
                 pSpeedText = GetString_519A00("netui10");
+                break;
+            default:
                 break;
         }
         SetDlgItemTextA(field_202E0_dlg_hwnd, LABLE_GAME_SPEED_1055, pSpeedText);
@@ -2040,6 +2060,8 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
                 case 0:
                     pSpeedText = GetString_519A00("netui10");
                     break;
+                default:
+                    break;
             }
             SetDlgItemTextA(field_202E0_dlg_hwnd, LABEL_GAME_SPEED_TEXT_1032, pSpeedText);
             gRegistry_6FF968.Set_Network_Setting_587730("game_speed", value);
@@ -2048,6 +2070,8 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
         case 7:
             field_20088_game_settings.field_201A4_game_time_limit = value;
             gRegistry_6FF968.Set_Network_Setting_587730("game_time_limit", value);
+            break;
+        default:
             break;
     }
 
@@ -2176,6 +2200,8 @@ LRESULT Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARAM wParam, 
                 case 1:
                     pThis->OnEnterPressed_51BEB0(1025, 1022);
                     break;
+                default:
+                    break;
             }
         }
 
@@ -2185,6 +2211,8 @@ LRESULT Network_20324::subclass_proc_51BDD0(HWND hWnd, UINT Msg, WPARAM wParam, 
                 return CallWindowProcA(pThis->field_1FD70_old_proc, hWnd, Msg, wParam, lParam);
             case 1:
                 return CallWindowProcA(pThis->field_1FD74_old_proc, hWnd, Msg, wParam, lParam);
+            default:
+                break;
         }
     }
     return 0;
@@ -2318,6 +2346,8 @@ void Network_20324::OnWmHScroll_51C630(HWND hWnd, HWND hTrackBar, s32 code, s32 
 
             case 5:
                 return;
+            default:
+                break;
         }
     }
 }
@@ -2500,6 +2530,8 @@ void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWN
             break;
         case 0:
             pText = GetString_519A00("netui10");
+            break;
+        default:
             break;
     }
     SetDlgItemTextA(hDlg, LABEL_GAME_SPEED_TEXT_1032, pText);

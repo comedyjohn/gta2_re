@@ -130,6 +130,8 @@ s32 TrainStation_34::GetWagonType_577f80(u8 idx)
                 return car_model_enum::TRAINFB;
             case 3:
                 return car_model_enum::boxcar;
+            default:
+                break;
         }
     }
     return car_model_enum::none;
@@ -825,6 +827,8 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     pStation->field_18_pStoppedTrain = pTrain;
                     break;
                 }
+                default:
+                    break;
             }
         }
     }
@@ -1529,6 +1533,8 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                 case 5:
                     bStopped = 1;
                     break;
+                default:
+                    break;
             }
 
             TrainStation_34* pStation;
@@ -1777,6 +1783,8 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                             pTrain->field_4C_maybe_train_station->field_1C_bOccupied = 1;
                         }
                     }
+                    break;
+                default:
                     break;
             }
         }

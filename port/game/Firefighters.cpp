@@ -217,6 +217,8 @@ void Firefighter_28::Update_4A81F0()
                         case 2:
                             field_8_state = firefighter_state::abort_6;
                             break;
+                        default:
+                            break;
                     }
                 }
                 else
@@ -248,6 +250,8 @@ void Firefighter_28::Update_4A81F0()
                         field_20_ped->SetObjective(objectives_enum::no_obj_0);
                         field_8_state = firefighter_state::finished_5;
                         break;
+                    default:
+                        break;
                 }
             }
             break;
@@ -272,6 +276,8 @@ void Firefighter_28::Update_4A81F0()
                 }
             }
             Reset_4A85E0();
+            break;
+        default:
             break;
     }
 

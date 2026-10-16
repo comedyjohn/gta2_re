@@ -1696,6 +1696,8 @@ void Frontend::UpdateMenuScreen_4B6780()
                 case 2:
                     field_EE08_menu_screen = Quit_2;
                     break;
+                default:
+                    break;
             }
         }
         else if (field_132_f136_idx == MENUPAGE_PLAY)
@@ -2945,6 +2947,8 @@ void Frontend::DrawDeletePlayerDialog_4ADDE0()
             DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("clrchar"), static_cast<u16>(275), ypos, field_126, 1);
             break;
         }
+        default:
+            break;
     }
 
     if (field_EE0A_dialog_cursor_ypos == 190)

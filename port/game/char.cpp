@@ -1120,6 +1120,8 @@ void Char_B4::UpdateAnimState_546360()
                     newId = field_68_animation_frame + baseId + 19;
                     frame_limit = 2;
                     break;
+                default:
+                    break;
             }
 
             field_80_sprite_ptr->set_xyz_lazy_420600(
@@ -1167,6 +1169,8 @@ void Char_B4::UpdateAnimState_546360()
                     break;
                 case 2:
                     CarDoorAlignmentSolver_545AF0(99, pCar, field_7C_pPed->get_target_car_door_403A60(), newx, newy, field_40_rotation);
+                    break;
+                default:
                     break;
             }
 
@@ -1348,6 +1352,8 @@ void Char_B4::UpdateAnimState_546360()
                     }
                     return;
                 }
+                default:
+                    break;
             }
 
             field_80_sprite_ptr->set_xyz_lazy_420600(
@@ -1472,6 +1478,8 @@ void Char_B4::UpdateAnimState_546360()
                     }
                     ManageZCoordAndSlopes_548590();
                     break;
+                default:
+                    break;
             }
 
             field_54_jump_scale_counter++;
@@ -1527,6 +1535,8 @@ void Char_B4::UpdateAnimState_546360()
                     newId = field_68_animation_frame + baseId + 81;
                     field_6C_animation_state = Char_Anim_state::Lethal_Fall_12;
                     break;
+                default:
+                    break;
             }
 
             if (static_cast<u8>(field_70_frame_timer) > static_cast<u8>(field_71_frame_delay))
@@ -1577,6 +1587,8 @@ void Char_B4::UpdateAnimState_546360()
                         case 1:
                             field_6C_animation_state = Char_Anim_state::Unknown_13;
                             break;
+                        default:
+                            break;
                     }
                     field_68_animation_frame = 7;
                 }
@@ -1600,6 +1612,8 @@ void Char_B4::UpdateAnimState_546360()
                             break;
                         case 2:
                             field_6C_animation_state = 20;
+                            break;
+                        default:
                             break;
                     }
                     field_68_animation_frame = 7;
@@ -1625,6 +1639,8 @@ void Char_B4::UpdateAnimState_546360()
             }
             field_80_sprite_ptr->SetDrawLayer_40F7B0(6);
             newId = field_68_animation_frame + baseId + 151;
+            break;
+        default:
             break;
     }
 
@@ -1819,7 +1835,7 @@ void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
     Fix16_Point a4;
     Fix16_Point point;
     // Unused: the original enters with EH state 4, so three more Fix16_Point locals were constructed up front
-    Fix16_Point unused_1, unused_2, unused_3;
+    [[maybe_unused]] Fix16_Point unused_1, unused_2, unused_3;
     u8 a6;
     u8 out2;
     u8 out3 = 0;
@@ -1965,6 +1981,8 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
                     pOther->field_74 = Fix16::atan2_fixed_405320(field_80_sprite_ptr->field_14_xy.y - pOther->field_80_sprite_ptr->field_14_xy.y,
                                                          field_80_sprite_ptr->field_14_xy.x - pOther->field_80_sprite_ptr->field_14_xy.x) + kAng180_6FD936;
                     break;
+                default:
+                    break;
             }
             break;
 
@@ -2005,6 +2023,8 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
                     pOther->field_6A = 4;
                     pOther->field_74 = Fix16::atan2_fixed_405320(field_80_sprite_ptr->field_14_xy.y - pOther->field_80_sprite_ptr->field_14_xy.y,
                                                          field_80_sprite_ptr->field_14_xy.x - pOther->field_80_sprite_ptr->field_14_xy.x) + kAng180_6FD936;
+                    break;
+                default:
                     break;
             }
             break;
@@ -2047,6 +2067,8 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
                     pOther->field_6A = 4;
                     pOther->field_74 = Fix16::atan2_fixed_405320(field_80_sprite_ptr->field_14_xy.y - pOther->field_80_sprite_ptr->field_14_xy.y,
                                                          field_80_sprite_ptr->field_14_xy.x - pOther->field_80_sprite_ptr->field_14_xy.x) + kAng180_6FD936;
+                    break;
+                default:
                     break;
             }
             break;
@@ -2098,7 +2120,11 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
                                                          field_80_sprite_ptr->field_14_xy.x - pOther->field_80_sprite_ptr->field_14_xy.x) + kAng180_6FD936);
                     }
                     break;
+                default:
+                    break;
             }
+            break;
+        default:
             break;
     }
 }
@@ -2654,6 +2680,8 @@ void Char_B4::sub_54C090()
                 break;
             case 4:
                 bPastHalf = field_40_rotation > kAng270_6FD904;
+                break;
+            default:
                 break;
         }
 
@@ -5121,7 +5149,11 @@ Ang16 Char_B4::GetNextRotationToward_550F60(Ang16 inputAng)
                         return field_40_rotation + max_turn;
                     }
                     break;
+                default:
+                    break;
             }
+            break;
+        default:
             break;
     }
 
@@ -6115,6 +6147,8 @@ void Char_B4::state_8_5520A0()
                             field_7C_pPed->Kill_46F9D0();
                             field_7C_pPed->SetVoiceEvent_IfBit24Clear_433DD0(27);
                             break;
+                        default:
+                            break;
                     }
                     pPedObjSprite = field_7C_pPed->field_184_pObj2C->field_4;
 
@@ -6261,6 +6295,8 @@ void Char_B4::state_9_552E90()
                         case 2:
                             field_6C_animation_state = 20;
                             break;
+                        default:
+                            break;
                     }
                 }
                 break;
@@ -6344,6 +6380,8 @@ void Char_B4::state_9_552E90()
                             break;
                         case 2:
                             field_6C_animation_state = 20;
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -6820,6 +6858,8 @@ void Char_B4::HandleGenericImpact_553E00(Ang16 ang, Fix16 impact_x, Fix16 impact
                                                           this->field_80_sprite_ptr->field_14_xy.y,
                                                           this->field_80_sprite_ptr->field_1C_zpos,
                                                           ang);
+                break;
+            default:
                 break;
         }
     }

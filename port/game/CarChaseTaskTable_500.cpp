@@ -125,6 +125,8 @@ bool CarChaseTaskTable_500::HasPursuerInFront_4749B0(Ped* pPed)
                     case car_chase_state::in_front_stopping_13:
                     case car_chase_state::target_stopped_15:
                         return true;
+                    default:
+                        break;
                 }
             }
         }
@@ -163,6 +165,8 @@ bool CarChaseTaskTable_500::HasPursuerOnLeft_474A80(Ped* pPed)
                     case car_chase_state::alongside_left_8:
                     case car_chase_state::pull_ahead_left_10:
                         return true;
+                    default:
+                        break;
                 }
             }
         }
@@ -202,6 +206,8 @@ bool CarChaseTaskTable_500::HasPursuerOnRight_474B50(Ped* pPed)
                     case car_chase_state::alongside_right_9:
                     case car_chase_state::pull_ahead_right_11:
                         return true;
+                    default:
+                        break;
                 }
             }
         }

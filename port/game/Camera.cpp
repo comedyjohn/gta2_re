@@ -525,6 +525,8 @@ void Camera_0xBC::Update_435FF0()
             field_98_cur_pos.field_8_z = field_0_target_pos.field_8_z;
             field_98_cur_pos.field_C_zoom = field_0_target_pos.field_C_zoom;
             break;
+        default:
+            break;
     }
     if (field_30_shake_amount != kZero_676818)
     {

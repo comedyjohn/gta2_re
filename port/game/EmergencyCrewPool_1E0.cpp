@@ -93,6 +93,8 @@ bool EmergencyCrew_30::IsLeaderAlive_5CBC60()
         case 4:
         case 5:
             return true;
+        default:
+            break;
     }
     return true;
 }

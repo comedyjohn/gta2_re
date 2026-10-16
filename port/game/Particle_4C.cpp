@@ -347,6 +347,8 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
         case 7:
             field_30_pNext->SetBlendAndAlpha_4337D0(2, 30);
             break;
+        default:
+            break;
     }
 
     field_30_pNext->SetNoLighting_4337F0();
@@ -487,6 +489,8 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
                                         NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue).rValue + jitter.rValue));
                 break;
             }
+            default:
+                break;
         }
 
         dst.SetXY_432860(target.x, target.y);
@@ -954,7 +958,7 @@ char_type Particle_4C::UpdateSkidOrScrapeSpark_state_40_41_53A280()
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     // The original enters EH state 2 right after Remove_477B00: two more points, one unused
-    Fix16_Point pos;
+    [[maybe_unused]] Fix16_Point pos;
     Fix16_Point offset;
 
     stru_6FD388 = field_30_pNext->field_14_xy.x;

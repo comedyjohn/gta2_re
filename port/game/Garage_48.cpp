@@ -40,6 +40,8 @@ Ang16 sub_5345E0(s32 face)
             return word_6FD07E;
         case 1:
             return word_6FD0A4;
+        default:
+            break;
     }
     return word_6FD25C;
 }
@@ -184,6 +186,8 @@ u8 Garage_48::ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor)
             }
             (reinterpret_cast<Fix16_Point_POD*>(&field_20_park_x_max))->SetXY_432860(Fix16(x) + dword_6FD124 + w1, Fix16(y) + dword_6FD124);
             (reinterpret_cast<Fix16_Point_POD*>(&field_30_target_x))->SetXY_432860(Fix16(x) + dword_6FCF98, Fix16(y) + dword_6FD124 + dword_6FD218);
+            break;
+        default:
             break;
     }
 
@@ -356,6 +360,8 @@ void Garage_48::GaragesService_5349D0()
             Reset_489650();
             break;
         }
+        default:
+            break;
     }
 }
 

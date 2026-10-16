@@ -186,6 +186,8 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
                                 //goto LABEL_8;
                                 this->field_0_car->SetTurnLeft_42AC80();
                                 break;
+                            default:
+                                break;
                         }
                         break;
 
@@ -205,6 +207,8 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
                             case 4:
                                 //goto LABEL_14;
                                 this->field_0_car->SetTurnRight_42AC70();
+                                break;
+                            default:
                                 break;
                         }
                         break;
@@ -226,6 +230,8 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
                                 this->field_38_junction_turn_direction = 4;
                                 this->field_24_bf.bTurnPlanned = true;
                                 break;
+                            default:
+                                break;
                         }
                         break;
 
@@ -245,6 +251,8 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
                             case 4:
                                 this->field_38_junction_turn_direction = 3;
                                 this->field_24_bf.bTurnPlanned = true;
+                                break;
+                            default:
                                 break;
                         }
                         break;
@@ -374,6 +382,8 @@ void CarAI_78::DoShortcutsUsingJunctions_447970()
                         {
                             field_24_bf.bFlag19 = true;
                         }
+                        break;
+                    default:
                         break;
                 }
             }
@@ -636,6 +646,8 @@ char_type CarAI_78::TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBloc
                 }
             }
             return 0;
+        default:
+            break;
     }
     return 0;
 }
@@ -1952,6 +1964,8 @@ void CarAI_78::FollowRoadDirection_44A1F0()
                         field_0_car->field_58_physics->TurnClockwise_42ABA0();
                     }
                     return;
+                default:
+                    break;
             }
             return;
 
@@ -1982,6 +1996,8 @@ void CarAI_78::FollowRoadDirection_44A1F0()
                         case 3:
                             Ang16::PolarToCartesian_41FC20(field_10_angle + kAng180_677ADE, gF16fOne_677B94, vec_x, vec_y);
                             break;
+                        default:
+                            break;
                     }
 
                     xpos += vec_x;
@@ -2009,6 +2025,8 @@ void CarAI_78::FollowRoadDirection_44A1F0()
                                 break;
                             case 3:
                                 field_50_seek_road_turn = 3;
+                                break;
+                            default:
                                 break;
                         }
                         return;
@@ -3027,6 +3045,8 @@ void CarAI_78::UpdateStateMachine_44E560()
                         case cop_level_enum::fbi_5:
                             police_level = 4;
                             break;
+                        default:
+                            break;
                     }
                 }
                 break;
@@ -3246,6 +3266,8 @@ void CarAI_78::UpdateStateMachine_44E560()
                             bOvertake = 1;
                         }
                         break;
+                    default:
+                        break;
                 }
 
                 if (static_cast<u16>(pChase->field_2E_wait_counter) < waitCount)
@@ -3367,6 +3389,8 @@ void CarAI_78::UpdateStateMachine_44E560()
                         {
                             bOvertake = 1;
                         }
+                        break;
+                    default:
                         break;
                 }
 
@@ -4622,6 +4646,8 @@ void CarAI_78::ScanAheadForObstacles_452060()
                     {
                         ReactToNearbyPed_451FF0();
                     }
+                    break;
+                default:
                     break;
             }
         }

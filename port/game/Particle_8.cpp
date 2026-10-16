@@ -508,7 +508,7 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
     // the EH state 2 that the original sets once t is built.
     Ang16 ang1;
     Ang16 tanAng;
-    Fix16_Point unused;
+    [[maybe_unused]] Fix16_Point unused;
     Fix16_Point t(Fix16(0), Fix16(0));
     tanAng = dir.atan2_40F790();
 

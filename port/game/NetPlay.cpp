@@ -875,6 +875,8 @@ void NetPlay::NetworkTick_51ED00()
                 }
             }
             break;
+        default:
+            break;
     }
 }
 
@@ -991,6 +993,8 @@ void NetPlay::ProcessPingOrHandshakeSend_51F110(void* pPacket, s32 packetLen, s3
             case packet_subtype::DisableJoining_4:
                 ProcessIncomingPacket_520230(9, 0);
                 field_48_net_state = 2;
+                break;
+            default:
                 break;
         }
     }
@@ -1318,6 +1322,8 @@ void NetPlay::OnPacketReceived_51F870(void* pPacket, s32 packetLen, s32 recvId, 
                     }
                     break;
                 }
+                default:
+                    break;
             }
             break;
         }
@@ -1381,12 +1387,18 @@ void NetPlay::OnPacketReceived_51F870(void* pPacket, s32 packetLen, s32 recvId, 
                                 field_8F0_disabled = 1;
                             }
                             break;
+                        default:
+                            break;
                     }
                     break;
                 }
+                default:
+                    break;
             }
             break;
         }
+        default:
+            break;
     }
 }
 

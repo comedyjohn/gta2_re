@@ -1817,6 +1817,8 @@ void PoliceCrew_38::sub_575650()
                     case crew_type::army_6:
                         --field_14_pPursuitTarget->field_74_num_army_crews;
                         break;
+                    default:
+                        break;
                 }
             }
         }

@@ -498,6 +498,8 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
             case 4:
                 gSpawnSide_6787C8 = 0;
                 break;
+            default:
+                break;
         }
     }
 
@@ -512,6 +514,8 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
             case 1:
             case 3:
                 bound_max = tileRight - tileLeft;
+                break;
+            default:
                 break;
         }
 
@@ -551,6 +555,8 @@ void PedManager::SpawnDummies_46EB60(Camera_0xBC* pCam)
                 ypos = Fix16(bottom);
                 xpos = Fix16(tileLeft + gSpawnIndex_6787C9);
                 rotation = gSpawnRotationBottom_678540;
+                break;
+            default:
                 break;
         }
 
@@ -1012,6 +1018,8 @@ void PedManager::DoIanTest_471060(u16 key)
 
         case DIK_7:
             gGame_0x40_67E008->field_38_local_player->field_2C4_player_ped->SetInvisible();
+            break;
+        default:
             break;
     }
 }

@@ -100,6 +100,8 @@ void UnknownDebugClass::DoBrianTest_42D870(u16 action)
         case 10:
             gFirefighterPool_54_67D4C0->TryDispatchFirefightersToCar_4A8820(gTestFireCar_675C30);
             break;
+        default:
+            break;
     }
 }
 
@@ -811,6 +813,8 @@ void Player::RestorePowerUpsFromSave_5651F0(SavedPlayerStats_90* pSave)
                     break;
                 case power_up_indices::Invisibility_11:
                     field_2C4_player_ped->SetInvisible();
+                    break;
+                default:
                     break;
             }
         }
@@ -3020,6 +3024,8 @@ void UnknownDebugClass::DoTest_5B2640(u16 action)
             break;
         case 10:
             gTestTimer_7042D8 = gHud_2B00_706620->field_620_pagers.CreateTimer_5D31F0(40);
+            break;
+        default:
             break;
     }
 }

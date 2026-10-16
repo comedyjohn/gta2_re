@@ -177,6 +177,8 @@ s32 CarInfo_808::ReadToken_430B10(char* pOut)
                 i++;
 
                 break;
+            default:
+                break;
         }
     }
     return -5;

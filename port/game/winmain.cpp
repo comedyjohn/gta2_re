@@ -1925,6 +1925,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
                     Input_ReleaseMouse_5D7C70();
                 }
                 break;
+                default:
+                    break;
             }
             break;
 
@@ -1946,6 +1948,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
                     // wm_size_case_2:
                     gMinimizedState_70827C = 0;
                     gRoot_sound_66B038.Reacquire_40F140();
+                    break;
+                default:
                     break;
             }
             break;

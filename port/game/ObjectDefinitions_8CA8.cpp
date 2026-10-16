@@ -640,6 +640,8 @@ void ObjectDefinition_74::SetRemap_533110(s16 remap)
         case 5:
             field_30 = 6;
             break;
+        default:
+            break;
     }
     field_1C_remap = remap;
 }

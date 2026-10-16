@@ -125,6 +125,8 @@ bool Door_38::CanOpen_49C6D0(Car_BC* pCar)
         case door_open_type::any_car:
             ret = true;
             break;
+        default:
+            break;
     }
     return ret;
 }
@@ -153,6 +155,8 @@ bool Door_38::CanOpenForPed_49C7F0(Ped* pPed)
                     }
                 }
             }
+            break;
+        default:
             break;
     }
     return ret;
@@ -252,6 +256,8 @@ void Door_38::InitSingleNoCheck_49C8D0(u8 door_group, u8 gr_id, u8 x, u8 y, u8 z
                 door_y += kFpOne_67BBE4;
             }
             break;
+        default:
+            break;
     }
 
     field_28_bClosing = 1;
@@ -315,6 +321,8 @@ void Door_38::InitSingle_49CAC0(DoorData_10* pDoorData, char_type bFlip, u8 obj_
                 y += kFpOne_67BBE4;
             }
             break;
+        default:
+            break;
     }
     field_28_bClosing = 1;
     field_2C_bCanAutoOpen = 1;
@@ -372,6 +380,8 @@ void Door_38::InitDouble_49CC00(DoorData_10* pDoorData, char_type bFlip, u8 obj_
             {
                 y += kFpOne_67BBE4;
             }
+            break;
+        default:
             break;
     }
     field_28_bClosing = 1;

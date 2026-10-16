@@ -327,6 +327,8 @@ s8 BonusTracker_1C0::IsDeathCauseInGroup_432170(int death_cause, int rule_death_
             case ped_death_cause::rocket_18:
             case ped_death_cause::shotgun_19:
                 return 1;
+            default:
+                break;
         }
     }
     return 0;

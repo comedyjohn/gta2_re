@@ -445,8 +445,8 @@ void Weapon_30::dual_pistol_5DDA70()
     Fix16_Point vector;
     Fix16_Point vector2;
     Fix16_Point vector3;
-    Fix16_Point vector_esp1; // not used, but required to match
-    Fix16_Point vector_esp2; // not used, but required to match
+    [[maybe_unused]] Fix16_Point vector_esp1; // not used, but required to match
+    [[maybe_unused]] Fix16_Point vector_esp2; // not used, but required to match
 
     if (field_2_reload_speed == 0)
     {
@@ -837,6 +837,8 @@ void Weapon_30::sub_5DE4F0()
                         }
                         break;
                     }
+                    default:
+                        break;
                 }
             }
         }
@@ -895,8 +897,8 @@ void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
     Fix16_Point d3;
     Fix16_Point from;
     Fix16_Point to;
-    Fix16_Point unused_eh_1;
-    Fix16_Point unused_eh_2;
+    [[maybe_unused]] Fix16_Point unused_eh_1;
+    [[maybe_unused]] Fix16_Point unused_eh_2;
 
     Fix16 seg_len = kFP16Quarter_706CF4;
     if (byte_706C94 > 0)
@@ -1291,6 +1293,8 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
                             gScriptManager_6F8060->RecordWeaponHit_512C00(pHit->field_8_car_bc_ptr->field_6C_car_id, 160, 0);
                         }
                     }
+                    break;
+                default:
                     break;
             }
         } while (hits.field_0_p18);
@@ -1739,7 +1743,7 @@ void Weapon_30::car_smg_5E2940()
     // they are computed: declared up front and assigned, the caller is too big for the rotations'
     // inline budget (the first + of each RotateByAngle_40F6B0 is inlined, its other operators aren't).
     Ang16 sprite_ang;
-    Fix16_Point unused_5;
+    [[maybe_unused]] Fix16_Point unused_5;
     Fix16_Point left;
     Fix16_Point right;
     Fix16_Point left_point_velocity;

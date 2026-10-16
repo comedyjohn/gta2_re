@@ -67,6 +67,8 @@ void CollisionEvent_28::SetupForCar_40B890(Car_BC* pCar)
             }
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -115,6 +117,8 @@ void CollisionEvent_28::SetupForPed_40B980()
             }
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -179,6 +183,8 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
             }
             break;
         }
+        default:
+            break;
     }
 
     return true;

@@ -253,6 +253,8 @@ Door_38* Door_4D4::RegisterDoubleDoor_49D1F0(u8 gr_id,
         case 4:
             reversed = x - 1;
             break;
+        default:
+            break;
     }
     this_00->AddDoorData_49CA50(gr_id, x, y, z, face);
     this_00->AddDoorData_49CA50(gr_id, reversed, flip, z, face);

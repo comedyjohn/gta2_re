@@ -795,6 +795,8 @@ void miss2_0x11C::SCRCMD_THREAD_DECLARE5_504710(SCR_CHAR_AREA_ANY* pCmd)
                                                                     pCmd->field_20_h);
 
                 break;
+            default:
+                break;
         }
     }
 }
@@ -935,6 +937,8 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
         case SCR_DOOR_OPENTYPES::any_player_one_car:
             pCmd->field_8_door->set_field_20(door_open_type::any_player_one_car);
             break;
+        default:
+            break;
     }
 
     Door_38* tmp;
@@ -972,6 +976,8 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
             tmp->field_1C_close_delay = tmp1;
             tmp->field_1E_close_timer = tmp1;
             return;
+            break;
+        default:
             break;
     }
     tmp = pCmd->field_8_door;
@@ -1082,6 +1088,8 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
         case SCR_DOOR_OPENTYPES::unknown1:
             pCmd->field_8_door->set_field_20(door_open_type::unknown1);
             break;
+        default:
+            break;
     }
 
     switch (pCmd->field_12_close_type)
@@ -1097,6 +1105,8 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
             break;
         case SCR_DOOR_CLOSETYPES::close_when_open_rule_fails:
             pCmd->field_8_door->set_close_type(door_close_type::close_when_open_rule_fails);
+            break;
+        default:
             break;
     }
     Door_38* tmp;
@@ -1357,6 +1367,8 @@ void miss2_0x11C::DisableThread_505790(u16 idx)
             pParam2->field_8_car->ClearCarThreadPending_4218E0();
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -2960,6 +2972,8 @@ void miss2_0x11C::SCRCMD_EXPLODE_509ED0()
                                                       explosion_type::large_20,
                                                       0);
             break;
+        default:
+            break;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -3487,6 +3501,8 @@ void miss2_0x11C::EnableThread_50A9E0(u16 idx)
 
             break;
         }
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -3569,6 +3585,8 @@ void miss2_0x11C::SCRCMD_CHANGE_RESPECT_50ACF0()
         case SCRCMD_CHANGE_GANG_RESP:
             pGang->ChangeRespectAndUpdate_4BF000(pPointer->field_8_char->field_15C_player->get_idx_4219D0(), 20 * (static_cast<u8>(pCmd->field_A_signed_2)));
             break;
+        default:
+            break;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -3628,6 +3646,8 @@ void miss2_0x11C::RespectOperator_50AEF0()
 
             break;
         }
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -4085,6 +4105,8 @@ void miss2_0x11C::SCRCMD_SET_CHAR_BRAVERY_50BBD0()
         case 151:
             pScrPtr->field_8_char->field_288_threat_search = pCmd->field_A_objective;
             break;
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -4145,6 +4167,8 @@ void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
 
         case SCRCMD_ADD_CHAR_TO_GROUP:
             pGroup->add_ped_to_end_of_list_4C8F90(pPtr2->field_8_char);
+            break;
+        default:
             break;
     }
 
@@ -4506,6 +4530,8 @@ void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
         case SCRCMD_EXPLODE_NO_RING1:
             type = explosion_type::no_ring_32;
             break;
+        default:
+            break;
     }
 
     switch (miss2_0x11C::GetEntityTypeOfCommand_503410(pPointer->field_2_type))
@@ -4546,6 +4572,8 @@ void miss2_0x11C::SCRCMD_EXPLODE_50C5A0()
 
             break;
         }
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -4612,6 +4640,8 @@ void miss2_0x11C::SCRCMD_UPDATE_DOOR_50C7D0()
             pDoorPointer->field_8_door->set_open_details_car_bc(6, pTarget->field_8_car);
             pDoorPointer->field_8_door->set_target_id(pTarget->field_8_car->field_6C_car_id);
             break;
+        default:
+            break;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -4665,6 +4695,8 @@ void miss2_0x11C::SCRCMD_DOOR_50C8A0()
             break;
         case SCRCMD_SET_DOOR_MANUAL:
             pPointer->field_8_door->field_29_bAuto = false;
+            break;
+        default:
             break;
     }
 
@@ -4828,6 +4860,8 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
 
             break;
         }
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -5315,6 +5349,8 @@ void miss2_0x11C::GetSetLivesAndMultiplier_50DB70()
             }
 
             break;
+        default:
+            break;
     }
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -5453,6 +5489,8 @@ void miss2_0x11C::StartBonus_50DF10()
             }
 
             break;
+        default:
+            break;
     }
 
     s8 f24 = pCmd->field_D != 1 ? 2 : 1;
@@ -5504,6 +5542,8 @@ void miss2_0x11C::SCRCMD_CHECK_BONUS_50E0B0()
             {
                 field_8_cond_result = true;
             }
+            break;
+        default:
             break;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -5570,6 +5610,8 @@ void miss2_0x11C::GetSpeed_50E190()
 
         case SCRCMD_GET_MAX_SPEED:
             pParam2->field_8_counter = pPointer->field_8_car->GetMaxSpeed_439F30().get_value_4754D0();
+            break;
+        default:
             break;
     }
 
@@ -5759,6 +5801,8 @@ void miss2_0x11C::SCRCMD_CAR_WEAPON_KIND_PROOF_50E820()
             {
                 pCar->field_78_flags &= static_cast<u16>(~car_flag::Flameproof);
             }
+            break;
+        default:
             break;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -6331,6 +6375,8 @@ void miss2_0x11C::SCRCMD_SET_CHAR_FLAGS_50F5E0()
                 break;
             case SCRCMD_DEATH_ARR_STATE:
                 gScriptManager_6F8060->field_355_death_arr_state = pCmd->field_A_status;
+                break;
+            default:
                 break;
         }
     }

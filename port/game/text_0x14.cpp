@@ -225,6 +225,8 @@ u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
                 return word_626590[ch - 0x80];
             }
             break;
+        default:
+            break;
     }
     return ch;
 }

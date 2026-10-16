@@ -684,6 +684,8 @@ void Crane_15C::ReleaseHookedCar_47FD10()
         case 4:
             DropHookedCar_47ECC0();
             break;
+        default:
+            break;
     }
 }
 

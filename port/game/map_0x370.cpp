@@ -2421,6 +2421,8 @@ char_type Map_0x370::sub_4E4820(Fix16_Rect* pRect, u8 slope_type)
                         return false;
                     }
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -2500,6 +2502,8 @@ void Map_0x370::FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type b
                 }
                 direction = 3;
                 step++;
+                break;
+            default:
                 break;
         }
     }
@@ -3181,6 +3185,8 @@ void Map_0x370::sub_4E5D10(Fix16* pX, Fix16* pY, Fix16 dist, s32 direction)
         case road_direction::right_3:
             *pX += dist;
             break;
+        default:
+            break;
     }
 }
 
@@ -3201,6 +3207,8 @@ Fix16 Map_0x370::sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle)
             break;
         case 4:
             result = kFpOne_6F6110 - y.GetFracValue();
+            break;
+        default:
             break;
     }
     return result;
@@ -3223,6 +3231,8 @@ Fix16 Map_0x370::sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle)
             break;
         case 4:
             result = x.GetFracValue();
+            break;
+        default:
             break;
     }
     return result;
@@ -3258,6 +3268,8 @@ char_type Map_0x370::HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock
             }
         case 4:
             return bDefault ? gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, LEFT_3) : gRouteFinder_6FFDC8->HasBlockDesiredArrow_588CA0(pBlock, green_1, RIGHT_4);
+        default:
+            break;
     }
     return bDefault;
 }
@@ -3340,6 +3352,8 @@ s16 Map_0x370::sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bF
                     r = bFlag ? 3 : 2;
                     bFound = true;
                     break;
+                default:
+                    break;
             }
             break;
         case 2:
@@ -3353,6 +3367,8 @@ s16 Map_0x370::sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bF
                     r = bFlag ? 2 : 3;
                     bFound = true;
                     break;
+                default:
+                    break;
             }
             break;
         case 3:
@@ -3362,6 +3378,8 @@ s16 Map_0x370::sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bF
                     return bFlag ? 3 : 2;
                 case 4:
                     return bFlag ? 2 : 3;
+                default:
+                    break;
             }
             break;
         case 4:
@@ -3371,6 +3389,8 @@ s16 Map_0x370::sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bF
                     return bFlag ? 2 : 3;
                 case 4:
                     return bFlag ? 3 : 2;
+                default:
+                    break;
             }
             break;
         default:
@@ -3535,6 +3555,8 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
             case road_direction::right_3:
                 direction = road_direction::up_1;
                 break;
+            default:
+                break;
         }
     }
     else if (side < kFpHalf_6F5F18)
@@ -3552,6 +3574,8 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 break;
             case road_direction::right_3:
                 direction = road_direction::down_2;
+                break;
+            default:
                 break;
         }
     }
@@ -3747,6 +3771,8 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
             case road_direction::right_3:
                 direction = road_direction::down_2;
                 break;
+            default:
+                break;
         }
     }
     else if (side < kFpHalf_6F5F18)
@@ -3764,6 +3790,8 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 break;
             case road_direction::right_3:
                 direction = road_direction::up_1;
+                break;
+            default:
                 break;
         }
     }
@@ -3926,6 +3954,8 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                         new_direction = GetArrowDirectionFromBlock_4E5FC0(pBlock, 0);
                     }
                     break;
+                default:
+                    break;
             }
 
             // `pPrev = pBlock` in both arms: FlowOpts hoists it back in front of the `jl`, but the slot list
@@ -3982,6 +4012,8 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
             return road_direction::right_3;
         case road_direction::right_3:
             return road_direction::left_4;
+        default:
+            break;
     }
     return 0;
 }

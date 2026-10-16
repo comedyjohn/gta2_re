@@ -2760,6 +2760,8 @@ void sound_obj::HandleTruckCorneringAudio_417FD0(Sound_Params_8* pParams)
                     // Dead store, but it keeps the switch range up to 86 as in the original
                     slide_angle = 0;
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -3606,11 +3608,15 @@ s32 sound_obj::AddSoundObject_419FA0(SoundObject_10* pTuring)
                         switch (pEntSprite->GetType_416B40())
                         {
                             case sprite_types_enum::car_2: // note: sub eax, 2 added via switch case instead of if
+                            {
                                 auto* pNewObj = new SoundPosEntry_C();
                                 field_147C_audio_entities[idx].field_8_pAlloc = pNewObj;
                                 pNewObj->field_0_x = kFpZero_674CD8;
                                 pNewObj->field_8 = 0;
                                 pNewObj->field_A = 0;
+                                break;
+                            }
+                            default:
                                 break;
                         }
                     }
@@ -3622,6 +3628,8 @@ s32 sound_obj::AddSoundObject_419FA0(SoundObject_10* pTuring)
                     DeInitVocals_57EA10();
                     break;
                 }
+                default:
+                    break;
             }
 
             return idx;
@@ -3662,6 +3670,8 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
                             delete field_147C_audio_entities[idx].field_8_pAlloc;
                         }
                         break;
+                    default:
+                        break;
                 }
                 break;
             }
@@ -3670,6 +3680,8 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
         case SoundObjectTypeEnum::Unknown_2:
             field_3 = 0;
             gSampManager_6FFF00.FadeOut_58E490();
+            break;
+        default:
             break;
     }
 
@@ -5179,6 +5191,8 @@ void sound_obj::ProcessObject_Type12_41E850(Sound_Params_8* pParams)
                 return;
             }
             break;
+        default:
+            break;
     }
 
     if (static_cast<u32>(field_30_sQueueSample.field_30_loop_count) > 0)
@@ -5855,6 +5869,8 @@ void sound_obj::HandlePedVoiceEvent_423080(Sound_Params_8* pParams)
             case 25:
                 samp = 59;
                 break;
+            default:
+                break;
         }
 
         s32 occupation = pPed->get_occupation_403980();
@@ -5900,6 +5916,8 @@ void sound_obj::HandlePedVoiceEvent_423080(Sound_Params_8* pParams)
             case 1:
             case 3:
                 samp = 198;
+                break;
+            default:
                 break;
         }
     }
@@ -6147,6 +6165,8 @@ void sound_obj::PoliceRadioMessageGeneration_426790()
                             EnqueueRadioWord_4271B0(91);
                         }
                         break;
+                    default:
+                        break;
                 }
             }
             else
@@ -6203,6 +6223,8 @@ void sound_obj::PoliceRadioMessageGeneration_426790()
                             word_6758A8 = field_1454_anRandomTable[3] % 680 + 628;
                             field_5570_timer = field_1454_anRandomTable[2] % 1067 + 150;
                         }
+                        break;
+                    default:
                         break;
                 }
             }
@@ -7526,6 +7548,8 @@ void sound_obj::sub_57EDB0(sound_f16_pos_0x1C* pEmitter, s32 type)
             pEmitter->field_10 = 600;
             pEmitter->field_12 = 300;
             break;
+        default:
+            break;
     }
 }
 
@@ -7656,6 +7680,8 @@ bool sound_obj::IsPoliceOrServiceVehicle_57F090(Car_BC* pCar)
         case car_model_enum::TANK:
         case car_model_enum::EDSELFBI:
             return true;
+        default:
+            break;
     }
     return false;
 }

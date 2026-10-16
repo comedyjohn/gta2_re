@@ -513,6 +513,8 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
             case ped_death_cause::unknown_5:
                 score = 5000;
                 break;
+            default:
+                break;
         }
     }
     else
@@ -699,6 +701,8 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                     break;
                 case ped_death_cause::unknown_5:
                     score = 50;
+                    break;
+                default:
                     break;
             }
         }

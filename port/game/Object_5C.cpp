@@ -383,7 +383,7 @@ void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16_Point& point
 // 0x5226a0
 void Object_2C::SetConveyorPush_5226A0(char_type conveyor_speed)
 {
-    Fix16_Point point;
+    [[maybe_unused]] Fix16_Point point;
     if (!field_10_obj_3c)
     {
         NewObj3C_528130(gZeroVector_6F8EF0);
@@ -630,6 +630,8 @@ void Object_2C::HandleCollision_522E10(Fix16_Point* pPoint)
             }
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -1037,7 +1039,7 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
     u8 bUnk = false;
     char_type bHandled = 0;
     Fix16_Point point;
-    Fix16_Point point2;
+    [[maybe_unused]] Fix16_Point point2;
     Fix16 step_count;
     Sprite* pSprt = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     gObject2C_WallHitSide_6F8F90 = 0;
@@ -1558,6 +1560,8 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
                                 return 1;
                             case objects::footy_13:
                                 return 1;
+                            default:
+                                break;
                         }
                     }
 
@@ -2007,6 +2011,8 @@ s32 Object_2C::GetExplosionTypeForItemDefinition_526830(s32 type)
             return 19;
         case 42:
             return 20;
+        default:
+            break;
     }
     // The original reloads type from its stack slot here instead of keeping it in a register
     return *(volatile s32*)&type;
@@ -2220,6 +2226,8 @@ void Object_2C::AssignToBucket_527AE0()
             return;
         case collision_bucket_category::none_2:
             return;
+        default:
+            break;
     }
 }
 
@@ -2314,6 +2322,8 @@ bool Object_2C::HandleRotationStateTransition_528240(s32 current, s32 desired)
                     gObject_5C_6F8F84->field_14_listed_sprite_count++;
                     gObject_5C_6F8F84->field_1C_sprite_list.AddSprite_5A6CD0(field_4);
                     break;
+                default:
+                    break;
             }
             break;
 
@@ -2328,6 +2338,8 @@ bool Object_2C::HandleRotationStateTransition_528240(s32 current, s32 desired)
                     gObject_5C_6F8F84->field_10_rotating_object_count--;
                     gObject_5C_6F8F84->field_14_listed_sprite_count++;
                     gObject_5C_6F8F84->field_1C_sprite_list.AddSprite_5A6CD0(field_4);
+                    break;
+                default:
                     break;
             }
             break;
@@ -2351,7 +2363,11 @@ bool Object_2C::HandleRotationStateTransition_528240(s32 current, s32 desired)
                     gObject_5C_6F8F84->field_1C_sprite_list.RemoveSprite_5A6B10(field_4);
                     gObject_5C_6F8F84->field_10_rotating_object_count++;
                     break;
+                default:
+                    break;
             }
+            break;
+        default:
             break;
     }
     return false;
@@ -2944,6 +2960,8 @@ void Object_2C::HandleCollisionWithObject_529000(Object_2C* pObj)
                 Dealloc_5291B0();
             }
             break;
+        default:
+            break;
     }
 }
 
@@ -3062,6 +3080,8 @@ s32 Object_2C::GetExplosionSideFromDiagonalWall_529210()
         case 45: // diagonal up left
         case 47: // diagonal down left
             return 23;
+        default:
+            break;
     }
     return 23;
 }

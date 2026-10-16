@@ -370,6 +370,8 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
                         x_pos += kFpPoint1_6FD824;
                         outAng = pCar->field_50_car_sprite->field_0_rotation;
                         break;
+                    default:
+                        break;
                 }
                 break;
             }
@@ -470,6 +472,8 @@ void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16&
                     case 99:
                         x_pos -= kFpPoint1_6FD824;
                         outAng = pCar->field_50_car_sprite->field_0_rotation;
+                        break;
+                    default:
                         break;
                 }
             }
@@ -710,6 +714,8 @@ void Ped::PoolAllocate()
             break;
         case ped_ocupation_enum::walking_guard_29:
             gNumberWalkingCopsSpawned_6787CD = 0;
+            break;
+        default:
             break;
     }
 }
@@ -2492,6 +2498,8 @@ void Ped::StartCrossingRoad_45E4A0()
             field_130_target_facing_angle = gSpawnRotationRight_678578;
             ++gNumPedsCrossingRoad_6787D0;
             break;
+        default:
+            break;
     }
 }
 
@@ -2754,6 +2762,8 @@ void Ped::SetOccupation_45EE00(u32 occupation)
                 if (--gNumberBusCustomers_6787D3 < 0)
                     gNumberBusCustomers_6787D3 = 0;
                 field_240_occupation = occupation;
+                break;
+            default:
                 break;
         }
     }
@@ -3213,6 +3223,8 @@ void Ped::TaxiCustomer_AI_460820()
             }
             break;
         }
+        default:
+            break;
     }
 }
 
@@ -3358,6 +3370,8 @@ void Ped::TrainCustomer_AI_461530()
                 this->field_1B8_target_x = this->field_1AC_cam.x;
                 this->field_1BC_target_y = this->field_1AC_cam.y;
             }
+            break;
+        default:
             break;
     }
 }
@@ -6566,6 +6580,8 @@ char_type Ped::IsThreatToSearchingPed_4661F0()
                 gSearchingPed_6787DC->field_21C_bf.bSpottedPlayer = false;
                 return 0;
             }
+        default:
+            break;
     }
 
     goto ret_false;
@@ -6712,6 +6728,8 @@ Ped* Ped::FindBestTargetPed_466BF0(s32 a2)
                 return pNear->AsCar_40FEB0()->GetDriver_4118B0();
             case sprite_types_enum::ped_3:
                 return pNear->AsCharB4_40FEA0()->field_7C_pPed;
+            default:
+                break;
         }
     }
     return nullptr;
@@ -7344,6 +7362,8 @@ void Ped::KillCharOnFoot_467CA0()
                 Ped::SetObjective2_463830(objectives_enum::kill_char_on_foot_20);
                 field_14C_internal_target_ped = field_148_objective_target_ped;
                 return;
+            default:
+                break;
         }
     }
 }
@@ -10660,6 +10680,8 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
                 bAttackingVehicleOrObject = 1;
             }
             break;
+        default:
+            break;
     }
 
     if (bTargetGone)
@@ -10845,6 +10867,8 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
                     break;
                 case ped_attack_target_type::object_2:  // target is a object
                     Ped::UpdateMovementTowardsTarget_4672E0(gDistanceToTarget_678750, ped_move_target_type::internal_target_object_6);
+                    break;
+                default:
                     break;
             }
 
@@ -11114,6 +11138,8 @@ void Ped::set_wanted_level_46EF40(u16 wanted)
             break;
         case cop_level_ped_enum::cop_6_stars:
             field_20A_wanted_points = cop_level_ped_enum::cop_6_stars;
+            break;
+        default:
             break;
     }
 }

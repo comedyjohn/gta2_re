@@ -353,6 +353,8 @@ static inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
                 }
             }
             break;
+        default:
+            break;
     }
 }
 
@@ -570,6 +572,8 @@ void MapRenderer::draw_4EA190(u16& rotation_and_flip)
                     gTileVerts_6F65A8[vert_idx].v = 0.0f;
                 }
             }
+            break;
+        default:
             break;
     }
 }

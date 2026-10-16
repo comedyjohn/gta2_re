@@ -736,6 +736,8 @@ void Ambulance_20::HandleObjectiveState_4FAAC0()
                 }
                 bBusy = 1;
                 break;
+            default:
+                break;
         }
 
         if (field_4_paramedics_crew->field_8_group)

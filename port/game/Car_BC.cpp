@@ -461,6 +461,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 }
             }
             break;
+        default:
+            break;
     }
 
     if (pEntry->field_14_enable_state == 0)
@@ -474,6 +476,8 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
             case 3:
                 gScriptManager_6F8060->SetGeneratorTypeForCar_511A70(pCar->field_84_car_info_idx, (Generator_2C*)pEntry->field_0_pScriptCmd);
                 FreeTrigger_5C8680(pEntry->field_10_remap_rng);
+                break;
+            default:
                 break;
         }
     }
@@ -2182,6 +2186,8 @@ char_type Car_BC::GetCarModelForPhysics_43A850()
                     return car_model_enum::HOTDOG_D2;
                 case car_model_enum::TANK:
                     return car_model_enum::HOTDOG_D4;
+                default:
+                    break;
             }
         }
         return this->field_84_car_info_idx;
@@ -2552,6 +2558,8 @@ void Car_BC::ProcessCarToCarImpact_43ADC0(Sprite* pSprite)
                     gCarManager_6C_677930->field_64_zpos = field_50_car_sprite->field_1C_zpos;
                     // NOTE: returned here originally
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -3729,7 +3737,7 @@ void Car_BC::RepairDamage_43D400()
 // 0x43d690
 void Car_BC::EmitExplosion_43D690(s32 type, Fix16 x, Fix16 y)
 {
-    Fix16_Point unused; // EH frame with state 0 before the first call: the original has a destructible local
+    [[maybe_unused]] Fix16_Point unused; // EH frame with state 0 before the first call: the original has a destructible local
 
     Object_2C* p2C = gObject_5C_6F8F84->CreateExplosion_52A3D0(gFix16_6777CC, gFix16_6777CC, 2, kAngZero_67791C, type, field_70_exploder_ped_id);
     if (p2C)
@@ -4214,6 +4222,8 @@ s32 GetDeathCauseForObjectModel_48E780(s32 model)
                     return ped_death_cause::rocket_18;
                 case 10:
                     return ped_death_cause::unknown_21;
+                default:
+                    break;
             }
         }
         else
@@ -4235,6 +4245,8 @@ s32 GetDeathCauseForObjectModel_48E780(s32 model)
             case 198:
             case 251:
                 return ped_death_cause::burning_20;
+            default:
+                break;
         }
     }
     return ped_death_cause::projectile_default_9;
@@ -4393,6 +4405,8 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::machine_gun_bullet_254:
         case objects::pistol_bullet_265:
             this->field_AC_sound_event = 3;
+            break;
+        default:
             break;
     }
 
@@ -6090,6 +6104,8 @@ char_type Car_BC::TrailerUpdate_443130()
         case 2:
             Car_BC::DetachTrailer_442760();
             break;
+        default:
+            break;
     }
     return 0;
 }
@@ -7172,6 +7188,8 @@ char TrafficSpawner_14::IsInsideCameraEdge_582360(int direction, Fix16 x, Fix16 
                 }
             }
             break;
+        default:
+            break;
     }
     return 0;
 }
@@ -7297,6 +7315,8 @@ char_type TrafficSpawner_14::SpawnTrafficCarFacing_583260(s32 angle_face)
             return SpawnTrafficCar_582480(3, 3, 0);
         case 4:
             return SpawnTrafficCar_582480(4, 4, 0);
+        default:
+            break;
     }
     return 1;
 }
@@ -7423,6 +7443,8 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
         case 4:
             car_w *= kFpOneAndHalf_6FF680;
             break;
+        default:
+            break;
     }
 
     Fix16 xpos;
@@ -7510,6 +7532,8 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
             y_one = -kFpOne_6FF778;
             y_two = -kFpTwo_6FF77C;
             break;
+        default:
+            break;
     }
 
     while (xpos > kFpZero_6FF774 && ypos > kFpZero_6FF774 && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
@@ -7582,6 +7606,8 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                                         break;
                                     case crew_type::army_6:
                                         car_model = car_model_enum::GUNJEEP;
+                                        break;
+                                    default:
                                         break;
                                 }
                             }
@@ -7902,6 +7928,8 @@ s32 TrafficSpawner_14::GetLaneOffset_5838E0(u8 lane_idx)
             return 1;
         case 4:
             return 2;
+        default:
+            break;
     }
     return 0;
 }

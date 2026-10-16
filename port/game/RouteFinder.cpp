@@ -332,6 +332,8 @@ bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_t
                         return true;
                     }
                     break;
+                default:
+                    break;
             }
             break;
 
@@ -355,6 +357,8 @@ bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_t
                     {
                         return true;
                     }
+                    break;
+                default:
                     break;
             }
             break;
@@ -380,6 +384,8 @@ bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_t
                         return true;
                     }
                     break;
+                default:
+                    break;
             }
             break;
 
@@ -404,7 +410,11 @@ bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_t
                         return true;
                     }
                     break;
+                default:
+                    break;
             }
+            break;
+        default:
             break;
     }
     return false;
@@ -428,6 +438,8 @@ char_type RouteFinder::sub_588DE0(gmp_block_info* pBlock, s32 arrow_type, s32 ro
             break;
         case road_direction::right_3:
             result = HasBlockDesiredArrow_588CA0(pBlock, arrow_type, RIGHT_4);
+            break;
+        default:
             break;
     }
     return result;
@@ -591,6 +603,8 @@ s32 RouteFinder::NoRefs_589210(u8 x, u8 y, s32 a4, u8 direction, s32 a6, u16 jun
         case 4:
             dx = -1;
             dy = 0;
+            break;
+        default:
             break;
     }
 
@@ -827,6 +841,8 @@ char_type RouteFinder::sub_5895C0(u8 x, u8 y, u8 z, s32 arrow_type, s32 directio
                     {
                         AddChildNode_589990(pStart, pJunction->field_4_e.GetIndex_0040CE90(), pJunction->field_4_e.GetLength());
                     }
+                    break;
+                default:
                     break;
             }
             return 1;

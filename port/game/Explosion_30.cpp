@@ -1000,6 +1000,8 @@ char_type Explosion_30::Update_5434A0(Fix16 speed, Ang16 ang)
         case explosion_type::building_45_22:
             Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(building_debris_dir::towards_45_3);
             return 0;
+        default:
+            break;
     }
     return 0;
 }

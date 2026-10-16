@@ -315,6 +315,8 @@ char_type PathFinder_2FD4::EvaluateGridCell_554640()
                 return 2;
             }
             break;
+        default:
+            break;
     }
     return 0;
 }

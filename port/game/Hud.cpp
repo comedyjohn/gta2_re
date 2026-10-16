@@ -1234,6 +1234,8 @@ char_type* get_phone_colour_5D12B0(s32 phone_type)
             return "red";
         case 3:
             return "green";
+        default:
+            break;
     }
     return "unknown";
 }
@@ -1249,6 +1251,8 @@ u8 GetMinRespectForPhoneType_5D12E0(s32 phone_type)
             return 80;
         case 3:
             return 237;
+        default:
+            break;
     }
     return 0;
 }

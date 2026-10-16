@@ -189,6 +189,8 @@ void Mike_A80::sub_4FF990(u32 idx)
         case 3:
             m85.field_0 = timeGetTime();
             break;
+        default:
+            break;
     }
 }
 
@@ -208,6 +210,8 @@ void Mike_A80::sub_4FF9F0(u32 idx)
             break;
         case 3:
             m85.field_4 = timeGetTime();
+            break;
+        default:
             break;
     }
 }

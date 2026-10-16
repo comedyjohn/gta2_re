@@ -22,28 +22,6 @@ class Fix16
         return (v + 0x2000) >> 14;
     }
 
-    // TODO: BIG HACK!!! Makes no sense for this to be a method but its the only way to force certain inlining behaviour
-    // ideally we'll figure out how to get the inlining we need without doing this in the future.
-    bool IntervalIntersectsRange_438FB0_inline(const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax) const
-    {
-        if (*this < rangeMin)
-        {
-            if (intervalEnd < rangeMin)
-            {
-                return false;
-            }
-            return true;
-        }
-        else
-        {
-            if (*this <= rangeMax)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
-
     // 9.6f 0x40E570
     // https://decomp.me/scratch/5BHO3
     s32 operator==(const Fix16& value) const

@@ -147,12 +147,9 @@ class Fix16_Rect
     // https://decomp.me/scratch/TT06X
     bool AABB_Intersects_41E2F0(Fix16_Rect* pOther) const
     {
-        // TODO: HACK - made 0x438FB0 a method of Fix16 to fix crazy compiler inlining behaviour/force it to do what we need
-        return field_0_left.IntervalIntersectsRange_438FB0_inline(this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
-                field_8_top.IntervalIntersectsRange_438FB0_inline(this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
-                field_10_low_z.IntervalIntersectsRange_438FB0_inline(this->field_14_high_z,
-                                                                     pOther->field_10_low_z,
-                                                                     pOther->field_14_high_z) ?
+        return IntervalIntersectsRange_438FB0(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
+                IntervalIntersectsRange_438FB0(field_8_top, this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
+                IntervalIntersectsRange_438FB0(field_10_low_z, this->field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z) ?
             true :
             false;
     }

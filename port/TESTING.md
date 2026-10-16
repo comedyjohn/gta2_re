@@ -9,6 +9,11 @@
 | `tools/refactor/init_order.py` | no | no global is initialised from another file's global | `python3 port/tools/refactor/init_order.py` |
 | **Replay tests** (`tools/replaytest.sh`) | yes | **what the game computes**: the simulation's state after every update | `port/tools/replaytest.sh build_port/linux32 build_port/linux64` |
 
+**The check** (`port/tools/refactor/check.sh`, `--quick` to iterate) runs all of the above in one
+command: builds of four presets, no new warnings, unit tests, selftest, audiotest, simcheck, nettest,
+replays on three builds. It ends with `CHECK OK` or `CHECK FAILED: <step>`; logs are in
+`build_port/check/`. Run the full check before every refactor commit.
+
 CI runs everything that needs no game data, the unit tests also under AddressSanitizer and
 UndefinedBehaviorSanitizer (presets `asan64`, `ubsan64`). The replay tests run locally.
 

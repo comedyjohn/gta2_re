@@ -32,6 +32,9 @@ void* Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
         FatalError_4A38C0(Gta2Error::OutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 76, requestedSize + 0x10000);
     }
 
+    // Zeroed so that reads past the chunk the caller fills are defined (valgrind found them in the tile reader)
+    memset(pAlloc, 0, requestedSize + 0x10000);
+
     // Return aligned pointer
     return (void*)(((sptr)*pUnAlignedPtr + 0xFFFF) & ~0xFFFF);
 }

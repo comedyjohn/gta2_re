@@ -423,6 +423,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
     }
 
     field_50_delta_buffer = static_cast<sprite_deltas*>(Memory::malloc_4FE4D0(field_60_delta_len));
+    memset(field_50_delta_buffer, 0, field_60_delta_len); // the entries below leave padding bytes unset (valgrind)
     delta_entry* pSrc = field_4C_delta_index;
     u32 off2 = 0;
     auto* pDst = static_cast<sprite_deltas*>(field_50_delta_buffer);

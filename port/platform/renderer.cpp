@@ -11,6 +11,7 @@
 #include "gl.h"
 #include "overlay.h"
 #include "platform.h"
+#include "port_replay.h"
 #include "port_world3d.h" // port: world3d
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 
@@ -249,6 +250,10 @@ class GLRenderer
         }
         port_world3d_present(); // port: world3d
         DrawOverlay();
+        if (const char* shot = port_replay_capture_file())
+        {
+            WritePpm(shot);
+        }
         plat::SwapWindow();
         if (!mFreeLater.empty())
         {
@@ -303,6 +308,34 @@ class GLRenderer
         glDisable(GL_DEPTH_TEST);
         glDepthMask(GL_TRUE);
         glDisable(GL_CULL_FACE);
+    }
+
+    // The picture as a binary PPM (P6), top row first (replay --screenshot)
+    void WritePpm(const char* file)
+    {
+        std::vector<DWORD> pixels;
+        int w = 0, h = 0;
+        ReadPixels(pixels, w, h);
+        FILE* f = fopen(file, "wb");
+        if (!f)
+        {
+            fprintf(stderr, "cannot write %s\n", file);
+            return;
+        }
+        fprintf(f, "P6\n%d %d\n255\n", w, h);
+        std::vector<unsigned char> row(static_cast<size_t>(w) * 3);
+        for (int y = h - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < w; x++)
+            {
+                const DWORD p = pixels[static_cast<size_t>(y) * w + x]; // R, G, B, A bytes
+                row[x * 3] = p & 0xFF;
+                row[x * 3 + 1] = (p >> 8) & 0xFF;
+                row[x * 3 + 2] = (p >> 16) & 0xFF;
+            }
+            fwrite(row.data(), 1, row.size(), f);
+        }
+        fclose(f);
     }
 
     // Reads back the game's 640x480 picture (for the headless self-test)

@@ -54,6 +54,7 @@ struct Options
     long frames = -1; // stop after this many updates
     long hashEvery = 1;
     long breakAt = -1; // dump the state after this update, then stop
+    std::vector<std::pair<long, std::string>> shots; // --screenshot N:FILE
     bool draw = false;
     bool keep = false; // keep the scratch folder
 };
@@ -65,6 +66,7 @@ long gFrame; // simulation updates so far
 std::string gScratch;
 u32 gLastRecord; // replay records applied before this update
 long gSyncMismatches;
+size_t gShotsTaken; // screenshots written
 bool gFinished; // the game returned normally
 volatile sig_atomic_t gStopRequested; // Ctrl+C or SIGTERM: end the game at the next update
 
@@ -75,6 +77,7 @@ void OnStopSignal(int)
 
 const char* const kUsage = "usage: gta2 --replay FILE [--game-dir DIR] [--hash-log FILE] [--frames N]\n"
                            "                         [--hash-every K] [--break-at FRAME] [--audio-log FILE] [--draw] [--keep]\n"
+                           "                         [--screenshot N:FILE ...]  (with --draw: the picture after update N, as PPM)\n"
                            "       gta2 --record FILE [--map wil|ste|bil|NAME] [--game-dir DIR] [--hash-log FILE]\n";
 
 bool ParseLong(const char* s, long& out)
@@ -142,6 +145,18 @@ bool Parse(int argc, char** argv, Options& o, std::string& error)
                 error = "--break-at needs a frame number";
                 return false;
             }
+        }
+        else if (a == "--screenshot" && hasValue)
+        {
+            const std::string v = argv[++i];
+            const size_t colon = v.find(':');
+            long n = 0;
+            if (colon == std::string::npos || !ParseLong(v.substr(0, colon).c_str(), n) || colon + 1 >= v.size())
+            {
+                error = "--screenshot needs N:FILE";
+                return false;
+            }
+            o.shots.emplace_back(n, v.substr(colon + 1));
         }
         else if (a == "--draw")
         {
@@ -588,8 +603,32 @@ void port_replay_after_update()
         fprintf(gLog ? gLog : stdout, "# state after update %ld\n%s", gFrame, dump.c_str());
         RequestExit();
     }
+    if (!gOptions.shots.empty() && gShotsTaken >= gOptions.shots.size())
+    {
+        RequestExit(); // the last screenshot was written
+    }
     if (gFrame == gOptions.frames || gStopRequested)
     {
         RequestExit();
     }
+}
+
+const char* port_replay_capture_file()
+{
+    if (!gActive)
+    {
+        return nullptr;
+    }
+    static std::vector<bool> done;
+    done.resize(gOptions.shots.size());
+    for (size_t i = 0; i < gOptions.shots.size(); i++)
+    {
+        if (!done[i] && gOptions.shots[i].first == gFrame)
+        {
+            done[i] = true;
+            gShotsTaken++;
+            return gOptions.shots[i].second.c_str();
+        }
+    }
+    return nullptr;
 }

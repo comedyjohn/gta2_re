@@ -30,6 +30,49 @@
         "GTA2_BITS": "64",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
+    },
+    {
+      "name": "clang64",
+      "displayName": "Linux, 64-bit, Clang 18 (warnings and clang-tidy)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/clang64",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/clang-18",
+        "CMAKE_CXX_COMPILER": "/usr/bin/clang++-18",
+        "GTA2_BITS": "64",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "asan64",
+      "displayName": "Linux, 64-bit, AddressSanitizer (run with ASAN_OPTIONS=detect_leaks=0)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/asan64",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "GTA2_BITS": "64",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "-fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer -O1",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer -O1",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address"
+      }
+    },
+    {
+      "name": "ubsan64",
+      "displayName": "Linux, 64-bit, Clang 18, UndefinedBehaviorSanitizer (UBSAN_OPTIONS=halt_on_error=1 to stop at the first)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_port/ubsan64",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/clang-18",
+        "CMAKE_CXX_COMPILER": "/usr/bin/clang++-18",
+        "GTA2_BITS": "64",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_C_FLAGS": "-fsanitize=undefined -fno-omit-frame-pointer",
+        "CMAKE_CXX_FLAGS": "-fsanitize=undefined -fno-omit-frame-pointer",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined"
+      }
     }
   ],
   "buildPresets": [
@@ -40,6 +83,18 @@
     {
       "name": "linux64",
       "configurePreset": "linux64"
+    },
+    {
+      "name": "clang64",
+      "configurePreset": "clang64"
+    },
+    {
+      "name": "asan64",
+      "configurePreset": "asan64"
+    },
+    {
+      "name": "ubsan64",
+      "configurePreset": "ubsan64"
     }
   ]
 }

@@ -4,10 +4,6 @@
 #include <math.h>
 #include <windows.h>
 
-#ifndef INLINE_MODE
-    #define INLINE_MODE __forceinline
-#endif
-
 class Fix16;
 
 EXTERN_GLOBAL(Fix16, kFP16Zero_6FE20C);
@@ -334,7 +330,7 @@ class Fix16
     }
 
     // SquareRoot forced inline, only for Fix16_Point::GetLength_SqrtForced_43A240 (unexplained)
-    __forceinline static Fix16 SquareRoot_forced(const Fix16& input)
+    inline static Fix16 SquareRoot_forced(const Fix16& input)
     {
         return Fix16(sqrt(input.AsDouble()));
     }

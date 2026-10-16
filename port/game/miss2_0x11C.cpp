@@ -2,7 +2,6 @@
 #define FIX16_POINT_ZERO kFpZero_6F77C0
 
 // Force inline off
-//#define INLINE_MODE inline
 #include "miss2_0x11C.hpp"
 #include "CarAI_78.hpp"
 #include "CarPhysics_B0.hpp"
@@ -47,9 +46,6 @@
 #include "sprite.hpp"
 #include "text_0x14.hpp"
 #include "voice_line.hpp"
-// Back to force inline
-#define INLINE_MODE __forceinline
-
 DEFINE_GLOBAL_INIT(s16, gNextThreadId_6212EE, 1, 0x6212EE);
 
 DEFINE_GLOBAL_ARRAY_INIT(u8,

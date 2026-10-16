@@ -1781,7 +1781,7 @@ void Weapon_30::car_mine_5E2550()
         Object_2C* pMine = gObject_5C_6F8F84->NewPhysicsObj_5299B0(10, p.x, p.y, newZ, Sprite_440840->field_0_rotation);
         pMine->SetDamageOwner_529080(field_24_pPed->field_267_ped_ref_idx);
 
-        decrement_ammo_4CCA30(); // NOTE: Didn't get inlined without __forceinline here, wtf??
+        decrement_ammo_4CCA30();
         set_field_2C_4CCA80(1);
     }
 }

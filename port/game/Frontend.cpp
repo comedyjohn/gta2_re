@@ -2360,7 +2360,7 @@ void Frontend::HandleDeletePlayerDialog_4AE9A0()
 // edited. 10.5 has three identical copies (a static function in a header included by three files), so the body
 // is a forced inline here. The count must be defined in another file: with its definition in view VC6 reads it
 // with 32 bit loads instead of the original's 16 bit ones.
-static __forceinline bool CheckCdFile()
+static inline bool CheckCdFile()
 {
     char_type path[255] = "\0";
 

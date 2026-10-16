@@ -103,7 +103,7 @@ class Weapon_30
     }
 
     // Maybe decrement ammo for weapons like shotgun, molotov, grenades, rocket launcher, (dual) pistol etc
-    __forceinline void decrement_ammo_4CCA30()
+    inline void decrement_ammo_4CCA30()
     {
         s32 new_ammo = field_0_ammo - 10;
         if (!is_infinite_ammo_4A4FA0())

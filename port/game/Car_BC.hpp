@@ -370,7 +370,7 @@ class Trailer
     }
 
     //Inlined in CarManager_6C constructor 9.6f -> 0x4212d0
-    __forceinline Trailer()
+    inline Trailer()
     {
         mpNext = nullptr;
         field_8_truck_cab = nullptr;

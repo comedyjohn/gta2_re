@@ -21,7 +21,9 @@ DEFINE_GLOBAL(Fix16, dword_6FECE8, 0x6FECE8);
 DEFINE_GLOBAL_INIT(Fix16, kFpTen_6FED54, Fix16(0x28000, 0), 0x6FED54);
 DEFINE_GLOBAL(Ped*, gCurrentCrewPed_6FEDDC, 0x6FEDDC);
 DEFINE_GLOBAL(u8, byte_6FEB48, 0x6FEB48);
-DEFINE_GLOBAL_INIT(Fix16, kFpEight_6FED48, kFpOne64th_6FEB88 * 512, 0x6FED48);
+// 8. The original computes it as kFpOne64th_6FEB88 * 512, after that is set; here
+// kFpOne64th_6FEB88 is another file's, whose initialiser can run later (it was 0 in GCC builds)
+DEFINE_GLOBAL_INIT(Fix16, kFpEight_6FED48, Fix16(8), 0x6FED48);
 
 // 0x4beb30
 PoliceCrew_38::PoliceCrew_38()

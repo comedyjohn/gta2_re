@@ -1,15 +1,16 @@
-// Native entry point: starts the platform layer, then hands the command line to the game's WinMain
-// (test.cpp), as Windows would.
+// Native entry point: starts the platform layer, then hands the command line to the game's WinMain_5E53F0,
+// as Windows would.
 #include "lobby_port.h"
 #include "platform.h"
 #include "types.hpp"
+#include "winmain.hpp"
 
 #include <stdio.h>
 
 #include <string>
 #include <vector>
 
-s32 APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, s32 nCmdShow);
+void EnableBoot2MapDebugOptions(); // ImGuiDebug.cpp
 int port_selftest();
 int port_audiotest();
 int port_nettest(int argc, char** argv);
@@ -84,7 +85,10 @@ int main(int argc, char** argv)
         }
         cmdLine += gameArgs[i];
     }
-    int result = WinMain(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
+    LoadBeginSceneCBPtr();
+    EnableBoot2MapDebugOptions();
+    WinMain_5E53F0(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
+    int result = 0; // the game's own result is not used
 
     plat::Shutdown();
     if (replay)

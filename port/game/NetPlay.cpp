@@ -1,11 +1,12 @@
 #include "NetPlay.hpp"
 #include "Globals.hpp"
-#include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "network_data.hpp"
 #include "winmain.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
 DEFINE_GLOBAL(NetPlay, gNetPlay_7071E8, 0x7071E8);
 // GTA2's DirectPlay application GUID {561E8920-5C70-11D2-AD00-00A0C9B61398} (from 10.5.exe)
@@ -1723,7 +1724,7 @@ void NetPlay::ClearPlayersAndSession_520DE0(Network_Game_Session* pStru)
 
     if (pStru->field_120_session_desc.lpszSessionName)
     {
-        crt::free(pStru->field_120_session_desc.lpszSessionName);
+        ::free(pStru->field_120_session_desc.lpszSessionName);
     }
 
     memset(&pStru->field_120_session_desc, 0, sizeof(pStru->field_120_session_desc));

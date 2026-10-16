@@ -16,7 +16,6 @@
 #include "TextureCache_15D8.hpp"
 #include "car_despawn_status.hpp"
 #include "char.hpp"
-#include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "enums.hpp"
 #include "error.hpp"
@@ -27,6 +26,8 @@
 #include "memory.hpp"
 #include "root_sound.hpp"
 #include "winmain.hpp" // TODO: only because of gLighting_626A09
+#include <stdio.h>
+#include <stdlib.h>
 
 // Forward declarations: the functions below are in address order
 void ProjectOntoAxis_5A5AA0(const Fix16& xpos1,
@@ -347,7 +348,7 @@ SpriteMaskCache_3CC::~SpriteMaskCache_3CC()
 {
     if (this->field_3C8_unaligned_alloc)
     {
-        crt::free(this->field_3C8_unaligned_alloc);
+        ::free(this->field_3C8_unaligned_alloc);
     }
     this->field_3C4_aligned_buffer = nullptr;
     this->field_3C8_unaligned_alloc = nullptr;

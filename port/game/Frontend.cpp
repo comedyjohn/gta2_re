@@ -14,7 +14,6 @@
 #include "ang16.hpp"
 #include "cSampleManager.hpp"
 #include "credits_line_category.hpp"
-#include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "dma_video.hpp"
 #include "enums.hpp"
@@ -33,6 +32,8 @@
 #include <cstdlib>
 #include <cwchar>
 #include <io.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void Start_GTA2Manager_5E4DE0();
 
@@ -2372,14 +2373,14 @@ static __forceinline bool CheckCdFile()
             strcat(path, gCdCheckFiles_6252E8[idx].field_0_name);
             if (File::IsCdRomDrive_4A6BB0(drive[0]))
             {
-                FILE* hFile = crt::fopen(path, "rb");
+                FILE* hFile = ::fopen(path, "rb");
                 if (hFile)
                 {
                     if (static_cast<u32>(File::GetFileSize_4A6B10(hFile)) == gCdCheckFiles_6252E8[idx].field_80_size)
                     {
-                        if (!crt::fclose(hFile))
+                        if (!::fclose(hFile))
                         {
-                            bool ok = crt::fopen(path, "wb") == nullptr;
+                            bool ok = ::fopen(path, "wb") == nullptr;
                             return ok;
                         }
                     }
@@ -3299,7 +3300,7 @@ void Frontend::Load_tga_4B6520(u16 idx)
 {
     Error_SetName_4A0770(tgaArray_61F0C8[idx].field_0_tga_name);
 
-    FILE* hFile = crt::fopen(tgaArray_61F0C8[idx].field_0_tga_name, "rb");
+    FILE* hFile = ::fopen(tgaArray_61F0C8[idx].field_0_tga_name, "rb");
     if (!hFile)
     {
         FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 6516);
@@ -3311,14 +3312,14 @@ void Frontend::Load_tga_4B6520(u16 idx)
         FatalError_4A38C0(Gta2Error::TargaMemoryAllocationError, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 6523);
     }
 
-    if (crt::fread(pAlloc, 1u, tgaArray_61F0C8[idx].field_80_len, hFile) != static_cast<size_t>(tgaArray_61F0C8[idx].field_80_len))
+    if (::fread(pAlloc, 1u, tgaArray_61F0C8[idx].field_80_len, hFile) != static_cast<size_t>(tgaArray_61F0C8[idx].field_80_len))
     {
         FatalError_4A38C0(Gta2Error::InvalidBackgroundImageSize, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 6529);
     }
 
     tgaArray_61F0C8[idx].field_84_img = pgbh_LoadImage(static_cast<SImage*>(pAlloc));
 
-    crt::fclose(hFile);
+    ::fclose(hFile);
     free(pAlloc);
 }
 
@@ -4197,7 +4198,7 @@ void Frontend::GetMainAndBonusStagesFromSeqFile_4B4440()
     }
     u16 main_block_counter = 0;
 
-    FILE* hSeqFile = crt::fopen(seqFileName, "rt");
+    FILE* hSeqFile = ::fopen(seqFileName, "rt");
     if (!hSeqFile)
     {
         FatalError_4A38C0(Gta2Error::SeqFileOpenError, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 4906);
@@ -4258,7 +4259,7 @@ void Frontend::GetMainAndBonusStagesFromSeqFile_4B4440()
     }
 
     field_1EB50_num_main_stages = main_block_counter + 1;
-    crt::fclose(hSeqFile);
+    ::fclose(hSeqFile);
 }
 
 // 0x4B48D0

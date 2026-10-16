@@ -11,7 +11,6 @@
 #include "NetPlay.hpp"
 #include "Particle_4C.hpp"
 #include "PlyDat_2BC0.hpp"
-#include "crt_stubs.hpp"
 #include "debug.hpp"
 #include "dma_video.hpp"
 #include "error.hpp"
@@ -29,6 +28,8 @@
 #include <direct.h>
 #include <port_input.h>
 #include <port_replay.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <windows.h>
@@ -981,7 +982,7 @@ s32 FileByteSum_4DB120(FILE* hFile)
 {
     s32 sum = 0;
     u8 c;
-    while (crt::fread(&c, 1, 1, hFile) > 0)
+    while (::fread(&c, 1, 1, hFile) > 0)
     {
         sum += c;
     }
@@ -1014,18 +1015,18 @@ void MakeInitialSyncData_4DB2E0(u8* pSyncData)
         pData->field_5_map_size = st.st_size;
     }
 
-    FILE* hFile = crt::fopen(gGameSession_67E8E0.GetScriptName_4C5960(), "rb");
+    FILE* hFile = ::fopen(gGameSession_67E8E0.GetScriptName_4C5960(), "rb");
     if (hFile)
     {
         pData->field_D_script_sum = FileByteSum_4DB120(hFile);
-        crt::fclose(hFile);
+        ::fclose(hFile);
     }
 
-    hFile = crt::fopen("data\\nyc.gci", "rb");
+    hFile = ::fopen("data\\nyc.gci", "rb");
     if (hFile)
     {
         pData->field_19_gci_sum = FileByteSum_4DB120(hFile);
-        crt::fclose(hFile);
+        ::fclose(hFile);
     }
 
     if (bIsFrench_67D53C)

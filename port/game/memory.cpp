@@ -1,14 +1,15 @@
 #include "memory.hpp"
 #include "Function.hpp"
-#include "crt_stubs.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 
 // 0x4FE4D0
 void* Memory::malloc_4FE4D0(size_t Size)
 {
-    void* result = crt::malloc(Size);
+    void* result = ::malloc(Size);
     if (!result)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 44, Size);
@@ -21,7 +22,7 @@ void* Memory::malloc_4FE4D0(size_t Size)
 void* Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
 {
     // Allocate with extra space for alignment
-    void* pAlloc = crt::malloc(requestedSize + 0x10000);
+    void* pAlloc = ::malloc(requestedSize + 0x10000);
 
     // Return the raw unaligned allocation (since we can't free the aligned one)
     *pUnAlignedPtr = pAlloc;

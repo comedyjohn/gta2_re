@@ -15,7 +15,6 @@
 #include "SpriteGrid_400.hpp"
 #include "TileAnim_2.hpp"
 #include "chunk.hpp"
-#include "crt_stubs.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
@@ -23,6 +22,8 @@
 #include "memory.hpp"
 #include "port_world3d.h" // port: world3d
 #include "sprite.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
 DEFINE_GLOBAL(Map_0x370*, gMap_0x370_6F6268, 0x6F6268);
 DEFINE_GLOBAL(gmp_block_info*, gBlockInfo0_6F5EB0, 0x6F5EB0);
@@ -4825,25 +4826,25 @@ Map_0x370::~Map_0x370()
 {
     if (field_33C_pLightData)
     {
-        crt::free(field_33C_pLightData);
+        ::free(field_33C_pLightData);
     }
     field_33C_pLightData = nullptr;
 
     if (field_328_pZoneData)
     {
-        crt::free(field_328_pZoneData);
+        ::free(field_328_pZoneData);
     }
     field_328_pZoneData = nullptr;
 
     if (field_32C_pZones)
     {
-        crt::free(field_32C_pZones);
+        ::free(field_32C_pZones);
     }
     field_32C_pZones = nullptr;
 
     if (field_338_pMapObjects)
     {
-        crt::free(field_338_pMapObjects);
+        ::free(field_338_pMapObjects);
     }
     field_338_pMapObjects = nullptr;
 
@@ -4851,13 +4852,13 @@ Map_0x370::~Map_0x370()
     {
         if (field_0_pDmap->field_40008_pColumn)
         {
-            crt::free(field_0_pDmap->field_40008_pColumn);
+            ::free(field_0_pDmap->field_40008_pColumn);
         }
         field_0_pDmap->field_40008_pColumn = nullptr;
 
         if (field_0_pDmap->field_4000C_block)
         {
-            crt::free(field_0_pDmap->field_4000C_block);
+            ::free(field_0_pDmap->field_4000C_block);
         }
         field_0_pDmap->field_4000C_block = nullptr;
 
@@ -4866,19 +4867,19 @@ Map_0x370::~Map_0x370()
 
     if (field_330_pZoneArray)
     {
-        crt::free(field_330_pZoneArray);
+        ::free(field_330_pZoneArray);
     }
     field_330_pZoneArray = nullptr;
 
     if (field_334_pUnknownZoneData)
     {
-        crt::free(field_334_pUnknownZoneData);
+        ::free(field_334_pUnknownZoneData);
     }
     field_334_pUnknownZoneData = nullptr;
 
     if (field_340_pTileAnimData)
     {
-        crt::free(field_340_pTileAnimData);
+        ::free(field_340_pTileAnimData);
     }
     field_340_pTileAnimData = nullptr;
 }

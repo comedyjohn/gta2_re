@@ -3,13 +3,14 @@
 #include "Function.hpp"
 #include "Globals.hpp"
 #include "chunk.hpp"
-#include "crt_stubs.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
 #include "memory.hpp"
 #include <cstdio>
 #include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 
 // Forward declarations: the functions below are in address order
@@ -657,7 +658,7 @@ void gtx_0x106C::load_delta_index_5AAD80(u32 delx_chunk_size)
     load_delx_5AAB30(delx_chunk_size);
     build_delta_container_5AAC70();
 
-    crt::free(this->field_4C_delta_index);
+    ::free(this->field_4C_delta_index);
     this->field_4C_delta_index = nullptr;
 }
 
@@ -762,7 +763,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
         field_20_sprite_index[i].field_5_height = pFileEntries[i].field_5_height;
         field_20_sprite_index[i].field_6_pad = pFileEntries[i].field_6_pad;
     }
-    crt::free(pFileEntries);
+    ::free(pFileEntries);
 #else
     field_20_sprite_index = (sprite_index*)Memory::malloc_4FE4D0(sprx_chunk_size + 8);
     File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
@@ -1155,7 +1156,7 @@ gtx_0x106C::~gtx_0x106C()
 
     if (field_64_car_recycling_info)
     {
-        crt::free(field_64_car_recycling_info);
+        ::free(field_64_car_recycling_info);
     }
 
     local_field_14_sprite_base2 = field_14_sprite_base2;
@@ -1176,20 +1177,20 @@ gtx_0x106C::~gtx_0x106C()
     field_10_palette_base1 = nullptr;
     if (local_field_1C_font_base)
     {
-        crt::free(local_field_1C_font_base);
+        ::free(local_field_1C_font_base);
     }
 
     local_field_20_sprite_index = field_20_sprite_index;
     field_1C_font_base = nullptr;
     if (local_field_20_sprite_index)
     {
-        crt::free(local_field_20_sprite_index);
+        ::free(local_field_20_sprite_index);
     }
     local_field_24_map_object_info = field_24_map_object_info;
     field_20_sprite_index = nullptr;
     if (local_field_24_map_object_info)
     {
-        crt::free(local_field_24_map_object_info);
+        ::free(local_field_24_map_object_info);
     }
     local_field_28_palette_index = field_28_palette_index;
     field_24_map_object_info = nullptr;
@@ -1198,40 +1199,40 @@ gtx_0x106C::~gtx_0x106C()
     field_28_palette_index = nullptr;
     if (local_field_30_physical_palettes_size)
     {
-        crt::free(local_field_30_physical_palettes_size);
+        ::free(local_field_30_physical_palettes_size);
     }
     local_field_44_aligned_tiles_size = field_44_aligned_tiles_size;
     field_2C_physical_palettes = nullptr;
     field_30_physical_palettes_size = nullptr;
     if (local_field_44_aligned_tiles_size)
     {
-        crt::free(local_field_44_aligned_tiles_size);
+        ::free(local_field_44_aligned_tiles_size);
     }
     pUnaligned = field_38_sprite_graphics_unaligned;
     field_3C_tiles = nullptr;
     field_44_aligned_tiles_size = nullptr;
     if (pUnaligned)
     {
-        crt::free(pUnaligned);
+        ::free(pUnaligned);
     }
     local_field_48_delta_store = field_48_delta_store;
     field_34_sprite_graphics = nullptr;
     field_38_sprite_graphics_unaligned = nullptr;
     if (local_field_48_delta_store)
     {
-        crt::free(local_field_48_delta_store);
+        ::free(local_field_48_delta_store);
     }
     local_field_50_delta_buffer = field_50_delta_buffer;
     field_48_delta_store = nullptr;
     if (local_field_50_delta_buffer)
     {
-        crt::free(local_field_50_delta_buffer);
+        ::free(local_field_50_delta_buffer);
     }
     local_field_58_car_info = reinterpret_cast<void*>(field_58_car_info);
     field_50_delta_buffer = nullptr;
     if (local_field_58_car_info)
     {
-        crt::free(local_field_58_car_info);
+        ::free(local_field_58_car_info);
     }
     local_field_5C_cari = field_5C_cari;
     field_58_car_info = nullptr;
@@ -1240,13 +1241,13 @@ gtx_0x106C::~gtx_0x106C()
     field_5C_cari = nullptr;
     if (local_field_4C_delta_index)
     {
-        crt::free(local_field_4C_delta_index);
+        ::free(local_field_4C_delta_index);
     }
     local_field_54_del = (void*)field_54_del;
     field_4C_delta_index = nullptr;
     if (local_field_54_del)
     {
-        crt::free(local_field_54_del);
+        ::free(local_field_54_del);
     }
     local_field_40_tile = field_40_tile;
     field_54_del = nullptr;

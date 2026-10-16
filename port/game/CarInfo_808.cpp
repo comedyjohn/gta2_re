@@ -1,6 +1,5 @@
 #include "CarInfo_808.hpp"
 #include "Globals.hpp"
-#include "crt_stubs.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
@@ -8,6 +7,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
 
 // Forward declarations: the functions below are in address order
 Fix16 ComputeCarMassAndInertia_454410(Fix16 width, Fix16 height, Fix16 mass, Fix16 frontMassBias, Fix16* outCgHeight);
@@ -629,7 +630,7 @@ void CarInfo_808::LoadModelPhysics_4546D0()
                                                          number_of_cars * sizeof(ModelPhysics_48),
                                                          &data_size);
 
-    crt::free(file_content);
+    ::free(file_content);
 
     if (pErrorMsg != nullptr)
     {

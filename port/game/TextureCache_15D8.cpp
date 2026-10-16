@@ -1,11 +1,12 @@
 #include "TextureCache_15D8.hpp"
 #include "Function.hpp"
 #include "Globals.hpp"
-#include "crt_stubs.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
 #include "memory.hpp"
 #include "sprite.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
 DEFINE_GLOBAL(TextureCache_15D8*, gTextureCache_15D8_705064, 0x705064);
 DEFINE_GLOBAL(u32, gRemappedSpriteCounter_704ED0, 0x704ED0);
@@ -98,7 +99,7 @@ RemapTextureSet_14::~RemapTextureSet_14()
             pgbh_FreeTexture(field_0_pTextures[i]);
         }
 
-        crt::free(reinterpret_cast<void*>(field_0_pTextures));
+        ::free(reinterpret_cast<void*>(field_0_pTextures));
         field_0_pTextures = nullptr;
     }
 }

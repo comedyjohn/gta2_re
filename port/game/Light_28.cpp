@@ -1,8 +1,9 @@
 #include "Light_28.hpp"
 #include "Globals.hpp"
-#include "crt_stubs.hpp"
 #include "gbh_graphics.hpp"
 #include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 
 DEFINE_GLOBAL(Light_28**, gLightGrid_6F5400, 0x6F5400);
 
@@ -77,7 +78,7 @@ Light_28* Light_28::RemoveFromGrid_4D6DC0()
 // 0x4D6E00
 void LightGrid::AllocGrid_4D6E00()
 {
-    gLightGrid_6F5400 = static_cast<Light_28**>(crt::malloc(4096 * sizeof(Light_28*)));
+    gLightGrid_6F5400 = static_cast<Light_28**>(::malloc(4096 * sizeof(Light_28*)));
     for (s32 i = 0; i < 4096; i++)
     {
         gLightGrid_6F5400[i] = nullptr;
@@ -89,7 +90,7 @@ void LightGrid::FreeGrid_4D6E30()
 {
     if (gLightGrid_6F5400)
     {
-        crt::free(reinterpret_cast<void*>(gLightGrid_6F5400));
+        ::free(reinterpret_cast<void*>(gLightGrid_6F5400));
         gLightGrid_6F5400 = nullptr;
     }
 }

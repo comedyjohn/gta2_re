@@ -58,8 +58,8 @@ To match VC6's inlining decisions, some functions exist twice: an inline copy an
 `Fix16_To_Ang16_ool_40F540`; `Add_ool`, `ClampToRangeFlexible_ool_55EEE0`, `ComputeTorqueUnknown_49E8E0_ool`,
 ...; 32 names).
 
-- [ ] List them: `grep -ohE '\b\w+_(Inline|inline|inlined|ool)\w*\(' port/game/*.{cpp,hpp} | sort -u`.
-- [ ] For each pair, diff the bodies. Identical: keep one, point all callers at it. Different: the
+- [x] List them: `grep -ohE '\b\w+_(Inline|inline|inlined|ool)\w*\(' port/game/*.{cpp,hpp} | sort -u`.
+- [x] (2026-10-16; 3 names left, see PROGRESS.md) For each pair, diff the bodies. Identical: keep one, point all callers at it. Different: the
       difference is either a decompilation artefact (pick the correct one, prove it with the replays) or
       real (two functions; give them distinct names in phase 2).
 

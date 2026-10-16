@@ -27,6 +27,8 @@
 
 - R1.4 (2026-10-16): scaffolding removed, 14 commits (HookLoader, test.cpp and force_link, globals registry, decompme_context, StdAfx, crt_stubs, NOT_IMPLEMENTED, COMMA, __forceinline/INLINE_MODE, CC, SIZEOF_ALWAYS, pragma pack). The entry point is now port/platform/main.cpp calling WinMain_5E53F0.
 
+- R1.5 (2026-10-16): 15 commits, about 1,100 lines less. The names the grep still lists: `inline_ComputeTorqueFromThrottle_561DD0_ool` (a real difference: it multiplies (fith_thrust * damage_factor) * gas_pedal, the plain one gas_pedal * (damage_factor * fith_thrust); fixed-point products are not associative, so they can round differently; kept as is, to be named in phase 2), `Door_38_inline_unknown` (not a copy of anything, a helper) and the hand-written inlined bodies inside functions (Cranes, Weapon_30 `RotateByAngle_40F6B0_no_budget3`, Particle_8, sprite.cpp) which are expressions, not named copies.
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

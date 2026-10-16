@@ -2,6 +2,7 @@
 
 #include "Globals.hpp"
 #include "types.hpp"
+#include <cstddef>
 #include <cstdio>
 
 // Variadic macros were added in C99, but this is not supported by VC6.
@@ -47,8 +48,15 @@
 #define GTA2_ASSERT_FILE_SIZEOF(structureName, expectedSize) \
     static_assert(sizeof(structureName) == expectedSize, "sizeof(" #structureName ") must be " #expectedSize);
 
-#define GTA2_COUNTOF(x) (sizeof(x) / sizeof(*(x)))
-#define GTA2_COUNTOF_S(x) ((s32)GTA2_COUNTOF(x))
+// Only accepts arrays (a pointer does not compile), unlike sizeof(x) / sizeof(*x)
+template <class T, std::size_t N>
+constexpr std::size_t Gta2CountOf(const T (&)[N])
+{
+    return N;
+}
+
+#define GTA2_COUNTOF(x) (Gta2CountOf(x))
+#define GTA2_COUNTOF_S(x) (static_cast<s32>(Gta2CountOf(x)))
 
 #define GTA2_DELETE_AND_NULL(x) \
     delete x;                   \

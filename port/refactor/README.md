@@ -123,7 +123,29 @@ From `metrics.py`, `clang-tidy` 18 and a `-fsyntax-only` pass with the strict wa
 | 7 Concurrency | 6 | L | 60 | Data races and non-determinism |
 | 8 Documentation | alongside | M | 40 | Falling out of date |
 
-S is a few sessions, M about a week of sessions, L several weeks, XL the bulk of the work.
+S is a few sessions, M about a week of sessions, L several weeks, XL the bulk of the work. These are
+rough guesses from the measured volume; the real pace depends mostly on phase 2's name research and
+phase 4's coverage gaps, which can't be measured before phase 0 exists.
+
+**How much of each phase is mechanical** (done by a tool and checked by the replay hashes) and how much
+needs judgement:
+
+| Phase | Mechanical share | What a tool does | What needs judgement |
+|---|---|---|---|
+| 0 Safety net | ~0% | nothing | All of it, but it's small. The reference replays must be recorded by playing |
+| 1 Tooling | ~80% | Formatting (one command, 10,100 lines); clang-tidy `-fix` for include cleanup (2,886), literal suffixes (2,598), redundant `inline` (545), braces; most of the 850 C casts | Scaffolding removal, merging 32 duplicate inline copies, CI and ratchet setup, 46 `-Wshadow` renames |
+| 2 Names | ~90% of edits, ~50% of time | `rename.py` renames about 4,100 functions, 2,800 members, 223 types, constants and enumerators by rule | Researching names: 20 colliding type names, 118 `sub_` functions, 107 unnamed fields, about 450 raw data globals, 91 debug flags |
+| 3 Types and data | ~50% of edits, ~25% of time | `-fix` for implicit bool conversions (7,243), `const` (1,469 + 733), member initialisers (832) | About 2,600 conversion warnings (widen, cast or bug), 686 C string calls, readers for 10 file formats, unions, id types |
+| 4 Control flow | ~5% | `else-after-return`, boolean simplification (~430) | Splitting 120 functions over 150 lines, state machines, the script VM, 224 `goto`s, dead code, file splits; each function needs replay coverage first. The riskiest phase |
+| 5 Ownership | ~20% | Moving the 24 pools to one template, once written | About 160 pointer members to handles with every use site checked; 218 `memcpy`/`memset` calls; stale-reference decisions |
+| 6 Architecture | ~25% | Step 1 of the globals (`gPedManager_6787BC->` to `gWorld->peds().`) | Explicit dependencies, 107 upward include edges, 11 platform interfaces replacing Win32/DirectX (each play-tested), encapsulation |
+| 7 Concurrency | ~0% | nothing | Snapshot, render, audio and loader threads; ThreadSanitizer |
+| 8 Documentation | ~0% | Doxygen setup | Writing, alongside every phase |
+
+Human input is needed for recording the replays (phase 0), the decisions below (before phase 2) and
+play-testing each platform interface (phase 6). Everything else is checked by the replay hashes, so once
+phase 0 exists the mechanical parts can run unattended. Phase 4 needs only phases 0 and 2, so it can
+overlap phases 3 and 5.
 
 **Subsystem order** (phases 2 to 5), smallest and best understood first, each building on the ones
 before it: core, data, world, sprites, objects, vehicles, peds, services, script, game, audio,

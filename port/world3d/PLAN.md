@@ -11,8 +11,8 @@ skip the checks. When a check fails and the task's "If it fails" doesn't cover i
 | Phase | What | State |
 |---|---|---|
 | 1 | Switches and hooks (graphics.txt, Graphics page, `include/port_world3d.h`, removability check) | **done** (commit `589e3ed4`) |
-| 2 | Scene layer: upstream's map, style and mesh code, built from the running game | todo |
-| 3 | OpenGL world pass: the map drawn as 3D geometry, with the game's own camera, lighting and shading | todo |
+| 2 | Scene layer: upstream's map, style and mesh code, built from the running game | **done** (commits `5e73f002`..`d5cf4da0`) |
+| 3 | OpenGL world pass: the map drawn as 3D geometry, with the game's own camera, lighting and shading | **done** (commits `12213cbd`..`1e731c75`); partial and triangular blocks (slope 49..61) still classic |
 | 4 | Depth for the game's 2D sprites, so they hide behind bridges and roofs correctly | todo |
 | 9 | Tuning panel (Dear ImGui): the window and its General tab | todo, **after phase 4, before phase 5** |
 | 5 | Lighting extras (render-only, each a Graphics setting and a panel tab): time of day, night lights, invented lights, additive effects | todo |

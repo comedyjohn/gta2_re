@@ -1,7 +1,6 @@
 #include "registry.hpp"
 #include "Function.hpp"
 #include "Globals.hpp"
-#include "StdAfx.h"
 #include "enums.hpp"
 #include "error.hpp"
 #include <cstdio>

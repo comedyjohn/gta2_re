@@ -20,6 +20,13 @@ of `Ped.cpp` could change how pedestrians behave and every check would stay gree
       cars) and a skipped `rand` in `Particle_8::EmitBloodBurst_53E450` (update 166, rng first) are
       caught; `FindBestTargetPed_Mode5_466BD0(3)` to `(4)` in `Threat_Reaction_AI` is not: no replay
       has armed peds threatening the player yet (05 in the corpus table).*
+      *Re-run 2026-10-16 with `check.sh --quick` (R0.9): skipped `rand` in `Particle_8` (the
+      `get_int(50)` draw): red at update 166 (industrial; rng, sprites, audio). Flipping
+      `bHaveThreateningPeds_6787DA` in `Threat_Reaction_AI`: red at update 161. Not caught, and the replay
+      that would close each gap is in Q3: `FindBestTargetPed_Mode5_466BD0(3)` to `(4)` (needs armed
+      peds that threaten the player: session 02-weapons or 04-police) and `<` to `<=` in
+      `GetCarLinearSpeed_43A240() < dword_677A8C` of `DetectCarAhead` (needs a car ahead at exactly the
+      same speed: session 03-cars-crash, may stay uncaught; it's a float-equality case).*
 - [x] Unit tests run in public CI (no game data needed), under ASan and UBSan (job
       `Linux_Native_Sanitizers` in `.github/workflows/ci.yml`).
 - [ ] `port/tools/replaytest.sh` documented (in [`port/TESTING.md`](../TESTING.md), not RUNNING.md, which is

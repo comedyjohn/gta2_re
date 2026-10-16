@@ -18,6 +18,8 @@
 
 - R0.8 (2026-10-16): the recording request is Q3 (open, for the user).
 
+- R0.9 (2026-10-16): mutation re-run, see the exit criteria of 0-safety-net.md. 2 of 4 mutations red; the 2 gaps are tied to the Q3 recordings. Phase 0 is done except R0.8 (Q3, user) and Q2 (open, no block).
+
 ## Notes
 
 - R0.1 mutation check: `<` to `<=` at `CarAI_78::DetectCarAhead_44D1D0` (the

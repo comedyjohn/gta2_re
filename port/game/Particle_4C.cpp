@@ -390,14 +390,6 @@ static inline Ang16 NormalizedAng(s16 value)
     return Ang16(&value, 0);
 }
 
-// 9.6f 0x41E210 (Fix16_Point::SetFromPolar(Fix16& radius, Ang16& angle)) with the multiplies out of line.
-// The angle is a temporary passed by reference, so the table index is reloaded after each multiply.
-static inline void SetFromPolar_OOL_41E210(Fix16_Point& p, const Fix16& radius, const Ang16& angle)
-{
-    p.x = radius.Multiply_408680(Ang16::sine_40F500(angle));
-    p.y = radius.Multiply_408680(Ang16::cosine_40F520(angle));
-}
-
 // Inlined Fix16::Max_44E540: compares and returns the values, not references
 [[maybe_unused]] static inline Fix16 MaxValue_44E540(const Fix16& a, const Fix16& b)
 {
@@ -475,16 +467,14 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
             case 2:
             case 3:
             {
-                SetFromPolar_OOL_41E210(src,
-                                        Fix16(field_46_sub_state) * dword_6FD46C,
+                src.SetFromPolar_41E210(Fix16(field_46_sub_state) * dword_6FD46C,
                                         NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue));
                 break;
             }
             case 4:
             case 5:
             {
-                SetFromPolar_OOL_41E210(
-                    src,
+                src.SetFromPolar_41E210(
                     Fix16(field_46_sub_state) * dword_6FD46C + dword_6FD45C,
                     NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue).rValue + jitter.rValue));
                 break;

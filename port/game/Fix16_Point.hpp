@@ -48,7 +48,7 @@ struct Fix16_Point_POD
         this->y = a3;
     }
 
-    inline void SetFromPolar_41E210(const Fix16& radius, Ang16& angle)
+    inline void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
     {
         x = Ang16::sine_40F500(angle) * radius;
         y = Ang16::cosine_40F520(angle) * radius;
@@ -145,7 +145,7 @@ class Fix16_Point
         }
     }
 
-    inline void SetFromPolar_41E210(const Fix16& radius, Ang16& angle)
+    inline void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
     {
         x = Ang16::sine_40F500(angle) * radius;
         y = Ang16::cosine_40F520(angle) * radius;

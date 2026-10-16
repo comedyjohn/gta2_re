@@ -37,5 +37,5 @@ void* Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
     memset(pAlloc, 0, requestedSize + 0x10000);
 
     // Return aligned pointer
-    return (void*)(((sptr)*pUnAlignedPtr + 0xFFFF) & ~0xFFFF);
+    return (void*)((reinterpret_cast<sptr>(*pUnAlignedPtr) + 0xFFFF) & ~0xFFFF);
 }

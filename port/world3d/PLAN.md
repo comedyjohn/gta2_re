@@ -14,26 +14,29 @@ skip the checks. When a check fails and the task's "If it fails" doesn't cover i
 | 2 | Scene layer: upstream's map, style and mesh code, built from the running game | todo |
 | 3 | OpenGL world pass: the map drawn as 3D geometry, with the game's own camera, lighting and shading | todo |
 | 4 | Depth for the game's 2D sprites, so they hide behind bridges and roofs correctly | todo |
-| 5 | Lighting extras (render-only, each a Graphics setting): time of day, night lights, invented lights, additive effects | todo |
-| 6 | Widescreen, blood, gibs (change the game) | **blocked: decision 4** |
+| 9 | Tuning panel (Dear ImGui): the window and its General tab | todo, **after phase 4, before phase 5** |
+| 5 | Lighting extras (render-only, each a Graphics setting and a panel tab): time of day, night lights, invented lights, additive effects | todo |
+| 6 | Widescreen, blood, gibs (change the game) | **not now** (decision 4) |
 | 7 | Windows x64 build of the port (MinGW-w64 cross compile) | todo |
 | 8 | RTX Remix backend (Direct3D 9) | todo, after 7 |
-| 9 | Tuning panel (Dear ImGui) | **blocked: decision 7** |
+
+Order of work: 2, 3, 4, 9, 5, 7, 8. Phase 9 comes before 5 so that every phase-5 task can put its values
+on the panel as it lands.
 
 Decisions taken by the user (2026-10-16), not to be revisited:
 
 1. Native OpenGL renderer first (phases 2-6), then Windows and Remix (7-8).
 2. Windows build: MinGW-w64 cross compile on Linux, 64-bit only, tested under Wine.
 3. `classic` stays the default renderer.
-4. **Open:** widescreen spawning, blood and gibs change what the game computes. In or out? Phase 6 waits.
+4. Widescreen spawning, blood and gibs: **not now** ("just 3D for now"). Phase 6 is not done; nothing in
+   world3d may change what the game computes.
 5. Camera straight down, as the original. No tilt.
 6. Upstream files are copied into `port/world3d/` and adapted there (no submodule).
-7. **Open:** the tuning panel (upstream's F4 window of sliders for every lighting and sprite value).
-   Wanted? Phase 9 waits.
+7. The tuning panel: **yes** (upstream's window of sliders for every lighting and sprite value), as phase 9.
 
 What the player gets, honestly: phases 2-4 reproduce the classic picture with real 3D geometry under it
-(the foundation for everything else, and for Remix). Visible gains come with phase 5 (lighting), phase 6
-(16:9) and phase 8 (path tracing).
+(the foundation for everything else, and for Remix). Visible gains come with phase 5 (lighting) and phase 8
+(path tracing); 16:9 would need phase 6, which is not planned for now.
 
 ## 1. Rules for the executor
 
@@ -557,33 +560,42 @@ The draws inside `port_world3d_world_text(true)` get the same depth treatment. T
 ## 6. Phase 5: lighting extras (render only)
 
 Each item is a row on the Graphics page and a key in `graphics.txt` (default off), with a unit test for the
-settings round trip, and must keep the full check green (they change pixels only). Do them in this order;
+settings round trip, and must keep the full check green (they change pixels only). Each one also puts its
+tuning values on the panel (phase 9 is done by then): a tab or section named in the item, its values in
+`world3d_tuning.txt` through the table of task 9.6, and nothing else on the panel changes. Do them in this order;
 each is one task and one commit.
 
 5.1 **Smooth lighting**: compute the 2.5 lighting per pixel instead of per vertex (pass world position to
 the fragment shader; the 16 lights nearest the camera as uniforms, the rest dropped). Key
-`smooth_lighting`.
+`smooth_lighting`. Panel: tab "Lighting", a light-strength multiplier and the number of lights used.
 
 5.2 **Time of day**: copy upstream `dll/src/time_of_day.{h,cpp}` into `upstream/` (verbatim commit
 first), remove its Remix push (`remix_api.h`), keep the sun position maths. Use the sun elevation to scale
 and tint the ambient: full at noon, the game's ambient at night. Keys `time_of_day` (0 off, else the start
-hour) and `day_minutes`.
+hour) and `day_minutes`. Panel: tab "Time of day" with upstream's controls from `DrawTimeOfDay`
+(`debug_overlay.cpp:823`): clock, scrub, speed, latitude, season, compass offset.
 
 5.3 **Night lights**: with time of day on, street lights fade with the sun as upstream's night gate does
-(`remix_lights.cpp`: copy `ClassifyGameLight` and the gate's smoothstep only).
+(`remix_lights.cpp`: copy `ClassifyGameLight` and the gate's smoothstep only). Panel: tab "Lighting",
+the per-category "follows the sun" switches and the two sun elevations of the gate (upstream
+`DrawLighting`, `debug_overlay.cpp:503`), plus the live count of lights per category.
 
 5.4 **Invented lights**: muzzle flashes, fire, headlights: from upstream's `synthetic_lights.cpp`. Read
 particles and cars read-only through new functions in `game_view.cpp` (find the pools from upstream's
 addresses with `survey.py --addrs` and the class names it prints). Add them to the light list for the mesh
-only. Key `invented_lights`.
+only. Key `invented_lights`. Panel: tab "Extra lights", one sub-tab per category with colour,
+intensity, radius and height (upstream `DrawExtraLights`, `debug_overlay.cpp:730`), and the particle-type
+binding list (upstream `DrawParticleTypes`, `debug_overlay.cpp:1576`).
 
 5.5 **Additive effects**: upstream's effect-sprite test (`texture_store.cpp`, "edge median < 16"), run on
 each sprite texture when the classic renderer uploads it; effect sprites drawn with additive blending in
-world3d mode. Key `effects_additive`.
+world3d mode. Key `effects_additive`. Panel: tab "Sprites", the mode (leave / fade fringe / additive) and the
+two thresholds (edge median 16, peak 40), and the texture report button (upstream `DrawTextureReport`).
 
-## 7. Phase 6: widescreen, blood, gibs (blocked: decision 4)
+## 7. Phase 6: widescreen, blood, gibs (not now)
 
-Do not start until the user has answered decision 4. Sketch for then: a hook in
+The user decided against these for now (decision 4). Do not start them. The sketch stays for a later
+decision: a hook in
 `Camera_0xBC::UpdateBoundaries_435B90` replacing `dword_6768E0` (0.75) by `H/W` of the chosen aspect, read
 **once when a game starts** and written into the replay as a port record (`include/port_input.h`,
 `kPortRecord`), forced off in network games; the world pass renders the full window width; HUD parts
@@ -630,11 +642,141 @@ hook 2 as the identity instead of upstream's matching), one draw each, transform
 `rtx.atmosphere.sunElevation`/`sunRotation` from 5.2's time of day.
 8.4 Package `rtx.conf` (`rtx.zUp = False`), upstream's Remix mods, and a player README.
 
-## 10. Phase 9: tuning panel (blocked: decision 7)
+## 10. Phase 9: the tuning panel
 
-Do not start until the user has answered decision 7. Sketch: Dear ImGui 1.91 vendored as
-`port/3rdParty/imgui` (not GTA2Hax's 1.50 copy, which the VC6 build needs), SDL2 + OpenGL2 backends, F4,
-upstream's `debug_overlay.cpp` tabs that apply, behind `GTA2_WORLD3D_DEVTOOLS`.
+Goal: a window over the game, opened and closed with **F12** (and from the Graphics page), where every
+world3d tuning value can be changed while playing and saved. Upstream's panel is
+`dll/src/debug_overlay.cpp` (1,848 lines): tabs General, Lighting, Extra lights, Time of day, Sprites,
+Diagnostics. Phase 9 builds the window and the General tab; the other tabs arrive with the phase-5 task
+whose values they edit (section 6), and the Sprites tab's 3D-sprite values with phase 8.
+
+Why F12: the game uses F2..F11 (`game/Player.cpp:975`; F4 is music volume) and the overlay F1, F2, F5.
+F12 is only a game key with the debug keys on (`bDo_debug_keys_67D6CF`); the panel takes it anyway.
+
+The panel is part of world3d: built when `GTA2_WORLD3D` is on, available with either renderer (its
+General tab is where the renderer is chosen too). It never freezes the game, so changes show while it
+runs; while the mouse is over it or a text field has focus, input goes to the panel, not the game.
+
+### Task 9.1: Dear ImGui
+
+1. Copy upstream's ImGui, which its panel was written against (1.91.7 WIP, `IMGUI_VERSION_NUM 19163`),
+   verbatim from the upstream clone's `dll/deps/imgui/` to `port/world3d/devtools/imgui/`: `imgui.cpp`,
+   `imgui.h`, `imgui_draw.cpp`, `imgui_internal.h`, `imgui_tables.cpp`, `imgui_widgets.cpp`,
+   `imconfig.h`, `imstb_rectpack.h`, `imstb_textedit.h`, `imstb_truetype.h`, `LICENSE.txt`. Not the
+   `backends/` folder (Windows and Direct3D 9 only). Do **not** use or change
+   `3rdParty/GTA2Hax/3rdParty/imgui` (1.50, needed by the VC6 build) or the port's `dear_imgui` target.
+2. `port/world3d/CMakeLists.txt`: a library `world3d_imgui` from the four `.cpp` files, compiled with
+   `-w` and **without** `gta2_game_target` (ImGui must not see the port's prelude), plus
+   `target_compile_definitions(world3d_imgui PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS)`; link it into
+   `gta2_world3d`. Record the copy in `UPSTREAM.md`.
+
+Check: builds on linux32 and linux64; `--quick` check; `nm -C ../build_port/noworld3d64/gta2 | grep -c
+ImGui` is unchanged from before (the old 1.50 copy only).
+
+### Task 9.2: mouse and text input from the platform
+
+The port's platform layer delivers only keys (`plat::Event` in `platform/platform.h`). Add, in
+`platform.h` and `platform/sdl/sdl_platform.cpp`'s `PollEvent`:
+
+| `EventType` | Fields | From SDL |
+|---|---|---|
+| `MouseMove` | `x`, `y` (drawable pixels) | `SDL_MOUSEMOTION` (scale window to drawable coordinates with `SDL_GL_GetDrawableSize` / `SDL_GetWindowSize`) |
+| `MouseButton` | `button` (0 left, 1 right, 2 middle), `down` | `SDL_MOUSEBUTTONDOWN/UP` |
+| `MouseWheel` | `wheel` (+1 up, -1 down) | `SDL_MOUSEWHEEL` |
+| `Text` | `text[8]` (UTF-8) | `SDL_TEXTINPUT` |
+
+Only plain types, as the header's comment demands. In `platform/win32.cpp`'s event loop, pass these four to
+a new hook `bool port_world3d_input(const plat::Event& e)` (declare it in `include/port_world3d.h` with
+`struct` forward declarations only, empty inline returning false) **before** anything else, and ignore
+them otherwise (the game had no mouse). Key events also go to the hook first; when it returns true the
+key is not passed on (same pattern as `overlay::OnKey`, line ~462). Tag the lines.
+
+Check: `--quick` check (no behaviour change: the hook returns false while there is no panel).
+
+### Task 9.3: an ImGui renderer over the port's OpenGL
+
+`port/world3d/devtools/imgui_gl.{h,cpp}`: `bool ImGuiGlInit(); void ImGuiGlRender(ImDrawData*); void
+ImGuiGlShutdown();`. Write it after ImGui's own `imgui_impl_opengl3.cpp` (read it on GitHub at the
+`v1.91.7` tag, `backends/imgui_impl_opengl3.cpp`), but simpler:
+
+- functions only from the port's `platform/gl.h` table (it loads through SDL; there are no GL headers);
+  add any missing ones the same way as task 3.1 (likely `glDrawElements`, `glGetIntegerv`), checking
+  values against the GL registry;
+- GLSL 1.20 like `renderer.cpp`: `attribute vec2 Position; attribute vec2 UV; attribute vec4 Color;
+  uniform mat4 ProjMtx;` (orthographic, from `draw_data->DisplayPos/DisplaySize`), texture × colour;
+- client-side vertex arrays as the classic renderer uses (`glVertexAttribPointer` straight onto
+  `ImDrawVert` arrays, `glDrawElements` onto the index list), so no buffer objects are needed;
+- the font atlas: `io.Fonts->GetTexDataAsRGBA32`, uploaded once as a GL texture, its id in
+  `io.Fonts->SetTexID`;
+- scissor per draw command (`glScissor`, flipping y), blending `SRC_ALPHA, ONE_MINUS_SRC_ALPHA`, depth
+  and cull off; afterwards restore the classic renderer's state with `port_renderer_restore_state()`
+  (task 3.4).
+
+Check: build; nothing calls it yet.
+
+### Task 9.4: the window
+
+`port/world3d/devtools/panel.{h,cpp}`:
+
+1. `void PanelToggle(); bool PanelOpen(); bool PanelInput(const plat::Event&); void PanelFrame();`
+2. `port_world3d_input` (9.2) calls `PanelInput`: F12 down toggles the panel (return true). While open:
+   mouse and text events go to ImGui (`io.AddMousePosEvent`, `AddMouseButtonEvent`, `AddMouseWheelEvent`,
+   `AddInputCharactersUTF8`); keys go to ImGui as `io.AddKeyEvent` (map the DIK codes the panel needs:
+   arrows, Tab, Enter, Esc, Backspace, Delete, Home, End, Ctrl, Shift, A..Z, 0..9) and are taken (true)
+   when `io.WantCaptureKeyboard`; mouse events are always taken while open. Esc with nothing focused
+   closes the panel.
+3. `PanelFrame` is called from `port_world3d_present()` (before the overlay is drawn): when open,
+   `io.DisplaySize` = the drawable size, `io.DeltaTime` from `std::chrono::steady_clock`,
+   `ImGui::NewFrame()`, the window (title "GTA2 3D renderer", tab bar, a save bar at the top as upstream's
+   `DrawSaveBar`), `ImGui::Render()`, `ImGuiGlRender`. Show the mouse cursor while open
+   (`plat::SetCursorVisible(true)`, back to false when closed). Create the ImGui context on the first
+   open, not at start-up.
+4. On the Graphics page, a row "Tuning panel" with the value "F12" whose change opens the panel.
+
+Check: start the game (`GTA2_RENDERER=world3d`), press F12: an empty window with tabs appears, moves with
+the mouse, F12 closes it, the game keeps running and gets its keys while the mouse isn't over the window.
+`--quick` check. Take a screenshot with task 3.5's capture (open the panel from a test: add an environment
+variable `GTA2_WORLD3D_PANEL=1` that opens it at start) and look at it.
+
+### Task 9.5: the General tab
+
+From upstream `DrawGeneral` (`debug_overlay.cpp:371`), only what applies to the port:
+
+- Renderer: Classic / 3D, saved to `graphics.txt`, "takes effect after a restart" (section 1.5);
+- World mesh on/off (task 3.7);
+- Mesh: vertices, triangles, batches, last build time (task 2.5);
+- Camera check: last maximum error in pixels (task 3.3), with a checkbox that turns the check on;
+- Frame time: average and worst of the last second.
+
+Check: each control does what it says (by eye), `--quick` check.
+
+### Task 9.6: saving the tuning values
+
+One table of all tuning values, written and read in both directions, as upstream's `dll/src/settings.cpp`
+does (read it: `SettingsSaveAll`, `SettingsLoadAll`, the field table). In the port: `devtools/tuning.{h,cpp}`
+with
+
+```cpp
+struct TuningField
+{
+    const char* key; // "tod.latitude"
+    enum Kind { Float, Int, Bool, Colour } kind;
+    void* value; // the variable the renderer reads
+    float min, max; // for the slider, and to clamp what is read
+};
+```
+
+a registration function each phase-5 module calls for its fields, and load/save of
+`~/.config/gta2-native/world3d_tuning.txt` (`key = value` lines, temporary file then rename, like
+`settings.cpp`). The save bar of 9.4 shows "unsaved changes" when any value differs from the file, a
+Save button, and a "Defaults" button. Loaded once at start-up. Unit test: register three fields, save,
+change, load, compare; a damaged line keeps its default.
+
+### Task 9.7: Diagnostics tab
+
+Only when `GTA2_WORLD3D_DEVTOOLS=1` is set in the environment (upstream hides it behind an "advanced"
+switch): the draw counts per frame (tiles taken by the mesh, tiles left to classic, sprite quads, HUD
+quads, from the hooks), and the hook context (current block, sprite, HUD flag) when the frame was drawn.
 
 ## 11. Removing world3d
 

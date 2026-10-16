@@ -46,7 +46,6 @@
 #include <direct.h>
 #include <vector>
 
-#include "HookLoader.hpp"
 #include <shlwapi.h>
 
 EXTERN_GLOBAL(Ambulance_110*, gAmbulance_110_6F70A8);
@@ -1196,152 +1195,6 @@ void ClearGlobalArrow()
     }
 }
 
-namespace HookManagement
-{
-static TEnumerateFuncsFn GetEnumerateFuncsFn()
-{
-    HMODULE hMod = ::GetModuleHandle("HookLoader.dll");
-    if (hMod)
-    {
-        return reinterpret_cast<TEnumerateFuncsFn>(::GetProcAddress(hMod, "EnumerateFuncs"));
-    }
-    return nullptr;
-}
-
-static TChangeHookFn GetChangeHookFn()
-{
-    HMODULE hMod = ::GetModuleHandle("HookLoader.dll");
-    if (hMod)
-    {
-        return reinterpret_cast<TChangeHookFn>(::GetProcAddress(hMod, "ChangeHook"));
-    }
-    return nullptr;
-}
-
-struct FuncData
-{
-    const char* funcName;
-    u32 ogAddr;
-    bool hooked;
-};
-static std::vector<FuncData> gStubFuncs;
-static std::vector<FuncData> gWipFuncs;
-
-extern "C"
-{
-    void OnEntryFn(const char* funcName, u32 ogAddr, u32 status)
-    {
-        FuncData d;
-        d.funcName = funcName;
-        d.ogAddr = ogAddr;
-        d.hooked = false;
-        if (status == 0)
-        {
-            gStubFuncs.push_back(d);
-        }
-        else if (status == 2)
-        {
-            gWipFuncs.push_back(d);
-        }
-    }
-}
-
-static void DrawHookList(char* filter, std::vector<FuncData>& funcs, TChangeHookFn pChangeHookFn)
-{
-    u32 i;
-
-    ImGui::InputText("Filter", filter, 256);
-
-    if (ImGui::Button("Toggle all listed"))
-    {
-        for (i = 0; i < funcs.size(); i++)
-        {
-            FuncData& d = funcs[i];
-            if (filter[0] == 0 || StrStrIA(d.funcName, filter))
-            {
-                d.hooked = !d.hooked;
-                pChangeHookFn(d.funcName, d.ogAddr, d.hooked);
-            }
-        }
-    }
-
-    static bool enableAllSlowly = false;
-    if (ImGui::Button("Slowly enable all"))
-    {
-        enableAllSlowly = true;
-    }
-
-    if (enableAllSlowly)
-    {
-        static s32 delay = 0;
-        delay++;
-        if (delay > 10)
-        {
-            delay = 0;
-            for (i = 0; i < funcs.size(); i++)
-            {
-                FuncData& d = funcs[i];
-                if (!d.hooked)
-                {
-                    d.hooked = !d.hooked;
-                    printf("Enable %s\n", d.funcName);
-                    pChangeHookFn(d.funcName, d.ogAddr, d.hooked);
-                    break;
-                }
-            }
-        }
-    }
-
-    for (i = 0; i < funcs.size(); i++)
-    {
-        FuncData& d = funcs[i];
-        if (filter[0] == 0 || StrStrIA(d.funcName, filter))
-        {
-            if (ImGui::Checkbox(d.funcName, &d.hooked))
-            {
-                pChangeHookFn(d.funcName, d.ogAddr, d.hooked);
-            }
-        }
-    }
-}
-
-static void HooksDebug()
-{
-    static TEnumerateFuncsFn pGetEnumerateFuncs = GetEnumerateFuncsFn();
-    static TChangeHookFn pChangeHookFn = GetChangeHookFn();
-    if (pGetEnumerateFuncs && pChangeHookFn)
-    {
-        static bool collectedFuncs = false;
-        if (!collectedFuncs)
-        {
-            pGetEnumerateFuncs(OnEntryFn);
-            collectedFuncs = true;
-        }
-
-        if (!gStubFuncs.empty() || !gWipFuncs.empty())
-        {
-            ImGui::Begin("Hooks debug");
-
-            if (!gStubFuncs.empty() && ImGui::TreeNode("Stubs"))
-            {
-                static char filter[256];
-                DrawHookList(filter, gStubFuncs, pChangeHookFn);
-                ImGui::TreePop();
-            }
-
-            if (!gWipFuncs.empty() && ImGui::TreeNode("Wips"))
-            {
-                static char filter[256];
-                DrawHookList(filter, gWipFuncs, pChangeHookFn);
-                ImGui::TreePop();
-            }
-
-            ImGui::End();
-        }
-    }
-}
-} // namespace HookManagement
-
 void BootMap(char* mapName, char* styName, char* scrName)
 {
     if (gFrontend_67DC84 && gFrontend_67DC84->field_110_state == FrontendState::Unknown_1)
@@ -1361,10 +1214,7 @@ void BootMap(char* mapName, char* styName, char* scrName)
 
         gGameSession_67E8E0.SetStartedFromPlayBonusMenu_4C5AD0(false);
 
-        if (!HookManagement::GetEnumerateFuncsFn()) // if standalone version
-        {
-            EnableBoot2MapDebugOptions();
-        }
+        EnableBoot2MapDebugOptions();
 
         gFrontend_67DC84->field_EE08_menu_screen = RedBar_16;
         gFrontend_67DC84->field_110_state = FrontendState::Booting_Map_2;
@@ -1387,8 +1237,6 @@ void ConvertBitSetIntoString(char* pOut, u8 max_width, s32 bitset, u8 max_num_bi
 
 void CC ImGuiDebugDraw()
 {
-    HookManagement::HooksDebug();
-
     ImGui::Begin("Debugger");
 
     if (ImGui::Button("set boot2map debug opts"))

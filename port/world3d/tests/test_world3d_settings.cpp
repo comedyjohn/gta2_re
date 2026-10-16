@@ -63,6 +63,7 @@ TEST_CASE("the overlay offers the Graphics page and changes the renderer through
     overlay::OnKey(DIK_RIGHT, true); // the next renderer
     CHECK(Current().renderer != before);
     CHECK(Load(SettingsFile()).renderer == Current().renderer);
+    CHECK(ActiveRenderer() == before); // only from the next start
     overlay::OnKey(DIK_LEFT, true); // and back
     CHECK(Current().renderer == before);
     overlay::OnKey(DIK_ESCAPE, true);

@@ -83,7 +83,13 @@ const char* PageValue(int row)
     {
         return "";
     }
-    return Current().renderer == Renderer::World3d ? "3D (in development: draws as classic)" : "Classic";
+    // The renderer is chosen for the next start; this run keeps the one it started with
+    const Renderer chosen = Current().renderer;
+    if (chosen != ActiveRenderer())
+    {
+        return chosen == Renderer::World3d ? "3D (after a restart)" : "Classic (after a restart)";
+    }
+    return chosen == Renderer::World3d ? "3D (in development: draws as classic)" : "Classic";
 }
 
 void PageChange(int row, int)

@@ -3,7 +3,8 @@
 //
 //   renderer = classic     classic: the game's own picture, as without world3d; world3d: the 3D renderer
 //
-// $GTA2_RENDERER overrides `renderer` for one run (for tests), without being saved.
+// $GTA2_RENDERER overrides `renderer` for one run (for tests), without being saved. The renderer is
+// fixed for a run: a change takes effect on the next start (ActiveRenderer).
 #pragma once
 
 #include <string>
@@ -32,8 +33,12 @@ Settings Load(const std::string& file);
 // Written to a temporary file and renamed over the old one, so it is never left half written
 bool Save(const std::string& file, const Settings& settings);
 
-// The settings in force: the file, read on first use, with $GTA2_RENDERER applied
+// The settings as chosen: the file, read on first use, with $GTA2_RENDERER applied. The Graphics page
+// changes them and saves them at once.
 Settings& Current();
+// The renderer this run uses: Current()'s when it was first read (at start-up), never changed while
+// the game runs. A renderer chosen on the Graphics page takes effect on the next start.
+Renderer ActiveRenderer();
 // Writes Current() to the file. $GTA2_RENDERER's value is not written, unless the player has chosen
 // a renderer since (rendererChosen)
 void SaveCurrent(bool rendererChosen = false);

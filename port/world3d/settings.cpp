@@ -15,6 +15,7 @@ Settings gCurrent;
 bool gLoaded = false;
 bool gOverridden = false; // $GTA2_RENDERER set the renderer
 Renderer gFileRenderer = Renderer::Classic; // what the file says, written back when overridden
+Renderer gActive = Renderer::Classic; // the renderer of this run
 } // namespace
 
 const char* RendererName(Renderer renderer)
@@ -105,8 +106,15 @@ Settings& Current()
                 fprintf(stderr, "gta2: GTA2_RENDERER=%s is not a renderer (classic, world3d)\n", env);
             }
         }
+        gActive = gCurrent.renderer;
     }
     return gCurrent;
+}
+
+Renderer ActiveRenderer()
+{
+    Current();
+    return gActive;
 }
 
 void SaveCurrent(bool rendererChosen)

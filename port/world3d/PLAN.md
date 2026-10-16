@@ -100,7 +100,15 @@ $E ../build_port/linux64/gta2 --replay ~/Games/gta2/corpus/replays/NAME.rep \
 Then compare against the same command on the commit before yours. The usual cause is a hook that writes
 game memory, or a game getter that is not pure. Stop and report if you can't find it in an hour.
 
-### 1.5 Where things are
+### 1.5 Which renderer is in use
+
+The player picks the renderer on the Graphics page (or in `graphics.txt`); **it takes effect on the next
+start**, never while the game runs. Code always asks `world3d::ActiveRenderer()` (`settings.h`), which is
+fixed when the settings are first read at start-up. `Current().renderer` is only the choice for the next
+start; don't use it to decide what to draw. Other Graphics settings added later (phase 5 on) may change
+live unless their task says otherwise.
+
+### 1.6 Where things are
 
 | Thing | Where |
 |---|---|
@@ -268,7 +276,7 @@ drawn yet.
 
 ### Task 2.1: copy upstream's scene files verbatim
 
-1. Clone upstream at `d51b19b` (1.5).
+1. Clone upstream at `d51b19b` (1.6).
 2. `mkdir -p port/world3d/upstream` and copy, unchanged: `src/math3d.h`, `src/alpha_bleed.h`,
    `src/gta2_map.h`, `src/gta2_map.cpp`, `src/gta2_style.h`, `src/gta2_style.cpp`, `src/world_mesh.h`,
    `src/world_mesh.cpp`, `dll/src/ground.h`, `dll/src/ground.cpp`, and upstream's `LICENSE` as
@@ -365,8 +373,8 @@ background already does what they are for), `gta2::BuildWorldMesh(map, style, sl
 normals `(nx, ny, nz)` → `(nx, -nz, ny)`). Print once per rebuild:
 `world3d: mesh built in N ms: V vertices, T triangles, B batches`.
 
-Call `UpdateScene(gScene, gMapDirty)` from `port_world3d_present()` **only when the renderer is
-`world3d`**, then clear `gMapDirty`.
+Call `UpdateScene(gScene, gMapDirty)` from `port_world3d_present()` **only when
+`ActiveRenderer()` is `World3d`**, then clear `gMapDirty`.
 
 Check:
 - `--quick` check.
@@ -444,7 +452,7 @@ with `GameProject` within 0.01 px; check NDC z is in (-1, 1) for D in (n, F).
 ### Task 3.3: check the camera against the game, live
 
 Before drawing anything, prove the matrix matches the game on real frames. In `port_world3d_draw`, when
-the renderer is `world3d`, `kind == kPortWorld3dTile` and `$GTA2_WORLD3D_CHECK` is set: for each of the 4
+`ActiveRenderer()` is `World3d`, `kind == kPortWorld3dTile` and `$GTA2_WORLD3D_CHECK` is set: for each of the 4
 vertices, project the **world** position (`verts[i + 4].x/.y/.z`) with `ClipMatrix` and compare with the
 game's screen position `verts[i].x/.y`. Keep the largest error per frame; print
 `world3d: camera error max E px over N tiles` once per second. Still return false (classic draws).
@@ -522,7 +530,7 @@ classic. Stop and report if none of these.
 ### Task 3.7: Graphics page text
 
 The renderer row's value for `world3d` currently says "in development: draws as classic". Change it to
-`3D`. Add a second row `World` with values `mesh` / `classic tiles` that lets the player switch the mesh off
+`3D` (keep the "(after a restart)" form for a choice that differs from `ActiveRenderer()`). Add a second row `World` with values `mesh` / `classic tiles` that lets the player switch the mesh off
 while keeping the rest of world3d (useful to compare by eye). Store it in `graphics.txt` as
 `world_mesh = 1|0`, with a unit test of the round trip in `tests/test_world3d_settings.cpp`.
 
@@ -532,7 +540,7 @@ Problem after phase 3: the mesh is drawn all at once, so a car under a bridge is
 
 ### Task 4.1: depth-tested sprite draws
 
-When the renderer is `world3d` and a sprite is active (hook 2), the classic path draws its quads with depth
+When `ActiveRenderer()` is `World3d` and a sprite is active (hook 2), the classic path draws its quads with depth
 test against the mesh: in `renderer.cpp`'s classic vertex shader, add an optional depth: `gl_Position.z`
 from the vertex's `D = 1/Vert.z` with the same `A`, `B` as 2.2 (`z_ndc = A + B/D`, so `gl_Position.z =
 (A + B/D) * w` where `w` is what the shader already uses), enabled by a uniform `uDepth` that is 0 for every

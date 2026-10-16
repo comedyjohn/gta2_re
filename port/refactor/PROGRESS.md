@@ -29,7 +29,8 @@
 
 - R1.5 (2026-10-16): 15 commits, about 1,100 lines less. The names the grep still lists: `inline_ComputeTorqueFromThrottle_561DD0_ool` (a real difference: it multiplies (fith_thrust * damage_factor) * gas_pedal, the plain one gas_pedal * (damage_factor * fith_thrust); fixed-point products are not associative, so they can round differently; kept as is, to be named in phase 2), `Door_38_inline_unknown` (not a copy of anything, a helper) and the hand-written inlined bodies inside functions (Cranes, Weapon_30 `RotateByAngle_40F6B0_no_budget3`, Particle_8, sprite.cpp) which are expressions, not named copies.
 
-- R1.6 (2026-10-17): `-Wcomma` on for Clang (`$<$<CXX_COMPILER_ID:Clang>:-Wcomma>`), 0 findings: 47 comma expressions in conditions rewritten by hand (hoisted reads, `(x = e) op y`, a helper `Map_0x370::RoundedZIsAboveSlope`, split `if`s in `Ped::` and `winmain.cpp`). Left for R1.6: `-Wshadow`, `-Wold-style-cast`.
+- R1.6 (2026-10-17): `-Wcomma` on for Clang (`$<$<CXX_COMPILER_ID:Clang>:-Wcomma>`), 0 findings: 47 comma expressions in conditions rewritten by hand (hoisted reads, `(x = e) op y`, a helper `Map_0x370::RoundedZIsAboveSlope`, split `if`s in `Ped::` and `winmain.cpp`). Left for R1.6: `-Wold-style-cast`.
+- R1.6 (2026-10-17): `-Wshadow` on for both compilers, 0 findings (46 Clang, 7 GCC sites: renamed inner variables, `load_gbh_func` macro local, two redeclarations in Police_38.cpp turned into assignments of the outer, never-read-before-set locals).
 
 ## Notes
 

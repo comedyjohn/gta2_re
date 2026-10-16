@@ -4028,7 +4028,7 @@ bool Car_BC::IsBeingCrushed_43DD50()
 void Car_BC::DestroyWhileSinking_43DD60()
 {
     bool bUnknown; // bl
-    Ped* field_54_driver; // eax
+    Ped* pCurrentDriver; // eax
     s32 exploder_ped_id; // eax
     Ped* pExploderPed; // eax
     Ped* pPed; // edi
@@ -4043,10 +4043,10 @@ void Car_BC::DestroyWhileSinking_43DD60()
 
     if (CarShrinkSprite_43DC80(2, 2))
     {
-        field_54_driver = this->field_54_driver;
-        if (field_54_driver)
+        pCurrentDriver = this->field_54_driver;
+        if (pCurrentDriver)
         {
-            if (field_54_driver->get_occupation_403980() == ped_ocupation_enum::unknown_2)
+            if (pCurrentDriver->get_occupation_403980() == ped_ocupation_enum::unknown_2)
             {
                 bUnknown = true;
             }

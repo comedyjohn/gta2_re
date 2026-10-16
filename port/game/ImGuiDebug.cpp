@@ -2655,10 +2655,10 @@ void ImGuiDebugDraw()
                     for (c = 0; c < 100; c++)
                     {
                         Char_B4* pPlayerChar = pPlayerPed->field_168_game_object;
-                        Sprite* pPlayerSprite = pPlayerChar->field_80_sprite_ptr;
-                        gPedManager_6787BC->SpawnPedAt(pPlayerSprite->field_14_xy.x,
-                                                       pPlayerSprite->field_14_xy.y,
-                                                       pPlayerSprite->field_1C_zpos,
+                        Sprite* pSpawnSprite = pPlayerChar->field_80_sprite_ptr;
+                        gPedManager_6787BC->SpawnPedAt(pSpawnSprite->field_14_xy.x,
+                                                       pSpawnSprite->field_14_xy.y,
+                                                       pSpawnSprite->field_1C_zpos,
                                                        pPlayerChar->field_5_remap,
                                                        pPlayerPed->field_134_rotation);
                     }

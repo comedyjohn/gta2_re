@@ -105,15 +105,15 @@ s32 GBH_Graphics_Free_5EA640()
     return 0;
 }
 
-#define load_gbh_func(varName, varType, funcName)                      \
-    varName = (varType)GetProcAddress(gGbhDllHandle_7085D8, funcName); \
-    if (!varName)                                                      \
-    {                                                                  \
-        char_type Text[120];                                           \
-        sprintf(Text, "Can't Find Function Called %s", funcName);      \
-        MessageBoxA(nullptr, Text, "Error Patching DLL Function", MB_OK);    \
-        FreeLibrary(gGbhDllHandle_7085D8);                             \
-        return -1;                                                     \
+#define load_gbh_func(varName, varType, funcName)                               \
+    varName = (varType)GetProcAddress(gGbhDllHandle_7085D8, funcName);          \
+    if (!varName)                                                               \
+    {                                                                           \
+        char_type error_text[120];                                              \
+        sprintf(error_text, "Can't Find Function Called %s", funcName);         \
+        MessageBoxA(nullptr, error_text, "Error Patching DLL Function", MB_OK); \
+        FreeLibrary(gGbhDllHandle_7085D8);                                      \
+        return -1;                                                              \
     }
 
 // 0x5EA680

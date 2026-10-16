@@ -106,7 +106,7 @@ add_library(gta2_game STATIC
 # game's), char subscripts (chars are signed on purpose and the indices small), format truncation
 # (snprintf cuts long messages short on purpose) and unknown pragmas (GTA2Hax's headers have VC6
 # ones).
-set(game_warnings -Wall -Wextra -Wextra-semi -Wundef -Wformat=2 -Wimplicit-fallthrough -Wzero-as-null-pointer-constant -Wwrite-strings $<$<CXX_COMPILER_ID:Clang>:-Wcomma> -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
+set(game_warnings -Wall -Wextra -Wextra-semi -Wundef -Wformat=2 -Wimplicit-fallthrough -Wzero-as-null-pointer-constant -Wwrite-strings -Wshadow $<$<CXX_COMPILER_ID:Clang>:-Wcomma> -Wno-unused-parameter -Wno-char-subscripts -Wno-format-truncation)
 gta2_game_target(gta2_game ${game_warnings})
 
 # The SDL side of port/platform/platform.h. It must not see the prelude (SDL reads _WIN32 as

@@ -827,7 +827,7 @@ gmp_block_info* Map_0x370::GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z)
 // 0x4DFEE0
 gmp_block_info* Map_0x370::GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 z_coord)
 {
-    gmp_compressed_map_32* field_0_pDmap;
+    gmp_compressed_map_32* pDmap;
     gmp_col_info* pColInfo;
     s32 offset;
 
@@ -855,15 +855,15 @@ gmp_block_info* Map_0x370::GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 
         }
     }
 
-    field_0_pDmap = this->field_0_pDmap;
-    pColInfo = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
+    pDmap = this->field_0_pDmap;
+    pColInfo = reinterpret_cast<gmp_col_info*>(&pDmap->field_40008_pColumn[*pDmap->get_base_42A830(y_coord, x_coord)]);
 
     if (z_coord < static_cast<u8>(pColInfo->field_0_height))
     {
         offset = static_cast<u8>(pColInfo->field_1_offset);
         if (z_coord >= offset)
         {
-            return &field_0_pDmap->field_4000C_block[pColInfo->field_4_blockd[z_coord - offset]];
+            return &pDmap->field_4000C_block[pColInfo->field_4_blockd[z_coord - offset]];
         }
     }
     return nullptr;

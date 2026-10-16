@@ -102,7 +102,7 @@ The full target set, added to `game_warnings` as each one reaches 0:
       `-Wno-multichar`. One commit per warning, as before.
 - [ ] `-Wno-narrowing`, `-Wno-invalid-offsetof`, `-Wno-char-subscripts`, `-Wconversion`,
       `-Wsign-conversion`, `-Wdouble-promotion`: phase 3. `-Wno-unused-parameter`: phase 4.
-- [ ] CI: `-DGTA2_WERROR=ON` adds `-Werror` (off by default so new compilers don't break users' builds).
+- [x] CI: `-DGTA2_WERROR=ON` adds `-Werror` (off by default so new compilers don't break users' builds).
 - The measurement: `port/tools/refactor/strict_warnings.py <build-dir> "<flags>" [--files]` replays
   `compile_commands.json` with `-fsyntax-only` and the given flags (the table above is its output for
   the full set on `build_port/clang64`).
@@ -168,7 +168,7 @@ Disabled for good, with the reason in `.clang-tidy`: `modernize-use-trailing-ret
 (phase 3's strong types solve it properly), `modernize-use-using` on `typedef struct` blocks and
 `3rdParty/` headers (it drops calling conventions and expands macros).
 
-- [ ] `port/.clang-tidy` with `Checks:` as above, `WarningsAsErrors: ''`, `HeaderFilterRegex:
+- [x] `port/.clang-tidy` with `Checks:` as above, `WarningsAsErrors: ''`, `HeaderFilterRegex:
       'port/(game|platform|tests)/'`, and the `CheckOptions` for `readability-identifier-naming` (written in
       phase 2), `readability-function-size` (`LineThreshold: 150`), `readability-function-cognitive-complexity`
       (`Threshold: 40`).

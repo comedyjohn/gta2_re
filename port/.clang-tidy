@@ -1,0 +1,39 @@
+# clang-tidy for port/game, port/platform and port/tests (port/refactor/1-tooling.md §1.5).
+# Run: ~/.venvs/gta2-refactor/bin/clang-tidy -p build_port/clang64 port/game/rng.cpp
+# The ratchet (port/tools/refactor/tidy_ratchet.py) judges the findings per file and check; the
+# phase in the comments is the phase of port/refactor/ that brings the check to zero.
+#
+# Disabled for good:
+#   modernize-use-trailing-return-type, modernize-return-braced-init-list: style
+#   cppcoreguidelines-avoid-do-while: do while is fine
+#   readability-identifier-length, readability-magic-numbers, cppcoreguidelines-avoid-magic-numbers:
+#       phase 2 names the constants; the check is too noisy on game tuning values
+#   bugprone-easily-swappable-parameters: phase 3's strong types solve it properly
+#   modernize-use-using: on typedef struct blocks and 3rdParty headers it drops calling conventions
+#       and expands macros
+# readability-identifier-naming is added by phase 2 (R2.1), disabled until a subsystem is renamed.
+Checks: >
+  -*,
+  bugprone-*,
+  cert-err33-c,
+  cert-err58-cpp,
+  cppcoreguidelines-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -modernize-return-braced-init-list,
+  -modernize-use-using,
+  -cppcoreguidelines-avoid-do-while,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -bugprone-easily-swappable-parameters
+WarningsAsErrors: ''
+HeaderFilterRegex: 'port/(game|platform|tests)/'
+CheckOptions:
+  - key: readability-function-size.LineThreshold
+    value: '150'
+  - key: readability-function-cognitive-complexity.Threshold
+    value: '40'

@@ -3057,7 +3057,7 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
                 }
                 else
                 {
-                    torque = -ComputeTorqueUnknown_49E8E0_ool() * gCarInfo_48_6FE258->field_34_gear1_multiplier;
+                    torque = -ComputeTorqueUnknown_49E8E0() * gCarInfo_48_6FE258->field_34_gear1_multiplier;
                 }
             }
             else if (field_93_is_forward_gas_on)
@@ -3079,7 +3079,7 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
                 else
                 {
                     // Gear 1. The original inlines this multiply, ours goes out of line (inline budget), so it's written out
-                    torque.mValue = static_cast<s32>((ComputeTorqueUnknown_49E8E0_ool().mValue *
+                    torque.mValue = static_cast<s32>((ComputeTorqueUnknown_49E8E0().mValue *
                                                       static_cast<__int64>(gCarInfo_48_6FE258->field_34_gear1_multiplier.mValue)) >>
                                                      14);
                 }

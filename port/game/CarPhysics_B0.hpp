@@ -257,21 +257,6 @@ class CarPhysics_B0
         }
     }
 
-    // ComputeTorqueUnknown_49E8E0 as inlined into ComputeEngineTorque_561970 (out of line operators)
-    Fix16 ComputeTorqueUnknown_49E8E0_ool()
-    {
-        if (get_revs_561940())
-        {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add_408660(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply_408680(field_60_gas_pedal).MultiplyInt_561DB0(2));
-        }
-        else
-        {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add_408660(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply_408680(field_60_gas_pedal));
-        }
-    }
-
     Fix16 ComputeTorqueUnknown_49E8E0()
     {
         if (get_revs_561940())

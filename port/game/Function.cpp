@@ -80,7 +80,7 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
     // Determine the file size.
     fseek(fp, 0, SEEK_END);
     long fsize = ftell(fp);
-    rewind(fp);
+    fseek(fp, 0, SEEK_SET);
 
     // Read the entire file into a buffer.
     char* buffer = new char[fsize + 1];

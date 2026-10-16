@@ -1150,7 +1150,7 @@ char_type cSampleManager::LoadWavSdtData_58E980(const char_type* pRawOrSdtName)
         return 0;
     }
 
-    rewind(hRawFile_);
+    fseek(hRawFile_, 0, SEEK_SET);
     const size_t rawRead = fread(field_1EA8_pAudioBuffer1, 1u, rawFileSize, hRawFile_);
     fclose(hRawFile_);
     if (rawRead != static_cast<size_t>(rawFileSize))

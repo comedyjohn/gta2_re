@@ -1,7 +1,9 @@
 // The state hash (statehash.h). Rules that keep it the same between runs and between builds:
 // - values, never addresses: a pointer into a pool is hashed as the pool and the index in it;
 // - field by field, never whole structures (padding, and layouts differ between 32 and 64 bits);
-// - pools in array order, plus the order of their used lists, which is the update order.
+// - pools in array order, plus the order of their used lists, which is the update order;
+// - only fields the game sets: some are never written (PolicePursuitTarget_7C::field_40 and
+//   field_54), and would hash whatever the heap held (AddressSanitizer's fill pattern, say).
 // FNV-1a 64 over little-endian bytes. The same walk can write every value out as text instead.
 #include "statehash.h"
 
@@ -585,8 +587,6 @@ uint64_t HashPolice(std::string* dump, const PoolMap& pools)
         {
             h.Add("crew", crew ? crew - p->field_4_cop_crew : -1);
         }
-        h.Add("field_40", t.field_40);
-        h.Add("field_54", t.field_54);
         h.Add("police_crews", t.field_70_num_police_crews);
         h.Add("target_police_crews", t.field_71_target_police_crews);
         h.Add("swat_crews", t.field_72_num_swat_crews);

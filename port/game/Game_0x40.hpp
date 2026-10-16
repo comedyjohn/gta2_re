@@ -19,9 +19,7 @@ enum GameState
 };
 } // namespace GameState
 
-namespace GameExitType
-{
-enum GameExitType
+enum class GameExitType : s32
 {
     None = 0,
     CloseGameImmediately_1 = 1,
@@ -31,7 +29,6 @@ enum GameExitType
     MultiplayerExit_5 = 5,
     ReplayExit_6 = 6,
 };
-} // namespace GameExitType
 
 class Game_0x40
 {
@@ -61,14 +58,14 @@ class Game_0x40
     }
 
     // 9.6f 0x4D09C0
-    inline s32 GetExitType_4D09C0()
+    inline GameExitType GetExitType_4D09C0()
     {
         return field_2C_game_exit_type;
     }
 
     s32 GetFrameDurationMs_4B8BB0();
-    void ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type);
-    void ExitGameNoBonus_4B8C00(s32 new_timer, s32 exit_type);
+    void ExitGame_4B8BD0(s32 new_timer, GameExitType exit_type, s8 bonus_type);
+    void ExitGameNoBonus_4B8C00(s32 new_timer, GameExitType exit_type);
     bool UpdateExitTimer_4B8C20();
     void LoadGameFiles_4B8C40();
     void SetScreenSize_4B8E00(u32 width, u32 height);
@@ -122,7 +119,7 @@ class Game_0x40
     char_type field_26_unused;
     char_type field_27_unused;
     s32 field_28_exit_timer;
-    s32 field_2C_game_exit_type;
+    GameExitType field_2C_game_exit_type;
     bool field_30_fast_forward;
     char_type field_31_unused;
     char_type field_32_unused;

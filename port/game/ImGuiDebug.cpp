@@ -2458,7 +2458,7 @@ void CC ImGuiDebugDraw()
 
             if (ImGui::Button("Apply exit state"))
             {
-                gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, exit_state);
+                gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, static_cast<GameExitType>(exit_state));
             }
 
             ImGui::TreePop();

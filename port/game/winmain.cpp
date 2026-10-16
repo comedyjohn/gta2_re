@@ -1327,7 +1327,7 @@ void TagGameHudUpdate_4DADA0()
                 {
                     gNetTimeLimitEnabled_6F58A4 = 0;
                     gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("g_over"), hud_message_priority::important_3);
-                    gGame_0x40_67E008->ExitGameNoBonus_4B8C00(2, 5);
+                    gGame_0x40_67E008->ExitGameNoBonus_4B8C00(2, GameExitType::MultiplayerExit_5);
                 }
             }
         }
@@ -1439,7 +1439,7 @@ void do_network_and_local_inputs_4DAF30()
         }
         if (gPlayerQuit_6F5AEC)
         {
-            gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, 2);
+            gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, GameExitType::PlayerQuit_2);
         }
         else
         {
@@ -2265,7 +2265,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                             {
                                 switch (gGame_0x40_67E008->GetExitType_4D09C0())
                                 {
-                                    case 1:
+                                    case GameExitType::CloseGameImmediately_1:
                                         DestroyWindow(gHwnd_707F04);
                                         break;
 

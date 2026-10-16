@@ -102,7 +102,7 @@ s32 Game_0x40::GetFrameDurationMs_4B8BB0()
 }
 
 // 0x4B8BD0
-void Game_0x40::ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type)
+void Game_0x40::ExitGame_4B8BD0(s32 new_timer, GameExitType exit_type, s8 bonus_type)
 {
     int timer = field_28_exit_timer;
     if (timer == -1 || timer > new_timer)
@@ -114,7 +114,7 @@ void Game_0x40::ExitGame_4B8BD0(s32 new_timer, s32 exit_type, s8 bonus_type)
 }
 
 // 0x4B8C00
-void Game_0x40::ExitGameNoBonus_4B8C00(s32 new_timer, s32 exit_type)
+void Game_0x40::ExitGameNoBonus_4B8C00(s32 new_timer, GameExitType exit_type)
 {
     ExitGame_4B8BD0(new_timer, exit_type, 0);
 }

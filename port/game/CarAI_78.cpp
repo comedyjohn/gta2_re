@@ -4290,30 +4290,27 @@ void CarAI_78::ReactToNearbyCar_451980()
                                     }
                                 }
 
-                                if (flag1)
+                                Ang16 our_heading;
+                                Ang16 their_heading;
+
+                                if (field_4C_curr_direction != car_ai_direction::south_2)
                                 {
-                                    Ang16 our_heading;
-                                    Ang16 their_heading;
+                                    our_heading = field_10_angle;
+                                    their_heading = bearing_to_other;
+                                }
+                                else
+                                {
+                                    our_heading = field_10_angle + kAng180_677ADE;
+                                    their_heading = bearing_to_other + kAng180_677ADE;
+                                }
 
-                                    if (field_4C_curr_direction != car_ai_direction::south_2)
-                                    {
-                                        our_heading = field_10_angle;
-                                        their_heading = bearing_to_other;
-                                    }
-                                    else
-                                    {
-                                        our_heading = field_10_angle + kAng180_677ADE;
-                                        their_heading = bearing_to_other + kAng180_677ADE;
-                                    }
-
-                                    if (our_heading < their_heading)
-                                    {
-                                        field_0_car->field_58_physics->TurnClockwise_42ABA0();
-                                    }
-                                    else
-                                    {
-                                        field_0_car->field_58_physics->TurnAntiClockwise_42AB90();
-                                    }
+                                if (our_heading < their_heading)
+                                {
+                                    field_0_car->field_58_physics->TurnClockwise_42ABA0();
+                                }
+                                else
+                                {
+                                    field_0_car->field_58_physics->TurnAntiClockwise_42AB90();
                                 }
 
                                 byte_677BBC = 0;

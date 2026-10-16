@@ -17,3 +17,13 @@ Copyright (c) 2026 gebdag (the full licence text is `upstream/LICENSE`; the noti
 
 - ground.h: its two includes of `../../src/` now name `gta2_map.h` and `world_mesh.h` (task 2.2).
 - CMake compiles the four .cpp files with `-w`, no source changes.
+
+## Measurements
+
+Mesh build (task 2.5, linux64, replays with `--draw`):
+
+| Level | Build | Vertices | Triangles | Batches |
+|---|---|---|---|---|
+| 00-synthetic-walk | 49 ms | 551,030 | 275,280 | 855 |
+| 11-attract-downtown | 50 ms | 551,030 | 275,280 | 855 |
+| 11-attract-industrial | 52-67 ms (rebuilt several times: blocks change in play) | 702,983 | 350,607 | 947 |

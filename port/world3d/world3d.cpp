@@ -2,6 +2,7 @@
 // game is drawing and hand every draw back to the classic renderer, so `renderer = world3d` draws
 // exactly what `classic` does.
 #include "port_world3d.h"
+#include "scene.h"
 #include "settings.h"
 
 #include "overlay.h"
@@ -21,6 +22,7 @@ struct DrawContext
     unsigned int blockZ = 0;
 };
 DrawContext gContext;
+Scene gScene;
 bool gMapDirty = true; // the game's map changed since the scene was last built
 
 enum SettingRow
@@ -67,6 +69,11 @@ bool port_world3d_draw(PortWorld3dDraw, int, STexture*, Vert*, int)
 
 void port_world3d_present()
 {
+    if (ActiveRenderer() == Renderer::World3d)
+    {
+        UpdateScene(gScene, gMapDirty);
+        gMapDirty = false;
+    }
     gContext = DrawContext();
 }
 

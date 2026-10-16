@@ -4,6 +4,7 @@ add_library(gta2_world3d STATIC
     settings.cpp
     world3d.cpp
     game_view.cpp
+    scene.cpp
     upstream/gta2_map.cpp
     upstream/gta2_style.cpp
     upstream/world_mesh.cpp

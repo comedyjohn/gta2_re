@@ -308,7 +308,7 @@ void TrafficLight_20::UpdateLightsFromPhase_5C27A0(u8 phase)
 // 0x5c2910
 void TrafficLights_194::AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h)
 {
-    TrafficLight_20* pMem = new TrafficLight_20();
+    auto* pMem = new TrafficLight_20();
     field_0_traffic_lights[field_190_array_used_count++] = pMem;
     pMem->Init_5C1D00(x, y, w, h);
 }
@@ -376,9 +376,9 @@ void TrafficLights_194::CreateFromMapZones_5C2AC0()
 TrafficLights_194::TrafficLights_194()
 {
     field_190_array_used_count = 0;
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_traffic_lights); i++)
+    for (auto& traffic_light : field_0_traffic_lights)
     {
-        field_0_traffic_lights[i] = nullptr;
+        traffic_light = nullptr;
     }
     field_192_phase = traffic_light_phase::north_south_green_1;
     field_193_timer = traffic_light_phase_timers_626840[traffic_light_phase::north_south_green_1];

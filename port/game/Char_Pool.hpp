@@ -10,13 +10,9 @@ class Camera_0xBC;
 class Char_B4_Pool
 {
   public:
-    __forceinline Char_B4_Pool()
-    {
-    }
+    __forceinline Char_B4_Pool() = default;
 
-    ~Char_B4_Pool()
-    {
-    }
+    ~Char_B4_Pool() = default;
 
     // inline 0x4355C0
     void DeAllocate(Char_B4* pB4)
@@ -70,9 +66,7 @@ class Char_8_Pool
         field_0_pool.DeAllocate(pItem);
     }
 
-    __forceinline Char_8_Pool()
-    {
-    }
+    __forceinline Char_8_Pool() = default;
 };
 
 class PedManager
@@ -110,9 +104,7 @@ class PedPool
   public:
     // __forceinline on the pool ctors: PedManager::PedManager (0x470650) runs out of inline
     // expansions on the Fix16 argument conversions but still expands these
-    __forceinline PedPool()
-    {
-    }
+    __forceinline PedPool() = default;
 
     ~PedPool();
 

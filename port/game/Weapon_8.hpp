@@ -36,8 +36,7 @@ class Weapon_30_Pool
 {
   public:
     Weapon_30_Pool() // 4CDA20 inline
-    {
-    }
+    = default;
 
     // 9.6f 0x4CC9C0 (which also calls 0x4CC810, init_5DCD90 in 10.5)
     Weapon_30* Allocate()

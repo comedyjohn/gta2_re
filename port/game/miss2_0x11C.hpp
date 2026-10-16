@@ -1195,9 +1195,7 @@ class miss2_0x11C_Pool
     }
 
     // 9.6f inlined ctor 0x481310
-    miss2_0x11C_Pool()
-    {
-    }
+    miss2_0x11C_Pool() = default;
 
     void LogAll_47F4D0()
     {

@@ -67,7 +67,7 @@ void KanjiFont_8EC::Load_kanji_dat_4D2090()
 // 0x4D2150
 void KanjiFont_8EC::OutlineGlyph_4D2150(sptr pPixels_addr, u16 width, u16 height)
 {
-    u8(*pPixels)[256] = reinterpret_cast<u8(*)[256]>(pPixels_addr);
+    auto *pPixels = reinterpret_cast<u8(*)[256]>(pPixels_addr);
     for (s32 y = 0; y < height; y++)
     {
         for (s32 x = 0; x < width; x++)
@@ -287,9 +287,9 @@ STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
     KanjiGlyph_10* pCurrent;
     u32 nearestId = -1;
 
-    for (s32 i = 0; i < k_num_small_glyphs; i++)
+    for (auto& small_glyph : field_0_small_glyphs)
     {
-        pCurrent = &field_0_small_glyphs[i];
+        pCurrent = &small_glyph;
         if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour && pCurrent->field_1_outline_colour == field_8E9_outline_colour)
         {
             pCurrent->field_C_last_used = field_8C0_use_counter++;
@@ -323,9 +323,9 @@ STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
     KanjiGlyph_10* pCurrent;
     u32 nearestId = -1;
 
-    for (s32 i = 0; i < k_num_large_glyphs; i++)
+    for (auto& large_glyph : field_780_large_glyphs)
     {
-        pCurrent = &field_780_large_glyphs[i];
+        pCurrent = &large_glyph;
         if (pCurrent->field_2_text_char == text_char && pCurrent->field_0_colour == field_8E8_colour && pCurrent->field_1_outline_colour == field_8E9_outline_colour)
         {
             pCurrent->field_C_last_used = field_8C0_use_counter++;

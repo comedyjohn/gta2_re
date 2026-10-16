@@ -14,14 +14,10 @@ EmergencyCrew_30::EmergencyCrew_30()
 }
 
 // 0x4beb10
-EmergencyCrew_30::~EmergencyCrew_30()
-{
-}
+EmergencyCrew_30::~EmergencyCrew_30() = default;
 
 // 0x4beb20
-EmergencyCrewPool_1E0::~EmergencyCrewPool_1E0()
-{
-}
+EmergencyCrewPool_1E0::~EmergencyCrewPool_1E0() = default;
 
 // 0x5cbb70
 void EmergencyCrewPool_1E0::init_5CBB70()
@@ -31,11 +27,11 @@ void EmergencyCrewPool_1E0::init_5CBB70()
 // 0x5cbb80
 EmergencyCrew_30* EmergencyCrewPool_1E0::AllocateSlot_5CBB80()
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_0_slots); i++)
+    for (auto& slot : field_0_slots)
     {
-        if (!field_0_slots[i].field_1E_is_used)
+        if (!slot.field_1E_is_used)
         {
-            return &field_0_slots[i];
+            return &slot;
         }
     }
     return nullptr;
@@ -44,13 +40,13 @@ EmergencyCrew_30* EmergencyCrewPool_1E0::AllocateSlot_5CBB80()
 // 0x5cbbd0
 void EmergencyCrewPool_1E0::ServiceAll_5CBBD0()
 {
-    for (s32 i = 0; i < 10; i++)
+    for (auto& slot : field_0_slots)
     {
-        if (field_0_slots[i].field_1E_is_used)
+        if (slot.field_1E_is_used)
         {
-            if (field_0_slots[i].Service_5CC480())
+            if (slot.Service_5CC480())
             {
-                field_0_slots[i].field_1E_is_used = 0;
+                slot.field_1E_is_used = 0;
             }
         }
     }

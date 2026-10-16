@@ -755,7 +755,7 @@ void Frontend::GetOptionText_4B3AF0(u16 menu_page_idx, u16 option_idx, wchar_t**
     if (menu_page_idx == MENUPAGE_PLAY && option_idx == 0) // option 0 = change player/name
     {
         u16 plyr_idx = pOption->field_6E_horizontal_selected_idx;
-        wchar_t* p_wName = reinterpret_cast<wchar_t*>(&gPlyDat_6FEAC0->field_26A0_plyr_stats[plyr_idx].field_90_strPlayerName);
+        auto* p_wName = reinterpret_cast<wchar_t*>(&gPlyDat_6FEAC0->field_26A0_plyr_stats[plyr_idx].field_90_strPlayerName);
         if (field_110_state == FrontendState::User_Typing_New_Player_Name_3)
         {
             // player typing a name
@@ -3331,21 +3331,21 @@ Frontend::Frontend()
 
     // Constant-count zeroing loops: VC6 turns them into dword/word stores at fixed offsets off this,
     // each with its own zero register, where memset takes the address into a register first
-    for (s32 k = 0; k < 9; k++)
+    for (wchar_t & k : field_C9A0_curr_plyr_name)
     {
-        field_C9A0_curr_plyr_name[k] = 0;
+        k = 0;
     }
-    for (s32 k2 = 0; k2 < 9; k2++)
+    for (wchar_t & k2 : field_C9B8_password)
     {
-        field_C9B8_password[k2] = 0;
+        k2 = 0;
     }
     field_C9CA_password_length = 0;
     field_C9CB_wrong_password_shown = 0;
     field_1EB50_num_main_stages = 0;
 
-    for (s32 k3 = 0; k3 < 3; k3++)
+    for (unsigned char & field_1EB51_num_bonus_stage : field_1EB51_num_bonus_stages)
     {
-        field_1EB51_num_bonus_stages[k3] = 0;
+        field_1EB51_num_bonus_stage = 0;
     }
 
     GetMainAndBonusStagesFromSeqFile_4B4440();
@@ -4119,9 +4119,9 @@ void Frontend::GetMainAndBonusStagesFromSeqFile_4B4440()
 
     this->field_1EB50_num_main_stages = 0;
     bool mainBlockFound = false;
-    for (s32 i = 0; i < 3; i++)
+    for (unsigned char & field_1EB51_num_bonus_stage : this->field_1EB51_num_bonus_stages)
     {
-        this->field_1EB51_num_bonus_stages[i] = 0;
+        field_1EB51_num_bonus_stage = 0;
     }
     u16 main_block_counter = 0;
 
@@ -5195,9 +5195,9 @@ menu_option_0x82::menu_option_0x82()
     field_6E_horizontal_selected_idx = 0;
     field_70 = 0;
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_72_horizontal_idx_enabled); i++) // or is it a u32 ??
+    for (char & i : field_72_horizontal_idx_enabled) // or is it a u32 ??
     {
-        field_72_horizontal_idx_enabled[i] = 0;
+        i = 0;
     }
 
     wcscpy(field_6_option_name_str, gEmptyWStr_67DC8C);

@@ -60,9 +60,9 @@ PlayerScoreTracker_36C::PlayerScoreTracker_36C()
     field_1A0_last_emergency_car_kill_time = 0;
     field_1A4_killed_cars_flags = emergency_car_kill_flag::none_0;
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_8C_car_model_flags); i++)
+    for (unsigned char & field_8C_car_model_flag : field_8C_car_model_flags)
     {
-        field_8C_car_model_flags[i] = 0;
+        field_8C_car_model_flag = 0;
     }
 }
 

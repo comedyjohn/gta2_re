@@ -373,34 +373,34 @@ TextureCache_15D8::~TextureCache_15D8()
 {
     if (field_1001_bFreeTileTextures)
     {
-        for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_tile_textures); i++)
+        for (auto& tile_texture : field_0_tile_textures)
         {
-            if (field_0_tile_textures[i])
+            if (tile_texture)
             {
-                pgbh_FreeTexture(field_0_tile_textures[i]);
-                field_0_tile_textures[i] = nullptr;
+                pgbh_FreeTexture(tile_texture);
+                tile_texture = nullptr;
             }
         }
     }
 
     if (field_1000_bFreeCarDamageTextures)
     {
-        for (s32 i = 0; i < GTA2_COUNTOF_S(field_1004_car_damage_textures); i++)
+        for (auto& car_damage_texture : field_1004_car_damage_textures)
         {
-            if (field_1004_car_damage_textures[i])
+            if (car_damage_texture)
             {
-                pgbh_FreeTexture(field_1004_car_damage_textures[i]);
-                field_1004_car_damage_textures[i] = nullptr;
+                pgbh_FreeTexture(car_damage_texture);
+                car_damage_texture = nullptr;
             }
         }
     }
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_10C4_digit_textures); i++)
+    for (auto& digit_texture : field_10C4_digit_textures)
     {
-        if (field_10C4_digit_textures[i].field_4_pTexture)
+        if (digit_texture.field_4_pTexture)
         {
-            pgbh_FreeTexture(field_10C4_digit_textures[i].field_4_pTexture);
-            field_10C4_digit_textures[i].field_4_pTexture = nullptr;
+            pgbh_FreeTexture(digit_texture.field_4_pTexture);
+            digit_texture.field_4_pTexture = nullptr;
         }
     }
 

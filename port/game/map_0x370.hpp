@@ -264,9 +264,7 @@ struct gmp_map_slope
 {
     gmp_map_slope(u8 gradient_direction, u8 gradient_size, u8 gradient_level, Fix16 zpos_lower, Fix16 zpos_higher);
 
-    gmp_map_slope()
-    {
-    }
+    gmp_map_slope() = default;
 
     u8 field_0_gradient_direction; // the direction the slope level increases. E.g. "direction north" means it increases the level from south to north
     u8 field_1_gradient_size; // 1 = 45 degree; 2 = 26 degree; 8 = 7 degree slope
@@ -620,7 +618,7 @@ class Map_0x370
     gmp_block_info* get_block_42A850(u8 x, u8 y, u8 z)
     {
         u32 col_idx = *field_0_pDmap->get_base_42A830(y, x);
-        gmp_col_info* pCol =
+        auto* pCol =
             reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
         if (z >= pCol->field_0_height || z < pCol->field_1_offset)
         {

@@ -12,9 +12,7 @@ class MapObjectOverride_54
 {
   public:
     // Temporary ctor, otherwise it won't be possible to define gMapObjectOverrides_6FC5F8.
-    MapObjectOverride_54()
-    {
-    }
+    MapObjectOverride_54() = default;
     MapObjectOverride_54(s32 param_1,
                   s32& param_2,
                   s32 param_3,
@@ -88,9 +86,7 @@ class CodeObjectTemplate_6C
 {
   public:
     // Temporary ctor, otherwise it won't be possible to define gCodeObjectTemplates_6F9038.
-    CodeObjectTemplate_6C()
-    {
-    }
+    CodeObjectTemplate_6C() = default;
     CodeObjectTemplate_6C(u32 param_1,
                   u8 param_2,
                   u32& param_3,

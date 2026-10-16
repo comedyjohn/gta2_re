@@ -8,10 +8,7 @@
 class LightBase
 {
   public:
-    LightBase()
-    {
-
-    }
+    LightBase() = default;
 
     void UpdatePool_45BF50()
     {

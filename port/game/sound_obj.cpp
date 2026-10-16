@@ -3606,7 +3606,7 @@ s32 sound_obj::AddSoundObject_419FA0(SoundObject_10* pTuring)
                         switch (pEntSprite->GetType_416B40())
                         {
                             case sprite_types_enum::car_2: // note: sub eax, 2 added via switch case instead of if
-                                SoundPosEntry_C* pNewObj = new SoundPosEntry_C();
+                                auto* pNewObj = new SoundPosEntry_C();
                                 field_147C_audio_entities[idx].field_8_pAlloc = pNewObj;
                                 pNewObj->field_0_x = kFpZero_674CD8;
                                 pNewObj->field_8 = 0;
@@ -4573,9 +4573,9 @@ void sound_obj::ClearActivateSamples_41B7A0()
 // 0x41BA90
 void sound_obj::GenerateIntegerRandomNumberTable_41BA90()
 {
-    for (s32 i = 0; i < 5; i++)
+    for (unsigned int & i : field_1454_anRandomTable)
     {
-        field_1454_anRandomTable[i] = rand();
+        i = rand();
     }
 }
 
@@ -6432,9 +6432,9 @@ void sound_obj::GenerateRadioVehicleDescription_426F20(Car_BC* pCar)
 // 0x427180
 void sound_obj::Init_RadioMessageQueue_427180()
 {
-    for (s32 i = 0; i < 15; i++)
+    for (int & i : field_552C_15array)
     {
-        field_552C_15array[i] = 121;
+        i = 121;
     }
     field_5528_idx15_cur = 0;
     field_5529_idx15 = 0;

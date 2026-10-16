@@ -115,31 +115,31 @@ cSampleManager::cSampleManager()
     field_1EA8_pAudioBuffer1 = nullptr;
     field_1EAC_pAudioBuffer2 = nullptr;
 
-    for (s32 k = 0; k < 16; k++)
+    for (auto& hSample : field_58_hSamples)
     {
-        field_58_hSamples[k] = nullptr;
+        hSample = nullptr;
     }
 
-    for (s32 j = 0; j < 2; j++)
+    for (auto& hStream : field_9C_hStreams)
     {
-        field_9C_hStreams[j] = nullptr;
+        hStream = nullptr;
     }
 
-    for (s32 m = 0; m < 16; m++)
+    for (auto& m : field_26C4_3d_sample)
     {
-        field_26C4_3d_sample[m] = nullptr;
+        m = nullptr;
     }
 
     field_A4_bLoaded = 0;
 
-    for (s32 i = 0; i < 320; i++)
+    for (auto& sdt_entry : field_A8_sdt_entries)
     {
-        field_A8_sdt_entries[i].field_0_offset = 0;
-        field_A8_sdt_entries[i].field_4_sample_length = 0;
-        field_A8_sdt_entries[i].field_8_playBackRate = 11025;
-        field_A8_sdt_entries[i].field_C_random_displacement = 0;
-        field_A8_sdt_entries[i].field_10_loop_start = 0;
-        field_A8_sdt_entries[i].field_14_loop_end = -1;
+        sdt_entry.field_0_offset = 0;
+        sdt_entry.field_4_sample_length = 0;
+        sdt_entry.field_8_playBackRate = 11025;
+        sdt_entry.field_C_random_displacement = 0;
+        sdt_entry.field_10_loop_start = 0;
+        sdt_entry.field_14_loop_end = -1;
     }
 
     field_0_hDriver = nullptr;

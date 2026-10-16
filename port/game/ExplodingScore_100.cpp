@@ -24,9 +24,7 @@ ExplodingScorePool::ExplodingScorePool()
 }
 
 // 0x596840
-ExplodingScorePool::~ExplodingScorePool()
-{
-}
+ExplodingScorePool::~ExplodingScorePool() = default;
 
 // 0x596860
 s16 ExplodingScorePool::NextPalette_596860()
@@ -99,9 +97,9 @@ void ExplodingScorePool::DrawExplodingScores_5969E0()
 ExplodingScore_50::ExplodingScore_50()
 {
     field_0_numbers_count = 0;
-    for (s32 i = 0; i < 9; i++)
+    for (int & field_4_digit : field_4_digits)
     {
-        field_4_digits[i] = 0;
+        field_4_digit = 0;
     }
     field_36 = 0;
     field_38 = 0;

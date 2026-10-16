@@ -229,7 +229,7 @@ Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing,
     Ang16 angle_diff;
     Ang16 neg_half_cone;
 
-    Fix16 closestDistance = Fix16(99999);
+    auto closestDistance = Fix16(99999);
     Char_8* pIter = field_0_pFirstPed;
     Ped* pClosest = nullptr;
 

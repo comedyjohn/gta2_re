@@ -1022,6 +1022,4 @@ CranePool_D9C::CranePool_D9C()
 }
 
 // 0x4bbbf0
-CranePool_D9C::~CranePool_D9C()
-{
-}
+CranePool_D9C::~CranePool_D9C() = default;

@@ -15,11 +15,11 @@ DEFINE_GLOBAL(Miss2_25C*, gMiss2_25C_6F805C, 0x6F805C);
 Miss2_25C::Miss2_25C() throw()
 {
     field_258_count = 0;
-    for (s32 i = 0; i < 50; i++)
+    for (auto& entry : field_0_entries)
     {
-        field_0_entries[i].field_0_obj = nullptr;
-        field_0_entries[i].field_8_entity_id = 0;
-        field_0_entries[i].field_4_type = 0;
+        entry.field_0_obj = nullptr;
+        entry.field_8_entity_id = 0;
+        entry.field_4_type = 0;
     }
 }
 

@@ -96,7 +96,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
     };
     field_0_tKey.field_4_tKey_count = chunkSize / sizeof(text_0xC_file);
     field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
-    text_0xC_file* pFileEntries = new text_0xC_file[field_0_tKey.field_4_tKey_count];
+    auto* pFileEntries = new text_0xC_file[field_0_tKey.field_4_tKey_count];
     File::Global_Read_4A71C0(pFileEntries, chunkSize);
     for (u32 i = 0; i < field_0_tKey.field_4_tKey_count; i++)
     {
@@ -148,15 +148,15 @@ bool text_0x14::TKeyFind_5B59E0(const char_type* pIdStr)
 // 0x5B5A10
 s32 text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
 {
-    const char_type* pIdStr = static_cast<const char_type*>(a);
-    const text_0xC* a2 = static_cast<const text_0xC*>(b);
+    const auto* pIdStr = static_cast<const char_type*>(a);
+    const auto* a2 = static_cast<const text_0xC*>(b);
     return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->field_4_pKey)); // TODO: ???
 }
 
 // 0x5B5A50
 wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
 {
-    text_0xC* pFound = static_cast<text_0xC*>(bsearch(pIdStr, // key
+    auto* pFound = static_cast<text_0xC*>(bsearch(pIdStr, // key
                                           field_0_tKey.field_0_tKey, // array
                                           field_0_tKey.field_4_tKey_count, // array count
                                           sizeof(text_0xC), // element size
@@ -437,6 +437,4 @@ text_0x14::text_0x14()
 
 // Only gets its EH frame when <new> isn't included, see Globals.hpp
 // 0x5B6050
-text_0x14::~text_0x14()
-{
-}
+text_0x14::~text_0x14() = default;

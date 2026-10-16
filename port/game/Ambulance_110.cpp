@@ -27,14 +27,10 @@ Ambulance_20::Ambulance_20()
 }
 
 // 0x4bead0
-Ambulance_20::~Ambulance_20()
-{
-}
+Ambulance_20::~Ambulance_20() = default;
 
 // 0x4beae0
-Ambulance_110::~Ambulance_110()
-{
-}
+Ambulance_110::~Ambulance_110() = default;
 
 // 0x4fa310
 void Ambulance_110::init_4FA310()
@@ -43,19 +39,19 @@ void Ambulance_110::init_4FA310()
     field_1_corpse_count = 0;
     field_4_patient_queue.ClearList_420E90();
 
-    for (s32 i = 0; i < 25; i++)
+    for (auto& unused_slot : field_8_unused_slots)
     {
-        field_8_unused_slots[i].field_0 = 0;
-        field_8_unused_slots[i].field_4_unused = 0;
+        unused_slot.field_0 = 0;
+        unused_slot.field_4_unused = 0;
     }
 }
 
 // 0x4fa330
 bool Ambulance_110::HandlePedDeath_4FA330(Ped* pDeadPed)
 {
-    for (u8 i = 0; i < 2; i++)
+    for (auto& task : field_D0_tasks)
     {
-        Ambulance_20* pIter = &field_D0_tasks[i];
+        Ambulance_20* pIter = &task;
         if (pIter->field_18_in_use)
         {
             if (pIter->field_4_paramedics_crew->field_4_ped == pDeadPed) // the dead person is one of the paramedics?
@@ -134,11 +130,11 @@ EXTERN_GLOBAL(Fix16, dword_6F6FC0);
 // 0x4fa4b0
 Ambulance_20* Ambulance_110::AllocateTaskSlot_4FA4B0()
 {
-    for (u8 i = 0; i < 2; i++)
+    for (auto& task : field_D0_tasks)
     {
-        if (!field_D0_tasks[i].field_18_in_use)
+        if (!task.field_18_in_use)
         {
-            return &field_D0_tasks[i];
+            return &task;
         }
     }
     return nullptr;
@@ -173,9 +169,9 @@ void Ambulance_110::ProcessPatientQueue_4FA500()
             return;
         }
 
-        for (u8 i = 0; i < 2; i++)
+        for (auto& task : field_D0_tasks)
         {
-            Ambulance_20* pAmbulance = &field_D0_tasks[i];
+            Ambulance_20* pAmbulance = &task;
             if (1 == pAmbulance->field_18_in_use && pAmbulance->field_4_paramedics_crew->IsLeaderAlive_5CBC60())
             {
                 if (Fix16::MaxAbsDistance_42A6B0(pPed->get_cam_x(),
@@ -242,11 +238,11 @@ void Ambulance_110::AmbulancesService_4FA790()
         ProcessPatientQueue_4FA500();
     }
 
-    for (s32 i = 0; i < 2; i++)
+    for (auto& task : field_D0_tasks)
     {
-        if (field_D0_tasks[i].field_18_in_use == 1)
+        if (task.field_18_in_use == 1)
         {
-            field_D0_tasks[i].UpdateState_4FB330();
+            task.UpdateState_4FB330();
         }
     }
 }

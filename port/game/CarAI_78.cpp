@@ -680,8 +680,8 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
 {
     Sprite* pProbe = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     u8 probe_steps = 0;
-    Fix16 default_probe_x = Fix16(static_cast<u8>(dword_677A74.ToInt()));
-    Fix16 default_probe_y = Fix16(static_cast<u8>(dword_677A80.ToInt()));
+    auto default_probe_x = Fix16(static_cast<u8>(dword_677A74.ToInt()));
+    auto default_probe_y = Fix16(static_cast<u8>(dword_677A80.ToInt()));
     if (word_677CFC && !this->field_24_bf.bFlag17)
     {
         if (word_677CFC > 0)

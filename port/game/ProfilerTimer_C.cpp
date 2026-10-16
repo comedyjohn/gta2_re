@@ -17,6 +17,4 @@ ProfilerTimer_C::ProfilerTimer_C()
 }
 
 // 0x5BEC20
-ProfilerTimer_C::~ProfilerTimer_C()
-{
-}
+ProfilerTimer_C::~ProfilerTimer_C() = default;

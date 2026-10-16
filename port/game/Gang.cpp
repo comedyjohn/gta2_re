@@ -20,14 +20,10 @@ Gang_144::Gang_144()
 }
 
 // 0x4BE4F0
-Gang_144::~Gang_144()
-{
-}
+Gang_144::~Gang_144() = default;
 
 // 0x4be500
-GangPool_CA8::~GangPool_CA8()
-{
-}
+GangPool_CA8::~GangPool_CA8() = default;
 
 // 0x4beca0
 Gang_144* GangPool_CA8::FirstGang_4BECA0()
@@ -86,9 +82,9 @@ void Gang_144::Init_4BED70()
         field_122_gang_kill_reaction[i] = 0;
     }
 
-    for (u8 j = 0; j < MAX_PLAYERS; j++)
+    for (signed char & j : field_11C_respect)
     {
-        field_11C_respect[j] = 0;
+        j = 0;
     }
     field_141_always_basic_weapon = 0;
 }
@@ -266,11 +262,11 @@ s32 Gang_144::GetCurrentWeapon_4BF0C0()
 // 0x4BF100
 Gang_144* GangPool_CA8::FindGangByName_4BF100(const char* pGangName)
 {
-    for (u8 i = 0; i < 10; i++)
+    for (auto& i : field_0_gang_list)
     {
-        if (_strnicmp(pGangName, field_0_gang_list[i].field_2_name, 4u) == 0)
+        if (_strnicmp(pGangName, i.field_2_name, 4u) == 0)
         {
-            return &field_0_gang_list[i];
+            return &i;
         }
     }
     return nullptr;

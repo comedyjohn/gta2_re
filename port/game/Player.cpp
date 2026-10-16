@@ -2946,9 +2946,9 @@ Player::Player(u8 player_idx)
     field_76_dbg_zoom_in = 0;
     memset(field_718_weapons, 0, sizeof(field_718_weapons));
 
-    for (s32 i = 0; i < 3; i++)
+    for (auto& i : field_54_car_history)
     {
-        field_54_car_history[i] = nullptr;
+        i = nullptr;
     }
 
     field_0_is_user = 0;

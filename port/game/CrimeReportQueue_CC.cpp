@@ -26,9 +26,7 @@ CrimeReport_14::CrimeReport_14()
 }
 
 // 0x484ce0
-CrimeReport_14::~CrimeReport_14()
-{
-}
+CrimeReport_14::~CrimeReport_14() = default;
 
 // 0x484cf0
 void CrimeReport_14::SetReport(s32 crime_type, s32 ped_id)
@@ -67,9 +65,7 @@ CrimeReportQueue_CC::CrimeReportQueue_CC()
 }
 
 // 0x484db0
-CrimeReportQueue_CC::~CrimeReportQueue_CC()
-{
-}
+CrimeReportQueue_CC::~CrimeReportQueue_CC() = default;
 
 // 0x484dd0
 void CrimeReportQueue_CC::QueueReport(s32 crime_type, s32 ped_id)
@@ -137,14 +133,10 @@ bool CrimeReportQueue_CC::IsCrimeQueued(s32 crime_type)
 }
 
 // 0x484fc0
-CrimeReportQueue_CC_Sub::CrimeReportQueue_CC_Sub()
-{
-}
+CrimeReportQueue_CC_Sub::CrimeReportQueue_CC_Sub() = default;
 
 // 0x484fd0
-CrimeReportQueue_CC_Sub::~CrimeReportQueue_CC_Sub()
-{
-}
+CrimeReportQueue_CC_Sub::~CrimeReportQueue_CC_Sub() = default;
 
 // https://decomp.me/scratch/0XcCw
 // 0x484fe0

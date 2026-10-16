@@ -1240,9 +1240,7 @@ ExplosionPool_7A8::ExplosionPool_7A8()
 }
 
 // 0x5438f0
-ExplosionPool_7A8::~ExplosionPool_7A8()
-{
-}
+ExplosionPool_7A8::~ExplosionPool_7A8() = default;
 
 // 0x543900
 Explosion_30* ExplosionPool_3D4::Allocate_543900()
@@ -1275,6 +1273,4 @@ ExplosionPool_3D4::ExplosionPool_3D4()
 }
 
 // 0x5439c0
-ExplosionPool_3D4::~ExplosionPool_3D4()
-{
-}
+ExplosionPool_3D4::~ExplosionPool_3D4() = default;

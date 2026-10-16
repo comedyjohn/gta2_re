@@ -25,10 +25,7 @@ class GridSpriteLink_8
 class GridSpriteLink_Pool : public PoolBasic<GridSpriteLink_8, 4096>
 {
   public:
-    GridSpriteLink_Pool()
-    {
-
-    }
+    GridSpriteLink_Pool() = default;
 
     ~GridSpriteLink_Pool()
     {
@@ -39,10 +36,7 @@ class GridSpriteLink_Pool : public PoolBasic<GridSpriteLink_8, 4096>
 class GridCell_Pool : public PoolBasic<GridCell_C, 6000>
 {
   public:
-    GridCell_Pool()
-    {
-
-    }
+    GridCell_Pool() = default;
 
     ~GridCell_Pool()
     {

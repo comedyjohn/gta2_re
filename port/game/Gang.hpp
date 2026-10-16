@@ -133,9 +133,7 @@ class Gang_144
 class GangPool_CA8
 {
   public:
-    GangPool_CA8()
-    {
-    }
+    GangPool_CA8() = default;
 
     ~GangPool_CA8();
     Gang_144* FirstGang_4BECA0();

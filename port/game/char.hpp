@@ -30,9 +30,7 @@ Ang16 ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3);
 class SpriteList_4_dtor : public SpriteList_4
 {
   public:
-    ~SpriteList_4_dtor()
-    {
-    }
+    ~SpriteList_4_dtor() = default;
 };
 
 class Char_B4

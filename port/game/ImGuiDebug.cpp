@@ -1867,9 +1867,9 @@ void CC ImGuiDebugDraw()
                 {
                     if (gCar_BC_Pool_67792C)
                     {
-                        for (u32 i = 0; i < GTA2_COUNTOF(gCar_BC_Pool_67792C->field_0_pool.field_8_pool); i++)
+                        for (auto& i : gCar_BC_Pool_67792C->field_0_pool.field_8_pool)
                         {
-                            Car_BC* pCarIter = &gCar_BC_Pool_67792C->field_0_pool.field_8_pool[i];
+                            Car_BC* pCarIter = &i;
                             if (pCarIter && pCarIter->field_50_car_sprite)
                             {
                                 swprintf(tmpBuff_67BD9C, L"%d", pCarIter->field_9C_engine_status);
@@ -1948,7 +1948,7 @@ void CC ImGuiDebugDraw()
                 {
                     Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
                     CarAI_78* pNearestAI = nullptr;
-                    Fix16 smallest = Fix16(99999);
+                    auto smallest = Fix16(99999);
                     while (pCarIter)
                     {
                         CarAI_78* pAI_Iter = pCarIter->field_5C_AI;
@@ -2808,9 +2808,8 @@ void CC ImGuiDebugDraw()
         {
             if (gCarChaseTaskTable_678E30)
             {
-                for (s32 i = 0; i < 20; i++)
+                for (auto& hb : gCarChaseTaskTable_678E30->field_0_entries)
                 {
-                    CarChaseTask_40& hb = gCarChaseTaskTable_678E30->field_0_entries[i];
                     ImGui::Value("field_0", hb.field_0_in_use);
                 }
             }
@@ -2929,9 +2928,9 @@ void CC ImGuiDebugDraw()
 
                     ypos += 16;
                     
-                    for (u32 idx2 = 0; idx2 < GTA2_COUNTOF(gPolice_7B8_6FEE40->field_464_pursuit_targets); idx2++)
+                    for (auto& pursuit_target : gPolice_7B8_6FEE40->field_464_pursuit_targets)
                     {
-                        PolicePursuitTarget_7C* p7C = &gPolice_7B8_6FEE40->field_464_pursuit_targets[idx2];
+                        PolicePursuitTarget_7C* p7C = &pursuit_target;
                         if (p7C && p7C->field_18_z != kFP16Zero_6FE20C)
                         {
                             swprintf(tmpBuff_67BD9C, L"P7C target coords (%.1f, %.1f, %.1f)", p7C->field_10_x.ToFloat(), p7C->field_14_y.ToFloat(), p7C->field_18_z.ToFloat());
@@ -3056,8 +3055,8 @@ void CC ImGuiDebugDraw()
             pPlayerSprite = GetPlayerSprite();
 
             static Fix16_Point particle_velocity = Fix16_Point(Fix16(0), Fix16(0));
-            static Fix16 speed = Fix16(0);
-            static Fix16 unknown = Fix16(0);
+            static auto speed = Fix16(0);
+            static auto unknown = Fix16(0);
             static s32 mVar_speed = 0;
             static s32 mVar_unknown = 0;
             static s32 particle_type = 1;

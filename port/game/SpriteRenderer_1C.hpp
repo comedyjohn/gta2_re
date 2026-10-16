@@ -30,9 +30,7 @@ class SpriteTreeStack_FA4
         field_FA0_pTop = field_0_stack;
     }
 
-    ~SpriteTreeStack_FA4()
-    {
-    }
+    ~SpriteTreeStack_FA4() = default;
 
     // 9.6f inline
     void Push_4C4B80(SpriteTreeNode_C* pToPush)

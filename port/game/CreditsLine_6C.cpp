@@ -13,5 +13,4 @@ CreditsLine_6C::CreditsLine_6C() // 483E30
 
 // 0x483E60
 CreditsLine_6C::~CreditsLine_6C() // 483E60
-{
-}
+= default;

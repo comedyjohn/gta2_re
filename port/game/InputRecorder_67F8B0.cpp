@@ -675,17 +675,17 @@ void InputRecorder_67F8B0::SaveReplay_4CDED0()
 void InputRecorder_67F8B0::modify_inputs_4CDF30(s32 match_mask)
 {
 
-    for (s32 i = 0; i < 12; i++)
+    for (int field_8_input_mask : field_8_input_masks)
     {
-        if ((field_8_input_masks[i] & match_mask) != 0)
+        if ((field_8_input_mask & match_mask) != 0)
         {
-            if ((field_8_input_masks[i] & field_4_input_bits) != 0)
+            if ((field_8_input_mask & field_4_input_bits) != 0)
             {
-                field_4_input_bits &= ~field_8_input_masks[i];
+                field_4_input_bits &= ~field_8_input_mask;
             }
             else
             {
-                field_4_input_bits |= field_8_input_masks[i];
+                field_4_input_bits |= field_8_input_mask;
             }
         }
     }

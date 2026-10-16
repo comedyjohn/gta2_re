@@ -25,10 +25,7 @@ struct Taxi_8
 class Taxi_4_Pool : public PoolBasic<Taxi_8, 100>
 {
 public:
-    Taxi_4_Pool()
-    {
-        
-    }
+    Taxi_4_Pool() = default;
     
     ~Taxi_4_Pool()
     {

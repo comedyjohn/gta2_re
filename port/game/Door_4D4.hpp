@@ -84,9 +84,7 @@ class DoorData_10_Pool
     }*/
 
     // inlined 0x44C800
-    DoorData_10_Pool()
-    {
-    }
+    DoorData_10_Pool() = default;
 
     // 9.6f 0x44C7F0
     ~DoorData_10_Pool()

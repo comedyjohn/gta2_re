@@ -11,19 +11,13 @@ PatrolPoint_3::PatrolPoint_3()
 }
 
 // 0x463FA0
-PatrolPoint_3::~PatrolPoint_3()
-{
-}
+PatrolPoint_3::~PatrolPoint_3() = default;
 
 // 0x4bdf70
-PatrolRoutePool_1D7E::~PatrolRoutePool_1D7E()
-{
-}
+PatrolRoutePool_1D7E::~PatrolRoutePool_1D7E() = default;
 
 // 0x4bdf90
-PatrolRoute_96::~PatrolRoute_96()
-{
-}
+PatrolRoute_96::~PatrolRoute_96() = default;
 
 // 0x543ec0
 void PatrolRoute_96::sub_543EC0()
@@ -33,9 +27,9 @@ void PatrolRoute_96::sub_543EC0()
 // 0x543ed0
 PatrolRoutePool_1D7E::PatrolRoutePool_1D7E()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1D4C_bUsed); i++)
+    for (unsigned char & i : field_1D4C_bUsed)
     {
-        field_1D4C_bUsed[i] = 0;
+        i = 0;
     }
 }
 
@@ -56,6 +50,4 @@ PatrolRoute_96* PatrolRoutePool_1D7E::AllocPatrolList_543F10(u8* pRet)
 }
 
 // 0x544bf0
-PatrolRoute_96::PatrolRoute_96()
-{
-}
+PatrolRoute_96::PatrolRoute_96() = default;

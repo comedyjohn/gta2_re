@@ -61,9 +61,9 @@ void GameSession_578::LoadDebugSettings_4C53D0()
     gGameSession_67E8E0.SetPlySlotIdx_4C5920(0);
     gGameSession_67E8E0.SetLevelFinishBonusType_4C5930(0);
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_408_statistics); i++)
+    for (int & field_408_statistic : field_408_statistics)
     {
-        field_408_statistics[i] = 0;
+        field_408_statistic = 0;
     }
 
     field_430_car_damage_cost = 0;
@@ -269,9 +269,9 @@ void GameSession_578::init_4C5AF0()
 
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_490_frags_list); i++)
     {
-        for (s32 j = 0; j < MAX_PLAYERS; j++)
+        for (short & j : field_448_frags_by_victim[i].field_0_frags_on_victim)
         {
-            field_448_frags_by_victim[i].field_0_frags_on_victim[j] = 0;
+            j = 0;
         }
         field_490_frags_list[i] = 0;
         field_49C_points_list[i] = 0;

@@ -168,7 +168,4 @@ Weapon_8::~Weapon_8()
 }
 
 // 0x5E4090
-Weapon_30_Pool::~Weapon_30_Pool()
-{
-
-}
+Weapon_30_Pool::~Weapon_30_Pool() = default;

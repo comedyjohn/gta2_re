@@ -352,7 +352,7 @@ void gtx_0x106C::InitTileMapping_5AA950()
 // 0x5AA9A0
 void gtx_0x106C::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
 {
-    car_info* pCarInfoIter = reinterpret_cast<car_info*>(field_58_car_info);
+    auto* pCarInfoIter = reinterpret_cast<car_info*>(field_58_car_info);
     u32 total_len = 0;
     u32 idx = 0;
     u8 total_sprite = 0;
@@ -425,7 +425,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
     field_50_delta_buffer = static_cast<sprite_deltas*>(Memory::malloc_4FE4D0(field_60_delta_len));
     delta_entry* pSrc = field_4C_delta_index;
     u32 off2 = 0;
-    sprite_deltas* pDst = static_cast<sprite_deltas*>(field_50_delta_buffer);
+    auto* pDst = static_cast<sprite_deltas*>(field_50_delta_buffer);
 
     for (; off2 < delx_chunk_size;)
     {
@@ -456,7 +456,7 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
     // load_delx_5AAB30 left in field_0_pData, which the original does with 32-bit adds.
     for (u32 offset = 0; offset < static_cast<u32>(field_60_delta_len);)
     {
-        sprite_deltas* pDeltas = reinterpret_cast<sprite_deltas*>(static_cast<u8*>(field_50_delta_buffer) + offset);
+        auto* pDeltas = reinterpret_cast<sprite_deltas*>(static_cast<u8*>(field_50_delta_buffer) + offset);
         for (u32 delta_idx = 0; delta_idx < pDeltas->field_2_count; delta_idx++)
         {
             sprite_delta& delta = pDeltas->field_4_deltas[delta_idx];
@@ -589,7 +589,7 @@ void gtx_0x106C::SetSpriteIndexDataPtrs_5AAC40()
 void gtx_0x106C::build_delta_container_5AAC70()
 {
     u32 off = 0;
-    sprite_deltas* pIter = static_cast<sprite_deltas*>(field_50_delta_buffer);
+    auto* pIter = static_cast<sprite_deltas*>(field_50_delta_buffer);
     u16 maxSprite = 0;
 
     for (; off < static_cast<u32>(field_60_delta_len);)
@@ -746,7 +746,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
         s16 field_6_pad;
     };
     const u32 entry_count = (sprx_chunk_size >> 3) + 1; // plus the spare last entry, as below
-    sprite_index_file* pFileEntries = static_cast<sprite_index_file*>(Memory::malloc_4FE4D0(sprx_chunk_size));
+    auto* pFileEntries = static_cast<sprite_index_file*>(Memory::malloc_4FE4D0(sprx_chunk_size));
     File::Global_Read_4A71C0(pFileEntries, sprx_chunk_size);
     field_20_sprite_index = static_cast<sprite_index*>(Memory::malloc_4FE4D0(entry_count * sizeof(sprite_index)));
     memset(field_20_sprite_index, 0, entry_count * sizeof(sprite_index));

@@ -521,10 +521,7 @@ class CarPhyisicsPool : public PoolBasic<CarPhysics_B0, 306>
 {
   public:
     //Inlined in CarManager_6C constructor 9.6f -> 0x420f8
-    CarPhyisicsPool()
-    {
-
-    }
+    CarPhyisicsPool() = default;
 
     ~CarPhyisicsPool()
     {

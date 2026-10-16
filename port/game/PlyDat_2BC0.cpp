@@ -156,17 +156,15 @@ HighScoreTable_F0::HighScoreTable_F0()
 }
 
 // 0x56B510
-HighScoreTable_F0::~HighScoreTable_F0()
-{
-}
+HighScoreTable_F0::~HighScoreTable_F0() = default;
 
 // 0x56B520
 void HighScoreTable_F0::Init_56B520()
 {
-    for (s32 i = 0; i < 10; i++)
+    for (auto& i : field_0_score_table_line)
     {
-        wcscpy(field_0_score_table_line[i].field_0_player_name, gEmptyWStr_67DC8C);
-        field_0_score_table_line[i].field_14_score = 0;
+        wcscpy(i.field_0_player_name, gEmptyWStr_67DC8C);
+        i.field_14_score = 0;
     }
 }
 
@@ -214,25 +212,23 @@ PlySlot_A4::PlySlot_A4()
 }
 
 // 0x56B620
-PlySlot_A4::~PlySlot_A4()
-{
-}
+PlySlot_A4::~PlySlot_A4() = default;
 
 // 0x56B630
 void PlySlot_A4::ResetPlayerSlot_56B630()
 {
-    for (u16 k = 0; k < 9; k++)
+    for (wchar_t & k : field_90_strPlayerName)
     {
-        field_90_strPlayerName[k] = 0;
+        k = 0;
     }
 
-    for (u32 i = 0; i < 3; i++)
+    for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
         for (u32 j = 0; j < 4; j++)
         {
-            field_0_plyr_stage_stats[i][j].field_0_is_stage_unlocked = false;
-            field_0_plyr_stage_stats[i][j].field_4_stage_best_score = 0;
-            field_0_plyr_stage_stats[i][j].field_8_stage_latest_score = 0;
+            plyr_stage_stat[j].field_0_is_stage_unlocked = false;
+            plyr_stage_stat[j].field_4_stage_best_score = 0;
+            plyr_stage_stat[j].field_8_stage_latest_score = 0;
         }
     }
     field_0_plyr_stage_stats[0][0].field_0_is_stage_unlocked = true;
@@ -243,11 +239,11 @@ s32 PlySlot_A4::GetTotalLatestScore_56B680()
 {
     s32 result = 0;
 
-    for (u32 i = 0; i < 3; i++)
+    for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
         for (u32 j = 0; j < 4; j++)
         {
-            result += field_0_plyr_stage_stats[i][j].field_8_stage_latest_score;
+            result += plyr_stage_stat[j].field_8_stage_latest_score;
         }
     }
     return result;
@@ -258,11 +254,11 @@ s32 PlySlot_A4::GetTotalBestScore_56B6B0()
 {
     s32 result = 0;
 
-    for (u32 i = 0; i < 3; i++)
+    for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
         for (u32 j = 0; j < 4; j++)
         {
-            result += field_0_plyr_stage_stats[i][j].field_4_stage_best_score;
+            result += plyr_stage_stat[j].field_4_stage_best_score;
         }
     }
     return result;
@@ -340,9 +336,7 @@ PlyDat_2BC0::PlyDat_2BC0()
 // Defined after ~HighScoreTable_F0 so VC6 knows that destructor can't throw and
 // drops the EH state updates between the calls to it.
 // 0x56B810
-PlyDat_2BC0::~PlyDat_2BC0()
-{
-}
+PlyDat_2BC0::~PlyDat_2BC0() = default;
 
 // 0x56B8A0
 void PlyDat_2BC0::GetPlySlotDatName_56B8A0(u16 slot_idx, char_type* pName)
@@ -380,24 +374,24 @@ void PlyDat_2BC0::LoadPlySlotDat_56B990(u16 slotIdx)
     GetPlySlotDatName_56B8A0(slotIdx, FileName);
     File::Global_Open_4A7060(FileName);
 
-    for (s32 i = 0; i < 9; i++)
+    for (wchar_t & i : pTmp->field_90_strPlayerName)
     {
         u32 len_read = 2;
-        File::Global_Read_4A71C0(&pTmp->field_90_strPlayerName[i], len_read);
+        File::Global_Read_4A71C0(&i, len_read);
     }
 
-    for (s32 k = 0; k < 3; k++)
+    for (auto& plyr_stage_stat : field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats)
     {
         for (s32 j = 0; j < 4; j++)
         {
             u32 len_read = 1;
-            File::Global_Read_4A71C0(&field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats[k][j].field_0_is_stage_unlocked, len_read);
+            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_0_is_stage_unlocked, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats[k][j].field_4_stage_best_score, len_read);
+            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_4_stage_best_score, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats[k][j].field_8_stage_latest_score, len_read);
+            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_8_stage_latest_score, len_read);
         }
     }
     File::Global_Close_4A70C0();
@@ -420,17 +414,17 @@ void PlyDat_2BC0::SavePlySlotDat_56BA60(s16 slotIdx)
     // len is accumulated like in SaveHiScores_56BF20: VC6 folds its final value (126) into one store
     // that it emits after the loop counter init, which a plain "len = 126" never does.
     u8* pDst = reinterpret_cast<u8*>(this) + sizeof(field_26A0_plyr_stats[0].field_90_strPlayerName);
-    for (s32 k = 0; k < 3; k++)
+    for (auto& plyr_stage_stat : field_26A0_plyr_stats[static_cast<u16>(slotIdx)].field_0_plyr_stage_stats)
     {
         for (s32 j = 0; j < 4; j++)
         {
-            *pDst = field_26A0_plyr_stats[static_cast<u16>(slotIdx)].field_0_plyr_stage_stats[k][j].field_0_is_stage_unlocked;
+            *pDst = plyr_stage_stat[j].field_0_is_stage_unlocked;
             pDst++;
             len++;
-            *reinterpret_cast<u32*>(pDst) = field_26A0_plyr_stats[static_cast<u16>(slotIdx)].field_0_plyr_stage_stats[k][j].field_4_stage_best_score;
+            *reinterpret_cast<u32*>(pDst) = plyr_stage_stat[j].field_4_stage_best_score;
             pDst += 4;
             len += 4;
-            *reinterpret_cast<s32*>(pDst) = field_26A0_plyr_stats[static_cast<u16>(slotIdx)].field_0_plyr_stage_stats[k][j].field_8_stage_latest_score;
+            *reinterpret_cast<s32*>(pDst) = plyr_stage_stat[j].field_8_stage_latest_score;
             pDst += 4;
             len += 4;
         }
@@ -483,11 +477,11 @@ void PlyDat_2BC0::UnlockAllStages_56BC40()
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     PlySlot_A4* pStats = &this->field_26A0_plyr_stats[slot_idx];
-    for (s32 k3 = 0; k3 < 3; k3++)
+    for (auto& plyr_stage_stat : pStats->field_0_plyr_stage_stats)
     {
         for (s32 k4 = 0; k4 < 4; k4++)
         {
-            pStats->field_0_plyr_stage_stats[k3][k4].field_0_is_stage_unlocked = 1;
+            plyr_stage_stat[k4].field_0_is_stage_unlocked = 1;
         }
     }
 
@@ -680,9 +674,9 @@ void PlyDat_2BC0::BuildMergedHiScores_56C170()
         ++pLine;
     }
 
-    for (s32 k8 = 0; k8 < 8; k8++)
+    for (auto& plyr_stat : field_26A0_plyr_stats)
     {
-        PlySlot_A4* pSlot = &field_26A0_plyr_stats[k8];
+        PlySlot_A4* pSlot = &plyr_stat;
         field_25B0.InsertScore_56B550(pSlot->field_90_strPlayerName, pSlot->GetTotalLatestScore_56B680());
     }
 }
@@ -699,14 +693,14 @@ void PlyDat_2BC0::InitDefaultHiScores_56C1D0()
     }
 
     ScoreTableLine_18* pSruIter = gDefaultStageHiScores_6243A0;
-    for (s32 k3 = 0; k3 < 3; k3++)
+    for (auto& stage_score : field_1890_stage_scores)
     {
         for (s32 k4 = 0; k4 < 4; k4++)
         {
-            field_1890_stage_scores[k3][k4].Init_56B520();
+            stage_score[k4].Init_56B520();
             for (s32 k10 = 0; k10 < 10; k10++)
             {
-                field_1890_stage_scores[k3][k4].InsertScore_56B550(pSruIter->field_0_player_name, pSruIter->field_14_score);
+                stage_score[k4].InsertScore_56B550(pSruIter->field_0_player_name, pSruIter->field_14_score);
                 ++pSruIter;
             }
         }

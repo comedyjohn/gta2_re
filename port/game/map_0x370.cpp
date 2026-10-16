@@ -207,7 +207,7 @@ void Init_gmp_slopes_array()
 // 0x452980
 gmp_block_info* Map_0x370::get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord)
 {
-    gmp_col_info* pColData =
+    auto* pColData =
         reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
     if (z_coord >= pColData->field_0_height || z_coord < pColData->field_1_offset)
     {
@@ -783,7 +783,7 @@ void Map_0x370::update_lights_4DFCD0()
 // 0x4DFE10
 gmp_block_info* Map_0x370::get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord)
 {
-    gmp_col_info* pCol =
+    auto* pCol =
         reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y_coord, x_coord)]);
     if (z_coord < pCol->field_0_height)
     {
@@ -802,7 +802,7 @@ gmp_block_info* Map_0x370::GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z)
     // If it's a partial block, get a null/empty block. 
     // If it's a tridiagonal block (four-sided or tri-sided), replace it by a flat solid block
     // Otherwise, return the original block. It's ideal for checking collisions
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
     if (z < pColumn->field_0_height)
     {
         if (z >= pColumn->field_1_offset)
@@ -2551,7 +2551,7 @@ bool Map_0x370::CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* p
 // 0x4E4BB0
 gmp_block_info* Map_0x370::FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
     for (s32 curr_z_pos = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z_pos >= 0; curr_z_pos--)
     {
         //  Begin with the highest non-empty block in the column
@@ -2573,7 +2573,7 @@ gmp_block_info* Map_0x370::FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z
 // 0x4E4C30
 gmp_block_info* Map_0x370::FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     for (s32 curr_z_pos = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z_pos >= 0; curr_z_pos--)
     {
@@ -2591,7 +2591,7 @@ gmp_block_info* Map_0x370::FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* fo
 // 0x4E4CB0
 gmp_block_info* Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*this->field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[*this->field_0_pDmap->get_base_42A830(y, x)]);
 
     if (z < pColumn->field_1_offset)
     {
@@ -3392,7 +3392,7 @@ Fix16 Map_0x370::FloorPlusOne_4E62B0(Fix16 value)
 // 0x4E62D0
 gmp_block_info* Map_0x370::FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     for (s32 curr_z = pColumn->field_0_height - pColumn->field_1_offset - 1; curr_z >= 0; curr_z--)
     {
@@ -3409,7 +3409,7 @@ gmp_block_info* Map_0x370::FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z)
 // 0x4E6360
 gmp_block_info* Map_0x370::FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[*field_0_pDmap->get_base_42A830(y, x)]);
 
     if (z >= pColumn->field_1_offset)
     {
@@ -4011,7 +4011,7 @@ char_type Map_0x370::CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z)
     gmp_compressed_map_32* pDMap = this->field_0_pDmap;
 
     s32 z_int = z.ToInt();
-    gmp_col_info* pColInfo = reinterpret_cast<gmp_col_info*>(&pDMap->field_40008_pColumn[*pDMap->get_base_42A830(y.ToInt(), x.ToInt())]);
+    auto* pColInfo = reinterpret_cast<gmp_col_info*>(&pDMap->field_40008_pColumn[*pDMap->get_base_42A830(y.ToInt(), x.ToInt())]);
     if (z_int < pColInfo->field_0_height)
     {
         if (z_int < pColInfo->field_1_offset)
@@ -4120,7 +4120,7 @@ s32 Map_0x370::CloneOriginalColumn_4E81D0(u32 column_idx)
 
     if (column_idx < field_358_column_words)
     {
-        gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
+        auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
         s32 len = pColumn->field_0_height - pColumn->field_1_offset + 1;
         idx = field_360_column_words;
         field_360_column_words += len;
@@ -4132,14 +4132,14 @@ s32 Map_0x370::CloneOriginalColumn_4E81D0(u32 column_idx)
 // 0x4E8220
 s32 Map_0x370::CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z)
 {
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
 
     if (z < pColumn->field_0_height && z >= pColumn->field_1_offset)
     {
         return Map_0x370::CloneOriginalColumn_4E81D0(column_idx);
     }
 
-    gmp_col_info* pNewColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[field_360_column_words]);
+    auto* pNewColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[field_360_column_words]);
     s32 local_column_words = field_360_column_words;
 
     if (z >= pColumn->field_0_height)
@@ -4182,7 +4182,7 @@ s32 Map_0x370::CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z)
 s32 Map_0x370::sub_4E8370(u32 column_idx, s32 z, char_type do_drop)
 {
     s32 offset;
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
     s32 height = pColumn->field_0_height;
     if (z >= height || z < (offset = pColumn->field_1_offset))
     {
@@ -4295,7 +4295,7 @@ void Map_0x370::ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u1
     *field_0_pDmap->get_base_42A830(y, x) = column_idx;
     field_4_obj.AddOrUpdateDmapInfo_4E80E0(x, y, column_idx);
 
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[column_idx]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&this->field_0_pDmap->field_40008_pColumn[column_idx]);
 
     s32 block_idx = Map_0x370::CloneOriginalBlock_4E8180(pColumn->field_4_blockd[z - pColumn->field_1_offset]);
 
@@ -4336,7 +4336,7 @@ void Map_0x370::AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockDa
     s32 column_idx = Map_0x370::CloneColumnExtendedToZ_4E8220(*field_0_pDmap->get_base_42A830(y, x), z);
     *field_0_pDmap->get_base_42A830(y, x) = column_idx;
     field_4_obj.AddOrUpdateDmapInfo_4E80E0(x, y, column_idx);
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
     u32 block_id = pColumn->field_4_blockd[z - pColumn->field_1_offset];
 
     if (block_id < field_34C_num_blocks)
@@ -4364,13 +4364,13 @@ void Map_0x370::RemoveBlock_4E8940(s32 x_pos, s32 y_pos, s32 offset, char_type d
 void Map_0x370::LowerColumn_4E8A10(s32 x_pos, s32 y_pos)
 {
     u32 column_idx = *field_0_pDmap->get_base_42A830(y_pos, x_pos);
-    gmp_col_info* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
+    auto* pColumn = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[column_idx]);
     if (pColumn->field_1_offset == pColumn->field_0_height - 1 && pColumn->field_1_offset)
     {
         if (column_idx < field_358_column_words)
         {
             // Note: decrements the new column's height, not a copy of pColumn's
-            gmp_col_info* pNew = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[field_360_column_words]);
+            auto* pNew = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[field_360_column_words]);
             pNew->field_1_offset = pColumn->field_1_offset - 1;
             pNew->field_0_height--;
             pNew->field_4_blockd[0] = pColumn->field_4_blockd[0];
@@ -4480,7 +4480,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
     }
 
     s32 zoneCount = zone_count + 1;
-    gmp_zone_info* pZoneInfo = static_cast<gmp_zone_info*>(Memory::malloc_4FE4D0(sizeof(gmp_zone_info) * zoneCount));
+    auto* pZoneInfo = static_cast<gmp_zone_info*>(Memory::malloc_4FE4D0(sizeof(gmp_zone_info) * zoneCount));
     field_334_pUnknownZoneData = pZoneInfo;
     s32 t = 0;
     do
@@ -4537,7 +4537,7 @@ void Map_0x370::AddTileAnimations_4E9160(s32 size)
     u8* pTileAnimDataIter = reinterpret_cast<u8*>(this->field_340_pTileAnimData);
     while (pTileAnimDataIter != reinterpret_cast<u8*>(this->field_340_pTileAnimData) + size)
     {
-        const gmp_tile_animation* pAnim = reinterpret_cast<const gmp_tile_animation*>(pTileAnimDataIter);
+        const auto* pAnim = reinterpret_cast<const gmp_tile_animation*>(pTileAnimDataIter);
         gTileAnim_2_7052C4->AddGmpAnim_5BC2C0(pAnim);
         pTileAnimDataIter += (sizeof(u16) * pAnim->field_4_anim_length) +
             (sizeof(gmp_tile_animation) -
@@ -4548,7 +4548,7 @@ void Map_0x370::AddTileAnimations_4E9160(s32 size)
 // 0x4E91A0
 void Map_0x370::load_mobj_4E91A0(size_t len)
 {
-    gmp_map_object* pData = static_cast<gmp_map_object*>(Memory::malloc_4FE4D0(len));
+    auto* pData = static_cast<gmp_map_object*>(Memory::malloc_4FE4D0(len));
     field_338_pMapObjects = pData;
     File::Global_Read_4A71C0(pData, len);
     field_344_map_object_count = len / 6;
@@ -4561,7 +4561,7 @@ void Map_0x370::load_mobj_4E91A0(size_t len)
 // 0x4E9200
 void Map_0x370::load_lght_4E9200(size_t size)
 {
-    gmp_map_light* pData = static_cast<gmp_map_light*>(Memory::malloc_4FE4D0(size));
+    auto* pData = static_cast<gmp_map_light*>(Memory::malloc_4FE4D0(size));
     field_33C_pLightData = pData;
     File::Global_Read_4A71C0(pData, size);
     field_348_num_lights = size >> 4;
@@ -4574,7 +4574,7 @@ void Map_0x370::load_lght_4E9200(size_t size)
 // 0x4E9250
 void Map_0x370::load_zone_4E9250(size_t size)
 {
-    gmp_map_zone* pData = static_cast<gmp_map_zone*>(Memory::malloc_4FE4D0(size));
+    auto* pData = static_cast<gmp_map_zone*>(Memory::malloc_4FE4D0(size));
     field_328_pZoneData = pData;
     File::Global_Read_4A71C0(pData, size);
     build_zone_list_4E90E0(size);
@@ -4583,7 +4583,7 @@ void Map_0x370::load_zone_4E9250(size_t size)
 // 0x4E9280
 void Map_0x370::load_anim_4E9280(size_t size)
 {
-    gmp_tile_animation* pAlloc = static_cast<gmp_tile_animation*>(Memory::malloc_4FE4D0(size));
+    auto* pAlloc = static_cast<gmp_tile_animation*>(Memory::malloc_4FE4D0(size));
     field_340_pTileAnimData = pAlloc;
     File::Global_Read_4A71C0(pAlloc, size);
     AddTileAnimations_4E9160(size);

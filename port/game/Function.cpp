@@ -179,17 +179,17 @@ void LogFuncAddr(u32 codeAddr, s32 mode)
     else
     {
         static std::vector<FunctionMetadata> functions = loadFunctionMetadataFromFile("new_data.json");
-        for (unsigned int i = 0; i < functions.size(); ++i)
+        for (auto& function : functions)
         {
-            if (functions[i].og_addr == ogAddr)
+            if (function.og_addr == ogAddr)
             {
                 if (mode == 0)
                 {
-                    printf("NOT IMPLEMENTED: %s (0x%X)\n", functions[i].mangled_name.c_str(), ogAddr);
+                    printf("NOT IMPLEMENTED: %s (0x%X)\n", function.mangled_name.c_str(), ogAddr);
                 }
                 else
                 {
-                    printf("WIP IMPLEMENTED: %s (0x%X)\n", functions[i].mangled_name.c_str(), ogAddr);
+                    printf("WIP IMPLEMENTED: %s (0x%X)\n", function.mangled_name.c_str(), ogAddr);
                 }
                 return;
             }

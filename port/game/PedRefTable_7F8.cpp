@@ -35,14 +35,12 @@ void PedRefTable_7F8::DecrementRefCount_59B0D0(u8 idx)
 // 0x59b0f0
 PedRefTable_7F8::PedRefTable_7F8()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_entries); i++)
+    for (auto& entry : field_0_entries)
     {
-        field_0_entries[i].field_0_ped_id = 0;
-        field_0_entries[i].field_4_ref_count = 0;
+        entry.field_0_ped_id = 0;
+        entry.field_4_ref_count = 0;
     }
 }
 
 // 0x59b110
-PedRefTable_7F8::~PedRefTable_7F8()
-{
-}
+PedRefTable_7F8::~PedRefTable_7F8() = default;

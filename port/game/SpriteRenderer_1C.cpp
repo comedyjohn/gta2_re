@@ -21,9 +21,9 @@ DEFINE_GLOBAL_INIT(Fix16, kFpZero_705AC4, Fix16(0), 0x705AC4);
 // 0x4954f0
 void SpriteRenderer_1C::ResetAll_4954F0()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_layers); i++)
+    for (auto& layer : field_0_layers)
     {
-        field_0_layers[i]->Reset_5C5E50();
+        layer->Reset_5C5E50();
     }
 }
 
@@ -49,10 +49,10 @@ void SpriteRenderer_1C::Draw_495560(s32 layer)
 // 0x4955a0
 SpriteRenderer_1C::SpriteRenderer_1C()
 {
-    for (s32 i = 0; i < k_num_layers; i++)
+    for (auto& layer : field_0_layers)
     {
-        field_0_layers[i] = new SpriteTree_4();
-        if (!field_0_layers[i])
+        layer = new SpriteTree_4();
+        if (!layer)
         {
             FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\display.cpp", 121);
         }
@@ -62,9 +62,9 @@ SpriteRenderer_1C::SpriteRenderer_1C()
 // 0x495630
 SpriteRenderer_1C::~SpriteRenderer_1C()
 {
-    for (s32 i = 0; i < k_num_layers; i++)
+    for (auto& layer : field_0_layers)
     {
-        delete field_0_layers[i];
+        delete layer;
     }
 }
 
@@ -245,14 +245,12 @@ SpriteTree_4::~SpriteTree_4()
 // 0x5c5f60
 SpriteTreeNodePool_2EE4::SpriteTreeNodePool_2EE4()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_entries); i++)
+    for (auto& entry : field_0_entries)
     {
-        field_0_entries[i].field_0_pSprite = nullptr;
+        entry.field_0_pSprite = nullptr;
     }
     Reset_4C4B70();
 }
 
 // 0x5c5f90
-SpriteTreeNodePool_2EE4::~SpriteTreeNodePool_2EE4()
-{
-}
+SpriteTreeNodePool_2EE4::~SpriteTreeNodePool_2EE4() = default;

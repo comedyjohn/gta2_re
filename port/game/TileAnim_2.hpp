@@ -60,9 +60,7 @@ class TileAnimPool
 {
   public:
     // Inlined 0x4c34b0
-    TileAnimPool()
-    {
-    }
+    TileAnimPool() = default;
 
     ~TileAnimPool();
 

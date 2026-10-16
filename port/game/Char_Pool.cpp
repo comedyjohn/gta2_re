@@ -1030,6 +1030,4 @@ Ped* PedManager::PedById(s32 pedId)
 }
 
 // 0x471110
-PedPool::~PedPool()
-{
-}
+PedPool::~PedPool() = default;

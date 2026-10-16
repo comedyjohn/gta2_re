@@ -478,14 +478,10 @@ void InitCodeObjectTemplates()
 }
 
 // 0x4bdf40
-ObjectDefinitions_8CA8::~ObjectDefinitions_8CA8()
-{
-}
+ObjectDefinitions_8CA8::~ObjectDefinitions_8CA8() = default;
 
 // 0x4bdf60
-ObjectDefinition_74::~ObjectDefinition_74()
-{
-}
+ObjectDefinition_74::~ObjectDefinition_74() = default;
 
 // 0x531860
 CodeObjectTemplate_6C::CodeObjectTemplate_6C(u32 param_1,
@@ -1434,9 +1430,9 @@ ObjectDefinition_74* ObjectDefinitions_8CA8::AllocDefinition_5343C0(s32 idx)
 // 0x5343f0
 ObjectDefinitions_8CA8::ObjectDefinitions_8CA8()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_87F4_definition_by_idx); i++)
+    for (auto& i : field_87F4_definition_by_idx)
     {
-        field_87F4_definition_by_idx[i] = nullptr;
+        i = nullptr;
     }
     field_0_next_idx = 0;
     field_8CA4_def112_sprite_palette = 99;

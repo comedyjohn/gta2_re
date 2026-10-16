@@ -730,9 +730,7 @@ class AttachedSpritePool
 {
   public:
     // Inlined, from 9.6f at 0x4bdcf0
-    AttachedSpritePool()
-    {
-    }
+    AttachedSpritePool() = default;
 
     ~AttachedSpritePool();
 
@@ -753,9 +751,7 @@ class SpriteShapePool
 {
   public:
     // Inlined, from 9.6f at 0x4bc9a0
-    SpriteShapePool()
-    {
-    }
+    SpriteShapePool() = default;
 
     ~SpriteShapePool();
 
@@ -778,9 +774,7 @@ class SpritePool
 {
   public:
     // Inlined, from 9.6f at 0x4bca20
-    SpritePool()
-    {
-    }
+    SpritePool() = default;
 
     ~SpritePool();
 

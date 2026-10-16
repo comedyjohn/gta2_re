@@ -34,9 +34,7 @@ class Fix16_Point;
 // 9.6f doesn't tell the two apart.
 struct Fix16_Point_POD
 {
-    Fix16_Point_POD()
-    {
-    }
+    Fix16_Point_POD() = default;
 
     Fix16_Point_POD(Fix16& a1, Fix16& a2)
     {
@@ -327,9 +325,7 @@ class Fix16_Point
     }
 
     // Both inlined and exists as a function... some strange array init behaviour??
-    ~Fix16_Point()
-    {
-    }
+    ~Fix16_Point() = default;
 
     // It needs to be in the header
     // 0x563970

@@ -18,9 +18,7 @@ keybrd_0x204::keybrd_0x204()
 }
 
 // 0x4D5D90
-keybrd_0x204::~keybrd_0x204()
-{
-}
+keybrd_0x204::~keybrd_0x204() = default;
 
 
 static inline bool is_line_break_or_space(wchar_t letter)
@@ -96,21 +94,21 @@ void keybrd_0x204::LoadKbCfg_4D5E00()
         FatalError_4A38C0(Gta2Error::KeyboardTypeFileOpenError, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 187);
     }
 
-    for (s32 i = 0; i < 256; i++)
+    for (short & field_0_key : field_0_keys)
     {
         wchar_t tmpBuffer[16];
         ReadCfg_4D5DA0(hConfigFile, tmpBuffer);
         if (tmpBuffer[0] == '~')
         {
-            field_0_keys[i] = 0;
+            field_0_key = 0;
         }
         else if (tmpBuffer[0] != '`')
         {
-            field_0_keys[i] = 0;
+            field_0_key = 0;
         }
         else
         {
-            field_0_keys[i] = tmpBuffer[1];
+            field_0_key = tmpBuffer[1];
         }
     }
 

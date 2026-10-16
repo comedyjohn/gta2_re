@@ -150,9 +150,9 @@ TrainStation_34::TrainStation_34()
     field_2E_wagons_number = 0;
     field_2F_track_idx = 0;
 
-    for (u8 i = 0; i < 10; i++)
+    for (unsigned char & field_24_train_wagon : field_24_train_wagons)
     {
-        field_24_train_wagons[i] = 1;
+        field_24_train_wagon = 1;
     }
 }
 
@@ -579,11 +579,11 @@ Train_58* PublicTransport_181C::AllocateTrain_578790()
 // 0x5787e0
 TrainStation_34* PublicTransport_181C::AllocateTrainStation_5787E0()
 {
-    for (u16 i = 0; i < GTA2_COUNTOF(field_0_stations); i++)
+    for (auto& station : this->field_0_stations)
     {
-        if (!this->field_0_stations[i].field_14_used)
+        if (!station.field_14_used)
         {
-            return &this->field_0_stations[i];
+            return &station;
         }
     }
     return nullptr;
@@ -596,9 +596,9 @@ void TrainStation_34::CalculateWagonCount_578820(u8* pWagons)
     {
         memcpy(field_24_train_wagons, pWagons, sizeof(field_24_train_wagons));
 
-        for (u8 i = 0; i < 10; i++)
+        for (unsigned char field_24_train_wagon : field_24_train_wagons)
         {
-            if (field_24_train_wagons[i])
+            if (field_24_train_wagon)
             {
                 field_2E_wagons_number++;
             }
@@ -847,9 +847,9 @@ void PublicTransport_181C::InitStationsLinkedList_5793E0()
 // 0x579440
 void PublicTransport_181C::InitTrainStations_579440()
 {
-    for (s32 station_idx = 0; station_idx < 100; station_idx++)
+    for (auto& station : field_0_stations)
     {
-        TrainStation_34* pStation = &field_0_stations[station_idx];
+        TrainStation_34* pStation = &station;
         switch (pStation->field_0_station_type)
         {
             case 0:
@@ -970,8 +970,8 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
                                                                Fix16(pBusStop->field_10_pZone->field_2_y).ToInt(),
                                                                &highest_zpos);
 
-            Fix16 xpos = Fix16(pBusStop->field_10_pZone->field_1_x);
-            Fix16 ypos = Fix16(pBusStop->field_10_pZone->field_2_y);
+            auto xpos = Fix16(pBusStop->field_10_pZone->field_1_x);
+            auto ypos = Fix16(pBusStop->field_10_pZone->field_2_y);
             gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &highest_zpos);
 
             for (u8 j = 0; j < 4; j++)
@@ -1146,9 +1146,9 @@ void PublicTransport_181C::KillAllPassengers_579B20()
 // 0x579b40
 Car_BC** PublicTransport_181C::GetCarArrayFromLeadCar_579B40(Car_BC* toFind)
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_1450_train_array); i++)
+    for (auto& i : field_1450_train_array)
     {
-        Train_58* pIter = &field_1450_train_array[i];
+        Train_58* pIter = &i;
         if (pIter->field_C_carriages[0] == toFind)
         {
             return &pIter->field_C_carriages[1];
@@ -1162,9 +1162,9 @@ bool PublicTransport_181C::GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk)
 {
     if (!bSkip_trains_67D550)
     {
-        for (u8 i = 0; i < 10; i++)
+        for (auto& i : field_1450_train_array)
         {
-            Train_58* pTrain = &field_1450_train_array[i];
+            Train_58* pTrain = &i;
             Car_BC* pCar = pTrain->field_C_carriages[0];
             if (pCar == pToFind)
             {
@@ -1478,9 +1478,9 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
     BusesService_579CA0();
     if (!bSkip_trains_67D550)
     {
-        for (u16 i = 0; i < 10; i++)
+        for (auto& i : field_1450_train_array)
         {
-            Train_58* pTrain = &field_1450_train_array[i];
+            Train_58* pTrain = &i;
             if (!pTrain->field_C_carriages[0])
             {
                 continue;
@@ -1816,9 +1816,9 @@ Train_58* PublicTransport_181C::GetTrainFromCar_57B5C0(Car_BC* pToFind)
 {
     if (!bSkip_trains_67D550)
     {
-        for (u8 i = 0; i < 10; i++)
+        for (auto& i : field_1450_train_array)
         {
-            Train_58* pTrain = &field_1450_train_array[i];
+            Train_58* pTrain = &i;
             Car_BC* pWagon = pTrain->field_C_carriages[0];
             if (pWagon == pToFind)
             {
@@ -1842,9 +1842,9 @@ Train_58* PublicTransport_181C::GetTrainFromCarExcludingLeadCar_57B6A0(Car_BC* p
 {
     if (!bSkip_trains_67D550)
     {
-        for (u8 i = 0; i < 10; i++)
+        for (auto& i : field_1450_train_array)
         {
-            Train_58* pTrain = &field_1450_train_array[i];
+            Train_58* pTrain = &i;
             for (u8 wagon_idx = 0; wagon_idx < pTrain->field_43_idx; wagon_idx++)
             {
                 Car_BC* pWagon = pTrain->field_C_carriages[wagon_idx + 1];
@@ -1874,11 +1874,7 @@ bool PublicTransport_181C::AreCarsInDifferentTrains_57B740(Car_BC* pCar1, Car_BC
 }
 
 // 0x57b7b0
-PublicTransport_181C::PublicTransport_181C()
-{
-}
+PublicTransport_181C::PublicTransport_181C() = default;
 
 // 0x57b820
-PublicTransport_181C::~PublicTransport_181C()
-{
-}
+PublicTransport_181C::~PublicTransport_181C() = default;

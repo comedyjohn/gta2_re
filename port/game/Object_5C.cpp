@@ -3144,9 +3144,9 @@ void Object_5C::ObjectsService_5293A0()
 // 0x529430
 Object_5C::Object_5C()
 {
-    for (u8 i = 0; i < 50; i++)
+    for (unsigned char & field_20_uncollected_token : field_20_uncollected_tokens)
     {
-        field_20_uncollected_tokens[i] = 1;
+        field_20_uncollected_token = 1;
     }
 
     field_54_uncollected_token_index = 0;

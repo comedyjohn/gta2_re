@@ -119,7 +119,7 @@ class CarRemapRng_2
 {
   public:
     CarRemapRng_2();
-    ~CarRemapRng_2() {}
+    ~CarRemapRng_2() = default;
     void IncNextRngRemapIdx_47BD90();
 
     u16 GetRngValue_4212D0()
@@ -1385,14 +1385,9 @@ GTA2_ASSERT_SIZEOF_ALWAYS(Car_BC, 0xBC)
 struct Car_BC_Pool
 {
     //Inlined in CarManager_6C constructor 9.6f -> 0x426db0
-    Car_BC_Pool()
-    {
-    }
+    Car_BC_Pool() = default;
 
-    ~Car_BC_Pool()
-    {
-
-    }
+    ~Car_BC_Pool() = default;
 
     // TODO: 9.6f addr/check
     void Remove(Car_BC* pCar)
@@ -1425,9 +1420,7 @@ class TrailerPool
 {
   public:
     //Inlined in CarManager_6C constructor 9.6f -> 0x425500
-    TrailerPool()
-    {
-    }
+    TrailerPool() = default;
 
     ~TrailerPool()
     {

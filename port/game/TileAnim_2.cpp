@@ -129,10 +129,7 @@ TileAnim_2::~TileAnim_2()
 }
 
 // 0x5bc4a0
-TileAnimPool::~TileAnimPool()
-{
-
-}
+TileAnimPool::~TileAnimPool() = default;
 
 // 0x5beba0
 TileAnim_18::TileAnim_18()

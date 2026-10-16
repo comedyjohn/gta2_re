@@ -228,6 +228,4 @@ CrusherPool_94::CrusherPool_94()
 }
 
 // 0x4bbc30
-CrusherPool_94::~CrusherPool_94()
-{
-}
+CrusherPool_94::~CrusherPool_94() = default;

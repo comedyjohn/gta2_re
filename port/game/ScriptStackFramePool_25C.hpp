@@ -31,10 +31,7 @@ class ScriptStackFramePool_25C
         k_max_frames = 50
     };
 
-    ScriptStackFramePool_25C()
-    {
-
-    }
+    ScriptStackFramePool_25C() = default;
 
     ~ScriptStackFramePool_25C();
 

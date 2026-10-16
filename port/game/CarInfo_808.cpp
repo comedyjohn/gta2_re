@@ -692,14 +692,10 @@ void CarInfo_808::CalculateAllCarInfo_454850()
 }
 
 // 0x4549A0
-CarInfo_2C::CarInfo_2C()
-{
-}
+CarInfo_2C::CarInfo_2C() = default;
 
 // 0x4549B0
-CarInfo_2C::~CarInfo_2C()
-{
-}
+CarInfo_2C::~CarInfo_2C() = default;
 
 // 0x4549c0
 void CarInfo_808::ConvertAllMass_4549C0()

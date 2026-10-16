@@ -39,9 +39,7 @@ class Fix16_Rect
 {
   public:
     // 9.6f 0x41D070
-    Fix16_Rect()
-    {
-    }
+    Fix16_Rect() = default;
 
     // 9.6f 0x4204D0
     void ComputeCollisionPrism_4204D0(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)

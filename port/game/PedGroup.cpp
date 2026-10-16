@@ -56,13 +56,13 @@ void PedGroup::ClearGroupData_4C8E90()
     field_34_count = 0;
     field_35_unused = 0;
 
-    for (int i = 0; i < 9; ++i)
+    for (auto& i : field_4_ped_list)
     {
-        if (field_4_ped_list[i] != nullptr)
+        if (i != nullptr)
         {
-            field_4_ped_list[i]->ClearGroupAndGroupIdx_403A30();
+            i->ClearGroupAndGroupIdx_403A30();
         }
-        field_4_ped_list[i] = nullptr;
+        i = nullptr;
     }
 }
 
@@ -78,9 +78,9 @@ void PedGroup::Reset_4C8EF0()
     field_1_wait_for_members = false;
     field_34_count = 0;
     field_35_unused = 0;
-    for (s32 i = 0; i < 9; i++)
+    for (auto& i : field_4_ped_list)
     {
-        field_4_ped_list[i] = nullptr;
+        i = nullptr;
     }
 }
 
@@ -904,7 +904,7 @@ u32 PedGroup::sub_4CA3E0()
 // 0x4ca3f0
 Ped* PedGroup::FindFarthestMember_4CA3F0(Fix16* pFoundDistance)
 {
-    Fix16 max_distance = Fix16(0);
+    auto max_distance = Fix16(0);
     u8 found_index = 0;
     Fix16 x_abs;
     Fix16 y_abs;
@@ -1263,13 +1263,13 @@ void PedGroup::ResetAllGroups_4CB080()
 // 0x4cb0d0
 PedGroup* PedGroup::New_4CB0D0()
 {
-    for (s32 i = 0; i < 20; i++)
+    for (auto& i : pedGroups_67EF20)
     {
-        if (!pedGroups_67EF20[i].get_in_use_4038F0())
+        if (!i.get_in_use_4038F0())
         {
-            pedGroups_67EF20[i].Reset_4C8EF0();
-            pedGroups_67EF20[i].set_in_use_4038E0();
-            return &pedGroups_67EF20[i];
+            i.Reset_4C8EF0();
+            i.set_in_use_4038E0();
+            return &i;
         }
     }
     return nullptr;
@@ -1282,6 +1282,4 @@ PedGroup::PedGroup()
 }
 
 // 0x4cb870
-PedGroup::~PedGroup()
-{
-}
+PedGroup::~PedGroup() = default;

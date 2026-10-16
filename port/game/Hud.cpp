@@ -123,9 +123,7 @@ static inline void ProjectWorldToScreen_Hud_4B90E0(Camera_0xBC* pCam, Fix16 x, F
 }
 
 // 0x4bbbb0
-Hud_2B00::~Hud_2B00()
-{
-}
+Hud_2B00::~Hud_2B00() = default;
 
 // 0x4be650
 Hud_Pager_C::~Hud_Pager_C()
@@ -485,10 +483,10 @@ void Hud_CopHead_C_Array::Init_5D0210()
     field_4C_w_fp.FromU8(sprite_index->field_4_width);
     field_50_h_fp.FromU8(sprite_index->field_5_height);
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1028_cop_heads); i++)
+    for (auto& cop_head : field_1028_cop_heads)
     {
-        field_1028_cop_heads[i].field_2_frame_delay = 2;
-        field_1028_cop_heads[i].field_1_frame_timer = 2;
+        cop_head.field_2_frame_delay = 2;
+        cop_head.field_1_frame_timer = 2;
     }
 }
 
@@ -974,9 +972,9 @@ bool Hud_Arrow_7C_Array::IsThereAnyOtherArrowsInSameGang_5D0E40(Hud_Arrow_7C* pA
 {
     Gang_144* pGang = pArgArrow->field_18.field_10.field_30_gang;
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
+    for (auto& i : field_0_array)
     {
-        Hud_Arrow_7C* pArrow = &field_0_array[i];
+        Hud_Arrow_7C* pArrow = &i;
         if (pArrow != pArgArrow && !pArrow->IsType0_4C6F80() && pArrow->IsVisible_4C7050() &&
             pArrow->field_18.field_10.field_30_gang == pGang)
         {
@@ -992,21 +990,21 @@ void Hud_Arrow_7C_Array::DrawArrows_5D0E90()
     if (IsNetworkGame_434B10())
     {
         // Limit drawn arrows in multiplayer
-        for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
+        for (auto& i : field_0_array)
         {
-            if (field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30() == nullptr ||
-                field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020() == nullptr ||
-                field_0_array[i].field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020()->field_21C_bf.bInvisible == 0)
+            if (i.field_18.field_18_primary_target.GetTargetPlayer_4C6F30() == nullptr ||
+                i.field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020() == nullptr ||
+                i.field_18.field_18_primary_target.GetTargetPlayer_4C6F30()->GetPlayerPed_41D020()->field_21C_bf.bInvisible == 0)
             {
-                field_0_array[i].DrawArrow_5D0C90();
+                i.DrawArrow_5D0C90();
             }
         }
     }
     else
     {
-        for (s32 i = 0; i < 17; i++)
+        for (auto& i : field_0_array)
         {
-            field_0_array[i].DrawArrow_5D0C90();
+            i.DrawArrow_5D0C90();
         }
     }
 }
@@ -1054,17 +1052,17 @@ bool Hud_Arrow_7C_Array::IsThereAnyMissionPhoneArrowForGang_5D0F40(Gang_144* pAr
 // 0x5d0f80
 void Hud_Arrow_7C_Array::ClearOrphanInfoPhoneArrows_5D0F80()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
+    for (auto& i : field_0_array)
     {
-        if (!field_0_array[i].IsType0_4C6F80())
+        if (!i.IsType0_4C6F80())
         {
-            if (field_0_array[i].field_18.field_10.field_30_gang)
+            if (i.field_18.field_10.field_30_gang)
             {
-                if (field_0_array[i].field_18.field_60_curr_target->field_10_target_type == ArrowTargetType::InfoPhone_5 &&
-                    !IsThereAnyMissionPhoneArrowForGang_5D0F40(field_0_array[i].field_18.field_10.field_30_gang))
+                if (i.field_18.field_60_curr_target->field_10_target_type == ArrowTargetType::InfoPhone_5 &&
+                    !IsThereAnyMissionPhoneArrowForGang_5D0F40(i.field_18.field_10.field_30_gang))
                 {
-                    field_0_array[i].field_18.field_18_primary_target.field_10_target_type = ArrowTargetType::Nothing_0;
-                    field_0_array[i].field_18.field_3C_secondary_target.field_10_target_type = ArrowTargetType::Nothing_0;
+                    i.field_18.field_18_primary_target.field_10_target_type = ArrowTargetType::Nothing_0;
+                    i.field_18.field_3C_secondary_target.field_10_target_type = ArrowTargetType::Nothing_0;
                 }
             }
         }
@@ -1078,11 +1076,11 @@ void Hud_Arrow_7C_Array::UpdateArrows_5D0FD0()
 {
     FindVisibleGangArrow_5D0EF0();
 
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
+    for (auto& i : field_0_array)
     {
-        if (!field_0_array[i].IsType0_4C6F80())
+        if (!i.IsType0_4C6F80())
         {
-            field_0_array[i].Service_5D0C60();
+            i.Service_5D0C60();
         }
     }
 
@@ -1124,14 +1122,14 @@ Hud_Arrow_7C* Hud_Arrow_7C_Array::AllocArrow_5D1050()
 // 0x5d10b0
 void Hud_Arrow_7C_Array::ReleaseAllArrows_5D10B0()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_array); i++)
+    for (auto& i : field_0_array)
     {
-        if (field_0_array[i].field_18.field_10.field_6_in_use)
+        if (i.field_18.field_10.field_6_in_use)
         {
-            field_0_array[i].field_18.field_18_primary_target.field_10_target_type = ArrowTargetType::Nothing_0;
-            field_0_array[i].field_18.field_3C_secondary_target.field_10_target_type = ArrowTargetType::Nothing_0;
+            i.field_18.field_18_primary_target.field_10_target_type = ArrowTargetType::Nothing_0;
+            i.field_18.field_3C_secondary_target.field_10_target_type = ArrowTargetType::Nothing_0;
 
-            field_0_array[i].field_18.field_10.field_6_in_use = 0;
+            i.field_18.field_10.field_6_in_use = 0;
         }
     }
 }
@@ -1883,9 +1881,9 @@ void Hud_Pager_C_Array::DrawPagers_5D3040()
     s32 width = (get_sprite_width_4C7220(117) / 2) + 3;
 
     s32 ypos = gGameSession_67E8E0.IsBonusStage_4C59A0() ? 36 : 104;
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_pagers_array); i++)
+    for (auto& i : field_0_pagers_array)
     {
-        field_0_pagers_array[i].DrawPager_5D2AB0(width, ypos);
+        i.DrawPager_5D2AB0(width, ypos);
         ypos += totalSpriteHeight;
     }
 }
@@ -1893,9 +1891,9 @@ void Hud_Pager_C_Array::DrawPagers_5D3040()
 // 0x5d31b0
 void Hud_Pager_C_Array::UpdatePagers_5D31B0()
 {
-    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_pagers_array); i++)
+    for (auto& i : field_0_pagers_array)
     {
-        field_0_pagers_array[i].Service_5D2320();
+        i.Service_5D2320();
     }
 }
 

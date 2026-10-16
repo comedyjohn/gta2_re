@@ -317,9 +317,7 @@ class Hud_Pager_C_Array
 {
   public:
     // inline 0x4CA660
-    Hud_Pager_C_Array()
-    {
-    }
+    Hud_Pager_C_Array() = default;
 
     // TODO: Correct order ?
     s32 AddOnScreenCounter_5D3220(s32* pCounter);

@@ -490,11 +490,11 @@ CarRemapRng_2::CarRemapRng_2()
             gRngRemapTable_679320[i] = i;
         }
 
-        for (u16 j = 0; j < 1000; j++)
+        for (unsigned short & j : gRngRemapTable_679320)
         {
             u16 idx = gRng_6F6784.get_int_4F7AE0(1000);
-            s16 next = gRngRemapTable_679320[j];
-            gRngRemapTable_679320[j] = gRngRemapTable_679320[idx];
+            s16 next = j;
+            j = gRngRemapTable_679320[idx];
             gRngRemapTable_679320[idx] = next;
         }
     }
@@ -872,7 +872,7 @@ Car_BC* CarManager_6C::DoGetNearestCarFromCoord_444FC0(Fix16 xpos,
                                                 char_type bIgnorePedRestrictions)
 {
     // 9.6f calls sub_421D80 and sub_421DF0 here, which are HasSpriteZoom_43A230 and IsCarInAir_43A3C0 (not inlined in 10.5)
-    Fix16 smallestDist = Fix16(0x300);
+    auto smallestDist = Fix16(0x300);
     Car_BC* pNearestCar = nullptr;
     for (Car_BC* pCarIter = gCar_BC_Pool_67792C->GetFirstCar_420E50(); pCarIter; pCarIter = pCarIter->mpNext)
     {

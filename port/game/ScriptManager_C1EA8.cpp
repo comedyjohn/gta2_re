@@ -98,8 +98,8 @@ void ScriptManager_C1EA8::SetGeneratorTypeForCar_511A70(s32 car_model, Generator
 // 0x511b10
 char_type ScriptManager_C1EA8::AddCranePowerupTrigger_511B10(s16 idx)
 {
-    SCR_DECLARE_CRANE_POWERUP* pCmd = (SCR_DECLARE_CRANE_POWERUP*)GetBasePointer_512770(idx);
-    SCR_POINTER* pGenerator = (SCR_POINTER*)GetBasePointer_512770(pCmd->field_A_generator);
+    auto* pCmd = (SCR_DECLARE_CRANE_POWERUP*)GetBasePointer_512770(idx);
+    auto* pGenerator = (SCR_POINTER*)GetBasePointer_512770(pCmd->field_A_generator);
     return gCarThreadTriggers_214_705F20->AddThreadTrigger_5C86C0(1,
                                        3,
                                        (SCR_THREAD*)pGenerator->field_8_generator,
@@ -118,7 +118,7 @@ void ScriptManager_C1EA8::SaveScriptCounters_511B90()
     {
         if (field_46C_base_pointers[ptr])
         {
-            SCR_POINTER* pPointer = (SCR_POINTER*)GetBasePointer_512770(ptr);
+            auto* pPointer = (SCR_POINTER*)GetBasePointer_512770(ptr);
             if (pPointer->field_2_type == SCRCMD_COUNTER_SAVE || pPointer->field_2_type == SCRCMD_COUNTER_SET_SAVE)
             {
                 gGameSave_6F78C8.field_E4_car_and_script_data.field_50_script_counter[saved_counter_count].field_0_pointer =
@@ -143,12 +143,12 @@ void ScriptManager_C1EA8::SaveScriptCounters_511B90()
 // 0x511c30
 void ScriptManager_C1EA8::LoadScriptCounters_511C30()
 {
-    for (u16 saved_counter_idx = 0; saved_counter_idx < 300; saved_counter_idx++)
+    for (auto& saved_counter_idx : gGameSave_6F78C8.field_E4_car_and_script_data.field_50_script_counter)
     {
-        SavedScriptCounter_4* pStruct = &gGameSave_6F78C8.field_E4_car_and_script_data.field_50_script_counter[saved_counter_idx];
+        SavedScriptCounter_4* pStruct = &saved_counter_idx;
         if (pStruct->field_0_pointer > 0)
         {
-            SCR_POINTER* pPointer = (SCR_POINTER*)GetBasePointer_512770(pStruct->field_0_pointer);
+            auto* pPointer = (SCR_POINTER*)GetBasePointer_512770(pStruct->field_0_pointer);
             pPointer->field_8_counter = pStruct->field_2_saved_value;
         }
     }
@@ -162,7 +162,7 @@ void ScriptManager_C1EA8::RestoreAnsweredPhones_511C60()
     {
         if (((1u << bit) & gGameSave_6F78C8.field_E4_car_and_script_data.field_48_flags) != 0)
         {
-            SCR_POINTER* pPointer = (SCR_POINTER*)GetBasePointer_512770(field_C1E32_phone_ids[bit]);
+            auto* pPointer = (SCR_POINTER*)GetBasePointer_512770(field_C1E32_phone_ids[bit]);
             pPointer->field_8_obj->PoolGiveAndSetDone_5291E0(174);
             gScriptManager_6F8060->RemovePhoneThreadByObjId_512AA0(pPointer->field_8_obj->field_14_id);
         }
@@ -583,7 +583,7 @@ bool ScriptManager_C1EA8::TriggerCarThread_512910(s32 ped_id, s32 obj_f14)
     ThreadTrigger_C* pThread = ScriptManager_C1EA8::FindCarThread_5128A0(ped_id, obj_f14);
     if (pThread)
     {
-        SCR_THREAD* pPtr = (SCR_THREAD*)GetBasePointer_512770(pThread->field_8_cmd_line);
+        auto* pPtr = (SCR_THREAD*)GetBasePointer_512770(pThread->field_8_cmd_line);
         pPtr->field_8_script_thread = SpawnThread_5120C0(pPtr->field_E_thread_start_cmd, 0);
 
         if (pPtr->field_8_script_thread)
@@ -634,7 +634,7 @@ bool ScriptManager_C1EA8::AnswerPhone_5129F0(s32 ped_idx, s32 phone_idx)
     ThreadTrigger_C* pThrdHeader = ScriptManager_C1EA8::FindPhoneThread_512980(ped_idx, phone_idx);
     if (pThrdHeader)
     {
-        SCR_THREAD* pPtr = (SCR_THREAD*)GetBasePointer_512770(pThrdHeader->field_8_cmd_line);
+        auto* pPtr = (SCR_THREAD*)GetBasePointer_512770(pThrdHeader->field_8_cmd_line);
         SCR_ANSWER_PHONE* pTriggerCmd;
 
         switch (pPtr->field_2_type)
@@ -876,7 +876,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     memset(field_27C_weapon_check_table, 0, sizeof(field_27C_weapon_check_table));
     memset((void*)&gGameSave_6F78C8, 0, sizeof(gGameSave_6F78C8));
 
-    Miss2_25C* pMiss2_25C = new Miss2_25C();
+    auto* pMiss2_25C = new Miss2_25C();
     gMiss2_25C_6F805C = pMiss2_25C;
     if (!pMiss2_25C)
     {

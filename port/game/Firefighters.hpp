@@ -60,9 +60,9 @@ class FirefighterPool_54
   public:
     FirefighterPool_54()
     {
-        for (s32 i = 0; i < 2; i++)
+        for (auto& firefighter : field_0_firefighters)
         {
-            field_0_firefighters[i].init_4A85C0();
+            firefighter.init_4A85C0();
         }
         ResetCount_4A88D0();
     }

@@ -1174,7 +1174,7 @@ s32 FileByteSum_4DB120(FILE* hFile)
 // 0x4DB2E0
 void MakeInitialSyncData_4DB2E0(u8* pSyncData)
 {
-    SyncCheckData_1F* pData = reinterpret_cast<SyncCheckData_1F*>(pSyncData);
+    auto* pData = reinterpret_cast<SyncCheckData_1F*>(pSyncData);
     struct _stat st;
 
     memset(pData, 0, sizeof(SyncCheckData_1F));
@@ -1235,8 +1235,8 @@ void FatalErrorMsg_4DB410(const char_type* pMsg)
 // 0x4DB440
 void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData)
 {
-    SyncCheckData_1F* pLocal = reinterpret_cast<SyncCheckData_1F*>(pLocalSyncData);
-    SyncCheckData_1F* pRemote = reinterpret_cast<SyncCheckData_1F*>(pRemoteSyncData);
+    auto* pLocal = reinterpret_cast<SyncCheckData_1F*>(pLocalSyncData);
+    auto* pRemote = reinterpret_cast<SyncCheckData_1F*>(pRemoteSyncData);
     char_type msg[260];
     char_type name[260];
     wchar_t wname[260];
@@ -1967,7 +1967,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
         case WM_WINDOWPOSCHANGING:
         {
-            WINDOWPOS* pPos = reinterpret_cast<WINDOWPOS*>(lParam);
+            auto* pPos = reinterpret_cast<WINDOWPOS*>(lParam);
             if (gFrontend_67DC84 && (pPos->flags & 2) == 0)
             {
                 newX = pPos->x;

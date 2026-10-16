@@ -36,12 +36,12 @@ void CarChaseTask_40::ResetEntry_4747B0()
 // 0x474810
 CarChaseTask_40* CarChaseTaskTable_500::AllocateEntry_474810()
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (!field_0_entries[i].field_0_in_use)
+        if (!entry.field_0_in_use)
         {
-            field_0_entries[i].field_0_in_use = 1;
-            return &field_0_entries[i];
+            entry.field_0_in_use = 1;
+            return &entry;
         }
     }
     return nullptr;
@@ -70,12 +70,12 @@ bool CarChaseTaskTable_500::AreAllies_474850(Ped* pPed1, Ped* pPed2)
 // 0x4748a0
 Ped* CarChaseTaskTable_500::FindDriverInState_4748A0(s32 chase_state, Ped* pTargetPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1 && field_0_entries[i].field_30_pTargetPed == pTargetPed && AreAllies_474850(pTargetPed, field_0_entries[i].field_4_pDriver) &&
-            chase_state == field_0_entries[i].field_C_chase_state)
+        if (entry.field_0_in_use == 1 && entry.field_30_pTargetPed == pTargetPed && AreAllies_474850(pTargetPed, entry.field_4_pDriver) &&
+            chase_state == entry.field_C_chase_state)
         {
-            return field_0_entries[i].field_4_pDriver;
+            return entry.field_4_pDriver;
         }
     }
     return nullptr;
@@ -85,11 +85,11 @@ Ped* CarChaseTaskTable_500::FindDriverInState_4748A0(s32 chase_state, Ped* pTarg
 u8 CarChaseTaskTable_500::CountPursuers_474920(Ped* pTargetPed, Ped* pPed)
 {
     u8 total = 0;
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1 && field_0_entries[i].field_30_pTargetPed == pTargetPed)
+        if (entry.field_0_in_use == 1 && entry.field_30_pTargetPed == pTargetPed)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
                 total++;
             }
@@ -101,9 +101,9 @@ u8 CarChaseTaskTable_500::CountPursuers_474920(Ped* pTargetPed, Ped* pPed)
 // 0x474970
 bool CarChaseTaskTable_500::HasAnyPursuer_474970(Ped* pTargetPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1 && field_0_entries[i].field_30_pTargetPed == pTargetPed)
+        if (entry.field_0_in_use == 1 && entry.field_30_pTargetPed == pTargetPed)
         {
             return true;
         }
@@ -114,13 +114,13 @@ bool CarChaseTaskTable_500::HasAnyPursuer_474970(Ped* pTargetPed)
 // 0x4749b0
 bool CarChaseTaskTable_500::HasPursuerInFront_4749B0(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
-                switch (field_0_entries[i].field_C_chase_state)
+                switch (entry.field_C_chase_state)
                 {
                     case car_chase_state::in_front_stopping_13:
                     case car_chase_state::target_stopped_15:
@@ -135,11 +135,11 @@ bool CarChaseTaskTable_500::HasPursuerInFront_4749B0(Ped* pPed)
 // 0x474a20
 bool CarChaseTaskTable_500::HasPursuerAlongsideLeft_474A20(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver) && field_0_entries[i].field_C_chase_state == car_chase_state::alongside_left_8)
+            if (AreAllies_474850(pPed, entry.field_4_pDriver) && entry.field_C_chase_state == car_chase_state::alongside_left_8)
             {
                 return true;
             }
@@ -151,13 +151,13 @@ bool CarChaseTaskTable_500::HasPursuerAlongsideLeft_474A20(Ped* pPed)
 // 0x474a80
 bool CarChaseTaskTable_500::HasPursuerOnLeft_474A80(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
-                switch (field_0_entries[i].field_C_chase_state)
+                switch (entry.field_C_chase_state)
                 {
                     case car_chase_state::approach_left_6:
                     case car_chase_state::alongside_left_8:
@@ -173,11 +173,11 @@ bool CarChaseTaskTable_500::HasPursuerOnLeft_474A80(Ped* pPed)
 // 0x474af0
 bool CarChaseTaskTable_500::HasPursuerAlongsideRight_474AF0(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver) && field_0_entries[i].field_C_chase_state == car_chase_state::alongside_right_9)
+            if (AreAllies_474850(pPed, entry.field_4_pDriver) && entry.field_C_chase_state == car_chase_state::alongside_right_9)
             {
                 return true;
             }
@@ -189,13 +189,13 @@ bool CarChaseTaskTable_500::HasPursuerAlongsideRight_474AF0(Ped* pPed)
 // 0x474b50
 bool CarChaseTaskTable_500::HasPursuerOnRight_474B50(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
-                switch (field_0_entries[i].field_C_chase_state)
+                switch (entry.field_C_chase_state)
                 {
                     case car_chase_state::approach_right_7:
                         return true;
@@ -212,13 +212,13 @@ bool CarChaseTaskTable_500::HasPursuerOnRight_474B50(Ped* pPed)
 // 0x474bc0
 bool CarChaseTaskTable_500::HasPursuerAlongside_474BC0(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
-                if (field_0_entries[i].field_C_chase_state >= car_chase_state::approach_left_6 && (field_0_entries[i].field_C_chase_state <= car_chase_state::alongside_right_9 || field_0_entries[i].field_C_chase_state == car_chase_state::in_front_stopping_13))
+                if (entry.field_C_chase_state >= car_chase_state::approach_left_6 && (entry.field_C_chase_state <= car_chase_state::alongside_right_9 || entry.field_C_chase_state == car_chase_state::in_front_stopping_13))
                 {
                     return true;
                 }
@@ -231,18 +231,18 @@ bool CarChaseTaskTable_500::HasPursuerAlongside_474BC0(Ped* pPed)
 // 0x474c30
 char_type CarChaseTaskTable_500::HasPursuerChoosingSide_474C30(Ped* pPed)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (field_0_entries[i].field_0_in_use == 1)
+        if (entry.field_0_in_use == 1)
         {
-            if (AreAllies_474850(pPed, field_0_entries[i].field_4_pDriver))
+            if (AreAllies_474850(pPed, entry.field_4_pDriver))
             {
-                if (field_0_entries[i].field_C_chase_state < car_chase_state::move_right_4)
+                if (entry.field_C_chase_state < car_chase_state::move_right_4)
                 {
                     continue;
                 }
 
-                if (field_0_entries[i].field_C_chase_state <= car_chase_state::choose_side_5)
+                if (entry.field_C_chase_state <= car_chase_state::choose_side_5)
                 {
                     return 1;
                 }
@@ -259,30 +259,24 @@ CarChaseTask_40::CarChaseTask_40()
 }
 
 // 0x474cb0
-CarChaseTask_40::~CarChaseTask_40()
-{
-}
+CarChaseTask_40::~CarChaseTask_40() = default;
 
 // 0x474cc0
 void CarChaseTaskTable_500::FreeEntry_474CC0(CarChaseTask_40* toFind)
 {
-    for (u8 i = 0; i < k_max_entries; i++)
+    for (auto& entry : field_0_entries)
     {
-        if (&field_0_entries[i] == toFind)
+        if (&entry == toFind)
         {
-            field_0_entries[i].field_0_in_use = 0;
-            field_0_entries[i].ResetEntry_4747B0();
+            entry.field_0_in_use = 0;
+            entry.ResetEntry_4747B0();
             return;
         }
     }
 }
 
 // 0x474d10
-CarChaseTaskTable_500::CarChaseTaskTable_500()
-{
-}
+CarChaseTaskTable_500::CarChaseTaskTable_500() = default;
 
 // 0x474d30
-CarChaseTaskTable_500::~CarChaseTaskTable_500()
-{
-}
+CarChaseTaskTable_500::~CarChaseTaskTable_500() = default;

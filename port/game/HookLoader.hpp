@@ -22,7 +22,7 @@ class FunctionCollector
 
     bool IsOgFunctionAddr(u32 addr)
     {
-      std::map<std::string, FuncMeta>::iterator it = mFunctionsToHookMap.begin();
+      auto it = mFunctionsToHookMap.begin();
       while (it != mFunctionsToHookMap.end())
       {
         if (it->second.mOgAddr == addr)

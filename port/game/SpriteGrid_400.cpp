@@ -861,9 +861,9 @@ void SpriteGrid_400::DebugLog_478950(s32 x_pos, s32 y_pos)
 // 0x4789f0
 GridCell_C** SpriteGrid_400::Clear_4789F0()
 {
-    for (u32 i = 0; i < GTA2_COUNTOF(field_0_rows); i++)
+    for (auto& row : field_0_rows)
     {
-        field_0_rows[i] = nullptr;
+        row = nullptr;
     }
     return field_0_rows;
 }

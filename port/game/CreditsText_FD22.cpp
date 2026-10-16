@@ -10,8 +10,7 @@ CreditsText_FD22::CreditsText_FD22() // 483E70
 
 // 0x483EA0
 CreditsText_FD22::~CreditsText_FD22() // 483EA0
-{
-}
+= default;
 
 // 0x483EC0
 wchar_t CreditsText_FD22::ReadNextNonBlankChar_483EC0(const wchar_t* pStr, u16* pStartPos, bool bStopAtSpace)

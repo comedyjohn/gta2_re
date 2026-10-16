@@ -12,9 +12,9 @@ class Mike_78
 
     void Clear()
     {
-        for (s32 i = 0; i < 30; i++)
+        for (int & i : field_0)
         {
-            field_0[i] = 0;
+            i = 0;
         }
     }
 };

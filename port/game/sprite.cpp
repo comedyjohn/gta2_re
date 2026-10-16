@@ -2620,9 +2620,7 @@ SpriteShape_4C::SpriteShape_4C()
 }
 
 // 0x5a5840
-SpriteShape_4C::~SpriteShape_4C()
-{
-}
+SpriteShape_4C::~SpriteShape_4C() = default;
 
 // 0x5a5860
 void SpriteManager_8::ResetDrawnSpriteCount_5A5860()
@@ -2704,9 +2702,7 @@ AttachedSpritePool::~AttachedSpritePool()
 }
 
 // 0x5a5c40
-AttachedSprite_18::~AttachedSprite_18()
-{
-}
+AttachedSprite_18::~AttachedSprite_18() = default;
 
 // 0x5a5c50
 AttachedSprite_18::AttachedSprite_18()

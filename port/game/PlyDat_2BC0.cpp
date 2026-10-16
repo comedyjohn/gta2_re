@@ -224,11 +224,11 @@ void PlySlot_A4::ResetPlayerSlot_56B630()
 
     for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
-        for (u32 j = 0; j < 4; j++)
+        for (auto& stage_stat : plyr_stage_stat)
         {
-            plyr_stage_stat[j].field_0_is_stage_unlocked = false;
-            plyr_stage_stat[j].field_4_stage_best_score = 0;
-            plyr_stage_stat[j].field_8_stage_latest_score = 0;
+            stage_stat.field_0_is_stage_unlocked = false;
+            stage_stat.field_4_stage_best_score = 0;
+            stage_stat.field_8_stage_latest_score = 0;
         }
     }
     field_0_plyr_stage_stats[0][0].field_0_is_stage_unlocked = true;
@@ -241,9 +241,9 @@ s32 PlySlot_A4::GetTotalLatestScore_56B680()
 
     for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
-        for (u32 j = 0; j < 4; j++)
+        for (auto& stage_stat : plyr_stage_stat)
         {
-            result += plyr_stage_stat[j].field_8_stage_latest_score;
+            result += stage_stat.field_8_stage_latest_score;
         }
     }
     return result;
@@ -256,9 +256,9 @@ s32 PlySlot_A4::GetTotalBestScore_56B6B0()
 
     for (auto& plyr_stage_stat : field_0_plyr_stage_stats)
     {
-        for (u32 j = 0; j < 4; j++)
+        for (auto& stage_stat : plyr_stage_stat)
         {
-            result += plyr_stage_stat[j].field_4_stage_best_score;
+            result += stage_stat.field_4_stage_best_score;
         }
     }
     return result;
@@ -382,16 +382,16 @@ void PlyDat_2BC0::LoadPlySlotDat_56B990(u16 slotIdx)
 
     for (auto& plyr_stage_stat : field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats)
     {
-        for (s32 j = 0; j < 4; j++)
+        for (auto& stage_stat : plyr_stage_stat)
         {
             u32 len_read = 1;
-            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_0_is_stage_unlocked, len_read);
+            File::Global_Read_4A71C0(&stage_stat.field_0_is_stage_unlocked, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_4_stage_best_score, len_read);
+            File::Global_Read_4A71C0(&stage_stat.field_4_stage_best_score, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&plyr_stage_stat[j].field_8_stage_latest_score, len_read);
+            File::Global_Read_4A71C0(&stage_stat.field_8_stage_latest_score, len_read);
         }
     }
     File::Global_Close_4A70C0();
@@ -416,15 +416,15 @@ void PlyDat_2BC0::SavePlySlotDat_56BA60(s16 slotIdx)
     u8* pDst = reinterpret_cast<u8*>(this) + sizeof(field_26A0_plyr_stats[0].field_90_strPlayerName);
     for (auto& plyr_stage_stat : field_26A0_plyr_stats[static_cast<u16>(slotIdx)].field_0_plyr_stage_stats)
     {
-        for (s32 j = 0; j < 4; j++)
+        for (auto& stage_stat : plyr_stage_stat)
         {
-            *pDst = plyr_stage_stat[j].field_0_is_stage_unlocked;
+            *pDst = stage_stat.field_0_is_stage_unlocked;
             pDst++;
             len++;
-            *reinterpret_cast<u32*>(pDst) = plyr_stage_stat[j].field_4_stage_best_score;
+            *reinterpret_cast<u32*>(pDst) = stage_stat.field_4_stage_best_score;
             pDst += 4;
             len += 4;
-            *reinterpret_cast<s32*>(pDst) = plyr_stage_stat[j].field_8_stage_latest_score;
+            *reinterpret_cast<s32*>(pDst) = stage_stat.field_8_stage_latest_score;
             pDst += 4;
             len += 4;
         }
@@ -479,9 +479,9 @@ void PlyDat_2BC0::UnlockAllStages_56BC40()
     PlySlot_A4* pStats = &this->field_26A0_plyr_stats[slot_idx];
     for (auto& plyr_stage_stat : pStats->field_0_plyr_stage_stats)
     {
-        for (s32 k4 = 0; k4 < 4; k4++)
+        for (auto& k4 : plyr_stage_stat)
         {
-            plyr_stage_stat[k4].field_0_is_stage_unlocked = 1;
+            k4.field_0_is_stage_unlocked = 1;
         }
     }
 
@@ -695,12 +695,12 @@ void PlyDat_2BC0::InitDefaultHiScores_56C1D0()
     ScoreTableLine_18* pSruIter = gDefaultStageHiScores_6243A0;
     for (auto& stage_score : field_1890_stage_scores)
     {
-        for (s32 k4 = 0; k4 < 4; k4++)
+        for (auto& k4 : stage_score)
         {
-            stage_score[k4].Init_56B520();
+            k4.Init_56B520();
             for (s32 k10 = 0; k10 < 10; k10++)
             {
-                stage_score[k4].InsertScore_56B550(pSruIter->field_0_player_name, pSruIter->field_14_score);
+                k4.InsertScore_56B550(pSruIter->field_0_player_name, pSruIter->field_14_score);
                 ++pSruIter;
             }
         }

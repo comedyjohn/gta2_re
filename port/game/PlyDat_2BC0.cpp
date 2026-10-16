@@ -327,11 +327,6 @@ PlyDat_2BC0::PlyDat_2BC0()
     InitAltHiScores_56BD20();
 }
 
-// Defined after ~HighScoreTable_F0 so VC6 knows that destructor can't throw and
-// drops the EH state updates between the calls to it.
-// 0x56B810
-PlyDat_2BC0::~PlyDat_2BC0() = default;
-
 // 0x56B8A0
 void PlyDat_2BC0::GetPlySlotDatName_56B8A0(u16 slot_idx, char_type* pName)
 {

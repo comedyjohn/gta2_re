@@ -68,7 +68,7 @@ struct PlyDat_2BC0
     PlySlot_A4 field_26A0_plyr_stats[8];
 
     PlyDat_2BC0();
-    ~PlyDat_2BC0();
+    ~PlyDat_2BC0() = default; // 0x56B810
 
     // todo: ordering
     void UpdateStageScore_56BB10(Player* pPlayer);

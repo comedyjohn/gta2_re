@@ -477,9 +477,6 @@ void InitCodeObjectTemplates()
     printf("CodeObjectTemplate_6C array loaded!\n");
 }
 
-// 0x4bdf40
-ObjectDefinitions_8CA8::~ObjectDefinitions_8CA8() = default;
-
 // 0x531860
 CodeObjectTemplate_6C::CodeObjectTemplate_6C(u32 param_1,
                u8 param_2,

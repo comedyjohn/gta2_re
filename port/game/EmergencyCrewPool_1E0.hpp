@@ -68,7 +68,7 @@ class EmergencyCrewPool_1E0
     {
         init_5CBB70();
     }
-    ~EmergencyCrewPool_1E0();
+    ~EmergencyCrewPool_1E0() = default; // 0x4beb20
     void init_5CBB70();
     EmergencyCrew_30* AllocateSlot_5CBB80();
     void ServiceAll_5CBBD0();

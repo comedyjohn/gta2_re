@@ -135,7 +135,7 @@ class GangPool_CA8
   public:
     GangPool_CA8() = default;
 
-    ~GangPool_CA8();
+    ~GangPool_CA8() = default; // 0x4be500
     Gang_144* FirstGang_4BECA0();
     Gang_144* NextGang_4BECE0();
     Gang_144* FindGangByName_4BF100(const char* pGangName);

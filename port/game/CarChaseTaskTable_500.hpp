@@ -66,7 +66,7 @@ class CarChaseTaskTable_500
     char_type HasPursuerChoosingSide_474C30(Ped* pPed);
     void FreeEntry_474CC0(CarChaseTask_40* pEntry);
     CarChaseTaskTable_500();
-    ~CarChaseTaskTable_500();
+    ~CarChaseTaskTable_500() = default; // 0x474d30
 
     CarChaseTask_40 field_0_entries[k_max_entries];
 };

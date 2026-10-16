@@ -53,7 +53,7 @@ class Ambulance_110
         init_4FA310();
     }
 
-    ~Ambulance_110();
+    ~Ambulance_110() = default; // 0x4beae0
     void init_4FA310();
     bool HandlePedDeath_4FA330(Ped* pDeadPed);
     bool TryAddPatient_4FA470(Ped* pPed);

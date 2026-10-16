@@ -283,7 +283,7 @@ class ObjectDefinitions_8CA8
         k_max_definitions = 300
     };
 
-    ~ObjectDefinitions_8CA8();
+    ~ObjectDefinitions_8CA8() = default; // 0x4bdf40
     ObjectDefinition_74* AllocDefinitionWithSprite_5332D0(s32 idx, s32 sprite_type, s16 sprite_palette, u8 anim_speed);
     void CreateMapObjectDefinitions_533300();
     void ApplyMapObjectOverrides_533360();

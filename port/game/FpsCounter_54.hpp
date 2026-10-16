@@ -10,7 +10,7 @@ class FpsCounter_54
   public:
     void ShowFps_5BEC30();
     FpsCounter_54();
-    ~FpsCounter_54();
+    ~FpsCounter_54() = default; // 0x5BECC0
     void UpdateFpsCounters_5BECF0(char_type bDrewFrame, char_type bUpdatedLogic);
 
     // Update (game logic) counter: field_0 counts updates, every 100 the rate is recomputed

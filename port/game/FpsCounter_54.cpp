@@ -29,9 +29,6 @@ FpsCounter_54::FpsCounter_54()
     field_10_draw_start_time = timeGetTime();
 }
 
-// 0x5BECC0
-FpsCounter_54::~FpsCounter_54() = default;
-
 // 0x5BECF0
 void FpsCounter_54::UpdateFpsCounters_5BECF0(char_type bDrewFrame, char_type bUpdatedLogic)
 {

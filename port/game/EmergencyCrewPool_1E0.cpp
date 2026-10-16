@@ -13,9 +13,6 @@ EmergencyCrew_30::EmergencyCrew_30()
     Init_5CBC00();
 }
 
-// 0x4beb20
-EmergencyCrewPool_1E0::~EmergencyCrewPool_1E0() = default;
-
 // 0x5cbb70
 void EmergencyCrewPool_1E0::init_5CBB70()
 {

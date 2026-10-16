@@ -61,9 +61,6 @@ CrimeReportQueue_CC::CrimeReportQueue_CC()
     field_2_read_idx = 0;
 }
 
-// 0x484db0
-CrimeReportQueue_CC::~CrimeReportQueue_CC() = default;
-
 // 0x484dd0
 void CrimeReportQueue_CC::QueueReport(s32 crime_type, s32 ped_id)
 {
@@ -131,9 +128,6 @@ bool CrimeReportQueue_CC::IsCrimeQueued(s32 crime_type)
 
 // 0x484fc0
 CrimeReportQueue_CC_Sub::CrimeReportQueue_CC_Sub() = default;
-
-// 0x484fd0
-CrimeReportQueue_CC_Sub::~CrimeReportQueue_CC_Sub() = default;
 
 // https://decomp.me/scratch/0XcCw
 // 0x484fe0

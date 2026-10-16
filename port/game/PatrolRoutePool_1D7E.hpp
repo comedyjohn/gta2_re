@@ -28,7 +28,7 @@ class PatrolRoute_96
     };
 
 
-    ~PatrolRoute_96();
+    ~PatrolRoute_96() = default; // 0x4bdf90
     void sub_543EC0();
     PatrolRoute_96();
     PatrolPoint_3 field_0_points[k_max_points];
@@ -44,7 +44,7 @@ class PatrolRoutePool_1D7E
     };
 
 
-    ~PatrolRoutePool_1D7E();
+    ~PatrolRoutePool_1D7E() = default; // 0x4bdf70
     PatrolRoutePool_1D7E();
     PatrolRoute_96* AllocPatrolList_543F10(u8* pRet);
     PatrolRoute_96 field_0_routes[k_max_routes];

@@ -29,7 +29,7 @@ class CrimeReportQueue_CC
 {
   public:
     CrimeReportQueue_CC();
-    ~CrimeReportQueue_CC();
+    ~CrimeReportQueue_CC() = default; // 0x484db0
     void QueueReport(s32 crime_type, s32 ped_id);
     bool TryPopOldestReport(s32* pCrimeType, Fix16* pXPos, Fix16* pYPos, Fix16* pZPos);
     bool IsCrimeQueued(s32 crime_type);
@@ -48,7 +48,7 @@ class CrimeReportQueue_CC
 class CrimeReportQueue_CC_Sub : public CrimeReportQueue_CC {
   public:
     CrimeReportQueue_CC_Sub();
-    ~CrimeReportQueue_CC_Sub();
+    ~CrimeReportQueue_CC_Sub() = default; // 0x484fd0
 };
 
 EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);

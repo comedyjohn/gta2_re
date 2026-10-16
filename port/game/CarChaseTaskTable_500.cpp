@@ -274,6 +274,3 @@ void CarChaseTaskTable_500::FreeEntry_474CC0(CarChaseTask_40* toFind)
 
 // 0x474d10
 CarChaseTaskTable_500::CarChaseTaskTable_500() = default;
-
-// 0x474d30
-CarChaseTaskTable_500::~CarChaseTaskTable_500() = default;

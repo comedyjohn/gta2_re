@@ -24,7 +24,7 @@ class PlayerCrimeStats_3C
 {
   public:
     PlayerCrimeStats_3C(); // 0x484ED0
-    ~PlayerCrimeStats_3C(); // 0x484EE0
+    ~PlayerCrimeStats_3C() = default; // 0x484EE0
     void Reset_484EF0();
     void Service_484F20();
     void ResetCrimeCountFlags_484F30();

@@ -1517,7 +1517,7 @@ void Char_B4::UpdateAnimState_546360()
                 case 12:
                 case 13:
                     field_7C_pPed->TakeDamage(4);
-                    // fall through
+                    [[fallthrough]];
                 case 0:
                 case 1:
                 case 2:

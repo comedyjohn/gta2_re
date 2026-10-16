@@ -3747,7 +3747,7 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
                 }
                 break;
             }
-            // fall through
+            [[fallthrough]];
 
         case SoundObjectTypeEnum::Unknown_2:
             field_3 = 0;

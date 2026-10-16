@@ -672,6 +672,7 @@ void PoliceCrew_38::State3_AlertedSearch_572340()
                     break;
                 case crew_type::swat_5:
                     PoliceCrew_38::SpawnSWAT_570E30();
+                    break;
                 default:
                     break;
             }
@@ -889,6 +890,7 @@ void PoliceCrew_38::State5_PursueOrChase_572920()
                         break;
                     case crew_type::swat_5:
                         PoliceCrew_38::SpawnSWAT_570E30();
+                        break;
                     default:
                         break;
                 }

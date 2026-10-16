@@ -1518,7 +1518,7 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
                     return !pCar->IsTrainModel_403BA0();
                 }
             }
-            // Fall through
+            [[fallthrough]];
         default:
             if (gCollisionCounters_6791FC->field_8_bUnknown == 1)
             {

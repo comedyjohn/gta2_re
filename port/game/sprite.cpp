@@ -938,6 +938,7 @@ void Sprite::SetRemap(s16 remap)
             break;
         case sprite_types_enum::font_7:
             field_34_palette_type = palette_types_enum::font_remaps_8;
+            break;
         default:
             break;
     }

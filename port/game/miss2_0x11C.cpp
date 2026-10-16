@@ -2250,6 +2250,7 @@ void miss2_0x11C::SCRCMD_SET_DENSITY_508280()
             break;
         case SCRCMD_SET_GANGCARRATIO:
             gMap_0x370_6F6268->SetZoneGangCarRatio_4DFA50(pStrTable->field_2_zone_idx, pCmd->field_C_value);
+            break;
         default:
             break;
     }

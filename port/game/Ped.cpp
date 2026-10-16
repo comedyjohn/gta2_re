@@ -4482,7 +4482,7 @@ void Ped::SetObjective(s32 objective, s16 objective_timer)
             case objectives_enum::objective_32:
             case objectives_enum::follow_car_on_foot_with_offset_56:
                 SetObjective2_463830(objectives_enum::no_obj_0);
-                // fall through
+                [[fallthrough]];
             case objectives_enum::kill_frenzy_22:
                 mode = 3;
                 break;
@@ -6784,7 +6784,7 @@ void Ped::UpdateMovementTowardsTarget_4672E0(Fix16 distance, u8 type)
                         }
                         field_18C_current_path_point++;
                     }
-                    // fall through
+                    [[fallthrough]];
 
                 default:
                     // line 361

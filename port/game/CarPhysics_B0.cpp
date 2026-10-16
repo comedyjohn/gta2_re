@@ -961,7 +961,7 @@ Fix16 CarPhysics_B0::ComputeSlopeCorrection_55AB50(Fix16* pOutY)
     {
         case car_surface_type::slope_northwards_1:
             y_val = -y_val;
-            // fall through
+            [[fallthrough]];
         case car_surface_type::slope_southwards_2:
             x_val = y_val;
             break;

@@ -33,6 +33,11 @@ Read this first when picking the port up again. `README.md` explains how the por
 11. The 64-bit build starts a game: the light grid was allocated for 4-byte pointers and corrupted
     the heap. Found with AddressSanitizer.
 
+12. The controller overlay (`platform/overlay.cpp`): F1 legend of the bindings, F2 / Guide settings screen
+    that rebinds the twelve controls to pad buttons or keys (and a pad preset). Checked headless under
+    Xvfb with a pad connected; not yet played with an 8BitDo pad. The names of controls 9..11 come from
+    `Player::CharacterControls_566520`'s comments; check them against the game's options menu.
+
 ## Left to do
 
 The order follows what a player notices first.

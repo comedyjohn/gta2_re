@@ -3,6 +3,7 @@
 // events by the data format the game sets (the game defines its own: gKeyboardDataFormat_601A54,
 // gInputDeviceFormat_601A6C, gMouseDataFormat_601A84).
 #include "events.h"
+#include "overlay.h"
 #include "platform.h"
 
 #include <dinput.h>
@@ -232,7 +233,7 @@ class DirectInputDevice final : public IDirectInputDevice2A
         BYTE* out = static_cast<BYTE*>(data);
         if (mObjects.empty())
         {
-            if (mKind == Kind::Keyboard && size >= 256)
+            if (mKind == Kind::Keyboard && size >= 256 && !overlay::Captured())
             {
                 plat::GetKeyboardState(out);
             }
@@ -242,6 +243,10 @@ class DirectInputDevice final : public IDirectInputDevice2A
         if (mKind == Kind::Keyboard)
         {
             plat::GetKeyboardState(keys);
+            if (overlay::Captured())
+            {
+                memset(keys, 0, sizeof(keys));
+            }
         }
         for (Object& o : mObjects)
         {
@@ -483,6 +488,11 @@ class DirectInputDevice final : public IDirectInputDevice2A
                 }
                 plat::PadState pad;
                 plat::GetPadState(mPadIndex, pad);
+                if (overlay::Captured()) // the settings screen has the pad: the game sees it at rest
+                {
+                    memset(&pad, 0, sizeof(pad));
+                    pad.pov = -1;
+                }
                 switch (o.mSource)
                 {
                     case Source::AxisX:

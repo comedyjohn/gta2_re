@@ -35,6 +35,8 @@ class Registry
     s32 Set_Option_586F70(const char_type* lpValueName, s32 value);
 
     s32 Set_Control_Setting_587010(s32 control_idx, s32 value);
+    // Port: overwrites a control setting (Set_Control_Setting_587010 only fills in a missing one)
+    void Write_Control_Setting(s32 control_idx, s32 value);
 
     s32 Get_Screen_Setting_5870D0(const char_type* lpValueName, s32 default_value);
 

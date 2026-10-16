@@ -18,7 +18,18 @@ You need your own copy of GTA2: an installed game folder, or its installer (an I
 
 Settings are kept in `~/.config/gta2-native/registry.txt`; delete it to go back to the defaults.
 Alt+Enter switches between a window and fullscreen. Keyboards and game controllers work; the
-controls are set in the game's own options menu.
+controls are set in the game's own options menu, or in the port's overlay:
+
+- **F1** shows or hides a legend of what each control is bound to (shown by default when a controller
+  is connected).
+- **F2**, the controller's **Guide / Home** button, or **Back + Start** together opens the settings:
+  pick a control with Up/Down (or the d-pad), press Enter (or A) and then the pad button or key to
+  bind. Delete (or X) puts the control back on its key, **P** (or Y) binds the whole pad to a layout
+  that drives with the d-pad, **K** restores the keyboard keys. The game is paused from input while the
+  settings are open. Pad buttons are named by position, as on an Xbox pad: A bottom, B right, X left,
+  Y top (8BitDo pads in Switch mode label them differently).
+- The game binds each control to a key *or* a pad button, not both, so binding a pad button takes the
+  control off its key.
 
 The game plays its music from a `GTAUDIO` folder, which came on the original CD (the game looks for
 it as `GTAUDIO` on every drive letter). Copy that folder into the game folder, next to `data/`, to

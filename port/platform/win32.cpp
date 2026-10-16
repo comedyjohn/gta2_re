@@ -5,6 +5,7 @@
 // The registry is real, since the game keeps its settings there: a key/value store saved to
 // $XDG_CONFIG_HOME/gta2-native/registry.txt (or ~/.config/...).
 #include "events.h"
+#include "overlay.h"
 #include "path.h"
 #include "platform.h"
 #include "renderer.h"
@@ -455,6 +456,11 @@ void port_pump_events()
                 if (down && e.alt && e.vk == VK_RETURN)
                 {
                     plat::ToggleFullscreen();
+                    break;
+                }
+                // The controller overlay takes F1, F2 and, while its settings are open, the keys
+                if (e.dik && overlay::OnKey(e.dik, down))
+                {
                     break;
                 }
                 if (e.dik)

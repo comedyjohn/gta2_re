@@ -330,6 +330,21 @@ s32 Registry::Set_Control_Setting_587010(s32 control_idx, s32 value)
     return Data;
 }
 
+void Registry::Write_Control_Setting(s32 control_idx, s32 value)
+{
+    HKEY hKey;
+    Open_Control_Root_586D40(&hKey);
+
+    char_type ValueName[4];
+    sprintf(ValueName, "%d", static_cast<BYTE>(control_idx));
+    const DWORD data = value;
+    if (RegSetValueExA(hKey, ValueName, 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), sizeof(DWORD)) != ERROR_SUCCESS)
+    {
+        FatalError_4A38C0(Gta2Error::SetRegistryValueFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 0);
+    }
+    RegCloseKey(hKey);
+}
+
 // 0x5870D0
 s32 Registry::Get_Screen_Setting_5870D0(const char_type* lpValueName, s32 default_value)
 {

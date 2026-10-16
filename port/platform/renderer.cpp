@@ -9,6 +9,7 @@
 // scaled into the window, keeping 4:3 with black bars.
 #include "renderer.h"
 #include "gl.h"
+#include "overlay.h"
 #include "platform.h"
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp"
 
@@ -244,6 +245,7 @@ class GLRenderer
         {
             return;
         }
+        DrawOverlay();
         plat::SwapWindow();
         if (!mFreeLater.empty())
         {
@@ -255,6 +257,30 @@ class GLRenderer
         glClearColor(0, 0, 0, 1);
         glClear(GL_COLOR_BUFFER_BIT);
         SetViewport();
+    }
+
+    // The controller overlay (overlay.h), a 640x480 picture over the game's
+    void DrawOverlay()
+    {
+        const uint32_t* picture = overlay::Frame();
+        if (!picture)
+        {
+            return;
+        }
+        if (!mOverlayTexture)
+        {
+            mOverlayTexture = CreateTexture();
+        }
+        Upload(mOverlayTexture, 640, 480, reinterpret_cast<const DWORD*>(picture));
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        mFilter = GL_NEAREST;
+        const DWORD white = 0xFFFFFFFF;
+        const GLVertex quad[4] = {{0, 0, 0, 1, white, 0, 0},
+                                  {kGameWidth, 0, 0, 1, white, 1, 0},
+                                  {kGameWidth, kGameHeight, 0, 1, white, 1, 1},
+                                  {0, kGameHeight, 0, 1, white, 0, 1}};
+        Draw(quad, 4, mOverlayTexture);
     }
 
     // Reads back the game's 640x480 picture (for the headless self-test)
@@ -335,6 +361,7 @@ class GLRenderer
     bool mModulateAlpha = false;
     GLint mFilter = GL_NEAREST;
     GLuint mWhite = 0;
+    GLuint mOverlayTexture = 0;
     GLVertex mVerts[4];
     std::vector<DWORD> mScratch;
     std::vector<GLuint> mFreeLater;

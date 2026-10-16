@@ -151,6 +151,7 @@ add_library(gta2_platform STATIC
     platform/replay.cpp
     platform/dinput.cpp
     platform/renderer.cpp
+    platform/overlay.cpp
     platform/mss.cpp
     platform/ptr32.cpp
     platform/selftest.cpp

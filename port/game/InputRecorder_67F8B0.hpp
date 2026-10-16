@@ -135,3 +135,9 @@ class InputRecorder_67F8B0
 EXTERN_GLOBAL(InputRecorder_67F8B0, gInputRecorder_67F8B0);
 
 EXTERN_GLOBAL(InputDevices_1*, gInputDevices_67B990);
+
+// Control i's device (0 keyboard, 1 game pad) and binding: a DirectInput key code, or for a game pad
+// a button number, or 224..227 for the stick or d-pad left, right, up, down. Default keys per control.
+EXTERN_GLOBAL_ARRAY(s32, gMaybeDeviceType_67B91C, 12);
+EXTERN_GLOBAL_ARRAY(u32, gPlayerControlsBinding_67B6E8, 12);
+EXTERN_GLOBAL_ARRAY(s32, gDefaultControls_61A9E4, 12);

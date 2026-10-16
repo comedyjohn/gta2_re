@@ -397,6 +397,19 @@ const char* PadName(int index)
     return (index >= 0 && index < 8 && gPads[index]) ? SDL_GameControllerName(gPads[index]) : "";
 }
 
+// Button order as a typical DirectInput pad of the time reports them (the triggers follow as two more)
+static const SDL_GameControllerButton kPadButtons[] = {
+    SDL_CONTROLLER_BUTTON_A,         SDL_CONTROLLER_BUTTON_B,          SDL_CONTROLLER_BUTTON_X,
+    SDL_CONTROLLER_BUTTON_Y,         SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+    SDL_CONTROLLER_BUTTON_BACK,      SDL_CONTROLLER_BUTTON_START,      SDL_CONTROLLER_BUTTON_LEFTSTICK,
+    SDL_CONTROLLER_BUTTON_RIGHTSTICK};
+
+const char* PadButtonName(int slot)
+{
+    static const char* const kNames[] = {"A", "B", "X", "Y", "LB", "RB", "Back", "Start", "L3", "R3", "LT", "RT"};
+    return (slot >= 0 && slot < 12) ? kNames[slot] : "";
+}
+
 bool GetPadState(int index, PadState& out)
 {
     memset(&out, 0, sizeof(out));
@@ -409,20 +422,15 @@ bool GetPadState(int index, PadState& out)
     out.axisX = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_LEFTX);
     out.axisY = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_LEFTY);
 
-    // Button order as a typical DirectInput pad of the time reports them
-    const SDL_GameControllerButton order[] = {
-        SDL_CONTROLLER_BUTTON_A,         SDL_CONTROLLER_BUTTON_B,          SDL_CONTROLLER_BUTTON_X,
-        SDL_CONTROLLER_BUTTON_Y,         SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
-        SDL_CONTROLLER_BUTTON_BACK,      SDL_CONTROLLER_BUTTON_START,      SDL_CONTROLLER_BUTTON_LEFTSTICK,
-        SDL_CONTROLLER_BUTTON_RIGHTSTICK};
     int b = 0;
-    for (SDL_GameControllerButton button : order)
+    for (SDL_GameControllerButton button : kPadButtons)
     {
         out.buttons[b++] = SDL_GameControllerGetButton(pad, button) ? 0x80 : 0;
     }
     // Triggers as two more buttons
     out.buttons[b++] = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERLEFT) > 16000 ? 0x80 : 0;
     out.buttons[b++] = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) > 16000 ? 0x80 : 0;
+    out.guide = SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_GUIDE) != 0;
 
     const bool up = SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_DPAD_UP);
     const bool down = SDL_GameControllerGetButton(pad, SDL_CONTROLLER_BUTTON_DPAD_DOWN);

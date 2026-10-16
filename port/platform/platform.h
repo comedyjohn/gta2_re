@@ -33,6 +33,7 @@ struct PadState
     int32_t axisY;
     int32_t pov; // hundredths of a degree clockwise from up, -1 when centred
     uint8_t buttons[32]; // 0x80 when held
+    bool guide; // the Guide / Home button, which the game has no slot for
 };
 
 bool Init();
@@ -59,6 +60,8 @@ void GetKeyboardState(uint8_t state[256]);
 int PadCount();
 bool GetPadState(int index, PadState& out);
 const char* PadName(int index);
+// What the pad's button in DirectInput slot `slot` (PadState::buttons) is called, "" past the last one
+const char* PadButtonName(int slot);
 
 // Audio output: interleaved signed 16-bit stereo, pulled from a callback on SDL's audio thread.
 // OpenAudio asks for `rate` frames a second and returns the rate the device actually took.

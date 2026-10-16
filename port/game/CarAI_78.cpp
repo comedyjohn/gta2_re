@@ -4619,8 +4619,7 @@ void CarAI_78::ScanAheadForObstacles_452060()
         field_0_car->field_50_car_sprite->set_xyz_lazy_420600(gCurrCarAI_xpos_677C38, gCurrCarAI_ypos_677C30, gCurrCarAI_zpos_677C48);
 
         Ang16::PolarToCartesian_41FC20(
-            this->field_10_angle +
-                word_677A3A.MultiplyByFix16_401CB0_ctor_ool(Fix16(this->field_0_car->field_58_physics->field_AD_turn_direction)),
+            this->field_10_angle + word_677A3A.MultiplyByFix16_401CB0(Fix16(this->field_0_car->field_58_physics->field_AD_turn_direction)),
             gF16fOne_677B94,
             offset_x,
             offset_y);

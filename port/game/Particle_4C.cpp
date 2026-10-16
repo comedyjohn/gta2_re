@@ -467,7 +467,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
         }
 
         target.SetXY_432860(field_28_pSprite->field_14_xy.x, field_28_pSprite->field_14_xy.y);
-        jitter = word_6FD5CC.MultiplyByFix16_401CB0_out_of_line(Fix16(gRng_6F6784.get_int_4F7AE0(16) - 8));
+        jitter = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(16) - 8));
 
         switch (field_46_sub_state)
         {

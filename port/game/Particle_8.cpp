@@ -570,7 +570,7 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
 
         // The rng result is bound to a const s16& temporary: stored as a short and sign extended only after the
         // word is loaded (the word ends up as the imul's eax operand)
-        angle = word_6FD5CC.MultiplyByFix16_401CB0(Fix16((const s16&)gRng_6F6784.get_int_4F7AE0(360)));
+        angle = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(static_cast<const s16&>(gRng_6F6784.get_int_4F7AE0(360))));
         // RotateByAngle_40F6B0, but x * cos, the y line and both sums use the out-of-line Fix16 operators
         {
             Fix16 sin = Ang16::sine_40F500(angle);

@@ -2037,7 +2037,7 @@ s32 Object_2C::GetExplosionTypeForItemDefinition_526830(s32 type)
             break;
     }
     // The original reloads type from its stack slot here instead of keeping it in a register
-    return *(volatile s32*)&type;
+    return *static_cast<volatile s32*>(&type);
 }
 
 // 0x526b40
@@ -3767,7 +3767,7 @@ void Object_5C::RestoreObjects_52A590(SavedObjectData_164* pData)
         pPedRefIdx++;
     }
 
-    memset((void*)pData, 0, 0x12Cu); // everything before field_12C_obj_5C_bUnCollectedTokens
+    memset(static_cast<void*>(pData), 0, 0x12Cu); // everything before field_12C_obj_5C_bUnCollectedTokens
 }
 
 // 0x52A610

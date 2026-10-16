@@ -78,9 +78,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFpEighth_677CBC, Fix16(0x800, 0), 0x677CBC);
 
 // File-local: VC6 then propagates their value into the first use (ManageTrafficCarDirection_448CE0)
 static Ang16 kAng180_677ADE = Ang16(720);
-GLOBAL(kAng180_677ADE, 0x677ADE)
 static Ang16 kAng90_6779E4 = Ang16(360);
-GLOBAL(kAng90_6779E4, 0x6779E4)
 EXTERN_GLOBAL(Ang16, dword_677A2E);
 // Defined in Car_10.cpp: with the definition (and its dynamic initialiser) in this TU, VC6
 // loads it with a 32-bit mov in FollowRoadDirection_44A1F0 instead of the original's 16-bit mov/sub.
@@ -89,7 +87,6 @@ EXTERN_GLOBAL(Ang16, word_677CE2);
 
 DEFINE_GLOBAL_INIT(Fix16, kFpTwoPi_677C84, Fix16(0x18F60, 0), 0x677C84);
 static Ang16 kAng270_677B08 = Ang16(1080);
-GLOBAL(kAng270_677B08, 0x677B08)
 DEFINE_GLOBAL_INIT(Fix16, kFpFive_677BA4, Fix16(0x14000, 0), 0x677BA4);
 DEFINE_GLOBAL_INIT(Fix16, kFpFive_677CA0, Fix16(0x14000, 0), 0x677CA0);
 DEFINE_GLOBAL_INIT(Fix16, dword_677B78, Fix16(0x5C2, 0), 0x677B78);

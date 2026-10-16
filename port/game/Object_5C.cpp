@@ -1095,7 +1095,7 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
             Ang16::PolarToCartesian_41FC20(angle, r, unk_x, unk_y);
         }
 
-        for (u8 i = 1; i <= step_count.ToInt(); i++)
+        for (s32 i = 1; i <= step_count.ToInt(); i++)
         {
             prev_x = pSprt->field_14_xy.x;
             prev_y = pSprt->field_14_xy.y;
@@ -1290,7 +1290,7 @@ void Object_2C::IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, 
     // half-step loop; a rotated for/while test gives the `jle top; jmp tail` latch. Both are needed to match.
     while (true)
     {
-        for (u8 a2_ = 1; a2_ <= t; a2_++)
+        for (s32 a2_ = 1; a2_ <= t; a2_++)
         {
             start_x = pProbe->field_14_xy.x;
             start_y = pProbe->field_14_xy.y;

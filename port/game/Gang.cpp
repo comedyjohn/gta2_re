@@ -275,7 +275,7 @@ Gang_144* GangPool_CA8::FindGangByName_4BF100(const char* pGangName)
 // 0x4BF170
 Gang_144* GangPool_CA8::AllocGang_4BF170()
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_0_gang_list); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_gang_list); i++)
     {
         if (!field_0_gang_list[i].field_0_used)
         {

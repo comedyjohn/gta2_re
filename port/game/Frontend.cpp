@@ -4281,7 +4281,7 @@ void Frontend::GetSeqItem_4B48D0(s32 type, char_type* ppRet, FILE* hSeqFile)
 void Frontend::LoadPlySlotSvgs_4B53C0()
 {
     char_type FileName[256];
-    for (u8 i = 0; i < GTA2_COUNTOF(field_EDE8_plySlots); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_EDE8_plySlots); i++)
     {
         if (PlySlotSvgExists_4B5370(i))
         {

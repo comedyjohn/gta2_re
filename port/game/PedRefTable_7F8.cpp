@@ -6,7 +6,7 @@ DEFINE_GLOBAL(PedRefTable_7F8*, gPedRefTable_7F8_703398, 0x703398);
 u8 PedRefTable_7F8::AllocForPed_59B060(s32 ped_id)
 {
     PedRef_8* pIter = &field_0_entries[1];
-    for (u8 i = 1; i < GTA2_COUNTOF(field_0_entries); pIter++, i++)
+    for (s32 i = 1; i < GTA2_COUNTOF_S(field_0_entries); pIter++, i++)
     {
         if (!pIter->field_0_ped_id && !pIter->field_4_ref_count)
         {

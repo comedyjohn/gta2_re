@@ -2988,7 +2988,7 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
 
     PolarToCartesianByVal(angle, value_2, vec_x, vec_y);
 
-    for (u8 i = 1; i <= value_1.ToInt(); i++)
+    for (s32 i = 1; i <= value_1.ToInt(); i++)
     {
         Fix16 ground_z;
         ground_z = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pObjSprt->field_14_xy.x, pObjSprt->field_14_xy.y, pObjSprt->field_1C_zpos);

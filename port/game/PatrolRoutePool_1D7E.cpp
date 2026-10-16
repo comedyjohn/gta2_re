@@ -36,7 +36,7 @@ PatrolRoutePool_1D7E::PatrolRoutePool_1D7E()
 // 0x543f10
 PatrolRoute_96* PatrolRoutePool_1D7E::AllocPatrolList_543F10(u8* pRet)
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_1D4C_bUsed); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1D4C_bUsed); i++)
     {
         if (!field_1D4C_bUsed[i])
         {

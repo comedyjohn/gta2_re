@@ -1193,7 +1193,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
 {
     // 9.6f has the init block twice, 10.5 merges both into one block. Indexing field_0_explosions at each
     // use (no pNew local) gives both copies the same registers, so they merge completely.
-    u8 idx;
+    s32 idx;
     // the first 20 slots are tried first; only when they are all used the lowest priority explosion is evicted
     for (idx = 0; idx < 20; idx++)
     {
@@ -1211,7 +1211,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
 
     FreeLowestPriority_543690();
 
-    for (idx = 0; idx < GTA2_COUNTOF(field_0_explosions); idx++)
+    for (idx = 0; idx < GTA2_COUNTOF_S(field_0_explosions); idx++)
     {
         if (!this->field_780_bUsed[idx])
         {
@@ -1230,7 +1230,7 @@ Explosion_30* ExplosionPool_7A8::Allocate_543800()
 // 0x5438b0
 ExplosionPool_7A8::ExplosionPool_7A8()
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_0_explosions); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_explosions); i++)
     {
         field_0_explosions[i].field_4_idx = i;
         field_780_bUsed[i] = false;
@@ -1245,7 +1245,7 @@ ExplosionPool_7A8::~ExplosionPool_7A8() = default;
 // 0x543900
 Explosion_30* ExplosionPool_3D4::Allocate_543900()
 {
-    for (u8 idx = 0; idx < GTA2_COUNTOF(field_0_explosions); idx++)
+    for (s32 idx = 0; idx < GTA2_COUNTOF_S(field_0_explosions); idx++)
     {
         if (!this->field_3C0_bUsed[idx])
         {
@@ -1264,7 +1264,7 @@ Explosion_30* ExplosionPool_3D4::Allocate_543900()
 // 0x543980
 ExplosionPool_3D4::ExplosionPool_3D4()
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_3C0_bUsed); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_3C0_bUsed); i++)
     {
         field_0_explosions[i].field_4_idx = i;
         field_3C0_bUsed[i] = false;

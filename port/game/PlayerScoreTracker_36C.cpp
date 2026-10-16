@@ -304,7 +304,7 @@ void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
 {
     if ((bits & car_model_flag::stolen_1) != 0)
     {
-        for (u16 i = 0; i < GTA2_COUNTOF(field_8C_car_model_flags); i++)
+        for (s32 i = 0; i < GTA2_COUNTOF_S(field_8C_car_model_flags); i++)
         {
             if (gGtx_0x106C_703DD4->does_car_exist(i) && gGtx_0x106C_703DD4->IsCarModelInRecycleList_5AB380(i))
             {
@@ -319,7 +319,7 @@ void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
 
     if ((bits & car_model_flag::destroyed_2) != 0)
     {
-        for (u16 i = 0; i < GTA2_COUNTOF(field_8C_car_model_flags); i++)
+        for (s32 i = 0; i < GTA2_COUNTOF_S(field_8C_car_model_flags); i++)
         {
             if (gGtx_0x106C_703DD4->does_car_exist(i) && gGtx_0x106C_703DD4->IsCarModelInRecycleList_5AB380(i))
             {
@@ -345,11 +345,11 @@ void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
 // 0x592430
 void PlayerScoreTracker_36C::CheckAllCarModelsFlagged_592430(char_type bits)
 {
-    u16 i;
+    s32 i;
 
     if ((bits & car_model_flag::stolen_1) != 0)
     {
-        for (i = 0; i < GTA2_COUNTOF(field_8C_car_model_flags); i++)
+        for (i = 0; i < GTA2_COUNTOF_S(field_8C_car_model_flags); i++)
         {
             if ((field_8C_car_model_flags[i] & car_model_flag::stolen_1) == 0)
             {
@@ -367,7 +367,7 @@ void PlayerScoreTracker_36C::CheckAllCarModelsFlagged_592430(char_type bits)
     }
     else if ((bits & car_model_flag::destroyed_2) != 0)
     {
-        for (i = 0; i < GTA2_COUNTOF(field_8C_car_model_flags); i++)
+        for (i = 0; i < GTA2_COUNTOF_S(field_8C_car_model_flags); i++)
         {
             if ((field_8C_car_model_flags[i] & car_model_flag::destroyed_2) == 0)
             {

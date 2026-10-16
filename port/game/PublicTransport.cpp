@@ -566,7 +566,7 @@ Train_58* PublicTransport_181C::AllocateTrain_578790()
         return nullptr;
     }
 
-    for (u16 i = 0; i < GTA2_COUNTOF(field_1450_train_array); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_1450_train_array); i++)
     {
         if (!field_1450_train_array[i].field_8_alloc_state)
         {
@@ -1787,7 +1787,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
 TrainStation_34* PublicTransport_181C::TrainStationForZone_57B4B0(gmp_map_zone* pZone)
 {
     TrainStation_34* pIter = &field_0_stations[0];
-    for (u16 i = 0; i < GTA2_COUNTOF(field_0_stations); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_stations); i++)
     {
         if (pIter->field_10_pZone == pZone)
         {

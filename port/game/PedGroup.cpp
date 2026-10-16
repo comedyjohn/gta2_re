@@ -234,7 +234,7 @@ void PedGroup::KillEntireGroup_4C9240()
 {
     field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
     field_2C_ped_leader->Kill_46F9D0();
-    for (char_type i = 0; i < field_34_count; i++)
+    for (s32 i = 0; i < field_34_count; i++)
     {
         field_4_ped_list[i]->ClearGroupAndGroupIdx_403A30();
         field_4_ped_list[i]->Kill_46F9D0();
@@ -359,7 +359,7 @@ void PedGroup::DisbandGroupDueToAttack_4C94E0(Ped* pAttacker)
 
         this->field_2C_ped_leader->ClearGroupAndGroupIdx_403A30();
 
-        for (char_type i_ = 0; i_ < static_cast<s32>(this->field_34_count); i_++)
+        for (s32 i_ = 0; i_ < static_cast<s32>(this->field_34_count); i_++)
         {
             s32 i = i_;
             if (field_4_ped_list[i]->has_car_403B80())
@@ -695,7 +695,7 @@ Ped* PedGroup::sub_4C9ED0()
 // 0x4c9f00
 void PedGroup::CoordinateGroupCarEntry_4C9F00()
 {
-    s8 i;
+    s32 i;
     Fix16 distance;
     Ped* pLeader = field_2C_ped_leader;
     s32 state = pLeader->GetPedState_403990();
@@ -826,7 +826,7 @@ void PedGroup::CoordinateGroupCarEntry_4C9F00()
                         }
                     } while (searching);
                 }
-                for (s8 j = 0; j < field_34_count; j++)
+                for (s32 j = 0; j < field_34_count; j++)
                 {
                     Ped* pOther = field_4_ped_list[j];
                     if (pOther != pMember && pOther->field_25C_internal_objective == objectives_enum::objective_18 &&

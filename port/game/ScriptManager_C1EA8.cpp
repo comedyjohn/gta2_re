@@ -114,7 +114,7 @@ char_type ScriptManager_C1EA8::AddCranePowerupTrigger_511B10(s16 idx)
 void ScriptManager_C1EA8::SaveScriptCounters_511B90()
 {
     u16 saved_counter_count = 0;
-    for (u16 ptr = 0; ptr < GTA2_COUNTOF(field_46C_base_pointers); ptr++)
+    for (s32 ptr = 0; ptr < GTA2_COUNTOF_S(field_46C_base_pointers); ptr++)
     {
         if (field_46C_base_pointers[ptr])
         {
@@ -308,7 +308,7 @@ miss2_0x11C* ScriptManager_C1EA8::SpawnThread_5120C0(s16 start_cmd, char_type bF
 // 0x512100
 SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 startOff)
 {
-    u16 idx;
+    s32 idx;
     SCR_CMD_HEADER* header;
 
     if (bSkip_mission_67D4E5)
@@ -547,7 +547,7 @@ void ScriptManager_C1EA8::ExecuteScriptThreads_5127A0()
 ThreadTrigger_C* ScriptManager_C1EA8::FindCarThread_5128A0(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pThread = &field_4_car_triggers[0];
-    for (u16 thread_idx = 0; thread_idx < GTA2_COUNTOF(field_4_car_triggers); thread_idx++)
+    for (s32 thread_idx = 0; thread_idx < GTA2_COUNTOF_S(field_4_car_triggers); thread_idx++)
     {
         if (pThread->field_0_ped_id == ped_id && pThread->field_4_obj_f14 == obj_f14)
         {
@@ -562,7 +562,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::FindCarThread_5128A0(s32 ped_id, s32 obj_f
 void ScriptManager_C1EA8::AddCarThread_5128D0(s32 ped_id, s32 obj_f14, u16 cmd_line)
 {
     ThreadTrigger_C* pHeader = &field_4_car_triggers[0];
-    for (u16 i = 0; i < GTA2_COUNTOF(field_4_car_triggers); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_4_car_triggers); i++)
     {
         if (pHeader->field_8_cmd_line == 0)
         {
@@ -603,7 +603,7 @@ bool ScriptManager_C1EA8::TriggerCarThread_512910(s32 ped_id, s32 obj_f14)
 ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThread_512980(s32 ped_id, s32 obj_f14)
 {
     ThreadTrigger_C* pHeader = &field_188_phone_triggers[0];
-    for (u16 thread_idx = 0; thread_idx < GTA2_COUNTOF(field_188_phone_triggers); thread_idx++)
+    for (s32 thread_idx = 0; thread_idx < GTA2_COUNTOF_S(field_188_phone_triggers); thread_idx++)
     {
         if (pHeader->field_0_ped_id == ped_id && pHeader->field_4_obj_f14 == obj_f14)
         {
@@ -686,7 +686,7 @@ ThreadTrigger_C* ScriptManager_C1EA8::RemovePhoneThreadByObjId_512AA0(s32 obj_f1
 ThreadTrigger_C* ScriptManager_C1EA8::FindPhoneThreadByObjId_512AD0(s32 obj_f14)
 {
     ThreadTrigger_C* pHeader = &field_188_phone_triggers[0];
-    for (u16 thread_idx = 0; thread_idx < GTA2_COUNTOF(field_188_phone_triggers); thread_idx++)
+    for (s32 thread_idx = 0; thread_idx < GTA2_COUNTOF_S(field_188_phone_triggers); thread_idx++)
     {
         if (pHeader->field_4_obj_f14 == obj_f14)
         {

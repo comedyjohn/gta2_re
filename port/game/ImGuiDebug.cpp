@@ -80,7 +80,7 @@ void wchar_to_char(wchar_t* wchar, char* out, u8 size)
         out[static_cast<s8>(i)] = wchar[i];
     }
     // clear remaining slots
-    for (s8 j = i; j < size; j++)
+    for (s32 j = i; j < size; j++)
     {
         out[j] = 0;
     }

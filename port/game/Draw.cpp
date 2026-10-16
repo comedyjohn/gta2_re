@@ -112,7 +112,7 @@ void ConvertColourBanks_5D7CC0()
         {
             ++max_idx;
         }
-        for (u16 i = 0; i < max_idx; i++)
+        for (u32 i = 0; i < max_idx; i++)
         {
             pConvertColourBank(gGtx_0x106C_703DD4->GetPalData_5AA6A0(i * 64));
         }

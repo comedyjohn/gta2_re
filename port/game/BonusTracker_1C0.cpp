@@ -97,7 +97,7 @@ void BonusTracker_1C0::Service_431E30()
 // 0x431E90
 u16 BonusTracker_1C0::FindFreeRule_431E90()
 {
-    for (u16 i = 0; i < GTA2_COUNTOF(field_0_bonuses); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_bonuses); i++)
     {
         if (!field_0_bonuses[i].field_2A_bUsed)
         {

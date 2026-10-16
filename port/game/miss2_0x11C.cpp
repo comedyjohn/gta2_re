@@ -6761,7 +6761,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
         }
 
         u16* pBasicKF = gScriptManager_6F8060->field_C1E74_basic_kf;
-        for (u16 idx = 0; idx < GTA2_COUNTOF(gScriptManager_6F8060->field_C1E74_basic_kf); idx++)
+        for (s32 idx = 0; idx < GTA2_COUNTOF_S(gScriptManager_6F8060->field_C1E74_basic_kf); idx++)
         {
             if (*pBasicKF == static_cast<u16>(gBasePtr_6F8070->field_0_cmd_this))
             {

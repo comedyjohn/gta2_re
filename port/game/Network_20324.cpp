@@ -2281,7 +2281,7 @@ void Network_20324::EnumerateMaps_51BFA0()
         do
         {
             bSwapped = 0;
-            for (u16 j = 0; j < last; j++)
+            for (u32 j = 0; j < last; j++)
             {
                 if (_strcmpi(field_4_maps[j].field_30C_description, field_4_maps[j + 1].field_30C_description) > 0)
                 {

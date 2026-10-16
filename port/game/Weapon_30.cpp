@@ -805,7 +805,7 @@ void Weapon_30::sub_5DE4F0()
 
             BeamStep_5DE4F0(angle, step_len, step_x, step_y);
         }
-        for (u8 i = 1; i <= steps.ToInt(); i++)
+        for (s32 i = 1; i <= steps.ToInt(); i++)
         {
             gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pBeam->field_14_xy.x, pBeam->field_14_xy.y, pBeam->field_1C_zpos);
             pBeam->set_xy_lazy_447E20(pBeam->field_14_xy.x + step_x, pBeam->field_14_xy.y + step_y);

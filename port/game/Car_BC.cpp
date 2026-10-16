@@ -214,7 +214,7 @@ void CarThreadTriggers_214::FreeTrigger_5C8680(u8 idx)
 char_type CarThreadTriggers_214::AddThreadTrigger_5C86C0(const s32& type, const s32& param, SCR_THREAD* pScriptThread, Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16 width, Fix16 height)
 {
     CarThreadTrigger_18* pIter = field_0_triggers;
-    for (u8 idx = 0; idx < GTA2_COUNTOF(field_0_triggers); idx++)
+    for (s32 idx = 0; idx < GTA2_COUNTOF_S(field_0_triggers); idx++)
     {
         if (pIter->field_8_type == 0)
         {
@@ -244,7 +244,7 @@ void CarThreadTriggers_214::Reset_5C8750()
 {
     field_210_count = 0;
     CarThreadTrigger_18* pOff = &field_0_triggers[0];
-    for (u8 i = 0; i < GTA2_COUNTOF(field_0_triggers); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_triggers); i++)
     {
         pOff->field_10_remap_rng = i;
         pOff->field_8_type = 0;

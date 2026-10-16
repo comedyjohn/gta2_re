@@ -1200,7 +1200,7 @@ void sound_obj::ProcessType6_CollisionSoundQueue_413760(s32 idx)
     this->field_30_sQueueSample.field_5C = nullptr;
     this->field_30_sQueueSample.field_0_EntityIndex = idx;
 
-    for (u8 event_idx = 0; event_idx < p88->field_C84_count; event_idx++)
+    for (s32 event_idx = 0; event_idx < p88->field_C84_count; event_idx++)
     {
         CollisionEvent_28* pEvent = &p88->field_4_events[event_idx];
         u8 base_sample = Type6_413A10(pEvent);

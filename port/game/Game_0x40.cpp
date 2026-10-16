@@ -924,7 +924,7 @@ Player* Game_0x40::IterateNextPlayer_4B9D10()
 // 0x4B9D60
 void Game_0x40::ReduceTrafficSpawnCounterOfOtherViewers_4B9D60(Sprite* pSprite, Player* pExclude)
 {
-    for (u8 i = 0; i < GTA2_COUNTOF(field_4_players); i++)
+    for (s32 i = 0; i < GTA2_COUNTOF_S(field_4_players); i++)
     {
         Player* p = gGame_0x40_67E008->GetPlayer_4219E0(i);
         if (p && p != pExclude)

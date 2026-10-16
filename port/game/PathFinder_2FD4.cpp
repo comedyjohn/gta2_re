@@ -537,7 +537,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
     u8 cur_x;
     u8 cur_z;
     u8 new_z; // only stored to cur_z on the paths that add a node
-    u8 i;
+    s32 i;
 
     PatrolPoint_3* pPatrolPoint_2;
     u16 j;
@@ -942,7 +942,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
         PathNode_8* pIter = field_2350_nodes;
         field_8_pNode = field_2350_nodes;
 
-        for (u8 i = 0; i < field_C_node_count - 1; i++)
+        for (s32 i = 0; i < field_C_node_count - 1; i++)
         {
             ++field_8_pNode;
             if (field_8_pNode->field_6_cost < pIter->field_6_cost)

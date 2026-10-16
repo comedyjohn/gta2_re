@@ -442,7 +442,7 @@ u16 RouteFinder::FindHorzSegmentJunction_588E60(u8 x, u8 y, u8 z, char_type bIsD
     if (block_4DFE10 != nullptr)
     {
         s8 bHasArrow = RouteFinder::HasBlockDesiredArrow_588CA0(block_4DFE10, arrow_type, LEFT_3);
-        for (s16 junc_idx = 0; junc_idx < field_CC62_horz_segment_count; pSegment++, junc_idx++)
+        for (s32 junc_idx = 0; junc_idx < field_CC62_horz_segment_count; pSegment++, junc_idx++)
         {
             if (pSegment->ContainsPoint_40CF20(x, y))
             {
@@ -483,7 +483,7 @@ u16 RouteFinder::FindVertSegmentJunction_588F30(u8 x, u8 y, u8 z, char_type bIsD
     if (block_4DFE10 != nullptr)
     {
         s8 bHasArrow = RouteFinder::HasBlockDesiredArrow_588CA0(block_4DFE10, arrow_type, UP_1);
-        for (s16 junc_idx = 0; junc_idx < field_CC64_vert_segment_count; pSegment++, junc_idx++)
+        for (s32 junc_idx = 0; junc_idx < field_CC64_vert_segment_count; pSegment++, junc_idx++)
         {
             if (pSegment->ContainsPoint_40CF20(x, y))
             {

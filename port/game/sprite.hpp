@@ -44,12 +44,12 @@ class SpriteShape_4C
     // until its put back ??
     void SetCollisionId_446920(u32 id)
     {
-        this->mpNext = (SpriteShape_4C*)static_cast<uintptr_t>(id);
+        this->mpNext = reinterpret_cast<SpriteShape_4C*>(static_cast<uintptr_t>(id));
     }
 
     bool CollisionIdIs_446930(u32 a2)
     {
-        return static_cast<u32>((uintptr_t)mpNext) == a2;
+        return static_cast<u32>(reinterpret_cast<uintptr_t>(mpNext)) == a2;
     }
 
     // 9.6f 0x41E390

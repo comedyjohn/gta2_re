@@ -16,4 +16,6 @@ void ReadSlopes(gta2::SlopeInfo out[gta2::kSlopeTypeCount]);
 std::string StylePath();
 // A pointer that changes when the game loads another map (gMap_0x370_6F6268->field_0_pDmap)
 const void* MapIdentity();
+// The slope type (0..63) of the block at a cell and level, -1 when there is none (or no map)
+int BlockSlopeType(int x, int y, int level);
 } // namespace world3d

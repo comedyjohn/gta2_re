@@ -2,10 +2,14 @@
 // game is drawing and hand every draw back to the classic renderer, so `renderer = world3d` draws
 // exactly what `classic` does.
 #include "port_world3d.h"
+#include "camera.h"
+#include "camera_check.h"
+#include "game_view.h"
 #include "scene.h"
 #include "settings.h"
 
 #include "overlay.h"
+#include <cstdlib>
 
 namespace world3d
 {
@@ -62,9 +66,13 @@ void port_world3d_map_changed()
     gMapDirty = true;
 }
 
-bool port_world3d_draw(PortWorld3dDraw, int, STexture*, Vert*, int)
+bool port_world3d_draw(PortWorld3dDraw kind, int, STexture*, Vert* verts, int)
 {
-    return false; // phase 1: the classic renderer draws everything, whichever renderer is chosen
+    if (ActiveRenderer() == Renderer::World3d && kind == kPortWorld3dTile)
+    {
+        CheckCamera(verts, BlockSlopeType(gContext.blockX, gContext.blockY, static_cast<int>(gContext.blockZ)));
+    }
+    return false; // phase 3 so far: the classic renderer draws everything
 }
 
 void port_world3d_present()

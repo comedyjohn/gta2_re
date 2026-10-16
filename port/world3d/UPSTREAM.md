@@ -27,3 +27,9 @@ Mesh build (task 2.5, linux64, replays with `--draw`):
 | 00-synthetic-walk | 49 ms | 551,030 | 275,280 | 855 |
 | 11-attract-downtown | 50 ms | 551,030 | 275,280 | 855 |
 | 11-attract-industrial | 52-67 ms (rebuilt several times: blocks change in play) | 702,983 | 350,607 | 947 |
+
+Camera check (task 3.3, `GTA2_WORLD3D_CHECK=1`, three corpus replays with `--draw`): the clip matrix
+reproduces the game's own screen positions of unsloped blocks to at most 0.12 / 0.24 / 0.23 px
+(walk / downtown / industrial). Blocks with a slope are not compared: for them the game's world
+vertices (`verts[4..7]`) are not the corners it projected (a ramp's z is fractional), so the check
+counts them apart (errors of hundreds of px there are expected, not a camera error).

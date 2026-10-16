@@ -6,6 +6,7 @@ add_library(gta2_world3d STATIC
     game_view.cpp
     scene.cpp
     camera.cpp
+    camera_check.cpp
     upstream/gta2_map.cpp
     upstream/gta2_style.cpp
     upstream/world_mesh.cpp

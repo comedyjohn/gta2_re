@@ -49,6 +49,16 @@ void ReadSlopes(gta2::SlopeInfo out[gta2::kSlopeTypeCount])
     }
 }
 
+int BlockSlopeType(int x, int y, int level)
+{
+    if (!MapIdentity())
+    {
+        return -1;
+    }
+    const gmp_block_info* block = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(x, y, level);
+    return block ? block->field_B_slope_type >> 2 : -1;
+}
+
 std::string StylePath()
 {
     const char* name = gGameSession_67E8E0.GetStyleName_4C5950();

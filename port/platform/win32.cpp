@@ -966,9 +966,20 @@ struct RegValue
 };
 
 // Key paths are stored lower-case ("hkey_local_machine\software\dma design ltd\gta2\screen")
-std::map<std::string, std::map<std::string, RegValue>> gRegistry;
-std::map<HKEY, std::string> gOpenKeys;
-bool gRegistryLoaded = false;
+struct RegistryState
+{
+    std::map<std::string, std::map<std::string, RegValue>> keys;
+    std::map<HKEY, std::string> openKeys;
+    bool loaded = false;
+};
+
+// Made on first use: the game's own static initialisers use the registry (cSampleManager's
+// constructor), and they can run before this file's
+RegistryState& Reg()
+{
+    static RegistryState state;
+    return state;
+}
 
 std::string Lower(std::string s)
 {
@@ -991,11 +1002,11 @@ std::string RegistryFile()
 // One value per line: key \t value-name \t type \t hex bytes
 void LoadRegistry()
 {
-    if (gRegistryLoaded)
+    if (Reg().loaded)
     {
         return;
     }
-    gRegistryLoaded = true;
+    Reg().loaded = true;
     // What an install of the game sets up. This build is the freeloader.com edition, which
     // downloaded the cities one at a time: before starting a level it checks that the city is
     // installed (FreeLoader::CheckCityInstalled_4AE1F0, cities 1 to 3), and when it isn't it
@@ -1003,7 +1014,7 @@ void LoadRegistry()
     RegValue cities;
     cities.mType = REG_DWORD;
     cities.mData = {3, 0, 0, 0};
-    gRegistry["hkey_local_machine\\software\\freeloader.com\\gta2"]["cityinstalled"] = cities;
+    Reg().keys["hkey_local_machine\\software\\freeloader.com\\gta2"]["cityinstalled"] = cities;
 
     FILE* f = fopen(RegistryFile().c_str(), "r");
     if (!f)
@@ -1037,7 +1048,7 @@ void LoadRegistry()
             char byte[3] = {h[0], h[1], 0};
             v.mData.push_back(static_cast<BYTE>(strtoul(byte, 0, 16)));
         }
-        gRegistry[fields[0]][fields[1]] = v;
+        Reg().keys[fields[0]][fields[1]] = v;
     }
     fclose(f);
 }
@@ -1049,7 +1060,7 @@ void SaveRegistry()
     {
         return;
     }
-    for (const auto& key : gRegistry)
+    for (const auto& key : Reg().keys)
     {
         for (const auto& value : key.second)
         {
@@ -1086,8 +1097,8 @@ bool KeyPath(HKEY key, LPCSTR subKey, std::string& out)
     }
     else
     {
-        auto it = gOpenKeys.find(key);
-        if (it == gOpenKeys.end())
+        auto it = Reg().openKeys.find(key);
+        if (it == Reg().openKeys.end())
         {
             return false;
         }
@@ -1105,7 +1116,7 @@ bool KeyPath(HKEY key, LPCSTR subKey, std::string& out)
 HKEY OpenHandle(const std::string& path)
 {
     HKEY h = reinterpret_cast<HKEY>(MakeHandle());
-    gOpenKeys[h] = path;
+    Reg().openKeys[h] = path;
     return h;
 }
 } // namespace
@@ -1115,7 +1126,7 @@ extern "C" {
 LSTATUS RegOpenKeyExA(HKEY key, LPCSTR subKey, DWORD, REGSAM, PHKEY result)
 {
     std::string path;
-    if (!KeyPath(key, subKey, path) || !gRegistry.count(path))
+    if (!KeyPath(key, subKey, path) || !Reg().keys.count(path))
     {
         return ERROR_FILE_NOT_FOUND;
     }
@@ -1136,8 +1147,8 @@ LSTATUS RegCreateKeyExA(HKEY key, LPCSTR subKey, DWORD, LPSTR, DWORD, REGSAM, LP
     {
         return ERROR_FILE_NOT_FOUND;
     }
-    bool existed = gRegistry.count(path) != 0;
-    gRegistry[path];
+    bool existed = Reg().keys.count(path) != 0;
+    Reg().keys[path];
     if (disposition)
     {
         *disposition = existed ? REG_OPENED_EXISTING_KEY : REG_CREATED_NEW_KEY;
@@ -1148,7 +1159,7 @@ LSTATUS RegCreateKeyExA(HKEY key, LPCSTR subKey, DWORD, LPSTR, DWORD, REGSAM, LP
 
 LSTATUS RegCloseKey(HKEY key)
 {
-    gOpenKeys.erase(key);
+    Reg().openKeys.erase(key);
     return ERROR_SUCCESS;
 }
 
@@ -1159,8 +1170,8 @@ LSTATUS RegQueryValueExA(HKEY key, LPCSTR name, LPDWORD, LPDWORD type, LPBYTE da
     {
         return ERROR_FILE_NOT_FOUND;
     }
-    auto keyIt = gRegistry.find(path);
-    if (keyIt == gRegistry.end())
+    auto keyIt = Reg().keys.find(path);
+    if (keyIt == Reg().keys.end())
     {
         return ERROR_FILE_NOT_FOUND;
     }
@@ -1200,7 +1211,7 @@ LSTATUS RegSetValueExA(HKEY key, LPCSTR name, DWORD, DWORD type, const BYTE* dat
     RegValue v;
     v.mType = type;
     v.mData.assign(data, data + size);
-    gRegistry[path][Lower(name ? name : "")] = v;
+    Reg().keys[path][Lower(name ? name : "")] = v;
     SaveRegistry();
     return ERROR_SUCCESS;
 }
@@ -1208,7 +1219,7 @@ LSTATUS RegSetValueExA(HKEY key, LPCSTR name, DWORD, DWORD type, const BYTE* dat
 LSTATUS RegDeleteValueA(HKEY key, LPCSTR name)
 {
     std::string path;
-    if (!KeyPath(key, 0, path) || !gRegistry[path].erase(Lower(name ? name : "")))
+    if (!KeyPath(key, 0, path) || !Reg().keys[path].erase(Lower(name ? name : "")))
     {
         return ERROR_FILE_NOT_FOUND;
     }
@@ -1255,8 +1266,8 @@ LPSTR StrStrIA(LPCSTR haystack, LPCSTR needle)
 // initialisation may already have read the real one: forget it and read the scratch file
 void port_registry_reload()
 {
-    gRegistry.clear();
-    gOpenKeys.clear();
-    gRegistryLoaded = false;
+    Reg().keys.clear();
+    Reg().openKeys.clear();
+    Reg().loaded = false;
     LoadRegistry();
 }

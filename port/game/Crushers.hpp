@@ -7,6 +7,15 @@ class Car_BC;
 class SoundObject_10;
 class Object_2C;
 
+enum class CrusherStates : s32
+{
+    Idle_0 = 0,
+    CrushW_1 = 1,
+    UnCrushW_2 = 2,
+    CrushH_3 = 3,
+    UnCrushH_4 = 4,
+};
+
 class Crusher_30
 {
   public:
@@ -23,19 +32,10 @@ class Crusher_30
     }
 
     // 9.6f 0x411A10
-    inline s32 get_state_411A10()
+    inline CrusherStates get_state_411A10()
     {
         return field_2C_state;
     }
-
-    enum CrusherStates
-    {
-        Idle_0 = 0,
-        CrushW_1 = 1,
-        UnCrushW_2 = 2,
-        CrushH_3 = 3,
-        UnCrushH_4 = 4,
-    };
 
     Crusher_30();
     ~Crusher_30();
@@ -68,7 +68,7 @@ public:
     Fix16 field_24_xpos;
     Fix16 field_28_ypos;
 
-    s32 field_2C_state;
+    CrusherStates field_2C_state;
 };
 
 class CrusherPool_94

@@ -515,7 +515,7 @@ void sound_obj::ProcessType9_Crusher_412A60(s32 idx)
     Crusher_30* pCrusher = field_147C_audio_entities[idx].field_4_pObj->field_C_pAny.pCrusher_30;
     if (pCrusher)
     {
-        if (pCrusher->get_state_411A10())
+        if (pCrusher->get_state_411A10() != CrusherStates::Idle_0)
         {
             Fix16 x = pCrusher->get_xpos_411A20();
             this->field_30_sQueueSample.field_8_obj.field_0_x = x;

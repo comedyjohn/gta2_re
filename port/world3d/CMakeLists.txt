@@ -3,6 +3,7 @@
 add_library(gta2_world3d STATIC
     settings.cpp
     world3d.cpp
+    game_view.cpp
     upstream/gta2_map.cpp
     upstream/gta2_style.cpp
     upstream/world_mesh.cpp
@@ -16,3 +17,5 @@ target_link_libraries(gta2_world3d PUBLIC gta2_game)
 
 file(GLOB world3d_test_sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
 set(WORLD3D_TEST_SOURCES ${world3d_test_sources} PARENT_SCOPE)
+# the game headers it includes have unused parameters (-Wextra)
+set_source_files_properties(game_view.cpp PROPERTIES COMPILE_OPTIONS "-Wno-unused-parameter")

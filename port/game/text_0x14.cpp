@@ -317,7 +317,7 @@ char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
     const wchar_t* pSrc = pText;
     // jnb forced to jge by changing u32 loop index to int
     s32 dstIdx = 0;
-    while (pSrc) // bug: should be *pSrc
+    while (*pSrc) // the original tested the pointer: it read up to 79 characters past the end of a short string
     {
         // jnb also used if comparing to sizeof() value instead of
         // numerical literal! cast to s32 fixes (sizeof returns unsigned?)

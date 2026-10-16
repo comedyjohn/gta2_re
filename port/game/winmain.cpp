@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <port_replay.h>
 #include <windows.h>
 //#include <dmusics.h>
 
@@ -1499,7 +1500,9 @@ bool RunGameFrame_4DA850()
                 do_network_and_local_inputs_4DAF30();
                 bInputsPending_6F5760 = 0;
             }
+            port_replay_before_update();
             exit_requested = ExecuteGame_4DA780();
+            port_replay_after_update();
             s32 frame_ms = gGame_0x40_67E008->GetFrameDurationMs_4B8BB0();
             bForceGameUpdate_6F5880 = 0;
             gMatchStartTime_6F5A28 += frame_ms;

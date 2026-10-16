@@ -10,10 +10,26 @@
 // (port/) a pointer doesn't fit, so it is a 32-bit handle that port/platform/ptr32.cpp maps to the
 // pointer: the slot keeps its size and the script data its layout. Handle 0 is the null pointer, so
 // a slot the file leaves zeroed reads as null.
+//
+// Both widths go through Ptr32, so every store also tells port/platform/ptr32.cpp which slot of
+// the script data holds a pointer (Ptr32_NoteSlot). The state hash (port/platform/statehash.cpp)
+// hashes those slots as the object they point at, never as an address.
 #if defined(GTA2_PORT_64BIT)
-
 u32 Ptr32_ToHandle(const void* p);
 void* Ptr32_FromHandle(u32 handle);
+#else
+inline u32 Ptr32_ToHandle(const void* p)
+{
+    return static_cast<u32>(reinterpret_cast<uintptr_t>(p));
+}
+
+inline void* Ptr32_FromHandle(u32 handle)
+{
+    return reinterpret_cast<void*>(static_cast<uintptr_t>(handle));
+}
+#endif
+
+void Ptr32_NoteSlot(const void* slot, u32 handle);
 
 template <typename T>
 struct Ptr32
@@ -41,11 +57,9 @@ struct Ptr32
     Ptr32& operator=(T* p)
     {
         field_0_handle = Ptr32_ToHandle(p);
+        Ptr32_NoteSlot(this, field_0_handle);
         return *this;
     }
 };
 
-    #define PTR32(T) Ptr32<T>
-#else
-    #define PTR32(T) T*
-#endif
+#define PTR32(T) Ptr32<T>

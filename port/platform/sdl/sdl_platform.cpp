@@ -4,6 +4,7 @@
 #include <SDL.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 namespace
@@ -309,6 +310,10 @@ void SetCursorVisible(bool visible)
 void ShowMessage(const char* title, const char* text)
 {
     fprintf(stderr, "[%s] %s\n", title, text);
+    if (getenv("GTA2_NO_MESSAGE_BOX")) // nobody to click it away (gta2 --replay)
+    {
+        return;
+    }
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, title, text, gWindow);
 }
 

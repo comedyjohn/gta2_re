@@ -1250,3 +1250,13 @@ LPSTR StrStrIA(LPCSTR haystack, LPCSTR needle)
 }
 
 } // extern "C"
+
+// gta2 --replay moves the registry to a scratch file (XDG_CONFIG_HOME) after the game's static
+// initialisation may already have read the real one: forget it and read the scratch file
+void port_registry_reload()
+{
+    gRegistry.clear();
+    gOpenKeys.clear();
+    gRegistryLoaded = false;
+    LoadRegistry();
+}

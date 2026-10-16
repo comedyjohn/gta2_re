@@ -14,6 +14,8 @@ int port_selftest();
 int port_audiotest();
 int port_nettest(int argc, char** argv);
 int port_simcheck();
+bool port_replay_setup(int argc, char** argv);
+int port_replay_finish(int result);
 
 int main(int argc, char** argv)
 {
@@ -37,7 +39,8 @@ int main(int argc, char** argv)
                "  --selftest           check the renderer\n"
                "  --audiotest          check the sound mixer\n"
                "  --nettest ...        check the network layer (see port/tools/nettest.sh)\n"
-               "  --simcheck           print what network games compare between systems\n\n%s",
+               "  --simcheck           print what network games compare between systems\n"
+               "  --replay FILE ...    play a replay headless and log the state hash (see port/platform/replay.cpp)\n\n%s",
                PortNetUsage());
         return 0;
     }
@@ -45,7 +48,15 @@ int main(int argc, char** argv)
     // The network options are the port's (the lobby reads them); the rest is the game's
     std::vector<std::string> gameArgs;
     std::string error;
-    if (!PortParseNetArgs(argc, argv, gameArgs, error))
+    const bool replay = first == "--replay";
+    if (replay)
+    {
+        if (!port_replay_setup(argc, argv))
+        {
+            return 2;
+        }
+    }
+    else if (!PortParseNetArgs(argc, argv, gameArgs, error))
     {
         fprintf(stderr, "gta2: %s (see gta2 --help)\n", error.c_str());
         return 2;
@@ -72,8 +83,12 @@ int main(int argc, char** argv)
         }
         cmdLine += gameArgs[i];
     }
-    const int result = WinMain(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
+    int result = WinMain(reinterpret_cast<HINSTANCE>(1), 0, &cmdLine[0], SW_SHOWNORMAL);
 
     plat::Shutdown();
+    if (replay)
+    {
+        result = port_replay_finish(result);
+    }
     return result;
 }

@@ -145,6 +145,8 @@ add_executable(gta2
     platform/lobby.cpp
     platform/nettest.cpp
     platform/simcheck.cpp
+    platform/statehash.cpp
+    platform/replay.cpp
     platform/dinput.cpp
     platform/renderer.cpp
     platform/mss.cpp

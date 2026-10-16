@@ -441,7 +441,8 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
         for (u32 i = 0; i < pSrc->field_2_delta_count; i++)
         {
             pDst->field_4_deltas[i].field_4_len = pSrc->field_4_delta[i];
-            pDst->field_4_deltas[i].field_0_pData = (delta_store_entry*)static_cast<uptr>(total); // an offset until the deltas are loaded
+            pDst->field_4_deltas[i].field_0_pData =
+                reinterpret_cast<delta_store_entry*>(static_cast<uptr>(total)); // an offset until the deltas are loaded
             total += pDst->field_4_deltas[i].field_4_len;
         }
 
@@ -465,8 +466,8 @@ void gtx_0x106C::SetDeltaDataPtrs_5AABF0()
         for (u32 delta_idx = 0; delta_idx < pDeltas->field_2_count; delta_idx++)
         {
             sprite_delta& delta = pDeltas->field_4_deltas[delta_idx];
-            delta.field_0_pData =
-                reinterpret_cast<delta_store_entry*>(reinterpret_cast<u8*>(field_48_delta_store) + (sptr)delta.field_0_pData);
+            delta.field_0_pData = reinterpret_cast<delta_store_entry*>(reinterpret_cast<u8*>(field_48_delta_store) +
+                                                                       reinterpret_cast<sptr>(delta.field_0_pData));
         }
         offset += SPRITE_DELTAS_SIZE(pDeltas->field_2_count);
     }
@@ -496,7 +497,7 @@ void gtx_0x106C::SetSpriteIndexDataPtrs_5AAC40()
     {
         field_0_pData = this->field_20_sprite_index[i].field_0_pData;
         pSpriteIndex = &this->field_20_sprite_index[i];
-        pSpriteIndex->field_0_pData = &this->field_34_sprite_graphics[static_cast<u32>((uintptr_t)field_0_pData)];
+        pSpriteIndex->field_0_pData = &this->field_34_sprite_graphics[static_cast<u32>(reinterpret_cast<uintptr_t>(field_0_pData))];
     }
 }
 
@@ -758,7 +759,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     memset(field_20_sprite_index, 0, entry_count * sizeof(sprite_index));
     for (u32 i = 0; i < entry_count - 1; i++)
     {
-        field_20_sprite_index[i].field_0_pData = (BYTE*)static_cast<sptr>(pFileEntries[i].field_0_offset);
+        field_20_sprite_index[i].field_0_pData = reinterpret_cast<BYTE*>(static_cast<sptr>(pFileEntries[i].field_0_offset));
         field_20_sprite_index[i].field_4_width = pFileEntries[i].field_4_width;
         field_20_sprite_index[i].field_5_height = pFileEntries[i].field_5_height;
         field_20_sprite_index[i].field_6_pad = pFileEntries[i].field_6_pad;
@@ -1243,7 +1244,7 @@ gtx_0x106C::~gtx_0x106C()
     {
         ::free(local_field_4C_delta_index);
     }
-    local_field_54_del = (void*)field_54_del;
+    local_field_54_del = static_cast<void*>(field_54_del);
     field_4C_delta_index = nullptr;
     if (local_field_54_del)
     {

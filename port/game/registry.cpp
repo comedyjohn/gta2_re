@@ -484,7 +484,7 @@ DWORD Registry::Get_Int_Setting_5874E0(HKEY hKey, const char_type* lpValueName)
         lpValueName = nullptr;
     }
 
-    return static_cast<DWORD>((uintptr_t)lpValueName);
+    return static_cast<DWORD>(reinterpret_cast<uintptr_t>(lpValueName));
 }
 
 // 0x5875A0

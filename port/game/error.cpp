@@ -1,6 +1,5 @@
 #include "error.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "fix16.hpp"
 #include "winmain.hpp"

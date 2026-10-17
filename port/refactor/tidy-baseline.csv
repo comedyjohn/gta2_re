@@ -1971,7 +1971,7 @@ port/game/error.cpp,cppcoreguidelines-pro-bounds-constant-array-index,14
 port/game/error.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,4
 port/game/error.cpp,cppcoreguidelines-pro-type-vararg,197
 port/game/error.cpp,misc-const-correctness,34
-port/game/error.cpp,misc-include-cleaner,10
+port/game/error.cpp,misc-include-cleaner,9
 port/game/error.cpp,modernize-avoid-c-arrays,6
 port/game/error.cpp,readability-function-size,1
 port/game/error.cpp,readability-implicit-bool-conversion,5
@@ -2433,7 +2433,7 @@ port/game/winmain.cpp,cppcoreguidelines-pro-type-reinterpret-cast,23
 port/game/winmain.cpp,cppcoreguidelines-pro-type-vararg,25
 port/game/winmain.cpp,cppcoreguidelines-special-member-functions,1
 port/game/winmain.cpp,misc-const-correctness,18
-port/game/winmain.cpp,misc-include-cleaner,134
+port/game/winmain.cpp,misc-include-cleaner,112
 port/game/winmain.cpp,misc-unused-parameters,1
 port/game/winmain.cpp,modernize-avoid-c-arrays,13
 port/game/winmain.cpp,modernize-deprecated-headers,2

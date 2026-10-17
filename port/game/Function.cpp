@@ -1,7 +1,6 @@
 #include "Function.hpp"
 #include <cstdio>
 
-#include <cstdio>
 #include <cstdlib>
 #include <string>
 #include <vector>

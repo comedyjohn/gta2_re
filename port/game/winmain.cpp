@@ -49,7 +49,6 @@
 #include "Generators.hpp"
 #include "Hud.hpp"
 #include "ImGuiDebug.hpp"
-#include "InputRecorder_67F8B0.hpp"
 #include "Light_28.hpp"
 #include "MapRenderer.hpp"
 #include "Mike_A80.hpp"

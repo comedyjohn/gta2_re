@@ -629,7 +629,6 @@ port/game/Function.cpp,misc-const-correctness,22
 port/game/Function.cpp,misc-include-cleaner,2
 port/game/Function.cpp,modernize-use-std-print,8
 port/game/Function.cpp,performance-no-int-to-ptr,1
-port/game/Function.cpp,readability-duplicate-include,1
 port/game/Function.cpp,readability-implicit-bool-conversion,1
 port/game/Function.cpp,readability-redundant-string-init,1
 port/game/Function.hpp,bugprone-macro-parentheses,3
@@ -2445,7 +2444,6 @@ port/game/winmain.cpp,modernize-deprecated-headers,2
 port/game/winmain.cpp,modernize-raw-string-literal,12
 port/game/winmain.cpp,modernize-use-std-print,3
 port/game/winmain.cpp,performance-no-int-to-ptr,2
-port/game/winmain.cpp,readability-duplicate-include,1
 port/game/winmain.cpp,readability-else-after-return,4
 port/game/winmain.cpp,readability-function-cognitive-complexity,3
 port/game/winmain.cpp,readability-function-size,2

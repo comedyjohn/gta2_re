@@ -766,7 +766,7 @@ class SpritePool
 
     bool has_free_48A8D0()
     {
-        return field_0_pool.field_0_pHead != nullptr;
+        return field_0_pool.head_ != nullptr;
     }
 
     PoolBasic<Sprite, 5031> field_0_pool;

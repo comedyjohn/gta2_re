@@ -5,21 +5,21 @@
 
 struct Angle
 {
-    s16 field_0_value;
+    s16 value_;
 
-    Angle() : field_0_value(0)
+    Angle() : value_(0)
     {
     }
 
     Angle(const s16& param_1, s32)
     {
-        this->field_0_value = param_1;
+        this->value_ = param_1;
         clamp();
     }
 
     Angle(const Fix16& param_1, s32)
     {
-        field_0_value = param_1.ToInt();
+        value_ = param_1.ToInt();
         clamp();
     }
 
@@ -27,49 +27,49 @@ struct Angle
 
     s32 operator!=(const Angle& right) const
     {
-        return field_0_value != right.field_0_value;
+        return value_ != right.value_;
     }
 
     s32 operator>(const Angle& right) const
     {
-        return field_0_value > right.field_0_value;
+        return value_ > right.value_;
     }
 
     s32 operator<(const Angle& right) const
     {
-        return field_0_value < right.field_0_value;
+        return value_ < right.value_;
     }
 
     s32 operator<=(const Angle& right) const
     {
-        return field_0_value <= right.field_0_value;
+        return value_ <= right.value_;
     }
 
     Angle operator+(const Angle& right) const
     {
-        return Angle(field_0_value + right.field_0_value, 0);
+        return Angle(value_ + right.value_, 0);
     }
 
     Angle operator-(const Angle& right) const
     {
-        return Angle(field_0_value - right.field_0_value, 0);
+        return Angle(value_ - right.value_, 0);
     }
 
     Angle operator-()
     {
-        return Angle(-field_0_value, 0);
+        return Angle(-value_, 0);
     }
 
     Angle& operator+=(const Angle& right)
     {
-        field_0_value = field_0_value + right.field_0_value;
+        value_ = value_ + right.value_;
         clamp();
         return *this;
     }
 
     Angle& operator-=(const Angle& right)
     {
-        field_0_value = field_0_value - right.field_0_value;
+        value_ = value_ - right.value_;
         clamp();
         return *this;
     }

@@ -47,8 +47,8 @@ ScriptStackFrame_C* miss2_8::remove_503180()
 // 0x5031A0
 ScriptStackFrame_C* miss2_8::AllocFrame_5031A0()
 {
-    ScriptStackFrame_C* pFrame = gScriptStackFramePool_6F8068->field_0_pool.field_0_pHead;
-    gScriptStackFramePool_6F8068->field_0_pool.field_0_pHead = gScriptStackFramePool_6F8068->field_0_pool.field_0_pHead->mpNext;
+    ScriptStackFrame_C* pFrame = gScriptStackFramePool_6F8068->field_0_pool.head_;
+    gScriptStackFramePool_6F8068->field_0_pool.head_ = gScriptStackFramePool_6F8068->field_0_pool.head_->mpNext;
     pFrame->PoolAllocate();
     return pFrame;
 

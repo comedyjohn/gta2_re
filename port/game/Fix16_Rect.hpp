@@ -42,13 +42,13 @@ class Fix16Rect
     {
         Fix16 tmp = offset / 2;
 
-        field_0_left = x - tmp;
-        field_4_right = x + tmp;
-        field_8_top = y - tmp;
-        field_C_bottom = y + tmp;
+        left_ = x - tmp;
+        right_ = x + tmp;
+        top_ = y - tmp;
+        bottom_ = y + tmp;
 
-        this->field_10_low_z = z - FIX16_RECT_HALF_HEIGHT;
-        this->field_14_high_z = z + FIX16_RECT_HALF_HEIGHT;
+        this->low_z_ = z - FIX16_RECT_HALF_HEIGHT;
+        this->high_z_ = z + FIX16_RECT_HALF_HEIGHT;
     }
 
     // Unused since sub_5DF270 calls ComputeCollisionPrism_4204D0 with FIX16_RECT_HALF_HEIGHT. Kept because removing
@@ -57,21 +57,21 @@ class Fix16Rect
     {
         offset = offset / 2;
 
-        field_0_left = x.Subtract(offset);
-        field_4_right = x.Add(offset);
-        field_8_top = y.Subtract(offset);
-        field_C_bottom = y.Add(offset);
+        left_ = x.Subtract(offset);
+        right_ = x.Add(offset);
+        top_ = y.Subtract(offset);
+        bottom_ = y.Add(offset);
 
-        field_10_low_z = z.Subtract(half_z);
-        field_14_high_z = z.Add(half_z);
+        low_z_ = z.Subtract(half_z);
+        high_z_ = z.Add(half_z);
     }
 
     void SetRect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
     {
-        this->field_0_left = left;
-        this->field_4_right = right;
-        this->field_8_top = top;
-        this->field_C_bottom = bottom;
+        this->left_ = left;
+        this->right_ = right;
+        this->top_ = top;
+        this->bottom_ = bottom;
     }
 
     // TODO: None inline version of SetRect_41E350 ??
@@ -80,12 +80,12 @@ class Fix16Rect
 
     bool OverlapsZ(Fix16Rect* pOther)
     {
-        return IntervalsOverlap(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
+        return IntervalsOverlap(low_z_, high_z_, pOther->low_z_, pOther->high_z_);
     }
 
     s32 GetMidZ() const
     {
-        return (field_10_low_z.Add(field_14_high_z) / 2).ToInt();
+        return (low_z_.Add(high_z_) / 2).ToInt();
     }
 
     // 9.6f 0x463690, defined in map_0x370.cpp
@@ -93,32 +93,32 @@ class Fix16Rect
 
     void SetFromPosSize(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {
-        field_0_left = left;
-        field_8_top = top;
-        field_4_right = left + width;
-        field_C_bottom = top + height;
+        left_ = left;
+        top_ = top;
+        right_ = left + width;
+        bottom_ = top + height;
     }
 
     void SetHiLowZ(Fix16 lowZ, Fix16 highZ)
     {
-        this->field_10_low_z = lowZ;
-        this->field_14_high_z = highZ;
+        this->low_z_ = lowZ;
+        this->high_z_ = highZ;
     }
 
     Fix16Rect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, Fix16 z)
     {
         SetRect(left, right, top, bottom);
-        field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
-        field_14_high_z = z + kCollisionPrismHalfHeight_6771E4;
+        low_z_ = z - kCollisionPrismHalfHeight_6771E4;
+        high_z_ = z + kCollisionPrismHalfHeight_6771E4;
     }
 
     // TODO: Get inline addr
     Fix16Rect(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
     {
-        field_0_left = x;
-        field_8_top = y;
-        field_4_right = w + x;
-        field_C_bottom = h + y;
+        left_ = x;
+        top_ = y;
+        right_ = w + x;
+        bottom_ = h + y;
     }
 
     void DoSetCurrentRect();
@@ -130,48 +130,48 @@ class Fix16Rect
 
     bool IsPointInRect(Fix16Point* a2)
     {
-        return Fix16::IsBetween(field_0_left, field_4_right, a2->x) && Fix16::IsBetween(field_8_top, field_C_bottom, a2->y);
+        return Fix16::IsBetween(left_, right_, a2->x) && Fix16::IsBetween(top_, bottom_, a2->y);
     }
 
     bool AABBIntersects(Fix16Rect* pOther) const
     {
-        return IntervalIntersectsRange(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
-                IntervalIntersectsRange(field_8_top, this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
-                IntervalIntersectsRange(field_10_low_z, this->field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z) ?
+        return IntervalIntersectsRange(left_, this->right_, pOther->left_, pOther->right_) &&
+                IntervalIntersectsRange(top_, this->bottom_, pOther->top_, pOther->bottom_) &&
+                IntervalIntersectsRange(low_z_, this->high_z_, pOther->low_z_, pOther->high_z_) ?
             true :
             false;
     }
 
     Fix16 GetTop()
     {
-        return field_8_top;
+        return top_;
     }
 
     Fix16 GetLeft()
     {
-        return field_0_left;
+        return left_;
     }
 
     Fix16 GetRight()
     {
-        return field_4_right;
+        return right_;
     }
 
     Fix16 GetBottom()
     {
-        return field_C_bottom;
+        return bottom_;
     }
 
     Fix16 GetLowZ()
     {
-        return field_10_low_z;
+        return low_z_;
     }
 
-    Fix16 field_0_left;
-    Fix16 field_4_right;
-    Fix16 field_8_top;
-    Fix16 field_C_bottom;
+    Fix16 left_;
+    Fix16 right_;
+    Fix16 top_;
+    Fix16 bottom_;
 
-    Fix16 field_10_low_z;
-    Fix16 field_14_high_z;
+    Fix16 low_z_;
+    Fix16 high_z_;
 };

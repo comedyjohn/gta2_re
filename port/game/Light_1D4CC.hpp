@@ -33,14 +33,14 @@ class Light_1D4CC : public LightBase
 
     void AddToUpdateList_464C60(Light_28* pLight)
     {
-        pLight->mpNext = field_0_pool.field_4_pPrev;
-        field_0_pool.field_4_pPrev = pLight;
+        pLight->mpNext = field_0_pool.prev_;
+        field_0_pool.prev_ = pLight;
     }
 
     Light_28* Alloc_464C40()
     {
-        Light_28* pFirst = field_0_pool.field_0_pStart;
-        field_0_pool.field_0_pStart = field_0_pool.field_0_pStart->mpNext;
+        Light_28* pFirst = field_0_pool.start_;
+        field_0_pool.start_ = field_0_pool.start_->mpNext;
         pFirst->mpNext = nullptr;
         pFirst->Reset_463F50();
         return pFirst;
@@ -91,8 +91,8 @@ class Light_1D4CC : public LightBase
     void Free_47F4B0(Light_28* pLight)
     {
         pLight->PoolDeallocate();
-        pLight->mpNext = field_0_pool.field_0_pStart;
-        field_0_pool.field_0_pStart = pLight;
+        pLight->mpNext = field_0_pool.start_;
+        field_0_pool.start_ = pLight;
     }
 
     // matched https://decomp.me/scratch/cZQwK
@@ -100,7 +100,7 @@ class Light_1D4CC : public LightBase
     {
         Light_28* pPrevious = nullptr;
 
-        for (Light_28* pCurr = field_0_pool.field_4_pPrev; pCurr; pPrevious = pCurr, pCurr = pCurr->mpNext)
+        for (Light_28* pCurr = field_0_pool.prev_; pCurr; pPrevious = pCurr, pCurr = pCurr->mpNext)
         {
             if (pCurr == pLight)
             {
@@ -111,10 +111,10 @@ class Light_1D4CC : public LightBase
                 }
                 else
                 {
-                    field_0_pool.field_4_pPrev = pCurr->mpNext;
+                    field_0_pool.prev_ = pCurr->mpNext;
                 }
-                pCurr->mpNext = field_0_pool.field_0_pStart;
-                field_0_pool.field_0_pStart = pCurr;
+                pCurr->mpNext = field_0_pool.start_;
+                field_0_pool.start_ = pCurr;
                 break;
             }
         }

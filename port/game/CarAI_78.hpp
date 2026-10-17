@@ -139,7 +139,7 @@ class CarAI_78_Pool
 
     ~CarAI_78_Pool()
     {
-        field_0_pool.field_0_pHead = nullptr;
+        field_0_pool.head_ = nullptr;
     }
 
     CarAI_78* Allocate()

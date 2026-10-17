@@ -45,7 +45,7 @@ COLUMNS = ["kind", "address", "owner", "old_name", "new_name", "new_owner", "add
 
 OWNERS = (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL, K.CLASS_TEMPLATE, K.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION,
           K.NAMESPACE)
-PLAIN_KINDS = {K.FUNCTION_DECL, K.CXX_METHOD, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
+PLAIN_KINDS = {K.FUNCTION_DECL, K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
                K.ENUM_DECL, K.ENUM_CONSTANT_DECL, K.TYPEDEF_DECL, K.TYPE_ALIAS_DECL, K.FUNCTION_TEMPLATE, K.CLASS_TEMPLATE}
 SYMBOLS_PATH = os.path.join(ROOT, "port", "tools", "refactor", "symbol_names.csv")
 FUNC_ADDR = re.compile(r"_([0-9A-Fa-f]{6})(?=_|$)")
@@ -168,7 +168,7 @@ def scan_tu(args):
             ).startswith("3rdParty"):
                 p = cur.semantic_parent
                 owner = p.spelling if p is not None and p.kind in OWNERS else ""
-                plain.add((owner, cur.spelling))
+                plain.add((owner, cur.spelling, "method" if cur.kind in (K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR) else "other"))
         if cur.kind in (K.TRANSLATION_UNIT, K.NAMESPACE, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL,
                         K.LINKAGE_SPEC, K.CLASS_TEMPLATE):
             for child in cur.get_children():
@@ -256,7 +256,7 @@ def init(build_dir, jobs, symbols_only=False):
                 r["new_name"], r["new_owner"] = prev["new_name"], prev["new_owner"]
     with open(SYMBOLS_PATH, "w", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
-        w.writerow(["owner", "name"])
+        w.writerow(["owner", "name", "kind"])
         w.writerows(sorted(plain))
     if symbols_only:
         print(f"{len(plain)} symbol names -> {os.path.relpath(SYMBOLS_PATH, ROOT)}", file=sys.stderr)

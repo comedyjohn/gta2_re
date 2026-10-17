@@ -28,7 +28,7 @@ class Taxi_4_Pool : public PoolBasic<Taxi_8, 100>
 
     ~Taxi_4_Pool()
     {
-        this->field_0_pHead = nullptr;
+        this->head_ = nullptr;
     }
 };
 

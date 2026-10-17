@@ -13,8 +13,8 @@ name, not before.
 |---|---|---|
 | Types (class, struct, enum, alias) | `PascalCase`, no size or address | `Game`, `Car`, `ScriptThread` |
 | Functions and methods | `PascalCase`, no address | `ExitGame`, `GetInputBits` |
-| Data members | `snake_case_` (private and protected) | `game_exit_type_`, `prev_` |
-| Public data members of plain structs (no invariants) | `snake_case` | `rng_index` |
+| Data members of a class or struct that declares member functions (public ones too, until phase 6 makes them private) | `snake_case_` | `game_exit_type_`, `prev_` |
+| Data members of a plain data struct (no member functions, no invariants) | `snake_case` | `rng_index` |
 | Locals and parameters | `snake_case`, no Hungarian prefix | `car`, `new_timer`, `x_offset` |
 | Constants (`constexpr`, `const` globals) | `kPascalCase` | `kAng45`, `kFp255` |
 | Enumerators | `kPascalCase` (an explicit `= 2` stays) | `GameExitType::kPlayerQuit` |
@@ -22,6 +22,9 @@ name, not before.
 | Macros | `GTA2_UPPER_CASE` | `GTA2_COUNTOF` |
 | Namespaces | `snake_case` | `gta2`, `gta2::sim` |
 | Files | `snake_case`, after the main type; one directory per subsystem | `vehicles/car.cpp` |
+
+The trailing underscore also keeps a member from being shadowed by the constructor and setter parameters
+of the same name (`-Wshadow` is an error).
 
 The type says what a variable is, so `b`, `p`, `pp`, `u` and `n` prefixes go. A pointer member that
 would read oddly without one gets a noun (`owner_`).

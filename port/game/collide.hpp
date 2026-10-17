@@ -29,7 +29,7 @@ class GridSpriteLink_Pool : public PoolBasic<GridSpriteLink_8, 4096>
 
     ~GridSpriteLink_Pool()
     {
-        this->field_0_pHead = nullptr;
+        this->head_ = nullptr;
     }
 };
 
@@ -40,7 +40,7 @@ class GridCell_Pool : public PoolBasic<GridCell_C, 6000>
 
     ~GridCell_Pool()
     {
-        this->field_0_pHead = nullptr;
+        this->head_ = nullptr;
     }
 };
 

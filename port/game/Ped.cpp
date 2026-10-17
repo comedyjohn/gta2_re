@@ -10706,12 +10706,12 @@ namespace
 inline void ComputeRecruitPrism(Fix16Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
 {
     s32 half = offset.mValue / 2;
-    r.field_0_left.mValue = x.mValue - half;
-    r.field_4_right.mValue = half + x.mValue;
-    r.field_8_top.mValue = y.mValue - half;
-    r.field_C_bottom.mValue = y.mValue + half;
-    r.field_10_low_z = z.Subtract(kFpOneEighth_67845C);
-    r.field_14_high_z = (z).Add(kFpOneEighth_67845C);
+    r.left_.mValue = x.mValue - half;
+    r.right_.mValue = half + x.mValue;
+    r.top_.mValue = y.mValue - half;
+    r.bottom_.mValue = y.mValue + half;
+    r.low_z_ = z.Subtract(kFpOneEighth_67845C);
+    r.high_z_ = (z).Add(kFpOneEighth_67845C);
 }
 } // namespace
 

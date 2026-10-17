@@ -175,27 +175,27 @@ enum PoolId
 PoolMap MakePoolMap()
 {
     PoolMap m;
-    m.Add(gSpritePool_703818->field_0_pool.field_4_pool, kSprites);
-    m.Add(gPedPool_6787B8->field_0_pool.field_8_pool, kPeds);
-    m.Add(gChar_B4_Pool_6FDB44->field_0_pool.field_4_pool, kChars);
-    m.Add(gCar_BC_Pool_67792C->field_0_pool.field_8_pool, kCars);
-    m.Add(gCarPhysicsPool_6FE3E0->field_4_pool, kCarPhysics);
-    m.Add(gCarAI_78_Pool_677CF8->field_0_pool.field_4_pool, kCarAI);
-    m.Add(gTrailerPool_66AC80->field_0_pool.field_4_pool, kTrailers);
-    m.Add(gObject_2C_Pool_6F8F80->field_8_pool, kObjects2C);
-    m.Add(gObject_3C_Pool_6F8F7C->field_4_pool, kObjects3C);
-    m.Add(gObject_8_Pool_6F8F78->field_4_pool, kObjects8);
-    m.Add(miss2_0x11C_Pool_6F8064->field_0_pool.field_8_pool, kThreads);
-    m.Add(gWeapon_30_Pool_707014->field_0_pool.field_8_pool, kWeapons);
-    m.Add(gLight_1D4CC_6F5520->field_0_pool.field_8_pool, kLights);
+    m.Add(gSpritePool_703818->field_0_pool.pool_, kSprites);
+    m.Add(gPedPool_6787B8->field_0_pool.pool_, kPeds);
+    m.Add(gChar_B4_Pool_6FDB44->field_0_pool.pool_, kChars);
+    m.Add(gCar_BC_Pool_67792C->field_0_pool.pool_, kCars);
+    m.Add(gCarPhysicsPool_6FE3E0->pool_, kCarPhysics);
+    m.Add(gCarAI_78_Pool_677CF8->field_0_pool.pool_, kCarAI);
+    m.Add(gTrailerPool_66AC80->field_0_pool.pool_, kTrailers);
+    m.Add(gObject_2C_Pool_6F8F80->pool_, kObjects2C);
+    m.Add(gObject_3C_Pool_6F8F7C->pool_, kObjects3C);
+    m.Add(gObject_8_Pool_6F8F78->pool_, kObjects8);
+    m.Add(miss2_0x11C_Pool_6F8064->field_0_pool.pool_, kThreads);
+    m.Add(gWeapon_30_Pool_707014->field_0_pool.pool_, kWeapons);
+    m.Add(gLight_1D4CC_6F5520->field_0_pool.pool_, kLights);
     m.Add(gDoor_4D4_67BD2C->field_0_doors, kDoors);
     m.Add(gCranePool_D9C_679FD4->field_0_cranes, kCranes);
     // field_0_crushers[3] is private, and the pool's first member
     m.Add(*reinterpret_cast<Crusher_30(*)[3]>(gCrusherPool_94_67A830), kCrushers);
     m.Add(gGeneratorPool_14AC_67E5D0->field_0_pool, kGenerators);
     m.Add(gHud_2B00_706620->field_1F18_arrows.field_0_array, kArrows);
-    m.Add(gAttachedSpritePool_703B80->field_0_pool.field_4_pool, kAttachedSprites);
-    m.Add(gParticle_4C_Pool_6FD5E4->field_8_pool, kParticles);
+    m.Add(gAttachedSpritePool_703B80->field_0_pool.pool_, kAttachedSprites);
+    m.Add(gParticle_4C_Pool_6FD5E4->pool_, kParticles);
     m.Add(gExplosionPool_7A8_6FD5F0->field_0_explosions, kExplosions40);
     m.Add(gExplosionPool_3D4_6FD5EC->field_0_explosions, kExplosions20);
     return m;
@@ -206,9 +206,9 @@ template<typename T, s32 N>
 std::vector<bool> UsedItems(PoolBasic<T, N>& pool)
 {
     std::vector<bool> used(N, true);
-    for (T* p = pool.field_0_pHead; p; p = p->mpNext)
+    for (T* p = pool.head_; p; p = p->mpNext)
     {
-        used[p - pool.field_4_pool] = false;
+        used[p - pool.pool_] = false;
     }
     return used;
 }
@@ -217,9 +217,9 @@ template<typename T, s32 N>
 std::vector<bool> UsedItems(Pool<T, N>& pool)
 {
     std::vector<bool> used(N, true);
-    for (T* p = pool.field_0_pStart; p; p = p->mpNext)
+    for (T* p = pool.start_; p; p = p->mpNext)
     {
-        used[p - pool.field_8_pool] = false;
+        used[p - pool.pool_] = false;
     }
     return used;
 }
@@ -229,7 +229,7 @@ template<typename T, s32 N>
 void AddUsedOrder(Hasher& h, const PoolMap& pools, Pool<T, N>& pool)
 {
     int count = 0;
-    for (T* p = pool.field_4_pPrev; p && count <= N; p = p->mpNext, count++)
+    for (T* p = pool.prev_; p && count <= N; p = p->mpNext, count++)
     {
         h.Add("used_list", pools.Of(p));
     }
@@ -259,8 +259,8 @@ void AddPoint(Hasher& h, const char* name, const Fix16Point& p)
 uint64_t HashRng(std::string* dump)
 {
     Hasher h(dump, "rng");
-    h.Add("count", gpRng_67AB34->field_0_rng);
-    h.Add("rnd", gpRng_67AB34->field_4_rnd);
+    h.Add("count", gpRng_67AB34->rng_);
+    h.Add("rnd", gpRng_67AB34->rnd_);
     return h.Value();
 }
 
@@ -275,7 +275,7 @@ uint64_t HashSprites(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const Sprite& s = pool.field_4_pool[i];
+        const Sprite& s = pool.pool_[i];
         h.Item("sprite", i);
         h.Add("index", i);
         h.Add("x", s.field_14_xy.x.mValue);
@@ -303,7 +303,7 @@ uint64_t HashPeds(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const Ped& p = pool.field_8_pool[i];
+        const Ped& p = pool.pool_[i];
         h.Item("ped", i);
         h.Add("index", i);
         h.Add("id", p.field_200_id);
@@ -332,7 +332,7 @@ uint64_t HashPeds(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const Char_B4& c = chars.field_4_pool[i];
+        const Char_B4& c = chars.pool_[i];
         h.Item("char", i);
         h.Add("index", i);
         h.Add("ped_state_1", c.field_8_ped_state_1);
@@ -360,7 +360,7 @@ uint64_t HashCars(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const Car_BC& c = pool.field_8_pool[i];
+        const Car_BC& c = pool.pool_[i];
         h.Item("car", i);
         h.Add("index", i);
         h.Add("id", c.field_6C_car_id);
@@ -413,7 +413,7 @@ uint64_t HashObjects(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const Object_2C& o = pool.field_8_pool[i];
+        const Object_2C& o = pool.pool_[i];
         h.Item("object", i);
         h.Add("index", i);
         h.Add("id", o.field_14_id);
@@ -485,7 +485,7 @@ uint64_t HashScript(std::string* dump, const PoolMap& pools)
         {
             continue;
         }
-        const miss2_0x11C& t = threads.field_8_pool[i];
+        const miss2_0x11C& t = threads.pool_[i];
         h.Item("thread", i);
         h.Add("index", i);
         h.Add("next_cmd", t.field_4_next_cmd);

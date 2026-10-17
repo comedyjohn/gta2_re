@@ -41,18 +41,18 @@ class Weapon_30_Pool
     // 9.6f 0x4CC9C0 (which also calls 0x4CC810, init_5DCD90 in 10.5)
     Weapon_30* Allocate()
     {
-        Weapon_30* pWeapon = field_0_pool.field_0_pStart;
-        field_0_pool.field_0_pStart = pWeapon->mpNext;
-        pWeapon->mpNext = field_0_pool.field_4_pPrev;
-        field_0_pool.field_4_pPrev = pWeapon;
+        Weapon_30* pWeapon = field_0_pool.start_;
+        field_0_pool.start_ = pWeapon->mpNext;
+        pWeapon->mpNext = field_0_pool.prev_;
+        field_0_pool.prev_ = pWeapon;
         return pWeapon;
     }
 
     // 9.6f 0x4CC9E0 (which also calls 0x4CC810, init_5DCD90 in 10.5)
     Weapon_30* AllocateUnlinked_4CC9E0()
     {
-        Weapon_30* pWeapon = field_0_pool.field_0_pStart;
-        field_0_pool.field_0_pStart = pWeapon->mpNext;
+        Weapon_30* pWeapon = field_0_pool.start_;
+        field_0_pool.start_ = pWeapon->mpNext;
         pWeapon->mpNext = nullptr;
         return pWeapon;
     }
@@ -61,7 +61,7 @@ class Weapon_30_Pool
     // Remove/dealloc?
     void DeAllocate_4A4F20(Weapon_30* pW30)
     {
-        Weapon_30* pIter = this->field_0_pool.field_4_pPrev;
+        Weapon_30* pIter = this->field_0_pool.prev_;
         Weapon_30* pLastIter = nullptr;
         while (pIter)
         {
@@ -74,10 +74,10 @@ class Weapon_30_Pool
                 }
                 else
                 {
-                    this->field_0_pool.field_4_pPrev = pIter->mpNext;
+                    this->field_0_pool.prev_ = pIter->mpNext;
                 }
-                pIter->mpNext = this->field_0_pool.field_0_pStart;
-                this->field_0_pool.field_0_pStart = pIter;
+                pIter->mpNext = this->field_0_pool.start_;
+                this->field_0_pool.start_ = pIter;
                 break;
             }
             else
@@ -90,7 +90,7 @@ class Weapon_30_Pool
 
     Weapon_30* get_next_4CC9B0()
     {
-        return this->field_0_pool.field_4_pPrev;
+        return this->field_0_pool.prev_;
     }
 
     ~Weapon_30_Pool();

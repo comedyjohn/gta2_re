@@ -62,8 +62,8 @@ void Weapon_8::deallocate_5E3CB0(Weapon_30* pWeapon)
 {
     Weapon_30_Pool* pRoot = gWeapon_30_Pool_707014;
     pWeapon->PoolDeallocate();
-    pWeapon->mpNext = pRoot->field_0_pool.field_0_pStart;
-    pRoot->field_0_pool.field_0_pStart = pWeapon;
+    pWeapon->mpNext = pRoot->field_0_pool.start_;
+    pRoot->field_0_pool.start_ = pWeapon;
     field_4_ref_count--;
 }
 

@@ -1626,10 +1626,10 @@ bool Map_0x370::CanMoveOntoSlopeTile_4E0130(s32 x, s32 y, s32 z, s32 path_direct
 // 9.6f 0x463690: does the segment p1-p2 cross any edge of the rect
 inline bool Fix16Rect::EdgesCrossSegment_463690(Fix16Point& p1, Fix16Point& p2)
 {
-    return ComputeScanlineIntersectionY_4F76A0(field_0_left, field_4_right, field_8_top, p1, p2) ||
-        ComputeScanlineIntersectionY_4F76A0(field_0_left, field_4_right, field_C_bottom, p1, p2) ||
-        ComputeScanlineIntersectionX_4F77D0(field_8_top, field_C_bottom, field_0_left, p1, p2) ||
-        ComputeScanlineIntersectionX_4F77D0(field_8_top, field_C_bottom, field_4_right, p1, p2);
+    return ComputeScanlineIntersectionY_4F76A0(left_, right_, top_, p1, p2) ||
+        ComputeScanlineIntersectionY_4F76A0(left_, right_, bottom_, p1, p2) ||
+        ComputeScanlineIntersectionX_4F77D0(top_, bottom_, left_, p1, p2) ||
+        ComputeScanlineIntersectionX_4F77D0(top_, bottom_, right_, p1, p2);
 }
 
 // 0x4E11E0

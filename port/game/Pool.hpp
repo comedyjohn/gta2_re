@@ -9,15 +9,15 @@ class PoolBasic
   public:
     PoolBasic()
     {
-        PoolType* pIter = &field_4_pool[0];
+        PoolType* pIter = &pool_[0];
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
             pIter->mpNext = pIter + 1;
             pIter++;
         }
 
-        field_4_pool[PoolSize - 1].mpNext = nullptr;
-        field_0_pHead = field_4_pool;
+        pool_[PoolSize - 1].mpNext = nullptr;
+        head_ = pool_;
     }
 
     /*~PoolBasic()
@@ -27,8 +27,8 @@ class PoolBasic
 
     PoolType* Allocate()
     {
-        PoolType* pNew = field_0_pHead;
-        field_0_pHead = pNew->mpNext;
+        PoolType* pNew = head_;
+        head_ = pNew->mpNext;
         pNew->PoolAllocate();
         return pNew;
     }
@@ -36,20 +36,20 @@ class PoolBasic
     void DeAllocate(PoolType* pItem)
     {
         pItem->PoolDeallocate();
-        pItem->mpNext = field_0_pHead;
-        field_0_pHead = pItem;
+        pItem->mpNext = head_;
+        head_ = pItem;
     }
 
     PoolType* UnlinkAndReturnNext(PoolType* pOldItem)
     {
         PoolType* pNewItem = pOldItem->mpNext;
-        pOldItem->mpNext = this->field_0_pHead;
-        this->field_0_pHead = pOldItem;
+        pOldItem->mpNext = this->head_;
+        this->head_ = pOldItem;
         return pNewItem;
     }
 
-    PoolType* field_0_pHead;
-    PoolType field_4_pool[PoolSize];
+    PoolType* head_;
+    PoolType pool_[PoolSize];
 };
 
 template<typename PoolType, s32 PoolSize>
@@ -58,43 +58,43 @@ class Pool
   public:
     bool HasPStart()
     {
-        return field_0_pStart != nullptr;
+        return start_ != nullptr;
     }
 
     // 9.6f 0x4B8FD0 (CokeZero_FC, 10.5 copy 0x5935C0): first used item
     PoolType* GetFirstUsed()
     {
-        return field_4_pPrev;
+        return prev_;
     }
 
     Pool()
     {
-        PoolType* pIter = field_8_pool;
+        PoolType* pIter = pool_;
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
             pIter->mpNext = pIter + 1;
             pIter++;
         }
 
-        field_8_pool[PoolSize - 1].mpNext = nullptr;
-        field_0_pStart = field_8_pool;
+        pool_[PoolSize - 1].mpNext = nullptr;
+        start_ = pool_;
 
-        field_4_pPrev = nullptr;
+        prev_ = nullptr;
         field_X_count = 0;
     }
 
     ~Pool()
     {
-        field_0_pStart = nullptr;
-        field_4_pPrev = nullptr;
+        start_ = nullptr;
+        prev_ = nullptr;
     }
 
     PoolType* Allocate()
     {
-        PoolType* tmp = field_0_pStart;
-        field_0_pStart = tmp->mpNext;
-        tmp->mpNext = field_4_pPrev;
-        field_4_pPrev = tmp;
+        PoolType* tmp = start_;
+        start_ = tmp->mpNext;
+        tmp->mpNext = prev_;
+        prev_ = tmp;
         tmp->PoolAllocate();
         return tmp;
     }
@@ -103,18 +103,18 @@ class Pool
     PoolType* AllocateAppend()
     {
         // Pop from free list
-        PoolType* obj = field_0_pStart;
-        field_0_pStart = obj->mpNext;
+        PoolType* obj = start_;
+        start_ = obj->mpNext;
         obj->mpNext = nullptr;
 
         // Append to active list (FIFO style)
-        if (!field_4_pPrev)
+        if (!prev_)
         {
-            field_4_pPrev = obj; // active list was empty
+            prev_ = obj; // active list was empty
         }
         else
         {
-            PoolType* tail = field_4_pPrev;
+            PoolType* tail = prev_;
             while (tail->mpNext)
             {
                 tail = tail->mpNext;
@@ -128,8 +128,8 @@ class Pool
 
     PoolType* AllocateUntracked()
     {
-        PoolType* tmp = this->field_0_pStart;
-        this->field_0_pStart = tmp->mpNext;
+        PoolType* tmp = this->start_;
+        this->start_ = tmp->mpNext;
         tmp->mpNext = nullptr;
         tmp->PoolAllocate();
         return tmp;
@@ -138,20 +138,20 @@ class Pool
     void DeAllocate(PoolType* pItem)
     {
         pItem->PoolDeallocate();
-        pItem->mpNext = field_0_pStart;
-        field_0_pStart = pItem;
+        pItem->mpNext = start_;
+        start_ = pItem;
     }
 
     void Remove_NoDeAllocate(PoolType* pItem)
     {
-        pItem->mpNext = field_0_pStart;
-        field_0_pStart = pItem;
+        pItem->mpNext = start_;
+        start_ = pItem;
     }
 
     void UpdateNextPrev(PoolType* pItem)
     {
-        pItem->mpNext = field_4_pPrev;
-        field_4_pPrev = pItem;
+        pItem->mpNext = prev_;
+        prev_ = pItem;
     }
 
     void UpdatePool()
@@ -159,7 +159,7 @@ class Pool
         field_X_count = 0;
 
         PoolType* pPreviousItem = nullptr;
-        PoolType* pCurrItem = field_4_pPrev;
+        PoolType* pCurrItem = prev_;
 
         while (pCurrItem)
         {
@@ -182,13 +182,13 @@ class Pool
                 }
                 else
                 {
-                    if (field_4_pPrev == pCurrItem)
+                    if (prev_ == pCurrItem)
                     {
-                        field_4_pPrev = pCurrItem->mpNext;
+                        prev_ = pCurrItem->mpNext;
                     }
                     else
                     {
-                        pPreviousItem = field_4_pPrev;
+                        pPreviousItem = prev_;
                         while (pPreviousItem->mpNext != pCurrItem)
                         {
                             pPreviousItem = pPreviousItem->mpNext;
@@ -197,8 +197,8 @@ class Pool
                     }
                 }
 
-                pCurrItem->mpNext = field_0_pStart;
-                field_0_pStart = pCurrItem;
+                pCurrItem->mpNext = start_;
+                start_ = pCurrItem;
             }
             else
             {
@@ -214,7 +214,7 @@ class Pool
         field_X_count = 0;
 
         PoolType* pPreviousItem = nullptr;
-        PoolType* pCurrItem = field_4_pPrev;
+        PoolType* pCurrItem = prev_;
 
         while (pCurrItem)
         {
@@ -235,13 +235,13 @@ class Pool
                 }
                 else
                 {
-                    if (field_4_pPrev == pCurrItem)
+                    if (prev_ == pCurrItem)
                     {
-                        field_4_pPrev = pCurrItem->mpNext;
+                        prev_ = pCurrItem->mpNext;
                     }
                     else
                     {
-                        pPreviousItem = field_4_pPrev;
+                        pPreviousItem = prev_;
                         while (pPreviousItem->mpNext != pCurrItem)
                         {
                             pPreviousItem = pPreviousItem->mpNext;
@@ -250,8 +250,8 @@ class Pool
                     }
                 }
 
-                pCurrItem->mpNext = field_0_pStart;
-                field_0_pStart = pCurrItem;
+                pCurrItem->mpNext = start_;
+                start_ = pCurrItem;
             }
             else
             {
@@ -266,7 +266,7 @@ class Pool
     {
         PoolType* pLast = nullptr;
 
-        for (PoolType* pIter = field_4_pPrev; pIter; pIter = pIter->mpNext)
+        for (PoolType* pIter = prev_; pIter; pIter = pIter->mpNext)
         {
             if (pIter == pToFind)
             {
@@ -278,10 +278,10 @@ class Pool
                 }
                 else
                 {
-                    field_4_pPrev = pIter->mpNext;
+                    prev_ = pIter->mpNext;
                 }
-                pIter->mpNext = field_0_pStart;
-                field_0_pStart = pIter;
+                pIter->mpNext = start_;
+                start_ = pIter;
                 return pToFind;
             }
             pLast = pIter;
@@ -292,7 +292,7 @@ class Pool
     void UnlinkFromActiveList(PoolType* toFind)
     {
         PoolType* pLast = nullptr;
-        for (PoolType* pIter = this->field_4_pPrev; pIter; pIter = pIter->mpNext)
+        for (PoolType* pIter = this->prev_; pIter; pIter = pIter->mpNext)
         {
             if (pIter == toFind)
             {
@@ -302,7 +302,7 @@ class Pool
                 }
                 else
                 {
-                    this->field_4_pPrev = pIter->mpNext;
+                    this->prev_ = pIter->mpNext;
                 }
                 pIter->mpNext = nullptr;
                 return;
@@ -311,9 +311,9 @@ class Pool
         }
     }
 
-    PoolType* field_0_pStart;
-    PoolType* field_4_pPrev;
-    PoolType field_8_pool[PoolSize];
+    PoolType* start_;
+    PoolType* prev_;
+    PoolType pool_[PoolSize];
 
     // Unknown offsets due to sizeof(PoolType) varying per template
     s16 field_X_count;

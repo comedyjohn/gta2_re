@@ -397,7 +397,7 @@ void Explosion_30::SpawnFlashParticle_541760()
 {
     if (field_10_type != explosion_type::small_18 && field_10_type != explosion_type::no_ring_32)
     {
-        if (gParticle_4C_Pool_6FD5E4->field_0_pStart)
+        if (gParticle_4C_Pool_6FD5E4->start_)
         {
             Particle_4C* pNew = gParticle_4C_Pool_6FD5E4->Allocate();
             pNew->field_46_sub_state = 0;
@@ -847,7 +847,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
         unk_6FD5F6 = 0;
         for (u8 i = 0; i < 2U; i++)
         {
-            if (gParticle_4C_Pool_6FD5E4->field_0_pStart)
+            if (gParticle_4C_Pool_6FD5E4->start_)
             {
                 Particle_4C* pParticle = gParticle_4C_Pool_6FD5E4->Allocate();
                 pParticle->field_46_sub_state = 0;

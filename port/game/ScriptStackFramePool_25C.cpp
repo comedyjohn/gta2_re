@@ -3,7 +3,7 @@
 // 0x4bc300
 ScriptStackFramePool_25C::~ScriptStackFramePool_25C()
 {
-    field_0_pool.field_0_pHead = nullptr;
+    field_0_pool.head_ = nullptr;
 }
 
 // 0x4bea80

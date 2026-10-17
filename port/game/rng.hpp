@@ -7,18 +7,18 @@ class Rng
   public:
     Rng()
     {
-        field_0_rng = 0;
-        field_4_rnd = 0;
+        rng_ = 0;
+        rnd_ = 0;
     }
 
     s32 GetCurRng()
     {
-        return field_0_rng;
+        return rng_;
     }
 
     s32 GetRnd()
     {
-        return field_4_rnd;
+        return rnd_;
     }
 
     void AdvanceCycle();
@@ -29,8 +29,8 @@ class Rng
     u8 GetUint8(const u8& max_rnd);
     int Rand();
 
-    s32 field_0_rng;
-    s32 field_4_rnd;
+    s32 rng_;
+    s32 rnd_;
 };
 
 EXTERN_GLOBAL(Rng*, gpRng_67AB34);

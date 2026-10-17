@@ -310,12 +310,12 @@ void ShowRectAndPointsForSprite4C(SpriteShape_4C* p4C)
     Fix16Rect rect = p4C->field_30_boundingBox;
     if (ImGui::TreeNode("bounding box"))
     {
-        ImGui::Value("Left", rect.field_0_left.ToFloat(), "%.2f");
-        ImGui::Value("Right", rect.field_4_right.ToFloat(), "%.2f");
-        ImGui::Value("Top", rect.field_8_top.ToFloat(), "%.2f");
-        ImGui::Value("Bottom", rect.field_C_bottom.ToFloat(), "%.2f");
-        ImGui::Value("Lower Z", rect.field_10_low_z.ToFloat(), "%.2f");
-        ImGui::Value("Higher Z", rect.field_14_high_z.ToFloat(), "%.2f");
+        ImGui::Value("Left", rect.left_.ToFloat(), "%.2f");
+        ImGui::Value("Right", rect.right_.ToFloat(), "%.2f");
+        ImGui::Value("Top", rect.top_.ToFloat(), "%.2f");
+        ImGui::Value("Bottom", rect.bottom_.ToFloat(), "%.2f");
+        ImGui::Value("Lower Z", rect.low_z_.ToFloat(), "%.2f");
+        ImGui::Value("Higher Z", rect.high_z_.ToFloat(), "%.2f");
         ImGui::TreePop();
     }
 
@@ -1402,7 +1402,7 @@ void ImGuiDebugDraw()
         {
             if (gPedPool_6787B8)
             {
-                Ped* pIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
+                Ped* pIter = gPedPool_6787B8->field_0_pool.prev_;
                 while (pIter)
                 {
                     Sprite* pPedSprite = GetPedSprite(pIter);
@@ -1423,7 +1423,7 @@ void ImGuiDebugDraw()
         {
             if (gPedPool_6787B8)
             {
-                Ped* pIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
+                Ped* pIter = gPedPool_6787B8->field_0_pool.prev_;
                 while (pIter)
                 {
                     if (pIter != GetPlayerPed())
@@ -1459,7 +1459,7 @@ void ImGuiDebugDraw()
 
         if (gCar_BC_Pool_67792C && ImGui::TreeNode("Car Pool"))
         {
-            Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
+            Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.prev_;
 
             if (ImGui::TreeNode("All cars Field 88 "))
             {
@@ -1473,7 +1473,7 @@ void ImGuiDebugDraw()
                 ImGui::TreePop();
             }
 
-            pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
+            pCarIter = gCar_BC_Pool_67792C->field_0_pool.prev_;
 
             while (pCarIter)
             {
@@ -1877,7 +1877,7 @@ void ImGuiDebugDraw()
                 {
                     if (gCar_BC_Pool_67792C)
                     {
-                        for (auto& i : gCar_BC_Pool_67792C->field_0_pool.field_8_pool)
+                        for (auto& i : gCar_BC_Pool_67792C->field_0_pool.pool_)
                         {
                             Car_BC* pCarIter = &i;
                             if (pCarIter && pCarIter->field_50_car_sprite)
@@ -1898,7 +1898,7 @@ void ImGuiDebugDraw()
             if (ImGui::TreeNode("Show Car AI info"))
             {
                 s32 num_AI_count = 0;
-                Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
+                Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.prev_;
                 while (pCarIter)
                 {
                     CarAI_78* pAI_Iter = pCarIter->field_5C_AI;
@@ -1956,7 +1956,7 @@ void ImGuiDebugDraw()
                 Sprite* pPlayerSprt = GetPlayerAssociatedSprite();
                 if (pPlayerSprt)
                 {
-                    Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev;
+                    Car_BC* pCarIter = gCar_BC_Pool_67792C->field_0_pool.prev_;
                     CarAI_78* pNearestAI = nullptr;
                     auto smallest = Fix16(99999);
                     while (pCarIter)
@@ -2132,7 +2132,7 @@ void ImGuiDebugDraw()
             {
                 for (u32 i = 0; i < 3824; i++)
                 {
-                    Object_2C* pObjIter = &gObject_2C_Pool_6F8F80->field_8_pool[i];
+                    Object_2C* pObjIter = &gObject_2C_Pool_6F8F80->pool_[i];
                     if (pObjIter && pObjIter->field_18_model != 0)
                     {
                         swprintf(tmpBuff_67BD9C, L"%d", pObjIter->field_18_model);
@@ -2659,7 +2659,7 @@ void ImGuiDebugDraw()
 
                 if (ImGui::Button("Apply states globally"))
                 {
-                    Ped* pIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
+                    Ped* pIter = gPedPool_6787B8->field_0_pool.prev_;
                     while (pIter)
                     {
                         if (pIter != GetPlayerPed())
@@ -2673,7 +2673,7 @@ void ImGuiDebugDraw()
 
                 if (ImGui::TreeNode("Show ped type"))
                 {
-                    Ped* pPedIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
+                    Ped* pPedIter = gPedPool_6787B8->field_0_pool.prev_;
                     while (pPedIter)
                     {
                         if (true) // pPedIter->field_168_game_object
@@ -2704,7 +2704,7 @@ void ImGuiDebugDraw()
                     }
                 }
 
-                Ped* pPedIter = gPedPool_6787B8->field_0_pool.field_4_pPrev;
+                Ped* pPedIter = gPedPool_6787B8->field_0_pool.prev_;
 
                 if (ImGui::TreeNode("Show Objectives"))
                 {
@@ -3023,7 +3023,7 @@ void ImGuiDebugDraw()
 
         if (gParticle_4C_Pool_6FD5E4 && ImGui::TreeNode("gParticle_4C_Pool_6FD5E4"))
         {
-            Particle_4C* pIter = gParticle_4C_Pool_6FD5E4->field_4_pPrev;
+            Particle_4C* pIter = gParticle_4C_Pool_6FD5E4->prev_;
             for (; pIter; pIter = pIter->mpNext)
             {
                 swprintf(tmpBuff_67BD9C, L"%d", pIter->field_38_state);

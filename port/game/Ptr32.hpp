@@ -35,11 +35,11 @@ template<typename T>
 struct Ptr32
 {
     // No constructors, so it can sit in the unions of the script structures
-    u32 field_0_handle;
+    u32 handle_;
 
     operator T*() const
     {
-        return static_cast<T*>(Ptr32_FromHandle(field_0_handle));
+        return static_cast<T*>(Ptr32_FromHandle(handle_));
     }
 
     T* operator->() const
@@ -51,13 +51,13 @@ struct Ptr32
     template<typename U>
     explicit operator U*() const
     {
-        return reinterpret_cast<U*>(Ptr32_FromHandle(field_0_handle));
+        return reinterpret_cast<U*>(Ptr32_FromHandle(handle_));
     }
 
     Ptr32& operator=(T* p)
     {
-        field_0_handle = Ptr32_ToHandle(p);
-        Ptr32_NoteSlot(this, field_0_handle);
+        handle_ = Ptr32_ToHandle(p);
+        Ptr32_NoteSlot(this, handle_);
         return *this;
     }
 };

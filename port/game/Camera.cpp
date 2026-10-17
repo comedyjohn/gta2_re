@@ -130,9 +130,9 @@ char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
                  field_98_cur_pos.field_4_y + half_height);
 
     Fix16Rect* pBox = &pSprite->field_C_pCollisionShape->field_30_boundingBox;
-    if (IntervalIntersectsRange(rect.field_0_left, rect.field_4_right, pBox->field_0_left, pBox->field_4_right) &&
-        IntervalIntersectsRange(rect.field_8_top, rect.field_C_bottom, pBox->field_8_top, pBox->field_C_bottom) &&
-        IntervalIntersectsRange(rect.field_10_low_z, rect.field_14_high_z, pBox->field_10_low_z, pBox->field_14_high_z))
+    if (IntervalIntersectsRange(rect.left_, rect.right_, pBox->left_, pBox->right_) &&
+        IntervalIntersectsRange(rect.top_, rect.bottom_, pBox->top_, pBox->bottom_) &&
+        IntervalIntersectsRange(rect.low_z_, rect.high_z_, pBox->low_z_, pBox->high_z_))
     {
         SpriteShape_4C* p4C = pSprite->field_C_pCollisionShape;
         if ((p4C->field_0_width == p4C->field_4_height && p4C->field_0_width <= dword_676694) || pSprite->field_0_rotation.rValue == 0 ||

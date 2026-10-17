@@ -62,6 +62,9 @@ CheckOptions:
     value: '_'
   - key: readability-identifier-naming.PublicMemberCase
     value: lower_case
+  # members of a class with member functions end in `_` even while they are public (STYLE.md)
+  - key: readability-identifier-naming.PublicMemberIgnoredRegexp
+    value: '^[a-z][a-z0-9]*(_[a-z0-9]+)*_$'
   - key: readability-identifier-naming.LocalVariableCase
     value: lower_case
   - key: readability-identifier-naming.ParameterCase

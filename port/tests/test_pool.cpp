@@ -35,15 +35,15 @@ TEST_CASE("PoolBasic hands out items in array order and reuses the last freed fi
     PoolBasic<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.Allocate();
-    CHECK(a == &pool.field_4_pool[0]);
-    CHECK(b == &pool.field_4_pool[1]);
+    CHECK(a == &pool.pool_[0]);
+    CHECK(b == &pool.pool_[1]);
     CHECK(a->allocations == 1);
     pool.DeAllocate(a);
     CHECK(a->deallocations == 1);
     CHECK(pool.Allocate() == a);
     pool.Allocate();
     pool.Allocate();
-    CHECK(pool.field_0_pHead == nullptr); // full
+    CHECK(pool.head_ == nullptr); // full
 }
 
 TEST_CASE("Pool keeps a used list, newest first")

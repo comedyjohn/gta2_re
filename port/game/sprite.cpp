@@ -2743,19 +2743,19 @@ SpriteManager_8::~SpriteManager_8()
 // 0x5a5be0
 SpriteShapePool::~SpriteShapePool()
 {
-    field_0_pool.field_0_pHead = nullptr;
+    field_0_pool.head_ = nullptr;
 }
 
 // 0x5A5C00
 SpritePool::~SpritePool()
 {
-    field_0_pool.field_0_pHead = nullptr;
+    field_0_pool.head_ = nullptr;
 }
 
 // 0x5a5c20
 AttachedSpritePool::~AttachedSpritePool()
 {
-    field_0_pool.field_0_pHead = nullptr;
+    field_0_pool.head_ = nullptr;
 }
 
 // 0x5a5c50

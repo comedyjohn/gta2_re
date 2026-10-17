@@ -5887,7 +5887,7 @@ void Car_BC::AttachTrailer_4427A0(Car_BC* pToFind)
     field_64_pTrailer->SetTruckCabAndTrailerCar_407BB0(this, pToFind);
 
     Car_BC* pLast = nullptr;
-    for (Car_BC* pIter = gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev; pIter; pIter = pIter->mpNext)
+    for (Car_BC* pIter = gCar_BC_Pool_67792C->field_0_pool.prev_; pIter; pIter = pIter->mpNext)
     {
         if (pIter == pToFind)
         {
@@ -5897,7 +5897,7 @@ void Car_BC::AttachTrailer_4427A0(Car_BC* pToFind)
             }
             else
             {
-                gCar_BC_Pool_67792C->field_0_pool.field_4_pPrev = pIter->mpNext;
+                gCar_BC_Pool_67792C->field_0_pool.prev_ = pIter->mpNext;
             }
             pIter->mpNext = nullptr;
             return;
@@ -6009,12 +6009,12 @@ namespace
 {
 inline void SetPrism(Fix16Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, const Fix16 z)
 {
-    rect.field_0_left = left;
-    rect.field_4_right = right;
-    rect.field_8_top = top;
-    rect.field_C_bottom = bottom;
-    rect.field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
-    rect.field_14_high_z = z.Add(kCollisionPrismHalfHeight_6771E4);
+    rect.left_ = left;
+    rect.right_ = right;
+    rect.top_ = top;
+    rect.bottom_ = bottom;
+    rect.low_z_ = z - kCollisionPrismHalfHeight_6771E4;
+    rect.high_z_ = z.Add(kCollisionPrismHalfHeight_6771E4);
 }
 } // namespace
 
@@ -6074,8 +6074,8 @@ char_type Car_BC::TrainUpdate_442D70()
                                  field_50_car_sprite->field_14_xy.x,
                                  field_50_car_sprite->field_14_xy.y - Fix16(0x4000, 0),
                                  field_50_car_sprite->field_14_xy.y + Fix16(0x4000, 0));
-                    rect.field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
-                    rect.field_14_high_z = z + kCollisionPrismHalfHeight_6771E4;
+                    rect.low_z_ = z - kCollisionPrismHalfHeight_6771E4;
+                    rect.high_z_ = z + kCollisionPrismHalfHeight_6771E4;
                     break;
                 }
 

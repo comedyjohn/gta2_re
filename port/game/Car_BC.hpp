@@ -1380,7 +1380,7 @@ struct Car_BC_Pool
 
     Car_BC* GetFirstCar_420E50()
     {
-        return field_0_pool.field_4_pPrev;
+        return field_0_pool.prev_;
     }
 
     void UpdateNextPrev(Car_BC* pItem)
@@ -1399,7 +1399,7 @@ class TrailerPool
 
     ~TrailerPool()
     {
-        field_0_pool.field_0_pHead = nullptr;
+        field_0_pool.head_ = nullptr;
     }
 
     void Remove_425580(Trailer* pTrailer)

@@ -18,8 +18,9 @@ of a member is written with its owner's current name (types are renamed first). 
 scope, an empty result, a name made only of a placeholder (`sub_4C9ED0`, an unnamed `field_2C`), a C++
 keyword. rename.py refuses a CSV with an empty `new`; fill the rows in by hand.
 
-Members get no trailing underscore yet: they are public until phase 6 gives each class its interface,
-and `PublicMemberCase` is `lower_case` (STYLE.md); phase 6 adds the `_` when it makes them private.
+Members of a class or struct that declares member functions get a trailing underscore (`left_`): the
+parameters of its constructors and setters are called `left` too, and -Wshadow is an error. Members of a
+plain data struct (no member functions) do not (`rng_index`). STYLE.md has the rule.
 """
 import argparse
 import collections
@@ -182,16 +183,25 @@ def propose(sub, kind, rows):
         return r["new_owner"] or r["owner"]
 
     taken = collections.defaultdict(set)
+    has_methods = set()
     if os.path.exists(SYMBOLS_PATH):  # every name the code declares now, with its owner as spelled now
         with open(SYMBOLS_PATH, newline="") as f:
             for sr in csv.DictReader(f):
                 taken[sr["owner"]].add(sr["name"])
+                if sr.get("kind") == "method":
+                    has_methods.add(sr["owner"])
+    for r in rows:
+        if r["kind"] == "method" and r["owner"]:
+            has_methods.add(r["new_owner"] or r["owner"])
     for r in rows:
         scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
         if r["kind"] == "type" and r["owner"]:
             scope = cur_owner(r)
         taken[scope].add(r["new_name"] or r["old_name"])
     out, counts = [], collections.defaultdict(list)
+    for i, (r, new, why) in enumerate(selected):
+        if new and r["kind"] == "member" and cur_owner(r) in has_methods:
+            selected[i] = (r, new + "_", why)  # a class with member functions: the trailing _ also avoids -Wshadow
     for r, new, why in selected:
         scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
         if r["kind"] == "type":

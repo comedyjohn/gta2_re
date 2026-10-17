@@ -14,8 +14,8 @@ EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 // 0x48B900
 void Rng::AdvanceCycle()
 {
-    ++field_0_rng;
-    field_4_rnd = gRng_6F6784.Rand();
+    ++rng_;
+    rnd_ = gRng_6F6784.Rand();
 }
 
 // 0x48B920
@@ -23,11 +23,11 @@ void Rng::ShowCycle()
 {
     if (gInputRecorder_67F8B0.inlined_check())
     {
-        swprintf(tmpBuff_67BD9C, L"%d / %d", this->field_0_rng, gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
+        swprintf(tmpBuff_67BD9C, L"%d / %d", this->rng_, gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
     }
     else
     {
-        swprintf(tmpBuff_67BD9C, L"%d", this->field_0_rng);
+        swprintf(tmpBuff_67BD9C, L"%d", this->rng_);
     }
     gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 460, gDebugFont_706600, 1);
 }
@@ -45,11 +45,11 @@ s16 Rng::GetInt(const s16& max_rnd)
     {
         if (!max_rnd)
         {
-            this->field_0_rng = 0;
+            this->rng_ = 0;
         }
         else
         {
-            this->field_0_rng = rand() % max_rnd;
+            this->rng_ = rand() % max_rnd;
         }
         sprintf(gTmpBuffer_67C598, "%d: random (get_int) %d", gpRng_67AB34->GetCurRng(), static_cast<s16>(this->GetCurRng()));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
@@ -75,15 +75,15 @@ u8 Rng::GetUint8(const u8& max_rnd)
     {
         if (!max_rnd)
         {
-            this->field_0_rng = 0;
+            this->rng_ = 0;
         }
         else
         {
-            this->field_0_rng = rand() % max_rnd;
+            this->rng_ = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gpRng_67AB34->GetCurRng(), static_cast<u8>(field_0_rng));
+        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gpRng_67AB34->GetCurRng(), static_cast<u8>(rng_));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
-        return static_cast<u8>(this->field_0_rng);
+        return static_cast<u8>(this->rng_);
     }
     else
     {

@@ -50,7 +50,7 @@ class Char_8_Pool
 
     ~Char_8_Pool()
     {
-        field_0_pool.field_0_pHead = nullptr;
+        field_0_pool.head_ = nullptr;
     }
 
     Char_8* Allocate_445EF0()
@@ -116,7 +116,7 @@ class PedPool
         field_0_pool.field_X_count = 0;
 
         Ped* pPreviousItem = nullptr;
-        Ped* pCurrItem = field_0_pool.field_4_pPrev;
+        Ped* pCurrItem = field_0_pool.prev_;
 
         while (pCurrItem)
         {
@@ -139,13 +139,13 @@ class PedPool
                 }
                 else
                 {
-                    if (field_0_pool.field_4_pPrev == pCurrItem)
+                    if (field_0_pool.prev_ == pCurrItem)
                     {
-                        field_0_pool.field_4_pPrev = pCurrItem->mpNext;
+                        field_0_pool.prev_ = pCurrItem->mpNext;
                     }
                     else
                     {
-                        pPreviousItem = field_0_pool.field_4_pPrev;
+                        pPreviousItem = field_0_pool.prev_;
                         while (pPreviousItem->mpNext != pCurrItem)
                         {
                             pPreviousItem = pPreviousItem->mpNext;
@@ -154,8 +154,8 @@ class PedPool
                     }
                 }
 
-                pCurrItem->mpNext = field_0_pool.field_0_pStart;
-                field_0_pool.field_0_pStart = pCurrItem;
+                pCurrItem->mpNext = field_0_pool.start_;
+                field_0_pool.start_ = pCurrItem;
                 pCurrItem = pNext;
             }
             else
@@ -168,7 +168,7 @@ class PedPool
 
     Ped* GetFirstPed_435530()
     {
-        return field_0_pool.field_4_pPrev;
+        return field_0_pool.prev_;
     }
 
     Pool<Ped, 200> field_0_pool;

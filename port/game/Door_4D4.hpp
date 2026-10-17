@@ -70,8 +70,8 @@ class DoorData_10_Pool
     // inlined 0x44c830
     DoorData_10* Allocate()
     {
-        DoorData_10* tmp = field_0_pool.field_0_pHead;
-        field_0_pool.field_0_pHead = tmp->mpNext;
+        DoorData_10* tmp = field_0_pool.head_;
+        field_0_pool.head_ = tmp->mpNext;
         tmp->PoolAllocate();
         return tmp;
     }
@@ -88,7 +88,7 @@ class DoorData_10_Pool
 
     ~DoorData_10_Pool()
     {
-        field_0_pool.field_0_pHead = nullptr;
+        field_0_pool.head_ = nullptr;
     }
 
     PoolBasic<DoorData_10, 44> field_0_pool;

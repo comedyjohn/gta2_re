@@ -222,8 +222,8 @@ void Object_2C::PoolGive_522340()
     {
         // TODO: Missing inline here
         TObject_2C_Pool* pRoot = gObject_2C_Pool_6F8F80;
-        mpNext = pRoot->field_4_pPrev;
-        pRoot->field_4_pPrev = this;
+        mpNext = pRoot->prev_;
+        pRoot->prev_ = this;
         field_20_pool_list_state = object_pool_state::in_pool_list_1;
     }
 }
@@ -237,7 +237,7 @@ void Object_2C::PoolTake_522360()
     if (field_20_pool_list_state == object_pool_state::in_pool_list_1)
     {
         pLast = nullptr;
-        for (pIter = gObject_2C_Pool_6F8F80->field_4_pPrev; pIter; pIter = pIter->mpNext)
+        for (pIter = gObject_2C_Pool_6F8F80->prev_; pIter; pIter = pIter->mpNext)
         {
             if (pIter == this)
             {
@@ -247,7 +247,7 @@ void Object_2C::PoolTake_522360()
                 }
                 else
                 {
-                    gObject_2C_Pool_6F8F80->field_4_pPrev = pIter->mpNext;
+                    gObject_2C_Pool_6F8F80->prev_ = pIter->mpNext;
                 }
                 pIter->mpNext = nullptr;
                 break;
@@ -3707,7 +3707,7 @@ Object_2C* Object_5C::CreateExplosion_52A3D0(Fix16 x, Fix16 y, Fix16 z, Ang16 ro
 void Object_5C::SaveObjects_52A500(SavedObjectData_164* pData)
 {
     u16 saved_count = 0;
-    Object_2C* pObj = gObject_2C_Pool_6F8F80->field_8_pool;
+    Object_2C* pObj = gObject_2C_Pool_6F8F80->pool_;
     for (u16 i = 0; i < 3825; pObj++, i++)
     {
         if (pObj->field_18_model && pObj->IsPickup_421060())

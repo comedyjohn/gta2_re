@@ -45,7 +45,7 @@ COLUMNS = ["kind", "address", "owner", "old_name", "new_name", "new_owner", "add
 
 OWNERS = (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL, K.CLASS_TEMPLATE, K.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION,
           K.NAMESPACE)
-PLAIN_KINDS = {K.FUNCTION_DECL, K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
+PLAIN_KINDS = {K.NAMESPACE, K.FUNCTION_DECL, K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
                K.ENUM_DECL, K.ENUM_CONSTANT_DECL, K.TYPEDEF_DECL, K.TYPE_ALIAS_DECL, K.FUNCTION_TEMPLATE, K.CLASS_TEMPLATE}
 SYMBOLS_PATH = os.path.join(ROOT, "port", "tools", "refactor", "symbol_names.csv")
 FUNC_ADDR = re.compile(r"_([0-9A-Fa-f]{6})(?=_|$)")
@@ -55,6 +55,23 @@ COMMENT_DECOMPME = re.compile(r"^\s*//\s*https://decomp\.me/scratch/([A-Za-z0-9]
 FIELD = re.compile(r"^field_([0-9A-Fa-f]+)(?:_|$)")
 TYPE_SIZE = re.compile(r"_(0x[0-9A-Fa-f]+|[0-9A-F]{1,5})$")
 ENUM_VALUE = re.compile(r"_(\d+)$")
+
+
+def qualified(cur):
+    parts = []
+    while cur is not None and cur.kind != K.TRANSLATION_UNIT:
+        if cur.kind != K.LINKAGE_SPEC and cur.spelling and not cur.spelling.startswith("("):
+            parts.append(cur.spelling)
+        cur = cur.semantic_parent
+    return "::".join(reversed(parts))
+
+
+def owner_of(cur):
+    """The qualified name of the class, enum or namespace a declaration is in ("" at file scope)."""
+    p = cur.semantic_parent
+    if p is None or p.kind not in OWNERS:
+        return ""
+    return qualified(p)
 
 
 def plausible(addr):
@@ -82,14 +99,7 @@ def row_for(cur, lines_of):
     rel = os.path.relpath(f, GAME)
     if rel.startswith("3rdParty"):
         return None
-    owner = ""
-    if cur.semantic_parent is not None and cur.semantic_parent.kind in OWNERS:
-        parent = cur.semantic_parent
-        owner = parent.spelling
-        if not owner or owner.startswith("(unnamed") or owner.startswith("(anonymous"):
-            # an unnamed enum or union: its enclosing class is the owner (or none at namespace scope)
-            outer = parent.semantic_parent
-            owner = outer.spelling if outer is not None and outer.kind in OWNERS else ""
+    owner = owner_of(cur)
     row = dict.fromkeys(COLUMNS, "")
     row["old_name"], row["owner"], row["file"] = name, owner, rel
     k = cur.kind
@@ -115,6 +125,10 @@ def row_for(cur, lines_of):
         if m:
             size = m.group(1)
             row["address"] = "0x" + (size[2:] if size.startswith("0x") else size).upper()
+    elif k == K.NAMESPACE:
+        if not name or name.startswith("("):
+            return None
+        row["kind"] = "namespace"
     elif k == K.ENUM_CONSTANT_DECL:
         m = ENUM_VALUE.search(name)
         if not m:
@@ -166,9 +180,8 @@ def scan_tu(args):
             if cur.spelling and not cur.spelling.startswith("(") and cur.kind in PLAIN_KINDS and not os.path.relpath(
                 cur.location.file.name, GAME
             ).startswith("3rdParty"):
-                p = cur.semantic_parent
-                owner = p.spelling if p is not None and p.kind in OWNERS else ""
-                plain.add((owner, cur.spelling, "method" if cur.kind in (K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR) else "other"))
+                owner = owner_of(cur)
+                plain.add((owner, cur.spelling, "method" if cur.kind in (K.CXX_METHOD, K.CONSTRUCTOR, K.DESTRUCTOR) else "enumerator" if cur.kind == K.ENUM_CONSTANT_DECL else "other"))
         if cur.kind in (K.TRANSLATION_UNIT, K.NAMESPACE, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL,
                         K.LINKAGE_SPEC, K.CLASS_TEMPLATE):
             for child in cur.get_children():

@@ -106,6 +106,16 @@ class Worker:
         self.olds = olds  # plain old spellings (for the residual check)
         self.cache = {}
 
+    def match(self, decl):
+        """The key of `wanted` that names this declaration: the whole qualified name, or its tail (the
+        namespace in front of a named enum is not in the CSV)."""
+        parts = qualified_name(decl).split("::")
+        for i in range(len(parts)):
+            k = "::".join(parts[i:])
+            if k in self.wanted:
+                return k
+        return None
+
     def target_of(self, decl):
         """(new name, old spelling) if decl is renamed by this batch, else None."""
         usr = decl.get_usr()
@@ -116,14 +126,13 @@ class Worker:
         if usr in self.usr_targets:
             result = (self.usr_targets[usr], decl.spelling)
         else:
-            q = qualified_name(decl)
-            if q in self.wanted and decl.kind in DECLS:
-                result = (self.wanted[q], decl.spelling)
+            q = self.match(decl)
+            if q is not None and decl.kind in DECLS:
+                result = (self.wanted[q], decl.spelling, q)
             elif decl.kind in (K.CONSTRUCTOR, K.DESTRUCTOR):
-                cls = decl.semantic_parent
-                cq = qualified_name(cls)
-                if cq in self.wanted:
-                    result = (self.wanted[cq], decl.spelling)
+                cq = self.match(decl.semantic_parent)
+                if cq is not None:
+                    result = (self.wanted[cq], decl.spelling, cq)
         self.cache[key] = result
         return result
 
@@ -170,7 +179,7 @@ class Worker:
                 t = self.target_of(cur)
                 if t:
                     virtual = cur.kind == K.CXX_METHOD and cur.is_virtual_method()
-                    out["targets"][usr] = (qualified_name(cur), t[0], scope_key(cur), cur.kind.name, virtual)
+                    out["targets"][usr] = (t[2] if len(t) > 2 else qualified_name(cur), t[0], scope_key(cur), cur.kind.name, virtual)
             if f is not None and (cur.kind in DECLS or cur.kind.is_reference() or cur.kind in (
                 K.DECL_REF_EXPR, K.MEMBER_REF_EXPR, K.OVERLOADED_DECL_REF
             )):

@@ -101,6 +101,16 @@ def propose_type(name):
     return pascal(n) if "_" in n or n[0].islower() else n, ""
 
 
+def propose_namespace(row, enum_namespaces):
+    """A namespace that holds enumerators stands in for an enum (phase 3 makes it an `enum class`) and is
+    named like the enum; any other namespace keeps its (snake_case) name."""
+    name = row["old_name"]
+    if name in enum_namespaces:
+        n = re.sub(r"_enum$", "", name)
+        return pascal(n) if "_" in n or n[0].islower() else n, ""
+    return name, ""
+
+
 def propose_enumerator(name):
     n = re.sub(r"_\d+$", "", name)
     if re.match(r"^k[A-Z]", n):
@@ -144,18 +154,21 @@ def read_rows():
 
 
 def propose(sub, kind, rows):
-    types = {r["old_name"]: r for r in rows if r["kind"] == "type"}
+    types = {r["old_name"]: r for r in rows if r["kind"] in ("type", "namespace")}
+    enum_namespaces = {r["owner"].split("::")[-1] for r in rows if r["kind"] == "enumerator" and r["owner"]}
+    if os.path.exists(SYMBOLS_PATH):
+        with open(SYMBOLS_PATH, newline="") as f:
+            enum_namespaces |= {sr["owner"].split("::")[-1] for sr in csv.DictReader(f) if sr.get("kind") == "enumerator" and sr["owner"]}
+    renamed_component = {r["old_name"]: r["new_name"] for r in rows if r["kind"] in ("type", "namespace") and r["new_name"]}
     new_owner = {r["old_name"]: r["new_name"] for r in types.values() if r["new_name"]}
 
-    def current_owner_chain(owner):
-        chain = []
-        while owner:
-            chain.append(new_owner.get(owner, owner))
-            owner = types[owner]["owner"] if owner in types else ""
-        return list(reversed(chain))
+    def current_owner(r):
+        comps = r["owner"].split("::") if r["owner"] else []
+        return "::".join(renamed_component.get(c, c) for c in comps)
 
     def current_qual(r):
-        return "::".join(current_owner_chain(r["owner"]) + [r["new_name"] or r["old_name"]])
+        o = current_owner(r)
+        return (o + "::" if o else "") + (r["new_name"] or r["old_name"])
 
     selected = []
     for r in rows:
@@ -166,6 +179,8 @@ def propose(sub, kind, rows):
             continue
         if kind == "types" and k == "type":
             selected.append((r, *propose_type(r["old_name"])))
+        elif kind == "types" and k == "namespace":
+            selected.append((r, *propose_namespace(r, enum_namespaces)))
         elif kind == "functions" and k in ("function", "method"):
             if r["old_name"] in (r["owner"], "~" + r["owner"]) or r["old_name"].startswith(("~", "operator")):
                 continue
@@ -180,7 +195,7 @@ def propose(sub, kind, rows):
             selected.append((r, *propose_global(r["old_name"])))
     # names already taken in each scope (current names), then collisions among the proposals
     def cur_owner(r):
-        return r["new_owner"] or r["owner"]
+        return current_owner(r)
 
     taken = collections.defaultdict(set)
     has_methods = set()

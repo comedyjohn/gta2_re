@@ -266,7 +266,7 @@ namespace
 {
 inline f32 Fix16ToF32_Rounded(const Fix16& v)
 {
-    f32 f = v.mValue;
+    f32 f = v.value_;
     return (f / 16384.0F);
 }
 } // namespace

@@ -420,9 +420,9 @@ gmp_map_zone* Map_0x370::sub_4DF3E0(u8 xpos, u8 ypos, u8 zone_type)
             s32 abs_y = diff_y > 0 ? diff_y : -diff_y;
             s32 abs_x = diff_x > 0 ? diff_x : -diff_x;
             Fix16 dist(abs_y, 0);
-            if (abs_x > dist.mValue)
+            if (abs_x > dist.value_)
             {
-                dist.mValue = abs_x;
+                dist.value_ = abs_x;
             }
             if (dist < best_dist)
             {
@@ -3663,7 +3663,7 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 &x,
                 &y,
                 kFpOne_6F6110 - to_edge,
-                Ang16::GetAngleFace(Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized()));
+                Ang16::GetAngleFace(Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).r_value_ + word_6F603E.r_value_).Normalized()));
             dist += kFpOne_6F6110 - to_edge;
             gmp_block_info* pNext = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
             if (pNext && (pNext->field_B_slope_type & 0xFC) == 0xFC)
@@ -3704,11 +3704,11 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 pPrev = pBlock;
                 Fix16 to_edge;
                 to_edge = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-                sub_4E5D10(
-                    &x,
-                    &y,
-                    kFpOne_6F6110 - to_edge,
-                    Ang16::GetAngleFace(Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized()));
+                sub_4E5D10(&x,
+                           &y,
+                           kFpOne_6F6110 - to_edge,
+                           Ang16::GetAngleFace(
+                               Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).r_value_ + word_6F603E.r_value_).Normalized()));
                 dist += kFpOne_6F6110 - to_edge;
                 SetRoadBlockAt_4E6660(pBlock, x, y, z);
                 if (pBlock != pPrev)

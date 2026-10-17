@@ -34,9 +34,9 @@ SimcheckHashes port_simcheck_hashes()
     Hash trig;
     for (int i = 0; i < 1440; i++)
     {
-        trig.Add(gSinTable[i].mValue);
-        trig.Add(gCosTable[i].mValue);
-        trig.Add(gTanTable[i].mValue);
+        trig.Add(gSinTable[i].value_);
+        trig.Add(gCosTable[i].value_);
+        trig.Add(gTanTable[i].value_);
     }
 
     // rng::get_int_4F7AE0 and friends draw from rand(), seeded with 1 (rng::srand_4F7A40)
@@ -52,13 +52,13 @@ SimcheckHashes port_simcheck_hashes()
     for (s32 v = 0; v < (1 << 24); v += 37)
     {
         Fix16 f(v, 0);
-        maths.Add(Fix16::SquareRoot(f).mValue);
+        maths.Add(Fix16::SquareRoot(f).value_);
     }
     for (s32 y = -40000; y <= 40000; y += 997)
     {
         for (s32 x = -40000; x <= 40000; x += 1009)
         {
-            maths.Add(Fix16::Atan2Fixed(Fix16(y, 0), Fix16(x, 0)).rValue);
+            maths.Add(Fix16::Atan2Fixed(Fix16(y, 0), Fix16(x, 0)).r_value_);
         }
     }
 
@@ -68,7 +68,7 @@ SimcheckHashes port_simcheck_hashes()
 int port_simcheck()
 {
     const SimcheckHashes h = port_simcheck_hashes();
-    printf("sin(90) %d, cos(180) %d\n", gSinTable[360].mValue, gCosTable[720].mValue);
+    printf("sin(90) %d, cos(180) %d\n", gSinTable[360].value_, gCosTable[720].value_);
     printf("trigonometry %016llx\n", static_cast<unsigned long long>(h.trigonometry));
     printf("random %016llx\n", static_cast<unsigned long long>(h.random));
     printf("maths %016llx\n", static_cast<unsigned long long>(h.maths));

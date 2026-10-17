@@ -16,67 +16,67 @@ class Fix16
     // 9.6f func
     static s32 RoundToInt(const Fix16& a1)
     {
-        s32 v = a1.mValue;
+        s32 v = a1.value_;
         return (v + 0x2000) >> 14;
     }
 
     s32 operator==(const Fix16& value) const
     {
-        return mValue == value.mValue;
+        return value_ == value.value_;
     }
 
     s32 operator<=(const Fix16& other) const
     {
-        return mValue <= other.mValue;
+        return value_ <= other.value_;
     }
 
     Fix16& operator=(s32 value)
     {
-        mValue = value;
+        value_ = value;
         return *this;
     }
 
     Fix16 operator-(const Fix16& in) const
     {
-        s32 value = mValue - in.mValue;
+        s32 value = value_ - in.value_;
         return Fix16(value, 0);
     }
 
     Fix16& operator-=(const Fix16& other)
     {
-        mValue -= other.mValue;
+        value_ -= other.value_;
         return *this;
     }
 
     Fix16 operator+(const Fix16& in)
     {
-        s32 value = mValue + in.mValue;
+        s32 value = value_ + in.value_;
         return Fix16(value, 0);
     }
 
     Fix16& operator+=(const Fix16& other)
     {
-        mValue += other.mValue;
+        value_ += other.value_;
         return *this;
     }
 
     Fix16 operator*(const Fix16& in) const
     {
-        s32 value = static_cast<s32>((mValue * static_cast<__int64>(in.mValue)) >> 14);
+        s32 value = static_cast<s32>((value_ * static_cast<__int64>(in.value_)) >> 14);
         return Fix16(value, 0);
     }
 
     // 10.5 non inline addr is 0x539F90
     Fix16& operator/=(const Fix16& rhs)
     {
-        mValue = static_cast<s32>((static_cast<__int64>(mValue) << 14) / rhs.mValue);
+        value_ = static_cast<s32>((static_cast<__int64>(value_) << 14) / rhs.value_);
         return *this;
     }
 
     // 10.5 non inline addr is 0x562430
     Fix16& operator*=(const Fix16& rhs)
     {
-        mValue = static_cast<s32>((mValue * static_cast<__int64>(rhs.mValue)) >> 14);
+        value_ = static_cast<s32>((value_ * static_cast<__int64>(rhs.value_)) >> 14);
         return *this;
     }
 
@@ -84,139 +84,139 @@ class Fix16
     // Inlined from 9.6f from 0x401bd0
     Fix16 operator*(const s32& in) const
     {
-        s32 value = mValue * in;
+        s32 value = value_ * in;
         return Fix16(value, 0);
     }
 
     // 0x4086A0
     Fix16 operator-() const
     {
-        return Fix16(-mValue, 0);
+        return Fix16(-value_, 0);
     }
 
     s32 operator>(const Fix16& other) const
     {
-        return mValue > other.mValue;
+        return value_ > other.value_;
     }
 
     s32 operator<(const Fix16& other) const
     {
-        return mValue < other.mValue;
+        return value_ < other.value_;
     }
 
     s32 operator!=(const Fix16& other) const
     {
-        return mValue != other.mValue;
+        return value_ != other.value_;
     }
 
     s32 operator>=(const Fix16& other) const
     {
-        return mValue >= other.mValue;
+        return value_ >= other.value_;
     }
 
     // 0x509990
     bool operator>=(const s32 value) const
     {
-        return mValue >= value << 14;
+        return value_ >= value << 14;
     }
 
     // 0x509990
     bool operator<(const s32 value) const
     {
-        return mValue < value << 14;
+        return value_ < value << 14;
     }
 
     f32 AsFloat() const
     {
-        return mValue / 16384.0F;
+        return value_ / 16384.0F;
     }
 
     f64 AsDouble() const
     {
-        return mValue / 16384.0;
+        return value_ / 16384.0;
     }
 
     s32 ToInt() const
     {
-        return mValue >> 14;
+        return value_ >> 14;
     }
 
     u8 ToUInt8() const
     {
-        return mValue >> 14;
+        return value_ >> 14;
     }
 
     void FromInt(s32 a1)
     {
-        mValue = a1 << 14;
+        value_ = a1 << 14;
     }
 
     void FromShort(s16 a1)
     {
-        mValue = a1 << 14;
+        value_ = a1 << 14;
     }
 
     void FromUnsignedShort(u16 a1)
     {
-        mValue = a1 << 14;
+        value_ = a1 << 14;
     }
 
     float ToFloat() const
     {
-        return (mValue / 16384.0F);
+        return (value_ / 16384.0F);
     }
 
     // Zero rather than unset: the original reads some Fix16 locals before setting them, and every
     // machine in a network game has to read the same value
-    constexpr Fix16() : mValue(0)
+    constexpr Fix16() : value_(0)
     {
     }
 
-    Fix16(s32 value, u8) : mValue(value)
+    Fix16(s32 value, u8) : value_(value)
     {
     }
 
     Fix16(u8 value)
     {
-        mValue = value << 14;
+        value_ = value << 14;
     }
 
     Fix16(u16 value)
     {
-        mValue = value << 14;
+        value_ = value << 14;
     }
 
     Fix16(s16 value)
     {
-        mValue = value << 14;
+        value_ = value << 14;
     }
 
     Fix16(u32 value)
     {
-        mValue = value << 14;
+        value_ = value << 14;
     }
 
     Fix16(s32 value)
     {
-        mValue = value << 14;
+        value_ = value << 14;
     }
 
-    explicit Fix16(f32 v) : mValue(static_cast<s32>(v * 16384.0F))
+    explicit Fix16(f32 v) : value_(static_cast<s32>(v * 16384.0F))
     {
     }
 
-    explicit Fix16(f64 v) : mValue(static_cast<s32>(v * 16384.0))
+    explicit Fix16(f64 v) : value_(static_cast<s32>(v * 16384.0))
     {
     }
 
     void FromU8(u8 v)
     {
-        mValue = v << 14;
+        value_ = v << 14;
     }
 
     Fix16& Negate()
     {
-        mValue = -mValue;
+        value_ = -value_;
         return *this;
     }
 
@@ -226,7 +226,7 @@ class Fix16
     // (Ped::NotifyWeaponHit_46FF00 needs <= 57) and in GetLength_41E260 (Car_BC::ManageDrowning_43E560 >= 57).
     static Fix16 Abs(const Fix16& input)
     {
-        if (input.mValue > 0)
+        if (input.value_ > 0)
         {
             return input;
         }
@@ -245,7 +245,7 @@ class Fix16
     Fix16 GetRoundValue() const
     {
         // get the "integer part" of Fix16, since everything less than 0x3FFF is decimal in float
-        return Fix16(mValue & 0xFFFFC000, 0); // 0xFFFFC000 = 0xFFFFFFFF - Fix16(1)
+        return Fix16(value_ & 0xFFFFC000, 0); // 0xFFFFC000 = 0xFFFFFFFF - Fix16(1)
     }
 
     // 9.6f 0x42A630 as a static taking the value by reference; defined in CarPhysics_B0.cpp (UpdateZPhysics_55AD90)
@@ -253,12 +253,12 @@ class Fix16
     Fix16 GetFracValue() const
     {
         // get the "fractional part" of Fix16
-        return Fix16(mValue & 0x3FFF, 0); // 0x4000 = Fix16(1)
+        return Fix16(value_ & 0x3FFF, 0); // 0x4000 = Fix16(1)
     }
 
     s32 MultiplyInt64(Fix16 a2)
     {
-        __int64 t = (mValue * static_cast<__int64>(a2.mValue)) >> 14;
+        __int64 t = (value_ * static_cast<__int64>(a2.value_)) >> 14;
         return static_cast<s32>(t);
     }
 
@@ -278,7 +278,7 @@ class Fix16
     // operand into the result register first (CarPhysics_B0::ComputeEngineTorque_561970's length).
     static Fix16 AddRef(const Fix16& lhs, const Fix16& rhs)
     {
-        return Fix16(lhs.mValue + rhs.mValue, 0);
+        return Fix16(lhs.value_ + rhs.value_, 0);
     }
 
     static Fix16 Max(const Fix16& diff_x, const Fix16& diff_y)
@@ -317,7 +317,7 @@ class Fix16
     // 0x436A20
     Fix16 operator/(const Fix16& in) const
     {
-        s32 value = static_cast<s32>((static_cast<__int64>(mValue) << 14) / in.mValue);
+        s32 value = static_cast<s32>((static_cast<__int64>(value_) << 14) / in.value_);
         return Fix16(value, 0);
     }
 
@@ -326,18 +326,18 @@ class Fix16
     // But I couldn't match ObjectDefinition_74::SetDimensionsFromSprite_533090 without this overload.
     Fix16 operator/(const s32& in)
     {
-        s32 value = mValue / in;
+        s32 value = value_ / in;
         return Fix16(value, 0);
     }
 
     s32 GetValue() const
     {
-        return mValue;
+        return value_;
     }
 
     s32 GetRaw() const
     {
-        return mValue;
+        return value_;
     }
 
     Fix16 ApplyDeadZone(Fix16 to_abs)
@@ -392,31 +392,31 @@ class Fix16
 
     Fix16* SubtractOne()
     {
-        mValue -= 0x4000;
+        value_ -= 0x4000;
         return this;
     }
 
     Fix16* AddOne()
     {
-        mValue += 0x4000;
+        value_ += 0x4000;
         return this;
     }
 
     Fix16 operator++(int)
     {
-        mValue += 0x4000;
-        return Fix16(mValue - 0x4000, 0);
+        value_ += 0x4000;
+        return Fix16(value_ - 0x4000, 0);
     }
 
     Fix16 operator--(int)
     {
-        mValue -= 0x4000;
-        return Fix16(mValue + 0x4000, 0);
+        value_ -= 0x4000;
+        return Fix16(value_ + 0x4000, 0);
     }
 
     static class Ang16 Atan2Fixed(const Fix16& y, const Fix16& x);
 
-    s32 mValue;
+    s32 value_;
 };
 
 bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax);

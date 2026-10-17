@@ -162,17 +162,17 @@ Ang16 ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3)
 Ang16 MidAngle_4057B0(Ang16& a, Ang16& b)
 {
     Ang16 half;
-    Ang16 delta(b.rValue - a.rValue);
+    Ang16 delta(b.r_value_ - a.r_value_);
     delta.Normalize();
     if (delta > kAng180)
     {
-        delta.rValue = -delta.rValue;
+        delta.r_value_ = -delta.r_value_;
         delta.Normalize();
-        half = Ang16(Fix16(delta.rValue) / Fix16(2));
+        half = Ang16(Fix16(delta.r_value_) / Fix16(2));
         half.NormalizeOutOfLine();
         return a - half;
     }
-    half = Ang16(Fix16(delta.rValue) / Fix16(2));
+    half = Ang16(Fix16(delta.r_value_) / Fix16(2));
     half.NormalizeOutOfLine();
     return a + half;
 }
@@ -1892,7 +1892,7 @@ namespace
 {
 inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
 {
-    a.rValue += b.rValue;
+    a.r_value_ += b.r_value_;
     a.Normalize();
     return a;
 }
@@ -2562,7 +2562,7 @@ char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
         if (field_18_collided_entity)
         {
             field_80_sprite_ptr->set_xy_lazy_447E20(gCharB4_Saved_Xpos_6FD7F8, gCharB4_Saved_Ypos_6FD800);
-            field_28.rValue += field_2A.rValue;
+            field_28.r_value_ += field_2A.r_value_;
             field_28.NormalizeOutOfLine();
             PolarToCartesian_OutOfLineMul(field_40_rotation, field_38_velocity, x_vec, y_vec);
             field_80_sprite_ptr->set_xyz_lazy_420600(field_80_sprite_ptr->field_14_xy.x + x_vec,
@@ -2600,7 +2600,7 @@ char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
             {
                 // Free behind: turn around
                 field_80_sprite_ptr->set_xy_lazy_447E20(gCharB4_Saved_Xpos_6FD7F8, gCharB4_Saved_Ypos_6FD800);
-                field_28.rValue += (kAng180_6FD936 + field_2A).rValue;
+                field_28.r_value_ += (kAng180_6FD936 + field_2A).r_value_;
                 field_28.NormalizeOutOfLine();
                 field_24 = 2;
                 field_40_rotation = field_28;
@@ -2612,7 +2612,7 @@ char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
                 if (field_18_collided_entity)
                 {
                     field_80_sprite_ptr->set_xy_lazy_447E20(gCharB4_Saved_Xpos_6FD7F8, gCharB4_Saved_Ypos_6FD800);
-                    field_28.rValue += field_2A.rValue;
+                    field_28.r_value_ += field_2A.r_value_;
                     field_28.NormalizeOutOfLine();
                     field_24 = 0;
                     field_40_rotation = field_28;
@@ -3609,7 +3609,7 @@ void Char_B4::state_0_54DDF0()
             if (field_7C_pPed->GetMoveDirection_45C9B0() > kFixZero) // line 53c
             {
                 // port: the pad's stick walks as fast as it is pushed (port/include/port_input.h)
-                const Fix16 walk_speed(port_walk_speed(field_7C_pPed, field_3C_run_or_jump_speed.mValue), 0);
+                const Fix16 walk_speed(port_walk_speed(field_7C_pPed, field_3C_run_or_jump_speed.value_), 0);
                 if (field_38_velocity == kZeroVelocity_6FD7C0)
                 {
                     this->field_38_velocity = walk_speed;
@@ -4775,7 +4775,7 @@ void Char_B4::state_1_5504F0()
             // The z argument is the raw subtraction: Fix16::operator- here gives other registers
             if (gMap_0x370_6F6268->HasBlockAnyArrows_492140(gCharB4_Saved_Xpos_6FD7F8.ToInt(),
                                                             gCharB4_Saved_Ypos_6FD800.ToInt(),
-                                                            (gCharB4_Saved_Zpos_6FD7FC.mValue - kFP16One_6FD9E8.mValue) >> 14))
+                                                            (gCharB4_Saved_Zpos_6FD7FC.value_ - kFP16One_6FD9E8.value_) >> 14))
             {
                 Char_B4::DoJump_5454D0();
                 field_38_velocity = kZeroVelocity_6FD7C0;
@@ -4794,7 +4794,7 @@ void Char_B4::state_1_5504F0()
         {
             if (gMap_0x370_6F6268->HasBlockAnyArrows_492140(gCharB4_Saved_Xpos_6FD7F8.ToInt(),
                                                             gCharB4_Saved_Ypos_6FD800.ToInt(),
-                                                            (gCharB4_Saved_Zpos_6FD7FC.mValue - kFP16One_6FD9E8.mValue) >> 14))
+                                                            (gCharB4_Saved_Zpos_6FD7FC.value_ - kFP16One_6FD9E8.value_) >> 14))
             {
                 Char_B4::DoJump_5454D0();
                 field_58_flags_bf.bFlag6 = true;
@@ -4807,7 +4807,7 @@ void Char_B4::state_1_5504F0()
     if (field_38_velocity < kFixZero)
     {
         field_58_flags_bf.bReverseVelocity = true;
-        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, static_cast<u8>(0));
+        field_40_rotation = Ang16(field_40_rotation.r_value_ + kAng180_6FD936.r_value_, static_cast<u8>(0));
         field_38_velocity = -field_38_velocity;
     }
     field_44_block_type = block_type;
@@ -5096,7 +5096,7 @@ LABEL_65:
     }
     if (field_58_flags_bf.bReverseVelocity)
     {
-        field_40_rotation = Ang16(field_40_rotation.rValue + kAng180_6FD936.rValue, static_cast<u8>(0));
+        field_40_rotation = Ang16(field_40_rotation.r_value_ + kAng180_6FD936.r_value_, static_cast<u8>(0));
         field_38_velocity = -field_38_velocity;
     }
     Char_B4::sub_54DD70();
@@ -5561,7 +5561,7 @@ void Char_B4::state_3_551A00()
             if (field_6C_animation_state != CharAnimState::kEnteringCar)
             {
                 // TODO: remove Ang16 operator=(const Ang16& other) without breaking Player::DoPedControlInputs_566C80
-                field_40_rotation.rValue = field_84_target_car->field_50_car_sprite->field_0_rotation.rValue;
+                field_40_rotation.r_value_ = field_84_target_car->field_50_car_sprite->field_0_rotation.r_value_;
                 field_6C_animation_state = CharAnimState::kEnteringCar;
                 field_68_animation_frame = 0;
                 if (field_84_target_car->IsDoorOffsetLarge_43B540(field_7C_pPed->get_target_car_door_403A60()))
@@ -5743,10 +5743,10 @@ void Char_B4::state_7_551CB0()
     {
         // Raw compares: the Fix16 operator== inlines push this function over VC6's inline budget
         if (field_58_flags_bf.bOnSlope == false &&
-            (gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16One_6FD9E8.mValue || gCharB4_Saved_Zpos_6FD7FC.mValue == gFix16_Two_6FD9EC.mValue ||
-             gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16Three_6FD9F0.mValue || gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16Four_6FD9F4.mValue ||
-             gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16Five_6FD9F8.mValue || gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16Six_6FD9FC.mValue ||
-             gCharB4_Saved_Zpos_6FD7FC.mValue == kFP16Seven_6FDA00.mValue))
+            (gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16One_6FD9E8.value_ || gCharB4_Saved_Zpos_6FD7FC.value_ == gFix16_Two_6FD9EC.value_ ||
+             gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16Three_6FD9F0.value_ || gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16Four_6FD9F4.value_ ||
+             gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16Five_6FD9F8.value_ || gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16Six_6FD9FC.value_ ||
+             gCharB4_Saved_Zpos_6FD7FC.value_ == kFP16Seven_6FDA00.value_))
         {
             block_type = gMap_0x370_6F6268->GetBlockTypeAtCoord_420420(gCharB4_Saved_Xpos_6FD7F8.ToInt(),
                                                                        gCharB4_Saved_Ypos_6FD800.ToInt(),

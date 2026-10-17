@@ -113,14 +113,14 @@ class PedPool
     // Pool::UpdatePool with the next item stored in both branches
     void UpdatePool_445960()
     {
-        field_0_pool.field_X_count = 0;
+        field_0_pool.field_x_count_ = 0;
 
         Ped* pPreviousItem = nullptr;
         Ped* pCurrItem = field_0_pool.prev_;
 
         while (pCurrItem)
         {
-            ++field_0_pool.field_X_count;
+            ++field_0_pool.field_x_count_;
 
             Ped* pNext = pCurrItem->mpNext;
 

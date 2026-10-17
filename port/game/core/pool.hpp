@@ -80,7 +80,7 @@ class Pool
         start_ = pool_;
 
         prev_ = nullptr;
-        field_X_count = 0;
+        field_x_count_ = 0;
     }
 
     ~Pool()
@@ -156,14 +156,14 @@ class Pool
 
     void UpdatePool()
     {
-        field_X_count = 0;
+        field_x_count_ = 0;
 
         PoolType* pPreviousItem = nullptr;
         PoolType* pCurrItem = prev_;
 
         while (pCurrItem)
         {
-            ++field_X_count;
+            ++field_x_count_;
 
             PoolType* pNext = pCurrItem->mpNext;
 
@@ -211,14 +211,14 @@ class Pool
 
     void UpdatePoolNoDeallocate()
     {
-        field_X_count = 0;
+        field_x_count_ = 0;
 
         PoolType* pPreviousItem = nullptr;
         PoolType* pCurrItem = prev_;
 
         while (pCurrItem)
         {
-            ++field_X_count;
+            ++field_x_count_;
 
             PoolType* pNext = pCurrItem->mpNext;
 
@@ -316,6 +316,6 @@ class Pool
     PoolType pool_[PoolSize];
 
     // Unknown offsets due to sizeof(PoolType) varying per template
-    s16 field_X_count;
-    s16 field_X_pad;
+    s16 field_x_count_;
+    s16 field_x_pad_;
 };

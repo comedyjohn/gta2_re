@@ -2733,7 +2733,7 @@ void Player::RestoreCarsFromSave_56A0F0()
                                                        gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_3C_car_model[i],
                                                        kOne_6FE614);
             AddCarToHistory_5645B0(pNewCar);
-            pNewCar->field_8_damaged_areas.m_var = gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_30_damaged_areas[i];
+            pNewCar->field_8_damaged_areas.m_var_ = gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_30_damaged_areas[i];
             pNewCar->SetDamage_4A51B0(gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_2A_damage[i]);
         }
     }

@@ -624,7 +624,7 @@ void Ped::Reset_45AFC0()
     field_1E4_objective_target_z = kFixZero;
     field_134_rotation = gDummyPedAng_6787A8;
     field_1E8_target_distance_limit = kFixZero;
-    field_1EC_unused = kFixZero.mValue;
+    field_1EC_unused = kFixZero.value_;
     field_184_pObj2C = nullptr;
     field_267_ped_ref_idx = 0;
     field_280_stored_ped_state_1 = 11;
@@ -660,7 +660,7 @@ void Ped::Reset_45AFC0()
     field_1A0_objective_target_object = nullptr;
     field_1A4_internal_target_object = nullptr;
     field_132_follow_car_offset_angle = gDummyPedAng_6787A8;
-    field_1FC_follow_car_offset_distance = kFixZero.mValue;
+    field_1FC_follow_car_offset_distance = kFixZero.value_;
     field_269_unused = -1;
     field_214_unused = 0;
     field_26A_recent_crime_timer = 0;
@@ -3374,7 +3374,7 @@ void Ped::UpdateFacingAngle_461A60()
                     {
                         // 9.6f uses Fix16_To_Ang16 and operator- here too, but 10.5 needs the
                         // conversion written out and the subtraction split to inline like the original
-                        jitter.rValue = (kFpOne64th_6784C4 * Fix16(gRng.GetInt(45))).GetRaw() / 71;
+                        jitter.r_value_ = (kFpOne64th_6784C4 * Fix16(gRng.GetInt(45))).GetRaw() / 71;
                         jitter.Normalize();
                         Ang16 tmp = field_130_target_facing_angle - kAng90_6784B0;
                         tmp = tmp - jitter;
@@ -6056,7 +6056,7 @@ namespace
 {
 inline Ang16 SubAng16(const Ang16& lhs, const Ang16& rhs)
 {
-    return NormalizedAng(lhs.rValue - rhs.rValue);
+    return NormalizedAng(lhs.r_value_ - rhs.r_value_);
 }
 } // namespace
 
@@ -6242,7 +6242,7 @@ char_type Ped::IsThreatToSearchingPed_4661F0()
                 }
             }
 
-            word_6784F0.rValue = *reinterpret_cast<s16*>(&kAng90_6784B0);
+            word_6784F0.r_value_ = *reinterpret_cast<s16*>(&kAng90_6784B0);
 
             {
                 Ped* pS = gSearchingPed_6787DC;
@@ -10674,11 +10674,11 @@ namespace
 {
 inline void ComputeRecruitPrism(Fix16Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
 {
-    s32 half = offset.mValue / 2;
-    r.left_.mValue = x.mValue - half;
-    r.right_.mValue = half + x.mValue;
-    r.top_.mValue = y.mValue - half;
-    r.bottom_.mValue = y.mValue + half;
+    s32 half = offset.value_ / 2;
+    r.left_.value_ = x.value_ - half;
+    r.right_.value_ = half + x.value_;
+    r.top_.value_ = y.value_ - half;
+    r.bottom_.value_ = y.value_ + half;
     r.low_z_ = z.Subtract(kFpOneEighth_67845C);
     r.high_z_ = (z).Add(kFpOneEighth_67845C);
 }

@@ -64,36 +64,36 @@ class BitSet32
   public:
     void ClearBit(int bit)
     {
-        m_var &= ~(1 << bit);
+        m_var_ &= ~(1 << bit);
     }
 
     void SetBit(int bit)
     {
-        m_var |= (1 << bit);
+        m_var_ |= (1 << bit);
     }
 
     // TODO: Find in 9.6f
     bool CheckBit(s32 bit)
     {
-        return (m_var & (1 << bit)) ? true : false;
+        return (m_var_ & (1 << bit)) ? true : false;
     }
 
     // 9.6f 0x420E20 TODO: Check if matches
     bool MaskBit(u32 bit)
     {
-        return (m_var & (1U << bit)) == (1U << bit);
+        return (m_var_ & (1U << bit)) == (1U << bit);
     }
 
     BitSet32& operator=(u32& value) // Note: arg as reference
     {
         // TODO: Value is probably another BitSet32
-        m_var = value;
+        m_var_ = value;
         return *this;
     }
 
     u32 GetRaw()
     {
-        return m_var;
+        return m_var_;
     }
 
     void SetGlobal0()
@@ -113,29 +113,29 @@ class BitSet32
 
     void MaskWithGlobalFlags()
     {
-        m_var &= gFlags_67ACF8;
+        m_var_ &= gFlags_67ACF8;
     }
 
     void ClearGlobalFlags()
     {
-        m_var &= ~gFlags_67ACF8;
+        m_var_ &= ~gFlags_67ACF8;
     }
 
     void ClearAllBits()
     {
-        m_var = 0;
+        m_var_ = 0;
     }
 
-    BitSet32() : m_var(0)
+    BitSet32() : m_var_(0)
     {
     }
 
     // TODO: Find in 9.6f
-    BitSet32(s32 value) : m_var(value)
+    BitSet32(s32 value) : m_var_(value)
     {
     }
 
-    u32 m_var;
+    u32 m_var_;
 };
 
 struct DamageAreaFlags : BitSet32

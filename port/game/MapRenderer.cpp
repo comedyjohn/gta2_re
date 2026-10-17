@@ -76,7 +76,7 @@ namespace
 {
 inline f32 Fix16ToF32_Rounded(const Fix16& v)
 {
-    f32 f = v.mValue;
+    f32 f = v.value_;
     return f / 16384.0F;
 }
 } // namespace
@@ -90,7 +90,7 @@ namespace
 {
 inline f32 Fix16ToFloat_Paren(const Fix16& v)
 {
-    return ((v.mValue / 16384.0F));
+    return ((v.value_ / 16384.0F));
 }
 } // namespace
 
@@ -105,19 +105,19 @@ namespace
 {
 inline f32 Fix16ToF32_Rounded2(const Fix16& v)
 {
-    f32 f = v.mValue;
+    f32 f = v.value_;
     return ((f / 16384.0F));
 }
 
 inline f32 Fix16ToF32_Rounded3(const Fix16& v)
 {
-    f32 f = v.mValue;
+    f32 f = v.value_;
     return (((f / 16384.0F)));
 }
 
 inline f32 Fix16ToF32_P3(const Fix16& v)
 {
-    return (((v.mValue / 16384.0F)));
+    return (((v.value_ / 16384.0F)));
 }
 } // namespace
 
@@ -230,7 +230,7 @@ namespace
 {
 inline f32 Fix16ToF32_Stored(const Fix16& v)
 {
-    f32 f = v.mValue;
+    f32 f = v.value_;
     f32 g = f / 16384.0F;
     return g;
 }
@@ -2543,9 +2543,9 @@ void Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
     Fix16Point uv_coords = ((gUVEdge01_6F62A8 * a1) + (gUVEdge03_6F62A0 * a2)) + gUVCorner0_6F6580;
     // Converting through f32 locals (rather than ToFloat()) adds a narrowing step that makes
     // VC6 schedule the index load before the fmuls, like the original.
-    f32 u = uv_coords.x.mValue;
+    f32 u = uv_coords.x.value_;
     gTileVerts_6F65A8[pVertIdx].u = u / 16384.0F;
-    f32 v = uv_coords.y.mValue;
+    f32 v = uv_coords.y.value_;
     gTileVerts_6F65A8[pVertIdx].v = v / 16384.0F;
 }
 

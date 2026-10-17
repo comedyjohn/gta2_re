@@ -333,26 +333,26 @@ void Weapon_30::shotgun_5DD290()
                                                                   x,
                                                                   y,
                                                                   z,
-                                                                  Ang16(word_706D5E.rValue + ped_rotation.rValue, static_cast<u8>(0)),
+                                                                  Ang16(word_706D5E.r_value_ + ped_rotation.r_value_, static_cast<u8>(0)),
                                                                   vector);
             Object_2C* pBullet_2 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
-                                                                  Ang16(word_707002.rValue + ped_rotation.rValue, static_cast<u8>(0)),
+                                                                  Ang16(word_707002.r_value_ + ped_rotation.r_value_, static_cast<u8>(0)),
                                                                   vector);
             Object_2C* pBullet_3 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet, x, y, z, ped_rotation, vector);
             Object_2C* pBullet_4 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
-                                                                  Ang16(ped_rotation.rValue - word_707002.rValue, static_cast<u8>(0)),
+                                                                  Ang16(ped_rotation.r_value_ - word_707002.r_value_, static_cast<u8>(0)),
                                                                   vector);
             Object_2C* pBullet_5 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
-                                                                  Ang16(ped_rotation.rValue - word_706D5E.rValue, static_cast<u8>(0)),
+                                                                  Ang16(ped_rotation.r_value_ - word_706D5E.r_value_, static_cast<u8>(0)),
                                                                   vector);
             if ((pBullet_1 || pBullet_2 || pBullet_3 || pBullet_4 || pBullet_5) && field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
@@ -374,20 +374,20 @@ void Weapon_30::shotgun_5DD290()
                                            x,
                                            y,
                                            z,
-                                           Ang16(word_706D5E.rValue + ped_rotation.rValue, static_cast<u8>(0)),
+                                           Ang16(word_706D5E.r_value_ + ped_rotation.r_value_, static_cast<u8>(0)),
                                            vector);
             Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop, x, y, z, ped_rotation, vector);
             Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop,
                                            x,
                                            y,
                                            z,
-                                           Ang16(ped_rotation.rValue - word_706D5E.rValue, static_cast<u8>(0)),
+                                           Ang16(ped_rotation.r_value_ - word_706D5E.r_value_, static_cast<u8>(0)),
                                            vector);
             Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop,
                                            x,
                                            y,
                                            z,
-                                           Ang16(ped_rotation.rValue - word_706D5C.rValue).Normalized(),
+                                           Ang16(ped_rotation.r_value_ - word_706D5C.r_value_).Normalized(),
                                            vector);
             field_2_reload_speed = 5;
         }
@@ -406,7 +406,7 @@ namespace
 {
 inline void FromPolar_41E210_sin_table(Fix16Point& p, const Fix16& radius, const Ang16& angle)
 {
-    p.x = radius * gSinTable[angle.rValue];
+    p.x = radius * gSinTable[angle.r_value_];
     p.y = radius * Ang16::Cosine(angle);
 }
 } // namespace
@@ -1556,7 +1556,7 @@ namespace
 {
 inline Fix16 MultiplyLeftWide(const Fix16& a, const Fix16& b)
 {
-    return Fix16(static_cast<s32>((static_cast<__int64>(a.mValue) * b.mValue) >> 14), 0);
+    return Fix16(static_cast<s32>((static_cast<__int64>(a.value_) * b.value_) >> 14), 0);
 }
 } // namespace
 
@@ -1565,7 +1565,7 @@ namespace
 {
 inline Fix16 AddFree(const Fix16& a, const Fix16& b)
 {
-    s32 v = a.mValue + b.mValue;
+    s32 v = a.value_ + b.value_;
     return Fix16(v, 0);
 }
 } // namespace

@@ -10701,3 +10701,9 @@ function,,,hexStringToU32,HexStringToU32,,,,core/function.cpp
 function,,,loadFunctionMetadataFromFile,LoadFunctionMetadataFromFile,,,,core/function.cpp
 function,,,trim,Trim,,,,core/function.cpp
 method,,Ang16,Normalize,Normalize,,,,core/ang16.hpp
+member,,Ang16,rValue,r_value_,,,,core/ang16.hpp
+member,,Ang8,rValue,r_value_,,,,core/ang16.hpp
+member,,BitSet32,m_var,m_var_,,,,core/bit_set32.hpp
+member,,Fix16,mValue,value_,,,,core/fix16.hpp
+member,,Pool,field_X_count,field_x_count_,,,,core/pool.hpp
+member,,Pool,field_X_pad,field_x_pad_,,,,core/pool.hpp

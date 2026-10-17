@@ -1866,7 +1866,7 @@ Ang16 Car_BC::GetCornerAngle_4403A0()
     car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 w_fp = Fix16(pCarInfo->w) / 2;
     Fix16 h_fp = Fix16(pCarInfo->h) / 2;
-    return Ang16(Fix16::Atan2Fixed(h_fp, w_fp).rValue);
+    return Ang16(Fix16::Atan2Fixed(h_fp, w_fp).r_value_);
 }
 
 // 0x439ec0
@@ -4006,7 +4006,7 @@ bool Car_BC::IsSpriteShrunk_43DC00()
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCar, pInfo->sprite);
     sprite_index* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     Fix16 lenWidth = field_50_car_sprite->field_4_pVisualShape->field_0_width;
-    return lenWidth.mValue != gPixelsToFix16_6F6850.list[pSpriteIndex->field_4_width].mValue;
+    return lenWidth.value_ != gPixelsToFix16_6F6850.list[pSpriteIndex->field_4_width].value_;
 }
 
 // 0x43dc80
@@ -4726,7 +4726,7 @@ namespace
 {
 inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
 {
-    a.rValue += b.rValue;
+    a.r_value_ += b.r_value_;
     a.Normalize();
     return a;
 }
@@ -4737,7 +4737,7 @@ namespace
 {
 inline Ang16& compound_subtract_41FA90(Ang16& a, const Ang16& b)
 {
-    a.rValue -= b.rValue;
+    a.r_value_ -= b.r_value_;
     a.Normalize();
     return a;
 }
@@ -4963,7 +4963,7 @@ void Car_BC::TurnToWreck_4436A0()
     field_50_car_sprite->field_22_type_sprite_idx = gGtx_0x106C_703DD4->get_car_info_5AA3B0(wreck_idx)->sprite;
     field_50_car_sprite->CopyCollisionShapeToVisual_59E2E0();
     field_50_car_sprite->field_34_palette_type = PaletteTypes::kSprites;
-    field_8_damaged_areas.m_var = 0;
+    field_8_damaged_areas.m_var_ = 0;
     PrepareForExplosion_43C1C0();
     field_A7_horn = 0;
     SpawnFire_43BBC0();
@@ -5344,7 +5344,7 @@ void Car_BC::ServiceDoors_441B00()
     Car_Door_10* p = field_C_doors;
     for (s32 i = 0; i < 4; i++)
     {
-        p->Service_439DA0(&field_8_damaged_areas.m_var);
+        p->Service_439DA0(&field_8_damaged_areas.m_var_);
         p++;
     }
 }
@@ -6915,7 +6915,7 @@ Car_BC::Car_BC()
     field_90_death_cause = 0;
     field_94_exploder_timer = 0;
     field_95_player_ped_id = 0;
-    field_68_scale.mValue = 0x4000;
+    field_68_scale.value_ = 0x4000;
     field_8E_flash_count = 0;
 }
 
@@ -7052,7 +7052,7 @@ void Trailer::UpdateTrailerAlignment_407CE0()
     Fix16 new_theta = Ang16::Ang16ToFix16(delta.Atan2());
     field_0_hitch_angle_clamped = ClampAngleToWindow(&cab_theta, &new_theta);
 
-    if (new_theta.mValue != cab_theta.mValue && new_theta.mValue == trailer_theta.mValue)
+    if (new_theta.value_ != cab_theta.value_ && new_theta.value_ == trailer_theta.value_)
     {
         if (IsVelocityAlignedWithHeading_40F840(pCabPhys) && pCabPhys->IsGasPedalPressedEnough_5626A0())
         {

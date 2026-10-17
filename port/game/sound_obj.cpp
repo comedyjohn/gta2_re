@@ -3156,8 +3156,8 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
                     // Written out: with `GetCarLinearSpeed() / gCarInfo->field_28` VC6 binds the divisor's
                     // reference before the call (`lea 0x28(%ecx)` held across it); the original reloads
                     // gCarInfo_48 after the shift, which only the raw expression gives.
-                    skid_amount = Fix16(static_cast<s32>((static_cast<__int64>(pCar->GetCarLinearSpeed_43A240().mValue) << 14) /
-                                                         gCarInfo_48_6FE258->field_28_max_speed.mValue),
+                    skid_amount = Fix16(static_cast<s32>((static_cast<__int64>(pCar->GetCarLinearSpeed_43A240().value_) << 14) /
+                                                         gCarInfo_48_6FE258->field_28_max_speed.value_),
                                         0);
                     pSound->field_20_rate = rate + Fix16::RoundToInt(Fix16(98304000, 0) * skid_amount);
                 }
@@ -4013,8 +4013,8 @@ s32 sound_obj::AdjustPlaybackRate_41A580(s32 snd_rate, Fix16 xpos, Fix16 ypos, F
         // q and rate are assigned, not initialised: that keeps them as register locals
         // (q moved to ecx before the imul, snd_rate << 14 held in esi across the divide)
         Fix16 q;
-        q = Fix16(zpos.mValue) / dword_674E18;
-        s32 relative_speed = (((ypos - xpos) * q) / Fix16(field_C, 0)).mValue;
+        q = Fix16(zpos.value_) / dword_674E18;
+        s32 relative_speed = (((ypos - xpos) * q) / Fix16(field_C, 0)).value_;
         s32 a = relative_speed > 0 ? relative_speed : -relative_speed;
         if (a >= field_4_speed_of_sound)
         {

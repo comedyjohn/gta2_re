@@ -17,47 +17,47 @@ DEFINE_GLOBAL_INIT(Ang16, kAng270, Ang16(1080), 0x66916C);
 // 0x408660
 Fix16 Fix16::Add(const Fix16& rhs) const throw()
 {
-    s32 value = mValue + rhs.mValue;
+    s32 value = value_ + rhs.value_;
     return Fix16(value, 0);
 }
 
 // 0x408680
 Fix16 Fix16::Multiply(const Fix16& in) const throw()
 {
-    s32 value = static_cast<s32>((mValue * static_cast<__int64>(in.mValue)) >> 14);
+    s32 value = static_cast<s32>((value_ * static_cast<__int64>(in.value_)) >> 14);
     return Fix16(value, 0);
 }
 
 // 0x436A00
 Fix16 Fix16::Subtract(const Fix16& in) const
 {
-    s32 value = mValue - in.mValue;
+    s32 value = value_ - in.value_;
     return Fix16(value, 0);
 }
 
 // 0x436A20
 Fix16 Fix16::Divide(const Fix16& in) const
 {
-    s32 value = static_cast<s32>((static_cast<__int64>(mValue) << 14) / in.mValue);
+    s32 value = static_cast<s32>((static_cast<__int64>(value_) << 14) / in.value_);
     return Fix16(value, 0);
 }
 
 // 0x451670
 s32 Fix16::IsLess(const Fix16& other) const
 {
-    return mValue < other.mValue;
+    return value_ < other.value_;
 }
 
 // 0x451690
 s32 Fix16::IsGreater(const Fix16& other) const
 {
-    return mValue > other.mValue;
+    return value_ > other.value_;
 }
 
 // 0x539F90
 Fix16& Fix16::DivideAssign(const Fix16& rhs)
 {
-    mValue = static_cast<s32>((static_cast<__int64>(mValue) << 14) / rhs.mValue);
+    value_ = static_cast<s32>((static_cast<__int64>(value_) << 14) / rhs.value_);
     return *this;
 }
 
@@ -65,28 +65,28 @@ Fix16& Fix16::DivideAssign(const Fix16& rhs)
 // 0x53E860
 Fix16 Fix16::DivideInt(const s32& in) const
 {
-    s32 value = mValue / in;
+    s32 value = value_ / in;
     return Fix16(value, 0);
 }
 
 // 0x561DB0
 Fix16 Fix16::MultiplyInt(const s32& in) const
 {
-    s32 value = mValue * in;
+    s32 value = value_ * in;
     return Fix16(value, 0);
 }
 
 // 0x562430
 Fix16& Fix16::MultiplyAssign(const Fix16& rhs)
 {
-    mValue = static_cast<s32>((mValue * static_cast<__int64>(rhs.mValue)) >> 14);
+    value_ = static_cast<s32>((value_ * static_cast<__int64>(rhs.value_)) >> 14);
     return *this;
 }
 
 // 0x4086A0
 Fix16 Fix16::Negated() const throw()
 {
-    return Fix16(-mValue, 0);
+    return Fix16(-value_, 0);
 }
 
 /*

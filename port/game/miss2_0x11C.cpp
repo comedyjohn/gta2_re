@@ -294,7 +294,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
 
     if (pCmd->field_18_obj_id < 0xC8U || pCmd->field_18_obj_id > 0xF4U)
     {
-        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
+        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.r_value_)));
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(pCmd->field_18_obj_id,
                                                                         pCmd->field_C_pos.field_0_x,
@@ -304,7 +304,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
     }
     else
     {
-        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
+        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.r_value_)));
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObjUnlessBlocked_529BC0(pCmd->field_18_obj_id,
                                                                                      pCmd->field_C_pos.field_0_x,
@@ -414,7 +414,7 @@ void miss2_0x11C::SCRCMD_PLAYER_PED_503A20(SCR_PLAYER_PED* pCmd)
                     gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
             }
 
-            Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+            Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.r_value_)));
 
             pPed = gPedManager_6787BC->SpawnPedAt(pCmd->field_C_pos.field_0_x,
                                                   pCmd->field_C_pos.field_4_y,
@@ -566,7 +566,7 @@ void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_P
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.r_value_)));
 
     pPed = gPedManager_6787BC->SpawnPedAt(pCmd->field_C_pos.field_0_x,
                                           pCmd->field_C_pos.field_4_y,
@@ -630,7 +630,7 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
     {
         if (pTargetCmd->field_1A_home_cranetype == 0)
         {
-            Fix16 fix_rot = Fix16(kDegreesToAng16_6F8044.rValue) * Fix16(pTargetCmd->field_24_target_rotation);
+            Fix16 fix_rot = Fix16(kDegreesToAng16_6F8044.r_value_) * Fix16(pTargetCmd->field_24_target_rotation);
             Ang16 rotation(&fix_rot, 0);
 
             pTargetCmd->field_8_crane->CraneTargetPickupCheck_480900(pTargetCmd->field_1C_target_pos.field_0_x,
@@ -639,7 +639,7 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
         }
         else if (pTargetCmd->field_1A_home_cranetype == 1)
         {
-            Fix16 fix_rot = Fix16(kDegreesToAng16_6F8044.rValue) * Fix16(pTargetCmd->field_24_target_rotation);
+            Fix16 fix_rot = Fix16(kDegreesToAng16_6F8044.r_value_) * Fix16(pTargetCmd->field_24_target_rotation);
             Ang16 rotation(&fix_rot, 0);
 
             pTargetCmd->field_8_crane->ComputePickupAlignment_480B60(pTargetCmd->field_1C_target_pos.field_0_x,
@@ -706,7 +706,7 @@ void miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(SCR_GENERATOR* pCmd, SCR_POINTE
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.r_value_)));
 
     pPointer->field_8_generator = gGeneratorPool_14AC_67E5D0->CreateGenerator_4C1DC0(pCmd->field_C_pos.field_0_x,
                                                                                      pCmd->field_C_pos.field_4_y,
@@ -3199,9 +3199,9 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ3_50A3E0()
 
     if (pPointer->field_8_char)
     {
-        (pPointer->field_8_char)->field_1DC_objective_target_x = pCmd->field_C_pos.field_0_x.mValue; //  TODO: May be Fix16 in the original
-        (pPointer->field_8_char)->field_1E0_objective_target_y = pCmd->field_C_pos.field_4_y.mValue;
-        (pPointer->field_8_char)->field_1E4_objective_target_z = pCmd->field_C_pos.field_8_z.mValue;
+        (pPointer->field_8_char)->field_1DC_objective_target_x = pCmd->field_C_pos.field_0_x.value_; //  TODO: May be Fix16 in the original
+        (pPointer->field_8_char)->field_1E0_objective_target_y = pCmd->field_C_pos.field_4_y.value_;
+        (pPointer->field_8_char)->field_1E4_objective_target_z = pCmd->field_C_pos.field_8_z.value_;
 
         (pPointer->field_8_char)->field_21C_bf.bScheduledForRemoval = false; // TODO: Maybe BitSet32
     }
@@ -3226,20 +3226,20 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ_FOLLOW_50A460()
         (pPointer->field_8_char)->SetTargetObjectiveCar(pCarPointer->field_8_car);
 
         Ang16 CmdRotation;
-        CmdRotation.rValue = pCmd->field_E_rotation;
+        CmdRotation.r_value_ = pCmd->field_E_rotation;
 
         Fix16 fix_1;
-        fix_1.mValue = CmdRotation.FromUnsignedToFloat();
+        fix_1.value_ = CmdRotation.FromUnsignedToFloat();
         Fix16 fix_2;
-        fix_2.mValue = kDegreesToAng16_6F8044.ToFloat();
+        fix_2.value_ = kDegreesToAng16_6F8044.ToFloat();
         Fix16 fix_3;
-        fix_3.mValue = fix_2.MultiplyInt64(fix_1);
+        fix_3.value_ = fix_2.MultiplyInt64(fix_1);
 
         Ang16 rotation;
-        rotation.rValue = fix_3.ToInt();
+        rotation.r_value_ = fix_3.ToInt();
         rotation.Normalize();
 
-        (pPointer->field_8_char)->field_132_follow_car_offset_angle = rotation.rValue;
+        (pPointer->field_8_char)->field_132_follow_car_offset_angle = rotation.r_value_;
         (pPointer->field_8_char)->field_1FC_follow_car_offset_distance = pCmd->field_12_offset;
         (pPointer->field_8_char)->field_21C_bf.bScheduledForRemoval = false; // TODO: Maybe BitSet32
     }

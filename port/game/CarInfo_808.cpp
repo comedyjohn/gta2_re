@@ -484,13 +484,13 @@ s32 CarInfo_808::FloatStrToFix16_431000(char* pStr, Fix16& pOut)
             {
                 return -11;
             }
-            pOut.mValue /= decimal_divisor;
+            pOut.value_ /= decimal_divisor;
             decimal_divisor = 1;
             bPastDecimalPoint = true;
         }
         else
         {
-            pOut.mValue += (currentChar - 0x30) * decimal_divisor * 0x4000;
+            pOut.value_ += (currentChar - 0x30) * decimal_divisor * 0x4000;
             decimal_divisor = decimal_divisor * 10;
         }
     }
@@ -593,7 +593,7 @@ Fix16 ComputeCarMassAndInertia_454410(Fix16 width, Fix16 height, Fix16 mass, Fix
     Fix16 frontI = (frontMass * inertiaBase);
     // Negated by hand: one inline expansion less, so both front (cg - h) subtractions stay inline (budget)
     Fix16 nh;
-    nh.mValue = -height.mValue;
+    nh.value_ = -height.value_;
     Fix16 negHeightXConstant = (nh * kQuarter_677D78);
 
     const Fix16& rearMass = (mass * (kOne_677F54 - frontMassBias));

@@ -12,30 +12,30 @@ EXTERN_GLOBAL(Ang16, kAng180);
 // 0x405640
 void Ang16::SnapToAng4()
 {
-    if (rValue < 180 || rValue > 1260)
+    if (r_value_ < 180 || r_value_ > 1260)
     {
-        rValue = 0;
+        r_value_ = 0;
     }
-    else if (rValue < 540)
+    else if (r_value_ < 540)
     {
-        rValue = 360;
+        r_value_ = 360;
     }
     else
     {
-        rValue = rValue < 900 ? 720 : 1080;
+        r_value_ = r_value_ < 900 ? 720 : 1080;
     }
 }
 
 // 0x405680
 u8 Ang16::ToAng4()
 {
-    return rValue / 360;
+    return r_value_ / 360;
 }
 
 // 0x4056A0
 u8 Ang16::GetOctant()
 {
-    return rValue / 180;
+    return r_value_ / 180;
 }
 
 // 0x405B60
@@ -72,7 +72,7 @@ void Ang16::NormalizeOutOfLine()
 // 0x409300
 Ang16* Ang16::AssignNormalized(const s16& value, s32 a3)
 {
-    rValue = value;
+    r_value_ = value;
     Normalize();
     return this;
 }
@@ -80,13 +80,13 @@ Ang16* Ang16::AssignNormalized(const s16& value, s32 a3)
 // 0x409340
 Ang16 Ang16::SubtractNormalized(const Ang16& toSub)
 {
-    return Ang16(rValue - toSub.rValue, static_cast<u8>(0));
+    return Ang16(r_value_ - toSub.r_value_, static_cast<u8>(0));
 }
 
 // 0x4516B0
 Ang16::Ang16(Fix16* a2, s32 a3)
 {
-    rValue = a2->ToInt();
+    r_value_ = a2->ToInt();
     Normalize();
 }
 
@@ -101,7 +101,7 @@ void Ang16::PolarToCartesianOutOfLine(Ang16& angle, const Fix16& radius, Fix16& 
 // 0x482740
 Ang16 Ang16::Fix16ToAng16OutOfLine(Fix16& value)
 {
-    return Ang16(value.mValue / 71, 0);
+    return Ang16(value.value_ / 71, 0);
 }
 
 // 0x4F78F0

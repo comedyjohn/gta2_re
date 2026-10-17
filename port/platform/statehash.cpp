@@ -251,9 +251,9 @@ void AddPoint(Hasher& h, const char* name, const Fix16Point& p)
 {
     char n[64];
     snprintf(n, sizeof(n), "%s.x", name);
-    h.Add(n, p.x.mValue);
+    h.Add(n, p.x.value_);
     snprintf(n, sizeof(n), "%s.y", name);
-    h.Add(n, p.y.mValue);
+    h.Add(n, p.y.value_);
 }
 
 uint64_t HashRng(std::string* dump)
@@ -278,10 +278,10 @@ uint64_t HashSprites(std::string* dump, const PoolMap& pools)
         const Sprite& s = pool.pool_[i];
         h.Item("sprite", i);
         h.Add("index", i);
-        h.Add("x", s.field_14_xy.x.mValue);
-        h.Add("y", s.field_14_xy.y.mValue);
-        h.Add("z", s.field_1C_zpos.mValue);
-        h.Add("rotation", s.field_0_rotation.rValue);
+        h.Add("x", s.field_14_xy.x.value_);
+        h.Add("y", s.field_14_xy.y.value_);
+        h.Add("z", s.field_1C_zpos.value_);
+        h.Add("rotation", s.field_0_rotation.r_value_);
         h.Add("type", s.field_30_sprite_type_enum);
         h.Add("instance_id", s.field_20_instance_id);
         h.Add("frame", s.field_22_type_sprite_idx);
@@ -338,8 +338,8 @@ uint64_t HashPeds(std::string* dump, const PoolMap& pools)
         h.Add("ped_state_1", c.field_8_ped_state_1);
         h.Add("ped_state_2", c.field_C_ped_state_2);
         h.Add("char_state", c.field_10_char_state);
-        h.Add("velocity", c.field_38_velocity.mValue);
-        h.Add("rotation", c.field_40_rotation.rValue);
+        h.Add("velocity", c.field_38_velocity.value_);
+        h.Add("rotation", c.field_40_rotation.r_value_);
         h.Add("animation_state", c.field_6C_animation_state);
         h.Add("animation_frame", c.field_68_animation_frame);
         h.Add("sprite", pools.Of(c.field_80_sprite_ptr));
@@ -377,13 +377,13 @@ uint64_t HashCars(std::string* dump, const PoolMap& pools)
         if (const CarPhysics_B0* ph = c.field_58_physics)
         {
             AddPoint(h, "velocity", ph->field_40_linvel_1);
-            h.Add("angular_velocity", ph->field_74_ang_vel_rad.mValue);
-            h.Add("z", ph->field_68_z_pos.mValue);
-            h.Add("z_velocity", ph->field_70_z_vel.mValue);
-            h.Add("theta", ph->field_58_theta.rValue);
+            h.Add("angular_velocity", ph->field_74_ang_vel_rad.value_);
+            h.Add("z", ph->field_68_z_pos.value_);
+            h.Add("z_velocity", ph->field_70_z_vel.value_);
+            h.Add("theta", ph->field_58_theta.r_value_);
             h.Add("physics_state", ph->field_8C_state);
-            h.Add("gas", ph->field_60_gas_pedal.mValue);
-            h.Add("brake", ph->field_64_brake_pressure.mValue);
+            h.Add("gas", ph->field_60_gas_pedal.value_);
+            h.Add("brake", ph->field_64_brake_pressure.value_);
         }
     }
     h.EndItem();
@@ -567,8 +567,8 @@ uint64_t HashPolice(std::string* dump, const PoolMap& pools)
         h.Add("target_x", c.field_2_targ_x);
         h.Add("target_y", c.field_3_targ_y);
         h.Add("target_z", c.field_4_targ_z);
-        h.Add("field_8", c.field_8.mValue);
-        h.Add("field_C", c.field_C.mValue);
+        h.Add("field_8", c.field_8.value_);
+        h.Add("field_C", c.field_C.value_);
         h.Add("emergency_crew", c.field_10_subObj ? c.field_10_subObj - gEmergencyCrewPool_706280->field_0_slots : -1);
         h.Add("pursuit", c.field_14_pPursuitTarget ? c.field_14_pPursuitTarget - p->field_464_pursuit_targets : -1);
         h.Add("field_18", c.field_18);
@@ -590,9 +590,9 @@ uint64_t HashPolice(std::string* dump, const PoolMap& pools)
         h.Add("state", t.field_8_state);
         h.Add("timer", t.field_C_timer);
         h.Add("field_E", t.field_E);
-        h.Add("x", t.field_10_x.mValue);
-        h.Add("y", t.field_14_y.mValue);
-        h.Add("z", t.field_18_z.mValue);
+        h.Add("x", t.field_10_x.value_);
+        h.Add("y", t.field_14_y.value_);
+        h.Add("z", t.field_18_z.value_);
         h.Add("gave_up", t.field_1C_crew_gave_up);
         for (PoliceCrew_38* crew : t.field_20_crews)
         {

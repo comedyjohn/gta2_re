@@ -38,7 +38,7 @@ class MapRenderer
     {
         field_0_ambient = kInitialAmbient_67DCCC;
         field_4_target_ambient = kInitialAmbient_67DCCC;
-        field_8_ambient_step.mValue = 0;
+        field_8_ambient_step.value_ = 0;
         field_2F00_drawn_tile_count = 0;
         field_2EFC_curr_draw_layer_size = 0;
         set_shading_lev_4E9DB0(15U);

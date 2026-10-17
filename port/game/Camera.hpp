@@ -118,7 +118,7 @@ class Camera_0xBC
     {
         Fix16PointPOD tmp;
         Fix16 u = field_98_cur_pos.field_8_z - z;
-        Fix16 t(kOne_67681C / Fix16(u.mValue + dword_676840.mValue, 0));
+        Fix16 t(kOne_67681C / Fix16(u.value_ + dword_676840.value_, 0));
 
         tmp.x = (((x - field_98_cur_pos.field_0_x) * field_60_screen_scale.y) * t) + Fix16(320);
         tmp.y = (((y - field_98_cur_pos.field_4_y) * field_60_screen_scale.y) * t) + Fix16(240);

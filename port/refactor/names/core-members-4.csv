@@ -1,0 +1,7 @@
+old,new,name
+Ang16::rValue,r_value_,Ang16::rValue
+Ang8::rValue,r_value_,Ang8::rValue
+BitSet32::m_var,m_var_,BitSet32::m_var
+Fix16::mValue,value_,Fix16::mValue
+Pool::field_X_count,field_x_count_,Pool::field_X_count
+Pool::field_X_pad,field_x_pad_,Pool::field_X_pad

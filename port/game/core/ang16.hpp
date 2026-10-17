@@ -12,39 +12,39 @@ class Ang16
     // 9.6f 0x40E670/0x41E0F0/0x40F4C0/0x40E690: setcc into a 32-bit register, so these return int, not bool
     s32 operator>(const Ang16& other) const
     {
-        return rValue > other.rValue;
+        return r_value_ > other.r_value_;
     }
 
     s32 operator<(const Ang16& other) const
     {
-        return rValue < other.rValue;
+        return r_value_ < other.r_value_;
     }
 
     s32 operator>=(const Ang16& other) const
     {
-        return rValue >= other.rValue;
+        return r_value_ >= other.r_value_;
     }
 
     s32 operator<=(const Ang16& other) const
     {
-        return rValue <= other.rValue;
+        return r_value_ <= other.r_value_;
     }
 
     s32 operator!=(const Ang16& other)
     {
-        return rValue != other.rValue;
+        return r_value_ != other.r_value_;
     }
 
     Ang16 operator-=(const Ang16& other)
     {
-        rValue -= other.rValue;
+        r_value_ -= other.r_value_;
         Normalize();
         return *this;
     }
 
     Ang16 operator+=(const Ang16& other)
     {
-        rValue += other.rValue;
+        r_value_ += other.r_value_;
         Normalize();
         return *this;
     }
@@ -60,23 +60,23 @@ class Ang16
 
     s32 operator==(const Ang16& other)
     {
-        return rValue == other.rValue;
+        return r_value_ == other.r_value_;
     }
 
     Ang16 operator*(const Ang16& other)
     {
-        return Ang16((Fix16(rValue) * Fix16(other.rValue)).ToInt());
+        return Ang16((Fix16(r_value_) * Fix16(other.r_value_)).ToInt());
     }
 
     Ang16 operator+(const Ang16& rhs)
     {
-        s16 value = rValue + rhs.rValue;
+        s16 value = r_value_ + rhs.r_value_;
         return Ang16(value, 0);
     }
 
     Ang16 operator-(const Ang16& other)
     {
-        s16 value = rValue - other.rValue;
+        s16 value = r_value_ - other.r_value_;
         return Ang16(value, 0);
     }
 
@@ -85,93 +85,93 @@ class Ang16
 
     Ang16 operator-()
     {
-        return Ang16(-rValue, 0);
+        return Ang16(-r_value_, 0);
     }
 
     //   Ang16  and  const int
 
     bool operator>(const s32 other) const
     {
-        return rValue > other;
+        return r_value_ > other;
     }
 
     bool operator<(const s32 other) const
     {
-        return rValue < other;
+        return r_value_ < other;
     }
 
     bool operator>=(const s32 other) const
     {
-        return rValue >= other;
+        return r_value_ >= other;
     }
 
     bool operator<=(const s32 other) const
     {
-        return rValue <= other;
+        return r_value_ <= other;
     }
 
     Ang16 operator-=(const s32 other)
     {
-        rValue -= other;
+        r_value_ -= other;
         return *this;
     }
 
     Ang16 operator+=(const s32 other)
     {
-        rValue += other;
+        r_value_ += other;
         return *this;
     }
 
     Ang16 operator<<(const s32 other)
     {
-        rValue = rValue << other;
+        r_value_ = r_value_ << other;
         return *this;
     }
 
     Ang16 operator>>(const s32 other)
     {
-        rValue = rValue >> other;
+        r_value_ = r_value_ >> other;
         return *this;
     }
 
     Ang16 operator*(const s32 other)
     {
-        rValue *= other;
+        r_value_ *= other;
         return *this;
     }
 
     Ang16 operator=(const s32 other)
     {
-        rValue = other;
+        r_value_ = other;
         return *this;
     }
 
     Ang16 operator-(const s32 other)
     {
-        rValue -= other;
+        r_value_ -= other;
         return *this;
     }
 
     s32 ToFloat()
     {
-        return rValue << 14;
+        return r_value_ << 14;
     }
 
     s32 FromUnsignedToFloat()
     {
-        return static_cast<u16>(rValue) << 14;
+        return static_cast<u16>(r_value_) << 14;
     }
 
     void ConvertAndMultiply(Ang16* a1, Ang16* a2)
     {
         Fix16 fix_1;
-        fix_1.mValue = a2->FromUnsignedToFloat();
+        fix_1.value_ = a2->FromUnsignedToFloat();
         Fix16 fix_2;
-        fix_2.mValue = a1->ToFloat();
+        fix_2.value_ = a1->ToFloat();
         Fix16 fix_3;
-        fix_3.mValue = fix_2.MultiplyInt64(fix_1);
+        fix_3.value_ = fix_2.MultiplyInt64(fix_1);
 
-        rValue = fix_3.ToInt();
+        r_value_ = fix_3.ToInt();
     }
 
     void NormalizeOutOfLine();
@@ -184,11 +184,11 @@ class Ang16
 
     void Normalize()
     {
-        for (; rValue < 0; rValue += 1440)
+        for (; r_value_ < 0; r_value_ += 1440)
         {
             ;
         }
-        for (; rValue >= 1440; rValue -= 1440)
+        for (; r_value_ >= 1440; r_value_ -= 1440)
         {
             ;
         }
@@ -207,7 +207,7 @@ class Ang16
     // constructor, so the out-of-line one is reached through these overloads.
     Ang16(Ang16& input, s32 a3)
     {
-        AssignNormalized(input.rValue, a3);
+        AssignNormalized(input.r_value_, a3);
     }
 
     Ang16(const s16* value, s32 a3)
@@ -228,12 +228,12 @@ class Ang16
 
     static Fix16 Cosine(const Ang16& angle)
     {
-        return gCosTable[angle.rValue];
+        return gCosTable[angle.r_value_];
     }
 
     static Fix16 Sine(const Ang16& angle)
     {
-        return gSinTable[angle.rValue];
+        return gSinTable[angle.r_value_];
     }
 
     // 9.6f 0x41FC20: the table value is the left operand (this) of the multiply
@@ -252,7 +252,7 @@ class Ang16
     // I was tempted to put this on the Fix16 header, but that will create a circular dependency...
     static Fix16 _stdcall Ang16ToFix16(const Ang16& v)
     {
-        s32 value = v.rValue * 71;
+        s32 value = v.r_value_ * 71;
         return Fix16(value, 0);
     }
 
@@ -264,7 +264,7 @@ class Ang16
 
     bool IsAxisAligned() const
     {
-        return (rValue == 0 || rValue == 360 || rValue == 720 || rValue == 1080) ? true : false;
+        return (r_value_ == 0 || r_value_ == 360 || r_value_ == 720 || r_value_ == 1080) ? true : false;
     }
 
     bool JIsAxisAligned()
@@ -272,43 +272,43 @@ class Ang16
         return IsAxisAligned();
     }
 
-    Ang16(const s16& value, s32 not_used) : rValue(value)
+    Ang16(const s16& value, s32 not_used) : r_value_(value)
     {
         this->Normalize();
     }
 
-    Ang16() : rValue(0)
+    Ang16() : r_value_(0)
     {
     }
 
-    Ang16(s16 value, u8 null2) : rValue(value)
+    Ang16(s16 value, u8 null2) : r_value_(value)
     {
         Normalize();
     }
 
-    Ang16(s32 value) : rValue(value)
+    Ang16(s32 value) : r_value_(value)
     {
     }
 
-    Ang16(Fix16 value) : rValue(value.mValue >> 14) // value.ToInt() breaks Map_0x370::SpawnMapObjects_4DFB90
+    Ang16(Fix16 value) : r_value_(value.value_ >> 14) // value.ToInt() breaks Map_0x370::SpawnMapObjects_4DFB90
     {
     }
 
     // 9.6f func: 0x401C40
     Ang16(const Fix16& value, u8 zero)
     {
-        rValue = value.ToInt();
+        r_value_ = value.ToInt();
         Normalize();
     }
 
     Ang16 MultiplyByFix16(const Fix16& a2)
     {
-        return Ang16(Fix16(rValue) * a2, 0);
+        return Ang16(Fix16(r_value_) * a2, 0);
     }
 
     Fix16 DivideBy(const Ang16& scale) const
     {
-        return Fix16(rValue) / scale.rValue;
+        return Fix16(r_value_) / scale.r_value_;
     }
 
     static Fix16 NormalizeAngleDeltaScaled(Ang16& from, Ang16& to, Ang16& divisor);
@@ -324,12 +324,12 @@ class Ang16
         ypos = (-old_xpos) * Ang16::Sine(rotation) + ypos * Ang16::Cosine(rotation);
     }
 
-    s16 rValue;
+    s16 r_value_;
 };
 
 inline Ang16 operator-(const Ang16& a, const Ang16& b)
 {
-    return a.rValue - b.rValue;
+    return a.r_value_ - b.r_value_;
 }
 
 class Ang8
@@ -338,10 +338,10 @@ class Ang8
     //  maybe an Ang8 inline at 0x462EF0 in 9.6f
     Ang16 ConvertToAng16()
     {
-        return Ang16((Fix16(rValue) / 256) * 1440);
+        return Ang16((Fix16(r_value_) / 256) * 1440);
     }
 
-    u8 rValue;
+    u8 r_value_;
 };
 
 inline void RotateAndTranslatePoint(const Fix16& pInX,

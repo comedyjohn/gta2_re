@@ -1374,7 +1374,7 @@ struct Car_BC_Pool
 
     s16 get_cars_count_45AD30()
     {
-        return field_0_pool.field_X_count;
+        return field_0_pool.field_x_count_;
     }
 
     Car_BC* GetFirstCar_420E50()

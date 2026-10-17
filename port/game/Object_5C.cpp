@@ -451,7 +451,7 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16Point* p
             if (ComputeShortestAngleDelta_4056C0(field_10_obj_3c->field_4_angle, impact_angle) < kAng90_6F8C88)
             {
                 Ang16& angle = field_10_obj_3c->field_4_angle;
-                angle.rValue += kAng180_6F8D62.rValue;
+                angle.r_value_ += kAng180_6F8D62.r_value_;
                 angle.NormalizeOutOfLine();
             }
         }
@@ -813,7 +813,7 @@ bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16Poin
     }
     else if (SelectCollisionSprite_522460(pSprite))
     {
-        field_10_obj_3c->field_14 = field_10_obj_3c->field_C_speed.mValue;
+        field_10_obj_3c->field_14 = field_10_obj_3c->field_C_speed.value_;
         field_10_obj_3c->field_10_z_speed = kFixZero;
         field_10_obj_3c->field_2A_bAirborne = 0;
         *pPoint = pSprite->get_x_y();
@@ -1006,7 +1006,7 @@ bool Object_2C::HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16Point* pPoin
         }
         else if (gObject2C_HitWallOrDoor_6F8F94)
         {
-            field_10_obj_3c->field_14 = field_10_obj_3c->field_C_speed.mValue;
+            field_10_obj_3c->field_14 = field_10_obj_3c->field_C_speed.value_;
             *pPoint = pSprite->get_x_y();
             *pHit = true;
             return true;

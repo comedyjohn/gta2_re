@@ -76,7 +76,7 @@ TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the 
     Item* c = pool.Allocate();
     b->remove = true;
     pool.UpdatePool();
-    CHECK(pool.field_X_count == 3); // counted before removal
+    CHECK(pool.field_x_count_ == 3); // counted before removal
     CHECK(pool.GetFirstUsed() == c);
     CHECK(c->mpNext == a);
     CHECK(b->deallocations == 1);

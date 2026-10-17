@@ -126,10 +126,10 @@ void Generator_2C::Service_4C1C50()
 // 0x4c1c70
 void Generator_2C::Init_4C1C70(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 generator_type, s16 min_delay, s16 max_delay)
 {
-    field_4_x = x.mValue;
-    field_8_y = y.mValue;
-    field_C_z = z.mValue;
-    field_10_rot = rot.rValue;
+    field_4_x = x.value_;
+    field_8_y = y.value_;
+    field_C_z = z.value_;
+    field_10_rot = rot.r_value_;
     field_0_gen_type = generator_type;
     field_12_min_delay = min_delay;
     field_14_max_delay = max_delay;

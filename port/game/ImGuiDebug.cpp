@@ -1485,7 +1485,7 @@ void ImGuiDebugDraw()
 
                     ImGui::SliderInt("field_A0_car_kind", &pCarIter->field_A0_car_kind, 0, 120);
 
-                    ImGui::Text("ang %d", pCarIter->field_50_car_sprite->field_0_rotation.rValue);
+                    ImGui::Text("ang %d", pCarIter->field_50_car_sprite->field_0_rotation.r_value_);
                     ImGui::Text("field_7C_ped_type %d", pCarIter->field_7C_ped_type);
                     ImGui::Text("field_74_damage %d", pCarIter->field_74_damage);
 
@@ -1589,7 +1589,7 @@ void ImGuiDebugDraw()
         {
             if (ImGui::TreeNode("MapRenderer & Lights"))
             {
-                ImGui::SliderInt("Ambient Level", &gpMapRenderer_6F66E4->field_0_ambient.mValue, 0, 16383);
+                ImGui::SliderInt("Ambient Level", &gpMapRenderer_6F66E4->field_0_ambient.value_, 0, 16383);
 
                 static u8 shading_level = 15;
                 ImGui::SliderU8("Shading Level", &shading_level, 0, 255);
@@ -1620,8 +1620,8 @@ void ImGuiDebugDraw()
                 }
                 if (ImGui::TreeNode("Globals"))
                 {
-                    ImGui::SliderInt("kZeroOnePoint_6F6484.x", &kZeroOnePoint_6F6484.x.mValue, 0, 32768);
-                    ImGui::SliderInt("kZeroOnePoint_6F6484.y", &kZeroOnePoint_6F6484.y.mValue, 16, 32768);
+                    ImGui::SliderInt("kZeroOnePoint_6F6484.x", &kZeroOnePoint_6F6484.x.value_, 0, 32768);
+                    ImGui::SliderInt("kZeroOnePoint_6F6484.y", &kZeroOnePoint_6F6484.y.value_, 16, 32768);
 
                     if (ImGui::Button("Return to default values"))
                     {
@@ -1652,18 +1652,18 @@ void ImGuiDebugDraw()
             {
                 if (gViewCamera_676978)
                 {
-                    ImGui::InputInt("field_60_full", &gViewCamera_676978->field_60_screen_scale.x.mValue, 1, 1);
-                    ImGui::InputInt("field_60_frac", &gViewCamera_676978->field_60_screen_scale.y.mValue, 1, 1);
+                    ImGui::InputInt("field_60_full", &gViewCamera_676978->field_60_screen_scale.x.value_, 1, 1);
+                    ImGui::InputInt("field_60_frac", &gViewCamera_676978->field_60_screen_scale.y.value_, 1, 1);
                     ImGui::Text("field_78_win_left %f", gViewCamera_676978->field_78_view_bounds.field_0_left.ToFloat());
                     ImGui::Text("field_7C_right %f", gViewCamera_676978->field_78_view_bounds.field_4_right.ToFloat());
                     ImGui::Text("field_80_win_top %f", gViewCamera_676978->field_78_view_bounds.field_8_top.ToFloat());
                     ImGui::Text("field_84_win_bottom %f", gViewCamera_676978->field_78_view_bounds.field_C_bottom.ToFloat());
-                    ImGui::SliderInt("field_A4", &gViewCamera_676978->field_98_cur_pos.field_C_zoom.mValue, 0, 30000);
+                    ImGui::SliderInt("field_A4", &gViewCamera_676978->field_98_cur_pos.field_C_zoom.value_, 0, 30000);
                     ImGui::SliderInt("screen_px_center_x", &gViewCamera_676978->field_70_screen_px_center_x, 0, 2000);
                     ImGui::SliderInt("screen_px_center_y", &gViewCamera_676978->field_74_screen_px_center_y, 0, 1200);
 
-                    ImGui::SliderInt("gXCoord_6F63AC", &gXCoord_6F63AC.mValue, 0, 2000);
-                    ImGui::SliderInt("gYCoord_6F63B8", &gYCoord_6F63B8.mValue, 0, 2000);
+                    ImGui::SliderInt("gXCoord_6F63AC", &gXCoord_6F63AC.value_, 0, 2000);
+                    ImGui::SliderInt("gYCoord_6F63B8", &gYCoord_6F63B8.value_, 0, 2000);
                     ImGui::SliderInt("gZCoord_6F63E0", reinterpret_cast<int*>(&gZCoord_6F63E0), 0, 2000);
                 }
 
@@ -1691,7 +1691,7 @@ void ImGuiDebugDraw()
                         //Camera_0xBC* aux_camera = &pPlayer->field_208_aux_game_camera;
                         if (game_camera)
                         {
-                            ImGui::SliderInt("field_A4", &game_camera->field_98_cur_pos.field_C_zoom.mValue, 0, 25000);
+                            ImGui::SliderInt("field_A4", &game_camera->field_98_cur_pos.field_C_zoom.value_, 0, 25000);
                         }
                     }
                 }
@@ -1732,7 +1732,7 @@ void ImGuiDebugDraw()
                 GetPlayerPos(xpos, ypos, zpos);
 
                 Fix16 scale;
-                scale.mValue = 0x4000;
+                scale.value_ = 0x4000;
 
                 static int currentCarModelIndex = 0;
                 const char* carModelNames[] = {
@@ -2071,13 +2071,13 @@ void ImGuiDebugDraw()
                 {
                     if (obj_3c)
                     {
-                        ImGui::SliderS16("Obj3C angle", &obj_3c->field_4_angle.rValue, 0, 1439);
+                        ImGui::SliderS16("Obj3C angle", &obj_3c->field_4_angle.r_value_, 0, 1439);
                         ImGui::InputS16("Obj3C field_6_unused", &obj_3c->field_6_unused, 0, 1439);
-                        ImGui::Value("Obj3C field_C", obj_3c->field_C_speed.mValue);
-                        ImGui::Value("Obj3C field_10", obj_3c->field_10_z_speed.mValue);
-                        ImGui::Value("Obj3C field_14", obj_3c->field_14.mValue);
-                        ImGui::Value("Obj3C field_18", obj_3c->field_18_friction.mValue);
-                        ImGui::Value("Obj3C field_1C", obj_3c->field_1C_z_accel.mValue);
+                        ImGui::Value("Obj3C field_C", obj_3c->field_C_speed.value_);
+                        ImGui::Value("Obj3C field_10", obj_3c->field_10_z_speed.value_);
+                        ImGui::Value("Obj3C field_14", obj_3c->field_14.value_);
+                        ImGui::Value("Obj3C field_18", obj_3c->field_18_friction.value_);
+                        ImGui::Value("Obj3C field_1C", obj_3c->field_1C_z_accel.value_);
 
                         ImGui::Value("Obj3C field_2E_unused", obj_3c->field_2E_unused);
                         ImGui::Value("Obj3C field_2F", obj_3c->field_2F_bOnSlope);
@@ -2209,8 +2209,8 @@ void ImGuiDebugDraw()
 
                             if (pPhysics)
                             {
-                                ImGui::SliderS16("Car Angle", &pPhysics->field_58_theta.rValue, 0, 1439);
-                                ImGui::SliderInt("Car Angle Velocity", &pPhysics->field_74_ang_vel_rad.mValue, -10 * 16384, 10 * 16384);
+                                ImGui::SliderS16("Car Angle", &pPhysics->field_58_theta.r_value_, 0, 1439);
+                                ImGui::SliderInt("Car Angle Velocity", &pPhysics->field_74_ang_vel_rad.value_, -10 * 16384, 10 * 16384);
                                 if (ImGui::TreeNode("Car Physics"))
                                 {
                                     //ImGui::Value("Center of Mass x", pPhysics->field_30_cm1.x.ToFloat(), "%.2f");
@@ -2232,19 +2232,19 @@ void ImGuiDebugDraw()
                                         gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(pPlayerCar->field_84_car_info_idx);
                                     if (pModelPhy)
                                     {
-                                        ImGui::SliderInt("Turn In", &pModelPhy->field_14_turn_in.mValue, 0, 4 * 16384);
-                                        ImGui::SliderInt("Turn Ratio", &pModelPhy->field_18_turn_ratio.mValue, 0, 4 * 16384);
-                                        ImGui::SliderInt("Mass", &pModelPhy->field_4_mass.mValue, 0, 30 * 16384);
-                                        ImGui::SliderInt("Anti Strength", &pModelPhy->field_2C_anti_strngth.mValue, 0, 10 * 16384);
-                                        ImGui::SliderInt("Brake Friction", &pModelPhy->field_10_brake_friction.mValue, 0, 10 * 16384);
+                                        ImGui::SliderInt("Turn In", &pModelPhy->field_14_turn_in.value_, 0, 4 * 16384);
+                                        ImGui::SliderInt("Turn Ratio", &pModelPhy->field_18_turn_ratio.value_, 0, 4 * 16384);
+                                        ImGui::SliderInt("Mass", &pModelPhy->field_4_mass.value_, 0, 30 * 16384);
+                                        ImGui::SliderInt("Anti Strength", &pModelPhy->field_2C_anti_strngth.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Brake Friction", &pModelPhy->field_10_brake_friction.value_, 0, 10 * 16384);
                                         ImGui::SliderInt("Rear End Stability",
-                                                         &pModelPhy->field_1C_rear_end_stability.mValue,
+                                                         &pModelPhy->field_1C_rear_end_stability.value_,
                                                          0,
                                                          10 * 16384);
-                                        ImGui::SliderInt("Thrust", &pModelPhy->field_24_thrust.mValue, 0, 10 * 16384);
-                                        ImGui::SliderInt("Skid Threshold", &pModelPhy->field_30_sked_threshold.mValue, 0, 10 * 16384);
-                                        ImGui::SliderInt("Front Drive Bias", &pModelPhy->field_8_front_drive_bias.mValue, 0, 10 * 16384);
-                                        ImGui::SliderInt("Front Mass Bias", &pModelPhy->field_C_front_mass_bias.mValue, 0, 10 * 16384);
+                                        ImGui::SliderInt("Thrust", &pModelPhy->field_24_thrust.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Skid Threshold", &pModelPhy->field_30_sked_threshold.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Front Drive Bias", &pModelPhy->field_8_front_drive_bias.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Front Mass Bias", &pModelPhy->field_C_front_mass_bias.value_, 0, 10 * 16384);
                                         ImGui::SliderS8("Turbo", reinterpret_cast<char_type*>(&pModelPhy->field_1_turbo), 0, 10);
                                     }
                                     ImGui::TreePop();
@@ -2488,7 +2488,7 @@ void ImGuiDebugDraw()
 
                     if (pArrow)
                     {
-                        ImGui::SliderS16("Rotation", &pArrow->field_8_rotation.rValue, 0, 1439);
+                        ImGui::SliderS16("Rotation", &pArrow->field_8_rotation.r_value_, 0, 1439);
 
                         Hud_ArrowTargets_64* g20 = &pArrow->field_18;
                         Hud_ArrowGangInfo_8* g30 = &g20->field_10;
@@ -2852,13 +2852,13 @@ void ImGuiDebugDraw()
                     {
                         ObjectDefinition_74* phi = spawned_obj->field_8;
 
-                        ImGui::InputInt("field_0", &phi->field_0_width.mValue, 1, 1);
-                        ImGui::InputInt("field_4", &phi->field_4_height.mValue, 1, 1);
-                        ImGui::InputInt("field_8", &phi->field_8_depth.mValue, 1, 1);
-                        ImGui::InputInt("field_C", &phi->field_C_min_size.mValue, 1, 1);
-                        ImGui::InputInt("field_10", &phi->field_10_speed.mValue, 1, 1);
-                        ImGui::InputInt("field_14_friction", &phi->field_14_friction.mValue, 1, 1);
-                        ImGui::InputInt("field_18", &phi->field_18_mass.mValue, 1, 1);
+                        ImGui::InputInt("field_0", &phi->field_0_width.value_, 1, 1);
+                        ImGui::InputInt("field_4", &phi->field_4_height.value_, 1, 1);
+                        ImGui::InputInt("field_8", &phi->field_8_depth.value_, 1, 1);
+                        ImGui::InputInt("field_C", &phi->field_C_min_size.value_, 1, 1);
+                        ImGui::InputInt("field_10", &phi->field_10_speed.value_, 1, 1);
+                        ImGui::InputInt("field_14_friction", &phi->field_14_friction.value_, 1, 1);
+                        ImGui::InputInt("field_18", &phi->field_18_mass.value_, 1, 1);
                         ImGui::SliderS16("field_1C_remap", &phi->field_1C_remap, 0, 50);
                         ImGui::Input_char_type("field_20", &phi->field_20_sprite_flags, 1, 1);
                         ImGui::InputInt("field_24_object_idx", &phi->field_24_object_idx, 1, 1);
@@ -3550,14 +3550,14 @@ void ImGuiDebugDraw()
                 ImGui::Value("field_10", phi_54->field_10);
                 ImGui::Value("field_14", phi_54->field_14);
                 ImGui::Value("field_18", phi_54->field_18_collision_bucket_category);
-                ImGui::Value("field_1C", phi_54->field_1C_speed.mValue);
-                ImGui::Value("field_20", phi_54->field_20_friction.mValue);
+                ImGui::Value("field_1C", phi_54->field_1C_speed.value_);
+                ImGui::Value("field_20", phi_54->field_20_friction.value_);
                 ImGui::Value("field_24", phi_54->field_24);
                 ImGui::Value("field_28", phi_54->field_28);
                 ImGui::Value("field_2C", phi_54->field_2C);
                 ImGui::Value("field_30", phi_54->field_30_next_frame_max);
                 ImGui::Value("field_34", phi_54->field_34);
-                ImGui::Value("field_38", phi_54->field_38_mass.mValue);
+                ImGui::Value("field_38", phi_54->field_38_mass.value_);
                 ImGui::Value("field_3C_draw_layer", phi_54->field_3C_draw_layer);
                 ImGui::Value("field_40", phi_54->field_40_sprite_flags);
                 ImGui::Value("field_44", phi_54->field_44_has_sound);

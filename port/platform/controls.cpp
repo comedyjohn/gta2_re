@@ -144,7 +144,7 @@ void Spawn(int model)
         const Fix16 dist = ring ? ahead + Fix16(0x6000, 0) : ahead; // and one and a half blocks further
         for (s16 turn : kTurns)
         {
-            const s16 value = static_cast<s16>(rotation.rValue + turn);
+            const s16 value = static_cast<s16>(rotation.r_value_ + turn);
             const Ang16 angle(value, 0);
             Ang16::PolarToCartesian(angle, dist, dx, dy);
             const Fix16 cx = x + dx;
@@ -320,8 +320,8 @@ unsigned int port_input_apply(unsigned int bits)
     // Turn towards the heading, and stop pressing the turn once the speed it has built up would
     // carry it there. The turn speed is an angle: a speed to the right is just under 1440.
     const int wanted = (analog.heading * 45 + 2) / 4; // 1440 / 128 = 11.25 per step
-    const int diff = Wrap(wanted - ped->GetRotation().rValue);
-    int speed = Wrap(gGame_0x40_67E008->field_38_local_player->field_8_turn_speed.rValue);
+    const int diff = Wrap(wanted - ped->GetRotation().r_value_);
+    int speed = Wrap(gGame_0x40_67E008->field_38_local_player->field_8_turn_speed.r_value_);
     speed = speed < 0 ? -speed : speed;
     const int dead = speed > 12 ? speed : 12;
     unsigned int steer = 0;

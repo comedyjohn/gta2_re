@@ -472,7 +472,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
             case 3:
             {
                 src.SetFromPolar(Fix16(field_46_sub_state) * dword_6FD46C,
-                                 NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue));
+                                 NormalizedAng(field_28_pSprite->field_0_rotation.r_value_ + kAng180_6FD3EE.r_value_));
                 break;
             }
             case 4:
@@ -480,7 +480,8 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
             {
                 src.SetFromPolar(
                     Fix16(field_46_sub_state) * dword_6FD46C + dword_6FD45C,
-                    NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.rValue + kAng180_6FD3EE.rValue).rValue + jitter.rValue));
+                    NormalizedAng(NormalizedAng(field_28_pSprite->field_0_rotation.r_value_ + kAng180_6FD3EE.r_value_).r_value_ +
+                                  jitter.r_value_));
                 break;
             }
             default:
@@ -1480,7 +1481,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
         {
             {
                 Ang16 gun_angle = pGun->field_0_pSprite->field_0_rotation;
-                gun_angle += kAng180_6FD3EE.rValue;
+                gun_angle += kAng180_6FD3EE.r_value_;
                 gun_angle.NormalizeOutOfLine();
                 car_angle = gun_angle;
             }
@@ -1512,7 +1513,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
     Fix16 dy;
     if ((field_4_bf.bDriverAttacking) && max_sub_state >= field_46_sub_state)
     {
-        Ang16 dir(spread.rValue + angle.rValue);
+        Ang16 dir(spread.r_value_ + angle.r_value_);
         dir.NormalizeOutOfLine();
         PolarToXY_6FD2E8(dir, dx, dy);
     }

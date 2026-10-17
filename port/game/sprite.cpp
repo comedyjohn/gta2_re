@@ -83,7 +83,7 @@ namespace
 {
 inline Fix16 RoundZToLayer_4B9C70(Fix16& in)
 {
-    return Fix16((in.mValue + 0x80) & 0xFFFFFF00, 0);
+    return Fix16((in.value_ + 0x80) & 0xFFFFFF00, 0);
 }
 } // namespace
 
@@ -122,7 +122,7 @@ inline void ProjectWorldPointToScreen_4BA4D0(Fix16Point& point, Vert* pVert, Fix
 
 inline f32 Fix16ToFloat_Paren(const Fix16& v)
 {
-    return ((v.mValue / 16384.0F));
+    return ((v.value_ / 16384.0F));
 }
 } // namespace
 
@@ -411,21 +411,21 @@ inline u16 Sprite::GetTrueSpriteIdx_4BA230()
 // 0x48F8B0
 s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5)
 {
-    if (!m_var)
+    if (!m_var_)
     {
         return -1;
     }
     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u32 bUnk = sprite_index_5AA440->field_5_height > 0x40U;
-    SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var, &a4);
+    SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var_, &a4);
     if (pSprt14)
     {
-        if (pSprt14->field_8_delta_mask < m_var)
+        if (pSprt14->field_8_delta_mask < m_var_)
         {
             bRet = 1;
-            u32 sub = m_var - pSprt14->field_8_delta_mask;
+            u32 sub = m_var_ - pSprt14->field_8_delta_mask;
             ApplyDelta(sprite_idx, pSprt14->field_0_pixels, sub, sprite_index_5AA440->field_4_width);
-            pSprt14->SetKey_44AF50(sprite_idx, m_var, a4);
+            pSprt14->SetKey_44AF50(sprite_idx, m_var_, a4);
         }
         else
         {
@@ -445,8 +445,8 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
             pSprt14->ClearMask_48F5C0(sprite_index_5AA440->field_4_width, sprite_index_5AA440->field_5_height);
         }
 
-        ApplyDelta(sprite_idx, pSprt14->field_0_pixels, m_var, sprite_index_5AA440->field_4_width);
-        pSprt14->SetKey_44AF50(sprite_idx, m_var, a4);
+        ApplyDelta(sprite_idx, pSprt14->field_0_pixels, m_var_, sprite_index_5AA440->field_4_width);
+        pSprt14->SetKey_44AF50(sprite_idx, m_var_, a4);
     }
 
     pSprt14->MarkUsed_48F5A0();
@@ -471,7 +471,7 @@ char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, co
     {
         pd = p1.Sub(p0);
         Fix16 x = p0.x + (((scanLineY - p0.y) * ((pd.x) / pd.y)));
-        if (x.mValue >= minX.mValue && x.mValue <= minY.mValue)
+        if (x.value_ >= minX.value_ && x.value_ <= minY.value_)
         {
             gCollisionTarget_679188.field_14_vseg_x = x;
             return 1;
@@ -481,7 +481,7 @@ char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, co
     {
         pd = p0.Sub(p1);
         Fix16 x = p1.x + (((scanLineY - p1.y) * ((pd.x) / pd.y)));
-        if (x.mValue >= minX.mValue && x.mValue <= minY.mValue)
+        if (x.value_ >= minX.value_ && x.value_ <= minY.value_)
         {
             gCollisionTarget_679188.field_14_vseg_x = x;
             return 1;
@@ -506,7 +506,7 @@ bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const F
     {
         pd = p1 - p0;
         Fix16 y = p0.y + (((scanLineX - p0.x) * ((pd.y) / pd.x)));
-        if (y.mValue >= minX.mValue && y.mValue <= minY.mValue)
+        if (y.value_ >= minX.value_ && y.value_ <= minY.value_)
         {
             gCollisionTarget_679188.field_18_hseg_y = y;
             return true;
@@ -516,7 +516,7 @@ bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const F
     {
         pd = p0 - p1;
         Fix16 y = p1.y + (((scanLineX - p1.x) * ((pd.y) / pd.x)));
-        if (y.mValue >= minX.mValue && y.mValue <= minY.mValue)
+        if (y.value_ >= minX.value_ && y.value_ <= minY.value_)
         {
             gCollisionTarget_679188.field_18_hseg_y = y;
             return true;
@@ -1191,7 +1191,7 @@ void Sprite::Draw_59EFF0()
             }
             pTexture = gTextureCache_15D8_705064->GetCarDamageTexture_5B95D0(unkDeltaRelated);
         }
-        pCar->field_8_damaged_areas.m_var = car_flags; // TODO: use CopyAll_4A51A0
+        pCar->field_8_damaged_areas.m_var_ = car_flags; // TODO: use CopyAll_4A51A0
     }
     else
     {
@@ -1259,7 +1259,7 @@ void Sprite::Draw_59EFF0()
             SetUV_4B9BC0(u, v);
             pgbh_DrawQuad(128, pTexture, gTileVerts_7036D0, 255);
         }
-        pCar->field_8_damaged_areas.m_var = car_flags; // TODO: use CopyAll_4A51A0
+        pCar->field_8_damaged_areas.m_var_ = car_flags; // TODO: use CopyAll_4A51A0
     }
 
     ++gSpriteManager_703820->field_0_drawn_sprite_count;
@@ -1333,7 +1333,7 @@ namespace
 {
 inline Ang16 NegateAng16_401C80(const Ang16& angle)
 {
-    s16 value = -angle.rValue;
+    s16 value = -angle.r_value_;
     return Ang16(&value, 0);
 }
 } // namespace
@@ -1689,7 +1689,7 @@ bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& p
     Fix16Point* RenderingRect = field_C_pCollisionShape->field_C_corners;
 
     Fix16 diff = RenderingRect[0].y - a2;
-    Fix16 sign = Sign_4B9C20(diff.mValue);
+    Fix16 sign = Sign_4B9C20(diff.value_);
     Fix16 least_abs;
     least_abs = Fix16::Abs(diff);
 
@@ -1697,7 +1697,7 @@ bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& p
     a4 = 0;
 
     diff = RenderingRect[1].y - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1717,7 +1717,7 @@ bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& p
     }
 
     diff = RenderingRect[2].y - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1737,7 +1737,7 @@ bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& p
     }
 
     diff = RenderingRect[3].y - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1782,7 +1782,7 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3,
     UpdateCollisionBoundsIfNeeded_59E9C0();
 
     Fix16 diff = RenderingRect[0].x - a2;
-    Fix16 sign = Sign_4B9C20(diff.mValue);
+    Fix16 sign = Sign_4B9C20(diff.value_);
     Fix16 least_abs;
     least_abs = Fix16::Abs(diff);
 
@@ -1790,7 +1790,7 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3,
     a4 = 0;
 
     diff = RenderingRect[1].x - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1810,7 +1810,7 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3,
     }
 
     diff = RenderingRect[2].x - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1830,7 +1830,7 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3,
     }
 
     diff = RenderingRect[3].x - a2;
-    if (Sign_4B9C20(diff.mValue) != sign)
+    if (Sign_4B9C20(diff.value_) != sign)
     {
         return false;
     }
@@ -1869,8 +1869,8 @@ bool Sprite::PointInsideRotatedBounds_5A1490(Fix16Point& point1, Fix16Point& poi
                             field_14_xy.y,
                             rotated_1.x,
                             rotated_1.y);
-    if (rotated_1.x.mValue >= -half_width.mValue && rotated_1.x.mValue <= half_width.mValue && rotated_1.y.mValue >= -half_height.mValue &&
-        rotated_1.y.mValue <= half_height.mValue)
+    if (rotated_1.x.value_ >= -half_width.value_ && rotated_1.x.value_ <= half_width.value_ && rotated_1.y.value_ >= -half_height.value_ &&
+        rotated_1.y.value_ <= half_height.value_)
     {
         return true;
     }
@@ -1881,8 +1881,8 @@ bool Sprite::PointInsideRotatedBounds_5A1490(Fix16Point& point1, Fix16Point& poi
                             field_14_xy.y,
                             rotated_2.x,
                             rotated_2.y);
-    if (rotated_2.x.mValue >= -half_width.mValue && rotated_2.x.mValue <= half_width.mValue && rotated_2.y.mValue >= -half_height.mValue &&
-        rotated_2.y.mValue <= half_height.mValue)
+    if (rotated_2.x.value_ >= -half_width.value_ && rotated_2.x.value_ <= half_width.value_ && rotated_2.y.value_ >= -half_height.value_ &&
+        rotated_2.y.value_ <= half_height.value_)
     {
         return true;
     }

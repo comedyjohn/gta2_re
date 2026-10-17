@@ -306,6 +306,7 @@ def match_paren(text, start):
 
 
 IDENTITY = {}
+USR_NAMES = {}  # usr -> the name as spelled (params and locals), for the text scan
 
 
 def load_renames(path):
@@ -321,6 +322,8 @@ def load_renames(path):
                 sys.exit(f"{path}: {new!r} is not an identifier")
             if old.startswith("usr:"):
                 usr_targets[old[4:]] = new
+                if len(row) > 2 and row[2].strip():  # the third column of a propose.py file: the name as spelled
+                    USR_NAMES[old[4:]] = row[2].strip().split("::")[-1]
             elif old.split("::")[-1] == new:
                 IDENTITY[old] = new  # nothing to edit; address_map.csv still gets the new_name
             else:
@@ -335,7 +338,7 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overl
             update_map(dict(IDENTITY), {})
         print("nothing to rename; address_map.csv updated" if not dry else "nothing to rename")
         return 0
-    olds = {q.split("::")[-1] for q in wanted}
+    olds = {q.split("::")[-1] for q in wanted} | set(USR_NAMES.values())
     argsets = [(wanted, usr_targets, olds, p, a) for p, a in commands(build_dir, only)]
     results = []
     with concurrent.futures.ProcessPoolExecutor(jobs) as pool:
@@ -489,6 +492,8 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overl
             print("REFUSED", line)
         return 2
     by_new = {q.split("::")[-1]: n for q, n in wanted.items()}
+    for u, nm in USR_NAMES.items():
+        by_new.setdefault(nm, usr_targets[u])
     extra = []
     if templates:
         extra += res_template
@@ -503,8 +508,11 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overl
     # which new name does a residual get? the one of its old spelling (the batch must be unambiguous)
     final = {(f, o): (old, new) for (f, o), (old, new, usr, line) in edits.items()}
     for p, off, name, line in extra:
-        newname = {q.split("::")[-1]: n for q, n in wanted.items()}.get(name)
-        if newname is None or len({n for q, n in wanted.items() if q.split("::")[-1] == name}) != 1:
+        candidates = {n for q, n in wanted.items() if q.split("::")[-1] == name} | {
+            usr_targets[u] for u, nm in USR_NAMES.items() if nm == name
+        }
+        newname = next(iter(candidates)) if len(candidates) == 1 else None
+        if newname is None:
             print(f"AMBIGUOUS residual {os.path.relpath(p, ROOT)}:{line}: {name} has several new names")
             return 2
         final[(p, off)] = (name, newname)

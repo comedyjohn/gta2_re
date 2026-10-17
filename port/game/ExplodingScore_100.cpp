@@ -30,7 +30,7 @@ ExplodingScorePool::~ExplodingScorePool() = default;
 s16 ExplodingScorePool::NextPalette_596860()
 {
     field_0_last_palette++;
-    if (field_0_last_palette > 13u)
+    if (field_0_last_palette > 13U)
     {
         field_0_last_palette = 9;
     }
@@ -160,7 +160,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[7] = tmpScore / 10000000;
         ClearNumbersArrayFrom_596A70(6);
-        tmpScore %= 10000000u;
+        tmpScore %= 10000000U;
     }
 
     if (tmpScore >= 1000000)
@@ -171,7 +171,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[6] = tmpScore / 1000000;
         ClearNumbersArrayFrom_596A70(5);
-        tmpScore %= 1000000u;
+        tmpScore %= 1000000U;
     }
 
     if (tmpScore >= 100000)
@@ -182,7 +182,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[5] = tmpScore / 100000;
         ClearNumbersArrayFrom_596A70(4);
-        tmpScore %= 100000u;
+        tmpScore %= 100000U;
     }
 
     if (tmpScore >= 10000)
@@ -193,7 +193,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[4] = tmpScore / 10000;
         ClearNumbersArrayFrom_596A70(3);
-        tmpScore %= 10000u;
+        tmpScore %= 10000U;
     }
 
     if (tmpScore >= 1000)
@@ -204,7 +204,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[3] = tmpScore / 1000;
         ClearNumbersArrayFrom_596A70(2);
-        tmpScore %= 1000u;
+        tmpScore %= 1000U;
     }
 
     if (tmpScore >= 100)
@@ -215,7 +215,7 @@ void ExplodingScore_50::InitScore_596A90(Fix16 xpos, Fix16 ypos, Fix16 zpos, u32
         }
         this->field_4_digits[2] = tmpScore / 100;
         ClearNumbersArrayFrom_596A70(1);
-        tmpScore %= 100u;
+        tmpScore %= 100U;
     }
 
     if (tmpScore >= 10)
@@ -366,7 +366,7 @@ char_type ExplodingScore_50::PoolUpdate()
         field_3C++;
         field_40++;
 
-        if (field_36 > 2u)
+        if (field_36 > 2U)
         {
             field_36 -= 2;
             field_38--;

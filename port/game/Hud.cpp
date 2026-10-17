@@ -300,7 +300,7 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
 {
     u32 random_num = gpRng_67AB34->get_cur_rng_41CFE0() & 0xF;
     u8 PlayerIdx = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
-    bool bPlusSignDark = random_num > 7u;
+    bool bPlusSignDark = random_num > 7U;
 
     // 64 and the bar x go through the Fix16(u32) constructor (out-of-line copy 0x4926F0)
     s32 ypos = 11;
@@ -312,9 +312,9 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
         s32 arrow_colour = pGang->field_138_arrow_colour - 1;
         DrawFigureScaled_5D7670(6, arrow_colour + 64, 16, static_cast<u32>(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(6, arrow_colour + 78, 64u, static_cast<u32>(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, arrow_colour + 78, 64U, static_cast<u32>(ypos + 2), kAngZero_706610, 2, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(6, arrow_colour + 71, 64u, ypos + 1, kAngZero_706610, 2, 0, 0, 0);
+        DrawFigureScaled_5D7670(6, arrow_colour + 71, 64U, ypos + 1, kAngZero_706610, 2, 0, 0, 0);
 
         // Draw positive respect
         s32 respect_i = respect;
@@ -351,7 +351,7 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
             // Always true here, but the original re-tests it on this path (written this way VC6 keeps the test)
             if (-19 <= respect)
             {
-                DrawFigureScaled_5D7670(6, 46, 64u, ypos + 9, kAngZero_706610, 2, 0, 0, 0);
+                DrawFigureScaled_5D7670(6, 46, 64U, ypos + 9, kAngZero_706610, 2, 0, 0, 0);
             }
         }
 
@@ -372,7 +372,7 @@ void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
         {
             s32 text_palette = (respect >= 0) + 5;
             swprintf(tmpBuff_67BD9C, L"%d", respect);
-            DrawText_5D7720(tmpBuff_67BD9C, 64u, ypos - 6, gDebugFont_706600, 8, text_palette, 0, 0);
+            DrawText_5D7720(tmpBuff_67BD9C, 64U, ypos - 6, gDebugFont_706600, 8, text_palette, 0, 0);
         }
     }
 }
@@ -899,7 +899,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
                               drawKind_,
                               0,
                               1,
-                              14u,
+                              14U,
                               1);
 
             s16 colour_related;
@@ -936,7 +936,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
                               drawKind,
                               0,
                               1,
-                              14u,
+                              14U,
                               1);
         }
     }
@@ -1450,7 +1450,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
         {
             if (pPlayerIter->field_794_is_chatting)
             {
-                if ((gpRng_67AB34->get_cur_rng_41CFE0() & 7u) < 4)
+                if ((gpRng_67AB34->get_cur_rng_41CFE0() & 7U) < 4)
                 {
                     swprintf(tmpBuff_67BD9C, L"%s:%s_", pPlayerIter->field_83C_player_name, pPlayerIter->field_796_chat_text);
                 }
@@ -2605,11 +2605,11 @@ void Hud_2B00::UpdateCarName_5D5350()
     if (pCarName->field_0_display_time)
     {
         pCarName->field_0_display_time--;
-        if (pCarName->field_0_display_time > 80u)
+        if (pCarName->field_0_display_time > 80U)
         {
             ++pCarName->field_48_ypos;
         }
-        else if (pCarName->field_0_display_time < 40u)
+        else if (pCarName->field_0_display_time < 40U)
         {
             --pCarName->field_48_ypos;
         }
@@ -2863,10 +2863,10 @@ void Hud_MapZone_98::UpdateZoneName_5D5B60()
             if (field_0_timer)
             {
                 field_0_timer--;
-                if (field_0_timer > 0x39u)
+                if (field_0_timer > 0x39U)
                 {
                     field_94_transparency++;
-                    if (field_94_transparency > 0x1Fu)
+                    if (field_94_transparency > 0x1FU)
                     {
                         field_90_alpha_flag = 0;
                         field_94_transparency = 31;
@@ -2874,7 +2874,7 @@ void Hud_MapZone_98::UpdateZoneName_5D5B60()
                 }
                 else
                 {
-                    if (field_0_timer < 0x1Fu)
+                    if (field_0_timer < 0x1FU)
                     {
                         field_90_alpha_flag = 1;
                         if (field_94_transparency > 0)

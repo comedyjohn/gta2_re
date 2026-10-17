@@ -420,7 +420,7 @@ static void ShowPedBitMaskSetting(PedFlags32* flags)
         u32* pMask = reinterpret_cast<u32*>(flags);
         for (u32 bit = 0; bit < 32; bit++)
         {
-            ImGui::CheckboxFlags(kPedFlagNames[bit], pMask, 1u << bit);
+            ImGui::CheckboxFlags(kPedFlagNames[bit], pMask, 1U << bit);
         }
         ImGui::TreePop();
     }
@@ -1053,7 +1053,7 @@ void AddMenuOption(u32 page_idx, s16 xpos, s16 ypos, const wchar_t* pLabelStr, s
     gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_4_options_array[num_options].field_4_y_pos = ypos;
     wcsncpy(gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_4_options_array[num_options].field_6_option_name_str,
             pLabelStr,
-            0x32u);
+            0x32U);
     gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_4_options_array[num_options].field_80_menu_page_target = target_page;
     gFrontend_67DC84->field_136_menu_pages_array[page_idx].field_0_number_of_options++;
 }
@@ -1104,25 +1104,25 @@ void LoadMapsFromData(Network_Enumerated_Map* pOut, u16& num_maps_loaded)
                                      "GMPFile",
                                      "",
                                      static_cast<LPSTR>(enumerated_mmp_name[i].field_0_map_name),
-                                     0x103u,
+                                     0x103U,
                                      FileName);
             GetPrivateProfileStringA("MapFiles",
                                      "STYFile",
                                      "",
                                      static_cast<LPSTR>(enumerated_mmp_name[i].field_104_style_name),
-                                     0x103u,
+                                     0x103U,
                                      FileName);
             GetPrivateProfileStringA("MapFiles",
                                      "SCRFile",
                                      "",
                                      static_cast<LPSTR>(enumerated_mmp_name[i].field_208_script_name),
-                                     0x103u,
+                                     0x103U,
                                      FileName);
             GetPrivateProfileStringA("MapFiles",
                                      "Description",
                                      "",
                                      static_cast<LPSTR>(enumerated_mmp_name[i].field_30C_description),
-                                     0x103u,
+                                     0x103U,
                                      FileName);
             // Now check if the map exists
             _chdir("data");
@@ -1259,14 +1259,14 @@ void ImGuiDebugDraw()
         EnableBoot2MapDebugOptions();
     }
 
-    ImGui::InputFloat("UI scale", &ImGui::GetIO().FontGlobalScale, 0.1f, 0.5f);
-    if (ImGui::GetIO().FontGlobalScale < 1.0f)
+    ImGui::InputFloat("UI scale", &ImGui::GetIO().FontGlobalScale, 0.1F, 0.5F);
+    if (ImGui::GetIO().FontGlobalScale < 1.0F)
     {
-        ImGui::GetIO().FontGlobalScale = 1.0f;
+        ImGui::GetIO().FontGlobalScale = 1.0F;
     }
-    else if (ImGui::GetIO().FontGlobalScale > 4.0f)
+    else if (ImGui::GetIO().FontGlobalScale > 4.0F)
     {
-        ImGui::GetIO().FontGlobalScale = 4.0f;
+        ImGui::GetIO().FontGlobalScale = 4.0F;
     }
 
     if (ImGui::TreeNode("Exploding score"))
@@ -1321,7 +1321,7 @@ void ImGuiDebugDraw()
 
         if (ImGui::Button("EnqueueRadioWord_4271B0"))
         {
-            gSound_obj_66F680.EnqueueRadioWord_4271B0(0x78u);
+            gSound_obj_66F680.EnqueueRadioWord_4271B0(0x78U);
         }
     }
 
@@ -1786,7 +1786,7 @@ void ImGuiDebugDraw()
                     // prevents player entering when 4
                     //pNewCar->field_98_door_lock = Car_Door_Lock::unlocked_3;
 
-                    pNewCar->field_78_flags |= 0x10u;
+                    pNewCar->field_78_flags |= 0x10U;
 
                     pNewCar->UpdateSpriteNum_4435F0();
 

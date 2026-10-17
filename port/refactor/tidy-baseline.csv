@@ -471,7 +471,6 @@ port/game/Draw.cpp,misc-const-correctness,14
 port/game/Draw.cpp,misc-include-cleaner,13
 port/game/Draw.cpp,misc-use-anonymous-namespace,1
 port/game/Draw.cpp,readability-implicit-bool-conversion,8
-port/game/Draw.cpp,readability-uppercase-literal-suffix,27
 port/game/Draw.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Draw.hpp,modernize-avoid-c-arrays,1
 port/game/Draw.hpp,readability-inconsistent-declaration-parameter-name,2
@@ -505,7 +504,6 @@ port/game/ExplodingScore_100.cpp,misc-include-cleaner,11
 port/game/ExplodingScore_100.cpp,readability-else-after-return,1
 port/game/ExplodingScore_100.cpp,readability-implicit-bool-conversion,18
 port/game/ExplodingScore_100.cpp,readability-make-member-function-const,1
-port/game/ExplodingScore_100.cpp,readability-uppercase-literal-suffix,8
 port/game/ExplodingScore_100.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/ExplodingScore_100.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/ExplodingScore_100.hpp,cppcoreguidelines-special-member-functions,2
@@ -636,7 +634,6 @@ port/game/Frontend.cpp,readability-make-member-function-const,5
 port/game/Frontend.cpp,readability-non-const-parameter,2
 port/game/Frontend.cpp,readability-redundant-declaration,1
 port/game/Frontend.cpp,readability-simplify-boolean-expr,6
-port/game/Frontend.cpp,readability-uppercase-literal-suffix,1039
 port/game/Frontend.hpp,cppcoreguidelines-avoid-c-arrays,22
 port/game/Frontend.hpp,cppcoreguidelines-avoid-non-const-global-variables,31
 port/game/Frontend.hpp,cppcoreguidelines-macro-usage,1
@@ -822,7 +819,6 @@ port/game/Hud.cpp,readability-function-cognitive-complexity,1
 port/game/Hud.cpp,readability-implicit-bool-conversion,152
 port/game/Hud.cpp,readability-make-member-function-const,7
 port/game/Hud.cpp,readability-static-accessed-through-instance,2
-port/game/Hud.cpp,readability-uppercase-literal-suffix,13
 port/game/Hud.hpp,bugprone-narrowing-conversions,3
 port/game/Hud.hpp,cppcoreguidelines-avoid-c-arrays,14
 port/game/Hud.hpp,cppcoreguidelines-avoid-non-const-global-variables,3
@@ -869,7 +865,6 @@ port/game/ImGuiDebug.cpp,readability-isolate-declaration,1
 port/game/ImGuiDebug.cpp,readability-non-const-parameter,1
 port/game/ImGuiDebug.cpp,readability-simplify-boolean-expr,1
 port/game/ImGuiDebug.cpp,readability-static-accessed-through-instance,1
-port/game/ImGuiDebug.cpp,readability-uppercase-literal-suffix,14
 port/game/InputRecorder_67F8B0.cpp,bugprone-narrowing-conversions,18
 port/game/InputRecorder_67F8B0.cpp,cert-err33-c,8
 port/game/InputRecorder_67F8B0.cpp,cppcoreguidelines-avoid-c-arrays,6
@@ -929,7 +924,6 @@ port/game/KanjiFont_8EC.cpp,performance-no-int-to-ptr,1
 port/game/KanjiFont_8EC.cpp,readability-delete-null-pointer,2
 port/game/KanjiFont_8EC.cpp,readability-implicit-bool-conversion,40
 port/game/KanjiFont_8EC.cpp,readability-make-member-function-const,3
-port/game/KanjiFont_8EC.cpp,readability-uppercase-literal-suffix,14
 port/game/KanjiFont_8EC.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/KanjiFont_8EC.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/KanjiFont_8EC.hpp,cppcoreguidelines-special-member-functions,1
@@ -984,7 +978,6 @@ port/game/MapRenderer.cpp,readability-function-cognitive-complexity,7
 port/game/MapRenderer.cpp,readability-function-size,2
 port/game/MapRenderer.cpp,readability-implicit-bool-conversion,253
 port/game/MapRenderer.cpp,readability-make-member-function-const,1
-port/game/MapRenderer.cpp,readability-uppercase-literal-suffix,258
 port/game/MapRenderer.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/MapRenderer.hpp,cppcoreguidelines-avoid-non-const-global-variables,7
 port/game/MapRenderer.hpp,cppcoreguidelines-prefer-member-initializer,4

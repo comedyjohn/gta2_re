@@ -189,7 +189,7 @@ void DrawFigure_5D7EC0(s32 sprite_type,
     flags = (scale == kFpOne_706A6C && rotation == kAngZero_706C3C) ? 0x10000 : 0;
     if (!a11)
     {
-        flags |= 0x20000u;
+        flags |= 0x20000U;
     }
 
     point.SetXY_432860(-half_w, -half_h);
@@ -197,31 +197,31 @@ void DrawFigure_5D7EC0(s32 sprite_type,
 
     gQuadVerts_706B88.field_0_verts[0].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[0].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[0].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[0].z = 0.000099999997F;
 
     point.SetXY_432860(half_w, -half_h);
     point.RotateByAngle_40F6B0(rotation);
 
     gQuadVerts_706B88.field_0_verts[1].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[1].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[1].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[1].z = 0.000099999997F;
 
     point.SetXY_432860(half_w, half_h);
     point.RotateByAngle_40F6B0(rotation);
 
     gQuadVerts_706B88.field_0_verts[2].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[2].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[2].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[2].z = 0.000099999997F;
 
     point.SetXY_432860(-half_w, half_h);
     point.RotateByAngle_40F6B0(rotation);
 
     gQuadVerts_706B88.field_0_verts[3].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[3].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997F;
 
-    f32 u = sprite_index_5AA440->field_4_width - 0.000099999997f;
-    f32 v = sprite_index_5AA440->field_5_height - 0.000099999997f;
+    f32 u = sprite_index_5AA440->field_4_width - 0.000099999997F;
+    f32 v = sprite_index_5AA440->field_5_height - 0.000099999997F;
     gQuadVerts_706B88.field_0_verts[0].u = 0.0;
     gQuadVerts_706B88.field_0_verts[0].v = 0.0;
     gQuadVerts_706B88.field_0_verts[1].v = 0.0;
@@ -267,7 +267,7 @@ s32 CalcQuadFlags_5D83E0(s32 mode, u8 a2)
 static inline f32 Fix16ToF32_Rounded(const Fix16& v)
 {
     f32 f = v.mValue;
-    return (f / 16384.0f);
+    return (f / 16384.0F);
 }
 
 // https://decomp.me/scratch/SCz1D
@@ -297,7 +297,7 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
 
     gQuadVerts_706B88.field_0_verts[0].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[0].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[0].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[0].z = 0.000099999997F;
 
     // point 2
 
@@ -307,7 +307,7 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
     // Only this vertex converts through an f32 local (the original issues the fmuls two loads later)
     gQuadVerts_706B88.field_0_verts[1].x = Fix16ToF32_Rounded(x_pos + point.x);
     gQuadVerts_706B88.field_0_verts[1].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[1].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[1].z = 0.000099999997F;
 
     // point 3
 
@@ -316,7 +316,7 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
 
     gQuadVerts_706B88.field_0_verts[2].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[2].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[2].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[2].z = 0.000099999997F;
 
     // point 4
 
@@ -325,15 +325,15 @@ void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, 
 
     gQuadVerts_706B88.field_0_verts[3].x = ((x_pos + point.x).ToFloat());
     gQuadVerts_706B88.field_0_verts[3].y = ((y_pos + point.y).ToFloat());
-    gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997f;
+    gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997F;
     // u & v, with z interleaved (store order found by the permuter)
     gQuadVerts_706B88.field_0_verts[0].u = 0.0;
     gQuadVerts_706B88.field_0_verts[0].v = 0.0;
     gQuadVerts_706B88.field_0_verts[1].v = 0.0;
     gQuadVerts_706B88.field_0_verts[3].u = 0.0;
 
-    f32 u = width - 0.000099999997f;
-    f32 v = height - 0.000099999997f;
+    f32 u = width - 0.000099999997F;
+    f32 v = height - 0.000099999997F;
     gQuadVerts_706B88.field_0_verts[1].u = u;
     gQuadVerts_706B88.field_0_verts[2].u = u;
     gQuadVerts_706B88.field_0_verts[2].v = v;
@@ -391,7 +391,7 @@ void DrawText_5D8A10(const wchar_t* pText,
         new_Flags = new_Flags | 0x10000;
     }
 
-    if (font_type >= 101u)
+    if (font_type >= 101U)
     {
         if (curr_palette_type == palette_types_enum::font_remaps_8)
         {
@@ -426,7 +426,7 @@ void DrawText_5D8A10(const wchar_t* pText,
             if (curr_palette_type == og_palette_type && curr_palette == og_palette)
             {
                 curr_palette_type = palette_types_enum::font_remaps_8;
-                curr_palette = font_type < 0x65u ? 0 : 5;
+                curr_palette = font_type < 0x65U ? 0 : 5;
             }
             else
             {
@@ -434,7 +434,7 @@ void DrawText_5D8A10(const wchar_t* pText,
                 curr_palette = og_palette;
             }
 
-            if (font_type >= 101u)
+            if (font_type >= 101U)
             {
                 if (curr_palette_type == palette_types_enum::font_remaps_8)
                 {
@@ -481,27 +481,27 @@ void DrawText_5D8A10(const wchar_t* pText,
             // (x0/y0 stay on the FPU stack, x1/y1 go through a stack temp like the original)
             gQuadVerts_706B88.field_0_verts[0].x = cur_xpos.ToFloat();
             gQuadVerts_706B88.field_0_verts[0].y = ypos_fp.ToFloat();
-            gQuadVerts_706B88.field_0_verts[0].z = 0.0001f;
+            gQuadVerts_706B88.field_0_verts[0].z = 0.0001F;
             gQuadVerts_706B88.field_0_verts[1].x = (cur_xpos + sprite_w).ToFloat();
             gQuadVerts_706B88.field_0_verts[1].y = ypos_fp.ToFloat();
-            gQuadVerts_706B88.field_0_verts[1].z = 0.0001f;
+            gQuadVerts_706B88.field_0_verts[1].z = 0.0001F;
             gQuadVerts_706B88.field_0_verts[2].x = (cur_xpos + sprite_w).ToFloat();
             gQuadVerts_706B88.field_0_verts[2].y = (ypos_fp + sprite_h).ToFloat();
-            gQuadVerts_706B88.field_0_verts[2].z = 0.0001f;
+            gQuadVerts_706B88.field_0_verts[2].z = 0.0001F;
             gQuadVerts_706B88.field_0_verts[3].x = cur_xpos.ToFloat();
             gQuadVerts_706B88.field_0_verts[3].y = (ypos_fp + sprite_h).ToFloat();
-            gQuadVerts_706B88.field_0_verts[3].z = 0.0001f;
+            gQuadVerts_706B88.field_0_verts[3].z = 0.0001F;
 
             // The double parentheses are two no-op expression nodes each (see "x87 code: the scheduler
             // works in 81-node windows" in docs/matching_quirks.md). With these 4 nodes the window
             // breaks before the zero u/v stores, so they are issued after the DrawQuad pushes
-            Fix16 u(((pSprIdx->field_4_width - 0.0001f)));
-            Fix16 v(((pSprIdx->field_5_height - 0.0001f)));
+            Fix16 u(((pSprIdx->field_4_width - 0.0001F)));
+            Fix16 v(((pSprIdx->field_5_height - 0.0001F)));
 
-            gQuadVerts_706B88.field_0_verts[0].u = 0.0f;
-            gQuadVerts_706B88.field_0_verts[0].v = 0.0f;
-            gQuadVerts_706B88.field_0_verts[1].v = 0.0f;
-            gQuadVerts_706B88.field_0_verts[3].u = 0.0f;
+            gQuadVerts_706B88.field_0_verts[0].u = 0.0F;
+            gQuadVerts_706B88.field_0_verts[0].v = 0.0F;
+            gQuadVerts_706B88.field_0_verts[1].v = 0.0F;
+            gQuadVerts_706B88.field_0_verts[3].u = 0.0F;
             gQuadVerts_706B88.field_0_verts[1].u = u.ToFloat();
             gQuadVerts_706B88.field_0_verts[2].u = u.ToFloat();
             gQuadVerts_706B88.field_0_verts[2].v = v.ToFloat();

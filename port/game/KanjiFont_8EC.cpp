@@ -15,7 +15,7 @@ DEFINE_GLOBAL(KanjiFont_8EC*, gKanjiFont_6F5168, 0x6F5168);
 // 0x4D1FC0
 void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
 {
-    if (!strncmp(pChunkId, "KIDX", 4u))
+    if (!strncmp(pChunkId, "KIDX", 4U))
     {
         field_8CC_kidx_size_words = chunk_len >> 1;
         field_8C4_pKidX = new WORD[field_8CC_kidx_size_words];
@@ -25,7 +25,7 @@ void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
         }
         File::Global_Read_4A71C0(field_8C4_pKidX, chunk_len);
     }
-    else if (!strncmp(pChunkId, "KBIT", 4u))
+    else if (!strncmp(pChunkId, "KBIT", 4U))
     {
         field_8C8_pKBIT = new BYTE[chunk_len];
         if (!field_8C8_pKBIT)
@@ -244,7 +244,7 @@ u8* KanjiFont_8EC::ExpandLargeGlyph_4D23B0(char_type* pGlyph)
 void KanjiFont_8EC::RenderSmallGlyph_4D2610(wchar_t text_char)
 {
     u16 kidx = text_char;
-    if (text_char < 0x100u)
+    if (text_char < 0x100U)
     {
         kidx = text_char << 8;
     }
@@ -264,7 +264,7 @@ void KanjiFont_8EC::RenderSmallGlyph_4D2610(wchar_t text_char)
 void KanjiFont_8EC::RenderLargeGlyph_4D2690(wchar_t text_char)
 {
     u16 kidx = text_char;
-    if (text_char < 0x100u)
+    if (text_char < 0x100U)
     {
         kidx = text_char << 8;
     }
@@ -359,34 +359,34 @@ void KanjiFont_8EC::SetGlyphParamsFromFont_4D28A0(u16 font_type)
 {
     switch (font_type)
     {
-        case 0x65u:
-        case 0xC9u:
+        case 0x65U:
+        case 0xC9U:
             field_8E8_colour = -4;
             field_8E9_outline_colour = -6;
             break;
-        case 0x66u:
+        case 0x66U:
             field_8E8_colour = 39;
             field_8E9_outline_colour = 44;
             break;
-        case 0x67u:
+        case 0x67U:
             field_8E8_colour = -53;
             field_8E9_outline_colour = -49;
             break;
-        case 0x68u:
+        case 0x68U:
             field_8E8_colour = 28;
             field_8E9_outline_colour = 24;
             break;
-        case 0x69u:
-        case 0xCAu:
+        case 0x69U:
+        case 0xCAU:
             field_8E8_colour = -23;
             field_8E9_outline_colour = -17;
             break;
-        case 0x6Au:
+        case 0x6AU:
             field_8E8_colour = -119;
             field_8E9_outline_colour = -115;
             break;
-        case 0x6Bu:
-        case 0xCBu:
+        case 0x6BU:
+        case 0xCBU:
             field_8E8_colour = 72;
             field_8E9_outline_colour = 76;
             break;

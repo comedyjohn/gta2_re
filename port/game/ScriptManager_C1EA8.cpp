@@ -312,7 +312,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
     s32 idx;
     SCR_CMD_HEADER* header;
 
-    if (bSkip_mission_67D4E5)
+    if (gDebugSkipMission)
     {
         return nullptr;
     }
@@ -332,7 +332,7 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::FindCommandByType_512100(u16 toFind, u16 st
 // 0x512160
 void ScriptManager_C1EA8::Update_512160()
 {
-    if (!bSkip_mission_67D4E5)
+    if (!gDebugSkipMission)
     {
         miss2_0x11C* pf_0 = miss2_0x11C_Pool_6F8064->Allocate_4767A0();
         SCR_CMD_HEADER* pLevelStart = FindCommandByType_512100(59, 0);
@@ -418,7 +418,7 @@ void ScriptManager_C1EA8::GetScrFileName_5122D0()
 // 0x512330
 void ScriptManager_C1EA8::Load_512330(const char_type* pScrName)
 {
-    if (!bSkip_mission_67D4E5)
+    if (!gDebugSkipMission)
     {
         strcpy(field_35C_full_scr_file_name, pScrName);
         Error_SetName_4A0770(field_35C_full_scr_file_name);
@@ -529,11 +529,11 @@ SCR_CMD_HEADER* ScriptManager_C1EA8::GetBasePointer_512770(u16 idx)
 // 0x5127a0
 void ScriptManager_C1EA8::ExecuteScriptThreads_5127A0()
 {
-    if (!bSkip_mission_67D4E5)
+    if (!gDebugSkipMission)
     {
         if (gbAllowMiss2Logging_6212EC)
         {
-            if (gDo_miss_logging_67D6BC)
+            if (gDoMissLogging)
             {
                 miss2_0x11C_Pool_6F8064->LogAll_47F4D0();
                 gMiss2Log_6F7698.Write_Log_4D9650("\n");
@@ -854,7 +854,7 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
 ScriptManager_C1EA8::ScriptManager_C1EA8()
 {
     field_13350_pStringTbl = nullptr;
-    if (!bSkip_mission_67D4E5)
+    if (!gDebugSkipMission)
     {
         memset(field_334C_script_data, 0, sizeof(field_334C_script_data));
         if (!miss2_0x11C_Pool_6F8064)
@@ -916,7 +916,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     field_C1E2D_bKillFrenzyActive = 0;
     field_468_unused = 0;
 
-    if (gDo_miss_logging_67D6BC)
+    if (gDoMissLogging)
     {
         gMiss2Log_6F7698.Open_4D9470("test\\MISS_LOG.TXT", 1);
     }

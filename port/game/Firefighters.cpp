@@ -308,7 +308,7 @@ void Firefighter_28::Reset_4A85E0()
 void FirefighterPool_54::FireEnginesService_4A85F0()
 {
     Firefighter_28* p = field_0_firefighters;
-    if (!bSkip_fire_engines_67D53A)
+    if (!gDebugSkipFireEngines)
     {
         for (u32 i = 0; i < 2; i++)
         {
@@ -324,7 +324,7 @@ void FirefighterPool_54::FireEnginesService_4A85F0()
 // 0x4a8620
 Firefighter_28* FirefighterPool_54::DispatchFirefighters_4A8620(Car_BC* pCar, Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
-    if (bSkip_fire_engines_67D53A)
+    if (gDebugSkipFireEngines)
     {
         return nullptr;
     }

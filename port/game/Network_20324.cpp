@@ -982,9 +982,9 @@ void Network_20324::DbcsToWide_5199B0(wchar_t* pDst, char_type* pSrc)
 // 0x519a00
 char_type* GetString_519A00(const char_type* pKey)
 {
-    wchar_t* pText = gtext_0x14_6F87F0->Find(pKey);
+    wchar_t* pText = gGtext->Find(pKey);
 
-    if (gtext_0x14_6F87F0->lang_code_ == 'j')
+    if (gGtext->lang_code_ == 'j')
     {
         WideToDbcs_519960(Dest_6F88A4, pText);
     }
@@ -998,7 +998,7 @@ char_type* GetString_519A00(const char_type* pKey)
 // 0x519a50
 void Network_20324::GetString_519A50(wchar_t* Dest, char_type* Source, size_t MaxCount)
 {
-    if (gtext_0x14_6F87F0->lang_code_ == 'j')
+    if (gGtext->lang_code_ == 'j')
     {
         DbcsToWide_5199B0(Dest, Source);
     }
@@ -1027,8 +1027,8 @@ Network_20324::Network_20324()
     this->field_20088_game_settings.field_201A0_police_on = 0;
     this->field_20088_game_settings.field_201A4_game_time_limit = 0;
     memset(field_4_maps, 0, sizeof(field_4_maps));
-    gtext_0x14_6F87F0 = new GameText();
-    gtext_0x14_6F87F0->Load();
+    gGtext = new GameText();
+    gGtext->Load();
     LoadPlayerNameFromRegistry_51BC90();
     EnumerateMaps_51BFA0();
 }
@@ -1036,10 +1036,10 @@ Network_20324::Network_20324()
 // 0x519ba0
 Network_20324::~Network_20324()
 {
-    if (gtext_0x14_6F87F0)
+    if (gGtext)
     {
-        delete gtext_0x14_6F87F0;
-        gtext_0x14_6F87F0 = nullptr;
+        delete gGtext;
+        gGtext = nullptr;
     }
 }
 
@@ -1147,7 +1147,7 @@ void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pN
     LVITEMA item;
     char_type name[260];
 
-    if (gtext_0x14_6F87F0->lang_code_ == 'j')
+    if (gGtext->lang_code_ == 'j')
     {
         WideToDbcs_519960(name, pName);
     }
@@ -2017,37 +2017,37 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
             field_20088_game_settings.field_2018C_map_idx = value;
             strcpy(field_20088_game_settings.field_20088_default_map, field_4_maps[value].field_410_mmp_name);
             SetPlayerCountText_51CB30(field_4_maps[value].field_514_player_count, field_202E0_dlg_hwnd);
-            gRegistry_6FF968.SetNetworkSetting("map_index", value);
+            gRegistry.SetNetworkSetting("map_index", value);
             break;
 
         case 2:
             field_20088_game_settings.field_20194_frag_limit = value;
             if (field_20088_game_settings.field_20198_game_type == 1)
             {
-                gRegistry_6FF968.SetNetworkSetting("f_limit", value);
+                gRegistry.SetNetworkSetting("f_limit", value);
             }
             else if (field_20088_game_settings.field_20198_game_type == 2)
             {
-                gRegistry_6FF968.SetNetworkSetting("s_limit", value);
+                gRegistry.SetNetworkSetting("s_limit", value);
             }
             break;
 
         case 3:
             field_20088_game_settings.field_20198_game_type = value;
-            gRegistry_6FF968.SetNetworkSetting("game_type", value);
+            gRegistry.SetNetworkSetting("game_type", value);
             if (field_20088_game_settings.field_20198_game_type == 1)
             {
-                field_20088_game_settings.field_20194_frag_limit = gRegistry_6FF968.SetNetworkSetting("f_limit", 3);
+                field_20088_game_settings.field_20194_frag_limit = gRegistry.SetNetworkSetting("f_limit", 3);
             }
             else if (field_20088_game_settings.field_20198_game_type == 2)
             {
-                field_20088_game_settings.field_20194_frag_limit = gRegistry_6FF968.SetNetworkSetting("s_limit", 10000);
+                field_20088_game_settings.field_20194_frag_limit = gRegistry.SetNetworkSetting("s_limit", 10000);
             }
             break;
 
         case 4:
             field_20088_game_settings.field_201A0_police_on = value;
-            gRegistry_6FF968.SetNetworkSetting("police", value);
+            gRegistry.SetNetworkSetting("police", value);
             break;
 
         case 6:
@@ -2071,12 +2071,12 @@ void Network_20324::SetSetting_51B9C0(s32 setting, s32 value)
                     break;
             }
             SetDlgItemTextA(field_202E0_dlg_hwnd, LABEL_GAME_SPEED_TEXT_1032, pSpeedText);
-            gRegistry_6FF968.SetNetworkSetting("game_speed", value);
+            gRegistry.SetNetworkSetting("game_speed", value);
             break;
 
         case 7:
             field_20088_game_settings.field_201A4_game_time_limit = value;
-            gRegistry_6FF968.SetNetworkSetting("game_time_limit", value);
+            gRegistry.SetNetworkSetting("game_time_limit", value);
             break;
         default:
             break;
@@ -2375,23 +2375,23 @@ void Network_20324::CopyGameSettings_51C7F0(NetworkGameSettings* pSettings)
 // 0x51c830
 void Network_20324::LoadGameSettingsFromRegistry_51C830()
 {
-    field_20088_game_settings.field_2018C_map_idx = gRegistry_6FF968.SetNetworkSetting("map_index", 0);
+    field_20088_game_settings.field_2018C_map_idx = gRegistry.SetNetworkSetting("map_index", 0);
     if (field_20088_game_settings.field_2018C_map_idx >= field_1FD64_total_map_count)
     {
         field_20088_game_settings.field_2018C_map_idx = 0;
     }
-    field_20088_game_settings.field_201A4_game_time_limit = gRegistry_6FF968.SetNetworkSetting("game_time_limit", 1);
-    field_20088_game_settings.field_20190_game_speed = gRegistry_6FF968.SetNetworkSetting("game_speed", 1);
-    field_20088_game_settings.field_20198_game_type = gRegistry_6FF968.SetNetworkSetting("game_type", 1);
-    field_20088_game_settings.field_201A0_police_on = gRegistry_6FF968.SetNetworkSetting("police", 0);
+    field_20088_game_settings.field_201A4_game_time_limit = gRegistry.SetNetworkSetting("game_time_limit", 1);
+    field_20088_game_settings.field_20190_game_speed = gRegistry.SetNetworkSetting("game_speed", 1);
+    field_20088_game_settings.field_20198_game_type = gRegistry.SetNetworkSetting("game_type", 1);
+    field_20088_game_settings.field_201A0_police_on = gRegistry.SetNetworkSetting("police", 0);
 
     if (field_20088_game_settings.field_20198_game_type == 1)
     {
-        field_20088_game_settings.field_20194_frag_limit = gRegistry_6FF968.SetNetworkSetting("f_limit", 3);
+        field_20088_game_settings.field_20194_frag_limit = gRegistry.SetNetworkSetting("f_limit", 3);
     }
     else
     {
-        field_20088_game_settings.field_20194_frag_limit = gRegistry_6FF968.SetNetworkSetting("s_limit", 10000);
+        field_20088_game_settings.field_20194_frag_limit = gRegistry.SetNetworkSetting("s_limit", 10000);
     }
 
     strcpy(field_20088_game_settings.field_20088_default_map,

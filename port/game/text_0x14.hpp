@@ -105,6 +105,6 @@ class GameText
     ~GameText();
 };
 
-EXTERN_GLOBAL(GameText*, gText_0x14_704DFC);
+EXTERN_GLOBAL(GameText*, gText);
 
-EXTERN_GLOBAL(GameText*, gtext_0x14_6F87F0);
+EXTERN_GLOBAL(GameText*, gGtext);

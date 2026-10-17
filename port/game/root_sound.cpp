@@ -14,7 +14,7 @@ SoundObject_10* root_sound::CreateSoundObject_40EF40(void* pObject, s32 objectTy
     pCurrent->field_4_bStatus = 0;
     pCurrent->field_0_object_type = objectType;
 
-    if (!bSkip_audio_67D6BE)
+    if (!gDebugSkipAudio)
     {
         pCurrent->field_8_sound_entry = gRoot_sound_66B038.AddSoundObject_40EFB0(pCurrent);
     }

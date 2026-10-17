@@ -123,7 +123,7 @@ void Weapon_30::init_5DCD90()
     field_C_unused = -1;
     field_20 = 0;
     field_2C_shot_fired = 0;
-    if (!field_28_pSound && !bSkip_audio_67D6BE)
+    if (!field_28_pSound && !gDebugSkipAudio)
     {
         field_28_pSound = gRoot_sound_66B038.CreateSoundObject_40EF40(this, SoundObjectTypeEnum::Weapon_30_7);
     }

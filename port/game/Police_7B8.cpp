@@ -67,7 +67,7 @@ void Police_7B8::Init_56F400()
     field_659_max_police_cars = 1;
     field_65C_highest_crew_type_in_pursuit = CrewType::kPolice;
     bHaveCriminals_6FEE44 = 0;
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         field_660_max_wanted_stars = 1;
     }

@@ -190,7 +190,7 @@ bool InGame()
 // the original behaviour back.
 bool EscOpensMenu()
 {
-    return controls::Pad().escMenu && InGame() && !bStartNetworkGame_7081F0;
+    return controls::Pad().escMenu && InGame() && !gDebugStartNetworkGame;
 }
 
 // ---------------------------------------------------------------- the controls
@@ -205,7 +205,7 @@ void SetKey(int action, int dik)
 {
     gMaybeDeviceType_67B91C[action] = 0;
     gPlayerControlsBinding_67B6E8[action] = static_cast<uint32_t>(dik);
-    gRegistry_6FF968.WriteControlSetting(action, dik);
+    gRegistry.WriteControlSetting(action, dik);
 }
 
 // Gives `action` the key. Another control that had it takes the old one, so none is left dead.
@@ -352,7 +352,7 @@ void ToggleSpawnMenu()
 
 void ChooseCar()
 {
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         gStatus = "Not in a network game: the other players would not see it";
         return;
@@ -922,7 +922,7 @@ bool Captured()
 
 bool FreezesGame()
 {
-    const bool frozen = Modal() && InGame() && !bStartNetworkGame_7081F0;
+    const bool frozen = Modal() && InGame() && !gDebugStartNetworkGame;
     if (frozen != gAudioPaused)
     {
         gAudioPaused = frozen;

@@ -52,5 +52,5 @@ struct CdCheckFile
     u32 field_80_size;
 };
 
-EXTERN_GLOBAL(u16, gCdCheckFileCount_6252E0);
-EXTERN_GLOBAL_ARRAY(CdCheckFile, gCdCheckFiles_6252E8, 22);
+EXTERN_GLOBAL(u16, gCdCheckFileCount);
+EXTERN_GLOBAL_ARRAY(CdCheckFile, gCdCheckFiles, 22);

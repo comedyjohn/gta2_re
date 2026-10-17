@@ -295,13 +295,13 @@ void InputDevices_1::get_registry_controls_498C00()
 {
     for (u32 i = 0; i < 12; ++i)
     {
-        u32 setting = gRegistry_6FF968.SetControlSetting(i, gDefaultControls_61A9E4[i]);
+        u32 setting = gRegistry.SetControlSetting(i, gDefaultControls_61A9E4[i]);
         // port: the game's bindings are the keyboard's, the pad has its own (platform/padinput.h). A pad
         // binding or no key, as older builds of the port left in the registry, goes back to the default key.
         if ((setting >> 15) != 0 || (setting & 0xFF) == 0)
         {
             setting = gDefaultControls_61A9E4[i];
-            gRegistry_6FF968.WriteControlSetting(i, setting);
+            gRegistry.WriteControlSetting(i, setting);
         }
         gMaybeDeviceType_67B91C[i] = 0;
         gPlayerControlsBinding_67B6E8[i] = static_cast<u8>(setting);
@@ -427,7 +427,7 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
                                                                  reinterpret_cast<DIDEVICEOBJECTDATA*>(&gGamePadDeviceData_67B5B0),
                                                                  &gKeyboardStatus_67B624,
                                                                  0);
-                if (bLog_directinput_67D6C0 && gKeyboardStatus_67B624 > 0)
+                if (gDebugLogDirectinput && gKeyboardStatus_67B624 > 0)
                 {
                     sprintf(gTmpBuffer_67C598,
                             "%d: input num_items = %d dwOfs = %d; data = %d",
@@ -600,7 +600,7 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
             {
                 AddKeyToInputBits_498C80(input_bits, &gKeyboardDeviceData_67B610);
                 bFirstPass = false;
-                if (bLog_directinput_67D6C0)
+                if (gDebugLogDirectinput)
                 {
                     if (gKeyboardDeviceData_67B610.dwData & 0x80)
                     {
@@ -682,7 +682,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
             field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx = gAmbientRng->GetCurRng();
             field_3C_rec_buff[field_75340_rec_buf_idx].field_8_rng_rnd = gAmbientRng->GetRnd();
 
-            if (bConstant_replay_save_67D5C4 == 1)
+            if (gDebugConstantReplaySave == 1)
             {
                 const s32 rec_idx = this->field_75340_rec_buf_idx;
                 u32 rec_len = sizeof(InputRecord_C);
@@ -697,7 +697,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
 // 0x4cded0
 void InputRecorder_67F8B0::SaveReplay_4CDED0()
 {
-    if (bConstant_replay_save_67D5C4 != 1 && bDo_release_replay_67D4EB && field_38_replay_state != ReplayState::Disabled_2 &&
+    if (gDebugConstantReplaySave != 1 && gDebugDoReleaseReplay && field_38_replay_state != ReplayState::Disabled_2 &&
         field_75340_rec_buf_idx > 0 && !RecOrPlayBackState_4CEDF0())
     {
         u32 len = sizeof(InputRecord_C) * field_75340_rec_buf_idx;
@@ -762,37 +762,37 @@ void InputRecorder_67F8B0::AppendReplayHeader_4CDF70()
     header.field_BC_debug_str[39] = '\n';
     header.field_E4_flags[39] = '\n';
 
-    header.field_E4_flags[0] = bSkip_dummies_67D4EF ? '1' : '0';
-    header.field_E4_flags[1] = bDo_test_67D4F8 ? '1' : '0';
-    header.field_E4_flags[2] = bSkip_mission_67D4E5 ? '1' : '0';
-    header.field_E4_flags[3] = bDo_brian_test_67D544 ? '1' : '0';
-    header.field_E4_flags[4] = bDo_iain_test_67D4E9 ? '1' : '0';
-    header.field_E4_flags[5] = bSkip_traffic_lights_67D4EC ? '1' : '0';
-    header.field_E4_flags[6] = bSkip_recycling_67D575 ? '1' : '0';
-    header.field_E4_flags[7] = bLimit_recycling_67D4CA ? '1' : '0';
-    header.field_E4_flags[8] = bNo_annoying_chars_67D586 ? '1' : '0';
-    header.field_E4_flags[9] = bDo_mike_67D5CC ? '1' : '0';
-    header.field_E4_flags[10] = bDo_kill_phones_on_answer_67D6E8 ? '1' : '0';
-    header.field_E4_flags[11] = bGet_all_weapons_67D684 ? '1' : '0';
-    header.field_E4_flags[12] = bDont_get_car_back_67D4F5 ? '1' : '0';
-    header.field_E4_flags[13] = bSkip_ambulance_67D6C9 ? '1' : '0';
-    header.field_E4_flags[14] = bSkip_police_67D4F9 ? '1' : '0';
-    header.field_E4_flags[15] = bDo_invulnerable_67D4CB ? '1' : '0';
-    header.field_E4_flags[16] = bDo_free_shopping_67D6CD ? '1' : '0';
-    header.field_E4_flags[17] = bKeep_weapons_after_death_67D54D ? '1' : '0';
-    header.field_E4_flags[18] = bSkip_skidmarks_67D585 ? '1' : '0';
-    header.field_E4_flags[19] = bExplodingScoresOff_67D4FB ? '1' : '0';
-    header.field_E4_flags[20] = gDo_infinite_lives_67D4C9 ? '1' : '0';
-    header.field_E4_flags[21] = bDo_blood_67D5C5 ? '1' : '0';
-    header.field_E4_flags[22] = bDo_load_savegame_67D4F0 ? '1' : '0';
-    header.field_E4_flags[23] = bSkip_audio_67D6BE ? '1' : '0';
-    header.field_E4_flags[24] = bDo_debug_keys_67D6CF ? '1' : '0';
-    header.field_E4_flags[25] = bSkip_trains_67D550 ? '1' : '0';
-    header.field_E4_flags[26] = bSkip_buses_67D558 ? '1' : '0';
-    header.field_E4_flags[27] = bSkip_fire_engines_67D53A ? '1' : '0';
-    header.field_E4_flags[28] = bDo_police_1_67D568 ? '1' : '0';
-    header.field_E4_flags[29] = bDo_police_2_67D569 ? '1' : '0';
-    header.field_E4_flags[30] = bDo_police_3_67D56A ? '1' : '0';
+    header.field_E4_flags[0] = gDebugSkipDummies ? '1' : '0';
+    header.field_E4_flags[1] = gDebugDoTest ? '1' : '0';
+    header.field_E4_flags[2] = gDebugSkipMission ? '1' : '0';
+    header.field_E4_flags[3] = gDebugDoBrianTest ? '1' : '0';
+    header.field_E4_flags[4] = gDebugDoIainTest ? '1' : '0';
+    header.field_E4_flags[5] = gDebugSkipTrafficLights ? '1' : '0';
+    header.field_E4_flags[6] = gDebugSkipRecycling ? '1' : '0';
+    header.field_E4_flags[7] = gDebugLimitRecycling ? '1' : '0';
+    header.field_E4_flags[8] = gDebugNoAnnoyingChars ? '1' : '0';
+    header.field_E4_flags[9] = gDebugDoMike ? '1' : '0';
+    header.field_E4_flags[10] = gDebugDoKillPhonesOnAnswer ? '1' : '0';
+    header.field_E4_flags[11] = gDebugGetAllWeapons ? '1' : '0';
+    header.field_E4_flags[12] = gDebugDontGetCarBack ? '1' : '0';
+    header.field_E4_flags[13] = gDebugSkipAmbulance ? '1' : '0';
+    header.field_E4_flags[14] = gDebugSkipPolice ? '1' : '0';
+    header.field_E4_flags[15] = gDebugDoInvulnerable ? '1' : '0';
+    header.field_E4_flags[16] = gDebugDoFreeShopping ? '1' : '0';
+    header.field_E4_flags[17] = gDebugKeepWeaponsAfterDeath ? '1' : '0';
+    header.field_E4_flags[18] = gDebugSkipSkidmarks ? '1' : '0';
+    header.field_E4_flags[19] = gDebugExplodingScoresOff ? '1' : '0';
+    header.field_E4_flags[20] = gDoInfiniteLives ? '1' : '0';
+    header.field_E4_flags[21] = gDebugDoBlood ? '1' : '0';
+    header.field_E4_flags[22] = gDebugDoLoadSavegame ? '1' : '0';
+    header.field_E4_flags[23] = gDebugSkipAudio ? '1' : '0';
+    header.field_E4_flags[24] = gDebugDoDebugKeys ? '1' : '0';
+    header.field_E4_flags[25] = gDebugSkipTrains ? '1' : '0';
+    header.field_E4_flags[26] = gDebugSkipBuses ? '1' : '0';
+    header.field_E4_flags[27] = gDebugSkipFireEngines ? '1' : '0';
+    header.field_E4_flags[28] = gDebugDoPolice1 ? '1' : '0';
+    header.field_E4_flags[29] = gDebugDoPolice2 ? '1' : '0';
+    header.field_E4_flags[30] = gDebugDoPolice3 ? '1' : '0';
 
     header_size = sizeof(header);
     File::AppendBufferToFile("test\\replay.rep", &header, &header_size);
@@ -805,7 +805,7 @@ void InputRecorder_67F8B0::LoadReplayHeader_4CE380(char_type bLoadDebug)
     ReplayHeader_10C header;
     File::GlobalRead(&header, header_size);
 
-    if (!bIgnore_replay_header_67D4F3)
+    if (!gDebugIgnoreReplayHeader)
     {
         s32 major;
         s32 minor;
@@ -817,37 +817,37 @@ void InputRecorder_67F8B0::LoadReplayHeader_4CE380(char_type bLoadDebug)
 
         if (bLoadDebug)
         {
-            bSkip_dummies_67D4EF = header.field_E4_flags[0] == '1';
-            bDo_test_67D4F8 = header.field_E4_flags[1] == '1';
-            bSkip_mission_67D4E5 = header.field_E4_flags[2] == '1';
-            bDo_brian_test_67D544 = header.field_E4_flags[3] == '1';
-            bDo_iain_test_67D4E9 = header.field_E4_flags[4] == '1';
-            bSkip_traffic_lights_67D4EC = header.field_E4_flags[5] == '1';
-            bSkip_recycling_67D575 = header.field_E4_flags[6] == '1';
-            bLimit_recycling_67D4CA = header.field_E4_flags[7] == '1';
-            bNo_annoying_chars_67D586 = header.field_E4_flags[8] == '1';
-            bDo_mike_67D5CC = header.field_E4_flags[9] == '1';
-            bDo_kill_phones_on_answer_67D6E8 = header.field_E4_flags[10] == '1';
-            bGet_all_weapons_67D684 = header.field_E4_flags[11] == '1';
-            bDont_get_car_back_67D4F5 = header.field_E4_flags[12] == '1';
-            bSkip_ambulance_67D6C9 = header.field_E4_flags[13] == '1';
-            bSkip_police_67D4F9 = header.field_E4_flags[14] == '1';
-            bDo_invulnerable_67D4CB = header.field_E4_flags[15] == '1';
-            bDo_free_shopping_67D6CD = header.field_E4_flags[16] == '1';
-            bKeep_weapons_after_death_67D54D = header.field_E4_flags[17] == '1';
-            bSkip_skidmarks_67D585 = header.field_E4_flags[18] == '1';
-            bExplodingScoresOff_67D4FB = header.field_E4_flags[19] == '1';
-            gDo_infinite_lives_67D4C9 = header.field_E4_flags[20] == '1';
-            bDo_blood_67D5C5 = header.field_E4_flags[21] == '1';
-            bDo_load_savegame_67D4F0 = header.field_E4_flags[22] == '1';
-            bSkip_audio_67D6BE = header.field_E4_flags[23] == '1';
-            bDo_debug_keys_67D6CF = header.field_E4_flags[24] == '1';
-            bSkip_trains_67D550 = header.field_E4_flags[25] == '1';
-            bSkip_buses_67D558 = header.field_E4_flags[26] == '1';
-            bSkip_fire_engines_67D53A = header.field_E4_flags[27] == '1';
-            bDo_police_1_67D568 = header.field_E4_flags[28] == '1';
-            bDo_police_2_67D569 = header.field_E4_flags[29] == '1';
-            bDo_police_3_67D56A = header.field_E4_flags[30] == '1';
+            gDebugSkipDummies = header.field_E4_flags[0] == '1';
+            gDebugDoTest = header.field_E4_flags[1] == '1';
+            gDebugSkipMission = header.field_E4_flags[2] == '1';
+            gDebugDoBrianTest = header.field_E4_flags[3] == '1';
+            gDebugDoIainTest = header.field_E4_flags[4] == '1';
+            gDebugSkipTrafficLights = header.field_E4_flags[5] == '1';
+            gDebugSkipRecycling = header.field_E4_flags[6] == '1';
+            gDebugLimitRecycling = header.field_E4_flags[7] == '1';
+            gDebugNoAnnoyingChars = header.field_E4_flags[8] == '1';
+            gDebugDoMike = header.field_E4_flags[9] == '1';
+            gDebugDoKillPhonesOnAnswer = header.field_E4_flags[10] == '1';
+            gDebugGetAllWeapons = header.field_E4_flags[11] == '1';
+            gDebugDontGetCarBack = header.field_E4_flags[12] == '1';
+            gDebugSkipAmbulance = header.field_E4_flags[13] == '1';
+            gDebugSkipPolice = header.field_E4_flags[14] == '1';
+            gDebugDoInvulnerable = header.field_E4_flags[15] == '1';
+            gDebugDoFreeShopping = header.field_E4_flags[16] == '1';
+            gDebugKeepWeaponsAfterDeath = header.field_E4_flags[17] == '1';
+            gDebugSkipSkidmarks = header.field_E4_flags[18] == '1';
+            gDebugExplodingScoresOff = header.field_E4_flags[19] == '1';
+            gDoInfiniteLives = header.field_E4_flags[20] == '1';
+            gDebugDoBlood = header.field_E4_flags[21] == '1';
+            gDebugDoLoadSavegame = header.field_E4_flags[22] == '1';
+            gDebugSkipAudio = header.field_E4_flags[23] == '1';
+            gDebugDoDebugKeys = header.field_E4_flags[24] == '1';
+            gDebugSkipTrains = header.field_E4_flags[25] == '1';
+            gDebugSkipBuses = header.field_E4_flags[26] == '1';
+            gDebugSkipFireEngines = header.field_E4_flags[27] == '1';
+            gDebugDoPolice1 = header.field_E4_flags[28] == '1';
+            gDebugDoPolice2 = header.field_E4_flags[29] == '1';
+            gDebugDoPolice3 = header.field_E4_flags[30] == '1';
         }
     }
 }
@@ -907,7 +907,7 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     gInputDevices_67B990->input_devices_init_498C40(hInstance);
     memset(this->field_3C_rec_buff, 0, sizeof(this->field_3C_rec_buff));
     this->field_75340_rec_buf_idx = 0;
-    bConstant_replay_save_67D5C4 = false;
+    gDebugConstantReplaySave = false;
     File::GlobalOpen(FileName);
     LoadReplayHeader_4CE380(0);
 
@@ -958,9 +958,9 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
 
     field_75340_rec_buf_idx = 0;
 
-    if (bPlay_replay_67D4F4 == 1)
+    if (gDebugPlayReplay == 1)
     {
-        bConstant_replay_save_67D5C4 = false;
+        gDebugConstantReplaySave = false;
         File::GlobalOpen("test\\replay.rep");
         InputRecorder_67F8B0::LoadReplayHeader_4CE380(1);
         u32 size = 480000;
@@ -975,18 +975,18 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     }
     else
     {
-        if (bDo_release_replay_67D4EB)
+        if (gDebugDoReleaseReplay)
         {
             File::CreateFile("test\\replay.rep");
             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
         }
         field_38_replay_state = ReplayState::Live_0;
     }
-    if (bConstant_replay_save_67D5C4)
+    if (gDebugConstantReplaySave)
     {
-        if (bPlay_replay_67D4F4 == 1)
+        if (gDebugPlayReplay == 1)
         {
-            if (bDo_release_replay_67D4EB)
+            if (gDebugDoReleaseReplay)
             {
                 File::CreateFile("test\\replay.rep");
                 InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
@@ -1014,7 +1014,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
     {
         field_38_replay_state = ReplayState::Live_0;
 
-        if (bDo_release_replay_67D4EB)
+        if (gDebugDoReleaseReplay)
         {
             File::CreateFile("test\\replay.rep");
             AppendReplayHeader_4CDF70();
@@ -1024,7 +1024,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
         memset(&this->field_3C_rec_buff[this->field_75340_rec_buf_idx],
                0,
                sizeof(InputRecord_C) * ((GTA2_COUNTOF(field_3C_rec_buff) - field_75340_rec_buf_idx)));
-        if (bConstant_replay_save_67D5C4)
+        if (gDebugConstantReplaySave)
         {
             SaveReplay_4CDED0();
         }
@@ -1044,7 +1044,7 @@ void SavePortRecord(InputRecorder_67F8B0& rec, u32 inputs)
         r.field_4_inputs = inputs;
         r.field_0_rng_idx = gAmbientRng->GetCurRng();
         r.field_8_rng_rnd = gAmbientRng->GetRnd();
-        if (bConstant_replay_save_67D5C4 == 1)
+        if (gDebugConstantReplaySave == 1)
         {
             u32 rec_len = sizeof(InputRecord_C);
             File::AppendBufferToFile("test\\replay.rep", &r, &rec_len);
@@ -1125,13 +1125,13 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                 inputs = TakePortRecords(*this, inputs); // port
                 if (field_75340_rec_buf_idx >= field_7533C_used_recs_count)
                 {
-                    if (bDo_exit_after_replay_67D6E4)
+                    if (gDebugDoExitAfterReplay)
                     {
                         gGame_0x40_67E008->ExitGameNoBonus_4B8C00(0, GameExitType::CloseGameImmediately_1);
                     }
                     else
                     {
-                        if (bDo_release_replay_67D4EB)
+                        if (gDebugDoReleaseReplay)
                         {
                             File::CreateFile("test\\replay.rep");
                             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
@@ -1235,7 +1235,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             break;
     }
 
-    if (bLog_input_67D4CC)
+    if (gDebugLogInput)
     {
         if (*control_status != saved_input)
         {

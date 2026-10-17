@@ -153,10 +153,10 @@ EXTERN_GLOBAL(u8, bHaveThreateningPeds_6787DA);
 EXTERN_GLOBAL(u8, byte_61A8A1);
 
 // TODO
-EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
+EXTERN_GLOBAL(s32, gDebugStartNetworkGame);
 
 // TODO: move with CarDoorAlignmentSolver_545AF0
-EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16_6F6850);
+EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint1_6FD824, Fix16(0x666, 0), 0x6FD824);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint06_6FD9C8, Fix16(0x3D7, 0), 0x6FD9C8);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint02_6FD9AC, Fix16(0x147, 0), 0x6FD9AC);
@@ -188,16 +188,16 @@ EXTERN_GLOBAL(Ang16, gSpawnRotationBottom_678540);
 void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16& outX, Fix16& outY, Ang16& outAng)
 {
     // This func is really get_car_remap?? shouldnt be get_car_door_info?
-    u8* car_door_info_array = gGtx_0x106C_703DD4->GetCarRemap(pCar->field_84_car_info_idx);
+    u8* car_door_info_array = gGtx->GetCarRemap(pCar->field_84_car_info_idx);
     Fix16 offset = gCharB4_WorldCollisionOffset_6FD8D8;
 
     Fix16 x_pos;
     Fix16 y_pos;
     s8 x_in_scale = car_door_info_array[2 * doorId + 1];
-    x_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16(x_in_scale);
+    x_pos = gPixelsToFix16.SignedPixelsToFix16(x_in_scale);
 
     s8 y_in_scale = car_door_info_array[2 * doorId + 2];
-    y_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16(y_in_scale);
+    y_pos = gPixelsToFix16.SignedPixelsToFix16(y_in_scale);
 
     bool bUnk = false;
     bool bFront = false;
@@ -2493,9 +2493,9 @@ void Ped::EnterPublicTransport_45EE70()
     for (gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(field_1AC_cam.x.ToInt(), field_1AC_cam.y.ToInt()); pZoneIter;
          pZoneIter = gMap_0x370_6F6268->next_zone_4DF770())
     {
-        if (bSkip_trains_67D550 || pZoneIter->field_0_zone_type != Railway_Station_Platform_6)
+        if (gDebugSkipTrains || pZoneIter->field_0_zone_type != Railway_Station_Platform_6)
         {
-            if (!bSkip_buses_67D558)
+            if (!gDebugSkipBuses)
             {
                 if (gRng.GetInt(100) > 90 && gNumberBusCustomers_6787D3 < 5 && pZoneIter->field_0_zone_type == 7 &&
                     !gPublicTransport_181C_6FF1D4->is_bus_full_579AF0())
@@ -3111,7 +3111,7 @@ void Ped::RobbedDriver_AI_461630()
                 if (field_278_ped_state_1 != PedState1::kImmobilized)
                 {
                     u16 rng_val = gRng.GetInt(40);
-                    if (bDont_get_car_back_67D4F5)
+                    if (gDebugDontGetCarBack)
                     {
                         rng_val = 6;
                     }
@@ -3752,7 +3752,7 @@ char_type Ped::StateMachineTick_4626B0()
     switch (this->field_238_ped_type)
     {
         case PedType::kPlayer:
-            if (bDo_invulnerable_67D4CB)
+            if (gDebugDoInvulnerable)
             {
                 this->field_208_invulnerability = 9999;
             }
@@ -4144,7 +4144,7 @@ bool Ped::PoolUpdate()
                 Ped::ManageWeapon_46F390();
                 if (field_20A_wanted_points)
                 {
-                    if (bSkip_police_67D4F9 || field_240_occupation == PedOcupation::kEmpty)
+                    if (gDebugSkipPolice || field_240_occupation == PedOcupation::kEmpty)
                     {
                         field_20A_wanted_points = 0;
                     }
@@ -9387,7 +9387,7 @@ void Ped::MeleeAttackStateMachine_46B670()
                 if (field_28C_threat_reaction == ThreatReaction::kReactAsEmergency &&
                     field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
-                    if (bStartNetworkGame_7081F0)
+                    if (gDebugStartNetworkGame)
                     {
                         field_14C_internal_target_ped->Kill_46F9D0();
                     }
@@ -9431,7 +9431,7 @@ void Ped::MeleeAttackStateMachine_46B670()
                 if (field_28C_threat_reaction == ThreatReaction::kReactAsEmergency &&
                     field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
-                    if (bStartNetworkGame_7081F0)
+                    if (gDebugStartNetworkGame)
                     {
                         field_14C_internal_target_ped->Kill_46F9D0();
                     }
@@ -11298,7 +11298,7 @@ void Ped::UpdateStatsForKiller_46F720()
                     }
                 }
             }
-            if (bStartNetworkGame_7081F0)
+            if (gDebugStartNetworkGame)
             {
                 if (field_1A8_ped_killer->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
@@ -11370,7 +11370,7 @@ void Ped::UpdateStatsForKiller_46F720()
             }
         }
     }
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         if (!this->field_1A8_ped_killer && PedTypeIs_45EDE0(PedType::kPlayer))
         {
@@ -11493,7 +11493,7 @@ void Ped::Kill_46F9D0()
 
             gThreateningPedsList_678468.RemovePed_471240(this);
 
-            if (bDo_blood_67D5C5)
+            if (gDebugDoBlood)
             {
                 if (!field_16C_car && field_168_game_object->field_6C_animation_state != 17)
                 {

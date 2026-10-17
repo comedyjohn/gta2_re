@@ -207,7 +207,7 @@ void CollisionSoundQueue_C88::Reset_40BB90()
 // 0x40bba0
 void CollisionSoundQueue_C88::AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_strength)
 {
-    if (!bSkip_audio_67D6BE)
+    if (!gDebugSkipAudio)
     {
         CollisionEvent_28* pEvent = &field_4_events[field_C84_count];
         Car_BC* pCar = pSprite->AsCar_40FEB0();
@@ -237,7 +237,7 @@ void CollisionSoundQueue_C88::AddCollision_40BBA0(Sprite* pSprite, Fix16 impact_
 // 0x40bc40
 void CollisionSoundQueue_C88::AddFloorCollision_40BC40(Sprite* pSprite)
 {
-    if (!bSkip_audio_67D6BE)
+    if (!gDebugSkipAudio)
     {
         CollisionEvent_28* pEvent = &field_4_events[field_C84_count];
         pEvent->SetPosition_40B870(pSprite->field_14_xy.x, pSprite->field_14_xy.y, pSprite->field_1C_zpos);
@@ -268,7 +268,7 @@ void CollisionSoundQueue_C88::AddFloorCollision_40BC40(Sprite* pSprite)
 // 0x40bd10
 void CollisionSoundQueue_C88::AddBlockCollision_40BD10(Sprite* pSprite)
 {
-    if (!bSkip_audio_67D6BE)
+    if (!gDebugSkipAudio)
     {
         CollisionEvent_28* pEvent = &this->field_4_events[this->field_C84_count];
         pEvent->SetPosition_40B870(pSprite->field_14_xy.x, pSprite->field_14_xy.y, pSprite->field_1C_zpos);
@@ -307,7 +307,7 @@ void CollisionSoundQueue_C88::AddSpriteCollision_40BDD0(Sprite* pSprite, Sprite*
 // 0x40be00
 CollisionSoundQueue_C88::CollisionSoundQueue_C88()
 {
-    if (bSkip_audio_67D6BE)
+    if (gDebugSkipAudio)
     {
         field_0_pSoundObj = nullptr;
     }

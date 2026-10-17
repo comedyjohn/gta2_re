@@ -5,9 +5,9 @@
 #include <cstdio>
 #include <windows.h>
 
-HKEY kRegistryRootKey_625018 = HKEY_LOCAL_MACHINE; // Note: should be const, but can't be
+HKEY kRegistryRootKey = HKEY_LOCAL_MACHINE; // Note: should be const, but can't be
 
-DEFINE_GLOBAL(Registry, gRegistry_6FF968, 0x6FF968);
+DEFINE_GLOBAL(Registry, gRegistry, 0x6FF968);
 
 // 0x586A00
 bool Registry::OpenSoundRoot(PHKEY phkResult)
@@ -462,7 +462,7 @@ char_type Registry::CreateNetworkRoot(PHKEY phkResult)
     strcpy(SubKey, "SOFTWARE\\DMA Design Ltd\\GTA2");
     strcat(SubKey, "\\Network");
 
-    if (RegCreateKeyExA(kRegistryRootKey_625018, SubKey, 0, const_cast<LPSTR>(""), 0, KEY_ALL_ACCESS, nullptr, phkResult, &dwDisposition) !=
+    if (RegCreateKeyExA(kRegistryRootKey, SubKey, 0, const_cast<LPSTR>(""), 0, KEY_ALL_ACCESS, nullptr, phkResult, &dwDisposition) !=
         ERROR_SUCCESS)
     {
         FatalError_4A38C0(Gta2Error::kCreateRegistryKeyFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 910);
@@ -490,10 +490,10 @@ DWORD Registry::GetIntSetting(HKEY hKey, const char_type* lpValueName)
 s32 Registry::GetBinaryValue(HKEY hKey, const char_type* keyPath, LPBYTE lpData)
 {
     s32 ret = 0;
-    s32 size = gRegistry_6FF968.GetInt(hKey, keyPath);
+    s32 size = gRegistry.GetInt(hKey, keyPath);
     if (size)
     {
-        if (gRegistry_6FF968.GetBinary(hKey, keyPath, size, lpData))
+        if (gRegistry.GetBinary(hKey, keyPath, size, lpData))
         {
             ret = 1;
         }
@@ -506,7 +506,7 @@ s32 Registry::SetWStringValue(HKEY hKey, const char_type* keyPath, const wchar_t
 {
     s32 ret = 0;
     u32 size = 2 * wcslen(pStr) + 2;
-    if (gRegistry_6FF968.SetBinary(hKey, keyPath, reinterpret_cast<BYTE*>(const_cast<wchar_t*>(pStr)), size))
+    if (gRegistry.SetBinary(hKey, keyPath, reinterpret_cast<BYTE*>(const_cast<wchar_t*>(pStr)), size))
     {
         ret = 1;
     }

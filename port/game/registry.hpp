@@ -73,4 +73,4 @@ class Registry
     void SetScreenSetting(const char_type* lpValueName, BYTE* lpData, u16 maxLen);
 };
 
-EXTERN_GLOBAL(Registry, gRegistry_6FF968);
+EXTERN_GLOBAL(Registry, gRegistry);

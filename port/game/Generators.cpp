@@ -3,14 +3,14 @@
 #include "core/rng.hpp"
 
 DEFINE_GLOBAL(GeneratorPool_14AC*, gGeneratorPool_14AC_67E5D0, 0x67E5D0);
-EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
+EXTERN_GLOBAL(s32, gDebugStartNetworkGame);
 
 // 0x4C1A70
 void Generator_2C::Activate_4C1A70()
 {
     field_1E_kill_timer = -1;
 
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         field_18_cycle = next_cycle_4C1AB0();
         gGeneratorPool_14AC_67E5D0->field_14A4_kill_count++;
@@ -163,7 +163,7 @@ void GeneratorPool_14AC::sub_4C1CD0()
             pIter++;
         }
     }
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         Generator_2C* pIter_2 = &field_0_pool[0];
         for (s32 i = 0; i < field_14A0_count; i++)

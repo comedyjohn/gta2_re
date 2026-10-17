@@ -41,7 +41,7 @@ void Rng::Srand()
 // 0x4F7AE0
 s16 Rng::GetInt(const s16& max_rnd)
 {
-    if (bLog_random_67D5FC)
+    if (gDebugLogRandom)
     {
         if (!max_rnd)
         {
@@ -71,7 +71,7 @@ s16 Rng::GetInt(const s16& max_rnd)
 // 0x4F7B70
 u8 Rng::GetUint8(const u8& max_rnd)
 {
-    if (bLog_random_67D5FC)
+    if (gDebugLogRandom)
     {
         if (!max_rnd)
         {

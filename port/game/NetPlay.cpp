@@ -1023,7 +1023,7 @@ s32 NetPlay::CalcPacketLen_51F210(sptr pPacket, u32 packetLen)
     {
         case pkt_data_type::PlayerTickOnly_9:
             pMsg[0] = packet_subtype::PlayerInputs_3;
-            if (bDo_sync_check_67D6C1)
+            if (gDebugDoSyncCheck)
             {
                 pMsg[1] = 8; // pPacket[4]
             }
@@ -1035,7 +1035,7 @@ s32 NetPlay::CalcPacketLen_51F210(sptr pPacket, u32 packetLen)
             pBytes[1] = copy[1];
             pBytes[2] = pMsg[1] + 2;
             *reinterpret_cast<s32*>(pPayload) = -1;
-            if (bDo_sync_check_67D6C1)
+            if (gDebugDoSyncCheck)
             {
                 memcpy(pPayload + 4, &copy[2], packetLen - 2);
             }
@@ -1188,7 +1188,7 @@ void NetPlay::MakeSendData_51F420(Packet_SubType_3* pPacket, sptr* pData, u32* p
                             pBuffer[0] = pkt_data_type::PlayerTickOnly_9;
                             pBuffer[1] = pPacket->field_8_seq;
                             *pDataLen = 2;
-                            if (bDo_sync_check_67D6C1)
+                            if (gDebugDoSyncCheck)
                             {
                                 *reinterpret_cast<s32*>(pBuffer + 2) = (static_cast<s32*>(pPacket->field_D_data))[1];
                                 *pDataLen += 4;

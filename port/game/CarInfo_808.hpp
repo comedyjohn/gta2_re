@@ -44,7 +44,7 @@ struct PixelsToFix16Table
     Fix16 list_[256];
 };
 
-EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16_6F6850);
+EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16);
 
 class ModelPhysics
 {
@@ -129,6 +129,6 @@ class CarInfoTable
     ModelPhysics* raw_model_physics_;
 };
 
-EXTERN_GLOBAL(CarInfoTable*, gCarInfo_808_678098);
+EXTERN_GLOBAL(CarInfoTable*, gCarInfo808);
 
 s32 ParseTokenAndPush(char_type* a1);

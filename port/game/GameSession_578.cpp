@@ -6,7 +6,7 @@
 #include <cstdio>
 
 DEFINE_GLOBAL(GameSession_578, gGameSession_67E8E0, 0x67E8E0);
-EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr_67DC8C, 32);
+EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr, 32);
 
 // 0x4C53D0
 void GameSession_578::LoadDebugSettings_4C53D0()
@@ -16,7 +16,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
 
     strcpy(tmp, "");
     strcpy(path, "data\\");
-    gRegistry_6FF968.GetDebugSetting("mapname", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
+    gRegistry.GetDebugSetting("mapname", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
     strcat(path, tmp);
     if (strcmp(path, "data\\") == 0)
     {
@@ -26,7 +26,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
 
     strcpy(tmp, "");
     strcpy(path, "data\\");
-    gRegistry_6FF968.GetDebugSetting("stylename", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
+    gRegistry.GetDebugSetting("stylename", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
     strcat(path, tmp);
     if (strcmp(path, "data\\") == 0)
     {
@@ -36,7 +36,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
 
     strcpy(tmp, "");
     strcpy(path, "data\\");
-    gRegistry_6FF968.GetDebugSetting("scriptname", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
+    gRegistry.GetDebugSetting("scriptname", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
     strcat(path, tmp);
     if (strcmp(path, "data\\") == 0)
     {
@@ -46,7 +46,7 @@ void GameSession_578::LoadDebugSettings_4C53D0()
 
     strcpy(tmp, "");
     strcpy(path, "player\\");
-    gRegistry_6FF968.GetDebugSetting("savename", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
+    gRegistry.GetDebugSetting("savename", reinterpret_cast<LPBYTE>(tmp), GTA2_COUNTOF(tmp));
     strcat(path, tmp);
     if (strcmp(path, "player\\") == 0)
     {
@@ -274,7 +274,7 @@ void GameSession_578::init_4C5AF0()
         }
         field_490_frags_list[i] = 0;
         field_49C_points_list[i] = 0;
-        wcscpy(field_4B4_player_names[i].field_0_name, gEmptyWStr_67DC8C);
+        wcscpy(field_4B4_player_names[i].field_0_name, gEmptyWStr);
     }
 }
 

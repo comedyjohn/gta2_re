@@ -932,7 +932,7 @@ void Crane_15C::InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id)
     field_158_is_hook_depth_changing = 0;
     field_159_hooked_car_this_frame = 0;
     field_140_powerup_cmd = 0;
-    if (!field_7C_sound && !bSkip_audio_67D6BE)
+    if (!field_7C_sound && !gDebugSkipAudio)
     {
         field_7C_sound = gRoot_sound_66B038.CreateSoundObject_40EF40(this, SoundObjectTypeEnum::Crane_15C_8);
     }

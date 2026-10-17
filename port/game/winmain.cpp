@@ -135,7 +135,7 @@ DEFINE_GLOBAL(s32, full_width_706B5C, 0x706B5C);
 DEFINE_GLOBAL(s32, full_height_706798, 0x706798);
 DEFINE_GLOBAL(s32, gWindowX_706B60, 0x706B60);
 DEFINE_GLOBAL(s32, gWindowY_706B64, 0x706B64);
-DEFINE_GLOBAL(s32, bStartNetworkGame_7081F0, 0x7081F0);
+DEFINE_GLOBAL(s32, gDebugStartNetworkGame, 0x7081F0);
 DEFINE_GLOBAL(BYTE, gMinimizedState_70827C, 0x70827C);
 DEFINE_GLOBAL(BYTE, bVideoModeResetPending_706C5D, 0x706C5D);
 DEFINE_GLOBAL(BYTE, bReplayMode_6F5B71, 0x6F5B71);
@@ -209,18 +209,18 @@ void UpdateGameScreenSize_5D8E00()
 // 0x5D8EB0
 void Init_FrameRateLightAndUnknown_5D8EB0()
 {
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         max_frame_rate_626A08 = 1;
         min_frame_rate_706C50 = 1;
     }
     else
     {
-        max_frame_rate_626A08 = gRegistry_6FF968.GetScreenSetting("max_frame_rate", 1) != 0;
-        min_frame_rate_706C50 = gRegistry_6FF968.GetScreenSetting("min_frame_rate", 0) != 0;
+        max_frame_rate_626A08 = gRegistry.GetScreenSetting("max_frame_rate", 1) != 0;
+        min_frame_rate_706C50 = gRegistry.GetScreenSetting("min_frame_rate", 0) != 0;
     }
 
-    if (gRegistry_6FF968.GetScreenSetting("lighting", 1))
+    if (gRegistry.GetScreenSetting("lighting", 1))
     {
         gLighting_626A09 = 1;
         gLightingDrawFlag_7068F4 = 0x8000;
@@ -236,7 +236,7 @@ void Init_FrameRateLightAndUnknown_5D8EB0()
         gSpriteMaskCache_67AF1C->InvalidateAllMasks_48F710();
     }
 
-    bExplodingScoresOff_67D4FB = gRegistry_6FF968.GetScreenSetting("exploding_on", 1) != 1;
+    gDebugExplodingScoresOff = gRegistry.GetScreenSetting("exploding_on", 1) != 1;
 }
 
 // todo: move
@@ -334,8 +334,8 @@ void SetFullScreenMode_5D93A0()
 
     if (bModeChanged)
     {
-        gRegistry_6FF968.SetScreenSetting("full_width", full_width_706B5C);
-        gRegistry_6FF968.SetScreenSetting("full_height", full_height_706798);
+        gRegistry.SetScreenSetting("full_width", full_width_706B5C);
+        gRegistry.SetScreenSetting("full_height", full_height_706798);
     }
 }
 
@@ -428,13 +428,13 @@ s32 ReadScreenSettings_5D8F70()
     }
     else
     {
-        window_width_706630 = gRegistry_6FF968.GetScreenSetting("window_width", 640);
-        window_height_706B50 = gRegistry_6FF968.GetScreenSetting("window_height", 480);
-        full_width_706B5C = gRegistry_6FF968.GetScreenSetting("full_width", 640);
-        full_height_706798 = gRegistry_6FF968.GetScreenSetting("full_height", 480);
+        window_width_706630 = gRegistry.GetScreenSetting("window_width", 640);
+        window_height_706B50 = gRegistry.GetScreenSetting("window_height", 480);
+        full_width_706B5C = gRegistry.GetScreenSetting("full_width", 640);
+        full_height_706798 = gRegistry.GetScreenSetting("full_height", 480);
     }
 
-    gStartMode_626A0C = gRegistry_6FF968.GetScreenSetting("start_mode", 1);
+    gStartMode_626A0C = gRegistry.GetScreenSetting("start_mode", 1);
 
     if (gBufferMode_706B34 == 0)
     {
@@ -442,7 +442,7 @@ s32 ReadScreenSettings_5D8F70()
     }
     else
     {
-        bTrippleBuffer_706C54 = gRegistry_6FF968.GetScreenSetting("tripple_buffer", 0);
+        bTrippleBuffer_706C54 = gRegistry.GetScreenSetting("tripple_buffer", 0);
     }
 
     if (gStartMode_626A0C == startMode_old && bTrippleBuffer_706C54 == trippleBuffer_old)
@@ -467,7 +467,7 @@ s32 ReadScreenSettings_5D8F70()
 // 0x5D98E0
 void SetSavedGamma_5D98E0()
 {
-    DWORD Screen_Setting_5870D0 = gRegistry_6FF968.GetScreenSetting("gamma", 0xAU);
+    DWORD Screen_Setting_5870D0 = gRegistry.GetScreenSetting("gamma", 0xAU);
     if (SetGamma_5D9910(Screen_Setting_5870D0))
     {
         counter_706C4C = 30;
@@ -508,12 +508,12 @@ void SetVideoModeFromSettings_5D92D0()
             {
                 SetFullScreenMode_5D93A0();
                 gStartMode_626A0C = 1;
-                gRegistry_6FF968.SetScreenSetting("start_mode", 1U);
+                gRegistry.SetScreenSetting("start_mode", 1U);
             }
             else
             {
-                gRegistry_6FF968.SetScreenSetting("window_width", window_width_706630);
-                gRegistry_6FF968.SetScreenSetting("window_height", window_height_706B50);
+                gRegistry.SetScreenSetting("window_width", window_width_706630);
+                gRegistry.SetScreenSetting("window_height", window_height_706B50);
             }
         }
     }
@@ -630,89 +630,89 @@ void Init_keybrd_jolly_and_sound_4DA440()
     keybrd_0x204::create_4D5F50();
     PlyDat::Create();
 
-    if (!bSkip_audio_67D6BE)
+    if (!gDebugSkipAudio)
     {
         gRoot_sound_66B038.Init_40EF80();
-        gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.GetOrCreateSoundSetting("CDVol", 127));
-        gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.GetOrCreateSoundSetting("SFXVol", 127));
-        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
-        gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+        gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry.GetOrCreateSoundSetting("CDVol", 127));
+        gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry.GetOrCreateSoundSetting("SFXVol", 127));
+        gRoot_sound_66B038.Set3DSound_40F160(gRegistry.GetSoundSettting("do_3d_sound"));
+        gRegistry.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
     }
 }
 
 // 0x4DB170
 void ClearDebugFlags_4DB170()
 {
-    bShow_all_arrows_67D6E7 = false;
-    bDo_kill_phones_on_answer_67D6E8 = false;
-    bSkip_dummies_67D4EF = false;
-    bSkip_tiles_67D655 = false;
-    bDo_test_67D4F8 = false;
-    bSkip_mission_67D4E5 = false;
-    bDo_brian_test_67D544 = false;
-    bDo_iain_test_67D4E9 = false;
-    bSkip_user_67D506 = false;
-    bSkip_traffic_lights_67D4EC = false;
-    bSkip_recycling_67D575 = false;
-    bLog_collisions_67D4E6 = false;
-    bDo_show_traffic_lights_info_67D4FA = false;
-    bLimit_recycling_67D4CA = false;
-    bNo_annoying_chars_67D586 = false;
-    bSkip_slopes_67D505 = false;
-    bSkip_left_67D6BF = false;
-    bSkip_right_67D4E4 = false;
-    bSkip_top_67D574 = false;
-    bSkip_bottom_67D4E7 = false;
-    bSkip_lid_67D546 = false;
-    bLog_routefinder_67D6D1 = false;
-    bDo_mike_67D5CC = false;
-    bSkip_particles_67D64D = false;
-    bShow_hidden_faces_67D5CD = false;
-    bGet_all_weapons_67D684 = false;
-    bDo_exit_after_replay_67D6E4 = false;
-    bDont_get_car_back_67D4F5 = false;
-    bSkip_ambulance_67D6C9 = false;
-    bSkip_frontend_67D53B = false;
-    bDo_invulnerable_67D4CB = false;
-    bKeep_weapons_after_death_67D54D = false;
-    bSkip_skidmarks_67D585 = false;
-    gDo_infinite_lives_67D4C9 = false;
-    bDo_load_savegame_67D4F0 = false;
-    bSkip_audio_67D6BE = false;
-    bDo_debug_keys_67D6CF = false;
-    bLog_input_67D4CC = false;
-    bLog_directinput_67D6C0 = false;
-    bIgnore_replay_header_67D4F3 = false;
-    bSkip_trains_67D550 = false;
-    bSkip_buses_67D558 = false;
-    bSkip_quit_confirm_67D4E8 = false;
-    bSkip_fire_engines_67D53A = false;
-    bSkip_window_check_67D54E = false;
-    gDo_miss_logging_67D6BC = false;
-    byte_67D654 = false;
-    bDo_police_1_67D568 = false;
-    bDo_police_2_67D569 = false;
-    bDo_police_3_67D56A = false;
-    bSkip_draw_67D4EA = false;
-    bDo_free_shopping_67D6CD = false;
+    gDebugShowAllArrows = false;
+    gDebugDoKillPhonesOnAnswer = false;
+    gDebugSkipDummies = false;
+    gDebugSkipTiles = false;
+    gDebugDoTest = false;
+    gDebugSkipMission = false;
+    gDebugDoBrianTest = false;
+    gDebugDoIainTest = false;
+    gDebugSkipUser = false;
+    gDebugSkipTrafficLights = false;
+    gDebugSkipRecycling = false;
+    gDebugLogCollisions = false;
+    gDebugDoShowTrafficLightsInfo = false;
+    gDebugLimitRecycling = false;
+    gDebugNoAnnoyingChars = false;
+    gDebugSkipSlopes = false;
+    gDebugSkipLeft = false;
+    gDebugSkipRight = false;
+    gDebugSkipTop = false;
+    gDebugSkipBottom = false;
+    gDebugSkipLid = false;
+    gDebugLogRoutefinder = false;
+    gDebugDoMike = false;
+    gDebugSkipParticles = false;
+    gDebugShowHiddenFaces = false;
+    gDebugGetAllWeapons = false;
+    gDebugDoExitAfterReplay = false;
+    gDebugDontGetCarBack = false;
+    gDebugSkipAmbulance = false;
+    gDebugSkipFrontend = false;
+    gDebugDoInvulnerable = false;
+    gDebugKeepWeaponsAfterDeath = false;
+    gDebugSkipSkidmarks = false;
+    gDoInfiniteLives = false;
+    gDebugDoLoadSavegame = false;
+    gDebugSkipAudio = false;
+    gDebugDoDebugKeys = false;
+    gDebugLogInput = false;
+    gDebugLogDirectinput = false;
+    gDebugIgnoreReplayHeader = false;
+    gDebugSkipTrains = false;
+    gDebugSkipBuses = false;
+    gDebugSkipQuitConfirm = false;
+    gDebugSkipFireEngines = false;
+    gDebugSkipWindowCheck = false;
+    gDoMissLogging = false;
+    gUnusedDebugFlag = false;
+    gDebugDoPolice1 = false;
+    gDebugDoPolice2 = false;
+    gDebugDoPolice3 = false;
+    gDebugSkipDraw = false;
+    gDebugDoFreeShopping = false;
     gCheatMiniCars_67D6C8 = false;
     gCheatGetPlayerPoints_67D4C8 = false;
     gCheatGet10MillionMoney_67D6CE = false;
-    gCheatUnlimitedElectroGun_67D4F7 = false;
+    gCheatUnlimitedElectroGun = false;
     gCheatAllGangMaxRespect_67D587 = false;
-    gCheatGet99Lives_67D4F1 = false;
+    gCheatGet99Lives = false;
     gCheat10xMultiplier_67D589 = false;
     gCheatUnlockThreeLevels_67D6CB = false;
     gCheatUnlockLevelsOneAndTwo_67D584 = false;
     gCheatUnlockAllLevels_67D538 = false;
     gCheatGetBasicWeaponsMaxAmmo_67D545 = false;
-    gCheatOnlyElvisPeds_67D4ED = false;
+    gCheatOnlyElvisPeds = false;
     gCheatOnlyMuggerPeds_67D5A4 = false;
     gCheatNakedPeds_67D5E8 = false;
-    gCheatUnknown_67D4F6 = false;
+    gCheatUnknown = false;
     gCheatInvisibility_67D539 = false;
     gCheatUnlimitedDoubleDamage_67D57C = false;
-    byte_67D56B = false;
+    gCheatJailCardAndAmmo = false;
     gCheatUnlimitedFlameThrower_67D6CC = false;
 }
 
@@ -721,7 +721,7 @@ void ShowPlayerLeftMessage_4DB070(u8 idx)
 {
     Player* pPlayer = gGame_0x40_67E008->GetPlayer_4219E0(idx);
     pPlayer->Disconnect_568730();
-    swprintf(gTmpBuff, gText_0x14_704DFC->Find("comms1"), pPlayer->field_83C_player_name);
+    swprintf(gTmpBuff, gText->Find("comms1"), pPlayer->field_83C_player_name);
     gHud_2B00_706620->field_12F0_mp_message.ShowText_5D5730(gTmpBuff);
 }
 
@@ -748,10 +748,10 @@ void InitializeGame_4DA4D0()
         gInputRecorder_67F8B0.input_init_live_4CE880(gHInstance_708220);
     }
 
-    gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
-    gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+    gRoot_sound_66B038.Set3DSound_40F160(gRegistry.GetSoundSettting("do_3d_sound"));
+    gRegistry.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
 
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         gTagGame_6F8450.Init_516560();
 
@@ -839,7 +839,7 @@ void Draw_4DA7B0()
 {
     gGame_0x40_67E008->Draw_4B92D0();
     pVid_FlipBuffers(gVidSys_7071D0);
-    if (bSkip_lid_67D546 || bSkip_top_67D574 || bSkip_bottom_67D4E7 || bSkip_left_67D6BF || bSkip_right_67D4E4)
+    if (gDebugSkipLid || gDebugSkipTop || gDebugSkipBottom || gDebugSkipLeft || gDebugSkipRight)
     {
         pVid_ClearScreen(gVidSys_7071D0, 0, 0, 0, 0, 0, gVidSys_7071D0->field_48_rect_right, gVidSys_7071D0->field_4C_rect_bottom);
     }
@@ -854,7 +854,7 @@ u8 gNetPlayerDropped_6F8470[6]; //DEFINE_GLOBAL_ARRAY(u8, gNetPlayerDropped_6F84
 void Net_4DA9B0(Network_InputData_0x8* pInputs, s32 delayed_ticks, u8 player_idx)
 {
     gInputSendData_6F5B18.field_0_data = pInputs;
-    gInputSendData_6F5B18.field_4_len = bDo_sync_check_67D6C1 ? sizeof(Network_InputData_0x8) : sizeof(u32);
+    gInputSendData_6F5B18.field_4_len = gDebugDoSyncCheck ? sizeof(Network_InputData_0x8) : sizeof(u32);
     gNetPlay_7071E8.SendToPlayer_521630(&gInputSendData_6F5B18, player_idx, delayed_ticks);
 }
 
@@ -917,7 +917,7 @@ void Net_Receive_Players_Inputs_4DA9F0()
                 case packet_subtype::PlayerInputs_3: // store player input for the latest/current tick
                     memcpy(&gCurrentNetInputs_6F57D8.field_0_inputs[player_idx], gpInputBuffer_6F58C0, gCurrentInputsBufferSize_6F58C4);
                     waiting_bits &= ~(1 << player_idx);
-                    if (bDo_sync_check_67D6C1 &&
+                    if (gDebugDoSyncCheck &&
                         gCurrentNetInputs_6F57D8.field_0_inputs[player_idx].field_4_rng !=
                             gCurrentNetInputs_6F57D8.field_0_inputs[gNetworkPlayerIdx_6F56C8].field_4_rng)
                     {
@@ -990,13 +990,13 @@ void MakeInitialSyncData_4DB2E0(u8* pSyncData)
     pData->field_0_type = std_packet_subtype::SyncCheckData_5;
     if (gCarManager_6C_677930)
     {
-        gCarManager_6C_677930->field_69_do_free_shopping = bDo_free_shopping_67D6CD;
+        gCarManager_6C_677930->field_69_do_free_shopping = gDebugDoFreeShopping;
     }
 
     pData->field_1_flags = 0;
-    pData->field_1_flags = bLog_random_extra_67D5BC != 0;
-    pData->field_1_flags |= bDo_sync_check_67D6C1 ? 2 : 0;
-    pData->field_1_flags |= bLog_random_67D5FC ? 4 : 0;
+    pData->field_1_flags = gDebugLogRandomExtra != 0;
+    pData->field_1_flags |= gDebugDoSyncCheck ? 2 : 0;
+    pData->field_1_flags |= gDebugLogRandom ? 4 : 0;
     pData->field_11_exe_a = -1;
     pData->field_15_exe_b = 0;
 
@@ -1019,7 +1019,7 @@ void MakeInitialSyncData_4DB2E0(u8* pSyncData)
         ::fclose(hFile);
     }
 
-    if (bIsFrench_67D53C)
+    if (gDebugIsFrench)
     {
         pData->field_1D_bFrench = 1;
     }
@@ -1090,7 +1090,7 @@ void Net_Send_Our_Inputs_4DACB0()
 {
     if (gNetPlay_7071E8.GetPlayerCount_461DA0() > 1)
     {
-        if (bDo_sync_check_67D6C1)
+        if (gDebugDoSyncCheck)
         {
             // Send the inputs plus an rng value the other players check against
             s16 max = 100;
@@ -1135,8 +1135,7 @@ void TagGameHudUpdate_4DADA0()
                 if (--gNetTimeLimit_6F573C < 0)
                 {
                     gNetTimeLimitEnabled_6F58A4 = 0;
-                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("g_over"),
-                                                                            hud_message_priority::important_3);
+                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("g_over"), hud_message_priority::important_3);
                     gGame_0x40_67E008->ExitGameNoBonus_4B8C00(2, GameExitType::MultiplayerExit_5);
                 }
             }
@@ -1201,7 +1200,7 @@ void TagGameHudUpdate_4DADA0()
 // 0x4DAF30
 void do_network_and_local_inputs_4DAF30()
 {
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         TagGameHudUpdate_4DADA0();
         gTagGame_6F8450.ExecuteGamemodeTick_516660();
@@ -1274,7 +1273,7 @@ bool RunGameFrame_4DA850()
     u8 updated_logic = 0;
     DWORD Time = timeGetTime();
 
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         if (Time >= gMatchStartTime_6F5A28)
         {
@@ -1304,7 +1303,7 @@ bool RunGameFrame_4DA850()
             updated_logic = 0;
         }
 
-        if (bForceGameUpdate_6F5880 || bSkip_draw_67D4EA)
+        if (bForceGameUpdate_6F5880 || gDebugSkipDraw)
         {
             updated_logic = 1;
         }
@@ -1392,12 +1391,12 @@ const char_type* kDefaultDllNames_626A00[2] = {"d3ddll.dll", "dmavideo.dll"};
 // 0x5D90E0
 void Video_Render_Inits_5D90E0()
 {
-    gRenderdevice_706998 = gRegistry_6FF968.GetScreenSetting("renderdevice", 1);
-    gVideodevice_70694C = gRegistry_6FF968.GetScreenSetting("videodevice", 1);
+    gRenderdevice_706998 = gRegistry.GetScreenSetting("renderdevice", 1);
+    gVideodevice_70694C = gRegistry.GetScreenSetting("videodevice", 1);
     strcpy(gRenderDllName_7067F0, kDefaultDllNames_626A00[0]);
     strcpy(gVideoDllName_706654, kDefaultDllNames_626A00[1]);
-    gRegistry_6FF968.SetScreenSetting("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFU);
-    gRegistry_6FF968.SetScreenSetting("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFU);
+    gRegistry.SetScreenSetting("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFU);
+    gRegistry.SetScreenSetting("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFU);
 
     if (strcmp(gRenderDllName_7067F0, "softdll.dll") == 0)
     {
@@ -1552,15 +1551,15 @@ void ParseCommandLine_4DA320(char_type* pCommandLine)
             switch (cmd_char)
             {
                 case 'R':
-                    bPlay_replay_67D4F4 = true;
+                    gDebugPlayReplay = true;
                     break;
 
                 case 'Q':
-                    bConstant_replay_save_67D5C4 = true;
+                    gDebugConstantReplaySave = true;
                     break;
 
                 case 'N':
-                    bStartNetworkGame_7081F0 = 1;
+                    gDebugStartNetworkGame = 1;
                     break;
 
                 default:
@@ -1617,7 +1616,7 @@ void ErrorMsgBox_5E4EC0(LPCSTR lpText)
 void SetStartMode_5D9230(s32 startMode)
 {
     gStartMode_626A0C = startMode;
-    gRegistry_6FF968.SetScreenSetting("start_mode", startMode);
+    gRegistry.SetScreenSetting("start_mode", startMode);
 }
 
 // todo: move
@@ -1635,7 +1634,7 @@ void Input_Read_498D10()
 void ToggleStartMode_5D9250()
 {
     gStartMode_626A0C = (gStartMode_626A0C != 1);
-    gRegistry_6FF968.SetScreenSetting("start_mode", gStartMode_626A0C);
+    gRegistry.SetScreenSetting("start_mode", gStartMode_626A0C);
 }
 
 // 0x5E4EE0
@@ -1663,8 +1662,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
         case WM_SETFOCUS: // order ok
             gRoot_sound_66B038.Reacquire_40F140();
-            gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.GetOrCreateSoundSetting("CDVol", 127));
-            gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.GetOrCreateSoundSetting("SFXVol", 127));
+            gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry.GetOrCreateSoundSetting("CDVol", 127));
+            gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry.GetOrCreateSoundSetting("SFXVol", 127));
 
             if (bDoFrontEnd_626B68)
             {
@@ -1672,8 +1671,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             }
             else
             {
-                gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
-                gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+                gRoot_sound_66B038.Set3DSound_40F160(gRegistry.GetSoundSettting("do_3d_sound"));
+                gRegistry.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
             }
 
             if (!bDestroyed_6F5B70)
@@ -1778,7 +1777,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             break;
 
         case WM_DESTROY: // order ok
-            if (bStartNetworkGame_7081F0)
+            if (gDebugStartNetworkGame)
             {
                 gNetPlay_7071E8.Disconnect_520D10();
             }
@@ -1912,9 +1911,9 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
-    gDebug_67D52C.Init();
+    gDebug.Init();
     gGameSession_67E8E0.LoadDebugSettings_4C53D0();
-    bDoFrontEnd_626B68 = bSkip_frontend_67D53B == 0;
+    bDoFrontEnd_626B68 = gDebugSkipFrontend == 0;
 
     WNDCLASSA WndClass;
     WndClass.style = 3; // CS_VREDRAW | CS_HREDRAW
@@ -1960,7 +1959,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     s32 window_w = window_width_706630 + (windowRec.right - windowRec.left) - (clientRec.right - clientRec.left);
     s32 window_h = window_height_706B50 + (windowRec.bottom - windowRec.top) - (clientRec.bottom - clientRec.top);
 
-    if (bDo_corner_window_67D4EE)
+    if (gDebugDoCornerWindow)
     {
         gWindowX_706B60 = 0;
         gWindowY_706B64 = 0;
@@ -1987,23 +1986,23 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     s32 state;
     if (Frontend::intro_bik_exists_4B5FF0())
     {
-        state = gRegistry_6FF968.GetScreenSetting("do_play_movie", 1) != 1 ? 0 : 8;
+        state = gRegistry.GetScreenSetting("do_play_movie", 1) != 1 ? 0 : 8;
     }
     else
     {
         state = 0; //  xor     esi, esi
     }
 
-    if (bIsFrench_67D53C)
+    if (gDebugIsFrench)
     {
         state = 14; // mov     esi, 0Eh
     }
 
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         bDoFrontEnd_626B68 = false;
-        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
-        gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+        gRoot_sound_66B038.Set3DSound_40F160(gRegistry.GetSoundSettting("do_3d_sound"));
+        gRegistry.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
     }
 
     // Game loop
@@ -2022,7 +2021,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         else
         {
             InitializeGame_4DA4D0();
-            if (bStartNetworkGame_7081F0 && !gNetPlay_7071E8.WaitForPlayersSync_5213E0())
+            if (gDebugStartNetworkGame && !gNetPlay_7071E8.WaitForPlayersSync_5213E0())
             {
                 CoUninitialize();
                 return 0;
@@ -2082,13 +2081,13 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                     if (bQuit)
                     {
-                        if (bSkip_frontend_67D53B)
+                        if (gDebugSkipFrontend)
                         {
                             DestroyWindow(gHwnd_707F04);
                         }
                         else
                         {
-                            if (bStartNetworkGame_7081F0)
+                            if (gDebugStartNetworkGame)
                             {
                                 switch (gGame_0x40_67E008->GetExitType_4D09C0())
                                 {
@@ -2114,8 +2113,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::PlayerQuit_2:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores();
+                                        gPlyDat->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat->UpdateHiScores();
 
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 11; // 11? prob 1
                                         CleanUpInputAndOthers_4DA700();
@@ -2124,8 +2123,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::GameOverRIP_3:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores();
+                                        gPlyDat->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat->UpdateHiScores();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 2;
                                         CleanUpInputAndOthers_4DA700();
                                         bDoFrontEnd_626B68 = true;
@@ -2133,8 +2132,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::AreaCompleted_4:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores();
+                                        gPlyDat->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat->UpdateHiScores();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 3;
                                         CleanUpInputAndOthers_4DA700();
                                         bDoFrontEnd_626B68 = true;
@@ -2183,7 +2182,7 @@ void Shutdown_4DA740()
         CleanUpInputAndOthers_4DA700();
         Frontend::destroy_4AD070();
 
-        if (!bSkip_audio_67D6BE)
+        if (!gDebugSkipAudio)
         {
             gRoot_sound_66B038.DeinitializeAudio();
         }
@@ -2198,15 +2197,15 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
 {
     char_type bRet = 1;
     gGameSession_67E8E0.init_4C5AF0();
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         HKEY hKey;
-        if (!gRegistry_6FF968.CreateNetworkRoot(&hKey))
+        if (!gRegistry.CreateNetworkRoot(&hKey))
         {
             bRet = 0;
         }
 
-        if (gRegistry_6FF968.GetInt(hKey, "UseProtocol") != sizeof(GUID))
+        if (gRegistry.GetInt(hKey, "UseProtocol") != sizeof(GUID))
         {
             RegCloseKey(hKey);
             if (!gNetPlay_7071E8.SetProtoAndConnection_51DAE0(nullptr, nullptr))
@@ -2217,16 +2216,16 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
         else
         {
             GUID protocolGuid;
-            if (!gRegistry_6FF968.GetBinary(hKey, "UseProtocol", sizeof(GUID), reinterpret_cast<LPBYTE>(&protocolGuid)))
+            if (!gRegistry.GetBinary(hKey, "UseProtocol", sizeof(GUID), reinterpret_cast<LPBYTE>(&protocolGuid)))
             {
                 RegCloseKey(hKey);
                 return 0;
             }
 
             Network_Buffer_8 connection;
-            connection.field_4_len = gRegistry_6FF968.GetInt(hKey, "UseConnection");
+            connection.field_4_len = gRegistry.GetInt(hKey, "UseConnection");
             connection.field_0 = operator new(connection.field_4_len);
-            if (!gRegistry_6FF968.GetBinary(hKey, "UseConnection", connection.field_4_len, static_cast<LPBYTE>(connection.field_0)))
+            if (!gRegistry.GetBinary(hKey, "UseConnection", connection.field_4_len, static_cast<LPBYTE>(connection.field_0)))
             {
                 operator delete(connection.field_0);
                 RegCloseKey(hKey);
@@ -2242,13 +2241,13 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
 
             if (gNetPlay_7071E8.field_4_bModem)
             {
-                u16 len = gRegistry_6FF968.GetInt(hKey, "ModemNumber");
+                u16 len = gRegistry.GetInt(hKey, "ModemNumber");
                 if (len >= 128)
                 {
                     return 0;
                 }
                 wchar_t modemNumber[128];
-                gRegistry_6FF968.GetBinary(hKey, "ModemNumber", len, reinterpret_cast<LPBYTE>(modemNumber));
+                gRegistry.GetBinary(hKey, "ModemNumber", len, reinterpret_cast<LPBYTE>(modemNumber));
                 gNetPlay_7071E8.field_5_modem_num = modemNumber[0] != 0;
             }
         }

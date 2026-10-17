@@ -13,27 +13,27 @@
 Fix16 ComputeCarMassAndInertia(Fix16 width, Fix16 height, Fix16 mass, Fix16 frontMassBias, Fix16* outCgHeight);
 Fix16 ComputeThrustWithTurbo(Fix16 half_thrust, Fix16 thrust_div5, s8 bTurbo);
 
-EXTERN_GLOBAL(Fix16, k_dword_6FE210);
-EXTERN_GLOBAL(Fix16, k_dword_6FDFEC);
-EXTERN_GLOBAL(Fix16, k_dword_6FDEFC);
+EXTERN_GLOBAL(Fix16, kOneFixed);
+EXTERN_GLOBAL(Fix16, kHalfFixed);
+EXTERN_GLOBAL(Fix16, kFiveFixed);
 
-DEFINE_GLOBAL(CarInfoTable*, gCarInfo_808_678098, 0x678098);
-DEFINE_GLOBAL_ARRAY(char, file_name_677EC4, 64, 0x677EC4);
-DEFINE_GLOBAL(u32, processedGciData_676260, 0x676260);
-DEFINE_GLOBAL(u32, gciDataLen_675F94, 0x675F94);
-DEFINE_GLOBAL(u8*, input_data_676170, 0x676170);
-DEFINE_GLOBAL(u32, found_open_brackets_67626C, 0x67626C);
-DEFINE_GLOBAL(s32, line_number_676258, 0x676258);
-DEFINE_GLOBAL(u32, processed_output_676250, 0x676250);
-DEFINE_GLOBAL(u32, modelPhyArrLen_675F90, 0x675F90);
-DEFINE_GLOBAL(u8*, modelPhyArrPtr_675F98, 0x675F98);
-DEFINE_GLOBAL_INIT(Fix16, kOne_677F54, Fix16(0x4000, 0), 0x677F54);
-DEFINE_GLOBAL_INIT(Fix16, kQuarter_677D78, Fix16(0x1000, 0), 0x677D78);
-DEFINE_GLOBAL_INIT(Fix16, kOneTenth_677D74, Fix16(0x666, 0), 0x677D74);
-DEFINE_GLOBAL_ARRAY(char, Buffer_675FD4, 80, 0x675FD4);
-DEFINE_GLOBAL_ARRAY(char, token_buffer_676024, 256, 0x676024);
+DEFINE_GLOBAL(CarInfoTable*, gCarInfo808, 0x678098);
+DEFINE_GLOBAL_ARRAY(char, gFileName, 64, 0x677EC4);
+DEFINE_GLOBAL(u32, gProcessedGciData, 0x676260);
+DEFINE_GLOBAL(u32, gGciDataLen, 0x675F94);
+DEFINE_GLOBAL(u8*, gInputData, 0x676170);
+DEFINE_GLOBAL(u32, gFoundOpenBrackets, 0x67626C);
+DEFINE_GLOBAL(s32, gLineNumber, 0x676258);
+DEFINE_GLOBAL(u32, gProcessedOutput, 0x676250);
+DEFINE_GLOBAL(u32, gModelPhyArrLen, 0x675F90);
+DEFINE_GLOBAL(u8*, gModelPhyArrPtr, 0x675F98);
+DEFINE_GLOBAL_INIT(Fix16, kOne, Fix16(0x4000, 0), 0x677F54);
+DEFINE_GLOBAL_INIT(Fix16, kQuarter, Fix16(0x1000, 0), 0x677D78);
+DEFINE_GLOBAL_INIT(Fix16, kOneTenth, Fix16(0x666, 0), 0x677D74);
+DEFINE_GLOBAL_ARRAY(char, gBuffer, 80, 0x675FD4);
+DEFINE_GLOBAL_ARRAY(char, gTokenBuffer, 256, 0x676024);
 DEFINE_GLOBAL_ARRAY_INIT(const char*,
-                         error_table_61A6D4,
+                         gErrorTable,
                          13,
                          0x61A6D4,
                          "Invalid integer",
@@ -53,45 +53,45 @@ DEFINE_GLOBAL_ARRAY_INIT(const char*,
 // 0x430a30
 char* CarInfoTable::ParseGciFile(void* pGciData, size_t gciDataLen, ModelPhysics* pModelPhyArr, size_t modelPhyArrLen, u32* next_position)
 {
-    input_data_676170 = static_cast<u8*>(pGciData);
-    line_number_676258 = 1;
-    processedGciData_676260 = 0;
-    gciDataLen_675F94 = gciDataLen;
-    modelPhyArrPtr_675F98 = reinterpret_cast<u8*>(pModelPhyArr);
-    processed_output_676250 = 0;
-    modelPhyArrLen_675F90 = modelPhyArrLen;
+    gInputData = static_cast<u8*>(pGciData);
+    gLineNumber = 1;
+    gProcessedGciData = 0;
+    gGciDataLen = gciDataLen;
+    gModelPhyArrPtr = reinterpret_cast<u8*>(pModelPhyArr);
+    gProcessedOutput = 0;
+    gModelPhyArrLen = modelPhyArrLen;
 
     s32 parse_result;
     s32 token_result = 0;
     while (token_result == 0)
     {
-        token_result = ReadToken(token_buffer_676024);
+        token_result = ReadToken(gTokenBuffer);
         if (token_result < 0)
         {
             return SetErr(token_result);
         }
 
-        parse_result = ParseTokenAndPush(token_buffer_676024);
+        parse_result = ParseTokenAndPush(gTokenBuffer);
         if (parse_result < 0)
         {
             return SetErr(parse_result);
         }
     }
 
-    *next_position = processed_output_676250;
+    *next_position = gProcessedOutput;
     return nullptr;
 }
 
 // 0x430AC0
 char* CarInfoTable::SetErr(s32 error_code)
 {
-    if (error_code > 0 || error_code < -GTA2_COUNTOF_S(error_table_61A6D4) - 1)
+    if (error_code > 0 || error_code < -GTA2_COUNTOF_S(gErrorTable) - 1)
     {
-        error_code = -GTA2_COUNTOF_S(error_table_61A6D4);
+        error_code = -GTA2_COUNTOF_S(gErrorTable);
     }
 
-    sprintf(Buffer_675FD4, "%s at line %d", error_table_61A6D4[-error_code], line_number_676258);
-    return Buffer_675FD4;
+    sprintf(gBuffer, "%s at line %d", gErrorTable[-error_code], gLineNumber);
+    return gBuffer;
 }
 
 // 0x430b10
@@ -105,22 +105,22 @@ s32 CarInfoTable::ReadToken(char* pOut)
         s32 currentChar = 0;
 
         // Get the next character
-        if (processedGciData_676260 == gciDataLen_675F94)
+        if (gProcessedGciData == gGciDataLen)
         {
             currentChar = -1;
         }
         else
         {
-            currentChar = *input_data_676170;
-            input_data_676170++;
-            processedGciData_676260++;
+            currentChar = *gInputData;
+            gInputData++;
+            gProcessedGciData++;
             if (currentChar == '\n')
             {
-                line_number_676258++;
+                gLineNumber++;
             }
         }
 
-        switch (found_open_brackets_67626C)
+        switch (gFoundOpenBrackets)
         {
             case 0:
                 if (currentChar == -1)
@@ -129,12 +129,12 @@ s32 CarInfoTable::ReadToken(char* pOut)
                 }
                 if (currentChar == '{')
                 {
-                    found_open_brackets_67626C = 1;
+                    gFoundOpenBrackets = 1;
                 }
                 else if (currentChar != ' ' && currentChar != '\t' && currentChar != '\n' && currentChar != ')' && currentChar != '(' &&
                          currentChar != '\r')
                 {
-                    found_open_brackets_67626C = 2;
+                    gFoundOpenBrackets = 2;
                     pOut[i] = static_cast<char>(currentChar);
                     i++;
                 }
@@ -146,7 +146,7 @@ s32 CarInfoTable::ReadToken(char* pOut)
                 }
                 if (currentChar == '}')
                 {
-                    found_open_brackets_67626C = 0;
+                    gFoundOpenBrackets = 0;
                 }
                 break;
             case 2:
@@ -158,14 +158,14 @@ s32 CarInfoTable::ReadToken(char* pOut)
                 if (currentChar == '{')
                 {
                     pOut[i] = 0;
-                    found_open_brackets_67626C = 1;
+                    gFoundOpenBrackets = 1;
                     return 0;
                 }
                 if (currentChar == ' ' || currentChar == '\t' || currentChar == '\n' || currentChar == ')' || currentChar == '(' ||
                     currentChar == '\r')
                 {
                     pOut[i] = 0;
-                    found_open_brackets_67626C = 0;
+                    gFoundOpenBrackets = 0;
                     return 0;
                 }
                 pOut[i] = static_cast<char>(currentChar);
@@ -364,15 +364,15 @@ s32 ParseTokenAndPush(char_type* pStr)
 // 0x430e60
 s32 CarInfoTable::PushData(void* pSrc, u32 size)
 {
-    processed_output_676250 += size;
-    if (processed_output_676250 > modelPhyArrLen_675F90)
+    gProcessedOutput += size;
+    if (gProcessedOutput > gModelPhyArrLen)
     {
         return -12;
     }
 
-    memcpy(modelPhyArrPtr_675F98, pSrc, size);
+    memcpy(gModelPhyArrPtr, pSrc, size);
 
-    modelPhyArrPtr_675F98 = modelPhyArrPtr_675F98 + size;
+    gModelPhyArrPtr = gModelPhyArrPtr + size;
     return 0;
 }
 
@@ -519,8 +519,8 @@ s32 CarInfoTable::StrToInt(const char* pStr, s16* pOut)
 // 0x4542A0
 void CarModelInfo::CalculateCarInfo(s32 idx)
 {
-    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->GetCarInfo(idx);
-    ModelPhysics* pModelPhysics = gCarInfo_808_678098->GetModelPhysicsFromIdx(idx);
+    StyleCarInfo* pCarInfo = gGtx->GetCarInfo(idx);
+    ModelPhysics* pModelPhysics = gCarInfo808->GetModelPhysicsFromIdx(idx);
     Fix16 gear2_speed = pModelPhysics->gear2_speed_;
     Fix16 gear3_speed = pModelPhysics->gear3_speed_;
     Fix16 max_speed;
@@ -533,27 +533,27 @@ void CarModelInfo::CalculateCarInfo(s32 idx)
     Fix16 new_front_wheel_offset;
     if (front_wheel_offset < 0)
     {
-        new_front_wheel_offset = -gPixelsToFix16_6F6850.list_[-front_wheel_offset];
+        new_front_wheel_offset = -gPixelsToFix16.list_[-front_wheel_offset];
     }
     else
     {
-        new_front_wheel_offset = gPixelsToFix16_6F6850.list_[front_wheel_offset];
+        new_front_wheel_offset = gPixelsToFix16.list_[front_wheel_offset];
     }
     this->front_wheel_offset_ = new_front_wheel_offset;
     s8 rear_wheel_offset = pCarInfo->rear_wheel_offset_;
     Fix16 new_rear_wheel_offset;
     if (rear_wheel_offset < 0)
     {
-        new_rear_wheel_offset = -gPixelsToFix16_6F6850.list_[-rear_wheel_offset];
+        new_rear_wheel_offset = -gPixelsToFix16.list_[-rear_wheel_offset];
     }
     else
     {
-        new_rear_wheel_offset = gPixelsToFix16_6F6850.list_[rear_wheel_offset];
+        new_rear_wheel_offset = gPixelsToFix16.list_[rear_wheel_offset];
     }
     this->rear_wheel_offset_ = new_rear_wheel_offset;
     Fix16 outY;
-    this->moment_of_inertia_ = ComputeCarMassAndInertia(gPixelsToFix16_6F6850.list_[pCarInfo->w],
-                                                        gPixelsToFix16_6F6850.list_[pCarInfo->h_],
+    this->moment_of_inertia_ = ComputeCarMassAndInertia(gPixelsToFix16.list_[pCarInfo->w],
+                                                        gPixelsToFix16.list_[pCarInfo->h_],
                                                         pModelPhysics->mass_,
                                                         pModelPhysics->front_mass_bias_,
                                                         &outY);
@@ -562,9 +562,9 @@ void CarModelInfo::CalculateCarInfo(s32 idx)
     this->half_thrust_ = pModelPhysics->thrust_ / 2;
     this->fith_thrust_ = pModelPhysics->thrust_ / 5;
     this->max_thrust_with_turbo_ = ComputeThrustWithTurbo(half_thrust_, fith_thrust_, pModelPhysics->turbo_);
-    this->front_drive_bias_ = kOne_677F54 - pModelPhysics->front_drive_bias_;
-    this->skid_threshhold_1_ = (pModelPhysics->sked_threshold_ * (kOne_677F54 - kOneTenth_677D74));
-    this->skid_threshhold_2_ = (pModelPhysics->sked_threshold_ * (kOne_677F54 + kOneTenth_677D74));
+    this->front_drive_bias_ = kOne - pModelPhysics->front_drive_bias_;
+    this->skid_threshhold_1_ = (pModelPhysics->sked_threshold_ * (kOne - kOneTenth));
+    this->skid_threshhold_2_ = (pModelPhysics->sked_threshold_ * (kOne + kOneTenth));
 }
 
 // 0x454410
@@ -572,16 +572,16 @@ Fix16 ComputeCarMassAndInertia(Fix16 width, Fix16 height, Fix16 mass, Fix16 fron
 {
     // The const refs (bound to the product temporaries) give the original's stack slots and the
     // __allmul operand order of the two inertia products (value locals swap them)
-    const Fix16& inertiaBase = ((((height * height) * kQuarter_677D78) + (width * width)) / 12);
-    const Fix16& heightXConstant = (height * kQuarter_677D78);
+    const Fix16& inertiaBase = ((((height * height) * kQuarter) + (width * width)) / 12);
+    const Fix16& heightXConstant = (height * kQuarter);
     const Fix16& frontMass = (mass * frontMassBias);
     Fix16 frontI = (frontMass * inertiaBase);
     // Negated by hand: one inline expansion less, so both front (cg - h) subtractions stay inline (budget)
     Fix16 nh;
     nh.value_ = -height.value_;
-    Fix16 negHeightXConstant = (nh * kQuarter_677D78);
+    Fix16 negHeightXConstant = (nh * kQuarter);
 
-    const Fix16& rearMass = (mass * (kOne_677F54 - frontMassBias));
+    const Fix16& rearMass = (mass * (kOne - frontMassBias));
     Fix16 rearI = (rearMass * inertiaBase);
 
     *outCgHeight = (((heightXConstant * frontMass) + (negHeightXConstant * rearMass)) / mass);
@@ -596,7 +596,7 @@ Fix16 ComputeCarMassAndInertia(Fix16 width, Fix16 height, Fix16 mass, Fix16 fron
 // 0x454680
 void ModelPhysics::ConvertMass()
 {
-    mass_ = mass_ * (kOneTenth_677D74 + kOne_677F54);
+    mass_ = mass_ * (kOneTenth + kOne);
 }
 
 // 0x4546b0
@@ -608,10 +608,10 @@ ModelPhysics* CarInfoTable::GetModelPhysicsFromIdx(u8 model_idx)
 // 0x4546d0
 void CarInfoTable::LoadModelPhysics()
 {
-    u32 number_of_cars = gGtx_0x106C_703DD4->GetNumberOfCars();
+    u32 number_of_cars = gGtx->GetNumberOfCars();
     u32 data_size;
     size_t file_size;
-    void* file_content = File::ReadFileToBuffer(file_name_677EC4, &file_size);
+    void* file_content = File::ReadFileToBuffer(gFileName, &file_size);
 
     raw_model_physics_ = new ModelPhysics[number_of_cars];
 
@@ -622,7 +622,7 @@ void CarInfoTable::LoadModelPhysics()
 
     if (pErrorMsg != nullptr)
     {
-        strcpy(gErrStr_67C29C, file_name_677EC4);
+        strcpy(gErrStr_67C29C, gFileName);
         strcpy(gErrStr2_67C3A8, pErrorMsg);
 
         FatalError_4A38C0(Gta2Error::kBinmakeError, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbc, gErrStr_67C29C, gErrStr2_67C3A8);
@@ -630,7 +630,7 @@ void CarInfoTable::LoadModelPhysics()
 
     if (data_size % sizeof(ModelPhysics))
     {
-        FatalError_4A38C0(Gta2Error::kInvalidSize, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbd, file_name_677EC4, data_size);
+        FatalError_4A38C0(Gta2Error::kInvalidSize, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbd, gFileName, data_size);
     }
 
     if (data_size != number_of_cars * sizeof(ModelPhysics))
@@ -639,7 +639,7 @@ void CarInfoTable::LoadModelPhysics()
                           "C:\\Splitting\\Gta2\\Source\\carinfo.cpp",
                           0xbe,
                           static_cast<s32>(data_size / sizeof(ModelPhysics)),
-                          file_name_677EC4,
+                          gFileName,
                           number_of_cars);
     }
 
@@ -659,12 +659,12 @@ CarModelInfo* CarInfoTable::GetInfoAtIdx(u8 idx)
 // 0x454850
 void CarInfoTable::CalculateAllCarInfo()
 {
-    const u32 count = gGtx_0x106C_703DD4->GetNumberOfCars();
+    const u32 count = gGtx->GetNumberOfCars();
     raw_car_info_ = new CarModelInfo[count];
 
     for (u32 i = 0, j = 0; i < 256; i++)
     {
-        if (gGtx_0x106C_703DD4->DoesCarExist(i))
+        if (gGtx->DoesCarExist(i))
         {
             ptr_array_[i] = &raw_car_info_[j];
             raw_car_info_[j].CalculateCarInfo(i);
@@ -679,7 +679,7 @@ CarModelInfo::CarModelInfo() = default;
 // 0x4549c0
 void CarInfoTable::ConvertAllMass()
 {
-    u32 number_of_cars = gGtx_0x106C_703DD4->GetNumberOfCars();
+    u32 number_of_cars = gGtx->GetNumberOfCars();
     for (u32 i = 0; i < number_of_cars; i++)
     {
         raw_model_physics_[i].ConvertMass();
@@ -689,7 +689,7 @@ void CarInfoTable::ConvertAllMass()
 // 0x454a00
 void CarInfoTable::LoadFromGciFile(const char_type* pGciFilePath)
 {
-    strcpy(&file_name_677EC4[0], pGciFilePath);
+    strcpy(&gFileName[0], pGciFilePath);
 
     LoadModelPhysics();
     ConvertAllMass();
@@ -747,11 +747,11 @@ Fix16 ComputeThrustWithTurbo(Fix16 half_thrust, Fix16 thrust_div5, s8 bTurbo)
     Fix16 thrust;
     if (bTurbo)
     {
-        thrust = (k_dword_6FE210 + k_dword_6FDFEC) * ((thrust_div5 * k_dword_6FDEFC));
+        thrust = (kOneFixed + kHalfFixed) * ((thrust_div5 * kFiveFixed));
     }
     else
     {
-        thrust = thrust_div5 * k_dword_6FDEFC;
+        thrust = thrust_div5 * kFiveFixed;
     }
     thrust = thrust + half_thrust;
     return thrust;

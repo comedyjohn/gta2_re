@@ -872,13 +872,13 @@ DWORD Map_0x370::GetLeftEdgeSpec_4DFF60(Fix16 x_coord, Fix16 y_coord, Fix16 z_co
     gmp_block_info* pBlock1 = get_block_4DFE10((x_coord - kFpOne_6F6110).ToInt(), y_coord.ToInt(), z_coord.ToInt());
     if (pBlock1 && pBlock1->field_2_right != 0)
     {
-        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock1->field_2_right));
+        return gGtx->GetSpecWith3AsOne(get_tile_idx(pBlock1->field_2_right));
     }
 
     gmp_block_info* pBlock2 = get_block_4DFE10(x_coord.ToInt(), y_coord.ToInt(), z_coord.ToInt());
     if (pBlock2 && pBlock2->field_0_left != 0)
     {
-        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock2->field_0_left));
+        return gGtx->GetSpecWith3AsOne(get_tile_idx(pBlock2->field_0_left));
     }
 
     return 0;
@@ -890,14 +890,14 @@ s32 Map_0x370::GetTopEdgeSpec_4E0000(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
     gmp_block_info* block_4DFE10 = Map_0x370::get_block_4DFE10(x_pos.ToInt(), (y_pos - kFpOne_6F6110).ToInt(), z_pos.ToInt());
     if (block_4DFE10 && has_bottom(block_4DFE10))
     {
-        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(block_4DFE10->field_6_bottom));
+        return gGtx->GetSpecWith3AsOne(get_tile_idx(block_4DFE10->field_6_bottom));
     }
     else
     {
         gmp_block_info* pBlock = Map_0x370::get_block_4DFE10(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt());
         if (pBlock && has_top(pBlock))
         {
-            return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock->field_4_top));
+            return gGtx->GetSpecWith3AsOne(get_tile_idx(pBlock->field_4_top));
         }
         else
         {
@@ -919,7 +919,7 @@ s32 Map_0x370::GetBlockSpec_4E00A0(Fix16 x, Fix16 y, Fix16 z)
                 u16 lid = pBlock->field_8_lid;
                 if (lid)
                 {
-                    return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(lid));
+                    return gGtx->GetSpecWith3AsOne(get_tile_idx(lid));
                 }
             }
         }
@@ -2818,7 +2818,7 @@ char_type Map_0x370::sub_4E52A0(Fix16 x, Fix16 y, Fix16 z)
 
     if (gBlockInfo0_6F5EB0)
     {
-        if (gGtx_0x106C_703DD4->IsWaterTile(get_tile_idx(gBlockInfo0_6F5EB0->field_8_lid)))
+        if (gGtx->IsWaterTile(get_tile_idx(gBlockInfo0_6F5EB0->field_8_lid)))
         {
             return 7;
         }

@@ -85,11 +85,11 @@ Shades ReadShades()
 
 unsigned TileTexture(int tile)
 {
-    if (!gGtx_0x106C_703DD4 || !gTextureCache_15D8_705064)
+    if (!gGtx || !gTextureCache_15D8_705064)
     {
         return 0;
     }
-    u16 idx = gGtx_0x106C_703DD4->GetTileMapping(static_cast<u16>(tile));
+    u16 idx = gGtx->GetTileMapping(static_cast<u16>(tile));
     if (!idx)
     {
         return 0;

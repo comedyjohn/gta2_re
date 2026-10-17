@@ -177,9 +177,9 @@ EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);
 // crt_init_own_libname_21 or sub_4F7530
 void Init_Unk_Width_Height_F16_array()
 {
-    for (u32 i = 0; i < GTA2_COUNTOF(gPixelsToFix16_6F6850.list_); i++)
+    for (u32 i = 0; i < GTA2_COUNTOF(gPixelsToFix16.list_); i++)
     {
-        gPixelsToFix16_6F6850.list_[i] = Fix16(i) / 64;
+        gPixelsToFix16.list_[i] = Fix16(i) / 64;
     }
 }
 
@@ -208,8 +208,8 @@ void EnableBoot2MapDebugOptions()
     Init_Unk_Width_Height_F16_array();
     Init_InputRecorder();
 
-    bSkip_traffic_lights_67D4EC = true;
-    bSkip_trains_67D550 = true;
+    gDebugSkipTrafficLights = true;
+    gDebugSkipTrains = true;
 
     /*
     bSkip_dummies_67D4EF = true;
@@ -501,7 +501,7 @@ EXTERN_GLOBAL(Car_BC*, gTestArrowCar_7043F0);
 void NoRefs_sub_5B1170()
 {
     gmp_block_info block;
-    gGtx_0x106C_703DD4->GetSpriteIndex(gGtx_0x106C_703DD4->GetSpriteTrueIndex(7, gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703C3E, 0)));
+    gGtx->GetSpriteIndex(gGtx->GetSpriteTrueIndex(7, gGtx->GetSpriteIdxFromFont(gFontType1, 0)));
     block.field_A_arrows = 0;
     block.field_0_left = 7206;
     block.field_2_right = 7206;
@@ -1356,7 +1356,7 @@ void ImGuiDebugDraw()
 
         static char tmpBuffer[512];
         sprintf(tmpBuffer, "c%02d", model_num);
-        ImGui::Text(GameText::Wide2PesudoAscii(gText_0x14_704DFC->Find(tmpBuffer)));
+        ImGui::Text(GameText::Wide2PesudoAscii(gText->Find(tmpBuffer)));
 
         static int currentCharIndex = 0;
         const char* char_lang_codes[] = {"english", "french", "italian", "german", "spanish", "russian??", "japanese??"};
@@ -1373,14 +1373,14 @@ void ImGuiDebugDraw()
 
         if (ImGui::Button("Change language"))
         {
-            gText_0x14_704DFC->lang_code_ = char_lang[currentCharIndex];
-            gText_0x14_704DFC->Load();
+            gText->lang_code_ = char_lang[currentCharIndex];
+            gText->Load();
             if (gFrontend_67DC84)
             {
                 gFrontend_67DC84->SetupMenuStringsOptionsElements_4B0220();
             }
         }
-        ImGui::Text("Curr Lang Code: %c", gText_0x14_704DFC->lang_code_);
+        ImGui::Text("Curr Lang Code: %c", gText->lang_code_);
     }
 
     if (gGame_0x40_67E008)
@@ -2098,8 +2098,8 @@ void ImGuiDebugDraw()
                 //ClearGlobalArrow();
                 for (; id < 8000; id++)
                 {
-                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kCodeObj1, id);
-                    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx);
+                    u16 true_idx = gGtx->GetSpriteTrueIndex(SpriteTypes::kCodeObj1, id);
+                    SpriteIndex* sprite_index_5AA440 = gGtx->GetSpriteIndex(true_idx);
                     if (sprite_index_5AA440)
                     {
                         if (sprite_index_5AA440->width_ == 20 && sprite_index_5AA440->height_ == 16)
@@ -2227,8 +2227,7 @@ void ImGuiDebugDraw()
 
                                 if (ImGui::TreeNode("Model Physics"))
                                 {
-                                    ModelPhysics* pModelPhy =
-                                        gCarInfo_808_678098->GetModelPhysicsFromIdx(pPlayerCar->field_84_car_info_idx);
+                                    ModelPhysics* pModelPhy = gCarInfo808->GetModelPhysicsFromIdx(pPlayerCar->field_84_car_info_idx);
                                     if (pModelPhy)
                                     {
                                         ImGui::SliderInt("Turn In", &pModelPhy->turn_in_.value_, 0, 4 * 16384);
@@ -2899,11 +2898,11 @@ void ImGuiDebugDraw()
 
         if (ImGui::TreeNode("gGtx_0x106C_703DD4"))
         {
-            if (gGtx_0x106C_703DD4)
+            if (gGtx)
             {
                 static s32 tile_idx = 0;
                 ImGui::InputInt("Tile idx", &tile_idx, 1, 1);
-                s32 spec = gGtx_0x106C_703DD4->spec_[tile_idx];
+                s32 spec = gGtx->spec_[tile_idx];
                 ImGui::Value("Spec", spec);
             }
             ImGui::TreePop();
@@ -3172,51 +3171,51 @@ void ImGuiDebugDraw()
 
     if (ImGui::TreeNode("Debug options"))
     {
-        ImGui::Checkbox("Debug Keys", &bDo_debug_keys_67D6CF);
-        ImGui::Checkbox("Iain Test", &bDo_iain_test_67D4E9);
-        ImGui::Checkbox("Brian Test", &bDo_brian_test_67D544);
-        ImGui::Checkbox("Do Test", &bDo_test_67D4F8);
-        ImGui::Checkbox("Do Mike", &bDo_mike_67D5CC);
+        ImGui::Checkbox("Debug Keys", &gDebugDoDebugKeys);
+        ImGui::Checkbox("Iain Test", &gDebugDoIainTest);
+        ImGui::Checkbox("Brian Test", &gDebugDoBrianTest);
+        ImGui::Checkbox("Do Test", &gDebugDoTest);
+        ImGui::Checkbox("Do Mike", &gDebugDoMike);
         ImGui::Checkbox("Do Text ID Test",
-                        &gDo_text_id_test_67D6D0); // press '<' or '>' to navigate through gxt text id's  (Hud_BriefSelector_4 stuff)
-        ImGui::Checkbox("3D Sound", &bDo_3d_sound_67D6C2); // seems to not work
+                        &gDoTextIdTest); // press '<' or '>' to navigate through gxt text id's  (Hud_BriefSelector_4 stuff)
+        ImGui::Checkbox("3D Sound", &gDebugDo3dSound); // seems to not work
 
         if (ImGui::TreeNode("Skip stuff"))
         {
-            ImGui::Checkbox("Skip Missions", &bSkip_mission_67D4E5);
-            ImGui::Checkbox("Skip Particles", &bSkip_particles_67D64D);
-            ImGui::Checkbox("Skip Ambulance", &bSkip_ambulance_67D6C9);
-            ImGui::Checkbox("Skip Explosions", &bExplodingScoresOff_67D4FB);
-            ImGui::Checkbox("Skip Police", &bSkip_police_67D4F9);
+            ImGui::Checkbox("Skip Missions", &gDebugSkipMission);
+            ImGui::Checkbox("Skip Particles", &gDebugSkipParticles);
+            ImGui::Checkbox("Skip Ambulance", &gDebugSkipAmbulance);
+            ImGui::Checkbox("Skip Explosions", &gDebugExplodingScoresOff);
+            ImGui::Checkbox("Skip Police", &gDebugSkipPolice);
             ImGui::TreePop();
         }
 
         if (ImGui::TreeNode("Show things"))
         {
-            ImGui::Checkbox("Show Ped IDs", &bDo_show_ids_67D559);
-            ImGui::Checkbox("Show Objects IDs", &bDo_show_object_ids_67D6CA);
-            ImGui::Checkbox("Show Junctions IDs", &bDo_show_junc_ids_67D5B0);
-            ImGui::Checkbox("Show Traffic lights info", &bDo_show_traffic_lights_info_67D4FA);
-            ImGui::Checkbox("Show Imaginary", &bDo_show_imaginary_67D588); // some cones appears when the player is hit by rocket launcher
-            ImGui::Checkbox("Show Camera", &bDo_show_camera_67D58A);
+            ImGui::Checkbox("Show Ped IDs", &gDebugDoShowIds);
+            ImGui::Checkbox("Show Objects IDs", &gDebugDoShowObjectIds);
+            ImGui::Checkbox("Show Junctions IDs", &gDebugDoShowJuncIds);
+            ImGui::Checkbox("Show Traffic lights info", &gDebugDoShowTrafficLightsInfo);
+            ImGui::Checkbox("Show Imaginary", &gDebugDoShowImaginary); // some cones appears when the player is hit by rocket launcher
+            ImGui::Checkbox("Show Camera", &gDebugDoShowCamera);
             //ImGui::Checkbox("Show Collision Box", &bDo_show_collision_box_67D6E5);    // crashes the game
-            ImGui::Checkbox("Show Physics", &bDo_show_physics_67D54F);
-            ImGui::Checkbox("Show Instruments", &bDo_show_instruments_67D64C);
-            ImGui::Checkbox("Show Cycle", &gShow_cycle_67D6BD);
-            ImGui::Checkbox("Show Timing", &bDo_show_timing_67D6DC);
-            ImGui::Checkbox("Show Counter", &gDo_show_counter_67D6E6);
-            ImGui::Checkbox("Show Brief number", &bShow_brief_number_67D504);
-            ImGui::Checkbox("Show Horn", &bDo_show_horn_67D4F2);
+            ImGui::Checkbox("Show Physics", &gDebugDoShowPhysics);
+            ImGui::Checkbox("Show Instruments", &gDebugDoShowInstruments);
+            ImGui::Checkbox("Show Cycle", &gShowCycle);
+            ImGui::Checkbox("Show Timing", &gDebugDoShowTiming);
+            ImGui::Checkbox("Show Counter", &gDoShowCounter);
+            ImGui::Checkbox("Show Brief number", &gDebugShowBriefNumber);
+            ImGui::Checkbox("Show Horn", &gDebugDoShowHorn);
             ImGui::TreePop();
         }
 
         if (ImGui::TreeNode("Cheats"))
         {
-            ImGui::Checkbox("Invulnerable", &bDo_invulnerable_67D4CB);
-            ImGui::Checkbox("Get all weapons", &bGet_all_weapons_67D684);
-            ImGui::Checkbox("Keep weapons after death", &bKeep_weapons_after_death_67D54D);
-            ImGui::Checkbox("Free Shopping", &bDo_free_shopping_67D6CD);
-            ImGui::Checkbox("Do Blood", &bDo_blood_67D5C5);
+            ImGui::Checkbox("Invulnerable", &gDebugDoInvulnerable);
+            ImGui::Checkbox("Get all weapons", &gDebugGetAllWeapons);
+            ImGui::Checkbox("Keep weapons after death", &gDebugKeepWeaponsAfterDeath);
+            ImGui::Checkbox("Free Shopping", &gDebugDoFreeShopping);
+            ImGui::Checkbox("Do Blood", &gDebugDoBlood);
             ImGui::TreePop();
         }
 
@@ -3378,7 +3377,7 @@ void ImGuiDebugDraw()
                     {
                         gGameSession_67E8E0.SetPlySlotIdx_4C5920(player_idx);
                         gFrontend_67DC84->UpdateMenuForCurrPlayer_4B42E0();
-                        gRegistry_6FF968.SetPlayerSetting("plyrslot", player_idx);
+                        gRegistry.SetPlayerSetting("plyrslot", player_idx);
                     }
                     ImGui::TreePop();
                 }
@@ -3417,7 +3416,7 @@ void ImGuiDebugDraw()
         ImGui::TreePop();
     }
 
-    if (gPlyDat_6FEAC0 && ImGui::TreeNode("gPlyDat_6FEAC0"))
+    if (gPlyDat && ImGui::TreeNode("gPlyDat_6FEAC0"))
     {
         //if (gPlyDat_6FEAC0)
         {
@@ -3425,7 +3424,7 @@ void ImGuiDebugDraw()
             {
                 static s32 struc_221_id = 0;
                 ImGui::SliderInt("BestStageStats_28 ID", &struc_221_id, 0, 2);
-                BestStageStats* struc = &gPlyDat_6FEAC0->best_stats_[struc_221_id];
+                BestStageStats* struc = &gPlyDat->best_stats_[struc_221_id];
 
                 static s32 byte_id = 0;
                 ImGui::SliderInt("Byte ID", &byte_id, 0, 39);
@@ -3450,16 +3449,16 @@ void ImGuiDebugDraw()
                 switch (table_type)
                 {
                     case 0:
-                        pTable = &gPlyDat_6FEAC0->stage_scores_[id_1][id_2];
+                        pTable = &gPlyDat->stage_scores_[id_1][id_2];
                         break;
                     case 1:
-                        pTable = &gPlyDat_6FEAC0->total_scores_;
+                        pTable = &gPlyDat->total_scores_;
                         break;
                     case 2:
-                        pTable = &gPlyDat_6FEAC0->alt_scores_;
+                        pTable = &gPlyDat->alt_scores_;
                         break;
                     default:
-                        pTable = &gPlyDat_6FEAC0->extra_scores_;
+                        pTable = &gPlyDat->extra_scores_;
                         break;
                 }
 
@@ -3479,7 +3478,7 @@ void ImGuiDebugDraw()
             {
                 static s32 table_idx = 0;
                 ImGui::SliderInt("table_idx", &table_idx, 0, 7);
-                PlySlot* dreamy = &gPlyDat_6FEAC0->plyr_stats_[table_idx];
+                PlySlot* dreamy = &gPlyDat->plyr_stats_[table_idx];
 
                 static char str_buf_4[9];
                 wchar_to_char(dreamy->str_player_name_, str_buf_4, 9);

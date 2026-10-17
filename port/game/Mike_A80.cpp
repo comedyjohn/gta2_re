@@ -79,15 +79,15 @@ void Mike_A80::DebugDrawProfiling_4FF250()
         s32 size = 8 << (ypos < 140 ? row : row - 6);
 
         swprintf(gTmpBuff, L"%d", size);
-        DrawText_4B87A0(gTmpBuff, 0, ypos, word_703BAA, 1);
+        DrawText_4B87A0(gTmpBuff, 0, ypos, gFontTypeSlot1Of7, 1);
         swprintf(gTmpBuff, L"%d", pGlobals[4 + row]);
-        DrawText_4B87A0(gTmpBuff, 50, ypos, word_703BAA, 1);
+        DrawText_4B87A0(gTmpBuff, 50, ypos, gFontTypeSlot1Of7, 1);
         swprintf(gTmpBuff, L"%d", pGlobals[16 + row]);
-        DrawText_4B87A0(gTmpBuff, 100, ypos, word_703BAA, 1);
+        DrawText_4B87A0(gTmpBuff, 100, ypos, gFontTypeSlot1Of7, 1);
         swprintf(gTmpBuff, L"%d", tex_counts[row]);
-        DrawText_4B87A0(gTmpBuff, 150, ypos, word_703BAA, 1);
+        DrawText_4B87A0(gTmpBuff, 150, ypos, gFontTypeSlot1Of7, 1);
         swprintf(gTmpBuff, L"%d", cache_used[row]);
-        DrawText_4B87A0(gTmpBuff, 200, ypos, word_703BAA, 1);
+        DrawText_4B87A0(gTmpBuff, 200, ypos, gFontTypeSlot1Of7, 1);
 
         total_textures_used += pGlobals[16 + row];
         total_texture_bytes += pGlobals[16 + row] * size * size * 2;
@@ -97,24 +97,24 @@ void Mike_A80::DebugDrawProfiling_4FF250()
     sDrawString_4FF910(0, 280, L"Total Num Textures %d - %d bytes", total_textures_used, total_texture_bytes);
 
     swprintf(gTmpBuff, L"Polys Drawn:");
-    DrawText_4B87A0(gTmpBuff, 0, 300, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 0, 300, gFontTypeSlot1Of7, 1);
     swprintf(gTmpBuff, L"%d", polys_drawn);
-    DrawText_4B87A0(gTmpBuff, 180, 300, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 180, 300, gFontTypeSlot1Of7, 1);
 
     swprintf(gTmpBuff, L"TextureUsed: ");
-    DrawText_4B87A0(gTmpBuff, 0, 320, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 0, 320, gFontTypeSlot1Of7, 1);
     swprintf(gTmpBuff, L"%d", total_cache_used);
-    DrawText_4B87A0(gTmpBuff, 180, 320, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 180, 320, gFontTypeSlot1Of7, 1);
 
     swprintf(gTmpBuff, L"Cache Misses:");
-    DrawText_4B87A0(gTmpBuff, 0, 340, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 0, 340, gFontTypeSlot1Of7, 1);
     swprintf(gTmpBuff, L"%d", total_tex_count);
-    DrawText_4B87A0(gTmpBuff, 180, 340, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 180, 340, gFontTypeSlot1Of7, 1);
 
     swprintf(gTmpBuff, L"TextureSwaps:");
-    DrawText_4B87A0(gTmpBuff, 0, 360, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 0, 360, gFontTypeSlot1Of7, 1);
     swprintf(gTmpBuff, L"%d", texture_swaps);
-    DrawText_4B87A0(gTmpBuff, 180, 360, word_703BAA, 1);
+    DrawText_4B87A0(gTmpBuff, 180, 360, gFontTypeSlot1Of7, 1);
 
     if (++gMemTotalCounter_6F7550 > 100)
     {
@@ -157,7 +157,7 @@ void Mike_A80::sDrawString_4FF910(s32 xpos, s32 ypos, const wchar_t* pFormat, ..
     va_list args;
     va_start(args, pFormat);
     vswprintf(buffer, pFormat, args);
-    DrawText_4B87A0(buffer, xpos, ypos, word_703BAA, 1);
+    DrawText_4B87A0(buffer, xpos, ypos, gFontTypeSlot1Of7, 1);
 }
 
 // 0x4ff970

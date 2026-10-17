@@ -173,7 +173,7 @@ TrainStation_34::~TrainStation_34()
 // 0x578030
 void Train_58::ReassignTrainHead_578030()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         Car_BC* pFirst = this->field_C_carriages[0];
         this->field_C_carriages[0] = this->field_C_carriages[this->field_43_idx];
@@ -227,7 +227,7 @@ void Train_58::ReassignTrainHead_578030()
 // 0x578180
 void Train_58::IncrementState_578180()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         switch (this->field_50_state)
         {
@@ -256,7 +256,7 @@ void Train_58::IncrementState_578180()
 // 0x5781f0
 void Train_58::DecrementState_5781F0()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         switch (this->field_50_state)
         {
@@ -328,7 +328,7 @@ Train_58::~Train_58()
 // 0x5782d0
 void Train_58::sub_5782D0()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         if (this->field_C_carriages[0]->field_54_driver)
         {
@@ -344,7 +344,7 @@ void Train_58::sub_5782D0()
 // 0x578300
 void Train_58::Stop_578300()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         if (this->field_50_state < 2)
         {
@@ -358,7 +358,7 @@ void Train_58::Stop_578300()
 // 0x578330
 void Train_58::CloseCarriageDoors_578330()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (s32 i = 0; i < 2; i++)
         {
@@ -376,7 +376,7 @@ void Train_58::CloseCarriageDoors_578330()
 // 0x578360
 void Train_58::OpenCarriageDoors_578360()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (s32 i = 0; i < 2; i++)
         {
@@ -394,7 +394,7 @@ void Train_58::OpenCarriageDoors_578360()
 // 0x578390
 void Train_58::UpdatePassengerAI_578390()
 {
-    if (!bSkip_trains_67D550 && !bSkip_dummies_67D4EF && gPedManager_6787BC->field_2_num_dummy_chars < 50U)
+    if (!gDebugSkipTrains && !gDebugSkipDummies && gPedManager_6787BC->field_2_num_dummy_chars < 50U)
     {
         if (this->field_8_alloc_state == 2)
         {
@@ -493,7 +493,7 @@ void Train_58::UpdatePassengerAI_578390()
 void Train_58::ProcessTrainExplosionChain_578670()
 {
     Car_BC* pCars = field_C_carriages[1];
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         Car_BC* pFirst = field_C_carriages[0];
         if (pFirst->field_74_damage >= 32000 && field_38_explosion_timers[10] == -1)
@@ -565,7 +565,7 @@ void Train_58::ProcessTrainExplosionChain_578670()
 // 0x578790
 Train_58* PublicTransport_181C::AllocateTrain_578790()
 {
-    if (bSkip_trains_67D550)
+    if (gDebugSkipTrains)
     {
         return nullptr;
     }
@@ -596,7 +596,7 @@ TrainStation_34* PublicTransport_181C::AllocateTrainStation_5787E0()
 // 0x578820
 void TrainStation_34::CalculateWagonCount_578820(u8* pWagons)
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         memcpy(field_24_train_wagons, pWagons, sizeof(field_24_train_wagons));
 
@@ -613,7 +613,7 @@ void TrainStation_34::CalculateWagonCount_578820(u8* pWagons)
 // 0x578860
 void PublicTransport_181C::SpawnTrainsFromStations_578860()
 {
-    if (bSkip_trains_67D550)
+    if (gDebugSkipTrains)
     {
         return;
     }
@@ -839,7 +839,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
 // 0x5793e0
 void PublicTransport_181C::InitStationsLinkedList_5793E0()
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         u16 idx = 0;
         for (; idx < gTrainStationList_6FEE68.field_194_count - 1; idx++)
@@ -883,7 +883,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
     char Buffer[8];
     byte_6FF1CD = 0;
     dword_6FF1D0 = 0;
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (u8 station_zone_kind = 0; station_zone_kind < 5; station_zone_kind++)
         {
@@ -958,7 +958,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
         }
     }
 
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         for (gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kBusStopPavement); pZone != nullptr;)
         {
@@ -1037,7 +1037,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
 // 0x5799b0
 TrainStation_34* PublicTransport_181C::GetBusStopOnScreen_5799B0()
 {
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         for (u16 station_idx = 0; station_idx < gStationCount_6FF1CC; station_idx++)
         {
@@ -1057,7 +1057,7 @@ TrainStation_34* PublicTransport_181C::GetBusStopOnScreen_5799B0()
 // 0x579a30
 void PublicTransport_181C::OnBusStopMarkerHit_579A30(Car_BC* pToFind)
 {
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         Car_BC* pLeadCar = field_17C0_bus.field_C_carriages[0];
         if (pLeadCar)
@@ -1085,7 +1085,7 @@ void PublicTransport_181C::OnBusStopMarkerHit_579A30(Car_BC* pToFind)
 // 0x579aa0
 bool PublicTransport_181C::is_bus_579AA0(Car_BC* pCar)
 {
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         Car_BC* pBus = this->field_17C0_bus.field_C_carriages[0];
         if (pBus)
@@ -1103,7 +1103,7 @@ bool PublicTransport_181C::is_bus_579AA0(Car_BC* pCar)
 // 0x579ad0
 Car_BC* PublicTransport_181C::sub_579AD0()
 {
-    if (bSkip_buses_67D558)
+    if (gDebugSkipBuses)
     {
         return nullptr;
     }
@@ -1119,7 +1119,7 @@ Car_BC* PublicTransport_181C::sub_579AD0()
 // 0x579af0
 bool PublicTransport_181C::is_bus_full_579AF0()
 {
-    if (bSkip_buses_67D558)
+    if (gDebugSkipBuses)
     {
         return false;
     }
@@ -1135,7 +1135,7 @@ bool PublicTransport_181C::is_bus_full_579AF0()
 // 0x579b10
 void PublicTransport_181C::IncrementBusPassengerCount_579B10()
 {
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         field_17C0_bus.field_56_passenger_count++;
     }
@@ -1144,7 +1144,7 @@ void PublicTransport_181C::IncrementBusPassengerCount_579B10()
 // 0x579b20
 void PublicTransport_181C::KillAllPassengers_579B20()
 {
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         this->field_17C0_bus.field_56_passenger_count = 0;
         field_17C0_bus.field_C_carriages[0]->field_4_passengers_list.KillAndClearAllPeds_4715A0();
@@ -1168,7 +1168,7 @@ Car_BC** PublicTransport_181C::GetCarArrayFromLeadCar_579B40(Car_BC* toFind)
 // 0x579b90
 bool PublicTransport_181C::GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk)
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (auto& i : field_1450_train_array)
         {
@@ -1228,7 +1228,7 @@ void PublicTransport_181C::BusesService_579CA0()
     Fix16 xpos;
     Fix16 ypos;
 
-    if (!bSkip_buses_67D558)
+    if (!gDebugSkipBuses)
     {
         u16 i;
         s32 found_z;
@@ -1486,7 +1486,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
 {
     u8 bStopped = 0;
     BusesService_579CA0();
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (auto& i : field_1450_train_array)
         {
@@ -1827,7 +1827,7 @@ TrainStation_34* PublicTransport_181C::TrainStationForZone_57B4B0(gmp_map_zone* 
 // 0x57b540
 Car_BC* PublicTransport_181C::GetLeadTrainCar_57B540(Car_BC* pCar)
 {
-    if (!bSkip_trains_67D550 && pCar->IsTrainModel_403BA0())
+    if (!gDebugSkipTrains && pCar->IsTrainModel_403BA0())
     {
         return GetTrainFromCar_57B5C0(pCar)->field_C_carriages[0];
     }
@@ -1840,7 +1840,7 @@ Car_BC* PublicTransport_181C::GetLeadTrainCar_57B540(Car_BC* pCar)
 // 0x57b5c0
 Train_58* PublicTransport_181C::GetTrainFromCar_57B5C0(Car_BC* pToFind)
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (auto& i : field_1450_train_array)
         {
@@ -1866,7 +1866,7 @@ Train_58* PublicTransport_181C::GetTrainFromCar_57B5C0(Car_BC* pToFind)
 // 0x57b6a0
 Train_58* PublicTransport_181C::GetTrainFromCarExcludingLeadCar_57B6A0(Car_BC* pToFind)
 {
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         for (auto& i : field_1450_train_array)
         {

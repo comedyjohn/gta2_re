@@ -47,8 +47,8 @@ void RollingDigitCounter_38::SetupDigitsParams_492110(s16 digit_transition_speed
 // 0x492150
 void RollingDigitCounter_38::InitDigitSprites_492150()
 {
-    u16 true_sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, field_36_sprite_idx);
-    SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(true_sprite_idx);
+    u16 true_sprite_idx = gGtx->GetSpriteTrueIndex(SpriteTypes::kUser, field_36_sprite_idx);
+    SpriteIndex* pSpriteIndex = gGtx->GetSpriteIndex(true_sprite_idx);
     field_27_sprite_w = pSpriteIndex->width_;
     field_28_sprite_h_calc = pSpriteIndex->height_ / 11;
     field_34_first_digit_texture_idx = gTextureCache_15D8_705064->RegisterDigits_5B9220(field_2A_max_num_of_digits, field_36_sprite_idx);
@@ -95,12 +95,12 @@ void RollingDigitCounter_38::ColorDigits_4921F0(s32 palette_type, s16 palette)
     u16 true_palette;
     if (palette_type == PaletteTypes::kSprites)
     {
-        u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, field_36_sprite_idx);
-        true_palette = gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
+        u16 sprite_idx = gGtx->GetSpriteTrueIndex(SpriteTypes::kUser, field_36_sprite_idx);
+        true_palette = gGtx->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
     }
     else
     {
-        true_palette = gGtx_0x106C_703DD4->GetTruePalette(palette_type, palette); // default color ?
+        true_palette = gGtx->GetTruePalette(palette_type, palette); // default color ?
     }
 
     s32 digit_idx = field_2E_non_used_digits;

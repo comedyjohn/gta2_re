@@ -75,7 +75,7 @@ void Crusher_30::Service_488350()
                 if (field_1C_w == kCrusherTargetH_67A4E4)
                 {
                     field_2C_state = CrusherStates::UnCrushW_2;
-                    if (!bStartNetworkGame_7081F0)
+                    if (!gDebugStartNetworkGame)
                     {
                         field_14_pCarBeingCrushed->field_70_exploder_ped_id =
                             gGame_0x40_67E008->field_38_local_player->field_2C4_player_ped->field_200_id;
@@ -181,7 +181,7 @@ void Crusher_30::InitCrusher_4885A0(Fix16 xpos, Fix16 ypos, char_type crusher_id
     field_2C_state = CrusherStates::Idle_0;
     field_14_pCarBeingCrushed = nullptr;
 
-    if (!field_18_sound && !bSkip_audio_67D6BE)
+    if (!field_18_sound && !gDebugSkipAudio)
     {
         field_18_sound = gRoot_sound_66B038.CreateSoundObject_40EF40(this, SoundObjectTypeEnum::Crusher_30_9);
     }

@@ -141,7 +141,7 @@ u8 Player::GetIdx_4881E0()
 void Player::AddCarToHistory_5645B0(Car_BC* pNewCar)
 {
     Car_BC** pIter = field_54_car_history;
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         u8 i = PromoteCarInHistory_564610(pNewCar, false);
         if (!i)
@@ -173,7 +173,7 @@ void Player::AddCarToHistory_5645B0(Car_BC* pNewCar)
 bool Player::PromoteCarInHistory_564610(Car_BC* pCar, bool dont_modify)
 {
     Car_BC** ppCarIter = &field_54_car_history[1];
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         if (pCar == field_54_car_history[2]) // check 2
         {
@@ -214,7 +214,7 @@ bool Player::PromoteCarInHistory_564610(Car_BC* pCar, bool dont_modify)
 void Player::PushCarInfo_564680(Car_BC* pCar)
 {
     Car_BC** pIter = field_54_car_history;
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         u8 idx;
         for (idx = 0; idx < 2; pIter++, idx++)
@@ -311,7 +311,7 @@ void Player::ClearKFWeapon_5647D0()
         }
         else
         {
-            if ((gCheatUnlimitedElectroGun_67D4F7 && field_1C_kf_weapon_kind == WeaponType::kShocker) ||
+            if ((gCheatUnlimitedElectroGun && field_1C_kf_weapon_kind == WeaponType::kShocker) ||
                 (gCheatUnlimitedFlameThrower_67D6CC && field_1C_kf_weapon_kind == WeaponType::kFlamethrower))
             {
                 this->field_18_pre_kf_weapon_kind = -2;
@@ -563,7 +563,7 @@ void Player::RemovePlayerWeapons_564C50()
     Weapon_30* pWeapon = this->field_718_weapons[0];
     do
     {
-        if ((!gCheatUnlimitedElectroGun_67D4F7 || pWeapon->field_1C_idx != WeaponType::kShocker) &&
+        if ((!gCheatUnlimitedElectroGun || pWeapon->field_1C_idx != WeaponType::kShocker) &&
             (!gCheatUnlimitedFlameThrower_67D6CC || pWeapon->field_1C_idx != WeaponType::kFlamethrower))
         {
             if (pWeapon->HasAmmo_4A4F80())
@@ -827,7 +827,7 @@ void Player::TeleportToDebugCam_565310()
     this->field_6C_in_debug_cam_mode = 0;
     this->field_68_camera_mode = 0;
     this->field_90_game_camera.SetSmoothFollow_475B60();
-    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("tport"), hud_message_priority::important_3);
+    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("tport"), hud_message_priority::important_3);
 }
 
 // 0x5653E0
@@ -871,7 +871,7 @@ void Player::InitPlayerPed_565490(Ped* pPed)
 
     for (s32 weapon_idx = WeaponType::kPistol; weapon_idx < WeaponType::kCarBomb; ++weapon_idx)
     {
-        if (!bGet_all_weapons_67D684 || weapon_idx >= WeaponType::kWeapon11 || weapon_idx == WeaponType::kElectroBatton)
+        if (!gDebugGetAllWeapons || weapon_idx >= WeaponType::kWeapon11 || weapon_idx == WeaponType::kElectroBatton)
         {
             ammo = 0;
         }
@@ -934,7 +934,7 @@ void Player::Hud_Controls_565890(u16 action)
         switch (action)
         {
             case DIK_ESCAPE:
-                if (bSkip_quit_confirm_67D4E8)
+                if (gDebugSkipQuitConfirm)
                 {
                     if (this->IsUser_41DC70())
                     {
@@ -947,20 +947,20 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 break;
             case DIK_HOME:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     field_90_game_camera.ReturnToDefaultZoom_435830();
                     field_208_aux_game_camera.ReturnToDefaultZoom_435830();
                 }
                 break;
             case DIK_NEXT:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_76_dbg_zoom_in = 1;
                 }
                 break;
             case DIK_PRIOR:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_77_dbg_zoom_out = 1;
                 }
@@ -985,7 +985,7 @@ void Player::Hud_Controls_565890(u16 action)
                     vol = 0;
                 }
                 gRoot_sound_66B038.SetCDVol_40F0F0(vol);
-                gRegistry_6FF968.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
+                gRegistry.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
                 break;
             case DIK_F4:
                 if (gRoot_sound_66B038.GetCDVol_40F120() + 10 < 127)
@@ -998,7 +998,7 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 // LABEL_18:
                 gRoot_sound_66B038.SetCDVol_40F0F0(vol);
-                gRegistry_6FF968.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
+                gRegistry.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
                 break;
             case DIK_F6:
                 gGame_0x40_67E008->TogglePause_4B9700();
@@ -1024,99 +1024,99 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 break;
             case DIK_F10:
-                if (bStartNetworkGame_7081F0)
+                if (gDebugStartNetworkGame)
                 {
                     gHud_2B00_706620->field_2A25_chat_input.StartChatting_5D1830(this);
                 }
                 break;
             case DIK_F11:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_68_camera_mode = 0;
                     this->field_90_game_camera.SetSmoothFollow_475B60();
                 }
                 break;
             case DIK_F12:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_68_camera_mode = 1;
                     this->field_90_game_camera.SetSnapFollow_4A5070();
                 }
                 break;
             case DIK_ADD:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     gGame_0x40_67E008->SinglePlayerStepFrame_4B9710();
                 }
                 break;
             case DIK_SUBTRACT:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     gGame_0x40_67E008->ToggleFastForward_4A4750();
                 }
                 break;
             case DIK_NUMPAD2:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_71_dbg_cam_south = 1;
                 }
                 break;
             case DIK_NUMPAD8:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_70_dbg_cam_north = 1;
                 }
                 break;
             case DIK_NUMPAD4:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_72_dbg_cam_west = 1;
                 }
                 break;
             case DIK_NUMPAD6:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_73_dbg_cam_east = 1;
                 }
                 break;
             case DIK_NUMPAD7:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_74_dbg_cam_zooming_out = 1;
                 }
                 break;
             case DIK_NUMPAD9:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 1;
                     this->field_75_dbg_cam_zooming_in = 1;
                 }
                 break;
             case DIK_NUMPAD5:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_6C_in_debug_cam_mode = 0;
                 }
                 break;
             case DIK_NUMPAD0:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::TeleportToDebugCam_565310(); // teleport?
                 }
                 break;
             case DIK_NUMPAD1:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     this->field_48_dbg_cam_follow_player = !this->field_48_dbg_cam_follow_player;
                 }
                 break;
             case DIK_DECIMAL:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     if (field_2C4_player_ped)
                     {
@@ -1125,25 +1125,25 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 break;
             case DIK_DIVIDE:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::DebugWatchNearestCar_5653E0();
                 }
                 break;
             case DIK_PERIOD:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     gHud_2B00_706620->field_12E8_brief_selector.ShowNextNumberedBrief_5CF620();
                 }
                 break;
             case DIK_COMMA:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     gHud_2B00_706620->field_12E8_brief_selector.ShowPrevNumberedBrief_5CF6B0();
                 }
                 break;
             case DIK_C:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     if (this->IsUser_41DC70())
                     {
@@ -1152,32 +1152,32 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 break;
             case DIK_1:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::IncrementGangRespectFromDebugKeys_565770(0);
                 }
                 break;
             case DIK_2:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::IncrementGangRespectFromDebugKeys_565770(1);
                 }
                 break;
             case DIK_3:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::IncrementGangRespectFromDebugKeys_565770(2);
                 }
                 break;
 
             case DIK_4:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     Player::IncreaseWantedLevelFromDebugKeys_565860();
                 }
                 break;
             case DIK_5:
-                if (bDo_debug_keys_67D6CF)
+                if (gDebugDoDebugKeys)
                 {
                     if (field_2C4_player_ped)
                     {
@@ -1190,15 +1190,15 @@ void Player::Hud_Controls_565890(u16 action)
             case DIK_8:
             case DIK_9:
             case DIK_0:
-                if (bDo_test_67D4F8)
+                if (gDebugDoTest)
                 {
                     dword_7044A0->DoTest_5B2640(action);
                 }
-                if (bDo_brian_test_67D544)
+                if (gDebugDoBrianTest)
                 {
                     dword_675F74->DoBrianTest_42D870(action);
                 }
-                else if (bDo_iain_test_67D4E9)
+                else if (gDebugDoIainTest)
                 {
                     gPedManager_6787BC->DoIanTest_471060(action);
                 }
@@ -1216,14 +1216,14 @@ void Player::HandleKeyRelease_566380(u16 key)
     switch (key)
     {
         case DIK_NEXT:
-            if (bDo_debug_keys_67D6CF)
+            if (gDebugDoDebugKeys)
             {
                 this->field_76_dbg_zoom_in = 0;
             }
             break;
 
         case DIK_PRIOR:
-            if (bDo_debug_keys_67D6CF)
+            if (gDebugDoDebugKeys)
             {
                 this->field_77_dbg_zoom_out = 0;
             }
@@ -1637,7 +1637,7 @@ void Player::ShowDebugInfo_566EE0(char_type skip)
             }
         }
 
-        if (bDo_show_camera_67D58A)
+        if (gDebugDoShowCamera)
         {
             // fmuls vs fmull
             double x = this->field_90_game_camera.field_98_cur_pos.field_0_x.AsDouble();
@@ -1661,12 +1661,12 @@ void Player::ShowDebugInfo_566EE0(char_type skip)
             gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 96, gDebugFont_706600, 1);
         }
 
-        if (gShow_cycle_67D6BD)
+        if (gShowCycle)
         {
             gAmbientRng->ShowCycle();
         }
 
-        if (gDo_show_input_67D576)
+        if (gDoShowInput)
         {
             gInputRecorder_67F8B0.ShowInput_4CEE10(); // input
         }
@@ -1705,7 +1705,7 @@ void Player::Wasted_567130()
     Ped* pPed_killer;
     Player* player_killer; //  this function seems to handle the player death
 
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         // Ped: field_204 = the ID of the ped who killed this player/Player
         if (field_2C4_player_ped->field_204_killer_id == 0)
@@ -1737,17 +1737,16 @@ void Player::Wasted_567130()
     {
         if (IsUser_41DC70())
         {
-            if (field_684_lives.get_value() > 1 || bStartNetworkGame_7081F0)
+            if (field_684_lives.get_value() > 1 || gDebugStartNetworkGame)
             {
                 gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00( //  It's really ugly, it's probably inlined
-                    gText_0x14_704DFC->Find(GetDeathText_569F00()),
+                    gText->Find(GetDeathText_569F00()),
                     hud_message_priority::normal_1);
                 gRoot_sound_66B038.PlayVoice_40F090(voice_line::wasted_29);
             }
             else
             {
-                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("g_over"),
-                                                                        hud_message_priority::important_3);
+                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("g_over"), hud_message_priority::important_3);
                 gRoot_sound_66B038.PlayVoice_40F090(voice_line::game_over_21);
             }
         }
@@ -1780,10 +1779,10 @@ void Player::Wasted_567130()
 
         if (field_2C_death_countdown == 0)
         {
-            if (field_684_lives.get_value() > 0 || bStartNetworkGame_7081F0)
+            if (field_684_lives.get_value() > 0 || gDebugStartNetworkGame)
             {
                 Player::ClearKFWeapon_5647D0();
-                if (!bKeep_weapons_after_death_67D54D)
+                if (!gDebugKeepWeaponsAfterDeath)
                 {
                     Player::UnloadCarWeapons_564C00();
                     Player::RemovePlayerWeapons_564C50(); //  remove weapons from dead player
@@ -1842,7 +1841,7 @@ void Player::Busted_5679E0()
         SetDeathType_434950(3);
         if (IsUser_41DC70())
         {
-            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find(Player::GetDeathText_569F00()),
+            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find(Player::GetDeathText_569F00()),
                                                                     hud_message_priority::normal_1);
         }
         SetDeathType_434950(0);
@@ -1887,14 +1886,14 @@ void Player::Busted_5679E0()
                 Player::ClearKFWeapon_5647D0();
                 if (HasPowerUp_434920(power_up_indices::JailCard_4))
                 {
-                    if (!gCheatUnknown_67D4F6)
+                    if (!gCheatUnknown)
                     {
                         DecPowerUp_434940(power_up_indices::JailCard_4);
                     }
                 }
                 else
                 {
-                    if (!bKeep_weapons_after_death_67D54D)
+                    if (!gDebugKeepWeaponsAfterDeath)
                     {
                         Player::UnloadCarWeapons_564C00();
                         Player::RemovePlayerWeapons_564C50();
@@ -2051,7 +2050,7 @@ void Player::Service_5687F0()
         }
     }
 
-    if (bDo_debug_keys_67D6CF)
+    if (gDebugDoDebugKeys)
     {
         Player::HandleDebugZoom_568670();
     }
@@ -2424,7 +2423,7 @@ void Player::get_pos_569920(Fix16* out_x, Fix16* out_y, Fix16* out_z)
 // 0x5699F0
 void Player::ChangeLifeCountByAmount_5699F0(s32 amount)
 {
-    if (!gDo_infinite_lives_67D4C9 || amount > 0)
+    if (!gDoInfiniteLives || amount > 0)
     {
         field_684_lives.ChangeStatByAmount_4921B0(amount);
     }
@@ -2493,7 +2492,7 @@ void Player::ColorScoreFromRemap_569A10()
 // 0x569C20
 void Player::SetScoreTextColour_569C20()
 {
-    if (bStartNetworkGame_7081F0 == false && gScriptManager_6F8060 != nullptr)
+    if (gDebugStartNetworkGame == false && gScriptManager_6F8060 != nullptr)
     {
         if (field_60_finish_score_reached == 0)
         {
@@ -2567,18 +2566,18 @@ void Player::InitializePlayerState_569CB0()
 
     if (IsUser_41DC70())
     {
-        if (!bSkip_audio_67D6BE)
+        if (!gDebugSkipAudio)
         {
             field_4C_sound_obj = gRoot_sound_66B038.CreateSoundObject_40EF40(&field_90_game_camera, SoundObjectTypeEnum::Camera_0xBC_5);
         }
     }
     field_78C_hud_palette_type = 2;
     field_790_hud_palette = 0;
-    if (bStartNetworkGame_7081F0)
+    if (gDebugStartNetworkGame)
     {
         Player::ColorScoreFromRemap_569A10();
         gNetPlay_7071E8.GetPlayerName_521100(field_83C_player_name, field_2E_idx);
-        gText_0x14_704DFC->RemapExtendedCharsIfNotJapanese(field_83C_player_name);
+        gText->RemapExtendedCharsIfNotJapanese(field_83C_player_name);
         gGameSession_67E8E0.SetPlayerName_4C5C30(field_2E_idx, field_83C_player_name);
     }
 }
@@ -2820,7 +2819,7 @@ void Player::ApplyCheats_56A490()
     {
         field_2D4_scores.SetMoney_4A50E0(9999999);
     }
-    if (gCheatUnlimitedElectroGun_67D4F7)
+    if (gCheatUnlimitedElectroGun)
     {
         field_718_weapons[WeaponType::kShocker]->set_infinite_ammo_4A4F90();
     }
@@ -2835,7 +2834,7 @@ void Player::ApplyCheats_56A490()
             pIter->SetRespect_4BEE30(field_2E_idx, 100);
         }
     }
-    if (gCheatGet99Lives_67D4F1)
+    if (gCheatGet99Lives)
     {
         field_684_lives.SetValueClamped_4A50B0(99);
     }
@@ -2849,7 +2848,7 @@ void Player::ApplyCheats_56A490()
         gPedManager_6787BC->field_7_make_all_muggers = true;
     }
 
-    if (gCheatUnknown_67D4F6)
+    if (gCheatUnknown)
     {
         Player::CollectPowerUp_564D60(power_up_indices::JailCard_4);
     }
@@ -2864,7 +2863,7 @@ void Player::ApplyCheats_56A490()
         Player::CollectPowerUp_564D60(power_up_indices::DoubleDamage_7);
     }
 
-    if (byte_67D56B)
+    if (gCheatJailCardAndAmmo)
     {
         Player::CollectPowerUp_564D60(power_up_indices::JailCard_4);
         Player::AddWeaponWithAmmo_564960(1, 50U);

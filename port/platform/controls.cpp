@@ -258,7 +258,7 @@ PortPadFrame port_input_read()
 {
     PortPadFrame out;
     out.captured = overlay::Captured();
-    const bool network = bStartNetworkGame_7081F0 != 0;
+    const bool network = gDebugStartNetworkGame != 0;
     out.spawn = network ? -1 : gSpawnRequest;
     gSpawnRequest = -1;
     gReads++;

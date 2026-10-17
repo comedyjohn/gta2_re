@@ -56,7 +56,7 @@ DEFINE_GLOBAL(Sprite*, gSprite_6F61E8, 0x6F61E8);
 DEFINE_GLOBAL_INIT(Fix16, kFP16One_7035C4, Fix16(1), 0x7035C4);
 DEFINE_GLOBAL_INIT(Fix16, gFix16_7035C0, Fix16(0), 0x7035C0);
 DEFINE_GLOBAL_INIT(Ang16, gAng16_703804, Ang16(0), 0x703804);
-DEFINE_GLOBAL(PixelsToFix16Table, gPixelsToFix16_6F6850, 0x6F6850);
+DEFINE_GLOBAL(PixelsToFix16Table, gPixelsToFix16, 0x6F6850);
 DEFINE_GLOBAL_INIT(Fix16, dword_703424, Fix16(0xCCC, 0), 0x703424);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Eight_7035E4, Fix16(8), 0x7035E4);
 DEFINE_GLOBAL_INIT(Fix16, dword_703578, Fix16(256, 0), 0x703578);
@@ -384,7 +384,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
         {
             if (delta_idx >= 22)
             {
-                SpriteDelta* pDelta = gGtx_0x106C_703DD4->GetDelta(sprite_idx, delta_idx - 17);
+                SpriteDelta* pDelta = gGtx->GetDelta(sprite_idx, delta_idx - 17);
                 if (pDelta)
                 {
                     pDelta->Delta(pArray, width);
@@ -392,7 +392,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
             }
             else
             {
-                SpriteDelta* pDelta = gGtx_0x106C_703DD4->GetDelta(sprite_idx, delta_idx);
+                SpriteDelta* pDelta = gGtx->GetDelta(sprite_idx, delta_idx);
                 if (pDelta)
                 {
                     pDelta->Delta(pArray);
@@ -405,7 +405,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
 
 inline u16 Sprite::GetTrueSpriteIdx_4BA230()
 {
-    return gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+    return gGtx->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
 }
 
 // 0x48F8B0
@@ -415,7 +415,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
     {
         return -1;
     }
-    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx->GetSpriteIndex(sprite_idx);
     u32 bUnk = sprite_index_5AA440->height_ > 0x40U;
     SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var_, &a4);
     if (pSprt14)
@@ -594,7 +594,7 @@ s32 Sprite::IsOnWater_59E1D0()
     if (pBlock)
     {
         const u16 lid_idx = pBlock->field_8_lid & 1023;
-        if (gGtx_0x106C_703DD4->IsRemappedWaterTile(lid_idx))
+        if (gGtx->IsRemappedWaterTile(lid_idx))
         {
             return true;
         }
@@ -639,7 +639,7 @@ void Sprite::CopyVisualShapeToCollision_59E300()
 void Sprite::IncreaseZoom_59E320(char_type delta)
 {
     u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx->GetSpriteIndex(sprite_idx);
     u32 field_5_height = sprite_index_5AA440->height_;
     u32 field_4_width = sprite_index_5AA440->width_;
 
@@ -967,10 +967,10 @@ s16 Sprite::GetTruePalette_59EAA0()
 {
     if (field_34_palette_type == PaletteTypes::kSprites)
     {
-        s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        return gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
+        s16 sprite_idx = gGtx->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        return gGtx->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
     }
-    return gGtx_0x106C_703DD4->GetTruePalette(field_34_palette_type, field_24_remap);
+    return gGtx->GetTruePalette(field_34_palette_type, field_24_remap);
 }
 
 // 0x59eae0
@@ -999,7 +999,7 @@ char_type Sprite::has_shadows_59EAE0()
 // 0x59EB30
 void Sprite::ShowId_59EB30(f32& x, f32& y)
 {
-    if (bDo_show_ids_67D559)
+    if (gDebugDoShowIds)
     {
         Car_BC* pCar = AsCar_40FEB0();
         if (pCar)
@@ -1009,7 +1009,7 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             Fix16 ypos;
             ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
             swprintf(gTmpBuff, L"%d", pCar->field_6C_car_id);
-            DrawTextScaled_4BA2C0(gTmpBuff, xpos, ypos, word_703BAA);
+            DrawTextScaled_4BA2C0(gTmpBuff, xpos, ypos, gFontTypeSlot1Of7);
         }
         else
         {
@@ -1025,7 +1025,7 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
                 DrawText_5D8A10(gTmpBuff,
                                 xpos * gViewCamera_676978->field_A8_ui_scale,
                                 ypos * gViewCamera_676978->field_A8_ui_scale,
-                                word_703BAA,
+                                gFontTypeSlot1Of7,
                                 gViewCamera_676978->field_A8_ui_scale,
                                 palette_type,
                                 0,
@@ -1035,7 +1035,7 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
         }
     }
 
-    if (bDo_show_object_ids_67D6CA)
+    if (gDebugDoShowObjectIds)
     {
         Object_2C* pObj = AsObject2C_40FEC0();
         if (pObj)
@@ -1049,7 +1049,7 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             DrawText_5D8A10(gTmpBuff,
                             xpos * gViewCamera_676978->field_A8_ui_scale,
                             ypos * gViewCamera_676978->field_A8_ui_scale,
-                            word_703BAA,
+                            gFontTypeSlot1Of7,
                             gViewCamera_676978->field_A8_ui_scale,
                             palette_type,
                             0,
@@ -1064,7 +1064,7 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
 {
 
     // 0x4BAEF0 9.6f
-    if (bDo_show_horn_67D4F2)
+    if (gDebugDoShowHorn)
     {
         Car_BC* pCar = AsCar_40FEB0();
         if (pCar)
@@ -1074,7 +1074,7 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
 
             if (pCar->IsEmittingHorn_411970())
             {
-                DrawTextScaled_4BA2C0(L"H", xpos, ypos, word_703BAA);
+                DrawTextScaled_4BA2C0(L"H", xpos, ypos, gFontTypeSlot1Of7);
             }
 
             Ped* pDriver = pCar->field_54_driver;
@@ -1082,7 +1082,7 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
             {
                 if (gPolice_7B8_6FEE40->IsActivelyChased_56F880(pDriver))
                 {
-                    DrawTextScaled_4BA2C0(L"P", xpos, ypos, word_703BAA);
+                    DrawTextScaled_4BA2C0(L"P", xpos, ypos, gFontTypeSlot1Of7);
                 }
             }
         }
@@ -1106,10 +1106,10 @@ void Sprite::Draw_59EFF0()
     Sprite::EnsureVisualShape_59F990();
     if (field_38_zoom != 0)
     {
-        sprite_idx = gGtx_0x106C_703DD4->sprite_index_count_ - 1;
-        pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
-        converted_pal = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        pSpriteIndex2 = gGtx_0x106C_703DD4->GetSpriteIndex(converted_pal);
+        sprite_idx = gGtx->sprite_index_count_ - 1;
+        pSpriteIndex = gGtx->GetSpriteIndex(sprite_idx);
+        converted_pal = gGtx->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        pSpriteIndex2 = gGtx->GetSpriteIndex(converted_pal);
         pSpriteIndex->width_ = pSpriteIndex2->width_ - 2 * field_38_zoom;
         pSpriteIndex->height_ = pSpriteIndex2->height_ - 2 * field_38_zoom;
         if (!pSpriteIndex->width_ || !pSpriteIndex->height_)
@@ -1123,8 +1123,8 @@ void Sprite::Draw_59EFF0()
     }
     else
     {
-        sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+        sprite_idx = gGtx->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        pSpriteIndex = gGtx->GetSpriteIndex(sprite_idx);
         pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(field_30_sprite_type_enum,
                                                                       field_22_type_sprite_idx,
                                                                       field_34_palette_type,
@@ -1261,7 +1261,7 @@ void Sprite::Draw_59EFF0()
     }
 
     ++gSpriteManager_703820->field_0_drawn_sprite_count;
-    if (bDo_show_collision_box_67D6E5)
+    if (gDebugDoShowCollisionBox)
     {
         if (field_C_pCollisionShape)
         {
@@ -1292,20 +1292,20 @@ void Sprite::EnsureVisualShape_59F990()
         this->field_4_pVisualShape = gSpriteShapePool_70381C->Allocate();
 
         const u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-        const SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+        const SpriteIndex* SpriteIndex = gGtx->GetSpriteIndex(sprite_idx);
 
         Fix16 w;
         Fix16 h;
 
         if (this->field_30_sprite_type_enum == SpriteTypes::kCodeObj2)
         {
-            w = gPixelsToFix16_6F6850.list_[SpriteIndex->width_] / 2;
-            h = gPixelsToFix16_6F6850.list_[SpriteIndex->height_] / 2;
+            w = gPixelsToFix16.list_[SpriteIndex->width_] / 2;
+            h = gPixelsToFix16.list_[SpriteIndex->height_] / 2;
         }
         else
         {
-            w = gPixelsToFix16_6F6850.list_[SpriteIndex->width_];
-            h = gPixelsToFix16_6F6850.list_[SpriteIndex->height_];
+            w = gPixelsToFix16.list_[SpriteIndex->width_];
+            h = gPixelsToFix16.list_[SpriteIndex->height_];
         }
         field_4_pVisualShape->SetWidthHeight_4BA070(w, h);
     }
@@ -1317,10 +1317,10 @@ void Sprite::UpdateDimensionsFromSpriteIndex_59FA40()
     if (field_4_pVisualShape)
     {
         const u16 idx = GetTrueSpriteIdx_4BA230();
-        SpriteIndex* pSprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(idx);
+        SpriteIndex* pSprite_index = gGtx->GetSpriteIndex(idx);
 
-        const Fix16 height = gPixelsToFix16_6F6850.list_[pSprite_index->height_];
-        const Fix16 width = gPixelsToFix16_6F6850.list_[pSprite_index->width_];
+        const Fix16 height = gPixelsToFix16.list_[pSprite_index->height_];
+        const Fix16 width = gPixelsToFix16.list_[pSprite_index->width_];
 
         field_4_pVisualShape->SetWidthHeightLazy_4BA030(width, height);
     }
@@ -2263,7 +2263,7 @@ void Sprite::CreateSoundObj_5A29D0()
 {
     if (!field_10_sound)
     {
-        if (!bSkip_audio_67D6BE)
+        if (!gDebugSkipAudio)
         {
             field_10_sound = gRoot_sound_66B038.CreateSoundObject_40EF40(this, SoundObjectTypeEnum::Sprite_1);
         }

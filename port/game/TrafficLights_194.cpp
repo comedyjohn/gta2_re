@@ -407,7 +407,7 @@ void TrafficLights_194::TrafficLightsService_5C2950()
         }
     }
 
-    if (bDo_show_traffic_lights_info_67D4FA)
+    if (gDebugDoShowTrafficLightsInfo)
     {
         ShowTrafficLightsInfo_5C2A10();
     }

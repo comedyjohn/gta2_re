@@ -448,17 +448,17 @@ class Gtx
     s32 spec_[1024];
 };
 
-EXTERN_GLOBAL(Gtx*, gGtx_0x106C_703DD4);
+EXTERN_GLOBAL(Gtx*, gGtx);
 
 inline s32 GetSpaceWidth(u16 font_type)
 {
-    return gGtx_0x106C_703DD4->GetSpaceCharWidth(&font_type);
+    return gGtx->GetSpaceCharWidth(&font_type);
 }
 
-EXTERN_GLOBAL(s16, word_703D98);
-EXTERN_GLOBAL(s16, word_703BAA);
-EXTERN_GLOBAL(s16, word_703C9C);
-EXTERN_GLOBAL(s16, word_703D9C);
-EXTERN_GLOBAL(s16, word_703DA4);
-EXTERN_GLOBAL(s16, word_703C3E);
-EXTERN_GLOBAL(s16, word_703D9A);
+EXTERN_GLOBAL(s16, gFontTypeSlot2Of7);
+EXTERN_GLOBAL(s16, gFontTypeSlot1Of7);
+EXTERN_GLOBAL(s16, gFontTypeSlot5Of7);
+EXTERN_GLOBAL(s16, gFontType0);
+EXTERN_GLOBAL(s16, gFontType3);
+EXTERN_GLOBAL(s16, gFontType1);
+EXTERN_GLOBAL(s16, gFontType2);

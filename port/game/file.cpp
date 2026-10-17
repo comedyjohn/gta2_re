@@ -8,11 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-DEFINE_GLOBAL(s32, gbGlobalFileOpen_67D160, 0x67D160);
-DEFINE_GLOBAL(FILE*, ghFile_67CFEC, 0x67CFEC);
-DEFINE_GLOBAL_INIT(u16, gCdCheckFileCount_6252E0, 22, 0x6252E0);
+DEFINE_GLOBAL(s32, gGbGlobalFileOpen, 0x67D160);
+DEFINE_GLOBAL(FILE*, gGhFile, 0x67CFEC);
+DEFINE_GLOBAL_INIT(u16, gCdCheckFileCount, 22, 0x6252E0);
 DEFINE_GLOBAL_ARRAY_INIT(CdCheckFile,
-                         gCdCheckFiles_6252E8,
+                         gCdCheckFiles,
                          22,
                          0x6252E8,
                          {"GTAudio\\1.wav", 31971388U},
@@ -94,7 +94,7 @@ void File::CheckReadOnlyFile(const char_type* FileName, s32 expectedSize)
     }
 
     s32 closeRet = ::fclose(hFile);
-    gbGlobalFileOpen_67D160 = 0;
+    gGbGlobalFileOpen = 0;
     if (closeRet)
     {
         FatalError_4A38C0(Gta2Error::kSecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 113);
@@ -265,29 +265,29 @@ void File::CreateFile(const char_type* FileName)
 // 0x4A7060
 void File::GlobalOpen(const char_type* FileName)
 {
-    if (gbGlobalFileOpen_67D160)
+    if (gGbGlobalFileOpen)
     {
         GlobalClose();
     }
 
     Error_SetName_4A0770(FileName);
 
-    ghFile_67CFEC = ::fopen(FileName, "rb");
-    if (!ghFile_67CFEC)
+    gGhFile = ::fopen(FileName, "rb");
+    if (!gGhFile)
     {
         FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 323);
     }
 
-    gbGlobalFileOpen_67D160 = 1;
+    gGbGlobalFileOpen = 1;
 }
 
 // 0x4A70C0
 void File::GlobalClose()
 {
-    if (gbGlobalFileOpen_67D160)
+    if (gGbGlobalFileOpen)
     {
-        s32 close_result = ::fclose(ghFile_67CFEC);
-        gbGlobalFileOpen_67D160 = 0;
+        s32 close_result = ::fclose(gGhFile);
+        gGbGlobalFileOpen = 0;
         if (close_result)
         {
             FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 345);
@@ -298,22 +298,22 @@ void File::GlobalClose()
 // 0x4A7110
 void File::GlobalCloseUnChecked()
 {
-    if (gbGlobalFileOpen_67D160)
+    if (gGbGlobalFileOpen)
     {
-        ::fclose(ghFile_67CFEC);
-        gbGlobalFileOpen_67D160 = 0;
+        ::fclose(gGhFile);
+        gGbGlobalFileOpen = 0;
     }
 }
 
 // 0x4A7140
 void File::GlobalSeek(u32* pOffset)
 {
-    if (!gbGlobalFileOpen_67D160)
+    if (!gGbGlobalFileOpen)
     {
         FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 416);
     }
 
-    if (::fseek(ghFile_67CFEC, *pOffset, 1))
+    if (::fseek(gGhFile, *pOffset, 1))
     {
         FileError(14, 0, 0);
     }
@@ -329,12 +329,12 @@ void File::FileError(s32 Code, s32 arg1, s32 arg2)
 // 0x4A71C0
 void File::GlobalRead(void* pBuffer, const u32& pBufferSize)
 {
-    if (!gbGlobalFileOpen_67D160)
+    if (!gGbGlobalFileOpen)
     {
         FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 438);
     }
 
-    if (Read(pBuffer, pBufferSize, 1U, ghFile_67CFEC) != 1)
+    if (Read(pBuffer, pBufferSize, 1U, gGhFile) != 1)
     {
         FileError(15, 0, 0);
     }
@@ -343,39 +343,39 @@ void File::GlobalRead(void* pBuffer, const u32& pBufferSize)
 // 0x4A7210
 bool File::GlobalRead(void* Buffer, u32* pSize)
 {
-    if (!gbGlobalFileOpen_67D160)
+    if (!gGbGlobalFileOpen)
     {
         FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 460);
     }
-    return (Read(Buffer, *pSize, 1U, ghFile_67CFEC) == 1) ? true : false;
+    return (Read(Buffer, *pSize, 1U, gGhFile) == 1) ? true : false;
 }
 
 // 0x4A7250
 size_t File::GetRemainderSize(void* Buffer, u32* pMaxFileSize)
 {
-    if (!gbGlobalFileOpen_67D160)
+    if (!gGbGlobalFileOpen)
     {
         FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 487);
     }
 
-    s32 curPos = ::ftell(ghFile_67CFEC);
+    s32 curPos = ::ftell(gGhFile);
     if (curPos == -1)
     {
         FileError(13, 0, 0);
     }
 
-    if (::fseek(ghFile_67CFEC, 0, SEEK_END))
+    if (::fseek(gGhFile, 0, SEEK_END))
     {
         FileError(14, 0, 0);
     }
 
-    s32 endPos = ::ftell(ghFile_67CFEC);
+    s32 endPos = ::ftell(gGhFile);
     if (endPos == -1)
     {
         FileError(13, 0, 0);
     }
 
-    if (::fseek(ghFile_67CFEC, curPos, 0))
+    if (::fseek(gGhFile, curPos, 0))
     {
         FileError(14, 0, 0);
     }
@@ -386,7 +386,7 @@ size_t File::GetRemainderSize(void* Buffer, u32* pMaxFileSize)
         FileError(1022, remainderSize - *pMaxFileSize, 0);
     }
 
-    if (Read(Buffer, remainderSize, 1U, ghFile_67CFEC) != 1)
+    if (Read(Buffer, remainderSize, 1U, gGhFile) != 1)
     {
         FileError(15, 0, 0);
     }

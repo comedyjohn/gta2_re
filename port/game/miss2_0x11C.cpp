@@ -134,7 +134,7 @@ void miss2_0x11C::MissionFailOnArrest_503200()
         gHud_2B00_706620->field_DC_brief.ClearAllBriefsWithPriority_5D4890(1);
         gHud_2B00_706620->field_DC_brief.ClearAllBriefsWithPriority_5D4890(3);
         gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(1, gTmpBuffer_67C598);
-        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("mfail"), hud_message_priority::important_3);
+        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("mfail"), hud_message_priority::important_3);
         gRoot_sound_66B038.PlayVoice_40F090(voice_line::jobfail_23);
 
         *gScriptManager_6F8060->field_344_mission_flag = 0;
@@ -230,7 +230,7 @@ void miss2_0x11C::PoolAllocate_5035B0()
 // 0x5035d0
 void miss2_0x11C::Log_5035D0()
 {
-    if (gDo_miss_logging_67D6BC)
+    if (gDoMissLogging)
     {
         sprintf(gTmpBuffer_67C598, "%d:\t\t%d ", gAmbientRng->GetCurRng(), static_cast<s16>(field_4_next_cmd));
         gMiss2Log_6F7698.Write_Log_4D9650(gTmpBuffer_67C598);
@@ -1176,7 +1176,7 @@ void miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030(SCR_SET_STATION* pCmd)
     s32 num_passenger;
     s32 num_freight;
 
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         str_table_entry* StringById_503080 = gScriptManager_6F8060->FindStringById_503080(pCmd->field_8_platform);
         gmp_map_zone* station_zone = gMap_0x370_6F6268->zone_by_name_4DEFD0(reinterpret_cast<const char*>(&StringById_503080[1]));
@@ -1221,7 +1221,7 @@ void miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210(SCR_TWO_PARAMS* pCmd)
 {
     str_table_entry* StringById;
 
-    if (!bSkip_trains_67D550)
+    if (!gDebugSkipTrains)
     {
         StringById = gScriptManager_6F8060->FindStringById_503080(pCmd->field_8_unsigned_1);
         const char* station_zone_name = reinterpret_cast<const char*>(&StringById[1]);
@@ -1238,7 +1238,7 @@ void miss2_0x11C::SCRCMD_DECLARE_POLICE_5052C0(SCR_DECLARE_POLICELEVEL* pCmd)
     u8 max_wanted_level = pCmd->field_A_wanted_level;
     if (max_wanted_level == 0)
     {
-        bSkip_police_67D4F9 = false;
+        gDebugSkipPolice = false;
     }
     gPolice_7B8_6FEE40->field_660_max_wanted_stars = pCmd->field_A_wanted_level; // max_wanted_level
 }
@@ -1469,10 +1469,10 @@ s16 miss2_0x11C::GetBonusResult_505EA0(u16 idx)
 // 0x505f50
 void miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50(SCR_TWO_PARAMS* pCmd)
 {
-    if (gDo_text_id_test_67D6D0)
+    if (gDoTextIdTest)
     {
         sprintf(gTmpBuffer_67C598, "%d", pCmd->field_8_unsigned_1);
-        if (!gText_0x14_704DFC->Find(gTmpBuffer_67C598))
+        if (!gText->Find(gTmpBuffer_67C598))
         {
             FatalError_4A38C0(Gta2Error::kMissionScriptIsReferringToTextIdThatDoesNotExist,
                               "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
@@ -2621,8 +2621,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_MESSAGE_5093C0()
     switch (pCmd->field_2_type)
     {
         case SCRCMD_DISPLAY_MESSAGE:
-            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find(gTmpBuffer_67C598),
-                                                                    hud_message_priority::important_3);
+            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find(gTmpBuffer_67C598), hud_message_priority::important_3);
             break;
         case SCRCMD_DISPLAY_BRIEF:
             gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(1, gTmpBuffer_67C598);
@@ -4887,7 +4886,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
         case SCRCMD_EMERG_LIGHTS_ON:
         {
             Car_BC* pCar = pPointer->field_8_car;
-            StyleCarInfo* pInfo = gGtx_0x106C_703DD4->GetCarInfo(pCar->field_84_car_info_idx);
+            StyleCarInfo* pInfo = gGtx->GetCarInfo(pCar->field_84_car_info_idx);
 
             if ((pInfo->info_flags_ & car_info_flag::kEmergency) == car_info_flag::kEmergency ||
                 pCar->field_84_car_info_idx == CarModel::kEdselfbi)
@@ -5512,7 +5511,7 @@ void miss2_0x11C::StartBonus_50DF10()
                 car_model = pCmd->field_E_id;
 
                 // French version neutralizes bonuses against law enforcement.
-                if (bIsFrench_67D53C &&
+                if (gDebugIsFrench &&
                     (car_model == CarModel::kCopcar || car_model == CarModel::kApc || car_model == CarModel::kGunjeep ||
                      car_model == CarModel::kJeep || car_model == CarModel::kSwatvan || car_model == CarModel::kEdselfbi))
                 {
@@ -5525,7 +5524,7 @@ void miss2_0x11C::StartBonus_50DF10()
             occupation = pCmd->field_E_id;
 
             // French version neutralizes bonuses against law enforcement.
-            if (bIsFrench_67D53C && (occupation == PedOcupation::kAnyLawEnforcement || occupation == PedOcupation::kPolice))
+            if (gDebugIsFrench && (occupation == PedOcupation::kAnyLawEnforcement || occupation == PedOcupation::kPolice))
             {
                 occupation = PedOcupation::kNoOccupation;
             }
@@ -6826,7 +6825,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
     {
         gScriptManager_6F8060->set_field_C1E2D_475A40(1);
         miss2_0x11C::DisableThread_505790(pCmd->field_8_triggername);
-        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("kfstart"),
+        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("kfstart"),
                                                                 hud_message_priority::important_3); // KILL FRENZY!
         gRoot_sound_66B038.PlayVoice_40F090(voice_line::killfrenzy_12); // KILL FRENZY voice
         auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_objname)); // Skull icon?
@@ -6915,8 +6914,7 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
             gScriptManager_6F8060->set_field_C1E2D_475A40(0);
             if (miss2_0x11C::GetBonusResult_505EA0(pCmd->field_8_bonusname) == -3)
             {
-                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("kfpass"),
-                                                                        hud_message_priority::important_3);
+                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("kfpass"), hud_message_priority::important_3);
                 pPlayerPedCmdPointer->field_8_char->ClearWantedPoints_420B80();
                 ++*gScriptManager_6F8060->field_338_secrets_passed;
 
@@ -6941,8 +6939,7 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
             }
             else
             {
-                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("kffail"),
-                                                                        hud_message_priority::important_3);
+                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText->Find("kffail"), hud_message_priority::important_3);
                 ++*gScriptManager_6F8060->field_33C_secrets_failed;
                 gRoot_sound_66B038.PlayVoice_40F090(voice_line::frenzyfail_18);
             }

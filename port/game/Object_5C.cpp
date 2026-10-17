@@ -3100,12 +3100,12 @@ s32 Object_2C::GetMapBlockSoundSpec_529240()
     {
         case 45U:
         case 47U:
-            result = gGtx_0x106C_703DD4->GetSpecWith3AsOne(pBlockInfo->field_0_left & 0x3FF);
+            result = gGtx->GetSpecWith3AsOne(pBlockInfo->field_0_left & 0x3FF);
             break;
 
         case 46U:
         case 48U:
-            result = gGtx_0x106C_703DD4->GetSpecWith3AsOne(pBlockInfo->field_2_right & 0x3FF);
+            result = gGtx->GetSpecWith3AsOne(pBlockInfo->field_2_right & 0x3FF);
             break;
 
         default:

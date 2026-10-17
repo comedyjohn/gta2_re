@@ -188,12 +188,12 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
         kind = 5;
     }
 
-    if (gCheatOnlyElvisPeds_67D4ED)
+    if (gCheatOnlyElvisPeds)
     {
         kind = 3;
     }
 
-    if (bNo_annoying_chars_67D586)
+    if (gDebugNoAnnoyingChars)
     {
         if (kind != 5)
         {
@@ -340,7 +340,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                 break;
             }
             case 5:
-                if (gNumberWalkingCopsSpawned_6787CD || bSkip_police_67D4F9 ||
+                if (gNumberWalkingCopsSpawned_6787CD || gDebugSkipPolice ||
                     gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit == CrewType::kArmy)
                 {
                 delloc_ret_2:
@@ -659,7 +659,7 @@ void PedManager::PedsService_4703F0()
     byte_6787D8 = byte_61A8A1 == 1;
     byte_6787D9 = byte_61A8A2 == 1;
 
-    if (!bSkip_dummies_67D4EF)
+    if (!gDebugSkipDummies)
     {
         Dummies_470330();
     }
@@ -673,7 +673,7 @@ void PedManager::PedsService_4703F0()
         gPolice_7B8_6FEE40->field_7AD_police_peds_in_range_screen = gNumPolicePedsInRangeScreen_6787EE;
     }
     bThreateningPedAdded_6787EF = 0;
-    if (bDo_iain_test_67D4E9)
+    if (gDebugDoIainTest)
     {
         u16 num_peds = gNumPedsOnScreen_6787EC;
         swprintf(gTmpBuff, L"num peds on screen : %d",

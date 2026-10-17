@@ -10,7 +10,7 @@ DEFINE_GLOBAL_INIT(s32, gGangIdx_6206B8, -1, 0x6206B8);
 
 DEFINE_GLOBAL_ARRAY(wchar_t, gGangNameWide_67E030, 4, 0x67E030);
 
-EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
+EXTERN_GLOBAL(s32, gDebugStartNetworkGame);
 
 // 0x4BE4E0
 Gang_144::Gang_144()
@@ -231,7 +231,7 @@ void Gang_144::SetName_4BF090(const char_type* pName, u8 nameLen)
 // 0x4BF0C0
 s32 Gang_144::GetCurrentWeapon_4BF0C0()
 {
-    if (bStartNetworkGame_7081F0 || field_141_always_basic_weapon)
+    if (gDebugStartNetworkGame || field_141_always_basic_weapon)
     {
         return field_104_basic_weapon;
     }
@@ -355,5 +355,5 @@ s8 GangPool_CA8::FindGangByCarModel_4BF2F0(s32 car_model)
 wchar_t* Gang_144::GetArrowColourText_4BF340()
 {
     sprintf(gTmpBuffer_67C598, "ganga%d", field_138_arrow_colour);
-    return gText_0x14_704DFC->Find(gTmpBuffer_67C598);
+    return gText->Find(gTmpBuffer_67C598);
 }

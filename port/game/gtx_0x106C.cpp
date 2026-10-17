@@ -15,14 +15,14 @@
 // Forward declarations: the functions below are in address order
 void ClearPixelsOfColourInRow(u8* pData, int width, u8 clear_target);
 
-DEFINE_GLOBAL(Gtx*, gGtx_0x106C_703DD4, 0x703DD4);
-DEFINE_GLOBAL(s16, word_703D9C, 0x703D9C);
-DEFINE_GLOBAL(s16, word_703D9A, 0x703D9A);
-DEFINE_GLOBAL(s16, word_703C3E, 0x703C3E);
-DEFINE_GLOBAL(s16, word_703DA4, 0x703DA4);
-DEFINE_GLOBAL(s16, word_703BAA, 0x703BAA);
-DEFINE_GLOBAL(s16, word_703D98, 0x703D98);
-DEFINE_GLOBAL(s16, word_703C9C, 0x703C9C);
+DEFINE_GLOBAL(Gtx*, gGtx, 0x703DD4);
+DEFINE_GLOBAL(s16, gFontType0, 0x703D9C);
+DEFINE_GLOBAL(s16, gFontType2, 0x703D9A);
+DEFINE_GLOBAL(s16, gFontType1, 0x703C3E);
+DEFINE_GLOBAL(s16, gFontType3, 0x703DA4);
+DEFINE_GLOBAL(s16, gFontTypeSlot1Of7, 0x703BAA);
+DEFINE_GLOBAL(s16, gFontTypeSlot2Of7, 0x703D98);
+DEFINE_GLOBAL(s16, gFontTypeSlot5Of7, 0x703C9C);
 
 // 0x5AA3B0
 StyleCarInfo* Gtx::GetCarInfo(u8 idx)
@@ -773,10 +773,10 @@ void Gtx::InitFontTypes(u16 fontCount)
 {
     if (fontCount == 14)
     {
-        word_703D9C = 0;
-        word_703C3E = 1;
-        word_703D9A = 2;
-        word_703DA4 = 3;
+        gFontType0 = 0;
+        gFontType1 = 1;
+        gFontType2 = 2;
+        gFontType3 = 3;
         word_703D0C = 4;
         word_703C16 = 5;
         word_703C8C = 6;
@@ -787,19 +787,19 @@ void Gtx::InitFontTypes(u16 fontCount)
         word_703B88 = 11;
         word_703DAC = 12;
         word_703B9C = 13;
-        word_703BAA = 99;
-        word_703D98 = 99;
-        word_703C9C = 99;
+        gFontTypeSlot1Of7 = 99;
+        gFontTypeSlot2Of7 = 99;
+        gFontTypeSlot5Of7 = 99;
     }
     else if (fontCount == 7)
     {
-        word_703D9C = 0;
-        word_703BAA = 1;
-        word_703D98 = 2;
-        word_703C3E = 3;
-        word_703D9A = 4;
-        word_703C9C = 5;
-        word_703DA4 = 6;
+        gFontType0 = 0;
+        gFontTypeSlot1Of7 = 1;
+        gFontTypeSlot2Of7 = 2;
+        gFontType1 = 3;
+        gFontType2 = 4;
+        gFontTypeSlot5Of7 = 5;
+        gFontType3 = 6;
     }
     else
     {

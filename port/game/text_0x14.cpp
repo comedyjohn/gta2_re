@@ -7,12 +7,12 @@
 #include "gtx_0x106C.hpp"
 #include "registry.hpp"
 
-DEFINE_GLOBAL(GameText*, gText_0x14_704DFC, 0x704DFC);
-DEFINE_GLOBAL(GameText*, gtext_0x14_6F87F0, 0x6F87F0);
-DEFINE_GLOBAL_ARRAY(wchar_t, tmpAscii2WideStr_70488C, 640, 0x70488C);
-DEFINE_GLOBAL_ARRAY(char_type, tmpWide2AsciiStr_70462C, 80, 0x70462C);
+DEFINE_GLOBAL(GameText*, gText, 0x704DFC);
+DEFINE_GLOBAL(GameText*, gGtext, 0x6F87F0);
+DEFINE_GLOBAL_ARRAY(wchar_t, gTmpAscii2WideStr, 640, 0x70488C);
+DEFINE_GLOBAL_ARRAY(char_type, gTmpWide2AsciiStr, 80, 0x70462C);
 
-const wchar_t word_626590[256] = {
+const wchar_t kExtendedCharMapPart2[256] = {
     128U, 129U, 130U, 131U, 132U, 133U, 134U, 135U, 136U, 137U, 138U, 139U, 140U, 141U, 142U, 143U, 144U, 145U, 146U, 147U, 148U, 149U,
     150U, 128U, 129U, 130U, 131U, 132U, 133U, 134U, 135U, 136U, 137U, 138U, 139U, 140U, 141U, 142U, 143U, 144U, 145U, 146U, 147U, 148U,
     149U, 173U, 173U, 175U, 176U, 177U, 178U, 179U, 180U, 181U, 182U, 183U, 184U, 185U, 186U, 187U, 188U, 189U, 190U, 191U, 192U, 193U,
@@ -26,7 +26,7 @@ const wchar_t word_626590[256] = {
     220U, 221U, 222U, 223U, 224U, 225U, 226U, 227U, 228U, 229U, 230U, 231U, 232U, 233U, 234U, 235U, 236U, 237U, 238U, 239U, 240U, 241U,
     242U, 243U, 244U, 245U, 246U, 247U, 248U, 249U, 250U, 251U, 252U, 253U, 254U, 255U};
 
-const s16 kExtendedRussianCharMap_626490[128] = {
+const s16 kExtendedRussianCharMap[128] = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   177, 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   210, 0,   0,   0,   0,   0,   0,   0,   193, 208, 192, 184, 198, 182, 199, 187, 205, 178, 181, 197, 204, 183,
@@ -56,7 +56,7 @@ u16 GameText::RemapExtendedChar(u16 ch)
         }
         else
         {
-            result = lang_code_ == 'r' ? kExtendedRussianCharMap_626490[ch - 128] : kExtendedWesternCharMap[ch - 128];
+            result = lang_code_ == 'r' ? kExtendedRussianCharMap[ch - 128] : kExtendedWesternCharMap[ch - 128];
             if (!result)
             {
                 result = 63;
@@ -213,7 +213,7 @@ u16 GameText::ToUpper(wchar_t ch)
             }
             if (ch >= 0x80 && ch <= 0xFF)
             {
-                return word_626590[ch];
+                return kExtendedCharMapPart2[ch];
             }
             break;
 
@@ -227,7 +227,7 @@ u16 GameText::ToUpper(wchar_t ch)
             }
             if (ch >= 0x80 && ch <= 0xFF)
             {
-                return word_626590[ch - 0x80];
+                return kExtendedCharMapPart2[ch - 0x80];
             }
             break;
         default:
@@ -251,7 +251,7 @@ namespace
 {
 inline s32 GetCharWidthLocal(u16 font_type, wchar_t chr)
 {
-    return gGtx_0x106C_703DD4->GetFontWidth(&font_type, &chr);
+    return gGtx->GetFontWidth(&font_type, &chr);
 }
 } // namespace
 
@@ -328,18 +328,18 @@ char* GameText::Wide2PesudoAscii(const wchar_t* pText)
     {
         // jnb also used if comparing to sizeof() value instead of
         // numerical literal! cast to s32 fixes (sizeof returns unsigned?)
-        if (dstIdx >= static_cast<int>(sizeof(tmpWide2AsciiStr_70462C) - 1))
+        if (dstIdx >= static_cast<int>(sizeof(gTmpWide2AsciiStr) - 1))
         {
             break;
         }
 
         if (*pSrc >= 0x80U)
         {
-            tmpWide2AsciiStr_70462C[dstIdx] = '#';
+            gTmpWide2AsciiStr[dstIdx] = '#';
         }
         else
         {
-            tmpWide2AsciiStr_70462C[dstIdx] = static_cast<char>(*pSrc);
+            gTmpWide2AsciiStr[dstIdx] = static_cast<char>(*pSrc);
         }
 
         pSrc++;
@@ -347,15 +347,15 @@ char* GameText::Wide2PesudoAscii(const wchar_t* pText)
     }
 
     // add null terminator
-    tmpWide2AsciiStr_70462C[dstIdx] = 0;
-    return tmpWide2AsciiStr_70462C;
+    gTmpWide2AsciiStr[dstIdx] = 0;
+    return gTmpWide2AsciiStr;
 }
 
 // 0x5B5DF0
 wchar_t* GameText::Ascii2Wide(const char_type* pStr)
 {
     // movsx vs movzx caused by unsigned vs s8
-    wchar_t* pDst = tmpAscii2WideStr_70488C;
+    wchar_t* pDst = gTmpAscii2WideStr;
     while (*pStr)
     {
         *pDst = *pStr;
@@ -365,7 +365,7 @@ wchar_t* GameText::Ascii2Wide(const char_type* pStr)
 
     // null terminate
     *pDst = 0;
-    return tmpAscii2WideStr_70488C;
+    return gTmpAscii2WideStr;
 }
 
 // 0x5B5E20
@@ -431,7 +431,7 @@ bool GameText::KeyExists(const char_type* pIdStr)
 // 0x5B5FB0
 GameText::GameText()
 {
-    gRegistry_6FF968.GetOption("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
+    gRegistry.GetOption("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
 
     if (gTmpBuffer_67C598[0] == 'e' || gTmpBuffer_67C598[0] == 'f' || gTmpBuffer_67C598[0] == 'g' || gTmpBuffer_67C598[0] == 'i' ||
         gTmpBuffer_67C598[0] == 's' || gTmpBuffer_67C598[0] == 'j' || gTmpBuffer_67C598[0] == 'r')

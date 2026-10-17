@@ -106,4 +106,4 @@ struct PlyDat
     static void Destroy();
 };
 
-EXTERN_GLOBAL(PlyDat*, gPlyDat_6FEAC0);
+EXTERN_GLOBAL(PlyDat*, gPlyDat);

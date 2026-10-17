@@ -780,8 +780,7 @@ class Car_BC
     // TODO: Find 9.6f addr
     bool HasEmergencyInfoFlag()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kEmergency) ==
-            car_info_flag::kEmergency;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kEmergency) == car_info_flag::kEmergency;
     }
 
     bool IsMaxDamage_40F890()
@@ -821,41 +820,37 @@ class Car_BC
     // 9.6f inline 0x421700
     bool HasPopupHeadlights_421700()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_2_ & car_info_flag2::kPopupHeadlights) ==
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_2_ & car_info_flag2::kPopupHeadlights) ==
             car_info_flag2::kPopupHeadlights;
     }
 
     // 9.6f inline 0x421660
     bool HasRoofLight_421660()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kRoofLight) ==
-            car_info_flag::kRoofLight;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kRoofLight) == car_info_flag::kRoofLight;
     }
 
     bool IsTrailerInfo_421640()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTrailer) == car_info_flag::kTrailer;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTrailer) == car_info_flag::kTrailer;
     }
 
     // 9.6f inline 0x4216C0
     bool HasTaxiLight_4216C0()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTaxiLight) ==
-            car_info_flag::kTaxiLight;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTaxiLight) == car_info_flag::kTaxiLight;
     }
 
     // 9.6f inline 0x421680
     bool HasBottomLeftRoofLight_421680()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kBottomRoofLight) ==
-            car_info_flag::kBottomRoofLight;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kBottomRoofLight) == car_info_flag::kBottomRoofLight;
     }
 
     // 9.6f inline 0x4216A0
     bool HasTopRoofLights_4216A0()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTopRoofLights) ==
-            car_info_flag::kTopRoofLights;
+        return (gGtx->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTopRoofLights) == car_info_flag::kTopRoofLights;
     }
 
     void SetBottomLeftRoofLightDelta_421810()
@@ -1234,7 +1229,7 @@ class Car_BC
 
     bool IsTruckCab_421620()
     {
-        StyleCarInfo* v1 = gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx);
+        StyleCarInfo* v1 = gGtx->GetCarInfo(field_84_car_info_idx);
         return v1->IsTruckCab();
     }
 
@@ -1245,7 +1240,7 @@ class Car_BC
 
     bool CanBeLiftedByCrane_447F00()
     {
-        return !IsTruckCab_421620() && !gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->IsTrailer() && !IsTrainModel_403BA0() &&
+        return !IsTruckCab_421620() && !gGtx->GetCarInfo(field_84_car_info_idx)->IsTrailer() && !IsTrainModel_403BA0() &&
             !IsLongerThanOneBlock_447ED0();
     }
 
@@ -1269,7 +1264,7 @@ class Car_BC
 
     bool CanCollideOver_4216E0()
     {
-        StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx);
+        StyleCarInfo* pCarInfo = gGtx->GetCarInfo(field_84_car_info_idx);
         return pCarInfo->IsHeavy();
     }
 

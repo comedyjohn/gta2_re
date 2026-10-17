@@ -105,7 +105,7 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
     Ang16 angle;
     Fix16Point vector(Fix16(0), Fix16(0));
 
-    if (!bSkip_particles_67D64D)
+    if (!gDebugSkipParticles)
     {
         vector.x = Fix16(0);
         vector.y = Fix16(gRng.GetInt(50) + 25) * dword_6FD548;
@@ -167,7 +167,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
     // but the rest of the function moves further away, so only the used points are declared for now.
     Fix16Point vel(Fix16(0), Fix16(0));
     Fix16Point offset;
-    if (bSkip_particles_67D64D)
+    if (gDebugSkipParticles)
     {
         return;
     }
@@ -280,7 +280,7 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
     Ang16 angle_2;
     Fix16Point velocity(Fix16(0), Fix16(0));
 
-    if (!bSkip_particles_67D64D)
+    if (!gDebugSkipParticles)
     {
         velocity.x = Fix16(0);
         velocity.y = Fix16(gRng.GetInt(50) + 25) * dword_6FD548;
@@ -349,7 +349,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
         // to set_xyz_lazy instead of pos).
         Fix16Point point_velocity;
         Ang16 angle;
-        if (!bSkip_particles_67D64D)
+        if (!gDebugSkipParticles)
         {
             if (!field_0_fire_hit_obj)
             {
@@ -435,7 +435,7 @@ void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
 {
     Ang16 angle;
     Fix16Point vector(Fix16(0), Fix16(0));
-    if (!bSkip_particles_67D64D)
+    if (!gDebugSkipParticles)
     {
         if (!field_4)
         {
@@ -555,7 +555,7 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
     Ang16 angle;
     Fix16Point vector(Fix16(0), Fix16(0));
 
-    if (!bSkip_particles_67D64D)
+    if (!gDebugSkipParticles)
     {
         gRng.GetInt(3);
         vector.x = Fix16(0);
@@ -622,7 +622,7 @@ void Particle_8::SpawnParticleSprite_5405D0(Sprite* pSprite)
 void Particle_8::SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnknown)
 {
     Fix16Point vel(Fix16(0), Fix16(0));
-    if (!bSkip_particles_67D64D)
+    if (!gDebugSkipParticles)
     {
         vel.x = Fix16(0);
         vel.y = Fix16(0);

@@ -983,7 +983,7 @@ char_type Explosion_30::Update_5434A0(Fix16 speed, Ang16 ang)
         return 1;
     }
 
-    if (bSkip_particles_67D64D)
+    if (gDebugSkipParticles)
     {
         return 1;
     }

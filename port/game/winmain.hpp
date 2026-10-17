@@ -23,7 +23,7 @@ void ResetFrameTimer_4DA830();
 
 void UpdateGameScreenSize_5D8E00();
 
-EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
+EXTERN_GLOBAL(s32, gDebugStartNetworkGame);
 EXTERN_GLOBAL_ARRAY(u8, gSyncCheckData_6F58E0, 0x20);
 void MakeInitialSyncData_4DB2E0(u8* pSyncData);
 void CompareRemotePlayers_4DB440(u8* pLocalSyncData, u8* pRemoteSyncData);
@@ -38,5 +38,5 @@ EXTERN_GLOBAL(char_type, gLighting_626A09);
 
 static inline u8 IsNetworkGame_434B10()
 {
-    return bStartNetworkGame_7081F0;
+    return gDebugStartNetworkGame;
 }

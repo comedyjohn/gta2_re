@@ -20,7 +20,7 @@ DEFINE_GLOBAL(RouteFinder*, gRouteFinder_6FFDC8, 0x6FFDC8);
 DEFINE_GLOBAL(u16, gLastRouteLength_6FFDCC, 0x6ffdcc);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FFC7C, Fix16(1), 0x6FFC7C);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FFC9C, Fix16(8), 0x6FFC9C);
-EXTERN_GLOBAL(s16, word_703BAA);
+EXTERN_GLOBAL(s16, gFontTypeSlot1Of7);
 
 // 0x588580
 char_type Junction_10::sub_588580(s32 arrow_type)
@@ -100,7 +100,7 @@ void RouteFinder::ShowJunctionIds_588620()
                 &screen_y);
 
             swprintf(gTmpBuff, L"%d", i);
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, screen_x.ToInt(), screen_y.ToInt(), word_703BAA, 1);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, screen_x.ToInt(), screen_y.ToInt(), gFontTypeSlot1Of7, 1);
         }
     }
 }
@@ -276,7 +276,7 @@ void RouteFinder::Load_RGEN_588B30()
     File::GlobalRead(&this->field_CC64_vert_segment_count, 2);
     this->field_0_route_count = 0;
 
-    if (bLog_routefinder_67D6D1)
+    if (gDebugLogRoutefinder)
     {
         int junction_idx = 0;
         do

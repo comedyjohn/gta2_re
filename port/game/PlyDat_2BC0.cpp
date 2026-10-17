@@ -7,10 +7,10 @@
 #include "file.hpp"
 #include <io.h>
 
-DEFINE_GLOBAL(PlyDat*, gPlyDat_6FEAC0, 0x6FEAC0);
-EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr_67DC8C, 32);
+DEFINE_GLOBAL(PlyDat*, gPlyDat, 0x6FEAC0);
+EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr, 32);
 DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine,
-                         gDefaultHiScores_6242B0,
+                         gDefaultHiScores,
                          10,
                          0x6242B0,
                          {L"ALISDAIR", 50000},
@@ -24,7 +24,7 @@ DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine,
                          {L"STEPHEN", 6000},
                          {L"WILLIAM", 5000}, );
 DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine,
-                         gDefaultStageHiScores_6243A0,
+                         gDefaultStageHiScores,
                          120,
                          0x6243A0, //, , 3][4][10, 0xUNKNOWN);
                          {L"ALISDAIR", 50000},
@@ -149,7 +149,7 @@ DEFINE_GLOBAL_ARRAY_INIT(ScoreTableLine,
                          {L"WILLIAM", 5000}, );
 
 // TODO
-EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
+EXTERN_GLOBAL(s32, gDebugStartNetworkGame);
 
 // 0x56B500
 HighScoreTable::HighScoreTable()
@@ -162,7 +162,7 @@ void HighScoreTable::Init()
 {
     for (auto& i : score_table_line_)
     {
-        wcscpy(i.field_0_player_name, gEmptyWStr_67DC8C);
+        wcscpy(i.field_0_player_name, gEmptyWStr);
         i.field_14_score = 0;
     }
 }
@@ -453,7 +453,7 @@ void PlyDat::UnlockStage(u8 map_num, u8 bonus_num)
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     this->plyr_stats_[slot_idx].plyr_stage_stats_[map_num][bonus_num].field_0_is_stage_unlocked = 1;
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         SavePlySlotDat(slot_idx);
     }
@@ -472,7 +472,7 @@ void PlyDat::UnlockAllStages()
         }
     }
 
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         SavePlySlotDat(slot_idx);
     }
@@ -671,14 +671,14 @@ void PlyDat::BuildMergedHiScores()
 void PlyDat::InitDefaultHiScores()
 {
     total_scores_.Init();
-    ScoreTableLine* p10StruIter = gDefaultHiScores_6242B0;
+    ScoreTableLine* p10StruIter = gDefaultHiScores;
     for (s32 k10 = 0; k10 < 10; k10++)
     {
         total_scores_.InsertScore(p10StruIter->field_0_player_name, p10StruIter->field_14_score);
         ++p10StruIter;
     }
 
-    ScoreTableLine* pSruIter = gDefaultStageHiScores_6243A0;
+    ScoreTableLine* pSruIter = gDefaultStageHiScores;
     for (auto& stage_score : stage_scores_)
     {
         for (auto& k4 : stage_score)
@@ -696,7 +696,7 @@ void PlyDat::InitDefaultHiScores()
 // 0x56C250
 void PlyDat::DoMuchCashCheat()
 {
-    if (!bStartNetworkGame_7081F0)
+    if (!gDebugStartNetworkGame)
     {
         PlySlot* pStats = &this->plyr_stats_[gGameSession_67E8E0.GetPlySlotIdx_4C59B0()];
         if (wcscmp(pStats->str_player_name_, L"MUCHCASH") == 0)
@@ -710,10 +710,10 @@ void PlyDat::DoMuchCashCheat()
 // 0x56C2C0
 void PlyDat::Create()
 {
-    if (!gPlyDat_6FEAC0)
+    if (!gPlyDat)
     {
-        gPlyDat_6FEAC0 = new PlyDat();
-        if (!gPlyDat_6FEAC0)
+        gPlyDat = new PlyDat();
+        if (!gPlyDat)
         {
             FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\plydat.cpp", 1269);
         }
@@ -723,9 +723,9 @@ void PlyDat::Create()
 // 0x56C340
 void PlyDat::Destroy()
 {
-    if (gPlyDat_6FEAC0)
+    if (gPlyDat)
     {
-        delete gPlyDat_6FEAC0;
-        gPlyDat_6FEAC0 = nullptr;
+        delete gPlyDat;
+        gPlyDat = nullptr;
     }
 }

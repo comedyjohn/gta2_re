@@ -4612,8 +4612,8 @@ void ObjectDefinition_74::SetDimensionsFromSprite_533090()
 {
     if (field_28_sprite_type != SpriteTypes::kObject)
     {
-        u16 sprite_id = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_28_sprite_type, field_1E_base_sprite_idx);
-        SpriteIndex* sprite = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_id);
+        u16 sprite_id = gGtx->GetSpriteTrueIndex(field_28_sprite_type, field_1E_base_sprite_idx);
+        SpriteIndex* sprite = gGtx->GetSpriteIndex(sprite_id);
         field_0_width = Fix16(sprite->width_) / 0x40;
         field_4_height = Fix16(sprite->height_) / 0x40;
         field_8_depth = kFpQuarter_6FCED0;
@@ -4752,13 +4752,13 @@ void ObjectDefinitions_8CA8::CreateMapObjectDefinitions_533300()
 {
     s16 sprites = 0;
     u16 i = 0;
-    ObjectInfo* pIter = gGtx_0x106C_703DD4->GetMapObjectInfo(i++);
+    ObjectInfo* pIter = gGtx->GetMapObjectInfo(i++);
     while (pIter)
     {
         ObjectDefinition_74* pDefinition = AllocDefinitionWithSprite_5332D0(pIter->field_0_model, 5, sprites, pIter->field_1_sprites);
         sprites += pIter->field_1_sprites;
         pDefinition->SetDimensionsFromSprite_533090();
-        pIter = gGtx_0x106C_703DD4->GetMapObjectInfo(i++);
+        pIter = gGtx->GetMapObjectInfo(i++);
     }
 }
 
@@ -5184,13 +5184,13 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp->field_64_next_frame_max = 3;
 
     tmp = CloneDefinition_534370(0x9a, 0xfe);
-    if (bDo_show_imaginary_67D588 == false)
+    if (gDebugDoShowImaginary == false)
     {
         tmp->field_40_collision_bucket_category = collision_bucket_category::none_2;
     }
     CloneDefinition_534370(0x109, 0xfe);
     tmp = CloneDefinition_534370(0x9f, 0x80);
-    if (bDo_show_imaginary_67D588 == false)
+    if (gDebugDoShowImaginary == false)
     {
         tmp->field_40_collision_bucket_category = collision_bucket_category::none_2;
     }
@@ -5202,7 +5202,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp->field_54_react_to_collisions_with = CollisionReaction::OnlyPeds_2;
     tmp->SetDimensions_533060(kFpPoint2_6FC578, kFpPoint2_6FC578, kFpQuarter_6F8FAC);
     tmp->field_18_mass = kFpHalf_6FC584;
-    if (bDo_show_imaginary_67D588 == false)
+    if (gDebugDoShowImaginary == false)
     {
         tmp->field_40_collision_bucket_category = collision_bucket_category::none_2;
     }
@@ -5220,7 +5220,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp->field_54_react_to_collisions_with = CollisionReaction::OnlyPeds_2;
     tmp->SetDimensions_533060((kFpOne64th_6FCEB0 * 8), (kFpOne64th_6FCEB0 * 8), kFpQuarter_6F8FAC);
     tmp->field_18_mass = kFpHalf_6FC584;
-    if (bDo_show_imaginary_67D588 == '\0')
+    if (gDebugDoShowImaginary == '\0')
     {
         tmp->field_40_collision_bucket_category = collision_bucket_category::none_2;
     }
@@ -5235,7 +5235,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp = CloneDefinition_534370(0xc1, 0xc0);
     tmp->field_38 = 0;
     tmp->field_3C_next_definition_idx = 0;
-    if (bDo_show_imaginary_67D588 == '\0')
+    if (gDebugDoShowImaginary == '\0')
     {
         tmp->field_40_collision_bucket_category = collision_bucket_category::none_2;
     }
@@ -5262,7 +5262,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp->SetRemap_533110(1);
     tmp->field_38 = 0xb1;
     tmp->field_3C_next_definition_idx = 0xb1;
-    if (bDo_kill_phones_on_answer_67D6E8 != '\0')
+    if (gDebugDoKillPhonesOnAnswer != '\0')
     {
         tmp = GetObjectDefinition_534360(0xa4);
         tmp->field_38 = 0xae;
@@ -5270,7 +5270,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     }
     tmp = CloneDefinition_534370(0xb1, 0xa4);
     tmp->SetRemap_533110(1);
-    if (bDo_kill_phones_on_answer_67D6E8 == '\0')
+    if (gDebugDoKillPhonesOnAnswer == '\0')
     {
         tmp->field_38 = 0xbb;
         tmp->field_3C_next_definition_idx = 0xbb;
@@ -5293,7 +5293,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
 
     tmp = CloneDefinition_534370(0xb3, 0xa4);
     tmp->SetRemap_533110(2);
-    if (bDo_kill_phones_on_answer_67D6E8 == '\0')
+    if (gDebugDoKillPhonesOnAnswer == '\0')
     {
         tmp->field_38 = 0xbd;
         tmp->field_3C_next_definition_idx = 0xbd;
@@ -5315,7 +5315,7 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
 
     tmp = CloneDefinition_534370(0xb5, 0xa4);
     tmp->SetRemap_533110(0);
-    if (bDo_kill_phones_on_answer_67D6E8 == '\0')
+    if (gDebugDoKillPhonesOnAnswer == '\0')
     {
         tmp->field_38 = 0xbf;
         tmp->field_3C_next_definition_idx = 0xbf;
@@ -5388,8 +5388,8 @@ void ObjectDefinitions_8CA8::CacheDef112SpritePalette_5342D0()
 void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx)
 {
     ObjectDefinition_74* pDef = GetObjectDefinition_534360(idx);
-    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(4, pDef->field_1E_base_sprite_idx);
-    SpriteIndex* psprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+    u16 sprite_idx = gGtx->GetSpriteTrueIndex(4, pDef->field_1E_base_sprite_idx);
+    SpriteIndex* psprite_index = gGtx->GetSpriteIndex(sprite_idx);
     psprite_index->ClearPixelsOfColour(1);
 }
 

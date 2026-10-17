@@ -762,8 +762,7 @@ class Ped
 
     bool IsPedGoingToEnterCar_492FD0()
     {
-        return field_258_objective == Objectives::enter_car_as_driver_35 ||
-            field_25C_internal_objective == Objectives::enter_car_as_driver_35;
+        return field_258_objective == Objectives::kEnterCarAsDriver || field_25C_internal_objective == Objectives::kEnterCarAsDriver;
     }
 
     Ang16 GetAimAngle_4CCA90()
@@ -773,7 +772,7 @@ class Ped
 
     bool isDead_403B60()
     {
-        return this->field_278_ped_state_1 == PedState1::dead_9;
+        return this->field_278_ped_state_1 == PedState1::kDead;
     }
 
     PedGroup* GetGroup_475AF0()

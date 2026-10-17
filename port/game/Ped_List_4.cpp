@@ -139,7 +139,7 @@ u8 Ped_List_4::RemoveNonCorpses_471290()
     u8 removedCount = 0;
     while (pIter)
     {
-        if (pIter->field_0_char_ped->IsActive_433B40() && pIter->field_0_char_ped->field_278_ped_state_1 == PedState1::dead_9)
+        if (pIter->field_0_char_ped->IsActive_433B40() && pIter->field_0_char_ped->field_278_ped_state_1 == PedState1::kDead)
         {
             pPrevKept = pIter;
             pIter = pIter->mpNext;
@@ -292,10 +292,10 @@ void Ped_List_4::ApplyPassengerBusStopBehavior_471630()
 {
     for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
     {
-        if (pIter->field_0_char_ped->get_occupation_403980() == PedOcupation::bus_customer_8)
+        if (pIter->field_0_char_ped->get_occupation_403980() == PedOcupation::kBusCustomer)
         {
-            pIter->field_0_char_ped->SetObjective2_463830(Objectives::no_obj_0);
-            pIter->field_0_char_ped->SetObjective(Objectives::objective_34);
+            pIter->field_0_char_ped->SetObjective2_463830(Objectives::kNoObj);
+            pIter->field_0_char_ped->SetObjective(Objectives::kObjective34);
             pIter->field_0_char_ped->SetTargetObjectiveCar(pIter->field_0_char_ped->field_16C_car);
         }
     }
@@ -306,7 +306,7 @@ void Ped_List_4::ForceTaxiPassengersToExit_471680()
 {
     for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
     {
-        if (pIter->field_0_char_ped->field_240_occupation == PedOcupation::taxi_customer_7)
+        if (pIter->field_0_char_ped->field_240_occupation == PedOcupation::kTaxiCustomer)
         {
             pIter->field_0_char_ped->field_21C_bf.bForcedOutOfTaxi = true;
         }
@@ -342,7 +342,7 @@ bool Ped_List_4::HasScriptCreatedPed_471710()
     Char_8* pIter = field_0_pFirstPed;
     while (pIter)
     {
-        if (pIter->field_0_char_ped->field_238_ped_type == PedType::script_created_5)
+        if (pIter->field_0_char_ped->field_238_ped_type == PedType::kScriptCreated)
         {
             return true;
         }

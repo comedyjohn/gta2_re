@@ -87,14 +87,14 @@ class Player
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 &&
-            ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != Objectives::objective_54);
+            ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != Objectives::kObjective54);
     }
 
     bool IsBustedObjective54_476730()
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr &&
-            pPed->get_objective_403A80() == Objectives::objective_54;
+            pPed->get_objective_403A80() == Objectives::kObjective54;
     }
 
     s32 get_lives_4766C0()

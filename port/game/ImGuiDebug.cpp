@@ -449,9 +449,9 @@ const char_type* GetOccupationStrFromPed(Ped* pPed)
                 return "Elvis";
             case PedOcupation::dummy:
                 return "Dummy";
-            case PedOcupation::robbed_driver_10:
+            case PedOcupation::kRobbedDriver:
                 return "Driver 2";
-            case PedOcupation::scared_driver_50:
+            case PedOcupation::kScaredDriver:
                 return "Driv3r";
             case PedOcupation::no_occupation:
                 return "None";
@@ -534,7 +534,7 @@ void NoRefs_sub_5B1170()
     block.field_B_slope_type = 199;
     gMap_0x370_6F6268->AddNewBlock_4E87C0(112, 152, 2, &block);
     gTestCar1_704418 = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(98), Fix16(180), word_70420C, 19, dword_7042A4);
-    gTestCar1_704418->field_98_door_lock = CarDoorLock::locked_permanently_4;
+    gTestCar1_704418->field_98_door_lock = CarDoorLock::kLockedPermanently;
     gTestCar1_704418->IncrementCarStats_443D70(8);
     gTestCar1_704418->field_78_flags |= 0x10;
     gTestCar1_704418->UpdateSpriteNum_4435F0();
@@ -663,273 +663,273 @@ const char* ObjectIdToString(s32 id)
 {
     switch (id)
     {
-        case Objects::object_0:
+        case Objects::kObject0:
             return "object_0";
-        case Objects::bin_lid_1:
+        case Objects::kBinLid:
             return "bin_lid_1";
-        case Objects::bollard_2:
+        case Objects::kBollard:
             return "bollard_2";
-        case Objects::cone_3:
+        case Objects::kCone:
             return "cone_3";
-        case Objects::boxes_4:
+        case Objects::kBoxes:
             return "boxes_4";
-        case Objects::blaster_5:
+        case Objects::kBlaster:
             return "blaster_5";
-        case Objects::rubbish_6:
+        case Objects::kRubbish:
             return "rubbish_6";
-        case Objects::bin_7:
+        case Objects::kBin:
             return "bin_7";
-        case Objects::animating_oil_8:
+        case Objects::kAnimatingOil:
             return "animating_oil_8";
-        case Objects::oil_9:
+        case Objects::kOil:
             return "oil_9";
-        case Objects::mine_10:
+        case Objects::kMine:
             return "mine_10";
-        case Objects::bush_11:
+        case Objects::kBush:
             return "bush_11";
-        case Objects::crate_12:
+        case Objects::kCrate:
             return "crate_12";
-        case Objects::footy_13:
+        case Objects::kFooty:
             return "footy_13";
-        case Objects::hardbox_14:
+        case Objects::kHardbox:
             return "hardbox_14";
-        case Objects::newsdis_15:
+        case Objects::kNewsdis:
             return "newsdis_15";
-        case Objects::oildrum_16:
+        case Objects::kOildrum:
             return "oildrum_16";
-        case Objects::tyre_17:
+        case Objects::kTyre:
             return "tyre_17";
-        case Objects::hydrant_lid_18:
+        case Objects::kHydrantLid:
             return "hydrant_lid_18";
-        case Objects::hydrant_19:
+        case Objects::kHydrant:
             return "hydrant_19";
-        case Objects::hydrant_unlid_20:
+        case Objects::kHydrantUnlid:
             return "hydrant_unlid_20";
-        case Objects::roadblock_21:
+        case Objects::kRoadblock:
             return "roadblock_21";
-        case Objects::bench_22:
+        case Objects::kBench:
             return "bench_22";
-        case Objects::package_23:
+        case Objects::kPackage:
             return "package_23";
-        case Objects::object_24:
+        case Objects::kObject24:
             return "object_24";
-        case Objects::tower_25:
+        case Objects::kTower:
             return "tower_25";
-        case Objects::object_26:
+        case Objects::kObject26:
             return "object_26";
-        case Objects::object_27:
+        case Objects::kObject27:
             return "object_27";
-        case Objects::object_28:
+        case Objects::kObject28:
             return "object_28";
-        case Objects::object_29:
+        case Objects::kObject29:
             return "object_29";
-        case Objects::object_30:
+        case Objects::kObject30:
             return "object_30";
-        case Objects::object_31:
+        case Objects::kObject31:
             return "object_31";
-        case Objects::object_32:
+        case Objects::kObject32:
             return "object_32";
-        case Objects::object_33:
+        case Objects::kObject33:
             return "object_33";
-        case Objects::object_34:
+        case Objects::kObject34:
             return "object_34";
-        case Objects::object_35:
+        case Objects::kObject35:
             return "object_35";
-        case Objects::object_36:
+        case Objects::kObject36:
             return "object_36";
-        case Objects::object_37:
+        case Objects::kObject37:
             return "object_37";
-        case Objects::object_38:
+        case Objects::kObject38:
             return "object_38";
-        case Objects::object_39:
+        case Objects::kObject39:
             return "object_39";
-        case Objects::object_40:
+        case Objects::kObject40:
             return "object_40";
-        case Objects::explode_medium_41:
+        case Objects::kExplodeMedium:
             return "explode_medium_41";
-        case Objects::object_42:
+        case Objects::kObject42:
             return "object_42";
-        case Objects::object_43:
+        case Objects::kObject43:
             return "object_43";
-        case Objects::object_44:
+        case Objects::kObject44:
             return "object_44";
-        case Objects::object_45:
+        case Objects::kObject45:
             return "object_45";
-        case Objects::object_46:
+        case Objects::kObject46:
             return "object_46";
 
-        case Objects::moving_collect_00_96:
+        case Objects::kMovingCollect00:
             return "moving_collect_00_96";
-        case Objects::moving_collect_01_97:
+        case Objects::kMovingCollect01:
             return "moving_collect_01_97";
-        case Objects::moving_collect_02_98:
+        case Objects::kMovingCollect02:
             return "moving_collect_02_98";
-        case Objects::moving_collect_03_99:
+        case Objects::kMovingCollect03:
             return "moving_collect_03_99";
-        case Objects::moving_collect_04_100:
+        case Objects::kMovingCollect04:
             return "moving_collect_04_100";
-        case Objects::moving_collect_05_101:
+        case Objects::kMovingCollect05:
             return "moving_collect_05_101";
-        case Objects::moving_collect_06_102:
+        case Objects::kMovingCollect06:
             return "moving_collect_06_102";
-        case Objects::moving_collect_07_103:
+        case Objects::kMovingCollect07:
             return "moving_collect_07_103";
-        case Objects::moving_collect_08_104:
+        case Objects::kMovingCollect08:
             return "moving_collect_08_104";
-        case Objects::moving_collect_09_105:
+        case Objects::kMovingCollect09:
             return "moving_collect_09_105";
-        case Objects::moving_collect_10_106:
+        case Objects::kMovingCollect10:
             return "moving_collect_10_106";
-        case Objects::moving_collect_11_107:
+        case Objects::kMovingCollect11:
             return "moving_collect_11_107";
-        case Objects::moving_collect_12_108:
+        case Objects::kMovingCollect12:
             return "moving_collect_12_108";
-        case Objects::moving_collect_13_109:
+        case Objects::kMovingCollect13:
             return "moving_collect_13_109";
-        case Objects::ped_pushed_110:
+        case Objects::kPedPushed:
             return "ped_pushed_110";
-        case Objects::moving_collect_15_111:
+        case Objects::kMovingCollect15:
             return "moving_collect_15_111";
-        case Objects::moving_collect_16_112:
+        case Objects::kMovingCollect16:
             return "moving_collect_16_112";
-        case Objects::explosion_113:
+        case Objects::kExplosion:
             return "explosion_113";
-        case Objects::water_cannon_114:
+        case Objects::kWaterCannon:
             return "water_cannon_114";
-        case Objects::moving_collect_19_115:
+        case Objects::kMovingCollect19:
             return "moving_collect_19_115";
-        case Objects::moving_collect_20_116:
+        case Objects::kMovingCollect20:
             return "moving_collect_20_116";
-        case Objects::moving_collect_21_117:
+        case Objects::kMovingCollect21:
             return "moving_collect_21_117";
-        case Objects::moving_collect_22_118:
+        case Objects::kMovingCollect22:
             return "moving_collect_22_118";
-        case Objects::moving_collect_23_119:
+        case Objects::kMovingCollect23:
             return "moving_collect_23_119";
-        case Objects::road_skidmark_120:
+        case Objects::kRoadSkidmark:
             return "road_skidmark_120";
-        case Objects::moving_collect_25_121:
+        case Objects::kMovingCollect25:
             return "moving_collect_25_121";
-        case Objects::pedestrian_crossing_marker_122:
+        case Objects::kPedestrianCrossingMarker:
             return "pedestrian_crossing_marker_122";
-        case Objects::moving_collect_27_123:
+        case Objects::kMovingCollect27:
             return "moving_collect_27_123";
-        case Objects::moving_collect_28_124:
+        case Objects::kMovingCollect28:
             return "moving_collect_28_124";
-        case Objects::moving_collect_29_125:
+        case Objects::kMovingCollect29:
             return "moving_collect_29_125";
-        case Objects::moving_collect_30_126:
+        case Objects::kMovingCollect30:
             return "moving_collect_30_126";
-        case Objects::explosion_fragments_127:
+        case Objects::kExplosionFragments:
             return "explosion_fragments_127";
-        case Objects::rocket_bullet_128:
+        case Objects::kRocketBullet:
             return "rocket_bullet_128";
-        case Objects::bus_stop_marker_129:
+        case Objects::kBusStopMarker:
             return "bus_stop_marker_129";
-        case Objects::car_shop_130:
+        case Objects::kCarShop130:
             return "car_shop_130";
-        case Objects::car_shop_busy_131:
+        case Objects::kCarShopBusy:
             return "car_shop_busy_131";
-        case Objects::moving_collect_36_132:
+        case Objects::kMovingCollect36:
             return "moving_collect_36_132";
-        case Objects::moving_collect_37_133:
+        case Objects::kMovingCollect37:
             return "moving_collect_37_133";
-        case Objects::crane_unknown_134:
+        case Objects::kCraneUnknown:
             return "crane_unknown_134";
-        case Objects::crane_rotor_135:
+        case Objects::kCraneRotor:
             return "crane_rotor_135";
-        case Objects::crane_hook_136:
+        case Objects::kCraneHook:
             return "crane_hook_136";
-        case Objects::crane_base_137:
+        case Objects::kCraneBase:
             return "crane_base_137";
-        case Objects::moving_molotov_138:
+        case Objects::kMovingMolotov:
             return "moving_molotov_138";
-        case Objects::conveyor_139:
+        case Objects::kConveyor:
             return "conveyor_139";
-        case Objects::crane_counterweight_140:
+        case Objects::kCraneCounterweight:
             return "crane_counterweight_140";
 
-        case Objects::destructor_141:
+        case Objects::kDestructor:
             return "destructor_141";
-        case Objects::crusher_piston_142:
+        case Objects::kCrusherPiston:
             return "crusher_piston_142";
-        case Objects::crusher_central_spot_143:
+        case Objects::kCrusherCentralSpot:
             return "crusher_central_spot_143";
-        case Objects::object_144:
+        case Objects::kObject144:
             return "object_144";
-        case Objects::particle_system_145:
+        case Objects::kParticleSystem:
             return "particle_system_145";
-        case Objects::firejet_146:
+        case Objects::kFirejet:
             return "firejet_146";
-        case Objects::object_147:
+        case Objects::kObject147:
             return "object_147";
-        case Objects::small_brown_skid_148:
+        case Objects::kSmallBrownSkid:
             return "small_brown_skid_148";
-        case Objects::small_grey_skid_149:
+        case Objects::kSmallGreySkid:
             return "small_grey_skid_149";
-        case Objects::crusher_piston_base_150:
+        case Objects::kCrusherPistonBase:
             return "crusher_piston_base_150";
-        case Objects::medium_brown_skid_151:
+        case Objects::kMediumBrownSkid:
             return "medium_brown_skid_151";
-        case Objects::medium_grey_skid_152:
+        case Objects::kMediumGreySkid:
             return "medium_grey_skid_152";
-        case Objects::medium_red_skid_153:
+        case Objects::kMediumRedSkid:
             return "medium_red_skid_153";
-        case Objects::flamethrower_fire_154:
+        case Objects::kFlamethrowerFire:
             return "flamethrower_fire_154";
-        case Objects::car_stop_155:
+        case Objects::kCarStop:
             return "car_stop_155";
-        case Objects::big_white_skid_156:
+        case Objects::kBigWhiteSkid:
             return "big_white_skid_156";
-        case Objects::medium_white_skid_157:
+        case Objects::kMediumWhiteSkid:
             return "medium_white_skid_157";
-        case Objects::small_white_skid_158:
+        case Objects::kSmallWhiteSkid:
             return "small_white_skid_158";
-        case Objects::object_159:
+        case Objects::kObject159:
             return "object_159";
-        case Objects::rocket_160:
+        case Objects::kRocket:
             return "rocket_160";
-        case Objects::savepoint_161:
+        case Objects::kSavepoint:
             return "savepoint_161";
-        case Objects::car_shop_162:
+        case Objects::kCarShop162:
             return "car_shop_162";
-        case Objects::busy_car_shop_163:
+        case Objects::kBusyCarShop:
             return "busy_car_shop_163";
-        case Objects::blue_phone_164:
+        case Objects::kBluePhone:
             return "blue_phone_164";
-        case Objects::maybe_train_headlight_165:
+        case Objects::kMaybeTrainHeadlight:
             return "maybe_train_headlight_165";
-        case Objects::diagonal_wall_collision_obj_166:
+        case Objects::kDiagonalWallCollisionObj:
             return "diagonal_wall_collision_obj_166";
-        case Objects::maybe_door_trigger_167:
+        case Objects::kMaybeDoorTrigger:
             return "maybe_door_trigger_167";
 
-        case Objects::huge_red_skid_189:
+        case Objects::kHugeRedSkid:
             return "huge_red_skid_189";
-        case Objects::huge_white_skid_190:
+        case Objects::kHugeWhiteSkid:
             return "huge_white_skid_190";
-        case Objects::huge_brown_skid_191:
+        case Objects::kHugeBrownSkid:
             return "huge_brown_skid_191";
-        case Objects::shotgun_bullet_192:
+        case Objects::kShotgunBullet:
             return "shotgun_bullet_192";
-        case Objects::tanktop_193:
+        case Objects::kTanktop:
             return "tanktop_193";
-        case Objects::fire_hitting_194:
+        case Objects::kFireHitting:
             return "fire_hitting_194";
-        case Objects::object_195:
+        case Objects::kObject195:
             return "object_195";
-        case Objects::animating_rubbish_196:
+        case Objects::kAnimatingRubbish:
             return "animating_rubbish_196";
-        case Objects::fire_197:
+        case Objects::kFire:
             return "ped_like_fire_197";
-        case Objects::maybe_bullet_on_fire_198:
+        case Objects::kMaybeBulletOnFire:
             return "maybe_bullet_on_fire_198";
-        case Objects::object_199:
+        case Objects::kObject199:
             return "object_199";
-        case Objects::remote_200:
+        case Objects::kRemote:
             return "remote_200";
 
-        case Objects::secret_token_266:
+        case Objects::kSecretToken:
             return "secret_token_266";
 
         default:
@@ -1441,13 +1441,13 @@ void ImGuiDebugDraw()
             if (ImGui::Button("Testing1"))
             {
                 gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(
-                    PaletteTypes::user_remaps_7,
+                    PaletteTypes::kUserRemaps,
                     6);
             }
 
             if (ImGui::Button("Testing2"))
             {
-                gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::sprites_2,
+                gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kSprites,
                                                                                                                     0);
             }
         }
@@ -1792,11 +1792,11 @@ void ImGuiDebugDraw()
                     pNewCar->field_5C_AI->SetCar_453BF0(pNewCar);
                     pNewCar->SpawnDriverPed();
 
-                    pNewCar->field_7C_ped_type = PedType::script_created_5;
+                    pNewCar->field_7C_ped_type = PedType::kScriptCreated;
                     pNewCar->field_76_last_seen_timer = 0;
-                    if (pNewCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
+                    if (pNewCar->field_98_door_lock != CarDoorLock::kLockedPermanently)
                     {
-                        pNewCar->field_98_door_lock = CarDoorLock::lockout_thief_2;
+                        pNewCar->field_98_door_lock = CarDoorLock::kLockoutThief;
                     }
 
                     //pNewCar->field_9C = 3;
@@ -2099,7 +2099,7 @@ void ImGuiDebugDraw()
                 //ClearGlobalArrow();
                 for (; id < 8000; id++)
                 {
-                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::code_obj1_4, id);
+                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCodeObj1, id);
                     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
                     if (sprite_index_5AA440)
                     {
@@ -2108,7 +2108,7 @@ void ImGuiDebugDraw()
                             bFound = true;
                             if (spawned_obj != nullptr && spawned_obj->field_4)
                             {
-                                spawned_obj->field_4->field_30_sprite_type_enum = SpriteTypes::code_obj1_4;
+                                spawned_obj->field_4->field_30_sprite_type_enum = SpriteTypes::kCodeObj1;
                                 spawned_obj->field_4->set_id_lazy_4206C0(id);
                                 //PointArrowToEntity(0, 0, spawned_obj);
                             }
@@ -2727,43 +2727,43 @@ void ImGuiDebugDraw()
                             swprintf(tmpBuff_67BD9C, L"(%d, %d)", pPedIter->field_21C_bf.bPanicking, pPedIter->field_21C_bf.bAttacking);
                             DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_7)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective7)
                         {
                             DisplayTextAtSprite("Obj 7", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_8)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective8)
                         {
                             DisplayTextAtSprite("Obj 8", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_9)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective9)
                         {
                             DisplayTextAtSprite("Obj 9", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_10)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective10)
                         {
                             DisplayTextAtSprite("Obj 10", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_11)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective11)
                         {
                             DisplayTextAtSprite("Obj 11", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_15)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective15)
                         {
                             DisplayTextAtSprite("Obj 15", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_17)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective17)
                         {
                             DisplayTextAtSprite("Obj 17", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_18)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective18)
                         {
                             DisplayTextAtSprite("Obj 18", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_28)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective28)
                         {
                             DisplayTextAtSprite("Obj 28", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == Objectives::objective_43)
+                        else if (pPedIter->field_258_objective == Objectives::kObjective43)
                         {
                             DisplayTextAtSprite("Obj 43", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
@@ -3114,7 +3114,7 @@ void ImGuiDebugDraw()
                     pParticle->field_2C_counter = counter;
                     pParticle->field_2E = f_2E;
 
-                    pParticle->field_30_pNext->SetType_4206F0(SpriteTypes::code_obj2_8);
+                    pParticle->field_30_pNext->SetType_4206F0(SpriteTypes::kCodeObj2);
                     pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 132);
                     pParticle->field_46_sub_state = 0; // TODO
                     pParticle->field_48_timer = timer;

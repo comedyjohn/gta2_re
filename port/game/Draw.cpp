@@ -392,7 +392,7 @@ void DrawText_5D8A10(const wchar_t* pText,
 
     if (font_type >= 101U)
     {
-        if (curr_palette_type == PaletteTypes::font_remaps_8)
+        if (curr_palette_type == PaletteTypes::kFontRemaps)
         {
             gKanjiFont_6F5168->SetGlyphParamsFromRemap_4D29D0(og_palette);
         }
@@ -424,7 +424,7 @@ void DrawText_5D8A10(const wchar_t* pText,
             // swap palettes
             if (curr_palette_type == og_palette_type && curr_palette == og_palette)
             {
-                curr_palette_type = PaletteTypes::font_remaps_8;
+                curr_palette_type = PaletteTypes::kFontRemaps;
                 curr_palette = font_type < 0x65U ? 0 : 5;
             }
             else
@@ -435,7 +435,7 @@ void DrawText_5D8A10(const wchar_t* pText,
 
             if (font_type >= 101U)
             {
-                if (curr_palette_type == PaletteTypes::font_remaps_8)
+                if (curr_palette_type == PaletteTypes::kFontRemaps)
                 {
                     gKanjiFont_6F5168->SetGlyphParamsFromRemap_4D29D0(curr_palette);
                 }
@@ -454,9 +454,9 @@ void DrawText_5D8A10(const wchar_t* pText,
                 if (font_type < 0xC9 || font_type > 203)
                 {
                     u16 sprt_relative_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(font_type, text_char - 33);
-                    u16 sprt_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::font_7, sprt_relative_idx);
+                    u16 sprt_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, sprt_relative_idx);
                     pSprIdx = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprt_idx);
-                    pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(SpriteTypes::font_7,
+                    pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(SpriteTypes::kFont,
                                                                                   sprt_relative_idx,
                                                                                   curr_palette_type,
                                                                                   curr_palette);

@@ -136,10 +136,10 @@ void CrimeReportQueue_CC::ReportCrimeForPed(u32 crime_type, Ped* pPed)
         case PedOcupation::swat:
         case PedOcupation::fbi:
         case PedOcupation::army_army:
-        case PedOcupation::walking_guard_29:
-        case PedOcupation::unknown_cop_occu_30:
-        case PedOcupation::unknown_cop_occu_31:
-        case PedOcupation::roadblock_cop_37:
+        case PedOcupation::kWalkingGuard:
+        case PedOcupation::kUnknownCopOccu30:
+        case PedOcupation::kUnknownCopOccu31:
+        case PedOcupation::kRoadblockCop:
             // Feds are allowed to do crime
             return;
 

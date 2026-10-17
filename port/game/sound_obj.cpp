@@ -3681,7 +3681,7 @@ s32 sound_obj::AddSoundObject_419FA0(SoundObject_10* pTuring)
                     {
                         switch (pEntSprite->GetType_416B40())
                         {
-                            case SpriteTypes::car_2: // note: sub eax, 2 added via switch case instead of if
+                            case SpriteTypes::kCar: // note: sub eax, 2 added via switch case instead of if
                             {
                                 auto* pNewObj = new SoundPosEntry_C();
                                 field_147C_audio_entities[idx].field_8_pAlloc = pNewObj;
@@ -3738,7 +3738,7 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
                 Sprite* pAny = pTuring->field_C_pAny.pSprite;
                 switch (pAny->GetType_416B40())
                 {
-                    case SpriteTypes::car_2:
+                    case SpriteTypes::kCar:
 
                         delete field_147C_audio_entities[idx].field_8_pAlloc;
 
@@ -5322,7 +5322,7 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
     Object_2C* pObj = pParams->field_0_pObj->field_8_object_2C_ptr;
     switch (pObj->field_18_model)
     {
-        case Objects::rocket_bullet_128:
+        case Objects::kRocketBullet:
             samp_idx = 191;
             bLoop = 0;
             volume = 127;
@@ -5333,10 +5333,10 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             release_mod = 15;
             break;
 
-        case Objects::blue_phone_164:
-        case Objects::red_phone_177:
-        case Objects::yellow_phone_179:
-        case Objects::green_phone_181:
+        case Objects::kBluePhone:
+        case Objects::kRedPhone:
+        case Objects::kYellowPhone:
+        case Objects::kGreenPhone:
             if (field_5448_m_FrameCounter % 130)
             {
                 return;
@@ -5356,12 +5356,12 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
 
         case 185:
         case 187:
-        case Objects::huge_red_skid_189:
-        case Objects::huge_brown_skid_191:
+        case Objects::kHugeRedSkid:
+        case Objects::kHugeBrownSkid:
             UpdateRadioChatterLoop_41FCA0();
             return;
 
-        case Objects::fire_197:
+        case Objects::kFire:
             samp_idx = 189;
             volume = 50;
             bLoop = 0;
@@ -5372,7 +5372,7 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             release_mod = 15;
             break;
 
-        case Objects::explosion_113:
+        case Objects::kExplosion:
         {
             Explosion_30* pExplosion = pObj->field_C_pAny.pExplosion;
             if (!pExplosion)
@@ -5498,7 +5498,7 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             break;
         }
 
-        case Objects::blaster_5:
+        case Objects::kBlaster:
             samp_idx = 145;
             volume = 50;
             bLoop = 0;
@@ -5508,7 +5508,7 @@ void sound_obj::ProcessOtherObjects_41F520(Sound_Params_8* pParams)
             release_mod = 7;
             break;
 
-        case Objects::conveyor_139:
+        case Objects::kConveyor:
             samp_idx = 150;
             bLoop = 0;
             volume = 20;
@@ -5735,7 +5735,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
 
         switch (pB4->get_ped_state_2_41B090())
         {
-            case PedState2::electrocuted_27:
+            case PedState2::kElectrocuted:
                 samp_idx_ = 58;
                 this->field_30_sQueueSample.field_41 = 0;
                 this->field_30_sQueueSample.field_20_rate = gSampManager_6FFF00.GetPlayBackRateIdx_58DBF0(58);
@@ -5746,7 +5746,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
                 max_dist = 35;
                 break;
 
-            case PedState2::Unknown_26:
+            case PedState2::kUnknown26:
                 if (!pB4->field_7C_pPed->is_player_41B0A0() && (this->field_30_sQueueSample.field_0_EntityIndex & 1) != 0)
                 {
                     return;

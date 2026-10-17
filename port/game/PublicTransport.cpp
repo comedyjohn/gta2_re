@@ -418,7 +418,7 @@ void Train_58::UpdatePassengerAI_578390()
                                 {
                                     Ped* pNewPed = gPedManager_6787BC->SpawnTrainLeaver_470E30();
                                     pNewPed->field_16C_car = *pTrainCar;
-                                    pNewPed->SetObjective(Objectives::leave_train_38);
+                                    pNewPed->SetObjective(Objectives::kLeaveTrain);
                                     Ped_List_4* pLink = &pNewPed->field_16C_car->field_4_passengers_list;
                                     pNewPed->SetTargetObjectiveCar(*pTrainCar);
                                     pLink->AddPedToFront_471140(pNewPed);
@@ -447,11 +447,11 @@ void Train_58::UpdatePassengerAI_578390()
                             Ped* pNewPed_1 = gPedManager_6787BC->SpawnTrainLeaver_470E30();
                             pNewPed_1->field_16C_car = this->field_C_carriages[0];
                             this->field_C_carriages[0]->field_4_passengers_list.AddPedToFront_471140(pNewPed_1);
-                            pNewPed_1->SetObjective(Objectives::leave_train_38);
+                            pNewPed_1->SetObjective(Objectives::kLeaveTrain);
                             Car_BC* pTargetCar = this->field_C_carriages[0];
                             pNewPed_1->SetTargetObjectiveCar(pTargetCar);
                             pNewPed_1->set_target_car_door_403A70(2);
-                            pNewPed_1->set_occupation_403970(PedOcupation::bus_customer_8);
+                            pNewPed_1->set_occupation_403970(PedOcupation::kBusCustomer);
                             if (this->field_0 == 1)
                             {
                                 this->field_56_passenger_count--;
@@ -462,11 +462,11 @@ void Train_58::UpdatePassengerAI_578390()
                     {
                         Ped* pRemoved = this->field_C_carriages[0]->field_4_passengers_list.RemoveFirstPed_471320();
                         pRemoved->field_16C_car = this->field_C_carriages[0];
-                        pRemoved->SetObjective(Objectives::leave_train_38);
+                        pRemoved->SetObjective(Objectives::kLeaveTrain);
                         Car_BC* pTargetCar_ = this->field_C_carriages[0];
                         pRemoved->SetTargetObjectiveCar(pTargetCar_);
                         pRemoved->set_target_car_door_403A70(2);
-                        pRemoved->set_occupation_403970(PedOcupation::bus_customer_8);
+                        pRemoved->set_occupation_403970(PedOcupation::kBusCustomer);
                         if (this->field_0 == 1)
                         {
                             if (this->field_56_passenger_count > 0)
@@ -802,7 +802,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     }
                     pTrain->field_C_carriages[0]->field_5C_AI->SetCar_453BF0(pTrain->field_C_carriages[0]);
                     pTrain->field_C_carriages[0]->SpawnDriverPed();
-                    pTrain->field_C_carriages[0]->SetDriverPedType_421560(PedType::script_created_5);
+                    pTrain->field_C_carriages[0]->SetDriverPedType_421560(PedType::kScriptCreated);
                     Object_2C* pLight = gObject_5C_6F8F84->NewLight_529A40(94, 138, 2, 0xFF8000, 3, 255);
                     pTrain->field_C_carriages[0]->field_0_attachments.PushImpactEvent_5A6D00(pLight->field_4, 0, 2, kAng0_6FF1BC);
                     pTrain->field_C_carriages[0]->LockPermanently_475C30();
@@ -810,7 +810,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     for (j = 0; j < wagons; j++)
                     {
                         pTrain->field_C_carriages[j + 1]->SpawnDriverPed();
-                        pTrain->field_C_carriages[j + 1]->SetDriverPedType_421560(PedType::script_created_5);
+                        pTrain->field_C_carriages[j + 1]->SetDriverPedType_421560(PedType::kScriptCreated);
                         pTrain->field_C_carriages[j + 1]->SetupCarPhysicsAndSpriteBinding_43BCA0();
                         pTrain->field_C_carriages[j + 1]->StartEngine_426E00();
                         if (pTrain->field_C_carriages[j + 1]->field_84_car_info_idx == CarModel::TRAINFB)
@@ -1026,7 +1026,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
             }
 
             gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &highest_zpos);
-            gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::bus_stop_marker_129,
+            gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kBusStopMarker,
                                                     kFpHalf_6FEEE8 + xpos,
                                                     kFpHalf_6FEEE8 + ypos,
                                                     kFpOne_6FF07C + Fix16(highest_zpos),
@@ -1320,7 +1320,7 @@ void PublicTransport_181C::BusesService_579CA0()
                     }
                     field_17C0_bus.field_C_carriages[0]->field_5C_AI->SetCar_453BF0(field_17C0_bus.field_C_carriages[0]);
                     field_17C0_bus.field_C_carriages[0]->SpawnDriverPed();
-                    field_17C0_bus.field_C_carriages[0]->SetDriverPedType_421560(PedType::special_ped_4);
+                    field_17C0_bus.field_C_carriages[0]->SetDriverPedType_421560(PedType::kSpecialPed);
                     field_17C0_bus.field_C_carriages[0]->InitCarAIControl_440590();
                     field_17C0_bus.field_C_carriages[0]->StartEngine_426E00();
 
@@ -1347,7 +1347,7 @@ void PublicTransport_181C::BusesService_579CA0()
                 {
                     if (pBusCar->field_54_driver)
                     {
-                        if (pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::unknown_2 &&
+                        if (pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::kUnknown2 &&
                             pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::driver)
                         {
                             field_17C0_bus.field_0 = 1;
@@ -1361,7 +1361,7 @@ void PublicTransport_181C::BusesService_579CA0()
                 {
                     if (pBusCar->field_54_driver)
                     {
-                        if (pBusCar->field_54_driver->get_occupation_403980() == PedOcupation::angry_armed_robbed_driver_12)
+                        if (pBusCar->field_54_driver->get_occupation_403980() == PedOcupation::kAngryArmedRobbedDriver)
                         {
                             field_17C0_bus.field_0 = 0;
                             field_17C0_bus.field_2 = 0;
@@ -1504,7 +1504,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
             {
                 if (!pTrain->field_C_carriages[0]->field_54_driver)
                 {
-                    pCar->SetDriverPedType_421560(PedType::unknown_1);
+                    pCar->SetDriverPedType_421560(PedType::kUnknown1);
                     pTrain->field_0 = 0;
                 }
                 else

@@ -45,7 +45,7 @@ void RemapTextureSet_14::LoadTextures_5B8F00()
         while (i < field_4_texture_count)
         {
             pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(i);
-            tmp = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::sprites_2, i);
+            tmp = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, i);
             t2 = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(tmp);
 
             field_0_pTextures[i++] = pgbh_RegisterTexture(
@@ -140,11 +140,11 @@ void TextureCache_15D8::FreePals_5B9140()
 void TextureCache_15D8::LoadCarDamageTextures_5B9180()
 {
     u16 width_height = 64;
-    if (gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::car_2))
+    if (gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCar))
     {
         field_1000_bFreeCarDamageTextures = 1;
-        u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::car_2, 0);
-        u16 true_pal_idx = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::sprites_2, sprite_idx);
+        u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCar, 0);
+        u16 true_pal_idx = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx);
         u16 pal_idx = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(true_pal_idx);
 
         for (u32 idx = 0; idx < 48; idx++)
@@ -164,11 +164,11 @@ void TextureCache_15D8::LoadCarDamageTextures_5B9180()
 s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
 {
     const u16 og_idx = field_15D4_next_digit_idx;
-    const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::user_6, palette);
+    const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, palette);
     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u8* field_0_pData = sprite_index_5AA440->field_0_pData;
     const u16 phys_pal_5AA6F0 =
-        gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::sprites_2, sprite_idx));
+        gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx));
 
     field_15D4_next_digit_idx += num_of_digits;
 
@@ -211,46 +211,46 @@ void TextureCache_15D8::LoadStyleTextures_5B9350()
     LoadPals_5B90F0();
     ReadTextures_5B92E0();
 
-    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::sprites_2),
+    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kSprites),
                                             1,
-                                            SpriteTypes::unknown_0,
-                                            PaletteTypes::sprites_2);
+                                            SpriteTypes::kUnknown,
+                                            PaletteTypes::kSprites);
     field_1548_sprite_textures.LoadTextures_5B8F00();
 
-    field_155C_car_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::car_2),
-                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::car_remaps_3),
-                                               SpriteTypes::car_2,
-                                               PaletteTypes::car_remaps_3);
+    field_155C_car_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCar),
+                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kCarRemaps),
+                                               SpriteTypes::kCar,
+                                               PaletteTypes::kCarRemaps);
     field_155C_car_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1570_ped_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::ped_3),
-                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::ped_remaps_4),
-                                               SpriteTypes::ped_3,
-                                               PaletteTypes::ped_remaps_4);
+    field_1570_ped_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kPed),
+                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kPedRemaps),
+                                               SpriteTypes::kPed,
+                                               PaletteTypes::kPedRemaps);
     field_1570_ped_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1584_code_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::code_obj1_4),
-                                                    gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::code_obj_remaps_5),
-                                                    SpriteTypes::code_obj1_4,
-                                                    PaletteTypes::code_obj_remaps_5);
+    field_1584_code_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCodeObj1),
+                                                    gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kCodeObjRemaps),
+                                                    SpriteTypes::kCodeObj1,
+                                                    PaletteTypes::kCodeObjRemaps);
     field_1584_code_obj_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1598_map_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::map_obj_5),
-                                                   gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::map_obj_remaps_6),
-                                                   SpriteTypes::map_obj_5,
-                                                   PaletteTypes::map_obj_remaps_6);
+    field_1598_map_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kMapObj),
+                                                   gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kMapObjRemaps),
+                                                   SpriteTypes::kMapObj,
+                                                   PaletteTypes::kMapObjRemaps);
     field_1598_map_obj_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_15AC_font_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::font_7),
-                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::font_remaps_8),
-                                                SpriteTypes::font_7,
-                                                PaletteTypes::font_remaps_8);
+    field_15AC_font_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kFont),
+                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kFontRemaps),
+                                                SpriteTypes::kFont,
+                                                PaletteTypes::kFontRemaps);
     field_15AC_font_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_15C0_user_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::user_6),
-                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::user_remaps_7),
-                                                SpriteTypes::user_6,
-                                                PaletteTypes::user_remaps_7);
+    field_15C0_user_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kUser),
+                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kUserRemaps),
+                                                SpriteTypes::kUser,
+                                                PaletteTypes::kUserRemaps);
     field_15C0_user_remap_textures.LoadRemappedTextures_5B8F70();
 
     LoadCarDamageTextures_5B9180();
@@ -265,25 +265,25 @@ STexture* TextureCache_15D8::GetSpriteTexture_5B94F0(s32 sprite_type, u16 sprite
 
     switch (palette_type)
     {
-        case PaletteTypes::sprites_2:
+        case PaletteTypes::kSprites:
             result = field_1548_sprite_textures.get_texture_5B90A0(sprite_type, sprite_id);
             break;
-        case PaletteTypes::car_remaps_3:
+        case PaletteTypes::kCarRemaps:
             result = field_155C_car_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
-        case PaletteTypes::ped_remaps_4:
+        case PaletteTypes::kPedRemaps:
             result = field_1570_ped_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
-        case PaletteTypes::code_obj_remaps_5:
+        case PaletteTypes::kCodeObjRemaps:
             result = field_1584_code_obj_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
-        case PaletteTypes::map_obj_remaps_6:
+        case PaletteTypes::kMapObjRemaps:
             result = field_1598_map_obj_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
-        case PaletteTypes::font_remaps_8:
+        case PaletteTypes::kFontRemaps:
             result = field_15AC_font_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
-        case PaletteTypes::user_remaps_7:
+        case PaletteTypes::kUserRemaps:
             result = field_15C0_user_remap_textures.GetRemappedTexture_5B90D0(sprite_id, remap);
             break;
         default:

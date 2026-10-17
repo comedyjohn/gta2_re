@@ -2190,7 +2190,7 @@ port/game/miss2_0x11C.cpp,cppcoreguidelines-init-variables,65
 port/game/miss2_0x11C.cpp,cppcoreguidelines-narrowing-conversions,118
 port/game/miss2_0x11C.cpp,cppcoreguidelines-owning-memory,1
 port/game/miss2_0x11C.cpp,cppcoreguidelines-prefer-member-initializer,11
-port/game/miss2_0x11C.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,64
+port/game/miss2_0x11C.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,63
 port/game/miss2_0x11C.cpp,cppcoreguidelines-pro-bounds-constant-array-index,9
 port/game/miss2_0x11C.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,32
 port/game/miss2_0x11C.cpp,cppcoreguidelines-pro-type-member-init,2

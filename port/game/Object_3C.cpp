@@ -102,8 +102,8 @@ Object_2C* SpriteList_4::FindObject2CByModel_5A6A90(s32 obj_type)
     while (pIter)
     {
         const s32 sprite_type_enum = pIter->field_0_pSprite->field_30_sprite_type_enum;
-        if (sprite_type_enum == SpriteTypes::code_obj1_4 || sprite_type_enum == SpriteTypes::map_obj_5 ||
-            sprite_type_enum == SpriteTypes::object_1)
+        if (sprite_type_enum == SpriteTypes::kCodeObj1 || sprite_type_enum == SpriteTypes::kMapObj ||
+            sprite_type_enum == SpriteTypes::kObject)
         {
             Object_2C* p2C = pIter->field_0_pSprite->field_8_object_2C_ptr;
             if (p2C)
@@ -126,7 +126,7 @@ AttachedSprite_18* SpriteList_4::FindFirstActiveObject_5A6AD0()
     while (pObjIter)
     {
         const s32 sprite_type = pObjIter->field_0_pSprite->field_30_sprite_type_enum;
-        if (sprite_type == SpriteTypes::code_obj1_4 || sprite_type == SpriteTypes::map_obj_5 || sprite_type == SpriteTypes::object_1)
+        if (sprite_type == SpriteTypes::kCodeObj1 || sprite_type == SpriteTypes::kMapObj || sprite_type == SpriteTypes::kObject)
         {
             Object_2C* o2c = pObjIter->field_0_pSprite->field_8_object_2C_ptr;
             if (o2c)
@@ -513,12 +513,12 @@ void SpriteList_4::DestroyAllSprites_5A7010()
         Sprite* pSprite = p18Iter->field_0_pSprite;
         switch (p18Iter->field_0_pSprite->GetType_416B40())
         {
-            case SpriteTypes::car_2:
+            case SpriteTypes::kCar:
                 gCarManager_6C_677930->RemoveFromPoolAndCollision_446730(pSprite->field_8_car_bc_ptr);
                 break;
-            case SpriteTypes::object_1:
-            case SpriteTypes::code_obj1_4:
-            case SpriteTypes::map_obj_5:
+            case SpriteTypes::kObject:
+            case SpriteTypes::kCodeObj1:
+            case SpriteTypes::kMapObj:
                 gObject_5C_6F8F84->RemoveAndFree_52A610(pSprite->field_8_object_2C_ptr);
                 break;
             default:
@@ -538,7 +538,7 @@ void SpriteList_4::CleanupSpriteList_5A7080()
     {
         bool bUnlinkHead = false;
         s32 type = pIter->field_0_pSprite->GetType_416B40();
-        if ((type == SpriteTypes::object_1 || (type > SpriteTypes::ped_3 && type <= SpriteTypes::map_obj_5)) &&
+        if ((type == SpriteTypes::kObject || (type > SpriteTypes::kPed && type <= SpriteTypes::kMapObj)) &&
             pIter->field_0_pSprite->field_8_object_2C_ptr->IsFlameObject_4BE830())
         {
             gObject_5C_6F8F84->RemoveAndFree_52A610(pIter->field_0_pSprite->field_8_object_2C_ptr);
@@ -617,13 +617,13 @@ s32 SpriteList_4::GetGangIdxFromSpriteIfAny_5A71A0()
     while (p18Iter)
     {
         const s32 type = p18Iter->field_0_pSprite->field_30_sprite_type_enum;
-        if (type == SpriteTypes::code_obj1_4 || type == SpriteTypes::map_obj_5 || type == SpriteTypes::object_1)
+        if (type == SpriteTypes::kCodeObj1 || type == SpriteTypes::kMapObj || type == SpriteTypes::kObject)
         {
             Object_2C* o5c = p18Iter->field_0_pSprite->field_8_object_2C_ptr;
             if (o5c)
             {
                 // If it is car gang icon
-                if (o5c->field_18_model >= Objects::loonies_icon_287 && o5c->field_18_model <= Objects::russian_mafia_icon_293)
+                if (o5c->field_18_model >= Objects::kLooniesIcon && o5c->field_18_model <= Objects::kRussianMafiaIcon)
                 {
                     return o5c->field_18_model - 286;
                 }
@@ -644,7 +644,7 @@ void SpriteList_4::sub_5A71F0()
     for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
     {
         const s32 type = p18Iter->field_0_pSprite->GetType_416B40();
-        if (type == SpriteTypes::object_1 || (type > SpriteTypes::ped_3 && type <= SpriteTypes::map_obj_5))
+        if (type == SpriteTypes::kObject || (type > SpriteTypes::kPed && type <= SpriteTypes::kMapObj))
         {
             Object_2C* o2c = p18Iter->field_0_pSprite->field_8_object_2C_ptr;
             if (o2c->IsFlameObject_4BE830())

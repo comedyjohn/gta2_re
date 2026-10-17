@@ -567,7 +567,7 @@ bool Sprite::IsControlledByActivePlayer_59E170()
 // 0x59E1B0
 Ped* Sprite::GetPed_59E1B0()
 {
-    if (this->field_30_sprite_type_enum == SpriteTypes::ped_3 && (this->field_8_char_b4_ptr) != nullptr)
+    if (this->field_30_sprite_type_enum == SpriteTypes::kPed && (this->field_8_char_b4_ptr) != nullptr)
     {
         return field_8_char_b4_ptr->field_7C_pPed;
     }
@@ -782,7 +782,7 @@ namespace
 {
 inline void DrawTextScaled_4BA2C0(const wchar_t* pStr, Fix16 x, Fix16 y, u16 font)
 {
-    s32 palette_type = PaletteTypes::sprites_2;
+    s32 palette_type = PaletteTypes::kSprites;
     Fix16 scale_y = y * gViewCamera_676978->field_A8_ui_scale;
     DrawText_5D8A10(pStr,
                     x * gViewCamera_676978->field_A8_ui_scale,
@@ -823,10 +823,10 @@ char_type Sprite::IsThreatToSearchingPed_59E830()
 {
     switch (this->field_30_sprite_type_enum)
     {
-        case SpriteTypes::car_2: // car
+        case SpriteTypes::kCar: // car
             return this->field_8_car_bc_ptr->IsThreatToSearchingPed_43AAE0();
 
-        case SpriteTypes::ped_3: // char_b4
+        case SpriteTypes::kPed: // char_b4
             return this->field_8_char_b4_ptr->IsThreatToSearchingPed_553330();
 
         default:
@@ -839,13 +839,13 @@ char_type Sprite::ShouldCollideWithSprite_59E850(Sprite* pSprite)
 {
     switch (this->field_30_sprite_type_enum)
     {
-        case SpriteTypes::object_1:
-        case SpriteTypes::code_obj1_4:
-        case SpriteTypes::map_obj_5:
+        case SpriteTypes::kObject:
+        case SpriteTypes::kCodeObj1:
+        case SpriteTypes::kMapObj:
             return field_8_object_2C_ptr->ShouldCollideWithSprite_525370(pSprite);
-        case SpriteTypes::car_2:
+        case SpriteTypes::kCar:
             return field_8_car_bc_ptr->CanCarCollideWithSprite_43AAF0(pSprite);
-        case SpriteTypes::ped_3:
+        case SpriteTypes::kPed:
             return field_8_char_b4_ptr->ShouldCollideWithSprite_553340(pSprite);
         default:
             return 1;
@@ -857,11 +857,11 @@ void Sprite::HandleObjectCollision_59E8C0(Sprite* pSprite)
 {
     // 9.6f: AsObject2C_40FEC0 for both sprites and sub_484DD0 (inlined, using AsObject2C_40FEC0 changes the code)
     s32 sprite_type = this->field_30_sprite_type_enum;
-    if (sprite_type == SpriteTypes::object_1 || (sprite_type > SpriteTypes::ped_3 && sprite_type <= SpriteTypes::map_obj_5))
+    if (sprite_type == SpriteTypes::kObject || (sprite_type > SpriteTypes::kPed && sprite_type <= SpriteTypes::kMapObj))
     {
         field_8_object_2C_ptr->HandleImpact_528E50(pSprite);
         s32 type = pSprite->field_30_sprite_type_enum;
-        if (type == SpriteTypes::code_obj1_4 || type == SpriteTypes::map_obj_5 || type == SpriteTypes::object_1)
+        if (type == SpriteTypes::kCodeObj1 || type == SpriteTypes::kMapObj || type == SpriteTypes::kObject)
         {
             if (pSprite->field_8_object_2C_ptr)
             {
@@ -874,7 +874,7 @@ void Sprite::HandleObjectCollision_59E8C0(Sprite* pSprite)
 // 0x59E910
 void Sprite::ProcessCarToCarImpactIfCar_59E910(Sprite* pSprite)
 {
-    if (field_30_sprite_type_enum == SpriteTypes::car_2)
+    if (field_30_sprite_type_enum == SpriteTypes::kCar)
     {
         field_8_car_bc_ptr->ProcessCarToCarImpact_43ADC0(pSprite);
     }
@@ -891,25 +891,25 @@ void Sprite::SetDefaultDrawLayerBySpriteType_59E960()
 {
     switch (this->field_30_sprite_type_enum)
     {
-        case SpriteTypes::car_2:
+        case SpriteTypes::kCar:
             this->field_28_draw_layer = 15;
             break;
-        case SpriteTypes::ped_3:
+        case SpriteTypes::kPed:
             this->field_28_draw_layer = 23;
             break;
-        case SpriteTypes::code_obj1_4:
+        case SpriteTypes::kCodeObj1:
             this->field_28_draw_layer = 2;
             break;
-        case SpriteTypes::map_obj_5:
+        case SpriteTypes::kMapObj:
             this->field_28_draw_layer = 2;
             break;
-        case SpriteTypes::code_obj2_8:
+        case SpriteTypes::kCodeObj2:
             this->field_28_draw_layer = 33;
             break;
-        case SpriteTypes::unknown_0:
+        case SpriteTypes::kUnknown:
             this->field_28_draw_layer = 0;
             break;
-        case SpriteTypes::object_1:
+        case SpriteTypes::kObject:
             this->field_28_draw_layer = 0;
             break;
         default:
@@ -938,24 +938,24 @@ void Sprite::SetRemap(s16 remap)
 {
     switch (field_30_sprite_type_enum)
     {
-        case SpriteTypes::car_2:
-            field_34_palette_type = PaletteTypes::car_remaps_3;
+        case SpriteTypes::kCar:
+            field_34_palette_type = PaletteTypes::kCarRemaps;
             break;
-        case SpriteTypes::ped_3:
-            field_34_palette_type = PaletteTypes::ped_remaps_4;
+        case SpriteTypes::kPed:
+            field_34_palette_type = PaletteTypes::kPedRemaps;
             break;
-        case SpriteTypes::code_obj1_4:
-        case SpriteTypes::code_obj2_8:
-            field_34_palette_type = PaletteTypes::code_obj_remaps_5;
+        case SpriteTypes::kCodeObj1:
+        case SpriteTypes::kCodeObj2:
+            field_34_palette_type = PaletteTypes::kCodeObjRemaps;
             break;
-        case SpriteTypes::map_obj_5:
-            field_34_palette_type = PaletteTypes::map_obj_remaps_6;
+        case SpriteTypes::kMapObj:
+            field_34_palette_type = PaletteTypes::kMapObjRemaps;
             break;
-        case SpriteTypes::user_6:
-            field_34_palette_type = PaletteTypes::user_remaps_7;
+        case SpriteTypes::kUser:
+            field_34_palette_type = PaletteTypes::kUserRemaps;
             break;
-        case SpriteTypes::font_7:
-            field_34_palette_type = PaletteTypes::font_remaps_8;
+        case SpriteTypes::kFont:
+            field_34_palette_type = PaletteTypes::kFontRemaps;
             break;
         default:
             break;
@@ -966,10 +966,10 @@ void Sprite::SetRemap(s16 remap)
 // 0x59eaa0
 s16 Sprite::GetTruePalette_59EAA0()
 {
-    if (field_34_palette_type == PaletteTypes::sprites_2)
+    if (field_34_palette_type == PaletteTypes::kSprites)
     {
         s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::sprites_2, sprite_idx);
+        return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx);
     }
     return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(field_34_palette_type, field_24_remap);
 }
@@ -979,17 +979,17 @@ char_type Sprite::has_shadows_59EAE0()
 {
     switch (field_30_sprite_type_enum)
     {
-        case SpriteTypes::ped_3:
+        case SpriteTypes::kPed:
             return field_8_char_b4_ptr->HasShadows_5451C0();
-        case SpriteTypes::car_2:
+        case SpriteTypes::kCar:
             return 1;
-        case SpriteTypes::object_1:
-        case SpriteTypes::code_obj1_4:
-        case SpriteTypes::map_obj_5:
+        case SpriteTypes::kObject:
+        case SpriteTypes::kCodeObj1:
+        case SpriteTypes::kMapObj:
             return field_8_object_2C_ptr->field_8->field_62_has_shadows;
-        case SpriteTypes::user_6:
-        case SpriteTypes::font_7:
-        case SpriteTypes::code_obj2_8:
+        case SpriteTypes::kUser:
+        case SpriteTypes::kFont:
+        case SpriteTypes::kCodeObj2:
             return 0;
         default:
             break;
@@ -1300,7 +1300,7 @@ void Sprite::EnsureVisualShape_59F990()
         Fix16 w;
         Fix16 h;
 
-        if (this->field_30_sprite_type_enum == SpriteTypes::code_obj2_8)
+        if (this->field_30_sprite_type_enum == SpriteTypes::kCodeObj2)
         {
             w = gPixelsToFix16_6F6850.list[sprite_index->field_4_width] / 2;
             h = gPixelsToFix16_6F6850.list[sprite_index->field_5_height] / 2;
@@ -1954,7 +1954,7 @@ char_type Sprite::ComputeZLayer_5A1BD0()
 {
     if (this->field_39_z_col == -1)
     {
-        if (this->field_30_sprite_type_enum == SpriteTypes::car_2 && field_8_car_bc_ptr->IsTrainModel_403BA0())
+        if (this->field_30_sprite_type_enum == SpriteTypes::kCar && field_8_car_bc_ptr->IsTrainModel_403BA0())
         {
             this->field_39_z_col = (this->field_1C_zpos - kFP16One_7035C4).ToInt();
         }
@@ -2292,10 +2292,10 @@ void Sprite::ResolveCollisionWithCarPedOrObject_5A2A30()
     for (AttachedSprite_18* pCollisionIter = collisions.field_0_p18; pCollisionIter; pCollisionIter = pCollisionIter->mpNext)
     {
         Sprite* pCurrent = pCollisionIter->field_0_pSprite;
-        if (pCurrent->GetType_416B40() == SpriteTypes::car_2)
+        if (pCurrent->GetType_416B40() == SpriteTypes::kCar)
         {
             Car_BC* pIterCar = pCurrent->AsCar_40FEB0();
-            if (field_30_sprite_type_enum != SpriteTypes::car_2 ||
+            if (field_30_sprite_type_enum != SpriteTypes::kCar ||
                 (!pIterCar->IsCargoCarOf_4BA390(field_8_car_bc_ptr) && !pIterCar->HasOtherCarOnTrailer_475E60(field_8_car_bc_ptr)))
             {
                 u8 x = field_14_xy.x.ToInt();
@@ -2311,7 +2311,7 @@ void Sprite::ResolveCollisionWithCarPedOrObject_5A2A30()
                 }
             }
         }
-        else if (pCurrent->GetType_416B40() == SpriteTypes::ped_3)
+        else if (pCurrent->GetType_416B40() == SpriteTypes::kPed)
         {
             Char_B4* pB4 = pCurrent->AsCharB4_40FEA0();
             pB4->field_7C_pPed->Deallocate_45EB60();
@@ -2337,7 +2337,7 @@ void Sprite::PoolAllocate()
     this->field_0_rotation = gAng16_703804;
     this->field_22_type_sprite_idx = 0;
     this->field_24_remap = 0;
-    this->field_34_palette_type = PaletteTypes::sprites_2;
+    this->field_34_palette_type = PaletteTypes::kSprites;
     this->field_C_pCollisionShape = nullptr;
     this->field_4_pVisualShape = nullptr;
     this->field_38_zoom = 0;
@@ -2366,15 +2366,15 @@ void Sprite::DispatchCollisionEvent_5A3100(Sprite* pSprite, Fix16 x, Fix16 y, An
 
     switch (field_30_sprite_type_enum)
     {
-        case SpriteTypes::ped_3:
+        case SpriteTypes::kPed:
             field_8_char_b4_ptr->field_88_obj_2c.PushImpactEvent_5A6D00(pSprite, x, y, ang);
             break;
-        case SpriteTypes::car_2:
+        case SpriteTypes::kCar:
             field_8_car_bc_ptr->field_0_attachments.PushImpactEvent_5A6D00(pSprite, x, y, ang);
             break;
-        case SpriteTypes::object_1: // sprite_type_1_Object_5C
-        case SpriteTypes::code_obj1_4: // sprite_type_4_Object_5C
-        case SpriteTypes::map_obj_5: // sprite_type_5_Object_5C
+        case SpriteTypes::kObject: // sprite_type_1_Object_5C
+        case SpriteTypes::kCodeObj1: // sprite_type_4_Object_5C
+        case SpriteTypes::kMapObj: // sprite_type_5_Object_5C
             o2c = field_8_object_2C_ptr;
             if (!o2c->field_10_obj_3c)
             {
@@ -2388,12 +2388,12 @@ void Sprite::DispatchCollisionEvent_5A3100(Sprite* pSprite, Fix16 x, Fix16 y, An
 
     switch (pSprite->field_30_sprite_type_enum)
     {
-        case SpriteTypes::car_2:
+        case SpriteTypes::kCar:
             pSprite->field_8_car_bc_ptr->Deactivate_43AA60();
             break;
-        case SpriteTypes::object_1: // sprite_type_1_Object_5C
-        case SpriteTypes::code_obj1_4: // sprite_type_4_Object_5C
-        case SpriteTypes::map_obj_5: // sprite_type_5_Object_5C
+        case SpriteTypes::kObject: // sprite_type_1_Object_5C
+        case SpriteTypes::kCodeObj1: // sprite_type_4_Object_5C
+        case SpriteTypes::kMapObj: // sprite_type_5_Object_5C
             pSprite->field_8_object_2C_ptr->ReactivateObjectAfterImpact_52A6D0(this);
             break;
         default:

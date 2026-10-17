@@ -138,7 +138,7 @@ bool Crane_15C::IsDropPositionClear_47E920()
     field_60_probe_sprite->set_xyz_lazy_420600(pos.x, pos.y, this->field_80_ground_z - this->field_11C_drop_hook_depth);
     field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_118_drop_rot));
 
-    return !gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, SpriteTypes::unknown_0) &&
+    return !gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, SpriteTypes::kUnknown) &&
         !field_60_probe_sprite->CheckSpriteMovementRegion_5A2500();
 }
 
@@ -152,7 +152,7 @@ bool Crane_15C::IsTarget1PositionClear_47EB00()
     field_60_probe_sprite->set_xyz_lazy_420600(hookPos.x, hookPos.y, field_80_ground_z - field_12C_target1_hook_depth);
     field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_128_target1_rot));
 
-    return gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, SpriteTypes::unknown_0) == nullptr;
+    return gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, SpriteTypes::kUnknown) == nullptr;
 }
 
 // 0x47ecc0
@@ -404,7 +404,7 @@ bool Crane_15C::IsDropTransporterTargetValid_47F450()
         this->field_CC_drop_transporter_z == field_64_drop_transporter->field_1C_zpos &&
         this->field_D0_drop_transporter_rot == Ang16::Ang16_to_Fix16(field_64_drop_transporter->field_0_rotation))
     {
-        return pCar->field_0_attachments.FirstSpriteOfType_5A6CA0(SpriteTypes::car_2) ? false : true;
+        return pCar->field_0_attachments.FirstSpriteOfType_5A6CA0(SpriteTypes::kCar) ? false : true;
     }
     return false;
 }
@@ -528,7 +528,7 @@ void Crane_15C::TargetTransporter_47F7F0(Car_BC* pCar)
 {
     Fix16 point;
     Fix16 t;
-    Sprite* pFoundSprite = pCar->field_0_attachments.FirstSpriteOfType_5A6CA0(SpriteTypes::car_2);
+    Sprite* pFoundSprite = pCar->field_0_attachments.FirstSpriteOfType_5A6CA0(SpriteTypes::kCar);
     if (pFoundSprite)
     {
         if (!field_150_hook_job)
@@ -846,27 +846,22 @@ void Crane_15C::InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id)
     set_field_148_447F60(0);
 
     field_80_ground_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(x_pos, y_pos);
-    field_2C_rotor_obj =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_rotor_135, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
-    field_30_part_obj_0 =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_unknown_134, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
-    field_34_part_obj_1 =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_unknown_134, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
-    field_38_part_obj_2 =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_unknown_134, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
-    field_3C_part_obj_3 =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_unknown_134, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_2C_rotor_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneRotor, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_30_part_obj_0 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneUnknown, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_34_part_obj_1 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneUnknown, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_38_part_obj_2 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneUnknown, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_3C_part_obj_3 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneUnknown, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_40_part_obj_4 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(252, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_44_part_obj_5 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(260, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_48_part_obj_6 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(261, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_4C_part_obj_7 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(262, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_50_part_obj_8 = gObject_5C_6F8F84->NewPhysicsObj_5299B0(263, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
     field_5C_counterweight_obj =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_counterweight_140, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
-    field_54_hook_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_hook_136, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneCounterweight, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
+    field_54_hook_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneHook, x_pos, y_pos, field_80_ground_z, kAngZero_679FC4);
 
     field_58_crane_base_obj =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::crane_base_137, x_pos, y_pos, field_80_ground_z - kFpTwo_679C78, kAngZero_679FC4);
+        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneBase, x_pos, y_pos, field_80_ground_z - kFpTwo_679C78, kAngZero_679FC4);
     field_58_crane_base_obj->set_field_26(obj_id);
     field_78_maybe_homecrane = nullptr;
     field_94_hook_radius_speed = kZero_679E70;

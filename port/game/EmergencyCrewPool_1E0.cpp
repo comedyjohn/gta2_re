@@ -111,7 +111,7 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
     Ped* pPedAtIdx = pGroup->field_4_ped_list[idx];
     while (pPedAtIdx)
     {
-        if (pPedAtIdx->GetPedState_403990() != PedState1::dead_9 && !pPedAtIdx->field_16C_car)
+        if (pPedAtIdx->GetPedState_403990() != PedState1::kDead && !pPedAtIdx->field_16C_car)
         {
             Ped* pLeaderPed = this->field_4_ped;
             if (pLeaderPed->field_16C_car)
@@ -123,12 +123,12 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
                 pGroup->PromoteMemberToLeader_4C9680(idx);
                 Ped* pLeader = this->field_8_group->field_2C_ped_leader;
                 this->field_4_ped = pLeader;
-                pLeader->SetObjective(Objectives::no_obj_0);
+                pLeader->SetObjective(Objectives::kNoObj);
                 const s32 occupation = pPedAtIdx->get_occupation_403980();
                 pPedAtIdx->set_occupation_403970(PedOcupation::dummy);
                 pPedAtIdx->Kill_46F9D0();
                 pPedAtIdx->set_occupation_403970(occupation);
-                pPedAtIdx->SetObjective(Objectives::objective_28);
+                pPedAtIdx->SetObjective(Objectives::kObjective28);
             }
             return true;
         }
@@ -241,9 +241,9 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             if (field_0_car)
             {
                 field_0_car->field_76_last_seen_timer = 0;
-                if (field_0_car->field_7C_ped_type != PedType::player_2)
+                if (field_0_car->field_7C_ped_type != PedType::kPlayer)
                 {
-                    field_0_car->field_7C_ped_type = PedType::dummy_3;
+                    field_0_car->field_7C_ped_type = PedType::kDummy;
                 }
                 if (field_0_car->field_60_pChaseTask)
                 {
@@ -307,8 +307,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                         field_4_ped = field_8_group->field_4_ped_list[0];
                         field_8_group->ClearGroupData_4C8E90();
                         field_8_group = nullptr;
-                        field_4_ped->SetObjective(Objectives::no_obj_0);
-                        field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
+                        field_4_ped->SetObjective(Objectives::kNoObj);
+                        field_4_ped->SetObjective2_463830(Objectives::kNoObj);
                         field_24_phase = crew_phase::on_foot_0;
                     }
                     else
@@ -327,8 +327,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                     field_4_ped = field_8_group->field_2C_ped_leader;
                     field_8_group->DestroyGroup_4C93A0();
                     field_8_group = nullptr;
-                    field_4_ped->SetObjective(Objectives::no_obj_0);
-                    field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
+                    field_4_ped->SetObjective(Objectives::kNoObj);
+                    field_4_ped->SetObjective2_463830(Objectives::kNoObj);
                     field_24_phase = crew_phase::on_foot_0;
                 }
             }
@@ -336,8 +336,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             {
                 if (field_4_ped->field_168_game_object)
                 {
-                    field_4_ped->SetObjective(Objectives::no_obj_0);
-                    field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
+                    field_4_ped->SetObjective(Objectives::kNoObj);
+                    field_4_ped->SetObjective2_463830(Objectives::kNoObj);
                     field_24_phase = crew_phase::on_foot_0;
                 }
             }
@@ -373,7 +373,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             {
                 if (field_0_car)
                 {
-                    field_0_car->SetDriverPedType_421560(PedType::dummy_3);
+                    field_0_car->SetDriverPedType_421560(PedType::kDummy);
                     field_0_car->field_76_last_seen_timer = -200;
                 }
             }
@@ -620,7 +620,7 @@ bool EmergencyCrew_30::Service_5CC480()
 
     switch (field_20_crew_type)
     {
-        case CrewType::paramedic_1:
+        case CrewType::kParamedic:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::paramedic_car_4))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::MEDICAR,
@@ -640,7 +640,7 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             break;
 
-        case CrewType::police_3:
+        case CrewType::kPolice:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::COPCAR,
@@ -659,7 +659,7 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             break;
 
-        case CrewType::swat_5:
+        case CrewType::kSwat:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
                 this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::SWATVAN,

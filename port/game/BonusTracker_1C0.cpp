@@ -355,11 +355,11 @@ s8 BonusTracker_1C0::IsOccupationInGroup_432240(int occupation, int rule_occupat
             case PedOcupation::swat:
             case PedOcupation::fbi:
             case PedOcupation::army_army:
-            case PedOcupation::walking_guard_29:
-            case PedOcupation::unknown_cop_occu_30:
-            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::kWalkingGuard:
+            case PedOcupation::kUnknownCopOccu30:
+            case PedOcupation::kUnknownCopOccu31:
             case PedOcupation::tank_driver:
-            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::kRoadblockCop:
             case PedOcupation::road_block_tank_man:
                 return 1;
             default:
@@ -370,16 +370,16 @@ s8 BonusTracker_1C0::IsOccupationInGroup_432240(int occupation, int rule_occupat
     {
         switch (occupation)
         {
-            case PedOcupation::paramedic_23:
+            case PedOcupation::kParamedic:
             case PedOcupation::police:
             case PedOcupation::swat:
             case PedOcupation::fbi:
             case PedOcupation::army_army:
-            case PedOcupation::walking_guard_29:
-            case PedOcupation::unknown_cop_occu_30:
-            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::kWalkingGuard:
+            case PedOcupation::kUnknownCopOccu30:
+            case PedOcupation::kUnknownCopOccu31:
             case PedOcupation::tank_driver:
-            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::kRoadblockCop:
             case PedOcupation::fireman:
             case PedOcupation::road_block_tank_man:
                 return 1;
@@ -389,8 +389,7 @@ s8 BonusTracker_1C0::IsOccupationInGroup_432240(int occupation, int rule_occupat
     }
     else if (rule_occupation == PedOcupation::any_gang_member)
     {
-        if (occupation == PedOcupation::armed_gang_member_19 || occupation == PedOcupation::guard ||
-            occupation == PedOcupation::gang_driver_42)
+        if (occupation == PedOcupation::kArmedGangMember || occupation == PedOcupation::guard || occupation == PedOcupation::kGangDriver)
         {
             return 1;
         }

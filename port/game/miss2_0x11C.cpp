@@ -425,7 +425,7 @@ void miss2_0x11C::SCRCMD_PLAYER_PED_503A20(SCR_PLAYER_PED* pCmd)
 
         if (pPed != nullptr)
         {
-            pPed->SetPedType_403920(PedType::player_2);
+            pPed->SetPedType_403920(PedType::kPlayer);
             if (!gScriptManager_6F8060->get_field_C1E2C_475A20())
             {
                 pPed->set_health_4039A0(100);
@@ -526,7 +526,7 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
         }
 
         Car_BC* pCar = pPointer->field_8_car;
-        pCar->SetDriverPedType_421560(PedType::script_created_5);
+        pCar->SetDriverPedType_421560(PedType::kScriptCreated);
 
         pPointer->field_8_car->LockoutThiefUnlessPermanent_475C40();
         pPointer->field_8_car->IncrementCarStats_443D70(car_kind::mission_car_8);
@@ -577,10 +577,10 @@ void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_P
 
     if (pPed)
     {
-        pPointer->field_8_char->SetPedType_403920(PedType::script_created_5);
+        pPointer->field_8_char->SetPedType_403920(PedType::kScriptCreated);
         pPointer->field_8_char->set_occupation_403970(pCmd->field_1C_occupation);
         pPointer->field_8_char->field_26C_graphic_type = ped_graphic_type::character_1;
-        pPointer->field_8_char->SetObjective(Objectives::wait_on_foot_26);
+        pPointer->field_8_char->SetObjective(Objectives::kWaitOnFoot);
         pPointer->field_8_char->set_health_4039A0(100);
         Sprite* pSprite = pPointer->field_8_char->GetSprite_46DF50();
         pSprite->ResolveCollisionWithCarPedOrObject_5A2A30();
@@ -1252,7 +1252,7 @@ void miss2_0x11C::SCRCMD_SOUND_DECSET_505340(SCR_SOUND_DECSET* pCmd, SCR_POINTER
 {
     if (!pCmd->field_19_play_type)
     {
-        pPointer->field_8_obj = gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(Objects::sound_object_type_1_278,
+        pPointer->field_8_obj = gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(Objects::kSoundObjectType1,
                                                                            pCmd->field_18_sound_id,
                                                                            pCmd->field_C_pos.field_0_x,
                                                                            pCmd->field_C_pos.field_4_y,
@@ -1260,7 +1260,7 @@ void miss2_0x11C::SCRCMD_SOUND_DECSET_505340(SCR_SOUND_DECSET* pCmd, SCR_POINTER
     }
     else
     {
-        pPointer->field_8_obj = gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(Objects::sound_object_type_2_279,
+        pPointer->field_8_obj = gObject_5C_6F8F84->NewWithPedRefIdx_5299F0(Objects::kSoundObjectType2,
                                                                            pCmd->field_18_sound_id,
                                                                            pCmd->field_C_pos.field_0_x,
                                                                            pCmd->field_C_pos.field_4_y,
@@ -2213,7 +2213,7 @@ void miss2_0x11C::SCRCMD_MAKE_CAR_DUMMY_508220()
         }
         pPointer->field_8_car->InitCarAIControl_440590();
 
-        pPointer->field_8_car->SetDriverPedType_421560(PedType::script_created_5);
+        pPointer->field_8_car->SetDriverPedType_421560(PedType::kScriptCreated);
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -2444,7 +2444,7 @@ void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
                         {
                             gStoredCar_6F7560->ReassignAllocatedCarType_443EE0(car_kind::recycled_1);
                             gGame_0x40_67E008->field_38_local_player->PushCarInfo_564680(gStoredCar_6F7560);
-                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::dummy_3);
+                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::kDummy);
 
                             if (!gStoredCar_6F7560->IsDeactivated_4214D0())
                             {
@@ -2454,7 +2454,7 @@ void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
                         else if (gCarManager_6C_677930->CanAllocateCarOfKindWithSpare_446870(car_kind::mission_car_8))
                         {
                             gGame_0x40_67E008->field_38_local_player->PushCarInfo_564680(gStoredCar_6F7560);
-                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::dummy_3);
+                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::kDummy);
 
                             if (!gStoredCar_6F7560->IsDeactivated_4214D0())
                             {
@@ -2464,7 +2464,7 @@ void miss2_0x11C::SCRCMD_STORE_CAR_INFO_509180()
                         else
                         {
                             gGame_0x40_67E008->field_38_local_player->PushCarInfo_564680(gStoredCar_6F7560);
-                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::dummy_3);
+                            gStoredCar_6F7560->SetDriverPedType_421560(PedType::kDummy);
 
                             gStoredCar_6F7560->DespawnSoon_421490();
                         }
@@ -2696,11 +2696,11 @@ void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_PASS_509810()
     {
         switch (pPed->field_225_objective_status)
         {
-            case ObjectiveStatus::failed_2:
-            case ObjectiveStatus::not_finished_0:
+            case ObjectiveStatus::kFailed:
+            case ObjectiveStatus::kNotFinished:
                 field_8_cond_result = false;
                 break;
-            case ObjectiveStatus::passed_1:
+            case ObjectiveStatus::kPassed:
                 field_8_cond_result = true;
                 break;
             default:
@@ -2720,7 +2720,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_OBJ_FAIL_509880()
     {
         switch (pPed->field_225_objective_status)
         {
-            case ObjectiveStatus::failed_2:
+            case ObjectiveStatus::kFailed:
                 field_8_cond_result = true;
                 break;
             default:
@@ -2819,7 +2819,7 @@ void miss2_0x11C::SCRCMD_HAS_CHAR_DIED_509BB0()
 
     pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
-    if (pPointer->field_8_char && pPointer->field_8_char->field_278_ped_state_1 == PedState1::dead_9)
+    if (pPointer->field_8_char && pPointer->field_8_char->field_278_ped_state_1 == PedState1::kDead)
     {
         field_8_cond_result = 1;
     }
@@ -3140,19 +3140,19 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
     SCR_POINTER* pParam;
     switch (pCmd->field_A_objective)
     {
-        case Objectives::flee_char_on_foot_till_safe_2:
-        case Objectives::flee_char_on_foot_always_3:
-        case Objectives::flee_char_any_means_till_safe_4:
-        case Objectives::flee_char_any_means_always_5:
-        case Objectives::flee_char_always_once_car_stopped_6:
-        case Objectives::goto_char_on_foot_16:
-        case Objectives::kill_char_any_means_19:
-        case Objectives::kill_char_on_foot_20:
-        case Objectives::punch_char_23:
+        case Objectives::kFleeCharOnFootTillSafe:
+        case Objectives::kFleeCharOnFootAlways:
+        case Objectives::kFleeCharAnyMeansTillSafe:
+        case Objectives::kFleeCharAnyMeansAlways:
+        case Objectives::kFleeCharAlwaysOnceCarStopped:
+        case Objectives::kGotoCharOnFoot:
+        case Objectives::kKillCharAnyMeans:
+        case Objectives::kKillCharOnFoot:
+        case Objectives::kPunchChar:
             pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->set_objective_target_ped_403AC0(pParam->field_8_char);
             break;
-        case Objectives::enter_car_as_driver_35:
+        case Objectives::kEnterCarAsDriver:
             pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->SetTargetObjectiveCar(pParam->field_8_car);
             if (pCmd->field_E_variant == 1)
@@ -3164,16 +3164,16 @@ void miss2_0x11C::SCRCMD_SET_CHAR_OBJ2_50A200()
                 pPointer->field_8_char->set_enter_car_as_passenger_4039B0(false);
             }
             break;
-        case Objectives::kill_car_21:
-        case Objectives::wait_in_car_27:
-        case Objectives::leave_car_36:
-        case Objectives::follow_car_in_car_55:
-        case Objectives::destroy_car_59:
+        case Objectives::kKillCar:
+        case Objectives::kWaitInCar:
+        case Objectives::kLeaveCar:
+        case Objectives::kFollowCarInCar:
+        case Objectives::kDestroyCar:
             pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->SetTargetObjectiveCar(pParam->field_8_car);
             break;
-        case Objectives::fire_at_object_from_vehicle_57:
-        case Objectives::destroy_object_58:
+        case Objectives::kFireAtObjectFromVehicle:
+        case Objectives::kDestroyObject:
             pParam = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_C_second_item_idx));
             pPointer->field_8_char->field_1A0_objective_target_object = pParam->field_8_obj;
             break;
@@ -3703,9 +3703,9 @@ void miss2_0x11C::SCRCMD_ADD_PATROL_POINT_50B0E0()
     Ped* pPed = pPointer->field_8_char;
     if (pPed)
     {
-        if (pPed->get_objective_403A80() != Objectives::patrol_on_foot_42)
+        if (pPed->get_objective_403A80() != Objectives::kPatrolOnFoot)
         {
-            pPed->SetObjective(Objectives::patrol_on_foot_42);
+            pPed->SetObjective(Objectives::kPatrolOnFoot);
         }
         pPointer->field_8_char->PushPatrolPoint_4702A0(pCmd->field_C_pos.field_0_x.ToInt(),
                                                        pCmd->field_C_pos.field_4_y.ToInt(),
@@ -3876,8 +3876,8 @@ void miss2_0x11C::SCRCMD_CHAR_TO_DRIVE_CAR_50B4F0()
     {
         if (gBasePtr_6F8070->field_2_type != SCRCMD_CHAR_TO_BACKDOOR)
         {
-            pPtrPed->field_8_char->SetObjective2_463830(Objectives::no_obj_0);
-            pPtrPed->field_8_char->SetObjective(Objectives::enter_car_as_driver_35);
+            pPtrPed->field_8_char->SetObjective2_463830(Objectives::kNoObj);
+            pPtrPed->field_8_char->SetObjective(Objectives::kEnterCarAsDriver);
             pPtrPed->field_8_char->SetTargetObjectiveCar(pPtrCar->field_8_car);
             pPtrPed->field_8_char->set_enter_car_as_passenger_4039B0(false);
         }
@@ -3895,8 +3895,8 @@ void miss2_0x11C::SCRCMD_DRIVER_OUT_CAR_50B5A0()
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     if (pPointer->field_8_char)
     {
-        pPointer->field_8_char->SetObjective2_463830(Objectives::no_obj_0);
-        pPointer->field_8_char->SetObjective(Objectives::leave_car_36);
+        pPointer->field_8_char->SetObjective2_463830(Objectives::kNoObj);
+        pPointer->field_8_char->SetObjective(Objectives::kLeaveCar);
         pPointer->field_8_char->field_150_target_objective_car = pPointer->field_8_char->field_16C_car;
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
@@ -3914,7 +3914,7 @@ void miss2_0x11C::SCRCMD_GIVE_DRIVER_BRAKE_50B600()
         }
         pPointer->field_8_car->InitCarAIControl_440590();
         pPointer->field_8_car->SetAIHalted_421540();
-        pPointer->field_8_car->SetDriverPedType_421560(PedType::script_created_5);
+        pPointer->field_8_car->SetDriverPedType_421560(PedType::kScriptCreated);
     }
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
@@ -4394,7 +4394,7 @@ void miss2_0x11C::SCRCMD_IS_CAR_ON_TRAIL_50C1B0()
     Car_BC* pCarOnTrailer;
 
     if (pSprite != nullptr &&
-        (pCarOnTrailer = pSprite->field_30_sprite_type_enum == SpriteTypes::car_2 ? pSprite->field_8_car_bc_ptr : nullptr) ==
+        (pCarOnTrailer = pSprite->field_30_sprite_type_enum == SpriteTypes::kCar ? pSprite->field_8_car_bc_ptr : nullptr) ==
             pCarPointer->field_8_car)
     {
         field_8_cond_result = true;
@@ -4472,7 +4472,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STUNNED_50C3B0()
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
-    if (pPed->field_27C_ped_state_2 == PedState2::lying_on_floor_22 || pPed->field_216_health <= 25)
+    if (pPed->field_27C_ped_state_2 == PedState2::kLyingOnFloor || pPed->field_216_health <= 25)
     {
         field_8_cond_result = true;
     }
@@ -5263,37 +5263,37 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_LOCK_50D680()
 
     switch (pCmd->field_A_lock_type)
     {
-        case CarDoorLock::locked_1:
+        case CarDoorLock::kLocked:
             pCar = pPointer->field_8_car;
-            if (pCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
+            if (pCar->field_98_door_lock != CarDoorLock::kLockedPermanently)
             {
-                pCar->field_98_door_lock = CarDoorLock::locked_1;
+                pCar->field_98_door_lock = CarDoorLock::kLocked;
             }
 
             break;
-        case CarDoorLock::lockout_thief_2:
+        case CarDoorLock::kLockoutThief:
             pCar = pPointer->field_8_car;
-            if (pCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
+            if (pCar->field_98_door_lock != CarDoorLock::kLockedPermanently)
             {
-                pCar->field_98_door_lock = CarDoorLock::lockout_thief_2;
+                pCar->field_98_door_lock = CarDoorLock::kLockoutThief;
             }
 
             break;
-        case CarDoorLock::unlocked_3:
+        case CarDoorLock::kUnlocked:
             pCar = pPointer->field_8_car;
-            if (pCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
+            if (pCar->field_98_door_lock != CarDoorLock::kLockedPermanently)
             {
-                pCar->field_98_door_lock = CarDoorLock::unlocked_3;
+                pCar->field_98_door_lock = CarDoorLock::kUnlocked;
             }
             break;
-        case CarDoorLock::locked_permanently_4:
-            pPointer->field_8_car->field_98_door_lock = CarDoorLock::locked_permanently_4;
+        case CarDoorLock::kLockedPermanently:
+            pPointer->field_8_car->field_98_door_lock = CarDoorLock::kLockedPermanently;
             break;
-        case CarDoorLock::lockout_player_5:
+        case CarDoorLock::kLockoutPlayer:
             pCar = pPointer->field_8_car;
-            if (pCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
+            if (pCar->field_98_door_lock != CarDoorLock::kLockedPermanently)
             {
-                pCar->field_98_door_lock = CarDoorLock::lockout_player_5;
+                pCar->field_98_door_lock = CarDoorLock::kLockoutPlayer;
             }
             break;
         default:
@@ -5452,7 +5452,7 @@ void miss2_0x11C::SCRCMD_CHAR_IN_AIR_50DE50()
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
-    if (pPed->field_27C_ped_state_2 == PedState2::falling_19 && pPed->field_278_ped_state_1 == PedState1::immobilized_8)
+    if (pPed->field_27C_ped_state_2 == PedState2::kFalling && pPed->field_278_ped_state_1 == PedState1::kImmobilized)
     {
         field_8_cond_result = true;
     }
@@ -5469,7 +5469,7 @@ void miss2_0x11C::SCRCMD_CHAR_SUNK_50DEB0()
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
     Ped* pPed = pPointer->field_8_char;
 
-    if (pPed->field_27C_ped_state_2 == PedState2::sinking_20 && pPed->field_278_ped_state_1 == PedState1::immobilized_8)
+    if (pPed->field_27C_ped_state_2 == PedState2::kSinking && pPed->field_278_ped_state_1 == PedState1::kImmobilized)
     {
         field_8_cond_result = true;
     }
@@ -6172,7 +6172,7 @@ void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
 
     if (pNewPed)
     {
-        pNewPed->field_238_ped_type = PedType::script_created_5;
+        pNewPed->field_238_ped_type = PedType::kScriptCreated;
         pParam1->field_8_char->SpawnPedInCar_45C730(pParam2->field_8_car);
         pParam1->field_8_char->field_244_remap = pCmd->field_C_remap;
         pParam1->field_8_char->field_240_occupation = pCmd->field_E_occupation;
@@ -6187,7 +6187,7 @@ void miss2_0x11C::SCRCMD_CHAR_INTO_CAR_50F060()
 
     if (pCarTest)
     {
-        pCarTest->field_7C_ped_type = PedType::script_created_5;
+        pCarTest->field_7C_ped_type = PedType::kScriptCreated;
         pCarTest->field_76_last_seen_timer = 0;
 
         Car_BC* pCar = pParam2->field_8_car;
@@ -6900,7 +6900,7 @@ void miss2_0x11C::SCRCMD_DO_BASIC_KF_510280()
 
             Ped* pPed = pPlayerPedCmdPointer->field_8_char;
 
-            if (pPed->GetPedState_403990() == PedState1::dead_9 || pPed->field_21C_bf.bBusted != 0)
+            if (pPed->GetPedState_403990() == PedState1::kDead || pPed->field_21C_bf.bBusted != 0)
             {
                 gGame_0x40_67E008->field_38_local_player->field_2D4_scores.field_1A8_bonuses.DeactivateBonus_476680(
                     pBonusType->field_8_index);

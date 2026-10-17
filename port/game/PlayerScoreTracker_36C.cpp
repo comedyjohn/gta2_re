@@ -494,7 +494,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     bool bGangA;
     bool bGangB;
 
-    if (bStartNetworkGame_7081F0 && pVictim->PedTypeIs_45EDE0(PedType::player_2) && pVictim->field_15C_player)
+    if (bStartNetworkGame_7081F0 && pVictim->PedTypeIs_45EDE0(PedType::kPlayer) && pVictim->field_15C_player)
     {
         switch (pVictim->field_290_death_cause)
         {
@@ -540,10 +540,10 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
 
         switch (pVictim->get_occupation_403980())
         {
-            case PedOcupation::paramedic_23:
+            case PedOcupation::kParamedic:
             case PedOcupation::police:
-            case PedOcupation::walking_guard_29:
-            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::kWalkingGuard:
+            case PedOcupation::kRoadblockCop:
             case PedOcupation::fireman:
                 bCop = true;
                 bFbi = false;
@@ -553,7 +553,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangB = false;
                 break;
             case PedOcupation::swat:
-            case PedOcupation::unknown_cop_occu_30:
+            case PedOcupation::kUnknownCopOccu30:
                 bSwat = true;
                 bFbi = false;
                 bArmy = false;
@@ -570,7 +570,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangB = false;
                 break;
             case PedOcupation::army_army:
-            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::kUnknownCopOccu31:
             case PedOcupation::tank_driver:
             case PedOcupation::road_block_tank_man:
                 bArmy = true;
@@ -778,8 +778,8 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     if (bIsFrench_67D53C)
     {
         s32 occupation = pVictim->get_occupation_403980();
-        if (occupation == PedOcupation::police || occupation == PedOcupation::walking_guard_29 ||
-            occupation == PedOcupation::roadblock_cop_37 || bFbi || bSwat || bArmy)
+        if (occupation == PedOcupation::police || occupation == PedOcupation::kWalkingGuard || occupation == PedOcupation::kRoadblockCop ||
+            bFbi || bSwat || bArmy)
         {
             bAwardScore = false;
         }
@@ -1089,11 +1089,11 @@ void PlayerScoreTracker_36C::UpdateAccuracyCount_5934F0(u32 event, s32 weapon_mo
             case PedOcupation::swat:
             case PedOcupation::fbi:
             case PedOcupation::army_army:
-            case PedOcupation::walking_guard_29:
-            case PedOcupation::unknown_cop_occu_30:
-            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::kWalkingGuard:
+            case PedOcupation::kUnknownCopOccu30:
+            case PedOcupation::kUnknownCopOccu31:
             case PedOcupation::tank_driver:
-            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::kRoadblockCop:
             case PedOcupation::road_block_tank_man:
                 field_198_accuracy_count = 0;
                 return;
@@ -1102,9 +1102,9 @@ void PlayerScoreTracker_36C::UpdateAccuracyCount_5934F0(u32 event, s32 weapon_mo
         }
     }
 
-    if (weapon_model == Objects::fire_hitting_194 || weapon_model == Objects::maybe_bullet_on_fire_198 ||
-        weapon_model == Objects::flamethrower_fire_154 || weapon_model == Objects::tanktop_193 || weapon_model == Objects::object_195 ||
-        weapon_model == Objects::object_159 || weapon_model == Objects::object_199 || event == accuracy_event::fire_ended_0 ||
+    if (weapon_model == Objects::kFireHitting || weapon_model == Objects::kMaybeBulletOnFire ||
+        weapon_model == Objects::kFlamethrowerFire || weapon_model == Objects::kTanktop || weapon_model == Objects::kObject195 ||
+        weapon_model == Objects::kObject159 || weapon_model == Objects::kObject199 || event == accuracy_event::fire_ended_0 ||
         event == accuracy_event::weapon_hit_1 || event == accuracy_event::hit_other_ped_3)
     {
         field_198_accuracy_count = 0;

@@ -113,17 +113,17 @@ s32 Player::ObjectTypeToWeaponType_443CB0(u8 object_type)
     s32 weapon_kind;
     switch (object_type)
     {
-        case Objects::shop_car_mines_252:
+        case Objects::kShopCarMines:
             weapon_kind = WeaponType::car_mines;
             break;
-        case Objects::shop_car_oil_stain_251:
+        case Objects::kShopCarOilStain:
             weapon_kind = WeaponType::oil_stain;
             break;
-        case Objects::shop_car_smg_250:
+        case Objects::kShopCarSmg:
             weapon_kind = WeaponType::car_smg;
             break;
         case 253:
-        case Objects::machine_gun_bullet_254:
+        case Objects::kMachineGunBullet:
             weapon_kind = WeaponType::car_bomb;
             break;
         default:
@@ -873,7 +873,7 @@ void Player::InitPlayerPed_565490(Ped* pPed)
 
     for (s32 weapon_idx = WeaponType::pistol; weapon_idx < WeaponType::car_bomb; ++weapon_idx)
     {
-        if (!bGet_all_weapons_67D684 || weapon_idx >= WeaponType::weapon_11 || weapon_idx == WeaponType::electro_batton)
+        if (!bGet_all_weapons_67D684 || weapon_idx >= WeaponType::kWeapon11 || weapon_idx == WeaponType::electro_batton)
         {
             ammo = 0;
         }
@@ -1362,7 +1362,7 @@ void Player::HandleControls_5668D0(Ped* pPed)
     {
         return;
     }
-    if (pPed->GetPedState_403990() == PedState1::dead_9)
+    if (pPed->GetPedState_403990() == PedState1::kDead)
     {
         return;
     }
@@ -1370,20 +1370,20 @@ void Player::HandleControls_5668D0(Ped* pPed)
     {
         if (!pPedCar)
         {
-            if (pPed->get_objective_403A80() != Objectives::leave_car_36)
+            if (pPed->get_objective_403A80() != Objectives::kLeaveCar)
             {
                 Car_BC* pCar = gCarManager_6C_677930->GetNearestFrontVehicle_445210(pPed->field_168_game_object->field_80_sprite_ptr, 3U);
                 if (pCar)
                 {
-                    pPed->SetObjective2_463830(Objectives::no_obj_0);
+                    pPed->SetObjective2_463830(Objectives::kNoObj);
 
                     if (pCar->IsTrainModel_403BA0())
                     {
-                        pPed->SetObjective(Objectives::enter_train_37);
+                        pPed->SetObjective(Objectives::kEnterTrain);
                     }
                     else
                     {
-                        pPed->SetObjective(Objectives::enter_car_as_driver_35);
+                        pPed->SetObjective(Objectives::kEnterCarAsDriver);
                     }
 
                     pPed->SetTargetObjectiveCar(pCar);
@@ -1396,14 +1396,14 @@ void Player::HandleControls_5668D0(Ped* pPed)
         {
             if (pPedCar->CanExitCar_43AF10())
             {
-                pPed->SetObjective2_463830(Objectives::no_obj_0);
+                pPed->SetObjective2_463830(Objectives::kNoObj);
                 if (pPed->get_car_416B60()->field_84_car_info_idx == CarModel::TRAIN)
                 {
-                    pPed->SetObjective(Objectives::leave_train_38);
+                    pPed->SetObjective(Objectives::kLeaveTrain);
                 }
                 else
                 {
-                    pPed->SetObjective(Objectives::leave_car_36);
+                    pPed->SetObjective(Objectives::kLeaveCar);
                 }
                 pPed->SetTargetObjectiveCar(pPed->get_car_416B60());
             }
@@ -1412,25 +1412,25 @@ void Player::HandleControls_5668D0(Ped* pPed)
     else
     {
         s32 objective = pPed->get_objective_403A80();
-        if (objective == Objectives::enter_car_as_driver_35 || objective == Objectives::enter_train_37)
+        if (objective == Objectives::kEnterCarAsDriver || objective == Objectives::kEnterTrain)
         {
-            if (pPed->GetPedState_403990() != PedState1::in_car_10)
+            if (pPed->GetPedState_403990() != PedState1::kInCar)
             {
-                if (pPed->GetObjectiveStatus_450CB0() == ObjectiveStatus::failed_2 || !pPed->get_target_objective_car_403AB0())
+                if (pPed->GetObjectiveStatus_450CB0() == ObjectiveStatus::kFailed || !pPed->get_target_objective_car_403AB0())
                 {
-                    pPed->SetObjective(Objectives::no_obj_0);
-                    pPed->SetObjective2_463830(Objectives::no_obj_0);
+                    pPed->SetObjective(Objectives::kNoObj);
+                    pPed->SetObjective2_463830(Objectives::kNoObj);
                     pPed->field_168_game_object->field_38_velocity = kZero_6FE41C;
                 }
             }
             else
             {
-                if (pPed->GetObjectiveStatus_450CB0() != ObjectiveStatus::not_finished_0)
+                if (pPed->GetObjectiveStatus_450CB0() != ObjectiveStatus::kNotFinished)
                 {
-                    pPed->SetObjective(Objectives::no_obj_0);
-                    pPed->SetObjective2_463830(Objectives::no_obj_0);
-                    pPed->ChangeNextPedState1_45C500(PedState1::in_car_10);
-                    pPed->ChangeNextPedState2_45C540(PedState2::ped2_driving_10);
+                    pPed->SetObjective(Objectives::kNoObj);
+                    pPed->SetObjective2_463830(Objectives::kNoObj);
+                    pPed->ChangeNextPedState1_45C500(PedState1::kInCar);
+                    pPed->ChangeNextPedState2_45C540(PedState2::kPed2Driving);
                 }
             }
         }
@@ -1604,7 +1604,7 @@ void Player::DoPedControlInputs_566C80(Ped* pPed)
     // --- Jump / handbrake ---
     if (field_7E_now_hand_brake_or_jump_pressed == 1 && field_8A_was_hand_brake_or_jump_pressed)
     {
-        if (pPed->field_168_game_object && pPed->field_168_game_object->GetCharState_433A80() != CharB4State::Jumping_15 &&
+        if (pPed->field_168_game_object && pPed->field_168_game_object->GetCharState_433A80() != CharB4State::kJumping &&
             pPed->field_21C_bf.bLeftVehicle == 0)
         {
             pPed->DoJump_433C40();
@@ -1718,7 +1718,7 @@ void Player::Wasted_567130()
         {
             player_killer = nullptr;
         }
-        else if (pPed_killer->PedTypeIs_45EDE0(PedType::player_2) == 0)
+        else if (pPed_killer->PedTypeIs_45EDE0(PedType::kPlayer) == 0)
         {
             player_killer = nullptr;
         }
@@ -1928,7 +1928,7 @@ void Player::Busted_5679E0()
             {
                 field_2C4_player_ped->field_210_shock_counter = 0;
                 field_2C4_player_ped->ClearWantedPoints_420B80();
-                field_2C4_player_ped->SetObjective(Objectives::objective_54, 60);
+                field_2C4_player_ped->SetObjective(Objectives::kObjective54, 60);
                 field_2C4_player_ped->SetTargetObjectiveCar(nullptr);
             }
         }
@@ -2177,7 +2177,7 @@ void Player::Service_5687F0()
             this->field_640_busted = 1;
         }
 
-        if (field_2C4_player_ped->GetPedState_403990() == PedState1::dead_9 && !field_640_busted)
+        if (field_2C4_player_ped->GetPedState_403990() == PedState1::kDead && !field_640_busted)
         {
             Player::Wasted_567130();
         }
@@ -2191,7 +2191,7 @@ void Player::Service_5687F0()
     {
         if (field_2C8_aux_ped)
         {
-            if (field_2C8_aux_ped->GetPedState_403990() == PedState1::dead_9 && !this->field_28_wasted_or_busted)
+            if (field_2C8_aux_ped->GetPedState_403990() == PedState1::kDead && !this->field_28_wasted_or_busted)
             {
                 Player::UpdateAuxPedDeath_567850();
             }
@@ -2304,7 +2304,7 @@ void Player::ResetAuxCamera_5695A0()
 void Player::StartRemoteControl_569600(Car_BC* pCar)
 {
     field_2C8_aux_ped = gPedManager_6787BC->SpawnDriver_470B00(pCar);
-    field_2C8_aux_ped->SetPedType_403920(PedType::player_2);
+    field_2C8_aux_ped->SetPedType_403920(PedType::kPlayer);
     field_2C8_aux_ped->set_occupation_403970(PedOcupation::empty);
     field_2C8_aux_ped->SetPlayer_45B560(this, 1);
     field_2C8_aux_ped->UpdatePositionFromCar_45C4B0();
@@ -2438,51 +2438,51 @@ void Player::ColorScoreFromRemap_569A10()
     switch (field_2C4_player_ped->field_244_remap)
     {
         case PedRemap::ped_remap_yakuza:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 2);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 2);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 2);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 2);
             field_790_hud_palette = 2;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_lonny:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 3);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 3);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 3);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 3);
             field_790_hud_palette = 3;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_russian:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 6);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 6);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 6);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 6);
             field_790_hud_palette = 6;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_kristna:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 5);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 5);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 5);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 5);
             field_790_hud_palette = 5;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_zaibatsu:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 7);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 7);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 7);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 7);
             field_790_hud_palette = 7;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_yellow_scientist:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 8);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 8);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 8);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 8);
             field_790_hud_palette = 8;
             field_78C_hud_palette_type = 7;
             break;
 
         case PedRemap::ped_remap_red_head_redneck:
         case PedRemap::ped_remap_blond_head_redneck:
-            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 4);
-            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 4);
+            field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 4);
+            field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 4);
             field_790_hud_palette = 4;
             field_78C_hud_palette_type = 7;
             break;
@@ -2504,7 +2504,7 @@ void Player::SetScoreTextColour_569C20()
             {
                 field_60_finish_score_reached = 1;
                 // Red when map "beaten"
-                field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::user_remaps_7, 6);
+                field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 6);
             }
         }
         else
@@ -2513,7 +2513,7 @@ void Player::SetScoreTextColour_569C20()
             if (score < static_cast<u32>(gScriptManager_6F8060->field_310_finish_score))
             {
                 field_60_finish_score_reached = 0;
-                field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::sprites_2, 0);
+                field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kSprites, 0);
             }
         }
     }

@@ -159,12 +159,19 @@ def propose(sub, kind, rows):
     if os.path.exists(SYMBOLS_PATH):
         with open(SYMBOLS_PATH, newline="") as f:
             enum_namespaces |= {sr["owner"].split("::")[-1] for sr in csv.DictReader(f) if sr.get("kind") == "enumerator" and sr["owner"]}
-    renamed_component = {r["old_name"]: r["new_name"] for r in rows if r["kind"] in ("type", "namespace") and r["new_name"]}
+    renamed_path = {
+        (r["owner"] + "::" if r["owner"] else "") + r["old_name"]: r["new_name"]
+        for r in rows
+        if r["kind"] in ("type", "namespace") and r["new_name"]
+    }
     new_owner = {r["old_name"]: r["new_name"] for r in types.values() if r["new_name"]}
 
     def current_owner(r):
         comps = r["owner"].split("::") if r["owner"] else []
-        return "::".join(renamed_component.get(c, c) for c in comps)
+        out = []
+        for i, c in enumerate(comps):
+            out.append(renamed_path.get("::".join(comps[: i + 1]), c))
+        return "::".join(out)
 
     def current_qual(r):
         o = current_owner(r)

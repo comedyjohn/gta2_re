@@ -247,7 +247,7 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
 
     pNewBullet->SetDamageOwner_529080(field_24_pPed->get_ped_ref_idx_420B50());
 
-    if (bullet_type == Objects::machine_gun_bullet_254 || bullet_type == Objects::pistol_bullet_265)
+    if (bullet_type == Objects::kMachineGunBullet || bullet_type == Objects::kPistolBullet)
     {
         pNewBullet->SetSpriteIdxOffset_5290C0(field_24_pPed->GetBulletSpriteOffset_45BE30());
     }
@@ -295,7 +295,7 @@ void Weapon_30::flamethrower_5DD0F0()
         {
             gParticle_8_6FD5E8->EmitFlameStreamSegment_53F4C0(field_24_pPed->field_168_game_object->field_80_sprite_ptr);
 
-            if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 DecreaseAmmo_4CCA60();
             }
@@ -330,32 +330,32 @@ void Weapon_30::shotgun_5DD290()
         set_field_2C_4CCA80(1);
         if (!field_4_bTargetHit)
         {
-            Object_2C* pBullet_1 = Weapon_30::spawn_bullet_5DCF60(Objects::shotgun_bullet_192,
+            Object_2C* pBullet_1 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
                                                                   Ang16(word_706D5E.rValue + ped_rotation.rValue, static_cast<u8>(0)),
                                                                   vector);
-            Object_2C* pBullet_2 = Weapon_30::spawn_bullet_5DCF60(Objects::shotgun_bullet_192,
+            Object_2C* pBullet_2 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
                                                                   Ang16(word_707002.rValue + ped_rotation.rValue, static_cast<u8>(0)),
                                                                   vector);
-            Object_2C* pBullet_3 = Weapon_30::spawn_bullet_5DCF60(Objects::shotgun_bullet_192, x, y, z, ped_rotation, vector);
-            Object_2C* pBullet_4 = Weapon_30::spawn_bullet_5DCF60(Objects::shotgun_bullet_192,
+            Object_2C* pBullet_3 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet, x, y, z, ped_rotation, vector);
+            Object_2C* pBullet_4 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
                                                                   Ang16(ped_rotation.rValue - word_707002.rValue, static_cast<u8>(0)),
                                                                   vector);
-            Object_2C* pBullet_5 = Weapon_30::spawn_bullet_5DCF60(Objects::shotgun_bullet_192,
+            Object_2C* pBullet_5 = Weapon_30::spawn_bullet_5DCF60(Objects::kShotgunBullet,
                                                                   x,
                                                                   y,
                                                                   z,
                                                                   Ang16(ped_rotation.rValue - word_706D5E.rValue, static_cast<u8>(0)),
                                                                   vector);
-            if ((pBullet_1 || pBullet_2 || pBullet_3 || pBullet_4 || pBullet_5) && field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if ((pBullet_1 || pBullet_2 || pBullet_3 || pBullet_4 || pBullet_5) && field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 decrement_ammo_4CCA30();
             }
@@ -370,21 +370,21 @@ void Weapon_30::shotgun_5DD290()
         }
         else
         {
-            Weapon_30::spawn_bullet_5DCF60(Objects::tanktop_193, x, y, z, word_706D5C + ped_rotation, vector);
-            Weapon_30::spawn_bullet_5DCF60(Objects::tanktop_193,
+            Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop, x, y, z, word_706D5C + ped_rotation, vector);
+            Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop,
                                            x,
                                            y,
                                            z,
                                            Ang16(word_706D5E.rValue + ped_rotation.rValue, static_cast<u8>(0)),
                                            vector);
-            Weapon_30::spawn_bullet_5DCF60(Objects::tanktop_193, x, y, z, ped_rotation, vector);
-            Weapon_30::spawn_bullet_5DCF60(Objects::tanktop_193,
+            Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop, x, y, z, ped_rotation, vector);
+            Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop,
                                            x,
                                            y,
                                            z,
                                            Ang16(ped_rotation.rValue - word_706D5E.rValue, static_cast<u8>(0)),
                                            vector);
-            Weapon_30::spawn_bullet_5DCF60(Objects::tanktop_193,
+            Weapon_30::spawn_bullet_5DCF60(Objects::kTanktop,
                                            x,
                                            y,
                                            z,
@@ -424,7 +424,7 @@ void Weapon_30::pistol_5DD860()
         set_field_2C_4CCA80(1);
         if (!field_4_bTargetHit) // first shot ??
         {
-            const s32 bullet_type = field_24_pPed->PedTypeIs_45EDE0(PedType::player_2) ? 265 : 254;
+            const s32 bullet_type = field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) ? 265 : 254;
 
             Fix16 x = field_24_pPed->get_cam_x();
             Fix16 y = field_24_pPed->get_cam_y();
@@ -436,7 +436,7 @@ void Weapon_30::pistol_5DD860()
             Fix16 yy = y + offset.y;
             if (spawn_bullet_5DCF60(bullet_type, xx, yy, z, pedRot, velocity))
             {
-                if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
                     decrement_ammo_4CCA30();
                 }
@@ -499,20 +499,20 @@ void Weapon_30::dual_pistol_5DDA70()
         if (!field_4_bTargetHit)
         {
             s32 weapon_bullet_model;
-            if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
-                weapon_bullet_model = Objects::pistol_bullet_265;
+                weapon_bullet_model = Objects::kPistolBullet;
             }
             else
             {
-                weapon_bullet_model = Objects::machine_gun_bullet_254;
+                weapon_bullet_model = Objects::kMachineGunBullet;
             }
 
             Object_2C* pBullet_1 =
                 Weapon_30::spawn_bullet_5DCF60(weapon_bullet_model, point_x, point_y, z, ped_rotation - word_706D5E, vector);
             Object_2C* pBullet_2 =
                 Weapon_30::spawn_bullet_5DCF60(weapon_bullet_model, point_x, point_y, z, ped_rotation + word_706D5E, vector);
-            if ((pBullet_1 || pBullet_2) && field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if ((pBullet_1 || pBullet_2) && field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 decrement_ammo_4CCA30();
             }
@@ -527,8 +527,8 @@ void Weapon_30::dual_pistol_5DDA70()
         }
         else
         {
-            Weapon_30::spawn_bullet_5DCF60(Objects::flamethrower_fire_154, point_x, point_y, z, ped_rotation - word_706D5E, vector);
-            Weapon_30::spawn_bullet_5DCF60(Objects::flamethrower_fire_154, point_y, point_y, z, ped_rotation + word_706D5E, vector);
+            Weapon_30::spawn_bullet_5DCF60(Objects::kFlamethrowerFire, point_x, point_y, z, ped_rotation - word_706D5E, vector);
+            Weapon_30::spawn_bullet_5DCF60(Objects::kFlamethrowerFire, point_y, point_y, z, ped_rotation + word_706D5E, vector);
             field_2_reload_speed = 5;
         }
         Weapon_30::TickReloadSpeed_5DCF40();
@@ -565,7 +565,7 @@ void Weapon_30::smg_5DDD20()
                                                AimAngle,
                                                field_24_pPed->GetVelocityVector_45B520()))
             {
-                if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
                     DecreaseAmmo_4CCA60();
                 }
@@ -615,9 +615,9 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
             set_field_2C_4CCA80(1);
             if (!field_4_bTargetHit)
             {
-                if (!field_24_pPed->PedTypeIs_45EDE0(PedType::player_2) && !field_20)
+                if (!field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && !field_20)
                 {
-                    spawn_bullet_5DCF60(Objects::object_159,
+                    spawn_bullet_5DCF60(Objects::kObject159,
                                         field_24_pPed->get_cam_x(),
                                         field_24_pPed->get_cam_y(),
                                         field_24_pPed->get_cam_z(),
@@ -632,7 +632,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
                 }
                 else
                 {
-                    if (obj_idx == Objects::grenade_obj_183 && throw_charge == 96)
+                    if (obj_idx == Objects::kGrenadeObj && throw_charge == 96)
                     {
                         // maybe holding the grenade for too long
                         gObject_5C_6F8F84->CreateExplosion_52A3D0(field_24_pPed->get_cam_x(),
@@ -641,7 +641,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
                                                                   field_24_pPed->GetAimAngle_4CCA90(),
                                                                   explosion_type::small_18,
                                                                   field_24_pPed->field_200_id);
-                        if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                        if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                         {
                             decrement_ammo_4CCA30();
                         }
@@ -653,7 +653,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
                     else
                     {
                         Fix16 speed;
-                        if (obj_idx == Objects::grenade_obj_183)
+                        if (obj_idx == Objects::kGrenadeObj)
                         {
                             speed = dword_706E74 + (Fix16(throw_strength) / Fix16(60)) * (dword_706CF0 + dword_706E80);
                         }
@@ -684,7 +684,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
                                     pProjectile->field_10_obj_3c->field_C_speed += dword_706C8C;
                                 }
                             }
-                            if (obj_idx == Objects::moving_molotov_138)
+                            if (obj_idx == Objects::kMovingMolotov)
                             {
                                 Object_2C* pLightObj = gObject_5C_6F8F84->NewLight_529A40(94, 138, 2, 0xFF8000, 3, 255);
                                 pProjectile->field_4->DispatchCollisionEvent_5A3100(pLightObj->field_4, 0, 0, kAngZero_707006);
@@ -705,7 +705,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
                                 pProjectile->SetO8Timer_434130((96 - throw_charge) / 8);
                             }
 
-                            if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                             {
                                 decrement_ammo_4CCA30();
                             }
@@ -733,7 +733,7 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
             }
             else
             {
-                spawn_bullet_5DCF60(Objects::object_159,
+                spawn_bullet_5DCF60(Objects::kObject159,
                                     field_24_pPed->get_cam_x(),
                                     field_24_pPed->get_cam_y(),
                                     field_24_pPed->get_cam_z(),
@@ -860,12 +860,12 @@ void Weapon_30::sub_5DE4F0()
             {
                 switch (pHit->field_30_sprite_type_enum)
                 {
-                    case SpriteTypes::car_2:
+                    case SpriteTypes::kCar:
                         field_24_pPed->field_170_selected_weapon->SetTargetHit_433810(1);
                         field_24_pPed->field_198_hit_target_ped = nullptr;
                         return;
 
-                    case SpriteTypes::ped_3:
+                    case SpriteTypes::kPed:
                     {
                         if (pHit->field_8_char_b4_ptr->field_7C_pPed != field_24_pPed->field_198_hit_target_ped &&
                             pHit->field_8_char_b4_ptr->field_7C_pPed != field_24_pPed)
@@ -888,7 +888,7 @@ void Weapon_30::sub_5DE4F0()
     field_24_pPed->field_198_hit_target_ped->SetAttacker_433BF0(field_24_pPed);
     field_24_pPed->field_198_hit_target_ped->field_204_killer_id = field_24_pPed->field_200_id;
     field_24_pPed->field_198_hit_target_ped->field_21C_bf.bHitByAttacker = 1;
-    if (field_24_pPed->field_28C_threat_reaction == ThreatReaction::react_as_emergency_1)
+    if (field_24_pPed->field_28C_threat_reaction == ThreatReaction::kReactAsEmergency)
     {
         gPolice_7B8_6FEE40->field_7B0_last_firing_emergency_ped = field_24_pPed;
     }
@@ -1247,7 +1247,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
             Ang16 diff;
             switch (pHit->GetType_416B40())
             {
-                case SpriteTypes::ped_3:
+                case SpriteTypes::kPed:
                     if (pSprite != pHit && !gWeapon_8_707018->field_0.SpriteExists_5A6D80(pHit))
                     {
                         angle =
@@ -1295,7 +1295,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
                     }
                     break;
 
-                case SpriteTypes::car_2:
+                case SpriteTypes::kCar:
                     if (pSprite != pHit && !gWeapon_8_707018->field_0.SpriteExists_5A6D80(pHit))
                     {
                         angle =
@@ -1331,7 +1331,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
                                     pHit->field_8_car_bc_ptr->field_94_exploder_timer = 50;
                                     s16 damage = pHit->field_8_car_bc_ptr->AccumulateDamage_43DA90(300, &stru_706F90);
                                     pHit->field_8_car_bc_ptr->ApplyVisualDamage_43A9F0();
-                                    if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2) && damage > 0)
+                                    if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && damage > 0)
                                     {
                                         field_24_pPed->field_15C_player->field_2D4_scores.AwardCarDamageScoreHit_593150(
                                             pHit->field_8_car_bc_ptr,
@@ -1357,7 +1357,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
         if (bHit && !bFlag)
         {
             set_field_2C_4CCA80(1);
-            if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2) && (gpRng_67AB34->GetCurRng() & 1))
+            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && (gpRng_67AB34->GetCurRng() & 1))
             {
                 DecreaseAmmo_4CCA60();
             }
@@ -1396,7 +1396,7 @@ void Weapon_30::electro_batton_5E0740()
                                                          field_24_pPed->get_cam_z(),
                                                          field_24_pPed->GetAimAngle_4CCA90(),
                                                          field_24_pPed->GetVelocityVector_45B520());
-                if (pBullet && field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                if (pBullet && field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
                     decrement_ammo_4CCA30();
                 }
@@ -1421,7 +1421,7 @@ void Weapon_30::electro_batton_5E0740()
     }
     else if (field_24_pPed->field_198_hit_target_ped->field_168_game_object)
     {
-        if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+        if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
         {
             s32 target_state = field_24_pPed->field_198_hit_target_ped->field_278_ped_state_1;
             if (target_state >= 8 && target_state <= 9)
@@ -1624,14 +1624,14 @@ void Weapon_30::tank_main_gun_5E10E0()
         set_field_2C_4CCA80(1);
         if (!field_4_bTargetHit)
         {
-            if (Weapon_30::spawn_bullet_5DCF60(Objects::rocket_bullet_128,
+            if (Weapon_30::spawn_bullet_5DCF60(Objects::kRocketBullet,
                                                cannon_pos.x,
                                                cannon_pos.y,
                                                field_14_car->field_50_car_sprite->field_1C_zpos,
                                                cannon_angle,
                                                velocity))
             {
-                if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
                     decrement_ammo_4CCA30();
                 }
@@ -1645,7 +1645,7 @@ void Weapon_30::tank_main_gun_5E10E0()
         }
         else
         {
-            Weapon_30::spawn_bullet_5DCF60(Objects::object_159,
+            Weapon_30::spawn_bullet_5DCF60(Objects::kObject159,
                                            cannon_pos.x,
                                            cannon_pos.y,
                                            field_14_car->field_50_car_sprite->field_1C_zpos,
@@ -1697,7 +1697,7 @@ void Weapon_30::army_gun_jeep_5E13E0()
         {
             if (spawn_bullet_5DCF60(254, bullet_pos.x, bullet_pos.y, field_14_car->field_50_car_sprite->field_1C_zpos, gun_ang, muzzle_vel))
             {
-                if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2) && !is_infinite_ammo_4A4FA0())
+                if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && !is_infinite_ammo_4A4FA0())
                 {
                     field_0_ammo--;
                 }
@@ -1831,19 +1831,15 @@ void Weapon_30::car_smg_5E2940()
 
         if (!field_4_bTargetHit)
         {
-            Object_2C* pLeft = spawn_bullet_5DCF60(Objects::machine_gun_bullet_254,
-                                                   left.x,
-                                                   left.y,
-                                                   pCarSprite->field_1C_zpos,
-                                                   sprite_ang,
-                                                   left_point_velocity);
-            Object_2C* pRight = spawn_bullet_5DCF60(Objects::machine_gun_bullet_254,
+            Object_2C* pLeft =
+                spawn_bullet_5DCF60(Objects::kMachineGunBullet, left.x, left.y, pCarSprite->field_1C_zpos, sprite_ang, left_point_velocity);
+            Object_2C* pRight = spawn_bullet_5DCF60(Objects::kMachineGunBullet,
                                                     right.x,
                                                     right.y,
                                                     pCarSprite->field_1C_zpos,
                                                     sprite_ang,
                                                     right_point_velocity);
-            if ((pLeft || pRight) && field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if ((pLeft || pRight) && field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 DecreaseAmmo_4CCA60();
             }
@@ -1861,13 +1857,8 @@ void Weapon_30::car_smg_5E2940()
         else
         {
             Ang16 tmp = sprite_ang;
-            spawn_bullet_5DCF60(Objects::flamethrower_fire_154, left.x, left.y, pCarSprite->field_1C_zpos, tmp, left_point_velocity);
-            spawn_bullet_5DCF60(Objects::flamethrower_fire_154,
-                                right.x,
-                                right.y,
-                                pCarSprite->field_1C_zpos,
-                                sprite_ang,
-                                right_point_velocity);
+            spawn_bullet_5DCF60(Objects::kFlamethrowerFire, left.x, left.y, pCarSprite->field_1C_zpos, tmp, left_point_velocity);
+            spawn_bullet_5DCF60(Objects::kFlamethrowerFire, right.x, right.y, pCarSprite->field_1C_zpos, sprite_ang, right_point_velocity);
             field_2_reload_speed = 1;
         }
 
@@ -2050,7 +2041,7 @@ void Weapon_30::rocket_5E3850()
         if (!field_4_bTargetHit)
         {
             Object_2C* pBullet;
-            if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 pBullet = spawn_bullet_5DCF60(128,
                                               field_24_pPed->get_cam_x(),
@@ -2087,7 +2078,7 @@ void Weapon_30::rocket_5E3850()
 
             if (pBullet)
             {
-                if (field_24_pPed->PedTypeIs_45EDE0(PedType::player_2))
+                if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
                     decrement_ammo_4CCA30();
                 }

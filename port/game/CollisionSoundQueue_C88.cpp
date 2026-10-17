@@ -57,7 +57,7 @@ void CollisionEvent_28::SetupForCar_40B890(Car_BC* pCar)
                 Object_2C* p2C = gCollisionTarget_679188.field_20_pHitSprite->AsObject2C_40FEC0();
 
                 field_18_object_model = p2C->GetModel_40FEF0();
-                if (field_18_object_model == Objects::diagonal_wall_collision_obj_166)
+                if (field_18_object_model == Objects::kDiagonalWallCollisionObj)
                 {
                     field_0_type = collision_event_type::car_wall_5;
                     field_20_map_block_spec = p2C->GetMapBlockSoundSpec_529240();
@@ -109,7 +109,7 @@ void CollisionEvent_28::SetupForPed_40B980()
             {
                 Object_2C* p2C = gCollisionTarget_679188.field_20_pHitSprite->AsObject2C_40FEC0();
                 field_18_object_model = p2C->GetModel_40FEF0();
-                if (field_18_object_model == Objects::diagonal_wall_collision_obj_166)
+                if (field_18_object_model == Objects::kDiagonalWallCollisionObj)
                 {
                     field_0_type = collision_event_type::ped_wall_8;
                     field_20_map_block_spec = p2C->GetMapBlockSoundSpec_529240();
@@ -177,7 +177,7 @@ bool CollisionEvent_28::SetupForObject_40BA60(Object_2C* pObj)
                 }
 
                 field_1C_other_object_model = o2c->GetModel_40FEF0();
-                if (field_1C_other_object_model == Objects::diagonal_wall_collision_obj_166)
+                if (field_1C_other_object_model == Objects::kDiagonalWallCollisionObj)
                 {
                     field_0_type = collision_event_type::object_wall_10;
                     field_20_map_block_spec = o2c->GetMapBlockSoundSpec_529240();

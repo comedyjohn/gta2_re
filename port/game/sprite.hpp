@@ -322,7 +322,7 @@ class Sprite
 
     void SetPaletteSprites_420700()
     {
-        field_34_palette_type = PaletteTypes::sprites_2;
+        field_34_palette_type = PaletteTypes::kSprites;
     }
 
     s32 GetType_416B40()
@@ -332,7 +332,7 @@ class Sprite
 
     Car_BC* AsCar_40FEB0()
     {
-        if (field_30_sprite_type_enum == SpriteTypes::car_2)
+        if (field_30_sprite_type_enum == SpriteTypes::kCar)
         {
             return field_8_car_bc_ptr;
         }
@@ -344,7 +344,7 @@ class Sprite
 
     Char_B4* AsCharB4_40FEA0()
     {
-        if (field_30_sprite_type_enum == SpriteTypes::ped_3)
+        if (field_30_sprite_type_enum == SpriteTypes::kPed)
         {
             return field_8_char_b4_ptr;
         }
@@ -364,13 +364,13 @@ class Sprite
 
     bool IsTypeAbove1_446950()
     {
-        return field_30_sprite_type_enum > SpriteTypes::object_1;
+        return field_30_sprite_type_enum > SpriteTypes::kObject;
     }
 
     bool IsObject2CType_40FE80()
     {
-        return field_30_sprite_type_enum == SpriteTypes::code_obj1_4 || field_30_sprite_type_enum == SpriteTypes::map_obj_5 ||
-            field_30_sprite_type_enum == SpriteTypes::object_1;
+        return field_30_sprite_type_enum == SpriteTypes::kCodeObj1 || field_30_sprite_type_enum == SpriteTypes::kMapObj ||
+            field_30_sprite_type_enum == SpriteTypes::kObject;
     }
 
     Object_2C* AsObject2C_40FEC0()

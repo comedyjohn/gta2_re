@@ -41,6 +41,7 @@
 - R1.13 (2026-10-17): `metrics.py` and the tidy baseline re-run (39,887 findings in 3,011 rows), README "Where it stands" updated, phase 1's exit criteria ticked. Format dry-run clean on all three trees. Per the user's instruction ("Never stop at checkpoints") the session went on to phase 2 after this task.
 - R2.1 (2026-10-17): `port/STYLE.md`, `port/refactor/decisions/0001..0006`, and the `readability-identifier-naming` options in `port/.clang-tidy`, with the check switched off at the top level (`-readability-identifier-naming`); `clang-tidy --checks=readability-identifier-naming` turns it on (2,970 findings on rng.cpp with its headers). A renamed subsystem directory gets a `.clang-tidy` with `InheritParentConfig: true` and `Checks: 'readability-identifier-naming'`.
 - R2.2 (part 1, 2026-10-17): `port/tools/refactor/address_map.py --init/--lookup/--strip-comments/--selftest` and `address_map.csv`: 10,382 rows (3,968 functions and methods with 3,874 distinct addresses against 3,883 names carrying an address suffix in the code, 1,640 globals, 3,290 members, 471 types, 1,013 enumerators). `--lookup 0x4B8BD0` prints `Game_0x40::ExitGame_4B8BD0`.
+- R2.2 (part 2, 2026-10-17) done: methods with only a 9.6f address (inlined in 10.5) and constructors also have rows (10,635 in all); `--strip-comments` removed 631 `// 9.6f 0x...`, `// FUNCTION: 96f 0x...` and decomp.me comment lines in 102 files, keeps 24 whose value is not in the CSV (their declaration is not one the tool visits); other 9.6f notes (`// 9.6f inline`, `calls ...`) stay on purpose.
 
 ## Notes
 

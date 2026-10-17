@@ -99,10 +99,10 @@ goes stale. `port/tools/refactor/address_map.csv`:
 | `decompme` | the decomp.me scratch from the `// https://decomp.me/scratch/...` comments |
 | `file` | where it is defined now |
 
-- [ ] `port/tools/refactor/address_map.py --init`: builds the table with libclang (every declaration with
+- [x] `port/tools/refactor/address_map.py --init`: builds the table with libclang (every declaration with
       an address in its name or its `// 0xADDR` comment, every member with its offset from the `field_XX`
       name), and moves the 9.6f and decomp.me comments into it (they leave the code: phase 1, task 1.2).
-- [ ] `address_map.py --lookup <old name|address|new name>`: prints the row, for porting fixes from
+- [x] `address_map.py --lookup <old name|address|new name>`: prints the row, for porting fixes from
       `Source/` or looking something up in Ghidra.
 
 ## 2.3 The rename tool

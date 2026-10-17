@@ -32,7 +32,6 @@ class PlayerCrimeStats_3C
     void AddCarDamageCost_484FA0(int cost);
     void AddEvasionRating_484FB0(int amount);
 
-  public:
     u32 field_0_crime_count_list[crime_stats_type::count_10]; // indexed by crime_stats_type
     bool field_28_bCountAllowed[crime_stats_type::count_10];
     s32 field_34_car_damage_cost;

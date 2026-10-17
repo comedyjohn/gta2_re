@@ -57,7 +57,6 @@ class SpriteList_4
     void PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown);
     char_type sub_5A7310();
 
-  public:
     AttachedSprite_18* field_0_p18;
 };
 

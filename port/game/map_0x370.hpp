@@ -799,7 +799,6 @@ class Map_0x370
         return false;
     }
 
-  public:
     gmp_compressed_map_32* field_0_pDmap;
     DmapInfoList field_4_obj;
     gmp_map_zone* field_328_pZoneData;

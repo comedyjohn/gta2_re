@@ -447,7 +447,6 @@ class Fix16
 
     static class Ang16 atan2_fixed_405320(const Fix16& y, const Fix16& x);
 
-  public:
     s32 mValue;
 };
 

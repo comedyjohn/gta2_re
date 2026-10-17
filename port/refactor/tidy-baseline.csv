@@ -2975,7 +2975,6 @@ port/platform/win32.cpp,readability-function-cognitive-complexity,1
 port/platform/win32.cpp,readability-implicit-bool-conversion,63
 port/platform/win32.cpp,readability-named-parameter,59
 port/tests/test_bitset.cpp,misc-use-anonymous-namespace,1
-port/tests/test_fix16.cpp,misc-use-anonymous-namespace,6
 port/tests/test_map_reader.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/tests/test_map_reader.cpp,cppcoreguidelines-owning-memory,1
 port/tests/test_map_reader.cpp,cppcoreguidelines-prefer-member-initializer,1
@@ -2984,7 +2983,6 @@ port/tests/test_map_reader.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/tests/test_map_reader.cpp,cppcoreguidelines-special-member-functions,1
 port/tests/test_map_reader.cpp,misc-include-cleaner,3
 port/tests/test_map_reader.cpp,misc-non-private-member-variables-in-classes,4
-port/tests/test_map_reader.cpp,misc-use-anonymous-namespace,5
 port/tests/test_map_reader.cpp,readability-container-data-pointer,4
 port/tests/test_map_reader.cpp,readability-function-cognitive-complexity,1
 port/tests/test_overlay.cpp,cppcoreguidelines-pro-type-member-init,1
@@ -3021,7 +3019,6 @@ port/tests/test_script_vm.cpp,misc-use-anonymous-namespace,10
 port/tests/test_script_vm.cpp,modernize-avoid-c-arrays,3
 port/tests/test_script_vm.cpp,readability-implicit-bool-conversion,4
 port/tests/test_script_vm.cpp,readability-make-member-function-const,1
-port/tests/test_tables.cpp,misc-use-anonymous-namespace,3
 port/tests/test_text.cpp,cppcoreguidelines-avoid-c-arrays,9
 port/tests/test_text.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,11
 port/tests/test_text.cpp,cppcoreguidelines-pro-bounds-constant-array-index,5

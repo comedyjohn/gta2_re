@@ -1,8 +1,6 @@
 #include "input.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 
-#include "enums.hpp"
 #include "error.hpp"
 
 DEFINE_GLOBAL(LPDIRECTINPUTA, gpDInput_67B804, 0x67B804);

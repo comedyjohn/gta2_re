@@ -1,6 +1,5 @@
 #include "keybrd_0x204.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include <cstdlib>

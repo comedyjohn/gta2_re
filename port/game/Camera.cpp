@@ -5,7 +5,6 @@
 #include "Car_BC.hpp"
 #include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Ped.hpp"
 #include "Police_7B8.hpp"
 #include "sprite.hpp"

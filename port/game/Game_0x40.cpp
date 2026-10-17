@@ -22,7 +22,6 @@
 #include "Gang.hpp"
 #include "Garage_48.hpp"
 #include "Generators.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "InputRecorder_67F8B0.hpp"
 #include "KanjiFont_8EC.hpp"

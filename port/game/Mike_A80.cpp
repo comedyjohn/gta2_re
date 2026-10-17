@@ -1,7 +1,6 @@
 #include "Mike_A80.hpp"
 #include "Draw.hpp"
 #include "Frontend.hpp"
-#include "Globals.hpp"
 #include "fix16.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"

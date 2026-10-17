@@ -1,7 +1,6 @@
 #include "GameSession_578.hpp"
 #include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Player.hpp"
 #include "registry.hpp"
 #include <cstdio>

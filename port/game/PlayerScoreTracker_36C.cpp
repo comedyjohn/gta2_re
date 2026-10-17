@@ -8,7 +8,6 @@
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Ped.inl"
 #include "Player.hpp"

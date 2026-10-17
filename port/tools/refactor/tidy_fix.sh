@@ -54,7 +54,7 @@ for f in glob.glob(sys.argv[1] + "/*.yaml"):
         parts = m["Message"].split()
         header = parts[2] if len(parts) > 2 else ""
         stem = os.path.basename(m["FilePath"]).rsplit(".", 1)[0]
-        return header not in keep_always and os.path.splitext(header)[0] != stem
+        return header not in keep_always and not header.endswith(".inl") and os.path.splitext(header)[0] != stem
     d["Diagnostics"] = [x for x in d.get("Diagnostics", []) if x["DiagnosticMessage"].get("Replacements") and removable(x)]
     for x in d["Diagnostics"]:
         x["DiagnosticMessage"]["Replacements"] = [r for r in x["DiagnosticMessage"]["Replacements"] if r["ReplacementText"] == ""]

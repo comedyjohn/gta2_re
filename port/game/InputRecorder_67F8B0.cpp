@@ -1,7 +1,6 @@
 #include "InputRecorder_67F8B0.hpp"
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "debug.hpp"
 #include "enums.hpp"

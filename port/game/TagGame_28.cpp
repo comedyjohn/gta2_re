@@ -2,14 +2,12 @@
 #include "Frontend.hpp"
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
 #include "error.hpp"
 #include "hud_message_priority.hpp"
 #include "text_0x14.hpp"
-#include <string>
 
 DEFINE_GLOBAL(TagGame_28, gTagGame_6F8450, 0x6F8450);
 DEFINE_GLOBAL(Fix16_Point, stru_6F8720, 0x6F8720);

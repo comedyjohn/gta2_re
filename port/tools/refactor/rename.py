@@ -515,6 +515,12 @@ def update_map(wanted, targets):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--propose":
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import propose
+
+        sys.argv = [sys.argv[0]] + sys.argv[2:]
+        return propose.main()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("renames", nargs="?")
     ap.add_argument("--dry-run", action="store_true")

@@ -43,7 +43,8 @@ GAME = os.path.join(ROOT, "port", "game") + os.sep
 CSV_PATH = os.path.join(ROOT, "port", "tools", "refactor", "address_map.csv")
 COLUMNS = ["kind", "address", "owner", "old_name", "new_name", "new_owner", "addr_96f", "decompme", "file"]
 
-OWNERS = (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL, K.CLASS_TEMPLATE, K.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION)
+OWNERS = (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL, K.CLASS_TEMPLATE, K.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION,
+          K.NAMESPACE)
 PLAIN_KINDS = {K.FUNCTION_DECL, K.CXX_METHOD, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
                K.ENUM_DECL, K.ENUM_CONSTANT_DECL, K.TYPEDEF_DECL, K.TYPE_ALIAS_DECL, K.FUNCTION_TEMPLATE, K.CLASS_TEMPLATE}
 SYMBOLS_PATH = os.path.join(ROOT, "port", "tools", "refactor", "symbol_names.csv")

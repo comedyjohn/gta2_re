@@ -1,0 +1,16 @@
+old,new
+Angle::field_0_value,value
+Fix16Rect::field_0_left,left
+Fix16Rect::field_10_low_z,low_z
+Fix16Rect::field_14_high_z,high_z
+Fix16Rect::field_4_right,right
+Fix16Rect::field_8_top,top
+Fix16Rect::field_C_bottom,bottom
+Pool::field_0_pStart,start
+Pool::field_4_pPrev,prev
+Pool::field_8_pool,pool
+PoolBasic::field_0_pHead,head
+PoolBasic::field_4_pool,pool
+Ptr32::field_0_handle,handle
+Rng::field_0_rng,rng
+Rng::field_4_rnd,rnd

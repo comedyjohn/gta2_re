@@ -54,7 +54,7 @@ class SpriteShape_4C
 
     bool IsZeroWidth_41E390() const
     {
-        return (field_0_width == field_4_height && field_0_width <= kSmallWidthEpslion_703450) ? true : false;
+        return (field_0_width == field_4_height && field_0_width <= kSmallWidthEpslion) ? true : false;
     }
 
     void SetDimensions_482980(Fix16 w, Fix16 h, Fix16 depth)

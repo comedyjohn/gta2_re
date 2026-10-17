@@ -9,10 +9,10 @@ DEFINE_GLOBAL_ARRAY(Fix16, gCos_table_669260, 1440, 0x669260);
 // TODO: hmm, shouldn't this be 360 entries ??
 DEFINE_GLOBAL_ARRAY(Fix16, gTanTable_6663C8, 1440, 0x6663C8);
 DEFINE_GLOBAL_INIT(Fix16, kFPZero_6691B0, Fix16(0), 0x6691B0);
-DEFINE_GLOBAL_INIT(Ang16, kAngZero_66A920, Ang16(0), 0x66A920);
-DEFINE_GLOBAL_INIT(Ang16, kAng180_669156, Ang16(720), 0x669156);
-DEFINE_GLOBAL_INIT(Ang16, kAng90_667A7C, Ang16(360), 0x667A7C);
-DEFINE_GLOBAL_INIT(Ang16, kAng270_66916C, Ang16(1080), 0x66916C);
+DEFINE_GLOBAL_INIT(Ang16, kAngZero, Ang16(0), 0x66A920);
+DEFINE_GLOBAL_INIT(Ang16, kAng180, Ang16(720), 0x669156);
+DEFINE_GLOBAL_INIT(Ang16, kAng90, Ang16(360), 0x667A7C);
+DEFINE_GLOBAL_INIT(Ang16, kAng270, Ang16(1080), 0x66916C);
 
 // 0x408660
 Fix16 Fix16::Add(const Fix16& rhs) const throw()
@@ -108,22 +108,22 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
     {
         if (x >= kFPZero_6691B0)
         {
-            return kAngZero_66A920;
+            return kAngZero;
         }
         else
         {
-            return kAng180_669156;
+            return kAng180;
         }
     }
     else if (x == kFPZero_6691B0)
     {
         if (y > kFPZero_6691B0)
         {
-            return kAng90_667A7C;
+            return kAng90;
         }
         else
         {
-            return kAng270_66916C;
+            return kAng270;
         }
     }
     else
@@ -134,17 +134,17 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
         {
             if (y > kFPZero_6691B0)
             {
-                return kAng90_667A7C - table_angle;
+                return kAng90 - table_angle;
             }
             else
             {
-                if (table_angle == kAng90_667A7C)
+                if (table_angle == kAng90)
                 {
-                    return kAngZero_66A920;
+                    return kAngZero;
                 }
                 else
                 {
-                    return kAng270_66916C + table_angle;
+                    return kAng270 + table_angle;
                 }
             }
         }
@@ -152,11 +152,11 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
         {
             if (y > kFPZero_6691B0)
             {
-                return kAng90_667A7C + table_angle;
+                return kAng90 + table_angle;
             }
             else
             {
-                return kAng270_66916C - table_angle;
+                return kAng270 - table_angle;
             }
         }
     }

@@ -2240,11 +2240,11 @@ global,0x6784C8,,kAng10_6784C8,,,,,Ped.cpp
 global,0x676790,,kAng135_676790,,,,,Camera.cpp
 global,0x67844C,,kAng135_67844C,,,,,Ped.cpp
 global,0x6F6414,,kAng135_6F6414,,,,,MapRenderer.cpp
-global,0x6F6800,,kAng135_6F6800,,,,,ang16.cpp
+global,0x6F6800,,kAng135_6F6800,kAng135,,,,ang16.cpp
 global,0x6F8D80,,kAng135_6F8D80,,,,,Object_5C.cpp
 global,0x6FD40C,,kAng135_6FD40C,,,,,Explosion_30.cpp
 global,0x6784E4,,kAng16_6784E4,,,,,Ped.cpp
-global,0x669156,,kAng180_669156,,,,,ang16.cpp
+global,0x669156,,kAng180_669156,kAng180,,,,ang16.cpp
 global,0x676772,,kAng180_676772,,,,,Camera.cpp
 global,0x677326,,kAng180_677326,,,,,Car_BC.cpp
 global,0x677ADE,,kAng180_677ADE,,,,,CarAI_78.cpp
@@ -2266,10 +2266,10 @@ global,0x706412,,kAng180_706412,,,,,Hud.cpp
 global,0x676764,,kAng225_676764,,,,,Camera.cpp
 global,0x6786B8,,kAng225_6786B8,,,,,Ped.cpp
 global,0x6F63EC,,kAng225_6F63EC,,,,,MapRenderer.cpp
-global,0x6F67DC,,kAng225_6F67DC,,,,,ang16.cpp
+global,0x6F67DC,,kAng225_6F67DC,kAng225,,,,ang16.cpp
 global,0x6F8D54,,kAng225_6F8D54,,,,,Object_5C.cpp
 global,0x6FD3E0,,kAng225_6FD3E0,,,,,Explosion_30.cpp
-global,0x66916C,,kAng270_66916C,,,,,fix16.cpp
+global,0x66916C,,kAng270_66916C,kAng270,,,,fix16.cpp
 global,0x677B08,,kAng270_677B08,,,,,CarAI_78.cpp
 global,0x6785D0,,kAng270_6785D0,,,,,Ped.cpp
 global,0x67A660,,kAng270_67A660,,,,,Crushers.cpp
@@ -2286,7 +2286,7 @@ global,0x705788,,kAng270_705788,,,,,TrafficLights_194.cpp
 global,0x67679C,,kAng315_67679C,,,,,Camera.cpp
 global,0x6785A8,,kAng315_6785A8,,,,,Ped.cpp
 global,0x6F6420,,kAng315_6F6420,,,,,MapRenderer.cpp
-global,0x6F680C,,kAng315_6F680C,,,,,ang16.cpp
+global,0x6F680C,,kAng315_6F680C,kAng315,,,,ang16.cpp
 global,0x6F8D8C,,kAng315_6F8D8C,,,,,Object_5C.cpp
 global,0x6FD418,,kAng315_6FD418,,,,,Explosion_30.cpp
 global,0x6FD938,,kAng315_6FD938,,,,,char.cpp
@@ -2295,11 +2295,11 @@ global,0x677A38,,kAng45_677A38,,,,,CarAI_78.cpp
 global,0x6784E2,,kAng45_6784E2,,,,,Ped.cpp
 global,0x6784FC,,kAng45_6784FC,,,,,Ped.cpp
 global,0x6F637C,,kAng45_6F637C,,,,,MapRenderer.cpp
-global,0x6F677C,,kAng45_6F677C,,,,,ang16.cpp
+global,0x6F677C,,kAng45_6F677C,kAng45,,,,ang16.cpp
 global,0x6F8CD0,,kAng45_6F8CD0,,,,,Object_5C.cpp
 global,0x6FD35C,,kAng45_6FD35C,,,,,Explosion_30.cpp
 global,0x6FD89C,,kAng45_6FD89C,,,,,char.cpp
-global,0x667A7C,,kAng90_667A7C,,,,,fix16.cpp
+global,0x667A7C,,kAng90_667A7C,kAng90,,,,fix16.cpp
 global,0x677234,,kAng90_677234,,,,,Car_BC.cpp
 global,0x6779E4,,kAng90_6779E4,,,,,CarAI_78.cpp
 global,0x6784B0,,kAng90_6784B0,,,,,Ped.cpp
@@ -2325,7 +2325,7 @@ global,0x6FE260,,kAngFix16HalfCircle_6FE260,,,,,CarPhysics_B0.cpp
 global,0x677920,,kAngFix16OneDegree_677920,,,,,Car_BC.cpp
 global,0x679FC8,,kAngFix16OneDegree_679FC8,,,,,Cranes.cpp
 global,0x6FE3C4,,kAngFix16OneDegree_6FE3C4,,,,,CarPhysics_B0.cpp
-global,0x66A920,,kAngZero_66A920,,,,,fix16.cpp
+global,0x66A920,,kAngZero_66A920,kAngZero,,,,fix16.cpp
 global,0x676964,,kAngZero_676964,,,,,Camera.cpp
 global,0x67791C,,kAngZero_67791C,,,,,Car_BC.cpp
 global,0x679FC4,,kAngZero_679FC4,,,,,Cranes.cpp
@@ -2352,7 +2352,7 @@ global,0x6FE1C0,,kBrakePressureMax_6FE1C0,,,,,CarPhysics_B0.cpp
 global,0x6FE200,,kBrakePressureStart_6FE200,,,,,CarPhysics_B0.cpp
 global,0x6FE2AC,,kBrakePressureStep_6FE2AC,,,,,CarPhysics_B0.cpp
 global,0x677358,,kCabHitchOffset_677358,,,,,Car_BC.cpp
-global,0x6771E4,,kCollisionPrismHalfHeight_6771E4,,,,,Fix16_Rect.cpp
+global,0x6771E4,,kCollisionPrismHalfHeight_6771E4,kCollisionPrismHalfHeight,,,,Fix16_Rect.cpp
 global,0x679F70,,kCraneAngleAccel_679F70,,,,,Cranes.cpp
 global,0x679DEC,,kCraneAngleMaxSpeed_679DEC,,,,,Cranes.cpp
 global,0x67A664,,kCrusherPistonBaseDist_67A664,,,,,Crushers.cpp
@@ -2709,7 +2709,7 @@ global,0x620F44,,kRightSideFlags_620F44,,,,,MapRenderer.cpp
 global,0x677910,,kRoofTurretAutoRotSpeed_677910,,,,,Car_BC.cpp
 global,0x6F638C,,kScreenAspectRatio_6F638C,,,,,MapRenderer.cpp
 global,0x620FC4,,kSlopeLidFlags_620FC4,,,,,MapRenderer.cpp
-global,0x703450,,kSmallWidthEpslion_703450,,,,,Fix16_Rect.cpp
+global,0x703450,,kSmallWidthEpslion_703450,kSmallWidthEpslion,,,,Fix16_Rect.cpp
 global,0x6772A4,,kTankCannonOffsetY_6772A4,,,,,Car_BC.cpp
 global,0x677352,,kTankTurretRotSpeed_677352,,,,,Car_BC.cpp
 global,0x6F6578,,kTileTexMax_6F6578,,,,,MapRenderer.cpp

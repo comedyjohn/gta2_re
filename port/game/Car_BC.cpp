@@ -6013,8 +6013,8 @@ inline void SetPrism(Fix16Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 
     rect.right_ = right;
     rect.top_ = top;
     rect.bottom_ = bottom;
-    rect.low_z_ = z - kCollisionPrismHalfHeight_6771E4;
-    rect.high_z_ = z.Add(kCollisionPrismHalfHeight_6771E4);
+    rect.low_z_ = z - kCollisionPrismHalfHeight;
+    rect.high_z_ = z.Add(kCollisionPrismHalfHeight);
 }
 } // namespace
 
@@ -6074,8 +6074,8 @@ char_type Car_BC::TrainUpdate_442D70()
                                  field_50_car_sprite->field_14_xy.x,
                                  field_50_car_sprite->field_14_xy.y - Fix16(0x4000, 0),
                                  field_50_car_sprite->field_14_xy.y + Fix16(0x4000, 0));
-                    rect.low_z_ = z - kCollisionPrismHalfHeight_6771E4;
-                    rect.high_z_ = z + kCollisionPrismHalfHeight_6771E4;
+                    rect.low_z_ = z - kCollisionPrismHalfHeight;
+                    rect.high_z_ = z + kCollisionPrismHalfHeight;
                     break;
                 }
 

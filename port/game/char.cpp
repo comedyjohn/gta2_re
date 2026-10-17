@@ -149,7 +149,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FDA04, k_dword_6FD868 * 256, 0x6FDA04);
 Ang16 ComputeShortestAngleDelta_4056C0(Ang16& a2, Ang16& a3)
 {
     Ang16 delta = a2 - a3;
-    if (delta > kAng180_669156)
+    if (delta > kAng180)
     {
         delta = -delta;
     }
@@ -165,7 +165,7 @@ Ang16 MidAngle_4057B0(Ang16& a, Ang16& b)
     Ang16 half;
     Ang16 delta(b.rValue - a.rValue);
     delta.Normalize();
-    if (delta > kAng180_669156)
+    if (delta > kAng180)
     {
         delta.rValue = -delta.rValue;
         delta.Normalize();

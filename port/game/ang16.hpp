@@ -3,7 +3,7 @@
 #include "Function.hpp"
 #include "fix16.hpp"
 
-EXTERN_GLOBAL(class Ang16, kAng180_669156);
+EXTERN_GLOBAL(class Ang16, kAng180);
 
 class Ang16
 {

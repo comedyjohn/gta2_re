@@ -2,12 +2,12 @@
 #include "Function.hpp"
 #include <cmath>
 
-DEFINE_GLOBAL_INIT(Ang16, kAng45_6F677C, Ang16(0xB4), 0x6F677C);
-DEFINE_GLOBAL_INIT(Ang16, kAng315_6F680C, Ang16(0x4EC), 0x6F680C);
-DEFINE_GLOBAL_INIT(Ang16, kAng135_6F6800, Ang16(0x21C), 0x6F6800);
-DEFINE_GLOBAL_INIT(Ang16, kAng225_6F67DC, Ang16(0x384), 0x6F67DC);
+DEFINE_GLOBAL_INIT(Ang16, kAng45, Ang16(0xB4), 0x6F677C);
+DEFINE_GLOBAL_INIT(Ang16, kAng315, Ang16(0x4EC), 0x6F680C);
+DEFINE_GLOBAL_INIT(Ang16, kAng135, Ang16(0x21C), 0x6F6800);
+DEFINE_GLOBAL_INIT(Ang16, kAng225, Ang16(0x384), 0x6F67DC);
 
-EXTERN_GLOBAL(Ang16, kAng180_669156);
+EXTERN_GLOBAL(Ang16, kAng180);
 
 // 0x405640
 void Ang16::SnapToAng4()
@@ -42,7 +42,7 @@ u8 Ang16::GetOctant()
 Fix16 Ang16::NormalizeAngleDeltaScaled(Ang16& from, Ang16& to, Ang16& divisor)
 {
     Ang16 d = to - from;
-    if (d > kAng180_669156)
+    if (d > kAng180)
     {
         d = -d;
         return d.DivideBy(divisor);
@@ -56,7 +56,7 @@ Fix16 Ang16::NormalizeAngleDeltaScaled(Ang16& from, Ang16& to, Ang16& divisor)
 // 0x405C60
 bool Ang16::IsAngleAhead(Ang16* pFrom, Ang16* pTo)
 {
-    if (*pTo - *pFrom <= kAng180_669156)
+    if (*pTo - *pFrom <= kAng180)
     {
         return true;
     }
@@ -107,13 +107,13 @@ Ang16 Ang16::Fix16ToAng16OutOfLine(Fix16& value)
 // 0x4F78F0
 s32 Ang16::GetAngleFace(const Ang16& angle)
 {
-    if (angle <= kAng45_6F677C || angle > kAng315_6F680C) //  45° and 315°
+    if (angle <= kAng45 || angle > kAng315) //  45° and 315°
     {
         return 2; //  North
     }
-    if (angle < kAng135_6F6800) // kAng135_6F6800 = 135°
+    if (angle < kAng135) // kAng135_6F6800 = 135°
     {
         return 3; //  East
     }
-    return angle < kAng225_6F67DC ? 1 : 4; // kAng225_6F67DC = 225°  ,  1 = South, 4 = West
+    return angle < kAng225 ? 1 : 4; // kAng225_6F67DC = 225°  ,  1 = South, 4 = West
 }

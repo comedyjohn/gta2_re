@@ -258,7 +258,7 @@ Gang_144* GangPool_CA8::FindGangByName_4BF100(const char* pGangName)
 {
     for (auto& i : field_0_gang_list)
     {
-        if (_strnicmp(pGangName, i.field_2_name, 4u) == 0)
+        if (_strnicmp(pGangName, i.field_2_name, 4U) == 0)
         {
             return &i;
         }

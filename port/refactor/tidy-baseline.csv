@@ -22,7 +22,6 @@ port/game/Ambulance_110.cpp,readability-function-size,1
 port/game/Ambulance_110.cpp,readability-implicit-bool-conversion,57
 port/game/Ambulance_110.cpp,readability-isolate-declaration,1
 port/game/Ambulance_110.cpp,readability-make-member-function-const,2
-port/game/Ambulance_110.cpp,readability-uppercase-literal-suffix,1
 port/game/Ambulance_110.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/Ambulance_110.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Ambulance_110.hpp,cppcoreguidelines-pro-type-member-init,1
@@ -544,7 +543,6 @@ port/game/Firefighters.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,3
 port/game/Firefighters.cpp,misc-include-cleaner,19
 port/game/Firefighters.cpp,readability-function-cognitive-complexity,2
 port/game/Firefighters.cpp,readability-implicit-bool-conversion,33
-port/game/Firefighters.cpp,readability-uppercase-literal-suffix,1
 port/game/Firefighters.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Firefighters.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Firefighters.hpp,cppcoreguidelines-pro-type-member-init,2
@@ -745,7 +743,6 @@ port/game/Gang.cpp,readability-else-after-return,2
 port/game/Gang.cpp,readability-implicit-bool-conversion,13
 port/game/Gang.cpp,readability-make-member-function-const,1
 port/game/Gang.cpp,readability-simplify-boolean-expr,3
-port/game/Gang.cpp,readability-uppercase-literal-suffix,1
 port/game/Gang.hpp,bugprone-narrowing-conversions,1
 port/game/Gang.hpp,cppcoreguidelines-avoid-c-arrays,5
 port/game/Gang.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -1529,7 +1526,6 @@ port/game/Police_38.cpp,readability-function-size,6
 port/game/Police_38.cpp,readability-implicit-bool-conversion,250
 port/game/Police_38.cpp,readability-make-member-function-const,9
 port/game/Police_38.cpp,readability-simplify-boolean-expr,1
-port/game/Police_38.cpp,readability-uppercase-literal-suffix,10
 port/game/Police_38.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Police_38.hpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Police_38.hpp,cppcoreguidelines-special-member-functions,2

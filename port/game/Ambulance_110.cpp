@@ -275,7 +275,7 @@ bool Ambulance_20::SpawnParamedicCrew_4FA820()
         return false;
     }
 
-    if (gPedManager_6787BC->field_5_fbi_army_count >= 30u)
+    if (gPedManager_6787BC->field_5_fbi_army_count >= 30U)
     {
         return false;
     }

@@ -326,7 +326,7 @@ void PoliceCrew_38::TryDespawnOffscreenCrew_571350()
         Ped* pPed = field_10_subObj->field_4_ped;
         if (pPed)
         {
-            if (pPed->GetOffscreenCounter_4039F0() >= 0x1Eu)
+            if (pPed->GetOffscreenCounter_4039F0() >= 0x1EU)
             {
                 pPed->Deallocate_45EB60();
                 field_10_subObj->field_28_state = crew_state::clean_up_5;
@@ -663,7 +663,7 @@ void PoliceCrew_38::State3_AlertedSearch_572340()
     }
     else if (field_10_subObj->field_2C_ready)
     {
-        if (gPedManager_6787BC->field_5_fbi_army_count < 0x1Au)
+        if (gPedManager_6787BC->field_5_fbi_army_count < 0x1AU)
         {
             switch (field_10_subObj->field_20_crew_type)
             {
@@ -881,7 +881,7 @@ void PoliceCrew_38::State5_PursueOrChase_572920()
     {
         if (field_10_subObj->field_2C_ready)
         {
-            if (gPedManager_6787BC->field_5_fbi_army_count < 0x1Au)
+            if (gPedManager_6787BC->field_5_fbi_army_count < 0x1AU)
             {
                 switch (field_10_subObj->field_20_crew_type)
                 {
@@ -2145,7 +2145,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_88_guard_1->field_20E_offscreen_counter < 0x50u)
+                    if (field_88_guard_1->field_20E_offscreen_counter < 0x50U)
                     {
                         bAllClear = 0;
                     }
@@ -2160,7 +2160,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_8C_guard_2->field_20E_offscreen_counter < 0x50u)
+                    if (field_8C_guard_2->field_20E_offscreen_counter < 0x50U)
                     {
                         bAllClear = 0;
                     }
@@ -2175,7 +2175,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_90_guard_3->field_20E_offscreen_counter < 0x50u)
+                    if (field_90_guard_3->field_20E_offscreen_counter < 0x50U)
                     {
                         bAllClear = 0;
                     }
@@ -2190,7 +2190,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_94_guard_4->field_20E_offscreen_counter < 0x50u)
+                    if (field_94_guard_4->field_20E_offscreen_counter < 0x50U)
                     {
                         bAllClear = 0;
                     }
@@ -2205,7 +2205,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_98_guard_5->field_20E_offscreen_counter < 0x50u)
+                    if (field_98_guard_5->field_20E_offscreen_counter < 0x50U)
                     {
                         bAllClear = 0;
                     }
@@ -2220,7 +2220,7 @@ void PoliceRoadblock_A4::Update_5757B0()
                 }
                 else
                 {
-                    if (field_9C_guard_6->field_20E_offscreen_counter < 0x50u)
+                    if (field_9C_guard_6->field_20E_offscreen_counter < 0x50U)
                     {
                         field_E = 0;
                         return;
@@ -2229,7 +2229,7 @@ void PoliceRoadblock_A4::Update_5757B0()
             }
             if (bAllClear)
             {
-                if (++field_E <= 200u)
+                if (++field_E <= 200U)
                 {
                     return;
                 }

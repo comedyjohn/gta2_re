@@ -42,7 +42,7 @@ struct HighScoreTable
 
     void Init();
 
-    char_type InsertScore(const wchar_t* pFindStr, u32 findScore);
+    char_type InsertScore(const wchar_t* find_str, u32 find_score);
 
     ScoreTableLine score_table_line_[10];
 };
@@ -71,21 +71,21 @@ struct PlyDat
     ~PlyDat() = default; // 0x56B810
 
     // todo: ordering
-    void UpdateStageScore(Player* pPlayer);
+    void UpdateStageScore(Player* player);
 
     void UpdateHiScores();
 
-    void GetPlySlotDatName(u16 slot_idx, char_type* pName);
+    void GetPlySlotDatName(u16 slot_idx, char_type* name);
 
     char_type PlySlotDatExists(s32 slot_idx);
 
-    void GetHiScoreHscFileName(char_type* pName);
+    void GetHiScoreHscFileName(char_type* name);
 
     char_type HiScoreHscExists();
 
-    void LoadPlySlotDat(u16 slotIdx);
+    void LoadPlySlotDat(u16 slot_idx);
 
-    void SavePlySlotDat(s16 slotIdx);
+    void SavePlySlotDat(s16 slot_idx);
 
     void LoadHiScores();
 

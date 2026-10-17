@@ -8,41 +8,41 @@ class File
 {
   public:
     // or static with explicit
-    static s32 GetFileSize(FILE* Stream);
+    static s32 GetFileSize(FILE* stream);
 
-    static bool IsCdRomDrive(char_type driveLetter);
+    static bool IsCdRomDrive(char_type drive_letter);
 
-    static void CheckReadOnlyFile(const char_type* FileName, s32 expectedSize);
-    static void* ReadFileToBuffer(const char_type* FileName, size_t* pAllocatedBufferSize);
-    static size_t ReadFileToFixedBuffer(const char_type* FileName, void* pBuffer, size_t* pMaxSize);
+    static void CheckReadOnlyFile(const char_type* file_name, s32 expected_size);
+    static void* ReadFileToBuffer(const char_type* file_name, size_t* allocated_buffer_size);
+    static size_t ReadFileToFixedBuffer(const char_type* file_name, void* buffer, size_t* max_size);
 
-    static size_t Read(void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
+    static size_t Read(void* buffer, size_t element_size, size_t element_count, FILE* stream);
 
-    static void WriteBufferToFile(const char_type* FileName, void* Buffer, size_t* pBufferSize);
+    static void WriteBufferToFile(const char_type* file_name, void* buffer, size_t* buffer_size);
 
-    static size_t Write(void* Buffer, size_t ElementSize, size_t ElementCount, FILE* Stream);
+    static size_t Write(void* buffer, size_t element_size, size_t element_count, FILE* stream);
 
-    static void AppendBufferToFile(const char_type* FileName, void* Buffer, u32* pBufferSize);
+    static void AppendBufferToFile(const char_type* file_name, void* buffer, u32* buffer_size);
 
-    static void CreateFile(const char_type* FileName);
+    static void CreateFile(const char_type* file_name);
 
-    static void GlobalOpen(const char_type* FileName);
+    static void GlobalOpen(const char_type* file_name);
 
     static void GlobalClose();
 
     static void GlobalCloseUnChecked();
 
-    static void GlobalSeek(u32* pOffset);
+    static void GlobalSeek(u32* offset);
 
-    static void FileError(s32 Code, s32 arg1, s32 arg2);
+    static void FileError(s32 code, s32 arg1, s32 arg2);
 
-    static void GlobalRead(void* pBuffer, const u32& pBufferSize);
+    static void GlobalRead(void* buffer, const u32& buffer_size);
 
-    static bool GlobalRead(void* Buffer, u32* pSize);
+    static bool GlobalRead(void* buffer, u32* size);
 
-    static size_t GetRemainderSize(void* Buffer, u32* pMaxFileSize);
+    static size_t GetRemainderSize(void* buffer, u32* max_file_size);
 
-    static char_type SkipWhitespace(FILE* Stream);
+    static char_type SkipWhitespace(FILE* stream);
 };
 
 // Copy protection: a file of the game CD with its expected size

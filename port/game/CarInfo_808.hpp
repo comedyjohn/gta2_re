@@ -106,7 +106,7 @@ class CarInfoTable
     CarModelInfo* GetInfoAtIdx(u8 idx);
     void CalculateAllCarInfo();
     void ConvertAllMass();
-    void LoadFromGciFile(const char_type* pGciFilePath);
+    void LoadFromGciFile(const char_type* gci_file_path);
     void Reload();
     void Clear();
     void Free();
@@ -115,13 +115,13 @@ class CarInfoTable
 
     static char* ParseGciFile(void* input, size_t input_size, ModelPhysics* output, size_t output_size, u32* next_position);
     static char* SetErr(s32 error_code);
-    static s32 ReadToken(char* pOut);
-    static s32 PushData(void* pSrc, u32 size);
-    static s32 HexStr2Int(const char* pStr, s32* pOut);
-    static s32 HexStr2Int(const char* pStr, s16* pOut);
-    static s32 StrToInt(const char* pStr, s32* pOut);
-    static s32 FloatStrToFix16(char* pStr, Fix16& pOut);
-    static s32 StrToInt(const char* pStr, s16* pOut);
+    static s32 ReadToken(char* out);
+    static s32 PushData(void* src, u32 size);
+    static s32 HexStr2Int(const char* str, s32* out);
+    static s32 HexStr2Int(const char* str, s16* out);
+    static s32 StrToInt(const char* str, s32* out);
+    static s32 FloatStrToFix16(char* str, Fix16& out);
+    static s32 StrToInt(const char* str, s16* out);
 
     CarModelInfo* ptr_array_[256];
     CarModelInfo* raw_car_info_;

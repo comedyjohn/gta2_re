@@ -66,37 +66,37 @@ class GameText
 
     u16 RemapExtendedChar(u16 ch);
 
-    void RemapExtendedCharsIfNotJapanese(wchar_t* pText);
+    void RemapExtendedCharsIfNotJapanese(wchar_t* text);
 
-    void RemapExtendedChars(wchar_t* pStr);
+    void RemapExtendedChars(wchar_t* str);
 
     void TKEYLoad(u32 size);
 
-    void TDATOffsets2Strings(BYTE* pDat);
+    void TDATOffsets2Strings(BYTE* dat);
 
-    bool HasKey(const char_type* pIdStr);
+    bool HasKey(const char_type* id_str);
 
     static s32 TKeySearch(const void* a, const void* b);
 
-    wchar_t* FindText(const char_type* pIdStr);
+    wchar_t* FindText(const char_type* id_str);
 
     u16 ToUpper(wchar_t ch);
 
-    wchar_t* StrToUpper(wchar_t* pWideStr);
+    wchar_t* StrToUpper(wchar_t* wide_str);
 
-    static s32 InsertLineBreaksAndGetNumLines(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type);
+    static s32 InsertLineBreaksAndGetNumLines(wchar_t* dest_str, const wchar_t* src_str, s32 max_line_width, u16 font_type);
 
-    static char_type* Wide2PesudoAscii(const wchar_t* pText);
+    static char_type* Wide2PesudoAscii(const wchar_t* text);
 
-    static wchar_t* Ascii2Wide(const char_type* pStr);
+    static wchar_t* Ascii2Wide(const char_type* str);
 
     void LoadChunk(const char_type* chunk_type, u32 chunk_len);
 
     void Load();
 
-    wchar_t* Find(const char_type* pIdStr);
+    wchar_t* Find(const char_type* id_str);
 
-    bool KeyExists(const char_type* pIdStr);
+    bool KeyExists(const char_type* id_str);
 
     // 0x5B5FB0
     GameText();

@@ -13,7 +13,7 @@
 #include <windows.h>
 
 // Forward declarations: the functions below are in address order
-void ClearPixelsOfColourInRow(u8* pData, int width, u8 clear_target);
+void ClearPixelsOfColourInRow(u8* data, int width, u8 clear_target);
 
 DEFINE_GLOBAL(Gtx*, gGtx, 0x703DD4);
 DEFINE_GLOBAL(s16, gFontType0, 0x703D9C);
@@ -197,9 +197,9 @@ BYTE* Gtx::GetPalData(u16 palette_idx)
 }
 
 // 0x5AA6F0
-u16 Gtx::GetPhysPal(u16 palId)
+u16 Gtx::GetPhysPal(u16 pal_id)
 {
-    return palette_index_->field_0_phys_palette[palId];
+    return palette_index_->field_0_phys_palette[pal_id];
 }
 
 // 0x5AA710
@@ -225,7 +225,7 @@ u16 Gtx::GetSpriteIdxFromFont(u16 font_type, s16 offset)
 }
 
 // 0x5AA760
-u16 Gtx::GetFontWidth(u16* font_type, wchar_t* pStr)
+u16 Gtx::GetFontWidth(u16* font_type, wchar_t* str)
 {
     if (*font_type >= 101)
     {
@@ -235,7 +235,7 @@ u16 Gtx::GetFontWidth(u16* font_type, wchar_t* pStr)
     else
     {
         // In this case letters have different widths
-        return this->sprite_index_[this->sprite_base2_->font + Gtx::GetSpriteIdxFromFont(*font_type, *pStr - 33)].width_;
+        return this->sprite_index_[this->sprite_base2_->font + Gtx::GetSpriteIdxFromFont(*font_type, *str - 33)].width_;
     }
 }
 
@@ -769,9 +769,9 @@ void Gtx::LoadSpriteIndex(u32 sprx_chunk_size)
 }
 
 // 0x5AAFE0
-void Gtx::InitFontTypes(u16 fontCount)
+void Gtx::InitFontTypes(u16 font_count)
 {
-    if (fontCount == 14)
+    if (font_count == 14)
     {
         gFontType0 = 0;
         gFontType1 = 1;
@@ -791,7 +791,7 @@ void Gtx::InitFontTypes(u16 fontCount)
         gFontTypeSlot2Of7 = 99;
         gFontTypeSlot5Of7 = 99;
     }
-    else if (fontCount == 7)
+    else if (font_count == 7)
     {
         gFontType0 = 0;
         gFontTypeSlot1Of7 = 1;
@@ -803,7 +803,7 @@ void Gtx::InitFontTypes(u16 fontCount)
     }
     else
     {
-        FatalError_4A38C0(Gta2Error::kStyleFileContainsUnexpectedNumberOfFonts, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1251, fontCount);
+        FatalError_4A38C0(Gta2Error::kStyleFileContainsUnexpectedNumberOfFonts, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1251, font_count);
     }
 }
 
@@ -832,36 +832,36 @@ void Gtx::LoadFontBase(u32 fonb_chunk_size)
 }
 
 // 0x5AB1A0
-u16 Gtx::SumOffsets(u16* pOffsets, u32 offsetsCount)
+u16 Gtx::SumOffsets(u16* offsets, u32 offsets_count)
 {
     u16 total = 0;
-    while (offsetsCount > 0) // jbe vs jz due to missing > 0 and signed vs unsigned
+    while (offsets_count > 0) // jbe vs jz due to missing > 0 and signed vs unsigned
     {
         // note: mov si, [ecx] also did xor esi, esi because
         // total was 32bits not 16bits, then an additional bitmask of 0xFFFF was done
         // because the return value was 32bits rather than 16bits.
-        total += *pOffsets;
-        pOffsets++;
-        offsetsCount--;
+        total += *offsets;
+        offsets++;
+        offsets_count--;
     }
     return total;
 }
 
 // 0x5AB1C0
-void Gtx::ConvertToVirtualOffsets(u16* pBuffer, u32 len)
+void Gtx::ConvertToVirtualOffsets(u16* buffer, u32 len)
 {
     for (s32 i = len - 1; i > 0; i--)
     {
-        pBuffer[i] = pBuffer[i - 1];
+        buffer[i] = buffer[i - 1];
     }
     if (len != 0)
     {
-        pBuffer[0] = 0;
+        buffer[0] = 0;
     }
     s32 j = 1;
     for (s32 k = len; k > 1; k--, j++)
     {
-        pBuffer[j] += pBuffer[j - 1];
+        buffer[j] += buffer[j - 1];
     }
 }
 
@@ -976,69 +976,69 @@ void Gtx::LoadSpec()
 }
 
 // 0x5AB4B0
-void Gtx::LoadChunk(const char_type* Str1, u32 chunk_len)
+void Gtx::LoadChunk(const char_type* str1, u32 chunk_len)
 {
-    if (!strncmp(Str1, "PALB", 4U))
+    if (!strncmp(str1, "PALB", 4U))
     {
         LoadPaleteBase(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRB", 4U))
+    else if (!strncmp(str1, "SPRB", 4U))
     {
         LoadSpriteBase(chunk_len);
     }
-    else if (!strncmp(Str1, "FONB", 4U))
+    else if (!strncmp(str1, "FONB", 4U))
     {
         LoadFontBase(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRX", 4U))
+    else if (!strncmp(str1, "SPRX", 4U))
     {
         LoadSpriteIndex(chunk_len);
     }
-    else if (!strncmp(Str1, "OBJI", 4U))
+    else if (!strncmp(str1, "OBJI", 4U))
     {
         LoadMapObjectInfo(chunk_len);
     }
-    else if (!strncmp(Str1, "PALX", 4U))
+    else if (!strncmp(str1, "PALX", 4U))
     {
         LoadPaletteIndex(chunk_len);
     }
-    else if (!strncmp(Str1, "PPAL", 4U))
+    else if (!strncmp(str1, "PPAL", 4U))
     {
         LoadPhysicalPalettes(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRG", 4U))
+    else if (!strncmp(str1, "SPRG", 4U))
     {
         LoadSpriteGraphics(chunk_len);
     }
-    else if (!strncmp(Str1, "TILE", 4U))
+    else if (!strncmp(str1, "TILE", 4U))
     {
         LoadTiles(chunk_len);
     }
-    else if (!strncmp(Str1, "DELS", 4U))
+    else if (!strncmp(str1, "DELS", 4U))
     {
         LoadDeltaStore(chunk_len);
     }
-    else if (!strncmp(Str1, "DELX", 4U))
+    else if (!strncmp(str1, "DELX", 4U))
     {
         LoadDeltaIndex(chunk_len);
     }
-    else if (!strncmp(Str1, "CARI", 4U))
+    else if (!strncmp(str1, "CARI", 4U))
     {
         LoadCarInfo(chunk_len);
     }
-    else if (!strncmp(Str1, "PSXT", 4U))
+    else if (!strncmp(str1, "PSXT", 4U))
     {
         SkipPsxt(chunk_len);
     }
-    else if (!strncmp(Str1, "OVLY", 4U))
+    else if (!strncmp(str1, "OVLY", 4U))
     {
         SkipOvly(chunk_len);
     }
-    else if (!strncmp(Str1, "SPEC", 4U))
+    else if (!strncmp(str1, "SPEC", 4U))
     {
         LoadSpec();
     }
-    else if (!strncmp(Str1, "RECY", 4U))
+    else if (!strncmp(str1, "RECY", 4U))
     {
         LoadCarRecyclingInfo(chunk_len);
     }
@@ -1063,9 +1063,9 @@ void Gtx::SetDataPtrs()
 }
 
 // 0x5AB750
-void Gtx::LoadSty(const char_type* pStyFileName)
+void Gtx::LoadSty(const char_type* sty_file_name)
 {
-    File::GlobalOpen(pStyFileName);
+    File::GlobalOpen(sty_file_name);
 
     FileHeader styHeader;
     u32 len = sizeof(FileHeader);
@@ -1249,14 +1249,14 @@ Gtx::~Gtx()
 }
 
 // 0x5ABA00
-void SpriteDelta::Delta(u8* pArray)
+void SpriteDelta::Delta(u8* array)
 {
     // Inline asm in the original (lodsw, rep movsb). Each entry is a u16 offset from the end
     // of the previous run, a u8 length and that many bytes.
     // The asm below, in C++ for compilers without MSVC inline asm
     u8* pSrc = reinterpret_cast<u8*>(data_);
     u8* pEnd = pSrc + len_;
-    u8* pDst = pArray;
+    u8* pDst = array;
     do
     {
         u16 offset;
@@ -1272,14 +1272,14 @@ void SpriteDelta::Delta(u8* pArray)
 
 // https://decomp.me/scratch/Cc0Dx Not fully working
 // 0x5ABA40
-void SpriteDelta::Delta(u8* pArray, u32 width)
+void SpriteDelta::Delta(u8* array, u32 width)
 {
     // Inline asm in the original (lodsw / loop)
     // Each entry: u16 offset, u8 len, then len bytes written backwards from the end of the row
     // The asm below, in C++ for compilers without MSVC inline asm
     u8* pSrc = reinterpret_cast<u8*>(data_);
     u8* pEnd = pSrc + len_;
-    u8* pDst = pArray - 1 + width;
+    u8* pDst = array - 1 + width;
     do
     {
         u16 offset;
@@ -1311,9 +1311,9 @@ void SpriteIndex::ClearPixelsOfColour(u8 clear_target)
 }
 
 // 0x5ABAE0
-void ClearPixelsOfColourInRow(u8* pData, int width, u8 clear_target)
+void ClearPixelsOfColourInRow(u8* data, int width, u8 clear_target)
 {
-    u8* pDataIter = pData;
+    u8* pDataIter = data;
     for (s32 i = 0; i < width; i++)
     {
         if (*pDataIter == clear_target)

@@ -168,17 +168,17 @@ void HighScoreTable::Init()
 }
 
 // 0x56B550
-char_type HighScoreTable::InsertScore(const wchar_t* pFindStr, u32 findScore)
+char_type HighScoreTable::InsertScore(const wchar_t* find_str, u32 find_score)
 {
     u16 startIdx = 10;
     for (s16 i = 9; i != -1; --i)
     {
-        if (findScore > score_table_line_[i].field_14_score)
+        if (find_score > score_table_line_[i].field_14_score)
         {
             startIdx = i;
         }
 
-        if (findScore == score_table_line_[i].field_14_score && wcscmp(pFindStr, score_table_line_[i].field_0_player_name) == 0)
+        if (find_score == score_table_line_[i].field_14_score && wcscmp(find_str, score_table_line_[i].field_0_player_name) == 0)
         {
             return 0;
         }
@@ -195,8 +195,8 @@ char_type HighScoreTable::InsertScore(const wchar_t* pFindStr, u32 findScore)
             }
         }
 
-        wcsncpy(score_table_line_[startIdx].field_0_player_name, pFindStr, 9U);
-        score_table_line_[startIdx].field_14_score = findScore;
+        wcsncpy(score_table_line_[startIdx].field_0_player_name, find_str, 9U);
+        score_table_line_[startIdx].field_14_score = find_score;
 
         return 1;
     }
@@ -329,13 +329,13 @@ PlyDat::PlyDat()
 }
 
 // 0x56B8A0
-void PlyDat::GetPlySlotDatName(u16 slot_idx, char_type* pName)
+void PlyDat::GetPlySlotDatName(u16 slot_idx, char_type* name)
 {
     char_type Buffer[8];
     _itoa(slot_idx, Buffer, 10);
-    strcpy(pName, "player\\plyslot");
-    strcat(pName, Buffer);
-    strcat(pName, ".dat");
+    strcpy(name, "player\\plyslot");
+    strcat(name, Buffer);
+    strcat(name, ".dat");
 }
 
 // 0x56B940
@@ -355,13 +355,13 @@ char_type PlyDat::PlySlotDatExists(s32 slot_idx)
 }
 
 // 0x56B990
-void PlyDat::LoadPlySlotDat(u16 slotIdx)
+void PlyDat::LoadPlySlotDat(u16 slot_idx)
 {
     char_type FileName[356];
 
-    PlySlot* pTmp = &plyr_stats_[slotIdx];
+    PlySlot* pTmp = &plyr_stats_[slot_idx];
 
-    GetPlySlotDatName(slotIdx, FileName);
+    GetPlySlotDatName(slot_idx, FileName);
     File::GlobalOpen(FileName);
 
     for (wchar_t& i : pTmp->str_player_name_)
@@ -370,7 +370,7 @@ void PlyDat::LoadPlySlotDat(u16 slotIdx)
         File::GlobalRead(&i, len_read);
     }
 
-    for (auto& plyr_stage_stat : plyr_stats_[slotIdx].plyr_stage_stats_)
+    for (auto& plyr_stage_stat : plyr_stats_[slot_idx].plyr_stage_stats_)
     {
         for (auto& stage_stat : plyr_stage_stat)
         {
@@ -388,21 +388,21 @@ void PlyDat::LoadPlySlotDat(u16 slotIdx)
 }
 
 // 0x56BA60
-void PlyDat::SavePlySlotDat(s16 slotIdx)
+void PlyDat::SavePlySlotDat(s16 slot_idx)
 {
     char_type FileName[356];
     size_t len;
 
-    GetPlySlotDatName(slotIdx, FileName);
+    GetPlySlotDatName(slot_idx, FileName);
 
     // The start of this object is reused as the buffer for the player slot .dat file
-    memcpy(static_cast<void*>(this), plyr_stats_[static_cast<u16>(slotIdx)].str_player_name_, sizeof(plyr_stats_[0].str_player_name_));
+    memcpy(static_cast<void*>(this), plyr_stats_[static_cast<u16>(slot_idx)].str_player_name_, sizeof(plyr_stats_[0].str_player_name_));
     len = sizeof(plyr_stats_[0].str_player_name_);
 
     // len is accumulated like in SaveHiScores_56BF20: VC6 folds its final value (126) into one store
     // that it emits after the loop counter init, which a plain "len = 126" never does.
     u8* pDst = reinterpret_cast<u8*>(this) + sizeof(plyr_stats_[0].str_player_name_);
-    for (auto& plyr_stage_stat : plyr_stats_[static_cast<u16>(slotIdx)].plyr_stage_stats_)
+    for (auto& plyr_stage_stat : plyr_stats_[static_cast<u16>(slot_idx)].plyr_stage_stats_)
     {
         for (auto& stage_stat : plyr_stage_stat)
         {
@@ -422,7 +422,7 @@ void PlyDat::SavePlySlotDat(s16 slotIdx)
 }
 
 // 0x56BB10
-void PlyDat::UpdateStageScore(Player* pPlayer)
+void PlyDat::UpdateStageScore(Player* player)
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     PlySlot* pPlayerStats = &plyr_stats_[slot_idx];
@@ -439,7 +439,7 @@ void PlyDat::UpdateStageScore(Player* pPlayer)
     }
 
     StageStats* pStageStats = &pPlayerStats->plyr_stage_stats_[map_num][bonus_num];
-    const u32 latest_score = pPlayer->field_2D4_scores.GetScore_592370();
+    const u32 latest_score = player->field_2D4_scores.GetScore_592370();
     if (latest_score > pStageStats->field_4_stage_best_score)
     {
         pStageStats->field_4_stage_best_score = latest_score;
@@ -497,9 +497,9 @@ char_type PlyDat::HiScoreHscExists()
 }
 
 // 0x56BCF0
-void PlyDat::GetHiScoreHscFileName(char_type* pName)
+void PlyDat::GetHiScoreHscFileName(char_type* name)
 {
-    strcpy(pName, "player\\hiscores.hsc");
+    strcpy(name, "player\\hiscores.hsc");
 }
 
 // 0x56BD20

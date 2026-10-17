@@ -67,25 +67,25 @@ u16 GameText::RemapExtendedChar(u16 ch)
 }
 
 // 0x5B5910
-void GameText::RemapExtendedCharsIfNotJapanese(wchar_t* pText)
+void GameText::RemapExtendedCharsIfNotJapanese(wchar_t* text)
 {
     if (lang_code_ != 'j')
     {
-        RemapExtendedChars(pText);
+        RemapExtendedChars(text);
     }
 }
 
 // 0x5B5930
-void GameText::RemapExtendedChars(wchar_t* pStr)
+void GameText::RemapExtendedChars(wchar_t* str)
 {
-    for (wchar_t* pStrIter = pStr; *pStrIter; ++pStrIter)
+    for (wchar_t* pStrIter = str; *pStrIter; ++pStrIter)
     {
         *pStrIter = RemapExtendedChar(*pStrIter);
     }
 }
 
 // 0x5B5960
-void GameText::TKEYLoad(u32 chunkSize)
+void GameText::TKEYLoad(u32 chunk_size)
 {
 #if defined(GTA2_PORT_64BIT)
     // The file's 12-byte entries hold a 4-byte offset where text_0xC has a pointer, then the 8-byte
@@ -96,10 +96,10 @@ void GameText::TKEYLoad(u32 chunkSize)
         u32 field_0_offset;
         char_type field_4_key[8];
     };
-    t_key_.t_key_count_ = chunkSize / sizeof(Text0xCFile);
+    t_key_.t_key_count_ = chunk_size / sizeof(Text0xCFile);
     t_key_.t_key_ = new TextEntry[t_key_.t_key_count_];
     auto* pFileEntries = new Text0xCFile[t_key_.t_key_count_];
-    File::GlobalRead(pFileEntries, chunkSize);
+    File::GlobalRead(pFileEntries, chunk_size);
     for (u32 i = 0; i < t_key_.t_key_count_; i++)
     {
         TextEntry& entry = t_key_.t_key_[i];
@@ -112,19 +112,19 @@ void GameText::TKEYLoad(u32 chunkSize)
     delete[] pFileEntries;
 #else
     // TODO: probably an inline
-    t_key_.t_key_count_ = chunkSize / sizeof(TextEntry);
+    t_key_.t_key_count_ = chunk_size / sizeof(TextEntry);
     t_key_.t_key_ = new TextEntry[t_key_.t_key_count_];
     if (!t_key_.t_key_)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
     }
 
-    File::GlobalRead(t_key_.t_key_, chunkSize);
+    File::GlobalRead(t_key_.t_key_, chunk_size);
 #endif
 }
 
 // 0x5B59B0
-void GameText::TDATOffsets2Strings(BYTE* pDat)
+void GameText::TDATOffsets2Strings(BYTE* dat)
 {
     TextEntry* ptKeyIter = t_key_.t_key_;
 
@@ -132,15 +132,15 @@ void GameText::TDATOffsets2Strings(BYTE* pDat)
     {
         // The raw file record is an offset, convert it to pos32 to the string data in the TDAT
         const s32 offsetInBytes = static_cast<s32>(reinterpret_cast<uintptr_t>(ptKeyIter->field_0_pwstr));
-        ptKeyIter->field_0_pwstr = reinterpret_cast<wchar_t*>(&pDat[offsetInBytes]);
+        ptKeyIter->field_0_pwstr = reinterpret_cast<wchar_t*>(&dat[offsetInBytes]);
         ptKeyIter++;
     }
 }
 
 // 0x5B59E0
-bool GameText::HasKey(const char_type* pIdStr)
+bool GameText::HasKey(const char_type* id_str)
 {
-    return bsearch(pIdStr, // search key
+    return bsearch(id_str, // search key
                    t_key_.t_key_, // array to search
                    t_key_.t_key_count_, // array count
                    sizeof(TextEntry), // element size
@@ -158,9 +158,9 @@ s32 GameText::TKeySearch(const void* a, const void* b)
 }
 
 // 0x5B5A50
-wchar_t* GameText::FindText(const char_type* pIdStr)
+wchar_t* GameText::FindText(const char_type* id_str)
 {
-    auto* pFound = static_cast<TextEntry*>(bsearch(pIdStr, // key
+    auto* pFound = static_cast<TextEntry*>(bsearch(id_str, // key
                                                    t_key_.t_key_, // array
                                                    t_key_.t_key_count_, // array count
                                                    sizeof(TextEntry), // element size
@@ -237,13 +237,13 @@ u16 GameText::ToUpper(wchar_t ch)
 }
 
 // 0x5B5B80
-wchar_t* GameText::StrToUpper(wchar_t* pWideStr)
+wchar_t* GameText::StrToUpper(wchar_t* wide_str)
 {
-    for (wchar_t* pStrIter = pWideStr; *pStrIter; ++pStrIter)
+    for (wchar_t* pStrIter = wide_str; *pStrIter; ++pStrIter)
     {
         *pStrIter = ToUpper(*pStrIter);
     }
-    return pWideStr;
+    return wide_str;
 }
 
 // 9.6f 0x4539D0, file-local copy of GetCharWidth_4539D0 (Draw.hpp): including Draw.hpp changes this file's static init code
@@ -256,10 +256,10 @@ inline s32 GetCharWidthLocal(u16 font_type, wchar_t chr)
 } // namespace
 
 // 0x5B5BC0
-s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
+s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* dest_str, const wchar_t* src_str, s32 max_line_width, u16 font_type)
 {
-    const wchar_t* pSrcStrCopy = pSrcStr;
-    wchar_t* pDestStrCopy = pDestStr;
+    const wchar_t* pSrcStrCopy = src_str;
+    wchar_t* pDestStrCopy = dest_str;
     s32 num_of_lines = 1;
     s32 space_width = GetSpaceWidth(font_type);
     s32 current_width = 0;
@@ -319,9 +319,9 @@ s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* pDestStr, const wchar_t* p
 }
 
 // 0x5B5D10
-char* GameText::Wide2PesudoAscii(const wchar_t* pText)
+char* GameText::Wide2PesudoAscii(const wchar_t* text)
 {
-    const wchar_t* pSrc = pText;
+    const wchar_t* pSrc = text;
     // jnb forced to jge by changing u32 loop index to int
     s32 dstIdx = 0;
     while (*pSrc) // the original tested the pointer: it read up to 79 characters past the end of a short string
@@ -352,15 +352,15 @@ char* GameText::Wide2PesudoAscii(const wchar_t* pText)
 }
 
 // 0x5B5DF0
-wchar_t* GameText::Ascii2Wide(const char_type* pStr)
+wchar_t* GameText::Ascii2Wide(const char_type* str)
 {
     // movsx vs movzx caused by unsigned vs s8
     wchar_t* pDst = gTmpAscii2WideStr;
-    while (*pStr)
+    while (*str)
     {
-        *pDst = *pStr;
+        *pDst = *str;
         pDst++;
-        pStr++;
+        str++;
     }
 
     // null terminate
@@ -417,15 +417,15 @@ void GameText::Load()
 }
 
 // 0x5B5F90
-wchar_t* GameText::Find(const char_type* pIdStr)
+wchar_t* GameText::Find(const char_type* id_str)
 {
-    return FindText(pIdStr);
+    return FindText(id_str);
 }
 
 // 0x5B5FA0
-bool GameText::KeyExists(const char_type* pIdStr)
+bool GameText::KeyExists(const char_type* id_str)
 {
-    return HasKey(pIdStr);
+    return HasKey(id_str);
 }
 
 // 0x5B5FB0

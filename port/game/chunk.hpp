@@ -9,9 +9,9 @@ struct ChunkBase
     char_type type_[4];
 
     // inline 0x460EE0
-    void VerifyType(const char_type* pExpected)
+    void VerifyType(const char_type* expected)
     {
-        if (strncmp(pExpected, type_, sizeof(type_)) != 0)
+        if (strncmp(expected, type_, sizeof(type_)) != 0)
         {
             FatalError_4A38C0(Gta2Error::kInvalidFileType, "C:\\Splitting\\Gta2\\Source\\chunk.h", 37);
         }
@@ -23,9 +23,9 @@ struct FileHeader : public ChunkBase
     u16 version_;
 
     // inline 460EC0
-    void VerifyVersion(u32 expectedVersion)
+    void VerifyVersion(u32 expected_version)
     {
-        if (version_ != expectedVersion)
+        if (version_ != expected_version)
         {
             FatalError_4A38C0(Gta2Error::kInvalidFileVersion, "C:\\Splitting\\Gta2\\Source\\chunk.h", 33);
         }

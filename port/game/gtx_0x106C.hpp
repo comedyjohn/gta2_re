@@ -165,8 +165,8 @@ struct DeltaStoreEntry
 
 struct SpriteDelta
 {
-    void Delta(u8* pArray);
-    void Delta(u8* pArray, u32 width);
+    void Delta(u8* array);
+    void Delta(u8* array, u32 width);
 
     DeltaStoreEntry* data_;
     u16 len_;
@@ -306,11 +306,11 @@ class Gtx
 
     BYTE* GetPalData(u16 palette_idx);
 
-    u16 GetPhysPal(u16 palId);
+    u16 GetPhysPal(u16 pal_id);
 
     u16 GetSpriteIdxFromFont(u16 font_type, s16 offset);
 
-    u16 GetFontWidth(u16* font_type, wchar_t* pStr);
+    u16 GetFontWidth(u16* font_type, wchar_t* str);
 
     u16 GetSpaceCharWidth(u16* font_type);
 
@@ -364,13 +364,13 @@ class Gtx
 
     void LoadSpriteIndex(u32 sprx_chunk_size);
 
-    void InitFontTypes(u16 fontCount);
+    void InitFontTypes(u16 font_count);
 
     void LoadFontBase(u32 fonb_chunk_size);
 
-    static u16 SumOffsets(u16* pOffsets, u32 offsetsCount);
+    static u16 SumOffsets(u16* offsets, u32 offsets_count);
 
-    static void ConvertToVirtualOffsets(u16* pBuffer, u32 len);
+    static void ConvertToVirtualOffsets(u16* buffer, u32 len);
 
     void LoadSpriteBase(u32 sprite_base_chunk_size);
 
@@ -384,11 +384,11 @@ class Gtx
 
     void LoadSpec();
 
-    void LoadChunk(const char_type* Str1, u32 chunk_len);
+    void LoadChunk(const char_type* str1, u32 chunk_len);
 
     void SetDataPtrs();
 
-    void LoadSty(const char_type* pStyFileName);
+    void LoadSty(const char_type* sty_file_name);
 
     // 0x5AB820
     Gtx();
@@ -403,9 +403,9 @@ class Gtx
     }
 
     // inlined v9.6f, 0x420200
-    bool DoesCarExist(u8 iParm1) const
+    bool DoesCarExist(u8 parm1) const
     {
-        return cari_->car_info_[iParm1] != nullptr;
+        return cari_->car_info_[parm1] != nullptr;
     }
 
     bool IsElectrifiedFloorType(u16 tile_idx)

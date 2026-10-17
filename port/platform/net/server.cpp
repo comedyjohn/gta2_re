@@ -112,7 +112,9 @@ void ReadMember(Reader& r, Member& m)
     }
 }
 
-static std::string ToUtf8(const std::u16string& s)
+namespace
+{
+std::string ToUtf8(const std::u16string& s)
 {
     std::string out;
     for (char16_t c : s)
@@ -135,6 +137,7 @@ static std::string ToUtf8(const std::u16string& s)
     }
     return out;
 }
+} // namespace
 
 Server::~Server()
 {

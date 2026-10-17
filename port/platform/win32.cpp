@@ -257,13 +257,16 @@ extern "C"
     }
 
     // FindFirstFileA & co. sit on the _findfirst family in crt.cpp
-    static void ToFindData(const _finddata_t& in, LPWIN32_FIND_DATAA out)
+    namespace
+    {
+    void ToFindData(const _finddata_t& in, LPWIN32_FIND_DATAA out)
     {
         memset(out, 0, sizeof(*out));
         out->dwFileAttributes = (in.attrib & _A_SUBDIR) ? FILE_ATTRIBUTE_DIRECTORY : FILE_ATTRIBUTE_NORMAL;
         out->nFileSizeLow = in.size;
         snprintf(out->cFileName, sizeof(out->cFileName), "%s", in.name);
     }
+    } // namespace
 
     HANDLE FindFirstFileA(LPCSTR pattern, LPWIN32_FIND_DATAA data)
     {
@@ -574,7 +577,9 @@ extern "C"
     // GWL_WNDPROC passes a window procedure through a LONG. That fits in a 32-bit build; in a 64-bit one
     // a LONG can't hold a pointer, so procedures travel as small numbered handles instead (64-bit
     // Windows does the same), which CallWindowProcA and SetWindowLongA turn back into the procedure.
-    static LONG WndProcToLong(WNDPROC proc)
+    namespace
+    {
+    LONG WndProcToLong(WNDPROC proc)
     {
 #if __SIZEOF_POINTER__ == 4
         return reinterpret_cast<LONG>(proc);
@@ -597,7 +602,7 @@ extern "C"
 #endif
     }
 
-    static WNDPROC LongToWndProc(intptr_t value)
+    WNDPROC LongToWndProc(intptr_t value)
     {
 #if __SIZEOF_POINTER__ == 4
         return reinterpret_cast<WNDPROC>(value);
@@ -610,6 +615,7 @@ extern "C"
         return reinterpret_cast<WNDPROC>(value);
 #endif
     }
+    } // namespace
 
     LONG SetWindowLongA(HWND hwnd, int index, LONG value)
     {
@@ -852,7 +858,10 @@ extern "C"
     // (lobby.cpp). Its controls' text is kept, so the game's own code reading the player name back
     // (Network_20324::cb_SavePlayerName_51BC00) gets what the lobby put there.
     INT_PTR PortRunDialog(HINSTANCE instance, LPCSTR templateName, DLGPROC proc, LPARAM param);
-    static std::map<int, std::string> gDialogText;
+    namespace
+    {
+    std::map<int, std::string> gDialogText;
+    } // namespace
 
     INT_PTR DialogBoxParamA(HINSTANCE instance, LPCSTR templateName, HWND, DLGPROC proc, LPARAM param)
     {

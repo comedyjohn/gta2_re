@@ -7,7 +7,9 @@
 
 namespace net
 {
-static int DropPercent()
+namespace
+{
+int DropPercent()
 {
     static int percent = -1;
     if (percent < 0)
@@ -17,6 +19,7 @@ static int DropPercent()
     }
     return percent;
 }
+} // namespace
 
 bool ShouldDropOutgoing()
 {

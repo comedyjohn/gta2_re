@@ -207,7 +207,9 @@ UdpSocket::~UdpSocket()
     Close();
 }
 
-static int OpenOne(int family, uint16_t port, std::string& error)
+namespace
+{
+int OpenOne(int family, uint16_t port, std::string& error)
 {
     const int fd = socket(family, SOCK_DGRAM, 0);
     if (fd < 0)
@@ -249,7 +251,7 @@ static int OpenOne(int family, uint16_t port, std::string& error)
     return fd;
 }
 
-static uint16_t BoundPort(int fd)
+uint16_t BoundPort(int fd)
 {
     sockaddr_storage ss {};
     socklen_t len = sizeof(ss);
@@ -260,6 +262,7 @@ static uint16_t BoundPort(int fd)
     }
     return ntohs(reinterpret_cast<sockaddr_in*>(&ss)->sin_port);
 }
+} // namespace
 
 bool UdpSocket::Open(uint16_t port, std::string& error)
 {

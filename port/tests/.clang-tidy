@@ -1,0 +1,3 @@
+# doctest's TEST_CASE expands to a static function: misc-use-anonymous-namespace cannot be satisfied
+InheritParentConfig: true
+Checks: '-misc-use-anonymous-namespace'

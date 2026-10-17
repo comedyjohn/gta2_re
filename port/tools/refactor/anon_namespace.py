@@ -6,8 +6,8 @@
 misc-use-anonymous-namespace has no fix-its in LLVM 18. For each namespace-scope declaration of the
 given .cpp files that has static storage class, this removes the `static` keyword and wraps the
 declaration in `namespace { ... }`; neighbours with only white space between them share one block.
-Declarations inside a class, a function or `extern "C"`, and member-function definitions are left
-alone. Needs the libclang of the refactor venv (EXECUTOR.md 1.2).
+Declarations inside a class or a function, and member-function definitions, are left alone;
+`extern "C" { }` and named namespaces are looked into. Needs the libclang of the refactor venv (EXECUTOR.md 1.2).
 """
 import json
 import os
@@ -46,14 +46,21 @@ def edits_for(build_dir, path):
         sys.exit(f"{path}: does not parse")
     text = open(path, newline="").read()
     decls = []
-    for c in tu.cursor.get_children():
+    def top_level(cur):
+        for c in cur.get_children():
+            if c.kind in (K.LINKAGE_SPEC, K.NAMESPACE) and c.location.file is not None:
+                yield from top_level(c)  # extern "C" { ... }
+            else:
+                yield c
+
+    for c in top_level(tu.cursor):
         if c.location.file is None or os.path.realpath(c.location.file.name) != path:
             continue
         if c.kind not in (K.FUNCTION_DECL, K.VAR_DECL):
             continue
         if c.storage_class != cindex.StorageClass.STATIC:
             continue
-        if c.kind == K.FUNCTION_DECL and c.semantic_parent.kind != K.TRANSLATION_UNIT:
+        if c.semantic_parent.kind not in (K.TRANSLATION_UNIT, K.LINKAGE_SPEC, K.NAMESPACE):
             continue
         start, end = c.extent.start.offset, c.extent.end.offset
         if c.kind == K.VAR_DECL or not text[start:end].rstrip().endswith("}"):

@@ -258,7 +258,10 @@ extern "C"
     }
 
     // MSVC's rand(): a linear congruential generator, 15 bits a draw, seeded with 1
-    static unsigned int gRandState = 1;
+    namespace
+    {
+    unsigned int gRandState = 1;
+    } // namespace
 
     int port_rand(void)
     {

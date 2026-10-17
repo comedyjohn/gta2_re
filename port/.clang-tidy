@@ -11,7 +11,9 @@
 #   bugprone-easily-swappable-parameters: phase 3's strong types solve it properly
 #   modernize-use-using: on typedef struct blocks and 3rdParty headers it drops calling conventions
 #       and expands macros
-# readability-identifier-naming is added by phase 2 (R2.1), disabled until a subsystem is renamed.
+# readability-identifier-naming (the rules of port/STYLE.md) is off here: the code still carries the
+# original names. Each subsystem directory that has been renamed gets its own .clang-tidy with
+# `InheritParentConfig: true` and `Checks: 'readability-identifier-naming'` (phase 2, step 8).
 Checks: >
   -*,
   bugprone-*,
@@ -29,7 +31,8 @@ Checks: >
   -cppcoreguidelines-avoid-magic-numbers,
   -readability-identifier-length,
   -readability-magic-numbers,
-  -bugprone-easily-swappable-parameters
+  -bugprone-easily-swappable-parameters,
+  -readability-identifier-naming
 WarningsAsErrors: ''
 HeaderFilterRegex: 'port/(game|platform|tests)/'
 CheckOptions:
@@ -37,3 +40,49 @@ CheckOptions:
     value: '150'
   - key: readability-function-cognitive-complexity.Threshold
     value: '40'
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  - key: readability-identifier-naming.MethodCase
+    value: CamelCase
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: lower_case
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+  - key: readability-identifier-naming.ProtectedMemberCase
+    value: lower_case
+  - key: readability-identifier-naming.ProtectedMemberSuffix
+    value: '_'
+  - key: readability-identifier-naming.PublicMemberCase
+    value: lower_case
+  - key: readability-identifier-naming.LocalVariableCase
+    value: lower_case
+  - key: readability-identifier-naming.ParameterCase
+    value: lower_case
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConstexprVariablePrefix
+    value: k
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: k
+  - key: readability-identifier-naming.EnumConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: k
+  - key: readability-identifier-naming.GlobalVariableCase
+    value: CamelCase
+  - key: readability-identifier-naming.GlobalVariablePrefix
+    value: g
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE

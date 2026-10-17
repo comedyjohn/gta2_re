@@ -79,7 +79,7 @@ CheckOptions:
 Until phase 2 ends, the check runs only on subsystems already renamed (a `.clang-tidy` in each finished
 subsystem directory turns it on).
 
-- [ ] Write `port/STYLE.md`: the table above, plus the rules other phases add (ownership, error handling,
+- [x] Write `port/STYLE.md`: the table above, plus the rules other phases add (ownership, error handling,
       `const`, comments, the `// 0xADDR` comment on every function that has an original).
 
 ## 2.2 The address map (before any rename)

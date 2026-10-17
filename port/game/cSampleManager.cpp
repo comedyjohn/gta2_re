@@ -196,19 +196,19 @@ char_type cSampleManager::DisableA3DSplash_58D620()
     HKEY hKey;
     DWORD disposition;
 
-    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\Aureal\\A3D", 0, nullptr, 0, 0x20006u, nullptr, &hKey, &disposition))
+    if (RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\Aureal\\A3D", 0, nullptr, 0, 0x20006U, nullptr, &hKey, &disposition))
     {
         return 0;
     }
 
     data = 0;
-    if (RegSetValueExA(hKey, "SplashScreen", 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), 4u))
+    if (RegSetValueExA(hKey, "SplashScreen", 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), 4U))
     {
         bOk = 0;
     }
 
     data = 0;
-    if (RegSetValueExA(hKey, "SplashAudio", 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), 4u))
+    if (RegSetValueExA(hKey, "SplashAudio", 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), 4U))
     {
         bOk = 0;
     }
@@ -326,7 +326,7 @@ char_type cSampleManager::Init3DProvider_58D820(BYTE* pMaxSamples)
     {
         if (field_22B4_str[i])
         {
-            if (strncmp(field_22B4_str[i], "Microsoft DirectSound3D hardware support", 0x1Eu) == 0 && Open3DProvider_58E140(i))
+            if (strncmp(field_22B4_str[i], "Microsoft DirectSound3D hardware support", 0x1EU) == 0 && Open3DProvider_58E140(i))
             {
                 break;
             }
@@ -342,12 +342,12 @@ char_type cSampleManager::Init3DProvider_58D820(BYTE* pMaxSamples)
             field_1EB2_3d_samp_count = 0;
             AIL_3D_provider_attribute(field_26C0_3d_provider, "Maximum supported samples", pMaxSamples);
 
-            if (*pMaxSamples > 16u)
+            if (*pMaxSamples > 16U)
             {
                 *pMaxSamples = 16;
             }
 
-            if (*pMaxSamples < 8u)
+            if (*pMaxSamples < 8U)
             {
                 *pMaxSamples = 0;
                 Close3DProvider_58E1C0();
@@ -778,7 +778,7 @@ void cSampleManager::Close3DProvider_58E1C0()
     {
         AIL_close_3D_provider(field_26C0_3d_provider);
         field_26C0_3d_provider = 0;
-        Sleep(1500u);
+        Sleep(1500U);
     }
 }
 
@@ -795,7 +795,7 @@ void cSampleManager::Enum3DProviders_58E1F0()
             break;
         }
 
-        field_22B4_str[prov_counter] = static_cast<char_type*>(operator new(0x50u));
+        field_22B4_str[prov_counter] = static_cast<char_type*>(operator new(0x50U));
         strcpy(field_22B4_str[prov_counter], pName);
 
         prov_counter++;
@@ -1151,7 +1151,7 @@ char_type cSampleManager::LoadWavSdtData_58E980(const char_type* pRawOrSdtName)
     }
 
     fseek(hRawFile_, 0, SEEK_SET);
-    const size_t rawRead = fread(field_1EA8_pAudioBuffer1, 1u, rawFileSize, hRawFile_);
+    const size_t rawRead = fread(field_1EA8_pAudioBuffer1, 1U, rawFileSize, hRawFile_);
     fclose(hRawFile_);
     if (rawRead != static_cast<size_t>(rawFileSize))
     {
@@ -1163,7 +1163,7 @@ char_type cSampleManager::LoadWavSdtData_58E980(const char_type* pRawOrSdtName)
         return 0; // the original closed the raw file a second time here and read from a null FILE*
     }
 
-    const size_t sdtRead = fread(field_A8_sdt_entries, sizeof(sdt_entry_0x18), 320u, hSdtFile); // up to 320 entries
+    const size_t sdtRead = fread(field_A8_sdt_entries, sizeof(sdt_entry_0x18), 320U, hSdtFile); // up to 320 entries
     fclose(hSdtFile);
     if (sdtRead == 0)
     {

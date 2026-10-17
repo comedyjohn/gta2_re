@@ -35,7 +35,7 @@ void DoorData_10::Init_49C340(u8 id, u8 x, u8 y, u8 z, u32 face, u8 bDoFlip)
 
     const u8& anim_id = id;
     DoorAnimInfo_A* pInfo = &gDoorAnimInfo_67BB38[anim_id];
-    gGtx_0x106C_703DD4->SetTileRemap_5AA930(pInfo->field_4_internal_tile_idx, pInfo->field_0_start_frame);
+    gGtx_0x106C_703DD4->SetTileRemap(pInfo->field_4_internal_tile_idx, pInfo->field_0_start_frame);
 
     u16 tile_word = pInfo->field_4_internal_tile_idx | 0x1C00; // wall, bullet wall and flat
     if (bDoFlip)
@@ -326,10 +326,10 @@ void Door_4D4::RegisterDoorInfo_49D2D0(s16 start_frame, s16 end_frame, char_type
     psVar3->field_0_start_frame = start_frame;
     psVar3->field_2_end_frame = end_frame;
     psVar3->field_8_speed = speed;
-    s16 reserved_tile_idx = gGtx_0x106C_703DD4->GetFirstFreeReservedTileIdx_5AA890();
+    s16 reserved_tile_idx = gGtx_0x106C_703DD4->GetFirstFreeReservedTileIdx();
     psVar3->field_4_internal_tile_idx = reserved_tile_idx;
-    gGtx_0x106C_703DD4->SetTileRemap_5AA930(reserved_tile_idx, psVar3->field_0_start_frame);
-    reserved_tile_idx = gGtx_0x106C_703DD4->GetFirstFreeReservedTileIdx_5AA890();
+    gGtx_0x106C_703DD4->SetTileRemap(reserved_tile_idx, psVar3->field_0_start_frame);
+    reserved_tile_idx = gGtx_0x106C_703DD4->GetFirstFreeReservedTileIdx();
     psVar3->field_6_open_internal_tile_idx = reserved_tile_idx;
 }
 

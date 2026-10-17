@@ -295,13 +295,13 @@ void InputDevices_1::get_registry_controls_498C00()
 {
     for (u32 i = 0; i < 12; ++i)
     {
-        u32 setting = gRegistry_6FF968.Set_Control_Setting_587010(i, gDefaultControls_61A9E4[i]);
+        u32 setting = gRegistry_6FF968.SetControlSetting(i, gDefaultControls_61A9E4[i]);
         // port: the game's bindings are the keyboard's, the pad has its own (platform/padinput.h). A pad
         // binding or no key, as older builds of the port left in the registry, goes back to the default key.
         if ((setting >> 15) != 0 || (setting & 0xFF) == 0)
         {
             setting = gDefaultControls_61A9E4[i];
-            gRegistry_6FF968.Write_Control_Setting(i, setting);
+            gRegistry_6FF968.WriteControlSetting(i, setting);
         }
         gMaybeDeviceType_67B91C[i] = 0;
         gPlayerControlsBinding_67B6E8[i] = static_cast<u8>(setting);
@@ -686,7 +686,7 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
             {
                 const s32 rec_idx = this->field_75340_rec_buf_idx;
                 u32 rec_len = sizeof(InputRecord_C);
-                File::AppendBufferToFile_4A6F50("test\\replay.rep", &field_3C_rec_buff[rec_idx], &rec_len);
+                File::AppendBufferToFile("test\\replay.rep", &field_3C_rec_buff[rec_idx], &rec_len);
             }
 
             field_75340_rec_buf_idx++;
@@ -701,7 +701,7 @@ void InputRecorder_67F8B0::SaveReplay_4CDED0()
         field_75340_rec_buf_idx > 0 && !RecOrPlayBackState_4CEDF0())
     {
         u32 len = sizeof(InputRecord_C) * field_75340_rec_buf_idx;
-        File::AppendBufferToFile_4A6F50("test\\replay.rep", field_3C_rec_buff, &len);
+        File::AppendBufferToFile("test\\replay.rep", field_3C_rec_buff, &len);
     }
 }
 
@@ -795,7 +795,7 @@ void InputRecorder_67F8B0::AppendReplayHeader_4CDF70()
     header.field_E4_flags[30] = bDo_police_3_67D56A ? '1' : '0';
 
     header_size = sizeof(header);
-    File::AppendBufferToFile_4A6F50("test\\replay.rep", &header, &header_size);
+    File::AppendBufferToFile("test\\replay.rep", &header, &header_size);
 }
 
 // 0x4ce380
@@ -803,7 +803,7 @@ void InputRecorder_67F8B0::LoadReplayHeader_4CE380(char_type bLoadDebug)
 {
     u32 header_size = sizeof(ReplayHeader_10C);
     ReplayHeader_10C header;
-    File::Global_Read_4A71C0(&header, header_size);
+    File::GlobalRead(&header, header_size);
 
     if (!bIgnore_replay_header_67D4F3)
     {
@@ -908,12 +908,12 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     memset(this->field_3C_rec_buff, 0, sizeof(this->field_3C_rec_buff));
     this->field_75340_rec_buf_idx = 0;
     bConstant_replay_save_67D5C4 = false;
-    File::Global_Open_4A7060(FileName);
+    File::GlobalOpen(FileName);
     LoadReplayHeader_4CE380(0);
 
     u32 bufLen = sizeof(field_3C_rec_buff);
-    const u32 remainderSize = File::GetRemainderSize_4A7250(this->field_3C_rec_buff, &bufLen);
-    File::Global_Close_4A70C0();
+    const u32 remainderSize = File::GetRemainderSize(this->field_3C_rec_buff, &bufLen);
+    File::GlobalClose();
     this->field_7533C_used_recs_count = remainderSize / sizeof(InputRecord_C);
     if (sizeof(InputRecord_C) * (remainderSize / sizeof(InputRecord_C)) != remainderSize)
     {
@@ -961,11 +961,11 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     if (bPlay_replay_67D4F4 == 1)
     {
         bConstant_replay_save_67D5C4 = false;
-        File::Global_Open_4A7060("test\\replay.rep");
+        File::GlobalOpen("test\\replay.rep");
         InputRecorder_67F8B0::LoadReplayHeader_4CE380(1);
         u32 size = 480000;
-        size_t remainderSize = File::GetRemainderSize_4A7250(field_3C_rec_buff, &size);
-        File::Global_Close_4A70C0();
+        size_t remainderSize = File::GetRemainderSize(field_3C_rec_buff, &size);
+        File::GlobalClose();
         field_7533C_used_recs_count = remainderSize / 0xC;
         if (12 * (remainderSize / 0xC) != remainderSize)
         {
@@ -977,7 +977,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     {
         if (bDo_release_replay_67D4EB)
         {
-            File::CreateFile_4A7000("test\\replay.rep");
+            File::CreateFile("test\\replay.rep");
             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
         }
         field_38_replay_state = ReplayState::Live_0;
@@ -988,7 +988,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
         {
             if (bDo_release_replay_67D4EB)
             {
-                File::CreateFile_4A7000("test\\replay.rep");
+                File::CreateFile("test\\replay.rep");
                 InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
             }
         }
@@ -1016,7 +1016,7 @@ void InputRecorder_67F8B0::replay_save_4CEA40(u32* input_bits)
 
         if (bDo_release_replay_67D4EB)
         {
-            File::CreateFile_4A7000("test\\replay.rep");
+            File::CreateFile("test\\replay.rep");
             AppendReplayHeader_4CDF70();
         }
 
@@ -1047,7 +1047,7 @@ void SavePortRecord(InputRecorder_67F8B0& rec, u32 inputs)
         if (bConstant_replay_save_67D5C4 == 1)
         {
             u32 rec_len = sizeof(InputRecord_C);
-            File::AppendBufferToFile_4A6F50("test\\replay.rep", &r, &rec_len);
+            File::AppendBufferToFile("test\\replay.rep", &r, &rec_len);
         }
         rec.field_75340_rec_buf_idx++;
     }
@@ -1133,7 +1133,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                     {
                         if (bDo_release_replay_67D4EB)
                         {
-                            File::CreateFile_4A7000("test\\replay.rep");
+                            File::CreateFile("test\\replay.rep");
                             InputRecorder_67F8B0::AppendReplayHeader_4CDF70();
                         }
                         field_38_replay_state = ReplayState::Live_0;

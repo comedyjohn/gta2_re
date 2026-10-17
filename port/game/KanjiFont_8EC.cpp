@@ -22,7 +22,7 @@ void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
         {
             FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\kanji.cpp", 142);
         }
-        File::Global_Read_4A71C0(field_8C4_pKidX, chunk_len);
+        File::GlobalRead(field_8C4_pKidX, chunk_len);
     }
     else if (!strncmp(pChunkId, "KBIT", 4U))
     {
@@ -31,35 +31,35 @@ void KanjiFont_8EC::LoadChunks_4D1FC0(const char_type* pChunkId, u32 chunk_len)
         {
             FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\kanji.cpp", 148);
         }
-        File::Global_Read_4A71C0(field_8C8_pKBIT, chunk_len);
+        File::GlobalRead(field_8C8_pKBIT, chunk_len);
     }
     else
     {
-        File::Global_Seek_4A7140(&chunk_len);
+        File::GlobalSeek(&chunk_len);
     }
 }
 
 // 0x4D2090
 void KanjiFont_8EC::Load_kanji_dat_4D2090()
 {
-    File::Global_Open_4A7060("data\\kanji.dat");
+    File::GlobalOpen("data\\kanji.dat");
 
     FileHeader header;
     u32 readSize = sizeof(FileHeader);
-    File::Global_Read_4A71C0(&header, readSize);
+    File::GlobalRead(&header, readSize);
 
-    header.verify_type("KANJ");
-    header.verify_version(100);
+    header.VerifyType("KANJ");
+    header.VerifyVersion(100);
 
     ChunkHeader chunkHeader; // [esp+10h] [ebp-8h] BYREF
-    for (readSize = sizeof(chunkHeader); File::Global_Read_4A7210(&chunkHeader, &readSize); readSize = sizeof(chunkHeader))
+    for (readSize = sizeof(chunkHeader); File::GlobalRead(&chunkHeader, &readSize); readSize = sizeof(chunkHeader))
     {
         if (chunkHeader.field_4_size)
         {
             LoadChunks_4D1FC0(chunkHeader.field_0_type, chunkHeader.field_4_size);
         }
     }
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 }
 
 // Outlines the pixels of colour field_8E8_colour with colour field_8E9_outline_colour in a 256 wide sprite
@@ -492,9 +492,9 @@ void KanjiFont_8EC::SetGlyphParamsFromRemap_4D29D0(u16 remap)
 // 0x4D2B40
 void KanjiFont_8EC::InitGlyphCaches_4D2B40()
 {
-    u16 base_font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703C3E, 0);
-    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, base_font_idx);
-    field_8D4_sprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    u16 base_font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703C3E, 0);
+    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kFont, base_font_idx);
+    field_8D4_sprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
 
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_small_glyphs); i++)
     {
@@ -504,17 +504,17 @@ void KanjiFont_8EC::InitGlyphCaches_4D2B40()
         pKanji->field_1_outline_colour = 0;
         pKanji->field_C_last_used = 0;
 
-        u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703C3E, i);
-        u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, font_idx);
-        pKanji->field_8_sprt_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
+        u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703C3E, i);
+        u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kFont, font_idx);
+        pKanji->field_8_sprt_index = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx);
         pKanji->field_4_pTexture =
             gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(SpriteTypes::kFont, font_idx, PaletteTypes::kSprites, 0);
     }
 
-    u16 font_idx2 = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703D9A, 0);
-    u16 true_idx2 = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, font_idx2);
+    u16 font_idx2 = gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703D9A, 0);
+    u16 true_idx2 = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kFont, font_idx2);
 
-    field_8E0_sprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx2);
+    field_8E0_sprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx2);
 
     for (s32 j = 0; j < GTA2_COUNTOF_S(field_780_large_glyphs); j++)
     {
@@ -524,9 +524,9 @@ void KanjiFont_8EC::InitGlyphCaches_4D2B40()
         pKanji_2->field_1_outline_colour = 0;
         pKanji_2->field_C_last_used = 0;
 
-        u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703D9A, j);
-        u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, font_idx);
-        pKanji_2->field_8_sprt_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
+        u16 font_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703D9A, j);
+        u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kFont, font_idx);
+        pKanji_2->field_8_sprt_index = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx);
         pKanji_2->field_4_pTexture =
             gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(SpriteTypes::kFont, font_idx, PaletteTypes::kSprites, 0);
     }

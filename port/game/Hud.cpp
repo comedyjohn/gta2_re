@@ -174,7 +174,7 @@ wchar_t* gmp_map_zone::get_zone_str_4DEF00()
         buf[1] = field_6_name[1];
         buf[2] = field_6_name[2];
         buf[3] = 0;
-        return gText_0x14_704DFC->Find_5B5F90(buf);
+        return gText_0x14_704DFC->Find(buf);
     }
     return nullptr;
 }
@@ -190,7 +190,7 @@ void Hud_BriefSelector_4::ShowNextNumberedBrief_5CF620()
             field_0_value = 0;
         }
         sprintf(gTmpBuffer_67C598, "%d", field_0_value);
-    } while (!gText_0x14_704DFC->KeyExists_5B5FA0(gTmpBuffer_67C598));
+    } while (!gText_0x14_704DFC->KeyExists(gTmpBuffer_67C598));
     gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(3, gTmpBuffer_67C598);
     swprintf(gTmpBuff, L"%d", field_0_value);
     gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gTmpBuff, hud_message_priority::important_3);
@@ -207,7 +207,7 @@ void Hud_BriefSelector_4::ShowPrevNumberedBrief_5CF6B0()
             field_0_value = 9999;
         }
         sprintf(gTmpBuffer_67C598, "%d", field_0_value);
-    } while (!gText_0x14_704DFC->KeyExists_5B5FA0(gTmpBuffer_67C598));
+    } while (!gText_0x14_704DFC->KeyExists(gTmpBuffer_67C598));
     gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(3, gTmpBuffer_67C598);
     swprintf(gTmpBuff, L"%d", field_0_value);
     gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gTmpBuff, hud_message_priority::important_3);
@@ -499,8 +499,8 @@ void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
 // 0x5d0210
 void Hud_CopHead_C_Array::Init_5D0210()
 {
-    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, 14);
-    SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, 14);
+    SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
 
     field_4C_w_fp.FromU8(SpriteIndex->field_4_width);
     field_50_h_fp.FromU8(SpriteIndex->field_5_height);
@@ -1353,7 +1353,7 @@ void Hud_QuitMessage_1::DrawQuitMessage_5D1430()
 {
     if (gGame_0x40_67E008->field_38_local_player->field_78A_show_quit_message)
     {
-        wchar_t* pQuitText = gText_0x14_704DFC->Find_5B5F90("quit1");
+        wchar_t* pQuitText = gText_0x14_704DFC->Find("quit1");
 
         s32 max_text_width = Frontend::GetMaxTextWidth_5D8990(pQuitText, word_7064D8);
         s32 line_spacing_added = CountLineSpacing_5D8940(pQuitText, word_7064D8);
@@ -1361,12 +1361,12 @@ void Hud_QuitMessage_1::DrawQuitMessage_5D1430()
 
         DrawText_5D7720(pQuitText, static_cast<u32>((640 - max_text_width) / 2), line2_ypos - line_spacing_added, word_7064D8, 2, 0, 0, 0);
 
-        wchar_t* pQuitText2 = gText_0x14_704DFC->Find_5B5F90("quit2");
+        wchar_t* pQuitText2 = gText_0x14_704DFC->Find("quit2");
         s32 max_text_width_2 = Frontend::GetMaxTextWidth_5D8990(pQuitText2, word_7064D8);
 
         DrawText_5D7720(pQuitText2, static_cast<u32>((640 - max_text_width_2) / 2), static_cast<u32>(line2_ypos), word_7064D8, 2, 0, 0, 0);
 
-        wchar_t* pQuitText3 = gText_0x14_704DFC->Find_5B5F90("quit3");
+        wchar_t* pQuitText3 = gText_0x14_704DFC->Find("quit3");
         s32 max_text_width_3 = Frontend::GetMaxTextWidth_5D8990(pQuitText3, word_7064D8);
 
         DrawText_5D7720(pQuitText3,
@@ -1425,7 +1425,7 @@ bool Hud_ChatInput_1::IsTypingOnChat_5D15E0(s32 action, Player* pPlayer)
         }
         else
         {
-            const u16 char_value = gText_0x14_704DFC->RemapExtendedChar_5B58D0(gKeybrd_0x204_6F52F4->GetKey_4D5F40(action));
+            const u16 char_value = gText_0x14_704DFC->RemapExtendedChar(gKeybrd_0x204_6F52F4->GetKey_4D5F40(action));
             if (char_value)
             {
                 if (pPlayer->field_838_chat_text_idx < 79)
@@ -1490,7 +1490,7 @@ bool Hud_ChatInput_1::IsChatInputKey_5D17D0(s32 key_idx)
                 return true;
             }
 
-            if (gText_0x14_704DFC->RemapExtendedChar_5B58D0(gKeybrd_0x204_6F52F4->GetKey_4D5F40(key_idx)))
+            if (gText_0x14_704DFC->RemapExtendedChar(gKeybrd_0x204_6F52F4->GetKey_4D5F40(key_idx)))
             {
                 return true;
             }
@@ -1520,7 +1520,7 @@ void Hud_Message_1C8::FormatMessage_5D1860()
 {
     if (this->field_0_time_to_show)
     {
-        GameText::InsertLineBreaksAndGetNumLines_5B5BC0(&this->field_2_str[100], this->field_2_str, 580, gMessageFont_7062F0);
+        GameText::InsertLineBreaksAndGetNumLines(&this->field_2_str[100], this->field_2_str, 580, gMessageFont_7062F0);
         this->field_1BC_str_width =
             static_cast<u16>((640 - Frontend::GetMaxTextWidth_5D8990(&this->field_2_str[100], gMessageFont_7062F0)) / 2);
         this->field_1C0_num_lines = static_cast<u16>((480 - CountLineSpacing_5D8940(&this->field_2_str[100], gMessageFont_7062F0)) / 4);
@@ -1543,7 +1543,7 @@ void Hud_Message_1C8::ShowMessage_5D1A00(wchar_t* pStr, s32 priority)
     {
         field_1C4_priority = priority;
         wcscpy(field_2_str, pStr);
-        gText_0x14_704DFC->StrToUpper_5B5B80(field_2_str);
+        gText_0x14_704DFC->StrToUpper(field_2_str);
         field_0_time_to_show = 90;
         FormatMessage_5D1860();
     }
@@ -1572,11 +1572,11 @@ void Hud_TextEntry_C4::FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, 
 {
     this->field_AC_fontType = fontType;
 
-    GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str_buf, pStr, 640, fontType);
+    GameText::InsertLineBreaksAndGetNumLines(field_0_str_buf, pStr, 640, fontType);
 
     if (field_AC_fontType == word_703C9C || field_AC_fontType == word_703D9C)
     {
-        /*v7 =*/gText_0x14_704DFC->StrToUpper_5B5B80(field_0_str_buf);
+        /*v7 =*/gText_0x14_704DFC->StrToUpper(field_0_str_buf);
     }
 
     this->field_B0_drawKind = 2;
@@ -2095,7 +2095,7 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
         if (field_6F8_curr_briefs->field_14_cost_param != -1)
         {
             swprintf(gTmpBuff,
-                     gText_0x14_704DFC->Find_5B5F90(field_6F8_curr_briefs->field_0_brief_id_str),
+                     gText_0x14_704DFC->Find(field_6F8_curr_briefs->field_0_brief_id_str),
                      field_6F8_curr_briefs->field_14_cost_param);
             brief_face_idx = GetBriefFaceIdx_5D3680(gTmpBuff[0]);
             field_502_face_idx = brief_face_idx;
@@ -2111,13 +2111,12 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                 field_502_face_idx = 8; // neutral face
             }
 
-            field_508_num_lines =
-                GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
+            field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
             if (bShow_brief_number_67D504)
             {
                 swprintf(gTmpBuff,
-                         gText_0x14_704DFC->Find_5B5F90(field_6F8_curr_briefs->field_0_brief_id_str),
+                         gText_0x14_704DFC->Find(field_6F8_curr_briefs->field_0_brief_id_str),
                          field_6F8_curr_briefs->field_14_cost_param);
                 brief_face_idx = GetBriefFaceIdx_5D3680(gTmpBuff[0]);
                 field_502_face_idx = brief_face_idx;
@@ -2132,19 +2131,14 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                     field_502_face_idx = 8; // neutral face
                     pStartStr_2 = gTmpBuff;
                 }
-                swprintf(gTmpWideStr_67C7D8,
-                         L"(%s)%s",
-                         GameText::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str),
-                         pStartStr_2);
-                field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                      gTmpWideStr_67C7D8,
-                                                                                      MaxLineWidth_62689C,
-                                                                                      gBriefFont_7065C4);
+                swprintf(gTmpWideStr_67C7D8, L"(%s)%s", GameText::Ascii2Wide(field_6F8_curr_briefs->field_0_brief_id_str), pStartStr_2);
+                field_508_num_lines =
+                    GameText::InsertLineBreaksAndGetNumLines(field_0_str, gTmpWideStr_67C7D8, MaxLineWidth_62689C, gBriefFont_7065C4);
             }
         }
         else
         {
-            wchar_t* _5B5F90 = gText_0x14_704DFC->Find_5B5F90(field_6F8_curr_briefs->field_0_brief_id_str);
+            wchar_t* _5B5F90 = gText_0x14_704DFC->Find(field_6F8_curr_briefs->field_0_brief_id_str);
             brief_face_idx = GetBriefFaceIdx_5D3680(_5B5F90[0]);
             field_502_face_idx = brief_face_idx;
 
@@ -2156,15 +2150,15 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
             {
                 field_502_face_idx = 8; // neutral face
             }
-            field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                  static_cast<const wchar_t*>(_5B5F90),
-                                                                                  MaxLineWidth_62689C,
-                                                                                  gBriefFont_7065C4);
+            field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines(field_0_str,
+                                                                           static_cast<const wchar_t*>(_5B5F90),
+                                                                           MaxLineWidth_62689C,
+                                                                           gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
 
             if (bShow_brief_number_67D504)
             {
-                wchar_t* pString = gText_0x14_704DFC->Find_5B5F90(field_6F8_curr_briefs->field_0_brief_id_str);
+                wchar_t* pString = gText_0x14_704DFC->Find(field_6F8_curr_briefs->field_0_brief_id_str);
                 brief_face_idx = GetBriefFaceIdx_5D3680(pString[0]);
                 field_502_face_idx = brief_face_idx;
 
@@ -2176,11 +2170,9 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                 {
                     field_502_face_idx = 8; // neutral face
                 }
-                swprintf(gTmpWideStr_67C7D8, L"(%s)%s", GameText::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str), pString);
-                field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                      gTmpWideStr_67C7D8,
-                                                                                      MaxLineWidth_62689C,
-                                                                                      gBriefFont_7065C4);
+                swprintf(gTmpWideStr_67C7D8, L"(%s)%s", GameText::Ascii2Wide(field_6F8_curr_briefs->field_0_brief_id_str), pString);
+                field_508_num_lines =
+                    GameText::InsertLineBreaksAndGetNumLines(field_0_str, gTmpWideStr_67C7D8, MaxLineWidth_62689C, gBriefFont_7065C4);
             }
         }
     }
@@ -2500,7 +2492,7 @@ void Hud_2B00::ShowCarName_5D5240(wchar_t* Source)
 {
     field_0_car_name.field_0_display_time = 120;
     wcscpy(field_0_car_name.field_2_car_name, Source);
-    gText_0x14_704DFC->StrToUpper_5B5B80(field_0_car_name.field_2_car_name);
+    gText_0x14_704DFC->StrToUpper(field_0_car_name.field_2_car_name);
     Hud_2B00::CalcCarNameXPosOffset_5D5190();
     field_0_car_name.field_48_ypos = -17;
 }
@@ -2554,7 +2546,7 @@ void Hud_PickupText_88::ShowPickupText_5D5600(u8 pickup_idx)
 {
     sprintf(gTmpGxtKey_67CE50, "c%02d", pickup_idx);
     field_0_timer = 90;
-    wchar_t* pStr = gText_0x14_704DFC->Find_5B5F90(gTmpGxtKey_67CE50);
+    wchar_t* pStr = gText_0x14_704DFC->Find(gTmpGxtKey_67CE50);
     wcscpy(field_2_str, pStr);
     CalcTextWidth_5D53E0();
 }
@@ -2623,30 +2615,26 @@ void Hud_MpMessage_D0::AnnounceKill_5D5770(Player* killer, Player* victim)
     {
         if (victim->IsUser_41DC70())
         {
-            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("mpkill1"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find("mpkill1"));
             this->ShowText_5D5730(gTmpBuff);
             return;
         }
 
-        swprintf(gTmpBuff, L"%s %s", gText_0x14_704DFC->Find_5B5F90("mpkill2"), victim->field_83C_player_name);
+        swprintf(gTmpBuff, L"%s %s", gText_0x14_704DFC->Find("mpkill2"), victim->field_83C_player_name);
 
         gRoot_sound_66B038.PlayVoice_40F090(voice_line::random_laugh_32);
     }
     else if (victim->IsUser_41DC70())
     {
-        swprintf(gTmpBuff, L"%s %s", killer->field_83C_player_name, gText_0x14_704DFC->Find_5B5F90("mpkill3"));
+        swprintf(gTmpBuff, L"%s %s", killer->field_83C_player_name, gText_0x14_704DFC->Find("mpkill3"));
     }
     else if (victim == killer)
     {
-        swprintf(gTmpBuff, L"%s %s", victim->field_83C_player_name, gText_0x14_704DFC->Find_5B5F90("mpkill5"));
+        swprintf(gTmpBuff, L"%s %s", victim->field_83C_player_name, gText_0x14_704DFC->Find("mpkill5"));
     }
     else
     {
-        swprintf(gTmpBuff,
-                 L"%s %s %s",
-                 killer->field_83C_player_name,
-                 gText_0x14_704DFC->Find_5B5F90("mpkill4"),
-                 &victim->field_83C_player_name);
+        swprintf(gTmpBuff, L"%s %s %s", killer->field_83C_player_name, gText_0x14_704DFC->Find("mpkill4"), &victim->field_83C_player_name);
 
         gRoot_sound_66B038.PlayVoice_40F090(voice_line::random_laugh_31);
     }
@@ -2741,7 +2729,7 @@ void Hud_MapZone_98::ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZo
     wchar_t* pStr = pArg2Or3->get_zone_str_4DEF00();
     if (pStr)
     {
-        const wchar_t* pName = gText_0x14_704DFC->StrToUpper_5B5B80(pStr);
+        const wchar_t* pName = gText_0x14_704DFC->StrToUpper(pStr);
         wcscpy(this->field_2_wstr, pName);
         this->field_88_nav_zone = pZone1;
         this->field_8C_local_nav_zone = pZone2;
@@ -2990,7 +2978,7 @@ namespace
 {
 inline u16 GetPowerupSpriteIndex_5D61A0(Gtx* pGtx, s32 sprite_pal)
 {
-    return pGtx->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, sprite_pal);
+    return pGtx->GetSpriteTrueIndex(SpriteTypes::kUser, sprite_pal);
 }
 } // namespace
 
@@ -2998,7 +2986,7 @@ inline u16 GetPowerupSpriteIndex_5D61A0(Gtx* pGtx, s32 sprite_pal)
 s32 DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number)
 {
     u16 sprite_idx = GetPowerupSpriteIndex_5D61A0(gGtx_0x106C_703DD4, powerup_idx + 141);
-    s32 width = gGtx_0x106C_703DD4->get_sprite_width_420220(sprite_idx);
+    s32 width = gGtx_0x106C_703DD4->GetSpriteWidth(sprite_idx);
     DrawFigureScaled_5D7670(6, powerup_idx + 141, base_xpos - (width / 2), 117, kAngZero_706610, 2, 0, 0, 0);
 
     if (powerup_idx == power_up_indices::Armor_3)
@@ -3098,7 +3086,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
         DrawFigureScaled_5D7670(6, 136, 320, 180, kAngZero_706610, 2, 0, 0, 0);
         DrawFigureScaled_5D7670(6, 135, 413, 180, kAngZero_706610, 2, 0, 0, 0);
 
-        wchar_t* pWMessage = gText_0x14_704DFC->Find_5B5F90("pause");
+        wchar_t* pWMessage = gText_0x14_704DFC->Find("pause");
         s32 max_width = Frontend::GetMaxTextWidth_5D8990(pWMessage, gPauseFont_7063F8);
 
         // u32: converts with the Fix16(u32) constructor, whose out-of-line copy is 0x4926F0
@@ -3113,7 +3101,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
             switch (field_0_current_pause_section)
             {
                 case HudPauseSection::target_score_0:
-                    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("pscore"), gScriptManager_6F8060->field_310_finish_score);
+                    swprintf(gTmpBuff, gText_0x14_704DFC->Find("pscore"), gScriptManager_6F8060->field_310_finish_score);
                     break;
 
                 case HudPauseSection::gang_1_missions_done_1:
@@ -3127,7 +3115,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                         value_1 = 0;
                     }
                     swprintf(gTmpBuff,
-                             gText_0x14_704DFC->Find_5B5F90("pgmiss"),
+                             gText_0x14_704DFC->Find("pgmiss"),
                              pGang->GetArrowColourText_4BF340(),
                              value_1,
                              gScriptManager_6F8060->field_31C_gang_1_missions_total);
@@ -3147,7 +3135,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                         value_1 = 0;
                     }
                     swprintf(gTmpBuff,
-                             gText_0x14_704DFC->Find_5B5F90("pgmiss"),
+                             gText_0x14_704DFC->Find("pgmiss"),
                              pGang->GetArrowColourText_4BF340(),
                              value_1,
                              gScriptManager_6F8060->field_320_gang_2_missions_total);
@@ -3168,7 +3156,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                         value_1 = 0;
                     }
                     swprintf(gTmpBuff,
-                             gText_0x14_704DFC->Find_5B5F90("pgmiss"),
+                             gText_0x14_704DFC->Find("pgmiss"),
                              pGang->GetArrowColourText_4BF340(),
                              value_1,
                              gScriptManager_6F8060->field_324_gang_3_missions_total);
@@ -3185,7 +3173,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                     {
                         value_1 = 0;
                     }
-                    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("pmiss"), value_1, gScriptManager_6F8060->field_314_total_missions);
+                    swprintf(gTmpBuff, gText_0x14_704DFC->Find("pmiss"), value_1, gScriptManager_6F8060->field_314_total_missions);
                     break;
 
                 case HudPauseSection::kill_frenzies_completed_5:
@@ -3197,16 +3185,13 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
                     {
                         value_1 = 0;
                     }
-                    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("psec"), value_1, gScriptManager_6F8060->field_318_total_secrets);
+                    swprintf(gTmpBuff, gText_0x14_704DFC->Find("psec"), value_1, gScriptManager_6F8060->field_318_total_secrets);
                     sprite_type = 4;
                     sprite_pal = gObjectDefinitions_6FCF00->GetObjectPalette_4C6E30(286);
                     break;
 
                 case HudPauseSection::tokens_collected_6:
-                    swprintf(gTmpBuff,
-                             gText_0x14_704DFC->Find_5B5F90("pbon"),
-                             gGameSession_67E8E0.get_secret_tokens_collected_453A80(),
-                             50);
+                    swprintf(gTmpBuff, gText_0x14_704DFC->Find("pbon"), gGameSession_67E8E0.get_secret_tokens_collected_453A80(), 50);
                     sprite_type = 4;
                     sprite_pal = gObjectDefinitions_6FCF00->GetObjectPalette_4C6E30(266);
                     break;
@@ -3218,8 +3203,8 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
             s32 text_xpos;
             if (sprite_pal != 0)
             {
-                u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_pal);
-                s32 icon_width = gGtx_0x106C_703DD4->get_sprite_width_420220(sprite_idx) + 10;
+                u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(sprite_type, sprite_pal);
+                s32 icon_width = gGtx_0x106C_703DD4->GetSpriteWidth(sprite_idx) + 10;
                 text_xpos = (640 - icon_width - max_width_2) / 2;
                 DrawFigureScaled_5D7670(sprite_type, sprite_pal, text_xpos + icon_width / 2, 235, kAngZero_706610, 2, 0, 0, 0);
                 text_xpos += icon_width;
@@ -3298,7 +3283,7 @@ void Hud_2B00::SetFullAmbient_5D6A70()
 // 0x5d6a90
 void Hud_2B00::GetTextSpeed_5D6A90()
 {
-    field_13C4_text_speed = gRegistry_6FF968.Set_Option_586F70("text_speed", 3);
+    field_13C4_text_speed = gRegistry_6FF968.SetOption("text_speed", 3);
 }
 
 // 0x5d6ab0
@@ -3316,7 +3301,7 @@ void Hud_2B00::RecalcTextLayout_5D6AB0()
 // 0x5d6b00
 void Hud_2B00::SetFontTypes_5D6B00()
 {
-    if (gText_0x14_704DFC->LangIsJapanese_452E60())
+    if (gText_0x14_704DFC->LangIsJapanese())
     {
         word_7064B8 = 103;
         gCarNameFont_706508 = 104;

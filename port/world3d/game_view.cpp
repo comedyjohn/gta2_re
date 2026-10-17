@@ -89,7 +89,7 @@ unsigned TileTexture(int tile)
     {
         return 0;
     }
-    u16 idx = gGtx_0x106C_703DD4->GetTile_5AA870(static_cast<u16>(tile));
+    u16 idx = gGtx_0x106C_703DD4->GetTileMapping(static_cast<u16>(tile));
     if (!idx)
     {
         return 0;

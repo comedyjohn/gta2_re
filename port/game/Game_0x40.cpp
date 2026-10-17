@@ -140,7 +140,7 @@ void Game_0x40::LoadGameFiles_4B8C40()
 {
     char_type tmp_array[256];
 
-    gText_0x14_704DFC->Load_5B5E90();
+    gText_0x14_704DFC->Load();
     if (bSkip_audio_67D6BE == false)
     {
         char_type* style_name = gGameSession_67E8E0.GetStyleName_4C5950();
@@ -148,7 +148,7 @@ void Game_0x40::LoadGameFiles_4B8C40()
     }
 
     char_type* style_name = gGameSession_67E8E0.GetStyleName_4C5950();
-    gGtx_0x106C_703DD4->LoadSty_5AB750(style_name);
+    gGtx_0x106C_703DD4->LoadSty(style_name);
 
     char_type* map_name = gGameSession_67E8E0.GetMapName_4C5940();
     gMap_0x370_6F6268->LoadMap_4E95B0(map_name);
@@ -170,17 +170,17 @@ void Game_0x40::LoadGameFiles_4B8C40()
 
     strcpy(tmp_array, "data\\");
     memset(gTmpBuffer_67C598, 0, sizeof(gTmpBuffer_67C598));
-    gRegistry_6FF968.Get_Debug_Setting_586E90("carname", reinterpret_cast<LPBYTE>(gTmpBuffer_67C598), 0x100);
+    gRegistry_6FF968.GetDebugSetting("carname", reinterpret_cast<LPBYTE>(gTmpBuffer_67C598), 0x100);
 
     strcat(tmp_array, gTmpBuffer_67C598);
 
     if (strcmp(tmp_array, "data\\") != 0)
     {
-        gCarInfo_808_678098->LoadFromGciFile_454A00(tmp_array);
+        gCarInfo_808_678098->LoadFromGciFile(tmp_array);
     }
     else
     {
-        gCarInfo_808_678098->LoadFromGciFile_454A00("data\\nyc.gci");
+        gCarInfo_808_678098->LoadFromGciFile("data\\nyc.gci");
     }
 
     gCarManager_6C_677930->DistributeCarsByRating_444980();
@@ -329,7 +329,7 @@ void Game_0x40::BootGame_4B8EB0()
         field_4_players[i]->InitializePlayerState_569CB0();
     }
 
-    gPlyDat_6FEAC0->DoMuchCashCheat_56C250();
+    gPlyDat_6FEAC0->DoMuchCashCheat();
 }
 
 // 0x4B8FF0
@@ -450,7 +450,7 @@ namespace
 {
 void SetGamma_5D9970() // TODO Function chunk of 0x4AEC00, 0x4B93C0 and 0x4B9410 - probably move elsewhere
 {
-    const s32 gamma = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 10U);
+    const s32 gamma = gRegistry_6FF968.GetScreenSetting("gamma", 10U);
     if (counter_706C4C)
     {
         if (SetGamma_5D9910(gamma))

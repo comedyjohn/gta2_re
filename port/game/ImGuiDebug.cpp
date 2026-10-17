@@ -501,8 +501,7 @@ EXTERN_GLOBAL(Car_BC*, gTestArrowCar_7043F0);
 void NoRefs_sub_5B1170()
 {
     gmp_block_info block;
-    gGtx_0x106C_703DD4->get_sprite_index_5AA440(
-        gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(7, gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(word_703C3E, 0)));
+    gGtx_0x106C_703DD4->GetSpriteIndex(gGtx_0x106C_703DD4->GetSpriteTrueIndex(7, gGtx_0x106C_703DD4->GetSpriteIdxFromFont(word_703C3E, 0)));
     block.field_A_arrows = 0;
     block.field_0_left = 7206;
     block.field_2_right = 7206;
@@ -1017,7 +1016,7 @@ namespace
 {
 void DisplayTextAtSprite(const char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
 {
-    DisplayWideTextAtSprite(GameText::Ascii2Wide_5B5DF0(pStr), pSprt, x_offset, y_offset);
+    DisplayWideTextAtSprite(GameText::Ascii2Wide(pStr), pSprt, x_offset, y_offset);
 }
 } // namespace
 
@@ -1037,7 +1036,7 @@ namespace
 {
 [[maybe_unused]] void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
 {
-    DisplayWideTextAtScreenCoords(GameText::Ascii2Wide_5B5DF0(pStr), screen_xpos, screen_ypos);
+    DisplayWideTextAtScreenCoords(GameText::Ascii2Wide(pStr), screen_xpos, screen_ypos);
 }
 } // namespace
 
@@ -1357,7 +1356,7 @@ void ImGuiDebugDraw()
 
         static char tmpBuffer[512];
         sprintf(tmpBuffer, "c%02d", model_num);
-        ImGui::Text(GameText::Wide2PesudoAscii_5B5D10(gText_0x14_704DFC->Find_5B5F90(tmpBuffer)));
+        ImGui::Text(GameText::Wide2PesudoAscii(gText_0x14_704DFC->Find(tmpBuffer)));
 
         static int currentCharIndex = 0;
         const char* char_lang_codes[] = {"english", "french", "italian", "german", "spanish", "russian??", "japanese??"};
@@ -1375,7 +1374,7 @@ void ImGuiDebugDraw()
         if (ImGui::Button("Change language"))
         {
             gText_0x14_704DFC->field_10_lang_code = char_lang[currentCharIndex];
-            gText_0x14_704DFC->Load_5B5E90();
+            gText_0x14_704DFC->Load();
             if (gFrontend_67DC84)
             {
                 gFrontend_67DC84->SetupMenuStringsOptionsElements_4B0220();
@@ -2099,8 +2098,8 @@ void ImGuiDebugDraw()
                 //ClearGlobalArrow();
                 for (; id < 8000; id++)
                 {
-                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCodeObj1, id);
-                    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
+                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kCodeObj1, id);
+                    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx);
                     if (sprite_index_5AA440)
                     {
                         if (sprite_index_5AA440->field_4_width == 20 && sprite_index_5AA440->field_5_height == 16)
@@ -2229,7 +2228,7 @@ void ImGuiDebugDraw()
                                 if (ImGui::TreeNode("Model Physics"))
                                 {
                                     ModelPhysics* pModelPhy =
-                                        gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(pPlayerCar->field_84_car_info_idx);
+                                        gCarInfo_808_678098->GetModelPhysicsFromIdx(pPlayerCar->field_84_car_info_idx);
                                     if (pModelPhy)
                                     {
                                         ImGui::SliderInt("Turn In", &pModelPhy->field_14_turn_in.value_, 0, 4 * 16384);
@@ -3382,7 +3381,7 @@ void ImGuiDebugDraw()
                     {
                         gGameSession_67E8E0.SetPlySlotIdx_4C5920(player_idx);
                         gFrontend_67DC84->UpdateMenuForCurrPlayer_4B42E0();
-                        gRegistry_6FF968.Set_Player_Setting_5878C0("plyrslot", player_idx);
+                        gRegistry_6FF968.SetPlayerSetting("plyrslot", player_idx);
                     }
                     ImGui::TreePop();
                 }

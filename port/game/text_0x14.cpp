@@ -45,7 +45,7 @@ const u16 kExtendedWesternCharMap[128] = {
 } // namespace
 
 // 0x5B58D0
-u16 GameText::RemapExtendedChar_5B58D0(u16 ch)
+u16 GameText::RemapExtendedChar(u16 ch)
 {
     u16 result = ch;
     if (ch >= 128U)
@@ -67,25 +67,25 @@ u16 GameText::RemapExtendedChar_5B58D0(u16 ch)
 }
 
 // 0x5B5910
-void GameText::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
+void GameText::RemapExtendedCharsIfNotJapanese(wchar_t* pText)
 {
     if (field_10_lang_code != 'j')
     {
-        RemapExtendedChars_5B5930(pText);
+        RemapExtendedChars(pText);
     }
 }
 
 // 0x5B5930
-void GameText::RemapExtendedChars_5B5930(wchar_t* pStr)
+void GameText::RemapExtendedChars(wchar_t* pStr)
 {
     for (wchar_t* pStrIter = pStr; *pStrIter; ++pStrIter)
     {
-        *pStrIter = RemapExtendedChar_5B58D0(*pStrIter);
+        *pStrIter = RemapExtendedChar(*pStrIter);
     }
 }
 
 // 0x5B5960
-void GameText::TKEY_Load_5B5960(u32 chunkSize)
+void GameText::TKEYLoad(u32 chunkSize)
 {
 #if defined(GTA2_PORT_64BIT)
     // The file's 12-byte entries hold a 4-byte offset where text_0xC has a pointer, then the 8-byte
@@ -99,7 +99,7 @@ void GameText::TKEY_Load_5B5960(u32 chunkSize)
     field_0_tKey.field_4_tKey_count = chunkSize / sizeof(Text0xCFile);
     field_0_tKey.field_0_tKey = new TextEntry[field_0_tKey.field_4_tKey_count];
     auto* pFileEntries = new Text0xCFile[field_0_tKey.field_4_tKey_count];
-    File::Global_Read_4A71C0(pFileEntries, chunkSize);
+    File::GlobalRead(pFileEntries, chunkSize);
     for (u32 i = 0; i < field_0_tKey.field_4_tKey_count; i++)
     {
         TextEntry& entry = field_0_tKey.field_0_tKey[i];
@@ -119,12 +119,12 @@ void GameText::TKEY_Load_5B5960(u32 chunkSize)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
     }
 
-    File::Global_Read_4A71C0(field_0_tKey.field_0_tKey, chunkSize);
+    File::GlobalRead(field_0_tKey.field_0_tKey, chunkSize);
 #endif
 }
 
 // 0x5B59B0
-void GameText::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
+void GameText::TDATOffsets2Strings(BYTE* pDat)
 {
     TextEntry* ptKeyIter = field_0_tKey.field_0_tKey;
 
@@ -138,19 +138,19 @@ void GameText::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
 }
 
 // 0x5B59E0
-bool GameText::TKeyFind_5B59E0(const char_type* pIdStr)
+bool GameText::HasKey(const char_type* pIdStr)
 {
     return bsearch(pIdStr, // search key
                    field_0_tKey.field_0_tKey, // array to search
                    field_0_tKey.field_4_tKey_count, // array count
                    sizeof(TextEntry), // element size
-                   TKeySearch_5B5A10) ?
+                   TKeySearch) ?
         true :
         false;
 }
 
 // 0x5B5A10
-s32 GameText::TKeySearch_5B5A10(const void* a, const void* b)
+s32 GameText::TKeySearch(const void* a, const void* b)
 {
     const auto* pIdStr = static_cast<const char_type*>(a);
     const auto* a2 = static_cast<const TextEntry*>(b);
@@ -158,13 +158,13 @@ s32 GameText::TKeySearch_5B5A10(const void* a, const void* b)
 }
 
 // 0x5B5A50
-wchar_t* GameText::TKeyFind_5B5A50(const char_type* pIdStr)
+wchar_t* GameText::FindText(const char_type* pIdStr)
 {
     auto* pFound = static_cast<TextEntry*>(bsearch(pIdStr, // key
                                                    field_0_tKey.field_0_tKey, // array
                                                    field_0_tKey.field_4_tKey_count, // array count
                                                    sizeof(TextEntry), // element size
-                                                   TKeySearch_5B5A10));
+                                                   TKeySearch));
     if (!pFound)
     {
         static wchar_t kBlank[] = L" "; // writable, like the text the callers usually get
@@ -177,7 +177,7 @@ wchar_t* GameText::TKeyFind_5B5A50(const char_type* pIdStr)
 }
 
 // 0x5B5A80
-void TextTdat::TDAT_Load_5B5A80(u32 size)
+void TextTdat::TDATLoad(u32 size)
 {
     field_4_len = size / sizeof(wchar_t);
     field_0_data = new BYTE[field_4_len * sizeof(wchar_t)];
@@ -187,11 +187,11 @@ void TextTdat::TDAT_Load_5B5A80(u32 size)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 378);
     }
 
-    File::Global_Read_4A71C0(field_0_data, size);
+    File::GlobalRead(field_0_data, size);
 }
 
 // 0x5B5AD0
-u16 GameText::ToUpper_5B5AD0(wchar_t ch)
+u16 GameText::ToUpper(wchar_t ch)
 {
     // The original indexed both tables with the raw char (0x80-0xFF), so its 'g'/'i'/'r'/'s' lookup read
     // past kExtendedRussianCharMap_626490 into word_626590[0..127], which follows it in memory. That
@@ -237,11 +237,11 @@ u16 GameText::ToUpper_5B5AD0(wchar_t ch)
 }
 
 // 0x5B5B80
-wchar_t* GameText::StrToUpper_5B5B80(wchar_t* pWideStr)
+wchar_t* GameText::StrToUpper(wchar_t* pWideStr)
 {
     for (wchar_t* pStrIter = pWideStr; *pStrIter; ++pStrIter)
     {
-        *pStrIter = ToUpper_5B5AD0(*pStrIter);
+        *pStrIter = ToUpper(*pStrIter);
     }
     return pWideStr;
 }
@@ -249,19 +249,19 @@ wchar_t* GameText::StrToUpper_5B5B80(wchar_t* pWideStr)
 // 9.6f 0x4539D0, file-local copy of GetCharWidth_4539D0 (Draw.hpp): including Draw.hpp changes this file's static init code
 namespace
 {
-inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
+inline s32 GetCharWidthLocal(u16 font_type, wchar_t chr)
 {
-    return gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
+    return gGtx_0x106C_703DD4->GetFontWidth(&font_type, &chr);
 }
 } // namespace
 
 // 0x5B5BC0
-s32 GameText::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
+s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
 {
     const wchar_t* pSrcStrCopy = pSrcStr;
     wchar_t* pDestStrCopy = pDestStr;
     s32 num_of_lines = 1;
-    s32 space_width = GetSpaceWidth_4C23D0(font_type);
+    s32 space_width = GetSpaceWidth(font_type);
     s32 current_width = 0;
     const wchar_t* pPrevSrcCheckpoint = nullptr;
     wchar_t* pPrevDestCheckpoint = nullptr;
@@ -286,7 +286,7 @@ s32 GameText::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wch
             case '#':
                 break;
             default:
-                current_width += GetCharWidth_local_4539D0(font_type, *pSrcStrCopy);
+                current_width += GetCharWidthLocal(font_type, *pSrcStrCopy);
                 break;
         }
 
@@ -307,7 +307,7 @@ s32 GameText::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wch
                 *pDestStrCopy = '\n';
                 pDestStrCopy++;
 
-                current_width = GetCharWidth_local_4539D0(font_type, *pSrcStrCopy);
+                current_width = GetCharWidthLocal(font_type, *pSrcStrCopy);
                 *pDestStrCopy = *pSrcStrCopy;
             }
             num_of_lines += 1;
@@ -319,7 +319,7 @@ s32 GameText::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wch
 }
 
 // 0x5B5D10
-char* GameText::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
+char* GameText::Wide2PesudoAscii(const wchar_t* pText)
 {
     const wchar_t* pSrc = pText;
     // jnb forced to jge by changing u32 loop index to int
@@ -352,7 +352,7 @@ char* GameText::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
 }
 
 // 0x5B5DF0
-wchar_t* GameText::Ascii2Wide_5B5DF0(const char_type* pStr)
+wchar_t* GameText::Ascii2Wide(const char_type* pStr)
 {
     // movsx vs movzx caused by unsigned vs s8
     wchar_t* pDst = tmpAscii2WideStr_70488C;
@@ -369,24 +369,24 @@ wchar_t* GameText::Ascii2Wide_5B5DF0(const char_type* pStr)
 }
 
 // 0x5B5E20
-void GameText::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
+void GameText::LoadChunk(const char_type* chunk_type, u32 chunk_len)
 {
     if (!strncmp(chunk_type, "TKEY", 4U))
     {
-        TKEY_Load_5B5960(chunk_len);
+        TKEYLoad(chunk_len);
     }
     else if (!strncmp(chunk_type, "TDAT", 4U))
     {
-        field_8_tDat.TDAT_Load_5B5A80(chunk_len);
+        field_8_tDat.TDATLoad(chunk_len);
     }
     else
     {
-        File::Global_Seek_4A7140(&chunk_len);
+        File::GlobalSeek(&chunk_len);
     }
 }
 
 // 0x5B5E90
-void GameText::Load_5B5E90()
+void GameText::Load()
 {
     char_type expected_code[5];
 
@@ -396,42 +396,42 @@ void GameText::Load_5B5E90()
 
     sprintf(expected_code, "GBL%c", field_10_lang_code - ' ');
 
-    File::Global_Open_4A7060(gxtFileName);
+    File::GlobalOpen(gxtFileName);
 
     FileHeader gtxHeader;
     u32 len = sizeof(FileHeader);
-    File::Global_Read_4A71C0(&gtxHeader, len);
+    File::GlobalRead(&gtxHeader, len);
 
-    gtxHeader.verify_type(expected_code);
-    gtxHeader.verify_version(100);
+    gtxHeader.VerifyType(expected_code);
+    gtxHeader.VerifyVersion(100);
 
-    for (len = sizeof(ChunkHeader); File::Global_Read_4A7210(&chunkHeader, &len); len = sizeof(ChunkHeader))
+    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunkHeader, &len); len = sizeof(ChunkHeader))
     {
         if (chunkHeader.field_4_size != 0)
         {
-            load_chunk_5B5E20(chunkHeader.field_0_type, chunkHeader.field_4_size);
+            LoadChunk(chunkHeader.field_0_type, chunkHeader.field_4_size);
         }
     }
-    File::Global_Close_4A70C0();
-    TDAT_Offsets2Strings_5B59B0(field_8_tDat.field_0_data);
+    File::GlobalClose();
+    TDATOffsets2Strings(field_8_tDat.field_0_data);
 }
 
 // 0x5B5F90
-wchar_t* GameText::Find_5B5F90(const char_type* pIdStr)
+wchar_t* GameText::Find(const char_type* pIdStr)
 {
-    return TKeyFind_5B5A50(pIdStr);
+    return FindText(pIdStr);
 }
 
 // 0x5B5FA0
-bool GameText::KeyExists_5B5FA0(const char_type* pIdStr)
+bool GameText::KeyExists(const char_type* pIdStr)
 {
-    return TKeyFind_5B59E0(pIdStr);
+    return HasKey(pIdStr);
 }
 
 // 0x5B5FB0
 GameText::GameText()
 {
-    gRegistry_6FF968.Get_Option_586F00("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
+    gRegistry_6FF968.GetOption("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
 
     if (gTmpBuffer_67C598[0] == 'e' || gTmpBuffer_67C598[0] == 'f' || gTmpBuffer_67C598[0] == 'g' || gTmpBuffer_67C598[0] == 'i' ||
         gTmpBuffer_67C598[0] == 's' || gTmpBuffer_67C598[0] == 'j' || gTmpBuffer_67C598[0] == 'r')

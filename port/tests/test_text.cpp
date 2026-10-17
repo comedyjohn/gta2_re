@@ -38,7 +38,7 @@ struct Fixture
         text.field_0_tKey.field_0_tKey = keys;
         text.field_0_tKey.field_4_tKey_count = kCount;
         text.field_10_lang_code = lang;
-        text.TDAT_Offsets2Strings_5B59B0(data);
+        text.TDATOffsets2Strings(data);
     }
     // The fixture's arrays are not owned by the text object.
     ~Fixture()
@@ -59,43 +59,43 @@ TEST_CASE("TDAT_Offsets2Strings turns byte offsets into string pointers")
 TEST_CASE("Keys are found by binary search; a missing key gives a single space")
 {
     Fixture f;
-    CHECK(f.text.TKeyFind_5B59E0("bravo"));
-    CHECK(f.text.TKeyFind_5B59E0("alpha"));
-    CHECK(f.text.TKeyFind_5B59E0("charlie"));
-    CHECK_FALSE(f.text.TKeyFind_5B59E0("delta"));
-    CHECK_FALSE(f.text.TKeyFind_5B59E0("alph"));
+    CHECK(f.text.HasKey("bravo"));
+    CHECK(f.text.HasKey("alpha"));
+    CHECK(f.text.HasKey("charlie"));
+    CHECK_FALSE(f.text.HasKey("delta"));
+    CHECK_FALSE(f.text.HasKey("alph"));
 
-    CHECK(wcscmp(f.text.TKeyFind_5B5A50("alpha"), L"A") == 0);
-    CHECK(wcscmp(f.text.TKeyFind_5B5A50("bravo"), L"BC") == 0);
-    CHECK(wcscmp(f.text.TKeyFind_5B5A50("zulu"), L" ") == 0);
-    CHECK(f.text.KeyExists_5B5FA0("charlie"));
-    CHECK(wcscmp(f.text.Find_5B5F90("charlie"), L"") == 0);
+    CHECK(wcscmp(f.text.FindText("alpha"), L"A") == 0);
+    CHECK(wcscmp(f.text.FindText("bravo"), L"BC") == 0);
+    CHECK(wcscmp(f.text.FindText("zulu"), L" ") == 0);
+    CHECK(f.text.KeyExists("charlie"));
+    CHECK(wcscmp(f.text.Find("charlie"), L"") == 0);
 }
 
 TEST_CASE("Extended characters are remapped per language; unmapped ones become '?'")
 {
     Fixture west('e');
-    CHECK(west.text.RemapExtendedChar_5B58D0('a') == 'a');
-    CHECK(west.text.RemapExtendedChar_5B58D0(127) == 127);
-    CHECK(west.text.RemapExtendedChar_5B58D0(0xC0) == 128);
-    CHECK(west.text.RemapExtendedChar_5B58D0(128) == '?');
-    CHECK(west.text.RemapExtendedChar_5B58D0(256) == '?');
-    CHECK(west.text.RemapExtendedChar_5B58D0(0x1234) == '?');
+    CHECK(west.text.RemapExtendedChar('a') == 'a');
+    CHECK(west.text.RemapExtendedChar(127) == 127);
+    CHECK(west.text.RemapExtendedChar(0xC0) == 128);
+    CHECK(west.text.RemapExtendedChar(128) == '?');
+    CHECK(west.text.RemapExtendedChar(256) == '?');
+    CHECK(west.text.RemapExtendedChar(0x1234) == '?');
 
     Fixture russian('r');
-    CHECK(russian.text.RemapExtendedChar_5B58D0(0xC0) == 193);
-    CHECK(russian.text.RemapExtendedChar_5B58D0(128) == '?');
+    CHECK(russian.text.RemapExtendedChar(0xC0) == 193);
+    CHECK(russian.text.RemapExtendedChar(128) == '?');
 }
 
 TEST_CASE("RemapExtendedChars leaves Japanese text alone")
 {
     wchar_t s[] = {L'a', 0xC0, 0};
     Fixture jp('j');
-    jp.text.RemapExtendedCharsIfNotJapanese_5B5910(s);
+    jp.text.RemapExtendedCharsIfNotJapanese(s);
     CHECK(s[1] == 0xC0);
 
     Fixture west('e');
-    west.text.RemapExtendedCharsIfNotJapanese_5B5910(s);
+    west.text.RemapExtendedCharsIfNotJapanese(s);
     CHECK(s[0] == L'a');
     CHECK(s[1] == 128);
 }
@@ -104,26 +104,26 @@ TEST_CASE("StrToUpper upper-cases ASCII, in the languages that have it")
 {
     wchar_t a[] = L"hello, World 1";
     Fixture west('e');
-    CHECK(west.text.StrToUpper_5B5B80(a) == a);
+    CHECK(west.text.StrToUpper(a) == a);
     CHECK(wcscmp(a, L"HELLO, WORLD 1") == 0);
 
     wchar_t b[] = L"hello";
     Fixture other('x');
-    other.text.StrToUpper_5B5B80(b);
+    other.text.StrToUpper(b);
     CHECK(wcscmp(b, L"hello") == 0);
 
     Fixture french('f');
-    CHECK(french.text.ToUpper_5B5AD0('q') == 'Q');
-    CHECK(french.text.ToUpper_5B5AD0('Q') == 'Q');
+    CHECK(french.text.ToUpper('q') == 'Q');
+    CHECK(french.text.ToUpper('Q') == 'Q');
 }
 
 TEST_CASE("Ascii2Wide widens, Wide2PesudoAscii narrows with '#' for anything above 127")
 {
     char_type narrow[] = "Hi 42";
-    CHECK(wcscmp(GameText::Ascii2Wide_5B5DF0(narrow), L"Hi 42") == 0);
+    CHECK(wcscmp(GameText::Ascii2Wide(narrow), L"Hi 42") == 0);
 
     const wchar_t wide[] = {L'o', L'k', 0x100, L'!', 0};
-    const char_type* out = GameText::Wide2PesudoAscii_5B5D10(wide);
+    const char_type* out = GameText::Wide2PesudoAscii(wide);
     CHECK(out[0] == 'o');
     CHECK(out[1] == 'k');
     CHECK(out[2] == '#');

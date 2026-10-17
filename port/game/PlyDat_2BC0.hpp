@@ -22,9 +22,9 @@ struct PlySlot
     PlySlot();
     ~PlySlot() = default; // 0x56B620
 
-    void ResetPlayerSlot_56B630();
-    s32 GetTotalLatestScore_56B680();
-    s32 GetTotalBestScore_56B6B0();
+    void ResetPlayerSlot();
+    s32 GetTotalLatestScore();
+    s32 GetTotalBestScore();
 };
 
 // One line (name, score) of a high score table
@@ -40,9 +40,9 @@ struct HighScoreTable
     HighScoreTable();
     ~HighScoreTable() = default; // 0x56B510
 
-    void Init_56B520();
+    void Init();
 
-    char_type InsertScore_56B550(const wchar_t* pFindStr, u32 findScore);
+    char_type InsertScore(const wchar_t* pFindStr, u32 findScore);
 
     ScoreTableLine field_0_score_table_line[10];
 };
@@ -71,39 +71,39 @@ struct PlyDat
     ~PlyDat() = default; // 0x56B810
 
     // todo: ordering
-    void UpdateStageScore_56BB10(Player* pPlayer);
+    void UpdateStageScore(Player* pPlayer);
 
-    void UpdateHiScores_56C010();
+    void UpdateHiScores();
 
-    void GetPlySlotDatName_56B8A0(u16 slot_idx, char_type* pName);
+    void GetPlySlotDatName(u16 slot_idx, char_type* pName);
 
-    char_type PlySlotDatExists_56B940(s32 slot_idx);
+    char_type PlySlotDatExists(s32 slot_idx);
 
-    void GetHiScoreHscFileName_56BCF0(char_type* pName);
+    void GetHiScoreHscFileName(char_type* pName);
 
-    char_type HiScoreHscExists_56BCA0();
+    char_type HiScoreHscExists();
 
-    void LoadPlySlotDat_56B990(u16 slotIdx);
+    void LoadPlySlotDat(u16 slotIdx);
 
-    void SavePlySlotDat_56BA60(s16 slotIdx);
+    void SavePlySlotDat(s16 slotIdx);
 
-    void LoadHiScores_56BE50();
+    void LoadHiScores();
 
-    void BuildMergedHiScores_56C170();
+    void BuildMergedHiScores();
 
-    void InitDefaultHiScores_56C1D0();
+    void InitDefaultHiScores();
 
-    void SaveHiScores_56BF20();
+    void SaveHiScores();
 
-    void InitAltHiScores_56BD20();
+    void InitAltHiScores();
 
-    void UnlockStage_56BBD0(u8 map_num, u8 bonus_num);
+    void UnlockStage(u8 map_num, u8 bonus_num);
 
-    void UnlockAllStages_56BC40();
+    void UnlockAllStages();
 
-    void DoMuchCashCheat_56C250();
-    static void Create_56C2C0();
-    static void Destroy_56C340();
+    void DoMuchCashCheat();
+    static void Create();
+    static void Destroy();
 };
 
 EXTERN_GLOBAL(PlyDat*, gPlyDat_6FEAC0);

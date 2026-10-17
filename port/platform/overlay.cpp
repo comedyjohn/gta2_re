@@ -205,7 +205,7 @@ void SetKey(int action, int dik)
 {
     gMaybeDeviceType_67B91C[action] = 0;
     gPlayerControlsBinding_67B6E8[action] = static_cast<uint32_t>(dik);
-    gRegistry_6FF968.Write_Control_Setting(action, dik);
+    gRegistry_6FF968.WriteControlSetting(action, dik);
 }
 
 // Gives `action` the key. Another control that had it takes the old one, so none is left dead.

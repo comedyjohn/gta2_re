@@ -638,7 +638,7 @@ void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY,
 {
     Fix16Point local(targetX, targetY);
     Fix16Point offset;
-    CarModelInfo* pCarInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->field_84_car_info_idx);
+    CarModelInfo* pCarInfo = gCarInfo_808_678098->GetInfoAtIdx(field_5C_pCar->field_84_car_info_idx);
     offset = pCarInfo->field_C_center_of_mass_offset;
     Fix16Point worldPoint;
     offset.RotateByAngle(field_58_theta);
@@ -1144,14 +1144,14 @@ inline u8 Map_0x370::GetBlockSurfaceType_49EBE0(s32 x, s32 y, s32 z, u8* pGradie
     gmp_block_info* pBlock = get_block_4DFE10(x, y, z);
     if (pBlock)
     {
-        if (gGtx_0x106C_703DD4->IsRemappedWaterTile_49E540(pBlock->field_8_lid & 0x3FF))
+        if (gGtx_0x106C_703DD4->IsRemappedWaterTile(pBlock->field_8_lid & 0x3FF))
         {
             return 7;
         }
 
         if ((pBlock->field_B_slope_type & 3) != 0)
         {
-            if (gGtx_0x106C_703DD4->sub_49E570(pBlock->field_8_lid & 0x3FF))
+            if (gGtx_0x106C_703DD4->IsSpec4NotRemapped(pBlock->field_8_lid & 0x3FF))
             {
                 return 9;
             }
@@ -2539,9 +2539,9 @@ void CarPhysics_B0::HandleCarCollision_55FF20(Car_BC* pOtherCar)
         // CanCrushCars_49EFE0 and CanCollideOver_4216E0 with get_car_info_5AA3B0 and the driver check out of line
         // (IsDrivenByNonPlayer_564300)
         pThisCar = field_5C_pCar;
-        if (gGtx_0x106C_703DD4->get_car_info_5AA3B0(pThisCar->field_84_car_info_idx)->IsHeavy_41FF00() &&
+        if (gGtx_0x106C_703DD4->GetCarInfo(pThisCar->field_84_car_info_idx)->IsHeavy() &&
             (pThisCar->IsTank_411900() || !pThisCar->IsDrivenByNonPlayer_564300()) &&
-            !gGtx_0x106C_703DD4->get_car_info_5AA3B0(pOtherCar->field_84_car_info_idx)->IsHeavy_41FF00())
+            !gGtx_0x106C_703DD4->GetCarInfo(pOtherCar->field_84_car_info_idx)->IsHeavy())
         {
             field_5C_pCar->SetCrushFlag_49EFC0();
         }
@@ -2563,10 +2563,10 @@ void CarPhysics_B0::HandleCarCollision_55FF20(Car_BC* pOtherCar)
     // Implement developments of collision with CopCar
     // CanCrushCars_49EFE0 with get_car_info_5AA3B0 called out of line
     pThisCar = field_5C_pCar;
-    if (gGtx_0x106C_703DD4->get_car_info_5AA3B0(pThisCar->field_84_car_info_idx)->IsHeavy_41FF00() &&
+    if (gGtx_0x106C_703DD4->GetCarInfo(pThisCar->field_84_car_info_idx)->IsHeavy() &&
         (pThisCar->IsTank_411900() || !pThisCar->HasNonPlayerDriver_4214F0()) &&
-        !gGtx_0x106C_703DD4->get_car_info_5AA3B0(pOtherCar->field_84_car_info_idx)->IsHeavy_41FF00() &&
-        ImpulseForce.GetLength() > dword_6FDFD8 && GetLinearSpeed_4211A0() > dword_6FE1C4)
+        !gGtx_0x106C_703DD4->GetCarInfo(pOtherCar->field_84_car_info_idx)->IsHeavy() && ImpulseForce.GetLength() > dword_6FDFD8 &&
+        GetLinearSpeed_4211A0() > dword_6FE1C4)
     {
         bGreatCollision = true;
         field_5C_pCar->SetCrushFlag_49EFC0();
@@ -3562,13 +3562,13 @@ void CarPhysics_B0::EnforceGearSensitiveMaxSpeed_562D00()
 // 0x562eb0
 void CarPhysics_B0::SetModelPhysicsGlobal_562EB0()
 {
-    gCarInfo_48_6FE258 = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(field_5C_pCar->GetCarModelForPhysics_43A850());
+    gCarInfo_48_6FE258 = gCarInfo_808_678098->GetModelPhysicsFromIdx(field_5C_pCar->GetCarModelForPhysics_43A850());
 }
 
 // 0x562ed0
 void CarPhysics_B0::SetCarInfoGlobal_562ED0()
 {
-    CarModelInfo* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
+    CarModelInfo* pInfo = gCarInfo_808_678098->GetInfoAtIdx(field_5C_pCar->GetCarModelForPhysics_43A850());
     gCarInfo_2C_6FE0E4 = pInfo;
 }
 
@@ -3587,8 +3587,8 @@ inline void NegateInPlace_40F760(Fix16Point& p)
 void CarPhysics_B0::SetCurrentCarInfoAndModelPhysics_562EF0()
 {
     u8 info_idx_remapped = field_5C_pCar->GetCarModelForPhysics_43A850();
-    gCarInfo_2C_6FE0E4 = gCarInfo_808_678098->GetInfoAtIdx_454840(info_idx_remapped);
-    gCarInfo_48_6FE258 = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(info_idx_remapped);
+    gCarInfo_2C_6FE0E4 = gCarInfo_808_678098->GetInfoAtIdx(info_idx_remapped);
+    gCarInfo_48_6FE258 = gCarInfo_808_678098->GetModelPhysicsFromIdx(info_idx_remapped);
 }
 
 // 0x562f30
@@ -3748,7 +3748,7 @@ void CarPhysics_B0::UpdateCp1FromCm1_563280()
 // 0x563350
 void CarPhysics_B0::UpdateCenterOfMassPoint_563350()
 {
-    const CarModelInfo* info = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
+    const CarModelInfo* info = gCarInfo_808_678098->GetInfoAtIdx(field_5C_pCar->GetCarModelForPhysics_43A850());
 
     Fix16Point point(info->field_C_center_of_mass_offset.x, info->field_C_center_of_mass_offset.y);
 

@@ -44,9 +44,9 @@ void RemapTextureSet_14::LoadTextures_5B8F00()
         u16 t2;
         while (i < field_4_texture_count)
         {
-            pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(i);
-            tmp = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, i);
-            t2 = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(tmp);
+            pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(i);
+            tmp = gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, i);
+            t2 = gGtx_0x106C_703DD4->GetPhysPal(tmp);
 
             field_0_pTextures[i++] = pgbh_RegisterTexture(
                 pSpriteIndex
@@ -67,15 +67,15 @@ void RemapTextureSet_14::LoadRemappedTextures_5B8F70()
         const u32 palTotal = field_4_texture_count / field_6_remaps_per_sprite;
         for (u32 pal_idx = 0; pal_idx < palTotal; pal_idx++)
         {
-            const u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_8_sprite_type, pal_idx);
-            SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+            const u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_8_sprite_type, pal_idx);
+            SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
 
             gRemappedSpriteCounter_704ED0++;
 
             for (u32 texture_idx = 0; texture_idx < field_6_remaps_per_sprite; texture_idx++)
             {
-                const s16 converted_pal_idx = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(field_C_pal_type, texture_idx);
-                const u16 physPal = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(converted_pal_idx);
+                const s16 converted_pal_idx = gGtx_0x106C_703DD4->GetTruePalette(field_C_pal_type, texture_idx);
+                const u16 physPal = gGtx_0x106C_703DD4->GetPhysPal(converted_pal_idx);
                 field_0_pTextures[texture_idx + (pal_idx * field_6_remaps_per_sprite)] = pgbh_RegisterTexture(pSpriteIndex->field_4_width,
                                                                                                               pSpriteIndex->field_5_height,
                                                                                                               pSpriteIndex->field_0_pData,
@@ -106,7 +106,7 @@ RemapTextureSet_14::~RemapTextureSet_14()
 // 0x5B90A0
 STexture* RemapTextureSet_14::get_texture_5B90A0(s32 sprite_type, s16 sprite_idx)
 {
-    return field_0_pTextures[gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_idx)];
+    return field_0_pTextures[gGtx_0x106C_703DD4->GetSpriteTrueIndex(sprite_type, sprite_idx)];
 }
 
 // 0x5B90D0
@@ -118,11 +118,11 @@ STexture* RemapTextureSet_14::GetRemappedTexture_5B90D0(s16 sprite_idx, s16 rema
 // 0x5B90F0
 void TextureCache_15D8::LoadPals_5B90F0()
 {
-    field_15D6_pal_count = gGtx_0x106C_703DD4->get_physical_palettes_len_5AA900();
+    field_15D6_pal_count = gGtx_0x106C_703DD4->GetPhysicalPalettesLen();
 
     for (u16 palId = 0; palId < field_15D6_pal_count; palId++)
     {
-        pgbh_RegisterPalette(palId, reinterpret_cast<DWORD*>(gGtx_0x106C_703DD4->GetPalData_5AA6A0(palId)));
+        pgbh_RegisterPalette(palId, reinterpret_cast<DWORD*>(gGtx_0x106C_703DD4->GetPalData(palId)));
     }
 }
 
@@ -140,12 +140,12 @@ void TextureCache_15D8::FreePals_5B9140()
 void TextureCache_15D8::LoadCarDamageTextures_5B9180()
 {
     u16 width_height = 64;
-    if (gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCar))
+    if (gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kCar))
     {
         field_1000_bFreeCarDamageTextures = 1;
-        u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCar, 0);
-        u16 true_pal_idx = gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx);
-        u16 pal_idx = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(true_pal_idx);
+        u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kCar, 0);
+        u16 true_pal_idx = gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
+        u16 pal_idx = gGtx_0x106C_703DD4->GetPhysPal(true_pal_idx);
 
         for (u32 idx = 0; idx < 48; idx++)
         {
@@ -164,11 +164,10 @@ void TextureCache_15D8::LoadCarDamageTextures_5B9180()
 s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
 {
     const u16 og_idx = field_15D4_next_digit_idx;
-    const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, palette);
-    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, palette);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
     u8* field_0_pData = sprite_index_5AA440->field_0_pData;
-    const u16 phys_pal_5AA6F0 =
-        gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx));
+    const u16 phys_pal_5AA6F0 = gGtx_0x106C_703DD4->GetPhysPal(gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx));
 
     field_15D4_next_digit_idx += num_of_digits;
 
@@ -187,7 +186,7 @@ s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
 // 0x5B92E0
 void TextureCache_15D8::ReadTextures_5B92E0()
 {
-    if (gGtx_0x106C_703DD4->has_tiles_4C2EE0())
+    if (gGtx_0x106C_703DD4->HasTiles())
     {
         field_1001_bFreeTileTextures = 1;
         STexture** p = field_0_tile_textures;
@@ -200,7 +199,7 @@ void TextureCache_15D8::ReadTextures_5B92E0()
                 return;
             }
             // 64 256x256 pages of 64x64 8 bit tiles
-            *p = pgbh_RegisterTexture(64, 64, gGtx_0x106C_703DD4->get_tile_4C2EB0(i), gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(i), 0);
+            *p = pgbh_RegisterTexture(64, 64, gGtx_0x106C_703DD4->GetTilePixels(i), gGtx_0x106C_703DD4->GetPhysPal(i), 0);
         }
     }
 }
@@ -211,44 +210,44 @@ void TextureCache_15D8::LoadStyleTextures_5B9350()
     LoadPals_5B90F0();
     ReadTextures_5B92E0();
 
-    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kSprites),
+    field_1548_sprite_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kSprites),
                                             1,
                                             SpriteTypes::kUnknown,
                                             PaletteTypes::kSprites);
     field_1548_sprite_textures.LoadTextures_5B8F00();
 
-    field_155C_car_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCar),
-                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kCarRemaps),
+    field_155C_car_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kCar),
+                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kCarRemaps),
                                                SpriteTypes::kCar,
                                                PaletteTypes::kCarRemaps);
     field_155C_car_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1570_ped_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kPed),
-                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kPedRemaps),
+    field_1570_ped_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kPed),
+                                               gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kPedRemaps),
                                                SpriteTypes::kPed,
                                                PaletteTypes::kPedRemaps);
     field_1570_ped_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1584_code_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kCodeObj1),
-                                                    gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kCodeObjRemaps),
+    field_1584_code_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kCodeObj1),
+                                                    gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kCodeObjRemaps),
                                                     SpriteTypes::kCodeObj1,
                                                     PaletteTypes::kCodeObjRemaps);
     field_1584_code_obj_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_1598_map_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kMapObj),
-                                                   gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kMapObjRemaps),
+    field_1598_map_obj_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kMapObj),
+                                                   gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kMapObjRemaps),
                                                    SpriteTypes::kMapObj,
                                                    PaletteTypes::kMapObjRemaps);
     field_1598_map_obj_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_15AC_font_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kFont),
-                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kFontRemaps),
+    field_15AC_font_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kFont),
+                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kFontRemaps),
                                                 SpriteTypes::kFont,
                                                 PaletteTypes::kFontRemaps);
     field_15AC_font_remap_textures.LoadRemappedTextures_5B8F70();
 
-    field_15C0_user_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType_5AA4F0(SpriteTypes::kUser),
-                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType_5AA560(PaletteTypes::kUserRemaps),
+    field_15C0_user_remap_textures.Alloc_5B8E90(gGtx_0x106C_703DD4->GetSpriteBaseOfType(SpriteTypes::kUser),
+                                                gGtx_0x106C_703DD4->GetPaletteBaseOfType(PaletteTypes::kUserRemaps),
                                                 SpriteTypes::kUser,
                                                 PaletteTypes::kUserRemaps);
     field_15C0_user_remap_textures.LoadRemappedTextures_5B8F70();
@@ -322,7 +321,7 @@ STexture* TextureCache_15D8::GetDigitTexture_5B95F0(u16 idx, u16 row_offset, u16
 void TextureCache_15D8::SetPal_5B9660(u16 digit_idx, u16 pal_idx)
 {
     STexture* pTexture = field_10C4_digit_textures[digit_idx].field_4_pTexture;
-    u16 pal = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(pal_idx);
+    u16 pal = gGtx_0x106C_703DD4->GetPhysPal(pal_idx);
     pgbh_LockTexture(pTexture);
     pgbh_AssignPalette(pTexture, pal);
     pgbh_UnlockTexture(pTexture);
@@ -331,7 +330,7 @@ void TextureCache_15D8::SetPal_5B9660(u16 digit_idx, u16 pal_idx)
 // 0x5B96B0
 void TextureCache_15D8::SetCarDamageTextureSizeAndPalette_5B96B0(u16 texture_idx, u16 new_width, u16 new_height, u16 pal)
 {
-    u16 pal_idx = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(pal);
+    u16 pal_idx = gGtx_0x106C_703DD4->GetPhysPal(pal);
     STexture* pTexture = field_1004_car_damage_textures[texture_idx];
     pgbh_LockTexture(pTexture);
     pTexture->field_E_width = new_width;
@@ -343,7 +342,7 @@ void TextureCache_15D8::SetCarDamageTextureSizeAndPalette_5B96B0(u16 texture_idx
 // 0x5B9710
 STexture* TextureCache_15D8::SetSharedTextureData_5B9710(s16 width, s16 height, u8* pPixelData, u16 pal)
 {
-    u16 phys_pal_5AA6F0 = gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(pal);
+    u16 phys_pal_5AA6F0 = gGtx_0x106C_703DD4->GetPhysPal(pal);
     pgbh_LockTexture(field_1544_pShared_texture);
     field_1544_pShared_texture->field_14_original_pixel_data_ptr = pPixelData;
     field_1544_pShared_texture->field_E_width = width;

@@ -827,7 +827,7 @@ void Player::TeleportToDebugCam_565310()
     this->field_6C_in_debug_cam_mode = 0;
     this->field_68_camera_mode = 0;
     this->field_90_game_camera.SetSmoothFollow_475B60();
-    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("tport"), hud_message_priority::important_3);
+    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("tport"), hud_message_priority::important_3);
 }
 
 // 0x5653E0
@@ -985,7 +985,7 @@ void Player::Hud_Controls_565890(u16 action)
                     vol = 0;
                 }
                 gRoot_sound_66B038.SetCDVol_40F0F0(vol);
-                gRegistry_6FF968.Set_Sound_Setting_586B80("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
+                gRegistry_6FF968.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
                 break;
             case DIK_F4:
                 if (gRoot_sound_66B038.GetCDVol_40F120() + 10 < 127)
@@ -998,7 +998,7 @@ void Player::Hud_Controls_565890(u16 action)
                 }
                 // LABEL_18:
                 gRoot_sound_66B038.SetCDVol_40F0F0(vol);
-                gRegistry_6FF968.Set_Sound_Setting_586B80("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
+                gRegistry_6FF968.SetSoundSetting("CDVol", gRoot_sound_66B038.GetCDVol_40F120());
                 break;
             case DIK_F6:
                 gGame_0x40_67E008->TogglePause_4B9700();
@@ -1740,13 +1740,13 @@ void Player::Wasted_567130()
             if (field_684_lives.get_value() > 1 || bStartNetworkGame_7081F0)
             {
                 gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00( //  It's really ugly, it's probably inlined
-                    gText_0x14_704DFC->Find_5B5F90(GetDeathText_569F00()),
+                    gText_0x14_704DFC->Find(GetDeathText_569F00()),
                     hud_message_priority::normal_1);
                 gRoot_sound_66B038.PlayVoice_40F090(voice_line::wasted_29);
             }
             else
             {
-                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("g_over"),
+                gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("g_over"),
                                                                         hud_message_priority::important_3);
                 gRoot_sound_66B038.PlayVoice_40F090(voice_line::game_over_21);
             }
@@ -1842,7 +1842,7 @@ void Player::Busted_5679E0()
         SetDeathType_434950(3);
         if (IsUser_41DC70())
         {
-            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90(Player::GetDeathText_569F00()),
+            gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find(Player::GetDeathText_569F00()),
                                                                     hud_message_priority::normal_1);
         }
         SetDeathType_434950(0);
@@ -2578,7 +2578,7 @@ void Player::InitializePlayerState_569CB0()
     {
         Player::ColorScoreFromRemap_569A10();
         gNetPlay_7071E8.GetPlayerName_521100(field_83C_player_name, field_2E_idx);
-        gText_0x14_704DFC->RemapExtendedCharsIfNotJapanese_5B5910(field_83C_player_name);
+        gText_0x14_704DFC->RemapExtendedCharsIfNotJapanese(field_83C_player_name);
         gGameSession_67E8E0.SetPlayerName_4C5C30(field_2E_idx, field_83C_player_name);
     }
 }

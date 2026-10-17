@@ -5,9 +5,9 @@
 
 struct Debug
 {
-    void Init_4ABBD0();
+    void Init();
 
-    bool HaveOnlyFrenchGtx_4AC200();
+    bool HaveOnlyFrenchGtx();
 };
 EXTERN_GLOBAL(Debug, gDebug_67D52C);
 

@@ -20,10 +20,10 @@ void TileAnim_18::ApplyCurrentFrame_5BC150()
 {
     if (field_C_ptr != nullptr)
     {
-        gGtx_0x106C_703DD4->SetTileRemap_5AA930(field_10_base, field_C_ptr->field_6_tiles[field_8_current_frame]);
+        gGtx_0x106C_703DD4->SetTileRemap(field_10_base, field_C_ptr->field_6_tiles[field_8_current_frame]);
         return;
     }
-    gGtx_0x106C_703DD4->SetTileRemap_5AA930(field_10_base, field_8_current_frame);
+    gGtx_0x106C_703DD4->SetTileRemap(field_10_base, field_8_current_frame);
 }
 
 // 0x5bc190

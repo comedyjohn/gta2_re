@@ -219,33 +219,33 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 
     {
         size_t writeLen = sizeof(SaveData_748);
-        File::WriteBufferToFile_4A6E80(pFileName, &gGameSave_6F78C8, &writeLen); // gTurkishDelight_748_664590
+        File::WriteBufferToFile(pFileName, &gGameSave_6F78C8, &writeLen); // gTurkishDelight_748_664590
     }
 
     {
         u32 writeLen = 4;
-        File::AppendBufferToFile_4A6F50(pFileName, &colBytes, &writeLen);
+        File::AppendBufferToFile(pFileName, &colBytes, &writeLen);
         if (colBytes)
         {
-            File::AppendBufferToFile_4A6F50(pFileName, pColData, &colBytes);
+            File::AppendBufferToFile(pFileName, pColData, &colBytes);
         }
     }
 
     {
         u32 writeLen = 4;
-        File::AppendBufferToFile_4A6F50(pFileName, &blockInfoBytes, &writeLen);
+        File::AppendBufferToFile(pFileName, &blockInfoBytes, &writeLen);
         if (blockInfoBytes)
         {
-            File::AppendBufferToFile_4A6F50(pFileName, pBlockInfo, &blockInfoBytes);
+            File::AppendBufferToFile(pFileName, pBlockInfo, &blockInfoBytes);
         }
     }
 
     {
         u32 writeLen = 4;
-        File::AppendBufferToFile_4A6F50(pFileName, &mapSubBytes, &writeLen);
+        File::AppendBufferToFile(pFileName, &mapSubBytes, &writeLen);
         if (mapSubBytes)
         {
-            File::AppendBufferToFile_4A6F50(pFileName, pMapSub, reinterpret_cast<u32*>(&mapSubBytes));
+            File::AppendBufferToFile(pFileName, pMapSub, reinterpret_cast<u32*>(&mapSubBytes));
         }
     }
 }
@@ -262,29 +262,29 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
 
     gMap_0x370_6F6268
         ->GetModifiedMapData_4E8CF0(&pColData, &colDataLen, &pBlockInfo, &blockInfoLen, &pMapSub, reinterpret_cast<s32*>(&mapSubLen));
-    File::Global_Open_4A7060(pFileName);
+    File::GlobalOpen(pFileName);
 
-    File::Global_Read_4A71C0(&gGameSave_6F78C8, 0x748);
+    File::GlobalRead(&gGameSave_6F78C8, 0x748);
 
-    File::Global_Read_4A71C0(&colDataLen, 4);
+    File::GlobalRead(&colDataLen, 4);
     if (colDataLen > 0)
     {
-        File::Global_Read_4A71C0(pColData, colDataLen);
+        File::GlobalRead(pColData, colDataLen);
     }
 
-    File::Global_Read_4A71C0(&blockInfoLen, 4);
+    File::GlobalRead(&blockInfoLen, 4);
     if (blockInfoLen > 0)
     {
-        File::Global_Read_4A71C0(pBlockInfo, blockInfoLen);
+        File::GlobalRead(pBlockInfo, blockInfoLen);
     }
 
-    File::Global_Read_4A71C0(&mapSubLen, 4);
+    File::GlobalRead(&mapSubLen, 4);
     if (mapSubLen > 0)
     {
-        File::Global_Read_4A71C0(pMapSub, mapSubLen);
+        File::GlobalRead(pMapSub, mapSubLen);
     }
     gMap_0x370_6F6268->OnModifiedMapDataLoaded_4E8C00(colDataLen, blockInfoLen, mapSubLen);
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 
     ScriptManager_C1EA8::LoadScriptCounters_511C30();
 
@@ -422,17 +422,17 @@ void ScriptManager_C1EA8::Load_512330(const char_type* pScrName)
     {
         strcpy(field_35C_full_scr_file_name, pScrName);
         Error_SetName_4A0770(field_35C_full_scr_file_name);
-        File::Global_Open_4A7060(field_35C_full_scr_file_name);
+        File::GlobalOpen(field_35C_full_scr_file_name);
         u32 len = sizeof(field_46C_base_pointers);
-        File::Global_Read_4A71C0(field_46C_base_pointers, len);
+        File::GlobalRead(field_46C_base_pointers, len);
         len = sizeof(field_334C_script_data);
-        File::Global_Read_4A71C0(field_334C_script_data, len);
+        File::GlobalRead(field_334C_script_data, len);
         u16 tableSize;
         len = sizeof(tableSize);
-        File::Global_Read_4A71C0(&tableSize, len);
+        File::GlobalRead(&tableSize, len);
         len = 5118;
-        File::GetRemainderSize_4A7250(field_1334C_strings, &len);
-        File::Global_Close_4A70C0();
+        File::GetRemainderSize(field_1334C_strings, &len);
+        File::GlobalClose();
         LoadStringTbl_5121E0(tableSize);
         GetScrFileName_5122D0();
         LoadSubScripts_5125F0();
@@ -449,13 +449,13 @@ u16 ScriptManager_C1EA8::LoadMissionScript_512400(const char_type* String1, u16*
         strcpy(gTmpBuffer_67C598, "data\\");
         strcat(gTmpBuffer_67C598, static_cast<const char*>(String1));
         Error_SetName_4A0770(gTmpBuffer_67C598);
-        File::Global_Open_4A7060(gTmpBuffer_67C598);
-        File::Global_Read_4A71C0(&Buffer, 2);
-        File::Global_Read_4A71C0(pStartCmd, 2);
-        File::Global_Read_4A71C0(&remainder, 4);
-        File::Global_Read_4A71C0(&field_46C_base_pointers[Buffer], 0xC00);
-        File::GetRemainderSize_4A7250(&field_334C_script_data[field_46C_base_pointers[Buffer]], &remainder);
-        File::Global_Close_4A70C0();
+        File::GlobalOpen(gTmpBuffer_67C598);
+        File::GlobalRead(&Buffer, 2);
+        File::GlobalRead(pStartCmd, 2);
+        File::GlobalRead(&remainder, 4);
+        File::GlobalRead(&field_46C_base_pointers[Buffer], 0xC00);
+        File::GetRemainderSize(&field_334C_script_data[field_46C_base_pointers[Buffer]], &remainder);
+        File::GlobalClose();
     }
     else
     {
@@ -495,19 +495,19 @@ void ScriptManager_C1EA8::LoadSubScripts_5125F0()
             {
                 sprintf(gTmpBuffer_67C598, "data\\%s\\", field_45C_scr_file_name);
                 strncat(gTmpBuffer_67C598, pEntry->get_name(), pEntry->field_8_length);
-                File::Global_Open_4A7060(gTmpBuffer_67C598);
+                File::GlobalOpen(gTmpBuffer_67C598);
 
-                File::Global_Read_4A71C0(&Buffer_16, 2);
+                File::GlobalRead(&Buffer_16, 2);
                 field_C1D72_mission_base_ptr_idx[j] = Buffer_16;
-                File::Global_Read_4A71C0(&Buffer_16, 2);
+                File::GlobalRead(&Buffer_16, 2);
                 field_C1D34_mission_start_cmd[j] = Buffer_16;
-                File::Global_Read_4A71C0(&Buffer, 4);
+                File::GlobalRead(&Buffer, 4);
                 field_C1DB0_mission_script_data_len[j] = Buffer;
 
-                File::Global_Read_4A71C0(&field_AA934_mission_base_pointers[3072 * j], 3072);
-                File::GetRemainderSize_4A7250(&field_13354_mission_script_data[20000 * j], &field_C1DB0_mission_script_data_len[j]);
+                File::GlobalRead(&field_AA934_mission_base_pointers[3072 * j], 3072);
+                File::GetRemainderSize(&field_13354_mission_script_data[20000 * j], &field_C1DB0_mission_script_data_len[j]);
 
-                File::Global_Close_4A70C0();
+                File::GlobalClose();
 
                 pEntry->field_2_zone_idx = j;
                 j++;

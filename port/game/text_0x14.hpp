@@ -28,7 +28,7 @@ class TextTdat
     }
     BYTE* field_0_data;
     s32 field_4_len;
-    void TDAT_Load_5B5A80(u32 size);
+    void TDATLoad(u32 size);
 };
 
 class TextTkey
@@ -54,7 +54,7 @@ class TextTkey
 class GameText
 {
   public:
-    bool LangIsJapanese_452E60()
+    bool LangIsJapanese()
     {
         return field_10_lang_code == 106;
     }
@@ -64,39 +64,39 @@ class GameText
     char_type field_10_lang_code;
     char_type field_11_pad[3];
 
-    u16 RemapExtendedChar_5B58D0(u16 ch);
+    u16 RemapExtendedChar(u16 ch);
 
-    void RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText);
+    void RemapExtendedCharsIfNotJapanese(wchar_t* pText);
 
-    void RemapExtendedChars_5B5930(wchar_t* pStr);
+    void RemapExtendedChars(wchar_t* pStr);
 
-    void TKEY_Load_5B5960(u32 size);
+    void TKEYLoad(u32 size);
 
-    void TDAT_Offsets2Strings_5B59B0(BYTE* pDat);
+    void TDATOffsets2Strings(BYTE* pDat);
 
-    bool TKeyFind_5B59E0(const char_type* pIdStr);
+    bool HasKey(const char_type* pIdStr);
 
-    static s32 TKeySearch_5B5A10(const void* a, const void* b);
+    static s32 TKeySearch(const void* a, const void* b);
 
-    wchar_t* TKeyFind_5B5A50(const char_type* pIdStr);
+    wchar_t* FindText(const char_type* pIdStr);
 
-    u16 ToUpper_5B5AD0(wchar_t ch);
+    u16 ToUpper(wchar_t ch);
 
-    wchar_t* StrToUpper_5B5B80(wchar_t* pWideStr);
+    wchar_t* StrToUpper(wchar_t* pWideStr);
 
-    static s32 InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type);
+    static s32 InsertLineBreaksAndGetNumLines(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type);
 
-    static char_type* Wide2PesudoAscii_5B5D10(const wchar_t* pText);
+    static char_type* Wide2PesudoAscii(const wchar_t* pText);
 
-    static wchar_t* Ascii2Wide_5B5DF0(const char_type* pStr);
+    static wchar_t* Ascii2Wide(const char_type* pStr);
 
-    void load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len);
+    void LoadChunk(const char_type* chunk_type, u32 chunk_len);
 
-    void Load_5B5E90();
+    void Load();
 
-    wchar_t* Find_5B5F90(const char_type* pIdStr);
+    wchar_t* Find(const char_type* pIdStr);
 
-    bool KeyExists_5B5FA0(const char_type* pIdStr);
+    bool KeyExists(const char_type* pIdStr);
 
     // 0x5B5FB0
     GameText();

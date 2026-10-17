@@ -73,7 +73,7 @@ void DrawTextureScaled_495470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 w
 
 inline s32 GetCharWidth_4539D0(u16 font_type, wchar_t chr)
 {
-    return gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
+    return gGtx_0x106C_703DD4->GetFontWidth(&font_type, &chr);
 }
 
 s32 CountLineSpacing_5D8940(wchar_t* a1, u16 a2);

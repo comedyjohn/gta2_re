@@ -24,7 +24,7 @@ void CreditsText_FD22::LoadCredits_483F20()
 {
     s16 y_gap = 0;
     u16 read_pos = 0;
-    wchar_t* pCreditsText = gText_0x14_704DFC->Find_5B5F90("credits");
+    wchar_t* pCreditsText = gText_0x14_704DFC->Find("credits");
     wchar_t line_char = CreditsText_FD22::ReadNextNonBlankChar_483EC0(pCreditsText, &read_pos, true);
     u16 line_idx = 0;
 

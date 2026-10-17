@@ -3459,7 +3459,7 @@ void Char_B4::state_0_54DDF0()
     {
         // bit 0: standing on a slope
         field_58_flags_bf.bOnSlope = get_slope_bits(pBlock->field_B_slope_type) != 0 && get_slope_bits(pBlock->field_B_slope_type) != 0xFC;
-        if (gGtx_0x106C_703DD4->IsElectrifiedFloorType_491F80(pBlock->field_8_lid & 0x3FF) && field_10_char_state != CharB4State::kJumping)
+        if (gGtx_0x106C_703DD4->IsElectrifiedFloorType(pBlock->field_8_lid & 0x3FF) && field_10_char_state != CharB4State::kJumping)
         {
             //if ((field_7C_pPed->field_21C & 0x8000000) == 0)
             if (!field_7C_pPed->field_21C_bf.bLeftVehicle)
@@ -4743,7 +4743,7 @@ void Char_B4::state_1_5504F0()
     if (pBlock)
     {
         field_58_flags_bf.bOnSlope = IsOnSlopeBlock(pBlock);
-        if (gGtx_0x106C_703DD4->IsElectrifiedFloorType_491F80(pBlock->field_8_lid & 0x3FF) && field_10_char_state != 15)
+        if (gGtx_0x106C_703DD4->IsElectrifiedFloorType(pBlock->field_8_lid & 0x3FF) && field_10_char_state != 15)
         {
             if (field_7C_pPed->field_21C_bf.bLeftVehicle == false)
             {
@@ -5694,7 +5694,7 @@ void Char_B4::state_7_551CB0()
         }
         if (block_4DFE10)
         {
-            if (gGtx_0x106C_703DD4->IsElectrifiedFloorType_491F80(block_4DFE10->field_8_lid & 0x3FF))
+            if (gGtx_0x106C_703DD4->IsElectrifiedFloorType(block_4DFE10->field_8_lid & 0x3FF))
             {
                 if (field_7C_pPed->field_21C_bf.bLeftVehicle == false)
                 {

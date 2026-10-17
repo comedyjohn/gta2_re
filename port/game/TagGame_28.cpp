@@ -54,8 +54,7 @@ void TagGame_28::SetNewFugitive_516590(Player* pNewFugitive)
     }
     else
     {
-        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("yourit"),
-                                                                hud_message_priority::important_3);
+        gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("yourit"), hud_message_priority::important_3);
     }
 }
 

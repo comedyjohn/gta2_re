@@ -355,5 +355,5 @@ s8 GangPool_CA8::FindGangByCarModel_4BF2F0(s32 car_model)
 wchar_t* Gang_144::GetArrowColourText_4BF340()
 {
     sprintf(gTmpBuffer_67C598, "ganga%d", field_138_arrow_colour);
-    return gText_0x14_704DFC->Find_5B5F90(gTmpBuffer_67C598);
+    return gText_0x14_704DFC->Find(gTmpBuffer_67C598);
 }

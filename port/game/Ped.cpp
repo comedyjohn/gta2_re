@@ -188,16 +188,16 @@ EXTERN_GLOBAL(Ang16, gSpawnRotationBottom_678540);
 void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16& outX, Fix16& outY, Ang16& outAng)
 {
     // This func is really get_car_remap?? shouldnt be get_car_door_info?
-    u8* car_door_info_array = gGtx_0x106C_703DD4->get_car_remap_5AA3D0(pCar->field_84_car_info_idx);
+    u8* car_door_info_array = gGtx_0x106C_703DD4->GetCarRemap(pCar->field_84_car_info_idx);
     Fix16 offset = gCharB4_WorldCollisionOffset_6FD8D8;
 
     Fix16 x_pos;
     Fix16 y_pos;
     s8 x_in_scale = car_door_info_array[2 * doorId + 1];
-    x_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(x_in_scale);
+    x_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16(x_in_scale);
 
     s8 y_in_scale = car_door_info_array[2 * doorId + 2];
-    y_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(y_in_scale);
+    y_pos = gPixelsToFix16_6F6850.SignedPixelsToFix16(y_in_scale);
 
     bool bUnk = false;
     bool bFront = false;

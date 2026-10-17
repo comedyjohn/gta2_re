@@ -154,11 +154,11 @@ EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
 // 0x56B500
 HighScoreTable::HighScoreTable()
 {
-    Init_56B520();
+    Init();
 }
 
 // 0x56B520
-void HighScoreTable::Init_56B520()
+void HighScoreTable::Init()
 {
     for (auto& i : field_0_score_table_line)
     {
@@ -168,7 +168,7 @@ void HighScoreTable::Init_56B520()
 }
 
 // 0x56B550
-char_type HighScoreTable::InsertScore_56B550(const wchar_t* pFindStr, u32 findScore)
+char_type HighScoreTable::InsertScore(const wchar_t* pFindStr, u32 findScore)
 {
     u16 startIdx = 10;
     for (s16 i = 9; i != -1; --i)
@@ -207,11 +207,11 @@ char_type HighScoreTable::InsertScore_56B550(const wchar_t* pFindStr, u32 findSc
 // 0x56B610
 PlySlot::PlySlot()
 {
-    ResetPlayerSlot_56B630();
+    ResetPlayerSlot();
 }
 
 // 0x56B630
-void PlySlot::ResetPlayerSlot_56B630()
+void PlySlot::ResetPlayerSlot()
 {
     for (wchar_t& k : field_90_strPlayerName)
     {
@@ -231,7 +231,7 @@ void PlySlot::ResetPlayerSlot_56B630()
 }
 
 // 0x56B680
-s32 PlySlot::GetTotalLatestScore_56B680()
+s32 PlySlot::GetTotalLatestScore()
 {
     s32 result = 0;
 
@@ -246,7 +246,7 @@ s32 PlySlot::GetTotalLatestScore_56B680()
 }
 
 // 0x56B6B0
-s32 PlySlot::GetTotalBestScore_56B6B0()
+s32 PlySlot::GetTotalBestScore()
 {
     s32 result = 0;
 
@@ -306,31 +306,31 @@ PlyDat::PlyDat()
 
     for (u32 j = 0; static_cast<u16>(j) < 8; j++)
     {
-        if (PlySlotDatExists_56B940(j))
+        if (PlySlotDatExists(j))
         {
-            LoadPlySlotDat_56B990(j);
+            LoadPlySlotDat(j);
         }
         else
         {
-            SavePlySlotDat_56BA60(j);
+            SavePlySlotDat(j);
         }
     }
 
-    if (HiScoreHscExists_56BCA0())
+    if (HiScoreHscExists())
     {
-        LoadHiScores_56BE50();
+        LoadHiScores();
     }
     else
     {
-        InitDefaultHiScores_56C1D0();
-        SaveHiScores_56BF20();
+        InitDefaultHiScores();
+        SaveHiScores();
     }
 
-    InitAltHiScores_56BD20();
+    InitAltHiScores();
 }
 
 // 0x56B8A0
-void PlyDat::GetPlySlotDatName_56B8A0(u16 slot_idx, char_type* pName)
+void PlyDat::GetPlySlotDatName(u16 slot_idx, char_type* pName)
 {
     char_type Buffer[8];
     _itoa(slot_idx, Buffer, 10);
@@ -340,10 +340,10 @@ void PlyDat::GetPlySlotDatName_56B8A0(u16 slot_idx, char_type* pName)
 }
 
 // 0x56B940
-char_type PlyDat::PlySlotDatExists_56B940(s32 slot_idx)
+char_type PlyDat::PlySlotDatExists(s32 slot_idx)
 {
     char_type FileName[356];
-    GetPlySlotDatName_56B8A0(slot_idx, FileName);
+    GetPlySlotDatName(slot_idx, FileName);
 
     _finddata_t findData;
     long hFind = _findfirst(FileName, &findData);
@@ -356,19 +356,19 @@ char_type PlyDat::PlySlotDatExists_56B940(s32 slot_idx)
 }
 
 // 0x56B990
-void PlyDat::LoadPlySlotDat_56B990(u16 slotIdx)
+void PlyDat::LoadPlySlotDat(u16 slotIdx)
 {
     char_type FileName[356];
 
     PlySlot* pTmp = &field_26A0_plyr_stats[slotIdx];
 
-    GetPlySlotDatName_56B8A0(slotIdx, FileName);
-    File::Global_Open_4A7060(FileName);
+    GetPlySlotDatName(slotIdx, FileName);
+    File::GlobalOpen(FileName);
 
     for (wchar_t& i : pTmp->field_90_strPlayerName)
     {
         u32 len_read = 2;
-        File::Global_Read_4A71C0(&i, len_read);
+        File::GlobalRead(&i, len_read);
     }
 
     for (auto& plyr_stage_stat : field_26A0_plyr_stats[slotIdx].field_0_plyr_stage_stats)
@@ -376,25 +376,25 @@ void PlyDat::LoadPlySlotDat_56B990(u16 slotIdx)
         for (auto& stage_stat : plyr_stage_stat)
         {
             u32 len_read = 1;
-            File::Global_Read_4A71C0(&stage_stat.field_0_is_stage_unlocked, len_read);
+            File::GlobalRead(&stage_stat.field_0_is_stage_unlocked, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&stage_stat.field_4_stage_best_score, len_read);
+            File::GlobalRead(&stage_stat.field_4_stage_best_score, len_read);
 
             len_read = 4;
-            File::Global_Read_4A71C0(&stage_stat.field_8_stage_latest_score, len_read);
+            File::GlobalRead(&stage_stat.field_8_stage_latest_score, len_read);
         }
     }
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 }
 
 // 0x56BA60
-void PlyDat::SavePlySlotDat_56BA60(s16 slotIdx)
+void PlyDat::SavePlySlotDat(s16 slotIdx)
 {
     char_type FileName[356];
     size_t len;
 
-    GetPlySlotDatName_56B8A0(slotIdx, FileName);
+    GetPlySlotDatName(slotIdx, FileName);
 
     // The start of this object is reused as the buffer for the player slot .dat file
     memcpy(static_cast<void*>(this),
@@ -421,11 +421,11 @@ void PlyDat::SavePlySlotDat_56BA60(s16 slotIdx)
         }
     }
 
-    File::WriteBufferToFile_4A6E80(FileName, this, &len);
+    File::WriteBufferToFile(FileName, this, &len);
 }
 
 // 0x56BB10
-void PlyDat::UpdateStageScore_56BB10(Player* pPlayer)
+void PlyDat::UpdateStageScore(Player* pPlayer)
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     PlySlot* pPlayerStats = &field_26A0_plyr_stats[slot_idx];
@@ -448,22 +448,22 @@ void PlyDat::UpdateStageScore_56BB10(Player* pPlayer)
         pStageStats->field_4_stage_best_score = latest_score;
     }
     pStageStats->field_8_stage_latest_score = latest_score;
-    SavePlySlotDat_56BA60(slot_idx);
+    SavePlySlotDat(slot_idx);
 }
 
 // 0x56BBD0
-void PlyDat::UnlockStage_56BBD0(u8 map_num, u8 bonus_num)
+void PlyDat::UnlockStage(u8 map_num, u8 bonus_num)
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     this->field_26A0_plyr_stats[slot_idx].field_0_plyr_stage_stats[map_num][bonus_num].field_0_is_stage_unlocked = 1;
     if (!bStartNetworkGame_7081F0)
     {
-        SavePlySlotDat_56BA60(slot_idx);
+        SavePlySlotDat(slot_idx);
     }
 }
 
 // 0x56BC40
-void PlyDat::UnlockAllStages_56BC40()
+void PlyDat::UnlockAllStages()
 {
     const u8 slot_idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
     PlySlot* pStats = &this->field_26A0_plyr_stats[slot_idx];
@@ -477,17 +477,17 @@ void PlyDat::UnlockAllStages_56BC40()
 
     if (!bStartNetworkGame_7081F0)
     {
-        SavePlySlotDat_56BA60(slot_idx);
+        SavePlySlotDat(slot_idx);
     }
 }
 
 // =====================================================================
 
 // 0x56BCA0
-char_type PlyDat::HiScoreHscExists_56BCA0()
+char_type PlyDat::HiScoreHscExists()
 {
     char_type FileName[356];
-    GetHiScoreHscFileName_56BCF0(FileName);
+    GetHiScoreHscFileName(FileName);
 
     _finddata_t findData;
     long hFind = _findfirst(FileName, &findData);
@@ -500,13 +500,13 @@ char_type PlyDat::HiScoreHscExists_56BCA0()
 }
 
 // 0x56BCF0
-void PlyDat::GetHiScoreHscFileName_56BCF0(char_type* pName)
+void PlyDat::GetHiScoreHscFileName(char_type* pName)
 {
     strcpy(pName, "player\\hiscores.hsc");
 }
 
 // 0x56BD20
-void PlyDat::InitAltHiScores_56BD20()
+void PlyDat::InitAltHiScores()
 {
     wcsncpy(field_24C0_alt_scores.field_0_score_table_line[0].field_0_player_name, L"ALAN", 9U);
     field_24C0_alt_scores.field_0_score_table_line[0].field_14_score = 1000000;
@@ -531,38 +531,38 @@ void PlyDat::InitAltHiScores_56BD20()
 }
 
 // 0x56BE50
-void PlyDat::LoadHiScores_56BE50()
+void PlyDat::LoadHiScores()
 {
     char_type FileName[256];
-    GetHiScoreHscFileName_56BCF0(FileName);
-    File::Global_Open_4A7060(FileName);
+    GetHiScoreHscFileName(FileName);
+    File::GlobalOpen(FileName);
 
-    File::Global_Read_4A71C0(&field_23D0_total_scores.field_0_score_table_line, 240);
+    File::GlobalRead(&field_23D0_total_scores.field_0_score_table_line, 240);
 
     for (s32 k3Counter = 0; k3Counter < 3; k3Counter++)
     {
         for (s32 k4Counter = 0; k4Counter < 4; k4Counter++)
         {
-            File::Global_Read_4A71C0(&field_1890_stage_scores[k3Counter][k4Counter], 240);
+            File::GlobalRead(&field_1890_stage_scores[k3Counter][k4Counter], 240);
         }
 
-        File::Global_Read_4A71C0(&field_1800_best_stats[k3Counter], 40); // 3 40 byte objs
+        File::GlobalRead(&field_1800_best_stats[k3Counter], 40); // 3 40 byte objs
 
-        File::Global_Read_4A71C0(&field_1878_best_car_damage_cost[k3Counter], 4);
+        File::GlobalRead(&field_1878_best_car_damage_cost[k3Counter], 4);
 
-        File::Global_Read_4A71C0(&field_1884_best_evasion_rating[k3Counter], 4);
+        File::GlobalRead(&field_1884_best_evasion_rating[k3Counter], 4);
     }
 
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 }
 
 // 0x56BF20
-void PlyDat::SaveHiScores_56BF20()
+void PlyDat::SaveHiScores()
 {
     char_type FileName[256];
     size_t len;
 
-    GetHiScoreHscFileName_56BCF0(FileName);
+    GetHiScoreHscFileName(FileName);
 
     // The start of this object is reused as the buffer for the high score file
     u8* pDst = reinterpret_cast<u8*>(this);
@@ -592,12 +592,12 @@ void PlyDat::SaveHiScores_56BF20()
         len += 4;
     }
 
-    File::WriteBufferToFile_4A6E80(FileName, this, &len);
+    File::WriteBufferToFile(FileName, this, &len);
 }
 
 // TODO: logic matches, only register allocation differs
 // 0x56C010
-void PlyDat::UpdateHiScores_56C010()
+void PlyDat::UpdateHiScores()
 {
     u8 map_num;
     u8 bonus_num;
@@ -615,10 +615,9 @@ void PlyDat::UpdateHiScores_56C010()
 
     PlySlot* pPlayerStats = &field_26A0_plyr_stats[gGameSession_67E8E0.GetPlySlotIdx_4C59B0()];
     s32 latest = pPlayerStats->field_0_plyr_stage_stats[map_num][bonus_num].field_8_stage_latest_score;
-    const char_type bNewStageScore =
-        field_1890_stage_scores[map_num][bonus_num].InsertScore_56B550(pPlayerStats->field_90_strPlayerName, latest);
+    const char_type bNewStageScore = field_1890_stage_scores[map_num][bonus_num].InsertScore(pPlayerStats->field_90_strPlayerName, latest);
     const char_type bNewTotalScore =
-        field_23D0_total_scores.InsertScore_56B550(pPlayerStats->field_90_strPlayerName, pPlayerStats->GetTotalBestScore_56B6B0());
+        field_23D0_total_scores.InsertScore(pPlayerStats->field_90_strPlayerName, pPlayerStats->GetTotalBestScore());
 
     if (!bonus_num)
     {
@@ -650,36 +649,36 @@ void PlyDat::UpdateHiScores_56C010()
 
     if (bNewStageScore || bNewTotalScore || bBestStatsChanged)
     {
-        SaveHiScores_56BF20();
+        SaveHiScores();
     }
 }
 
 // 0x56C170
-void PlyDat::BuildMergedHiScores_56C170()
+void PlyDat::BuildMergedHiScores()
 {
-    field_25B0.Init_56B520();
+    field_25B0.Init();
     ScoreTableLine* pLine = field_24C0_alt_scores.field_0_score_table_line;
     for (s32 k10 = 0; k10 < 10; k10++)
     {
-        field_25B0.InsertScore_56B550(pLine->field_0_player_name, pLine->field_14_score);
+        field_25B0.InsertScore(pLine->field_0_player_name, pLine->field_14_score);
         ++pLine;
     }
 
     for (auto& plyr_stat : field_26A0_plyr_stats)
     {
         PlySlot* pSlot = &plyr_stat;
-        field_25B0.InsertScore_56B550(pSlot->field_90_strPlayerName, pSlot->GetTotalLatestScore_56B680());
+        field_25B0.InsertScore(pSlot->field_90_strPlayerName, pSlot->GetTotalLatestScore());
     }
 }
 
 // 0x56C1D0
-void PlyDat::InitDefaultHiScores_56C1D0()
+void PlyDat::InitDefaultHiScores()
 {
-    field_23D0_total_scores.Init_56B520();
+    field_23D0_total_scores.Init();
     ScoreTableLine* p10StruIter = gDefaultHiScores_6242B0;
     for (s32 k10 = 0; k10 < 10; k10++)
     {
-        field_23D0_total_scores.InsertScore_56B550(p10StruIter->field_0_player_name, p10StruIter->field_14_score);
+        field_23D0_total_scores.InsertScore(p10StruIter->field_0_player_name, p10StruIter->field_14_score);
         ++p10StruIter;
     }
 
@@ -688,10 +687,10 @@ void PlyDat::InitDefaultHiScores_56C1D0()
     {
         for (auto& k4 : stage_score)
         {
-            k4.Init_56B520();
+            k4.Init();
             for (s32 k10 = 0; k10 < 10; k10++)
             {
-                k4.InsertScore_56B550(pSruIter->field_0_player_name, pSruIter->field_14_score);
+                k4.InsertScore(pSruIter->field_0_player_name, pSruIter->field_14_score);
                 ++pSruIter;
             }
         }
@@ -699,7 +698,7 @@ void PlyDat::InitDefaultHiScores_56C1D0()
 }
 
 // 0x56C250
-void PlyDat::DoMuchCashCheat_56C250()
+void PlyDat::DoMuchCashCheat()
 {
     if (!bStartNetworkGame_7081F0)
     {
@@ -713,7 +712,7 @@ void PlyDat::DoMuchCashCheat_56C250()
 }
 
 // 0x56C2C0
-void PlyDat::Create_56C2C0()
+void PlyDat::Create()
 {
     if (!gPlyDat_6FEAC0)
     {
@@ -726,7 +725,7 @@ void PlyDat::Create_56C2C0()
 }
 
 // 0x56C340
-void PlyDat::Destroy_56C340()
+void PlyDat::Destroy()
 {
     if (gPlyDat_6FEAC0)
     {

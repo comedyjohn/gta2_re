@@ -384,18 +384,18 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
         {
             if (delta_idx >= 22)
             {
-                SpriteDelta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx - 17);
+                SpriteDelta* pDelta = gGtx_0x106C_703DD4->GetDelta(sprite_idx, delta_idx - 17);
                 if (pDelta)
                 {
-                    pDelta->Delta_5ABA40(pArray, width);
+                    pDelta->Delta(pArray, width);
                 }
             }
             else
             {
-                SpriteDelta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx);
+                SpriteDelta* pDelta = gGtx_0x106C_703DD4->GetDelta(sprite_idx, delta_idx);
                 if (pDelta)
                 {
-                    pDelta->Delta_5ABA00(pArray);
+                    pDelta->Delta(pArray);
                 }
             }
             unknown &= ~i;
@@ -405,7 +405,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
 
 inline u16 Sprite::GetTrueSpriteIdx_4BA230()
 {
-    return gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
+    return gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
 }
 
 // 0x48F8B0
@@ -415,7 +415,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
     {
         return -1;
     }
-    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
     u32 bUnk = sprite_index_5AA440->field_5_height > 0x40U;
     SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var_, &a4);
     if (pSprt14)
@@ -438,7 +438,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
         pSprt14 = gSpriteMaskCache_67AF1C->FindLeastRecentlyUsed_48F690(&bUnk);
         if (!a5)
         {
-            sprite_index_5AA440->CopyPixels_5ABB00(pSprt14->field_0_pixels);
+            sprite_index_5AA440->CopyPixels(pSprt14->field_0_pixels);
         }
         else
         {
@@ -594,7 +594,7 @@ s32 Sprite::IsOnWater_59E1D0()
     if (pBlock)
     {
         const u16 lid_idx = pBlock->field_8_lid & 1023;
-        if (gGtx_0x106C_703DD4->IsRemappedWaterTile_49E540(lid_idx))
+        if (gGtx_0x106C_703DD4->IsRemappedWaterTile(lid_idx))
         {
             return true;
         }
@@ -639,7 +639,7 @@ void Sprite::CopyVisualShapeToCollision_59E300()
 void Sprite::IncreaseZoom_59E320(char_type delta)
 {
     u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
     u32 field_5_height = sprite_index_5AA440->field_5_height;
     u32 field_4_width = sprite_index_5AA440->field_4_width;
 
@@ -967,10 +967,10 @@ s16 Sprite::GetTruePalette_59EAA0()
 {
     if (field_34_palette_type == PaletteTypes::kSprites)
     {
-        s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx);
+        s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        return gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx);
     }
-    return gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(field_34_palette_type, field_24_remap);
+    return gGtx_0x106C_703DD4->GetTruePalette(field_34_palette_type, field_24_remap);
 }
 
 // 0x59eae0
@@ -1107,9 +1107,9 @@ void Sprite::Draw_59EFF0()
     if (field_38_zoom != 0)
     {
         sprite_idx = gGtx_0x106C_703DD4->field_4_sprite_index_count - 1;
-        pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
-        converted_pal = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        pSpriteIndex2 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(converted_pal);
+        pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+        converted_pal = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        pSpriteIndex2 = gGtx_0x106C_703DD4->GetSpriteIndex(converted_pal);
         pSpriteIndex->field_4_width = pSpriteIndex2->field_4_width - 2 * field_38_zoom;
         pSpriteIndex->field_5_height = pSpriteIndex2->field_5_height - 2 * field_38_zoom;
         if (!pSpriteIndex->field_4_width || !pSpriteIndex->field_5_height)
@@ -1125,8 +1125,8 @@ void Sprite::Draw_59EFF0()
     }
     else
     {
-        sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
-        pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+        sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
+        pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
         pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(field_30_sprite_type_enum,
                                                                       field_22_type_sprite_idx,
                                                                       field_34_palette_type,
@@ -1294,7 +1294,7 @@ void Sprite::EnsureVisualShape_59F990()
         this->field_4_pVisualShape = gSpriteShapePool_70381C->Allocate();
 
         const u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-        const SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+        const SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
 
         Fix16 w;
         Fix16 h;
@@ -1319,7 +1319,7 @@ void Sprite::UpdateDimensionsFromSpriteIndex_59FA40()
     if (field_4_pVisualShape)
     {
         const u16 idx = GetTrueSpriteIdx_4BA230();
-        SpriteIndex* pSprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(idx);
+        SpriteIndex* pSprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(idx);
 
         const Fix16 height = gPixelsToFix16_6F6850.list[pSprite_index->field_5_height];
         const Fix16 width = gPixelsToFix16_6F6850.list[pSprite_index->field_4_width];

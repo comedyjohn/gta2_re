@@ -451,7 +451,7 @@ void MapRenderer::ambient_light_tick_4E9EA0()
 // 0x4E9EE0
 void MapRenderer::draw_4E9EE0(u16& word_side, const bool& bUnk, u8 colour)
 {
-    u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(word_side & 0x3FF);
+    u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(word_side & 0x3FF);
     if (texture_idx)
     {
         if (bUnk)
@@ -730,7 +730,7 @@ void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
                 break;
         }
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(left_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(left_word & 0x3FF);
         if (texture_idx)
         {
             if ((*((reinterpret_cast<u8*>(&left_word)) + 1) & 0x10) != 0)
@@ -932,7 +932,7 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
                 break;
         }
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(right_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(right_word & 0x3FF);
         if (texture_idx)
         {
             if ((*((reinterpret_cast<u8*>(&right_word)) + 1) & 0x10) != 0)
@@ -1095,7 +1095,7 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
                 break;
         }
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(top_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(top_word & 0x3FF);
         if (texture_idx != 0)
         {
             if ((*((reinterpret_cast<u8*>(&top_word)) + 1) & 0x10) != 0)
@@ -1127,7 +1127,7 @@ void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
         gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC, gYCoord_6F63B8 + kZeroOnePoint_6F6484.y, &gTileVerts_6F65A8[3]);
 
         gTileDrawFlags_6F6560 = dword_620FE4[left_word >> 13];
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(left_word & 1023);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(left_word & 1023);
         if (texture_idx)
         {
             pgbh_DrawTile(gTileDrawFlags_6F6560 | gLightingDrawFlag_7068F4,
@@ -1159,7 +1159,7 @@ void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
                                               &gTileVerts_6F65A8[3]);
 
         gTileDrawFlags_6F6560 = dword_621004[right_word >> 13];
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(right_word & 1023);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(right_word & 1023);
         if (texture_idx)
         {
             pgbh_DrawTile(gTileDrawFlags_6F6560 | gLightingDrawFlag_7068F4,
@@ -1191,7 +1191,7 @@ void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
                                                  gYCoord_6F63B8 + kZeroOnePoint_6F6484.y,
                                                  &gTileVerts_6F65A8[3]);
         gTileDrawFlags_6F6560 = dword_620FE4[left_word >> 13];
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(left_word & 1023);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(left_word & 1023);
         if (texture_idx)
         {
             pgbh_DrawTile(gTileDrawFlags_6F6560 | gLightingDrawFlag_7068F4,
@@ -1219,7 +1219,7 @@ void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
         gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC, gYCoord_6F63B8 + kZeroOnePoint_6F6484.y, &gTileVerts_6F65A8[2]);
         gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC, gYCoord_6F63B8 + kZeroOnePoint_6F6484.y, &gTileVerts_6F65A8[3]);
         gTileDrawFlags_6F6560 = dword_621004[right_word >> 13];
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(right_word & 1023);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(right_word & 1023);
         if (texture_idx)
         {
             pgbh_DrawTile(gTileDrawFlags_6F6560 | gLightingDrawFlag_7068F4,
@@ -1383,7 +1383,7 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
                 break;
         }
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(bottom_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(bottom_word & 0x3FF);
         if (texture_idx)
         {
             if ((*((reinterpret_cast<u8*>(&bottom_word)) + 1) & 0x10) != 0)
@@ -1411,7 +1411,7 @@ void MapRenderer::draw_lid_4EE130()
                                               &gTileVerts_6F65A8[2]);
         gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC, gYCoord_6F63B8 + kZeroOnePoint_6F6484.y, &gTileVerts_6F65A8[3]);
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF); // tile idx
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF); // tile idx
 
         if (texture_idx)
         {
@@ -2013,7 +2013,7 @@ void MapRenderer::DrawGradientSlopeNorthwards_4F0420()
         {
             gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
         }
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF);
         u8 colour;
         u16 colour_sel = (gLidType_6F6274 >> 10) & 3;
         if (colour_sel == 0)
@@ -2162,7 +2162,7 @@ void MapRenderer::DrawGradientSlopeSouthwards_4F1660()
         {
             gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
         }
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF);
         u8 colour;
         u16 colour_sel = (gLidType_6F6274 >> 10) & 3;
         if (colour_sel == 0)
@@ -2292,7 +2292,7 @@ void MapRenderer::DrawGradientSlopeWestwards_4F22F0()
         {
             gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
         }
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF);
         u8 colour;
         u16 colour_sel = (gLidType_6F6274 >> 10) & 3;
         if (colour_sel == 0)
@@ -2423,7 +2423,7 @@ void MapRenderer::DrawGradientSlopeEastwards_4F33B0()
         {
             gTileDrawFlags_6F6560 = gTileDrawFlags_6F6560 | 0x80;
         }
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF);
         u8 colour;
         u16 colour_sel = (gLidType_6F6274 >> 10) & 3;
         if (colour_sel == 0)
@@ -2464,7 +2464,7 @@ void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a,
         Set_UV_4F4190(kZeroOnePoint_6F6484.x, y_off_b, 3);
 
         gTileDrawFlags_6F6560 = 16389;
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(side_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(side_word & 0x3FF);
         if (texture_idx)
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
@@ -2571,7 +2571,7 @@ void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a
         Set_UV_4F4190(kZeroOnePoint_6F6484.x, y_off_b, 3);
 
         gTileDrawFlags_6F6560 = 16389;
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(side_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(side_word & 0x3FF);
         if (texture_idx)
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
@@ -2611,7 +2611,7 @@ void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b
         Set_UV_4F4190(x_off_a, kZeroOnePoint_6F6484.y, 3);
 
         gTileDrawFlags_6F6560 = 16389;
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(side_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(side_word & 0x3FF);
         if (texture_idx)
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
@@ -2651,7 +2651,7 @@ void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_of
         Set_UV_4F4190(x_off_a, kZeroOnePoint_6F6484.y, 3);
 
         gTileDrawFlags_6F6560 = 16389;
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(side_word & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(side_word & 0x3FF);
         if (texture_idx)
         {
             //BlockSideWord word = *(BlockSideWord*)&side_word;
@@ -2686,7 +2686,7 @@ void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& 
         Set_UV_4F4190(unk2, unk4, 2);
         Set_UV_4F4190(unk1, unk4, 3);
 
-        u16 texture_idx = gGtx_0x106C_703DD4->GetTile_5AA870(gLidType_6F6274 & 0x3FF);
+        u16 texture_idx = gGtx_0x106C_703DD4->GetTileMapping(gLidType_6F6274 & 0x3FF);
         if (texture_idx)
         {
             gTileDrawFlags_6F6560 = 16389;

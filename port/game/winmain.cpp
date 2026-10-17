@@ -216,11 +216,11 @@ void Init_FrameRateLightAndUnknown_5D8EB0()
     }
     else
     {
-        max_frame_rate_626A08 = gRegistry_6FF968.Get_Screen_Setting_5870D0("max_frame_rate", 1) != 0;
-        min_frame_rate_706C50 = gRegistry_6FF968.Get_Screen_Setting_5870D0("min_frame_rate", 0) != 0;
+        max_frame_rate_626A08 = gRegistry_6FF968.GetScreenSetting("max_frame_rate", 1) != 0;
+        min_frame_rate_706C50 = gRegistry_6FF968.GetScreenSetting("min_frame_rate", 0) != 0;
     }
 
-    if (gRegistry_6FF968.Get_Screen_Setting_5870D0("lighting", 1))
+    if (gRegistry_6FF968.GetScreenSetting("lighting", 1))
     {
         gLighting_626A09 = 1;
         gLightingDrawFlag_7068F4 = 0x8000;
@@ -236,7 +236,7 @@ void Init_FrameRateLightAndUnknown_5D8EB0()
         gSpriteMaskCache_67AF1C->InvalidateAllMasks_48F710();
     }
 
-    bExplodingScoresOff_67D4FB = gRegistry_6FF968.Get_Screen_Setting_5870D0("exploding_on", 1) != 1;
+    bExplodingScoresOff_67D4FB = gRegistry_6FF968.GetScreenSetting("exploding_on", 1) != 1;
 }
 
 // todo: move
@@ -334,8 +334,8 @@ void SetFullScreenMode_5D93A0()
 
     if (bModeChanged)
     {
-        gRegistry_6FF968.Set_Screen_Setting_587170("full_width", full_width_706B5C);
-        gRegistry_6FF968.Set_Screen_Setting_587170("full_height", full_height_706798);
+        gRegistry_6FF968.SetScreenSetting("full_width", full_width_706B5C);
+        gRegistry_6FF968.SetScreenSetting("full_height", full_height_706798);
     }
 }
 
@@ -428,13 +428,13 @@ s32 ReadScreenSettings_5D8F70()
     }
     else
     {
-        window_width_706630 = gRegistry_6FF968.Get_Screen_Setting_5870D0("window_width", 640);
-        window_height_706B50 = gRegistry_6FF968.Get_Screen_Setting_5870D0("window_height", 480);
-        full_width_706B5C = gRegistry_6FF968.Get_Screen_Setting_5870D0("full_width", 640);
-        full_height_706798 = gRegistry_6FF968.Get_Screen_Setting_5870D0("full_height", 480);
+        window_width_706630 = gRegistry_6FF968.GetScreenSetting("window_width", 640);
+        window_height_706B50 = gRegistry_6FF968.GetScreenSetting("window_height", 480);
+        full_width_706B5C = gRegistry_6FF968.GetScreenSetting("full_width", 640);
+        full_height_706798 = gRegistry_6FF968.GetScreenSetting("full_height", 480);
     }
 
-    gStartMode_626A0C = gRegistry_6FF968.Get_Screen_Setting_5870D0("start_mode", 1);
+    gStartMode_626A0C = gRegistry_6FF968.GetScreenSetting("start_mode", 1);
 
     if (gBufferMode_706B34 == 0)
     {
@@ -442,7 +442,7 @@ s32 ReadScreenSettings_5D8F70()
     }
     else
     {
-        bTrippleBuffer_706C54 = gRegistry_6FF968.Get_Screen_Setting_5870D0("tripple_buffer", 0);
+        bTrippleBuffer_706C54 = gRegistry_6FF968.GetScreenSetting("tripple_buffer", 0);
     }
 
     if (gStartMode_626A0C == startMode_old && bTrippleBuffer_706C54 == trippleBuffer_old)
@@ -467,7 +467,7 @@ s32 ReadScreenSettings_5D8F70()
 // 0x5D98E0
 void SetSavedGamma_5D98E0()
 {
-    DWORD Screen_Setting_5870D0 = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 0xAU);
+    DWORD Screen_Setting_5870D0 = gRegistry_6FF968.GetScreenSetting("gamma", 0xAU);
     if (SetGamma_5D9910(Screen_Setting_5870D0))
     {
         counter_706C4C = 30;
@@ -508,12 +508,12 @@ void SetVideoModeFromSettings_5D92D0()
             {
                 SetFullScreenMode_5D93A0();
                 gStartMode_626A0C = 1;
-                gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", 1U);
+                gRegistry_6FF968.SetScreenSetting("start_mode", 1U);
             }
             else
             {
-                gRegistry_6FF968.Set_Screen_Setting_587170("window_width", window_width_706630);
-                gRegistry_6FF968.Set_Screen_Setting_587170("window_height", window_height_706B50);
+                gRegistry_6FF968.SetScreenSetting("window_width", window_width_706630);
+                gRegistry_6FF968.SetScreenSetting("window_height", window_height_706B50);
             }
         }
     }
@@ -628,15 +628,15 @@ void InitVideo_5D96C0()
 void Init_keybrd_jolly_and_sound_4DA440()
 {
     keybrd_0x204::create_4D5F50();
-    PlyDat::Create_56C2C0();
+    PlyDat::Create();
 
     if (!bSkip_audio_67D6BE)
     {
         gRoot_sound_66B038.Init_40EF80();
-        gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.Set_Sound_Setting_586AE0("CDVol", 127));
-        gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.Set_Sound_Setting_586AE0("SFXVol", 127));
-        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.Get_Sound_Settting_586A70("do_3d_sound"));
-        gRegistry_6FF968.Clear_Or_Delete_Sound_Setting_586BF0("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+        gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.GetOrCreateSoundSetting("CDVol", 127));
+        gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.GetOrCreateSoundSetting("SFXVol", 127));
+        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
+        gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
     }
 }
 
@@ -721,7 +721,7 @@ void ShowPlayerLeftMessage_4DB070(u8 idx)
 {
     Player* pPlayer = gGame_0x40_67E008->GetPlayer_4219E0(idx);
     pPlayer->Disconnect_568730();
-    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("comms1"), pPlayer->field_83C_player_name);
+    swprintf(gTmpBuff, gText_0x14_704DFC->Find("comms1"), pPlayer->field_83C_player_name);
     gHud_2B00_706620->field_12F0_mp_message.ShowText_5D5730(gTmpBuff);
 }
 
@@ -748,8 +748,8 @@ void InitializeGame_4DA4D0()
         gInputRecorder_67F8B0.input_init_live_4CE880(gHInstance_708220);
     }
 
-    gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.Get_Sound_Settting_586A70("do_3d_sound"));
-    gRegistry_6FF968.Clear_Or_Delete_Sound_Setting_586BF0("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+    gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
+    gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
 
     if (bStartNetworkGame_7081F0)
     {
@@ -1135,7 +1135,7 @@ void TagGameHudUpdate_4DADA0()
                 if (--gNetTimeLimit_6F573C < 0)
                 {
                     gNetTimeLimitEnabled_6F58A4 = 0;
-                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find_5B5F90("g_over"),
+                    gHud_2B00_706620->field_111C_message.ShowMessage_5D1A00(gText_0x14_704DFC->Find("g_over"),
                                                                             hud_message_priority::important_3);
                     gGame_0x40_67E008->ExitGameNoBonus_4B8C00(2, GameExitType::MultiplayerExit_5);
                 }
@@ -1392,12 +1392,12 @@ const char_type* kDefaultDllNames_626A00[2] = {"d3ddll.dll", "dmavideo.dll"};
 // 0x5D90E0
 void Video_Render_Inits_5D90E0()
 {
-    gRenderdevice_706998 = gRegistry_6FF968.Get_Screen_Setting_5870D0("renderdevice", 1);
-    gVideodevice_70694C = gRegistry_6FF968.Get_Screen_Setting_5870D0("videodevice", 1);
+    gRenderdevice_706998 = gRegistry_6FF968.GetScreenSetting("renderdevice", 1);
+    gVideodevice_70694C = gRegistry_6FF968.GetScreenSetting("videodevice", 1);
     strcpy(gRenderDllName_7067F0, kDefaultDllNames_626A00[0]);
     strcpy(gVideoDllName_706654, kDefaultDllNames_626A00[1]);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFU);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFU);
+    gRegistry_6FF968.SetScreenSetting("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFU);
+    gRegistry_6FF968.SetScreenSetting("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFU);
 
     if (strcmp(gRenderDllName_7067F0, "softdll.dll") == 0)
     {
@@ -1617,7 +1617,7 @@ void ErrorMsgBox_5E4EC0(LPCSTR lpText)
 void SetStartMode_5D9230(s32 startMode)
 {
     gStartMode_626A0C = startMode;
-    gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", startMode);
+    gRegistry_6FF968.SetScreenSetting("start_mode", startMode);
 }
 
 // todo: move
@@ -1635,7 +1635,7 @@ void Input_Read_498D10()
 void ToggleStartMode_5D9250()
 {
     gStartMode_626A0C = (gStartMode_626A0C != 1);
-    gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", gStartMode_626A0C);
+    gRegistry_6FF968.SetScreenSetting("start_mode", gStartMode_626A0C);
 }
 
 // 0x5E4EE0
@@ -1663,8 +1663,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
         case WM_SETFOCUS: // order ok
             gRoot_sound_66B038.Reacquire_40F140();
-            gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.Set_Sound_Setting_586AE0("CDVol", 127));
-            gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.Set_Sound_Setting_586AE0("SFXVol", 127));
+            gRoot_sound_66B038.SetCDVol_40F0F0(gRegistry_6FF968.GetOrCreateSoundSetting("CDVol", 127));
+            gRoot_sound_66B038.SetSfxVol_40F0B0(gRegistry_6FF968.GetOrCreateSoundSetting("SFXVol", 127));
 
             if (bDoFrontEnd_626B68)
             {
@@ -1672,8 +1672,8 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             }
             else
             {
-                gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.Get_Sound_Settting_586A70("do_3d_sound"));
-                gRegistry_6FF968.Clear_Or_Delete_Sound_Setting_586BF0("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+                gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
+                gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
             }
 
             if (!bDestroyed_6F5B70)
@@ -1912,7 +1912,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
-    gDebug_67D52C.Init_4ABBD0();
+    gDebug_67D52C.Init();
     gGameSession_67E8E0.LoadDebugSettings_4C53D0();
     bDoFrontEnd_626B68 = bSkip_frontend_67D53B == 0;
 
@@ -1987,7 +1987,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     s32 state;
     if (Frontend::intro_bik_exists_4B5FF0())
     {
-        state = gRegistry_6FF968.Get_Screen_Setting_5870D0("do_play_movie", 1) != 1 ? 0 : 8;
+        state = gRegistry_6FF968.GetScreenSetting("do_play_movie", 1) != 1 ? 0 : 8;
     }
     else
     {
@@ -2002,8 +2002,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     if (bStartNetworkGame_7081F0)
     {
         bDoFrontEnd_626B68 = false;
-        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.Get_Sound_Settting_586A70("do_3d_sound"));
-        gRegistry_6FF968.Clear_Or_Delete_Sound_Setting_586BF0("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
+        gRoot_sound_66B038.Set3DSound_40F160(gRegistry_6FF968.GetSoundSettting("do_3d_sound"));
+        gRegistry_6FF968.ClearOrDeleteSoundSetting("do_3d_sound", gRoot_sound_66B038.Get3DSound_40F180());
     }
 
     // Game loop
@@ -2114,8 +2114,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::PlayerQuit_2:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore_56BB10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores_56C010();
+                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat_6FEAC0->UpdateHiScores();
 
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 11; // 11? prob 1
                                         CleanUpInputAndOthers_4DA700();
@@ -2124,8 +2124,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::GameOverRIP_3:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore_56BB10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores_56C010();
+                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat_6FEAC0->UpdateHiScores();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 2;
                                         CleanUpInputAndOthers_4DA700();
                                         bDoFrontEnd_626B68 = true;
@@ -2133,8 +2133,8 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                                     case GameExitType::AreaCompleted_4:
                                         gGameSession_67E8E0.StoreCrimeStats_4C5A10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateStageScore_56BB10(gGame_0x40_67E008->field_38_local_player);
-                                        gPlyDat_6FEAC0->UpdateHiScores_56C010();
+                                        gPlyDat_6FEAC0->UpdateStageScore(gGame_0x40_67E008->field_38_local_player);
+                                        gPlyDat_6FEAC0->UpdateHiScores();
                                         state = gGameSession_67E8E0.IsBonusStage_4C59A0() != 0 ? 6 : 3;
                                         CleanUpInputAndOthers_4DA700();
                                         bDoFrontEnd_626B68 = true;
@@ -2179,7 +2179,7 @@ void Shutdown_4DA740()
     {
         bDestroyed_6F5B70 = 1;
         keybrd_0x204::destroy_4D5FA0();
-        PlyDat::Destroy_56C340();
+        PlyDat::Destroy();
         CleanUpInputAndOthers_4DA700();
         Frontend::destroy_4AD070();
 
@@ -2201,12 +2201,12 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
     if (bStartNetworkGame_7081F0)
     {
         HKEY hKey;
-        if (!gRegistry_6FF968.CreateNetworkRoot_587420(&hKey))
+        if (!gRegistry_6FF968.CreateNetworkRoot(&hKey))
         {
             bRet = 0;
         }
 
-        if (gRegistry_6FF968.Get_Int_5873E0(hKey, "UseProtocol") != sizeof(GUID))
+        if (gRegistry_6FF968.GetInt(hKey, "UseProtocol") != sizeof(GUID))
         {
             RegCloseKey(hKey);
             if (!gNetPlay_7071E8.SetProtoAndConnection_51DAE0(nullptr, nullptr))
@@ -2217,16 +2217,16 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
         else
         {
             GUID protocolGuid;
-            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseProtocol", sizeof(GUID), reinterpret_cast<LPBYTE>(&protocolGuid)))
+            if (!gRegistry_6FF968.GetBinary(hKey, "UseProtocol", sizeof(GUID), reinterpret_cast<LPBYTE>(&protocolGuid)))
             {
                 RegCloseKey(hKey);
                 return 0;
             }
 
             Network_Buffer_8 connection;
-            connection.field_4_len = gRegistry_6FF968.Get_Int_5873E0(hKey, "UseConnection");
+            connection.field_4_len = gRegistry_6FF968.GetInt(hKey, "UseConnection");
             connection.field_0 = operator new(connection.field_4_len);
-            if (!gRegistry_6FF968.Get_Binary_587340(hKey, "UseConnection", connection.field_4_len, static_cast<LPBYTE>(connection.field_0)))
+            if (!gRegistry_6FF968.GetBinary(hKey, "UseConnection", connection.field_4_len, static_cast<LPBYTE>(connection.field_0)))
             {
                 operator delete(connection.field_0);
                 RegCloseKey(hKey);
@@ -2242,13 +2242,13 @@ char_type Start_NetworkGame_5E5A30(HINSTANCE hInstance)
 
             if (gNetPlay_7071E8.field_4_bModem)
             {
-                u16 len = gRegistry_6FF968.Get_Int_5873E0(hKey, "ModemNumber");
+                u16 len = gRegistry_6FF968.GetInt(hKey, "ModemNumber");
                 if (len >= 128)
                 {
                     return 0;
                 }
                 wchar_t modemNumber[128];
-                gRegistry_6FF968.Get_Binary_587340(hKey, "ModemNumber", len, reinterpret_cast<LPBYTE>(modemNumber));
+                gRegistry_6FF968.GetBinary(hKey, "ModemNumber", len, reinterpret_cast<LPBYTE>(modemNumber));
                 gNetPlay_7071E8.field_5_modem_num = modemNumber[0] != 0;
             }
         }

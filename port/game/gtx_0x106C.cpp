@@ -13,7 +13,7 @@
 #include <windows.h>
 
 // Forward declarations: the functions below are in address order
-void ClearPixelsOfColourInRow_5ABAE0(u8* pData, int width, u8 clear_target);
+void ClearPixelsOfColourInRow(u8* pData, int width, u8 clear_target);
 
 DEFINE_GLOBAL(Gtx*, gGtx_0x106C_703DD4, 0x703DD4);
 DEFINE_GLOBAL(s16, word_703D9C, 0x703D9C);
@@ -25,20 +25,20 @@ DEFINE_GLOBAL(s16, word_703D98, 0x703D98);
 DEFINE_GLOBAL(s16, word_703C9C, 0x703C9C);
 
 // 0x5AA3B0
-StyleCarInfo* Gtx::get_car_info_5AA3B0(u8 idx)
+StyleCarInfo* Gtx::GetCarInfo(u8 idx)
 {
     return field_5C_cari->field_0_car_info[idx];
 }
 
 // 0x5AA3D0
-BYTE* Gtx::get_car_remap_5AA3D0(u8 idx)
+BYTE* Gtx::GetCarRemap(u8 idx)
 {
     StyleCarInfo* pCarInfo = field_5C_cari->field_0_car_info[idx];
     return &pCarInfo->remap[pCarInfo->num_remaps];
 }
 
 // 0x5AA3F0
-SpriteDelta* Gtx::get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx)
+SpriteDelta* Gtx::GetDelta(u16 sprite_idx, u8 delta_idx)
 {
     DeltaContainer* pDel = field_54_del;
 
@@ -66,13 +66,13 @@ SpriteDelta* Gtx::get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx)
 
 // note: param type matters
 // 0x5AA440
-SpriteIndex* Gtx::get_sprite_index_5AA440(u16 idx)
+SpriteIndex* Gtx::GetSpriteIndex(u16 idx)
 {
     return &field_20_sprite_index[idx];
 }
 
 // 0x5AA460
-u16 Gtx::GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_idx)
+u16 Gtx::GetSpriteTrueIndex(s32 sprite_type, s16 sprite_idx)
 {
     u16 result;
     switch (sprite_type)
@@ -104,7 +104,7 @@ u16 Gtx::GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_idx)
 }
 
 // 0x5AA4F0
-s16 Gtx::GetSpriteBaseOfType_5AA4F0(s32 sprite_type)
+s16 Gtx::GetSpriteBaseOfType(s32 sprite_type)
 {
     switch (sprite_type)
     {
@@ -127,7 +127,7 @@ s16 Gtx::GetSpriteBaseOfType_5AA4F0(s32 sprite_type)
 }
 
 // 0x5AA560
-s16 Gtx::GetPaletteBaseOfType_5AA560(s32 palette_type)
+s16 Gtx::GetPaletteBaseOfType(s32 palette_type)
 {
     switch (palette_type)
     {
@@ -153,7 +153,7 @@ s16 Gtx::GetPaletteBaseOfType_5AA560(s32 palette_type)
 }
 
 // 0x5AA5F0
-s16 Gtx::GetTruePalette_5AA5F0(s32 palette_type, s16 pal)
+s16 Gtx::GetTruePalette(s32 palette_type, s16 pal)
 {
     s16 result; // ax
 
@@ -191,19 +191,19 @@ s16 Gtx::GetTruePalette_5AA5F0(s32 palette_type, s16 pal)
 }
 
 // 0x5AA6A0
-BYTE* Gtx::GetPalData_5AA6A0(u16 palette_idx)
+BYTE* Gtx::GetPalData(u16 palette_idx)
 {
     return static_cast<BYTE*>(field_2C_physical_palettes) + 4 * ((palette_idx & 63) + ((palette_idx & 0xFFFFC0) << 8));
 }
 
 // 0x5AA6F0
-u16 Gtx::get_phys_pal_5AA6F0(u16 palId)
+u16 Gtx::GetPhysPal(u16 palId)
 {
     return field_28_palette_index->field_0_phys_palette[palId];
 }
 
 // 0x5AA710
-u16 Gtx::GetSpriteIdxFromFont_5AA710(u16 font_type, s16 offset)
+u16 Gtx::GetSpriteIdxFromFont(u16 font_type, s16 offset)
 {
     u16 result = field_1C_font_base->field_2_base[font_type] + offset;
     if (font_type == field_1C_font_base->field_0_font_count - 1)
@@ -225,7 +225,7 @@ u16 Gtx::GetSpriteIdxFromFont_5AA710(u16 font_type, s16 offset)
 }
 
 // 0x5AA760
-u16 Gtx::GetFontWidth_5AA760(u16* font_type, wchar_t* pStr)
+u16 Gtx::GetFontWidth(u16* font_type, wchar_t* pStr)
 {
     if (*font_type >= 101)
     {
@@ -235,14 +235,13 @@ u16 Gtx::GetFontWidth_5AA760(u16* font_type, wchar_t* pStr)
     else
     {
         // In this case letters have different widths
-        return this
-            ->field_20_sprite_index[this->field_14_sprite_base2->field_A_font + Gtx::GetSpriteIdxFromFont_5AA710(*font_type, *pStr - 33)]
+        return this->field_20_sprite_index[this->field_14_sprite_base2->field_A_font + Gtx::GetSpriteIdxFromFont(*font_type, *pStr - 33)]
             .field_4_width;
     }
 }
 
 // 0x5AA7B0
-u16 Gtx::GetSpaceCharWidth_5AA7B0(u16* font_type)
+u16 Gtx::GetSpaceCharWidth(u16* font_type)
 {
     if (*font_type >= 101)
     {
@@ -255,7 +254,7 @@ u16 Gtx::GetSpaceCharWidth_5AA7B0(u16* font_type)
 }
 
 // 0x5AA800
-s16 Gtx::GetLineSpacing_5AA800(u16* font_type)
+s16 Gtx::GetLineSpacing(u16* font_type)
 {
     if (*font_type >= 0x65U)
     {
@@ -275,19 +274,19 @@ s16 Gtx::GetLineSpacing_5AA800(u16* font_type)
 #define UNIQUE_FUNC printf(__FILE__ LINE_STRING "\n")
 
 // 0x5AA850
-bool Gtx::IsTileRemapped_5AA850(u16 tile_idx)
+bool Gtx::IsTileRemapped(u16 tile_idx)
 {
     return field_40_tile->field_0_tile_mapping[tile_idx] != tile_idx;
 }
 
 // 0x5AA870
-s16 Gtx::GetTile_5AA870(u16 tile_idx)
+s16 Gtx::GetTileMapping(u16 tile_idx)
 {
     return field_40_tile->field_0_tile_mapping[tile_idx];
 }
 
 // 0x5AA890
-s16 Gtx::GetFirstFreeReservedTileIdx_5AA890()
+s16 Gtx::GetFirstFreeReservedTileIdx()
 {
     // Decreasing order: starts from 1023 down to 992
     u16* i = &field_40_tile->field_0_tile_mapping[1023];
@@ -303,19 +302,19 @@ s16 Gtx::GetFirstFreeReservedTileIdx_5AA890()
 }
 
 // 0x5AA8C0
-void* Gtx::GetTiles_5AA8C0()
+void* Gtx::GetTiles()
 {
     return field_3C_tiles;
 }
 
 // 0x5AA900
-u16 Gtx::get_physical_palettes_len_5AA900()
+u16 Gtx::GetPhysicalPalettesLen()
 {
     return field_8_physical_palettes_len;
 }
 
 // 0x5AA910
-ObjectInfo* Gtx::get_map_object_info_5AA910(u16 idx)
+ObjectInfo* Gtx::GetMapObjectInfo(u16 idx)
 {
     if (idx >= field_6_map_object_info_len)
     {
@@ -325,13 +324,13 @@ ObjectInfo* Gtx::get_map_object_info_5AA910(u16 idx)
 }
 
 // 0x5AA930
-void Gtx::SetTileRemap_5AA930(u16 tile_idx, s16 tile_val)
+void Gtx::SetTileRemap(u16 tile_idx, s16 tile_val)
 {
     field_40_tile->field_0_tile_mapping[tile_idx] = tile_val;
 }
 
 // 0x5AA950
-void Gtx::InitTileMapping_5AA950()
+void Gtx::InitTileMapping()
 {
     field_40_tile = new TileArray();
 
@@ -351,7 +350,7 @@ void Gtx::InitTileMapping_5AA950()
 // Current WIP (lower score, but more runtime correct?):
 // https://decomp.me/scratch/CqJJm
 // 0x5AA9A0
-void Gtx::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
+void Gtx::BuildCarInfoContainer(u32 chunk_size)
 {
     auto* pCarInfoIter = reinterpret_cast<StyleCarInfo*>(field_58_car_info);
     u32 total_len = 0;
@@ -409,7 +408,7 @@ void Gtx::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
 }
 
 // 0x5AAB30
-void Gtx::load_delx_5AAB30(u32 delx_chunk_size)
+void Gtx::LoadDelx(u32 delx_chunk_size)
 {
     DeltaEntry* pIter = field_4C_delta_index;
     u32 off = 0;
@@ -452,7 +451,7 @@ void Gtx::load_delx_5AAB30(u32 delx_chunk_size)
 
 // https://decomp.me/scratch/vwSG1 TODO: fix this hack
 // 0x5AABF0
-void Gtx::SetDeltaDataPtrs_5AABF0()
+void Gtx::SetDeltaDataPtrs()
 {
 #if defined(GTA2_PORT_64BIT)
     // The walk below at sprite_deltas' real layout. It adds the store's address to each offset
@@ -485,7 +484,7 @@ void Gtx::SetDeltaDataPtrs_5AABF0()
 }
 
 // 0x5AAC40
-void Gtx::SetSpriteIndexDataPtrs_5AAC40()
+void Gtx::SetSpriteIndexDataPtrs()
 {
     u8* field_0_pData;
     SpriteIndex* pSpriteIndex;
@@ -590,7 +589,7 @@ void Gtx::SetSpriteIndexDataPtrs_5AAC40()
 */
 
 // 0x5AAC70
-void Gtx::build_delta_container_5AAC70()
+void Gtx::BuildDeltaContainer()
 {
     u32 off = 0;
     auto* pIter = static_cast<SpriteDeltas*>(field_50_delta_buffer);
@@ -639,71 +638,71 @@ void Gtx::build_delta_container_5AAC70()
 }
 
 // 0x5AAD50
-void Gtx::load_car_info_5AAD50(u32 cari_chunk_size)
+void Gtx::LoadCarInfo(u32 cari_chunk_size)
 {
     field_58_car_info = static_cast<StyleCarInfo**>(Memory::Malloc(cari_chunk_size));
-    File::Global_Read_4A71C0(reinterpret_cast<void*>(field_58_car_info), cari_chunk_size);
+    File::GlobalRead(reinterpret_cast<void*>(field_58_car_info), cari_chunk_size);
 
-    BuildCarInfoContainer_5AA9A0(cari_chunk_size);
+    BuildCarInfoContainer(cari_chunk_size);
 }
 
 // 0x5AAD80
-void Gtx::load_delta_index_5AAD80(u32 delx_chunk_size)
+void Gtx::LoadDeltaIndex(u32 delx_chunk_size)
 {
     this->field_4C_delta_index = static_cast<DeltaEntry*>(Memory::Malloc(delx_chunk_size));
-    File::Global_Read_4A71C0(field_4C_delta_index, delx_chunk_size);
+    File::GlobalRead(field_4C_delta_index, delx_chunk_size);
 
-    load_delx_5AAB30(delx_chunk_size);
-    build_delta_container_5AAC70();
+    LoadDelx(delx_chunk_size);
+    BuildDeltaContainer();
 
     ::free(this->field_4C_delta_index);
     this->field_4C_delta_index = nullptr;
 }
 
 // 0x5AADD0
-void Gtx::load_delta_store_5AADD0(u32 dels_chunk_size)
+void Gtx::LoadDeltaStore(u32 dels_chunk_size)
 {
     field_48_delta_store = static_cast<DeltaStoreEntry*>(Memory::Malloc(dels_chunk_size)); // todo: or new?
-    File::Global_Read_4A71C0(field_48_delta_store, dels_chunk_size);
+    File::GlobalRead(field_48_delta_store, dels_chunk_size);
 }
 
 // 0x5AADF0
-void Gtx::load_tiles_5AADF0(u32 tile_chunk_len)
+void Gtx::LoadTiles(u32 tile_chunk_len)
 {
     field_3C_tiles = static_cast<u8*>(Memory::AlignedMalloc(tile_chunk_len, &field_44_aligned_tiles_size));
-    File::Global_Read_4A71C0(field_3C_tiles, tile_chunk_len);
-    InitTileMapping_5AA950();
+    File::GlobalRead(field_3C_tiles, tile_chunk_len);
+    InitTileMapping();
 }
 
 // 0x5AAE20
-void Gtx::skip_ovly_5AAE20(u32 size)
+void Gtx::SkipOvly(u32 size)
 {
-    File::Global_Seek_4A7140(&size);
+    File::GlobalSeek(&size);
 }
 
 // 0x5AAE30
-void Gtx::skip_psxt_5AAE30(u32 size)
+void Gtx::SkipPsxt(u32 size)
 {
-    File::Global_Seek_4A7140(&size);
+    File::GlobalSeek(&size);
 }
 
 // 0x5AAE40
-void Gtx::load_sprite_graphics_5AAE40(u32 sprg_chunk_len)
+void Gtx::LoadSpriteGraphics(u32 sprg_chunk_len)
 {
     field_34_sprite_graphics = reinterpret_cast<BYTE*>(Memory::AlignedMalloc(sprg_chunk_len, &field_38_sprite_graphics_unaligned));
-    File::Global_Read_4A71C0(field_34_sprite_graphics, sprg_chunk_len);
+    File::GlobalRead(field_34_sprite_graphics, sprg_chunk_len);
 }
 
 // 0x5AAE70
-void Gtx::load_physical_palettes_5AAE70(u32 ppal_chunk_size)
+void Gtx::LoadPhysicalPalettes(u32 ppal_chunk_size)
 {
     field_2C_physical_palettes = Memory::AlignedMalloc(ppal_chunk_size, &field_30_physical_palettes_size);
-    File::Global_Read_4A71C0(field_2C_physical_palettes, ppal_chunk_size);
+    File::GlobalRead(field_2C_physical_palettes, ppal_chunk_size);
     field_8_physical_palettes_len = ppal_chunk_size >> 10;
 }
 
 // 0x5AAEA0
-void Gtx::load_palette_index_5AAEA0(u32 palx_chunk_len)
+void Gtx::LoadPaletteIndex(u32 palx_chunk_len)
 {
     if (palx_chunk_len != sizeof(PaletteIndex))
     {
@@ -716,14 +715,14 @@ void Gtx::load_palette_index_5AAEA0(u32 palx_chunk_len)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1159);
     }
 
-    File::Global_Read_4A71C0(field_28_palette_index, palx_chunk_len);
+    File::GlobalRead(field_28_palette_index, palx_chunk_len);
 }
 
 // 0x5AAF00
-void Gtx::load_map_object_info_5AAF00(u32 obji_chunk_len)
+void Gtx::LoadMapObjectInfo(u32 obji_chunk_len)
 {
     field_24_map_object_info = static_cast<ObjectInfo*>(Memory::Malloc(obji_chunk_len));
-    File::Global_Read_4A71C0(field_24_map_object_info, obji_chunk_len);
+    File::GlobalRead(field_24_map_object_info, obji_chunk_len);
     if (obji_chunk_len / 2 >= 0x10000)
     {
         FatalError_4A38C0(Gta2Error::kInvalidNewTileNumber, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1177, obji_chunk_len / 2);
@@ -737,7 +736,7 @@ void Gtx::load_map_object_info_5AAF00(u32 obji_chunk_len)
 }
 
 // 0x5AAF80
-void Gtx::load_sprite_index_5AAF80(u32 sprx_chunk_size)
+void Gtx::LoadSpriteIndex(u32 sprx_chunk_size)
 {
 #if defined(GTA2_PORT_64BIT)
     // The file's 8-byte entries hold a 4-byte offset where sprite_index has a pointer. Read them as
@@ -751,7 +750,7 @@ void Gtx::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     };
     const u32 entry_count = (sprx_chunk_size >> 3) + 1; // plus the spare last entry, as below
     auto* pFileEntries = static_cast<SpriteIndexFile*>(Memory::Malloc(sprx_chunk_size));
-    File::Global_Read_4A71C0(pFileEntries, sprx_chunk_size);
+    File::GlobalRead(pFileEntries, sprx_chunk_size);
     field_20_sprite_index = static_cast<SpriteIndex*>(Memory::Malloc(entry_count * sizeof(SpriteIndex)));
     memset(field_20_sprite_index, 0, entry_count * sizeof(SpriteIndex));
     for (u32 i = 0; i < entry_count - 1; i++)
@@ -764,7 +763,7 @@ void Gtx::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     ::free(pFileEntries);
 #else
     field_20_sprite_index = reinterpret_cast<SpriteIndex*>(Memory::Malloc(sprx_chunk_size + 8));
-    File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
+    File::GlobalRead(field_20_sprite_index, sprx_chunk_size);
 #endif
     if ((sprx_chunk_size & ~7U) > 524280)
     {
@@ -774,7 +773,7 @@ void Gtx::load_sprite_index_5AAF80(u32 sprx_chunk_size)
 }
 
 // 0x5AAFE0
-void Gtx::InitFontTypes_5AAFE0(u16 fontCount)
+void Gtx::InitFontTypes(u16 fontCount)
 {
     if (fontCount == 14)
     {
@@ -813,7 +812,7 @@ void Gtx::InitFontTypes_5AAFE0(u16 fontCount)
 }
 
 // 0x5AB0F0
-void Gtx::load_font_base_5AB0F0(u32 fonb_chunk_size)
+void Gtx::LoadFontBase(u32 fonb_chunk_size)
 {
     if (fonb_chunk_size < 2)
     {
@@ -821,7 +820,7 @@ void Gtx::load_font_base_5AB0F0(u32 fonb_chunk_size)
     }
 
     field_1C_font_base = static_cast<FontBase*>(Memory::Malloc(fonb_chunk_size));
-    File::Global_Read_4A71C0(field_1C_font_base, fonb_chunk_size);
+    File::GlobalRead(field_1C_font_base, fonb_chunk_size);
 
     u16 fountCount = field_1C_font_base->field_0_font_count;
     if (fonb_chunk_size != (fountCount * 2U) + 2)
@@ -829,15 +828,15 @@ void Gtx::load_font_base_5AB0F0(u32 fonb_chunk_size)
         FatalError_4A38C0(Gta2Error::kInvalidChunkSize, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1271, fonb_chunk_size);
     }
 
-    field_2_font_base_total = ConvertToVirtualOffsets_5AB1A0(field_1C_font_base->field_2_base, field_1C_font_base->field_0_font_count);
+    field_2_font_base_total = SumOffsets(field_1C_font_base->field_2_base, field_1C_font_base->field_0_font_count);
 
-    ConvertToVirtualOffsets_5AB1C0(field_1C_font_base->field_2_base, field_1C_font_base->field_0_font_count);
+    ConvertToVirtualOffsets(field_1C_font_base->field_2_base, field_1C_font_base->field_0_font_count);
 
-    InitFontTypes_5AAFE0(field_1C_font_base->field_0_font_count);
+    InitFontTypes(field_1C_font_base->field_0_font_count);
 }
 
 // 0x5AB1A0
-u16 Gtx::ConvertToVirtualOffsets_5AB1A0(u16* pOffsets, u32 offsetsCount)
+u16 Gtx::SumOffsets(u16* pOffsets, u32 offsetsCount)
 {
     u16 total = 0;
     while (offsetsCount > 0) // jbe vs jz due to missing > 0 and signed vs unsigned
@@ -853,7 +852,7 @@ u16 Gtx::ConvertToVirtualOffsets_5AB1A0(u16* pOffsets, u32 offsetsCount)
 }
 
 // 0x5AB1C0
-void Gtx::ConvertToVirtualOffsets_5AB1C0(u16* pBuffer, u32 len)
+void Gtx::ConvertToVirtualOffsets(u16* pBuffer, u32 len)
 {
     for (s32 i = len - 1; i > 0; i--)
     {
@@ -871,7 +870,7 @@ void Gtx::ConvertToVirtualOffsets_5AB1C0(u16* pBuffer, u32 len)
 }
 
 // 0x5AB210
-void Gtx::load_sprite_base_5AB210(u32 sprite_base_chunk_size)
+void Gtx::LoadSpriteBase(u32 sprite_base_chunk_size)
 {
     if (sprite_base_chunk_size != sizeof(SpriteBase))
     {
@@ -890,15 +889,15 @@ void Gtx::load_sprite_base_5AB210(u32 sprite_base_chunk_size)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1293);
     }
 
-    File::Global_Read_4A71C0(field_18_sprite_base1, sprite_base_chunk_size);
+    File::GlobalRead(field_18_sprite_base1, sprite_base_chunk_size);
 
     *field_14_sprite_base2 = *field_18_sprite_base1;
 
-    ConvertToVirtualOffsets_5AB1C0(&field_14_sprite_base2->field_0_car, 6);
+    ConvertToVirtualOffsets(&field_14_sprite_base2->field_0_car, 6);
 }
 
 // 0x5AB2C0
-void Gtx::load_palete_base_5AB2C0(u32 palette_base_chunk_len)
+void Gtx::LoadPaleteBase(u32 palette_base_chunk_len)
 {
     if (palette_base_chunk_len != sizeof(PaletteBase))
     {
@@ -917,16 +916,16 @@ void Gtx::load_palete_base_5AB2C0(u32 palette_base_chunk_len)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1315);
     }
 
-    File::Global_Read_4A71C0(field_10_palette_base1, palette_base_chunk_len);
+    File::GlobalRead(field_10_palette_base1, palette_base_chunk_len);
 
     *field_C_palette_base2 = *field_10_palette_base1;
 
-    field_0_totalPalBase = ConvertToVirtualOffsets_5AB1A0(&field_C_palette_base2->field_0_tile, 8);
-    ConvertToVirtualOffsets_5AB1C0(&field_C_palette_base2->field_0_tile, 8);
+    field_0_totalPalBase = SumOffsets(&field_C_palette_base2->field_0_tile, 8);
+    ConvertToVirtualOffsets(&field_C_palette_base2->field_0_tile, 8);
 }
 
 // 0x5AB380
-bool Gtx::IsCarModelInRecycleList_5AB380(u8 car_id)
+bool Gtx::IsCarModelInRecycleList(u8 car_id)
 {
     // Certain car models are in the recycle list only for certain stages/districts
     s32 i = 0;
@@ -945,158 +944,158 @@ bool Gtx::IsCarModelInRecycleList_5AB380(u8 car_id)
 }
 
 // 0x5AB3C0
-void Gtx::load_car_recycling_info_5AB3C0(u32 recy_chunk_size)
+void Gtx::LoadCarRecyclingInfo(u32 recy_chunk_size)
 {
     field_64_car_recycling_info = static_cast<u8*>(Memory::Malloc(recy_chunk_size));
     field_68_recy_chunk_size = recy_chunk_size;
-    File::Global_Read_4A71C0(field_64_car_recycling_info, recy_chunk_size);
+    File::GlobalRead(field_64_car_recycling_info, recy_chunk_size);
 }
 
 // 0x5AB3F0
-void Gtx::read_spec_5AB3F0(u32 value_to_set)
+void Gtx::ReadSpec(u32 value_to_set)
 {
     u16 index_to_set;
     u32 len = 2;
-    File::Global_Read_4A71C0(&index_to_set, len);
+    File::GlobalRead(&index_to_set, len);
     while (index_to_set)
     {
         this->field_6C_spec[index_to_set] = value_to_set;
         s32 len2 = 2;
-        File::Global_Read_4A71C0(&index_to_set, len2);
+        File::GlobalRead(&index_to_set, len2);
     }
 }
 
 // 0x5AB450
-void Gtx::load_spec_5AB450()
+void Gtx::LoadSpec()
 {
-    read_spec_5AB3F0(2);
-    read_spec_5AB3F0(3);
-    read_spec_5AB3F0(4);
-    read_spec_5AB3F0(5);
-    read_spec_5AB3F0(6);
-    read_spec_5AB3F0(7);
-    read_spec_5AB3F0(8);
-    read_spec_5AB3F0(9);
-    read_spec_5AB3F0(10);
+    ReadSpec(2);
+    ReadSpec(3);
+    ReadSpec(4);
+    ReadSpec(5);
+    ReadSpec(6);
+    ReadSpec(7);
+    ReadSpec(8);
+    ReadSpec(9);
+    ReadSpec(10);
 }
 
 // 0x5AB4B0
-void Gtx::LoadChunk_5AB4B0(const char_type* Str1, u32 chunk_len)
+void Gtx::LoadChunk(const char_type* Str1, u32 chunk_len)
 {
     if (!strncmp(Str1, "PALB", 4U))
     {
-        load_palete_base_5AB2C0(chunk_len);
+        LoadPaleteBase(chunk_len);
     }
     else if (!strncmp(Str1, "SPRB", 4U))
     {
-        load_sprite_base_5AB210(chunk_len);
+        LoadSpriteBase(chunk_len);
     }
     else if (!strncmp(Str1, "FONB", 4U))
     {
-        load_font_base_5AB0F0(chunk_len);
+        LoadFontBase(chunk_len);
     }
     else if (!strncmp(Str1, "SPRX", 4U))
     {
-        load_sprite_index_5AAF80(chunk_len);
+        LoadSpriteIndex(chunk_len);
     }
     else if (!strncmp(Str1, "OBJI", 4U))
     {
-        load_map_object_info_5AAF00(chunk_len);
+        LoadMapObjectInfo(chunk_len);
     }
     else if (!strncmp(Str1, "PALX", 4U))
     {
-        load_palette_index_5AAEA0(chunk_len);
+        LoadPaletteIndex(chunk_len);
     }
     else if (!strncmp(Str1, "PPAL", 4U))
     {
-        load_physical_palettes_5AAE70(chunk_len);
+        LoadPhysicalPalettes(chunk_len);
     }
     else if (!strncmp(Str1, "SPRG", 4U))
     {
-        load_sprite_graphics_5AAE40(chunk_len);
+        LoadSpriteGraphics(chunk_len);
     }
     else if (!strncmp(Str1, "TILE", 4U))
     {
-        load_tiles_5AADF0(chunk_len);
+        LoadTiles(chunk_len);
     }
     else if (!strncmp(Str1, "DELS", 4U))
     {
-        load_delta_store_5AADD0(chunk_len);
+        LoadDeltaStore(chunk_len);
     }
     else if (!strncmp(Str1, "DELX", 4U))
     {
-        load_delta_index_5AAD80(chunk_len);
+        LoadDeltaIndex(chunk_len);
     }
     else if (!strncmp(Str1, "CARI", 4U))
     {
-        load_car_info_5AAD50(chunk_len);
+        LoadCarInfo(chunk_len);
     }
     else if (!strncmp(Str1, "PSXT", 4U))
     {
-        skip_psxt_5AAE30(chunk_len);
+        SkipPsxt(chunk_len);
     }
     else if (!strncmp(Str1, "OVLY", 4U))
     {
-        skip_ovly_5AAE20(chunk_len);
+        SkipOvly(chunk_len);
     }
     else if (!strncmp(Str1, "SPEC", 4U))
     {
-        load_spec_5AB450();
+        LoadSpec();
     }
     else if (!strncmp(Str1, "RECY", 4U))
     {
-        load_car_recycling_info_5AB3C0(chunk_len);
+        LoadCarRecyclingInfo(chunk_len);
     }
     else
     {
-        File::Global_Seek_4A7140(&chunk_len);
+        File::GlobalSeek(&chunk_len);
     }
 }
 
 // 0x5AB720
-void Gtx::SetDataPtrs_5AB720()
+void Gtx::SetDataPtrs()
 {
     if (field_50_delta_buffer && field_48_delta_store)
     {
-        SetDeltaDataPtrs_5AABF0();
+        SetDeltaDataPtrs();
     }
 
     if (field_20_sprite_index && field_34_sprite_graphics)
     {
-        SetSpriteIndexDataPtrs_5AAC40();
+        SetSpriteIndexDataPtrs();
     }
 }
 
 // 0x5AB750
-void Gtx::LoadSty_5AB750(const char_type* pStyFileName)
+void Gtx::LoadSty(const char_type* pStyFileName)
 {
-    File::Global_Open_4A7060(pStyFileName);
+    File::GlobalOpen(pStyFileName);
 
     FileHeader styHeader;
     u32 len = sizeof(FileHeader);
-    File::Global_Read_4A71C0(styHeader.field_0_type, len);
+    File::GlobalRead(styHeader.field_0_type, len);
 
-    styHeader.verify_type("GBST");
-    styHeader.verify_version(700);
+    styHeader.VerifyType("GBST");
+    styHeader.VerifyVersion(700);
 
     ChunkHeader chunkHeader;
-    for (len = sizeof(ChunkHeader); File::Global_Read_4A7210(&chunkHeader, &len); len = sizeof(ChunkHeader))
+    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunkHeader, &len); len = sizeof(ChunkHeader))
     {
         if (chunkHeader.field_4_size != 0)
         {
-            LoadChunk_5AB4B0(chunkHeader.field_0_type, chunkHeader.field_4_size);
+            LoadChunk(chunkHeader.field_0_type, chunkHeader.field_4_size);
         }
     }
 
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 
-    SetDataPtrs_5AB720();
+    SetDataPtrs();
 }
 
 // 0x5AB820
 Gtx::Gtx()
 {
-    ResetSpecs_4C03D0();
+    ResetSpecs();
 
     field_64_car_recycling_info = nullptr;
     field_68_recy_chunk_size = 0;
@@ -1254,7 +1253,7 @@ Gtx::~Gtx()
 }
 
 // 0x5ABA00
-void SpriteDelta::Delta_5ABA00(u8* pArray)
+void SpriteDelta::Delta(u8* pArray)
 {
     // Inline asm in the original (lodsw, rep movsb). Each entry is a u16 offset from the end
     // of the previous run, a u8 length and that many bytes.
@@ -1277,7 +1276,7 @@ void SpriteDelta::Delta_5ABA00(u8* pArray)
 
 // https://decomp.me/scratch/Cc0Dx Not fully working
 // 0x5ABA40
-void SpriteDelta::Delta_5ABA40(u8* pArray, u32 width)
+void SpriteDelta::Delta(u8* pArray, u32 width)
 {
     // Inline asm in the original (lodsw / loop)
     // Each entry: u16 offset, u8 len, then len bytes written backwards from the end of the row
@@ -1307,16 +1306,16 @@ void SpriteDelta::Delta_5ABA40(u8* pArray, u32 width)
 }
 
 // 0x5abaa0
-void SpriteIndex::ClearPixelsOfColour_5ABAA0(u8 clear_target)
+void SpriteIndex::ClearPixelsOfColour(u8 clear_target)
 {
     for (s32 i = 0; i < field_5_height; i++)
     {
-        ClearPixelsOfColourInRow_5ABAE0(&this->field_0_pData[i * 256], this->field_4_width, clear_target);
+        ClearPixelsOfColourInRow(&this->field_0_pData[i * 256], this->field_4_width, clear_target);
     }
 }
 
 // 0x5ABAE0
-void ClearPixelsOfColourInRow_5ABAE0(u8* pData, int width, u8 clear_target)
+void ClearPixelsOfColourInRow(u8* pData, int width, u8 clear_target)
 {
     u8* pDataIter = pData;
     for (s32 i = 0; i < width; i++)
@@ -1330,7 +1329,7 @@ void ClearPixelsOfColourInRow_5ABAE0(u8* pData, int width, u8 clear_target)
 }
 
 // 0x5abb00
-void SpriteIndex::CopyPixels_5ABB00(u8* src)
+void SpriteIndex::CopyPixels(u8* src)
 {
     for (s32 ypos = 0; ypos < field_5_height; ypos++)
     {

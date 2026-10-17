@@ -466,35 +466,35 @@ INT_PTR Host(Network_20324* ui, const std::string& name, const std::u16string& w
             return 0;
         }
         s.field_2018C_map_idx = map;
-        gRegistry_6FF968.Set_Network_Setting_587730("map_index", map);
+        gRegistry_6FF968.SetNetworkSetting("map_index", map);
     }
     strcpy(s.field_20088_default_map, ui->field_4_maps[s.field_2018C_map_idx].field_410_mmp_name);
     if (o.gameType)
     {
         s.field_20198_game_type = o.gameType;
-        gRegistry_6FF968.Set_Network_Setting_587730("game_type", o.gameType);
-        s.field_20194_frag_limit = o.gameType == 1 ? gRegistry_6FF968.Set_Network_Setting_587690("f_limit", 3) :
-                                                     gRegistry_6FF968.Set_Network_Setting_587690("s_limit", 10000);
+        gRegistry_6FF968.SetNetworkSetting("game_type", o.gameType);
+        s.field_20194_frag_limit =
+            o.gameType == 1 ? gRegistry_6FF968.SetNetworkSetting("f_limit", 3) : gRegistry_6FF968.SetNetworkSetting("s_limit", 10000);
     }
     if (o.limit >= 0)
     {
         s.field_20194_frag_limit = o.limit;
-        gRegistry_6FF968.Set_Network_Setting_587730(s.field_20198_game_type == 1 ? "f_limit" : "s_limit", o.limit);
+        gRegistry_6FF968.SetNetworkSetting(s.field_20198_game_type == 1 ? "f_limit" : "s_limit", o.limit);
     }
     if (o.timeLimit >= 0)
     {
         s.field_201A4_game_time_limit = o.timeLimit;
-        gRegistry_6FF968.Set_Network_Setting_587730("game_time_limit", o.timeLimit);
+        gRegistry_6FF968.SetNetworkSetting("game_time_limit", o.timeLimit);
     }
     if (o.police >= 0)
     {
         s.field_201A0_police_on = o.police;
-        gRegistry_6FF968.Set_Network_Setting_587730("police", o.police);
+        gRegistry_6FF968.SetNetworkSetting("police", o.police);
     }
     if (o.speed >= 0)
     {
         s.field_20190_game_speed = o.speed;
-        gRegistry_6FF968.Set_Network_Setting_587730("game_speed", o.speed);
+        gRegistry_6FF968.SetNetworkSetting("game_speed", o.speed);
     }
 
     // The dialog's "Create" button (Network_20324::OnWmCommand_519FE0, 1002)

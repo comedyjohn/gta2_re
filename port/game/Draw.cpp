@@ -68,7 +68,7 @@ void DrawFigureScaled_5D7670(s32 sprite_type,
 // 0x5D7700
 s32 GetLineSpacingFromFontType_5D7700(u16 font_type)
 {
-    return static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type));
+    return static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing(&font_type));
 }
 
 // 0x5D7720
@@ -119,7 +119,7 @@ void ConvertColourBanks_5D7CC0()
 {
     if (gGtx_0x106C_703DD4 && gGtx_0x106C_703DD4->field_6A_palettes_converted == 0)
     {
-        s32 phys_pal_len = gGtx_0x106C_703DD4->get_physical_palettes_len_5AA900();
+        s32 phys_pal_len = gGtx_0x106C_703DD4->GetPhysicalPalettesLen();
         u32 max_idx = static_cast<u32>(phys_pal_len) / 64;
 
         if (phys_pal_len % 64 != 0)
@@ -128,7 +128,7 @@ void ConvertColourBanks_5D7CC0()
         }
         for (u32 i = 0; i < max_idx; i++)
         {
-            pConvertColourBank(gGtx_0x106C_703DD4->GetPalData_5AA6A0(i * 64));
+            pConvertColourBank(gGtx_0x106C_703DD4->GetPalData(i * 64));
         }
         gGtx_0x106C_703DD4->field_6A_palettes_converted = 1;
     }
@@ -173,8 +173,7 @@ void DrawFigure_5D7EC0(s32 sprite_type,
                        u8 og_flags,
                        char_type a11)
 {
-    SpriteIndex* sprite_index_5AA440 =
-        gGtx_0x106C_703DD4->get_sprite_index_5AA440(gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_idx));
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(gGtx_0x106C_703DD4->GetSpriteTrueIndex(sprite_type, sprite_idx));
     Fix16Point point;
 
     Fix16 half_w;
@@ -379,8 +378,8 @@ void DrawText_5D8A10(const wchar_t* pText,
     Fix16 sprite_h;
     Fix16 cur_xpos = xpos_fp;
 
-    Fix16 spaceWidth = scale_fp * gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);
-    Fix16 lineHeight = scale_fp * static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing_5AA800(&font_type));
+    Fix16 spaceWidth = scale_fp * gGtx_0x106C_703DD4->GetSpaceCharWidth(&font_type);
+    Fix16 lineHeight = scale_fp * static_cast<u16>(gGtx_0x106C_703DD4->GetLineSpacing(&font_type));
 
     u16 curr_palette = og_palette;
     s32 curr_palette_type = og_palette_type;
@@ -453,9 +452,9 @@ void DrawText_5D8A10(const wchar_t* pText,
             {
                 if (font_type < 0xC9 || font_type > 203)
                 {
-                    u16 sprt_relative_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont_5AA710(font_type, text_char - 33);
-                    u16 sprt_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kFont, sprt_relative_idx);
-                    pSprIdx = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprt_idx);
+                    u16 sprt_relative_idx = gGtx_0x106C_703DD4->GetSpriteIdxFromFont(font_type, text_char - 33);
+                    u16 sprt_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kFont, sprt_relative_idx);
+                    pSprIdx = gGtx_0x106C_703DD4->GetSpriteIndex(sprt_idx);
                     pTexture = gTextureCache_15D8_705064->GetSpriteTexture_5B94F0(SpriteTypes::kFont,
                                                                                   sprt_relative_idx,
                                                                                   curr_palette_type,

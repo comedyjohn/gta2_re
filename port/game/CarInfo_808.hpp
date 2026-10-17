@@ -20,11 +20,11 @@ struct PixelsToFix16Table
 
     PixelsToFix16Table()
     {
-        Init_4F79F0();
+        Init();
     }
 
     // 10.5 0x4F79F0
-    void Init_4F79F0()
+    void Init()
     {
         for (s32 i = 0; i < 256; i++)
         {
@@ -32,7 +32,7 @@ struct PixelsToFix16Table
         }
     }
 
-    Fix16 SignedPixelsToFix16_41FE70(const s8& var)
+    Fix16 SignedPixelsToFix16(const s8& var)
     {
         if (var < 0)
         {
@@ -71,12 +71,12 @@ class ModelPhysics
     Fix16 field_40_gear2_speed;
     Fix16 field_44_gear3_speed;
 
-    Fix16 get_anti_strngth()
+    Fix16 GetAntiStrngth()
     {
         return field_2C_anti_strngth;
     }
 
-    void ConvertMass_454680();
+    void ConvertMass();
 };
 
 class CarModelInfo
@@ -84,7 +84,7 @@ class CarModelInfo
   public:
     CarModelInfo();
     ~CarModelInfo() = default; // 0x4549B0
-    void CalculateCarInfo_4542A0(s32 idx);
+    void CalculateCarInfo(s32 idx);
 
     Fix16 field_0_moment_of_inertia;
     Fix16 field_4_front_wheel_offset;
@@ -101,27 +101,27 @@ class CarModelInfo
 class CarInfoTable
 {
   public:
-    ModelPhysics* GetModelPhysicsFromIdx_4546B0(u8 model_idx);
-    void LoadModelPhysics_4546D0();
-    CarModelInfo* GetInfoAtIdx_454840(u8 idx);
-    void CalculateAllCarInfo_454850();
-    void ConvertAllMass_4549C0();
-    void LoadFromGciFile_454A00(const char_type* pGciFilePath);
-    void Reload_454A50();
-    void Clear_454A80();
-    void Free_454AA0();
+    ModelPhysics* GetModelPhysicsFromIdx(u8 model_idx);
+    void LoadModelPhysics();
+    CarModelInfo* GetInfoAtIdx(u8 idx);
+    void CalculateAllCarInfo();
+    void ConvertAllMass();
+    void LoadFromGciFile(const char_type* pGciFilePath);
+    void Reload();
+    void Clear();
+    void Free();
     CarInfoTable();
     ~CarInfoTable();
 
-    static char* parse_gci_file_430A30(void* input, size_t input_size, ModelPhysics* output, size_t output_size, u32* next_position);
-    static char* SetErr_430AC0(s32 error_code);
-    static s32 ReadToken_430B10(char* pOut);
-    static s32 PushData_430E60(void* pSrc, u32 size);
-    static s32 HexStr2Int_430EC0(const char* pStr, s32* pOut);
-    static s32 HexStr2Int_430F30(const char* pStr, s16* pOut);
-    static s32 StrToInt_430FA0(const char* pStr, s32* pOut);
-    static s32 FloatStrToFix16_431000(char* pStr, Fix16& pOut);
-    static s32 StrToInt_431080(const char* pStr, s16* pOut);
+    static char* ParseGciFile(void* input, size_t input_size, ModelPhysics* output, size_t output_size, u32* next_position);
+    static char* SetErr(s32 error_code);
+    static s32 ReadToken(char* pOut);
+    static s32 PushData(void* pSrc, u32 size);
+    static s32 HexStr2Int(const char* pStr, s32* pOut);
+    static s32 HexStr2Int(const char* pStr, s16* pOut);
+    static s32 StrToInt(const char* pStr, s32* pOut);
+    static s32 FloatStrToFix16(char* pStr, Fix16& pOut);
+    static s32 StrToInt(const char* pStr, s16* pOut);
 
     CarModelInfo* field_0_ptr_array[256];
     CarModelInfo* field_400_raw_data;
@@ -131,4 +131,4 @@ class CarInfoTable
 
 EXTERN_GLOBAL(CarInfoTable*, gCarInfo_808_678098);
 
-s32 ParseTokenAndPush_430C70(char_type* a1);
+s32 ParseTokenAndPush(char_type* a1);

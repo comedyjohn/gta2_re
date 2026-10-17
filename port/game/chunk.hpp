@@ -9,7 +9,7 @@ struct ChunkBase
     char_type field_0_type[4];
 
     // inline 0x460EE0
-    void verify_type(const char_type* pExpected)
+    void VerifyType(const char_type* pExpected)
     {
         if (strncmp(pExpected, field_0_type, sizeof(field_0_type)) != 0)
         {
@@ -23,7 +23,7 @@ struct FileHeader : public ChunkBase
     u16 field_4_version;
 
     // inline 460EC0
-    void verify_version(u32 expectedVersion)
+    void VerifyVersion(u32 expectedVersion)
     {
         if (field_4_version != expectedVersion)
         {

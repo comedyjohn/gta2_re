@@ -4612,8 +4612,8 @@ void ObjectDefinition_74::SetDimensionsFromSprite_533090()
 {
     if (field_28_sprite_type != SpriteTypes::kObject)
     {
-        u16 sprite_id = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_28_sprite_type, field_1E_base_sprite_idx);
-        SpriteIndex* sprite = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_id);
+        u16 sprite_id = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_28_sprite_type, field_1E_base_sprite_idx);
+        SpriteIndex* sprite = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_id);
         field_0_width = Fix16(sprite->field_4_width) / 0x40;
         field_4_height = Fix16(sprite->field_5_height) / 0x40;
         field_8_depth = kFpQuarter_6FCED0;
@@ -4752,13 +4752,13 @@ void ObjectDefinitions_8CA8::CreateMapObjectDefinitions_533300()
 {
     s16 sprites = 0;
     u16 i = 0;
-    ObjectInfo* pIter = gGtx_0x106C_703DD4->get_map_object_info_5AA910(i++);
+    ObjectInfo* pIter = gGtx_0x106C_703DD4->GetMapObjectInfo(i++);
     while (pIter)
     {
         ObjectDefinition_74* pDefinition = AllocDefinitionWithSprite_5332D0(pIter->field_0_model, 5, sprites, pIter->field_1_sprites);
         sprites += pIter->field_1_sprites;
         pDefinition->SetDimensionsFromSprite_533090();
-        pIter = gGtx_0x106C_703DD4->get_map_object_info_5AA910(i++);
+        pIter = gGtx_0x106C_703DD4->GetMapObjectInfo(i++);
     }
 }
 
@@ -5388,9 +5388,9 @@ void ObjectDefinitions_8CA8::CacheDef112SpritePalette_5342D0()
 void ObjectDefinitions_8CA8::ClearColour1PixelsOfDefinitionSprite_5342F0(s32 idx)
 {
     ObjectDefinition_74* pDef = GetObjectDefinition_534360(idx);
-    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(4, pDef->field_1E_base_sprite_idx);
-    SpriteIndex* psprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
-    psprite_index->ClearPixelsOfColour_5ABAA0(1);
+    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(4, pDef->field_1E_base_sprite_idx);
+    SpriteIndex* psprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
+    psprite_index->ClearPixelsOfColour(1);
 }
 
 // 0x534330

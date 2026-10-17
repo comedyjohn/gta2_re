@@ -327,14 +327,14 @@ class Hud_Pager_C_Array
 
 inline u8 get_sprite_width_4C7220(s16 user_sprite_idx)
 {
-    s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, user_sprite_idx);
-    return gGtx_0x106C_703DD4->get_sprite_width_420220(sprite_idx);
+    s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, user_sprite_idx);
+    return gGtx_0x106C_703DD4->GetSpriteWidth(sprite_idx);
 }
 
 inline u8 get_sprite_height_4C7250(s16 user_sprite_idx)
 {
-    s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, user_sprite_idx);
-    return gGtx_0x106C_703DD4->get_sprite_height_4C6C90(sprite_idx);
+    s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, user_sprite_idx);
+    return gGtx_0x106C_703DD4->GetSpriteHeight(sprite_idx);
 }
 
 class Hud_BriefEntry_18

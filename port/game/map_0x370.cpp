@@ -872,13 +872,13 @@ DWORD Map_0x370::GetLeftEdgeSpec_4DFF60(Fix16 x_coord, Fix16 y_coord, Fix16 z_co
     gmp_block_info* pBlock1 = get_block_4DFE10((x_coord - kFpOne_6F6110).ToInt(), y_coord.ToInt(), z_coord.ToInt());
     if (pBlock1 && pBlock1->field_2_right != 0)
     {
-        return gGtx_0x106C_703DD4->sub_462FD0(get_tile_idx(pBlock1->field_2_right));
+        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock1->field_2_right));
     }
 
     gmp_block_info* pBlock2 = get_block_4DFE10(x_coord.ToInt(), y_coord.ToInt(), z_coord.ToInt());
     if (pBlock2 && pBlock2->field_0_left != 0)
     {
-        return gGtx_0x106C_703DD4->sub_462FD0(get_tile_idx(pBlock2->field_0_left));
+        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock2->field_0_left));
     }
 
     return 0;
@@ -890,14 +890,14 @@ s32 Map_0x370::GetTopEdgeSpec_4E0000(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
     gmp_block_info* block_4DFE10 = Map_0x370::get_block_4DFE10(x_pos.ToInt(), (y_pos - kFpOne_6F6110).ToInt(), z_pos.ToInt());
     if (block_4DFE10 && has_bottom(block_4DFE10))
     {
-        return gGtx_0x106C_703DD4->sub_462FD0(get_tile_idx(block_4DFE10->field_6_bottom));
+        return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(block_4DFE10->field_6_bottom));
     }
     else
     {
         gmp_block_info* pBlock = Map_0x370::get_block_4DFE10(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt());
         if (pBlock && has_top(pBlock))
         {
-            return gGtx_0x106C_703DD4->sub_462FD0(get_tile_idx(pBlock->field_4_top));
+            return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(pBlock->field_4_top));
         }
         else
         {
@@ -919,7 +919,7 @@ s32 Map_0x370::GetBlockSpec_4E00A0(Fix16 x, Fix16 y, Fix16 z)
                 u16 lid = pBlock->field_8_lid;
                 if (lid)
                 {
-                    return gGtx_0x106C_703DD4->sub_462FD0(get_tile_idx(lid));
+                    return gGtx_0x106C_703DD4->GetSpecWith3AsOne(get_tile_idx(lid));
                 }
             }
         }
@@ -2818,7 +2818,7 @@ char_type Map_0x370::sub_4E52A0(Fix16 x, Fix16 y, Fix16 z)
 
     if (gBlockInfo0_6F5EB0)
     {
-        if (gGtx_0x106C_703DD4->IsWaterTile_462FB0(get_tile_idx(gBlockInfo0_6F5EB0->field_8_lid)))
+        if (gGtx_0x106C_703DD4->IsWaterTile(get_tile_idx(gBlockInfo0_6F5EB0->field_8_lid)))
         {
             return 7;
         }
@@ -4603,7 +4603,7 @@ void Map_0x370::load_mobj_4E91A0(size_t len)
 {
     auto* pData = static_cast<gmp_map_object*>(Memory::Malloc(len));
     field_338_pMapObjects = pData;
-    File::Global_Read_4A71C0(pData, len);
+    File::GlobalRead(pData, len);
     field_344_map_object_count = len / 6;
     if (6 * field_344_map_object_count != len)
     {
@@ -4616,7 +4616,7 @@ void Map_0x370::load_lght_4E9200(size_t size)
 {
     auto* pData = static_cast<gmp_map_light*>(Memory::Malloc(size));
     field_33C_pLightData = pData;
-    File::Global_Read_4A71C0(pData, size);
+    File::GlobalRead(pData, size);
     field_348_num_lights = size >> 4;
     if (16 * field_348_num_lights != size)
     {
@@ -4629,7 +4629,7 @@ void Map_0x370::load_zone_4E9250(size_t size)
 {
     auto* pData = static_cast<gmp_map_zone*>(Memory::Malloc(size));
     field_328_pZoneData = pData;
-    File::Global_Read_4A71C0(pData, size);
+    File::GlobalRead(pData, size);
     build_zone_list_4E90E0(size);
 }
 
@@ -4638,7 +4638,7 @@ void Map_0x370::load_anim_4E9280(size_t size)
 {
     auto* pAlloc = static_cast<gmp_tile_animation*>(Memory::Malloc(size));
     field_340_pTileAnimData = pAlloc;
-    File::Global_Read_4A71C0(pAlloc, size);
+    File::GlobalRead(pAlloc, size);
     AddTileAnimations_4E9160(size);
 }
 
@@ -4651,8 +4651,8 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\map.cpp", 6147);
     }
 
-    File::Global_Read_4A71C0(&field_0_pDmap->field_0_base[0][0], 0x40000);
-    File::Global_Read_4A71C0(&field_0_pDmap->field_40000_column_words, sizeof(DWORD));
+    File::GlobalRead(&field_0_pDmap->field_0_base[0][0], 0x40000);
+    File::GlobalRead(&field_0_pDmap->field_40000_column_words, sizeof(DWORD));
 
     if ((field_0_pDmap->field_40000_column_words + 1024) > 0x20000U)
     {
@@ -4669,12 +4669,12 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
 
     field_0_pDmap->field_40008_pColumn = static_cast<gmp_column_word*>(Memory::Malloc(m_size));
 
-    File::Global_Read_4A71C0(field_0_pDmap->field_40008_pColumn, column_data_size);
+    File::GlobalRead(field_0_pDmap->field_40008_pColumn, column_data_size);
 
     field_358_column_words = field_0_pDmap->field_40000_column_words;
     field_360_column_words = field_358_column_words;
 
-    File::Global_Read_4A71C0(&field_0_pDmap->field_40004_num_blocks, 4);
+    File::GlobalRead(&field_0_pDmap->field_40004_num_blocks, 4);
 
     if ((field_0_pDmap->field_40004_num_blocks + 200) > 0x20000U)
     {
@@ -4690,7 +4690,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
 
     field_0_pDmap->field_4000C_block = static_cast<gmp_block_info*>(Memory::Malloc(m_size2));
 
-    File::Global_Read_4A71C0(field_0_pDmap->field_4000C_block, block_info_size);
+    File::GlobalRead(field_0_pDmap->field_4000C_block, block_info_size);
 
     field_34C_num_blocks = field_0_pDmap->field_40004_num_blocks;
     field_354_num_blocks = field_34C_num_blocks;
@@ -4736,7 +4736,7 @@ void Map_0x370::load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen)
     }
     else
     {
-        File::Global_Seek_4A7140(&chunkLen);
+        File::GlobalSeek(&chunkLen);
     }
 }
 
@@ -4750,14 +4750,14 @@ void Map_0x370::process_loaded_zone_data_4E95A0()
 void Map_0x370::LoadMap_4E95B0(const char_type* pGmpFileName)
 {
     gmp_header header;
-    File::Global_Open_4A7060(pGmpFileName);
+    File::GlobalOpen(pGmpFileName);
 
     u32 len = sizeof(gmp_header);
     ChunkHeader chunkHeader;
-    File::Global_Read_4A71C0(&header, len);
+    File::GlobalRead(&header, len);
 
     len = sizeof(ChunkHeader);
-    while (File::Global_Read_4A7210(&chunkHeader, &len))
+    while (File::GlobalRead(&chunkHeader, &len))
     {
         if (chunkHeader.field_4_size != 0)
         {
@@ -4765,7 +4765,7 @@ void Map_0x370::LoadMap_4E95B0(const char_type* pGmpFileName)
         }
         len = sizeof(ChunkHeader);
     }
-    File::Global_Close_4A70C0();
+    File::GlobalClose();
 
     process_loaded_zone_data_4E95A0();
 

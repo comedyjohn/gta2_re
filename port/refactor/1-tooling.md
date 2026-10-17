@@ -8,12 +8,12 @@ port.
 
 **Exit criteria**
 
-- [ ] `clang-format --dry-run -Werror` passes on `port/game/`, `port/platform/`, `port/tests/`; CI enforces it.
-- [ ] CI builds with the phase-1 warning set below and `-Werror`; 0 warnings.
-- [ ] `.clang-tidy` is checked in; CI runs the ratchet and fails on any new finding.
-- [ ] The scaffolding files below are gone; the 32 duplicate inline copies are merged.
-- [ ] `metrics.py` and the tidy baseline are the numbers quoted in [README.md](README.md).
-- [ ] Every commit of the phase is hash-neutral (phase 0).
+- [x] `clang-format --dry-run -Werror` passes on `port/game/`, `port/platform/`, `port/tests/`; CI enforces it.
+- [x] CI builds with the phase-1 warning set below and `-Werror`; 0 warnings (GCC 32/64, Clang 64; the sanitizer presets without `-Werror`).
+- [x] `.clang-tidy` is checked in; CI runs the ratchet and fails on any new finding.
+- [x] The scaffolding files below are gone; the 32 duplicate inline copies are merged.
+- [x] `metrics.py` and the tidy baseline are the numbers quoted in [README.md](README.md).
+- [x] Every commit of the phase is hash-neutral (phase 0).
 
 ## 1.1 Formatting
 

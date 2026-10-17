@@ -52,13 +52,13 @@ The phase files name further tools to write (`rename.py`, `address_map.py`, `tid
 | Tests | Unit tests for core and data; replay tests for the simulation; golden frames for presentation | `ctest` | 0 onwards |
 | Docs | Every public interface documented; architecture and style guides current | review | 8 |
 
-## Where it stands (2026-10-16)
+## Where it stands (2026-10-17, end of phase 1)
 
 From `metrics.py`, `clang-tidy` 18 and a `-fsyntax-only` pass with the strict warning set.
 
 | Measure | Now |
 |---|---|
-| Lines in `game/` | 160,700 in 265 files (137,400 `.cpp`, 23,300 headers) |
+| Lines in `game/` | 165,400 (about 4,700 more than before phase 1: the named casts, braces and anonymous-namespace blocks outweigh the 1,100 lines of duplicates removed) |
 | Functions | 3,574; 439 over 60 lines, 222 over 100, 120 over 150, 72 over 200 |
 | Largest functions | `ImGuiDebugDraw` 2,274 lines, `FatalError_4A07C0` 1,532, `CarAI_78::UpdateStateMachine_44E560` 1,114, `Char_B4::UpdateAnimState_546360` 964, `miss2_0x11C::PreExecOpCode_5108D0` 733 |
 | Largest files | `Ped.cpp` 12,128, `Car_BC.cpp` 7,973, `miss2_0x11C.cpp` 7,869, `sound_obj.cpp` 7,703, `char.cpp` 6,885 |
@@ -67,17 +67,17 @@ From `metrics.py`, `clang-tidy` 18 and a `-fsyntax-only` pass with the strict wa
 | Types named after their size (`Car_BC`, `Game_0x40`) | 223 of 449 classes and structs; 20 names collide once the size is dropped |
 | Global definitions | 1,684: 490 constants (`k...`), 450 raw data (`byte_`/`dword_`...), 474 objects and pointers (`g...`), 91 debug flags (`b...`), 179 other |
 | Pools | 24 instantiations of `Pool`/`PoolBasic`, intrusive free lists, raw pointers between objects |
-| `new` / `delete` / `malloc`-family | 179 / 73 / 50 |
-| `memcpy`/`memset`/`memmove` | 218 |
-| `sprintf`/`strcpy`/`strcat`/`swprintf`... | 686 (`swprintf` alone 149) |
+| `new` / `delete` / `malloc`-family | 179 / 72 / 44 |
+| `memcpy`/`memset`/`memmove` | 220 |
+| `sprintf`/`strcpy`/`strcat`/`swprintf`... | 687 (`swprintf` alone 149) |
 | `wchar_t` (2 bytes via `-fshort-wchar`) | 266 uses |
-| `goto` | 224 (147 in `Ped.cpp`) |
-| `union` | 28 |
-| Win32 references / files including `windows.h` | 415 / 34 (`fix16.hpp` among them) |
+| `goto` | 182 |
+| `union` | 29 |
+| Win32 references / files including `windows.h` | 416 / 32 (`fix16.hpp` among them) |
 | Struct-over-file reads (`Global_Read_4A71C0`) | 78 |
-| Duplicate inline/out-of-line copies kept for VC6 inlining (`*_inline_*`, `*_ool`) | 32 |
-| `TODO`/`FIXME` | 253 |
-| clang-tidy findings (bugprone, cert, cppcoreguidelines, misc, modernize, performance, readability) | 37,189 unique; the breakdown and the phase that clears each check are in [1-tooling.md](1-tooling.md) |
+| Duplicate inline/out-of-line copies kept for VC6 inlining (`*_inline_*`, `*_ool`) | 3 names left (R1.5) |
+| `TODO`/`FIXME` | 248 |
+| clang-tidy findings (bugprone, cert, cppcoreguidelines, misc, modernize, performance, readability) | 39,887 unique in 3,011 (file, check) rows (`tidy-baseline.csv`; the 37,189 of the first count was with fewer headers in scope); the breakdown and the phase that clears each check are in [1-tooling.md](1-tooling.md) |
 | Strict-warning findings (`-Wconversion -Wshadow -Wold-style-cast` ...) | 3,839; breakdown in [1-tooling.md](1-tooling.md) |
 | Files not matching `.clang-format` | 182 of 265 (about 10,100 lines would change) |
 | Tests | `--selftest` (renderer), `--audiotest`, `--simcheck` (maths tables), `tools/nettest.sh` (lockstep, no game data). **Nothing runs gameplay.** *Since phase 0 started: replay tests (`tools/replaytest.sh`, 3 replays so far) and unit tests (17 cases); see [0-safety-net.md](0-safety-net.md)* |

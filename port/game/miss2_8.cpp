@@ -1,5 +1,4 @@
 #include "miss2_8.hpp"
-#include "Globals.hpp"
 #include "ScriptStackFramePool_25C.hpp"
 
 // TODO: move

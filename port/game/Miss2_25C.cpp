@@ -1,7 +1,6 @@
 #include "Miss2_25C.hpp"
 #include "Car_BC.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"

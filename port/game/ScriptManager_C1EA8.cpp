@@ -4,7 +4,6 @@
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Generators.hpp"
-#include "Globals.hpp"
 #include "Miss2_25C.hpp"
 #include "Object_5C.hpp"
 #include "Player.hpp"

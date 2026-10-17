@@ -14,7 +14,6 @@
 #include "Gang.hpp"
 #include "Garage_48.hpp"
 #include "Generators.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Light_1D4CC.hpp"
 #include "MapRenderer.hpp"

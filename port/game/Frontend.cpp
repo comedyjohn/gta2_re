@@ -35,8 +35,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Start_GTA2Manager_5E4DE0();
-
 DEFINE_GLOBAL(Frontend*, gFrontend_67DC84, 0x67DC84);
 DEFINE_GLOBAL_INIT(u32, counter_706C4C, 0, 0x706C4C);
 DEFINE_GLOBAL_INIT(Fix16, dword_67D930, Fix16(0, 0), 0x67D930);

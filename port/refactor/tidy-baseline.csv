@@ -610,7 +610,6 @@ port/game/Frontend.cpp,readability-function-size,5
 port/game/Frontend.cpp,readability-implicit-bool-conversion,213
 port/game/Frontend.cpp,readability-make-member-function-const,5
 port/game/Frontend.cpp,readability-non-const-parameter,2
-port/game/Frontend.cpp,readability-redundant-declaration,1
 port/game/Frontend.cpp,readability-simplify-boolean-expr,6
 port/game/Frontend.hpp,cppcoreguidelines-avoid-c-arrays,22
 port/game/Frontend.hpp,cppcoreguidelines-avoid-non-const-global-variables,31

@@ -98,9 +98,9 @@ class Mike_A80
         // right is 630 - fx + 1 rather than left + 1: VC6 keeps fx on the x87 stack for the second
         // use, then CSEs the whole (630 - fx) and pops the dead fx
         f32 fx = x;
-        f32 left = 630.0f - fx;
-        f32 right = 630.0f - fx + 1.0f;
-        sDrawFlatRect_4FF1C0(left, 478.0f - (value * 4), right, 478.0f, colour);
+        f32 left = 630.0F - fx;
+        f32 right = 630.0F - fx + 1.0F;
+        sDrawFlatRect_4FF1C0(left, 478.0F - (value * 4), right, 478.0F, colour);
     }
 
     Mike_8 m81;

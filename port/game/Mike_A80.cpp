@@ -25,16 +25,16 @@ s32 Mike_A80::sDrawFlatRect_4FF1C0(f32 left, f32 top, f32 right, f32 bottom, s32
     Vert verts[4];
     verts[0].x = left;
     verts[0].y = top;
-    verts[0].z = 0.0f;
+    verts[0].z = 0.0F;
     verts[1].x = right;
     verts[1].y = top;
-    verts[1].z = 0.0f;
+    verts[1].z = 0.0F;
     verts[2].x = right;
     verts[2].y = bottom;
-    verts[2].z = 0.0f;
+    verts[2].z = 0.0F;
     verts[3].x = left;
     verts[3].y = bottom;
-    verts[3].z = 0.0f;
+    verts[3].z = 0.0F;
     return pgbh_DrawFlatRect(verts, colour);
 }
 

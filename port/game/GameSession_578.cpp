@@ -335,7 +335,7 @@ char_type GameSession_578::GetWinnerIdx_4C5C20()
 // 0x4C5C30
 void GameSession_578::SetPlayerName_4C5C30(u16 player_idx, wchar_t* pName)
 {
-    wcsncpy(field_4B4_player_names[player_idx].field_0_name, pName, 16u);
+    wcsncpy(field_4B4_player_names[player_idx].field_0_name, pName, 16U);
 }
 
 // 0x4C5C60

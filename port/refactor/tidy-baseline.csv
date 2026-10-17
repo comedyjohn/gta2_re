@@ -83,7 +83,6 @@ port/game/Camera.cpp,misc-include-cleaner,9
 port/game/Camera.cpp,readability-else-after-return,3
 port/game/Camera.cpp,readability-implicit-bool-conversion,85
 port/game/Camera.cpp,readability-make-member-function-const,6
-port/game/Camera.cpp,readability-uppercase-literal-suffix,2
 port/game/Camera.hpp,cppcoreguidelines-avoid-non-const-global-variables,6
 port/game/Camera.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Camera.hpp,misc-const-correctness,4
@@ -679,7 +678,6 @@ port/game/GameSession_578.cpp,cppcoreguidelines-pro-type-vararg,4
 port/game/GameSession_578.cpp,misc-include-cleaner,14
 port/game/GameSession_578.cpp,modernize-avoid-c-arrays,3
 port/game/GameSession_578.cpp,readability-make-member-function-const,14
-port/game/GameSession_578.cpp,readability-uppercase-literal-suffix,1
 port/game/GameSession_578.hpp,cppcoreguidelines-avoid-c-arrays,11
 port/game/GameSession_578.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/GameSession_578.hpp,misc-non-private-member-variables-in-classes,25
@@ -714,7 +712,6 @@ port/game/Game_0x40.cpp,readability-function-size,1
 port/game/Game_0x40.cpp,readability-implicit-bool-conversion,72
 port/game/Game_0x40.cpp,readability-make-member-function-const,5
 port/game/Game_0x40.cpp,readability-simplify-boolean-expr,5
-port/game/Game_0x40.cpp,readability-uppercase-literal-suffix,2
 port/game/Game_0x40.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Game_0x40.hpp,cppcoreguidelines-avoid-non-const-global-variables,4
 port/game/Game_0x40.hpp,cppcoreguidelines-pro-bounds-constant-array-index,1
@@ -900,7 +897,6 @@ port/game/InputRecorder_67F8B0.cpp,readability-make-member-function-const,2
 port/game/InputRecorder_67F8B0.cpp,readability-non-const-parameter,1
 port/game/InputRecorder_67F8B0.cpp,readability-redundant-casting,2
 port/game/InputRecorder_67F8B0.cpp,readability-simplify-boolean-expr,2
-port/game/InputRecorder_67F8B0.cpp,readability-uppercase-literal-suffix,10
 port/game/InputRecorder_67F8B0.hpp,cppcoreguidelines-avoid-c-arrays,14
 port/game/InputRecorder_67F8B0.hpp,cppcoreguidelines-avoid-non-const-global-variables,5
 port/game/InputRecorder_67F8B0.hpp,cppcoreguidelines-pro-bounds-constant-array-index,2
@@ -1016,7 +1012,6 @@ port/game/Mike_A80.cpp,misc-include-cleaner,12
 port/game/Mike_A80.cpp,modernize-avoid-c-arrays,6
 port/game/Mike_A80.cpp,readability-convert-member-functions-to-static,2
 port/game/Mike_A80.cpp,readability-implicit-bool-conversion,6
-port/game/Mike_A80.cpp,readability-uppercase-literal-suffix,4
 port/game/Mike_A80.hpp,bugprone-narrowing-conversions,2
 port/game/Mike_A80.hpp,cppcoreguidelines-avoid-c-arrays,6
 port/game/Mike_A80.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -1429,7 +1424,6 @@ port/game/Player.cpp,readability-function-size,2
 port/game/Player.cpp,readability-implicit-bool-conversion,174
 port/game/Player.cpp,readability-make-member-function-const,6
 port/game/Player.cpp,readability-simplify-boolean-expr,1
-port/game/Player.cpp,readability-uppercase-literal-suffix,6
 port/game/Player.hpp,bugprone-assignment-in-if-condition,1
 port/game/Player.hpp,cppcoreguidelines-avoid-c-arrays,5
 port/game/Player.hpp,cppcoreguidelines-init-variables,3
@@ -1473,7 +1467,6 @@ port/game/PlayerScoreTracker_36C.cpp,readability-function-cognitive-complexity,2
 port/game/PlayerScoreTracker_36C.cpp,readability-function-size,2
 port/game/PlayerScoreTracker_36C.cpp,readability-implicit-bool-conversion,36
 port/game/PlayerScoreTracker_36C.cpp,readability-make-member-function-const,7
-port/game/PlayerScoreTracker_36C.cpp,readability-uppercase-literal-suffix,4
 port/game/PlayerScoreTracker_36C.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/PlayerScoreTracker_36C.hpp,misc-non-private-member-variables-in-classes,22
 port/game/PlayerScoreTracker_36C.hpp,modernize-avoid-c-arrays,1

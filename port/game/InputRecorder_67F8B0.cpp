@@ -1215,11 +1215,11 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
                 {
                     // port: the keyboard's controls (those still held: unpausing or a menu clears them), then
                     // the pad's on top, and its analog state recorded after the control bits
-                    *control_status = (*control_status & ~0xFFFu) | (gPortKeyboardBits & *control_status);
+                    *control_status = (*control_status & ~0xFFFU) | (gPortKeyboardBits & *control_status);
                     gInputDevices_67B990->read_input_device_498DA0(reinterpret_cast<s32*>(control_status), 1);
                     gPortKeyboardBits = *control_status & 0xFFF;
                     const PortPadFrame pad = port_input_read();
-                    *control_status = pad.captured ? (*control_status & ~0xFFFu) : (*control_status | pad.bits);
+                    *control_status = pad.captured ? (*control_status & ~0xFFFU) : (*control_status | pad.bits);
                     const u32 records = field_75340_rec_buf_idx;
                     InputRecorder_67F8B0::save_replay_inputs_4CED00(*control_status, saved_input);
                     RecordPad(*this, pad, field_75340_rec_buf_idx != records);
@@ -1261,33 +1261,33 @@ void InputRecorder_67F8B0::save_replay_inputs_4CED00(s32 input_old, s32 input_ne
 
         if ((xor_inputs & 1) != 0)
         {
-            calc_inputs |= 1u;
+            calc_inputs |= 1U;
         }
         if ((xor_inputs & 2) != 0)
         {
-            calc_inputs |= 2u;
+            calc_inputs |= 2U;
         }
         if ((xor_inputs & 4) != 0)
         {
-            calc_inputs |= 4u;
+            calc_inputs |= 4U;
         }
         if ((xor_inputs & 8) != 0)
         {
-            calc_inputs |= 8u;
+            calc_inputs |= 8U;
         }
         if ((xor_inputs & 0x10) != 0)
         {
-            calc_inputs |= 0x10u;
+            calc_inputs |= 0x10U;
         }
         if ((xor_inputs & 0x20) != 0)
         {
-            calc_inputs |= 0x20u;
+            calc_inputs |= 0x20U;
         }
         if ((xor_inputs & 0x40) != 0)
         {
-            calc_inputs |= 0x40u;
+            calc_inputs |= 0x40U;
         }
-        if ((xor_inputs & 0x80u) != 0)
+        if ((xor_inputs & 0x80U) != 0)
         {
             calc_inputs |= 0x80;
         }

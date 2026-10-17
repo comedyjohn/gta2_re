@@ -95,7 +95,7 @@ void PlayerScoreTracker_36C::Service_591C70()
         field_368_player->field_644_crime_stats.AddEvasionRating_484FB0(player_ped->get_wanted_star_count_46EF00());
     }
 
-    if (field_7C_execution_count >= 20u)
+    if (field_7C_execution_count >= 20U)
     {
         field_7C_execution_count = 0;
         field_368_player->AddScore_41DC40(100000);
@@ -108,7 +108,7 @@ void PlayerScoreTracker_36C::Service_591C70()
         }
     }
 
-    if (field_84_num_elvis_killed >= 6u)
+    if (field_84_num_elvis_killed >= 6U)
     {
         field_84_num_elvis_killed = 0;
         field_368_player->AddScore_41DC40(30000);
@@ -144,7 +144,7 @@ void PlayerScoreTracker_36C::Service_591C70()
         }
     }
 
-    if (field_88_killed_cops >= 20u)
+    if (field_88_killed_cops >= 20U)
     {
         field_88_killed_cops = 0;
         field_368_player->AddScore_41DC40(5000);
@@ -910,7 +910,7 @@ void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pK
     }
 
     field_70_last_car_kill_time = cur_rng;
-    if (field_74_car_kill_combo < 5u)
+    if (field_74_car_kill_combo < 5U)
     {
         field_74_car_kill_combo++;
     }

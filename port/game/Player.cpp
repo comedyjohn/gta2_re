@@ -1374,7 +1374,7 @@ void Player::HandleControls_5668D0(Ped* pPed)
         {
             if (pPed->get_objective_403A80() != objectives_enum::leave_car_36)
             {
-                Car_BC* pCar = gCarManager_6C_677930->GetNearestFrontVehicle_445210(pPed->field_168_game_object->field_80_sprite_ptr, 3u);
+                Car_BC* pCar = gCarManager_6C_677930->GetNearestFrontVehicle_445210(pPed->field_168_game_object->field_80_sprite_ptr, 3U);
                 if (pCar)
                 {
                     pPed->SetObjective2_463830(objectives_enum::no_obj_0);
@@ -1691,7 +1691,7 @@ void Player::RespawnPlayer_5670B0()
         gmp_map_zone* pZone;
         if (IsNetworkGame_434B10())
         {
-            pZone = gMap_0x370_6F6268->zone_by_type_bounded_4DF0F0(0x10u);
+            pZone = gMap_0x370_6F6268->zone_by_type_bounded_4DF0F0(0x10U);
         }
         else
         {
@@ -2023,7 +2023,7 @@ void Player::Service_5687F0()
     const bool bNowSpecial_1_Pressed = this->field_81_now_special_1_pressed;
     const bool bWasSpecial_1_Pressed = this->field_84_was_special_1_pressed;
 
-    if (field_680_traffic_spawn_counter < 100u)
+    if (field_680_traffic_spawn_counter < 100U)
     {
         this->field_680_traffic_spawn_counter++;
     }
@@ -2741,7 +2741,7 @@ void Player::RestoreCarsFromSave_56A0F0()
             pNewCar->SetDamage_4A51B0(gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_2A_damage[i]);
         }
     }
-    memset(static_cast<void*>(&gGameSave_6F78C8.field_E4_car_and_script_data.field_0), 0, 68u);
+    memset(static_cast<void*>(&gGameSave_6F78C8.field_E4_car_and_script_data.field_0), 0, 68U);
 }
 
 // 0x56A1A0
@@ -2871,7 +2871,7 @@ void Player::ApplyCheats_56A490()
     if (byte_67D56B)
     {
         Player::CollectPowerUp_564D60(power_up_indices::JailCard_4);
-        Player::AddWeaponWithAmmo_564960(1, 50u);
+        Player::AddWeaponWithAmmo_564960(1, 50U);
         for (Gang_144* pIter2 = gGangPool_CA8_67E274->FirstGang_4BECA0(); pIter2; pIter2 = gGangPool_CA8_67E274->NextGang_4BECE0())
         {
             pIter2->SetRespect_4BEE30(field_2E_idx, 80);
@@ -2963,7 +2963,7 @@ Player::Player(u8 player_idx)
     field_2C_death_countdown = 0;
     field_4C_sound_obj = nullptr;
     field_2E_idx = player_idx;
-    field_2D4_scores.Init_5922F0(this, 2, 999999999, 158, 999u);
+    field_2D4_scores.Init_5922F0(this, 2, 999999999, 158, 999U);
     field_684_lives.SetupDigitsParams_492110(1, 99, 115);
     field_6BC_multipliers.SetupDigitsParams_492110(1, 99, 116);
     Player::ClearPowerUps_564CC0();

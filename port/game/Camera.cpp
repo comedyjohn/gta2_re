@@ -326,7 +326,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
             if (this->field_44_suspicion)
             {
                 Fix16 suspicion;
-                if (this->field_44_suspicion > 64u)
+                if (this->field_44_suspicion > 64U)
                 {
                     suspicion = dword_6768E4;
                 }
@@ -476,7 +476,7 @@ void Camera_0xBC::AccumulateSuspicionOnDriver_435F90(Car_BC* pCar)
          gCarChaseTaskTable_678E30->HasAnyPursuer_474970(pCar->field_54_driver)))
     {
         field_44_suspicion++;
-        if (field_44_suspicion > 80u)
+        if (field_44_suspicion > 80U)
         {
             field_44_suspicion = 80;
         }

@@ -449,7 +449,7 @@ void Game_0x40::UpdateAllPlayersControls_4B9380()
 // 0x5D9970
 static void SetGamma_5D9970() // TODO Function chunk of 0x4AEC00, 0x4B93C0 and 0x4B9410 - probably move elsewhere
 {
-    const s32 gamma = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 10u);
+    const s32 gamma = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 10U);
     if (counter_706C4C)
     {
         if (SetGamma_5D9910(gamma))
@@ -646,7 +646,7 @@ void Game_0x40::Unpause_4B96C0()
         {
             pPlayer->DisableInputs_569F40();
             field_38_local_player->ClearInputs_56A6D0();
-            gInputRecorder_67F8B0.field_4_input_bits &= ~0xFFFu;
+            gInputRecorder_67F8B0.field_4_input_bits &= ~0xFFFU;
         }
     }
 }

@@ -951,7 +951,7 @@ Car_BC* CarManager_6C::GetNearestFrontVehicle_445210(Sprite* pSprite, u8 k3)
     pSprite->set_xyz_lazy_420600(pSprite->field_14_xy.x + new_x, pSprite->field_14_xy.y + new_y, pSprite->field_1C_zpos);
 
     Sprite* pNearest =
-        gSpriteGrid_1_679208->FindNearestSprite_SpiralSearch_477C90(sprite_types_enum::car_2, sprite_types_enum::car_2, pSprite, k3, 3, 1u);
+        gSpriteGrid_1_679208->FindNearestSprite_SpiralSearch_477C90(sprite_types_enum::car_2, sprite_types_enum::car_2, pSprite, k3, 3, 1U);
 
     pSprite->set_xyz_lazy_420600(oldx, oldy, oldz);
 
@@ -1428,7 +1428,7 @@ Car_BC* CarManager_6C::SpawnCarAt_446230(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
     else if (pCar->IsFireTruck_4118F0())
     {
         pCar->PutWaterCannonOnRoof_440AC0();
-        gWeapon_8_707018->allocate_5E3D50(20, 50u, pCar);
+        gWeapon_8_707018->allocate_5E3D50(20, 50U, pCar);
 
         // shared flag set
         pCar->AddFlags_421890(car_flag::Jammed);
@@ -1441,12 +1441,12 @@ Car_BC* CarManager_6C::SpawnCarAt_446230(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
         pCar->SetBulletproof_4218C0();
         pCar->SetFlameproof_4218D0();
         pCar->SetFlag3_4218A0();
-        gWeapon_8_707018->allocate_5E3D50(19, 20u, pCar);
+        gWeapon_8_707018->allocate_5E3D50(19, 20U, pCar);
     }
     else if (pCar->IsGunJeep_411910())
     {
         pCar->PutMachineGunOnRoof_440B60();
-        gWeapon_8_707018->allocate_5E3D50(22, 20u, pCar);
+        gWeapon_8_707018->allocate_5E3D50(22, 20U, pCar);
     }
     else if (pCar->IsTvVan_4217E0())
     {
@@ -2991,7 +2991,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos
     {
         switch (static_cast<u8>(fire_size))
         {
-            case 1u: // small fire
+            case 1U: // small fire
                 y_hit = Get_rear_window_offset(pCarInfo);
                 if (gCarManager_6C_677930->field_1A_fire_effect_cycle && gCarManager_6C_677930->field_1A_fire_effect_cycle != 2)
                 {
@@ -3003,7 +3003,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos
                 }
                 break;
 
-            case 2u: // huge fire
+            case 2U: // huge fire
                 x_hit = -(Get_half_width(pCarInfo));
                 if (gCarManager_6C_677930->field_1A_fire_effect_cycle && gCarManager_6C_677930->field_1A_fire_effect_cycle != 3)
                 {
@@ -3015,7 +3015,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos
                 }
                 break;
 
-            case 3u: // also a big fire but never used?
+            case 3U: // also a big fire but never used?
                 y_hit = Get_front_window_offset(pCarInfo);
                 if (gCarManager_6C_677930->field_1A_fire_effect_cycle && gCarManager_6C_677930->field_1A_fire_effect_cycle != 2)
                 {
@@ -3051,7 +3051,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos
     if (pExplosion)
     {
         field_50_car_sprite->DispatchCollisionEvent_5A3100(pExplosion->field_4, x_hit, y_hit, kAngZero_67791C);
-        if (++gCarManager_6C_677930->field_1A_fire_effect_cycle > 3u)
+        if (++gCarManager_6C_677930->field_1A_fire_effect_cycle > 3U)
         {
             gCarManager_6C_677930->field_1A_fire_effect_cycle = 0;
         }
@@ -3871,7 +3871,7 @@ void Car_BC::HandleCarExplosion_43D840(s32 type)
                     if (zone_idx != -1)
                     {
                         pZone = gGangPool_CA8_67E274->GangByIdx_4BF1C0(zone_idx);
-                        pZone->ApplyKillRespectChange_4BEF70(pExploder->field_15C_player->get_idx_4219D0(), 1u);
+                        pZone->ApplyKillRespectChange_4BEF70(pExploder->field_15C_player->get_idx_4219D0(), 1U);
                     }
                     if (pExploder->is_player_41B0A0())
                     {
@@ -4077,7 +4077,7 @@ void Car_BC::DestroyWhileSinking_43DD60()
                     if (gang_idx != -1)
                     {
                         pGang = gGangPool_CA8_67E274->GangByIdx_4BF1C0(gang_idx);
-                        pGang->ApplyKillRespectChange_4BEF70(pPed->field_15C_player->get_idx_4219D0(), 1u);
+                        pGang->ApplyKillRespectChange_4BEF70(pPed->field_15C_player->get_idx_4219D0(), 1U);
                     }
                     if (pPed->is_player_41B0A0())
                     {
@@ -4473,7 +4473,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
 // 0x440510
 Fix16 Car_BC::GetMaxTurnRate_440510()
 {
-    if (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->h <= 64u)
+    if (gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->h <= 64U)
     {
         return k_dword_6778B4 * GetCarLinearSpeed_43A240();
     }
@@ -5199,7 +5199,7 @@ void Car_BC::HonkHorn_4417F0()
 // 0x441800
 void Car_BC::HandleSpecialInput_441800(char_type now_special_pressed)
 {
-    if (HasEmergencyLights_414F20() && !now_special_pressed && field_A7_horn > 248u)
+    if (HasEmergencyLights_414F20() && !now_special_pressed && field_A7_horn > 248U)
     {
         SyncEmergencyLightState_43CA80(); // on/off depending on field_A4_light_flags flags
     }
@@ -5415,7 +5415,7 @@ void Car_BC::UpdateRoofLightFlasher_441B50()
 // 0x441c00
 void Car_BC::UpdatePopupHeadlights_441C00()
 {
-    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3u))
+    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3U))
     {
         if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor1_11))
         {
@@ -5464,7 +5464,7 @@ void Car_BC::UpdatePopupHeadlights_441C00()
 // 0x441d40
 void Car_BC::UpdateFbiPopupSiren_441D40()
 {
-    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3u))
+    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3U))
     {
         if (this->field_A4_bf.bEmergencyLights)
         {
@@ -5969,7 +5969,7 @@ void Car_BC::TryHitchTrailer_442810()
             else
             {
                 //LABEL_28:
-                this->field_78_flags &= ~1u;
+                this->field_78_flags &= ~1U;
             }
         }
     }
@@ -6254,7 +6254,7 @@ char_type Car_BC::PoolUpdate()
             if (field_54_driver)
             {
                 if (field_9C_engine_status == car_engine_status::on_3 && !field_4_passengers_list.field_0_pFirstPed &&
-                    field_8C_damage_level < 3u)
+                    field_8C_damage_level < 3U)
                 {
                     gTaxi_4_704130->PushTaxi_457BA0(this);
                 }
@@ -6485,7 +6485,7 @@ void Car_BC::BuyCarWeapon_4438C0(s32 weapon_kind)
             }
 
             pPlayer->field_2D4_scores.AddCash_592620(-car_weapon_cost);
-            if (gWeapon_8_707018->get_max_ammo_capacity_5E3E70(weapon_kind) < 10u)
+            if (gWeapon_8_707018->get_max_ammo_capacity_5E3E70(weapon_kind) < 10U)
             {
                 ammo_capacity = gWeapon_8_707018->get_max_ammo_capacity_5E3E70(weapon_kind);
             }
@@ -7634,8 +7634,8 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     s32 car_model;
                     u16 car_kind;
                     u8 rng_val;
-                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.get_int_4F7AE0(40)) <= 20u ||
-                        rng_val >= 30u)
+                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.get_int_4F7AE0(40)) <= 20U ||
+                        rng_val >= 30U)
                     {
                         car_model =
                             gCarManager_6C_677930->SelectTrafficCarModel_444AB0(field_C_player, field_10_zone, dword_6FF7E8, &car_kind);
@@ -7823,13 +7823,13 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     Fix16 spawn_y;
                     if (speed_kind == 2)
                     {
-                        if (static_cast<u8>(DAT_006FF8C4) > 2u)
+                        if (static_cast<u8>(DAT_006FF8C4) > 2U)
                         {
                             spawn_x = back_x;
                             spawn_y = back_y;
                             ResolveSpawnDirection_583930(2, road_len);
                         }
-                        else if (static_cast<u8>(DAT_006FF8C4) > 0u)
+                        else if (static_cast<u8>(DAT_006FF8C4) > 0U)
                         {
                             spawn_x = mid_x;
                             spawn_y = mid_y;
@@ -7844,7 +7844,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     }
                     else if (speed_kind == 1)
                     {
-                        if (static_cast<u8>(DAT_006FF8C4) > 1u)
+                        if (static_cast<u8>(DAT_006FF8C4) > 1U)
                         {
                             spawn_x = mid_x;
                             spawn_y = mid_y;
@@ -7879,7 +7879,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                         spawn_chance = gRng_6F6784.get_uint8_4F7B70(100);
                     }
 
-                    if ((speed_kind == 2 && spawn_chance < 33u) || (speed_kind == 1 && spawn_chance < 67u) || speed_kind == 0)
+                    if ((speed_kind == 2 && spawn_chance < 33U) || (speed_kind == 1 && spawn_chance < 67U) || speed_kind == 0)
                     {
                         if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(field_4_rect, 0, 0, nullptr) &&
                             !field_4_rect->CanRectEnterMovementRegion_59DE80() && !field_4_rect->RectOverlapsZone_59DF20(2))

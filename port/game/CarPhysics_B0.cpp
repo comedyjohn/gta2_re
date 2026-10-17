@@ -3639,7 +3639,7 @@ char_type CarPhysics_B0::UpdateLastMovementTimer_562FA0()
         {
             field_90_timer_since_last_move++;
         }
-        if (field_90_timer_since_last_move >= 20u)
+        if (field_90_timer_since_last_move >= 20U)
         {
             return true;
         }

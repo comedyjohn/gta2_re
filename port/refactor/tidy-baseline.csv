@@ -115,7 +115,6 @@ port/game/CarAI_78.cpp,readability-function-size,12
 port/game/CarAI_78.cpp,readability-implicit-bool-conversion,408
 port/game/CarAI_78.cpp,readability-make-member-function-const,8
 port/game/CarAI_78.cpp,readability-simplify-boolean-expr,8
-port/game/CarAI_78.cpp,readability-uppercase-literal-suffix,26
 port/game/CarAI_78.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/CarAI_78.hpp,cppcoreguidelines-special-member-functions,1
 port/game/CarAI_78.hpp,misc-non-private-member-variables-in-classes,46
@@ -200,7 +199,6 @@ port/game/CarPhysics_B0.cpp,readability-implicit-bool-conversion,269
 port/game/CarPhysics_B0.cpp,readability-make-member-function-const,29
 port/game/CarPhysics_B0.cpp,readability-non-const-parameter,1
 port/game/CarPhysics_B0.cpp,readability-simplify-boolean-expr,1
-port/game/CarPhysics_B0.cpp,readability-uppercase-literal-suffix,1
 port/game/CarPhysics_B0.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/CarPhysics_B0.hpp,cppcoreguidelines-avoid-non-const-global-variables,13
 port/game/CarPhysics_B0.hpp,cppcoreguidelines-special-member-functions,2
@@ -265,7 +263,6 @@ port/game/Car_BC.cpp,readability-implicit-bool-conversion,425
 port/game/Car_BC.cpp,readability-make-member-function-const,56
 port/game/Car_BC.cpp,readability-non-const-parameter,1
 port/game/Car_BC.cpp,readability-simplify-boolean-expr,10
-port/game/Car_BC.cpp,readability-uppercase-literal-suffix,24
 port/game/Car_BC.hpp,bugprone-narrowing-conversions,1
 port/game/Car_BC.hpp,cppcoreguidelines-avoid-c-arrays,5
 port/game/Car_BC.hpp,cppcoreguidelines-avoid-non-const-global-variables,16
@@ -1615,7 +1612,6 @@ port/game/PublicTransport.cpp,readability-implicit-bool-conversion,93
 port/game/PublicTransport.cpp,readability-make-member-function-const,1
 port/game/PublicTransport.cpp,readability-non-const-parameter,2
 port/game/PublicTransport.cpp,readability-simplify-boolean-expr,1
-port/game/PublicTransport.cpp,readability-uppercase-literal-suffix,1
 port/game/PublicTransport.hpp,cppcoreguidelines-avoid-c-arrays,6
 port/game/PublicTransport.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/PublicTransport.hpp,cppcoreguidelines-special-member-functions,3

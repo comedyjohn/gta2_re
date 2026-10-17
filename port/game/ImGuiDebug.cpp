@@ -1359,7 +1359,7 @@ void ImGuiDebugDraw()
 
         static char tmpBuffer[512];
         sprintf(tmpBuffer, "c%02d", model_num);
-        ImGui::Text(gText_0x14_704DFC->Wide2PesudoAscii_5B5D10(gText_0x14_704DFC->Find_5B5F90(tmpBuffer)));
+        ImGui::Text(text_0x14::Wide2PesudoAscii_5B5D10(gText_0x14_704DFC->Find_5B5F90(tmpBuffer)));
 
         static int currentCharIndex = 0;
         const char* char_lang_codes[] = {"english", "french", "italian", "german", "spanish", "russian??", "japanese??"};

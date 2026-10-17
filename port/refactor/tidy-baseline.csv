@@ -784,7 +784,6 @@ port/game/Hud.cpp,readability-else-after-return,2
 port/game/Hud.cpp,readability-function-cognitive-complexity,1
 port/game/Hud.cpp,readability-implicit-bool-conversion,152
 port/game/Hud.cpp,readability-make-member-function-const,7
-port/game/Hud.cpp,readability-static-accessed-through-instance,2
 port/game/Hud.hpp,bugprone-narrowing-conversions,3
 port/game/Hud.hpp,cppcoreguidelines-avoid-c-arrays,14
 port/game/Hud.hpp,cppcoreguidelines-avoid-non-const-global-variables,3
@@ -828,7 +827,6 @@ port/game/ImGuiDebug.cpp,readability-implicit-bool-conversion,166
 port/game/ImGuiDebug.cpp,readability-isolate-declaration,1
 port/game/ImGuiDebug.cpp,readability-non-const-parameter,1
 port/game/ImGuiDebug.cpp,readability-simplify-boolean-expr,1
-port/game/ImGuiDebug.cpp,readability-static-accessed-through-instance,1
 port/game/InputRecorder_67F8B0.cpp,bugprone-narrowing-conversions,18
 port/game/InputRecorder_67F8B0.cpp,cert-err33-c,8
 port/game/InputRecorder_67F8B0.cpp,cppcoreguidelines-avoid-c-arrays,6

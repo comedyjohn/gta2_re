@@ -2211,7 +2211,7 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
             }
 
             field_508_num_lines =
-                gText_0x14_704DFC->InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
+                text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
             if (bShow_brief_number_67D504)
             {
@@ -2255,10 +2255,10 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
             {
                 field_502_face_idx = 8; // neutral face
             }
-            field_508_num_lines = gText_0x14_704DFC->InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                           static_cast<const wchar_t*>(_5B5F90),
-                                                                                           MaxLineWidth_62689C,
-                                                                                           gBriefFont_7065C4);
+            field_508_num_lines = text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
+                                                                                   static_cast<const wchar_t*>(_5B5F90),
+                                                                                   MaxLineWidth_62689C,
+                                                                                   gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
 
             if (bShow_brief_number_67D504)

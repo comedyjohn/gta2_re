@@ -619,13 +619,13 @@ StateHashes Compute(std::string* dump)
     s.sprites = HashSprites(dump, pools);
     s.peds = HashPeds(dump, pools);
     s.cars = HashCars(dump, pools);
-    s.objects = HashObjects(dump, pools);
+    s.Objects = HashObjects(dump, pools);
     s.players = HashPlayers(dump, pools);
     s.script = HashScript(dump, pools);
     s.police = HashPolice(dump, pools);
 
     Hasher total(nullptr, "total");
-    for (uint64_t c : {s.rng, s.sprites, s.peds, s.cars, s.objects, s.players, s.script, s.police})
+    for (uint64_t c : {s.rng, s.sprites, s.peds, s.cars, s.Objects, s.players, s.script, s.police})
     {
         total.Add("", static_cast<int64_t>(c));
     }

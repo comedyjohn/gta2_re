@@ -349,7 +349,7 @@ void SpriteGrid_400::CheckTileSpritesForClosestMatch_478060(GridSpriteLink_8* pS
                     dist = gSpriteGrid_exclude_sprite_678F40->MinDistanceToAnySpriteBBoxCorner_5A22B0(pSprt);
                     if (dist < gSpriteGrid_smallestDistance_678E5C)
                     {
-                        if (pColIter->field_0_pSprite->GetType_416B40() == sprite_types_enum::car_2)
+                        if (pColIter->field_0_pSprite->GetType_416B40() == SpriteTypes::car_2)
                         {
                             if (pColIter->field_0_pSprite->field_8_car_bc_ptr->IsEnterable_445360())
                             {

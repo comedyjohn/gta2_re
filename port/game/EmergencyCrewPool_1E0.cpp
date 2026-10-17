@@ -111,7 +111,7 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
     Ped* pPedAtIdx = pGroup->field_4_ped_list[idx];
     while (pPedAtIdx)
     {
-        if (pPedAtIdx->GetPedState_403990() != ped_state_1::dead_9 && !pPedAtIdx->field_16C_car)
+        if (pPedAtIdx->GetPedState_403990() != PedState1::dead_9 && !pPedAtIdx->field_16C_car)
         {
             Ped* pLeaderPed = this->field_4_ped;
             if (pLeaderPed->field_16C_car)
@@ -123,12 +123,12 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
                 pGroup->PromoteMemberToLeader_4C9680(idx);
                 Ped* pLeader = this->field_8_group->field_2C_ped_leader;
                 this->field_4_ped = pLeader;
-                pLeader->SetObjective(objectives_enum::no_obj_0);
+                pLeader->SetObjective(Objectives::no_obj_0);
                 const s32 occupation = pPedAtIdx->get_occupation_403980();
-                pPedAtIdx->set_occupation_403970(ped_ocupation_enum::dummy);
+                pPedAtIdx->set_occupation_403970(PedOcupation::dummy);
                 pPedAtIdx->Kill_46F9D0();
                 pPedAtIdx->set_occupation_403970(occupation);
-                pPedAtIdx->SetObjective(objectives_enum::objective_28);
+                pPedAtIdx->SetObjective(Objectives::objective_28);
             }
             return true;
         }
@@ -241,9 +241,9 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             if (field_0_car)
             {
                 field_0_car->field_76_last_seen_timer = 0;
-                if (field_0_car->field_7C_ped_type != ped_type::player_2)
+                if (field_0_car->field_7C_ped_type != PedType::player_2)
                 {
-                    field_0_car->field_7C_ped_type = ped_type::dummy_3;
+                    field_0_car->field_7C_ped_type = PedType::dummy_3;
                 }
                 if (field_0_car->field_60_pChaseTask)
                 {
@@ -256,7 +256,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             {
                 if (field_4_ped)
                 {
-                    field_4_ped->set_occupation_403970(ped_ocupation_enum::dummy);
+                    field_4_ped->set_occupation_403970(PedOcupation::dummy);
                     field_4_ped->ClearGroupAndGroupIdx_403A30();
                     field_4_ped->Deallocate_45EB60();
                 }
@@ -265,7 +265,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                 {
                     for (Ped* j = field_8_group->field_4_ped_list[0]; j; j = field_8_group->field_4_ped_list[idx])
                     {
-                        j->set_occupation_403970(ped_ocupation_enum::dummy);
+                        j->set_occupation_403970(PedOcupation::dummy);
                         j->ClearGroupAndGroupIdx_403A30();
                         j->Deallocate_45EB60();
                         ++idx;
@@ -307,8 +307,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                         field_4_ped = field_8_group->field_4_ped_list[0];
                         field_8_group->ClearGroupData_4C8E90();
                         field_8_group = nullptr;
-                        field_4_ped->SetObjective(objectives_enum::no_obj_0);
-                        field_4_ped->SetObjective2_463830(objectives_enum::no_obj_0);
+                        field_4_ped->SetObjective(Objectives::no_obj_0);
+                        field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
                         field_24_phase = crew_phase::on_foot_0;
                     }
                     else
@@ -327,8 +327,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                     field_4_ped = field_8_group->field_2C_ped_leader;
                     field_8_group->DestroyGroup_4C93A0();
                     field_8_group = nullptr;
-                    field_4_ped->SetObjective(objectives_enum::no_obj_0);
-                    field_4_ped->SetObjective2_463830(objectives_enum::no_obj_0);
+                    field_4_ped->SetObjective(Objectives::no_obj_0);
+                    field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
                     field_24_phase = crew_phase::on_foot_0;
                 }
             }
@@ -336,8 +336,8 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             {
                 if (field_4_ped->field_168_game_object)
                 {
-                    field_4_ped->SetObjective(objectives_enum::no_obj_0);
-                    field_4_ped->SetObjective2_463830(objectives_enum::no_obj_0);
+                    field_4_ped->SetObjective(Objectives::no_obj_0);
+                    field_4_ped->SetObjective2_463830(Objectives::no_obj_0);
                     field_24_phase = crew_phase::on_foot_0;
                 }
             }
@@ -373,7 +373,7 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
             {
                 if (field_0_car)
                 {
-                    field_0_car->SetDriverPedType_421560(ped_type::dummy_3);
+                    field_0_car->SetDriverPedType_421560(PedType::dummy_3);
                     field_0_car->field_76_last_seen_timer = -200;
                 }
             }
@@ -507,7 +507,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
             {
                 if (field_4_ped)
                 {
-                    field_4_ped->set_occupation_403970(ped_ocupation_enum::dummy);
+                    field_4_ped->set_occupation_403970(PedOcupation::dummy);
                     field_4_ped->ClearGroupAndGroupIdx_403A30();
                     field_4_ped->Deallocate_45EB60();
                 }
@@ -517,7 +517,7 @@ void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
                 {
                     for (Ped* pPedListIter = field_8_group->field_4_ped_list[0]; pPedListIter;)
                     {
-                        pPedListIter->set_occupation_403970(ped_ocupation_enum::dummy);
+                        pPedListIter->set_occupation_403970(PedOcupation::dummy);
                         pPedListIter->ClearGroupAndGroupIdx_403A30();
                         pPedListIter->Deallocate_45EB60();
                         i++;
@@ -620,10 +620,10 @@ bool EmergencyCrew_30::Service_5CC480()
 
     switch (field_20_crew_type)
     {
-        case crew_type::paramedic_1:
+        case CrewType::paramedic_1:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::paramedic_car_4))
             {
-                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::MEDICAR,
+                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::MEDICAR,
                                                                                           this->field_C_spawn_x,
                                                                                           this->field_10_spawn_y,
                                                                                           this->field_14_spawn_z);
@@ -640,10 +640,10 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             break;
 
-        case crew_type::police_3:
+        case CrewType::police_3:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
-                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::COPCAR,
+                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::COPCAR,
                                                                                           this->field_C_spawn_x,
                                                                                           this->field_10_spawn_y,
                                                                                           this->field_14_spawn_z);
@@ -659,10 +659,10 @@ bool EmergencyCrew_30::Service_5CC480()
             }
             break;
 
-        case crew_type::swat_5:
+        case CrewType::swat_5:
             if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
             {
-                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(car_model_enum::SWATVAN,
+                this->field_0_car = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::SWATVAN,
                                                                                           this->field_C_spawn_x,
                                                                                           this->field_10_spawn_y,
                                                                                           this->field_14_spawn_z);

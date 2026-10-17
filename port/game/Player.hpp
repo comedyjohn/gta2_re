@@ -87,14 +87,14 @@ class Player
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 &&
-            ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != objectives_enum::objective_54);
+            ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != Objectives::objective_54);
     }
 
     bool IsBustedObjective54_476730()
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr &&
-            pPed->get_objective_403A80() == objectives_enum::objective_54;
+            pPed->get_objective_403A80() == Objectives::objective_54;
     }
 
     s32 get_lives_4766C0()
@@ -190,7 +190,7 @@ class Player
     {
         s32 occupation;
         if (!field_2D0_aux_cam_active || !field_2C8_aux_ped ||
-            (occupation = field_2C8_aux_ped->get_occupation_403980()) != ped_ocupation_enum::empty)
+            (occupation = field_2C8_aux_ped->get_occupation_403980()) != PedOcupation::empty)
         {
             return false;
         }

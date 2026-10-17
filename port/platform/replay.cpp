@@ -603,7 +603,7 @@ void port_replay_after_update()
                 static_cast<unsigned long long>(s.sprites),
                 static_cast<unsigned long long>(s.peds),
                 static_cast<unsigned long long>(s.cars),
-                static_cast<unsigned long long>(s.objects),
+                static_cast<unsigned long long>(s.Objects),
                 static_cast<unsigned long long>(s.players),
                 static_cast<unsigned long long>(s.script),
                 static_cast<unsigned long long>(s.police),

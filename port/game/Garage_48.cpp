@@ -300,7 +300,7 @@ void Garage_48::GaragesService_5349D0()
             }
             if (field_0_parking_car->GetDriver_4118B0() && !field_0_parking_car->IsDrivenByPlayer_4118D0())
             {
-                field_0_parking_car->GetDriver_4118B0()->SetObjective(objectives_enum::wait_in_car_27);
+                field_0_parking_car->GetDriver_4118B0()->SetObjective(Objectives::wait_in_car_27);
             }
 
             if (field_0_parking_car->field_50_car_sprite->CollisionCheck_5A0320(&field_18_park_x_min, &field_20_park_x_max, &idx1, &idx2) !=

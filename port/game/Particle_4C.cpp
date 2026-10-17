@@ -424,7 +424,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
     Fix16Point prev;
     Fix16Point mid;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
-    if (field_46_sub_state != 6 && field_28_pSprite->GetType_416B40() == sprite_types_enum::code_obj1_4)
+    if (field_46_sub_state != 6 && field_28_pSprite->GetType_416B40() == SpriteTypes::code_obj1_4)
     {
         src.SetXY(field_30_pNext->field_14_xy.x, field_30_pNext->field_14_xy.y);
         dst.SetXY(field_28_pSprite->field_14_xy.x, field_28_pSprite->field_14_xy.y);
@@ -452,7 +452,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
                     pSegment->field_2C_counter = 50;
                     pSegment->field_46_sub_state = 0;
                     pSegment->field_2E = 50;
-                    pSegment->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
+                    pSegment->field_30_pNext->SetType_4206F0(SpriteTypes::code_obj2_8);
                     pSegment->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 104);
                     pSegment->field_30_pNext->set_xyz_lazy_420600(mid.x, mid.y, field_30_pNext->field_1C_zpos);
                     pSegment->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
@@ -491,7 +491,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
         dst.SetXY(target.x, target.y);
         dst += src;
 
-        if (field_28_pSprite->GetType_416B40() == sprite_types_enum::code_obj1_4)
+        if (field_28_pSprite->GetType_416B40() == SpriteTypes::code_obj1_4)
         {
             field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + field_46_sub_state + 163);
             field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
@@ -851,7 +851,7 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
                     pSmoke->field_38_state = 6;
                     pSmoke->field_2C_counter = 100;
                     pSmoke->field_2E = 100;
-                    pSmoke->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
+                    pSmoke->field_30_pNext->SetType_4206F0(SpriteTypes::code_obj2_8);
                     pSmoke->field_38_state = 6;
                     pSmoke->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette);
                     pSmoke->field_30_pNext->set_xyz_lazy_420600(field_30_pNext->field_14_xy.x,
@@ -957,7 +957,7 @@ char_type Particle_4C::UpdateSkidOrScrapeSpark_state_40_41_53A280()
     stru_6FD388 = field_30_pNext->field_14_xy.x;
     stru_6FD38C = field_30_pNext->field_14_xy.y;
 
-    if (field_28_pSprite->field_30_sprite_type_enum == sprite_types_enum::car_2)
+    if (field_28_pSprite->field_30_sprite_type_enum == SpriteTypes::car_2)
     {
         Car_BC* pCar = field_28_pSprite->AsCar_40FEB0();
         if (!pCar || pCar->IsDespawning_4215B0())
@@ -1258,7 +1258,7 @@ char_type Particle_4C::UpdateAttachedEmitter_state_9_10_53B670()
     Sprite* pSprite = field_28_pSprite;
     Fix16 zpos = field_30_pNext->field_1C_zpos;
     Fix16PointPOD offset;
-    if (pSprite->GetType_416B40() != sprite_types_enum::ped_3)
+    if (pSprite->GetType_416B40() != SpriteTypes::ped_3)
     {
         return true;
     }
@@ -1414,7 +1414,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
     Sprite* pTarget = field_28_pSprite;
     switch (pTarget->field_30_sprite_type_enum)
     {
-        case sprite_types_enum::car_2:
+        case SpriteTypes::car_2:
             pCar = pTarget->field_8_car_bc_ptr;
             if (!pCar || !pCar->field_54_driver)
             {
@@ -1433,7 +1433,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
         default:
             return true;
 
-        case sprite_types_enum::ped_3:
+        case SpriteTypes::ped_3:
             pB4 = pTarget->field_8_char_b4_ptr;
             if (!pB4 || !pB4->field_7C_pPed || !pB4->field_7C_pPed->IsActive_433B40())
             {
@@ -1560,9 +1560,9 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
                     {
                         gParticle_8_6FD5E8->field_0_fire_hit_obj->SetDamageOwner_529080(pCar->field_54_driver->field_267_ped_ref_idx);
                     }
-                    if (pHit->field_30_sprite_type_enum != sprite_types_enum::code_obj1_4 &&
-                        pHit->field_30_sprite_type_enum != sprite_types_enum::map_obj_5 &&
-                        pHit->field_30_sprite_type_enum != sprite_types_enum::object_1)
+                    if (pHit->field_30_sprite_type_enum != SpriteTypes::code_obj1_4 &&
+                        pHit->field_30_sprite_type_enum != SpriteTypes::map_obj_5 &&
+                        pHit->field_30_sprite_type_enum != SpriteTypes::object_1)
                     {
                         gParticle_8_6FD5E8->field_0_fire_hit_obj->HandleObjectHit_528990(pHit);
                     }
@@ -1584,13 +1584,13 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
                     {
                         gParticle_8_6FD5E8->field_4->SetDamageOwner_529080(pCar->field_54_driver->field_267_ped_ref_idx);
                     }
-                    if (pHit->field_30_sprite_type_enum != sprite_types_enum::code_obj1_4 &&
-                        (pHit->field_30_sprite_type_enum != sprite_types_enum::map_obj_5) &&
-                        pHit->field_30_sprite_type_enum != sprite_types_enum::object_1)
+                    if (pHit->field_30_sprite_type_enum != SpriteTypes::code_obj1_4 &&
+                        (pHit->field_30_sprite_type_enum != SpriteTypes::map_obj_5) &&
+                        pHit->field_30_sprite_type_enum != SpriteTypes::object_1)
                     {
                         gParticle_8_6FD5E8->field_4->HandleObjectHit_528990(pHit);
                     }
-                    if (pHit->GetType_416B40() == sprite_types_enum::ped_3)
+                    if (pHit->GetType_416B40() == SpriteTypes::ped_3)
                     {
                         pHit->field_8_char_b4_ptr->HandleGenericImpact_553E00(angle, dword_6FD2E8 + dword_6FD46C, kFP16Zero_6FD49C, 0);
                         Ped* pHitPed = pHit->field_8_char_b4_ptr->field_7C_pPed;

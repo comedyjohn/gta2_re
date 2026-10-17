@@ -77,23 +77,23 @@ u16 gtx_0x106C::GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_idx)
     u16 result;
     switch (sprite_type)
     {
-        case sprite_types_enum::car_2:
+        case SpriteTypes::car_2:
             result = sprite_idx + field_14_sprite_base2->field_0_car;
             break;
-        case sprite_types_enum::ped_3:
+        case SpriteTypes::ped_3:
             result = field_14_sprite_base2->field_2_ped + sprite_idx;
             break;
-        case sprite_types_enum::code_obj1_4:
-        case sprite_types_enum::code_obj2_8:
+        case SpriteTypes::code_obj1_4:
+        case SpriteTypes::code_obj2_8:
             result = sprite_idx + field_14_sprite_base2->field_4_code_obj;
             break;
-        case sprite_types_enum::map_obj_5:
+        case SpriteTypes::map_obj_5:
             result = sprite_idx + field_14_sprite_base2->field_6_map_obj;
             break;
-        case sprite_types_enum::user_6:
+        case SpriteTypes::user_6:
             result = sprite_idx + static_cast<s16>(field_14_sprite_base2->field_8_user);
             break;
-        case sprite_types_enum::font_7:
+        case SpriteTypes::font_7:
             result = sprite_idx + field_14_sprite_base2->field_A_font;
             break;
         default:
@@ -108,18 +108,18 @@ s16 gtx_0x106C::GetSpriteBaseOfType_5AA4F0(s32 sprite_type)
 {
     switch (sprite_type)
     {
-        case sprite_types_enum::car_2:
+        case SpriteTypes::car_2:
             return field_18_sprite_base1->field_0_car;
-        case sprite_types_enum::ped_3:
+        case SpriteTypes::ped_3:
             return field_18_sprite_base1->field_2_ped;
-        case sprite_types_enum::code_obj1_4:
-        case sprite_types_enum::code_obj2_8:
+        case SpriteTypes::code_obj1_4:
+        case SpriteTypes::code_obj2_8:
             return field_18_sprite_base1->field_4_code_obj;
-        case sprite_types_enum::map_obj_5:
+        case SpriteTypes::map_obj_5:
             return field_18_sprite_base1->field_6_map_obj;
-        case sprite_types_enum::font_7:
+        case SpriteTypes::font_7:
             return field_18_sprite_base1->field_A_font;
-        case sprite_types_enum::user_6:
+        case SpriteTypes::user_6:
             return field_18_sprite_base1->field_8_user;
         default:
             return 0;
@@ -131,21 +131,21 @@ s16 gtx_0x106C::GetPaletteBaseOfType_5AA560(s32 palette_type)
 {
     switch (palette_type)
     {
-        case palette_types_enum::tiles_1:
+        case PaletteTypes::tiles_1:
             return field_10_palette_base1->field_0_tile;
-        case palette_types_enum::sprites_2:
+        case PaletteTypes::sprites_2:
             return field_10_palette_base1->field_2_sprite;
-        case palette_types_enum::car_remaps_3:
+        case PaletteTypes::car_remaps_3:
             return field_10_palette_base1->field_4_car_remap;
-        case palette_types_enum::ped_remaps_4:
+        case PaletteTypes::ped_remaps_4:
             return field_10_palette_base1->field_6_ped_remap;
-        case palette_types_enum::code_obj_remaps_5:
+        case PaletteTypes::code_obj_remaps_5:
             return field_10_palette_base1->field_8_code_obj_remap;
-        case palette_types_enum::map_obj_remaps_6:
+        case PaletteTypes::map_obj_remaps_6:
             return field_10_palette_base1->field_A_map_obj_remap;
-        case palette_types_enum::user_remaps_7:
+        case PaletteTypes::user_remaps_7:
             return field_10_palette_base1->field_C_user_remap;
-        case palette_types_enum::font_remaps_8:
+        case PaletteTypes::font_remaps_8:
             return field_10_palette_base1->field_E_font_remap;
         default:
             return 0;
@@ -159,28 +159,28 @@ s16 gtx_0x106C::GetTruePalette_5AA5F0(s32 palette_type, s16 pal)
 
     switch (palette_type)
     {
-        case palette_types_enum::tiles_1:
+        case PaletteTypes::tiles_1:
             result = pal + field_C_palette_base2->field_0_tile;
             break;
-        case palette_types_enum::sprites_2:
+        case PaletteTypes::sprites_2:
             result = pal + field_C_palette_base2->field_2_sprite;
             break;
-        case palette_types_enum::car_remaps_3:
+        case PaletteTypes::car_remaps_3:
             result = pal + field_C_palette_base2->field_4_car_remap;
             break;
-        case palette_types_enum::ped_remaps_4:
+        case PaletteTypes::ped_remaps_4:
             result = pal + field_C_palette_base2->field_6_ped_remap;
             break;
-        case palette_types_enum::code_obj_remaps_5:
+        case PaletteTypes::code_obj_remaps_5:
             result = pal + field_C_palette_base2->field_8_code_obj_remap;
             break;
-        case palette_types_enum::map_obj_remaps_6:
+        case PaletteTypes::map_obj_remaps_6:
             result = pal + field_C_palette_base2->field_A_map_obj_remap;
             break;
-        case palette_types_enum::user_remaps_7:
+        case PaletteTypes::user_remaps_7:
             result = pal + field_C_palette_base2->field_C_user_remap;
             break;
-        case palette_types_enum::font_remaps_8:
+        case PaletteTypes::font_remaps_8:
             result = pal + field_C_palette_base2->field_E_font_remap;
             break;
         default:

@@ -277,14 +277,14 @@ bool Object_2C::ShouldCollideWith_5223C0(Sprite* pSprite)
             return true;
         case CollisionReaction::OnlyCars_1:
             // Only cars
-            if (pSprite->GetType_416B40() == sprite_types_enum::car_2)
+            if (pSprite->GetType_416B40() == SpriteTypes::car_2)
             {
                 return false;
             }
             break;
         case CollisionReaction::OnlyPeds_2:
             // Only peds
-            if (pSprite->GetType_416B40() == sprite_types_enum::ped_3)
+            if (pSprite->GetType_416B40() == SpriteTypes::ped_3)
             {
                 return false;
             }
@@ -292,8 +292,7 @@ bool Object_2C::ShouldCollideWith_5223C0(Sprite* pSprite)
         case CollisionReaction::OnlyObjects_3:
             // Only objects?
             sprite_type = pSprite->GetType_416B40();
-            if (sprite_type != sprite_types_enum::code_obj1_4 && sprite_type != sprite_types_enum::map_obj_5 &&
-                sprite_type != sprite_types_enum::object_1)
+            if (sprite_type != SpriteTypes::code_obj1_4 && sprite_type != SpriteTypes::map_obj_5 && sprite_type != SpriteTypes::object_1)
             {
                 return true;
             }
@@ -325,14 +324,14 @@ bool Object_2C::SelectCollisionSprite_522460(Sprite* pProbe)
     gObject2C_HitWallOrDoor_6F8F94 = 0;
 
     Sprite* pSprite = pProbe->QuerySpriteCollision_59E7D0(2);
-    if ((pSprite && gObject2C_LastCollisionSprite_6F8F8C && pSprite->GetType_416B40() == sprite_types_enum::car_2) // IsCar
+    if ((pSprite && gObject2C_LastCollisionSprite_6F8F8C && pSprite->GetType_416B40() == SpriteTypes::car_2) // IsCar
         || !ShouldCollideWithSprite_522430(pSprite) || pSprite == gObject2C_LastCollisionSprite_6F8F8C)
     {
         return false;
     }
 
-    if (pSprite->field_8_object_2C_ptr->field_18_model == objects::diagonal_wall_collision_obj_166 ||
-        pSprite->field_8_object_2C_ptr->field_18_model == objects::door_unknown_169)
+    if (pSprite->field_8_object_2C_ptr->field_18_model == Objects::diagonal_wall_collision_obj_166 ||
+        pSprite->field_8_object_2C_ptr->field_18_model == Objects::door_unknown_169)
     {
         gObject2C_HitWallOrDoor_6F8F94 = 1;
     }
@@ -1421,7 +1420,7 @@ void Object_2C::OnAttachedSpriteDestroyed_525100()
     const s32 behavior = field_8->field_34_behavior_type;
     if (behavior >= object_behavior_type::static_object_0 && behavior <= object_behavior_type::static_collision_check_1)
     {
-        if (field_18_model != objects::small_brown_skid_148)
+        if (field_18_model != Objects::small_brown_skid_148)
         {
             RequestRemoval_5290A0();
         }
@@ -1482,17 +1481,17 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
 {
     switch (this->field_18_model)
     {
-        case objects::pedestrian_crossing_marker_122:
+        case Objects::pedestrian_crossing_marker_122:
             if (pSprite)
             {
                 return ShouldStopAtTrafficLight_525290(pSprite);
             }
             break;
 
-        case objects::conveyor_139:
+        case Objects::conveyor_139:
             break;
 
-        case objects::door_unknown_169:
+        case Objects::door_unknown_169:
             if (pSprite)
             {
                 return gDoor_4D4_67BD2C->CheckDoorAccess_49D3C0(pSprite, this->get_field_26_420FF0());
@@ -1502,7 +1501,7 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
                 return byte_6F8EDC;
             }
 
-        case objects::tunnel_blocker_294:
+        case Objects::tunnel_blocker_294:
             if (pSprite)
             {
                 Car_BC* pCar = pSprite->AsCar_40FEB0();
@@ -1530,7 +1529,7 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
 
                 if (pSprite)
                 {
-                    if (pSprite->GetType_416B40() != sprite_types_enum::ped_3)
+                    if (pSprite->GetType_416B40() != SpriteTypes::ped_3)
                     {
                         if (field_8->field_4C == 3)
                         {
@@ -1565,18 +1564,18 @@ char Object_2C::ShouldCollideWithSprite_525370(Sprite* pSprite)
                     {
                         switch (field_8->field_48)
                         {
-                            case objects::object_0:
+                            case Objects::object_0:
                                 return 0;
-                            case objects::crate_12:
+                            case Objects::crate_12:
                                 return 1;
-                            case objects::footy_13:
+                            case Objects::footy_13:
                                 return 1;
                             default:
                                 break;
                         }
                     }
 
-                    if (pObj2C->field_18_model == objects::conveyor_139)
+                    if (pObj2C->field_18_model == Objects::conveyor_139)
                     {
                         break;
                     }
@@ -1672,7 +1671,7 @@ bool Object_2C::DispatchFrameAction_525910()
 // 0x525AC0
 bool Object_2C::IsFireExplosion_525AC0()
 {
-    if (field_18_model == objects::explosion_113)
+    if (field_18_model == Objects::explosion_113)
     {
         return field_C_pAny.pExplosion->IsFireType_5435D0();
     }
@@ -1687,8 +1686,8 @@ void Object_2C::CheckCollisionForModel_139_And_141_525AE0()
 {
     switch (field_18_model)
     {
-        case objects::conveyor_139:
-        case objects::destructor_141:
+        case Objects::conveyor_139:
+        case Objects::destructor_141:
             gSpriteGrid_1_679208->CheckAndHandleCollisionInStrips_477BD0(field_4);
             gSpriteGrid_2_67920C->CheckAndHandleCollisionInStrips_477BD0(field_4);
             break;
@@ -1712,7 +1711,7 @@ void Object_2C::UpdateEffectPool_525B20()
 // 0x525b40
 void Object_2C::SpawnSpriteParticlesForRocketBullet_525B40()
 {
-    if (field_18_model == objects::rocket_bullet_128)
+    if (field_18_model == Objects::rocket_bullet_128)
     {
         gParticle_8_6FD5E8->SpawnParticleSprite_5405D0(field_4);
     }
@@ -1841,7 +1840,7 @@ void Object_2C::UpdatePhysicsMovementAndAnimation_525D90()
         if (field_10_obj_3c->field_0.field_0_p18)
         {
             field_10_obj_3c->field_0.PoolUpdate_5A6F70(field_4);
-            if (!field_10_obj_3c->field_0.field_0_p18 && field_18_model == objects::explosion_fragments_127)
+            if (!field_10_obj_3c->field_0.field_0_p18 && field_18_model == Objects::explosion_fragments_127)
             {
                 RequestRemoval_5290A0();
             }
@@ -1855,7 +1854,7 @@ void Object_2C::UpdatePhysicsMovementAndAnimation_525D90()
                 field_10_obj_3c->field_1C_z_accel = kFpZero_6F8E10;
                 field_10_obj_3c->field_10_z_speed = kFpZero_6F8E10;
 
-                if (field_18_model != objects::grenade_obj_183)
+                if (field_18_model != Objects::grenade_obj_183)
                 {
                     if (UsesParamAsPedRef_421080())
                     {
@@ -1993,7 +1992,7 @@ void Object_2C::TriggerCarExplosionIfApplicable_526790(Sprite* pSprite)
                 Car_BC* pCar = pSprite->AsCar_40FEB0();
                 if (pCar)
                 {
-                    if (this->field_18_model == objects::moving_collect_36_132)
+                    if (this->field_18_model == Objects::moving_collect_36_132)
                     {
 
                         s32 id = gPedRefTable_7F8_703398->GetPedId_420F10(get_field_26_420FF0());
@@ -2039,20 +2038,20 @@ void Object_2C::InheritMotionFromSprite_526B40(Sprite* pSprite)
 
     switch (pSprite->GetType_416B40())
     {
-        case sprite_types_enum::ped_3: //sprite_type_3_Char_B4:
+        case SpriteTypes::ped_3: //sprite_type_3_Char_B4:
             this->field_10_obj_3c->field_C_speed = (pSprite->field_8_char_b4_ptr->get_velocity_41B080() * k_dword_6F8C9C);
             this->field_10_obj_3c->field_4_angle = pSprite->field_0_rotation;
             this->field_4->SetDrawLayer_40F7B0(27);
             break;
 
-        case sprite_types_enum::car_2: // 2
+        case SpriteTypes::car_2: // 2
             this->field_10_obj_3c->field_C_speed = pSprite->field_8_car_bc_ptr->GetCarLinearSpeed_43A240();
             this->field_10_obj_3c->field_4_angle = pSprite->field_8_car_bc_ptr->GetOrientationAngle_43A3E0();
             this->field_4->SetDrawLayer_40F7B0(pSprite->AsCar_40FEB0()->GetCrashSoundCategory_4435B0());
             break;
 
-        case sprite_types_enum::code_obj1_4: //sprite_type_4_Object_5C:
-        case sprite_types_enum::map_obj_5: //sprite_type_5_Object_5C:
+        case SpriteTypes::code_obj1_4: //sprite_type_4_Object_5C:
+        case SpriteTypes::map_obj_5: //sprite_type_5_Object_5C:
             p3C = pSprite->field_8_object_2C_ptr->field_10_obj_3c;
             if (p3C)
             {
@@ -2118,8 +2117,8 @@ bool Object_2C::UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 
                 {
                     switch (pSprite->GetType_416B40())
                     {
-                        case sprite_types_enum::code_obj1_4:
-                        case sprite_types_enum::map_obj_5:
+                        case SpriteTypes::code_obj1_4:
+                        case SpriteTypes::map_obj_5:
                             if (field_C_pAny.pExplosion->Update_5434A0(field_10_obj_3c->field_C_speed, field_10_obj_3c->field_4_angle))
                             {
                                 byte_6F8C68 = 0;
@@ -2127,7 +2126,7 @@ bool Object_2C::UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 
                             }
                             break;
 
-                        case sprite_types_enum::car_2:
+                        case SpriteTypes::car_2:
                             if (field_C_pAny.pExplosion->IsFireType_5435D0())
                             {
                                 field_4->set_z_lazy_420660(pSprite->field_8_car_bc_ptr->GetZPos_441330());
@@ -2143,7 +2142,7 @@ bool Object_2C::UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 
                             }
                             break;
 
-                        case sprite_types_enum::ped_3:
+                        case SpriteTypes::ped_3:
                             if (field_C_pAny.pExplosion->Update_5434A0(field_10_obj_3c->field_C_speed, field_10_obj_3c->field_4_angle))
                             {
                                 byte_6F8C68 = 0;
@@ -2675,11 +2674,11 @@ void Object_2C::ProcessObjectExplosionImpact_528A20(Object_2C* pObj)
 {
     switch (this->field_18_model)
     {
-        case objects::rocket_bullet_128:
-        case objects::moving_molotov_138:
+        case Objects::rocket_bullet_128:
+        case Objects::moving_molotov_138:
         {
             s32 remapped;
-            if (pObj->field_18_model == objects::diagonal_wall_collision_obj_166)
+            if (pObj->field_18_model == Objects::diagonal_wall_collision_obj_166)
             {
                 remapped = pObj->GetExplosionSideFromDiagonalWall_529210();
             }
@@ -2708,17 +2707,17 @@ void Object_2C::ProcessObjectExplosionImpact_528A20(Object_2C* pObj)
             break;
         }
 
-        case objects::flamethrower_fire_154:
-        case objects::object_159:
-        case objects::shotgun_bullet_192:
-        case objects::tanktop_193:
-        case objects::fire_hitting_194:
-        case objects::object_195:
-        case objects::maybe_bullet_on_fire_198:
-        case objects::object_199:
-        case objects::machine_gun_bullet_254:
-        case objects::pistol_bullet_265:
-        case objects::electrobaton_bullet_277:
+        case Objects::flamethrower_fire_154:
+        case Objects::object_159:
+        case Objects::shotgun_bullet_192:
+        case Objects::tanktop_193:
+        case Objects::fire_hitting_194:
+        case Objects::object_195:
+        case Objects::maybe_bullet_on_fire_198:
+        case Objects::object_199:
+        case Objects::machine_gun_bullet_254:
+        case Objects::pistol_bullet_265:
+        case Objects::electrobaton_bullet_277:
             break;
         default:
             return;
@@ -2735,7 +2734,7 @@ void Object_2C::ProcessObjectExplosionImpact_528A20(Object_2C* pObj)
         pPed = nullptr;
     }
 
-    if (pObj->field_18_model == objects::diagonal_wall_collision_obj_166)
+    if (pObj->field_18_model == Objects::diagonal_wall_collision_obj_166)
     {
         if (pPed)
         {
@@ -2751,8 +2750,8 @@ void Object_2C::HandleImpactNoSprite_528BA0()
 
     switch (this->field_18_model)
     {
-        case objects::rocket_bullet_128:
-        case objects::moving_molotov_138:
+        case Objects::rocket_bullet_128:
+        case Objects::moving_molotov_138:
         {
             Object_2C* pExplosion =
                 gObject_5C_6F8F84->CreateExplosion_52A3D0(field_4->field_14_xy.x,
@@ -2768,23 +2767,23 @@ void Object_2C::HandleImpactNoSprite_528BA0()
             [[fallthrough]];
         }
 
-        case objects::machine_gun_bullet_254:
-        case objects::pistol_bullet_265:
+        case Objects::machine_gun_bullet_254:
+        case Objects::pistol_bullet_265:
         {
             point.FromPolar(k_dword_6F8C9C, field_4->field_0_rotation + kAng180_6F8D62);
             gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x, field_4->field_14_xy.y, field_4->field_1C_zpos, point);
             break;
         }
 
-        case objects::flamethrower_fire_154:
-        case objects::object_159:
-        case objects::shotgun_bullet_192:
-        case objects::tanktop_193:
-        case objects::fire_hitting_194:
-        case objects::object_195:
-        case objects::maybe_bullet_on_fire_198:
-        case objects::object_199:
-        case objects::electrobaton_bullet_277:
+        case Objects::flamethrower_fire_154:
+        case Objects::object_159:
+        case Objects::shotgun_bullet_192:
+        case Objects::tanktop_193:
+        case Objects::fire_hitting_194:
+        case Objects::object_195:
+        case Objects::maybe_bullet_on_fire_198:
+        case Objects::object_199:
+        case Objects::electrobaton_bullet_277:
             break;
 
         default:
@@ -2960,11 +2959,11 @@ void Object_2C::HandleCollisionWithObject_529000(Object_2C* pObj)
 {
     switch (pObj->field_18_model)
     {
-        case objects::conveyor_139:
+        case Objects::conveyor_139:
             ApplyConveyorSpeedFrom_529070(pObj);
             break;
 
-        case objects::destructor_141:
+        case Objects::destructor_141:
             if (field_8->field_60)
             {
                 Dealloc_5291B0();
@@ -3037,7 +3036,7 @@ Fix16 Object_2C::GetEffectiveSpeed_5290F0()
             {
                 if (field_10_obj_3c->field_10_z_speed == kFpZero_6F8E10)
                 {
-                    if (this->field_18_model == objects::explosion_113)
+                    if (this->field_18_model == Objects::explosion_113)
                     {
                         return kFpZero_6F8E10;
                     }
@@ -3146,7 +3145,7 @@ void Object_5C::TrimSpriteList_529300()
     {
         Sprite* pSprite = field_1C_sprite_list.PopBackSprite_5A6DC0();
         Object_2C* o2c = pSprite->AsObject2C_40FEC0();
-        if (o2c->field_18_model == objects::mine_10)
+        if (o2c->field_18_model == Objects::mine_10)
         {
             if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(pSprite, kFpZero_6F8E10))
             {
@@ -3330,7 +3329,7 @@ Object_2C* Object_5C::NewWithPedRefIdx_5299F0(s32 object_type, u32 ped_ref_idx, 
     if (pNewObj)
     {
         pNewObj->set_field_26(ped_ref_idx);
-        if (object_type == objects::sound_object_type_2_279)
+        if (object_type == Objects::sound_object_type_2_279)
         {
             pNewObj->RequestRemoval_5290A0();
         }
@@ -3394,7 +3393,7 @@ Object_2C* Object_5C::NewPhysicsObjUnlessBlocked_529BC0(s32 object_type, Fix16 x
 // 0x529c00
 Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char fail_if_blocked)
 {
-    if (object_type == objects::secret_token_266)
+    if (object_type == Objects::secret_token_266)
     {
         if (!field_20_uncollected_tokens[field_54_uncollected_token_index]) // 20
         {
@@ -3549,10 +3548,10 @@ Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypo
         pNew2C->SetDefaultWeaponAmmo_5292D0();
     }
 
-    if (pNew2C->field_18_model == objects::power_generator_281)
+    if (pNew2C->field_18_model == Objects::power_generator_281)
     {
         Object_2C* pLight =
-            NewPhysicsObj_5299B0(objects::powergen_light_284, kFpZero_6F8E10, kFpZero_6F8E10, kFpZero_6F8E10, kZeroAng_6F8F68);
+            NewPhysicsObj_5299B0(Objects::powergen_light_284, kFpZero_6F8E10, kFpZero_6F8E10, kFpZero_6F8E10, kZeroAng_6F8F68);
         pNew2C->field_4->DispatchCollisionEvent_5A3100(pLight->field_4,
                                                        (dword_6F8CE8 * dword_6F8ECC), // x?
                                                        (kFP16One_6F8CEC * dword_6F8ECC), // y?
@@ -3560,7 +3559,7 @@ Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypo
     }
     else
     {
-        if (pNew2C->field_18_model == objects::secret_token_266)
+        if (pNew2C->field_18_model == Objects::secret_token_266)
         {
             pNew2C->set_field_26(field_54_uncollected_token_index);
             field_54_uncollected_token_index++;
@@ -3652,7 +3651,7 @@ Object_2C* Object_5C::CreateMovingObj_52A2C0(s32 object_type,
 // 0x52a3d0
 Object_2C* Object_5C::CreateExplosion_52A3D0(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 kind, s32 ped_id)
 {
-    Object_2C* pNew2C = NewPhysicsObj_5299B0(objects::explosion_113, x, y, z, rot);
+    Object_2C* pNew2C = NewPhysicsObj_5299B0(Objects::explosion_113, x, y, z, rot);
     if (pNew2C)
     {
         pNew2C->field_1C_has_explosion = 1;

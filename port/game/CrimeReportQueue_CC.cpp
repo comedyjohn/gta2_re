@@ -132,14 +132,14 @@ void CrimeReportQueue_CC::ReportCrimeForPed(u32 crime_type, Ped* pPed)
 {
     switch (pPed->get_occupation_403980())
     {
-        case ped_ocupation_enum::police:
-        case ped_ocupation_enum::swat:
-        case ped_ocupation_enum::fbi:
-        case ped_ocupation_enum::army_army:
-        case ped_ocupation_enum::walking_guard_29:
-        case ped_ocupation_enum::unknown_cop_occu_30:
-        case ped_ocupation_enum::unknown_cop_occu_31:
-        case ped_ocupation_enum::roadblock_cop_37:
+        case PedOcupation::police:
+        case PedOcupation::swat:
+        case PedOcupation::fbi:
+        case PedOcupation::army_army:
+        case PedOcupation::walking_guard_29:
+        case PedOcupation::unknown_cop_occu_30:
+        case PedOcupation::unknown_cop_occu_31:
+        case PedOcupation::roadblock_cop_37:
             // Feds are allowed to do crime
             return;
 

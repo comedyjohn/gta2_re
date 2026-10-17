@@ -10,7 +10,7 @@
 struct StateHashes
 {
     uint64_t total;
-    uint64_t rng, sprites, peds, cars, objects, players, script, police;
+    uint64_t rng, sprites, peds, cars, Objects, players, script, police;
 };
 
 // Hashes the simulation as it is now. Only call it while a game runs (gGame_0x40_67E008 is set).

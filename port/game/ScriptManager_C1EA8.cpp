@@ -713,7 +713,7 @@ char_type ScriptManager_C1EA8::TestAndRecordWeaponHit_512AF0(s32 id, char_type w
 
         if (pTable->field_0_entity_id == id)
         {
-            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == weapon_type::weapon_0x17)
+            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::weapon_0x17)
             {
                 if (bUnk)
                 {
@@ -794,7 +794,7 @@ void ScriptManager_C1EA8::RecordWeaponHit_512C00(s32 entity_id, s32 projectile_m
     {
         if (pTable->field_0_entity_id == entity_id)
         {
-            if (pTable->field_4_weapon_idx == weapon_type::weapon_0x17 || pTable->field_4_weapon_idx == projectile_type)
+            if (pTable->field_4_weapon_idx == WeaponType::weapon_0x17 || pTable->field_4_weapon_idx == projectile_type)
             {
                 if (bUnk)
                 {
@@ -828,7 +828,7 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
     {
         if (pTable->field_0_entity_id == id)
         {
-            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == weapon_type::weapon_0x17)
+            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::weapon_0x17)
             {
                 if (bUnk)
                 {

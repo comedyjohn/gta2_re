@@ -435,41 +435,41 @@ const char_type* GetOccupationStrFromPed(Ped* pPed)
     {
         switch (pPed->field_240_occupation)
         {
-            case ped_ocupation_enum::car_thief:
+            case PedOcupation::car_thief:
                 return "Car Thief";
-            case ped_ocupation_enum::mugger:
+            case PedOcupation::mugger:
                 return "Mugger";
-            case ped_ocupation_enum::driver:
+            case PedOcupation::driver:
                 return "Driver";
-            case ped_ocupation_enum::fireman:
+            case PedOcupation::fireman:
                 return "Fireman";
-            case ped_ocupation_enum::elvis_leader:
+            case PedOcupation::elvis_leader:
                 return "Elvis Leader";
-            case ped_ocupation_enum::elvis:
+            case PedOcupation::elvis:
                 return "Elvis";
-            case ped_ocupation_enum::dummy:
+            case PedOcupation::dummy:
                 return "Dummy";
-            case ped_ocupation_enum::robbed_driver_10:
+            case PedOcupation::robbed_driver_10:
                 return "Driver 2";
-            case ped_ocupation_enum::scared_driver_50:
+            case PedOcupation::scared_driver_50:
                 return "Driv3r";
-            case ped_ocupation_enum::no_occupation:
+            case PedOcupation::no_occupation:
                 return "None";
-            case ped_ocupation_enum::any_gang_member:
+            case PedOcupation::any_gang_member:
                 return "Gang member";
-            case ped_ocupation_enum::police:
+            case PedOcupation::police:
                 return "Police";
-            case ped_ocupation_enum::fbi:
+            case PedOcupation::fbi:
                 return "FBI";
-            case ped_ocupation_enum::player:
+            case PedOcupation::player:
                 return "Player";
-            case ped_ocupation_enum::swat:
+            case PedOcupation::swat:
                 return "SWAT";
-            case ped_ocupation_enum::road_block_tank_man:
+            case PedOcupation::road_block_tank_man:
                 return "Roadblock Tank Man";
-            case ped_ocupation_enum::army_army:
+            case PedOcupation::army_army:
                 return "Army";
-            case ped_ocupation_enum::tank_driver:
+            case PedOcupation::tank_driver:
                 return "Tank Driver";
             default:
                 return "Other";
@@ -534,7 +534,7 @@ void NoRefs_sub_5B1170()
     block.field_B_slope_type = 199;
     gMap_0x370_6F6268->AddNewBlock_4E87C0(112, 152, 2, &block);
     gTestCar1_704418 = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(98), Fix16(180), word_70420C, 19, dword_7042A4);
-    gTestCar1_704418->field_98_door_lock = Car_Door_Lock::locked_permanently_4;
+    gTestCar1_704418->field_98_door_lock = CarDoorLock::locked_permanently_4;
     gTestCar1_704418->IncrementCarStats_443D70(8);
     gTestCar1_704418->field_78_flags |= 0x10;
     gTestCar1_704418->UpdateSpriteNum_4435F0();
@@ -663,273 +663,273 @@ const char* ObjectIdToString(s32 id)
 {
     switch (id)
     {
-        case objects::object_0:
+        case Objects::object_0:
             return "object_0";
-        case objects::bin_lid_1:
+        case Objects::bin_lid_1:
             return "bin_lid_1";
-        case objects::bollard_2:
+        case Objects::bollard_2:
             return "bollard_2";
-        case objects::cone_3:
+        case Objects::cone_3:
             return "cone_3";
-        case objects::boxes_4:
+        case Objects::boxes_4:
             return "boxes_4";
-        case objects::blaster_5:
+        case Objects::blaster_5:
             return "blaster_5";
-        case objects::rubbish_6:
+        case Objects::rubbish_6:
             return "rubbish_6";
-        case objects::bin_7:
+        case Objects::bin_7:
             return "bin_7";
-        case objects::animating_oil_8:
+        case Objects::animating_oil_8:
             return "animating_oil_8";
-        case objects::oil_9:
+        case Objects::oil_9:
             return "oil_9";
-        case objects::mine_10:
+        case Objects::mine_10:
             return "mine_10";
-        case objects::bush_11:
+        case Objects::bush_11:
             return "bush_11";
-        case objects::crate_12:
+        case Objects::crate_12:
             return "crate_12";
-        case objects::footy_13:
+        case Objects::footy_13:
             return "footy_13";
-        case objects::hardbox_14:
+        case Objects::hardbox_14:
             return "hardbox_14";
-        case objects::newsdis_15:
+        case Objects::newsdis_15:
             return "newsdis_15";
-        case objects::oildrum_16:
+        case Objects::oildrum_16:
             return "oildrum_16";
-        case objects::tyre_17:
+        case Objects::tyre_17:
             return "tyre_17";
-        case objects::hydrant_lid_18:
+        case Objects::hydrant_lid_18:
             return "hydrant_lid_18";
-        case objects::hydrant_19:
+        case Objects::hydrant_19:
             return "hydrant_19";
-        case objects::hydrant_unlid_20:
+        case Objects::hydrant_unlid_20:
             return "hydrant_unlid_20";
-        case objects::roadblock_21:
+        case Objects::roadblock_21:
             return "roadblock_21";
-        case objects::bench_22:
+        case Objects::bench_22:
             return "bench_22";
-        case objects::package_23:
+        case Objects::package_23:
             return "package_23";
-        case objects::object_24:
+        case Objects::object_24:
             return "object_24";
-        case objects::tower_25:
+        case Objects::tower_25:
             return "tower_25";
-        case objects::object_26:
+        case Objects::object_26:
             return "object_26";
-        case objects::object_27:
+        case Objects::object_27:
             return "object_27";
-        case objects::object_28:
+        case Objects::object_28:
             return "object_28";
-        case objects::object_29:
+        case Objects::object_29:
             return "object_29";
-        case objects::object_30:
+        case Objects::object_30:
             return "object_30";
-        case objects::object_31:
+        case Objects::object_31:
             return "object_31";
-        case objects::object_32:
+        case Objects::object_32:
             return "object_32";
-        case objects::object_33:
+        case Objects::object_33:
             return "object_33";
-        case objects::object_34:
+        case Objects::object_34:
             return "object_34";
-        case objects::object_35:
+        case Objects::object_35:
             return "object_35";
-        case objects::object_36:
+        case Objects::object_36:
             return "object_36";
-        case objects::object_37:
+        case Objects::object_37:
             return "object_37";
-        case objects::object_38:
+        case Objects::object_38:
             return "object_38";
-        case objects::object_39:
+        case Objects::object_39:
             return "object_39";
-        case objects::object_40:
+        case Objects::object_40:
             return "object_40";
-        case objects::explode_medium_41:
+        case Objects::explode_medium_41:
             return "explode_medium_41";
-        case objects::object_42:
+        case Objects::object_42:
             return "object_42";
-        case objects::object_43:
+        case Objects::object_43:
             return "object_43";
-        case objects::object_44:
+        case Objects::object_44:
             return "object_44";
-        case objects::object_45:
+        case Objects::object_45:
             return "object_45";
-        case objects::object_46:
+        case Objects::object_46:
             return "object_46";
 
-        case objects::moving_collect_00_96:
+        case Objects::moving_collect_00_96:
             return "moving_collect_00_96";
-        case objects::moving_collect_01_97:
+        case Objects::moving_collect_01_97:
             return "moving_collect_01_97";
-        case objects::moving_collect_02_98:
+        case Objects::moving_collect_02_98:
             return "moving_collect_02_98";
-        case objects::moving_collect_03_99:
+        case Objects::moving_collect_03_99:
             return "moving_collect_03_99";
-        case objects::moving_collect_04_100:
+        case Objects::moving_collect_04_100:
             return "moving_collect_04_100";
-        case objects::moving_collect_05_101:
+        case Objects::moving_collect_05_101:
             return "moving_collect_05_101";
-        case objects::moving_collect_06_102:
+        case Objects::moving_collect_06_102:
             return "moving_collect_06_102";
-        case objects::moving_collect_07_103:
+        case Objects::moving_collect_07_103:
             return "moving_collect_07_103";
-        case objects::moving_collect_08_104:
+        case Objects::moving_collect_08_104:
             return "moving_collect_08_104";
-        case objects::moving_collect_09_105:
+        case Objects::moving_collect_09_105:
             return "moving_collect_09_105";
-        case objects::moving_collect_10_106:
+        case Objects::moving_collect_10_106:
             return "moving_collect_10_106";
-        case objects::moving_collect_11_107:
+        case Objects::moving_collect_11_107:
             return "moving_collect_11_107";
-        case objects::moving_collect_12_108:
+        case Objects::moving_collect_12_108:
             return "moving_collect_12_108";
-        case objects::moving_collect_13_109:
+        case Objects::moving_collect_13_109:
             return "moving_collect_13_109";
-        case objects::ped_pushed_110:
+        case Objects::ped_pushed_110:
             return "ped_pushed_110";
-        case objects::moving_collect_15_111:
+        case Objects::moving_collect_15_111:
             return "moving_collect_15_111";
-        case objects::moving_collect_16_112:
+        case Objects::moving_collect_16_112:
             return "moving_collect_16_112";
-        case objects::explosion_113:
+        case Objects::explosion_113:
             return "explosion_113";
-        case objects::water_cannon_114:
+        case Objects::water_cannon_114:
             return "water_cannon_114";
-        case objects::moving_collect_19_115:
+        case Objects::moving_collect_19_115:
             return "moving_collect_19_115";
-        case objects::moving_collect_20_116:
+        case Objects::moving_collect_20_116:
             return "moving_collect_20_116";
-        case objects::moving_collect_21_117:
+        case Objects::moving_collect_21_117:
             return "moving_collect_21_117";
-        case objects::moving_collect_22_118:
+        case Objects::moving_collect_22_118:
             return "moving_collect_22_118";
-        case objects::moving_collect_23_119:
+        case Objects::moving_collect_23_119:
             return "moving_collect_23_119";
-        case objects::road_skidmark_120:
+        case Objects::road_skidmark_120:
             return "road_skidmark_120";
-        case objects::moving_collect_25_121:
+        case Objects::moving_collect_25_121:
             return "moving_collect_25_121";
-        case objects::pedestrian_crossing_marker_122:
+        case Objects::pedestrian_crossing_marker_122:
             return "pedestrian_crossing_marker_122";
-        case objects::moving_collect_27_123:
+        case Objects::moving_collect_27_123:
             return "moving_collect_27_123";
-        case objects::moving_collect_28_124:
+        case Objects::moving_collect_28_124:
             return "moving_collect_28_124";
-        case objects::moving_collect_29_125:
+        case Objects::moving_collect_29_125:
             return "moving_collect_29_125";
-        case objects::moving_collect_30_126:
+        case Objects::moving_collect_30_126:
             return "moving_collect_30_126";
-        case objects::explosion_fragments_127:
+        case Objects::explosion_fragments_127:
             return "explosion_fragments_127";
-        case objects::rocket_bullet_128:
+        case Objects::rocket_bullet_128:
             return "rocket_bullet_128";
-        case objects::bus_stop_marker_129:
+        case Objects::bus_stop_marker_129:
             return "bus_stop_marker_129";
-        case objects::car_shop_130:
+        case Objects::car_shop_130:
             return "car_shop_130";
-        case objects::car_shop_busy_131:
+        case Objects::car_shop_busy_131:
             return "car_shop_busy_131";
-        case objects::moving_collect_36_132:
+        case Objects::moving_collect_36_132:
             return "moving_collect_36_132";
-        case objects::moving_collect_37_133:
+        case Objects::moving_collect_37_133:
             return "moving_collect_37_133";
-        case objects::crane_unknown_134:
+        case Objects::crane_unknown_134:
             return "crane_unknown_134";
-        case objects::crane_rotor_135:
+        case Objects::crane_rotor_135:
             return "crane_rotor_135";
-        case objects::crane_hook_136:
+        case Objects::crane_hook_136:
             return "crane_hook_136";
-        case objects::crane_base_137:
+        case Objects::crane_base_137:
             return "crane_base_137";
-        case objects::moving_molotov_138:
+        case Objects::moving_molotov_138:
             return "moving_molotov_138";
-        case objects::conveyor_139:
+        case Objects::conveyor_139:
             return "conveyor_139";
-        case objects::crane_counterweight_140:
+        case Objects::crane_counterweight_140:
             return "crane_counterweight_140";
 
-        case objects::destructor_141:
+        case Objects::destructor_141:
             return "destructor_141";
-        case objects::crusher_piston_142:
+        case Objects::crusher_piston_142:
             return "crusher_piston_142";
-        case objects::crusher_central_spot_143:
+        case Objects::crusher_central_spot_143:
             return "crusher_central_spot_143";
-        case objects::object_144:
+        case Objects::object_144:
             return "object_144";
-        case objects::particle_system_145:
+        case Objects::particle_system_145:
             return "particle_system_145";
-        case objects::firejet_146:
+        case Objects::firejet_146:
             return "firejet_146";
-        case objects::object_147:
+        case Objects::object_147:
             return "object_147";
-        case objects::small_brown_skid_148:
+        case Objects::small_brown_skid_148:
             return "small_brown_skid_148";
-        case objects::small_grey_skid_149:
+        case Objects::small_grey_skid_149:
             return "small_grey_skid_149";
-        case objects::crusher_piston_base_150:
+        case Objects::crusher_piston_base_150:
             return "crusher_piston_base_150";
-        case objects::medium_brown_skid_151:
+        case Objects::medium_brown_skid_151:
             return "medium_brown_skid_151";
-        case objects::medium_grey_skid_152:
+        case Objects::medium_grey_skid_152:
             return "medium_grey_skid_152";
-        case objects::medium_red_skid_153:
+        case Objects::medium_red_skid_153:
             return "medium_red_skid_153";
-        case objects::flamethrower_fire_154:
+        case Objects::flamethrower_fire_154:
             return "flamethrower_fire_154";
-        case objects::car_stop_155:
+        case Objects::car_stop_155:
             return "car_stop_155";
-        case objects::big_white_skid_156:
+        case Objects::big_white_skid_156:
             return "big_white_skid_156";
-        case objects::medium_white_skid_157:
+        case Objects::medium_white_skid_157:
             return "medium_white_skid_157";
-        case objects::small_white_skid_158:
+        case Objects::small_white_skid_158:
             return "small_white_skid_158";
-        case objects::object_159:
+        case Objects::object_159:
             return "object_159";
-        case objects::rocket_160:
+        case Objects::rocket_160:
             return "rocket_160";
-        case objects::savepoint_161:
+        case Objects::savepoint_161:
             return "savepoint_161";
-        case objects::car_shop_162:
+        case Objects::car_shop_162:
             return "car_shop_162";
-        case objects::busy_car_shop_163:
+        case Objects::busy_car_shop_163:
             return "busy_car_shop_163";
-        case objects::blue_phone_164:
+        case Objects::blue_phone_164:
             return "blue_phone_164";
-        case objects::maybe_train_headlight_165:
+        case Objects::maybe_train_headlight_165:
             return "maybe_train_headlight_165";
-        case objects::diagonal_wall_collision_obj_166:
+        case Objects::diagonal_wall_collision_obj_166:
             return "diagonal_wall_collision_obj_166";
-        case objects::maybe_door_trigger_167:
+        case Objects::maybe_door_trigger_167:
             return "maybe_door_trigger_167";
 
-        case objects::huge_red_skid_189:
+        case Objects::huge_red_skid_189:
             return "huge_red_skid_189";
-        case objects::huge_white_skid_190:
+        case Objects::huge_white_skid_190:
             return "huge_white_skid_190";
-        case objects::huge_brown_skid_191:
+        case Objects::huge_brown_skid_191:
             return "huge_brown_skid_191";
-        case objects::shotgun_bullet_192:
+        case Objects::shotgun_bullet_192:
             return "shotgun_bullet_192";
-        case objects::tanktop_193:
+        case Objects::tanktop_193:
             return "tanktop_193";
-        case objects::fire_hitting_194:
+        case Objects::fire_hitting_194:
             return "fire_hitting_194";
-        case objects::object_195:
+        case Objects::object_195:
             return "object_195";
-        case objects::animating_rubbish_196:
+        case Objects::animating_rubbish_196:
             return "animating_rubbish_196";
-        case objects::fire_197:
+        case Objects::fire_197:
             return "ped_like_fire_197";
-        case objects::maybe_bullet_on_fire_198:
+        case Objects::maybe_bullet_on_fire_198:
             return "maybe_bullet_on_fire_198";
-        case objects::object_199:
+        case Objects::object_199:
             return "object_199";
-        case objects::remote_200:
+        case Objects::remote_200:
             return "remote_200";
 
-        case objects::secret_token_266:
+        case Objects::secret_token_266:
             return "secret_token_266";
 
         default:
@@ -1441,15 +1441,14 @@ void ImGuiDebugDraw()
             if (ImGui::Button("Testing1"))
             {
                 gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(
-                    palette_types_enum::user_remaps_7,
+                    PaletteTypes::user_remaps_7,
                     6);
             }
 
             if (ImGui::Button("Testing2"))
             {
-                gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(
-                    palette_types_enum::sprites_2,
-                    0);
+                gGame_0x40_67E008->field_4_players[0]->field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::sprites_2,
+                                                                                                                    0);
             }
         }
         else
@@ -1782,11 +1781,7 @@ void ImGuiDebugDraw()
                     pNewCar->IncrementCarStats_443D70(car_kind::recycled_1); // avoid crashes when entering the car
 
                     // Spawns a cab and connected trailer, can spawn trains too apparently
-                    gCarManager_6C_677930->SpawnCabAndTrailer_446530(xpos + xOff,
-                                                                     ypos,
-                                                                     0,
-                                                                     car_model_enum::TRUKCAB1,
-                                                                     car_model_enum::TRUKTRNS);
+                    gCarManager_6C_677930->SpawnCabAndTrailer_446530(xpos + xOff, ypos, 0, CarModel::TRUKCAB1, CarModel::TRUKTRNS);
 
                     pNewCar->SetupCarPhysicsAndSpriteBinding_43BCA0();
                     if (!pNewCar->field_5C_AI)
@@ -1797,11 +1792,11 @@ void ImGuiDebugDraw()
                     pNewCar->field_5C_AI->SetCar_453BF0(pNewCar);
                     pNewCar->SpawnDriverPed();
 
-                    pNewCar->field_7C_ped_type = ped_type::script_created_5;
+                    pNewCar->field_7C_ped_type = PedType::script_created_5;
                     pNewCar->field_76_last_seen_timer = 0;
-                    if (pNewCar->field_98_door_lock != Car_Door_Lock::locked_permanently_4)
+                    if (pNewCar->field_98_door_lock != CarDoorLock::locked_permanently_4)
                     {
-                        pNewCar->field_98_door_lock = Car_Door_Lock::lockout_thief_2;
+                        pNewCar->field_98_door_lock = CarDoorLock::lockout_thief_2;
                     }
 
                     //pNewCar->field_9C = 3;
@@ -2104,7 +2099,7 @@ void ImGuiDebugDraw()
                 //ClearGlobalArrow();
                 for (; id < 8000; id++)
                 {
-                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::code_obj1_4, id);
+                    u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::code_obj1_4, id);
                     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
                     if (sprite_index_5AA440)
                     {
@@ -2113,7 +2108,7 @@ void ImGuiDebugDraw()
                             bFound = true;
                             if (spawned_obj != nullptr && spawned_obj->field_4)
                             {
-                                spawned_obj->field_4->field_30_sprite_type_enum = sprite_types_enum::code_obj1_4;
+                                spawned_obj->field_4->field_30_sprite_type_enum = SpriteTypes::code_obj1_4;
                                 spawned_obj->field_4->set_id_lazy_4206C0(id);
                                 //PointArrowToEntity(0, 0, spawned_obj);
                             }
@@ -2726,49 +2721,49 @@ void ImGuiDebugDraw()
                             ImGui::TreePop();
                         }
 
-                        if (pPedIter->field_240_occupation == ped_ocupation_enum::mugger ||
-                            pPedIter->field_240_occupation == ped_ocupation_enum::car_thief)
+                        if (pPedIter->field_240_occupation == PedOcupation::mugger ||
+                            pPedIter->field_240_occupation == PedOcupation::car_thief)
                         {
                             swprintf(tmpBuff_67BD9C, L"(%d, %d)", pPedIter->field_21C_bf.bPanicking, pPedIter->field_21C_bf.bAttacking);
                             DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_7)
+                        else if (pPedIter->field_258_objective == Objectives::objective_7)
                         {
                             DisplayTextAtSprite("Obj 7", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_8)
+                        else if (pPedIter->field_258_objective == Objectives::objective_8)
                         {
                             DisplayTextAtSprite("Obj 8", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_9)
+                        else if (pPedIter->field_258_objective == Objectives::objective_9)
                         {
                             DisplayTextAtSprite("Obj 9", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_10)
+                        else if (pPedIter->field_258_objective == Objectives::objective_10)
                         {
                             DisplayTextAtSprite("Obj 10", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_11)
+                        else if (pPedIter->field_258_objective == Objectives::objective_11)
                         {
                             DisplayTextAtSprite("Obj 11", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_15)
+                        else if (pPedIter->field_258_objective == Objectives::objective_15)
                         {
                             DisplayTextAtSprite("Obj 15", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_17)
+                        else if (pPedIter->field_258_objective == Objectives::objective_17)
                         {
                             DisplayTextAtSprite("Obj 17", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_18)
+                        else if (pPedIter->field_258_objective == Objectives::objective_18)
                         {
                             DisplayTextAtSprite("Obj 18", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_28)
+                        else if (pPedIter->field_258_objective == Objectives::objective_28)
                         {
                             DisplayTextAtSprite("Obj 28", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        else if (pPedIter->field_258_objective == objectives_enum::objective_43)
+                        else if (pPedIter->field_258_objective == Objectives::objective_43)
                         {
                             DisplayTextAtSprite("Obj 43", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
@@ -3119,7 +3114,7 @@ void ImGuiDebugDraw()
                     pParticle->field_2C_counter = counter;
                     pParticle->field_2E = f_2E;
 
-                    pParticle->field_30_pNext->SetType_4206F0(sprite_types_enum::code_obj2_8);
+                    pParticle->field_30_pNext->SetType_4206F0(SpriteTypes::code_obj2_8);
                     pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 132);
                     pParticle->field_46_sub_state = 0; // TODO
                     pParticle->field_48_timer = timer;

@@ -48,7 +48,7 @@ enum
 };
 } // namespace CarDeltaBitsEnum
 
-namespace car_manager_car_type_enum
+namespace CarManagerCarType
 {
 enum
 {
@@ -61,8 +61,8 @@ enum
     police_cars = 6
 };
 // static_assert(sizeof(car_manager_car_type_enum) == 4);
-} // namespace car_manager_car_type_enum
-namespace car_model_enum
+} // namespace CarManagerCarType
+namespace CarModel
 {
 enum
 {
@@ -156,9 +156,9 @@ enum
     none = 87
 };
 // static_assert(sizeof(car_model_enum) == 4);
-} // namespace car_model_enum
+} // namespace CarModel
 
-namespace Car_Door_Lock
+namespace CarDoorLock
 {
 enum
 {
@@ -170,7 +170,7 @@ enum
     lockout_player_5 = 5,
     none_6 = 6,
 };
-} // namespace Car_Door_Lock
+} // namespace CarDoorLock
 
 // Wanted level (star count / cop head), what Police_7B8 sends at each
 namespace CopLevel
@@ -187,7 +187,7 @@ enum cop_level_enum
 };
 } // namespace CopLevel
 
-namespace cop_level_ped_enum
+namespace CopLevelPed
 {
 enum
 { /* The cop level stored in the PED */
@@ -200,9 +200,9 @@ enum
     cop_6_stars = 12000
 };
 // static_assert(sizeof(cop_level_ped_enum) == 2);
-} // namespace cop_level_ped_enum
+} // namespace CopLevelPed
 
-namespace gmp_zone_type_enum
+namespace GmpZoneType
 {
 enum
 {
@@ -229,9 +229,9 @@ enum
     arrest_restart = 20
 };
 // static_assert(sizeof(gmp_zone_type_enum) == 4);
-} // namespace gmp_zone_type_enum
+} // namespace GmpZoneType
 
-namespace crew_type // KFC type
+namespace CrewType // KFC type
 {
 enum
 {
@@ -241,10 +241,10 @@ enum
     swat_5 = 5,
     army_6 = 6,
 };
-} // namespace crew_type
+} // namespace CrewType
 
 // Which kind of crew (or roadblock guard) is built: PoliceCrew_38::field_20_crew_kind and gCrewKind_6FEDB8
-namespace crew_kind
+namespace CrewKind
 {
 enum
 {
@@ -253,9 +253,9 @@ enum
     fbi_3 = 3,
     army_4 = 4,
 };
-} // namespace crew_kind
+} // namespace CrewKind
 
-namespace palette_types_enum
+namespace PaletteTypes
 {
 enum
 {
@@ -270,9 +270,9 @@ enum
     font_remaps_8 = 8,
 };
 // static_assert(sizeof(palette_types_enum) == 4);
-} // namespace palette_types_enum
+} // namespace PaletteTypes
 
-namespace ped_bit_status_enum
+namespace PedBitStatus
 {
 enum
 {
@@ -311,9 +311,9 @@ enum
     k_ped_0x80000000 = 0x80000000,
 };
 // static_assert(sizeof(ped_bit_status_enum) == 0x4);
-} // namespace ped_bit_status_enum
+} // namespace PedBitStatus
 
-namespace ped_major_state
+namespace PedMajorState
 {
 enum
 {
@@ -327,9 +327,9 @@ enum
     ped_major_getting_out_a_car = 7
 };
 // static_assert(sizeof(ped_major_state) == 0x1);
-} // namespace ped_major_state
+} // namespace PedMajorState
 
-namespace ped_ocupation_enum
+namespace PedOcupation
 {
 enum
 { /* The ocupation that a PED can have */
@@ -387,9 +387,9 @@ enum
     no_occupation = 51,
 };
 // static_assert(sizeof(ped_ocupation_enum) == 0x4);
-} // namespace ped_ocupation_enum
+} // namespace PedOcupation
 
-namespace ped_remap_enum
+namespace PedRemap
 {
 enum
 {
@@ -422,9 +422,9 @@ enum
     ped_remap_naked_dummy = 26,
 };
 // static_assert(sizeof(ped_remap_enum) == 0x1);
-} // namespace ped_remap_enum
+} // namespace PedRemap
 
-namespace ped_state1_enum
+namespace PedState1Alias
 {
 enum
 {
@@ -441,9 +441,9 @@ enum
     ped_driving = 10,
 };
 // static_assert(sizeof(ped_state1_enum) == 0x4);
-} // namespace ped_state1_enum
+} // namespace PedState1Alias
 
-namespace ped_state_2
+namespace PedState2
 {
 enum
 {
@@ -477,9 +477,9 @@ enum
     Unknown_30 = 30,
 };
 // static_assert(sizeof(ped_state_2) == 0x4);
-} // namespace ped_state_2
+} // namespace PedState2
 
-namespace Char_B4_state
+namespace CharB4State
 {
 enum
 {
@@ -503,9 +503,9 @@ enum
     Smoking_35 = 35,
     Interacting_Car_Door_36 = 36,
 };
-} // namespace Char_B4_state
+} // namespace CharB4State
 
-namespace Char_Anim_state
+namespace CharAnimState
 {
 enum
 {
@@ -525,9 +525,9 @@ enum
     Unknown_13 = 13,
     Unknown_14 = 14,
 };
-} // namespace Char_Anim_state
+} // namespace CharAnimState
 
-namespace spec_surface_type_enum
+namespace SpecSurfaceType
 {
 enum
 {
@@ -542,9 +542,9 @@ enum
     spec_grass_dirt_wall = 10,
 };
 // static_assert(sizeof(spec_surface_type_enum) == 4);
-} // namespace spec_surface_type_enum
+} // namespace SpecSurfaceType
 
-namespace car_surface_type
+namespace CarSurfaceType
 {
 enum
 {
@@ -558,9 +558,9 @@ enum
     water_surface_8 = 8,
     unknown_surface_9 = 9,
 };
-} // namespace car_surface_type
+} // namespace CarSurfaceType
 
-namespace sprite_types_enum
+namespace SpriteTypes
 {
 enum
 {
@@ -575,9 +575,9 @@ enum
     code_obj2_8 = 8,
 };
 // static_assert(sizeof(sprite_types_enum) == 4);
-} // namespace sprite_types_enum
+} // namespace SpriteTypes
 
-namespace weapon_type
+namespace WeaponType
 {
 enum
 {
@@ -607,9 +607,9 @@ enum
     weapon_0x17 = 23,
 };
 // static_assert(sizeof(weapon_type) == 0x4);
-} // namespace weapon_type
+} // namespace WeaponType
 
-namespace objects
+namespace Objects
 {
 enum
 {
@@ -791,9 +791,9 @@ enum
     russian_mafia_icon_293 = 293,
     tunnel_blocker_294 = 294,
 };
-} // namespace objects
+} // namespace Objects
 
-namespace threat_reaction_enum
+namespace ThreatReaction
 {
 enum
 {
@@ -802,9 +802,9 @@ enum
     react_as_normal_2 = 2,
     run_away_3 = 3,
 };
-} // namespace threat_reaction_enum
+} // namespace ThreatReaction
 
-namespace objective_status
+namespace ObjectiveStatus
 {
 enum
 {
@@ -812,9 +812,9 @@ enum
     passed_1 = 1,
     failed_2 = 2,
 };
-} // namespace objective_status
+} // namespace ObjectiveStatus
 
-namespace objectives_enum
+namespace Objectives
 {
 enum
 {
@@ -881,9 +881,9 @@ enum
     turret_put_out_car_fire_60 = 60,
     objective_61 = 61,
 };
-} // namespace objectives_enum
+} // namespace Objectives
 
-namespace threat_search_enum
+namespace ThreatSearch
 {
 enum
 {
@@ -895,9 +895,9 @@ enum
     area_player_only_5 = 5,
     line_of_sight_player_only_6 = 6,
 };
-} // namespace threat_search_enum
+} // namespace ThreatSearch
 
-namespace ped_type
+namespace PedType
 {
 enum
 {
@@ -909,7 +909,7 @@ enum
     script_created_5 = 5,
     dummy_with_occupation_6 = 6,
 };
-} // namespace ped_type
+} // namespace PedType
 
 // Keeps the number of distinct names in headers MapRenderer.cpp includes unchanged after merging ped_type_enum into
 // ped_type; it flips Draw3SidedDiagonalDownRight_4EF520 / Draw4SidedDiagonalUpLeft_4EF880 otherwise (see car_flags.hpp
@@ -923,7 +923,7 @@ enum
     kPedTypeNameCount4
 };
 
-namespace ped_state_1
+namespace PedState1
 {
 enum
 {
@@ -939,7 +939,7 @@ enum
     dead_9 = 9,
     in_car_10 = 10,
 };
-} // namespace ped_state_1
+} // namespace PedState1
 
 namespace CarDamageAreas
 {

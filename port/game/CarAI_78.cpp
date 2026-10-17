@@ -753,7 +753,7 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
 
             if (NearestSpriteOfType_477E60)
             {
-                if (NearestSpriteOfType_477E60->GetType_416B40() == sprite_types_enum::car_2)
+                if (NearestSpriteOfType_477E60->GetType_416B40() == SpriteTypes::car_2)
                 {
                     CarAI_78* pYieldAI = NearestSpriteOfType_477E60->field_8_car_bc_ptr->field_5C_AI;
                     if (pYieldAI)
@@ -872,7 +872,7 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
                 pProbe->set_xyz_lazy_420600(probe_x, probe_y, field_0_car->field_50_car_sprite->field_1C_zpos);
 
                 Sprite* pHit = gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(pProbe, 0);
-                if (pHit && pHit->GetType_416B40() == sprite_types_enum::car_2)
+                if (pHit && pHit->GetType_416B40() == SpriteTypes::car_2)
                 {
                     CarAI_78* pAi = pHit->field_8_car_bc_ptr->field_5C_AI;
                     if (pAi && !pAi->field_24_bf.bFlag17 && pAi->field_48_probe_direction != this->field_48_probe_direction)
@@ -1001,7 +1001,7 @@ void CarAI_78::CheckRoadAhead_448770()
                 Sprite* pNearestSpriteOfType = gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(obj_5C_f58, 0);
                 if (pNearestSpriteOfType)
                 {
-                    if (pNearestSpriteOfType->GetType_416B40() == sprite_types_enum::car_2)
+                    if (pNearestSpriteOfType->GetType_416B40() == SpriteTypes::car_2)
                     {
                         this->field_0_car->DoBrake_43A950();
                         this->field_8_maneuver_active = 0;
@@ -2465,7 +2465,7 @@ void CarAI_78::DetectCarAhead_44D1D0()
     u8 bSlowerThanTarget = 0;
 
     byte_677A94 = 0;
-    if (this->field_0_car->field_84_car_info_idx == car_model_enum::BUS)
+    if (this->field_0_car->field_84_car_info_idx == CarModel::BUS)
     {
         return;
     }
@@ -2519,7 +2519,7 @@ void CarAI_78::DetectCarAhead_44D1D0()
         return;
     }
 
-    if (this->field_70_nearest_entity->field_30_sprite_type_enum != sprite_types_enum::car_2)
+    if (this->field_70_nearest_entity->field_30_sprite_type_enum != SpriteTypes::car_2)
     {
         return;
     }
@@ -3281,7 +3281,7 @@ void CarAI_78::UpdateStateMachine_44E560()
                         break;
 
                     case car_task_type::follow_target_ped_4:
-                        if (this->field_0_car->field_84_car_info_idx != car_model_enum::EDSELFBI)
+                        if (this->field_0_car->field_84_car_info_idx != CarModel::EDSELFBI)
                         {
                             speed_limit = kFpNine_677BB8;
                         }
@@ -3424,7 +3424,7 @@ void CarAI_78::UpdateStateMachine_44E560()
                         break;
 
                     case car_task_type::follow_target_ped_4:
-                        if (this->field_0_car->field_84_car_info_idx != car_model_enum::EDSELFBI)
+                        if (this->field_0_car->field_84_car_info_idx != CarModel::EDSELFBI)
                         {
                             speed_limit = kFpNine_677BB8;
                         }
@@ -4277,7 +4277,7 @@ void CarAI_78::ReactToNearbyCar_451980()
     {
         if (cBC->field_54_driver)
         {
-            if (cBC->field_54_driver->field_28C_threat_reaction == threat_reaction_enum::react_as_emergency_1)
+            if (cBC->field_54_driver->field_28C_threat_reaction == ThreatReaction::react_as_emergency_1)
             {
                 bUnknown = 1;
             }
@@ -4295,7 +4295,7 @@ void CarAI_78::ReactToNearbyCar_451980()
         {
             flag1 = true;
         }
-        if (cBC->field_7C_ped_type == ped_type::player_2)
+        if (cBC->field_7C_ped_type == PedType::player_2)
         {
             DetectCarAhead_44D1D0();
         }
@@ -4380,7 +4380,7 @@ void CarAI_78::ReactToNearbyCar_451980()
                 field_0_car->field_58_physics->NeutralGear_42AC00();
             }
         }
-        else if (cBC->field_7C_ped_type == ped_type::player_2)
+        else if (cBC->field_7C_ped_type == PedType::player_2)
         {
             if (field_24_bf.bFlag21)
             {
@@ -4428,7 +4428,7 @@ void CarAI_78::ReactToNearbyCar_451980()
                         {
                             if (cBC->field_76_last_seen_timer > 5)
                             {
-                                if (cBC->field_7C_ped_type == ped_type::dummy_3)
+                                if (cBC->field_7C_ped_type == PedType::dummy_3)
                                 {
                                     cBC->MarkForDespawn_421470();
                                 }
@@ -4512,7 +4512,7 @@ void CarAI_78::ReactToNearbyCar_451980()
     else
     {
         byte_677B3C = 0;
-        if (!field_24_bf.bFlag12 || field_68_car_in_collision->field_7C_ped_type != ped_type::player_2)
+        if (!field_24_bf.bFlag12 || field_68_car_in_collision->field_7C_ped_type != PedType::player_2)
         {
             if (gCurrCarAI_Velocity_677B00 > dword_6779C8)
             {
@@ -4532,7 +4532,7 @@ void CarAI_78::ReactToNearbyObject_451FA0()
     if (!byte_677BBC)
     {
         Object_2C* pObj = field_70_nearest_entity->AsObject2C_40FEC0();
-        if (pObj->field_18_model == objects::roadblock_21 || pObj->field_18_model == objects::pedestrian_crossing_marker_122)
+        if (pObj->field_18_model == Objects::roadblock_21 || pObj->field_18_model == Objects::pedestrian_crossing_marker_122)
         {
             field_0_car->DoBrakeAndHandbrake_43A970();
             byte_677B3C = 0;
@@ -4585,7 +4585,7 @@ void CarAI_78::ScanAheadForObstacles_452060()
 
     Car_BC* pCar = this->field_0_car;
 
-    if (pCar->field_7C_ped_type == ped_type::player_2)
+    if (pCar->field_7C_ped_type == PedType::player_2)
     {
         this->field_24_bf.bFlag4 = 0;
         probe_height = gF16fOne_677B94;
@@ -4790,17 +4790,17 @@ void CarAI_78::ScanAheadForObstacles_452060()
         react:
             switch (this->field_70_nearest_entity->GetType_416B40())
             {
-                case sprite_types_enum::object_1:
-                case sprite_types_enum::code_obj1_4:
-                case sprite_types_enum::map_obj_5:
+                case SpriteTypes::object_1:
+                case SpriteTypes::code_obj1_4:
+                case SpriteTypes::map_obj_5:
                     ReactToNearbyObject_451FA0();
                     break;
 
-                case sprite_types_enum::car_2:
+                case SpriteTypes::car_2:
                     ReactToNearbyCar_451980();
                     break;
 
-                case sprite_types_enum::ped_3:
+                case SpriteTypes::ped_3:
                     if (!field_24_bf.bFlag7)
                     {
                         ReactToNearbyPed_451FF0();
@@ -4972,7 +4972,7 @@ void CarAI_78::ManageCollisions_452A20()
 
         Ped* pDriver = field_68_car_in_collision->field_54_driver;
 
-        if (pDriver && pDriver->PedTypeIs_45EDE0(ped_type::player_2) && field_24_bf.bFlag21 == false)
+        if (pDriver && pDriver->PedTypeIs_45EDE0(PedType::player_2) && field_24_bf.bFlag21 == false)
         {
             field_0_car->field_58_physics->NeutralGear_42AC00();
             byte_677A5D = 0;
@@ -5121,7 +5121,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
     if (field_3C_seeking_road)
     {
         ++field_58_off_road_timer;
-        if (field_0_car->field_7C_ped_type != ped_type::script_created_5)
+        if (field_0_car->field_7C_ped_type != PedType::script_created_5)
         {
             if (field_58_off_road_timer > 200)
             {
@@ -5199,8 +5199,8 @@ void CarAI_78::UpdateDrivingAI_452DF0()
     }
     else if (!byte_677BBC)
     {
-        if (field_70_nearest_entity && field_70_nearest_entity->GetType_416B40() == sprite_types_enum::object_1 &&
-            field_70_nearest_entity->AsObject2C_40FEC0()->field_18_model == objects::pedestrian_crossing_marker_122)
+        if (field_70_nearest_entity && field_70_nearest_entity->GetType_416B40() == SpriteTypes::object_1 &&
+            field_70_nearest_entity->AsObject2C_40FEC0()->field_18_model == Objects::pedestrian_crossing_marker_122)
         {
             field_24_bf.bFlag4 = true;
             field_70_nearest_entity = nullptr;

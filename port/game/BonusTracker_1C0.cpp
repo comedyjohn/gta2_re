@@ -16,12 +16,12 @@ void BonusRule_2C::Init_431D50()
 {
     field_0_pZone = nullptr;
     field_4_event_type = bonus_event_type::any_event;
-    field_8_car_model = car_model_enum::none;
-    field_C_occupation = ped_ocupation_enum::no_occupation;
+    field_8_car_model = CarModel::none;
+    field_C_occupation = PedOcupation::no_occupation;
     field_10_gang_idx = -1;
     field_12_remap = -2;
     field_14_death_cause = ped_death_cause::none_0;
-    field_18_alt_car_model = car_model_enum::none;
+    field_18_alt_car_model = CarModel::none;
     field_1C_time_limit = 0;
     field_20_start_time = 0;
     field_24_check_mode = 0;
@@ -141,11 +141,11 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
             continue;
         }
         bonus_occupation = pBonus->field_C_occupation;
-        if (bonus_occupation == occupation || bonus_occupation == ped_ocupation_enum::no_occupation ||
+        if (bonus_occupation == occupation || bonus_occupation == PedOcupation::no_occupation ||
             IsOccupationInGroup_432240(occupation, pBonus->field_C_occupation))
         {
             bonus_car_model = pBonus->field_8_car_model;
-            if (bonus_car_model == car_model || bonus_car_model == car_model_enum::none ||
+            if (bonus_car_model == car_model || bonus_car_model == CarModel::none ||
                 AreCarModelsEquivalent_432300(car_model, pBonus->field_8_car_model))
             {
                 bonus_gang_idx = pBonus->field_10_gang_idx;
@@ -159,7 +159,7 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
                             IsDeathCauseInGroup_432170(death_cause, pBonus->field_14_death_cause))
                         {
                             bonus_alt_car_model = pBonus->field_18_alt_car_model;
-                            if ((bonus_alt_car_model == alt_car_model || bonus_alt_car_model == car_model_enum::none) &&
+                            if ((bonus_alt_car_model == alt_car_model || bonus_alt_car_model == CarModel::none) &&
                                 (pBonus->field_0_pZone == pZone || !pBonus->field_0_pZone))
                             {
                                 return i;
@@ -347,57 +347,57 @@ s8 BonusTracker_1C0::IsDeathCauseInGroup_432170(int death_cause, int rule_death_
 // 0x432240
 s8 BonusTracker_1C0::IsOccupationInGroup_432240(int occupation, int rule_occupation)
 {
-    if (rule_occupation == ped_ocupation_enum::any_law_enforcement)
+    if (rule_occupation == PedOcupation::any_law_enforcement)
     {
         switch (occupation)
         {
-            case ped_ocupation_enum::police:
-            case ped_ocupation_enum::swat:
-            case ped_ocupation_enum::fbi:
-            case ped_ocupation_enum::army_army:
-            case ped_ocupation_enum::walking_guard_29:
-            case ped_ocupation_enum::unknown_cop_occu_30:
-            case ped_ocupation_enum::unknown_cop_occu_31:
-            case ped_ocupation_enum::tank_driver:
-            case ped_ocupation_enum::roadblock_cop_37:
-            case ped_ocupation_enum::road_block_tank_man:
+            case PedOcupation::police:
+            case PedOcupation::swat:
+            case PedOcupation::fbi:
+            case PedOcupation::army_army:
+            case PedOcupation::walking_guard_29:
+            case PedOcupation::unknown_cop_occu_30:
+            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::tank_driver:
+            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::road_block_tank_man:
                 return 1;
             default:
                 return 0;
         }
     }
-    else if (rule_occupation == ped_ocupation_enum::any_emergency_service_man)
+    else if (rule_occupation == PedOcupation::any_emergency_service_man)
     {
         switch (occupation)
         {
-            case ped_ocupation_enum::paramedic_23:
-            case ped_ocupation_enum::police:
-            case ped_ocupation_enum::swat:
-            case ped_ocupation_enum::fbi:
-            case ped_ocupation_enum::army_army:
-            case ped_ocupation_enum::walking_guard_29:
-            case ped_ocupation_enum::unknown_cop_occu_30:
-            case ped_ocupation_enum::unknown_cop_occu_31:
-            case ped_ocupation_enum::tank_driver:
-            case ped_ocupation_enum::roadblock_cop_37:
-            case ped_ocupation_enum::fireman:
-            case ped_ocupation_enum::road_block_tank_man:
+            case PedOcupation::paramedic_23:
+            case PedOcupation::police:
+            case PedOcupation::swat:
+            case PedOcupation::fbi:
+            case PedOcupation::army_army:
+            case PedOcupation::walking_guard_29:
+            case PedOcupation::unknown_cop_occu_30:
+            case PedOcupation::unknown_cop_occu_31:
+            case PedOcupation::tank_driver:
+            case PedOcupation::roadblock_cop_37:
+            case PedOcupation::fireman:
+            case PedOcupation::road_block_tank_man:
                 return 1;
             default:
                 return 0;
         }
     }
-    else if (rule_occupation == ped_ocupation_enum::any_gang_member)
+    else if (rule_occupation == PedOcupation::any_gang_member)
     {
-        if (occupation == ped_ocupation_enum::armed_gang_member_19 || occupation == ped_ocupation_enum::guard ||
-            occupation == ped_ocupation_enum::gang_driver_42)
+        if (occupation == PedOcupation::armed_gang_member_19 || occupation == PedOcupation::guard ||
+            occupation == PedOcupation::gang_driver_42)
         {
             return 1;
         }
     }
-    else if (rule_occupation == ped_ocupation_enum::any_elvis)
+    else if (rule_occupation == PedOcupation::any_elvis)
     {
-        if (occupation == ped_ocupation_enum::elvis || occupation == ped_ocupation_enum::elvis_leader)
+        if (occupation == PedOcupation::elvis || occupation == PedOcupation::elvis_leader)
         {
             return 1;
         }
@@ -411,20 +411,20 @@ bool BonusTracker_1C0::AreCarModelsEquivalent_432300(int car_model_1, int car_mo
     bool is_fed_car_1;
     bool is_fed_car_2;
 
-    if ((car_model_1 == car_model_enum::TAXI || car_model_1 == car_model_enum::STYPECAB) &&
-        (car_model_2 == car_model_enum::TAXI || car_model_2 == car_model_enum::STYPECAB))
+    if ((car_model_1 == CarModel::TAXI || car_model_1 == CarModel::STYPECAB) &&
+        (car_model_2 == CarModel::TAXI || car_model_2 == CarModel::STYPECAB))
     {
         return true;
     }
     switch (car_model_1)
     {
-        case car_model_enum::apc:
-        case car_model_enum::COPCAR:
-        case car_model_enum::GUNJEEP:
-        case car_model_enum::JEEP:
-        case car_model_enum::SWATVAN:
-        case car_model_enum::TANK:
-        case car_model_enum::EDSELFBI:
+        case CarModel::apc:
+        case CarModel::COPCAR:
+        case CarModel::GUNJEEP:
+        case CarModel::JEEP:
+        case CarModel::SWATVAN:
+        case CarModel::TANK:
+        case CarModel::EDSELFBI:
             is_fed_car_1 = true;
             break;
         default:
@@ -433,13 +433,13 @@ bool BonusTracker_1C0::AreCarModelsEquivalent_432300(int car_model_1, int car_mo
     }
     switch (car_model_2)
     {
-        case car_model_enum::apc:
-        case car_model_enum::COPCAR:
-        case car_model_enum::GUNJEEP:
-        case car_model_enum::JEEP:
-        case car_model_enum::SWATVAN:
-        case car_model_enum::TANK:
-        case car_model_enum::EDSELFBI:
+        case CarModel::apc:
+        case CarModel::COPCAR:
+        case CarModel::GUNJEEP:
+        case CarModel::JEEP:
+        case CarModel::SWATVAN:
+        case CarModel::TANK:
+        case CarModel::EDSELFBI:
             is_fed_car_2 = true;
             break;
         default:

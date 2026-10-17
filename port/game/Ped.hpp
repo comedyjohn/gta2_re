@@ -32,7 +32,7 @@ class Ped
   public:
     bool Is_occupation_elvis_433C90()
     {
-        return field_240_occupation == ped_ocupation_enum::elvis;
+        return field_240_occupation == PedOcupation::elvis;
     }
 
     void set_enter_car_as_passenger_4039B0(s32 v)
@@ -762,8 +762,8 @@ class Ped
 
     bool IsPedGoingToEnterCar_492FD0()
     {
-        return field_258_objective == objectives_enum::enter_car_as_driver_35 ||
-            field_25C_internal_objective == objectives_enum::enter_car_as_driver_35;
+        return field_258_objective == Objectives::enter_car_as_driver_35 ||
+            field_25C_internal_objective == Objectives::enter_car_as_driver_35;
     }
 
     Ang16 GetAimAngle_4CCA90()
@@ -773,7 +773,7 @@ class Ped
 
     bool isDead_403B60()
     {
-        return this->field_278_ped_state_1 == ped_state_1::dead_9;
+        return this->field_278_ped_state_1 == PedState1::dead_9;
     }
 
     PedGroup* GetGroup_475AF0()

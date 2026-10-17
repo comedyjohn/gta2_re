@@ -501,7 +501,7 @@ void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
 // 0x5d0210
 void Hud_CopHead_C_Array::Init_5D0210()
 {
-    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, 14);
+    u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::user_6, 14);
     sprite_index* sprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
 
     field_4C_w_fp.FromU8(sprite_index->field_4_width);
@@ -1230,13 +1230,13 @@ s32 GetPhoneTypeFromObjModel_5D1260(s32 phone_model_idx)
     switch (phone_model_idx)
     {
         case 176:
-        case objects::red_phone_177:
+        case Objects::red_phone_177:
             return 2;
         case 180:
-        case objects::green_phone_181:
+        case Objects::green_phone_181:
             return 3;
         case 178:
-        case objects::yellow_phone_179:
+        case Objects::yellow_phone_179:
             return 1;
         default:
             return 0;
@@ -1473,7 +1473,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
                 {
                     start_xpos = 0;
                 }
-                DrawText_5D7720(tmpBuff_67BD9C, start_xpos, text_ypos, word_70643E, palette_types_enum::font_remaps_8, 5, 0, 0);
+                DrawText_5D7720(tmpBuff_67BD9C, start_xpos, text_ypos, word_70643E, PaletteTypes::font_remaps_8, 5, 0, 0);
                 text_ypos -= line_spacing;
             }
         }
@@ -1781,45 +1781,13 @@ void Hud_Pager_C::DrawCounterDigits_5D2380(s32 xpos, s32 ypos)
             }
         }
     }
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + ones,
-                            xpos + 11,
-                            ypos + 2,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + ones, xpos + 11, ypos + 2, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + tens,
-                            xpos + 4,
-                            ypos + 2,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + tens, xpos + 4, ypos + 2, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + hundreds,
-                            xpos - 3,
-                            ypos + 2,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + hundreds, xpos - 3, ypos + 2, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + thousands,
-                            xpos - 10,
-                            ypos + 2,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + thousands, xpos - 10, ypos + 2, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 }
 
 // 0x5d2680
@@ -1828,80 +1796,40 @@ void Hud_Pager_C::DrawDigits_5D2680(s32 xpos, s32 ypos)
     // (field_0_timer / 30 fps) = total time in seconds
     s32 minutes = (field_0_timer / 30) / 60;
     s32 seconds = (field_0_timer / 30) % 60;
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
+    DrawFigureScaled_5D7670(SpriteTypes::user_6,
                             123 + minutes / 10,
                             xpos - 13,
                             ypos + 3,
                             kAngZero_706610,
-                            palette_types_enum::sprites_2,
+                            PaletteTypes::sprites_2,
                             0,
                             0,
                             0);
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + minutes % 10,
-                            xpos - 6,
-                            ypos + 3,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + minutes % 10, xpos - 6, ypos + 3, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
     if (field_0_timer % 15 <= 7)
     {
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                                121,
-                                xpos - 1,
-                                ypos + 3,
-                                kAngZero_706610,
-                                palette_types_enum::sprites_2,
-                                0,
-                                0,
-                                0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 121, xpos - 1, ypos + 3, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
         if (field_0_timer < 300) // less than 10 seconds: draw flashing light
         {
-            DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                                    133,
-                                    xpos + 20,
-                                    ypos + 14,
-                                    kAngZero_706610,
-                                    palette_types_enum::sprites_2,
-                                    0,
-                                    0,
-                                    0);
+            DrawFigureScaled_5D7670(SpriteTypes::user_6, 133, xpos + 20, ypos + 14, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
         }
     }
     else
     {
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                                120,
-                                xpos - 1,
-                                ypos + 3,
-                                kAngZero_706610,
-                                palette_types_enum::sprites_2,
-                                0,
-                                0,
-                                0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 120, xpos - 1, ypos + 3, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
     }
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
-                            123 + seconds / 10,
-                            xpos + 4,
-                            ypos + 3,
-                            kAngZero_706610,
-                            palette_types_enum::sprites_2,
-                            0,
-                            0,
-                            0);
+    DrawFigureScaled_5D7670(SpriteTypes::user_6, 123 + seconds / 10, xpos + 4, ypos + 3, kAngZero_706610, PaletteTypes::sprites_2, 0, 0, 0);
 
-    DrawFigureScaled_5D7670(sprite_types_enum::user_6,
+    DrawFigureScaled_5D7670(SpriteTypes::user_6,
                             123 + seconds % 10,
                             xpos + 11,
                             ypos + 3,
                             kAngZero_706610,
-                            palette_types_enum::sprites_2,
+                            PaletteTypes::sprites_2,
                             0,
                             0,
                             0);
@@ -1910,7 +1838,7 @@ void Hud_Pager_C::DrawDigits_5D2680(s32 xpos, s32 ypos)
 // 0x5d2ab0
 void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
 {
-    const s32 palette_type = palette_types_enum::sprites_2;
+    const s32 palette_type = PaletteTypes::sprites_2;
     if (field_0_timer < 0 && !field_4_ptr_counter)
     {
         return;
@@ -1922,7 +1850,7 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
         s32 bottom_height = get_sprite_height_4C7250(118);
         s32 middle_height = get_sprite_height_4C7250(119);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6,
+        DrawFigureScaled_5D7670(SpriteTypes::user_6,
                                 117,
                                 xpos,
                                 ypos - top_height / 2 - middle_height / 2,
@@ -1933,9 +1861,9 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
                                 0);
 
         // The middle sprite's y goes through the Fix16(u32) constructor (out-of-line copy 0x4926F0) like x does
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 119, xpos, static_cast<u32>(ypos), kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 119, xpos, static_cast<u32>(ypos), kAngZero_706610, palette_type, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6,
+        DrawFigureScaled_5D7670(SpriteTypes::user_6,
                                 118,
                                 xpos,
                                 ypos + middle_height / 2 + bottom_height / 2,
@@ -1952,9 +1880,9 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
         s32 top_height = get_sprite_height_4C7250(117);
         s32 bottom_height = get_sprite_height_4C7250(118);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 117, xpos, ypos - top_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 117, xpos, ypos - top_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 118, xpos, ypos + bottom_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 118, xpos, ypos + bottom_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
         Hud_Pager_C::DrawDigits_5D2680(xpos, ypos);
     }
     else
@@ -1962,9 +1890,9 @@ void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
         s32 top_height = get_sprite_height_4C7250(117);
         s32 bottom_height = get_sprite_height_4C7250(118);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 117, xpos, ypos - top_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 117, xpos, ypos - top_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
 
-        DrawFigureScaled_5D7670(sprite_types_enum::user_6, 118, xpos, ypos + bottom_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
+        DrawFigureScaled_5D7670(SpriteTypes::user_6, 118, xpos, ypos + bottom_height / 2, kAngZero_706610, palette_type, 0, 0, 0);
         Hud_Pager_C::DrawCounterDigits_5D2380(xpos, ypos);
     }
 }
@@ -2325,7 +2253,7 @@ void Hud_Brief_704::DrawBrief_5D3B80()
                                 (32), // x
                                 (443), // y
                                 kAngZero_706610, // rot
-                                palette_types_enum::sprites_2,
+                                PaletteTypes::sprites_2,
                                 0,
                                 0,
                                 0);
@@ -2336,7 +2264,7 @@ void Hud_Brief_704::DrawBrief_5D3B80()
                         (64), // x
                         first_line_ypos, // y
                         gBriefFont_7065C4, // fontType
-                        palette_types_enum::sprites_2,
+                        PaletteTypes::sprites_2,
                         0, // palette
                         0, // alpha
                         0); // alpha_flag
@@ -3080,7 +3008,7 @@ namespace
 {
 inline u16 GetPowerupSpriteIndex_5D61A0(gtx_0x106C* pGtx, s32 sprite_pal)
 {
-    return pGtx->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, sprite_pal);
+    return pGtx->GetSpriteTrueIndex_5AA460(SpriteTypes::user_6, sprite_pal);
 }
 } // namespace
 

@@ -49,8 +49,8 @@ CarChaseTask_40* CarChaseTaskTable_500::AllocateEntry_474810()
 // 0x474850
 bool CarChaseTaskTable_500::AreAllies_474850(Ped* pPed1, Ped* pPed2)
 {
-    if (pPed1->get_occupation_403980() < ped_ocupation_enum::police ||
-        pPed1->get_occupation_403980() > ped_ocupation_enum::army_army) // ped 1 is not police
+    if (pPed1->get_occupation_403980() < PedOcupation::police ||
+        pPed1->get_occupation_403980() > PedOcupation::army_army) // ped 1 is not police
     {
         if (pPed2->field_17C_pGang == pPed1->field_17C_pGang) // they are from same gang (or both dont have any)
         {
@@ -59,8 +59,8 @@ bool CarChaseTaskTable_500::AreAllies_474850(Ped* pPed1, Ped* pPed2)
     }
     else
     {
-        if (pPed2->get_occupation_403980() >= ped_ocupation_enum::police &&
-            pPed2->field_240_occupation <= ped_ocupation_enum::army_army) // both ped 1 and ped 2 are police feds
+        if (pPed2->get_occupation_403980() >= PedOcupation::police &&
+            pPed2->field_240_occupation <= PedOcupation::army_army) // both ped 1 and ped 2 are police feds
         {
             return true;
         }

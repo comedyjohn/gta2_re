@@ -112,7 +112,7 @@ static inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pV
 
 static inline f32 Fix16ToFloat_Paren(const Fix16& v)
 {
-    return ((v.mValue / 16384.0f));
+    return ((v.mValue / 16384.0F));
 }
 
 // The first expansion in Draw_59EFF0: four more no-op nodes before the y line (point.x/point.y) and four
@@ -134,16 +134,16 @@ static inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Ve
 // not exactly but something similar... https://decomp.me/scratch/N5g2D
 static inline void SetUV_4B9BC0(f32& u, f32& v)
 {
-    gTileVerts_7036D0[0].u = 0.30000001f;
-    gTileVerts_7036D0[0].v = 0.30000001f;
+    gTileVerts_7036D0[0].u = 0.30000001F;
+    gTileVerts_7036D0[0].v = 0.30000001F;
 
     gTileVerts_7036D0[1].u = u;
-    gTileVerts_7036D0[1].v = 0.30000001f;
+    gTileVerts_7036D0[1].v = 0.30000001F;
 
     gTileVerts_7036D0[2].u = u;
     gTileVerts_7036D0[2].v = v;
 
-    gTileVerts_7036D0[3].u = 0.30000001f;
+    gTileVerts_7036D0[3].u = 0.30000001F;
     gTileVerts_7036D0[3].v = v;
 }
 
@@ -398,7 +398,7 @@ s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, cons
         return -1;
     }
     sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
-    u32 bUnk = sprite_index_5AA440->field_5_height > 0x40u;
+    u32 bUnk = sprite_index_5AA440->field_5_height > 0x40U;
     SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var, &a4);
     if (pSprt14)
     {
@@ -988,9 +988,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
         if (pCar)
         {
             Fix16 xpos;
-            xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
+            xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
             Fix16 ypos;
-            ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
+            ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
             swprintf(tmpBuff_67BD9C, L"%d", pCar->field_6C_car_id);
             DrawTextScaled_4BA2C0(tmpBuff_67BD9C, xpos, ypos, word_703BAA);
         }
@@ -1000,9 +1000,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             if (pB4)
             {
                 Fix16 xpos;
-                xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
+                xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
                 Fix16 ypos;
-                ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
+                ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
                 swprintf(tmpBuff_67BD9C, L"%d", pB4->field_7C_pPed->field_200_id);
                 s32 palette_type = 2;
                 DrawText_5D8A10(tmpBuff_67BD9C,
@@ -1024,9 +1024,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
         if (pObj)
         {
             Fix16 xpos;
-            xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
+            xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
             Fix16 ypos;
-            ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
+            ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
             swprintf(tmpBuff_67BD9C, L"%d:%d", pObj->field_18_model, pObj->field_14_id);
             s32 palette_type = 2;
             DrawText_5D8A10(tmpBuff_67BD9C,
@@ -1052,8 +1052,8 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
         Car_BC* pCar = AsCar_40FEB0();
         if (pCar)
         {
-            Fix16 xpos(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0f));
-            Fix16 ypos(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0f));
+            Fix16 xpos(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
+            Fix16 ypos(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
 
             if (pCar->IsEmittingHorn_411970())
             {
@@ -1124,8 +1124,8 @@ void Sprite::Draw_59EFF0()
 
     Fix16_Point* pRect = field_4_pVisualShape->field_C_corners;
 
-    u = pSpriteIndex->field_4_width - 0.30000001f;
-    v = pSpriteIndex->field_5_height - 0.30000001f;
+    u = pSpriteIndex->field_4_width - 0.30000001F;
+    v = pSpriteIndex->field_5_height - 0.30000001F;
 
     Fix16 new_zpos = RoundZToLayer_4B9C70(field_1C_zpos);
 
@@ -1977,13 +1977,13 @@ char_type Sprite::CheckCornerZCollisions_5A1CA0(u32* pCount)
     if (gMap_0x370_6F6268->CheckZCollisionAtCoord_4E5300(p4C->field_C_corners[1].x, p4C->field_C_corners[1].y, z_min, z_max))
     {
         ++*pCount;
-        flags |= 2u;
+        flags |= 2U;
     }
 
     if (gMap_0x370_6F6268->CheckZCollisionAtCoord_4E5300(p4C->field_C_corners[2].x, p4C->field_C_corners[2].y, z_min, z_max))
     {
         ++*pCount;
-        flags |= 4u;
+        flags |= 4U;
     }
 
     if (gMap_0x370_6F6268->CheckZCollisionAtCoord_4E5300(p4C->field_C_corners[3].x, p4C->field_C_corners[3].y, z_min, z_max))

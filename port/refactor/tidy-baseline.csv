@@ -1747,7 +1747,6 @@ port/game/SpriteGrid_400.cpp,misc-use-anonymous-namespace,1
 port/game/SpriteGrid_400.cpp,readability-convert-member-functions-to-static,2
 port/game/SpriteGrid_400.cpp,readability-function-cognitive-complexity,1
 port/game/SpriteGrid_400.cpp,readability-implicit-bool-conversion,55
-port/game/SpriteGrid_400.cpp,readability-uppercase-literal-suffix,1
 port/game/SpriteGrid_400.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/SpriteGrid_400.hpp,cppcoreguidelines-avoid-non-const-global-variables,7
 port/game/SpriteGrid_400.hpp,cppcoreguidelines-pro-bounds-constant-array-index,1
@@ -2510,7 +2509,6 @@ port/game/sprite.cpp,readability-isolate-declaration,1
 port/game/sprite.cpp,readability-make-member-function-const,20
 port/game/sprite.cpp,readability-non-const-parameter,4
 port/game/sprite.cpp,readability-simplify-boolean-expr,1
-port/game/sprite.cpp,readability-uppercase-literal-suffix,18
 port/game/sprite.hpp,bugprone-narrowing-conversions,3
 port/game/sprite.hpp,cppcoreguidelines-avoid-c-arrays,3
 port/game/sprite.hpp,cppcoreguidelines-avoid-non-const-global-variables,11

@@ -177,7 +177,7 @@ Sprite* SpriteGrid_400::FindNearestSprite_SpiralSearch_477C90(s32 primary_sprite
         gSpriteGrid_zpos_min_678F3C = Fix16(7);
     }
 
-    SearchTileStripForClosestSprite_4781E0(1u);
+    SearchTileStripForClosestSprite_4781E0(1U);
 
     Sprite* pCollisionSprite = gSpriteGrid_smallestDistSprite_678E40; // from previous call
     if (search_mode > 1 || !gSpriteGrid_smallestDistSprite_678E40)

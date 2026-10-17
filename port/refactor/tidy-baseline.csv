@@ -1070,7 +1070,6 @@ port/game/NetPlay.cpp,readability-make-member-function-const,2
 port/game/NetPlay.cpp,readability-named-parameter,1
 port/game/NetPlay.cpp,readability-qualified-auto,1
 port/game/NetPlay.cpp,readability-simplify-boolean-expr,1
-port/game/NetPlay.cpp,readability-uppercase-literal-suffix,1
 port/game/NetPlay.hpp,cppcoreguidelines-avoid-c-arrays,11
 port/game/NetPlay.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/NetPlay.hpp,cppcoreguidelines-special-member-functions,1
@@ -1108,7 +1107,6 @@ port/game/Network_20324.cpp,readability-function-size,2
 port/game/Network_20324.cpp,readability-implicit-bool-conversion,35
 port/game/Network_20324.cpp,readability-make-member-function-const,5
 port/game/Network_20324.cpp,readability-suspicious-call-argument,1
-port/game/Network_20324.cpp,readability-uppercase-literal-suffix,22
 port/game/Network_20324.hpp,cppcoreguidelines-avoid-c-arrays,12
 port/game/Network_20324.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Network_20324.hpp,misc-non-private-member-variables-in-classes,17

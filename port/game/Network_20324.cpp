@@ -991,7 +991,7 @@ char_type* GetString_519A00(const char_type* pKey)
     }
     else
     {
-        wcstombs(Dest_6F88A4, pText, 256u);
+        wcstombs(Dest_6F88A4, pText, 256U);
     }
     return Dest_6F88A4;
 }
@@ -1154,7 +1154,7 @@ void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pN
     }
     else
     {
-        wcstombs(name, pName, 260u);
+        wcstombs(name, pName, 260U);
     }
 
     switch (pNetUi->Get_202D4_active_control_idx_51ACC0())
@@ -1596,7 +1596,7 @@ void Network_20324::ShowSpecificWindow_51ABF0(s32 showing_specific_window_idx)
 s32 Network_20324::OnInitDialog_51AC60(HWND hWnd, s32 lParam, Network_20324* thisPtr)
 {
     SetWindowLongPtrA(hWnd, 8, reinterpret_cast<LONG_PTR>(thisPtr));
-    gTimerId_6F8A18 = SetTimer(hWnd, 0xAu, 0xAu, nullptr);
+    gTimerId_6F8A18 = SetTimer(hWnd, 0xAU, 0xAU, nullptr);
     thisPtr->SetDlgHwnd_519E10(hWnd);
     thisPtr->CreateMainUi_51AA90(hWnd);
     thisPtr->PopulateMainUI_51AFA0();
@@ -1617,7 +1617,7 @@ void Network_20324::cb_sub_51ACD0(Network_20324* pNetUi, wchar_t* Source)
     LVFINDINFOA findInfo;
     char Dest[260];
 
-    wcstombs(Dest, Source, 260u);
+    wcstombs(Dest, Source, 260U);
 
     switch (pNetUi->Get_202D4_active_control_idx_51ACC0())
     {
@@ -1683,7 +1683,7 @@ s32 Network_20324::cb_SetPlayerPing_51AE50(Network_20324* pNetUi, Network_Player
     char_type pingText[260];
     char_type name[260];
 
-    wcstombs(name, pPing->field_0_name, 260u);
+    wcstombs(name, pPing->field_0_name, 260U);
 
     switch (pNetUi->Get_202D4_active_control_idx_51ACC0())
     {
@@ -1736,22 +1736,22 @@ void Network_20324::PopulateMainUI_51AFA0()
     columnInfo[1] = 0;
     columnInfo[3] = reinterpret_cast<LPARAM>("Ping");
     columnInfo[7] = 1;
-    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1024, 0x101B, 1u, reinterpret_cast<LPARAM>(columnInfo));
-    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1024, 0x101E, 1u, 65534);
+    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1024, 0x101B, 1U, reinterpret_cast<LPARAM>(columnInfo));
+    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1024, 0x101E, 1U, 65534);
     memset(columnInfo, 0, sizeof(columnInfo));
     columnInfo[0] = 36;
     columnInfo[3] = reinterpret_cast<LPARAM>("Player Name");
     u16 col_width = 3 * (gUiControlDefinitions_621430.data[2][0].field_0_windowParams.field_8_w >> 2);
     columnInfo[7] = 0;
     SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101B, 0, reinterpret_cast<LPARAM>(columnInfo));
-    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101Eu, 0, col_width);
+    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101EU, 0, col_width);
     memset(columnInfo, 0, sizeof(columnInfo));
     columnInfo[0] = 37;
     columnInfo[1] = 0;
     columnInfo[3] = reinterpret_cast<LPARAM>("Ping");
     columnInfo[7] = 1;
-    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101B, 1u, reinterpret_cast<LPARAM>(columnInfo));
-    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101E, 1u, 65534);
+    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101B, 1U, reinterpret_cast<LPARAM>(columnInfo));
+    SendDlgItemMessageA(field_202E0_dlg_hwnd, 1050, 0x101E, 1U, 65534);
 
     for (u32 map_idx = 0; map_idx < field_1FD64_total_map_count; map_idx++)
     {
@@ -1763,12 +1763,12 @@ void Network_20324::PopulateMainUI_51AFA0()
         SendDlgItemMessageA(field_202E0_dlg_hwnd, 1026, CB_SETITEMDATA, item_idx, map_idx);
     }
 
-    LRESULT item_a = SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, 323u, 0, reinterpret_cast<LPARAM>(GetString_519A00("netui19")));
+    LRESULT item_a = SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, 323U, 0, reinterpret_cast<LPARAM>(GetString_519A00("netui19")));
     SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, CB_SETITEMDATA, item_a, 0);
     LRESULT item_b =
         SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(GetString_519A00("netui20")));
     SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, CB_SETITEMDATA, item_b, 1);
-    LRESULT item_c = SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, 0x143u, 0, reinterpret_cast<LPARAM>(GetString_519A00("netui22")));
+    LRESULT item_c = SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, 0x143U, 0, reinterpret_cast<LPARAM>(GetString_519A00("netui22")));
     SendDlgItemMessageA(field_202E0_dlg_hwnd, 1036, CB_SETITEMDATA, item_c, 2);
     Network_20324::LoadGameSettingsFromRegistry_51C830();
     SendDlgItemMessageA(field_202E0_dlg_hwnd, 1026, CB_SETCURSEL, field_20088_game_settings.field_2018C_map_idx, 0);
@@ -1792,8 +1792,8 @@ LRESULT Network_20324::cb_AddChatMessage_51B2F0(Network_20324* pNetUi, Network_C
     char_type text[2048];
     char_type newText[2048];
 
-    wcstombs(message, pMsg->field_0_message, 260u);
-    wcstombs(name, pMsg->field_100_name, 260u);
+    wcstombs(message, pMsg->field_0_message, 260U);
+    wcstombs(name, pMsg->field_100_name, 260U);
     // TODO: the format strings are guesses (right sizes, contents unverified)
     snprintf(line, sizeof(line), "%s: %s", name, message);
 
@@ -2188,7 +2188,7 @@ void Network_20324::SetPlayNameAndSaveToRegistry_51BD40(const wchar_t* pPlayerNa
         RegSetValueExA(hKey,
                        "PlayerName",
                        0,
-                       1u, // TODO: constant
+                       1U, // TODO: constant
                        reinterpret_cast<const u8*>(pPlayerNameA),
                        strlen(pPlayerNameA) + 1); // +1 so the NULL is also written
         RegCloseKey(hKey);
@@ -2278,11 +2278,11 @@ void Network_20324::EnumerateMaps_51BFA0()
     {
         strcpy(FileName, "data\\");
         strcat(FileName, maps[i].field_410_mmp_name);
-        GetPrivateProfileStringA("MapFiles", "GMPFile", "", maps[i].field_0_map_name, 0x103u, FileName);
-        GetPrivateProfileStringA("MapFiles", "STYFile", "", maps[i].field_104_style_name, 0x103u, FileName);
-        GetPrivateProfileStringA("MapFiles", "SCRFile", "", maps[i].field_208_script_name, 0x103u, FileName);
-        GetPrivateProfileStringA("MapFiles", "Description", "", maps[i].field_30C_description, 0x103u, FileName);
-        GetPrivateProfileStringA("MapFiles", "PlayerCount", "", gTmpBuffer_67C598, 2u, FileName);
+        GetPrivateProfileStringA("MapFiles", "GMPFile", "", maps[i].field_0_map_name, 0x103U, FileName);
+        GetPrivateProfileStringA("MapFiles", "STYFile", "", maps[i].field_104_style_name, 0x103U, FileName);
+        GetPrivateProfileStringA("MapFiles", "SCRFile", "", maps[i].field_208_script_name, 0x103U, FileName);
+        GetPrivateProfileStringA("MapFiles", "Description", "", maps[i].field_30C_description, 0x103U, FileName);
+        GetPrivateProfileStringA("MapFiles", "PlayerCount", "", gTmpBuffer_67C598, 2U, FileName);
         maps[i].field_514_player_count = atoi(gTmpBuffer_67C598);
 
         // Only keep maps whose files all exist
@@ -2530,7 +2530,7 @@ void Network_20324::SetFragsNumberAndLabel_51CDC0(s32 gameType, s32 fragLimit, H
 // 0x51cfc0
 void Network_20324::SetGameSpeedTextLabelAndSlider_51CFC0(LPARAM game_speed, HWND hDlg)
 {
-    SendDlgItemMessageA(hDlg, 1031, 0x405, 1u, game_speed); // 0x405 = TBM_SETPOS
+    SendDlgItemMessageA(hDlg, 1031, 0x405, 1U, game_speed); // 0x405 = TBM_SETPOS
 
     LPCSTR pText = ""; // unset in the original for an unknown speed
     switch (game_speed)

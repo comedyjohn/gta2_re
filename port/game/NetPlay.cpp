@@ -288,7 +288,7 @@ s32 NetPlay::DirectPlayCreate_51DCD0()
 
     DirectPlayDestroy_51DC90();
 
-    if (CoCreateInstance(CLSID_DirectPlay, nullptr, 1u, IID_IDirectPlay3, reinterpret_cast<LPVOID*>(&field_5E4_pDPlay3)) < 0 ||
+    if (CoCreateInstance(CLSID_DirectPlay, nullptr, 1U, IID_IDirectPlay3, reinterpret_cast<LPVOID*>(&field_5E4_pDPlay3)) < 0 ||
         DirectPlayLobbyCreateW(nullptr, &pIDirectPlayLobby, nullptr, nullptr, 0) < 0)
     {
         return 0;

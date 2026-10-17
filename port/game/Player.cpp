@@ -1693,7 +1693,7 @@ void Player::RespawnPlayer_5670B0()
         {
             s32 y_pos = field_2C4_player_ped->get_cam_y().ToInt();
             s32 x_pos = field_2C4_player_ped->get_cam_x().ToInt();
-            pZone = gMap_0x370_6F6268->GetNearestZoneOfType_4DF240(x_pos, y_pos, Restart_16);
+            pZone = gMap_0x370_6F6268->GetNearestZoneOfType_4DF240(x_pos, y_pos, GmpZoneType::kRestart);
         }
         field_2C4_player_ped->RespawnPed_45C350(pZone);
     }
@@ -1939,9 +1939,10 @@ void Player::UpdateCurrentZones_568520()
     const Fix16 cam_x_fp = pPed->field_1AC_cam.x;
     const Fix16 cam_y_fp = pPed->field_1AC_cam.y;
     field_38_local_navigation_zone =
-        gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), Local_Navigation_15);
-    field_3C_navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), Navigation_1);
-    field_40_arrow_blocker_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), Arrow_Blocker_5);
+        gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), GmpZoneType::kLocalNavigation);
+    field_3C_navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), GmpZoneType::kNavigation);
+    field_40_arrow_blocker_zone =
+        gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(cam_x_fp.ToInt(), cam_y_fp.ToInt(), GmpZoneType::kArrowBlocker);
     field_34_gang_curr_location = gMap_0x370_6F6268->GetGangAtCoords_4DFB50(cam_x_fp, cam_y_fp);
 }
 
@@ -2519,7 +2520,7 @@ void Player::SetScoreTextColour_569C20()
 // 0x569CB0
 void Player::InitializePlayerState_569CB0()
 {
-    if (!gMap_0x370_6F6268->first_zone_by_type_4DF1D0(Restart_16))
+    if (!gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kRestart))
     {
         FatalError_4A38C0(Gta2Error::kNoRestartZone, "C:\\Splitting\\Gta2\\Source\\player.cpp",
                           2905); // No Restart Zone

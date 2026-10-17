@@ -74,18 +74,18 @@ bool CompareNameChars_577E90(char_type* pChar1, char_type* pChar2)
 // 0x577EE0
 gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
 {
-    u32 zone_type = Railway_Station_Entry_Point_11;
+    u32 zone_type = GmpZoneType::kRailwayStationEntryPoint;
 
     switch (case_value)
     {
         case 0:
-            zone_type = Railway_Station_Entry_Point_11;
+            zone_type = GmpZoneType::kRailwayStationEntryPoint;
             break;
         case 1:
-            zone_type = Railway_Station_Exit_Point_12;
+            zone_type = GmpZoneType::kRailwayStationExitPoint;
             break;
         case 2:
-            zone_type = Railway_Station_Stop_Point_13;
+            zone_type = GmpZoneType::kRailwayStopPoint;
             break;
         default:
             FatalError_4A38C0(1006, "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp", 98); // invalid case

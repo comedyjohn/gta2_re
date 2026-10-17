@@ -464,8 +464,8 @@ gmp_map_zone* Map_0x370::nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y)
         for (field_364_cur_zone_idx = 0; field_364_cur_zone_idx < field_32C_pZones->field_0_num_zones; field_364_cur_zone_idx++)
         {
             gmp_map_zone* pZone = get_zone_4DFB30(field_364_cur_zone_idx);
-            if ((pZone->field_0_zone_type == Information_10 || pZone->field_0_zone_type == Navigation_1 ||
-                 pZone->field_0_zone_type == Local_Navigation_15) &&
+            if ((pZone->field_0_zone_type == GmpZoneType::kInformation || pZone->field_0_zone_type == GmpZoneType::kNavigation ||
+                 pZone->field_0_zone_type == GmpZoneType::kLocalNavigation) &&
                 pZone->ContainsPoint_463020(field_36A_zone_x, field_36B_zone_y))
             {
                 return pZone;
@@ -702,7 +702,7 @@ gmp_map_zone* Map_0x370::get_zone_4DFB30(u16 zone_idx)
 // 0x4DFB50
 Gang_144* Map_0x370::GetGangAtCoords_4DFB50(Fix16 x, Fix16 y)
 {
-    gmp_map_zone* pZone = zone_by_pos_and_type_4DF4D0(x.ToInt(), y.ToInt(), Gang_14);
+    gmp_map_zone* pZone = zone_by_pos_and_type_4DF4D0(x.ToInt(), y.ToInt(), GmpZoneType::kGang);
     if (pZone)
     {
         return gGangPool_CA8_67E274->FindGangByName_4BF100(pZone->field_6_name);
@@ -736,7 +736,7 @@ void Map_0x370::SpawnMapObjects_4DFB90()
 // 0x4DFCA0
 void Map_0x370::alloc_zones_4DFCA0()
 {
-    gmp_map_zone* pZoneIter = first_zone_by_type_4DF1D0(Gang_14);
+    gmp_map_zone* pZoneIter = first_zone_by_type_4DF1D0(GmpZoneType::kGang);
     while (pZoneIter)
     {
         gGangPool_CA8_67E274->AddGangForMapZone_4BF1E0(pZoneIter);

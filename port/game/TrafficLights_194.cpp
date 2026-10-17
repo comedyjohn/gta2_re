@@ -431,7 +431,7 @@ void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
 // 0x5c2ac0
 void TrafficLights_194::CreateFromMapZones_5C2AC0()
 {
-    gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(Traffic_light_2);
+    gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kTrafficLight);
     while (pZoneIter)
     {
         AddTrafficLight_5C2910(pZoneIter->field_1_x, pZoneIter->field_2_y, pZoneIter->field_3_w, pZoneIter->field_4_h);

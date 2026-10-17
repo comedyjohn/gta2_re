@@ -70,31 +70,6 @@ enum gmp_slope_type
     FIELD = 3,
 };
 
-enum gmp_zone_type
-{
-    General_Purpose_0 = 0,
-    Navigation_1 = 1,
-    Traffic_light_2 = 2,
-    Unused_3 = 3,
-    Unused_4 = 4,
-    Arrow_Blocker_5 = 5,
-    Railway_Station_Platform_6 = 6,
-    Bus_Stop_7 = 7,
-    General_Trigger_8 = 8,
-    Unused_9 = 9,
-    Information_10 = 10,
-    Railway_Station_Entry_Point_11 = 11,
-    Railway_Station_Exit_Point_12 = 12,
-    Railway_Station_Stop_Point_13 = 13,
-    Gang_14 = 14,
-    Local_Navigation_15 = 15,
-    Restart_16 = 16,
-    Unused_17 = 17,
-    Unused_18 = 18,
-    Unused_19 = 19,
-    Arrest_Restart_20 = 20,
-};
-
 enum MapSlopes
 {
     DIAGONAL_WALL_UP_LEFT = 0xB4,

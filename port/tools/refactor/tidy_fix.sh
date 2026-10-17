@@ -44,10 +44,18 @@ if [ -n "${REMOVE_ONLY:-}" ]; then
     # keep only the deletions (misc-include-cleaner also wants to add includes, at one spot
     # several times over, and clang-apply-replacements refuses those)
     $T/python - "$out" <<'P'
-import glob, sys, yaml
+import glob, os, sys, yaml
 for f in glob.glob(sys.argv[1] + "/*.yaml"):
     d = yaml.safe_load(open(f))
-    d["Diagnostics"] = [x for x in d.get("Diagnostics", []) if x["DiagnosticMessage"].get("Replacements")]
+    # never a file's own header, nor the ones that carry macros or platform names the build needs
+    keep_always = {"Function.hpp", "windows.h", "stdio.h", "memory.h", "types.h", "stat.h", "shlwapi.h", "ddraw.h"}
+    def removable(x):
+        m = x["DiagnosticMessage"]
+        parts = m["Message"].split()
+        header = parts[2] if len(parts) > 2 else ""
+        stem = os.path.basename(m["FilePath"]).rsplit(".", 1)[0]
+        return header not in keep_always and os.path.splitext(header)[0] != stem
+    d["Diagnostics"] = [x for x in d.get("Diagnostics", []) if x["DiagnosticMessage"].get("Replacements") and removable(x)]
     for x in d["Diagnostics"]:
         x["DiagnosticMessage"]["Replacements"] = [r for r in x["DiagnosticMessage"]["Replacements"] if r["ReplacementText"] == ""]
     d["Diagnostics"] = [x for x in d["Diagnostics"] if x["DiagnosticMessage"]["Replacements"]]

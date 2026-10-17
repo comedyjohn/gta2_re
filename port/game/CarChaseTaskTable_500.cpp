@@ -1,5 +1,4 @@
 #include "CarChaseTaskTable_500.hpp"
-#include "Globals.hpp"
 #include "Ped.hpp"
 
 DEFINE_GLOBAL(CarChaseTaskTable_500*, gCarChaseTaskTable_678E30, 0x678E30);

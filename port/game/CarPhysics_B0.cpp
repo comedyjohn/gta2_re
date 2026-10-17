@@ -6,7 +6,6 @@
 #include "CarInfo_808.hpp"
 #include "CollisionSoundQueue_C88.hpp"
 #include "Frontend.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Object_5C.hpp"
 #include "Particle_8.hpp"

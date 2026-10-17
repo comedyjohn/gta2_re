@@ -1,6 +1,5 @@
 #include "Taxi_4.hpp"
 #include "Car_BC.hpp"
-#include "Globals.hpp"
 #include "error.hpp"
 
 DEFINE_GLOBAL(Taxi_4_Pool*, gTaxi_4_Pool_6783F8, 0x6783F8);

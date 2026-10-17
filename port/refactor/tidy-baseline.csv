@@ -115,7 +115,7 @@ port/game/CarChaseTaskTable_500.cpp,bugprone-branch-clone,1
 port/game/CarChaseTaskTable_500.cpp,cert-err58-cpp,1
 port/game/CarChaseTaskTable_500.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/CarChaseTaskTable_500.cpp,cppcoreguidelines-pro-type-member-init,1
-port/game/CarChaseTaskTable_500.cpp,misc-include-cleaner,20
+port/game/CarChaseTaskTable_500.cpp,misc-include-cleaner,19
 port/game/CarChaseTaskTable_500.cpp,readability-convert-member-functions-to-static,1
 port/game/CarChaseTaskTable_500.cpp,readability-implicit-bool-conversion,1
 port/game/CarChaseTaskTable_500.cpp,readability-use-anyofallof,4
@@ -179,7 +179,7 @@ port/game/CarPhysics_B0.cpp,cppcoreguidelines-pro-type-reinterpret-cast,2
 port/game/CarPhysics_B0.cpp,cppcoreguidelines-pro-type-union-access,5
 port/game/CarPhysics_B0.cpp,cppcoreguidelines-pro-type-vararg,13
 port/game/CarPhysics_B0.cpp,misc-const-correctness,61
-port/game/CarPhysics_B0.cpp,misc-include-cleaner,37
+port/game/CarPhysics_B0.cpp,misc-include-cleaner,36
 port/game/CarPhysics_B0.cpp,modernize-avoid-c-arrays,2
 port/game/CarPhysics_B0.cpp,modernize-raw-string-literal,1
 port/game/CarPhysics_B0.cpp,readability-else-after-return,11
@@ -237,7 +237,7 @@ port/game/Car_BC.cpp,cppcoreguidelines-pro-type-static-cast-downcast,13
 port/game/Car_BC.cpp,cppcoreguidelines-pro-type-union-access,66
 port/game/Car_BC.cpp,cppcoreguidelines-pro-type-vararg,7
 port/game/Car_BC.cpp,misc-const-correctness,82
-port/game/Car_BC.cpp,misc-include-cleaner,165
+port/game/Car_BC.cpp,misc-include-cleaner,163
 port/game/Car_BC.cpp,misc-unused-parameters,5
 port/game/Car_BC.cpp,modernize-avoid-c-arrays,2
 port/game/Car_BC.cpp,modernize-raw-string-literal,8
@@ -728,7 +728,7 @@ port/game/Garage_48.cpp,cppcoreguidelines-pro-type-reinterpret-cast,17
 port/game/Garage_48.cpp,cppcoreguidelines-pro-type-union-access,1
 port/game/Garage_48.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Garage_48.cpp,misc-const-correctness,1
-port/game/Garage_48.cpp,misc-include-cleaner,15
+port/game/Garage_48.cpp,misc-include-cleaner,14
 port/game/Garage_48.cpp,modernize-raw-string-literal,1
 port/game/Garage_48.cpp,readability-function-cognitive-complexity,1
 port/game/Garage_48.cpp,readability-function-size,1
@@ -1508,7 +1508,7 @@ port/game/PublicTransport.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/PublicTransport.cpp,cppcoreguidelines-pro-type-reinterpret-cast,6
 port/game/PublicTransport.cpp,cppcoreguidelines-pro-type-vararg,17
 port/game/PublicTransport.cpp,misc-const-correctness,3
-port/game/PublicTransport.cpp,misc-include-cleaner,37
+port/game/PublicTransport.cpp,misc-include-cleaner,36
 port/game/PublicTransport.cpp,modernize-avoid-c-arrays,1
 port/game/PublicTransport.cpp,modernize-raw-string-literal,12
 port/game/PublicTransport.cpp,readability-convert-member-functions-to-static,1
@@ -1694,7 +1694,7 @@ port/game/Taxi_4.cpp,cppcoreguidelines-owning-memory,2
 port/game/Taxi_4.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Taxi_4.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Taxi_4.cpp,misc-const-correctness,1
-port/game/Taxi_4.cpp,misc-include-cleaner,5
+port/game/Taxi_4.cpp,misc-include-cleaner,4
 port/game/Taxi_4.cpp,modernize-raw-string-literal,1
 port/game/Taxi_4.cpp,readability-implicit-bool-conversion,6
 port/game/Taxi_4.cpp,readability-make-member-function-const,1

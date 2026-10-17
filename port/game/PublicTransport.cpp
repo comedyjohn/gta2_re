@@ -4,7 +4,6 @@
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"

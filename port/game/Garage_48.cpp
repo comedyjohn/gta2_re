@@ -3,7 +3,6 @@
 #include "Car_BC.hpp"
 #include "Door_38.hpp"
 #include "Door_4D4.hpp"
-#include "Globals.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
 #include "char.hpp"

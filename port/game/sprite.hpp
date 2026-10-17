@@ -502,7 +502,7 @@ class Sprite
 
     void SetNoLighting_4337F0()
     {
-        this->field_2C_flags |= 4u;
+        this->field_2C_flags |= 4U;
     }
 
     // 9.6f 0x482A40
@@ -515,7 +515,7 @@ class Sprite
     // 9.6f 0x433800
     void ClearNoLighting_433800()
     {
-        this->field_2C_flags &= ~4u;
+        this->field_2C_flags &= ~4U;
     }
 
     // 9.6f 0x4337D0

@@ -839,7 +839,7 @@ void Init_gmp_slopes_array();
 
 static inline u8 get_slope_bits(u8& slope_byte) // slope_byte but with its first 2 bits cleared
 {
-    return slope_byte & 0xFCu;
+    return slope_byte & 0xFCU;
 }
 
 static inline u8 get_slope_idx(u8& slope_byte) // 0 to 63
@@ -855,7 +855,7 @@ static inline bool is_air_type(u8& slope_byte)
 static inline bool is_gradient_slope(u8& slope_byte)
 {
     u8 slope = get_slope_bits(slope_byte);
-    return slope > 0 && slope < 0xB4u; // slope idx in range 1 to 45
+    return slope > 0 && slope < 0xB4U; // slope idx in range 1 to 45
 }
 
 static inline u8 get_block_type(u8& slope_byte)

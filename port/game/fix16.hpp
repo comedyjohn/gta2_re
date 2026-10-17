@@ -134,7 +134,7 @@ class Fix16
 
     f32 AsFloat() const
     {
-        return mValue / 16384.0f;
+        return mValue / 16384.0F;
     }
 
     // 9.6f 0x410BA0, defined in CarPhysics_B0.cpp (AsDouble with the parentheses of the original: each
@@ -173,7 +173,7 @@ class Fix16
 
     float ToFloat() const
     {
-        return (mValue / 16384.0f);
+        return (mValue / 16384.0F);
     }
 
     // Zero rather than unset: the original reads some Fix16 locals before setting them, and every
@@ -211,7 +211,7 @@ class Fix16
         mValue = value << 14;
     }
 
-    explicit Fix16(f32 v) : mValue(static_cast<s32>(v * 16384.0f))
+    explicit Fix16(f32 v) : mValue(static_cast<s32>(v * 16384.0F))
     {
     }
 

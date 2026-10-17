@@ -106,19 +106,19 @@ s32 CarInfoTable::ReadToken(char* out)
     *out = 0;
     while (255 > i)
     {
-        s32 currentChar = 0;
+        s32 current_char = 0;
 
         // Get the next character
         if (gProcessedGciData == gGciDataLen)
         {
-            currentChar = -1;
+            current_char = -1;
         }
         else
         {
-            currentChar = *gInputData;
+            current_char = *gInputData;
             gInputData++;
             gProcessedGciData++;
-            if (currentChar == '\n')
+            if (current_char == '\n')
             {
                 gLineNumber++;
             }
@@ -127,52 +127,52 @@ s32 CarInfoTable::ReadToken(char* out)
         switch (gFoundOpenBrackets)
         {
             case 0:
-                if (currentChar == -1)
+                if (current_char == -1)
                 {
                     return 1;
                 }
-                if (currentChar == '{')
+                if (current_char == '{')
                 {
                     gFoundOpenBrackets = 1;
                 }
-                else if (currentChar != ' ' && currentChar != '\t' && currentChar != '\n' && currentChar != ')' && currentChar != '(' &&
-                         currentChar != '\r')
+                else if (current_char != ' ' && current_char != '\t' && current_char != '\n' && current_char != ')' &&
+                         current_char != '(' && current_char != '\r')
                 {
                     gFoundOpenBrackets = 2;
-                    out[i] = static_cast<char>(currentChar);
+                    out[i] = static_cast<char>(current_char);
                     i++;
                 }
                 break;
             case 1:
-                if (currentChar == -1)
+                if (current_char == -1)
                 {
                     return -4;
                 }
-                if (currentChar == '}')
+                if (current_char == '}')
                 {
                     gFoundOpenBrackets = 0;
                 }
                 break;
             case 2:
-                if (currentChar == -1)
+                if (current_char == -1)
                 {
                     out[i] = 0;
                     return 1;
                 }
-                if (currentChar == '{')
+                if (current_char == '{')
                 {
                     out[i] = 0;
                     gFoundOpenBrackets = 1;
                     return 0;
                 }
-                if (currentChar == ' ' || currentChar == '\t' || currentChar == '\n' || currentChar == ')' || currentChar == '(' ||
-                    currentChar == '\r')
+                if (current_char == ' ' || current_char == '\t' || current_char == '\n' || current_char == ')' || current_char == '(' ||
+                    current_char == '\r')
                 {
                     out[i] = 0;
                     gFoundOpenBrackets = 0;
                     return 0;
                 }
-                out[i] = static_cast<char>(currentChar);
+                out[i] = static_cast<char>(current_char);
                 i++;
 
                 break;
@@ -194,71 +194,71 @@ s32 ParseTokenAndPush(char_type* str)
     s32 negated_value;
     s16 tmp;
 
-    char_type* pCurr = str;
-    BOOL bHex = false;
-    BOOL bNegate = false;
+    char_type* curr = str;
+    BOOL hex = false;
+    BOOL negate = false;
 
-    if (*pCurr)
+    if (*curr)
     {
-        if (*pCurr == '-')
+        if (*curr == '-')
         {
-            bNegate = 1;
-            pCurr++;
+            negate = 1;
+            curr++;
         }
 
-        if (*pCurr)
+        if (*curr)
         {
-            if (*pCurr == 'b')
+            if (*curr == 'b')
             {
                 type = DataType::kByte;
-                ++pCurr;
+                ++curr;
             }
-            else if (*pCurr == 'w')
+            else if (*curr == 'w')
             {
                 type = DataType::kWord;
-                ++pCurr;
+                ++curr;
             }
-            else if (*pCurr == 'l')
+            else if (*curr == 'l')
             {
                 type = DataType::kDword;
-                ++pCurr;
+                ++curr;
             }
-            else if (*pCurr == 'f')
+            else if (*curr == 'f')
             {
                 type = DataType::kFix16Float;
-                ++pCurr;
+                ++curr;
             }
             else
             {
                 type = DataType::kByte;
             }
 
-            if (*pCurr == 'h')
+            if (*curr == 'h')
             {
-                bHex = 1;
-                ++pCurr;
+                hex = 1;
+                ++curr;
             }
-            if (*pCurr == '-')
+            if (*curr == '-')
             {
-                bNegate = !bNegate;
-                ++pCurr;
+                negate = !negate;
+                ++curr;
             }
 
             switch (type)
             {
                 case DataType::kByte:
-                    if (bHex == 1)
+                    if (hex == 1)
                     {
-                        error_ret = CarInfoTable::HexStr2Int(pCurr, &tmp);
+                        error_ret = CarInfoTable::HexStr2Int(curr, &tmp);
                     }
                     else
                     {
-                        error_ret = CarInfoTable::StrToInt(pCurr, &tmp);
+                        error_ret = CarInfoTable::StrToInt(curr, &tmp);
                     }
 
                     if (!error_ret)
                     {
-                        if (bNegate)
+                        if (negate)
                         {
                             negated = static_cast<char>(-static_cast<char>(tmp));
                             if (negated < -127)
@@ -281,18 +281,18 @@ s32 ParseTokenAndPush(char_type* str)
                     return error_ret;
 
                 case DataType::kWord:
-                    if (bHex == 1)
+                    if (hex == 1)
                     {
-                        error_ret = CarInfoTable::HexStr2Int(pCurr, &tmp);
+                        error_ret = CarInfoTable::HexStr2Int(curr, &tmp);
                     }
                     else
                     {
-                        error_ret = CarInfoTable::StrToInt(pCurr, &tmp);
+                        error_ret = CarInfoTable::StrToInt(curr, &tmp);
                     }
 
                     if (!error_ret)
                     {
-                        if (bNegate)
+                        if (negate)
                         {
                             negated = -tmp;
                             error_ret = CarInfoTable::PushData(&negated, sizeof(WORD));
@@ -311,18 +311,18 @@ s32 ParseTokenAndPush(char_type* str)
                     return error_ret;
 
                 case DataType::kDword:
-                    if (bHex == 1)
+                    if (hex == 1)
                     {
-                        error_ret = CarInfoTable::HexStr2Int(pCurr, &parsed_value);
+                        error_ret = CarInfoTable::HexStr2Int(curr, &parsed_value);
                     }
                     else
                     {
-                        error_ret = CarInfoTable::StrToInt(pCurr, &parsed_value);
+                        error_ret = CarInfoTable::StrToInt(curr, &parsed_value);
                     }
 
                     if (!error_ret)
                     {
-                        if (bNegate)
+                        if (negate)
                         {
                             negated_value = -static_cast<s16>(parsed_value);
                             error_ret = CarInfoTable::PushData(&negated_value, sizeof(DWORD));
@@ -340,11 +340,11 @@ s32 ParseTokenAndPush(char_type* str)
                     return error_ret;
 
                 case DataType::kFix16Float:
-                    error_ret = CarInfoTable::FloatStrToFix16(static_cast<char*>(pCurr), fix16_num);
+                    error_ret = CarInfoTable::FloatStrToFix16(static_cast<char*>(curr), fix16_num);
 
                     if (!error_ret)
                     {
-                        if (bNegate)
+                        if (negate)
                         {
                             fix16_num = -fix16_num;
                         }
@@ -385,24 +385,24 @@ s32 CarInfoTable::HexStr2Int(const char* str, s32* out)
 {
     *out = 0;
     s32 place_value = 1;
-    s32 strLen = strlen(str);
+    s32 str_len = strlen(str);
 
-    while (--strLen >= 0)
+    while (--str_len >= 0)
     {
-        s8 currentChar = str[strLen];
-        if ((currentChar < '0' || '9' < currentChar) && (currentChar < 'A' || 'F' < currentChar))
+        s8 current_char = str[str_len];
+        if ((current_char < '0' || '9' < current_char) && (current_char < 'A' || 'F' < current_char))
         {
             return 0xfffffff6;
         }
 
         s32 digit_value;
-        if (currentChar < '0' || '9' < currentChar)
+        if (current_char < '0' || '9' < current_char)
         {
-            digit_value = (currentChar - 0x37) * place_value;
+            digit_value = (current_char - 0x37) * place_value;
         }
         else
         {
-            digit_value = (currentChar - 0x30) * place_value;
+            digit_value = (current_char - 0x30) * place_value;
         }
 
         *out += digit_value;
@@ -417,24 +417,24 @@ s32 CarInfoTable::HexStr2Int(const char* str, s16* out)
 {
     *out = 0;
     s32 place_value = 1;
-    s32 strLen = strlen(str);
+    s32 str_len = strlen(str);
 
-    while (--strLen >= 0)
+    while (--str_len >= 0)
     {
-        s8 currentChar = str[strLen];
-        if ((currentChar < '0' || '9' < currentChar) && (currentChar < 'A' || 'F' < currentChar))
+        s8 current_char = str[str_len];
+        if ((current_char < '0' || '9' < current_char) && (current_char < 'A' || 'F' < current_char))
         {
             return 0xfffffff7;
         }
 
         s32 digit_value;
-        if (currentChar < '0' || '9' < currentChar)
+        if (current_char < '0' || '9' < current_char)
         {
-            digit_value = (currentChar - 0x37) * place_value;
+            digit_value = (current_char - 0x37) * place_value;
         }
         else
         {
-            digit_value = (currentChar - 0x30) * place_value;
+            digit_value = (current_char - 0x30) * place_value;
         }
 
         *out += digit_value;
@@ -449,17 +449,17 @@ s32 CarInfoTable::StrToInt(const char* str, s32* out)
 {
     *out = 0;
     s32 place_value = 1;
-    s32 strLen = strlen(str);
+    s32 str_len = strlen(str);
 
-    while (--strLen >= 0)
+    while (--str_len >= 0)
     {
-        s8 currentChar = str[strLen];
-        if (currentChar < '0' || '9' < currentChar)
+        s8 current_char = str[str_len];
+        if (current_char < '0' || '9' < current_char)
         {
             return 0xfffffff8;
         }
 
-        s32 digit_value = (currentChar - 0x30) * place_value;
+        s32 digit_value = (current_char - 0x30) * place_value;
         *out += digit_value;
         place_value = place_value * 10;
     }
@@ -471,26 +471,26 @@ s32 CarInfoTable::StrToInt(const char* str, s32* out)
 s32 CarInfoTable::FloatStrToFix16(char* str, Fix16& out)
 {
     out = kFixZero;
-    bool bPastDecimalPoint = false;
+    bool past_decimal_point = false;
     s32 decimal_divisor = 1;
-    s32 strLen = strlen(str);
+    s32 str_len = strlen(str);
 
-    while (--strLen >= 0)
+    while (--str_len >= 0)
     {
-        char currentChar = str[strLen];
-        if (currentChar < '0' || '9' < currentChar)
+        char current_char = str[str_len];
+        if (current_char < '0' || '9' < current_char)
         {
-            if (currentChar != '.' || bPastDecimalPoint)
+            if (current_char != '.' || past_decimal_point)
             {
                 return -11;
             }
             out.value_ /= decimal_divisor;
             decimal_divisor = 1;
-            bPastDecimalPoint = true;
+            past_decimal_point = true;
         }
         else
         {
-            out.value_ += (currentChar - 0x30) * decimal_divisor * 0x4000;
+            out.value_ += (current_char - 0x30) * decimal_divisor * 0x4000;
             decimal_divisor = decimal_divisor * 10;
         }
     }
@@ -502,17 +502,17 @@ s32 CarInfoTable::StrToInt(const char* str, s16* out)
 {
     *out = 0;
     s32 place_value = 1;
-    s32 strLen = strlen(str);
+    s32 str_len = strlen(str);
 
-    while (--strLen >= 0)
+    while (--str_len >= 0)
     {
-        s8 currentChar = str[strLen];
-        if (currentChar < '0' || '9' < currentChar)
+        s8 current_char = str[str_len];
+        if (current_char < '0' || '9' < current_char)
         {
             return 0xffffffff;
         }
 
-        s32 digit_value = (currentChar - 0x30) * place_value;
+        s32 digit_value = (current_char - 0x30) * place_value;
         *out += digit_value;
         place_value = place_value * 10;
     }
@@ -523,17 +523,17 @@ s32 CarInfoTable::StrToInt(const char* str, s16* out)
 // 0x4542A0
 void CarModelInfo::CalculateCarInfo(s32 idx)
 {
-    StyleCarInfo* pCarInfo = gGtx->GetCarInfo(idx);
-    ModelPhysics* pModelPhysics = gCarInfo808->GetModelPhysicsFromIdx(idx);
-    Fix16 gear2_speed = pModelPhysics->gear2_speed_;
-    Fix16 gear3_speed = pModelPhysics->gear3_speed_;
+    StyleCarInfo* car_info = gGtx->GetCarInfo(idx);
+    ModelPhysics* model_physics = gCarInfo808->GetModelPhysicsFromIdx(idx);
+    Fix16 gear2_speed = model_physics->gear2_speed_;
+    Fix16 gear3_speed = model_physics->gear3_speed_;
     Fix16 max_speed;
-    if (gear2_speed > gear3_speed || gear3_speed > (max_speed = pModelPhysics->max_speed_) || gear2_speed > max_speed)
+    if (gear2_speed > gear3_speed || gear3_speed > (max_speed = model_physics->max_speed_) || gear2_speed > max_speed)
     {
         FatalError_4A38C0(0x3F6, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 91, static_cast<u8>(idx));
     }
 
-    s8 front_wheel_offset = pCarInfo->front_wheel_offset_;
+    s8 front_wheel_offset = car_info->front_wheel_offset_;
     Fix16 new_front_wheel_offset;
     if (front_wheel_offset < 0)
     {
@@ -544,7 +544,7 @@ void CarModelInfo::CalculateCarInfo(s32 idx)
         new_front_wheel_offset = gPixelsToFix16.list_[front_wheel_offset];
     }
     this->front_wheel_offset_ = new_front_wheel_offset;
-    s8 rear_wheel_offset = pCarInfo->rear_wheel_offset_;
+    s8 rear_wheel_offset = car_info->rear_wheel_offset_;
     Fix16 new_rear_wheel_offset;
     if (rear_wheel_offset < 0)
     {
@@ -555,20 +555,20 @@ void CarModelInfo::CalculateCarInfo(s32 idx)
         new_rear_wheel_offset = gPixelsToFix16.list_[rear_wheel_offset];
     }
     this->rear_wheel_offset_ = new_rear_wheel_offset;
-    Fix16 outY;
-    this->moment_of_inertia_ = ComputeCarMassAndInertia(gPixelsToFix16.list_[pCarInfo->w],
-                                                        gPixelsToFix16.list_[pCarInfo->h_],
-                                                        pModelPhysics->mass_,
-                                                        pModelPhysics->front_mass_bias_,
-                                                        &outY);
+    Fix16 out_y;
+    this->moment_of_inertia_ = ComputeCarMassAndInertia(gPixelsToFix16.list_[car_info->w],
+                                                        gPixelsToFix16.list_[car_info->h_],
+                                                        model_physics->mass_,
+                                                        model_physics->front_mass_bias_,
+                                                        &out_y);
     this->center_of_mass_offset_.x = 0;
-    this->center_of_mass_offset_.y = outY; // out val of func above
-    this->half_thrust_ = pModelPhysics->thrust_ / 2;
-    this->fith_thrust_ = pModelPhysics->thrust_ / 5;
-    this->max_thrust_with_turbo_ = ComputeThrustWithTurbo(half_thrust_, fith_thrust_, pModelPhysics->turbo_);
-    this->front_drive_bias_ = kOne - pModelPhysics->front_drive_bias_;
-    this->skid_threshhold_1_ = (pModelPhysics->sked_threshold_ * (kOne - kOneTenth));
-    this->skid_threshhold_2_ = (pModelPhysics->sked_threshold_ * (kOne + kOneTenth));
+    this->center_of_mass_offset_.y = out_y; // out val of func above
+    this->half_thrust_ = model_physics->thrust_ / 2;
+    this->fith_thrust_ = model_physics->thrust_ / 5;
+    this->max_thrust_with_turbo_ = ComputeThrustWithTurbo(half_thrust_, fith_thrust_, model_physics->turbo_);
+    this->front_drive_bias_ = kOne - model_physics->front_drive_bias_;
+    this->skid_threshhold_1_ = (model_physics->sked_threshold_ * (kOne - kOneTenth));
+    this->skid_threshhold_2_ = (model_physics->sked_threshold_ * (kOne + kOneTenth));
 }
 
 // 0x454410
@@ -576,25 +576,25 @@ Fix16 ComputeCarMassAndInertia(Fix16 width, Fix16 height, Fix16 mass, Fix16 fron
 {
     // The const refs (bound to the product temporaries) give the original's stack slots and the
     // __allmul operand order of the two inertia products (value locals swap them)
-    const Fix16& inertiaBase = ((((height * height) * kQuarter) + (width * width)) / 12);
-    const Fix16& heightXConstant = (height * kQuarter);
-    const Fix16& frontMass = (mass * front_mass_bias);
-    Fix16 frontI = (frontMass * inertiaBase);
+    const Fix16& inertia_base = ((((height * height) * kQuarter) + (width * width)) / 12);
+    const Fix16& height_x_constant = (height * kQuarter);
+    const Fix16& front_mass = (mass * front_mass_bias);
+    Fix16 front_i = (front_mass * inertia_base);
     // Negated by hand: one inline expansion less, so both front (cg - h) subtractions stay inline (budget)
     Fix16 nh;
     nh.value_ = -height.value_;
-    Fix16 negHeightXConstant = (nh * kQuarter);
+    Fix16 neg_height_x_constant = (nh * kQuarter);
 
-    const Fix16& rearMass = (mass * (kOne - front_mass_bias));
-    Fix16 rearI = (rearMass * inertiaBase);
+    const Fix16& rear_mass = (mass * (kOne - front_mass_bias));
+    Fix16 rear_i = (rear_mass * inertia_base);
 
-    *out_cg_height = (((heightXConstant * frontMass) + (negHeightXConstant * rearMass)) / mass);
+    *out_cg_height = (((height_x_constant * front_mass) + (neg_height_x_constant * rear_mass)) / mass);
 
-    Fix16 frontTotal;
-    frontTotal = frontI + frontMass * (*out_cg_height - heightXConstant) * (*out_cg_height - heightXConstant);
-    Fix16 rearTotal;
-    rearTotal = rearI + rearMass * (*out_cg_height - negHeightXConstant) * (*out_cg_height - negHeightXConstant);
-    return frontTotal + rearTotal;
+    Fix16 front_total;
+    front_total = front_i + front_mass * (*out_cg_height - height_x_constant) * (*out_cg_height - height_x_constant);
+    Fix16 rear_total;
+    rear_total = rear_i + rear_mass * (*out_cg_height - neg_height_x_constant) * (*out_cg_height - neg_height_x_constant);
+    return front_total + rear_total;
 }
 
 // 0x454680
@@ -619,15 +619,15 @@ void CarInfoTable::LoadModelPhysics()
 
     raw_model_physics_ = new ModelPhysics[number_of_cars];
 
-    char* pErrorMsg =
+    char* error_msg =
         CarInfoTable::ParseGciFile(file_content, file_size, raw_model_physics_, number_of_cars * sizeof(ModelPhysics), &data_size);
 
     ::free(file_content);
 
-    if (pErrorMsg != nullptr)
+    if (error_msg != nullptr)
     {
         strcpy(gErrStr_67C29C, gFileName);
-        strcpy(gErrStr2_67C3A8, pErrorMsg);
+        strcpy(gErrStr2_67C3A8, error_msg);
 
         FatalError_4A38C0(Gta2Error::kBinmakeError, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbc, gErrStr_67C29C, gErrStr2_67C3A8);
     }
@@ -649,8 +649,8 @@ void CarInfoTable::LoadModelPhysics()
 
     for (u32 i = 0; i < number_of_cars; i++)
     {
-        ModelPhysics* pMVar5 = &raw_model_physics_[i];
-        model_physics_array_[pMVar5->model_] = pMVar5;
+        ModelPhysics* m_var5 = &raw_model_physics_[i];
+        model_physics_array_[m_var5->model_] = m_var5;
     }
 }
 

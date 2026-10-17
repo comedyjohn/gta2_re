@@ -33,35 +33,35 @@ StyleCarInfo* Gtx::GetCarInfo(u8 idx)
 // 0x5AA3D0
 BYTE* Gtx::GetCarRemap(u8 idx)
 {
-    StyleCarInfo* pCarInfo = cari_->car_info_[idx];
-    return &pCarInfo->remap_[pCarInfo->num_remaps_];
+    StyleCarInfo* car_info = cari_->car_info_[idx];
+    return &car_info->remap_[car_info->num_remaps_];
 }
 
 // 0x5AA3F0
 SpriteDelta* Gtx::GetDelta(u16 sprite_idx, u8 delta_idx)
 {
-    DeltaContainer* pDel = del_;
+    DeltaContainer* del = del_;
 
-    if (sprite_idx >= pDel->field_0_count)
+    if (sprite_idx >= del->field_0_count)
     {
         return nullptr;
     }
 
-    SpriteDeltas* pEntry = pDel->field_4_entries[sprite_idx];
+    SpriteDeltas* entry = del->field_4_entries[sprite_idx];
 
-    if (!pEntry)
+    if (!entry)
     {
         return nullptr;
     }
 
-    if (delta_idx >= pEntry->field_2_count)
+    if (delta_idx >= entry->field_2_count)
     {
         return nullptr;
     }
 
-    SpriteDelta* pDelta = &pEntry->field_4_deltas[delta_idx];
+    SpriteDelta* delta = &entry->field_4_deltas[delta_idx];
 
-    return pDelta->len_ != 0 ? pDelta : nullptr;
+    return delta->len_ != 0 ? delta : nullptr;
 }
 
 // note: param type matters
@@ -349,7 +349,7 @@ void Gtx::InitTileMapping()
 // 0x5AA9A0
 void Gtx::BuildCarInfoContainer(u32 chunk_size)
 {
-    auto* pCarInfoIter = reinterpret_cast<StyleCarInfo*>(car_info_);
+    auto* car_info_iter = reinterpret_cast<StyleCarInfo*>(car_info_);
     u32 total_len = 0;
     u32 idx = 0;
     u8 total_sprite = 0;
@@ -369,36 +369,36 @@ void Gtx::BuildCarInfoContainer(u32 chunk_size)
             FatalError_4A38C0(Gta2Error::kFileOverflow, "C:\\Splitting\\Gta2\\Source\\style.cpp", 825);
         }
 
-        if (pCarInfoIter->w > 0x80U || pCarInfoIter->h_ > 0x80U || pCarInfoIter->num_remaps_ > 0x40U)
+        if (car_info_iter->w > 0x80U || car_info_iter->h_ > 0x80U || car_info_iter->num_remaps_ > 0x40U)
         {
-            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 826, pCarInfoIter->model_);
+            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 826, car_info_iter->model_);
         }
 
-        if (pCarInfoIter->sprite_ != 0 && pCarInfoIter->sprite_ != 1)
+        if (car_info_iter->sprite_ != 0 && car_info_iter->sprite_ != 1)
         {
-            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 827, pCarInfoIter->model_);
+            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 827, car_info_iter->model_);
         }
 
-        cari_->car_info_[pCarInfoIter->model_] = pCarInfoIter;
+        cari_->car_info_[car_info_iter->model_] = car_info_iter;
 
-        if (pCarInfoIter->sprite_)
+        if (car_info_iter->sprite_)
         {
             total_sprite += last_car_sprite;
-            last_car_sprite = pCarInfoIter->sprite_;
+            last_car_sprite = car_info_iter->sprite_;
         }
 
-        pCarInfoIter->sprite_ = total_sprite;
+        car_info_iter->sprite_ = total_sprite;
 
         // Offset of num_doors. The door part (2 * num_doors + 1) is its own local, added to the offset at
         // both uses: one expression folds it into a single lea, the original keeps lea / add / add.
-        u32 off = pCarInfoIter->num_remaps_ + 0xE;
-        if ((reinterpret_cast<u8*>(pCarInfoIter))[off] > 5U)
+        u32 off = car_info_iter->num_remaps_ + 0xE;
+        if ((reinterpret_cast<u8*>(car_info_iter))[off] > 5U)
         {
-            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 842, pCarInfoIter->model_);
+            FatalError_4A38C0(Gta2Error::kInvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 842, car_info_iter->model_);
         }
-        u32 door_len = (reinterpret_cast<u8*>(pCarInfoIter))[off] * sizeof(DoorInfo) + 1;
+        u32 door_len = (reinterpret_cast<u8*>(car_info_iter))[off] * sizeof(DoorInfo) + 1;
         total_len += off + door_len;
-        pCarInfoIter = reinterpret_cast<StyleCarInfo*>(reinterpret_cast<u8*>(pCarInfoIter) + off + door_len);
+        car_info_iter = reinterpret_cast<StyleCarInfo*>(reinterpret_cast<u8*>(car_info_iter) + off + door_len);
         idx++;
     }
     cari_->count_ = idx;
@@ -407,42 +407,42 @@ void Gtx::BuildCarInfoContainer(u32 chunk_size)
 // 0x5AAB30
 void Gtx::LoadDelx(u32 delx_chunk_size)
 {
-    DeltaEntry* pIter = delta_index_;
+    DeltaEntry* iter = delta_index_;
     u32 off = 0;
     u32 total = 0;
 
     for (; off < delx_chunk_size;)
     {
-        u32 size = 2 * pIter->field_2_delta_count + 4;
-        delta_len_ += SPRITE_DELTAS_SIZE(pIter->field_2_delta_count);
-        pIter = reinterpret_cast<DeltaEntry*>(reinterpret_cast<u8*>(pIter) + size);
+        u32 size = 2 * iter->field_2_delta_count + 4;
+        delta_len_ += SPRITE_DELTAS_SIZE(iter->field_2_delta_count);
+        iter = reinterpret_cast<DeltaEntry*>(reinterpret_cast<u8*>(iter) + size);
         off += size;
     }
 
     delta_buffer_ = static_cast<SpriteDeltas*>(Memory::Malloc(delta_len_));
     memset(delta_buffer_, 0, delta_len_); // the entries below leave padding bytes unset (valgrind)
-    DeltaEntry* pSrc = delta_index_;
+    DeltaEntry* src = delta_index_;
     u32 off2 = 0;
-    auto* pDst = static_cast<SpriteDeltas*>(delta_buffer_);
+    auto* dst = static_cast<SpriteDeltas*>(delta_buffer_);
 
     for (; off2 < delx_chunk_size;)
     {
-        pDst->field_0_which_sprite = pSrc->field_0_which_sprite;
-        pDst->field_2_count = pSrc->field_2_delta_count;
-        pDst->field_3_pad = 0;
+        dst->field_0_which_sprite = src->field_0_which_sprite;
+        dst->field_2_count = src->field_2_delta_count;
+        dst->field_3_pad = 0;
 
-        for (u32 i = 0; i < pSrc->field_2_delta_count; i++)
+        for (u32 i = 0; i < src->field_2_delta_count; i++)
         {
-            pDst->field_4_deltas[i].len_ = pSrc->field_4_delta[i];
-            pDst->field_4_deltas[i].data_ =
+            dst->field_4_deltas[i].len_ = src->field_4_delta[i];
+            dst->field_4_deltas[i].data_ =
                 reinterpret_cast<DeltaStoreEntry*>(static_cast<uptr>(total)); // an offset until the deltas are loaded
-            total += pDst->field_4_deltas[i].len_;
+            total += dst->field_4_deltas[i].len_;
         }
 
-        u32 size = 2 * pSrc->field_2_delta_count + 4;
-        pDst = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(pDst) + SPRITE_DELTAS_SIZE(pDst->field_2_count));
+        u32 size = 2 * src->field_2_delta_count + 4;
+        dst = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(dst) + SPRITE_DELTAS_SIZE(dst->field_2_count));
         off2 += size;
-        pSrc = reinterpret_cast<DeltaEntry*>(reinterpret_cast<u8*>(pSrc) + size);
+        src = reinterpret_cast<DeltaEntry*>(reinterpret_cast<u8*>(src) + size);
     }
 }
 
@@ -455,13 +455,13 @@ void Gtx::SetDeltaDataPtrs()
     // load_delx_5AAB30 left in field_0_pData, which the original does with 32-bit adds.
     for (u32 offset = 0; offset < static_cast<u32>(delta_len_);)
     {
-        auto* pDeltas = reinterpret_cast<SpriteDeltas*>(static_cast<u8*>(delta_buffer_) + offset);
-        for (u32 delta_idx = 0; delta_idx < pDeltas->field_2_count; delta_idx++)
+        auto* deltas = reinterpret_cast<SpriteDeltas*>(static_cast<u8*>(delta_buffer_) + offset);
+        for (u32 delta_idx = 0; delta_idx < deltas->field_2_count; delta_idx++)
         {
-            SpriteDelta& delta = pDeltas->field_4_deltas[delta_idx];
+            SpriteDelta& delta = deltas->field_4_deltas[delta_idx];
             delta.data_ = reinterpret_cast<DeltaStoreEntry*>(reinterpret_cast<u8*>(delta_store_) + reinterpret_cast<sptr>(delta.data_));
         }
-        offset += SPRITE_DELTAS_SIZE(pDeltas->field_2_count);
+        offset += SPRITE_DELTAS_SIZE(deltas->field_2_count);
     }
 #else
     s32 size;
@@ -482,14 +482,14 @@ void Gtx::SetDeltaDataPtrs()
 // 0x5AAC40
 void Gtx::SetSpriteIndexDataPtrs()
 {
-    u8* field_0_pData;
-    SpriteIndex* pSpriteIndex;
+    u8* field_0_p_data;
+    SpriteIndex* sprite_index;
 
     for (u32 i = 0; i < static_cast<u16>(this->sprite_index_count_); i++)
     {
-        field_0_pData = this->sprite_index_[i].data_;
-        pSpriteIndex = &this->sprite_index_[i];
-        pSpriteIndex->data_ = &this->sprite_graphics_[static_cast<u32>(reinterpret_cast<uintptr_t>(field_0_pData))];
+        field_0_p_data = this->sprite_index_[i].data_;
+        sprite_index = &this->sprite_index_[i];
+        sprite_index->data_ = &this->sprite_graphics_[static_cast<u32>(reinterpret_cast<uintptr_t>(field_0_p_data))];
     }
 }
 
@@ -588,47 +588,47 @@ void Gtx::SetSpriteIndexDataPtrs()
 void Gtx::BuildDeltaContainer()
 {
     u32 off = 0;
-    auto* pIter = static_cast<SpriteDeltas*>(delta_buffer_);
-    u16 maxSprite = 0;
+    auto* iter = static_cast<SpriteDeltas*>(delta_buffer_);
+    u16 max_sprite = 0;
 
     for (; off < static_cast<u32>(delta_len_);)
     {
-        if (pIter->field_0_which_sprite >= maxSprite)
+        if (iter->field_0_which_sprite >= max_sprite)
         {
-            maxSprite = pIter->field_0_which_sprite;
+            max_sprite = iter->field_0_which_sprite;
         }
 
-        u32 size = SPRITE_DELTAS_SIZE(pIter->field_2_count);
+        u32 size = SPRITE_DELTAS_SIZE(iter->field_2_count);
         off += size;
-        pIter = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(pIter) + size);
+        iter = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(iter) + size);
     }
 
-    del_ = static_cast<DeltaContainer*>(Memory::Malloc(DELTA_CONTAINER_SIZE(maxSprite + 1)));
-    del_->field_0_count = maxSprite + 1;
+    del_ = static_cast<DeltaContainer*>(Memory::Malloc(DELTA_CONTAINER_SIZE(max_sprite + 1)));
+    del_->field_0_count = max_sprite + 1;
 
     for (u32 i = 0; i < del_->field_0_count; i++)
     {
         del_->field_4_entries[i] = nullptr;
     }
 
-    pIter = static_cast<SpriteDeltas*>(delta_buffer_);
+    iter = static_cast<SpriteDeltas*>(delta_buffer_);
 
     for (u32 off2 = 0; off2 < static_cast<u32>(delta_len_);)
     {
-        if (del_->field_4_entries[pIter->field_0_which_sprite])
+        if (del_->field_4_entries[iter->field_0_which_sprite])
         {
-            FatalError_4A38C0(Gta2Error::kMultipleSpriteDeltas, "C:\\Splitting\\Gta2\\Source\\style.cpp", 996, pIter->field_0_which_sprite);
+            FatalError_4A38C0(Gta2Error::kMultipleSpriteDeltas, "C:\\Splitting\\Gta2\\Source\\style.cpp", 996, iter->field_0_which_sprite);
         }
 
-        del_->field_4_entries[pIter->field_0_which_sprite] = pIter;
+        del_->field_4_entries[iter->field_0_which_sprite] = iter;
 
-        if (pIter->field_0_which_sprite >= maxSprite)
+        if (iter->field_0_which_sprite >= max_sprite)
         {
-            maxSprite = pIter->field_0_which_sprite;
+            max_sprite = iter->field_0_which_sprite;
         }
 
-        u32 size = SPRITE_DELTAS_SIZE(pIter->field_2_count);
-        pIter = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(pIter) + size);
+        u32 size = SPRITE_DELTAS_SIZE(iter->field_2_count);
+        iter = reinterpret_cast<SpriteDeltas*>(reinterpret_cast<u8*>(iter) + size);
         off2 += size;
     }
 }
@@ -745,18 +745,18 @@ void Gtx::LoadSpriteIndex(u32 sprx_chunk_size)
         s16 field_6_pad;
     };
     const u32 entry_count = (sprx_chunk_size >> 3) + 1; // plus the spare last entry, as below
-    auto* pFileEntries = static_cast<SpriteIndexFile*>(Memory::Malloc(sprx_chunk_size));
-    File::GlobalRead(pFileEntries, sprx_chunk_size);
+    auto* file_entries = static_cast<SpriteIndexFile*>(Memory::Malloc(sprx_chunk_size));
+    File::GlobalRead(file_entries, sprx_chunk_size);
     sprite_index_ = static_cast<SpriteIndex*>(Memory::Malloc(entry_count * sizeof(SpriteIndex)));
     memset(sprite_index_, 0, entry_count * sizeof(SpriteIndex));
     for (u32 i = 0; i < entry_count - 1; i++)
     {
-        sprite_index_[i].data_ = reinterpret_cast<BYTE*>(static_cast<sptr>(pFileEntries[i].field_0_offset));
-        sprite_index_[i].width_ = pFileEntries[i].field_4_width;
-        sprite_index_[i].height_ = pFileEntries[i].field_5_height;
-        sprite_index_[i].pad_ = pFileEntries[i].field_6_pad;
+        sprite_index_[i].data_ = reinterpret_cast<BYTE*>(static_cast<sptr>(file_entries[i].field_0_offset));
+        sprite_index_[i].width_ = file_entries[i].field_4_width;
+        sprite_index_[i].height_ = file_entries[i].field_5_height;
+        sprite_index_[i].pad_ = file_entries[i].field_6_pad;
     }
-    ::free(pFileEntries);
+    ::free(file_entries);
 #else
     sprite_index_ = reinterpret_cast<SpriteIndex*>(Memory::Malloc(sprx_chunk_size + 8));
     File::GlobalRead(sprite_index_, sprx_chunk_size);
@@ -818,8 +818,8 @@ void Gtx::LoadFontBase(u32 fonb_chunk_size)
     font_base_ = static_cast<FontBase*>(Memory::Malloc(fonb_chunk_size));
     File::GlobalRead(font_base_, fonb_chunk_size);
 
-    u16 fountCount = font_base_->field_0_font_count;
-    if (fonb_chunk_size != (fountCount * 2U) + 2)
+    u16 fount_count = font_base_->field_0_font_count;
+    if (fonb_chunk_size != (fount_count * 2U) + 2)
     {
         FatalError_4A38C0(Gta2Error::kInvalidChunkSize, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1271, fonb_chunk_size);
     }
@@ -1067,19 +1067,19 @@ void Gtx::LoadSty(const char_type* sty_file_name)
 {
     File::GlobalOpen(sty_file_name);
 
-    FileHeader styHeader;
+    FileHeader sty_header;
     u32 len = sizeof(FileHeader);
-    File::GlobalRead(styHeader.type_, len);
+    File::GlobalRead(sty_header.type_, len);
 
-    styHeader.VerifyType("GBST");
-    styHeader.VerifyVersion(700);
+    sty_header.VerifyType("GBST");
+    sty_header.VerifyVersion(700);
 
-    ChunkHeader chunkHeader;
-    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunkHeader, &len); len = sizeof(ChunkHeader))
+    ChunkHeader chunk_header;
+    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunk_header, &len); len = sizeof(ChunkHeader))
     {
-        if (chunkHeader.size_ != 0)
+        if (chunk_header.size_ != 0)
         {
-            LoadChunk(chunkHeader.type_, chunkHeader.size_);
+            LoadChunk(chunk_header.type_, chunk_header.size_);
         }
     }
 
@@ -1130,20 +1130,20 @@ Gtx::~Gtx()
 {
     SpriteBase* local_field_14_sprite_base2; // eax
     SpriteBase* local_field_18_sprite_base1; // ecx
-    PaletteBase* local_field_C_palette_base2; // edx
+    PaletteBase* local_field_c_palette_base2; // edx
     PaletteBase* local_field_10_palette_base1; // eax
-    FontBase* local_field_1C_font_base; // eax
+    FontBase* local_field_1_c_font_base; // eax
     SpriteIndex* local_field_20_sprite_index; // eax
     ObjectInfo* local_field_24_map_object_info; // eax
     PaletteIndex* local_field_28_palette_index; // ecx
     void* local_field_30_physical_palettes_size; // eax
     void* local_field_44_aligned_tiles_size; // eax
-    void* pUnaligned; // eax
+    void* unaligned; // eax
     DeltaStoreEntry* local_field_48_delta_store; // eax
     void* local_field_50_delta_buffer; // eax
     void* local_field_58_car_info; // eax
-    CarInfoContainer* local_field_5C_cari; // edx
-    DeltaEntry* local_field_4C_delta_index; // eax
+    CarInfoContainer* local_field_5_c_cari; // edx
+    DeltaEntry* local_field_4_c_delta_index; // eax
     void* local_field_54_del; // eax
     TileArray* local_field_40_tile; // eax
 
@@ -1160,17 +1160,17 @@ Gtx::~Gtx()
     sprite_base2_ = nullptr;
     delete (local_field_18_sprite_base1);
 
-    local_field_C_palette_base2 = palette_base2_;
+    local_field_c_palette_base2 = palette_base2_;
     sprite_base1_ = nullptr;
-    delete (local_field_C_palette_base2);
+    delete (local_field_c_palette_base2);
     local_field_10_palette_base1 = palette_base1_;
     palette_base2_ = nullptr;
     delete (local_field_10_palette_base1);
-    local_field_1C_font_base = font_base_;
+    local_field_1_c_font_base = font_base_;
     palette_base1_ = nullptr;
-    if (local_field_1C_font_base)
+    if (local_field_1_c_font_base)
     {
-        ::free(local_field_1C_font_base);
+        ::free(local_field_1_c_font_base);
     }
 
     local_field_20_sprite_index = sprite_index_;
@@ -1201,12 +1201,12 @@ Gtx::~Gtx()
     {
         ::free(local_field_44_aligned_tiles_size);
     }
-    pUnaligned = sprite_graphics_unaligned_;
+    unaligned = sprite_graphics_unaligned_;
     tiles_ = nullptr;
     aligned_tiles_size_ = nullptr;
-    if (pUnaligned)
+    if (unaligned)
     {
-        ::free(pUnaligned);
+        ::free(unaligned);
     }
     local_field_48_delta_store = delta_store_;
     sprite_graphics_ = nullptr;
@@ -1227,14 +1227,14 @@ Gtx::~Gtx()
     {
         ::free(local_field_58_car_info);
     }
-    local_field_5C_cari = cari_;
+    local_field_5_c_cari = cari_;
     car_info_ = nullptr;
-    delete (local_field_5C_cari);
-    local_field_4C_delta_index = delta_index_;
+    delete (local_field_5_c_cari);
+    local_field_4_c_delta_index = delta_index_;
     cari_ = nullptr;
-    if (local_field_4C_delta_index)
+    if (local_field_4_c_delta_index)
     {
-        ::free(local_field_4C_delta_index);
+        ::free(local_field_4_c_delta_index);
     }
     local_field_54_del = static_cast<void*>(del_);
     delta_index_ = nullptr;
@@ -1254,20 +1254,20 @@ void SpriteDelta::Delta(u8* array)
     // Inline asm in the original (lodsw, rep movsb). Each entry is a u16 offset from the end
     // of the previous run, a u8 length and that many bytes.
     // The asm below, in C++ for compilers without MSVC inline asm
-    u8* pSrc = reinterpret_cast<u8*>(data_);
-    u8* pEnd = pSrc + len_;
-    u8* pDst = array;
+    u8* src = reinterpret_cast<u8*>(data_);
+    u8* end = src + len_;
+    u8* dst = array;
     do
     {
         u16 offset;
-        memcpy(&offset, pSrc, sizeof(offset));
-        pSrc += 2;
-        u8 len = *pSrc++;
-        pDst += offset;
-        memcpy(pDst, pSrc, len);
-        pDst += len;
-        pSrc += len;
-    } while (pSrc != pEnd);
+        memcpy(&offset, src, sizeof(offset));
+        src += 2;
+        u8 len = *src++;
+        dst += offset;
+        memcpy(dst, src, len);
+        dst += len;
+        src += len;
+    } while (src != end);
 }
 
 // https://decomp.me/scratch/Cc0Dx Not fully working
@@ -1277,28 +1277,28 @@ void SpriteDelta::Delta(u8* array, u32 width)
     // Inline asm in the original (lodsw / loop)
     // Each entry: u16 offset, u8 len, then len bytes written backwards from the end of the row
     // The asm below, in C++ for compilers without MSVC inline asm
-    u8* pSrc = reinterpret_cast<u8*>(data_);
-    u8* pEnd = pSrc + len_;
-    u8* pDst = array - 1 + width;
+    u8* src = reinterpret_cast<u8*>(data_);
+    u8* end = src + len_;
+    u8* dst = array - 1 + width;
     do
     {
         u16 offset;
-        memcpy(&offset, pSrc, sizeof(offset));
-        pSrc += 2;
-        u32 len = *pSrc;
-        pDst += offset;
+        memcpy(&offset, src, sizeof(offset));
+        src += 2;
+        u32 len = *src;
+        dst += offset;
         u32 mirrored = static_cast<u32>(offset & 0xFF) << 1;
-        pDst -= mirrored;
+        dst -= mirrored;
         if (mirrored >= 0x100)
         {
-            pDst += 0x200;
+            dst += 0x200;
         }
-        pSrc++;
+        src++;
         do // like the loop instruction, a zero length wraps
         {
-            *pDst-- = *pSrc++;
+            *dst-- = *src++;
         } while (--len);
-    } while (pSrc != pEnd);
+    } while (src != end);
 }
 
 // 0x5abaa0
@@ -1313,14 +1313,14 @@ void SpriteIndex::ClearPixelsOfColour(u8 clear_target)
 // 0x5ABAE0
 void ClearPixelsOfColourInRow(u8* data, int width, u8 clear_target)
 {
-    u8* pDataIter = data;
+    u8* data_iter = data;
     for (s32 i = 0; i < width; i++)
     {
-        if (*pDataIter == clear_target)
+        if (*data_iter == clear_target)
         {
-            *pDataIter = 0;
+            *data_iter = 0;
         }
-        pDataIter++;
+        data_iter++;
     }
 }
 

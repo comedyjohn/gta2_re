@@ -78,9 +78,9 @@ void GameText::RemapExtendedCharsIfNotJapanese(wchar_t* text)
 // 0x5B5930
 void GameText::RemapExtendedChars(wchar_t* str)
 {
-    for (wchar_t* pStrIter = str; *pStrIter; ++pStrIter)
+    for (wchar_t* str_iter = str; *str_iter; ++str_iter)
     {
-        *pStrIter = RemapExtendedChar(*pStrIter);
+        *str_iter = RemapExtendedChar(*str_iter);
     }
 }
 
@@ -98,18 +98,18 @@ void GameText::TKEYLoad(u32 chunk_size)
     };
     t_key_.t_key_count_ = chunk_size / sizeof(Text0xCFile);
     t_key_.t_key_ = new TextEntry[t_key_.t_key_count_];
-    auto* pFileEntries = new Text0xCFile[t_key_.t_key_count_];
-    File::GlobalRead(pFileEntries, chunk_size);
+    auto* file_entries = new Text0xCFile[t_key_.t_key_count_];
+    File::GlobalRead(file_entries, chunk_size);
     for (u32 i = 0; i < t_key_.t_key_count_; i++)
     {
         TextEntry& entry = t_key_.t_key_[i];
         memset(&entry, 0, sizeof(entry));
-        entry.field_0_pwstr = reinterpret_cast<wchar_t*>(static_cast<sptr>(pFileEntries[i].field_0_offset));
+        entry.field_0_pwstr = reinterpret_cast<wchar_t*>(static_cast<sptr>(file_entries[i].field_0_offset));
         memcpy(reinterpret_cast<void*>(&entry.key),
-               reinterpret_cast<const void*>(pFileEntries[i].field_4_key),
-               sizeof(pFileEntries[i].field_4_key));
+               reinterpret_cast<const void*>(file_entries[i].field_4_key),
+               sizeof(file_entries[i].field_4_key));
     }
-    delete[] pFileEntries;
+    delete[] file_entries;
 #else
     // TODO: probably an inline
     t_key_.t_key_count_ = chunk_size / sizeof(TextEntry);
@@ -126,14 +126,14 @@ void GameText::TKEYLoad(u32 chunk_size)
 // 0x5B59B0
 void GameText::TDATOffsets2Strings(BYTE* dat)
 {
-    TextEntry* ptKeyIter = t_key_.t_key_;
+    TextEntry* pt_key_iter = t_key_.t_key_;
 
     for (u32 idx = 0; idx < t_key_.t_key_count_; idx++)
     {
         // The raw file record is an offset, convert it to pos32 to the string data in the TDAT
-        const s32 offsetInBytes = static_cast<s32>(reinterpret_cast<uintptr_t>(ptKeyIter->field_0_pwstr));
-        ptKeyIter->field_0_pwstr = reinterpret_cast<wchar_t*>(&dat[offsetInBytes]);
-        ptKeyIter++;
+        const s32 offset_in_bytes = static_cast<s32>(reinterpret_cast<uintptr_t>(pt_key_iter->field_0_pwstr));
+        pt_key_iter->field_0_pwstr = reinterpret_cast<wchar_t*>(&dat[offset_in_bytes]);
+        pt_key_iter++;
     }
 }
 
@@ -152,27 +152,27 @@ bool GameText::HasKey(const char_type* id_str)
 // 0x5B5A10
 s32 GameText::TKeySearch(const void* a, const void* b)
 {
-    const auto* pIdStr = static_cast<const char_type*>(a);
+    const auto* id_str = static_cast<const char_type*>(a);
     const auto* a2 = static_cast<const TextEntry*>(b);
-    return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->key)); // TODO: ???
+    return strcmp(id_str, reinterpret_cast<const char_type*>(&a2->key)); // TODO: ???
 }
 
 // 0x5B5A50
 wchar_t* GameText::FindText(const char_type* id_str)
 {
-    auto* pFound = static_cast<TextEntry*>(bsearch(id_str, // key
-                                                   t_key_.t_key_, // array
-                                                   t_key_.t_key_count_, // array count
-                                                   sizeof(TextEntry), // element size
-                                                   TKeySearch));
-    if (!pFound)
+    auto* found = static_cast<TextEntry*>(bsearch(id_str, // key
+                                                  t_key_.t_key_, // array
+                                                  t_key_.t_key_count_, // array count
+                                                  sizeof(TextEntry), // element size
+                                                  TKeySearch));
+    if (!found)
     {
-        static wchar_t kBlank[] = L" "; // writable, like the text the callers usually get
-        return kBlank;
+        static wchar_t k_blank[] = L" "; // writable, like the text the callers usually get
+        return k_blank;
     }
     else
     {
-        return pFound->field_0_pwstr;
+        return found->field_0_pwstr;
     }
 }
 
@@ -239,9 +239,9 @@ u16 GameText::ToUpper(wchar_t ch)
 // 0x5B5B80
 wchar_t* GameText::StrToUpper(wchar_t* wide_str)
 {
-    for (wchar_t* pStrIter = wide_str; *pStrIter; ++pStrIter)
+    for (wchar_t* str_iter = wide_str; *str_iter; ++str_iter)
     {
-        *pStrIter = ToUpper(*pStrIter);
+        *str_iter = ToUpper(*str_iter);
     }
     return wide_str;
 }
@@ -258,62 +258,62 @@ inline s32 GetCharWidthLocal(u16 font_type, wchar_t chr)
 // 0x5B5BC0
 s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* dest_str, const wchar_t* src_str, s32 max_line_width, u16 font_type)
 {
-    const wchar_t* pSrcStrCopy = src_str;
-    wchar_t* pDestStrCopy = dest_str;
+    const wchar_t* src_str_copy = src_str;
+    wchar_t* dest_str_copy = dest_str;
     s32 num_of_lines = 1;
     s32 space_width = GetSpaceWidth(font_type);
     s32 current_width = 0;
-    const wchar_t* pPrevSrcCheckpoint = nullptr;
-    wchar_t* pPrevDestCheckpoint = nullptr;
+    const wchar_t* prev_src_checkpoint = nullptr;
+    wchar_t* prev_dest_checkpoint = nullptr;
 
-    for (; *pSrcStrCopy; pSrcStrCopy++, pDestStrCopy++)
+    for (; *src_str_copy; src_str_copy++, dest_str_copy++)
     {
-        *pDestStrCopy = *pSrcStrCopy;
+        *dest_str_copy = *src_str_copy;
 
-        switch (*pSrcStrCopy)
+        switch (*src_str_copy)
         {
             case '\n':
-                pPrevSrcCheckpoint = nullptr;
-                pPrevDestCheckpoint = nullptr;
+                prev_src_checkpoint = nullptr;
+                prev_dest_checkpoint = nullptr;
                 current_width = 0;
                 num_of_lines += 1;
                 break;
             case ' ':
                 current_width += space_width;
-                pPrevSrcCheckpoint = pSrcStrCopy;
-                pPrevDestCheckpoint = pDestStrCopy;
+                prev_src_checkpoint = src_str_copy;
+                prev_dest_checkpoint = dest_str_copy;
                 break;
             case '#':
                 break;
             default:
-                current_width += GetCharWidthLocal(font_type, *pSrcStrCopy);
+                current_width += GetCharWidthLocal(font_type, *src_str_copy);
                 break;
         }
 
         if (current_width > max_line_width)
         {
-            if (pPrevSrcCheckpoint && pPrevDestCheckpoint)
+            if (prev_src_checkpoint && prev_dest_checkpoint)
             {
                 current_width = 0;
-                pDestStrCopy = pPrevDestCheckpoint; // retrocede
-                pSrcStrCopy = pPrevSrcCheckpoint;
-                *pDestStrCopy = '\n';
+                dest_str_copy = prev_dest_checkpoint; // retrocede
+                src_str_copy = prev_src_checkpoint;
+                *dest_str_copy = '\n';
 
-                pPrevSrcCheckpoint = nullptr;
-                pPrevDestCheckpoint = nullptr;
+                prev_src_checkpoint = nullptr;
+                prev_dest_checkpoint = nullptr;
             }
             else
             {
-                *pDestStrCopy = '\n';
-                pDestStrCopy++;
+                *dest_str_copy = '\n';
+                dest_str_copy++;
 
-                current_width = GetCharWidthLocal(font_type, *pSrcStrCopy);
-                *pDestStrCopy = *pSrcStrCopy;
+                current_width = GetCharWidthLocal(font_type, *src_str_copy);
+                *dest_str_copy = *src_str_copy;
             }
             num_of_lines += 1;
         }
     }
-    *pDestStrCopy = 0; // terminate string
+    *dest_str_copy = 0; // terminate string
 
     return num_of_lines;
 }
@@ -321,33 +321,33 @@ s32 GameText::InsertLineBreaksAndGetNumLines(wchar_t* dest_str, const wchar_t* s
 // 0x5B5D10
 char* GameText::Wide2PesudoAscii(const wchar_t* text)
 {
-    const wchar_t* pSrc = text;
+    const wchar_t* src = text;
     // jnb forced to jge by changing u32 loop index to int
-    s32 dstIdx = 0;
-    while (*pSrc) // the original tested the pointer: it read up to 79 characters past the end of a short string
+    s32 dst_idx = 0;
+    while (*src) // the original tested the pointer: it read up to 79 characters past the end of a short string
     {
         // jnb also used if comparing to sizeof() value instead of
         // numerical literal! cast to s32 fixes (sizeof returns unsigned?)
-        if (dstIdx >= static_cast<int>(sizeof(gTmpWide2AsciiStr) - 1))
+        if (dst_idx >= static_cast<int>(sizeof(gTmpWide2AsciiStr) - 1))
         {
             break;
         }
 
-        if (*pSrc >= 0x80U)
+        if (*src >= 0x80U)
         {
-            gTmpWide2AsciiStr[dstIdx] = '#';
+            gTmpWide2AsciiStr[dst_idx] = '#';
         }
         else
         {
-            gTmpWide2AsciiStr[dstIdx] = static_cast<char>(*pSrc);
+            gTmpWide2AsciiStr[dst_idx] = static_cast<char>(*src);
         }
 
-        pSrc++;
-        dstIdx++;
+        src++;
+        dst_idx++;
     }
 
     // add null terminator
-    gTmpWide2AsciiStr[dstIdx] = 0;
+    gTmpWide2AsciiStr[dst_idx] = 0;
     return gTmpWide2AsciiStr;
 }
 
@@ -355,16 +355,16 @@ char* GameText::Wide2PesudoAscii(const wchar_t* text)
 wchar_t* GameText::Ascii2Wide(const char_type* str)
 {
     // movsx vs movzx caused by unsigned vs s8
-    wchar_t* pDst = gTmpAscii2WideStr;
+    wchar_t* dst = gTmpAscii2WideStr;
     while (*str)
     {
-        *pDst = *str;
-        pDst++;
+        *dst = *str;
+        dst++;
         str++;
     }
 
     // null terminate
-    *pDst = 0;
+    *dst = 0;
     return gTmpAscii2WideStr;
 }
 
@@ -390,26 +390,26 @@ void GameText::Load()
 {
     char_type expected_code[5];
 
-    ChunkHeader chunkHeader;
-    char_type gxtFileName[20];
-    sprintf(gxtFileName, "data\\%c.gxt", lang_code_);
+    ChunkHeader chunk_header;
+    char_type gxt_file_name[20];
+    sprintf(gxt_file_name, "data\\%c.gxt", lang_code_);
 
     sprintf(expected_code, "GBL%c", lang_code_ - ' ');
 
-    File::GlobalOpen(gxtFileName);
+    File::GlobalOpen(gxt_file_name);
 
-    FileHeader gtxHeader;
+    FileHeader gtx_header;
     u32 len = sizeof(FileHeader);
-    File::GlobalRead(&gtxHeader, len);
+    File::GlobalRead(&gtx_header, len);
 
-    gtxHeader.VerifyType(expected_code);
-    gtxHeader.VerifyVersion(100);
+    gtx_header.VerifyType(expected_code);
+    gtx_header.VerifyVersion(100);
 
-    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunkHeader, &len); len = sizeof(ChunkHeader))
+    for (len = sizeof(ChunkHeader); File::GlobalRead(&chunk_header, &len); len = sizeof(ChunkHeader))
     {
-        if (chunkHeader.size_ != 0)
+        if (chunk_header.size_ != 0)
         {
-            LoadChunk(chunkHeader.type_, chunkHeader.size_);
+            LoadChunk(chunk_header.type_, chunk_header.size_);
         }
     }
     File::GlobalClose();

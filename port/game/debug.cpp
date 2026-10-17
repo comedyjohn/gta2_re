@@ -173,56 +173,56 @@ void Debug::Init()
 // 0x4AC200
 bool Debug::HaveOnlyFrenchGtx()
 {
-    bool bEGtxExists = false;
-    bool bFgxtExists = false;
-    bool bGGtxExists = false;
-    bool bIGtxExists = false;
-    bool bJGtxExists = false;
-    bool bSGtxExists = false;
+    bool e_gtx_exists = false;
+    bool fgxt_exists = false;
+    bool g_gtx_exists = false;
+    bool i_gtx_exists = false;
+    bool j_gtx_exists = false;
+    bool s_gtx_exists = false;
 
-    FILE* fEnglish = fopen("data\\e.gxt", "rb");
-    if (fEnglish)
+    FILE* english = fopen("data\\e.gxt", "rb");
+    if (english)
     {
-        fclose(fEnglish);
-        bEGtxExists = true;
+        fclose(english);
+        e_gtx_exists = true;
     }
 
-    FILE* fFrench = fopen("data\\f.gxt", "rb");
-    if (fFrench)
+    FILE* french = fopen("data\\f.gxt", "rb");
+    if (french)
     {
-        fclose(fFrench);
-        bFgxtExists = true;
+        fclose(french);
+        fgxt_exists = true;
     }
 
-    FILE* fGerman = fopen("data\\g.gxt", "rb");
-    if (fGerman)
+    FILE* german = fopen("data\\g.gxt", "rb");
+    if (german)
     {
-        fclose(fGerman);
-        bGGtxExists = true;
+        fclose(german);
+        g_gtx_exists = true;
     }
 
-    FILE* fItalian = fopen("data\\i.gxt", "rb");
-    if (fItalian)
+    FILE* italian = fopen("data\\i.gxt", "rb");
+    if (italian)
     {
-        fclose(fItalian);
-        bIGtxExists = true;
+        fclose(italian);
+        i_gtx_exists = true;
     }
 
-    FILE* fJapanese = fopen("data\\j.gxt", "rb");
-    if (fJapanese)
+    FILE* japanese = fopen("data\\j.gxt", "rb");
+    if (japanese)
     {
-        fclose(fJapanese);
-        bJGtxExists = true;
+        fclose(japanese);
+        j_gtx_exists = true;
     }
 
-    FILE* fSpanish = fopen("data\\s.gxt", "rb");
-    if (fSpanish)
+    FILE* spanish = fopen("data\\s.gxt", "rb");
+    if (spanish)
     {
-        fclose(fSpanish);
-        bSGtxExists = true;
+        fclose(spanish);
+        s_gtx_exists = true;
     }
 
-    bool r = (!bEGtxExists && bFgxtExists == true && !bGGtxExists && !bIGtxExists && !bJGtxExists && !bSGtxExists);
+    bool r = (!e_gtx_exists && fgxt_exists == true && !g_gtx_exists && !i_gtx_exists && !j_gtx_exists && !s_gtx_exists);
 
     return r;
 }

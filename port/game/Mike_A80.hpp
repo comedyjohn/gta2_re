@@ -93,7 +93,7 @@ class Mike_A80
     void sub_4FFA90();
     void sub_4FFD90();
 
-    inline void DrawProfileBar(s32 x, s32 value, s32 colour)
+    void DrawProfileBar(s32 x, s32 value, s32 colour)
     {
         // right is 630 - fx + 1 rather than left + 1: VC6 keeps fx on the x87 stack for the second
         // use, then CSEs the whole (630 - fx) and pops the dead fx

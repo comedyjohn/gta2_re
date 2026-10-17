@@ -21,7 +21,7 @@ class root_sound
     }
 
     // 9.6f 0x410730
-    inline SoundObject_10* PopFree_410730()
+    SoundObject_10* PopFree_410730()
     {
         SoundObject_10* pCurrent = field_0_pFreeList;
         field_0_pFreeList = pCurrent->field_C_pAny.pNextFree;

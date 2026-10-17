@@ -34,7 +34,7 @@ class ScriptStackFramePool_25C
     ~ScriptStackFramePool_25C();
 
     // 9.6f 0x476780
-    inline void DeAllocate_476780(ScriptStackFrame_C* pItem)
+    void DeAllocate_476780(ScriptStackFrame_C* pItem)
     {
         field_0_pool.DeAllocate(pItem);
     }

@@ -16,7 +16,7 @@ class Fix16
 {
   public:
     // 9.6f func
-    static inline s32 Round_To_Int_410BF0(const Fix16& a1)
+    static s32 Round_To_Int_410BF0(const Fix16& a1)
     {
         s32 v = a1.mValue;
         return (v + 0x2000) >> 14;
@@ -141,32 +141,32 @@ class Fix16
     // pair is a no-op node for VC6's x87 scheduler, see Scripts/x87_sched/README.md)
     inline f64 to_float_410BA0() const;
 
-    inline f64 AsDouble() const
+    f64 AsDouble() const
     {
         return mValue / 16384.0;
     }
 
-    inline s32 ToInt() const
+    s32 ToInt() const
     {
         return mValue >> 14;
     }
 
-    inline u8 ToUInt8() const
+    u8 ToUInt8() const
     {
         return mValue >> 14;
     }
 
-    inline void FromInt(s32 a1)
+    void FromInt(s32 a1)
     {
         mValue = a1 << 14;
     }
 
-    inline void FromShort(s16 a1)
+    void FromShort(s16 a1)
     {
         mValue = a1 << 14;
     }
 
-    inline void FromUnsignedShort(u16 a1)
+    void FromUnsignedShort(u16 a1)
     {
         mValue = a1 << 14;
     }
@@ -224,7 +224,7 @@ class Fix16
         mValue = v << 14;
     }
 
-    inline Fix16& Negate()
+    Fix16& Negate()
     {
         mValue = -mValue;
         return *this;
@@ -234,7 +234,7 @@ class Fix16
     // inline budget sees the front-end size, 57 here (each brace pair adds 2, the else 2 more, a non-const
     // parameter 1 less). 57 is the only size that gives the original's cut-offs both in MaxAbsDistance_42A6B0
     // (Ped::NotifyWeaponHit_46FF00 needs <= 57) and in GetLength_41E260 (Car_BC::ManageDrowning_43E560 >= 57).
-    inline static Fix16 Abs(const Fix16& input)
+    static Fix16 Abs(const Fix16& input)
     {
         if (input.mValue > 0)
         {
@@ -243,7 +243,7 @@ class Fix16
         return -input;
     }
 
-    inline Fix16 ZeroIfNegligible_482730()
+    Fix16 ZeroIfNegligible_482730()
     {
         if (Fix16::Abs(*this) < dword_6F8CF0)
         {
@@ -252,7 +252,7 @@ class Fix16
         return *this;
     }
 
-    inline Fix16 GetRoundValue() const
+    Fix16 GetRoundValue() const
     {
         // get the "integer part" of Fix16, since everything less than 0x3FFF is decimal in float
         return Fix16(mValue & 0xFFFFC000, 0); // 0xFFFFC000 = 0xFFFFFFFF - Fix16(1)
@@ -262,20 +262,20 @@ class Fix16
     static Fix16 GetFracValue_42A630(const Fix16& v);
 
     // 9.6f func: 0x42A630
-    inline Fix16 GetFracValue() const
+    Fix16 GetFracValue() const
     {
         // get the "fractional part" of Fix16
         return Fix16(mValue & 0x3FFF, 0); // 0x4000 = Fix16(1)
     }
 
-    inline s32 MultiplyInt64(Fix16 a2)
+    s32 MultiplyInt64(Fix16 a2)
     {
         __int64 t = (mValue * static_cast<__int64>(a2.mValue)) >> 14;
         return static_cast<s32>(t);
     }
 
     //  inline sub_4B9E10 in 9.6f
-    inline static bool IsBetween_4B9E10(Fix16& min, Fix16& max, Fix16& input)
+    static bool IsBetween_4B9E10(Fix16& min, Fix16& max, Fix16& input)
     {
         return input >= min && input <= max;
     }
@@ -288,12 +288,12 @@ class Fix16
 
     // Non-member style add of two references. Unlike the member operator+ it loads the left
     // operand into the result register first (CarPhysics_B0::ComputeEngineTorque_561970's length).
-    inline static Fix16 Add_ref(const Fix16& lhs, const Fix16& rhs)
+    static Fix16 Add_ref(const Fix16& lhs, const Fix16& rhs)
     {
         return Fix16(lhs.mValue + rhs.mValue, 0);
     }
 
-    inline static Fix16 Max(const Fix16& diff_x, const Fix16& diff_y)
+    static Fix16 Max(const Fix16& diff_x, const Fix16& diff_y)
     {
         return (diff_x > diff_y) ? diff_x : diff_y;
     }
@@ -303,7 +303,7 @@ class Fix16
     // inline budget charges the front-end size, 48 here (41 without the local, 46 with a non-const one).
     // Car_BC::ApplyExplosionImpulse_443710 needs >= 48 and CarPhysics_B0::EnforceGearSensitiveMaxSpeed_562D00
     // <= 49; with GetLength_41E260 at 162, Crane_15C::ComputeHookPolar_47F6C0 needs >= 48 too.
-    inline static Fix16 SquareRoot(const Fix16& input)
+    static Fix16 SquareRoot(const Fix16& input)
     {
         const f64 value = input.AsDouble();
         return Fix16(sqrt(value));
@@ -312,7 +312,7 @@ class Fix16
     static Fix16 Max_44E540(const Fix16& pLhs, const Fix16& pRhs);
     // 9.6f 0x41E130, out-of-line copy Max_44E540. Small functions inline it (Ped_List_4::FindClosestActivePed_471340),
     // and as a site after the two Abs it sets their nested budget in MaxAbsDistance_42A6B0
-    inline static Fix16 Max_41E130(const Fix16& a, const Fix16& b)
+    static Fix16 Max_41E130(const Fix16& a, const Fix16& b)
     {
         if (a > b)
         {
@@ -358,12 +358,12 @@ class Fix16
         return Fix16(value, 0);
     }
 
-    inline s32 get_value_4754D0() const
+    s32 get_value_4754D0() const
     {
         return mValue;
     }
 
-    inline s32 GetRaw_40F4B0() const
+    s32 GetRaw_40F4B0() const
     {
         return mValue;
     }
@@ -381,7 +381,7 @@ class Fix16
     }
 
     // https://decomp.me/scratch/MqQPJ
-    inline static Fix16 MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
+    static Fix16 MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
     {
         Fix16 diff_x;
         diff_x = x2 - x1;
@@ -393,7 +393,7 @@ class Fix16
     }
 
     // NOTE: 10.5 function - matched but inlined
-    static inline Fix16 ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)
+    static Fix16 ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)
     {
         if (a2 > a3)
         {
@@ -419,27 +419,27 @@ class Fix16
         }
     }
 
-    inline Fix16* subtract_one_491F00()
+    Fix16* subtract_one_491F00()
     {
         mValue -= 0x4000;
         return this;
     }
 
-    inline Fix16* add_one_491EF0()
+    Fix16* add_one_491EF0()
     {
         mValue += 0x4000;
         return this;
     }
 
     // 9.6f 0x4824E0
-    inline Fix16 operator++(int)
+    Fix16 operator++(int)
     {
         mValue += 0x4000;
         return Fix16(mValue - 0x4000, 0);
     }
 
     // 9.6f 0x482510
-    inline Fix16 operator--(int)
+    Fix16 operator--(int)
     {
         mValue -= 0x4000;
         return Fix16(mValue + 0x4000, 0);

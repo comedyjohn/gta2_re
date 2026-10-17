@@ -49,7 +49,7 @@ class Object_2C
 {
   public:
     // 9.6f 0x4C4F10
-    inline void SetThreadTriggerIdx_4C4F10(char_type v)
+    void SetThreadTriggerIdx_4C4F10(char_type v)
     {
         field_27_thread_trigger_idx = v;
     }
@@ -133,7 +133,7 @@ class Object_2C
     // 9.6f 0x482C50; GetSpeedVector_52AE90 is its out-of-line copy. It returns a Fix16_Point (which has
     // a destructor), so VC6 never expands it: it is charged to the caller's inline budget and called
     // out of line (SetMovementVector_5224E0)
-    inline Fix16_Point GetSpeedVector_482C50()
+    Fix16_Point GetSpeedVector_482C50()
     {
         if (field_10_obj_3c)
         {
@@ -154,13 +154,13 @@ class Object_2C
     void Sprite_UpdateZFromSlopeAndTile_522FA0(Sprite* pSprite);
 
     // 9.6f 0x475A70
-    inline bool IsStaticCollisionCheck_475A70()
+    bool IsStaticCollisionCheck_475A70()
     {
         return field_8->field_34_behavior_type == object_behavior_type::static_collision_check_1;
     }
 
     // 9.6f 0x475A60
-    inline bool IsShop_475A60()
+    bool IsShop_475A60()
     {
         s32 v1 = field_8->field_34_behavior_type;
         return v1 == object_behavior_type::shop_10;
@@ -173,7 +173,7 @@ class Object_2C
             t == object_behavior_type::pickup_animated_8 || t == object_behavior_type::pickup_physics_animated_9;
     }
 
-    inline bool IsDestroyedPowergen_434140()
+    bool IsDestroyedPowergen_434140()
     {
         if (field_18_model == objects::destroyed_invisible_powergen_285 || field_18_model == objects::destroyed_powergen_282)
         {
@@ -216,19 +216,19 @@ class Object_2C
     }
 
     // Inlined on version 9.6f 0x447e90 (also 9.6f copies 0x45E0A0 and 0x482C00)
-    inline void set_field_26(u8 v)
+    void set_field_26(u8 v)
     {
         field_26_ped_ref_idx = v;
     }
 
     // Inlined on version 9.6f 0x420FF0
-    inline u8 get_field_26_420FF0()
+    u8 get_field_26_420FF0()
     {
         return field_26_ped_ref_idx;
     }
 
     // 9.6f 0x434130
-    inline void SetO8Timer_434130(s16 timer)
+    void SetO8Timer_434130(s16 timer)
     {
         field_C_pAny.o8->field_4_timer = timer;
     }
@@ -240,13 +240,13 @@ class Object_2C
     }
 
     // 9.6f 0x40FF00
-    inline char_type GetDefHasShadowsField_40FF00()
+    char_type GetDefHasShadowsField_40FF00()
     {
         return field_8->field_63;
     }
 
     // 9.6f 0x475AA0
-    inline bool IsModel176To181_475AA0()
+    bool IsModel176To181_475AA0()
     {
         s32 model = field_18_model;
         return model == 176 || model == 177 || model == 178 || model == 179 || model == 180 || model == 181;
@@ -261,7 +261,7 @@ class Object_2C
     }
 
     // 9.6f 0x482490
-    inline void PoolAllocate()
+    void PoolAllocate()
     {
         field_14_id = gObj2C_id_623EC0++;
         field_25_removal_state = object_removal_state::none_0;
@@ -273,17 +273,17 @@ class Object_2C
         field_18_model = 0;
     }
 
-    inline Fix16 GetX_4340D0()
+    Fix16 GetX_4340D0()
     {
         return field_4->field_14_xy.x;
     }
 
-    inline Fix16 GetY_4340E0()
+    Fix16 GetY_4340E0()
     {
         return field_4->field_14_xy.y;
     }
 
-    inline Fix16 GetZ_4340F0()
+    Fix16 GetZ_4340F0()
     {
         return field_4->field_1C_zpos;
     }
@@ -310,13 +310,13 @@ class Object_2C
     }
 
     // 9.6f 0x482400
-    static inline bool IsExplosiveItemDefinition_482400(s32 idx)
+    static bool IsExplosiveItemDefinition_482400(s32 idx)
     {
         return idx >= 39 && idx <= 42;
     }
 
     // 9.6f 0x482C80
-    inline Fix16 GetMass_482C80()
+    Fix16 GetMass_482C80()
     {
         return field_8->field_18_mass;
     }
@@ -330,7 +330,7 @@ class Object_2C
     inline bool IsAnimFinished_482C10();
 
     // 9.6f 0x493090
-    inline void GetConveyorDirection_493090(s8* pX, s8* pY)
+    void GetConveyorDirection_493090(s8* pX, s8* pY)
     {
         UnpackSignedNibbles_529050(get_field_26_420FF0(), pX, pY);
     }

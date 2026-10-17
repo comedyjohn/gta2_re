@@ -48,7 +48,7 @@ class Taxi_4
     }
 
     // 9.6f 0x434970
-    inline bool IsEmpty_434970()
+    bool IsEmpty_434970()
     {
         return field_0_pFirst == nullptr;
     }

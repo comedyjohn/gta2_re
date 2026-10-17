@@ -155,17 +155,17 @@ class Ang16
         return *this;
     }
 
-    inline s32 ToFloat()
+    s32 ToFloat()
     {
         return rValue << 14;
     }
 
-    inline s32 FromUnsignedToFloat()
+    s32 FromUnsignedToFloat()
     {
         return static_cast<u16>(rValue) << 14;
     }
 
-    inline void ConvertAndMultiply(Ang16* a1, Ang16* a2)
+    void ConvertAndMultiply(Ang16* a1, Ang16* a2)
     {
         Fix16 fix_1;
         fix_1.mValue = a2->FromUnsignedToFloat();
@@ -179,7 +179,7 @@ class Ang16
 
     void Normalize_406C20();
 
-    inline Ang16& Normalized_406C20()
+    Ang16& Normalized_406C20()
     {
         Normalize_406C20();
         return *this;
@@ -231,18 +231,18 @@ class Ang16
     // evaluated (Particle_8::EmitImpactParticles_53FE40). Also used by miss2_0x11C::SCRCMD_CRANE_5041C0.
     Ang16(Fix16* a2, s32 a3);
 
-    inline static Fix16 cosine_40F520(const Ang16& angle)
+    static Fix16 cosine_40F520(const Ang16& angle)
     {
         return gCos_table_669260[angle.rValue];
     }
 
-    inline static Fix16 sine_40F500(const Ang16& angle)
+    static Fix16 sine_40F500(const Ang16& angle)
     {
         return gSin_table_667A80[angle.rValue];
     }
 
     // 9.6f 0x41FC20: the table value is the left operand (this) of the multiply
-    inline static void PolarToCartesian_41FC20(const Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
+    static void PolarToCartesian_41FC20(const Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
     {
         ret1 = Ang16::sine_40F500(angle) * radius;
         ret2 = Ang16::cosine_40F520(angle) * radius;
@@ -262,7 +262,7 @@ class Ang16
     }
 
     // Reverse of above func
-    inline static Ang16 Fix16_To_Ang16_40F540(const Fix16& a2)
+    static Ang16 Fix16_To_Ang16_40F540(const Fix16& a2)
     {
         return Ang16(a2.GetRaw_40F4B0() / 71, 0);
     }
@@ -328,7 +328,7 @@ class Ang16
 
     // TODO: move with CarDoorAlignmentSolver_545AF0
     // https://decomp.me/scratch/6VBR0  (matched)
-    static inline void RotateVector_41FC90(Fix16& xpos, Fix16& ypos, Ang16& rotation)
+    static void RotateVector_41FC90(Fix16& xpos, Fix16& ypos, Ang16& rotation)
     {
         Fix16 old_xpos = xpos;
         xpos = xpos * Ang16::cosine_40F520(rotation) + ypos * Ang16::sine_40F500(rotation);

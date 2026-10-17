@@ -171,7 +171,7 @@ class Hud_ShowCoords_1
     void ShowPlayerCoords_5CF970();
 
     // 9.6f 0x4A4760
-    inline void ToggleShowCoords_4A4760()
+    void ToggleShowCoords_4A4760()
     {
         field_0_show_coords = field_0_show_coords == 0;
     }
@@ -226,13 +226,13 @@ class Hud_TextEntry_C4
     bool operator_equals_5D1E10(Hud_TextEntry_C4* pOther);
 
     // 9.6f 0x4C70F0
-    inline void Expire_4C70F0()
+    void Expire_4C70F0()
     {
         field_A4_display_time = 0;
     }
 
     // 9.6f 0x4C70E0
-    inline void ClearAlpha_4C70E0()
+    void ClearAlpha_4C70E0()
     {
         field_B8_alpha = 0;
         *reinterpret_cast<u8*>(&field_BC_alpha_flag) = 0; // byte store in both 9.6f and 10.5, the field is read as s32 elsewhere
@@ -275,19 +275,19 @@ class Hud_Pager_C
 {
   public:
     // 9.6f 0x4C7160
-    inline bool no_ptr_counter_4C7160()
+    bool no_ptr_counter_4C7160()
     {
         return field_4_ptr_counter == nullptr;
     }
 
     // 9.6f 0x4C7170
-    inline bool IsTimerOff_4C7170()
+    bool IsTimerOff_4C7170()
     {
         return field_0_timer < 0;
     }
 
     // 9.6f 0x4C7120
-    inline void SetTimer_4C7120(s32 timer)
+    void SetTimer_4C7120(s32 timer)
     {
         field_0_timer = timer;
     }
@@ -296,7 +296,7 @@ class Hud_Pager_C
     inline void SetCounter_4C7130(s32* pCounter);
 
     // 9.6f 0x411A40
-    inline s32 get_timer_411A40()
+    s32 get_timer_411A40()
     {
         return field_0_timer;
     }
@@ -391,14 +391,14 @@ class ArrowTrace_24
     }
 
     // 9.6f 0x4767E0
-    inline void SetTargetPed_4767E0(Ped* pPed)
+    void SetTargetPed_4767E0(Ped* pPed)
     {
         field_0_ped = pPed;
         field_10_target_type = ArrowTargetType::Ped_2;
     }
 
     // 9.6f 0x476810
-    inline void SetTargetObject_476810(Object_2C* pObj)
+    void SetTargetObject_476810(Object_2C* pObj)
     {
         field_8_obj = pObj;
         field_10_target_type = ArrowTargetType::Object_4;
@@ -415,7 +415,7 @@ class ArrowTrace_24
         field_20_bIsTargetVisible = false;
     }
 
-    inline void set_arrow_aim_from_pos_4767C0(Fix16 x, Fix16 y, Fix16 z)
+    void set_arrow_aim_from_pos_4767C0(Fix16 x, Fix16 y, Fix16 z)
     {
         field_14_aim_x = x;
         field_18_aim_y = y;
@@ -423,20 +423,20 @@ class ArrowTrace_24
     }
 
     // 9.6f inline 0x4C6F20
-    inline bool HasNoTarget_4C6F20()
+    bool HasNoTarget_4C6F20()
     {
         return field_10_target_type == ArrowTargetType::Nothing_0;
     }
 
     // 9.6f 0x4C6F30
-    inline Player* GetTargetPlayer_4C6F30()
+    Player* GetTargetPlayer_4C6F30()
     {
         return field_C_player;
     }
 
     // 9.6f inline 0x4820A0. The player is stored first (VC7 gives 9.6f's body either way): with the
     // type store first, SetNewFugitive_516590 schedules and allocates registers differently
-    inline void SetTargetPlayer_4820A0(Player* player)
+    void SetTargetPlayer_4820A0(Player* player)
     {
         field_C_player = player;
         field_10_target_type = ArrowTargetType::Player_6;
@@ -456,7 +456,7 @@ class ArrowTrace_24
 class Hud_ArrowTargets_64
 {
   public:
-    inline bool HasBothTargets_4C6FB0()
+    bool HasBothTargets_4C6FB0()
     {
         return !field_18_primary_target.HasNoTarget_4C6F20() && !field_3C_secondary_target.HasNoTarget_4C6F20();
     }
@@ -482,7 +482,7 @@ class Hud_Arrow_7C
     inline void SetMinRadiusPos_4C6FF0(s32 steps);
 
     // 9.6f 0x4C6F20
-    inline bool Is_radius_pos_0_4C6F20()
+    bool Is_radius_pos_0_4C6F20()
     {
         return field_10_radius_pos == 0;
     }
@@ -496,7 +496,7 @@ class Hud_Arrow_7C
     void SetPlayerArrowColour_5D0DC0(Ped* pPed);
 
     // 9.6f inline 0x4C6F80
-    inline bool IsType0_4C6F80()
+    bool IsType0_4C6F80()
     {
         if (field_18.field_18_primary_target.HasNoTarget_4C6F20() && field_18.field_3C_secondary_target.HasNoTarget_4C6F20())
         {
@@ -506,7 +506,7 @@ class Hud_Arrow_7C
     }
 
     // 9.6f inline 0x4C7050
-    inline bool IsVisible_4C7050()
+    bool IsVisible_4C7050()
     {
         if (field_18.field_10.field_5_is_visible)
         {
@@ -515,7 +515,7 @@ class Hud_Arrow_7C
         return false;
     }
 
-    inline void swap_arrows_4C7060()
+    void swap_arrows_4C7060()
     {
         if (field_18.field_60_curr_target == &field_18.field_18_primary_target)
         {
@@ -528,24 +528,24 @@ class Hud_Arrow_7C
     }
 
     // 9.6f 0x476850
-    inline void SetArrowTargetPed_476850(Ped* pPed)
+    void SetArrowTargetPed_476850(Ped* pPed)
     {
         field_18.field_18_primary_target.SetTargetPed_4767E0(pPed);
     }
 
     // 9.6f 0x476860
-    inline void SetArrowTargetCar_476860(Car_BC* pCar)
+    void SetArrowTargetCar_476860(Car_BC* pCar)
     {
         field_18.field_18_primary_target.SetTargetCar(pCar);
     }
 
     // 9.6f 0x476870
-    inline void SetArrowTargetObject_476870(Object_2C* pObj)
+    void SetArrowTargetObject_476870(Object_2C* pObj)
     {
         field_18.field_18_primary_target.SetTargetObject_476810(pObj);
     }
 
-    inline void SetArrowAim_476840(Fix16 xpos, Fix16 ypos, Fix16 zpos)
+    void SetArrowAim_476840(Fix16 xpos, Fix16 ypos, Fix16 zpos)
     {
         ArrowTrace_24* pTarget = &field_18.field_18_primary_target;
         pTarget->field_14_aim_x = xpos;
@@ -568,7 +568,7 @@ class Hud_Arrow_7C_Array
 {
   public:
     // 9.6f 0x4C70B0
-    inline char_type ShowGangArrows_4C70B0()
+    char_type ShowGangArrows_4C70B0()
     {
         return field_83C_show_gang_arrows;
     }

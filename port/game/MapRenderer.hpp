@@ -11,7 +11,7 @@ class Fix16_Point;
 class Nanobotz_8 // Maybe Fix16_Point
 {
   public:
-    inline s32 IsEqual_46BB60(Nanobotz_8* other)
+    s32 IsEqual_46BB60(Nanobotz_8* other)
     {
         return field_0_x == other->field_0_x && field_4_y == other->field_4_y;
     }
@@ -104,7 +104,7 @@ class MapRenderer
     void ClearDrawnTileCount_4F6A10();
     void Draw_4F6A20();
 
-    inline u32 update_and_get_gradient_direction(u32 idx)
+    u32 update_and_get_gradient_direction(u32 idx)
     {
         gGradientSize_6F6480 = gGmpSlopes_6F5BA8[idx].field_1_gradient_size;
         gGradientLevel_6F647C = gGmpSlopes_6F5BA8[idx].field_2_gradient_level;
@@ -112,7 +112,7 @@ class MapRenderer
         return gCurrentSlope_6F646C.field_0_gradient_direction;
     }
 
-    inline u8 GetColour_46B5E0(s32 a1)
+    u8 GetColour_46B5E0(s32 a1)
     {
         //u8 diffuseColour;
         switch (a1)
@@ -136,7 +136,7 @@ class MapRenderer
         //return diffuseColour;
     }
 
-    inline void AddToDrawList_46BB90(s32& maybe_x, s32& maybe_y)
+    void AddToDrawList_46BB90(s32& maybe_x, s32& maybe_y)
     {
         Nanobotz_8* pPos = &field_1C_draw_list[field_2EFC_curr_draw_layer_size];
         pPos->field_0_x = maybe_x;
@@ -153,7 +153,7 @@ class MapRenderer
         ++field_2EFC_curr_draw_layer_size;
     }
 
-    inline void ResetCount_45B040()
+    void ResetCount_45B040()
     {
         field_2EFC_curr_draw_layer_size = 0;
     }

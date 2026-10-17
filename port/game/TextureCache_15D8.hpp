@@ -77,7 +77,7 @@ struct TextureCache_15D8
     s16 field_15D4_next_digit_idx;
     u16 field_15D6_pal_count;
 
-    inline STexture* GetTexture_46BB50(u16& tile_idx)
+    STexture* GetTexture_46BB50(u16& tile_idx)
     {
         return field_0_tile_textures[tile_idx];
     }

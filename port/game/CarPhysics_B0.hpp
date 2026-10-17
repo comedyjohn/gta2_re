@@ -52,76 +52,76 @@ class CarPhysics_B0
 {
   public:
     // 9.6f 0x40F800
-    inline Fix16 get_cp3_40F800()
+    Fix16 get_cp3_40F800()
     {
         return field_6C_cp3;
     }
 
     // 9.6f 0x40F810
-    inline void set_cp3_40F810(Fix16 v)
+    void set_cp3_40F810(Fix16 v)
     {
         field_6C_cp3 = v;
     }
 
     // 9.6f 0x40F820
-    inline Ang16 get_theta_40F820()
+    Ang16 get_theta_40F820()
     {
         return field_58_theta;
     }
 
     // 9.6f 0x40F830
-    inline void set_theta_40F830(Ang16 v)
+    void set_theta_40F830(Ang16 v)
     {
         field_58_theta = v;
     }
 
     // 9.6f 0x40F7E0
-    inline void set_cp1_40F7E0(const Fix16_Point& v)
+    void set_cp1_40F7E0(const Fix16_Point& v)
     {
         field_38_cp1.x = v.x;
         field_38_cp1.y = v.y;
     }
 
     // 9.6f 0x421170
-    inline void set_linvel_421170(const Fix16_Point& v)
+    void set_linvel_421170(const Fix16_Point& v)
     {
         field_40_linvel_1.x = v.x;
         field_40_linvel_1.y = v.y;
     }
 
     // 9.6f 0x4895D0
-    inline void StopMoving_4895D0()
+    void StopMoving_4895D0()
     {
         field_74_ang_vel_rad = dword_6FD120;
         field_40_linvel_1.clear_41E1E0();
     }
 
     // 9.6f 0x4211E0
-    inline Ang16 GetLinvelAngle_4211E0()
+    Ang16 GetLinvelAngle_4211E0()
     {
         return field_40_linvel_1.atan2_40F790();
     }
 
     // 9.6f 0x421130
-    inline bool IsRngBelowDamage_421130()
+    bool IsRngBelowDamage_421130()
     {
         return static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) < field_8_total_damage_q;
     }
 
     // 9.6f 0x421260
-    inline void SetHandBrakeOff_421260()
+    void SetHandBrakeOff_421260()
     {
         field_92_is_hand_brake_on = 0;
     }
 
     // 9.6f 0x421250
-    inline void SetHandBrakeOn_421250()
+    void SetHandBrakeOn_421250()
     {
         field_92_is_hand_brake_on = 1;
     }
 
     // 9.6f 0x421270
-    inline char_type get_is_hand_brake_on_421270()
+    char_type get_is_hand_brake_on_421270()
     {
         return field_92_is_hand_brake_on;
     }
@@ -149,7 +149,7 @@ class CarPhysics_B0
     Fix16 GetTrailerAwareTurnRatio_55A100();
     // Inlined in UpdateSteeringAngle_562560. The scale is computed before the turn ratio call, which
     // needs it as a by-value argument ahead of the turn direction (arguments are evaluated right to left)
-    inline Fix16 GetScaledTurnRatio(Fix16 scale, s32 turn_direction)
+    Fix16 GetScaledTurnRatio(Fix16 scale, s32 turn_direction)
     {
         return GetTrailerAwareTurnRatio_55A100() * turn_direction * scale;
     }
@@ -297,7 +297,7 @@ class CarPhysics_B0
     void SetCurrentCarInfoAndModelPhysics_562EF0();
 
     // 9.6f 0x482CC0
-    inline void HandleObjectCollisionAt_482CC0(Object_2C* pObj, Fix16_Point& point, char_type a3)
+    void HandleObjectCollisionAt_482CC0(Object_2C* pObj, Fix16_Point& point, char_type a3)
     {
         SetCurrentCarInfoAndModelPhysics_562EF0();
         CollisionIntersectionPoint_6FE1A0 = point;
@@ -326,7 +326,7 @@ class CarPhysics_B0
     void SetCar_5638C0(Car_BC* pBC);
     CarPhysics_B0();
 
-    inline Fix16 GetLinearSpeed_4211A0()
+    Fix16 GetLinearSpeed_4211A0()
     {
         return field_40_linvel_1.GetLength_41E260();
     }
@@ -335,59 +335,59 @@ class CarPhysics_B0
     inline void AddDamage_49EF50(s32 damage);
 
     // 9.6f 0x421260
-    inline void ClearHandBrake_421260()
+    void ClearHandBrake_421260()
     {
         field_92_is_hand_brake_on = 0;
     }
 
-    inline char_type is_backward_gas_on_411810()
+    char_type is_backward_gas_on_411810()
     {
         return field_94_is_backward_gas_on;
     }
 
-    inline Fix16 get_car_velocity_4211C0()
+    Fix16 get_car_velocity_4211C0()
     {
         return field_0_vel_read_only.GetLength_41E260();
     }
 
     // FUNCTION: 96f 0x4212a0
-    inline void SetField8C_to_1()
+    void SetField8C_to_1()
     {
         field_8C_state = 1;
     }
 
     // FUNCTION: 96f 0x4212b0
-    inline void SetField8C_to_2()
+    void SetField8C_to_2()
     {
         field_8C_state = 2;
     }
 
-    inline bool IsStationary_49EF80()
+    bool IsStationary_49EF80()
     {
         return field_40_linvel_1.x == kFP16Zero_6FE20C && field_40_linvel_1.y == kFP16Zero_6FE20C &&
             field_74_ang_vel_rad == kFP16Zero_6FE20C;
     }
 
     // FUNCTION: 96f 0x49ea60
-    inline void Field74Subtract()
+    void Field74Subtract()
     {
         field_74_ang_vel_rad -= dword_6FE0B0;
     }
 
     // FUNCTION: 96f 0x49f4e0
-    inline void Field40Add()
+    void Field40Add()
     {
         field_40_linvel_1 += stru_6FDF50;
     }
 
     // FUNCTION: 96f 0x49f4f0
-    inline void Field40Subtract()
+    void Field40Subtract()
     {
         field_40_linvel_1 -= stru_6FDF50;
     }
 
     // FUNCTION: 96f 0x49f500
-    inline void ResetPoint6FDF50()
+    void ResetPoint6FDF50()
     {
         stru_6FDF50.reset();
     }

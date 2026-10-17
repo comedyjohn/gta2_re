@@ -11,7 +11,7 @@ class Object_8
     Object_8();
     ~Object_8();
 
-    inline void PoolAllocate()
+    void PoolAllocate()
     {
         gObj8_count_6F8F18++;
         field_6_frame_counter = 0;
@@ -20,7 +20,7 @@ class Object_8
     }
 
     // 9.6f 0x482AF0
-    inline void PoolDeallocate()
+    void PoolDeallocate()
     {
         --gObj8_count_6F8F18;
         ++gObj8_dealloc_count_6F8DC0;

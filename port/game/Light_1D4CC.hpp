@@ -31,13 +31,13 @@ class Light_1D4CC : public LightBase
         LightGrid::AllocGrid_4D6E00();
     }
 
-    inline void AddToUpdateList_464C60(Light_28* pLight)
+    void AddToUpdateList_464C60(Light_28* pLight)
     {
         pLight->mpNext = field_0_pool.field_4_pPrev;
         field_0_pool.field_4_pPrev = pLight;
     }
 
-    inline Light_28* Alloc_464C40()
+    Light_28* Alloc_464C40()
     {
         Light_28* pFirst = field_0_pool.field_0_pStart;
         field_0_pool.field_0_pStart = field_0_pool.field_0_pStart->mpNext;
@@ -46,7 +46,7 @@ class Light_1D4CC : public LightBase
         return pFirst;
     }
 
-    inline void SetFlashing_469070(Light_28* pLight, u8 on_time, u8 off_time, u8 shape)
+    void SetFlashing_469070(Light_28* pLight, u8 on_time, u8 off_time, u8 shape)
     {
         pLight->field_16_flicker_range = shape;
         pLight->field_14_on_time = on_time;
@@ -56,7 +56,7 @@ class Light_1D4CC : public LightBase
         AddToUpdateList_464C60(pLight);
     }
 
-    inline Light_28* Init_469010(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
+    Light_28* Init_469010(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
     {
         Light_28* pLight = Alloc_464C40();
         pLight->field_4_x = xpos;
@@ -73,7 +73,7 @@ class Light_1D4CC : public LightBase
 
     // Same as Init_469010, but TrafficLight_20::Init_5C1D00 calls the out-of-line copies
     // Alloc_5C2B70 and LightIntensityRadius::SetRadius_5C5CD0 in 10.5.
-    inline Light_28* InitOutOfLine_469010(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
+    Light_28* InitOutOfLine_469010(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
     {
         Light_28* pLight = Alloc_5C2B70();
         pLight->field_4_x = xpos;
@@ -88,7 +88,7 @@ class Light_1D4CC : public LightBase
         return pLight;
     }
 
-    inline void Free_47F4B0(Light_28* pLight)
+    void Free_47F4B0(Light_28* pLight)
     {
         pLight->PoolDeallocate();
         pLight->mpNext = field_0_pool.field_0_pStart;
@@ -96,7 +96,7 @@ class Light_1D4CC : public LightBase
     }
 
     // matched https://decomp.me/scratch/cZQwK
-    inline void RemoveFromUpdateListAndFree_47F450(Light_28* pLight)
+    void RemoveFromUpdateListAndFree_47F450(Light_28* pLight)
     {
         Light_28* pPrevious = nullptr;
 
@@ -120,7 +120,7 @@ class Light_1D4CC : public LightBase
         }
     }
 
-    inline void DeallocLight_47F4F0(Light_28* pLight)
+    void DeallocLight_47F4F0(Light_28* pLight)
     {
         pLight->RemoveFromGrid_4D6DC0();
         if (pLight->field_14_on_time)

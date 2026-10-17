@@ -60,7 +60,7 @@ class SpriteTreeStack_FA4
 class SpriteTreeNodePool_2EE4
 {
   public:
-    inline SpriteTreeNode_C* Alloc_4C4B40()
+    SpriteTreeNode_C* Alloc_4C4B40()
     {
         if (field_2EE0_next_free_idx >= SpriteTreeStack_FA4::k_max_nodes)
         {
@@ -75,7 +75,7 @@ class SpriteTreeNodePool_2EE4
     }
 
     // 9.6f 0x4C4B70
-    inline void Reset_4C4B70()
+    void Reset_4C4B70()
     {
         field_2EE0_next_free_idx = 0;
     }

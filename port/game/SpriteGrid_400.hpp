@@ -30,7 +30,7 @@ struct GridCell_C
 class SpriteGrid_400
 {
   public:
-    inline GridSpriteLink_8* GetCollideListAt_446820(s32 x_find, s32 y_pos)
+    GridSpriteLink_8* GetCollideListAt_446820(s32 x_find, s32 y_pos)
     {
         if (y_pos <= 255 && y_pos >= 0)
         {

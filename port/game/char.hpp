@@ -37,37 +37,37 @@ class Char_B4
 {
   public:
     // 9.6f 0x41B080
-    inline Fix16 get_velocity_41B080()
+    Fix16 get_velocity_41B080()
     {
         return field_38_velocity;
     }
 
     // 9.6f 0x433930
-    inline void UseRunOrJumpSpeed_433930()
+    void UseRunOrJumpSpeed_433930()
     {
         field_38_velocity = field_3C_run_or_jump_speed;
     }
 
     // 9.6f 0x4338F0
-    inline void SetSpriteNum_4338F0(s32 num)
+    void SetSpriteNum_4338F0(s32 num)
     {
         field_80_sprite_ptr->SetDrawLayer_40F7B0(num);
     }
 
     // 9.6f 0x41B090
-    inline s32 get_ped_state_2_41B090()
+    s32 get_ped_state_2_41B090()
     {
         return field_C_ped_state_2;
     }
 
     // 9.6f 0x4338D0
-    inline Sprite* get_sprite_ptr_4338D0()
+    Sprite* get_sprite_ptr_4338D0()
     {
         return field_80_sprite_ptr;
     }
 
     // 9.6f 0x4338E0
-    inline void set_pPed_4338E0(Ped* v)
+    void set_pPed_4338E0(Ped* v)
     {
         field_7C_pPed = v;
     }
@@ -155,18 +155,18 @@ class Char_B4
     s32 field_B0_scream_timer;
 
     // 9.6f 0x48A4C0
-    inline s32 get_ped_state_1_48A4C0()
+    s32 get_ped_state_1_48A4C0()
     {
         return field_8_ped_state_1;
     }
 
     // 9.6f 0x492180
-    inline void Set_F8_ped_state_1_433910(s32 a2)
+    void Set_F8_ped_state_1_433910(s32 a2)
     {
         field_8_ped_state_1 = a2;
     }
 
-    inline Ang16 get_rotation_433A40()
+    Ang16 get_rotation_433A40()
     {
         return field_40_rotation;
     }
@@ -177,24 +177,24 @@ class Char_B4
     }
 
     // 9.6f 0x4339C0
-    inline Fix16 get_sprite_xpos()
+    Fix16 get_sprite_xpos()
     {
         return field_80_sprite_ptr->field_14_xy.x;
     }
 
     // 9.6f 0x4339E0
-    inline Fix16 get_sprite_ypos()
+    Fix16 get_sprite_ypos()
     {
         return field_80_sprite_ptr->field_14_xy.y;
     }
 
     // 9.6f 0x433A00
-    inline Fix16 get_sprite_zpos()
+    Fix16 get_sprite_zpos()
     {
         return field_80_sprite_ptr->field_1C_zpos;
     }
 
-    inline void RegulateVelocity_433970(Fix16 threshold)
+    void RegulateVelocity_433970(Fix16 threshold)
     {
         if (field_38_velocity < threshold)
         {
@@ -207,7 +207,7 @@ class Char_B4
     }
 
     // strange, the same 9.6f func but Ped::ChaseTargetStateMachine_46B170 only matches if it pass by ref
-    inline void RegulateVelocityByRef_433970(const Fix16& threshold)
+    void RegulateVelocityByRef_433970(const Fix16& threshold)
     {
         if (field_38_velocity < threshold)
         {
@@ -219,33 +219,33 @@ class Char_B4
         }
     }
 
-    inline void SetMaxSpeed_433920(Fix16 max_speed)
+    void SetMaxSpeed_433920(Fix16 max_speed)
     {
         field_38_velocity = max_speed;
     }
 
     // strange, the same 9.6f func but Ped::ChaseTargetStateMachine_46B170 only matches if it pass by ref
-    inline void SetMaxSpeedByRef_433920(Fix16& max_speed)
+    void SetMaxSpeedByRef_433920(Fix16& max_speed)
     {
         field_38_velocity = max_speed;
     }
 
-    inline Ped* get_ped_433A20()
+    Ped* get_ped_433A20()
     {
         return field_7C_pPed;
     }
 
-    inline void SetPedState1_433910(s32 new_state)
+    void SetPedState1_433910(s32 new_state)
     {
         field_8_ped_state_1 = new_state;
     }
 
-    inline void SetPedState2_433A50(s32 new_state)
+    void SetPedState2_433A50(s32 new_state)
     {
         field_C_ped_state_2 = new_state;
     }
 
-    inline void sub_4923D0()
+    void sub_4923D0()
     {
         field_40_rotation.SnapToAng4_405640();
         field_40_rotation += word_6FD940;
@@ -253,7 +253,7 @@ class Char_B4
         field_46_timer = 10;
     }
 
-    inline void sub_4923A0()
+    void sub_4923A0()
     {
         field_40_rotation.SnapToAng4_405640();
         field_40_rotation += word_6FD8F8;
@@ -261,34 +261,34 @@ class Char_B4
         field_46_timer = 10;
     }
 
-    inline s32 GetCharState_433A80()
+    s32 GetCharState_433A80()
     {
         return field_10_char_state;
     }
 
-    inline void SetCharState_433A60(s32 char_state)
+    void SetCharState_433A60(s32 char_state)
     {
         field_10_char_state = char_state;
     }
 
     // 9.6f 0x433A90
-    inline s8 Get_F44_433A90()
+    s8 Get_F44_433A90()
     {
         return field_44_block_type;
     }
 
     // 9.6f 0x403900
-    inline Car_BC* Get_F84_403900()
+    Car_BC* Get_F84_403900()
     {
         return field_84_target_car;
     }
 
-    inline void Set_F84_433900(Car_BC* pCar)
+    void Set_F84_433900(Car_BC* pCar)
     {
         field_84_target_car = pCar;
     }
 
-    inline void IncreaseSpeedIfAllowed_433940()
+    void IncreaseSpeedIfAllowed_433940()
     {
         field_38_velocity += kFpOne128th_6784BC;
 
@@ -298,12 +298,12 @@ class Char_B4
         }
     }
 
-    inline void AddAngle_4928A0(Ang16 ang)
+    void AddAngle_4928A0(Ang16 ang)
     {
         field_40_rotation += ang;
     }
 
-    inline bool IsCollidingWithASprite_433AA0()
+    bool IsCollidingWithASprite_433AA0()
     {
         if (field_69_is_colliding_with_sprite)
         {

@@ -7,7 +7,7 @@ template<typename PoolType, s32 PoolSize>
 class PoolBasic
 {
   public:
-    inline PoolBasic()
+    PoolBasic()
     {
         PoolType* pIter = &field_4_pool[0];
         for (s32 i = 0; i < PoolSize - 1; i++)
@@ -57,18 +57,18 @@ class Pool
 {
   public:
     // 9.6f 0x48A8F0
-    inline bool has_pStart_48A8F0()
+    bool has_pStart_48A8F0()
     {
         return field_0_pStart != nullptr;
     }
 
     // 9.6f 0x4B8FD0 (CokeZero_FC, 10.5 copy 0x5935C0): first used item
-    inline PoolType* GetFirstUsed_4B8FD0()
+    PoolType* GetFirstUsed_4B8FD0()
     {
         return field_4_pPrev;
     }
 
-    inline Pool()
+    Pool()
     {
         PoolType* pIter = field_8_pool;
         for (s32 i = 0; i < PoolSize - 1; i++)

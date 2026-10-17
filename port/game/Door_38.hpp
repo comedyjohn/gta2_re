@@ -52,7 +52,7 @@ class Door_38
 {
   public:
     // 9.6f 0x476A90
-    inline s32 get_state_476A90()
+    s32 get_state_476A90()
     {
         return field_20_state;
     }
@@ -94,39 +94,39 @@ class Door_38
     inline void CloseDoors_476A30();
 
     // 9.6f 0x4895F0
-    inline void ClearF2C_4895F0()
+    void ClearF2C_4895F0()
     {
         field_2C_bCanAutoOpen = 0;
     }
 
     // 9.6f 0x489600
-    inline bool IsDoubleDoor_489600()
+    bool IsDoubleDoor_489600()
     {
         return field_0_primary_door_data && field_4_secondary_door_data;
     }
 
     // inlined in 0x476990
     // 9.6f 0x476990
-    inline void set_field_20(u32 v)
+    void set_field_20(u32 v)
     {
         field_20_state = v;
     }
 
     // inlined in 0x476a10
-    inline void set_close_type(u32 v)
+    void set_close_type(u32 v)
     {
         field_24_close_type = v;
     }
 
     // inlined in 0x476a20
-    inline void set_close_delay(s16 v)
+    void set_close_delay(s16 v)
     {
         field_1C_close_delay = v;
         field_1E_close_timer = v;
     }
 
     // inlined in 0x4769e0
-    inline void set_open_details_car_bc(u32 open, Car_BC* car_bc_ptr)
+    void set_open_details_car_bc(u32 open, Car_BC* car_bc_ptr)
     {
         field_20_state = open;
         field_10_car_bc = car_bc_ptr;
@@ -134,7 +134,7 @@ class Door_38
     }
 
     // inlined in 0x4769a0
-    inline void set_open_details_model_id(u32 open, s32 id)
+    void set_open_details_model_id(u32 open, s32 id)
     {
         field_20_state = open;
         field_10_model_id = id;
@@ -142,7 +142,7 @@ class Door_38
     }
 
     // inlined in 0x4769c0
-    inline void set_open_details_ped(u32 open, Ped* ped_ptr)
+    void set_open_details_ped(u32 open, Ped* ped_ptr)
     {
         field_20_state = open;
         field_10_ped = ped_ptr;
@@ -150,7 +150,7 @@ class Door_38
     }
 
     // inlined in 0x476a00
-    inline void set_target_id(s32 id)
+    void set_target_id(s32 id)
     {
         field_14_target_id = id;
         field_2C_bCanAutoOpen = 1;

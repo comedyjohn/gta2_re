@@ -49,7 +49,7 @@ class Weapon_30_Pool
     }
 
     // 9.6f 0x4CC9E0 (which also calls 0x4CC810, init_5DCD90 in 10.5)
-    inline Weapon_30* AllocateUnlinked_4CC9E0()
+    Weapon_30* AllocateUnlinked_4CC9E0()
     {
         Weapon_30* pWeapon = field_0_pool.field_0_pStart;
         field_0_pool.field_0_pStart = pWeapon->mpNext;

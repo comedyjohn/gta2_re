@@ -28,13 +28,13 @@ class Garage_48
     }
 
     // 9.6f 0x434AF0
-    inline bool IsParkingCarInPosition_434AF0(Car_BC* pCar)
+    bool IsParkingCarInPosition_434AF0(Car_BC* pCar)
     {
         return pCar == field_0_parking_car && field_3D_in_position;
     }
 
     // 9.6f 0x489650
-    inline void Reset_489650()
+    void Reset_489650()
     {
         field_10_door = nullptr;
         field_C_state = 0;

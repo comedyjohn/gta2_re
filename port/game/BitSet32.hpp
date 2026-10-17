@@ -94,35 +94,35 @@ class BitSet32
         return *this;
     }
 
-    inline u32 GetRaw_4A5190()
+    u32 GetRaw_4A5190()
     {
         return m_var;
     }
 
     // 9.6f 0x4BA360
-    inline void SetGlobal0_4BA360()
+    void SetGlobal0_4BA360()
     {
         gFlags_67ACF8 = kGlobalMask0_61A9AC;
     }
 
     // 9.6f 0x4BA370
-    inline void SetGlobal1_4BA370()
+    void SetGlobal1_4BA370()
     {
         gFlags_67ACF8 = kGlobalMask1_61A9A8;
     }
 
     // 9.6f 0x4BA350
-    inline void SetGlobal2_4BA350()
+    void SetGlobal2_4BA350()
     {
         gFlags_67ACF8 = kGlobalMask2_61A9A4;
     }
 
-    inline void MaskWithGlobalFlags_4BA330()
+    void MaskWithGlobalFlags_4BA330()
     {
         m_var &= gFlags_67ACF8;
     }
 
-    inline void ClearGlobalFlags_4BA340()
+    void ClearGlobalFlags_4BA340()
     {
         m_var &= ~gFlags_67ACF8;
     }

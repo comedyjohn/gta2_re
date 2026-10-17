@@ -187,13 +187,13 @@ class Sprite
 {
   public:
     // 9.6f 0x41C1F0
-    inline s16 get_remap_41C1F0()
+    s16 get_remap_41C1F0()
     {
         return field_24_remap;
     }
 
     // 9.6f 0x4BA220
-    inline void set_z_col_4BA220(char_type v)
+    void set_z_col_4BA220(char_type v)
     {
         field_39_z_col = v;
     }
@@ -204,7 +204,7 @@ class Sprite
     Fix16_Point get_x_y_443580();
     // 9.6f 0x4207B0, out-of-line copy get_x_y_443580 (emitted by Car_BC.cpp). Returns a Fix16_Point by
     // value, so VC6 charges it to the caller's inline budget and then calls the copy.
-    inline Fix16_Point get_x_y()
+    Fix16_Point get_x_y()
     {
         return Fix16_Point(field_14_xy.x, field_14_xy.y);
     }
@@ -283,7 +283,7 @@ class Sprite
 
     // The original ctor is an inline that reads a per-TU static zero Ang16 / Fix16 (car.cpp has its own
     // copies at 0x67791C / 0x6777CC). This inline takes them as parameters for the TUs that inline it.
-    inline Sprite(const Ang16& kZeroAng, const Fix16& kZero) : field_0_rotation(kZeroAng)
+    Sprite(const Ang16& kZeroAng, const Fix16& kZero) : field_0_rotation(kZeroAng)
     {
         field_4_pVisualShape = nullptr;
         field_14_xy.x = kZero;
@@ -303,7 +303,7 @@ class Sprite
         field_10_sound = nullptr;
     }
 
-    inline bool TypeIs_446940(s32 a2)
+    bool TypeIs_446940(s32 a2)
     {
         return field_30_sprite_type_enum == a2;
     }
@@ -326,7 +326,7 @@ class Sprite
     }
 
     // 9.6f 0x420700
-    inline void SetPaletteSprites_420700()
+    void SetPaletteSprites_420700()
     {
         field_34_palette_type = palette_types_enum::sprites_2;
     }
@@ -365,7 +365,7 @@ class Sprite
     inline u16 GetTrueSpriteIdx_4BA230();
 
     // 9.6f 0x446960
-    inline Fix16 ManhattanDistance_446960(Sprite* pOther)
+    Fix16 ManhattanDistance_446960(Sprite* pOther)
     {
         return Fix16::Abs(pOther->field_14_xy.x - field_14_xy.x) + Fix16::Abs(pOther->field_14_xy.y - field_14_xy.y);
     }
@@ -394,18 +394,18 @@ class Sprite
         }
     }
 
-    inline s32 GetBlendMode_4BA200()
+    s32 GetBlendMode_4BA200()
     {
         return field_2C_flags & 3;
     }
 
-    inline u32 GetAlphaBits_4BA210()
+    u32 GetAlphaBits_4BA210()
     {
         //return field_2C >> 3;
         return field_2C_flags & 0xFFFFFFF8;
     }
 
-    inline s32 GetLightingDrawFlag_4B9BA0()
+    s32 GetLightingDrawFlag_4B9BA0()
     {
         if ((field_2C_flags & 4) == 0)
         {
@@ -415,7 +415,7 @@ class Sprite
     }
 
     // matched on 9.6f but slight different on 10.5: https://decomp.me/scratch/iNjwT
-    inline u32 ComputeDrawFlags_4BAC60()
+    u32 ComputeDrawFlags_4BAC60()
     {
         u32 flags;
         switch (GetBlendMode_4BA200())
@@ -525,7 +525,7 @@ class Sprite
     }
 
     // 9.6f inline 0x420690
-    inline void set_ang_lazy_420690(Ang16 a1)
+    void set_ang_lazy_420690(Ang16 a1)
     {
         if (a1 != field_0_rotation)
         {
@@ -535,7 +535,7 @@ class Sprite
     }
 
     // 9.6f inline 0x420600
-    inline void set_xyz_lazy_420600(Fix16 xpos, Fix16 ypos, Fix16 zpos)
+    void set_xyz_lazy_420600(Fix16 xpos, Fix16 ypos, Fix16 zpos)
     {
         if (field_14_xy.x != xpos || field_14_xy.y != ypos || field_1C_zpos != zpos)
         {
@@ -567,22 +567,22 @@ class Sprite
         }
     }
 
-    inline Fix16 GetXPos()
+    Fix16 GetXPos()
     {
         return field_14_xy.x;
     }
 
-    inline Fix16 GetYPos()
+    Fix16 GetYPos()
     {
         return field_14_xy.y;
     }
 
-    inline Fix16 GetZPos()
+    Fix16 GetZPos()
     {
         return field_1C_zpos;
     }
 
-    inline void SetDrawLayer_40F7B0(s32 new_layer)
+    void SetDrawLayer_40F7B0(s32 new_layer)
     {
         field_28_draw_layer = new_layer;
     }
@@ -779,7 +779,7 @@ class SpritePool
     }
 
     // 9.6f 0x48A8D0
-    inline bool has_free_48A8D0()
+    bool has_free_48A8D0()
     {
         return field_0_pool.field_0_pHead != nullptr;
     }

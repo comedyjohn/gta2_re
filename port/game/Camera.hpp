@@ -47,7 +47,7 @@ class Camera_0xBC
 {
   public:
     // 9.6f 0x416B70
-    inline Ped* GetFollowedPed_416B70()
+    Ped* GetFollowedPed_416B70()
     {
         return field_34_target_ped;
     }
@@ -107,19 +107,19 @@ class Camera_0xBC
                      .Add_408660(Fix16(field_74_screen_px_center_y));
     }
 
-    inline void SetSmoothFollow_475B60()
+    void SetSmoothFollow_475B60()
     {
         field_3C_follow_mode = camera_follow_mode::smooth_1;
     }
 
     // 9.6f 0x4A5070
-    inline void SetSnapFollow_4A5070()
+    void SetSnapFollow_4A5070()
     {
         field_3C_follow_mode = camera_follow_mode::snap_2;
     }
 
     // FUNCTION: 96f 0x40cfc0
-    inline Fix16_Point_POD WorldToScreen_40CFC0(Fix16 x, Fix16 y, Fix16 z)
+    Fix16_Point_POD WorldToScreen_40CFC0(Fix16 x, Fix16 y, Fix16 z)
     {
         Fix16_Point_POD tmp;
         Fix16 u = field_98_cur_pos.field_8_z - z;
@@ -132,7 +132,7 @@ class Camera_0xBC
     }
 
     // 9.6f 0x45AEA0
-    inline bool IsSpriteInBounds_45AEA0(Sprite* pSprite, Fix16 margin)
+    bool IsSpriteInBounds_45AEA0(Sprite* pSprite, Fix16 margin)
     {
         return pSprite->field_14_xy.x >= field_20_padded_view_bounds.field_0_left - margin &&
             pSprite->field_14_xy.x <= field_20_padded_view_bounds.field_4_right + margin &&
@@ -141,7 +141,7 @@ class Camera_0xBC
     }
 
     // 9.6f 0x45AF40
-    inline bool IsRectInBounds_45AF40(Fix16_Rect* pRect)
+    bool IsRectInBounds_45AF40(Fix16_Rect* pRect)
     {
         return pRect->get_top_45ADD0() <= field_20_padded_view_bounds.field_C_bottom &&
             pRect->get_bottom_45ADC0() >= field_20_padded_view_bounds.field_8_top &&
@@ -150,29 +150,29 @@ class Camera_0xBC
     }
 
     // 9.6f 0x40CF60
-    inline bool IsPointInViewBounds_40CF60(Fix16 x, Fix16 y)
+    bool IsPointInViewBounds_40CF60(Fix16 x, Fix16 y)
     {
         return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right && y >= field_78_view_bounds.field_8_top &&
             y <= field_78_view_bounds.field_C_bottom;
     }
 
-    inline void CommitPendingTarget_41E410()
+    void CommitPendingTarget_41E410()
     {
         field_0_target_pos = field_10_pending_target_pos;
     }
 
-    inline void ResetPendingTarget()
+    void ResetPendingTarget()
     {
         field_10_pending_target_pos = field_0_target_pos;
     }
 
     // 9.6f inline 0x433E90
-    inline bool HasFollowTarget_433E90()
+    bool HasFollowTarget_433E90()
     {
         return field_34_target_ped || field_38_target_car;
     }
 
-    inline void SetPendingTarget_41E3D0(Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16 zoom)
+    void SetPendingTarget_41E3D0(Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16 zoom)
     {
         field_10_pending_target_pos.field_0_x = xpos;
         field_10_pending_target_pos.field_4_y = ypos;

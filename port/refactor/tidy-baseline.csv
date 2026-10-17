@@ -997,7 +997,6 @@ port/game/MapRenderer.cpp,readability-function-cognitive-complexity,7
 port/game/MapRenderer.cpp,readability-function-size,2
 port/game/MapRenderer.cpp,readability-implicit-bool-conversion,253
 port/game/MapRenderer.cpp,readability-make-member-function-const,1
-port/game/MapRenderer.cpp,readability-redundant-inline-specifier,8
 port/game/MapRenderer.cpp,readability-uppercase-literal-suffix,258
 port/game/MapRenderer.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/MapRenderer.hpp,cppcoreguidelines-avoid-non-const-global-variables,7

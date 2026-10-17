@@ -208,7 +208,7 @@ class sound_obj
     SoundEntry_1C field_544C[5]; // sound_f16_pos_0x1C instead of SoundEntry_1C ?
 
     // Radio emitters use indices 1..5
-    inline sound_f16_pos_0x1C& RadioEmitter(s32 idx)
+    sound_f16_pos_0x1C& RadioEmitter(s32 idx)
     {
         return (reinterpret_cast<sound_f16_pos_0x1C*>(field_544C))[idx];
     }

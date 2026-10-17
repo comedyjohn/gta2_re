@@ -12,13 +12,13 @@ class rng
     }
 
     // FUNCTION: 96f 0x41cfe0
-    inline s32 get_cur_rng_41CFE0()
+    s32 get_cur_rng_41CFE0()
     {
         return field_0_rng;
     }
 
     // 9.6f 0x45F9E0
-    inline s32 get_rnd_45F9E0()
+    s32 get_rnd_45F9E0()
     {
         return field_4_rnd;
     }

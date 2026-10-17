@@ -17,7 +17,7 @@ struct str_table_entry
     s16 field_6;
     u8 field_8_length;
 
-    inline char* get_name()
+    char* get_name()
     {
         return reinterpret_cast<char*>(&this[1]);
     }
@@ -606,43 +606,43 @@ class ScriptManager_C1EA8
 {
   public:
     // 9.6f 0x4C7350
-    inline bool IsOnMission_4C7350()
+    bool IsOnMission_4C7350()
     {
         return field_344_mission_flag && *field_344_mission_flag;
     }
 
     // 9.6f 0x475980
-    inline bool HasCheckFlag1_475980(WeaponCheckTable* pTable)
+    bool HasCheckFlag1_475980(WeaponCheckTable* pTable)
     {
         return (pTable->field_6_flags & 1) == 1;
     }
 
     // 9.6f 0x4759A0
-    inline bool HasCheckFlag2_4759A0(WeaponCheckTable* pTable)
+    bool HasCheckFlag2_4759A0(WeaponCheckTable* pTable)
     {
         return (pTable->field_6_flags & 2) == 2;
     }
 
     // 9.6f 0x4759C0
-    inline bool HasCheckFlag4_4759C0(WeaponCheckTable* pTable)
+    bool HasCheckFlag4_4759C0(WeaponCheckTable* pTable)
     {
         return (pTable->field_6_flags & 4) == 4;
     }
 
     // 9.6f 0x475A20
-    inline char_type get_field_C1E2C_475A20()
+    char_type get_field_C1E2C_475A20()
     {
         return field_C1E2C_bLoadedFromSave;
     }
 
     // 9.6f 0x475A30
-    inline char_type get_field_C1E2D_475A30()
+    char_type get_field_C1E2D_475A30()
     {
         return field_C1E2D_bKillFrenzyActive;
     }
 
     // 9.6f 0x475A40
-    inline void set_field_C1E2D_475A40(char_type v)
+    void set_field_C1E2D_475A40(char_type v)
     {
         field_C1E2D_bKillFrenzyActive = v;
     }

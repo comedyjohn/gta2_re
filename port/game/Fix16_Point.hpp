@@ -48,14 +48,14 @@ struct Fix16_Point_POD
         this->y = a3;
     }
 
-    inline void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
+    void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
     {
         x = Ang16::sine_40F500(angle) * radius;
         y = Ang16::cosine_40F520(angle) * radius;
     }
 
     // Matching impl at RotateVelocity_562C20
-    inline void RotateByAngle_40F6B0(const Ang16& angle)
+    void RotateByAngle_40F6B0(const Ang16& angle)
     {
         Fix16 sin = Ang16::sine_40F500(angle);
         Fix16 cos = Ang16::cosine_40F520(angle);
@@ -88,19 +88,19 @@ class Fix16_Point
     }
 
     // Reads the TU's FIX16_POINT_ZERO copy (Weapon_30::throwable_5DDFC0 compares with 0x706EB8)
-    inline bool IsNull_420360() const
+    bool IsNull_420360() const
     {
         return x == FIX16_POINT_ZERO && y == FIX16_POINT_ZERO;
     }
 
     // For some reason uses another constant
-    inline bool IsNull() const
+    bool IsNull() const
     {
         return x == kFP16Zero_6FE20C && y == kFP16Zero_6FE20C;
     }
 
     // 9.6f 0x49E450
-    inline bool HasZeroComponent_49E450() const
+    bool HasZeroComponent_49E450() const
     {
         return x == kFP16Zero_6FE20C || y == kFP16Zero_6FE20C;
     }
@@ -126,7 +126,7 @@ class Fix16_Point
     // 9.6f 0x41E260; the out-of-line copy is GetLength_453590. The nested if/else (front-end size 162, the
     // else-if chain is 160) gives the original's cut-offs in Crane_15C::ComputeHookPolar_47F6C0 with
     // SquareRoot at 48; matched functions allow 159..162.
-    inline Fix16 GetLength_41E260() const
+    Fix16 GetLength_41E260() const
     {
         if (x == FIX16_POINT_ZERO)
         {
@@ -145,14 +145,14 @@ class Fix16_Point
         }
     }
 
-    inline void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
+    void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
     {
         x = Ang16::sine_40F500(angle) * radius;
         y = Ang16::cosine_40F520(angle) * radius;
     }
 
     // Matching impl at RotateVelocity_562C20
-    inline void RotateByAngle_40F6B0(const Ang16& angle)
+    void RotateByAngle_40F6B0(const Ang16& angle)
     {
         Fix16 sin = Ang16::sine_40F500(angle);
         Fix16 cos = Ang16::cosine_40F520(angle);
@@ -198,13 +198,13 @@ class Fix16_Point
 
     // Divide_442CB0 as a nothrow inline (see DivideInl_55F9E0; CarPhysics_B0::HandleObjectCollision_5606C0,
     // Car_BC::ApplyExplosionImpulse_443710)
-    inline Fix16_Point DivideInl_442CB0(Fix16& in) throw()
+    Fix16_Point DivideInl_442CB0(Fix16& in) throw()
     {
         return Fix16_Point(x / in, y / in);
     }
 
     // Multiply_438FE0 as a nothrow inline (see DivideInl_55F9E0; Car_BC::TryHitchTrailer_442810)
-    inline Fix16_Point MultiplyInl_438FE0(Fix16& in) throw()
+    Fix16_Point MultiplyInl_438FE0(Fix16& in) throw()
     {
         return Fix16_Point(x * in, y * in);
     }
@@ -215,7 +215,7 @@ class Fix16_Point
     Fix16 MaxAbs_5E4140();
 
     // 9.6f 0x48A270 (the inline of MaxAbs_5E4140)
-    inline Fix16 MaxAbs_48A270()
+    Fix16 MaxAbs_48A270()
     {
         Fix16 ax = Fix16::Abs_436A50(x);
         Fix16 ay = Fix16::Abs_436A50(y);
@@ -227,7 +227,7 @@ class Fix16_Point
     }
 
     // 9.6f 0x48A250: both components through Fix16::DivideAssign (10.5 0x539F90)
-    inline void DivideAssign_48A250(const Fix16& d)
+    void DivideAssign_48A250(const Fix16& d)
     {
         x.DivideAssign_539F90(d);
         y.DivideAssign_539F90(d);
@@ -309,7 +309,7 @@ class Fix16_Point
 
     // operator+ 0x40AC50 as a nothrow inline that VC6 still calls out of line: no EH state for the
     // temporaries alive across the call (Car_BC::TryHitchTrailer_442810)
-    inline Fix16_Point AddInl_40AC50(const Fix16_Point& in) throw()
+    Fix16_Point AddInl_40AC50(const Fix16_Point& in) throw()
     {
         return Fix16_Point(x + in.x, y + in.y);
     }
@@ -349,7 +349,7 @@ class Fix16_Point
     // operator/ 0x55F9E0 as a nothrow inline that VC6 still calls out of line: the original sets no EH
     // state for the temporaries that live across this call (CarPhysics_B0::HandleCarCollision_55FF20,
     // HandleObjectCollision_5606C0). throw() on the real operator/ changes 6 matched functions.
-    inline Fix16_Point DivideInl_55F9E0(const s32& a3) throw()
+    Fix16_Point DivideInl_55F9E0(const s32& a3) throw()
     {
         return Fix16_Point(x / a3, y / a3);
     }

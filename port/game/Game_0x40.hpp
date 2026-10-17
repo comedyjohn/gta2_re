@@ -34,31 +34,31 @@ class Game_0x40
 {
   public:
     // 9.6f 0x4A4750
-    inline void ToggleFastForward_4A4750()
+    void ToggleFastForward_4A4750()
     {
         field_30_fast_forward = field_30_fast_forward == 0;
     }
 
     // 9.6f 0x416BC0
-    inline bool IsPaused_416BC0()
+    bool IsPaused_416BC0()
     {
         return field_0_game_state == GameState::Paused_2;
     }
 
     // 9.6f 0x4B7590
-    inline bool IsExitTimerSet_4B7590()
+    bool IsExitTimerSet_4B7590()
     {
         return field_28_exit_timer != -1;
     }
 
     // 9.6f 0x476790
-    inline u8 GetLocalPlayerIdx_476790()
+    u8 GetLocalPlayerIdx_476790()
     {
         return field_24_local_player_idx;
     }
 
     // 9.6f 0x4D09C0
-    inline GameExitType GetExitType_4D09C0()
+    GameExitType GetExitType_4D09C0()
     {
         return field_2C_game_exit_type;
     }

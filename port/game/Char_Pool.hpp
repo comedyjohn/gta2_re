@@ -10,7 +10,7 @@ class Camera_0xBC;
 class Char_B4_Pool
 {
   public:
-    inline Char_B4_Pool() = default;
+    Char_B4_Pool() = default;
 
     ~Char_B4_Pool() = default;
 
@@ -27,7 +27,7 @@ class Char_8
 {
   public:
     // 9.6f 0x420EA0
-    inline bool no_char_ped_420EA0()
+    bool no_char_ped_420EA0()
     {
         return field_0_char_ped == nullptr;
     }
@@ -55,18 +55,18 @@ class Char_8_Pool
     }
 
     // 9.6f 0x445EF0
-    inline Char_8* Allocate_445EF0()
+    Char_8* Allocate_445EF0()
     {
         return field_0_pool.Allocate();
     }
 
     // 9.6f 0x445F00
-    inline void DeAllocate_445F00(Char_8* pItem)
+    void DeAllocate_445F00(Char_8* pItem)
     {
         field_0_pool.DeAllocate(pItem);
     }
 
-    inline Char_8_Pool() = default;
+    Char_8_Pool() = default;
 };
 
 class PedManager
@@ -104,7 +104,7 @@ class PedPool
   public:
     // inline on the pool ctors: PedManager::PedManager (0x470650) runs out of inline
     // expansions on the Fix16 argument conversions but still expands these
-    inline PedPool() = default;
+    PedPool() = default;
 
     ~PedPool();
 
@@ -172,7 +172,7 @@ class PedPool
     }
 
     // 9.6f 0x435530
-    inline Ped* GetFirstPed_435530()
+    Ped* GetFirstPed_435530()
     {
         return field_0_pool.field_4_pPrev;
     }

@@ -8,7 +8,7 @@ class Car_Door_10
 {
   public:
     // 9.6f 0x4341B0
-    inline Ped* get_pObj_4341B0()
+    Ped* get_pObj_4341B0()
     {
         return field_8_pObj;
     }
@@ -23,31 +23,31 @@ class Car_Door_10
     ~Car_Door_10(); // 447350
 
     // 9.6f 0x421360
-    inline bool IsStateActive_421360()
+    bool IsStateActive_421360()
     {
         return field_4_state != 0 && field_4_state != 6;
     }
 
     // 9.6f 0x421340
-    inline void ResetState_421340()
+    void ResetState_421340()
     {
         field_4_state = 0;
     }
 
     // Inlined in sound_obj::HandleCarDoorSounds_4182E0
-    inline bool IsStartingToOpen()
+    bool IsStartingToOpen()
     {
         return field_4_state == 2 && field_0_animation_frame == 0 && field_1_frame_delay == 0;
     }
 
     // Inlined in sound_obj::HandleCarDoorSounds_4182E0
-    inline bool IsStartingToClose()
+    bool IsStartingToClose()
     {
         return field_4_state == 3 && field_0_animation_frame == 1;
     }
 
     // 9.6f inline 0x421380
-    inline void set_ped_421380(Ped* pPed)
+    void set_ped_421380(Ped* pPed)
     {
         field_8_pObj = pPed;
     }

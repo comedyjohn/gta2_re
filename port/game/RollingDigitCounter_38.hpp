@@ -22,7 +22,7 @@ class RollingDigitCounter_38
     void UpdateRollingDigits_4925E0();
 
     // 9.6f 0x4A50B0
-    inline void SetValueClamped_4A50B0(s32 value)
+    void SetValueClamped_4A50B0(s32 value)
     {
         if (value < -field_30_max_value)
         {
@@ -39,7 +39,7 @@ class RollingDigitCounter_38
     }
 
     // 9.6f 0x41DC30
-    inline s32 get_value()
+    s32 get_value()
     {
         return field_0_value;
     }

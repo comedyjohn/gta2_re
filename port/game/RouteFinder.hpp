@@ -8,29 +8,29 @@ class Link_2
 {
   public:
     // 9.6f 0x40CE90
-    inline u16 GetIndex_0040CE90()
+    u16 GetIndex_0040CE90()
     {
         return field_0 & 0x1ff;
     }
 
     // 9.6f 0x40CED0
-    inline u8 IsEnabled()
+    u8 IsEnabled()
     {
         return field_0 >> 15;
     }
 
     // 9.6f 0x40CEA0
-    inline u16 GetLength()
+    u16 GetLength()
     {
         return (field_0 >> 9) & 0x3F;
     }
 
-    inline void Disable_40CEC0()
+    void Disable_40CEC0()
     {
         field_0 &= ~0x8000u;
     }
 
-    inline void Enable_40CEB0()
+    void Enable_40CEB0()
     {
         field_0 |= 0x8000u;
     }
@@ -45,7 +45,7 @@ class Junction_10
     u16 GetDirectionToJunction_5885C0(u16 junction_idx);
 
     // 9.6f 0x40CEE0
-    inline bool ContainsPoint(s16 x, s16 y)
+    bool ContainsPoint(s16 x, s16 y)
     {
         return x >= field_C_min_x && x <= field_E_max_x && y >= field_D_min_y && y <= field_F_max_y;
     }
@@ -63,7 +63,7 @@ class Junction_10
 
 struct JunctionSegment_0x8
 {
-    inline bool ContainsPoint_40CF20(s16 x, s16 y)
+    bool ContainsPoint_40CF20(s16 x, s16 y)
     {
         return x >= field_4_min_x && x <= field_6_max_x && y >= field_5_min_y && y <= field_7_min_y;
     }

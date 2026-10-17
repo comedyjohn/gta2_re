@@ -219,7 +219,7 @@ enum
 class gtx_0x106C
 {
   public:
-    inline bool IsRemappedWaterTile_49E540(u16 spec_idx)
+    bool IsRemappedWaterTile_49E540(u16 spec_idx)
     {
         if (field_6C_spec[spec_idx] == 4 && IsTileRemapped_5AA850(spec_idx))
         {
@@ -229,7 +229,7 @@ class gtx_0x106C
     }
 
     // 9.6f 0x4C03D0 (a ctor of the spec array there)
-    inline void ResetSpecs_4C03D0()
+    void ResetSpecs_4C03D0()
     {
         for (int& i : field_6C_spec)
         {
@@ -238,19 +238,19 @@ class gtx_0x106C
     }
 
     // 9.6f 0x462FB0
-    inline bool IsWaterTile_462FB0(u16 spec_idx)
+    bool IsWaterTile_462FB0(u16 spec_idx)
     {
         return field_6C_spec[spec_idx] == 4;
     }
 
     // 9.6f 0x42A810
-    inline bool IsRoadTile_42A810(u16 spec_idx)
+    bool IsRoadTile_42A810(u16 spec_idx)
     {
         return field_6C_spec[spec_idx] == 3;
     }
 
     // 9.6f 0x462FD0
-    inline s32 sub_462FD0(u16 spec_idx)
+    s32 sub_462FD0(u16 spec_idx)
     {
         s32 result = field_6C_spec[spec_idx];
         if (result == 3)
@@ -261,7 +261,7 @@ class gtx_0x106C
     }
 
     // 9.6f 0x49E570
-    inline bool sub_49E570(u16 spec_idx)
+    bool sub_49E570(u16 spec_idx)
     {
         if (field_6C_spec[spec_idx] == 4 && !IsTileRemapped_5AA850(spec_idx))
         {
@@ -282,12 +282,12 @@ class gtx_0x106C
         return &field_3C_tiles[(((tile_num & ~3) * 64) + (tile_num & 3)) * 64];
     }
 
-    inline u8 get_sprite_width_420220(u16 a2)
+    u8 get_sprite_width_420220(u16 a2)
     {
         return get_sprite_index_5AA440(a2)->field_4_width;
     }
 
-    inline u8 get_sprite_height_4C6C90(u16 a2)
+    u8 get_sprite_height_4C6C90(u16 a2)
     {
         return get_sprite_index_5AA440(a2)->field_5_height;
     }
@@ -412,12 +412,12 @@ class gtx_0x106C
         return field_5C_cari->field_0_car_info[iParm1] != nullptr;
     }
 
-    inline bool IsElectrifiedFloorType_491F80(u16 tile_idx)
+    bool IsElectrifiedFloorType_491F80(u16 tile_idx)
     {
         return field_6C_spec[tile_idx] == spec_surface_type_enum::spec_electrified;
     }
 
-    inline car_info* get_car_info_4BF1F0(u8 model_idx)
+    car_info* get_car_info_4BF1F0(u8 model_idx)
     {
         return field_5C_cari->field_0_car_info[model_idx];
     }

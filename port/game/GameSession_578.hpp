@@ -19,25 +19,25 @@ class Player;
 struct GameSession_578
 {
     // 9.6f 0x453A80
-    inline s32 get_secret_tokens_collected_453A80()
+    s32 get_secret_tokens_collected_453A80()
     {
         return field_574_secret_tokens_collected;
     }
 
     // 9.6f 0x476B10
-    inline void set_secret_tokens_collected_476B10(s32 count)
+    void set_secret_tokens_collected_476B10(s32 count)
     {
         field_574_secret_tokens_collected = count;
     }
 
     // 9.6f 0x434A10
-    inline void IncSecretTokensCollected_434A10()
+    void IncSecretTokensCollected_434A10()
     {
         field_574_secret_tokens_collected++;
     }
 
     // 9.6f 0x453A40
-    inline u8 EncodeStage_453A40(u8 main_stage_idx, u8 bonus_stage_idx)
+    u8 EncodeStage_453A40(u8 main_stage_idx, u8 bonus_stage_idx)
     {
         main_stage_idx <<= 4;
         main_stage_idx |= bonus_stage_idx;
@@ -45,7 +45,7 @@ struct GameSession_578
     }
 
     // 9.6f 0x453A60
-    inline void DecodeStage_453A60(u8 stage, u8* pMainStageIdx, u8* pBonusStageIdx)
+    void DecodeStage_453A60(u8 stage, u8* pMainStageIdx, u8* pBonusStageIdx)
     {
         *pMainStageIdx = stage >> 4;
         *pBonusStageIdx = stage & 0xF;
@@ -92,7 +92,7 @@ struct GameSession_578
         field_574_secret_tokens_collected = 0;
     }
 
-    inline s32 GetTimeLimit_461DC0()
+    s32 GetTimeLimit_461DC0()
     {
         return field_444_game_time_limit;
     }

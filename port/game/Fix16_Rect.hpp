@@ -85,13 +85,13 @@ class Fix16_Rect
     void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
     // 9.6f 0x433560
-    inline bool OverlapsZ_433560(Fix16_Rect* pOther)
+    bool OverlapsZ_433560(Fix16_Rect* pOther)
     {
         return IntervalsOverlap_41E160(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
     }
 
     // 9.6f 0x463760
-    inline s32 GetMidZ_463760() const
+    s32 GetMidZ_463760() const
     {
         return (field_10_low_z.Add_408660(field_14_high_z) / 2).ToInt();
     }
@@ -100,7 +100,7 @@ class Fix16_Rect
     inline bool EdgesCrossSegment_463690(Fix16_Point& p1, Fix16_Point& p2);
 
     // 9.6f 0x463710
-    inline void SetFromPosSize_463710(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
+    void SetFromPosSize_463710(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {
         field_0_left = left;
         field_8_top = top;
@@ -138,7 +138,7 @@ class Fix16_Rect
     bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
 
     // 9.6f 0x4B9FD0
-    inline bool IsPointInRect_4B9FD0(Fix16_Point* a2)
+    bool IsPointInRect_4B9FD0(Fix16_Point* a2)
     {
         return Fix16::IsBetween_4B9E10(field_0_left, field_4_right, a2->x) && Fix16::IsBetween_4B9E10(field_8_top, field_C_bottom, a2->y);
     }

@@ -296,7 +296,7 @@ class ObjectDefinitions_8CA8
     ObjectDefinition_74* GetObjectDefinition_534360(s32 idx);
 
     // 9.6f 0x4C6E30
-    inline s16 GetObjectPalette_4C6E30(s32 idx)
+    s16 GetObjectPalette_4C6E30(s32 idx)
     {
         return GetObjectDefinition_534360(idx)->field_1E_base_sprite_idx;
     }

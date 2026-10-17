@@ -20,7 +20,7 @@ class PedRefTable_7F8
     PedRefTable_7F8();
     ~PedRefTable_7F8() = default; // 0x59b110
 
-    inline void Clear_434070(u8 idx)
+    void Clear_434070(u8 idx)
     {
         field_0_entries[idx].field_0_ped_id = 0;
         field_0_entries[idx].field_4_ref_count = 0;

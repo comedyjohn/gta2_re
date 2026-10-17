@@ -43,7 +43,7 @@ enum
 struct gmp_block_info
 {
     // 9.6f 0x44C840
-    inline void init_44C840()
+    void init_44C840()
     {
         field_0_left = 0;
         field_2_right = 0;
@@ -165,7 +165,7 @@ struct gmp_compressed_map_32
 
 struct gmp_dmap_info
 {
-    inline void set_data_463080(u8 x, u8 y, u32 column_idx)
+    void set_data_463080(u8 x, u8 y, u32 column_idx)
     {
         field_4_x = x;
         field_5_y = y;
@@ -207,7 +207,7 @@ class gmp_map_zone
     wchar_t* get_zone_str_4DEF00();
 
     // 9.6f 0x463020
-    inline bool ContainsPoint_463020(u8 x, u8 y)
+    bool ContainsPoint_463020(u8 x, u8 y)
     {
         return x >= field_1_x && y >= field_2_y && x < field_1_x + field_3_w && y < field_2_y + field_4_h;
     }
@@ -482,7 +482,7 @@ class Map_0x370
     Fix16 sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle);
 
     // The block under (x, y, z), or the one at z when the one under is a lid-less "air" block
-    inline gmp_block_info* GetRoadBlockAt_4E6660(Fix16& x, Fix16& y, Fix16& z)
+    gmp_block_info* GetRoadBlockAt_4E6660(Fix16& x, Fix16& y, Fix16& z)
     {
         gmp_block_info* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if ((pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -494,7 +494,7 @@ class Map_0x370
 
     // As GetRoadBlockAt_4E6660, writing straight into pBlock (the original keeps pBlock in a register
     // through both lookups, which a returned temporary doesn't give)
-    inline void SetRoadBlockAt_4E6660(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
+    void SetRoadBlockAt_4E6660(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
     {
         pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if ((pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -504,7 +504,7 @@ class Map_0x370
     }
 
     // As SetRoadBlockAt_4E6660, but copes with no block under (x, y, z)
-    inline void SetRoadBlockAtOrNull_4E7190(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
+    void SetRoadBlockAtOrNull_4E7190(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
     {
         pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if (pBlock && (pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -514,7 +514,7 @@ class Map_0x370
     }
 
     // As GetRoadBlockAt_4E6660, but copes with no block under (x, y, z)
-    inline gmp_block_info* GetRoadBlockAtOrNull_4E7190(Fix16& x, Fix16& y, Fix16& z)
+    gmp_block_info* GetRoadBlockAtOrNull_4E7190(Fix16& x, Fix16& y, Fix16& z)
     {
         gmp_block_info* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if (pBlock && (pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -525,7 +525,7 @@ class Map_0x370
     }
 
     // Move up to one block along direction, using up dist
-    inline void StepOneBlock_4E6660(Fix16* pX, Fix16* pY, Fix16& dist, s32 direction)
+    void StepOneBlock_4E6660(Fix16* pX, Fix16* pY, Fix16& dist, s32 direction)
     {
         if (dist >= kFpOne_6F6110)
         {
@@ -589,14 +589,14 @@ class Map_0x370
 
     ~Map_0x370();
 
-    inline bool IsWaterBlockAt_4B9F40(s32 x, s32 y, s32 z)
+    bool IsWaterBlockAt_4B9F40(s32 x, s32 y, s32 z)
     {
         gmp_block_info* pBlock = get_block_4DFE10(x, y, z);
         return pBlock && gGtx_0x106C_703DD4->IsRemappedWaterTile_49E540(pBlock->field_8_lid & 0x3FF);
     }
 
     // 9.6f inline 0x4634E0
-    inline Fix16 get_grad_scale_from_size_4634E0(Fix16& scale, u8 gradient_size)
+    Fix16 get_grad_scale_from_size_4634E0(Fix16& scale, u8 gradient_size)
     {
         switch (gradient_size)
         {
@@ -637,7 +637,7 @@ class Map_0x370
         return false;
     }
 
-    inline bool IsBlockPavementTypeInlined_433530(u8 x, u8 y, u8 z)
+    bool IsBlockPavementTypeInlined_433530(u8 x, u8 y, u8 z)
     {
         gmp_block_info* pBlock = get_block_42A850(x, y, z);
         if (pBlock)
@@ -648,7 +648,7 @@ class Map_0x370
     }
 
     // Like IsBlockPavementTypeInlined_433530 but via get_block_452980 (TrafficLight_20::Init_5C1D00)
-    inline bool IsBlockPavementTypeAt_452980(u8 x, u8 y, u8 z)
+    bool IsBlockPavementTypeAt_452980(u8 x, u8 y, u8 z)
     {
         gmp_block_info* pBlock = get_block_452980(x, y, z);
         if (pBlock)
@@ -658,7 +658,7 @@ class Map_0x370
         return false;
     }
 
-    inline bool IsBlockRoadType_42A8C0(u8 x, u8 y, u8 z)
+    bool IsBlockRoadType_42A8C0(u8 x, u8 y, u8 z)
     {
         gmp_block_info* pBlock = get_block_452980(x, y, z);
         if (pBlock)
@@ -669,7 +669,7 @@ class Map_0x370
     }
 
     // 9.6f out of line 0x433470 (North), 0x4334A0 (East), 0x4334D0 (South), 0x433500 (West).
-    inline bool IsBlockRoadTypeInlined_433470(u8 x, u8 y, u8 z)
+    bool IsBlockRoadTypeInlined_433470(u8 x, u8 y, u8 z)
     {
         gmp_block_info* pBlock = get_block_42A850(x, y, z);
         if (pBlock)
@@ -680,7 +680,7 @@ class Map_0x370
     }
 
     // 9.6f inline 0x420420
-    inline u8 GetBlockTypeAtCoord_420420(s32 a2, s32 a3, s32 a4)
+    u8 GetBlockTypeAtCoord_420420(s32 a2, s32 a3, s32 a4)
     {
         gmp_block_info* pBlock = get_block_4DFE10(a2, a3, a4);
         if (pBlock)
@@ -691,7 +691,7 @@ class Map_0x370
     }
 
     // 9.6f 0x433430
-    inline bool IsSlopeB4ToD0At_433430(s32 xpos, s32 ypos, s32 zpos)
+    bool IsSlopeB4ToD0At_433430(s32 xpos, s32 ypos, s32 zpos)
     {
         gmp_block_info* pBlock = get_block_4DFE10(xpos, ypos, zpos);
         if (pBlock)
@@ -705,7 +705,7 @@ class Map_0x370
         return false;
     }
 
-    inline bool IsGradientSlopeAt_466CF0(s32 xpos, s32 ypos, s32 zpos)
+    bool IsGradientSlopeAt_466CF0(s32 xpos, s32 ypos, s32 zpos)
     {
         gmp_block_info* block_4DFE10 = get_block_4DFE10(xpos, ypos, zpos);
         if (block_4DFE10 && (block_4DFE10->field_B_slope_type & 0xFC) > 0 &&
@@ -717,13 +717,13 @@ class Map_0x370
         return false;
     }
 
-    inline bool HasBlockAnyArrows_492140(s32 xpos, s32 ypos, s32 zpos)
+    bool HasBlockAnyArrows_492140(s32 xpos, s32 ypos, s32 zpos)
     {
         gmp_block_info* pBlock = get_block_4DFE10(xpos, ypos, zpos);
         return pBlock && pBlock->field_A_arrows;
     }
 
-    inline void Clear_F36E_492130()
+    void Clear_F36E_492130()
     {
         field_36E_bBlockedByTerrain = 0;
     }
@@ -789,7 +789,7 @@ class Map_0x370
         return false;
     }
 
-    inline bool IsBlockNonAirType_48A350(u8 x, u8 y, u8 z)
+    bool IsBlockNonAirType_48A350(u8 x, u8 y, u8 z)
     {
         gmp_block_info* pBlock = get_block_452980(x, y, z);
         if (pBlock)

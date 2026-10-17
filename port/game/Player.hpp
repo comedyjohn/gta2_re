@@ -49,49 +49,49 @@ class Player
 {
   public:
     // 9.6f 0x45B0C0
-    inline bool has_player_ped_45B0C0()
+    bool has_player_ped_45B0C0()
     {
         return field_2C4_player_ped != nullptr;
     }
 
     // 9.6f 0x4766D0
-    inline Gang_144* get_gang_curr_location_4766D0()
+    Gang_144* get_gang_curr_location_4766D0()
     {
         return field_34_gang_curr_location;
     }
 
     // 9.6f 0x4A5170
-    inline void set_in_use_4A5170(bool in_use)
+    void set_in_use_4A5170(bool in_use)
     {
         field_8E_in_use = in_use;
     }
 
     // 9.6f 0x4C7340
-    inline gmp_map_zone* get_arrow_blocker_zone_4C7340()
+    gmp_map_zone* get_arrow_blocker_zone_4C7340()
     {
         return field_40_arrow_blocker_zone;
     }
 
     // 9.6f 0x434920
-    inline bool HasPowerUp_434920(s32 power_up_idx)
+    bool HasPowerUp_434920(s32 power_up_idx)
     {
         return field_6F4_power_up_timers[power_up_idx] != 0;
     }
 
     // 9.6f 0x434940
-    inline void DecPowerUp_434940(s32 power_up_idx)
+    void DecPowerUp_434940(s32 power_up_idx)
     {
         field_6F4_power_up_timers[power_up_idx]--;
     }
 
     // 9.6f 0x4766B0
-    inline void ChangeMultipliers_4766B0(s32 amount)
+    void ChangeMultipliers_4766B0(s32 amount)
     {
         field_6BC_multipliers.ChangeStatByAmount_4921B0(amount);
     }
 
     // 9.6f 0x476700
-    inline bool IsBustedNotObjective54_476700()
+    bool IsBustedNotObjective54_476700()
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 &&
@@ -99,7 +99,7 @@ class Player
     }
 
     // 9.6f 0x476730
-    inline bool IsBustedObjective54_476730()
+    bool IsBustedObjective54_476730()
     {
         Ped* pPed;
         return field_28_wasted_or_busted && field_2C_death_countdown == 2 && (pPed = field_2C4_player_ped) != nullptr &&
@@ -107,36 +107,36 @@ class Player
     }
 
     // 9.6f 0x4766C0
-    inline s32 get_lives_4766C0()
+    s32 get_lives_4766C0()
     {
         return field_684_lives.get_value();
     }
 
     // 9.6f 0x421990
-    inline void AddCash_421990(s32 cash)
+    void AddCash_421990(s32 cash)
     {
         field_2D4_scores.AddCash_592620(cash);
     }
 
     // 9.6f 0x421980
-    inline s32 GetScore_421980()
+    s32 GetScore_421980()
     {
         return field_2D4_scores.GetScore_592370();
     }
 
     // 9.6f 0x4766A0
-    inline s32 get_multiplier_4766A0()
+    s32 get_multiplier_4766A0()
     {
         return field_6BC_multipliers.get_value();
     }
 
     // 9.6f 0x41DC40
-    inline void AddScore_41DC40(s32 score)
+    void AddScore_41DC40(s32 score)
     {
         field_2D4_scores.AddCash_592620(score * field_6BC_multipliers.field_0_value);
     }
 
-    inline Ped* GetCameraModePed()
+    Ped* GetCameraModePed()
     {
         return field_68_camera_mode == 2 ? field_2C8_aux_ped : field_2C4_player_ped;
     }
@@ -174,13 +174,13 @@ class Player
         }
     }
 
-    inline bool GetInUse_461DB0()
+    bool GetInUse_461DB0()
     {
         return field_8E_in_use;
     }
 
     // 9.6f inline 0x41D020
-    inline Ped* GetPlayerPed_41D020()
+    Ped* GetPlayerPed_41D020()
     {
         return field_2C4_player_ped;
     }
@@ -190,12 +190,12 @@ class Player
         return this->field_50_throw_charge >= 0;
     }
 
-    inline void ResetThrowCharge_4A5180()
+    void ResetThrowCharge_4A5180()
     {
         field_50_throw_charge = 0;
     }
 
-    inline void SetDeathType_434950(s32 death_type)
+    void SetDeathType_434950(s32 death_type)
     {
         field_44_death_type = death_type;
     }
@@ -295,12 +295,12 @@ class Player
     // 0x56A940
     ~Player();
 
-    inline u8 IsUser_41DC70()
+    u8 IsUser_41DC70()
     {
         return field_0_is_user;
     }
 
-    inline Ped* GetPlayerPed_4A5130()
+    Ped* GetPlayerPed_4A5130()
     {
         if (field_68_camera_mode == 2)
         {
@@ -312,19 +312,19 @@ class Player
         }
     }
 
-    inline u8 get_idx_4219D0()
+    u8 get_idx_4219D0()
     {
         return field_2E_idx;
     }
 
     // 9.6f 0x4A5150
-    inline Ped* GetActivePed_4A5150()
+    Ped* GetActivePed_4A5150()
     {
         return (field_68_camera_mode == 2 || field_68_camera_mode == 3) ? field_2C8_aux_ped : field_2C4_player_ped;
     }
 
     // 9.6f 0x434900
-    inline Camera_0xBC* get_camera_434900()
+    Camera_0xBC* get_camera_434900()
     {
         if (field_68_camera_mode == 2 || field_68_camera_mode == 3)
         {

@@ -10,61 +10,61 @@ class Gang_144
 {
   public:
     // 9.6f 0x45DD50
-    inline bool HasKillRespectChange_45DD50()
+    bool HasKillRespectChange_45DD50()
     {
         return field_139_kill_respect_change > 0;
     }
 
     // 9.6f 0x433B30
-    inline bool DoesKillAffectRespect_433B30()
+    bool DoesKillAffectRespect_433B30()
     {
         return field_111_kill_affects_respect;
     }
 
     // 9.6f 0x4758A0
-    inline void SetRemap_4758A0(char v)
+    void SetRemap_4758A0(char v)
     {
         field_101_remap = v;
     }
 
     // 9.6f 0x4758B0
-    inline void SetBasicWeapon_4758B0(u32 v)
+    void SetBasicWeapon_4758B0(u32 v)
     {
         field_104_basic_weapon = v;
     }
 
     // 9.6f 0x4758C0
-    inline void SetAngryWeapon_4758C0(u32 v)
+    void SetAngryWeapon_4758C0(u32 v)
     {
         field_108_angry_weapon = v;
     }
 
     // 9.6f 0x4758D0
-    inline void SetHateWeapon_4758D0(u32 v)
+    void SetHateWeapon_4758D0(u32 v)
     {
         field_10C_hate_weapon = v;
     }
 
     // 9.6f 0x4758E0
-    inline void SetGangCarModel_4758E0(u32 v)
+    void SetGangCarModel_4758E0(u32 v)
     {
         field_13C_gang_car_model = v;
     }
 
     // 9.6f 0x4758F0
-    inline void SetGangCarRemap_4758F0(char v)
+    void SetGangCarRemap_4758F0(char v)
     {
         field_140_gang_car_remap = v;
     }
 
     // 9.6f 0x475900
-    inline void SetKillAffectsRespect_475900(char v)
+    void SetKillAffectsRespect_475900(char v)
     {
         field_111_kill_affects_respect = v;
     }
 
     // 9.6f 0x475910
-    inline void SetInfoPhonePos_475910(Fix16 x, Fix16 y, Fix16 z)
+    void SetInfoPhonePos_475910(Fix16 x, Fix16 y, Fix16 z)
     {
         field_12C_info_phone_x = x;
         field_130_info_phone_y = y;
@@ -72,13 +72,13 @@ class Gang_144
     }
 
     // 9.6f 0x475940
-    inline void SetArrowColour_475940(u8 v)
+    void SetArrowColour_475940(u8 v)
     {
         field_138_arrow_colour = v;
     }
 
     // 9.6f 0x475950
-    inline void SetKillRespectChange_475950(u8 v)
+    void SetKillRespectChange_475950(u8 v)
     {
         field_139_kill_respect_change = v;
     }

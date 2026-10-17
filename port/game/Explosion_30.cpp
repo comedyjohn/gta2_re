@@ -486,7 +486,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                                                                   field_14_pObj2C->field_4->field_14_xy.y);
                     if (distance > this->field_28_blast_radius)
                     {
-                        if (timerVal < 70u)
+                        if (timerVal < 70U)
                         {
                             pPedChar->HandleGenericImpact_553E00(ang, dword_6FD2E8 + dword_6FD46C, kFP16Zero_6FD49C, 0);
                         }
@@ -514,7 +514,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                 Car_BC* pCar = pSprite->AsCar_40FEB0();
                 if (pCar)
                 {
-                    if ((timerVal > explosion_timer::damage_phase_50 && timerVal < 60u) || (timerVal > 80u && timerVal < 90u))
+                    if ((timerVal > explosion_timer::damage_phase_50 && timerVal < 60U) || (timerVal > 80U && timerVal < 90U))
                     {
                         if (!pCar->IsMaxDamage_40F890() && !pCar->IsTrainModel_403BA0() &&
                             !pCar->IsImmuneToExplosionType_43B850(field_10_type))
@@ -574,7 +574,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                 else
                 {
                     Object_2C* pObject = pSprite->AsObject2C_40FEC0();
-                    if (timerVal > explosion_timer::damage_phase_50 && timerVal < 60u)
+                    if (timerVal > explosion_timer::damage_phase_50 && timerVal < 60U)
                     {
                         pObject->OnExplosionNearby_525190(this->field_14_pObj2C->field_26_ped_ref_idx);
                     }
@@ -590,9 +590,9 @@ void Explosion_30::EmitExplosion_18_33_541D60()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
     {
-        if (static_cast<u16>(field_1A_timer) > 0x52u)
+        if (static_cast<u16>(field_1A_timer) > 0x52U)
         {
-            if (static_cast<u16>(field_1A_timer) > 0x5Au)
+            if (static_cast<u16>(field_1A_timer) > 0x5AU)
             {
                 Fix16 radius;
                 radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(8));
@@ -643,7 +643,7 @@ void Explosion_30::EmitExplosion_19_32_542060()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
     {
-        if (this->field_1A_timer > 8u)
+        if (this->field_1A_timer > 8U)
         {
             Fix16 radius;
             radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(48));
@@ -692,7 +692,7 @@ void Explosion_30::EmitExplosion_20_542340()
 {
     if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
     {
-        if (this->field_1A_timer > 8u)
+        if (this->field_1A_timer > 8U)
         {
             Fix16 radius;
             radius = this->field_24_particle_spread * Fix16(gRng_6F6784.get_int_4F7AE0(80));
@@ -738,7 +738,7 @@ void Explosion_30::EmitExplosion_20_542340()
 void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
 {
     bool isOnScreen = true;
-    if (this->field_1A_timer < 90u)
+    if (this->field_1A_timer < 90U)
     {
         if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(this->field_14_pObj2C->field_4->field_14_xy.x,
                                                        this->field_14_pObj2C->field_4->field_14_xy.y))
@@ -806,7 +806,7 @@ void Explosion_30::UpdateExplosion_18_19_20_32_33_542790()
         }
     }
 
-    if (this->field_1A_timer > 0x1Eu)
+    if (this->field_1A_timer > 0x1EU)
     {
         Fix16 max_spread = (dword_6FD448 * kFP16Two_6FD4A4);
         if (this->field_24_particle_spread > max_spread)
@@ -856,7 +856,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
         pSprite->field_14_xy.y < Fix16(0x3F8000, 0) && pSprite->field_14_xy.y > kFP16One_6FD4A0)
     {
         unk_6FD5F6 = 0;
-        for (u8 i = 0; i < 2u; i++)
+        for (u8 i = 0; i < 2U; i++)
         {
             if (gParticle_4C_Pool_6FD5E4->field_0_pStart)
             {
@@ -927,7 +927,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                 pParticle->field_46_sub_state = 0;
                 pParticle->field_24_angle = this->field_22_spawn_angle;
 
-                if (this->field_1A_timer < 60u && this->field_1A_timer < 30u)
+                if (this->field_1A_timer < 60U && this->field_1A_timer < 30U)
                 {
                     i = 4;
                 }
@@ -964,7 +964,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
 
         if (this->field_1A_timer != explosion_timer::forever_9999)
         {
-            if (this->field_1A_timer > 60u)
+            if (this->field_1A_timer > 60U)
             {
                 this->field_1A_timer--;
             }
@@ -1154,31 +1154,31 @@ s32 ExplosionPool_7A8::FreeLowestPriority_543690()
                     priority = 6;
                     break;
                 case explosion_type::small_18:
-                    if (pExplosion->field_1A_timer < 82u)
+                    if (pExplosion->field_1A_timer < 82U)
                     {
                         priority = 3;
                     }
                     break;
                 case explosion_type::small_33:
-                    if (pExplosion->field_1A_timer < 82u)
+                    if (pExplosion->field_1A_timer < 82U)
                     {
                         priority = 3;
                     }
                     break;
                 case explosion_type::item_19:
-                    if (pExplosion->field_1A_timer < 50u)
+                    if (pExplosion->field_1A_timer < 50U)
                     {
                         priority = 3;
                     }
                     break;
                 case explosion_type::large_20:
-                    if (pExplosion->field_1A_timer < 50u)
+                    if (pExplosion->field_1A_timer < 50U)
                     {
                         priority = 3;
                     }
                     break;
                 case explosion_type::no_ring_32:
-                    if (pExplosion->field_1A_timer < 50u)
+                    if (pExplosion->field_1A_timer < 50U)
                     {
                         priority = 3;
                     }

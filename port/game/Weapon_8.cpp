@@ -16,37 +16,37 @@ DEFINE_GLOBAL_ARRAY_INIT(u8,
                          max_ammo_capacity_5FF75C,
                          28,
                          0x5FF75C,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         1u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u,
-                         99u);
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         1U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U,
+                         99U);
 
-u8 byte_5FF778[40] = {10u, 10u, 5u,  20u, 5u, 5u, 10u, 20u, 20u, 10u, 10u, 0u, 0u,  0u,  0u,  1u,  5u,   5u,  10u, 50u,
-                      50u, 20u, 50u, 1u,  0u, 0u, 0u,  0u,  0u,  0u,  0u,  0u, 80u, 69u, 82u, 84u, 251u, 33u, 9u,  64u};
+u8 byte_5FF778[40] = {10U, 10U, 5U,  20U, 5U, 5U, 10U, 20U, 20U, 10U, 10U, 0U, 0U,  0U,  0U,  1U,  5U,   5U,  10U, 50U,
+                      50U, 20U, 50U, 1U,  0U, 0U, 0U,  0U,  0U,  0U,  0U,  0U, 80U, 69U, 82U, 84U, 251U, 33U, 9U,  64U};
 
 // 0x5e3c10
 Weapon_30* Weapon_8::allocate_5E3C10(s32 weapon_kind, Ped* pPed, u8 ammo)
@@ -131,7 +131,7 @@ char_type Weapon_8::allocate_5E3D50(s32 weapon_kind, u8 ammo, Car_BC* pCar)
     {
         if (pCar->field_54_driver)
         {
-            pCar->field_54_driver->field_178_car_weapon = gWeapon_8_707018->allocate_5E3C10(weapon_kind, pCar->field_54_driver, 99u);
+            pCar->field_54_driver->field_178_car_weapon = gWeapon_8_707018->allocate_5E3C10(weapon_kind, pCar->field_54_driver, 99U);
             pCar->field_54_driver->field_178_car_weapon->field_14_car = pCar;
         }
     }

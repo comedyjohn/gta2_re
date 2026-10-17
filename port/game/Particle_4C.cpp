@@ -38,7 +38,7 @@ DEFINE_GLOBAL(Fix16, stru_6FD388, 0x6FD388);
 DEFINE_GLOBAL(Fix16, stru_6FD38C, 0x6FD38C);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD2E8, Fix16(0x666, 0), 0x6FD2E8);
 DEFINE_GLOBAL_INIT(Fix16, kFP16One_6FD4A0, Fix16(1), 0x6FD4A0);
-DEFINE_GLOBAL_INIT(Fix16, kFP16Half_6FD39C, Fix16(0.5f), 0x6FD39C);
+DEFINE_GLOBAL_INIT(Fix16, kFP16Half_6FD39C, Fix16(0.5F), 0x6FD39C);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Two_6FD4A4, Fix16(2), 0x6FD4A4);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD4A8, Fix16(3), 0x6FD4A8);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD470, Fix16(0x28F, 0), 0x6FD470);
@@ -370,7 +370,7 @@ char_type Particle_4C::UpdateBeamSegment_state_43_538A40()
     gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
 
     this->field_46_sub_state++;
-    if (field_46_sub_state > 7u)
+    if (field_46_sub_state > 7U)
     {
         return 1;
     }
@@ -928,7 +928,7 @@ char_type Particle_4C::UpdateStaticAnim_state_39_53A180()
     {
         this->field_48_timer = 3;
         this->field_46_sub_state++;
-        if (field_46_sub_state > 5u)
+        if (field_46_sub_state > 5U)
         {
             this->field_46_sub_state = 5;
         }
@@ -1638,17 +1638,17 @@ char_type Particle_4C::PoolUpdate()
             else
             {
                 this->field_46_sub_state++;
-                if (field_46_sub_state < 6u)
+                if (field_46_sub_state < 6U)
                 {
                     this->field_48_timer = 1;
                 }
-                else if (field_46_sub_state > 10u)
+                else if (field_46_sub_state > 10U)
                 {
                     this->field_48_timer = 1;
                 }
 
                 gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
-                if (field_46_sub_state > 15u)
+                if (field_46_sub_state > 15U)
                 {
                     return 1;
                 }
@@ -1681,17 +1681,17 @@ char_type Particle_4C::PoolUpdate()
             else
             {
                 this->field_46_sub_state++;
-                if (field_46_sub_state < 6u)
+                if (field_46_sub_state < 6U)
                 {
                     this->field_48_timer = 1;
                 }
-                else if (field_46_sub_state > 10u)
+                else if (field_46_sub_state > 10U)
                 {
                     this->field_48_timer = 1;
                 }
 
                 gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
-                if (field_46_sub_state > 15u)
+                if (field_46_sub_state > 15U)
                 {
                     return 1;
                 }
@@ -1725,17 +1725,17 @@ char_type Particle_4C::PoolUpdate()
             else
             {
                 this->field_46_sub_state++;
-                if (field_46_sub_state < 6u)
+                if (field_46_sub_state < 6U)
                 {
                     this->field_48_timer = 1;
                 }
-                else if (field_46_sub_state > 10u)
+                else if (field_46_sub_state > 10U)
                 {
                     this->field_48_timer = 1;
                 }
 
                 gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
-                if (field_46_sub_state > 15u)
+                if (field_46_sub_state > 15U)
                 {
                     return 1;
                 }
@@ -1774,7 +1774,7 @@ char_type Particle_4C::PoolUpdate()
             gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
             this->field_48_timer = 1;
             this->field_46_sub_state++;
-            if (field_46_sub_state > 0xCu)
+            if (field_46_sub_state > 0xCU)
             {
                 return true;
             }
@@ -1787,7 +1787,7 @@ char_type Particle_4C::PoolUpdate()
             stru_6FD388 = this->field_30_pNext->field_14_xy.x + stru_6FD388;
             stru_6FD38C = this->field_30_pNext->field_14_xy.y + stru_6FD38C;
 
-            if (this->field_46_sub_state < 9u)
+            if (this->field_46_sub_state < 9U)
             {
                 field_30_pNext->set_xyz_lazy_420600(stru_6FD388, stru_6FD38C, field_30_pNext->field_1C_zpos + dword_6FD2E8);
             }

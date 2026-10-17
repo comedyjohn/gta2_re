@@ -1433,7 +1433,7 @@ void Object_2C::OnAttachedSpriteDestroyed_525100()
         }
         else
         {
-            SetSpriteIdxOffset_5290C0(1u);
+            SetSpriteIdxOffset_5290C0(1U);
         }
     }
 }
@@ -3115,13 +3115,13 @@ s32 Object_2C::GetMapBlockSoundSpec_529240()
         gMap_0x370_6F6268->get_block_4DFE10(field_4->field_14_xy.x.ToInt(), field_4->field_14_xy.y.ToInt(), field_4->field_1C_zpos.ToInt());
     switch (get_field_26_420FF0())
     {
-        case 45u:
-        case 47u:
+        case 45U:
+        case 47U:
             result = gGtx_0x106C_703DD4->sub_462FD0(pBlockInfo->field_0_left & 0x3FF);
             break;
 
-        case 46u:
-        case 48u:
+        case 46U:
+        case 48U:
             result = gGtx_0x106C_703DD4->sub_462FD0(pBlockInfo->field_2_right & 0x3FF);
             break;
 
@@ -3767,7 +3767,7 @@ void Object_5C::RestoreObjects_52A590(SavedObjectData_164* pData)
         pPedRefIdx++;
     }
 
-    memset(static_cast<void*>(pData), 0, 0x12Cu); // everything before field_12C_obj_5C_bUnCollectedTokens
+    memset(static_cast<void*>(pData), 0, 0x12CU); // everything before field_12C_obj_5C_bUnCollectedTokens
 }
 
 // 0x52A610

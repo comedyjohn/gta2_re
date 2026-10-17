@@ -533,7 +533,6 @@ port/game/Explosion_30.cpp,readability-function-cognitive-complexity,1
 port/game/Explosion_30.cpp,readability-function-size,1
 port/game/Explosion_30.cpp,readability-implicit-bool-conversion,31
 port/game/Explosion_30.cpp,readability-make-member-function-const,4
-port/game/Explosion_30.cpp,readability-uppercase-literal-suffix,20
 port/game/Explosion_30.hpp,cppcoreguidelines-avoid-c-arrays,4
 port/game/Explosion_30.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Explosion_30.hpp,cppcoreguidelines-special-member-functions,3
@@ -1216,7 +1215,6 @@ port/game/Object_5C.cpp,readability-function-size,4
 port/game/Object_5C.cpp,readability-implicit-bool-conversion,247
 port/game/Object_5C.cpp,readability-make-member-function-const,22
 port/game/Object_5C.cpp,readability-simplify-boolean-expr,4
-port/game/Object_5C.cpp,readability-uppercase-literal-suffix,6
 port/game/Object_5C.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Object_5C.hpp,cppcoreguidelines-avoid-non-const-global-variables,3
 port/game/Object_5C.hpp,cppcoreguidelines-pro-type-union-access,2
@@ -1256,7 +1254,6 @@ port/game/Particle_4C.cpp,readability-function-cognitive-complexity,2
 port/game/Particle_4C.cpp,readability-function-size,4
 port/game/Particle_4C.cpp,readability-implicit-bool-conversion,147
 port/game/Particle_4C.cpp,readability-make-member-function-const,1
-port/game/Particle_4C.cpp,readability-uppercase-literal-suffix,14
 port/game/Particle_4C.hpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Particle_4C.hpp,misc-non-private-member-variables-in-classes,26
 port/game/Particle_8.cpp,bugprone-narrowing-conversions,12
@@ -1918,7 +1915,6 @@ port/game/Weapon_8.cpp,misc-include-cleaner,12
 port/game/Weapon_8.cpp,modernize-avoid-c-arrays,2
 port/game/Weapon_8.cpp,readability-convert-member-functions-to-static,5
 port/game/Weapon_8.cpp,readability-implicit-bool-conversion,11
-port/game/Weapon_8.cpp,readability-uppercase-literal-suffix,69
 port/game/Weapon_8.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Weapon_8.hpp,cppcoreguidelines-avoid-non-const-global-variables,3
 port/game/Weapon_8.hpp,cppcoreguidelines-special-member-functions,2

@@ -41,7 +41,7 @@ class MapRenderer
         field_8_ambient_step.mValue = 0;
         field_2F00_drawn_tile_count = 0;
         field_2EFC_curr_draw_layer_size = 0;
-        set_shading_lev_4E9DB0(15u);
+        set_shading_lev_4E9DB0(15U);
     }
 
     void SetAmbientLevel_4E9D50(s32& target_level, u16& cycles);
@@ -117,16 +117,16 @@ class MapRenderer
         //u8 diffuseColour;
         switch (a1)
         {
-            case 0u:
+            case 0U:
                 return -1;
                 break;
-            case 1u:
+            case 1U:
                 return field_C_colour_t1;
                 break;
-            case 2u:
+            case 2U:
                 return field_E_colour_t2;
                 break;
-            case 3u:
+            case 3U:
                 return field_F_colour_t3;
                 break;
             default:

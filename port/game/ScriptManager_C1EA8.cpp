@@ -161,7 +161,7 @@ void ScriptManager_C1EA8::RestoreAnsweredPhones_511C60()
     // The original tested all 32 bits, and bit 31 read past the 31 phone ids
     for (s32 bit = 0; bit < GTA2_COUNTOF_S(field_C1E32_phone_ids); bit++)
     {
-        if (((1u << bit) & gGameSave_6F78C8.field_E4_car_and_script_data.field_48_flags) != 0)
+        if (((1U << bit) & gGameSave_6F78C8.field_E4_car_and_script_data.field_48_flags) != 0)
         {
             auto* pPointer = static_cast<SCR_POINTER*>(GetBasePointer_512770(field_C1E32_phone_ids[bit]));
             pPointer->field_8_obj->PoolGiveAndSetDone_5291E0(174);
@@ -210,7 +210,7 @@ void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 
     memcpy(gGameSave_6F78C8.field_5E4_object_data.field_12C_obj_5C_bUnCollectedTokens,
            &gObject_5C_6F8F84->field_20_uncollected_tokens,
-           50u);
+           50U);
 
     gGameSave_6F78C8.field_5E4_object_data.field_160_secret_tokens_collected = gGameSession_67E8E0.get_secret_tokens_collected_453A80();
 
@@ -467,7 +467,7 @@ u16 ScriptManager_C1EA8::LoadMissionScript_512400(const char_type* String1, u16*
         *pStartCmd = gScriptManager_6F8060->field_C1D34_mission_start_cmd[field_2_zone_idx];
         memcpy(&gScriptManager_6F8060->field_46C_base_pointers[Buffer],
                &gScriptManager_6F8060->field_AA934_mission_base_pointers[3072 * field_2_zone_idx],
-               0xC00u);
+               0xC00U);
         memcpy(&gScriptManager_6F8060->field_334C_script_data[gScriptManager_6F8060->field_46C_base_pointers[Buffer]],
                &gScriptManager_6F8060->field_13354_mission_script_data[20000 * pStrEntry->field_2_zone_idx],
                gScriptManager_6F8060->field_C1DB0_mission_script_data_len[pStrEntry->field_2_zone_idx]);
@@ -866,11 +866,11 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
             miss2_0x11C_Pool_6F8064 = new miss2_0x11C_Pool();
         }
     }
-    field_1334C_strings = static_cast<str_table_entry*>(Memory::malloc_4FE4D0(0x1400u));
+    field_1334C_strings = static_cast<str_table_entry*>(Memory::malloc_4FE4D0(0x1400U));
     memset(field_35C_full_scr_file_name, 0, sizeof(field_35C_full_scr_file_name));
     memset(field_334C_script_data, 0, sizeof(field_334C_script_data));
     memset(field_46C_base_pointers, 0, sizeof(field_46C_base_pointers));
-    memset(field_1334C_strings, 0, 0x1400u);
+    memset(field_1334C_strings, 0, 0x1400U);
     field_0_car_trigger_count = 0;
     memset(field_4_car_triggers, 0, sizeof(field_4_car_triggers));
     field_184_phone_trigger_count = 0;

@@ -1690,7 +1690,6 @@ port/game/ScriptManager_C1EA8.cpp,modernize-raw-string-literal,2
 port/game/ScriptManager_C1EA8.cpp,readability-convert-member-functions-to-static,4
 port/game/ScriptManager_C1EA8.cpp,readability-implicit-bool-conversion,33
 port/game/ScriptManager_C1EA8.cpp,readability-make-member-function-const,2
-port/game/ScriptManager_C1EA8.cpp,readability-uppercase-literal-suffix,5
 port/game/ScriptManager_C1EA8.hpp,cppcoreguidelines-avoid-c-arrays,35
 port/game/ScriptManager_C1EA8.hpp,cppcoreguidelines-avoid-non-const-global-variables,4
 port/game/ScriptManager_C1EA8.hpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
@@ -2333,7 +2332,6 @@ port/game/miss2_0x11C.cpp,readability-implicit-bool-conversion,371
 port/game/miss2_0x11C.cpp,readability-make-member-function-const,2
 port/game/miss2_0x11C.cpp,readability-non-const-parameter,3
 port/game/miss2_0x11C.cpp,readability-simplify-boolean-expr,76
-port/game/miss2_0x11C.cpp,readability-uppercase-literal-suffix,28
 port/game/miss2_0x11C.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/miss2_0x11C.hpp,cppcoreguidelines-avoid-non-const-global-variables,5
 port/game/miss2_0x11C.hpp,cppcoreguidelines-pro-type-member-init,33

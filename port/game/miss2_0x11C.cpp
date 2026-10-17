@@ -51,25 +51,25 @@ DEFINE_GLOBAL_ARRAY_INIT(u8,
                          kDecidePowerupGenTypes_6212F0,
                          19,
                          0x6212F0,
-                         0x41u,
-                         0x42u,
-                         0x43u,
-                         0x44u,
-                         0x45u,
-                         0x46u,
-                         0x47u,
-                         0x48u,
-                         0x49u,
-                         0x5Eu,
-                         0x5Fu,
-                         0x60u,
-                         0x61u,
-                         0x62u,
-                         0x63u,
-                         0x64u,
-                         0x65u,
-                         0x66u,
-                         0x67u);
+                         0x41U,
+                         0x42U,
+                         0x43U,
+                         0x44U,
+                         0x45U,
+                         0x46U,
+                         0x47U,
+                         0x48U,
+                         0x49U,
+                         0x5EU,
+                         0x5FU,
+                         0x60U,
+                         0x61U,
+                         0x62U,
+                         0x63U,
+                         0x64U,
+                         0x65U,
+                         0x66U,
+                         0x67U);
 
 DEFINE_GLOBAL(miss2_0x11C_Pool*, miss2_0x11C_Pool_6F8064, 0x6F8064);
 DEFINE_GLOBAL(SCR_POINTER*, gBasePtr_6F8070, 0x6F8070);
@@ -278,7 +278,7 @@ void miss2_0x11C::JumpToCmd_503650(u16 cmdIdx)
 // 0x503670
 void miss2_0x11C::EndCmd_503670()
 {
-    field_4_next_cmd = 0xFFFFu;
+    field_4_next_cmd = 0xFFFFU;
 }
 
 // 0x503680
@@ -290,7 +290,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    if (pCmd->field_18_obj_id < 0xC8u || pCmd->field_18_obj_id > 0xF4u)
+    if (pCmd->field_18_obj_id < 0xC8U || pCmd->field_18_obj_id > 0xF4U)
     {
         Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
 
@@ -337,7 +337,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPoi
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    if (pCmd->field_18_obj_id < 0xC8u || pCmd->field_18_obj_id > 0xF4u)
+    if (pCmd->field_18_obj_id < 0xC8U || pCmd->field_18_obj_id > 0xF4U)
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, &pCmd->field_1A_rot);
@@ -1524,7 +1524,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_506140(u16* pKfValue)
 // 0x5061c0
 void miss2_0x11C::ExecOpCode_5061C0()
 {
-    for (u16 i = 1; i < 6000u; ++i)
+    for (u16 i = 1; i < 6000U; ++i)
     {
         SCR_CMD_HEADER* pBasePtr = gScriptManager_6F8060->GetBasePointer_512770(i);
         if (pBasePtr)
@@ -3249,7 +3249,7 @@ void miss2_0x11C::SCRCMD_CHANGE_CAR_REMAP_50A570()
 {
     auto* pCmd = reinterpret_cast<SCR_TWO_PARAMS*>(gBasePtr_6F8070);
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
-    if (pCmd->field_A_unsigned_2 != 0xFFu) //  field_A_unsigned_2 = remap
+    if (pCmd->field_A_unsigned_2 != 0xFFU) //  field_A_unsigned_2 = remap
     {
         pPointer->field_8_car->SetCarRemap(pCmd->field_A_unsigned_2);
     }
@@ -4251,7 +4251,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_HORN_50BE70()
     Ped* pPed = pPointer->field_8_char;
     Car_BC* pCar = pPed->field_16C_car;
 
-    if (pCar != nullptr && pCar->field_A7_horn > 0 && pCar->field_A7_horn <= 0xF8u)
+    if (pCar != nullptr && pCar->field_A7_horn > 0 && pCar->field_A7_horn <= 0xF8U)
     {
         field_8_cond_result = true;
     }
@@ -6253,7 +6253,7 @@ void miss2_0x11C::SCRCMD_DECIDE_POWERUP_50F150()
 // 0x50f220
 void miss2_0x11C::SCRCMD_SUPPRESS_MODEL_50F220()
 {
-    if (static_cast<u16>(gBasePtr_6F8070->field_8_index) == 0xFFFFu) //  TODO: fix gBasePtr_6F8070
+    if (static_cast<u16>(gBasePtr_6F8070->field_8_index) == 0xFFFFU) //  TODO: fix gBasePtr_6F8070
     {
         gCarManager_6C_677930->field_C_suppressed_model = car_model_enum::none; //  No model suppressed
     }

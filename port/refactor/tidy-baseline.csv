@@ -45,9 +45,7 @@ port/game/BitSet32.hpp,misc-non-private-member-variables-in-classes,1
 port/game/BitSet32.hpp,readability-convert-member-functions-to-static,3
 port/game/BitSet32.hpp,readability-implicit-bool-conversion,1
 port/game/BitSet32.hpp,readability-make-member-function-const,3
-port/game/BitSet32.hpp,readability-redundant-inline-specifier,6
 port/game/BitSet32.hpp,readability-simplify-boolean-expr,1
-port/game/BitSet32.hpp,readability-uppercase-literal-suffix,2
 port/game/BonusTracker_1C0.cpp,bugprone-branch-clone,1
 port/game/BonusTracker_1C0.cpp,bugprone-narrowing-conversions,1
 port/game/BonusTracker_1C0.cpp,cppcoreguidelines-init-variables,11
@@ -68,7 +66,6 @@ port/game/BonusTracker_1C0.hpp,cppcoreguidelines-special-member-functions,2
 port/game/BonusTracker_1C0.hpp,misc-non-private-member-variables-in-classes,19
 port/game/BonusTracker_1C0.hpp,modernize-avoid-c-arrays,1
 port/game/BonusTracker_1C0.hpp,performance-enum-size,1
-port/game/BonusTracker_1C0.hpp,readability-redundant-inline-specifier,2
 port/game/Camera.cpp,bugprone-assignment-in-if-condition,1
 port/game/Camera.cpp,bugprone-narrowing-conversions,4
 port/game/Camera.cpp,cert-err58-cpp,39
@@ -90,7 +87,6 @@ port/game/Camera.hpp,misc-non-private-member-variables-in-classes,28
 port/game/Camera.hpp,performance-enum-size,1
 port/game/Camera.hpp,readability-implicit-bool-conversion,14
 port/game/Camera.hpp,readability-make-member-function-const,9
-port/game/Camera.hpp,readability-redundant-inline-specifier,11
 port/game/CarAI_78.cpp,bugprone-assignment-in-if-condition,5
 port/game/CarAI_78.cpp,bugprone-branch-clone,5
 port/game/CarAI_78.cpp,bugprone-narrowing-conversions,13
@@ -209,7 +205,6 @@ port/game/CarPhysics_B0.hpp,readability-else-after-return,3
 port/game/CarPhysics_B0.hpp,readability-implicit-bool-conversion,8
 port/game/CarPhysics_B0.hpp,readability-inconsistent-declaration-parameter-name,2
 port/game/CarPhysics_B0.hpp,readability-make-member-function-const,11
-port/game/CarPhysics_B0.hpp,readability-redundant-inline-specifier,25
 port/game/Car_10.cpp,bugprone-narrowing-conversions,1
 port/game/Car_10.cpp,cert-err58-cpp,3
 port/game/Car_10.cpp,cppcoreguidelines-avoid-c-arrays,1
@@ -224,7 +219,6 @@ port/game/Car_10.cpp,readability-implicit-bool-conversion,3
 port/game/Car_10.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Car_10.hpp,misc-non-private-member-variables-in-classes,10
 port/game/Car_10.hpp,readability-make-member-function-const,4
-port/game/Car_10.hpp,readability-redundant-inline-specifier,6
 port/game/Car_BC.cpp,bugprone-assignment-in-if-condition,3
 port/game/Car_BC.cpp,bugprone-branch-clone,4
 port/game/Car_BC.cpp,bugprone-narrowing-conversions,40
@@ -280,9 +274,7 @@ port/game/Car_BC.hpp,readability-implicit-bool-conversion,16
 port/game/Car_BC.hpp,readability-inconsistent-declaration-parameter-name,3
 port/game/Car_BC.hpp,readability-make-member-function-const,61
 port/game/Car_BC.hpp,readability-redundant-declaration,1
-port/game/Car_BC.hpp,readability-redundant-inline-specifier,80
 port/game/Car_BC.hpp,readability-simplify-boolean-expr,3
-port/game/Car_BC.hpp,readability-uppercase-literal-suffix,3
 port/game/Char_Pool.cpp,bugprone-narrowing-conversions,11
 port/game/Char_Pool.cpp,cert-err58-cpp,6
 port/game/Char_Pool.cpp,cppcoreguidelines-avoid-c-arrays,1
@@ -309,7 +301,6 @@ port/game/Char_Pool.hpp,cppcoreguidelines-special-member-functions,4
 port/game/Char_Pool.hpp,misc-non-private-member-variables-in-classes,13
 port/game/Char_Pool.hpp,readability-implicit-bool-conversion,3
 port/game/Char_Pool.hpp,readability-make-member-function-const,2
-port/game/Char_Pool.hpp,readability-redundant-inline-specifier,7
 port/game/CollisionSoundQueue_C88.cpp,bugprone-narrowing-conversions,3
 port/game/CollisionSoundQueue_C88.cpp,cert-err58-cpp,3
 port/game/CollisionSoundQueue_C88.cpp,cppcoreguidelines-avoid-non-const-global-variables,4
@@ -353,7 +344,6 @@ port/game/Cranes.hpp,cppcoreguidelines-special-member-functions,2
 port/game/Cranes.hpp,misc-non-private-member-variables-in-classes,93
 port/game/Cranes.hpp,modernize-avoid-c-arrays,1
 port/game/Cranes.hpp,readability-make-member-function-const,2
-port/game/Cranes.hpp,readability-redundant-inline-specifier,5
 port/game/CreditsLine_6C.cpp,cppcoreguidelines-prefer-member-initializer,4
 port/game/CreditsLine_6C.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,1
 port/game/CreditsLine_6C.cpp,cppcoreguidelines-pro-type-member-init,1
@@ -408,7 +398,6 @@ port/game/Crushers.hpp,modernize-avoid-c-arrays,1
 port/game/Crushers.hpp,modernize-use-nodiscard,1
 port/game/Crushers.hpp,performance-enum-size,1
 port/game/Crushers.hpp,readability-make-member-function-const,3
-port/game/Crushers.hpp,readability-redundant-inline-specifier,3
 port/game/Door_38.cpp,bugprone-narrowing-conversions,6
 port/game/Door_38.cpp,cert-err58-cpp,6
 port/game/Door_38.cpp,cppcoreguidelines-avoid-c-arrays,1
@@ -436,7 +425,6 @@ port/game/Door_38.hpp,modernize-avoid-c-arrays,1
 port/game/Door_38.hpp,performance-enum-size,2
 port/game/Door_38.hpp,readability-implicit-bool-conversion,2
 port/game/Door_38.hpp,readability-make-member-function-const,2
-port/game/Door_38.hpp,readability-redundant-inline-specifier,10
 port/game/Door_4D4.cpp,bugprone-narrowing-conversions,33
 port/game/Door_4D4.cpp,cppcoreguidelines-avoid-non-const-global-variables,4
 port/game/Door_4D4.cpp,cppcoreguidelines-init-variables,3
@@ -530,7 +518,6 @@ port/game/Explosion_30.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Explosion_30.hpp,cppcoreguidelines-special-member-functions,3
 port/game/Explosion_30.hpp,misc-non-private-member-variables-in-classes,19
 port/game/Explosion_30.hpp,modernize-avoid-c-arrays,4
-port/game/Explosion_30.hpp,readability-redundant-inline-specifier,1
 port/game/Firefighters.cpp,bugprone-branch-clone,1
 port/game/Firefighters.cpp,cert-err58-cpp,7
 port/game/Firefighters.cpp,cppcoreguidelines-avoid-non-const-global-variables,9
@@ -563,7 +550,6 @@ port/game/Fix16_Point.hpp,modernize-use-noexcept,4
 port/game/Fix16_Point.hpp,readability-else-after-return,2
 port/game/Fix16_Point.hpp,readability-implicit-bool-conversion,16
 port/game/Fix16_Point.hpp,readability-make-member-function-const,4
-port/game/Fix16_Point.hpp,readability-redundant-inline-specifier,14
 port/game/Fix16_Rect.cpp,cert-err58-cpp,2
 port/game/Fix16_Rect.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Fix16_Rect.cpp,cppcoreguidelines-init-variables,2
@@ -581,7 +567,6 @@ port/game/Fix16_Rect.hpp,misc-non-private-member-variables-in-classes,6
 port/game/Fix16_Rect.hpp,modernize-use-nodiscard,1
 port/game/Fix16_Rect.hpp,readability-implicit-bool-conversion,3
 port/game/Fix16_Rect.hpp,readability-make-member-function-const,6
-port/game/Fix16_Rect.hpp,readability-redundant-inline-specifier,4
 port/game/Fix16_Rect.hpp,readability-simplify-boolean-expr,2
 port/game/FpsCounter_54.cpp,bugprone-narrowing-conversions,11
 port/game/FpsCounter_54.cpp,cppcoreguidelines-avoid-c-arrays,1
@@ -643,7 +628,6 @@ port/game/Frontend.hpp,modernize-avoid-c-arrays,22
 port/game/Frontend.hpp,performance-enum-size,5
 port/game/Frontend.hpp,readability-inconsistent-declaration-parameter-name,1
 port/game/Frontend.hpp,readability-redundant-declaration,2
-port/game/Frontend.hpp,readability-redundant-inline-specifier,1
 port/game/Function.cpp,cert-err33-c,3
 port/game/Function.cpp,cppcoreguidelines-owning-memory,3
 port/game/Function.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,8
@@ -681,7 +665,6 @@ port/game/GameSession_578.hpp,misc-non-private-member-variables-in-classes,25
 port/game/GameSession_578.hpp,modernize-avoid-c-arrays,11
 port/game/GameSession_578.hpp,readability-convert-member-functions-to-static,2
 port/game/GameSession_578.hpp,readability-make-member-function-const,2
-port/game/GameSession_578.hpp,readability-redundant-inline-specifier,6
 port/game/Game_0x40.cpp,bugprone-narrowing-conversions,3
 port/game/Game_0x40.cpp,cert-err58-cpp,2
 port/game/Game_0x40.cpp,cppcoreguidelines-avoid-c-arrays,1
@@ -718,7 +701,6 @@ port/game/Game_0x40.hpp,modernize-avoid-c-arrays,1
 port/game/Game_0x40.hpp,performance-enum-size,2
 port/game/Game_0x40.hpp,readability-implicit-bool-conversion,1
 port/game/Game_0x40.hpp,readability-make-member-function-const,4
-port/game/Game_0x40.hpp,readability-redundant-inline-specifier,5
 port/game/Gang.cpp,bugprone-assignment-in-if-condition,1
 port/game/Gang.cpp,bugprone-narrowing-conversions,13
 port/game/Gang.cpp,cert-err33-c,1
@@ -746,7 +728,6 @@ port/game/Gang.hpp,misc-non-private-member-variables-in-classes,28
 port/game/Gang.hpp,modernize-avoid-c-arrays,5
 port/game/Gang.hpp,readability-implicit-bool-conversion,1
 port/game/Gang.hpp,readability-make-member-function-const,2
-port/game/Gang.hpp,readability-redundant-inline-specifier,12
 port/game/Garage_48.cpp,bugprone-narrowing-conversions,1
 port/game/Garage_48.cpp,cert-err58-cpp,13
 port/game/Garage_48.cpp,cppcoreguidelines-avoid-goto,1
@@ -773,7 +754,6 @@ port/game/Garage_48.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Garage_48.hpp,misc-non-private-member-variables-in-classes,23
 port/game/Garage_48.hpp,readability-implicit-bool-conversion,1
 port/game/Garage_48.hpp,readability-make-member-function-const,2
-port/game/Garage_48.hpp,readability-redundant-inline-specifier,2
 port/game/Garage_48.hpp,readability-simplify-boolean-expr,2
 port/game/Generators.cpp,bugprone-narrowing-conversions,1
 port/game/Generators.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
@@ -834,7 +814,6 @@ port/game/Hud.hpp,performance-enum-size,2
 port/game/Hud.hpp,readability-implicit-bool-conversion,5
 port/game/Hud.hpp,readability-inconsistent-declaration-parameter-name,2
 port/game/Hud.hpp,readability-make-member-function-const,8
-port/game/Hud.hpp,readability-redundant-inline-specifier,23
 port/game/Hud.hpp,readability-simplify-boolean-expr,2
 port/game/ImGuiDebug.cpp,bugprone-narrowing-conversions,16
 port/game/ImGuiDebug.cpp,bugprone-signed-char-misuse,2
@@ -900,7 +879,6 @@ port/game/InputRecorder_67F8B0.hpp,misc-non-private-member-variables-in-classes,
 port/game/InputRecorder_67F8B0.hpp,modernize-avoid-c-arrays,14
 port/game/InputRecorder_67F8B0.hpp,performance-enum-size,2
 port/game/InputRecorder_67F8B0.hpp,readability-make-member-function-const,1
-port/game/InputRecorder_67F8B0.hpp,readability-redundant-inline-specifier,2
 port/game/InputRecorder_67F8B0.hpp,readability-simplify-boolean-expr,1
 port/game/KanjiFont_8EC.cpp,bugprone-implicit-widening-of-multiplication-result,2
 port/game/KanjiFont_8EC.cpp,bugprone-narrowing-conversions,7
@@ -938,7 +916,6 @@ port/game/Light_1D4CC.hpp,cppcoreguidelines-narrowing-conversions,5
 port/game/Light_1D4CC.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Light_1D4CC.hpp,misc-non-private-member-variables-in-classes,1
 port/game/Light_1D4CC.hpp,readability-implicit-bool-conversion,2
-port/game/Light_1D4CC.hpp,readability-redundant-inline-specifier,8
 port/game/Light_28.cpp,bugprone-implicit-widening-of-multiplication-result,1
 port/game/Light_28.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Light_28.cpp,cppcoreguidelines-no-malloc,2
@@ -958,7 +935,6 @@ port/game/Light_28.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Light_28.hpp,misc-const-correctness,2
 port/game/Light_28.hpp,misc-non-private-member-variables-in-classes,14
 port/game/Light_28.hpp,readability-implicit-bool-conversion,4
-port/game/Light_28.hpp,readability-redundant-inline-specifier,4
 port/game/MapRenderer.cpp,bugprone-narrowing-conversions,68
 port/game/MapRenderer.cpp,cert-err58-cpp,26
 port/game/MapRenderer.cpp,cppcoreguidelines-avoid-c-arrays,10
@@ -989,8 +965,6 @@ port/game/MapRenderer.hpp,modernize-avoid-c-arrays,1
 port/game/MapRenderer.hpp,readability-convert-member-functions-to-static,1
 port/game/MapRenderer.hpp,readability-implicit-bool-conversion,2
 port/game/MapRenderer.hpp,readability-make-member-function-const,2
-port/game/MapRenderer.hpp,readability-redundant-inline-specifier,5
-port/game/MapRenderer.hpp,readability-uppercase-literal-suffix,5
 port/game/Mike_A80.cpp,bugprone-narrowing-conversions,14
 port/game/Mike_A80.cpp,cert-err33-c,1
 port/game/Mike_A80.cpp,cppcoreguidelines-avoid-c-arrays,6
@@ -1016,8 +990,6 @@ port/game/Mike_A80.hpp,misc-const-correctness,4
 port/game/Mike_A80.hpp,misc-non-private-member-variables-in-classes,23
 port/game/Mike_A80.hpp,modernize-avoid-c-arrays,6
 port/game/Mike_A80.hpp,readability-make-member-function-const,1
-port/game/Mike_A80.hpp,readability-redundant-inline-specifier,1
-port/game/Mike_A80.hpp,readability-uppercase-literal-suffix,5
 port/game/Miss2_25C.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Miss2_25C.cpp,cppcoreguidelines-prefer-member-initializer,1
 port/game/Miss2_25C.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,1
@@ -1077,7 +1049,6 @@ port/game/NetPlay.hpp,misc-non-private-member-variables-in-classes,37
 port/game/NetPlay.hpp,modernize-avoid-c-arrays,11
 port/game/NetPlay.hpp,readability-inconsistent-declaration-parameter-name,4
 port/game/NetPlay.hpp,readability-make-member-function-const,2
-port/game/NetPlay.hpp,readability-redundant-inline-specifier,2
 port/game/Network_20324.cpp,bugprone-narrowing-conversions,26
 port/game/Network_20324.cpp,cert-err33-c,22
 port/game/Network_20324.cpp,cert-err58-cpp,1
@@ -1112,7 +1083,6 @@ port/game/Network_20324.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Network_20324.hpp,misc-non-private-member-variables-in-classes,17
 port/game/Network_20324.hpp,modernize-avoid-c-arrays,12
 port/game/Network_20324.hpp,performance-enum-size,1
-port/game/Network_20324.hpp,readability-uppercase-literal-suffix,16
 port/game/ObjectDefinitions_8CA8.cpp,bugprone-narrowing-conversions,75
 port/game/ObjectDefinitions_8CA8.cpp,cert-err58-cpp,24
 port/game/ObjectDefinitions_8CA8.cpp,cppcoreguidelines-avoid-c-arrays,2
@@ -1142,7 +1112,6 @@ port/game/ObjectDefinitions_8CA8.hpp,cppcoreguidelines-special-member-functions,
 port/game/ObjectDefinitions_8CA8.hpp,misc-non-private-member-variables-in-classes,90
 port/game/ObjectDefinitions_8CA8.hpp,modernize-avoid-c-arrays,4
 port/game/ObjectDefinitions_8CA8.hpp,performance-enum-size,4
-port/game/ObjectDefinitions_8CA8.hpp,readability-redundant-inline-specifier,1
 port/game/Object_2C_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Object_2C_Pool.cpp,misc-include-cleaner,2
 port/game/Object_2C_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -1163,7 +1132,6 @@ port/game/Object_3C.hpp,misc-non-private-member-variables-in-classes,25
 port/game/Object_3C.hpp,readability-convert-member-functions-to-static,1
 port/game/Object_3C.hpp,readability-make-member-function-const,1
 port/game/Object_3C.hpp,readability-redundant-access-specifiers,1
-port/game/Object_3C.hpp,readability-redundant-inline-specifier,1
 port/game/Object_3C_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Object_3C_Pool.cpp,misc-include-cleaner,2
 port/game/Object_3C_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -1206,14 +1174,12 @@ port/game/Object_5C.hpp,readability-implicit-bool-conversion,1
 port/game/Object_5C.hpp,readability-inconsistent-declaration-parameter-name,2
 port/game/Object_5C.hpp,readability-make-member-function-const,21
 port/game/Object_5C.hpp,readability-redundant-declaration,1
-port/game/Object_5C.hpp,readability-redundant-inline-specifier,17
 port/game/Object_5C.hpp,readability-simplify-boolean-expr,2
 port/game/Object_8.cpp,cppcoreguidelines-prefer-member-initializer,4
 port/game/Object_8.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Object_8.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Object_8.hpp,misc-non-private-member-variables-in-classes,4
 port/game/Object_8.hpp,readability-convert-member-functions-to-static,1
-port/game/Object_8.hpp,readability-redundant-inline-specifier,2
 port/game/Object_8_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Object_8_Pool.cpp,misc-include-cleaner,2
 port/game/Object_8_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -1328,7 +1294,6 @@ port/game/Ped.hpp,modernize-use-nodiscard,4
 port/game/Ped.hpp,readability-implicit-bool-conversion,5
 port/game/Ped.hpp,readability-inconsistent-declaration-parameter-name,5
 port/game/Ped.hpp,readability-make-member-function-const,54
-port/game/Ped.hpp,readability-redundant-inline-specifier,69
 port/game/Ped.hpp,readability-simplify-boolean-expr,1
 port/game/Ped.inl,bugprone-narrowing-conversions,1
 port/game/Ped.inl,cppcoreguidelines-init-variables,1
@@ -1365,7 +1330,6 @@ port/game/PedGroup.hpp,misc-non-private-member-variables-in-classes,18
 port/game/PedGroup.hpp,modernize-avoid-c-arrays,1
 port/game/PedGroup.hpp,readability-inconsistent-declaration-parameter-name,1
 port/game/PedGroup.hpp,readability-make-member-function-const,2
-port/game/PedGroup.hpp,readability-redundant-inline-specifier,4
 port/game/PedRefTable_7F8.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/PedRefTable_7F8.cpp,cppcoreguidelines-pro-bounds-constant-array-index,4
 port/game/PedRefTable_7F8.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
@@ -1378,7 +1342,6 @@ port/game/PedRefTable_7F8.hpp,cppcoreguidelines-pro-bounds-constant-array-index,
 port/game/PedRefTable_7F8.hpp,cppcoreguidelines-special-member-functions,1
 port/game/PedRefTable_7F8.hpp,misc-non-private-member-variables-in-classes,1
 port/game/PedRefTable_7F8.hpp,modernize-avoid-c-arrays,1
-port/game/PedRefTable_7F8.hpp,readability-redundant-inline-specifier,1
 port/game/Ped_List_4.cpp,cert-err58-cpp,2
 port/game/Ped_List_4.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Ped_List_4.cpp,cppcoreguidelines-init-variables,1
@@ -1427,7 +1390,6 @@ port/game/Player.hpp,performance-enum-size,1
 port/game/Player.hpp,readability-else-after-return,3
 port/game/Player.hpp,readability-implicit-bool-conversion,5
 port/game/Player.hpp,readability-make-member-function-const,15
-port/game/Player.hpp,readability-redundant-inline-specifier,24
 port/game/Player.hpp,readability-simplify-boolean-expr,1
 port/game/PlayerCrimeStats_3C.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,2
 port/game/PlayerCrimeStats_3C.cpp,cppcoreguidelines-pro-bounds-constant-array-index,5
@@ -1462,7 +1424,6 @@ port/game/PlayerScoreTracker_36C.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/PlayerScoreTracker_36C.hpp,misc-non-private-member-variables-in-classes,22
 port/game/PlayerScoreTracker_36C.hpp,modernize-avoid-c-arrays,1
 port/game/PlayerScoreTracker_36C.hpp,readability-make-member-function-const,2
-port/game/PlayerScoreTracker_36C.hpp,readability-redundant-inline-specifier,3
 port/game/PlyDat_2BC0.cpp,bugprone-narrowing-conversions,6
 port/game/PlyDat_2BC0.cpp,cppcoreguidelines-avoid-c-arrays,10
 port/game/PlyDat_2BC0.cpp,cppcoreguidelines-avoid-non-const-global-variables,5
@@ -1552,7 +1513,6 @@ port/game/Pool.hpp,cppcoreguidelines-pro-type-union-access,4
 port/game/Pool.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Pool.hpp,misc-non-private-member-variables-in-classes,7
 port/game/Pool.hpp,modernize-avoid-c-arrays,2
-port/game/Pool.hpp,readability-redundant-inline-specifier,4
 port/game/ProfilerTimer_C.cpp,bugprone-narrowing-conversions,1
 port/game/ProfilerTimer_C.cpp,cppcoreguidelines-narrowing-conversions,1
 port/game/ProfilerTimer_C.cpp,cppcoreguidelines-prefer-member-initializer,3
@@ -1615,7 +1575,6 @@ port/game/RollingDigitCounter_38.hpp,misc-non-private-member-variables-in-classe
 port/game/RollingDigitCounter_38.hpp,modernize-avoid-c-arrays,3
 port/game/RollingDigitCounter_38.hpp,performance-enum-size,1
 port/game/RollingDigitCounter_38.hpp,readability-make-member-function-const,1
-port/game/RollingDigitCounter_38.hpp,readability-redundant-inline-specifier,2
 port/game/RouteFinder.cpp,bugprone-narrowing-conversions,36
 port/game/RouteFinder.cpp,cert-err33-c,2
 port/game/RouteFinder.cpp,cert-err58-cpp,2
@@ -1642,8 +1601,6 @@ port/game/RouteFinder.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/RouteFinder.hpp,misc-non-private-member-variables-in-classes,39
 port/game/RouteFinder.hpp,modernize-avoid-c-arrays,7
 port/game/RouteFinder.hpp,readability-make-member-function-const,5
-port/game/RouteFinder.hpp,readability-redundant-inline-specifier,7
-port/game/RouteFinder.hpp,readability-uppercase-literal-suffix,2
 port/game/ScriptManager_C1EA8.cpp,bugprone-assignment-in-if-condition,1
 port/game/ScriptManager_C1EA8.cpp,bugprone-branch-clone,1
 port/game/ScriptManager_C1EA8.cpp,bugprone-implicit-widening-of-multiplication-result,4
@@ -1686,13 +1643,11 @@ port/game/ScriptManager_C1EA8.hpp,performance-enum-size,1
 port/game/ScriptManager_C1EA8.hpp,readability-convert-member-functions-to-static,3
 port/game/ScriptManager_C1EA8.hpp,readability-implicit-bool-conversion,2
 port/game/ScriptManager_C1EA8.hpp,readability-make-member-function-const,3
-port/game/ScriptManager_C1EA8.hpp,readability-redundant-inline-specifier,8
 port/game/ScriptStackFramePool_25C.cpp,cppcoreguidelines-prefer-member-initializer,3
 port/game/ScriptStackFramePool_25C.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/ScriptStackFramePool_25C.hpp,cppcoreguidelines-special-member-functions,2
 port/game/ScriptStackFramePool_25C.hpp,misc-non-private-member-variables-in-classes,4
 port/game/ScriptStackFramePool_25C.hpp,performance-enum-size,1
-port/game/ScriptStackFramePool_25C.hpp,readability-redundant-inline-specifier,1
 port/game/SoundObject_10.cpp,misc-include-cleaner,1
 port/game/SoundObject_10.cpp,readability-implicit-bool-conversion,1
 port/game/SoundObject_10.cpp,readability-make-member-function-const,1
@@ -1725,7 +1680,6 @@ port/game/SpriteGrid_400.hpp,misc-non-private-member-variables-in-classes,3
 port/game/SpriteGrid_400.hpp,modernize-avoid-c-arrays,1
 port/game/SpriteGrid_400.hpp,readability-implicit-bool-conversion,1
 port/game/SpriteGrid_400.hpp,readability-inconsistent-declaration-parameter-name,1
-port/game/SpriteGrid_400.hpp,readability-redundant-inline-specifier,1
 port/game/SpriteRenderer_1C.cpp,bugprone-narrowing-conversions,1
 port/game/SpriteRenderer_1C.cpp,cert-err58-cpp,3
 port/game/SpriteRenderer_1C.cpp,cppcoreguidelines-avoid-non-const-global-variables,10
@@ -1753,7 +1707,6 @@ port/game/SpriteRenderer_1C.hpp,modernize-use-nodiscard,1
 port/game/SpriteRenderer_1C.hpp,performance-enum-size,2
 port/game/SpriteRenderer_1C.hpp,readability-else-after-return,1
 port/game/SpriteRenderer_1C.hpp,readability-make-member-function-const,1
-port/game/SpriteRenderer_1C.hpp,readability-redundant-inline-specifier,2
 port/game/TagGame_28.cpp,cert-err58-cpp,1
 port/game/TagGame_28.cpp,cppcoreguidelines-avoid-non-const-global-variables,3
 port/game/TagGame_28.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,2
@@ -1768,7 +1721,6 @@ port/game/TagGame_28.hpp,cppcoreguidelines-pro-bounds-constant-array-index,3
 port/game/TagGame_28.hpp,misc-non-private-member-variables-in-classes,4
 port/game/TagGame_28.hpp,modernize-avoid-c-arrays,2
 port/game/TagGame_28.hpp,readability-convert-member-functions-to-static,1
-port/game/TagGame_28.hpp,readability-redundant-inline-specifier,4
 port/game/Taxi_4.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/Taxi_4.cpp,cppcoreguidelines-owning-memory,2
 port/game/Taxi_4.cpp,cppcoreguidelines-pro-type-member-init,1
@@ -1782,7 +1734,6 @@ port/game/Taxi_4.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Taxi_4.hpp,cppcoreguidelines-special-member-functions,2
 port/game/Taxi_4.hpp,misc-non-private-member-variables-in-classes,3
 port/game/Taxi_4.hpp,readability-make-member-function-const,1
-port/game/Taxi_4.hpp,readability-redundant-inline-specifier,1
 port/game/TextureCache_15D8.cpp,bugprone-implicit-widening-of-multiplication-result,1
 port/game/TextureCache_15D8.cpp,bugprone-narrowing-conversions,15
 port/game/TextureCache_15D8.cpp,cppcoreguidelines-avoid-non-const-global-variables,3
@@ -1808,7 +1759,6 @@ port/game/TextureCache_15D8.hpp,cppcoreguidelines-pro-bounds-constant-array-inde
 port/game/TextureCache_15D8.hpp,cppcoreguidelines-special-member-functions,2
 port/game/TextureCache_15D8.hpp,misc-non-private-member-variables-in-classes,25
 port/game/TextureCache_15D8.hpp,modernize-avoid-c-arrays,3
-port/game/TextureCache_15D8.hpp,readability-redundant-inline-specifier,1
 port/game/TileAnim_2.cpp,bugprone-narrowing-conversions,3
 port/game/TileAnim_2.cpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/TileAnim_2.cpp,cppcoreguidelines-init-variables,1
@@ -1825,7 +1775,6 @@ port/game/TileAnim_2.cpp,readability-make-member-function-const,1
 port/game/TileAnim_2.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/TileAnim_2.hpp,cppcoreguidelines-special-member-functions,3
 port/game/TileAnim_2.hpp,misc-non-private-member-variables-in-classes,12
-port/game/TileAnim_2.hpp,readability-redundant-inline-specifier,1
 port/game/TrafficLights_194.cpp,cert-err58-cpp,12
 port/game/TrafficLights_194.cpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/TrafficLights_194.cpp,cppcoreguidelines-avoid-non-const-global-variables,19
@@ -1874,7 +1823,6 @@ port/game/Weapon_30.hpp,misc-const-correctness,1
 port/game/Weapon_30.hpp,misc-non-private-member-variables-in-classes,21
 port/game/Weapon_30.hpp,readability-else-after-return,1
 port/game/Weapon_30.hpp,readability-make-member-function-const,5
-port/game/Weapon_30.hpp,readability-redundant-inline-specifier,8
 port/game/Weapon_8.cpp,cert-err58-cpp,1
 port/game/Weapon_8.cpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/Weapon_8.cpp,cppcoreguidelines-avoid-non-const-global-variables,5
@@ -1896,7 +1844,6 @@ port/game/Weapon_8.hpp,readability-convert-member-functions-to-static,1
 port/game/Weapon_8.hpp,readability-else-after-return,1
 port/game/Weapon_8.hpp,readability-implicit-bool-conversion,2
 port/game/Weapon_8.hpp,readability-make-member-function-const,1
-port/game/Weapon_8.hpp,readability-redundant-inline-specifier,1
 port/game/accuracy_event.hpp,performance-enum-size,1
 port/game/ang16.cpp,bugprone-narrowing-conversions,3
 port/game/ang16.cpp,cert-err58-cpp,4
@@ -1924,7 +1871,6 @@ port/game/ang16.hpp,misc-unused-parameters,3
 port/game/ang16.hpp,modernize-use-nodiscard,2
 port/game/ang16.hpp,readability-implicit-bool-conversion,6
 port/game/ang16.hpp,readability-make-member-function-const,11
-port/game/ang16.hpp,readability-redundant-inline-specifier,9
 port/game/ang16.hpp,readability-simplify-boolean-expr,1
 port/game/angle.cpp,misc-include-cleaner,1
 port/game/angle.hpp,bugprone-narrowing-conversions,6
@@ -2003,7 +1949,6 @@ port/game/char.hpp,misc-non-private-member-variables-in-classes,76
 port/game/char.hpp,readability-implicit-bool-conversion,6
 port/game/char.hpp,readability-make-member-function-const,14
 port/game/char.hpp,readability-redundant-declaration,1
-port/game/char.hpp,readability-redundant-inline-specifier,29
 port/game/char.hpp,readability-simplify-boolean-expr,1
 port/game/chunk.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/chunk.hpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,1
@@ -2050,7 +1995,6 @@ port/game/dma_video.cpp,readability-implicit-bool-conversion,1
 port/game/dma_video.hpp,cppcoreguidelines-avoid-non-const-global-variables,23
 port/game/emergency_car_kill_flag.hpp,performance-enum-size,1
 port/game/enums.hpp,performance-enum-size,32
-port/game/enums.hpp,readability-uppercase-literal-suffix,369
 port/game/error.cpp,bugprone-narrowing-conversions,32
 port/game/error.cpp,cert-err33-c,252
 port/game/error.cpp,cppcoreguidelines-avoid-c-arrays,6
@@ -2120,7 +2064,6 @@ port/game/fix16.hpp,misc-non-private-member-variables-in-classes,1
 port/game/fix16.hpp,modernize-avoid-c-arrays,2
 port/game/fix16.hpp,modernize-use-nodiscard,19
 port/game/fix16.hpp,modernize-use-noexcept,4
-port/game/fix16.hpp,readability-braces-around-statements,1
 port/game/fix16.hpp,readability-convert-member-functions-to-static,1
 port/game/fix16.hpp,readability-else-after-return,4
 port/game/fix16.hpp,readability-implicit-bool-conversion,15
@@ -2128,8 +2071,6 @@ port/game/fix16.hpp,readability-inconsistent-declaration-parameter-name,2
 port/game/fix16.hpp,readability-make-member-function-const,3
 port/game/fix16.hpp,readability-named-parameter,1
 port/game/fix16.hpp,readability-redundant-access-specifiers,1
-port/game/fix16.hpp,readability-redundant-inline-specifier,26
-port/game/fix16.hpp,readability-uppercase-literal-suffix,3
 port/game/gbh_graphics.cpp,bugprone-macro-parentheses,1
 port/game/gbh_graphics.cpp,cert-err33-c,41
 port/game/gbh_graphics.cpp,cppcoreguidelines-avoid-c-arrays,41
@@ -2184,7 +2125,6 @@ port/game/gtx_0x106C.hpp,modernize-use-nodiscard,7
 port/game/gtx_0x106C.hpp,performance-enum-size,3
 port/game/gtx_0x106C.hpp,readability-inconsistent-declaration-parameter-name,3
 port/game/gtx_0x106C.hpp,readability-make-member-function-const,2
-port/game/gtx_0x106C.hpp,readability-redundant-inline-specifier,10
 port/game/gtx_0x106C.hpp,readability-simplify-boolean-expr,2
 port/game/hud_message_priority.hpp,performance-enum-size,1
 port/game/input.cpp,cppcoreguidelines-avoid-non-const-global-variables,3
@@ -2269,9 +2209,7 @@ port/game/map_0x370.hpp,readability-convert-member-functions-to-static,3
 port/game/map_0x370.hpp,readability-implicit-bool-conversion,19
 port/game/map_0x370.hpp,readability-make-member-function-const,3
 port/game/map_0x370.hpp,readability-redundant-access-specifiers,1
-port/game/map_0x370.hpp,readability-redundant-inline-specifier,20
 port/game/map_0x370.hpp,readability-simplify-boolean-expr,4
-port/game/map_0x370.hpp,readability-uppercase-literal-suffix,2
 port/game/memory.cpp,cppcoreguidelines-no-malloc,2
 port/game/memory.cpp,cppcoreguidelines-owning-memory,2
 port/game/memory.cpp,cppcoreguidelines-pro-type-reinterpret-cast,2
@@ -2381,7 +2319,6 @@ port/game/rng.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/rng.hpp,cppcoreguidelines-prefer-member-initializer,2
 port/game/rng.hpp,misc-non-private-member-variables-in-classes,2
 port/game/rng.hpp,readability-make-member-function-const,2
-port/game/rng.hpp,readability-redundant-inline-specifier,2
 port/game/root_sound.cpp,cert-err58-cpp,1
 port/game/root_sound.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/root_sound.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,2
@@ -2398,7 +2335,6 @@ port/game/root_sound.hpp,cppcoreguidelines-pro-type-union-access,2
 port/game/root_sound.hpp,cppcoreguidelines-special-member-functions,1
 port/game/root_sound.hpp,misc-non-private-member-variables-in-classes,2
 port/game/root_sound.hpp,modernize-avoid-c-arrays,1
-port/game/root_sound.hpp,readability-redundant-inline-specifier,1
 port/game/sound_obj.cpp,bugprone-assignment-in-if-condition,1
 port/game/sound_obj.cpp,bugprone-branch-clone,5
 port/game/sound_obj.cpp,bugprone-narrowing-conversions,145
@@ -2438,7 +2374,6 @@ port/game/sound_obj.hpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/sound_obj.hpp,misc-non-private-member-variables-in-classes,115
 port/game/sound_obj.hpp,modernize-avoid-c-arrays,13
 port/game/sound_obj.hpp,readability-inconsistent-declaration-parameter-name,3
-port/game/sound_obj.hpp,readability-redundant-inline-specifier,1
 port/game/sprite.cpp,bugprone-branch-clone,2
 port/game/sprite.cpp,bugprone-implicit-widening-of-multiplication-result,1
 port/game/sprite.cpp,bugprone-narrowing-conversions,27
@@ -2491,9 +2426,7 @@ port/game/sprite.hpp,readability-else-after-return,3
 port/game/sprite.hpp,readability-implicit-bool-conversion,17
 port/game/sprite.hpp,readability-inconsistent-declaration-parameter-name,2
 port/game/sprite.hpp,readability-make-member-function-const,24
-port/game/sprite.hpp,readability-redundant-inline-specifier,18
 port/game/sprite.hpp,readability-simplify-boolean-expr,3
-port/game/sprite.hpp,readability-uppercase-literal-suffix,2
 port/game/sprite_flags.hpp,performance-enum-size,1
 port/game/text_0x14.cpp,bugprone-narrowing-conversions,1
 port/game/text_0x14.cpp,cert-err33-c,2
@@ -2526,7 +2459,6 @@ port/game/text_0x14.hpp,modernize-avoid-c-arrays,1
 port/game/text_0x14.hpp,readability-delete-null-pointer,2
 port/game/text_0x14.hpp,readability-implicit-bool-conversion,2
 port/game/text_0x14.hpp,readability-make-member-function-const,1
-port/game/text_0x14.hpp,readability-redundant-inline-specifier,1
 port/game/voice_line.hpp,performance-enum-size,1
 port/game/winmain.cpp,bugprone-narrowing-conversions,28
 port/game/winmain.cpp,cert-err33-c,10
@@ -2598,7 +2530,6 @@ port/platform/controls.cpp,modernize-use-auto,1
 port/platform/controls.cpp,modernize-use-std-print,2
 port/platform/controls.cpp,readability-implicit-bool-conversion,28
 port/platform/controls.cpp,readability-isolate-declaration,1
-port/platform/controls.cpp,readability-uppercase-literal-suffix,1
 port/platform/controls.h,cppcoreguidelines-avoid-c-arrays,1
 port/platform/controls.h,modernize-avoid-c-arrays,1
 port/platform/crt.cpp,cert-err33-c,2
@@ -2616,7 +2547,6 @@ port/platform/crt.cpp,modernize-use-emplace,1
 port/platform/crt.cpp,modernize-use-nullptr,1
 port/platform/crt.cpp,readability-function-cognitive-complexity,1
 port/platform/crt.cpp,readability-implicit-bool-conversion,8
-port/platform/crt.cpp,readability-uppercase-literal-suffix,2
 port/platform/dinput.cpp,bugprone-implicit-widening-of-multiplication-result,2
 port/platform/dinput.cpp,bugprone-narrowing-conversions,1
 port/platform/dinput.cpp,cert-err33-c,2
@@ -2757,7 +2687,6 @@ port/platform/mss.cpp,readability-avoid-nested-conditional-operator,3
 port/platform/mss.cpp,readability-implicit-bool-conversion,37
 port/platform/mss.cpp,readability-isolate-declaration,3
 port/platform/mss.cpp,readability-named-parameter,1
-port/platform/mss.cpp,readability-uppercase-literal-suffix,27
 port/platform/net/client.cpp,bugprone-switch-missing-default-case,4
 port/platform/net/client.cpp,cppcoreguidelines-avoid-c-arrays,1
 port/platform/net/client.cpp,cppcoreguidelines-init-variables,2
@@ -2780,7 +2709,6 @@ port/platform/net/link.cpp,misc-use-anonymous-namespace,1
 port/platform/net/link.cpp,modernize-deprecated-headers,1
 port/platform/net/link.cpp,modernize-use-auto,2
 port/platform/net/link.cpp,readability-implicit-bool-conversion,6
-port/platform/net/link.cpp,readability-uppercase-literal-suffix,1
 port/platform/net/link.h,cppcoreguidelines-avoid-const-or-ref-data-members,1
 port/platform/net/link.h,cppcoreguidelines-pro-type-member-init,1
 port/platform/net/link.h,modernize-use-nodiscard,6
@@ -2838,7 +2766,6 @@ port/platform/net/socket.cpp,modernize-deprecated-headers,4
 port/platform/net/socket.cpp,modernize-use-auto,2
 port/platform/net/socket.cpp,readability-implicit-bool-conversion,9
 port/platform/net/socket.cpp,readability-make-member-function-const,1
-port/platform/net/socket.cpp,readability-uppercase-literal-suffix,1
 port/platform/net/socket.h,cppcoreguidelines-special-member-functions,1
 port/platform/net/socket.h,misc-non-private-member-variables-in-classes,2
 port/platform/net/socket.h,modernize-use-nodiscard,7
@@ -2874,7 +2801,6 @@ port/platform/nettest.cpp,readability-function-cognitive-complexity,1
 port/platform/nettest.cpp,readability-function-size,1
 port/platform/nettest.cpp,readability-implicit-bool-conversion,15
 port/platform/nettest.cpp,readability-named-parameter,4
-port/platform/nettest.cpp,readability-uppercase-literal-suffix,4
 port/platform/overlay.cpp,cert-err33-c,1
 port/platform/overlay.cpp,cppcoreguidelines-avoid-c-arrays,11
 port/platform/overlay.cpp,cppcoreguidelines-avoid-non-const-global-variables,21
@@ -2909,7 +2835,6 @@ port/platform/padinput.cpp,modernize-use-std-print,3
 port/platform/padinput.cpp,readability-avoid-nested-conditional-operator,2
 port/platform/padinput.cpp,readability-function-cognitive-complexity,1
 port/platform/padinput.cpp,readability-implicit-bool-conversion,13
-port/platform/padinput.cpp,readability-uppercase-literal-suffix,4
 port/platform/padinput.h,cppcoreguidelines-avoid-c-arrays,4
 port/platform/padinput.h,cppcoreguidelines-pro-type-member-init,1
 port/platform/padinput.h,misc-non-private-member-variables-in-classes,4
@@ -2967,7 +2892,6 @@ port/platform/renderer.cpp,readability-make-member-function-const,2
 port/platform/renderer.cpp,readability-named-parameter,41
 port/platform/renderer.cpp,readability-non-const-parameter,1
 port/platform/renderer.cpp,readability-simplify-boolean-expr,1
-port/platform/renderer.cpp,readability-uppercase-literal-suffix,34
 port/platform/replay.cpp,cert-err33-c,25
 port/platform/replay.cpp,cert-err58-cpp,1
 port/platform/replay.cpp,cppcoreguidelines-avoid-c-arrays,3
@@ -3007,7 +2931,6 @@ port/platform/sdl/sdl_platform.cpp,modernize-deprecated-headers,3
 port/platform/sdl/sdl_platform.cpp,modernize-use-std-print,7
 port/platform/sdl/sdl_platform.cpp,readability-implicit-bool-conversion,37
 port/platform/sdl/sdl_platform.cpp,readability-named-parameter,1
-port/platform/sdl/sdl_platform.cpp,readability-uppercase-literal-suffix,1
 port/platform/selftest.cpp,bugprone-implicit-widening-of-multiplication-result,2
 port/platform/selftest.cpp,cppcoreguidelines-avoid-c-arrays,5
 port/platform/selftest.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -3026,7 +2949,6 @@ port/platform/selftest.cpp,modernize-use-nullptr,2
 port/platform/selftest.cpp,modernize-use-std-print,2
 port/platform/selftest.cpp,readability-avoid-nested-conditional-operator,1
 port/platform/selftest.cpp,readability-implicit-bool-conversion,2
-port/platform/selftest.cpp,readability-uppercase-literal-suffix,6
 port/platform/simcheck.cpp,cppcoreguidelines-avoid-c-arrays,1
 port/platform/simcheck.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/platform/simcheck.cpp,cppcoreguidelines-pro-bounds-constant-array-index,3
@@ -3037,7 +2959,6 @@ port/platform/simcheck.cpp,misc-non-private-member-variables-in-classes,1
 port/platform/simcheck.cpp,modernize-avoid-c-arrays,1
 port/platform/simcheck.cpp,modernize-deprecated-headers,1
 port/platform/simcheck.cpp,modernize-use-std-print,4
-port/platform/simcheck.cpp,readability-uppercase-literal-suffix,2
 port/platform/statehash.cpp,bugprone-narrowing-conversions,1
 port/platform/statehash.cpp,cert-err33-c,4
 port/platform/statehash.cpp,cppcoreguidelines-avoid-c-arrays,5
@@ -3060,7 +2981,6 @@ port/platform/statehash.cpp,modernize-use-nodiscard,1
 port/platform/statehash.cpp,performance-enum-size,1
 port/platform/statehash.cpp,performance-no-int-to-ptr,1
 port/platform/statehash.cpp,readability-implicit-bool-conversion,15
-port/platform/statehash.cpp,readability-uppercase-literal-suffix,4
 port/platform/wchar.cpp,cert-err33-c,2
 port/platform/wchar.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,34
 port/platform/wchar.cpp,cppcoreguidelines-pro-bounds-constant-array-index,14
@@ -3100,7 +3020,6 @@ port/platform/win32.cpp,readability-container-contains,2
 port/platform/win32.cpp,readability-function-cognitive-complexity,1
 port/platform/win32.cpp,readability-implicit-bool-conversion,63
 port/platform/win32.cpp,readability-named-parameter,59
-port/platform/win32.cpp,readability-uppercase-literal-suffix,9
 port/tests/test_bitset.cpp,misc-use-anonymous-namespace,1
 port/tests/test_bitset.cpp,readability-uppercase-literal-suffix,1
 port/tests/test_fix16.cpp,misc-use-anonymous-namespace,6

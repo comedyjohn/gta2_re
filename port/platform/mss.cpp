@@ -29,7 +29,7 @@ bool port_audio_manual; // --audiotest: no device; the test pulls frames with po
 // The audio event log (see port_audio_log_open): what the game's sound code asked the mixer to do,
 // hashed into a running value the replay tests compare, and optionally written out as text.
 long port_audio_frame; // the update the replay is at, for the text log
-static uint64_t gAudioHash = 14695981039346656037ull; // FNV-1a basis
+static uint64_t gAudioHash = 14695981039346656037ULL; // FNV-1a basis
 static uint64_t gAudioEvents;
 static FILE* gAudioText;
 
@@ -137,7 +137,7 @@ void HashValue(uint64_t v)
 {
     for (int i = 0; i < 8; i++)
     {
-        gAudioHash = (gAudioHash ^ ((v >> (8 * i)) & 0xFF)) * 1099511628211ull;
+        gAudioHash = (gAudioHash ^ ((v >> (8 * i)) & 0xFF)) * 1099511628211ULL;
     }
 }
 
@@ -184,13 +184,13 @@ Stream* ToStream(HSTREAM s)
 void PanGains(S32 pan, float volume, float& left, float& right)
 {
     const float p = static_cast<float>(pan < 0 ? 0 : pan > 127 ? 127 : pan);
-    left = volume * (p <= 64.0f ? 1.0f : (127.0f - p) / 63.0f);
-    right = volume * (p >= 64.0f ? 1.0f : p / 64.0f);
+    left = volume * (p <= 64.0F ? 1.0F : (127.0F - p) / 63.0F);
+    right = volume * (p >= 64.0F ? 1.0F : p / 64.0F);
 }
 
 float Volume(S32 v)
 {
-    return static_cast<float>(v < 0 ? 0 : v > 127 ? 127 : v) / 127.0f;
+    return static_cast<float>(v < 0 ? 0 : v > 127 ? 127 : v) / 127.0F;
 }
 
 int SampleChannels(const Sample& s)
@@ -209,19 +209,19 @@ void SampleFrame(const Sample& s, U32 frame, float& l, float& r)
     const int channels = SampleChannels(s);
     if (s.mFormat & DIG_F_16BITS_MASK)
     {
-        const U8* p = s.mData + frame * 2u * channels;
-        l = static_cast<float>(static_cast<S16>(p[0] | (p[1] << 8))) / 32768.0f;
-        r = channels == 2 ? static_cast<float>(static_cast<S16>(p[2] | (p[3] << 8))) / 32768.0f : l;
+        const U8* p = s.mData + frame * 2U * channels;
+        l = static_cast<float>(static_cast<S16>(p[0] | (p[1] << 8))) / 32768.0F;
+        r = channels == 2 ? static_cast<float>(static_cast<S16>(p[2] | (p[3] << 8))) / 32768.0F : l;
     }
     else
     {
         const U8* p = s.mData + frame * channels;
         const bool sign = (s.mFlags & DIG_PCM_SIGN) != 0;
-        l = sign ? static_cast<float>(static_cast<signed char>(p[0])) / 128.0f : (static_cast<float>(p[0]) - 128.0f) / 128.0f;
+        l = sign ? static_cast<float>(static_cast<signed char>(p[0])) / 128.0F : (static_cast<float>(p[0]) - 128.0F) / 128.0F;
         r = l;
         if (channels == 2)
         {
-            r = sign ? static_cast<float>(static_cast<signed char>(p[1])) / 128.0f : (static_cast<float>(p[1]) - 128.0f) / 128.0f;
+            r = sign ? static_cast<float>(static_cast<signed char>(p[1])) / 128.0F : (static_cast<float>(p[1]) - 128.0F) / 128.0F;
         }
     }
 }
@@ -229,8 +229,8 @@ void SampleFrame(const Sample& s, U32 frame, float& l, float& r)
 void StreamFrame(const Stream& s, U32 frame, float& l, float& r)
 {
     const S16* p = s.mWav.samples + static_cast<size_t>(frame) * s.mWav.channels;
-    l = static_cast<float>(p[0]) / 32768.0f;
-    r = s.mWav.channels >= 2 ? static_cast<float>(p[1]) / 32768.0f : l;
+    l = static_cast<float>(p[0]) / 32768.0F;
+    r = s.mWav.channels >= 2 ? static_cast<float>(p[1]) / 32768.0F : l;
 }
 
 // Mixes a voice into `mix`, following its loops; returns false once it has finished. `frames` is the
@@ -291,7 +291,7 @@ bool MixVoice(Voice& v,
 
 void MixInto(int16_t* out, int count)
 {
-    std::vector<float> mix(static_cast<size_t>(count) * 2, 0.0f);
+    std::vector<float> mix(static_cast<size_t>(count) * 2, 0.0F);
     const float master = Volume(gDriver.mMasterVolume);
 
     for (Sample& s : gDriver.mSamples)
@@ -360,8 +360,8 @@ void MixInto(int16_t* out, int count)
 
     for (size_t i = 0; i < mix.size(); i++)
     {
-        const float v = mix[i] * 32767.0f;
-        out[i] = static_cast<int16_t>(v > 32767.0f ? 32767 : v < -32768.0f ? -32768 : lrintf(v));
+        const float v = mix[i] * 32767.0F;
+        out[i] = static_cast<int16_t>(v > 32767.0F ? 32767 : v < -32768.0F ? -32768 : lrintf(v));
     }
 }
 
@@ -717,10 +717,10 @@ DXDEC HSTREAM AILCALL AIL_open_stream(HDIGDRIVER dig, char FAR* filename, S32 st
             s.mVolume = 127;
             s.mPan = 64;
             s.mLoopCount = 1;
-            uint64_t nameHash = 14695981039346656037ull; // which file, by its name's characters
+            uint64_t nameHash = 14695981039346656037ULL; // which file, by its name's characters
             for (const char* c = filename; *c; c++)
             {
-                nameHash = (nameHash ^ static_cast<unsigned char>(*c)) * 1099511628211ull;
+                nameHash = (nameHash ^ static_cast<unsigned char>(*c)) * 1099511628211ULL;
             }
             LogAudio(EV_OPEN_STREAM, SlotOf(reinterpret_cast<HSTREAM>(&s)), static_cast<int64_t>(nameHash), wav.frames);
             return reinterpret_cast<HSTREAM>(&s);

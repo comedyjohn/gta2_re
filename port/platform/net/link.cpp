@@ -185,7 +185,7 @@ void Link::SendAck()
         const uint32_t ahead = kv.first - mNextRecvSeq;
         if (ahead >= 1 && ahead <= 64)
         {
-            bits |= 1ull << (ahead - 1);
+            bits |= 1ULL << (ahead - 1);
         }
     }
     Writer w;

@@ -262,7 +262,7 @@ extern "C"
 
     int port_rand(void)
     {
-        gRandState = gRandState * 214013u + 2531011u;
+        gRandState = gRandState * 214013U + 2531011U;
         return static_cast<int>((gRandState >> 16) & PORT_RAND_MAX);
     }
 

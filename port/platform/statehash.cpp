@@ -65,7 +65,7 @@ class Hasher
     void Block(const char* name, const void* p, size_t len)
     {
         const uint64_t before = mHash;
-        mHash = 1469598103934665603ull;
+        mHash = 1469598103934665603ULL;
         Bytes(p, len);
         const uint64_t block = mHash;
         mHash = before;
@@ -97,11 +97,11 @@ class Hasher
         for (size_t i = 0; i < len; i++)
         {
             mHash ^= b[i];
-            mHash *= 1099511628211ull;
+            mHash *= 1099511628211ULL;
         }
     }
 
-    uint64_t mHash = 1469598103934665603ull;
+    uint64_t mHash = 1469598103934665603ULL;
     std::string* mDump;
     const char* mComponent;
     std::string mPrefix = ".";
@@ -528,7 +528,7 @@ uint64_t HashScript(std::string* dump, const PoolMap& pools)
         for (int i = 0; i < 6000; i++)
         {
             const u16 offset = sm->field_46C_base_pointers[i];
-            if (offset && offset + 12u <= data.size())
+            if (offset && offset + 12U <= data.size())
             {
                 s32 value;
                 memcpy(&value, &data[offset + 8], sizeof(value));

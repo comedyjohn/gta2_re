@@ -113,8 +113,8 @@ void port_gl_load_null()
 
 namespace
 {
-const float kGameWidth = 640.0f;
-const float kGameHeight = 480.0f;
+const float kGameWidth = 640.0F;
+const float kGameHeight = 480.0F;
 
 // ---------------------------------------------------------------- the OpenGL backend
 struct GLVertex
@@ -187,7 +187,7 @@ class GLRenderer
         mScaleLoc = glGetUniformLocation(mProgram, "uScale");
         mModulateAlphaLoc = glGetUniformLocation(mProgram, "uModulateAlpha");
         glUniform1i(glGetUniformLocation(mProgram, "uTex"), 0);
-        glUniform2f(mScaleLoc, 2.0f / kGameWidth, 2.0f / kGameHeight);
+        glUniform2f(mScaleLoc, 2.0F / kGameWidth, 2.0F / kGameHeight);
         glUniform1i(mModulateAlphaLoc, 0);
         glActiveTexture(GL_TEXTURE0);
         glDisable(GL_DEPTH_TEST);
@@ -235,7 +235,7 @@ class GLRenderer
                       static_cast<int>((right - left) * sx),
                       static_cast<int>((bottom - top) * sy));
         }
-        glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
+        glClearColor(r / 255.0F, g / 255.0F, b / 255.0F, 1.0F);
         glClear(GL_COLOR_BUFFER_BIT);
         if (useRect)
         {
@@ -557,7 +557,7 @@ GLuint SetTexture(GLuint existing, u32 w, u32 h, const u8* pPixelData, const u16
             for (u32 x = 0; x < w; x++)
             {
                 const u8 idx = row[x];
-                argb[static_cast<size_t>(y) * w + x] = RGB565ToRGB888(pPalData[idx]) | (idx == 0 ? 0 : 0xFF000000u);
+                argb[static_cast<size_t>(y) * w + x] = RGB565ToRGB888(pPalData[idx]) | (idx == 0 ? 0 : 0xFF000000U);
             }
         }
     }
@@ -570,7 +570,7 @@ GLuint SetTexture(GLuint existing, u32 w, u32 h, const u8* pPixelData, const u16
             {
                 u16 c;
                 memcpy(&c, src + static_cast<size_t>(y) * w + x, sizeof(c));
-                argb[static_cast<size_t>(h - 1 - y) * w + x] = RGB555ToRGB888(c) | 0xFF000000u;
+                argb[static_cast<size_t>(h - 1 - y) * w + x] = RGB555ToRGB888(c) | 0xFF000000U;
             }
         }
     }
@@ -619,7 +619,7 @@ float gWindowTop;
 float gWindowBottom;
 int gScreenTableSize = 0;
 intptr_t gScreenTable[1700]; // the address of each row of the surface
-float gAmbient = 1.0f;
+float gAmbient = 1.0F;
 SImageTableEntry* gImageTable = 0;
 DWORD gImageTableCount = 0;
 u32 gTextureId = 0;
@@ -642,9 +642,9 @@ const u32 FLAG_USE_ALPHA_DIFFUSE = 0x2000;
 
 s32 ComputeLighting(const Vert& vert, u8 colorMultiplier, s32 vertexColor)
 {
-    float lr = 0.0f;
-    float lg = 0.0f;
-    float lb = 0.0f;
+    float lr = 0.0F;
+    float lg = 0.0F;
+    float lb = 0.0F;
     for (DWORD j = 0; j < gNumLights; j++)
     {
         const SLightInternal& light = gLights[j];
@@ -661,7 +661,7 @@ s32 ComputeLighting(const Vert& vert, u8 colorMultiplier, s32 vertexColor)
             continue;
         }
         const float attenuation = (light.radius - sqrtf(d2)) * light.radiusNormalized;
-        if (attenuation > 0.0f)
+        if (attenuation > 0.0F)
         {
             const float brightness = attenuation * light.brightness;
             lr += light.r * brightness;
@@ -669,16 +669,16 @@ s32 ComputeLighting(const Vert& vert, u8 colorMultiplier, s32 vertexColor)
             lb += light.b * brightness;
         }
     }
-    const float n = colorMultiplier / 255.0f;
-    const s32 r = static_cast<s32>(std::min(n * ((vertexColor >> 16) & 0xFF) * lr + gAmbient, 255.0f));
-    const s32 g = static_cast<s32>(std::min(n * ((vertexColor >> 8) & 0xFF) * lg + gAmbient, 255.0f));
-    const s32 b = static_cast<s32>(std::min(n * (vertexColor & 0xFF) * lb + gAmbient, 255.0f));
+    const float n = colorMultiplier / 255.0F;
+    const s32 r = static_cast<s32>(std::min(n * ((vertexColor >> 16) & 0xFF) * lr + gAmbient, 255.0F));
+    const s32 g = static_cast<s32>(std::min(n * ((vertexColor >> 8) & 0xFF) * lg + gAmbient, 255.0F));
+    const s32 b = static_cast<s32>(std::min(n * (vertexColor & 0xFF) * lb + gAmbient, 255.0F));
     return static_cast<s32>(vertexColor & 0xFF000000) | b | (g << 8) | (r << 16);
 }
 
 void RenderVerts(int flags, STexture* pTexture, Vert* pVerts, int vertsCount, int baseColour)
 {
-    if (vertsCount < 3 || vertsCount > 4 || pVerts[0].z <= 0.0f || !pTexture)
+    if (vertsCount < 3 || vertsCount > 4 || pVerts[0].z <= 0.0F || !pTexture)
     {
         return;
     }
@@ -712,11 +712,11 @@ void RenderVerts(int flags, STexture* pTexture, Vert* pVerts, int vertsCount, in
         const u32 c = static_cast<u8>(baseColour);
         for (int i = 0; i < vertsCount; i++)
         {
-            pVerts[i].diff = c | (c << 8) | (c << 16) | 0xFF000000u;
+            pVerts[i].diff = c | (c << 8) | (c << 16) | 0xFF000000U;
             pVerts[i].spec = 255;
         }
     }
-    if ((flags & FLAG_LIGHTING_SHADOW) && gAmbient != 255.0f)
+    if ((flags & FLAG_LIGHTING_SHADOW) && gAmbient != 255.0F)
     {
         // The game passes the lit positions in the four verts after the drawn ones
         for (int i = 0; i < vertsCount; i++)
@@ -967,16 +967,16 @@ int gbh_AddLight(SLight* pLight)
     const DWORD idx = gNumLights++;
     SLightInternal& l = gLights[idx];
     l.flags = pLight->field_0;
-    l.brightness = static_cast<float>(pLight->field_0 & 0xFF) * 0.0039215689f;
+    l.brightness = static_cast<float>(pLight->field_0 & 0xFF) * 0.0039215689F;
     l.x = pLight->field_4_x;
     l.y = pLight->field_8_y;
     l.z = pLight->field_C_z;
-    l.r = static_cast<float>((pLight->field_10_colour >> 16) & 0xFF) * 0.0039215689f;
-    l.g = static_cast<float>((pLight->field_10_colour >> 8) & 0xFF) * 0.0039215689f;
-    l.b = static_cast<float>(pLight->field_10_colour & 0xFF) * 0.0039215689f;
-    l.radius = ((pLight->field_0 >> 8) & 0xFF) * 0.0039215689f * 8.0f;
+    l.r = static_cast<float>((pLight->field_10_colour >> 16) & 0xFF) * 0.0039215689F;
+    l.g = static_cast<float>((pLight->field_10_colour >> 8) & 0xFF) * 0.0039215689F;
+    l.b = static_cast<float>(pLight->field_10_colour & 0xFF) * 0.0039215689F;
+    l.radius = ((pLight->field_0 >> 8) & 0xFF) * 0.0039215689F * 8.0F;
     l.radiusSquared = l.radius * l.radius;
-    l.radiusNormalized = 1.0f / l.radius;
+    l.radiusNormalized = 1.0F / l.radius;
     return static_cast<int>(idx * sizeof(SLightInternal));
 }
 
@@ -1045,8 +1045,8 @@ int gbh_BlitImage(int imageIndex, int srcLeft, int srcTop, int srcRight, int src
     {
         verts[i].x = x[i];
         verts[i].y = y[i];
-        verts[i].z = 1.0f;
-        verts[i].w = 1.0f;
+        verts[i].z = 1.0F;
+        verts[i].w = 1.0F;
         verts[i].u = u[i];
         verts[i].v = v[i];
     }
@@ -1112,8 +1112,8 @@ s32 gbh_DrawTilePart(unsigned int flags, STexture* pTexture, Vert* pData, int di
     if (!(flags & 0x4000))
     {
         // Half-texel insets keep neighbouring tiles from bleeding in
-        const float lo = 0.5f;
-        const float hi = 63.499901f;
+        const float lo = 0.5F;
+        const float hi = 63.499901F;
         pData[0].u = lo;
         pData[0].v = lo;
         pData[1].u = hi;
@@ -1356,7 +1356,7 @@ void gbh_ResetLights()
 
 void gbh_SetAmbient(float ambient)
 {
-    gAmbient = ambient * 255.0f;
+    gAmbient = ambient * 255.0F;
 }
 
 int gbh_SetCamera(float, float, float, float)

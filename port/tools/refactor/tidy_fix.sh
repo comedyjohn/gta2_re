@@ -4,7 +4,8 @@
 # ones are an error), then the changed files are clang-formatted.
 #
 #   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix vehicles
-#   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix all
+#   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix all   (port/game only)
+#   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix platform   (or tests)
 #   BUILD=build_port/clang64 T=~/.venvs/gta2-refactor/bin  (defaults)
 set -eu
 check=$1
@@ -23,7 +24,13 @@ sub = sys.argv[1]
 db = json.load(open(os.environ.get("BUILD", "build_port/clang64") + "/compile_commands.json"))
 for e in db:
     f = e["file"]
-    if "/port/game/" not in f or not f.endswith(".cpp"):
+    if not f.endswith(".cpp"):
+        continue
+    if sub in ("platform", "tests"):
+        if "/port/%s/" % sub in f:
+            print(f)
+        continue
+    if "/port/game/" not in f:
         continue
     stem = os.path.basename(f)[:-4]
     if sub == "all" or stem in SUBSYSTEMS.get(sub, set()):
@@ -34,6 +41,6 @@ P
 printf '%s\n' $files | awk '{print NR, $0}' | xargs -P 8 -L 1 bash -c '"$0" -p "$1" --quiet --checks="-*,'"$check"'" --export-fixes="$2/$3.yaml" "$4" >/dev/null 2>&1 || true' "$T/clang-tidy" "$BUILD" "$out"
 ls "$out"/*.yaml >/dev/null 2>&1 || { echo "no fixes"; exit 0; }
 clang-apply-replacements-18 "$out"
-git diff --name-only -- port/game | grep -E '\.(cpp|hpp|h)$' | xargs -r "$T/clang-format" -i
+git diff --name-only -- port/game port/platform port/tests | grep -E '\.(cpp|hpp|h)$' | xargs -r "$T/clang-format" -i
 echo "fixed: $(git diff --shortstat)"
 rm -rf "$out"

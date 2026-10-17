@@ -337,7 +337,7 @@ unsigned int port_input_apply(unsigned int bits)
     {
         steer |= 1; // Forward
     }
-    return (bits & ~0xFu) | steer;
+    return (bits & ~0xFU) | steer;
 }
 
 int port_gas_scale(const void* driverPed)

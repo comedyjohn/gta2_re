@@ -315,7 +315,7 @@ Frame Reader::Read(const plat::PadState* pad, Context context, const Settings& s
     {
         if (Down(*pad, layout.source[action]))
         {
-            frame.bits |= 1u << action;
+            frame.bits |= 1U << action;
         }
     }
 
@@ -331,7 +331,7 @@ Frame Reader::Read(const plat::PadState* pad, Context context, const Settings& s
             push = push > 1.0 ? 1.0 : (push < 0.0 ? 0.0 : push);
             frame.analog.walk = analogAllowed ? static_cast<int>(lround(push * 7.0)) : 7;
             // The game's Forward, Backward, Left and Right come from the heading now
-            frame.bits &= ~0xFu;
+            frame.bits &= ~0xFU;
         }
         return frame;
     }
@@ -344,10 +344,10 @@ Frame Reader::Read(const plat::PadState* pad, Context context, const Settings& s
         if (IsTrigger(source) && !mLatched[source])
         {
             const int32_t travel = TriggerTravel(*pad, source);
-            frame.bits &= ~(1u << action);
+            frame.bits &= ~(1U << action);
             if (travel > kTriggerDead)
             {
-                frame.bits |= 1u << action;
+                frame.bits |= 1U << action;
                 travelled = travel > travelled ? travel : travelled;
             }
         }

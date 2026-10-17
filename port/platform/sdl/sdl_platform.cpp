@@ -593,7 +593,7 @@ bool DecodeWav(const void* data, uint32_t size, Wav& out)
     out.samples = reinterpret_cast<int16_t*>(cvt.buf);
     out.channels = spec.channels;
     out.rate = spec.freq;
-    out.frames = static_cast<uint32_t>(cvt.needed ? cvt.len_cvt : cvt.len) / (2u * spec.channels);
+    out.frames = static_cast<uint32_t>(cvt.needed ? cvt.len_cvt : cvt.len) / (2U * spec.channels);
     return true;
 }
 

@@ -31,7 +31,7 @@ uint32_t MonotonicMs()
 {
     timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
-    return static_cast<uint32_t>(ts.tv_sec * 1000ull + ts.tv_nsec / 1000000ull);
+    return static_cast<uint32_t>(ts.tv_sec * 1000ULL + ts.tv_nsec / 1000000ULL);
 }
 
 // Fake handles: distinct non-null values, never dereferenced
@@ -118,13 +118,13 @@ extern "C"
     {
         timespec ts;
         clock_gettime(CLOCK_MONOTONIC, &ts);
-        count->QuadPart = static_cast<LONGLONG>(ts.tv_sec) * 1000000000ll + ts.tv_nsec;
+        count->QuadPart = static_cast<LONGLONG>(ts.tv_sec) * 1000000000LL + ts.tv_nsec;
         return TRUE;
     }
 
     BOOL QueryPerformanceFrequency(LARGE_INTEGER* freq)
     {
-        freq->QuadPart = 1000000000ll;
+        freq->QuadPart = 1000000000LL;
         return TRUE;
     }
 
@@ -588,12 +588,12 @@ extern "C"
         {
             if (handles[i] == proc)
             {
-                return static_cast<LONG>(0xFFFF0000u + i);
+                return static_cast<LONG>(0xFFFF0000U + i);
             }
         }
         handles.push_back(proc);
         gWndProcHandles = &handles;
-        return static_cast<LONG>(0xFFFF0000u + handles.size() - 1);
+        return static_cast<LONG>(0xFFFF0000U + handles.size() - 1);
 #endif
     }
 
@@ -603,9 +603,9 @@ extern "C"
         return reinterpret_cast<WNDPROC>(value);
 #else
         const uint32_t v = static_cast<uint32_t>(value);
-        if (gWndProcHandles && value == static_cast<LONG>(v) && v >= 0xFFFF0000u && v - 0xFFFF0000u < gWndProcHandles->size())
+        if (gWndProcHandles && value == static_cast<LONG>(v) && v >= 0xFFFF0000U && v - 0xFFFF0000U < gWndProcHandles->size())
         {
-            return (*gWndProcHandles)[v - 0xFFFF0000u];
+            return (*gWndProcHandles)[v - 0xFFFF0000U];
         }
         return reinterpret_cast<WNDPROC>(value);
 #endif

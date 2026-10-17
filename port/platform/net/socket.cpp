@@ -21,7 +21,7 @@ uint32_t NowMs()
 {
     timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
-    return static_cast<uint32_t>(ts.tv_sec * 1000ull + ts.tv_nsec / 1000000);
+    return static_cast<uint32_t>(ts.tv_sec * 1000ULL + ts.tv_nsec / 1000000);
 }
 
 bool Address::IsV6() const

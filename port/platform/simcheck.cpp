@@ -15,13 +15,13 @@ namespace
 {
 struct Hash
 {
-    uint64_t h = 1469598103934665603ull;
+    uint64_t h = 1469598103934665603ULL;
     void Add(uint32_t v)
     {
         for (int i = 0; i < 4; i++)
         {
             h ^= (v >> (i * 8)) & 0xFF;
-            h *= 1099511628211ull;
+            h *= 1099511628211ULL;
         }
     }
 };

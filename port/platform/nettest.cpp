@@ -110,7 +110,7 @@ std::u16string Wide(const std::string& s)
 uint32_t Expected(DPID from, uint32_t frame)
 {
     // Something both ends compute, different for every sender and frame
-    uint32_t v = from * 2654435761u ^ frame * 40503u;
+    uint32_t v = from * 2654435761U ^ frame * 40503U;
     return v ^ (v >> 13);
 }
 
@@ -125,7 +125,7 @@ struct Frame
 // as the game's simulation does, and folds it into a running hash. The hash goes out with the frame's
 // message; once a frame is complete everyone compares the others' hash with their own. A player that
 // skips one rand() call (GTA2_NET_TEST_SKIP_RAND=FRAME) differs from that frame on.
-uint32_t gSimHash = 2166136261u;
+uint32_t gSimHash = 2166136261U;
 std::vector<uint32_t> gMyHashes; // by frame
 std::map<DPID, std::map<uint32_t, uint32_t>> gTheirHashes; // by player, by frame
 int gDesyncs = 0;
@@ -135,7 +135,7 @@ uint32_t SimStep(uint32_t frame)
     static const long skipFrame = getenv("GTA2_NET_TEST_SKIP_RAND") ? atol(getenv("GTA2_NET_TEST_SKIP_RAND")) : -1;
     if (static_cast<long>(frame) != skipFrame)
     {
-        gSimHash = (gSimHash ^ static_cast<uint32_t>(rand())) * 16777619u;
+        gSimHash = (gSimHash ^ static_cast<uint32_t>(rand())) * 16777619U;
     }
     gMyHashes.push_back(gSimHash);
     return gSimHash;

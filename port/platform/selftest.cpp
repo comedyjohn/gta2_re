@@ -52,7 +52,7 @@ void Quad(Vert* v, float x0, float y0, float x1, float y1)
     {
         v[i].x = xs[i];
         v[i].y = ys[i];
-        v[i].z = 1.0f;
+        v[i].z = 1.0F;
     }
 }
 } // namespace
@@ -66,7 +66,7 @@ int port_selftest()
         return 1;
     }
     Get<u32 (*)(SVideo*)>("gbh_InitDLL")(video);
-    Get<void (*)(float)>("gbh_SetAmbient")(1.0f);
+    Get<void (*)(float)>("gbh_SetAmbient")(1.0F);
 
     // Blue background
     Get<s32 (*)(SVideo*, u8, u8, u8, s32, s32, s32, s32)>("Vid_ClearScreen")(video, 0, 0, 255, 0, 0, 0, 0);
@@ -100,8 +100,8 @@ int port_selftest()
     Quad(v, 100, 300, 228, 428);
     for (int i = 0; i < 4; i++)
     {
-        v[i].u = (i == 1 || i == 2) ? 64.0f : 0.0f;
-        v[i].v = (i >= 2) ? 64.0f : 0.0f;
+        v[i].u = (i == 1 || i == 2) ? 64.0F : 0.0F;
+        v[i].v = (i >= 2) ? 64.0F : 0.0F;
     }
     Get<void (*)(int, STexture*, Vert*, int)>("gbh_DrawQuad")(0x200, tile, v, 255);
 

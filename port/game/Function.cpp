@@ -46,7 +46,7 @@ u32 hexStringToU32(const std::string& hexStr)
 std::string extractJsonStringValue(const std::string& objectStr, const std::string& key)
 {
     std::string pattern = "\"" + key + "\"";
-    std::string value = "";
+    std::string value;
     std::string::size_type keyPos = objectStr.find(pattern);
     if (keyPos == std::string::npos)
     {

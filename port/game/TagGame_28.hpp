@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
 #include "GameSession_578.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class Player;
 class Ped;

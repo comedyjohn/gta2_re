@@ -3,10 +3,10 @@
 #include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"
-#include "Function.hpp"
 #include "Game_0x40.hpp"
 #include "Ped.hpp"
 #include "Police_7B8.hpp"
+#include "core/function.hpp"
 #include "sprite.hpp"
 
 // Forward declarations: the functions below are in address order

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 #include <windows.h>
 
 #ifdef BUILD_BINK

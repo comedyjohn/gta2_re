@@ -1,8 +1,8 @@
 // Native entry point: starts the platform layer, then hands the command line to the game's WinMain_5E53F0,
 // as Windows would.
+#include "core/types.hpp"
 #include "lobby_port.h"
 #include "platform.h"
-#include "types.hpp"
 #include "winmain.hpp"
 
 #include <stdio.h>

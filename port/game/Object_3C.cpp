@@ -5,8 +5,8 @@
 #include "Explosion_30.hpp"
 #include "Object_5C.hpp"
 #include "char.hpp"
-#include "enums.hpp"
-#include "rng.hpp"
+#include "core/enums.hpp"
+#include "core/rng.hpp"
 #include "sprite.hpp"
 
 // TODO: Init to correct values

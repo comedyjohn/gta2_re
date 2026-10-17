@@ -1,6 +1,6 @@
 #include "registry.hpp"
-#include "Function.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
 #include "error.hpp"
 #include <cstdio>
 #include <windows.h>

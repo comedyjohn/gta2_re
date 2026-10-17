@@ -12,7 +12,6 @@
 #include "Crushers.hpp"
 #include "Explosion_30.hpp"
 #include "Frontend.hpp"
-#include "Function.hpp"
 #include "Game_0x40.hpp"
 #include "Hud.hpp"
 #include "Object_5C.hpp"
@@ -23,6 +22,7 @@
 #include "Weapon_30.hpp"
 #include "cSampleManager.hpp"
 #include "collision_event_type.hpp"
+#include "core/function.hpp"
 #include "map_0x370.hpp"
 #include "sprite.hpp"
 #include <cmath>

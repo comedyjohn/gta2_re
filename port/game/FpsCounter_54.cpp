@@ -1,8 +1,8 @@
 // Built with /GX- (see cmake/vc6.cmake) to match, the STL headers pulled in warn about that
 
 #include "FpsCounter_54.hpp"
-#include "Function.hpp"
 #include "Hud.hpp"
+#include "core/function.hpp"
 #include <windows.h>
 
 DEFINE_GLOBAL(FpsCounter_54*, gFpsCounter_7055D4, 0x7055D4);

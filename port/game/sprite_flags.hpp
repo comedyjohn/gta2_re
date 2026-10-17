@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 
 // Sprite::field_2C_bf (aliases field_2C_flags): blend mode (0..3), "no lighting" and a 5 bit alpha value
 // (see Sprite::GetBlendMode_4BA200, GetAlphaBits_4BA210 and GetLightingDrawFlag_4B9BA0).

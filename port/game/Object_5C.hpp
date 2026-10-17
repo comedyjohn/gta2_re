@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
 #include "ObjectDefinitions_8CA8.hpp"
 #include "Object_3C.hpp"
 #include "Object_8.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
 #include "sprite.hpp"
 
 EXTERN_GLOBAL(Fix16Point, gZeroVector_6F8EF0);

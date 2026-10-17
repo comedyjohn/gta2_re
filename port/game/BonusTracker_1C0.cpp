@@ -1,9 +1,9 @@
 #include "BonusTracker_1C0.hpp"
-#include "Function.hpp"
 #include "Player.hpp" // PlayerScoreTracker_36C
 #include "bonus_event_type.hpp"
+#include "core/function.hpp"
+#include "core/rng.hpp"
 #include "ped_death_cause.hpp"
-#include "rng.hpp"
 
 // 0x431D30
 BonusRule_2C::BonusRule_2C()

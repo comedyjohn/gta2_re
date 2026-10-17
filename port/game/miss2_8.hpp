@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 
 class ScriptStackFramePool_25C;
 class ScriptStackFrame_C;

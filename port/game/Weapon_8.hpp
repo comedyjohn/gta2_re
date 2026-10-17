@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Function.hpp"
 #include "Object_3C.hpp"
-#include "Pool.hpp"
 #include "Weapon_30.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 class Ped;
 class Car_BC;

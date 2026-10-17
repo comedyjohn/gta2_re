@@ -1,8 +1,8 @@
 #include "TextureCache_15D8.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
+#include "core/memory.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
-#include "memory.hpp"
 #include "sprite.hpp"
 #include <stdio.h>
 #include <stdlib.h>

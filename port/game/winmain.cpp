@@ -2,12 +2,13 @@
 #include "Bink.hpp"
 #include "FpsCounter_54.hpp"
 #include "Frontend.hpp"
-#include "Function.hpp"
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "InputRecorder_67F8B0.hpp"
 #include "NetPlay.hpp"
 #include "PlyDat_2BC0.hpp"
+#include "core/function.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "dma_video.hpp"
 #include "error.hpp"
@@ -18,7 +19,6 @@
 #include "network_data.hpp"
 #include "registry.hpp"
 #include "resource.h"
-#include "rng.hpp"
 #include "root_sound.hpp"
 #include <cstdio>
 #include <ddraw.h>

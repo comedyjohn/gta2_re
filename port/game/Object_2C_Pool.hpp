@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object_5C.hpp" // for Object_2C
-#include "Pool.hpp"
+#include "core/pool.hpp"
 
 using TObject_2C_Pool = Pool<Object_2C, 3825>;
 

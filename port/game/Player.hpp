@@ -3,12 +3,12 @@
 #include "BonusTracker_1C0.hpp"
 #include "Camera.hpp"
 #include "Draw.hpp"
-#include "Function.hpp"
 #include "PlayerCrimeStats_3C.hpp"
 #include "PlayerScoreTracker_36C.hpp"
 #include "TagGame_28.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include <windows.h>
 
 class SoundObject_10;

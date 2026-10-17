@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Function.hpp"
 #include "Light_28.hpp"
-#include "Pool.hpp"
-#include "rng.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
+#include "core/rng.hpp"
 
 class LightBase
 {

@@ -1,6 +1,6 @@
 #include "collide.hpp"
 #include "SpriteGrid_400.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
 #include "error.hpp"
 
 DEFINE_GLOBAL(CollisionCounters_C*, gCollisionCounters_6791FC, 0x6791FC);

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "fix16.hpp"
-#include "types.hpp"
+#include "core/fix16.hpp"
+#include "core/types.hpp"
 
 struct Angle
 {

@@ -1,5 +1,5 @@
 #include "SpriteRenderer_1C.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
 #include "error.hpp"
 #include "port_world3d.h" // port: world3d
 #include "sprite.hpp"

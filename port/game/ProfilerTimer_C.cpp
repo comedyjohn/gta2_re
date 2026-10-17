@@ -1,5 +1,5 @@
 #include "ProfilerTimer_C.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 #include <windows.h>
 
 // 0x5BEBF0

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 // DmaVideo.hpp (GTA2Hax) includes <set> and <vector> for two members of its Renderer class, which no
 // game code uses. Through them every TU that includes sprite.hpp got <new> and its throw() operator delete,
 // and with it VC6 drops the EH frame of destructors that delete through an inline destructor

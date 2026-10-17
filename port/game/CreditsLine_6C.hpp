@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 #include <cwchar>
 
 class CreditsLine_6C

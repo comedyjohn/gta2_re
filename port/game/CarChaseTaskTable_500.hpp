@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
 #include "car_chase_state.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class Ped;
 

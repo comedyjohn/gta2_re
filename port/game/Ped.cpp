@@ -33,6 +33,7 @@
 #include "accuracy_event.hpp"
 #include "car_despawn_status.hpp"
 #include "char.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "error.hpp"
 #include "explosion_type.hpp"
@@ -45,7 +46,6 @@
 #include "ped_jump_over_mode.hpp"
 #include "ped_lifetime.hpp"
 #include "ped_move_target_type.hpp"
-#include "rng.hpp"
 #include "sprite.hpp"
 #include "winmain.hpp"
 

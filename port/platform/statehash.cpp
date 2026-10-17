@@ -32,8 +32,8 @@
 #include "ScriptManager_C1EA8.hpp"
 #include "Weapon_8.hpp"
 #include "char.hpp"
+#include "core/rng.hpp"
 #include "miss2_0x11C.hpp"
-#include "rng.hpp"
 #include "sprite.hpp"
 
 #include <stdio.h>

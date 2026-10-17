@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Car_BC.hpp"
-#include "Function.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class Sprite;
 class Car_BC;

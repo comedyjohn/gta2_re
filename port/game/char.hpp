@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BitSet32.hpp"
-#include "Function.hpp"
 #include "Object_3C.hpp"
-#include "Pool.hpp"
-#include "ang16.hpp"
 #include "char_b4_flags.hpp"
+#include "core/ang16.hpp"
+#include "core/bit_set32.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 #include "sprite.hpp"
 
 class Sprite_3C;

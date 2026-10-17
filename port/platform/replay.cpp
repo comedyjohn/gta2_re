@@ -17,7 +17,7 @@
 
 #include "Game_0x40.hpp"
 #include "InputRecorder_67F8B0.hpp"
-#include "rng.hpp"
+#include "core/rng.hpp"
 
 #include <dirent.h>
 #include <ftw.h>

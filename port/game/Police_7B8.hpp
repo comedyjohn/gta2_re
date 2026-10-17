@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
 #include "Police_38.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class Ped;
 class Car_BC;

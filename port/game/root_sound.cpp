@@ -1,6 +1,6 @@
 #include "root_sound.hpp"
-#include "Function.hpp"
 #include "cSampleManager.hpp"
+#include "core/function.hpp"
 #include "debug.hpp"
 #include "sound_obj.hpp"
 

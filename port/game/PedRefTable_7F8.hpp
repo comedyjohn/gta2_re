@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 
 // Maps a small u8 index (stored in objects / peds / explosions as the "owner" of damage etc.) to a ped id.
 // Index 0 means "no ped", so slot 0 is never allocated. A slot is free when it has no ped id and no references.

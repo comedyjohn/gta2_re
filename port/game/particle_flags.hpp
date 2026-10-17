@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 
 // Particle_4C::field_4_bf (aliases field_4_flags). Bit 0 is set on shot particles and cleared again once the driver
 // stops attacking; bits named bFlagN are not used.

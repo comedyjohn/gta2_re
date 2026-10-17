@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include "gtx_0x106C.hpp"
 #include <windows.h>
 

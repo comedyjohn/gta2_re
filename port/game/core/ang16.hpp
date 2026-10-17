@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 EXTERN_GLOBAL(class Ang16, kAng180);
 

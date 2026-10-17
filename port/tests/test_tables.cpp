@@ -5,8 +5,8 @@
 
 #include "simcheck.h"
 
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
 
 TEST_CASE("simcheck hashes")
 {

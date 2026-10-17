@@ -10,8 +10,8 @@
 #include "ScriptManager_C1EA8.hpp"
 #include "SpriteGrid_400.hpp"
 #include "char.hpp"
+#include "core/rng.hpp"
 #include "map_0x370.hpp"
-#include "rng.hpp"
 #include "sprite.hpp"
 
 EXTERN_GLOBAL(Fix16, kFP16Zero_6FD49C);

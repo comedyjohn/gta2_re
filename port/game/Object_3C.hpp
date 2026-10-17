@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
 
 EXTERN_GLOBAL(u32, gObj3C_id_6F8E54);
 EXTERN_GLOBAL(u32, gObj3C_dealloc_count_6F8F0C);

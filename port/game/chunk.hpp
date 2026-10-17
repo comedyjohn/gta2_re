@@ -1,8 +1,8 @@
 #pragma once
 
-#include "enums.hpp"
+#include "core/enums.hpp"
+#include "core/types.hpp"
 #include "error.hpp"
-#include "types.hpp"
 
 struct chunk_base
 {

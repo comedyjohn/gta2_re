@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 
 // PTR32(T): a pointer the game keeps in 4 bytes of data it loaded from a file. The mission script
 // is one block read from the .scr file, and its commands keep the objects they create (a car, a

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Door_38.hpp"
-#include "Function.hpp"
-#include "Pool.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 class Object_2C;
 class DoorData_10;

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
 #include "collision_target_type.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include "sprite.hpp"
 
 class SoundObject_10;

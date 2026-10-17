@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 struct object_info;
 class Sprite;

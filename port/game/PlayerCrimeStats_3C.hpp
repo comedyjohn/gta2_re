@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 
 namespace crime_stats_type
 {

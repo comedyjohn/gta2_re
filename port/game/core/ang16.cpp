@@ -1,5 +1,5 @@
-#include "ang16.hpp"
-#include "Function.hpp"
+#include "core/ang16.hpp"
+#include "core/function.hpp"
 #include <cmath>
 
 DEFINE_GLOBAL_INIT(Ang16, kAng45, Ang16(0xB4), 0x6F677C);

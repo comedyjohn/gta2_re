@@ -1,6 +1,6 @@
 #include "Generators.hpp"
 #include "Object_5C.hpp"
-#include "rng.hpp"
+#include "core/rng.hpp"
 
 DEFINE_GLOBAL(GeneratorPool_14AC*, gGeneratorPool_14AC_67E5D0, 0x67E5D0);
 EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);

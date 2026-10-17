@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
 #include "SoundObject_10.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include <windows.h>
 
 class root_sound

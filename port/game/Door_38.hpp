@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class Object_2C;
 class DoorData_10;

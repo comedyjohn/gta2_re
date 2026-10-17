@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 
 // Car_BC::field_78_flags masks. Flags named FlagN are used but their meaning is not understood yet. Car_BC::IsFlagSet_411930
 // and AddFlags_421890 (9.6f inlines) take the mask as an argument, so the original treats this as a plain flag word.

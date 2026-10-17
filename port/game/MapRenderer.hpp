@@ -1,9 +1,9 @@
 #pragma once
 
 #include "3rdParty/GTA2Hax/d3ddll/d3ddll.hpp" // Vert
-#include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include "map_0x370.hpp"
 
 class Fix16Point;

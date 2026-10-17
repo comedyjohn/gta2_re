@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Car_BC.hpp"
-#include "Function.hpp"
 #include "Object_5C.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 
 class SoundObject_10;
 class Car_BC;

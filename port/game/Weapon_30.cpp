@@ -2,10 +2,10 @@
 #define FIX16_POINT_ZERO dword_706EB8
 // This TU's copy of the Fix16_Rect::ComputeCollisionPrism_4204D0 half height (see Fix16_Rect.hpp)
 #define FIX16_RECT_HALF_HEIGHT dword_706CC8
-#include "Function.hpp"
 #include "PlayerCrimeStats_3C.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include "explosion_type.hpp"
-#include "fix16.hpp"
 #include "ped_death_cause.hpp"
 EXTERN_GLOBAL(Fix16, dword_706CC8);
 
@@ -13,7 +13,6 @@ EXTERN_GLOBAL(Fix16, dword_706CC8);
 #include "Car_BC.hpp"
 #include "CollisionSoundQueue_C88.hpp"
 #include "CrimeReportQueue_CC.hpp"
-#include "Fix16_Rect.hpp"
 #include "Object_3C.hpp"
 #include "Object_5C.hpp"
 #include "Particle_8.hpp"
@@ -26,10 +25,11 @@ EXTERN_GLOBAL(Fix16, dword_706CC8);
 #include "Weapon_30.hpp"
 #include "Weapon_8.hpp"
 #include "char.hpp"
+#include "core/enums.hpp"
+#include "core/fix16_rect.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
-#include "enums.hpp"
 #include "map_0x370.hpp"
-#include "rng.hpp"
 #include "root_sound.hpp"
 #include "sprite.hpp"
 

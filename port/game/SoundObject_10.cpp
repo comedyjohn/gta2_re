@@ -1,5 +1,5 @@
 #include "SoundObject_10.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 #include "root_sound.hpp"
 
 // 0x40EF20

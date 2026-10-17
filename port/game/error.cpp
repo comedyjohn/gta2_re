@@ -1,7 +1,7 @@
 #include "error.hpp"
-#include "Function.hpp"
-#include "enums.hpp"
-#include "fix16.hpp"
+#include "core/enums.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
 #include "winmain.hpp"
 #include <cstdio>
 #include <cstring>

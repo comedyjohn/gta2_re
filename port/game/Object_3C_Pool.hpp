@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object_3C.hpp"
-#include "Pool.hpp"
+#include "core/pool.hpp"
 
 using TObject_3C_Pool = PoolBasic<Object_3C, 385>;
 

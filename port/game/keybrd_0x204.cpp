@@ -1,6 +1,6 @@
 #include "keybrd_0x204.hpp"
-#include "Function.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
 #include "error.hpp"
 #include <cstdlib>
 #include <windows.h>

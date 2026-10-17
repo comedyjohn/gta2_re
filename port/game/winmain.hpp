@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 #include <windows.h>
 
 void Start_GTA2Manager_5E4DE0();

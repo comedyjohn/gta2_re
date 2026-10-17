@@ -1,16 +1,16 @@
 #pragma once
 
-#include "BitSet32.hpp"
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
 #include "PatrolRoutePool_1D7E.hpp"
-#include "ang16.hpp"
 #include "char.hpp"
-#include "enums.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/bit_set32.hpp"
+#include "core/enums.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
+#include "core/rng.hpp"
 #include "miss2_xyz.hpp"
 #include "ped_flags.hpp"
-#include "rng.hpp"
 #include "sprite.hpp"
 #include <cstdio>
 

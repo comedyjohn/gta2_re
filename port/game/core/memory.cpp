@@ -1,6 +1,6 @@
-#include "memory.hpp"
-#include "Function.hpp"
-#include "enums.hpp"
+#include "core/memory.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
 #include "error.hpp"
 #include <cstdlib>
 #include <stdio.h>

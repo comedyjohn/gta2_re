@@ -4,7 +4,6 @@
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "EmergencyCrewPool_1E0.hpp"
-#include "Fix16_Rect.hpp"
 #include "Game_0x40.hpp"
 #include "Object_5C.hpp"
 #include "PathFinder_2FD4.hpp"
@@ -14,6 +13,7 @@
 #include "Police_7B8.hpp"
 #include "RouteFinder.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/fix16_rect.hpp"
 #include "ped_graphic_type.hpp"
 
 DEFINE_GLOBAL(Fix16, dword_6FECE8, 0x6FECE8);

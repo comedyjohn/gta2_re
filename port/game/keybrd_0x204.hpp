@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 #include <stdio.h>
 
 class keybrd_0x204

@@ -2,7 +2,7 @@
 // rng::srand_4F7A40. The first values are those of the original's C runtime.
 #include <doctest.h>
 
-#include "rng.hpp"
+#include "core/rng.hpp"
 
 TEST_CASE("rand() is MSVC's")
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "ang16.hpp"
+#include "core/ang16.hpp"
+#include "core/function.hpp"
 
 class Player;
 class Object_2C;

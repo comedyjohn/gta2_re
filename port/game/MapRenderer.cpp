@@ -4,8 +4,8 @@
 #include "Light_1D4CC.hpp"
 #include "SpriteRenderer_1C.hpp"
 #include "TextureCache_15D8.hpp"
+#include "core/fix16.hpp"
 #include "debug.hpp"
-#include "fix16.hpp"
 #include "gbh_graphics.hpp"
 #include "map_0x370.hpp"
 #include "port_world3d.h" // port: world3d

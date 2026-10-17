@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CreditsLine_6C.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 
 class CreditsText_FD22
 {

@@ -6,9 +6,9 @@
 #include "Object_5C.hpp"
 #include "ScriptManager_C1EA8.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "map_0x370.hpp"
-#include "rng.hpp"
 #include "root_sound.hpp"
 #include "sprite.hpp"
 

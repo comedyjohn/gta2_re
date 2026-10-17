@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
 #include "Globals.hpp"
+#include "core/function.hpp"
 
 struct Debug
 {

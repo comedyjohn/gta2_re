@@ -5,10 +5,10 @@
 #include "Object_5C.hpp"
 #include "Particle_4C.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/enums.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
-#include "enums.hpp"
 #include "error.hpp"
-#include "rng.hpp"
 #include "sprite.hpp"
 
 // Forward declarations: the functions below are in address order

@@ -12,8 +12,8 @@
 #include "PublicTransport.hpp"
 #include "RouteFinder.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/rng.hpp"
 #include "map_0x370.hpp"
-#include "rng.hpp"
 
 EXTERN_GLOBAL(Ang16, kAng0_677CE8);
 DEFINE_GLOBAL_INIT(Fix16, kF16Zero_677B90, Fix16(0), 0x677B90);

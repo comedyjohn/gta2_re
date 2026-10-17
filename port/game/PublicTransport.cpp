@@ -7,10 +7,10 @@
 #include "Object_5C.hpp"
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "error.hpp"
 #include "map_0x370.hpp"
-#include "rng.hpp"
 
 DEFINE_GLOBAL(PublicTransport_181C*, gPublicTransport_181C_6FF1D4, 0x6FF1D4);
 DEFINE_GLOBAL(TrainStationList, gTrainStationList_6FEE68, 0x6FEE68);

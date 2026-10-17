@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
 
 namespace DataType
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "Pool.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 // A script stack frame (pushed by GOSUB): where to return to and the condition result at the time of the call
 class ScriptStackFrame_C

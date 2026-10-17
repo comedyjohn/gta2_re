@@ -1,5 +1,5 @@
 #include "CarInfo_808.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
 #include "gtx_0x106C.hpp"

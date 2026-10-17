@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Function.hpp"
+#include "core/function.hpp"
 
 EXTERN_GLOBAL(u32, gObj8_count_6F8F18);
 EXTERN_GLOBAL(u32, gObj8_dealloc_count_6F8DC0);

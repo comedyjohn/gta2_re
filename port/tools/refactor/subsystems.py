@@ -14,8 +14,8 @@ SUBSYSTEMS = {
     },
     # Types, fixed point, angles, random numbers, pools, bit sets: no game knowledge.
     "core": {
-        "types", "Function", "fix16", "Fix16_Point", "Fix16_Rect", "ang16", "angle", "rng", "BitSet32",
-        "rgb", "Pool", "Ptr32", "memory", "enums",
+        "types", "function", "fix16", "fix16_point", "fix16_rect", "ang16", "angle", "rng", "bit_set32",
+        "rgb", "pool", "ptr32", "memory", "enums",
     },
     # File formats and loading: style (.sty), text (.gxt), car info (.gci), chunks, player data, the
     # registry and debug settings.

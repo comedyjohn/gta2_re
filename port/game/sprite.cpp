@@ -15,14 +15,14 @@
 #include "TextureCache_15D8.hpp"
 #include "car_despawn_status.hpp"
 #include "char.hpp"
+#include "core/enums.hpp"
+#include "core/memory.hpp"
 #include "debug.hpp"
-#include "enums.hpp"
 #include "error.hpp"
 #include "explosion_type.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
-#include "memory.hpp"
 #include "root_sound.hpp"
 #include "winmain.hpp" // TODO: only because of gLighting_626A09
 #include <stdio.h>

@@ -1,5 +1,5 @@
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
 
 // The out-of-line copy of the inline operator+
 // 0x40AC50

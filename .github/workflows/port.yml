@@ -16,9 +16,8 @@ jobs:
       run: pip install clang-format==18.1.8
     - name: clang-format --dry-run -Werror
       run: |
-        shopt -s globstar nullglob
-        clang-format --dry-run -Werror port/game/**/*.{cpp,hpp,h} port/platform/**/*.{cpp,h} port/tests/*.{cpp,hpp}
-      shell: bash
+        git ls-files 'port/game/*.cpp' 'port/game/*.hpp' 'port/game/*.h' 'port/platform/*.cpp' 'port/platform/*.h' \
+            'port/tests/*.cpp' 'port/tests/*.hpp' | grep -v '/3rdParty/' | xargs clang-format --dry-run -Werror
 
   # Every preset builds with -Werror (the presets set GTA2_WERROR=ON). aarch64 is not here yet: it
   # needs the cross toolchain of phase 7.

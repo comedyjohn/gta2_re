@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Fix16_Rect.hpp"
-#include "Function.hpp"
-#include "Pool.hpp"
-#include "ang16.hpp"
-#include "enums.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/enums.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_rect.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 #include "gbh_graphics.hpp"
 #include "sprite_flags.hpp"
 

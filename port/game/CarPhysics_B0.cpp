@@ -11,13 +11,13 @@
 #include "Particle_8.hpp"
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "error.hpp"
 #include "explosion_type.hpp"
 #include "map_0x370.hpp"
 #include "ped_death_cause.hpp"
 #include "port_input.h"
-#include "rng.hpp"
 
 // Forward declarations: the functions below are in address order
 s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx);

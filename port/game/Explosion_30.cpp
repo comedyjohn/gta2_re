@@ -8,10 +8,10 @@
 #include "PedRefTable_7F8.hpp"
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
 #include "explosion_type.hpp"
 #include "ped_death_cause.hpp"
-#include "rng.hpp"
 
 DEFINE_GLOBAL(ExplosionPool_7A8*, gExplosionPool_7A8_6FD5F0, 0x6FD5F0);
 DEFINE_GLOBAL(ExplosionPool_3D4*, gExplosionPool_3D4_6FD5EC, 0x6FD5EC);

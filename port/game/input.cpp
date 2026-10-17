@@ -1,5 +1,5 @@
 #include "input.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 
 #include "error.hpp"
 

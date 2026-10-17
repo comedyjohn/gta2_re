@@ -1,6 +1,6 @@
 #include <doctest.h>
 
-#include "BitSet32.hpp"
+#include "core/bit_set32.hpp"
 
 TEST_CASE("BitSet32 sets, clears and tests bits")
 {

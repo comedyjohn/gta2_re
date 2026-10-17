@@ -1,5 +1,5 @@
 #include "PlayerCrimeStats_3C.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 
 // 0x484ED0
 PlayerCrimeStats_3C::PlayerCrimeStats_3C() // 0x484ED0

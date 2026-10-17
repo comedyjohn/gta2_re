@@ -2,14 +2,14 @@
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Hud.hpp"
+#include "core/enums.hpp"
+#include "core/rng.hpp"
 #include "debug.hpp"
-#include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"
 #include "input.hpp"
 #include "port_input.h"
 #include "registry.hpp"
-#include "rng.hpp"
 #include <cstdio>
 #include <cstring>
 #include <ctime>

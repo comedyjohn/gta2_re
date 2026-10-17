@@ -1,6 +1,6 @@
-#include "fix16.hpp"
-#include "Function.hpp"
-#include "ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/function.hpp"
 #include <cmath>
 
 DEFINE_GLOBAL_ARRAY(Fix16, gSinTable, 1440, 0x667A80);

@@ -4,9 +4,9 @@
 #include "Light_1D4CC.hpp"
 #include "Light_28.hpp"
 #include "Object_5C.hpp"
+#include "core/rgb.hpp"
 #include "debug.hpp"
 #include "map_0x370.hpp"
-#include "rgb.hpp"
 
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "Pool.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 #include <cstdio>
 
 struct gmp_tile_animation;

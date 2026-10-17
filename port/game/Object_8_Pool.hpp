@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object_8.hpp"
-#include "Pool.hpp"
+#include "core/pool.hpp"
 
 using TObject_8_Pool = PoolBasic<Object_8, 1101>;
 

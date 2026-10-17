@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
 #include "ProfilerTimer_C.hpp"
+#include "core/function.hpp"
 
 class Hud_TextEntry_C4;
 

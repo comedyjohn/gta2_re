@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Globals.hpp"
-#include "types.hpp"
+#include "core/types.hpp"
 #include <cstddef>
 #include <cstdio>
 

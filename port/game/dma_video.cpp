@@ -1,5 +1,5 @@
 #include "dma_video.hpp"
-#include "Function.hpp"
+#include "core/function.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(SVideo*, gVidSys_7071D0, 0x7071D0);

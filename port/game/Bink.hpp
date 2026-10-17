@@ -4,9 +4,9 @@
 #include "3rdParty/mss.h"
 #include "Draw.hpp"
 #include "Frontend.hpp"
-#include "Function.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
 #include "dma_video.hpp"
-#include "enums.hpp"
 #include "error.hpp"
 #include "winmain.hpp"
 #include <windows.h>

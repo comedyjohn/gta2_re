@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "types.hpp"
+#include "core/function.hpp"
+#include "core/types.hpp"
 
 EXTERN_GLOBAL(u32, kGlobalMask0_61A9AC);
 EXTERN_GLOBAL(u32, kGlobalMask1_61A9A8);

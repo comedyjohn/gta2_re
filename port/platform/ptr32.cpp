@@ -3,7 +3,7 @@
 // the table only grows with the number of distinct objects a script ever points at. Those come from
 // the game's object pools (cars, peds, threads, ...), which keeps it small.
 // In both builds it also keeps which slots a pointer was stored in, for the state hash.
-#include "Ptr32.hpp"
+#include "core/ptr32.hpp"
 #include "statehash.h"
 
 #include <stdint.h>

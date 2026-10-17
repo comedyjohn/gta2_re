@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.hpp"
+#include "core/types.hpp"
 
 // Ped::field_21C_bf. Same layout as CompilerBitField32 (the bit field form is needed to match), with the meaning of
 // each bit. Bits marked "Flag" are used but their meaning is not understood yet, "Unused" bits are only reset / copied.

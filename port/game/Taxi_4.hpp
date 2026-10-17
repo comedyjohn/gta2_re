@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
-#include "Pool.hpp"
-#include "fix16.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 class Car_BC;
 

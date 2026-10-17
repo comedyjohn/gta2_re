@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Function.hpp"
 #include "Ped.hpp"
-#include "Pool.hpp"
 #include "char.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 class Camera_0xBC;
 

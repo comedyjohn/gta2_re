@@ -20,7 +20,7 @@
 #include "TrafficLights_194.hpp"
 #include "Weapon_8.hpp"
 #include "collide.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
 #include "error.hpp"
 #include "explosion_type.hpp"
 #include "map_0x370.hpp"

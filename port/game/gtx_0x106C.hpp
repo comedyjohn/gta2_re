@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Function.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
 #include <cstdio>
 #include <windows.h>
 

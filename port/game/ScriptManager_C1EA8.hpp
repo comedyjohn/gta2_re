@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Fix16_Rect.hpp"
-#include "Function.hpp"
+#include "core/fix16_rect.hpp"
+#include "core/function.hpp"
 #include "miss2_0x11C.hpp"
 #include <windows.h>
 

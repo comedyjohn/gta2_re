@@ -2,8 +2,8 @@
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Ped.hpp"
-#include "enums.hpp"
-#include "rng.hpp"
+#include "core/enums.hpp"
+#include "core/rng.hpp"
 
 DEFINE_GLOBAL_ARRAY(PedGroup, pedGroups_67EF20, 20, 0x67EF20);
 DEFINE_GLOBAL_INIT(Fix16, dword_67F60C, Fix16(0x270F00, 0), 0x67F60C);

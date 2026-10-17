@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Function.hpp"
-#include "fix16.hpp"
-#include "rng.hpp"
+#include "core/fix16.hpp"
+#include "core/function.hpp"
+#include "core/rng.hpp"
 
 struct LightIntensityRadius
 {

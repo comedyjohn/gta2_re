@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
-#include "Pool.hpp"
-#include "Ptr32.hpp"
-#include "ang16.hpp"
-#include "fix16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
+#include "core/ptr32.hpp"
 #include "miss2_xyz.hpp"
 
 class Ped;

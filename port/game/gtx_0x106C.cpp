@@ -1,11 +1,11 @@
 #include "gtx_0x106C.hpp"
 #include "Frontend.hpp" // TODO: for some globals, prob should be put some where else
-#include "Function.hpp"
 #include "chunk.hpp"
-#include "enums.hpp"
+#include "core/enums.hpp"
+#include "core/function.hpp"
+#include "core/memory.hpp"
 #include "error.hpp"
 #include "file.hpp"
-#include "memory.hpp"
 #include <cstdio>
 #include <cstring>
 #include <stdio.h>

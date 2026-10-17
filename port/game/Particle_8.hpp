@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Fix16_Point.hpp"
-#include "Function.hpp"
 #include "Particle_4C.hpp"
-#include "Pool.hpp"
-#include "ang16.hpp"
+#include "core/ang16.hpp"
+#include "core/fix16_point.hpp"
+#include "core/function.hpp"
+#include "core/pool.hpp"
 
 class Fix16;
 class Sprite;

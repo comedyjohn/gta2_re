@@ -1,6 +1,6 @@
 #include "TileAnim_2.hpp"
 
-#include "enums.hpp"
+#include "core/enums.hpp"
 #include "error.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"

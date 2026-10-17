@@ -1,8 +1,8 @@
 #pragma once
 
 #include "BonusTracker_1C0.hpp"
-#include "Function.hpp"
 #include "RollingDigitCounter_38.hpp"
+#include "core/function.hpp"
 
 class Player;
 class Car_BC;

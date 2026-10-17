@@ -1,7 +1,7 @@
 // Fix16: the game's 18.14 fixed-point number. Values are mValue / 16384.
 #include <doctest.h>
 
-#include "fix16.hpp"
+#include "core/fix16.hpp"
 
 TEST_CASE("Fix16 converts from and to integers")
 {

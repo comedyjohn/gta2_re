@@ -175,6 +175,12 @@ def qual(s):
     return (s["owner"] + "::" if s["owner"] else "") + s["name"]
 
 
+def scope_of(s):
+    """Where a name must be unique. The parameters of a function's declaration and of its definition are different
+    declarations (the names may differ), so a parameter's scope includes the file."""
+    return s["owner"] + "@" + s["file"] if s["kind"] in ("param", "local") else s["owner"]
+
+
 def key_of(s):
     return ("usr:" + s["usr"]) if s["kind"] in ("param", "local") else qual(s)
 
@@ -256,12 +262,12 @@ def propose(sub, kind, syms, names=None):
         counts = collections.defaultdict(set)
         for s, new, why in rows:
             if new:
-                counts[(s["owner"], new)].add(s["name"])
+                counts[(scope_of(s), new)].add(s["name"])
         for r in rows:
             s, new, why = r
             if not new:
                 continue
-            clash = counts[(s["owner"], new)]
+            clash = counts[(scope_of(s), new)]
             if len(clash) > 1 and s["kind"] in ("function", "method"):
                 # same name, different parameter types: an overload set, if no two are alike
                 group = [x for x in rows if x[1] == new and x[0]["owner"] == s["owner"] and x[0]["kind"] in ("function", "method")]

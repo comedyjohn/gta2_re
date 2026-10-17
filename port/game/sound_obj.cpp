@@ -48,7 +48,6 @@ EXTERN_GLOBAL(u32, gCarRadioTuneRate_625014);
 
 DEFINE_GLOBAL(sound_obj, gSound_obj_66F680, 0x66F680);
 DEFINE_GLOBAL(Fix16, kFpZero_674CD8, 0x674CD8);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_66F3F0, Fix16(0), 0x66F3F0);
 DEFINE_GLOBAL_INIT(Ang16, kMinCorneringAngle_66F274, Ang16(360), 0x66F274);
 DEFINE_GLOBAL_INIT(Ang16, kMaxCorneringAngle_66F370, Ang16(1080), 0x66F370);
 DEFINE_GLOBAL_INIT(Fix16, kMinCorneringSpeed_66F378, Fix16(0x40, 0), 0x66F378);
@@ -134,8 +133,6 @@ DEFINE_GLOBAL_INIT(u8, gSoundSampleIdx_61A684, 0x64, 0x61A684);
 DEFINE_GLOBAL(char_type, byte_66F543, 0x66F543);
 
 DEFINE_GLOBAL_INIT(Fix16, dword_675414, Fix16(0x14000, 0), 0x675414);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_675400, Fix16(0), 0x675400);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_675220, kFpZero_675400, 0x675220);
 DEFINE_GLOBAL_INIT(Fix16, dword_675418, Fix16(0x18000, 0), 0x675418);
 DEFINE_GLOBAL_INIT(Fix16, dword_6751F4, Fix16(0x640000, 0), 0x6751F4);
 
@@ -392,12 +389,12 @@ void sound_obj::ProcessType2_412490(s32 idx)
     field_30_sQueueSample.field_0_EntityIndex = idx;
     field_30_sQueueSample.field_5C = nullptr;
     field_30_sQueueSample.field_18_bIs2D = 1;
-    field_30_sQueueSample.field_8_obj.field_0_x = kFpZero_66F3F0;
-    field_30_sQueueSample.field_8_obj.field_4_y = kFpZero_66F3F0;
-    field_30_sQueueSample.field_8_obj.field_8_z = kFpZero_66F3F0;
+    field_30_sQueueSample.field_8_obj.field_0_x = kFixZero;
+    field_30_sQueueSample.field_8_obj.field_4_y = kFixZero;
+    field_30_sQueueSample.field_8_obj.field_8_z = kFixZero;
     field_30_sQueueSample.field_1C_ReleasingVolumeModificator = 0;
     field_30_sQueueSample.field_24_nVolume = 127;
-    field_30_sQueueSample.field_28_distance = kFpZero_66F3F0;
+    field_30_sQueueSample.field_28_distance = kFixZero;
     field_30_sQueueSample.field_30_loop_count = 1;
     field_30_sQueueSample.field_34_loop_start = 0;
     field_30_sQueueSample.field_38_loop_end = -1;
@@ -644,7 +641,7 @@ void sound_obj::ProcessCar_412B80(Sound_Params_8* pParams)
             }
             else
             {
-                pAlloc->field_0_x = kFpZero_66F3F0;
+                pAlloc->field_0_x = kFixZero;
             }
             switch (pParams->field_0_pObj->field_8_car_bc_ptr->GetCarInfoIdx_411940())
             {
@@ -1278,13 +1275,13 @@ void sound_obj::ProcessType6_CollisionSoundQueue_413760(s32 idx)
         {
             if (this->field_30_sQueueSample.field_18_bIs2D)
             {
-                this->field_30_sQueueSample.field_8_obj.field_0_x = kFpZero_66F3F0;
-                this->field_30_sQueueSample.field_8_obj.field_4_y = kFpZero_66F3F0;
-                this->field_30_sQueueSample.field_8_obj.field_8_z = kFpZero_66F3F0;
+                this->field_30_sQueueSample.field_8_obj.field_0_x = kFixZero;
+                this->field_30_sQueueSample.field_8_obj.field_4_y = kFixZero;
+                this->field_30_sQueueSample.field_8_obj.field_8_z = kFixZero;
                 this->field_30_sQueueSample.field_4_SampleIndex = gType6SampleIndexCounter_66F541++;
                 this->field_30_sQueueSample.field_1C_ReleasingVolumeModificator = 0;
                 this->field_30_sQueueSample.field_24_nVolume = 45;
-                this->field_30_sQueueSample.field_28_distance = kFpZero_66F3F0;
+                this->field_30_sQueueSample.field_28_distance = kFixZero;
                 this->field_30_sQueueSample.field_34_loop_start = 0;
                 this->field_30_sQueueSample.field_30_loop_count = 1;
                 this->field_30_sQueueSample.field_38_loop_end = -1;
@@ -1598,7 +1595,7 @@ void sound_obj::HandleTrainEngineSound_4140C0(Sound_Params_8* pParams)
     car_speed = pCar->GetCarLinearSpeed_43A240();
     Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
 
-    if (car_speed > kFpZero_66F3F0 && max_speed > kFpZero_66F3F0)
+    if (car_speed > kFixZero && max_speed > kFixZero)
     {
         if (CalculateDistance_419020(Fix16(0x4204000, 0)))
         {
@@ -1644,7 +1641,7 @@ void sound_obj::HandleTrainCabRollingFrictionSound_4143A0(Sound_Params_8* pParam
     Fix16 car_speed;
     car_speed = pCar->GetCarLinearSpeed_43A240();
     Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
-    if (car_speed > kFpZero_66F3F0 && max_speed > kFpZero_66F3F0)
+    if (car_speed > kFixZero && max_speed > kFixZero)
     {
         if (CalculateDistance_419020(Fix16(3686400, 0)))
         {
@@ -1773,7 +1770,7 @@ void sound_obj::Tank_414A50(Sound_Params_8* pParams)
             Fix16 vol_mult;
             vol_mult = pCar->GetCarLinearSpeed_43A240();
             Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
-            if (max_speed > kFpZero_66F3F0)
+            if (max_speed > kFixZero)
             {
                 if (vol_mult > max_speed)
                 {
@@ -1904,7 +1901,7 @@ void sound_obj::Tank_415190(Sound_Params_8* pParams)
             Fix16 vol_mult;
             vol_mult = pCar->GetCarLinearSpeed_43A240();
             Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
-            if (max_speed > kFpZero_66F3F0)
+            if (max_speed > kFixZero)
             {
                 if (vol_mult > max_speed)
                 {
@@ -2086,9 +2083,9 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
         gas_pedal = pCar->GetCarLinearSpeed_43A240();
         Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
         u8 emitting_vol;
-        if (max_speed > kFpZero_66F3F0)
+        if (max_speed > kFixZero)
         {
-            if (gas_pedal == kFpZero_66F3F0)
+            if (gas_pedal == kFixZero)
             {
                 if (pCar->field_68_scale != kFpOne_66F3F4)
                 {
@@ -2190,9 +2187,9 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
             Fix16 speed;
             speed = pCar->GetCarLinearSpeed_43A240();
 
-            if (max_speed > kFpZero_66F3F0)
+            if (max_speed > kFixZero)
             {
-                if (speed == kFpZero_66F3F0)
+                if (speed == kFixZero)
                 {
                     max_speed = dword_66F220;
                     if (!pCar->field_58_physics->is_backward_gas_on_411810())
@@ -2735,7 +2732,7 @@ void sound_obj::HandleHeavyVehicleStopSound_417E30(Sound_Params_8* pParams, Soun
     Car_BC* cBC = pParams->field_0_pObj->field_8_car_bc_ptr;
     Fix16 car_speed;
     car_speed = cBC->GetCarLinearSpeed_43A240();
-    if (pAlloc->field_0_x > kFpZero_66F3F0 && car_speed == kFpZero_66F3F0)
+    if (pAlloc->field_0_x > kFixZero && car_speed == kFixZero)
     {
         if (IsHeavyTruckOrBus_417F40(cBC->GetCarInfoIdx_411940()))
         {
@@ -2859,7 +2856,7 @@ void sound_obj::HandleAICarEngineSound_418190(Sound_Params_8* pParams)
         Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
         Fix16 speed;
         speed = pParams->field_0_pObj->field_8_car_bc_ptr->GetCarLinearSpeed_43A240();
-        if (max_speed > kFpZero_66F3F0 && speed > kFpZero_66F3F0 && CalculateDistance_419020(Fix16(0x144000, 0)))
+        if (max_speed > kFixZero && speed > kFixZero && CalculateDistance_419020(Fix16(0x144000, 0)))
         {
             u8 emitting_vol = Fix16::RoundToInt((speed / max_speed) * Fix16(0x2C000, 0));
             if (emitting_vol > 0)
@@ -3044,7 +3041,7 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
         {
             if (pPhysics->field_AC_drive_wheels_locked_q > 0)
             {
-                if (gCarInfo_48_6FE258->field_28_max_speed > kFpZero_66F3F0)
+                if (gCarInfo_48_6FE258->field_28_max_speed > kFixZero)
                 {
                     Fix16 speed = pCar->GetCarLinearSpeed_43A240();
                     speed /= gCarInfo_48_6FE258->field_28_max_speed;
@@ -3114,8 +3111,8 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
 // 0x418940
 char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
 {
-    Fix16 front_skid = kFpZero_66F3F0;
-    Fix16 rear_skid = kFpZero_66F3F0;
+    Fix16 front_skid = kFixZero;
+    Fix16 rear_skid = kFixZero;
 
     Car_BC* pCar;
     if (GetCar_4145E0(pSound->field_0_EntityIndex, &pCar))
@@ -3154,7 +3151,7 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
 
             if (pPhysics->field_AC_drive_wheels_locked_q > 0)
             {
-                if (gCarInfo_48_6FE258->field_28_max_speed > kFpZero_66F3F0)
+                if (gCarInfo_48_6FE258->field_28_max_speed > kFixZero)
                 {
                     // Written out: with `GetCarLinearSpeed() / gCarInfo->field_28` VC6 binds the divisor's
                     // reference before the call (`lea 0x28(%ecx)` held across it); the original reloads
@@ -5614,7 +5611,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
     pB4 = pType3Entity->field_0_pObj->field_8_char_b4_ptr;
     if (pB4->field_7C_pPed)
     {
-        if (!gGame_0x40_67E008->field_38_local_player->GetPlayerCar_5698E0() && pB4->get_velocity_41B080() > kFpZero_675220)
+        if (!gGame_0x40_67E008->field_38_local_player->GetPlayerCar_5698E0() && pB4->get_velocity_41B080() > kFixZero)
         {
             animation_state = pB4->field_6C_animation_state;
             if (animation_state == 4 || animation_state == 1 || animation_state == 0)

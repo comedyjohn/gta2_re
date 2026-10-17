@@ -14,7 +14,6 @@ EXTERN_GLOBAL(Fix16, dword_67D384);
 
 DEFINE_GLOBAL(FirefighterPool_54*, gFirefighterPool_54_67D4C0, 0x67D4C0);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_67D1F0, Fix16(0.5F), 0x67D1F0);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_67D378, Fix16(0), 0x67D378);
 
 DEFINE_GLOBAL_INIT(Ang16, kAng0_67D4B0, Ang16(0), 0x67D4B0);
 DEFINE_GLOBAL_INIT(Ang16, kAng90_67D208, Ang16(360), 0x67D208);
@@ -31,7 +30,7 @@ bool Firefighter_28::sub_4A7FC0()
         return false;
     }
 
-    if (field_1C_car->field_58_physics->get_car_velocity_4211C0() == kFpZero_67D378)
+    if (field_1C_car->field_58_physics->get_car_velocity_4211C0() == kFixZero)
     {
         if (++field_24_next_state_timer >= 1000)
         {

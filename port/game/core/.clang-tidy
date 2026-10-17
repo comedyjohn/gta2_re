@@ -1,0 +1,4 @@
+# This directory is renamed: the naming rules of port/STYLE.md apply (phase 2, step 8)
+InheritParentConfig: true
+Checks: 'readability-identifier-naming'
+HeaderFilterRegex: 'port/game/core/'

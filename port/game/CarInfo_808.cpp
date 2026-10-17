@@ -30,7 +30,6 @@ DEFINE_GLOBAL(u8*, modelPhyArrPtr_675F98, 0x675F98);
 DEFINE_GLOBAL_INIT(Fix16, kOne_677F54, Fix16(0x4000, 0), 0x677F54);
 DEFINE_GLOBAL_INIT(Fix16, kQuarter_677D78, Fix16(0x1000, 0), 0x677D78);
 DEFINE_GLOBAL_INIT(Fix16, kOneTenth_677D74, Fix16(0x666, 0), 0x677D74);
-DEFINE_GLOBAL_INIT(Fix16, kZero_6761A4, Fix16(0), 0x6761a4);
 DEFINE_GLOBAL_ARRAY(char, Buffer_675FD4, 80, 0x675FD4);
 DEFINE_GLOBAL_ARRAY(char, token_buffer_676024, 256, 0x676024);
 DEFINE_GLOBAL_ARRAY_INIT(const char*,
@@ -471,7 +470,7 @@ s32 CarInfo_808::StrToInt_430FA0(const char* pStr, s32* pOut)
 // 0x431000
 s32 CarInfo_808::FloatStrToFix16_431000(char* pStr, Fix16& pOut)
 {
-    pOut = kZero_6761A4;
+    pOut = kFixZero;
     bool bPastDecimalPoint = false;
     s32 decimal_divisor = 1;
     s32 strLen = strlen(pStr);

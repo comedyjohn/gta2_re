@@ -92,11 +92,9 @@ DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6771FC, Fix16(0x2000, 0), 0x6771FC);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_677888, Fix16(0x100, 0), 0x677888);
 DEFINE_GLOBAL_INIT(Fix16, kFpFive_6778D0, Fix16(0x14000, 0), 0x6778D0);
 DEFINE_GLOBAL_INIT(Fix16, kDefaultTrafficCarSpeed_6FF744, Fix16(0x147, 0), 0x6FF744);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6FF774, Fix16(0), 0x006FF774);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6FF580, kFpZero_6FF774, 0x6FF580);
 DEFINE_GLOBAL_INIT(Fix16, kFp255_6FF558, Fix16(0x3FC000, 0), 0x6FF558);
 DEFINE_GLOBAL_INIT(Fix16, gTrafficCarSpeed_6FF570, Fix16(0x147, 0), 0x6FF570);
-DEFINE_GLOBAL_INIT(Fix16, dword_6FF7E8, kFpZero_6FF774, 0x6FF7E8);
+DEFINE_GLOBAL_INIT(Fix16, dword_6FF7E8, Fix16(0), 0x6FF7E8);
 DEFINE_GLOBAL(s8, DAT_006FF8C4, 0x6FF8C4);
 DEFINE_GLOBAL(s8, DAT_006FF8C5, 0x6FF8C5);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_6FF778, Fix16(1), 0x6ff778);
@@ -119,7 +117,6 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FF5CC, Fix16(0xCCC, 0), 0x6FF5CC);
 DEFINE_GLOBAL_INIT(Fix16Point, kZeroPoint_6778A8, Fix16Point(0, 0), 0x6778A8);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_677908, Fix16(1), 0x677908);
 
-DEFINE_GLOBAL_INIT(Fix16, kZero_705DD8, Fix16(0), 0x705DD8);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_705DDC, Fix16(0x4000, 0), 0x705DDC);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_705F10, Ang16(0), 0x705F10);
 
@@ -412,7 +409,7 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 {
                     pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
                         (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
-                    if (pPed->GetGameObjectVelocity_433C20() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
+                    if (pPed->GetGameObjectVelocity_433C20() == kFixZero && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
                     }
@@ -428,7 +425,7 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 {
                     pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
                         (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
-                    if (pPed->GetGameObjectVelocity_433C20() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
+                    if (pPed->GetGameObjectVelocity_433C20() == kFixZero && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
                     }
@@ -442,7 +439,7 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 {
                     pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
                         (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
-                    if (pPed->GetPedVelocity_45C920() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
+                    if (pPed->GetPedVelocity_45C920() == kFixZero && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
                     }
@@ -459,7 +456,7 @@ void CarThreadTriggers_214::CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite)
                 {
                     pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(
                         (reinterpret_cast<CarThreadTriggerCmd*>(pEntry->field_0_pScriptCmd))->field_8_idx));
-                    if (pPed->GetPedVelocity_45C920() == kZero_705DD8 && pPed->get_id() == pPointer->field_8_char->get_id())
+                    if (pPed->GetPedVelocity_45C920() == kFixZero && pPed->get_id() == pPointer->field_8_char->get_id())
                     {
                         pEntry->field_14_enable_state = 0;
                     }
@@ -5734,13 +5731,12 @@ Ang16 Car_BC::GetRadioTowerAngle_442520()
 }
 
 // TODO: Move all of these together with SmoothApproachAngle_405CE0
-EXTERN_GLOBAL(Fix16, kFPZero_6691B0);
 DEFINE_GLOBAL_INIT(Fix16, kAngFix16FullCircle_66A8E4, Fix16(0x18F60, 0), 0x66A8E4);
 DEFINE_GLOBAL_INIT(Fix16, kAngFix16HalfCircle_6691EC, Fix16(0xC7B0, 0), 0x6691EC);
 inline Fix16 WrapAngle_40E790(const Fix16& unk) // 9.6f inlined func
 {
     Fix16 result = unk;
-    for (; result < kFPZero_6691B0; result += kAngFix16FullCircle_66A8E4)
+    for (; result < kFixZero; result += kAngFix16FullCircle_66A8E4)
     {
         ;
     }
@@ -5769,9 +5765,9 @@ void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4
 
     Fix16 a1_m_a3 = a1 - a3;
 
-    if (a1_m_a3 > kFPZero_6691B0)
+    if (a1_m_a3 > kFixZero)
     {
-        if (a2 >= kFPZero_6691B0)
+        if (a2 >= kFixZero)
         {
             if (a2 + a4 <= a1_m_a3)
             {
@@ -5788,14 +5784,14 @@ void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4
         }
         else
         {
-            a2 = kFPZero_6691B0;
+            a2 = kFixZero;
         }
     }
     else
     {
-        if (a1_m_a3 >= kFPZero_6691B0 || a2 > kFPZero_6691B0)
+        if (a1_m_a3 >= kFixZero || a2 > kFixZero)
         {
-            a2 = kFPZero_6691B0;
+            a2 = kFixZero;
         }
         else
         {
@@ -7195,7 +7191,7 @@ s32 Trailer::Update_408220()
 // 0x5822E0
 void ResetTrafficSpawnGlobals_5822E0()
 {
-    dword_6FF7E8 = kFpZero_6FF774;
+    dword_6FF7E8 = kFixZero;
     gTrafficCarSpeed_6FF570 = kDefaultTrafficCarSpeed_6FF744;
     DAT_006FF8C4 = 0;
     DAT_006FF8C5 = 0;
@@ -7316,7 +7312,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
         this->field_A_unused = 1;
 
         u8 rng_int = gRng.GetUint8(5);
-        bool maybe_vel = !!(field_0_cam->ReturnOwnerVelocity_435A20() > kFpZero_6FF580);
+        bool maybe_vel = !!(field_0_cam->ReturnOwnerVelocity_435A20() > kFixZero);
 
         switch (rng_int)
         {
@@ -7587,10 +7583,10 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
     }
 
     // One and two blocks along the road direction
-    Fix16 x_one = kFpZero_6FF774;
-    Fix16 y_one = kFpZero_6FF774;
-    Fix16 x_two = kFpZero_6FF774;
-    Fix16 y_two = kFpZero_6FF774;
+    Fix16 x_one = kFixZero;
+    Fix16 y_one = kFixZero;
+    Fix16 x_two = kFixZero;
+    Fix16 y_two = kFixZero;
     switch (arrow_direction)
     {
         case 1:
@@ -7613,7 +7609,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
             break;
     }
 
-    while (xpos > kFpZero_6FF774 && ypos > kFpZero_6FF774 && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
+    while (xpos > kFixZero && ypos > kFixZero && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
     {
         gmp_block_info* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &found_z);
         ground_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos);
@@ -7974,7 +7970,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
 // 0x583870
 char_type TrafficSpawner_14::IsFlatRoadAt_583870(Fix16 xpos, Fix16 ypos)
 {
-    if (xpos > kFpZero_6FF774 && ypos > kFpZero_6FF774 && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
+    if (xpos > kFixZero && ypos > kFixZero && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
     {
         s32 zpos;
         gmp_block_info* pHighBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &zpos);

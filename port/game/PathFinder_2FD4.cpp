@@ -8,7 +8,6 @@ DEFINE_GLOBAL(s16, gPathFinder_best_cost_6FDECE, 0x6FDECE);
 
 DEFINE_GLOBAL(PathFinder_2FD4*, gPathFinder_6FDEF0, 0x6FDEF0);
 
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6FDD98, Fix16(0), 0x6FDD98);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FDD50, Fix16(0x100, 0), 0x6FDD50);
 DEFINE_GLOBAL_INIT(Fix16, kFpQuarter_6FDC00, Fix16(0.25), 0x6FDC00);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6FDCA8, Fix16(0.5), 0x6FDCA8);
@@ -926,7 +925,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     {
         return false;
     }
-    u8 default_pos = kFpZero_6FDD98.ToUInt8();
+    u8 default_pos = kFixZero.ToUInt8();
     field_27_zpos = default_pos;
     field_26_ypos = default_pos;
     field_25_xpos = default_pos;

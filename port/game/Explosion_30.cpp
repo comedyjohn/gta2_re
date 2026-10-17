@@ -18,7 +18,6 @@ DEFINE_GLOBAL(ExplosionPool_3D4*, gExplosionPool_3D4_6FD5EC, 0x6FD5EC);
 
 EXTERN_GLOBAL(u16, gParticleInstCount_6FD5F4);
 
-DEFINE_GLOBAL_INIT(Fix16, kFP16Zero_6FD49C, Fix16(0), 0x6FD49C);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_6FD5D4, Ang16(0), 0x6FD5D4);
 
 // Defined in Particle_4C.cpp: with the definition (and its dynamic initialiser) in this TU, VC6
@@ -80,11 +79,11 @@ Explosion_30::Explosion_30()
     this->field_14_pObj2C = nullptr;
     this->field_18_particle_cooldown = 0;
     this->field_1A_timer = 0;
-    this->field_8_speed = kFP16Zero_6FD49C;
+    this->field_8_speed = kFixZero;
     this->field_20 = kAngZero_6FD5D4;
     this->field_22_spawn_angle = kAngZero_6FD5D4;
-    this->field_24_particle_spread = kFP16Zero_6FD49C;
-    this->field_28_blast_radius = kFP16Zero_6FD49C;
+    this->field_24_particle_spread = kFixZero;
+    this->field_28_blast_radius = kFixZero;
     this->field_C_angle = kAngZero_6FD5D4;
     this->field_1C_pAttachedSprite = nullptr;
     this->field_6_id = 0;
@@ -304,7 +303,7 @@ void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
     this->field_8_speed = speed;
     this->field_C_angle = ang;
 
-    if (field_14_pObj2C->GetEffectiveSpeed_5290F0() == kFP16Zero_6FD49C && this->field_1A_timer == explosion_timer::forever_9999)
+    if (field_14_pObj2C->GetEffectiveSpeed_5290F0() == kFixZero && this->field_1A_timer == explosion_timer::forever_9999)
     {
         this->field_1A_timer = 20;
     }
@@ -478,7 +477,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                     {
                         if (timerVal < 70U)
                         {
-                            pPedChar->HandleGenericImpact_553E00(ang, dword_6FD2E8 + dword_6FD46C, kFP16Zero_6FD49C, 0);
+                            pPedChar->HandleGenericImpact_553E00(ang, dword_6FD2E8 + dword_6FD46C, kFixZero, 0);
                         }
                     }
                     else

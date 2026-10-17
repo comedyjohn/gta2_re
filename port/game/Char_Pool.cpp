@@ -28,7 +28,6 @@ EXTERN_GLOBAL(Ang16, word_6784F0);
 EXTERN_GLOBAL(u8, byte_61A8A0);
 EXTERN_GLOBAL(s8, byte_61A8A3);
 EXTERN_GLOBAL(u8, byte_61A8A4);
-EXTERN_GLOBAL(Fix16, kFpZero_678660);
 EXTERN_GLOBAL(Fix16, gDistanceToTarget_678750);
 EXTERN_GLOBAL(Ped*, gLastProcessedPed_6787C0);
 EXTERN_GLOBAL(u8, gNumberArmedGangMembers_6787CE);
@@ -78,7 +77,6 @@ EXTERN_GLOBAL(u8, byte_6787D8);
 EXTERN_GLOBAL(u8, byte_6787D9);
 EXTERN_GLOBAL(u8, gNewTaxiCustomersThisTick_6787D2);
 
-EXTERN_GLOBAL(Fix16, kFpZero_678438);
 EXTERN_GLOBAL(Fix16, kFpHalf_67853C);
 EXTERN_GLOBAL(Ang16, gDummyPedAng_6787A8);
 
@@ -613,7 +611,7 @@ void PedManager::Dummies_470330()
             spawnSideLocked_6787D5 = 0;
             if (pCam->HasFollowTarget_433E90())
             {
-                if (pCam->ReturnOwnerVelocity_435A20() > kFpZero_678438)
+                if (pCam->ReturnOwnerVelocity_435A20() > kFixZero)
                 {
                     // TODO: BL register is reused to set these to 1 instead
                     // of a constant value :)
@@ -763,7 +761,7 @@ PedManager::PedManager()
     byte_61A8A2 = 1;
     byte_6787D9 = 0;
     bHaveThreateningPeds_6787DA = 0;
-    gDistanceToTarget_678750 = kFpZero_678660;
+    gDistanceToTarget_678750 = kFixZero;
     gSearchingPed_6787DC = nullptr;
     cameraFacingAng_678760 = gDummyPedAng_6787A8;
     byte_61A8A3 = 1;

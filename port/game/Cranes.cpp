@@ -1,5 +1,5 @@
 // This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kZero_679E70
+#define FIX16_POINT_ZERO kFixZero
 #include "Cranes.hpp"
 #include "Char_Pool.hpp"
 #include "Hud.hpp"
@@ -17,12 +17,11 @@ void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4
 void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3);
 
 DEFINE_GLOBAL_INIT(Fix16, kHomeHookRadius_679E58, Fix16(0x2000, 0), 0x679E58);
-DEFINE_GLOBAL_INIT(Fix16, kZero_679E70, Fix16(0), 0x679E70);
 DEFINE_GLOBAL_INIT(Fix16, kFpTwo_679E78, Fix16(2), 0x679E78);
 DEFINE_GLOBAL_INIT(Fix16, kFpTwo_679C78, kFpTwo_679E78, 0x679C78);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_679FC4, Ang16(0), 0x679FC4);
 DEFINE_GLOBAL(CranePool_D9C*, gCranePool_D9C_679FD4, 0x679FD4);
-DEFINE_GLOBAL_INIT(Fix16, kHomeHookAxialAngle_679D50, kZero_679E70, 0x679D50);
+DEFINE_GLOBAL_INIT(Fix16, kHomeHookAxialAngle_679D50, Fix16(0), 0x679D50);
 DEFINE_GLOBAL_INIT(Fix16, kFpTwo_679F8C, kFpTwo_679E78, 0x679F8C);
 DEFINE_GLOBAL_INIT(Fix16, kFpThree_679E7C, Fix16(0xC000, 0), 0x679E7C);
 DEFINE_GLOBAL_INIT(Fix16, kFpThree_679F88, kFpThree_679E7C, 0x679F88);
@@ -54,7 +53,7 @@ DEFINE_GLOBAL_INIT(Fix16, kAngFix16HalfCircle_679EB8, Fix16(0xC7B0, 0), 0x679EB8
 
 inline Fix16 WrapAngle_40E790(Fix16 a2)
 {
-    while (a2 < kZero_679E70)
+    while (a2 < kFixZero)
     {
         a2 += kAngFix16FullCircle_679F58;
     }
@@ -89,7 +88,7 @@ Crane_15C::Crane_15C()
 // 0x47e620
 void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutPoint)
 {
-    pOutPoint->SetXY(kZero_679E70, radius);
+    pOutPoint->SetXY(kFixZero, radius);
 
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
     Fix16 sin = Ang16::Sine(ang);
@@ -104,7 +103,7 @@ void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutP
 // 0x47e730
 void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutPoint)
 {
-    pOutPoint->SetXY(kZero_679E70, ang);
+    pOutPoint->SetXY(kFixZero, ang);
     // Inlined RotateByAngle_40F6B0, but with the y part using the out-of-line Fix16 operators
     Fix16 sin = Ang16::Sine(radius);
     Fix16 cos = Ang16::Cosine(radius);
@@ -118,7 +117,7 @@ void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutP
 void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16Point* pOutPoint)
 {
 
-    pOutPoint->SetXY(kZero_679E70, -kFpHalf_679D64);
+    pOutPoint->SetXY(kFixZero, -kFpHalf_679D64);
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
     Fix16 sin = Ang16::Sine(ang);
     Fix16 cos = Ang16::Cosine(ang);
@@ -196,7 +195,7 @@ void Crane_15C::DropHookedCarOnTransporter_47ED60()
     gCar_BC_Pool_67792C->UpdateNextPrev(pCar);
     pCar->ResetDespawnStatus_447EA0();
     gSpriteGrid_1_679208->AddToRegionBuckets_477B20(field_74_pSprite_on_hook);
-    field_64_drop_transporter->DispatchCollisionEvent_5A3100(field_74_pSprite_on_hook, kZero_679E70, kZero_679E70, kAngZero_679FC4);
+    field_64_drop_transporter->DispatchCollisionEvent_5A3100(field_74_pSprite_on_hook, kFixZero, kFixZero, kAngZero_679FC4);
     field_28_strct4.AddSprite_5A6CD0(field_64_drop_transporter);
     field_74_pSprite_on_hook = nullptr;
     field_150_hook_job = 0;
@@ -317,7 +316,7 @@ void Crane_15C::sub_47F170()
         field_B0_hook_radius_target = kHomeHookRadius_679E58;
         field_AC_crane_angle_target = field_A8_home_angle;
         field_B4_hook_angle_target = kHomeHookAxialAngle_679D50;
-        field_B8_hook_depth_target = kZero_679E70;
+        field_B8_hook_depth_target = kFixZero;
     }
     field_14D_is_busy = 0;
 }
@@ -627,7 +626,7 @@ void Crane_15C::TryNextDropPosition_47FB40()
 // 0x47fba0
 s32 Crane_15C::MoveTowardsTargets_47FBA0()
 {
-    if (this->field_84_hook_depth == kZero_679E70)
+    if (this->field_84_hook_depth == kFixZero)
     {
         SmoothApproach_4F7540(this->field_B0_hook_radius_target,
                               this->field_94_hook_radius_speed,
@@ -662,7 +661,7 @@ s32 Crane_15C::MoveTowardsTargets_47FBA0()
     else
     {
         bUnknown = false;
-        f_B8_hook_depth_target = kZero_679E70;
+        f_B8_hook_depth_target = kFixZero;
     }
 
     SmoothApproach_4F7540(f_B8_hook_depth_target,
@@ -864,70 +863,70 @@ void Crane_15C::InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id)
         gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kCraneBase, x_pos, y_pos, field_80_ground_z - kFpTwo_679C78, kAngZero_679FC4);
     field_58_crane_base_obj->set_field_26(obj_id);
     field_78_maybe_homecrane = nullptr;
-    field_94_hook_radius_speed = kZero_679E70;
-    field_98_crane_angle_speed = kZero_679E70;
-    field_9C_unused = kZero_679E70;
-    field_A8_home_angle = kZero_679E70;
-    field_8C_crane_angle = kZero_679E70;
+    field_94_hook_radius_speed = kFixZero;
+    field_98_crane_angle_speed = kFixZero;
+    field_9C_unused = kFixZero;
+    field_A8_home_angle = kFixZero;
+    field_8C_crane_angle = kFixZero;
     field_90_hook_radius = kHomeHookRadius_679E58;
-    field_84_hook_depth = kZero_679E70;
-    field_88_hook_depth_speed = kZero_679E70;
-    field_A0_hook_axial_angle = kZero_679E70;
-    field_A4_hook_axial_angle_speed = kZero_679E70;
+    field_84_hook_depth = kFixZero;
+    field_88_hook_depth_speed = kFixZero;
+    field_A0_hook_axial_angle = kFixZero;
+    field_A4_hook_axial_angle_speed = kFixZero;
     field_AC_crane_angle_target = field_8C_crane_angle;
     field_B0_hook_radius_target = field_90_hook_radius;
     field_14D_is_busy = 0;
     field_0_hooked_sprite_offset_target.x = 0;
     field_0_hooked_sprite_offset_target.y = 0;
     field_B4_hook_angle_target = field_8C_crane_angle;
-    field_B8_hook_depth_target = kZero_679E70;
+    field_B8_hook_depth_target = kFixZero;
     field_68_pickup_car = nullptr;
-    field_E0_pickup_car_x = kZero_679E70;
-    field_E4_pickup_car_y = kZero_679E70;
-    field_E8_pickup_car_z = kZero_679E70;
-    field_EC_pickup_car_rot = kZero_679E70;
-    field_F0_pickup_car_hook_depth = kZero_679E70;
+    field_E0_pickup_car_x = kFixZero;
+    field_E4_pickup_car_y = kFixZero;
+    field_E8_pickup_car_z = kFixZero;
+    field_EC_pickup_car_rot = kFixZero;
+    field_F0_pickup_car_hook_depth = kFixZero;
     field_6C_transporter_cargo = nullptr;
     field_70_cargo_transporter = nullptr;
-    field_FC_transporter_cargo_x = kZero_679E70;
-    field_100_transporter_cargo_y = kZero_679E70;
-    field_104_transporter_cargo_z = kZero_679E70;
-    field_108_transporter_cargo_rot = kZero_679E70;
-    field_10C_transporter_cargo_hook_depth = kZero_679E70;
+    field_FC_transporter_cargo_x = kFixZero;
+    field_100_transporter_cargo_y = kFixZero;
+    field_104_transporter_cargo_z = kFixZero;
+    field_108_transporter_cargo_rot = kFixZero;
+    field_10C_transporter_cargo_hook_depth = kFixZero;
     field_74_pSprite_on_hook = nullptr;
     field_154_unused = 0;
     field_150_hook_job = 0;
-    field_114_drop_radius = kZero_679E70;
-    field_110_drop_angle = kZero_679E70;
-    field_118_drop_rot = kZero_679E70;
+    field_114_drop_radius = kFixZero;
+    field_110_drop_angle = kFixZero;
+    field_118_drop_rot = kFixZero;
     field_8_drop_offset.x = 0;
     field_8_drop_offset.y = 0;
-    field_11C_drop_hook_depth = kZero_679E70;
+    field_11C_drop_hook_depth = kFixZero;
 
     Sprite* current_sprite = gSpritePool_703818->get_new_sprite();
     field_60_probe_sprite = current_sprite;
-    current_sprite->AllocCollisionShape_59F950(kZero_679E70, kZero_679E70, kZero_679E70);
+    current_sprite->AllocCollisionShape_59F950(kFixZero, kFixZero, kFixZero);
     field_14C_return_delay = 60;
-    field_BC_drop_transporter_radius = kZero_679E70;
-    field_C0_drop_transporter_angle = kZero_679E70;
+    field_BC_drop_transporter_radius = kFixZero;
+    field_C0_drop_transporter_angle = kFixZero;
     field_64_drop_transporter = nullptr;
-    field_D0_drop_transporter_rot = kZero_679E70;
-    field_C4_drop_transporter_pos.x = kZero_679E70;
-    field_C4_drop_transporter_pos.y = kZero_679E70;
-    field_CC_drop_transporter_z = kZero_679E70;
-    field_D4_drop_transporter_hook_depth = kZero_679E70;
-    field_120_target1_radius = kZero_679E70;
-    field_124_target1_angle = kZero_679E70;
-    field_128_target1_rot = kZero_679E70;
+    field_D0_drop_transporter_rot = kFixZero;
+    field_C4_drop_transporter_pos.x = kFixZero;
+    field_C4_drop_transporter_pos.y = kFixZero;
+    field_CC_drop_transporter_z = kFixZero;
+    field_D4_drop_transporter_hook_depth = kFixZero;
+    field_120_target1_radius = kFixZero;
+    field_124_target1_angle = kFixZero;
+    field_128_target1_rot = kFixZero;
     field_18_target1_offset.x = 0;
     field_18_target1_offset.y = 0;
-    field_12C_target1_hook_depth = kZero_679E70;
-    field_130_target2_radius = kZero_679E70;
-    field_134_target2_angle = kZero_679E70;
-    field_138_target2_rot = kZero_679E70;
+    field_12C_target1_hook_depth = kFixZero;
+    field_130_target2_radius = kFixZero;
+    field_134_target2_angle = kFixZero;
+    field_138_target2_rot = kFixZero;
     field_20_target2_offset.x = 0;
     field_20_target2_offset.y = 0;
-    field_13C_target2_hook_depth = kZero_679E70;
+    field_13C_target2_hook_depth = kFixZero;
     field_155_load_phase = 1;
     Crane_15C::UpdateCraneSprites_47FE10();
     field_156_is_rotating = 0;

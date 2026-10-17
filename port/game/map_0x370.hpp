@@ -331,7 +331,6 @@ EXTERN_GLOBAL(Fix16, kGradientScaleSize2_6F5FA8);
 
 EXTERN_GLOBAL(Fix16, kGradientScaleSize8_6F6214);
 
-EXTERN_GLOBAL(Fix16, kFpZero_6F610C);
 extern Fix16 kFpOne_6F6110;
 EXTERN_GLOBAL(Ang16, word_6F603E);
 Ang16 ReturnAngleFromRoadDirection_4F7940(s32* road_direction);
@@ -531,7 +530,7 @@ class Map_0x370
         else
         {
             sub_4E5D10(pX, pY, dist, direction);
-            dist = kFpZero_6F610C;
+            dist = kFixZero;
         }
     }
 
@@ -606,7 +605,7 @@ class Map_0x370
                 scale = kGradientScaleSize8_6F6214; //  2084
                 break;
             default:
-                scale = kFpZero_6F610C; //  0
+                scale = kFixZero; //  0
                 break;
         }
         return scale;

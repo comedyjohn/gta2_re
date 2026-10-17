@@ -1,4 +1,4 @@
-#define FIX16_POINT_ZERO kFpZero_7064C0
+#define FIX16_POINT_ZERO kFixZero
 #include "Hud.hpp"
 #include "Car_BC.hpp"
 #include "Draw.hpp"
@@ -40,7 +40,6 @@ DEFINE_GLOBAL(u16, gPlayerNameFont_7062DC, 0x7062DC);
 DEFINE_GLOBAL(u16, word_70643E, 0x70643E);
 DEFINE_GLOBAL_ARRAY(char, gTmpGxtKey_67CE50, 264, 0x67CE50); //, TODO, 0xUNKNOWN);
 DEFINE_GLOBAL(s16, word_7064D8, 0x7064D8);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_7064C0, 0, 0x7064C0);
 DEFINE_GLOBAL_INIT(Fix16, kArrowBaseRepositionSpeed_7063B0, Fix16(0x400, 0), 0x7063B0);
 DEFINE_GLOBAL_INIT(Fix16, kArrowRadiusOffset_7065B4, Fix16(0x1C00, 0), 0x7065B4);
 DEFINE_GLOBAL_INIT(Fix16, kArrowMinRadiusStep_706338, Fix16(0x100, 0), 0x706338);
@@ -779,9 +778,9 @@ void Hud_Arrow_7C::UpdateScreenPos_5D0850()
     if (field_18.field_60_curr_target->field_20_bIsTargetVisible)
     {
         intended_radius = distance - kFpQuarter_706300;
-        if (intended_radius < kFpZero_7064C0)
+        if (intended_radius < kFixZero)
         {
-            intended_radius = kFpZero_7064C0;
+            intended_radius = kFixZero;
         }
     }
     else
@@ -844,7 +843,7 @@ void Hud_Arrow_7C::UpdateScreenPos_5D0850()
     Fix16 projected_radius = ((radius * 64) / (pCamera->field_60_screen_scale.x * factor)) * pCamera->field_A8_ui_scale;
 
     Fix16 zpos_2;
-    if (distance != kFpZero_7064C0 && !field_18.field_60_curr_target->field_20_bIsTargetVisible)
+    if (distance != kFixZero && !field_18.field_60_curr_target->field_20_bIsTargetVisible)
     {
         zpos_2 = player_zpos + ((radius / distance) * (field_18.field_60_curr_target->field_1C_aim_z - player_zpos));
     }
@@ -2304,7 +2303,7 @@ void Hud_Brief_704::SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32
 
 inline void Hud_Arrow_7C::Reset_4CA610()
 {
-    field_10_radius_pos = kFpZero_7064C0;
+    field_10_radius_pos = kFixZero;
     field_14_reposition_speed = kArrowBaseRepositionSpeed_7063B0;
     SetArrowColour_5D0510(4);
     field_18.field_10.field_5_is_visible = true;

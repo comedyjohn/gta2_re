@@ -2947,7 +2947,7 @@ void ImGuiDebugDraw()
                     for (auto& pursuit_target : gPolice_7B8_6FEE40->field_464_pursuit_targets)
                     {
                         PolicePursuitTarget_7C* p7C = &pursuit_target;
-                        if (p7C && p7C->field_18_z != kFP16Zero_6FE20C)
+                        if (p7C && p7C->field_18_z != kFixZero)
                         {
                             swprintf(tmpBuff_67BD9C,
                                      L"P7C target coords (%.1f, %.1f, %.1f)",

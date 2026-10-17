@@ -1,4 +1,4 @@
-#define FIX16_POINT_ZERO kZero_676818
+#define FIX16_POINT_ZERO kFixZero
 #include "Camera.hpp"
 #include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"
@@ -22,7 +22,6 @@ void SmoothApproachClamped_4F75D0(Fix16* target_coord,
 DEFINE_GLOBAL(Camera_0xBC*, gViewCamera_676978, 0x676978);
 DEFINE_GLOBAL_INIT(Fix16, dword_676840, Fix16(0x20000, 0), 0x676840);
 DEFINE_GLOBAL_INIT(Fix16, dword_67671C, Fix16(0x2000, 0), 0x67671C);
-DEFINE_GLOBAL_INIT(Fix16, kZero_676818, Fix16(0), 0x676818);
 DEFINE_GLOBAL_INIT(Fix16, kOne_67681C, Fix16(1), 0x67681C);
 DEFINE_GLOBAL_INIT(Fix16, kDefaultZoom_6766D4, Fix16(0x38CC, 0), 0x6766D4);
 DEFINE_GLOBAL_INIT(Fix16, dword_67682C, Fix16(0x14000, 0), 0x67682C);
@@ -52,7 +51,6 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6766F4, Fix16(0x3000, 0), 0x6766F4);
 DEFINE_GLOBAL_INIT(Fix16, kTwo_676820, Fix16(2), 0x676820);
 DEFINE_GLOBAL_INIT(Fix16, dword_6767B4, Fix16(0xE333, 0), 0x6767B4);
 DEFINE_GLOBAL_INIT(Fix16, kMaxCamZ_676898, Fix16(14), 0x676898);
-DEFINE_GLOBAL_INIT(Fix16, kZero_6F6C50, Fix16(0), 0x6F6C50);
 
 DEFINE_GLOBAL_INIT(Fix16, dword_702E04, Fix16(0x20000, 0), 0x702E04);
 DEFINE_GLOBAL_INIT(Fix16, dword_702DE4, Fix16(0x4000, 0), 0x702DE4);
@@ -166,7 +164,7 @@ void Camera_0xBC::IncreaseElevation_4357F0()
 // 0x435810
 void Camera_0xBC::DecreaseElevation_435810()
 {
-    if (field_40_target_elevation > kZero_676818)
+    if (field_40_target_elevation > kFixZero)
     {
         field_40_target_elevation -= dword_676678;
     }
@@ -175,15 +173,15 @@ void Camera_0xBC::DecreaseElevation_435810()
 // 0x435830
 void Camera_0xBC::ReturnToDefaultZoom_435830()
 {
-    field_40_target_elevation = kZero_676818;
+    field_40_target_elevation = kFixZero;
 }
 
 // 0x435840
 void Camera_0xBC::ClampTargetZ_435840()
 {
-    if (field_10_pending_target_pos.field_8_z < kZero_676818)
+    if (field_10_pending_target_pos.field_8_z < kFixZero)
     {
-        field_10_pending_target_pos.field_8_z = kZero_676818;
+        field_10_pending_target_pos.field_8_z = kFixZero;
     }
 
     if (field_10_pending_target_pos.field_8_z > kMaxCamZ_676898)
@@ -270,7 +268,7 @@ Fix16 Camera_0xBC::ReturnOwnerVelocity_435A20()
     }
     else
     {
-        return kZero_676818;
+        return kFixZero;
     }
 }
 
@@ -348,7 +346,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
 s32 Camera_0xBC::IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z)
 {
     Fix16PointPOD pos = WorldToScreen_40CFC0(x, y, z);
-    if (pos.x >= kZero_676818 && pos.x < Fix16(640) && pos.y >= kZero_676818 && pos.y < Fix16(480))
+    if (pos.x >= kFixZero && pos.x < Fix16(640) && pos.y >= kFixZero && pos.y < Fix16(480))
     {
         return 1;
     }
@@ -365,7 +363,7 @@ void Camera_0xBC::UpdateBoundaries_435B90()
     Fix16 v = (dword_676838 + field_98_cur_pos.field_8_z) * (kOne_67681C / field_98_cur_pos.field_C_zoom) * dword_67671C;
 
     field_78_view_bounds.field_0_left = field_98_cur_pos.field_0_x - v;
-    if (field_78_view_bounds.field_0_left < kZero_676818)
+    if (field_78_view_bounds.field_0_left < kFixZero)
     {
         field_78_view_bounds.field_0_left = Fix16(0);
     }
@@ -375,7 +373,7 @@ void Camera_0xBC::UpdateBoundaries_435B90()
     }
 
     field_78_view_bounds.field_4_right = field_98_cur_pos.field_0_x + v;
-    if (field_78_view_bounds.field_4_right < kZero_676818)
+    if (field_78_view_bounds.field_4_right < kFixZero)
     {
         field_78_view_bounds.field_4_right = Fix16(0);
     }
@@ -387,7 +385,7 @@ void Camera_0xBC::UpdateBoundaries_435B90()
     v *= dword_6768E0;
 
     field_78_view_bounds.field_8_top = field_98_cur_pos.field_4_y - v;
-    if (field_78_view_bounds.field_8_top < kZero_676818)
+    if (field_78_view_bounds.field_8_top < kFixZero)
     {
         field_78_view_bounds.field_8_top = Fix16(0);
     }
@@ -397,7 +395,7 @@ void Camera_0xBC::UpdateBoundaries_435B90()
     }
 
     field_78_view_bounds.field_C_bottom = field_98_cur_pos.field_4_y + v;
-    if (field_78_view_bounds.field_C_bottom < kZero_676818)
+    if (field_78_view_bounds.field_C_bottom < kFixZero)
     {
         field_78_view_bounds.field_C_bottom = Fix16(0);
     }
@@ -461,10 +459,10 @@ void Camera_0xBC::ResetCameraSmoothing_435DD0()
     field_98_cur_pos.field_8_z = field_0_target_pos.field_8_z;
     field_98_cur_pos.field_C_zoom = field_0_target_pos.field_C_zoom;
 
-    field_AC_cam_velocity.field_0_x = kZero_676818;
-    field_AC_cam_velocity.field_4_y = kZero_676818;
-    field_AC_cam_velocity.field_8_z = kZero_676818;
-    field_AC_cam_velocity.field_C_zoom = kZero_676818;
+    field_AC_cam_velocity.field_0_x = kFixZero;
+    field_AC_cam_velocity.field_4_y = kFixZero;
+    field_AC_cam_velocity.field_8_z = kFixZero;
+    field_AC_cam_velocity.field_C_zoom = kFixZero;
 }
 
 // 0x435F90
@@ -530,7 +528,7 @@ void Camera_0xBC::Update_435FF0()
         default:
             break;
     }
-    if (field_30_shake_amount != kZero_676818)
+    if (field_30_shake_amount != kFixZero)
     {
         Camera_0xBC::ApplyShake_436140();
     }
@@ -556,9 +554,9 @@ void Camera_0xBC::ApplyShake_436140()
     field_98_cur_pos.field_0_x += field_30_shake_amount;
     field_98_cur_pos.field_4_y += field_30_shake_amount;
     field_98_cur_pos.field_8_z += field_30_shake_amount;
-    if (field_98_cur_pos.field_8_z < kZero_676818)
+    if (field_98_cur_pos.field_8_z < kFixZero)
     {
-        field_98_cur_pos.field_8_z = kZero_676818;
+        field_98_cur_pos.field_8_z = kFixZero;
     }
     field_30_shake_amount = -field_30_shake_amount;
     field_30_shake_amount = dword_6766F4 * field_30_shake_amount;
@@ -757,11 +755,11 @@ Camera_0xBC::Camera_0xBC()
     CommitPendingTarget_41E410();
     field_60_screen_scale.x = Fix16(-1);
     field_60_screen_scale.y = Fix16(-1);
-    field_AC_cam_velocity.field_0_x = kZero_676818;
-    field_AC_cam_velocity.field_4_y = kZero_676818;
-    field_AC_cam_velocity.field_8_z = kZero_676818;
+    field_AC_cam_velocity.field_0_x = kFixZero;
+    field_AC_cam_velocity.field_4_y = kFixZero;
+    field_AC_cam_velocity.field_8_z = kFixZero;
     field_3C_follow_mode = camera_follow_mode::none_0;
-    field_30_shake_amount = kZero_676818;
+    field_30_shake_amount = kFixZero;
     field_34_target_ped = nullptr;
     SetScreenSize_4361B0(640, 480);
     field_44_suspicion = 0;
@@ -784,9 +782,9 @@ void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fi
 {
     // One shared `Coord_2 += Velocity_1` at the end: VC6 copies it into the clamp paths
     Fix16 DeltaCoord = Coord_1 - Coord_2;
-    if (DeltaCoord > kZero_6F6C50)
+    if (DeltaCoord > kFixZero)
     {
-        if (Velocity_1 >= kZero_6F6C50)
+        if (Velocity_1 >= kFixZero)
         {
             if (Velocity_1 + Velocity_2 <= DeltaCoord)
             {
@@ -803,12 +801,12 @@ void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fi
         }
         else
         {
-            Velocity_1 = kZero_6F6C50;
+            Velocity_1 = kFixZero;
         }
     }
-    else if (DeltaCoord < kZero_6F6C50)
+    else if (DeltaCoord < kFixZero)
     {
-        if (Velocity_1 <= kZero_6F6C50)
+        if (Velocity_1 <= kFixZero)
         {
             if (Velocity_1 - Velocity_2 >= DeltaCoord)
             {
@@ -825,12 +823,12 @@ void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fi
         }
         else
         {
-            Velocity_1 = kZero_6F6C50;
+            Velocity_1 = kFixZero;
         }
     }
     else
     {
-        Velocity_1 = kZero_6F6C50;
+        Velocity_1 = kFixZero;
     }
     Coord_2 += Velocity_1;
 }
@@ -846,9 +844,9 @@ void SmoothApproachClamped_4F75D0(Fix16* target_coord,
                                   Fix16* maybe_decrement)
 {
     Fix16 DeltaCoord = *target_coord - *curr_coord;
-    if (DeltaCoord > kZero_6F6C50)
+    if (DeltaCoord > kFixZero)
     {
-        if (*coord_velocity >= kZero_6F6C50)
+        if (*coord_velocity >= kFixZero)
         {
             if (*coord_velocity + *velocity_1 <= DeltaCoord)
             {
@@ -865,14 +863,14 @@ void SmoothApproachClamped_4F75D0(Fix16* target_coord,
         }
         else
         {
-            *coord_velocity = kZero_6F6C50;
+            *coord_velocity = kFixZero;
         }
     }
     else
     {
-        if (DeltaCoord >= kZero_6F6C50 || *coord_velocity > kZero_6F6C50)
+        if (DeltaCoord >= kFixZero || *coord_velocity > kFixZero)
         {
-            *coord_velocity = kZero_6F6C50;
+            *coord_velocity = kFixZero;
         }
         else
         {

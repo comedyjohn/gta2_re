@@ -3,17 +3,15 @@
 
 DEFINE_GLOBAL(CarChaseTaskTable_500*, gCarChaseTaskTable_678E30, 0x678E30);
 
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_678D0C, Fix16(0), 0x678D0C);
-
 // 0x4747b0
 void CarChaseTask_40::ResetEntry_4747B0()
 {
     field_0_in_use = 0;
     field_10_ram_target = 0;
     field_8_task_type = 0;
-    field_14_target_x = kFpZero_678D0C;
-    field_18_target_y = kFpZero_678D0C;
-    field_1C_target_z = kFpZero_678D0C;
+    field_14_target_x = kFixZero;
+    field_18_target_y = kFixZero;
+    field_1C_target_z = kFixZero;
     field_20_can_snap_to_target = 0;
     field_21_unused = 0;
     field_22_following_route = 1;

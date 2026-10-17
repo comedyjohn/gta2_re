@@ -1,5 +1,5 @@
 // This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFpZero_6F610C
+#define FIX16_POINT_ZERO kFixZero
 
 #include "map_0x370.hpp"
 #include "Car_BC.hpp"
@@ -44,7 +44,6 @@ DEFINE_GLOBAL(s32, dword_6F620C, 0x6F620C);
 DEFINE_GLOBAL(s32, dword_6F5BA0, 0x6F5BA0);
 DEFINE_GLOBAL(s32, dword_6F6248, 0x6F6248);
 DEFINE_GLOBAL(s32, dword_6F5FAC, 0x6F5FAC);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6F610C, Fix16(0), 0x6F610C);
 DEFINE_GLOBAL_INIT(Fix16, kFpEight_6F6130, Fix16(0x20000, 0), 0x6F6130);
 DEFINE_GLOBAL_INIT(Fix16, kFpOneThirtySecond_6F601C, Fix16(0x200, 0), 0x6F601C);
 DEFINE_GLOBAL_INIT(Fix16, kFpOneSixtyFourth_6F60C0, Fix16(0x100, 0), 0x6F60C0);
@@ -140,16 +139,16 @@ inline bool has_top(gmp_block_info* pBlock)
 
 void Init_gmp_slopes_array()
 {
-    gGmpSlopes_6F5BA8[0] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[1] = gmp_map_slope(1, 2, 1, kFpZero_6F610C, kFpHalf_6F5F18);
+    gGmpSlopes_6F5BA8[0] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[1] = gmp_map_slope(1, 2, 1, kFixZero, kFpHalf_6F5F18);
     gGmpSlopes_6F5BA8[2] = gmp_map_slope(1, 2, 0, kFpHalf_6F5F18, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[3] = gmp_map_slope(2, 2, 1, kFpZero_6F610C, kFpHalf_6F5F18);
+    gGmpSlopes_6F5BA8[3] = gmp_map_slope(2, 2, 1, kFixZero, kFpHalf_6F5F18);
     gGmpSlopes_6F5BA8[4] = gmp_map_slope(2, 2, 0, kFpHalf_6F5F18, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[5] = gmp_map_slope(3, 2, 1, kFpZero_6F610C, kFpHalf_6F5F18);
+    gGmpSlopes_6F5BA8[5] = gmp_map_slope(3, 2, 1, kFixZero, kFpHalf_6F5F18);
     gGmpSlopes_6F5BA8[6] = gmp_map_slope(3, 2, 0, kFpHalf_6F5F18, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[7] = gmp_map_slope(4, 2, 1, kFpZero_6F610C, kFpHalf_6F5F18);
+    gGmpSlopes_6F5BA8[7] = gmp_map_slope(4, 2, 1, kFixZero, kFpHalf_6F5F18);
     gGmpSlopes_6F5BA8[8] = gmp_map_slope(4, 2, 0, kFpHalf_6F5F18, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[9] = gmp_map_slope(1, 8, 7, kFpZero_6F610C, kFpOneEighth_6F6050);
+    gGmpSlopes_6F5BA8[9] = gmp_map_slope(1, 8, 7, kFixZero, kFpOneEighth_6F6050);
     gGmpSlopes_6F5BA8[10] = gmp_map_slope(1, 8, 6, kFpOneEighth_6F6050, kFpQuarter_6F6180);
     gGmpSlopes_6F5BA8[11] = gmp_map_slope(1, 8, 5, kFpQuarter_6F6180, kFpThreeEighths_6F60A0);
     gGmpSlopes_6F5BA8[12] = gmp_map_slope(1, 8, 4, kFpThreeEighths_6F60A0, kFpHalf_6F5F18);
@@ -157,7 +156,7 @@ void Init_gmp_slopes_array()
     gGmpSlopes_6F5BA8[14] = gmp_map_slope(1, 8, 2, kFpFiveEighths_6F60B8, kFpThreeQuarters_6F61D8);
     gGmpSlopes_6F5BA8[15] = gmp_map_slope(1, 8, 1, kFpThreeQuarters_6F61D8, kFpSevenEighths_6F6218);
     gGmpSlopes_6F5BA8[16] = gmp_map_slope(1, 8, 0, kFpSevenEighths_6F6218, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[17] = gmp_map_slope(2, 8, 7, kFpZero_6F610C, kFpOneEighth_6F6050);
+    gGmpSlopes_6F5BA8[17] = gmp_map_slope(2, 8, 7, kFixZero, kFpOneEighth_6F6050);
     gGmpSlopes_6F5BA8[18] = gmp_map_slope(2, 8, 6, kFpOneEighth_6F6050, kFpQuarter_6F6180);
     gGmpSlopes_6F5BA8[19] = gmp_map_slope(2, 8, 5, kFpQuarter_6F6180, kFpThreeEighths_6F60A0);
     gGmpSlopes_6F5BA8[20] = gmp_map_slope(2, 8, 4, kFpThreeEighths_6F60A0, kFpHalf_6F5F18);
@@ -165,7 +164,7 @@ void Init_gmp_slopes_array()
     gGmpSlopes_6F5BA8[22] = gmp_map_slope(2, 8, 2, kFpFiveEighths_6F60B8, kFpThreeQuarters_6F61D8);
     gGmpSlopes_6F5BA8[23] = gmp_map_slope(2, 8, 1, kFpThreeQuarters_6F61D8, kFpSevenEighths_6F6218);
     gGmpSlopes_6F5BA8[24] = gmp_map_slope(2, 8, 0, kFpSevenEighths_6F6218, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[25] = gmp_map_slope(3, 8, 7, kFpZero_6F610C, kFpOneEighth_6F6050);
+    gGmpSlopes_6F5BA8[25] = gmp_map_slope(3, 8, 7, kFixZero, kFpOneEighth_6F6050);
     gGmpSlopes_6F5BA8[26] = gmp_map_slope(3, 8, 6, kFpOneEighth_6F6050, kFpQuarter_6F6180);
     gGmpSlopes_6F5BA8[27] = gmp_map_slope(3, 8, 5, kFpQuarter_6F6180, kFpThreeEighths_6F60A0);
     gGmpSlopes_6F5BA8[28] = gmp_map_slope(3, 8, 4, kFpThreeEighths_6F60A0, kFpHalf_6F5F18);
@@ -173,7 +172,7 @@ void Init_gmp_slopes_array()
     gGmpSlopes_6F5BA8[30] = gmp_map_slope(3, 8, 2, kFpFiveEighths_6F60B8, kFpThreeQuarters_6F61D8);
     gGmpSlopes_6F5BA8[31] = gmp_map_slope(3, 8, 1, kFpThreeQuarters_6F61D8, kFpSevenEighths_6F6218);
     gGmpSlopes_6F5BA8[32] = gmp_map_slope(3, 8, 0, kFpSevenEighths_6F6218, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[33] = gmp_map_slope(4, 8, 7, kFpZero_6F610C, kFpOneEighth_6F6050);
+    gGmpSlopes_6F5BA8[33] = gmp_map_slope(4, 8, 7, kFixZero, kFpOneEighth_6F6050);
     gGmpSlopes_6F5BA8[34] = gmp_map_slope(4, 8, 6, kFpOneEighth_6F6050, kFpQuarter_6F6180);
     gGmpSlopes_6F5BA8[35] = gmp_map_slope(4, 8, 5, kFpQuarter_6F6180, kFpThreeEighths_6F60A0);
     gGmpSlopes_6F5BA8[36] = gmp_map_slope(4, 8, 4, kFpThreeEighths_6F60A0, kFpHalf_6F5F18);
@@ -181,29 +180,29 @@ void Init_gmp_slopes_array()
     gGmpSlopes_6F5BA8[38] = gmp_map_slope(4, 8, 2, kFpFiveEighths_6F60B8, kFpThreeQuarters_6F61D8);
     gGmpSlopes_6F5BA8[39] = gmp_map_slope(4, 8, 1, kFpThreeQuarters_6F61D8, kFpSevenEighths_6F6218);
     gGmpSlopes_6F5BA8[40] = gmp_map_slope(4, 8, 0, kFpSevenEighths_6F6218, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[41] = gmp_map_slope(1, 1, 0, kFpZero_6F610C, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[42] = gmp_map_slope(2, 1, 0, kFpZero_6F610C, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[43] = gmp_map_slope(3, 1, 0, kFpZero_6F610C, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[44] = gmp_map_slope(4, 1, 0, kFpZero_6F610C, kFpOne_6F6110);
-    gGmpSlopes_6F5BA8[45] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[46] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[47] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[48] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[49] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[50] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[51] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[52] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[53] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[54] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[55] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[56] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[57] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[58] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[59] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[60] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[61] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[62] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
-    gGmpSlopes_6F5BA8[63] = gmp_map_slope(0, 0, 0, kFpZero_6F610C, kFpZero_6F610C);
+    gGmpSlopes_6F5BA8[41] = gmp_map_slope(1, 1, 0, kFixZero, kFpOne_6F6110);
+    gGmpSlopes_6F5BA8[42] = gmp_map_slope(2, 1, 0, kFixZero, kFpOne_6F6110);
+    gGmpSlopes_6F5BA8[43] = gmp_map_slope(3, 1, 0, kFixZero, kFpOne_6F6110);
+    gGmpSlopes_6F5BA8[44] = gmp_map_slope(4, 1, 0, kFixZero, kFpOne_6F6110);
+    gGmpSlopes_6F5BA8[45] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[46] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[47] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[48] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[49] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[50] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[51] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[52] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[53] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[54] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[55] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[56] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[57] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[58] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[59] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[60] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[61] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[62] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
+    gGmpSlopes_6F5BA8[63] = gmp_map_slope(0, 0, 0, kFixZero, kFixZero);
     printf("Map slopes info array initialized!\n");
 }
 
@@ -913,7 +912,7 @@ s32 Map_0x370::GetTopEdgeSpec_4E0000(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
 // 0x4E00A0
 s32 Map_0x370::GetBlockSpec_4E00A0(Fix16 x, Fix16 y, Fix16 z)
 {
-    if (z >= kFpZero_6F610C)
+    if (z >= kFixZero)
     {
         if (z < kFpEight_6F6130)
         {
@@ -2323,7 +2322,7 @@ char_type Map_0x370::CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y,
 char_type Map_0x370::sub_4E4630(Fix16 zpos_f16)
 {
     s32 zpos = zpos_f16.ToInt();
-    bool bUnk = !!(zpos_f16.GetFracValue() != kFpZero_6F610C);
+    bool bUnk = !!(zpos_f16.GetFracValue() != kFixZero);
     char_type bFound = 0;
 
     for (s32 ypos = gSpriteGrid_top_6F6108; ypos <= gSpriteGrid_bottom_6F5F38; ypos++)
@@ -2647,7 +2646,7 @@ Fix16 Map_0x370::FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_
     u8 slope_byte;
     Fix16 new_z;
 
-    if (z_pos.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
+    if (z_pos.GetFracValue() == kFixZero || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
         RoundedZIsAboveSlope(x_pos, y_pos, z_pos, new_z))
     {
         s32 below_z = z_pos.ToInt() - 1;
@@ -2719,15 +2718,14 @@ Fix16 Map_0x370::GetGroundZBelowCoord_4E4F40(Fix16 x, Fix16 y, Fix16 z)
 {
     Fix16 new_z;
 
-    if (z.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x.ToInt(), y.ToInt(), z.ToInt()) ||
-        RoundedZIsAboveSlope(x, y, z, new_z))
+    if (z.GetFracValue() == kFixZero || !IsGradientSlopeAt_466CF0(x.ToInt(), y.ToInt(), z.ToInt()) || RoundedZIsAboveSlope(x, y, z, new_z))
     {
         s32 int_z = z.ToInt() - 1;
         gBlockInfo0_6F5EB0 = Map_0x370::FindNonAirBlockAtOrBelowZ_4E4CB0(x.ToInt(), y.ToInt(), int_z);
 
         if (!gBlockInfo0_6F5EB0)
         {
-            return kFpZero_6F610C;
+            return kFixZero;
         }
         if (is_gradient_slope(gBlockInfo0_6F5EB0->field_B_slope_type) && !is_air_type(gBlockInfo0_6F5EB0->field_B_slope_type))
         {
@@ -2747,7 +2745,7 @@ Fix16 Map_0x370::sub_4E5050(Fix16 x, Fix16 y, Fix16 z, bool& bFound)
 {
     Fix16 new_z;
     bFound = false;
-    if (z.GetFracValue() != kFpZero_6F610C)
+    if (z.GetFracValue() != kFixZero)
     {
         gmp_block_info* block_4DFE10 = Map_0x370::get_block_4DFE10(x.ToInt(), y.ToInt(), z.ToInt());
         if (block_4DFE10)
@@ -2785,7 +2783,7 @@ Fix16 Map_0x370::sub_4E5050(Fix16 x, Fix16 y, Fix16 z, bool& bFound)
 // 0x4E5170
 bool Map_0x370::IsZOnGround_4E5170(Fix16 x, Fix16 y, Fix16 z)
 {
-    if (z.GetFracValue() != kFpZero_6F610C)
+    if (z.GetFracValue() != kFixZero)
     {
         gBlockInfo0_6F5EB0 = Map_0x370::get_block_4DFE10(x.ToInt(), y.ToInt(), z.ToInt());
         if (gBlockInfo0_6F5EB0)
@@ -2996,7 +2994,7 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
     Fix16 value_2;
     Fix16 value_3;
 
-    if (distance != kFpZero_6F610C)
+    if (distance != kFixZero)
     {
         value_1 = distance / height;
         value_2 = distance / value_1;
@@ -3004,8 +3002,8 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
     }
     else
     {
-        value_1 = kFpZero_6F610C;
-        value_2 = kFpZero_6F610C;
+        value_1 = kFixZero;
+        value_2 = kFixZero;
     }
 
     if (value_1 < kFpOne_6F6110)
@@ -3025,7 +3023,7 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
         Fix16 ground_z;
         ground_z =
             gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(pObjSprt->field_14_xy.x, pObjSprt->field_14_xy.y, pObjSprt->field_1C_zpos);
-        if (value_3 == kFpZero_6F610C)
+        if (value_3 == kFixZero)
         {
             pObjSprt->set_xyz_lazy_420600(pObjSprt->field_14_xy.x + vec_x,
                                           pObjSprt->field_14_xy.y + vec_y,
@@ -3038,7 +3036,7 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
         }
         else
         {
-            if (value_3 > kFpZero_6F610C)
+            if (value_3 > kFixZero)
             {
                 // Going up
                 pObjSprt->set_xyz_lazy_420600(pObjSprt->field_14_xy.x + vec_x,
@@ -3186,7 +3184,7 @@ u8 Map_0x370::UpdateZFromSlopeAtCoord_4E5BF0(Fix16 x_pos, Fix16 y_pos, Fix16& z_
 
             Fix16 relative_z_pos = dword_6F5EC8->field_4_zpos_lower + (grad_pos * grad_scale);
 
-            if (relative_z_pos == kFpZero_6F610C)
+            if (relative_z_pos == kFixZero)
             {
                 relative_z_pos = kFpOneSixtyFourth_6F60C0;
             }
@@ -3222,7 +3220,7 @@ void Map_0x370::sub_4E5D10(Fix16* pX, Fix16* pY, Fix16 dist, s32 direction)
 // 0x4E5D70
 Fix16 Map_0x370::sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle)
 {
-    Fix16 result = kFpZero_6F610C;
+    Fix16 result = kFixZero;
     switch (Ang16::GetAngleFace(angle))
     {
         case 1:
@@ -3246,7 +3244,7 @@ Fix16 Map_0x370::sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle)
 // 0x4E5E00
 Fix16 Map_0x370::sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle)
 {
-    Fix16 result = kFpZero_6F610C;
+    Fix16 result = kFixZero;
     switch (Ang16::GetAngleFace(angle))
     {
         case 1:
@@ -3485,7 +3483,7 @@ Fix16 Map_0x370::GetRailwayZBelowCoord_4E6400(Fix16 x_pos, Fix16 y_pos, Fix16 z_
     u8 slope_byte;
     Fix16 new_z;
 
-    if (z_pos.GetFracValue() == kFpZero_6F610C || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
+    if (z_pos.GetFracValue() == kFixZero || !IsGradientSlopeAt_466CF0(x_pos.ToInt(), y_pos.ToInt(), z_pos.ToInt()) ||
         RoundedZIsAboveSlope(x_pos, y_pos, z_pos, new_z))
     {
         s32 below_z = z_pos.ToInt() - 1;
@@ -3613,7 +3611,7 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
     if (side != kFpHalf_6F5F18)
     {
         to_centre = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction)) - kFpHalf_6F5F18;
-        if (to_centre > kFpZero_6F610C)
+        if (to_centre > kFixZero)
         {
             if (dist >= to_centre)
             {
@@ -3655,7 +3653,7 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
     {
         Fix16 to_edge;
         to_edge = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-        if (to_edge > kFpZero_6F610C)
+        if (to_edge > kFixZero)
         {
             // Before the call, not after it as the original schedules it: after it, VC6 keeps
             // the constant 1 in ebx for the pushes instead.
@@ -3689,7 +3687,7 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
         }
     }
 
-    while (dist != kFpZero_6F610C)
+    while (dist != kFixZero)
     {
         if (HasGreenArrowForPathDirection_4E5E90(pBlock, direction, 1) && !bTurned)
         {
@@ -3831,7 +3829,7 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
         pPrev = pBlock;
         Fix16 to_centre;
         to_centre = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-        if (to_centre > kFpZero_6F610C)
+        if (to_centre > kFixZero)
         {
             if (dist >= to_centre)
             {
@@ -3841,7 +3839,7 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
             else
             {
                 sub_4E5D10(&x, &y, dist, direction);
-                dist = kFpZero_6F610C;
+                dist = kFixZero;
             }
         }
         if (!HasGreenArrowForPathDirection_4E5E90(GetRoadBlockAt_4E6660(x, y, z), direction, 0))
@@ -3859,7 +3857,7 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
     {
         Fix16 to_edge;
         to_edge = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-        if (to_edge > kFpZero_6F610C)
+        if (to_edge > kFixZero)
         {
             sub_4E65A0(x, y, &z, 0, 1);
             pPrev = pBlock;
@@ -3883,7 +3881,7 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
         }
     }
 
-    while (dist != kFpZero_6F610C)
+    while (dist != kFixZero)
     {
         if (HasGreenArrowForPathDirection_4E5E90(pBlock, direction, 0) && !bTurned)
         {

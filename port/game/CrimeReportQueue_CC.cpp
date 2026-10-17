@@ -9,8 +9,6 @@
 
 DEFINE_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8, 0x67A4B8);
 
-DEFINE_GLOBAL_INIT(Fix16, kFP16Zero_67A370, Fix16(0), 0x67A370);
-
 EXTERN_GLOBAL(u8, gCharB4_HitByMine_6FDB59);
 
 // 0x484cb0
@@ -18,9 +16,9 @@ CrimeReport_14::CrimeReport_14()
 {
     field_0_crime_type = crime_stats_type::none_0;
     field_4_ped_id = 0;
-    field_8_pos.x = kFP16Zero_67A370;
-    field_8_pos.y = kFP16Zero_67A370;
-    field_8_pos.z = kFP16Zero_67A370;
+    field_8_pos.x = kFixZero;
+    field_8_pos.y = kFixZero;
+    field_8_pos.z = kFixZero;
 }
 
 // 0x484cf0
@@ -30,9 +28,9 @@ void CrimeReport_14::SetReport(s32 crime_type, s32 ped_id)
     field_4_ped_id = ped_id;
     if (!ped_id)
     {
-        field_8_pos.x = kFP16Zero_67A370;
-        field_8_pos.y = kFP16Zero_67A370;
-        field_8_pos.z = kFP16Zero_67A370;
+        field_8_pos.x = kFixZero;
+        field_8_pos.y = kFixZero;
+        field_8_pos.z = kFixZero;
     }
     else
     {

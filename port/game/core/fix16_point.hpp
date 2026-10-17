@@ -5,7 +5,6 @@
 #include "core/function.hpp"
 
 EXTERN_GLOBAL(Fix16, gFix16_6777CC);
-EXTERN_GLOBAL(Fix16, kFP16Zero_6FE20C);
 EXTERN_GLOBAL(Fix16, kFP16One256th_6FE07C);
 EXTERN_GLOBAL(Fix16, kFpZero_6F77C0);
 
@@ -15,13 +14,7 @@ EXTERN_GLOBAL(Fix16, kFpZero_6F77C0);
 #ifndef FIX16_POINT_ZERO
     #define FIX16_POINT_ZERO gFix16_6777CC
 #endif
-EXTERN_GLOBAL(Fix16, kFpZero_6F610C);
-EXTERN_GLOBAL(Fix16, kF16Zero_677B90);
 EXTERN_GLOBAL(Fix16, dword_706EB8);
-EXTERN_GLOBAL(Fix16, kFP16Zero_6FD9E4);
-EXTERN_GLOBAL(Fix16, kZero_676818);
-EXTERN_GLOBAL(Fix16, kFpZero_7064C0);
-EXTERN_GLOBAL(Fix16, kZero_679E70);
 
 class Fix16Point;
 
@@ -89,12 +82,12 @@ class Fix16Point
 
     bool IsNull() const
     {
-        return x == kFP16Zero_6FE20C && y == kFP16Zero_6FE20C;
+        return x == kFixZero && y == kFixZero;
     }
 
     bool HasZeroComponent() const
     {
-        return x == kFP16Zero_6FE20C || y == kFP16Zero_6FE20C;
+        return x == kFixZero || y == kFixZero;
     }
 
     void ApplyDeadZone()
@@ -102,8 +95,8 @@ class Fix16Point
         Fix16 total = (Fix16::Abs(x) + Fix16::Abs(y));
         if (total < kFP16One256th_6FE07C)
         {
-            x = kFP16Zero_6FE20C;
-            y = kFP16Zero_6FE20C;
+            x = kFixZero;
+            y = kFixZero;
         }
     }
 
@@ -247,7 +240,7 @@ class Fix16Point
 
     void ClampTowardsZero(const Fix16Point& limit)
     {
-        if (x >= kFP16Zero_6FE20C)
+        if (x >= kFixZero)
         {
             if (x > limit.x)
             {
@@ -259,7 +252,7 @@ class Fix16Point
             x = limit.x;
         }
 
-        if (y >= kFP16Zero_6FE20C)
+        if (y >= kFixZero)
         {
             if (y > limit.y)
             {

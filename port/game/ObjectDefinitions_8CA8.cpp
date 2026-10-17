@@ -11,7 +11,6 @@ DEFINE_GLOBAL_INIT(Fix16, kFpQuarter_6F8FAC, Fix16(4096, 0), 0x6f8fac);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint1_6F8FD8, Fix16(1638, 0), 0x6F8FD8);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint2_6FC578, Fix16(3276, 0), 0x6fc578);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6FC584, Fix16(8192, 0), 0x6fc584);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6FCE08, Fix16(0, 0), 0x6fce08);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FCEB0, Fix16(256, 0), 0x6fceb0);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint02_6FCDE0, Fix16(327, 0), 0x6fcde0);
 DEFINE_GLOBAL_INIT(Fix16, kFpPoint01_6FCDD8, Fix16(163, 0), 0x6FCDD8);
@@ -5112,8 +5111,7 @@ void ObjectDefinitions_8CA8::CreateCodeObjectDefinitions_533B30()
                 AllocDefinitionWithSprite_5332D0(pTemplate->field_0_definition_idx, 4, sprite_base, pTemplate->field_4_num_sprites);
             sprite_base += pTemplate->field_4_num_sprites;
             pDef->field_28_sprite_type = pTemplate->field_38_sprite_type;
-            if (pTemplate->field_48_width == kFpZero_6FCE08 && pTemplate->field_4C_height == kFpZero_6FCE08 &&
-                pTemplate->field_50_depth == kFpZero_6FCE08)
+            if (pTemplate->field_48_width == kFixZero && pTemplate->field_4C_height == kFixZero && pTemplate->field_50_depth == kFixZero)
             {
                 pDef->SetDimensionsFromSprite_533090();
             }
@@ -5341,8 +5339,8 @@ void ObjectDefinitions_8CA8::CloneRemappedDefinitions_533C90()
     tmp->field_34_behavior_type = object_behavior_type::animated_2;
     tmp->field_44 = 2;
 
-    tmp->field_14_friction = kFpZero_6FCE08;
-    tmp->field_10_speed = kFpZero_6FCE08;
+    tmp->field_14_friction = kFixZero;
+    tmp->field_10_speed = kFixZero;
     tmp->field_4C = 0;
     tmp->field_50 = 0;
     tmp->field_64_next_frame_max = '\b';

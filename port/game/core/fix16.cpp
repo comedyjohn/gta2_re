@@ -8,7 +8,7 @@ DEFINE_GLOBAL_ARRAY(Fix16, gCosTable, 1440, 0x669260);
 
 // TODO: hmm, shouldn't this be 360 entries ??
 DEFINE_GLOBAL_ARRAY(Fix16, gTanTable, 1440, 0x6663C8);
-DEFINE_GLOBAL_INIT(Fix16, kFPZero_6691B0, Fix16(0), 0x6691B0);
+DEFINE_GLOBAL_INIT(Fix16, kFixZero, Fix16(0), 0x6691B0);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero, Ang16(0), 0x66A920);
 DEFINE_GLOBAL_INIT(Ang16, kAng180, Ang16(720), 0x669156);
 DEFINE_GLOBAL_INIT(Ang16, kAng90, Ang16(360), 0x667A7C);
@@ -104,9 +104,9 @@ Fix16 Fix16::operator/(const Fix16& in)
 Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
 {
     Ang16 table_angle;
-    if (y == kFPZero_6691B0)
+    if (y == kFixZero)
     {
-        if (x >= kFPZero_6691B0)
+        if (x >= kFixZero)
         {
             return kAngZero;
         }
@@ -115,9 +115,9 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
             return kAng180;
         }
     }
-    else if (x == kFPZero_6691B0)
+    else if (x == kFixZero)
     {
-        if (y > kFPZero_6691B0)
+        if (y > kFixZero)
         {
             return kAng90;
         }
@@ -130,9 +130,9 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
     {
         table_angle = ArcTanLookup(Fix16::Abs(x / y));
 
-        if (x > kFPZero_6691B0)
+        if (x > kFixZero)
         {
-            if (y > kFPZero_6691B0)
+            if (y > kFixZero)
             {
                 return kAng90 - table_angle;
             }
@@ -150,7 +150,7 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
         }
         else
         {
-            if (y > kFPZero_6691B0)
+            if (y > kFixZero)
             {
                 return kAng90 + table_angle;
             }
@@ -175,7 +175,6 @@ bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEn
     }
 }
 
-EXTERN_GLOBAL(Fix16, kFPZero_6691B0);
 EXTERN_GLOBAL(Fix16, kAngFix16FullCircle_66A8E4);
 EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle_6691EC);
 
@@ -194,14 +193,14 @@ Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
     }
 
     Fix16 diff = *pTarget - cur;
-    if (diff > kFPZero_6691B0)
+    if (diff > kFixZero)
     {
         if (diff > *pSpeed)
         {
             diff = *pSpeed;
         }
     }
-    else if (diff < kFPZero_6691B0)
+    else if (diff < kFixZero)
     {
         if (diff < -*pSpeed)
         {
@@ -210,7 +209,7 @@ Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
     }
 
     Fix16 result = diff + cur;
-    for (; result < kFPZero_6691B0; result += kAngFix16FullCircle_66A8E4)
+    for (; result < kFixZero; result += kAngFix16FullCircle_66A8E4)
     {
         ;
     }

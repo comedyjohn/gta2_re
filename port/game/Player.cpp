@@ -42,9 +42,7 @@ EXTERN_GLOBAL(bool, gCheatUnlimitedFlameThrower_67D6CC);
 EXTERN_GLOBAL(bool, gCheatInvisibility_67D539);
 EXTERN_GLOBAL(bool, gCheatUnlimitedDoubleDamage_67D57C);
 
-DEFINE_GLOBAL_INIT(Fix16, kZero_6FE610, Fix16(0), 0x6FE610);
 DEFINE_GLOBAL_INIT(Fix16, kTwo_6FE618, Fix16(2), 0x6FE618);
-DEFINE_GLOBAL_INIT(Fix16, kZero_6FE41C, kZero_6FE610, 0x6FE41C);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_6FE754, Ang16(0), 0x6FE754);
 DEFINE_GLOBAL_INIT(Ang16, kJumpTurnAccel_6FE74C, Ang16(4), 0x6FE74C);
 DEFINE_GLOBAL_INIT(Ang16, word_6FE750, Ang16(12), 0x6FE750);
@@ -862,7 +860,7 @@ void Player::InitPlayerPed_565490(Ped* pPed)
     field_2C4_player_ped = pPed;
     field_8_turn_speed = kAngZero_6FE754;
     field_A_turn_accel = kJumpTurnAccel_6FE74C + (word_6FE750 + kJumpTurnAccel_6FE74C);
-    field_C_move_direction = kZero_6FE610;
+    field_C_move_direction = kFixZero;
     field_10_unused = 0;
     field_680_traffic_spawn_counter = 0;
     field_682_traffic_spawn_threshold = 1000;
@@ -1420,7 +1418,7 @@ void Player::HandleControls_5668D0(Ped* pPed)
                 {
                     pPed->SetObjective(Objectives::kNoObj);
                     pPed->SetObjective2_463830(Objectives::kNoObj);
-                    pPed->field_168_game_object->field_38_velocity = kZero_6FE41C;
+                    pPed->field_168_game_object->field_38_velocity = kFixZero;
                 }
             }
             else
@@ -1598,7 +1596,7 @@ void Player::DoPedControlInputs_566C80(Ped* pPed)
     }
     else
     {
-        field_C_move_direction = kZero_6FE610;
+        field_C_move_direction = kFixZero;
     }
 
     // --- Jump / handbrake ---
@@ -2668,7 +2666,7 @@ void Player::DisableInputs_569F40()
                 if (pCar->IsTrainModel_403BA0())
                 {
                     this->field_8_turn_speed = kAngZero_6FE754;
-                    this->field_C_move_direction = kZero_6FE610;
+                    this->field_C_move_direction = kFixZero;
                 }
                 else if (pCar->field_58_physics)
                 {
@@ -2679,7 +2677,7 @@ void Player::DisableInputs_569F40()
     }
 
     this->field_8_turn_speed = kAngZero_6FE754;
-    this->field_C_move_direction = kZero_6FE610;
+    this->field_C_move_direction = kFixZero;
 }
 
 // 0x569FF0
@@ -2724,8 +2722,8 @@ void Player::RestoreCarsFromSave_56A0F0()
 {
     for (u8 i = 0; i < 3; i++)
     {
-        if (gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_0_x[i].field_0 > kZero_6FE610 &&
-            gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_C_y[i].field_0 > kZero_6FE610)
+        if (gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_0_x[i].field_0 > kFixZero &&
+            gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_C_y[i].field_0 > kFixZero)
         {
             Car_BC* pNewCar =
                 gCarManager_6C_677930->SpawnCar_426E10(gGameSave_6F78C8.field_E4_car_and_script_data.field_0.field_0_x[i].field_0,
@@ -2931,7 +2929,7 @@ Player::Player(u8 player_idx)
     Player::ClearInputs_56A6D0();
     field_8_turn_speed = kAngZero_6FE754;
     field_A_turn_accel = kAngZero_6FE754;
-    field_C_move_direction = kZero_6FE610;
+    field_C_move_direction = kFixZero;
     field_10_unused = 0;
     field_788_curr_weapon_idx = 0;
     field_68_camera_mode = 1;

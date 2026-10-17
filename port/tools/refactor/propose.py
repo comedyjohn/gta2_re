@@ -1,40 +1,42 @@
 #!/usr/bin/env python3
 """Mechanical new names for rename.py (port/refactor/2-names.md 2.3, task R2.4).
 
-    python3 port/tools/refactor/propose.py SUBSYSTEM KIND [-o renames.csv]
+    python3 port/tools/refactor/propose.py SUBSYSTEM KIND [-o renames.csv] [--symbols build_port/symbols.json]
     python3 port/tools/refactor/propose.py --selftest
 
 SUBSYSTEM is one of subsystems.py (or `all`); KIND is one of
-    types       strip the size suffix (`Garage_48` -> `Garage`), PascalCase
-    functions   functions and methods: strip the address, PascalCase (`get_input_bits_4CEAC0` -> `GetInputBits`)
-    members     strip `field_<hex>_`, drop the Hungarian prefix, snake_case (`field_4_pPrev` -> `prev`)
-    enumerators strip `_<digits>`, add `k`, PascalCase (`Running_1` -> `kRunning`)
-    constants   `k` globals: strip the address (`kAng45_6F677C` -> `kAng45`)
-    globals     `g` globals: strip address and size (`gGame_0x40_67E008` -> `gGame`); `b` debug flags -> `gDebug...`
+    types        classes, structs, unions, enums, aliases and the namespaces that stand in for enums
+    functions    functions and methods (not constructors, destructors or operators)
+    members      data members (and static members)
+    enumerators  enumerators (`kPascalCase`)
+    globals      global variables: `kPascalCase` constants, `g` + `PascalCase` the others
+    params       function parameters
+    locals       local variables
 
-It reads address_map.csv, so a symbol already renamed (a `new_name`) is skipped, and the qualified old name
-of a member is written with its owner's current name (types are renamed first). Output columns:
-`old,new,todo`. A row the rules can't decide has an empty `new` and a reason in `todo`: a collision in its
-scope, an empty result, a name made only of a placeholder (`sub_4C9ED0`, an unnamed `field_2C`), a C++
-keyword. rename.py refuses a CSV with an empty `new`; fill the rows in by hand.
+It reads symbols.json (symbols.py), proposes a name for every symbol of the subsystem that does not follow
+port/STYLE.md yet, and writes `old,new,todo,name`: `old` is the qualified name as the code spells it now (or
+`usr:...` for params and locals), `new` is empty with a reason in `todo` when the rules can't decide
+(placeholders such as `sub_4C9ED0`, raw data globals, an unnamed `field_2C`, keywords, collisions). rename.py
+refuses a CSV with an empty `new`; fill those rows in by hand (name_step.py's overrides file).
 
-Members of a class or struct that declares member functions get a trailing underscore (`left_`): the
-parameters of its constructors and setters are called `left` too, and -Wshadow is an error. Members of a
-plain data struct (no member functions) do not (`rng_index`). STYLE.md has the rule.
+Members of a class or struct that declares member functions get a trailing underscore (`left_`): its
+constructors' and setters' parameters are called `left` too, and -Wshadow is an error. Members of a plain
+data struct do not. See STYLE.md.
 """
 import argparse
 import collections
 import csv
+import json
 import os
 import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.realpath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, HERE)
 from subsystems import SUBSYSTEMS  # noqa: E402
 
-MAP_PATH = os.path.join(HERE, "address_map.csv")
-SYMBOLS_PATH = os.path.join(HERE, "symbol_names.csv")
+SYMBOLS = os.path.join(ROOT, "build_port", "symbols.json")
 KEYWORDS = set(
     """alignas alignof and and_eq asm auto bitand bitor bool break case catch char char8_t char16_t char32_t class
     compl concept const consteval constexpr constinit const_cast continue co_await co_return co_yield decltype default
@@ -42,12 +44,22 @@ KEYWORDS = set(
     mutable namespace new noexcept not not_eq nullptr operator or or_eq private protected public register
     reinterpret_cast requires return short signed sizeof static static_assert static_cast struct switch template this
     thread_local throw true try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor
-    xor_eq""".split()
+    xor_eq NULL EOF""".split()
 )
 ADDR_SUFFIX = re.compile(r"_(?:[0-9A-Fa-f]{6})(?=_|$)")
 SIZE_SUFFIX = re.compile(r"_(?:0x[0-9A-Fa-f]+|[0-9A-F]{1,5})$")
 INLINE_TAG = re.compile(r"_(?:inline|ool|OOL|no_budget\d*)(?=_|$)")
-HUNGARIAN = re.compile(r"^(?:pp|p|b|n|u|dw|w|i|f|sz|e)(?=[A-Z0-9])")
+HUNGARIAN = re.compile(r"^(?:pp|p|b|n|u|dw|w|i|f|sz|e|m)(?=[A-Z0-9])")
+
+RE_TYPE = re.compile(r"^[A-Z][A-Za-z0-9]*$")
+RE_SNAKE = re.compile(r"^[a-z][a-z0-9]*(_[a-z0-9]+)*$")
+RE_SNAKE_US = re.compile(r"^[a-z][a-z0-9]*(_[a-z0-9]+)*_$")
+RE_K = re.compile(r"^k[A-Z][A-Za-z0-9]*$")
+RE_G = re.compile(r"^g[A-Z][A-Za-z0-9]*$")
+# the project's fixed-width and char aliases (types.hpp) keep their names until phase 3
+KEEP_ALIASES = {"s8", "s16", "s32", "s64", "u8", "u16", "u32", "u64", "f32", "f64", "char_type", "wchar_type", "uptr", "sptr",
+                "size_t", "ptrdiff_t", "uintptr_t", "intptr_t", "wchar_t"}
+SKIP_FUNCTIONS = {"main", "WinMain", "DllMain"}
 
 
 def pascal(name):
@@ -64,51 +76,40 @@ def snake(name):
     return re.sub(r"_+", "_", s).strip("_").lower()
 
 
-def strip_function(name):
+def strip_address(name):
     n = ADDR_SUFFIX.sub("", name)
-    n = INLINE_TAG.sub("", n)
-    return n
+    return INLINE_TAG.sub("", n)
 
 
 def propose_function(name):
-    if name.startswith(("sub_", "operator")) or "~" in name:
-        return None, "placeholder or operator"
-    n = strip_function(name)
+    if name.startswith("sub_"):
+        return None, "placeholder"
+    if name in SKIP_FUNCTIONS:
+        return name, ""
+    n = strip_address(name)
     if not n or n.isdigit():
         return None, "empty after stripping the address"
     return pascal(n), ""
 
 
-def propose_member(name):
+def propose_member(name, with_underscore):
     m = re.match(r"^field_[0-9A-Fa-f]+(?:_(.*))?$", name)
-    if not m:
-        return None, "not a field_ name"
-    rest = m.group(1) or ""
-    if not rest:
+    rest = (m.group(1) or "") if m else name
+    if m and not rest:
         return None, "unnamed field"
-    new = snake(rest)
+    new = snake(rest.rstrip("_") if not m else rest)
     if not new or new[0].isdigit():
         return None, "no usable name left"
-    return new, ""
+    return (new + "_" if with_underscore else new), ""
 
 
 def propose_type(name):
     n = SIZE_SUFFIX.sub("", name)
-    if n == name:
-        n = name
+    if name.startswith("T_"):
+        n = n[2:]
     if not n:
         return None, "empty"
-    return pascal(n) if "_" in n or n[0].islower() else n, ""
-
-
-def propose_namespace(row, enum_namespaces):
-    """A namespace that holds enumerators stands in for an enum (phase 3 makes it an `enum class`) and is
-    named like the enum; any other namespace keeps its (snake_case) name."""
-    name = row["old_name"]
-    if name in enum_namespaces:
-        n = re.sub(r"_enum$", "", name)
-        return pascal(n) if "_" in n or n[0].islower() else n, ""
-    return name, ""
+    return (pascal(n) if "_" in n or n[0].islower() else n), ""
 
 
 def propose_enumerator(name):
@@ -120,24 +121,29 @@ def propose_enumerator(name):
     return "k" + pascal(n), ""
 
 
-def propose_constant(name):
-    n = ADDR_SUFFIX.sub("", name)
-    n = SIZE_SUFFIX.sub("", n) if re.search(r"_0x[0-9A-Fa-f]+$", n) else n
-    if not re.match(r"^k[A-Z]", n):
-        return None, "not a k constant"
-    return n, ""
-
-
-def propose_global(name):
+def propose_global(name, const):
     n = ADDR_SUFFIX.sub("", name)
     n = re.sub(r"_0x[0-9A-Fa-f]+", "", n)
-    if re.match(r"^(byte|word|dword|unk|flt|off|stru|stru_|dbl|str|asc|wasc)_", name):
+    if re.match(r"^(byte|word|dword|unk|flt|off|stru|dbl|str|asc|wasc|sub|loc)_", name):
         return None, "raw data placeholder"
+    if re.match(r"^k[A-Z]", n):  # a constant by its name, whether or not the type says const
+        return n, ""
+    if const:
+        return "k" + pascal(re.sub(r"^k_?", "", n)), ""
     if re.match(r"^g[A-Z]", n):
         return "g" + pascal(n[1:]), ""
+    if re.match(r"^gp[A-Z]", n):
+        return "g" + pascal(n[2:]), ""
     if re.match(r"^b[A-Z]", n):
         return "gDebug" + pascal(n[1:]), ""
-    return None, "unclear prefix"
+    return "g" + pascal(HUNGARIAN.sub("", n)), ""
+
+
+def propose_local(name):
+    n = snake(name)
+    if not n or n[0].isdigit():
+        return None, "no usable name"
+    return n, ""
 
 
 def subsystem_of(file):
@@ -148,138 +154,134 @@ def subsystem_of(file):
     return "?"
 
 
-def read_rows():
-    with open(MAP_PATH, newline="") as f:
-        return list(csv.DictReader(f))
+def qual(s):
+    return (s["owner"] + "::" if s["owner"] else "") + s["name"]
 
 
-def propose(sub, kind, rows):
-    types = {r["old_name"]: r for r in rows if r["kind"] in ("type", "namespace")}
-    enum_namespaces = {r["owner"].split("::")[-1] for r in rows if r["kind"] == "enumerator" and r["owner"]}
-    if os.path.exists(SYMBOLS_PATH):
-        with open(SYMBOLS_PATH, newline="") as f:
-            enum_namespaces |= {sr["owner"].split("::")[-1] for sr in csv.DictReader(f) if sr.get("kind") == "enumerator" and sr["owner"]}
-    renamed_path = {
-        (r["owner"] + "::" if r["owner"] else "") + r["old_name"]: r["new_name"]
-        for r in rows
-        if r["kind"] in ("type", "namespace") and r["new_name"]
-    }
-    new_owner = {r["old_name"]: r["new_name"] for r in types.values() if r["new_name"]}
+def key_of(s):
+    return ("usr:" + s["usr"]) if s["kind"] in ("param", "local") else qual(s)
 
-    def current_owner(r):
-        comps = r["owner"].split("::") if r["owner"] else []
-        out = []
-        for i, c in enumerate(comps):
-            out.append(renamed_path.get("::".join(comps[: i + 1]), c))
-        return "::".join(out)
 
-    def current_qual(r):
-        o = current_owner(r)
-        return (o + "::" if o else "") + (r["new_name"] or r["old_name"])
-
-    selected = []
-    for r in rows:
-        if sub != "all" and subsystem_of(r["file"]) != sub:
+def wanted_symbols(sub, kind, syms):
+    """(symbol, proposed name, reason) for every symbol of the kind that does not follow the style yet."""
+    out = []
+    for s in syms:
+        if sub != "all" and subsystem_of(s["file"]) != sub:
             continue
-        k = r["kind"]
-        if r["new_name"]:
-            continue
-        if kind == "types" and k == "type":
-            selected.append((r, *propose_type(r["old_name"])))
-        elif kind == "types" and k == "namespace":
-            selected.append((r, *propose_namespace(r, enum_namespaces)))
-        elif kind == "functions" and k in ("function", "method"):
-            if r["old_name"] in (r["owner"], "~" + r["owner"]) or r["old_name"].startswith(("~", "operator")):
+        k, name = s["kind"], s["name"]
+        if kind == "types" and k in ("type", "alias"):
+            if k == "alias" and (name in KEEP_ALIASES or s["file"].endswith("types.hpp")):
                 continue
-            selected.append((r, *propose_function(r["old_name"])))
-        elif kind == "members" and k == "member":
-            selected.append((r, *propose_member(r["old_name"])))
+            if RE_TYPE.match(name):
+                continue
+            out.append((s, *propose_type(name)))
+        elif kind == "types" and k == "namespace":
+            if RE_TYPE.match(name) or RE_SNAKE.match(name):
+                continue
+            n = re.sub(r"_enum$", "", name)
+            out.append((s, pascal(n) if "_" in n or n[0].islower() else n, ""))
+        elif kind == "functions" and k in ("function", "method"):
+            if s["operator"] or RE_TYPE.match(name) or name.startswith("~") or name in SKIP_FUNCTIONS:
+                continue
+            out.append((s, *propose_function(name)))
+        elif kind == "members" and k in ("field", "static_member"):
+            if k == "static_member" and s.get("const"):
+                if RE_K.match(name):
+                    continue
+                out.append((s, *propose_global(name, True)))
+                continue
+            us = s.get("has_methods", True) if k == "field" else True
+            if (RE_SNAKE_US if us else RE_SNAKE).match(name):
+                continue
+            out.append((s, *propose_member(name, us)))
         elif kind == "enumerators" and k == "enumerator":
-            selected.append((r, *propose_enumerator(r["old_name"])))
-        elif kind == "constants" and k == "global" and re.match(r"^k[A-Z]", r["old_name"]):
-            selected.append((r, *propose_constant(r["old_name"])))
-        elif kind == "globals" and k == "global" and not re.match(r"^k[A-Z]", r["old_name"]):
-            selected.append((r, *propose_global(r["old_name"])))
-    # names already taken in each scope (current names), then collisions among the proposals
-    def cur_owner(r):
-        return current_owner(r)
+            if RE_K.match(name):
+                continue
+            out.append((s, *propose_enumerator(name)))
+        elif kind == "globals" and k == "global":
+            ok = RE_K if (s.get("const") or name.startswith("k")) else RE_G
+            if ok.match(name) and not ADDR_SUFFIX.search(name):
+                continue
+            out.append((s, *propose_global(name, bool(s.get("const")))))
+        elif kind == "params" and k == "param":
+            if RE_SNAKE.match(name):
+                continue
+            out.append((s, *propose_local(name)))
+        elif kind == "locals" and k == "local":
+            if RE_SNAKE.match(name):
+                continue
+            out.append((s, *propose_local(name)))
+    return out
 
-    taken = collections.defaultdict(set)
-    has_methods = set()
-    if os.path.exists(SYMBOLS_PATH):  # every name the code declares now, with its owner as spelled now
-        with open(SYMBOLS_PATH, newline="") as f:
-            for sr in csv.DictReader(f):
-                taken[sr["owner"]].add(sr["name"])
-                if sr.get("kind") == "method":
-                    has_methods.add(sr["owner"])
-    for r in rows:
-        if r["kind"] == "method" and r["owner"]:
-            has_methods.add(r["new_owner"] or r["owner"])
-    for r in rows:
-        scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
-        if r["kind"] == "type" and r["owner"]:
-            scope = cur_owner(r)
-        taken[scope].add(r["new_name"] or r["old_name"])
-    out, counts = [], collections.defaultdict(list)
-    for i, (r, new, why) in enumerate(selected):
-        if new and r["kind"] == "member" and cur_owner(r) in has_methods:
-            selected[i] = (r, new + "_", why)  # a class with member functions: the trailing _ also avoids -Wshadow
-    for r, new, why in selected:
-        scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
-        if r["kind"] == "type":
-            scope = cur_owner(r)
-        if new:
-            if new in KEYWORDS:
-                new, why = None, f"{new} is a C++ keyword"
-            elif r["kind"] != "type" and not re.match(r"^[A-Za-z_]\w*$", new):
-                new, why = None, "not an identifier"
-        out.append([r, new, why, scope])
-        if new:
-            counts[(scope, new)].append(r["old_name"])
-    pending = {(s, o["old_name"]) for o, n, w, s in map(tuple, out)}
-    for o in out:
-        r, new, why, scope = o
-        if not new:
-            continue
-        clash = counts[(scope, new)]
-        if len(set(clash)) > 1 and r["kind"] == "enumerator":
-            # Unknown_0, Unknown_1, ...: the value stays in the name
-            m = re.search(r"_(\d+)$", r["old_name"])
-            o[1], o[2] = (new + m.group(1), "") if m else (None, "collides and has no value suffix")
-        elif len(set(clash)) > 1:
-            o[1], o[2] = None, "collides with " + ", ".join(sorted(set(clash) - {r["old_name"]}))
-        elif new in taken[scope] and new != r["old_name"] and (scope, new) not in pending:
-            o[1], o[2] = None, f"{new} already exists in {scope or 'the global scope'}"
-    result = []
-    for r, new, why, scope in out:
-        result.append((current_qual(r), new or "", why))
-    return sorted(set(result))
+
+def propose(sub, kind, syms):
+    chosen = wanted_symbols(sub, kind, syms)
+    taken = collections.defaultdict(set)  # scope -> names in use now
+    for s in syms:
+        taken[s["owner"]].add(s["name"])
+    rows = []
+    for s, new, why in chosen:
+        if new and new in KEYWORDS:
+            new, why = None, f"{new} is a C++ keyword"
+        rows.append([s, new, why])
+    batch_names = collections.defaultdict(set)  # scope -> old names renamed in this batch
+    for s, _, _ in rows:
+        batch_names[s["owner"]].add(s["name"])
+    for _ in range(2):  # the digit fallback can collide again
+        counts = collections.defaultdict(set)
+        for s, new, why in rows:
+            if new:
+                counts[(s["owner"], new)].add(s["name"])
+        for r in rows:
+            s, new, why = r
+            if not new:
+                continue
+            clash = counts[(s["owner"], new)]
+            if len(clash) > 1:
+                m = re.search(r"_(\d+)$", s["name"])
+                if s["kind"] == "enumerator" and m and not new.endswith(m.group(1)):
+                    r[1], r[2] = new + m.group(1), ""
+                else:
+                    r[1], r[2] = None, "collides with " + ", ".join(sorted(clash - {s["name"]}))
+            elif new in taken[s["owner"]] and new != s["name"] and new not in batch_names[s["owner"]]:
+                r[1], r[2] = None, f"{new} already exists in {s['owner'] or 'the global scope'}"
+    result = {}
+    for s, new, why in rows:
+        key = key_of(s)
+        if key in result and result[key][0] != (new or ""):
+            result[key] = ["", "overloads would get different names", qual(s)]
+        else:
+            result[key] = [new or "", why, qual(s)]
+    return sorted((k, v[0], v[1], v[2]) for k, v in result.items())
 
 
 def selftest():
     f = propose_function
     assert f("get_input_bits_4CEAC0") == ("GetInputBits", "")
     assert f("ExitGame_4B8BD0") == ("ExitGame", "")
-    assert f("PoolAllocate") == ("PoolAllocate", "")
     assert f("sub_4C9ED0")[0] is None
     assert f("Draw_4B8BD0_inline") == ("Draw", "")
-    m = propose_member
-    assert m("field_2C_game_exit_type") == ("game_exit_type", "")
-    assert m("field_0_pHead") == ("head", "")
-    assert m("field_75340_rec_buf_idx") == ("rec_buf_idx", "")
-    assert m("field_4_pPrev") == ("prev", "")
-    assert m("field_18_bShutDown") == ("shut_down", "")
-    assert m("field_2C")[0] is None
+    assert propose_member("field_2C_game_exit_type", True) == ("game_exit_type_", "")
+    assert propose_member("field_0_pHead", False) == ("head", "")
+    assert propose_member("field_4_pPrev", True) == ("prev_", "")
+    assert propose_member("mValue", True) == ("value_", "")
+    assert propose_member("field_2C", True)[0] is None
     assert propose_type("Garage_48") == ("Garage", "")
-    assert propose_type("Game_0x40") == ("Game", "")
     assert propose_type("sound_obj")[0] == "SoundObj"
+    assert propose_type("T_gbh_Init")[0] == "GbhInit"
     assert propose_enumerator("Running_1") == ("kRunning", "")
-    assert propose_enumerator("none_0") == ("kNone", "")
-    assert propose_constant("kAng45_6F677C") == ("kAng45", "")
-    assert propose_global("gGame_0x40_67E008") == ("gGame", "")
-    assert propose_global("bDo_mike_67D5CC") == ("gDebugDoMike", "")
-    assert propose_global("dword_6F1234")[0] is None
+    assert propose_enumerator("ped_walking") == ("kPedWalking", "")
+    assert propose_global("kAng45_6F677C", True) == ("kAng45", "")
+    assert propose_global("gGame_0x40_67E008", False) == ("gGame", "")
+    assert propose_global("bDo_mike_67D5CC", False) == ("gDebugDoMike", "")
+    assert propose_global("gpRng_67AB34", False) == ("gRng", "")
+    assert propose_global("dword_6F1234", False)[0] is None
+    assert propose_global("kFpZero_6F610C", False) == ("kFpZero", "")
+    assert propose_global("tmpBuff_67BD9C", False) == ("gTmpBuff", "")
+    assert propose_local("pCurrentPlayer") == ("current_player", "")
+    assert propose_local("pInX") == ("in_x", "")
     assert snake("pCurrentPlayer") == "current_player" and snake("FixedHUD") == "fixed_hud"
+    assert RE_SNAKE_US.match("left_") and not RE_SNAKE_US.match("left") and RE_SNAKE.match("rng_index")
     print("selftest OK")
     return 0
 
@@ -289,6 +291,7 @@ def main():
     ap.add_argument("subsystem", nargs="?")
     ap.add_argument("kind", nargs="?")
     ap.add_argument("-o", "--output")
+    ap.add_argument("--symbols", default=SYMBOLS)
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -297,10 +300,11 @@ def main():
         ap.error("SUBSYSTEM and KIND are required")
     if a.subsystem != "all" and a.subsystem not in SUBSYSTEMS:
         ap.error("subsystem must be one of " + ", ".join(SUBSYSTEMS))
-    rows = propose(a.subsystem, a.kind, read_rows())
+    syms = json.load(open(a.symbols))
+    rows = propose(a.subsystem, a.kind, syms)
     out = open(a.output, "w", newline="") if a.output else sys.stdout
     w = csv.writer(out, lineterminator="\n")
-    w.writerow(["old", "new", "todo"])
+    w.writerow(["old", "new", "todo", "name"])
     w.writerows(rows)
     todo = sum(1 for r in rows if not r[1])
     print(f"{len(rows)} proposals, {todo} TODO", file=sys.stderr)

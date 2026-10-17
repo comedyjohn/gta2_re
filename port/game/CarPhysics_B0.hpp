@@ -14,7 +14,6 @@ class Ped;
 class ModelPhysics_48;
 class CarAI_78;
 
-EXTERN_GLOBAL(Fix16, kFP16Zero_6FE20C);
 EXTERN_GLOBAL(Fix16, dword_6FD120);
 EXTERN_GLOBAL(ModelPhysics_48*, gCarInfo_48_6FE258);
 EXTERN_GLOBAL(Ang16, kAng90_6FE00C);
@@ -24,7 +23,6 @@ EXTERN_GLOBAL(Fix16, gDamageSpeedFactor_6FE348);
 EXTERN_GLOBAL(Fix16, kDrowningMaxSpeed_677794);
 EXTERN_GLOBAL(Fix16Point, stru_6FDF50);
 EXTERN_GLOBAL(Fix16, dword_6FE0B0);
-EXTERN_GLOBAL(Fix16, kF16Zero_677B90);
 EXTERN_GLOBAL(Fix16Point, CollisionIntersectionPoint_6FE1A0);
 
 Fix16Point ComputeLineLineIntersection_55F3B0(Fix16 OwnerMass,
@@ -345,8 +343,7 @@ class CarPhysics_B0
 
     bool IsStationary_49EF80()
     {
-        return field_40_linvel_1.x == kFP16Zero_6FE20C && field_40_linvel_1.y == kFP16Zero_6FE20C &&
-            field_74_ang_vel_rad == kFP16Zero_6FE20C;
+        return field_40_linvel_1.x == kFixZero && field_40_linvel_1.y == kFixZero && field_74_ang_vel_rad == kFixZero;
     }
 
     void Field74Subtract()
@@ -415,7 +412,7 @@ class CarPhysics_B0
     void SetGoStraight_42ABB0()
     {
         field_AD_turn_direction = 0;
-        field_78_pointing_ang_rad = kF16Zero_677B90;
+        field_78_pointing_ang_rad = kFixZero;
     }
 
     Fix16 vec_len_552DE0(); // Char_B4.cpp func

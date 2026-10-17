@@ -14,7 +14,6 @@
 #include "map_0x370.hpp"
 #include "sprite.hpp"
 
-EXTERN_GLOBAL(Fix16, kFP16Zero_6FD49C);
 EXTERN_GLOBAL(Fix16, dword_6FD2F0);
 EXTERN_GLOBAL(Fix16, dword_6FD448);
 EXTERN_GLOBAL(Fix16, kFP16Eight_6FD4C0);
@@ -118,10 +117,10 @@ char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
     }
     else
     {
-        field_20_speed = kFP16Zero_6FD49C;
+        field_20_speed = kFixZero;
     }
 
-    if (field_20_speed == kFP16Zero_6FD49C)
+    if (field_20_speed == kFixZero)
     {
         // Assigned (not initialised) here so VC6 keeps the neg; add instead of folding it into a sub
         off_y = -dword_6FD45C;
@@ -140,12 +139,12 @@ char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
     else
     {
         field_20_speed = field_20_speed * dword_6FD30C;
-        if (field_20_speed < kFP16Zero_6FD49C)
+        if (field_20_speed < kFixZero)
         {
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
         // A named copy of the zero constant: gives it ebx and pos_y ebp, as in the original
-        Fix16 zero = kFP16Zero_6FD49C;
+        Fix16 zero = kFixZero;
         Fix16 pos_x = field_30_pNext->field_14_xy.x;
         Fix16 pos_y = field_30_pNext->field_14_xy.y;
         vector.y = field_20_speed;
@@ -187,9 +186,9 @@ char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
 char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
 {
     Fix16 jitter_x;
-    Fix16 off_x = kFP16Zero_6FD49C;
+    Fix16 off_x = kFixZero;
     Fix16 jitter_y;
-    Fix16 off_y = kFP16Zero_6FD49C;
+    Fix16 off_y = kFixZero;
     char_type bJitter = 1;
     Fix16Point dir(Fix16(0), Fix16(0));
 
@@ -204,7 +203,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
         if (field_40_pExplosion->field_6_id != field_44)
         {
             field_40_pExplosion = nullptr;
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
         else if (field_40_pExplosion->field_14_pObj2C)
         {
@@ -221,12 +220,12 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
         else
         {
             field_40_pExplosion = nullptr;
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
     }
     else
     {
-        field_20_speed = kFP16Zero_6FD49C;
+        field_20_speed = kFixZero;
     }
 
     Fix16 zpos = field_30_pNext->field_1C_zpos + dword_6FD540;
@@ -238,7 +237,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
     Fix16 xpos = field_30_pNext->field_14_xy.x;
     Fix16 ypos = field_30_pNext->field_14_xy.y;
 
-    if (field_20_speed == kFP16Zero_6FD49C)
+    if (field_20_speed == kFixZero)
     {
         off_x = 0;
         off_y = -dword_6FD45C;
@@ -432,7 +431,7 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
         delta.Atan2();
         Fix16 segments = delta.MaxAbs() / dword_6FD364;
 
-        if (segments != kFP16Zero_6FD49C)
+        if (segments != kFixZero)
         {
             delta.DivideAssign(segments);
             prev = src;
@@ -509,8 +508,8 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
 {
     Fix16 jitter_x;
     Fix16 jitter_y;
-    Fix16 off_x = kFP16Zero_6FD49C;
-    Fix16 off_y = kFP16Zero_6FD49C;
+    Fix16 off_x = kFixZero;
+    Fix16 off_y = kFixZero;
     Fix16Point dir(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
@@ -522,7 +521,7 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
             if (field_40_pExplosion->field_6_id != field_44)
             {
                 field_40_pExplosion = nullptr;
-                field_20_speed = kFP16Zero_6FD49C;
+                field_20_speed = kFixZero;
             }
             else if (field_40_pExplosion->field_14_pObj2C)
             {
@@ -539,12 +538,12 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
             else
             {
                 field_40_pExplosion = nullptr;
-                field_20_speed = kFP16Zero_6FD49C;
+                field_20_speed = kFixZero;
             }
         }
         else
         {
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
 
         Fix16 zpos = field_30_pNext->field_1C_zpos + dword_6FD45C;
@@ -618,8 +617,8 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
 {
     Fix16 jitter_x;
     Fix16 jitter_y;
-    Fix16 off_x = kFP16Zero_6FD49C;
-    Fix16 off_y = kFP16Zero_6FD49C;
+    Fix16 off_x = kFixZero;
+    Fix16 off_y = kFixZero;
     Fix16Point dir(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
@@ -631,7 +630,7 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
             if (field_40_pExplosion->field_6_id != field_44)
             {
                 field_40_pExplosion = nullptr;
-                field_20_speed = kFP16Zero_6FD49C;
+                field_20_speed = kFixZero;
             }
             else if (field_40_pExplosion->field_14_pObj2C)
             {
@@ -648,12 +647,12 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
             else
             {
                 field_40_pExplosion = nullptr;
-                field_20_speed = kFP16Zero_6FD49C;
+                field_20_speed = kFixZero;
             }
         }
         else
         {
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
 
         Fix16 zpos = field_30_pNext->field_1C_zpos + dword_6FD540;
@@ -755,14 +754,14 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
         else
         {
             field_40_pExplosion = nullptr;
-            field_20_speed = kFP16Zero_6FD49C;
+            field_20_speed = kFixZero;
         }
     }
     else
     {
-        field_20_speed = kFP16Zero_6FD49C;
+        field_20_speed = kFixZero;
     }
-    field_20_speed = kFP16Zero_6FD49C;
+    field_20_speed = kFixZero;
 
     Fix16 zpos = field_30_pNext->field_1C_zpos + dword_6FD540;
     if (zpos >= dword_6FD28C)
@@ -1069,8 +1068,8 @@ char_type Particle_4C::UpdateSimpleBallisticMotion_state_1_53ABA0()
 {
 
     Fix16 z = dword_6FD46C;
-    Fix16 x = kFP16Zero_6FD49C;
-    Fix16 y = kFP16Zero_6FD49C;
+    Fix16 x = kFixZero;
+    Fix16 y = kFixZero;
     Fix16Point point2(Fix16(0), Fix16(0));
     Fix16 new_z;
 
@@ -1112,8 +1111,8 @@ char_type Particle_4C::UpdateSimpleBallisticMotion_state_1_53ABA0()
 char_type Particle_4C::UpdateLargeBallisticDebris_state_35_53AE60()
 {
     Fix16 z_offset = dword_6FD2E8;
-    Fix16 x = kFP16Zero_6FD49C;
-    Fix16 y = kFP16Zero_6FD49C;
+    Fix16 x = kFixZero;
+    Fix16 y = kFixZero;
     Fix16Point point2(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
@@ -1160,8 +1159,8 @@ char_type Particle_4C::Empty_state_44_53B170()
 bool Particle_4C::UpdateDebrisArc_state_7_53B1A0()
 {
     Fix16 z_offset = dword_6FD46C;
-    Fix16 x = kFP16Zero_6FD49C;
-    Fix16 y = kFP16Zero_6FD49C;
+    Fix16 x = kFixZero;
+    Fix16 y = kFixZero;
     Fix16Point point2(Fix16(0), Fix16(0));
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
@@ -1590,7 +1589,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
                     }
                     if (pHit->GetType_416B40() == SpriteTypes::kPed)
                     {
-                        pHit->field_8_char_b4_ptr->HandleGenericImpact_553E00(angle, dword_6FD2E8 + dword_6FD46C, kFP16Zero_6FD49C, 0);
+                        pHit->field_8_char_b4_ptr->HandleGenericImpact_553E00(angle, dword_6FD2E8 + dword_6FD46C, kFixZero, 0);
                         Ped* pHitPed = pHit->field_8_char_b4_ptr->field_7C_pPed;
                         if (pHitPed)
                         {

@@ -16,7 +16,6 @@ DEFINE_GLOBAL(s32, gDisplayDraw_67B57C, 0x67B57C);
 DEFINE_GLOBAL(s32, gDisplayAdd_67B578, 0x67B578);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_67B434, Fix16(1), 0x67B434);
 DEFINE_GLOBAL_INIT(Fix16, kFp96_705B80, Fix16(0x180000, 0), 0x705B80);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_705AC4, Fix16(0), 0x705AC4);
 
 // 0x4954f0
 void SpriteRenderer_1C::ResetAll_4954F0()
@@ -106,7 +105,7 @@ void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
     }
     else
     {
-        z_pos = kFpZero_705AC4;
+        z_pos = kFixZero;
     }
 
     SpriteTreeNode_C* pParent = nullptr; // TODO: not initialized before 'for' loop
@@ -121,7 +120,7 @@ void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
         }
         else
         {
-            node_z = kFpZero_705AC4;
+            node_z = kFixZero;
         }
 
         if (z_pos < node_z)

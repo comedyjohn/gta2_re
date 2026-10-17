@@ -16,7 +16,6 @@ DEFINE_GLOBAL(PublicTransport_181C*, gPublicTransport_181C_6FF1D4, 0x6FF1D4);
 DEFINE_GLOBAL(TrainStationList, gTrainStationList_6FEE68, 0x6FEE68);
 DEFINE_GLOBAL(u8, gStationCount_6FF1CC, 0x6FF1CC);
 DEFINE_GLOBAL(u8, gTargetCarDoor_6FF1D8, 0x6FF1D8);
-DEFINE_GLOBAL_INIT(Fix16, kFpZero_6FF078, 0, 0x6FF078);
 DEFINE_GLOBAL_INIT(Fix16Point, kZeroPoint_6FF150, Fix16Point(Fix16(0), Fix16(0)), 0x6FF150);
 DEFINE_GLOBAL(u8, gNameCompareLen_6FF158, 0x6FF158);
 DEFINE_GLOBAL(u8, byte_6FF1CD, 0x6FF1CD);
@@ -405,7 +404,7 @@ void Train_58::UpdatePassengerAI_578390()
                 if ((*pTrainCar)->GetCarInfoIdx_411940() == CarModel::TRAIN)
                 {
                     this->field_56_passenger_count = 1;
-                    if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0((*pTrainCar)->field_50_car_sprite, kFpZero_6FF078))
+                    if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0((*pTrainCar)->field_50_car_sprite, kFixZero))
                     {
                         if (this->field_54_passenger_timer <= 0)
                         {
@@ -434,7 +433,7 @@ void Train_58::UpdatePassengerAI_578390()
         }
         else
         {
-            if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(this->field_C_carriages[0]->field_50_car_sprite, kFpZero_6FF078) &&
+            if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0(this->field_C_carriages[0]->field_50_car_sprite, kFixZero) &&
                 this->field_54_passenger_timer <= 0 && !gPublicTransport_181C_6FF1D4->field_1818_stop_getting_off_bus)
             {
                 if (this->field_C_carriages[0]->IsStoppedWithPavementAtDoor_43B140(2))
@@ -1073,7 +1072,7 @@ void PublicTransport_181C::OnBusStopMarkerHit_579A30(Car_BC* pToFind)
                         field_17C0_bus.field_4_wait_timer = 10;
                     }
                 }
-                else if (field_17C0_bus.field_0 != 1 || pLeadCar->GetCarLinearSpeed_43A240() == kFpZero_6FF078)
+                else if (field_17C0_bus.field_0 != 1 || pLeadCar->GetCarLinearSpeed_43A240() == kFixZero)
                 {
                     field_17C0_bus.field_48_stop_phase = 12;
                     field_17C0_bus.field_4_wait_timer = 10;
@@ -1179,7 +1178,7 @@ bool PublicTransport_181C::GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk)
             {
                 if (!pCar->IsEngineOn_4118C0())
                 {
-                    *pF16Unk = kFpZero_6FF078;
+                    *pF16Unk = kFixZero;
                     if (pTrain->field_50_state != 0 && pTrain->field_50_state != 1)
                     {
                         return true;
@@ -1198,7 +1197,7 @@ bool PublicTransport_181C::GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk)
                         return false;
                         break;
                     case 2:
-                        *pF16Unk = kFpZero_6FF078;
+                        *pF16Unk = kFixZero;
                         return true;
                         break;
                     case 3:
@@ -1432,7 +1431,7 @@ void PublicTransport_181C::BusesService_579CA0()
                                     field_17C0_bus.field_4_wait_timer = 10;
                                 }
                             }
-                            else if (field_17C0_bus.field_C_carriages[0]->GetCarLinearSpeed_43A240() > kFpZero_6FF078)
+                            else if (field_17C0_bus.field_C_carriages[0]->GetCarLinearSpeed_43A240() > kFixZero)
                             {
                                 field_17C0_bus.field_48_stop_phase = 9;
                                 field_17C0_bus.field_4_wait_timer = 10;
@@ -1509,14 +1508,14 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
                 else
                 {
                     pTrain->field_0 = 1;
-                    if (pCar->field_54_driver->GetMoveDirection_45C9B0() > kFpZero_6FF078)
+                    if (pCar->field_54_driver->GetMoveDirection_45C9B0() > kFixZero)
                     {
                         if (pTrain->field_C_carriages[0]->field_54_driver->field_15C_player->field_8B_was_forward_pressed)
                         {
                             pTrain->IncrementState_578180();
                         }
                     }
-                    else if (pTrain->field_C_carriages[0]->field_54_driver->GetMoveDirection_45C9B0() < kFpZero_6FF078)
+                    else if (pTrain->field_C_carriages[0]->field_54_driver->GetMoveDirection_45C9B0() < kFixZero)
                     {
                         if (pTrain->field_C_carriages[0]->field_54_driver->field_15C_player->field_8C_was_down_pressed)
                         {

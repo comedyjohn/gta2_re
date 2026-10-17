@@ -70,7 +70,6 @@ DEFINE_GLOBAL_INIT(u32, kGlobalMask0_61A9AC, 0x0C00060, 0x61A9AC); // BitSet32 f
 DEFINE_GLOBAL_INIT(u32, kGlobalMask1_61A9A8, 0x0C70060, 0x61A9A8); // BitSet32 flag
 DEFINE_GLOBAL_INIT(u32, kGlobalMask2_61A9A4, 0x0C78060, 0x61A9A4); // BitSet32 flag
 DEFINE_GLOBAL(u32, gFlags_67ACF8, 0x67ACF8); // BitSet32 flag
-DEFINE_GLOBAL_INIT(Fix16, kFP16Zero_703A38, Fix16(0), 0x703A38);
 
 DEFINE_GLOBAL_INIT(Fix16, k_dword_7033B4, Fix16(0x3FC000, 0), 0x7033B4);
 DEFINE_GLOBAL_INIT(Fix16, dword_7035DC, Fix16(0x1C000, 0), 0x7035DC);
@@ -2813,7 +2812,7 @@ bool AttachedSprite_18::UpdateAttached_5A6910(Sprite* pSprite)
         {
             Char_B4* cB4 = field_0_pSprite->AsCharB4_40FEA0();
             bRet = false;
-            cB4->Update_545720(kFP16Zero_703A38);
+            cB4->Update_545720(kFixZero);
         }
     }
     return bRet;

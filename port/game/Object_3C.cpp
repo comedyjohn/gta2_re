@@ -1,5 +1,5 @@
 // GetLength_41E260 compares against this TU's zero
-#define FIX16_POINT_ZERO kFpZero_6F8E10
+#define FIX16_POINT_ZERO kFixZero
 #include "Object_3C.hpp"
 #include "Car_BC.hpp"
 #include "Explosion_30.hpp"

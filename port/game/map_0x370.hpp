@@ -8,7 +8,7 @@
 
 class Gang_144;
 class Sprite;
-class Fix16_Rect;
+class Fix16Rect;
 
 struct gmp_col_info
 {
@@ -437,7 +437,7 @@ class Map_0x370
     char_type sub_4E0110();
     char_type sub_4E0120();
     bool CanMoveOntoSlopeTile_4E0130(s32 x, s32 y, s32 z, s32 path_direction, u8* pSlopeZDelta, char_type bReportStepUp);
-    char_type RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect);
+    char_type RectHitsDiagonalWall_4E11E0(Fix16Rect* pRect);
     bool SpriteHitsDiagonalWall_4E1520(s32 z_pos);
     bool HasWallInArea_4E18A0(s32 x_min, s32 x_max, s32 y_min, s32 y_max, s32 z);
     bool sub_4E1A30(s32 tileX_min, s32 tileX_max, s32 tileY_min, s32 tileY_max, s32 zLevel);
@@ -445,7 +445,7 @@ class Map_0x370
     char_type CanSpriteEnterMovementRegion_4E4460(s32 tile_x, s32 tile_y, s32 tile_z, Sprite* pSprite, s16 collision_mask);
     char_type sub_4E4630(Fix16 zpos_f16);
     bool sub_4E4770(Fix16 z_pos);
-    char_type sub_4E4820(Fix16_Rect* pRect, u8 slope_type);
+    char_type sub_4E4820(Fix16Rect* pRect, u8 slope_type);
     void FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type block_type);
     static bool IsSearchBlockOfType_4E4AC0(char_type block_type);
     bool CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* pBlock);

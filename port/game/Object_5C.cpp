@@ -35,7 +35,7 @@ DEFINE_GLOBAL(s32, dword_6F8F88, 0x6f8f88);
 DEFINE_GLOBAL(s32, gObject2C_WallHitSide_6F8F90, 0x6F8F90);
 DEFINE_GLOBAL_INIT(Ang16, kAng180_6F8D62, Ang16(0x2D0), 0x6F8D62);
 
-DEFINE_GLOBAL(Fix16_Point, gZeroVector_6F8EF0, 0x6F8EF0);
+DEFINE_GLOBAL(Fix16Point, gZeroVector_6F8EF0, 0x6F8EF0);
 DEFINE_GLOBAL_INIT(Fix16, kFpZero_6F8E10, Fix16(0), 0x6F8E10);
 DEFINE_GLOBAL_INIT(Fix16, k_dword_6F8C9C, Fix16(0x100, 0), 0x6F8C9C);
 
@@ -97,7 +97,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6F8C78, Fix16(0x2CCC, 0), 0x6F8C78);
 DEFINE_GLOBAL_INIT(Fix16, kObjectBounceRestitution_6F8DBC, dword_6F8C78, 0x6F8DBC);
 
 // TODO: From CarPhysics_B0
-EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
+EXTERN_GLOBAL(Fix16Point, CollisionIntersectionPoint_6FE1A0);
 
 inline bool Object_2C::IsAnimFinished_482C10()
 {
@@ -341,9 +341,9 @@ bool Object_2C::SelectCollisionSprite_522460(Sprite* pProbe)
 }
 
 // 0x5224e0
-void Object_2C::SetMovementVector_5224E0(const Fix16_Point& speed)
+void Object_2C::SetMovementVector_5224E0(const Fix16Point& speed)
 {
-    Fix16_Point new_velocity;
+    Fix16Point new_velocity;
     if (field_10_obj_3c)
     {
         new_velocity = GetSpeedVector_482C50() + speed;
@@ -358,7 +358,7 @@ void Object_2C::SetMovementVector_5224E0(const Fix16_Point& speed)
 }
 
 // 0x522640
-void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16_Point& point)
+void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16Point& point)
 {
     SetMovementVector_5224E0(point);
 
@@ -382,7 +382,7 @@ void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16_Point& point
 // 0x5226a0
 void Object_2C::SetConveyorPush_5226A0(char_type conveyor_speed)
 {
-    [[maybe_unused]] Fix16_Point point;
+    [[maybe_unused]] Fix16Point point;
     if (!field_10_obj_3c)
     {
         NewObj3C_528130(gZeroVector_6F8EF0);
@@ -391,14 +391,14 @@ void Object_2C::SetConveyorPush_5226A0(char_type conveyor_speed)
 }
 
 // 0x522710
-void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* pPoint)
+void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16Point* pPoint)
 {
-    Fix16_Point offset;
-    Fix16_Point rel_velocity;
-    Fix16_Point impulse;
+    Fix16Point offset;
+    Fix16Point rel_velocity;
+    Fix16Point impulse;
 
-    Fix16_Point other_pos = pObj->GetXY_52AE70();
-    Fix16_Point my_pos = GetXY_52AE70();
+    Fix16Point other_pos = pObj->GetXY_52AE70();
+    Fix16Point my_pos = GetXY_52AE70();
 
     Ang16 impact_angle = 0;
     offset = (my_pos - *pPoint);
@@ -464,15 +464,15 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* 
 }
 
 // 0x5229b0
-void Object_2C::ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint, u8 not_used)
+void Object_2C::ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16Point* pPoint, u8 not_used)
 {
-    Fix16_Point posDelta;
-    Fix16_Point lineHitPos;
-    Fix16_Point impulse;
+    Fix16Point posDelta;
+    Fix16Point lineHitPos;
+    Fix16Point impulse;
     Ped* pPed = pB4->field_7C_pPed;
-    Fix16_Point camPos(pPed->get_cam_x(), pPed->get_cam_y());
+    Fix16Point camPos(pPed->get_cam_x(), pPed->get_cam_y());
 
-    Fix16_Point spritePos = GetXY_52AE70();
+    Fix16Point spritePos = GetXY_52AE70();
     posDelta = (spritePos - *pPoint);
 
     lineHitPos = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
@@ -495,29 +495,29 @@ void Object_2C::ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint
 }
 
 // 0x522b20
-void Object_2C::ResolveCollisionWithWorld_522B20(Fix16_Point* f18, Fix16_Point* pPoint, Fix16_Point* speed)
+void Object_2C::ResolveCollisionWithWorld_522B20(Fix16Point* f18, Fix16Point* pPoint, Fix16Point* speed)
 {
     // GetXY_52AE70() is a temporary argument, not a local: that gives the original EH states (0, 2, 3) and frame
-    Fix16_Point impulse = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
-                                                             kFP16MinusOne_6F8BE8,
-                                                             *speed,
-                                                             *pPoint,
-                                                             *f18,
-                                                             GetXY_52AE70(),
-                                                             gZeroVector_6F8EF0,
-                                                             kFP16One_6F8D38,
-                                                             kFpZero_6F8E10,
-                                                             kFP16Half_6F8D3C);
+    Fix16Point impulse = ComputeLineLineIntersection_55F3B0(GetMass_482C80(),
+                                                            kFP16MinusOne_6F8BE8,
+                                                            *speed,
+                                                            *pPoint,
+                                                            *f18,
+                                                            GetXY_52AE70(),
+                                                            gZeroVector_6F8EF0,
+                                                            kFP16One_6F8D38,
+                                                            kFpZero_6F8E10,
+                                                            kFP16Half_6F8D3C);
     SetMovementVectorWithRandomState_522640(impulse.Divide_442CB0(GetMass_482C80()));
     HandleImpact_528E50(nullptr);
 }
 
 // 0x522be0
-void Object_2C::ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint)
+void Object_2C::ResolveCollisionWithMapTile_522BE0(Fix16Point* pPoint)
 {
-    Fix16_Point reflect_dir;
-    Fix16_Point t1;
-    Fix16_Point obj_speed;
+    Fix16Point reflect_dir;
+    Fix16Point t1;
+    Fix16Point obj_speed;
     obj_speed = GetSpeedVector_52AE90();
     u8 edge_flag;
     if (this->field_4->GetNearestHorizontalEdgeToCoordinate_5A0A70(gCollisionTarget_679188.field_18_hseg_y, t1, edge_flag))
@@ -550,12 +550,12 @@ void Object_2C::ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint)
 }
 
 // 0x522d00
-void Object_2C::ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint)
+void Object_2C::ResolveCollisionWithMapTileHorizontal_522D00(Fix16Point* pPoint)
 {
     u8 edge_flag;
-    Fix16_Point reflect_dir;
-    Fix16_Point t2;
-    Fix16_Point obj_speed;
+    Fix16Point reflect_dir;
+    Fix16Point t2;
+    Fix16Point obj_speed;
     obj_speed = Object_2C::GetSpeedVector_52AE90();
     if (field_4->GetNearestVerticalEdgeToCoordinate_5A1030(gCollisionTarget_679188.field_14_vseg_x, t2, edge_flag))
     {
@@ -586,10 +586,10 @@ void Object_2C::ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint
 }
 
 // 0x522e10
-void Object_2C::HandleCollision_522E10(Fix16_Point* pPoint)
+void Object_2C::HandleCollision_522E10(Fix16Point* pPoint)
 {
 
-    Fix16_Point hit_point;
+    Fix16Point hit_point;
     switch (gCollisionTarget_679188.field_0_type)
     {
         case collision_target_type::horizontal_edge_1:
@@ -704,7 +704,7 @@ bool Object_2C::TryStartSlide_5233A0(Fix16 value)
 }
 
 // 0x523440
-void Object_2C::HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnknown1, char_type bUnknown2)
+void Object_2C::HandleCollisionOutcome_523440(Fix16Point point, char_type bUnknown1, char_type bUnknown2)
 {
     if (static_cast<u8>(field_4->IsOnWater_59E1D0()))
     {
@@ -759,7 +759,7 @@ void Object_2C::HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnkn
 }
 
 // 0x5235b0
-bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, Fix16 found_z)
+bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, Fix16 found_z)
 {
     Fix16 temp_z;
     bool bOnGround;
@@ -828,7 +828,7 @@ bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Poi
 }
 
 // 0x523770
-bool Object_2C::HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2)
+bool Object_2C::HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, u8* pHit2)
 {
     field_10_obj_3c->field_2A_bAirborne = 1;
 
@@ -881,7 +881,7 @@ bool Object_2C::HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix
 }
 
 // 0x5238B0
-bool Object_2C::HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z)
+bool Object_2C::HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z)
 {
     Fix16 ground_z;
     bool bOverGap = false;
@@ -1042,8 +1042,8 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
     u8 bUnk2 = 0;
     u8 bUnk = false;
     char_type bHandled = 0;
-    Fix16_Point point;
-    [[maybe_unused]] Fix16_Point point2;
+    Fix16Point point;
+    [[maybe_unused]] Fix16Point point2;
     Fix16 step_count;
     Sprite* pSprt = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     gObject2C_WallHitSide_6F8F90 = 0;
@@ -1243,7 +1243,7 @@ void Object_2C::ComputeWallHitSide_524550()
 void Object_2C::IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, Ang16 move_angle)
 {
     bool bOnSlope = false;
-    Fix16_Point hitPoint;
+    Fix16Point hitPoint;
     //v4 = move_len;
     Sprite* pProbe = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     //v63 = 0;
@@ -2301,7 +2301,7 @@ void Object_2C::ReleaseSubObjects_527F10()
 }
 
 // 0x528130
-void Object_2C::NewObj3C_528130(const Fix16_Point& speed)
+void Object_2C::NewObj3C_528130(const Fix16Point& speed)
 {
     Object_3C* pNewObj = gObject_3C_Pool_6F8F7C->Allocate();
 
@@ -2388,7 +2388,7 @@ bool Object_2C::HandleRotationStateTransition_528240(s32 current, s32 desired)
 void Object_2C::TickObject_5283C0(s32 obj_type)
 {
 
-    Fix16_Point dir;
+    Fix16Point dir;
 
     if (!obj_type)
     {
@@ -2747,7 +2747,7 @@ void Object_2C::ProcessObjectExplosionImpact_528A20(Object_2C* pObj)
 // 0x528ba0
 void Object_2C::HandleImpactNoSprite_528BA0()
 {
-    Fix16_Point point;
+    Fix16Point point;
 
     switch (this->field_18_model)
     {
@@ -3809,13 +3809,13 @@ Object_2C::~Object_2C()
 }
 
 // 0x52ae70
-Fix16_Point Object_2C::GetXY_52AE70()
+Fix16Point Object_2C::GetXY_52AE70()
 {
     return field_4->get_x_y();
 }
 
 // 0x52ae90
-Fix16_Point Object_2C::GetSpeedVector_52AE90()
+Fix16Point Object_2C::GetSpeedVector_52AE90()
 {
     if (field_10_obj_3c)
     {

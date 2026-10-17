@@ -6,7 +6,7 @@
 #include "fix16.hpp"
 #include "map_0x370.hpp"
 
-class Fix16_Point;
+class Fix16Point;
 
 class Nanobotz_8 // Maybe Fix16_Point
 {

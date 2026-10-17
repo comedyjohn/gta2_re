@@ -47,8 +47,8 @@ DEFINE_GLOBAL_INIT(Ang16, word_706D6C, Ang16(180), 0x706D6C);
 DEFINE_GLOBAL_INIT(Ang16, word_706E28, Ang16(1260), 0x706E28);
 DEFINE_GLOBAL(u8, byte_706C94, 0x706C94);
 DEFINE_GLOBAL(Ang16, word_707004, 0x707004);
-DEFINE_GLOBAL(Fix16_Point_POD, stru_706E58, 0x706E58);
-DEFINE_GLOBAL(Fix16_Point, stru_706F90, 0x706F90);
+DEFINE_GLOBAL(Fix16PointPOD, stru_706E58, 0x706E58);
+DEFINE_GLOBAL(Fix16Point, stru_706F90, 0x706F90);
 DEFINE_GLOBAL_INIT(Fix16, dword_706CC8, Fix16(0x800, 0), 0x706CC8);
 DEFINE_GLOBAL_INIT(Fix16, k_dword_706EDC, Fix16(0x20000, 0), 0x706EDC);
 DEFINE_GLOBAL_INIT(Fix16, k_dword_706F70, Fix16(0x100, 0), 0x706F70);
@@ -225,7 +225,7 @@ void Weapon_30::TickReloadSpeed_5DCF40()
 }
 
 // 0x5dcf60
-Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rot, const Fix16_Point& speed)
+Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rot, const Fix16Point& speed)
 {
     // probe_x/probe_y are assigned, not initialised: initialised, VC6 folds them into the call
     // arguments and computes y first
@@ -270,8 +270,8 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
 void Weapon_30::flamethrower_5DD0F0()
 {
     Ang16 ped_rot;
-    Fix16_Point cartesian_offset;
-    Fix16_Point ped_pos_maybe;
+    Fix16Point cartesian_offset;
+    Fix16Point ped_pos_maybe;
 
     Fix16 cam_x = field_24_pPed->get_cam_x();
     Fix16 cam_y = field_24_pPed->get_cam_y();
@@ -319,7 +319,7 @@ void Weapon_30::flamethrower_5DD0F0()
 void Weapon_30::shotgun_5DD290()
 {
     Ang16 ped_rotation;
-    Fix16_Point vector;
+    Fix16Point vector;
     if (field_2_reload_speed == 0)
     {
         Fix16 x = field_24_pPed->get_cam_x();
@@ -405,7 +405,7 @@ void Weapon_30::shotgun_5DD290()
 // y line is the out of line radius * cos
 namespace
 {
-inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radius, const Ang16& angle)
+inline void FromPolar_41E210_sin_table(Fix16Point& p, const Fix16& radius, const Ang16& angle)
 {
     p.x = radius * gSin_table_667A80[angle.rValue];
     p.y = radius * Ang16::cosine_40F520(angle);
@@ -416,8 +416,8 @@ inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radius, cons
 void Weapon_30::pistol_5DD860()
 {
     Ang16 pedRot;
-    Fix16_Point offset;
-    Fix16_Point velocity;
+    Fix16Point offset;
+    Fix16Point velocity;
 
     if (field_2_reload_speed == 0)
     {
@@ -475,11 +475,11 @@ void Weapon_30::pistol_5DD860()
 void Weapon_30::dual_pistol_5DDA70()
 {
     Ang16 ped_rotation;
-    Fix16_Point vector;
-    Fix16_Point vector2;
-    Fix16_Point vector3;
-    [[maybe_unused]] Fix16_Point vector_esp1; // not used, but required to match
-    [[maybe_unused]] Fix16_Point vector_esp2; // not used, but required to match
+    Fix16Point vector;
+    Fix16Point vector2;
+    Fix16Point vector3;
+    [[maybe_unused]] Fix16Point vector_esp1; // not used, but required to match
+    [[maybe_unused]] Fix16Point vector_esp2; // not used, but required to match
 
     if (field_2_reload_speed == 0)
     {
@@ -542,7 +542,7 @@ void Weapon_30::dual_pistol_5DDA70()
 // 0x5ddd20
 void Weapon_30::smg_5DDD20()
 {
-    Fix16_Point point;
+    Fix16Point point;
     if (field_2_reload_speed == 0)
     {
         set_field_2C_4CCA80(1);
@@ -604,7 +604,7 @@ void Weapon_30::smg_5DDD20()
 // 0x5ddfc0
 void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_charge)
 {
-    Fix16_Point vector;
+    Fix16Point vector;
     Object_2C* pProjectile;
 
     if (throw_strength)
@@ -760,12 +760,12 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
     }
 }
 
-void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3);
+void sub_5DE910(Fix16PointPOD a1, const Fix16Point& a2, Fix16 a3);
 
 // GetLength_41E260 with both Abs and the x multiply, the add and the square root out of line
 namespace
 {
-inline Fix16 BeamLength_5DE4F0(Fix16_Point& d)
+inline Fix16 BeamLength_5DE4F0(Fix16Point& d)
 {
     if (d.x == dword_706EB8)
     {
@@ -799,8 +799,8 @@ inline void BeamStep_5DE4F0(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2
 void Weapon_30::sub_5DE4F0()
 {
     Sprite* pBeam = gObject_5C_6F8F84->field_58_collision_probe_sprite;
-    Fix16_Point delta(field_24_pPed->field_198_hit_target_ped->field_1AC_cam.x - field_24_pPed->get_cam_x(),
-                      field_24_pPed->field_198_hit_target_ped->get_cam_y() - field_24_pPed->get_cam_y());
+    Fix16Point delta(field_24_pPed->field_198_hit_target_ped->field_1AC_cam.x - field_24_pPed->get_cam_x(),
+                     field_24_pPed->field_198_hit_target_ped->get_cam_y() - field_24_pPed->get_cam_y());
     gCollisionTarget_679188.Reset_4637B0();
 
     Ang16 angle;
@@ -905,7 +905,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_706D34, Fix16(0x100, 0), 0x706D34);
 // out-of-line copies; Abs follows the inline budget).
 namespace
 {
-inline Fix16 BeamLength_5DE910(Fix16_Point& d)
+inline Fix16 BeamLength_5DE910(Fix16Point& d)
 {
     if (d.x == dword_706EB8)
     {
@@ -930,19 +930,19 @@ inline Fix16 BeamLength_5DE910(Fix16_Point& d)
 // (likely the original's by-value a1 is one of them). `d` is reused for the rest of the way and
 // `len` for the straight segment count, as the original's frame shows.
 // 0x5de910
-void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
+void sub_5DE910(Fix16PointPOD a1, const Fix16Point& a2, Fix16 a3)
 {
-    Fix16_Point d;
-    Fix16_Point start;
-    Fix16_Point cur;
-    Fix16_Point mid;
-    Fix16_Point next;
-    Fix16_Point step;
-    Fix16_Point d3;
-    Fix16_Point from;
-    Fix16_Point to;
-    [[maybe_unused]] Fix16_Point unused_eh_1;
-    [[maybe_unused]] Fix16_Point unused_eh_2;
+    Fix16Point d;
+    Fix16Point start;
+    Fix16Point cur;
+    Fix16Point mid;
+    Fix16Point next;
+    Fix16Point step;
+    Fix16Point d3;
+    Fix16Point from;
+    Fix16Point to;
+    [[maybe_unused]] Fix16Point unused_eh_1;
+    [[maybe_unused]] Fix16Point unused_eh_2;
 
     Fix16 seg_len = kFP16Quarter_706CF4;
     if (byte_706C94 > 0)
@@ -1053,7 +1053,7 @@ void sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprit
     Ang16 angle = a1->field_0_rotation;
     Ang16 diff;
 
-    Fix16_Rect rect;
+    Fix16Rect rect;
     rect.ComputeCollisionPrism_4204D0(xpos, ypos, a2, zpos);
 
     if (gSpriteGrid_1_679208->CollectRectCollisions_477F30(&rect, 0, 0, a1, &hits))
@@ -1210,7 +1210,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
     char_type bHit = 0;
 
     // Both branches compute the four bounds into registers and share the stores.
-    Fix16_Rect rect;
+    Fix16Rect rect;
     Fix16 left;
     Fix16 right;
     Fix16 top;
@@ -1234,7 +1234,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
 
     word_707004 = field_24_pPed->field_168_game_object->field_80_sprite_ptr->field_0_rotation;
     // The original copies the returned point through the return pointer, as a struct assignment
-    reinterpret_cast<Fix16_Point&>(stru_706E58) = field_24_pPed->GetVelocityVector_45B520();
+    reinterpret_cast<Fix16Point&>(stru_706E58) = field_24_pPed->GetVelocityVector_45B520();
 
     if (gSpriteGrid_1_679208->CollectRectCollisions_477F30(&rect, 0, 0, pSprite, &hits) && hits.field_0_p18)
     {
@@ -1473,9 +1473,9 @@ DEFINE_GLOBAL_INIT(Fix16, dword_706CD8, Fix16(0x800, 0), 0x706CD8);
 void Weapon_30::fire_truck_flamethrower_5E0B10()
 {
     Ang16 gun_ang;
-    Fix16_Point bullet_pos;
-    Fix16_Point offset;
-    Fix16_Point velocity;
+    Fix16Point bullet_pos;
+    Fix16Point offset;
+    Fix16Point velocity;
 
     AttachedSprite_18* pTurret;
     Ped* pDriver = field_14_car->field_54_driver;
@@ -1526,9 +1526,9 @@ void Weapon_30::fire_truck_flamethrower_5E0B10()
 void Weapon_30::fire_truck_gun_5E0E70()
 {
     Ang16 gun_ang;
-    Fix16_Point bullet_pos;
-    Fix16_Point offset;
-    Fix16_Point velocity;
+    Fix16Point bullet_pos;
+    Fix16Point offset;
+    Fix16Point velocity;
 
     field_24_pPed = field_14_car->GetDriver_4118B0();
 
@@ -1583,7 +1583,7 @@ inline Fix16 AddFree(const Fix16& a, const Fix16& b)
 // copies, and the x line's sum is AddFree (tank_main_gun_5E10E0, army_gun_jeep_5E13E0)
 namespace
 {
-inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& angle)
+inline void RotateByAngle_40F6B0_no_budget3(Fix16Point& p, const Ang16& angle)
 {
     Fix16 sin = Ang16::sine_40F500(angle);
     Fix16 cos = Ang16::cosine_40F520(angle);
@@ -1597,9 +1597,9 @@ inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& angle)
 void Weapon_30::tank_main_gun_5E10E0()
 {
     Ang16 cannon_angle;
-    Fix16_Point cannon_pos;
-    Fix16_Point offset;
-    Fix16_Point velocity;
+    Fix16Point cannon_pos;
+    Fix16Point offset;
+    Fix16Point velocity;
 
     if (field_2_reload_speed == 0)
     {
@@ -1672,9 +1672,9 @@ void Weapon_30::tank_main_gun_5E10E0()
 void Weapon_30::army_gun_jeep_5E13E0()
 {
     Ang16 gun_ang;
-    Fix16_Point bullet_pos;
-    Fix16_Point muzzle_offset;
-    Fix16_Point muzzle_vel;
+    Fix16Point bullet_pos;
+    Fix16Point muzzle_offset;
+    Fix16Point muzzle_vel;
     if (field_2_reload_speed == 0)
     {
         field_24_pPed = field_14_car->GetDriver_4118B0();
@@ -1733,7 +1733,7 @@ void Weapon_30::army_gun_jeep_5E13E0()
 // 0x5e1dc0
 void Weapon_30::oil_stain_5E1DC0()
 {
-    Fix16_Point vector;
+    Fix16Point vector;
     Sprite* pSprt = field_14_car->GetSprite_440840();
     vector.y = (-(pSprt->field_C_pCollisionShape->GetHeight_447E10() + k_dword_706EB4)) / kFP16Two_706EC0;
 
@@ -1769,7 +1769,7 @@ void Weapon_30::oil_stain_5E1DC0()
 // 0x5e2550
 void Weapon_30::car_mine_5E2550()
 {
-    Fix16_Point p;
+    Fix16Point p;
 
     field_24_pPed = field_14_car->GetDriver_4118B0();
 
@@ -1810,11 +1810,11 @@ void Weapon_30::car_smg_5E2940()
     // they are computed: declared up front and assigned, the caller is too big for the rotations'
     // inline budget (the first + of each RotateByAngle_40F6B0 is inlined, its other operators aren't).
     Ang16 sprite_ang;
-    [[maybe_unused]] Fix16_Point unused_5;
-    Fix16_Point left;
-    Fix16_Point right;
-    Fix16_Point left_point_velocity;
-    Fix16_Point right_point_velocity;
+    [[maybe_unused]] Fix16Point unused_5;
+    Fix16Point left;
+    Fix16Point right;
+    Fix16Point left_point_velocity;
+    Fix16Point right_point_velocity;
     if (field_2_reload_speed == 0)
     {
         field_24_pPed = field_14_car->GetDriver_4118B0();

@@ -47,8 +47,8 @@ DEFINE_GLOBAL(CarThreadTriggers_214*, gCarThreadTriggers_214_705F20, 0x705F20);
 DEFINE_GLOBAL(CarManager_6C*, gCarManager_6C_677930, 0x677930);
 DEFINE_GLOBAL(Car_BC_Pool*, gCar_BC_Pool_67792C, 0x67792C);
 DEFINE_GLOBAL(TrailerPool*, gTrailerPool_66AC80, 0x66AC80);
-DEFINE_GLOBAL(Fix16_Point, gTrailerHitchOffset_66AAC8, 0x66AAC8);
-DEFINE_GLOBAL(Fix16_Point, gTrailerCabOffset_66AAE0, 0x66AAE0);
+DEFINE_GLOBAL(Fix16Point, gTrailerHitchOffset_66AAC8, 0x66AAC8);
+DEFINE_GLOBAL(Fix16Point, gTrailerCabOffset_66AAE0, 0x66AAE0);
 DEFINE_GLOBAL_INIT(Ang16, word_66A9C8, Ang16(360), 0x66A9C8);
 DEFINE_GLOBAL_INIT(Ang16, word_66AABC, Ang16(1080), 0x66AABC);
 DEFINE_GLOBAL(TrafficSpawner_14*, gTrafficSpawner_14_677934, 0x677934);
@@ -116,7 +116,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFpFive_6FF6D4, Fix16(0x14000, 0), 0x6FF6D4);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6FF674, Fix16(0x2000, 0), 0x6FF674);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FF5CC, Fix16(0xCCC, 0), 0x6FF5CC);
 
-DEFINE_GLOBAL_INIT(Fix16_Point, kZeroPoint_6778A8, Fix16_Point(0, 0), 0x6778A8);
+DEFINE_GLOBAL_INIT(Fix16Point, kZeroPoint_6778A8, Fix16Point(0, 0), 0x6778A8);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_677908, Fix16(1), 0x677908);
 
 DEFINE_GLOBAL_INIT(Fix16, kZero_705DD8, Fix16(0), 0x705DD8);
@@ -134,8 +134,8 @@ EXTERN_GLOBAL(u8, byte_6F8EDC);
 
 DEFINE_GLOBAL_INIT(Fix16, k_dword_66AB38, Fix16(0), 0x66AB38);
 
-DEFINE_GLOBAL_INIT(Fix16_Point, kTrailerHitchOffset_677370, Fix16_Point(0, kFpOne64th_677888 * 47), 0x677370);
-DEFINE_GLOBAL_INIT(Fix16_Point, kCabHitchOffset_677358, Fix16_Point(0, kFpOne64th_677888 * -30), 0x677358);
+DEFINE_GLOBAL_INIT(Fix16Point, kTrailerHitchOffset_677370, Fix16Point(0, kFpOne64th_677888 * 47), 0x677370);
+DEFINE_GLOBAL_INIT(Fix16Point, kCabHitchOffset_677358, Fix16Point(0, kFpOne64th_677888 * -30), 0x677358);
 DEFINE_GLOBAL_INIT(Ang16, kAng90_677234, Ang16(0x168), 0x677234);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6778FC, Fix16(0x2000, 0), 0x6778FC);
 DEFINE_GLOBAL_INIT(Fix16, k_dword_677918, Fix16(0x20000, 0), 0x677918);
@@ -814,7 +814,7 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
                     Fix16 w_val = gPixelsToFix16_6F6850.list[pInfo->w];
                     Fix16 h_val = gPixelsToFix16_6F6850.list[pInfo->h];
                     SwapIf3or4_41FE40(direction, w_val, h_val);
-                    Fix16_Rect rect;
+                    Fix16Rect rect;
                     rect.SetRect_41E350(xpos - w_val, w_val + xpos, ypos - h_val, h_val + ypos);
                     rect.SetHiLowZ_41E370(pos_z - kFP16One_6777D0, kFP16One_6777D0 + pos_z);
                     if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) &&
@@ -1099,7 +1099,7 @@ Car_BC* CarManager_6C::SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 
 
                 SwapIf3or4_41FE40(road_direction, sprite_width, sprite_height);
 
-                Fix16_Rect rect;
+                Fix16Rect rect;
                 rect.SetRect_41E350(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
                 rect.SetHiLowZ_41E370(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
 
@@ -1302,7 +1302,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
 
                 SwapIf3or4_41FE40(road_direction, sprite_width, sprite_height);
 
-                Fix16_Rect rect;
+                Fix16Rect rect;
                 rect.SetRect_41E350(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
                 rect.SetHiLowZ_41E370(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
 
@@ -1484,11 +1484,11 @@ void SpawnCabAndTrailerHelper_408370(Fix16 xpos,
                                      Fix16* pOutZ,
                                      Ang16* pOutRot)
 {
-    Fix16_Point pos(xpos, ypos);
-    Fix16_Point hitch_pos;
-    Fix16_Point trailer_pos;
-    Fix16_Point hitch = gTrailerHitchOffset_66AAC8;
-    Fix16_Point cab_offset = gTrailerCabOffset_66AAE0;
+    Fix16Point pos(xpos, ypos);
+    Fix16Point hitch_pos;
+    Fix16Point trailer_pos;
+    Fix16Point hitch = gTrailerHitchOffset_66AAC8;
+    Fix16Point cab_offset = gTrailerCabOffset_66AAE0;
 
     hitch.RotateByAngle_40F6B0(rot);
     hitch_pos = pos.Add_40AC50(hitch);
@@ -1910,9 +1910,9 @@ wchar_t* Car_BC::GetCarStr_439F80()
 }
 
 // 0x439fb0
-Fix16_Point Car_BC::GetHitchPoint_439FB0()
+Fix16Point Car_BC::GetHitchPoint_439FB0()
 {
-    Fix16_Point point;
+    Fix16Point point;
     car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     if ((pInfo->info_flags & car_info_flag::trailer) == car_info_flag::trailer)
     {
@@ -1928,10 +1928,10 @@ Fix16_Point Car_BC::GetHitchPoint_439FB0()
 }
 
 // 0x43a0e0
-Fix16_Point Car_BC::GetRearWheelOffset_43A0E0()
+Fix16Point Car_BC::GetRearWheelOffset_43A0E0()
 {
     CarInfo_2C* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_84_car_info_idx);
-    return Fix16_Point(Fix16(0), pInfo->field_8_rear_wheel_offset);
+    return Fix16Point(Fix16(0), pInfo->field_8_rear_wheel_offset);
 }
 
 // 0x43a120
@@ -2028,7 +2028,7 @@ Ang16 Car_BC::GetOrientationAngle_43A3E0()
 }
 
 // 0x43a450
-Fix16_Point Car_BC::GetLinearVelocity_43A450()
+Fix16Point Car_BC::GetLinearVelocity_43A450()
 {
     if (IsTrainModel_403BA0())
     {
@@ -2636,7 +2636,7 @@ char_type Car_BC::IsDoorAccessible_43AFE0(u8 target_door)
 {
     Fix16 y;
     Fix16 x;
-    Fix16_Rect fr;
+    Fix16Rect fr;
 
     GetDoorWorldPosition_43B5A0(target_door, &x, &y);
     if (gPathFinder_6FDEF0->TestDiagonalMove_5540E0(field_50_car_sprite->field_14_xy.x.ToInt(),
@@ -2991,13 +2991,13 @@ inline Fix16 Get_half_width(car_info* p)
 } // namespace
 
 // 0x43b870
-void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos)
+void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
 {
     car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
 
     Fix16 x_hit;
     Fix16 y_hit;
-    Fix16_Point rot_point; // function scope: the original has its EH state 0 from entry
+    Fix16Point rot_point; // function scope: the original has its EH state 0 from entry
 
     if (pPos->IsNull_420360())
     {
@@ -3791,7 +3791,7 @@ void Car_BC::RepairDamage_43D400()
 // 0x43d690
 void Car_BC::EmitExplosion_43D690(s32 type, Fix16 x, Fix16 y)
 {
-    [[maybe_unused]] Fix16_Point unused; // EH frame with state 0 before the first call: the original has a destructible local
+    [[maybe_unused]] Fix16Point unused; // EH frame with state 0 before the first call: the original has a destructible local
 
     Object_2C* p2C =
         gObject_5C_6F8F84->CreateExplosion_52A3D0(gFix16_6777CC, gFix16_6777CC, 2, kAngZero_67791C, type, field_70_exploder_ped_id);
@@ -3846,7 +3846,7 @@ void Car_BC::HandleCarExplosion_43D840(s32 type)
 
         KillContainedPeds_43DB80();
 
-        Fix16_Point pos = field_50_car_sprite->get_x_y();
+        Fix16Point pos = field_50_car_sprite->get_x_y();
         ApplyExplosionImpulse_443710(&pos);
 
         this->field_74_damage = 32001;
@@ -3906,7 +3906,7 @@ void Car_BC::HandleCarExplosion_43D840(s32 type)
 }
 
 // 0x43da90
-s16 Car_BC::AccumulateDamage_43DA90(s16 damage, const Fix16_Point* pVec)
+s16 Car_BC::AccumulateDamage_43DA90(s16 damage, const Fix16Point* pVec)
 {
     if (IsMaxDamage_40F890())
     {
@@ -4329,8 +4329,8 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
 {
     s16 damage = 0;
     Ped* pFoundPed = nullptr;
-    Fix16_Point offset;
-    Fix16_Point impact_vec; // never set: 265 and default pass it uninitialised
+    Fix16Point offset;
+    Fix16Point impact_vec; // never set: 265 and default pass it uninitialised
 
     if (pObj->get_field_26_420FF0())
     {
@@ -4372,7 +4372,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::moving_molotov_138:
             if (!IsFlagSet_411930(car_flag::Rocketproof) && !IsMaxDamage_40F890())
             {
-                Fix16_Point hit_pos =
+                Fix16Point hit_pos =
                     (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
                 damage = AccumulateDamage_43DA90(32000, &hit_pos);
                 if (!IsMaxDamage_40F890())
@@ -4399,7 +4399,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
                 {
                     if (!IsFlagSet_411930(car_flag::Rocketproof))
                     {
-                        Fix16_Point hit_pos =
+                        Fix16Point hit_pos =
                             (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) *
                             kFpHalf_677218;
                         damage = AccumulateDamage_43DA90(32000, &hit_pos);
@@ -4418,7 +4418,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::fire_hitting_194:
             if (!IsFlameproof_425770())
             {
-                Fix16_Point hit_pos =
+                Fix16Point hit_pos =
                     (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
                 damage = AccumulateDamage_43DA90(100 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
@@ -4427,7 +4427,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         case objects::pistol_bullet_265:
             if (!IsFlagSet_411930(car_flag::Bulletproof))
             {
-                Fix16_Point hit_pos =
+                Fix16Point hit_pos =
                     (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
                 damage = AccumulateDamage_43DA90(1600 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
@@ -4441,7 +4441,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
         default:
             if (!IsFlagSet_411930(car_flag::Bulletproof))
             {
-                Fix16_Point hit_pos =
+                Fix16Point hit_pos =
                     (pObj->field_4->get_x_y_late_443580().AddLate_40AC50(field_50_car_sprite->get_x_y_late_443580())) * kFpHalf_677218;
                 damage = AccumulateDamage_43DA90(800 * GetDamageMultiplier_45CF90(pFoundPed), &hit_pos);
             }
@@ -5125,7 +5125,7 @@ void Car_BC::UpdateBrakeLights_4415C0()
 }
 
 // 0x441600
-Fix16_Rect Car_BC::GetOrientedHalfExtentsRect_441600()
+Fix16Rect Car_BC::GetOrientedHalfExtentsRect_441600()
 {
     car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 half_w = gPixelsToFix16_6F6850.list[pInfo->w] / k_dword_6777D4;
@@ -5140,7 +5140,7 @@ Fix16_Rect Car_BC::GetOrientedHalfExtentsRect_441600()
     }
 
     Fix16 z = field_50_car_sprite->field_1C_zpos;
-    return Fix16_Rect(-half_w, half_w, -half_h, half_h, z);
+    return Fix16Rect(-half_w, half_w, -half_h, half_h, z);
 }
 
 // 0x4416d0
@@ -5736,7 +5736,7 @@ char_type Car_BC::UpdateCarDespawnStatus_4424C0()
 // 0x442520
 Ang16 Car_BC::GetRadioTowerAngle_442520()
 {
-    Fix16_Point xy;
+    Fix16Point xy;
     xy = gCarManager_6C_677930->field_4C_tv_van_dir - field_50_car_sprite->get_x_y();
     return xy.atan2_40F790() - field_50_car_sprite->field_0_rotation;
 }
@@ -5912,10 +5912,10 @@ void Car_BC::AttachTrailer_4427A0(Car_BC* pToFind)
 void Car_BC::TryHitchTrailer_442810()
 {
 
-    Fix16_Point hitch_this;
-    Fix16_Point hitch_car;
-    Fix16_Point offset;
-    Fix16_Point hitch_point; // the original sets EH state 3 up front: 4 points constructed
+    Fix16Point hitch_this;
+    Fix16Point hitch_car;
+    Fix16Point offset;
+    Fix16Point hitch_point; // the original sets EH state 3 up front: 4 points constructed
 
     field_50_car_sprite->SetDrawLayer_40F7B0(15);
 
@@ -6009,7 +6009,7 @@ void Car_BC::LightUpdate_442D10()
 // evaluated before any store, which gives the original's schedule.
 namespace
 {
-inline void SetPrism(Fix16_Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, const Fix16 z)
+inline void SetPrism(Fix16Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, const Fix16 z)
 {
     rect.field_0_left = left;
     rect.field_4_right = right;
@@ -6038,7 +6038,7 @@ char_type Car_BC::TrainUpdate_442D70()
         }
         else
         {
-            Fix16_Rect rect;
+            Fix16Rect rect;
             switch (Ang16::GetAngleFace_4F78F0(field_50_car_sprite->field_0_rotation))
             {
                 case 2:
@@ -6402,11 +6402,11 @@ void Car_BC::UpdateSpriteNum_4435F0()
 }
 
 // 0x443710
-void Car_BC::ApplyExplosionImpulse_443710(Fix16_Point* xy)
+void Car_BC::ApplyExplosionImpulse_443710(Fix16Point* xy)
 {
-    Fix16_Point hitch_point;
-    Fix16_Point impulse_dir;
-    Fix16_Point impulse_pos;
+    Fix16Point hitch_point;
+    Fix16Point impulse_dir;
+    Fix16Point impulse_pos;
 
     if (!IsDeactivated_4214D0())
     {
@@ -7004,15 +7004,15 @@ void Trailer::SetTruckCabAndTrailerCar_407BB0(Car_BC* pTruckCab, Car_BC* pTraile
 }
 
 // 0x407bd0
-Fix16_Point Trailer::GetHitchPosition_407BD0()
+Fix16Point Trailer::GetHitchPosition_407BD0()
 {
     // The y line calls the out-of-line Negate/Multiply/operator+ in the original, as if it
     // were written with them; with the inline RotateByAngle_40F6B0 the tail stops inlining.
     // Assigning a constructed point (not a copy) loads y before x as in the original.
     // The rotation's locals live in their own block (as if from an inline rotate): without it the
     // x_old store is scheduled after the angle load.
-    Fix16_Point offset;
-    offset = Fix16_Point(gTrailerHitchOffset_66AAC8.x, gTrailerHitchOffset_66AAC8.y);
+    Fix16Point offset;
+    offset = Fix16Point(gTrailerHitchOffset_66AAC8.x, gTrailerHitchOffset_66AAC8.y);
     Ang16 angle = field_8_truck_cab->field_58_physics->field_58_theta;
     {
         Fix16 sin = Ang16::sine_40F500(angle);
@@ -7042,10 +7042,10 @@ void Trailer::UpdateTrailerAlignment_407CE0()
     // The four points are declared up front: the original enters with EH state 3. The 9.6f getters and
     // setters (get/set_theta_40F820/40F830, set_cp1_40F7E0, get/set_cp3) are written as field accesses
     // and the Fix16 compares on mValue, otherwise the inline budget pushes these ctors out of line.
-    Fix16_Point rear;
-    Fix16_Point hitch;
-    Fix16_Point delta;
-    Fix16_Point offset;
+    Fix16Point rear;
+    Fix16Point hitch;
+    Fix16Point delta;
+    Fix16Point offset;
 
     CarPhysics_B0* pTrailerPhys = field_C_pCarOnTrailer->field_58_physics;
     CarPhysics_B0* pCabPhys = field_8_truck_cab->field_58_physics;
@@ -7218,7 +7218,7 @@ TrafficSpawner_14::TrafficSpawner_14()
     field_0_cam = nullptr;
     field_C_player = nullptr;
     field_10_zone = nullptr;
-    field_4_rect = new Fix16_Rect();
+    field_4_rect = new Fix16Rect();
     ResetTrafficSpawnGlobals_5822E0();
 }
 
@@ -7290,21 +7290,21 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
 
         switch (gPolice_7B8_6FEE40->field_654_max_wanted_level)
         {
-            case cop_level_enum::none_0:
-            case cop_level_enum::police_1:
+            case CopLevel::none_0:
+            case CopLevel::police_1:
                 wanted_related = kFpOne_6FF778;
                 break;
-            case cop_level_enum::police_3:
+            case CopLevel::police_3:
                 wanted_related = dword_6FF5DC;
                 break;
-            case cop_level_enum::police_2:
-            case cop_level_enum::fbi_5:
+            case CopLevel::police_2:
+            case CopLevel::fbi_5:
                 wanted_related = dword_6FF5E4;
                 break;
-            case cop_level_enum::swat_4:
+            case CopLevel::swat_4:
                 wanted_related = dword_6FF5D4;
                 break;
-            case cop_level_enum::army_6:
+            case CopLevel::army_6:
                 wanted_related = dword_6FF5D4;
                 break;
             default:
@@ -8048,17 +8048,17 @@ char_type TrafficSpawner_14::ResolveSpawnDirection_583930(char_type a1, char_typ
 
 // Defined after HandleCarHitByObject_43F130, so that VC6 hasn't compiled their out-of-line copies (and
 // learnt that they can't throw) when it compiles that function.
-inline Fix16_Point Sprite::get_x_y_late_443580()
+inline Fix16Point Sprite::get_x_y_late_443580()
 {
-    return Fix16_Point(field_14_xy.x, field_14_xy.y);
+    return Fix16Point(field_14_xy.x, field_14_xy.y);
 }
 
-inline Fix16_Point Fix16_Point::AddLate_40AC50(const Fix16_Point& in)
+inline Fix16Point Fix16Point::AddLate_40AC50(const Fix16Point& in)
 {
-    return Fix16_Point(x + in.x, y + in.y);
+    return Fix16Point(x + in.x, y + in.y);
 }
 
-inline Fix16_Point Fix16_Point::SubLate_40AC80(const Fix16_Point& rhs)
+inline Fix16Point Fix16Point::SubLate_40AC80(const Fix16Point& rhs)
 {
-    return Fix16_Point(x - rhs.x, y - rhs.y);
+    return Fix16Point(x - rhs.x, y - rhs.y);
 }

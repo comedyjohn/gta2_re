@@ -5,7 +5,7 @@
 class Sprite;
 class Object_3C;
 class GridSpriteLink_8;
-class Fix16_Rect;
+class Fix16Rect;
 class SpriteList_4;
 class Ped;
 
@@ -70,12 +70,12 @@ class SpriteGrid_400
                                                   char_type bUseSpriteZ);
     void SetSpriteToExclude_477E50(Sprite* pSprite);
     Sprite* FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desired_sprite_type);
-    bool CollectRectCollisions_477F30(Fix16_Rect* pRect,
+    bool CollectRectCollisions_477F30(Fix16Rect* pRect,
                                       char_type bDeepCheck,
                                       s32 exclude_sprite_type,
                                       Sprite* pExclude,
                                       SpriteList_4* pOutList);
-    bool CheckRectForCollisions_477F60(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude);
+    bool CheckRectForCollisions_477F60(Fix16Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude);
     SpriteGrid_400();
     ~SpriteGrid_400();
 
@@ -95,7 +95,7 @@ class SpriteGrid_400
     void AddToSingleBucket_478440(s32 x_pos, s32 y_pos, Sprite* pSprite);
     void AddToRowBuckets_4784D0(s32 y_pos, Sprite* pSprite);
     GridCell_C* GetFirstXCellInRow_478590(s32 y_pos);
-    char_type CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect* pRect);
+    char_type CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16Rect* pRect);
     char_type CheckAndHandleCollisionsInStrip_478750(u32 y_pos, Sprite* pSprite);
     bool CheckAndHandleRowCollisionsForSprite_4787E0(u32 y_pos, Sprite* pSprite);
     Sprite* FindNearestSpriteInRow_478880(u32 y_pos, Sprite* pSprite);

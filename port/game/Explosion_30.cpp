@@ -63,7 +63,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAng315_6FD418, Ang16(1260), 0x6FD418);
 DEFINE_GLOBAL_INIT(Ang16, kAng225_6FD3E0, Ang16(900), 0x6FD3E0);
 DEFINE_GLOBAL_INIT(Ang16, kAng45_6FD35C, Ang16(180), 0x6FD35C);
 
-DEFINE_GLOBAL_INIT(Fix16_Point, kZeroPoint_6FD570, Fix16_Point(Fix16(0), Fix16(0)), 0x6FD570);
+DEFINE_GLOBAL_INIT(Fix16Point, kZeroPoint_6FD570, Fix16Point(Fix16(0), Fix16(0)), 0x6FD570);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD2F4, Fix16(0x1333, 0), 0x6FD2F4);
 
 EXTERN_GLOBAL(Fix16, dword_6FD2E8);
@@ -173,7 +173,7 @@ void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
     // then assigned as in 9.6f: the speed stores are scheduled after the angle add.
-    Fix16_Point point(Fix16(0), Fix16(0));
+    Fix16Point point(Fix16(0), Fix16(0));
     point.x = speed;
     point.y = speed;
     point.RotateByAngle_40F6B0(ang + kAng180_6FD3EE);
@@ -217,7 +217,7 @@ void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
     // then assigned as in 9.6f: the speed stores are scheduled after the angle add.
-    Fix16_Point point(Fix16(0), Fix16(0));
+    Fix16Point point(Fix16(0), Fix16(0));
     point.x = speed;
     point.y = speed;
     point.RotateByAngle_40F6B0(ang + kAng180_6FD3EE);
@@ -261,7 +261,7 @@ void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
 {
     // Fix16_Point (has a destructor): the original sets an EH state for it. Zero-constructed
     // then assigned as in 9.6f: the speed stores are scheduled after the angle add.
-    Fix16_Point point(Fix16(0), Fix16(0));
+    Fix16Point point(Fix16(0), Fix16(0));
     point.x = speed;
     point.y = speed;
     point.RotateByAngle_40F6B0(ang + kAng180_6FD3EE);
@@ -304,7 +304,7 @@ void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
 void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
 {
 
-    Fix16_Point point(Fix16(0), Fix16(0));
+    Fix16Point point(Fix16(0), Fix16(0));
     point.x = speed;
     point.y = speed;
     point.RotateByAngle_40F6B0(ang + kAng180_6FD3EE);
@@ -446,7 +446,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
         SpawnFlashParticle_541760();
     }
 
-    Fix16_Rect rect;
+    Fix16Rect rect;
     rect.SetRect_41E350(left, right, top, bottom);
     rect.SetHiLowZ_41E370(z_low, z_high);
 
@@ -564,7 +564,7 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
                                                          field_14_pObj2C->field_4->field_14_xy.x,
                                                          field_14_pObj2C->field_4->field_14_xy.y) <= this->field_28_blast_radius)
                         {
-                            Fix16_Point pos = this->field_14_pObj2C->field_4->get_x_y_443580();
+                            Fix16Point pos = this->field_14_pObj2C->field_4->get_x_y_443580();
                             pCar->ApplyExplosionImpulse_443710(&pos);
                         }
                     }

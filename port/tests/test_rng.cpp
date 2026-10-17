@@ -6,7 +6,7 @@
 
 TEST_CASE("rand() is MSVC's")
 {
-    rng r;
+    Rng r;
     r.srand_4F7A40();
     const int expected[] = {41, 18467, 6334, 26500, 19169, 15724, 11478, 29358, 26962, 24464};
     for (int v : expected)
@@ -17,7 +17,7 @@ TEST_CASE("rand() is MSVC's")
 
 TEST_CASE("get_int and get_uint8 take rand() modulo the limit")
 {
-    rng r;
+    Rng r;
     r.srand_4F7A40();
     const s16 max16 = 100;
     CHECK(r.get_int_4F7AE0(max16) == 41);
@@ -31,7 +31,7 @@ TEST_CASE("get_int and get_uint8 take rand() modulo the limit")
 
 TEST_CASE("the cycle counter counts updates")
 {
-    rng r;
+    Rng r;
     r.srand_4F7A40();
     r.AdvanceCycle_48B900();
     r.AdvanceCycle_48B900();

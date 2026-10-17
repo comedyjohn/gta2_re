@@ -247,7 +247,7 @@ int CountUsed(PoolBasic<T, N>& pool)
     return count;
 }
 
-void AddPoint(Hasher& h, const char* name, const Fix16_Point& p)
+void AddPoint(Hasher& h, const char* name, const Fix16Point& p)
 {
     char n[64];
     snprintf(n, sizeof(n), "%s.x", name);

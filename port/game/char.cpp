@@ -452,9 +452,9 @@ s32 Char_B4::IsOnWater_545570()
 }
 
 // 0x545580
-Fix16_Point Char_B4::sub_545580()
+Fix16Point Char_B4::sub_545580()
 {
-    Fix16_Point p;
+    Fix16Point p;
     p.FromPolar_41E210(-gRunOrJumpSpeed_6FD7D0, field_80_sprite_ptr->field_0_rotation);
     return p;
 }
@@ -1835,10 +1835,10 @@ void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
     //v19 = 4;
     //pPhi = pObj->field_8;
     //phi_type = pPhi->field_34_type;
-    Fix16_Point a4;
-    Fix16_Point point;
+    Fix16Point a4;
+    Fix16Point point;
     // Unused: the original enters with EH state 4, so three more Fix16_Point locals were constructed up front
-    [[maybe_unused]] Fix16_Point unused_1, unused_2, unused_3;
+    [[maybe_unused]] Fix16Point unused_1, unused_2, unused_3;
     u8 a6;
     u8 out2;
     u8 out3 = 0;
@@ -6696,7 +6696,7 @@ char_type Char_B4::HandlePedObjectHit_5537F0(Object_2C* p2c)
                                            kFP16Zero_6FD9E4)
 void Char_B4::HandleCarImpact_5538A0(Car_BC* pCar, u8 bUnknown, Fix16 x, Fix16 y)
 {
-    Fix16_Point p(x, y);
+    Fix16Point p(x, y);
     Fix16 vecLen = p.GetLength_41E260();
     Ang16 tanVec;
     tanVec = p.atan2_40F790();

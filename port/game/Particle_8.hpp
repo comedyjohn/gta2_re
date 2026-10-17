@@ -34,7 +34,7 @@ class Particle_8
     ~Particle_8();
 
     void EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite);
-    void EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir);
+    void EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16Point dir);
     void EmitFlameStreamSegment_53F4C0(Sprite* pSprite);
 
     Object_2C* field_0_fire_hit_obj;

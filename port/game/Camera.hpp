@@ -116,9 +116,9 @@ class Camera_0xBC
         field_3C_follow_mode = camera_follow_mode::snap_2;
     }
 
-    Fix16_Point_POD WorldToScreen_40CFC0(Fix16 x, Fix16 y, Fix16 z)
+    Fix16PointPOD WorldToScreen_40CFC0(Fix16 x, Fix16 y, Fix16 z)
     {
-        Fix16_Point_POD tmp;
+        Fix16PointPOD tmp;
         Fix16 u = field_98_cur_pos.field_8_z - z;
         Fix16 t(kOne_67681C / Fix16(u.mValue + dword_676840.mValue, 0));
 
@@ -136,7 +136,7 @@ class Camera_0xBC
             pSprite->field_14_xy.y <= field_20_padded_view_bounds.field_C_bottom + margin;
     }
 
-    bool IsRectInBounds_45AF40(Fix16_Rect* pRect)
+    bool IsRectInBounds_45AF40(Fix16Rect* pRect)
     {
         return pRect->get_top_45ADD0() <= field_20_padded_view_bounds.field_C_bottom &&
             pRect->get_bottom_45ADC0() >= field_20_padded_view_bounds.field_8_top &&
@@ -202,7 +202,7 @@ class Camera_0xBC
     Fix16 field_54_pan_speed_down;
     Fix16 field_58_pan_speed_left;
     Fix16 field_5C_pan_speed_right;
-    Fix16_Point field_60_screen_scale; // x: screen width * zoom, y: 640 * zoom
+    Fix16Point field_60_screen_scale; // x: screen width * zoom, y: 640 * zoom
     s32 field_68_screen_px_width;
     s32 field_6C_screen_px_height;
     s32 field_70_screen_px_center_x;

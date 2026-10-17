@@ -686,7 +686,7 @@ class ScriptManager_C1EA8
     s16 field_27A_unused;
     WeaponCheckTable field_27C_weapon_check_table[15];
     s32 field_2F4_bPreloadMissionScripts;
-    Fix16_Rect field_2F8_area_rect;
+    Fix16Rect field_2F8_area_rect;
     s32 field_310_finish_score;
     s32 field_314_total_missions;
     u32 field_318_total_secrets;

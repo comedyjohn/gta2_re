@@ -175,7 +175,7 @@ void DrawFigure_5D7EC0(s32 sprite_type,
 {
     sprite_index* sprite_index_5AA440 =
         gGtx_0x106C_703DD4->get_sprite_index_5AA440(gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_idx));
-    Fix16_Point point;
+    Fix16Point point;
 
     Fix16 half_w;
     Fix16 half_h;
@@ -274,7 +274,7 @@ inline f32 Fix16ToF32_Rounded(const Fix16& v)
 // 0x5D8470
 void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, Fix16 scale, s32 a8, u8 a9)
 {
-    Fix16_Point point;
+    Fix16Point point;
     u32 flags;
     Fix16 half_w;
     Fix16 half_h;

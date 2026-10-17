@@ -225,7 +225,7 @@ gmp_block_info* Map_0x370::get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord)
 // 0x4DEF40
 s8 gmp_map_zone::IsZoneVisibleToAnyPlayer_4DEF40()
 {
-    Fix16_Rect zoneBounds;
+    Fix16Rect zoneBounds;
     zoneBounds.SetFromPosSize_463710(field_1_x, field_2_y, field_3_w, field_4_h);
     return gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&zoneBounds);
 }
@@ -1624,7 +1624,7 @@ bool Map_0x370::CanMoveOntoSlopeTile_4E0130(s32 x, s32 y, s32 z, s32 path_direct
 }
 
 // 9.6f 0x463690: does the segment p1-p2 cross any edge of the rect
-inline bool Fix16_Rect::EdgesCrossSegment_463690(Fix16_Point& p1, Fix16_Point& p2)
+inline bool Fix16Rect::EdgesCrossSegment_463690(Fix16Point& p1, Fix16Point& p2)
 {
     return ComputeScanlineIntersectionY_4F76A0(field_0_left, field_4_right, field_8_top, p1, p2) ||
         ComputeScanlineIntersectionY_4F76A0(field_0_left, field_4_right, field_C_bottom, p1, p2) ||
@@ -1633,12 +1633,12 @@ inline bool Fix16_Rect::EdgesCrossSegment_463690(Fix16_Point& p1, Fix16_Point& p
 }
 
 // 0x4E11E0
-char_type Map_0x370::RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect)
+char_type Map_0x370::RectHitsDiagonalWall_4E11E0(Fix16Rect* pRect)
 {
 
     // TODO: rect ?
-    Fix16_Point p1;
-    Fix16_Point p2;
+    Fix16Point p1;
+    Fix16Point p2;
 
     pRect->DoSetCurrentRect_59DD60();
 
@@ -1684,8 +1684,8 @@ char_type Map_0x370::RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect)
 // 0x4E1520
 bool Map_0x370::SpriteHitsDiagonalWall_4E1520(s32 z_pos)
 {
-    Fix16_Point point;
-    Fix16_Point unk_point;
+    Fix16Point point;
+    Fix16Point unk_point;
     for (s32 y_pos = gSpriteGrid_top_6F6108; y_pos <= gSpriteGrid_bottom_6F5F38; y_pos++)
     {
         for (s32 x_pos = gSpriteGrid_left_6F5FD4; x_pos <= gSpriteGrid_right_6F5B80; x_pos++)
@@ -2400,7 +2400,7 @@ bool Map_0x370::sub_4E4770(Fix16 z_pos)
 }
 
 // 0x4E4820
-char_type Map_0x370::sub_4E4820(Fix16_Rect* pRect, u8 slope_type)
+char_type Map_0x370::sub_4E4820(Fix16Rect* pRect, u8 slope_type)
 {
     s32 left = Fix16::Round_To_Int_410BF0(pRect->get_left_45ADB0());
     s32 right = Fix16::Round_To_Int_410BF0(pRect->get_right_45ADA0());
@@ -2980,7 +2980,7 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
     Sprite* pObjSprt = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     Fix16 z_diff = z_2 - z_1;
     Ang16 angle;
-    Fix16_Point pos_diff(x_2 - x_1, y_2 - y_1);
+    Fix16Point pos_diff(x_2 - x_1, y_2 - y_1);
 
     gCollisionTarget_679188.Reset_4637B0();
 

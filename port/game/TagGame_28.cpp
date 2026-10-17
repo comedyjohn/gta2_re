@@ -10,7 +10,7 @@
 #include "text_0x14.hpp"
 
 DEFINE_GLOBAL(TagGame_28, gTagGame_6F8450, 0x6F8450);
-DEFINE_GLOBAL(Fix16_Point, stru_6F8720, 0x6F8720);
+DEFINE_GLOBAL(Fix16Point, stru_6F8720, 0x6F8720);
 DEFINE_GLOBAL(s32, gNetTimeLimitEnabled_6F58A4, 0x6F58A4);
 
 // 0x516560

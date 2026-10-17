@@ -87,7 +87,7 @@ Crane_15C::Crane_15C()
 }
 
 // 0x47e620
-void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16_Point* pOutPoint)
+void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutPoint)
 {
     pOutPoint->SetXY_432860(kZero_679E70, radius);
 
@@ -102,7 +102,7 @@ void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16_Point* pOut
 }
 
 // 0x47e730
-void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16_Point* pOutPoint)
+void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutPoint)
 {
     pOutPoint->SetXY_432860(kZero_679E70, ang);
     // Inlined RotateByAngle_40F6B0, but with the y part using the out-of-line Fix16 operators
@@ -115,7 +115,7 @@ void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16_Point* pOut
 }
 
 // 0x47e840
-void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16_Point* pOutPoint)
+void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16Point* pOutPoint)
 {
 
     pOutPoint->SetXY_432860(kZero_679E70, -kFpHalf_679D64);
@@ -131,7 +131,7 @@ void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16_Point* pOutPoint)
 // 0x47e920
 bool Crane_15C::IsDropPositionClear_47E920()
 {
-    Fix16_Point pos;
+    Fix16Point pos;
     ComputeHookPos_47E620(field_114_drop_radius, Ang16::Fix16_To_Ang16_40F540(field_110_drop_angle), &pos);
     pos += field_8_drop_offset;
 
@@ -145,7 +145,7 @@ bool Crane_15C::IsDropPositionClear_47E920()
 // 0x47eb00
 bool Crane_15C::IsTarget1PositionClear_47EB00()
 {
-    Fix16_Point hookPos;
+    Fix16Point hookPos;
     ComputeHookPos_47E620(field_120_target1_radius, Ang16::Fix16_To_Ang16_40F540(field_124_target1_angle), &hookPos);
     hookPos += field_18_target1_offset;
 
@@ -505,9 +505,9 @@ void Crane_15C::UpdateCraneTargets_47F4C0()
 }
 
 // 0x47f6c0
-bool Crane_15C::ComputeHookPolar_47F6C0(const Fix16_Point& pPoint, Fix16* pOutF16, Fix16* pOutAng)
+bool Crane_15C::ComputeHookPolar_47F6C0(const Fix16Point& pPoint, Fix16* pOutF16, Fix16* pOutAng)
 {
-    Fix16_Point to_hook = (pPoint.Sub_40AC80(field_2C_rotor_obj->field_4->get_x_y()));
+    Fix16Point to_hook = (pPoint.Sub_40AC80(field_2C_rotor_obj->field_4->get_x_y()));
     *pOutF16 = to_hook.GetLength_41E260();
 
     // TODO: 1st check is removed in 9.6f ??
@@ -737,7 +737,7 @@ void Crane_15C::UpdateCraneTick_47FD50()
 // 0x47fe10
 void Crane_15C::UpdateCraneSprites_47FE10()
 {
-    Fix16_Point a4;
+    Fix16Point a4;
     Ang16 a2 = Ang16::Fix16_To_Ang16_40F540(field_8C_crane_angle);
 
     field_30_part_obj_0->RemoveFromCollisionBuckets_527D00();
@@ -950,8 +950,8 @@ void Crane_15C::InitCrane_4803B0(Fix16 x_pos, Fix16 y_pos, char_type obj_id)
 // 0x480900
 void Crane_15C::CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang)
 {
-    Fix16_Point target_pos(xpos, ypos);
-    Fix16_Point t;
+    Fix16Point target_pos(xpos, ypos);
+    Fix16Point t;
     ComputeHookPolar_47F6C0(target_pos, &field_120_target1_radius, &field_124_target1_angle);
 
     field_128_target1_rot = Ang16::Ang16_to_Fix16(ang);
@@ -975,8 +975,8 @@ void Crane_15C::CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang)
 // 0x480b60
 void Crane_15C::ComputePickupAlignment_480B60(Fix16 xpos, Fix16 ypos, Ang16 ang)
 {
-    Fix16_Point target_pos(xpos, ypos);
-    Fix16_Point t;
+    Fix16Point target_pos(xpos, ypos);
+    Fix16Point t;
     ComputeHookPolar_47F6C0(target_pos, &field_130_target2_radius, &field_134_target2_angle);
 
     field_138_target2_rot = Ang16::Ang16_to_Fix16(ang);

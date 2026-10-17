@@ -24,9 +24,9 @@ class Crane_15C
 
     ~Crane_15C();
     Crane_15C();
-    void ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16_Point* pOutPoint);
-    void ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16_Point* pOutPoint);
-    void ComputeHookOffset_47E840(Ang16 ang, Fix16_Point* pOutPoint);
+    void ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutPoint);
+    void ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutPoint);
+    void ComputeHookOffset_47E840(Ang16 ang, Fix16Point* pOutPoint);
     bool IsDropPositionClear_47E920();
     bool IsTarget1PositionClear_47EB00();
     void DropHookedCar_47ECC0();
@@ -41,7 +41,7 @@ class Crane_15C
     bool IsPickupCarTargetValid_47F3D0();
     bool IsDropTransporterTargetValid_47F450();
     void UpdateCraneTargets_47F4C0();
-    bool ComputeHookPolar_47F6C0(const Fix16_Point& pPoint, Fix16* pOutF16, Fix16* pOutAng);
+    bool ComputeHookPolar_47F6C0(const Fix16Point& pPoint, Fix16* pOutF16, Fix16* pOutAng);
     void TargetTransporter_47F7F0(Car_BC* pCar);
     void PickUpCar_47F930(Car_BC* pCar);
     void TryNextDropPosition_47FB40();
@@ -70,11 +70,11 @@ class Crane_15C
         return field_8C_crane_angle == field_A8_home_angle;
     }
 
-    Fix16_Point field_0_hooked_sprite_offset_target;
-    Fix16_Point field_8_drop_offset;
-    Fix16_Point field_10_hooked_sprite_offset;
-    Fix16_Point field_18_target1_offset;
-    Fix16_Point field_20_target2_offset;
+    Fix16Point field_0_hooked_sprite_offset_target;
+    Fix16Point field_8_drop_offset;
+    Fix16Point field_10_hooked_sprite_offset;
+    Fix16Point field_18_target1_offset;
+    Fix16Point field_20_target2_offset;
     SpriteList_4 field_28_strct4;
     Object_2C* field_2C_rotor_obj;
     Object_2C* field_30_part_obj_0;
@@ -114,7 +114,7 @@ class Crane_15C
     Fix16 field_B8_hook_depth_target;
     Fix16 field_BC_drop_transporter_radius;
     Fix16 field_C0_drop_transporter_angle;
-    Fix16_Point_POD field_C4_drop_transporter_pos;
+    Fix16PointPOD field_C4_drop_transporter_pos;
     Fix16 field_CC_drop_transporter_z;
     Fix16 field_D0_drop_transporter_rot;
     Fix16 field_D4_drop_transporter_hook_depth;

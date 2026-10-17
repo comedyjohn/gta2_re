@@ -65,7 +65,7 @@ char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
     Fix16 rng_1;
     Fix16 rng_2;
     Fix16 off_y;
-    Fix16_Point vector(Fix16(0), Fix16(0));
+    Fix16Point vector(Fix16(0), Fix16(0));
     Fix16 new_z = dword_6FD45C + field_30_pNext->field_1C_zpos;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     if (field_2C_counter == 0)
@@ -191,7 +191,7 @@ char_type Particle_4C::UpdateDirectedProjectile_state_3_12_5384C0()
     Fix16 jitter_y;
     Fix16 off_y = kFP16Zero_6FD49C;
     char_type bJitter = 1;
-    Fix16_Point dir(Fix16(0), Fix16(0));
+    Fix16Point dir(Fix16(0), Fix16(0));
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     if (field_2C_counter == 0)
@@ -416,13 +416,13 @@ char_type Particle_4C::UpdateObjectBeamLink_state_38_538AC0()
     ++field_46_sub_state;
     Ang16 jitter;
     // Declared before src: the symbol order decides the operand order of `dst += src` (x add)
-    Fix16_Point_POD target;
-    Fix16_Point src;
-    Fix16_Point dst;
-    Fix16_Point delta;
-    Fix16_Point cur;
-    Fix16_Point prev;
-    Fix16_Point mid;
+    Fix16PointPOD target;
+    Fix16Point src;
+    Fix16Point dst;
+    Fix16Point delta;
+    Fix16Point cur;
+    Fix16Point prev;
+    Fix16Point mid;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     if (field_46_sub_state != 6 && field_28_pSprite->GetType_416B40() == sprite_types_enum::code_obj1_4)
     {
@@ -511,7 +511,7 @@ char_type Particle_4C::UpdateDirectedBurstSweep_state_4_539040()
     Fix16 jitter_y;
     Fix16 off_x = kFP16Zero_6FD49C;
     Fix16 off_y = kFP16Zero_6FD49C;
-    Fix16_Point dir(Fix16(0), Fix16(0));
+    Fix16Point dir(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
@@ -620,7 +620,7 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
     Fix16 jitter_y;
     Fix16 off_x = kFP16Zero_6FD49C;
     Fix16 off_y = kFP16Zero_6FD49C;
-    Fix16_Point dir(Fix16(0), Fix16(0));
+    Fix16Point dir(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
@@ -726,7 +726,7 @@ char_type Particle_4C::UpdateCircularBurst_state_5_539890()
 {
     char_type bJitter = 1;
     Fix16 jitter_y;
-    Fix16_Point dir(Fix16(0), Fix16(0));
+    Fix16Point dir(Fix16(0), Fix16(0));
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     if (field_2C_counter == 0)
@@ -947,12 +947,12 @@ char_type Particle_4C::UpdateStaticAnim_state_39_53A180()
 // 0x53a280
 char_type Particle_4C::UpdateSkidOrScrapeSpark_state_40_41_53A280()
 {
-    Fix16_Point corner;
+    Fix16Point corner;
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     // The original enters EH state 2 right after Remove_477B00: two more points, one unused
-    [[maybe_unused]] Fix16_Point pos;
-    Fix16_Point offset;
+    [[maybe_unused]] Fix16Point pos;
+    Fix16Point offset;
 
     stru_6FD388 = field_30_pNext->field_14_xy.x;
     stru_6FD38C = field_30_pNext->field_14_xy.y;
@@ -1071,7 +1071,7 @@ char_type Particle_4C::UpdateSimpleBallisticMotion_state_1_53ABA0()
     Fix16 z = dword_6FD46C;
     Fix16 x = kFP16Zero_6FD49C;
     Fix16 y = kFP16Zero_6FD49C;
-    Fix16_Point point2(Fix16(0), Fix16(0));
+    Fix16Point point2(Fix16(0), Fix16(0));
     Fix16 new_z;
 
     gSpriteGrid_3_679210->Remove_477B00(this->field_30_pNext);
@@ -1114,7 +1114,7 @@ char_type Particle_4C::UpdateLargeBallisticDebris_state_35_53AE60()
     Fix16 z_offset = dword_6FD2E8;
     Fix16 x = kFP16Zero_6FD49C;
     Fix16 y = kFP16Zero_6FD49C;
-    Fix16_Point point2(Fix16(0), Fix16(0));
+    Fix16Point point2(Fix16(0), Fix16(0));
 
     ++field_46_sub_state;
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
@@ -1162,7 +1162,7 @@ bool Particle_4C::UpdateDebrisArc_state_7_53B1A0()
     Fix16 z_offset = dword_6FD46C;
     Fix16 x = kFP16Zero_6FD49C;
     Fix16 y = kFP16Zero_6FD49C;
-    Fix16_Point point2(Fix16(0), Fix16(0));
+    Fix16Point point2(Fix16(0), Fix16(0));
 
     gSpriteGrid_3_679210->Remove_477B00(field_30_pNext);
     if (!field_2C_counter)
@@ -1257,7 +1257,7 @@ char_type Particle_4C::UpdateAttachedEmitter_state_9_10_53B670()
 
     Sprite* pSprite = field_28_pSprite;
     Fix16 zpos = field_30_pNext->field_1C_zpos;
-    Fix16_Point_POD offset;
+    Fix16PointPOD offset;
     if (pSprite->GetType_416B40() != sprite_types_enum::ped_3)
     {
         return true;
@@ -1396,7 +1396,7 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
 {
     Char_B4* pB4 = nullptr;
     Car_BC* pCar = nullptr;
-    Fix16_Point vel;
+    Fix16Point vel;
     Ang16 angle = 0;
 
     Fix16 zpos;
@@ -1475,9 +1475,9 @@ char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()
     else
     {
         Ang16 car_angle;
-        Fix16_Point offset;
+        Fix16Point offset;
         AttachedSprite_18* pGun = pCar->field_0_attachments.GetSpriteForModel_5A6A50(114);
-        Fix16_Point attach;
+        Fix16Point attach;
         if (pGun)
         {
             {

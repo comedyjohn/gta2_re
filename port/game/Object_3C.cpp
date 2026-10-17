@@ -22,8 +22,8 @@ void Object_3C::GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle)
 {
     s8 x_related;
     s8 y_related;
-    Fix16_Point point;
-    Fix16_Point unk;
+    Fix16Point point;
+    Fix16Point unk;
     if (field_38_conveyor_speed)
     {
         UnpackSignedNibbles_529050(field_38_conveyor_speed, &x_related, &y_related);
@@ -69,9 +69,9 @@ Object_3C::~Object_3C()
 }
 
 // 0x52adf0
-Fix16_Point Object_3C::GetSpeedVector_52ADF0()
+Fix16Point Object_3C::GetSpeedVector_52ADF0()
 {
-    Fix16_Point p;
+    Fix16Point p;
     p.FromPolar_41E210(field_C_speed, field_4_angle);
     return p;
 }

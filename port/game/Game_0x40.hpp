@@ -7,7 +7,7 @@ class Player;
 class Sprite;
 class Car_BC;
 class Camera_0xBC;
-class Fix16_Rect;
+class Fix16Rect;
 
 namespace GameState
 {
@@ -87,7 +87,7 @@ class Game_0x40
     bool IsSpriteInPlayerBounds_4B9950(Sprite* pSprite, u8 player_idx, Fix16 margin);
     bool IsSpriteCameraSubjectForPlayer_4B9A10(Sprite* pSprite, u8 player_idx);
     bool IsPointOnScreen_4B9A80(Fix16 x, Fix16 y);
-    bool IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds);
+    bool IsRectVisibleToAnyPlayer_4B9B10(Fix16Rect* pBounds);
     Camera_0xBC* IteratePlayerCamera_4B9BC0();
     bool IsCarInAnyPlayerHistory_4B9C10(Car_BC* pCar);
     Camera_0xBC* IterateNextPlayerCamera_4B9C50();

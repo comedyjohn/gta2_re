@@ -107,7 +107,7 @@ inline void SaveUnprojectedVertex_4B9990(f32 xCoord, f32 yCoord, f32 z_val, Vert
 // window breaks of Sprite::Draw_59EFF0's four expansions where the original's are (Scripts/x87_sched).
 namespace
 {
-inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
+inline void ProjectWorldPointToScreen_4BA4D0(Fix16Point& point, Vert* pVert, Fix16 zpos)
 {
     SaveUnprojectedVertex_4B9990(point.x.ToFloat(), point.y.ToFloat(), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
@@ -132,7 +132,7 @@ inline f32 Fix16ToFloat_Paren(const Fix16& v)
 // waits behind the centre store, as in the original (regsearch: window 9 limit 76, window 10 limit 84).
 namespace
 {
-inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
+inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16Point& point, Vert* pVert, Fix16 zpos)
 {
     SaveUnprojectedVertex_4B9990((Fix16ToFloat_Paren(point.x)), (point.y.ToFloat()), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
@@ -186,9 +186,9 @@ inline Fix16 Sign_4B9C20(s32& a2)
 } // namespace
 
 // 0x443580
-Fix16_Point Sprite::get_x_y_443580()
+Fix16Point Sprite::get_x_y_443580()
 {
-    return Fix16_Point(field_14_xy.x, field_14_xy.y);
+    return Fix16Point(field_14_xy.x, field_14_xy.y);
 }
 
 // 0x451950
@@ -455,13 +455,13 @@ s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, cons
 }
 
 // 0x4F76A0
-char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, const Fix16& scanLineY, Fix16_Point& p0, Fix16_Point& p1)
+char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, const Fix16& scanLineY, Fix16Point& p0, Fix16Point& p1)
 {
 
     // Raw compares: with Fix16 operators VC6 runs out of inline budget and calls the Fix16_Point ctor
     // out of line. The out-of-line Sub_40AC80 gives the original's EH frame for pd. Remaining diff: the
     // original's success returns are `mov $1,%al; jmp` to one shared epilogue, ours copy the epilogue.
-    Fix16_Point pd;
+    Fix16Point pd;
 
     if (p0.y == p1.y)
     {
@@ -492,11 +492,11 @@ char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, co
 }
 
 // 0x4F77D0
-bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const Fix16& scanLineX, Fix16_Point& p0, Fix16_Point& p1)
+bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const Fix16& scanLineX, Fix16Point& p0, Fix16Point& p1)
 {
 
     // Same shape as ComputeScanlineIntersectionY_4F76A0, same leftover diff.
-    Fix16_Point pd;
+    Fix16Point pd;
 
     if (p0.x == p1.x)
     {
@@ -610,10 +610,10 @@ u8 Sprite::GetWaterCornerMask_59E250()
     Fix16 zpos_delta = this->field_1C_zpos - kFP16One_7035C4;
     UpdateCollisionBoundsIfNeeded_59E9C0();
 
-    Fix16_Point* pBBox = field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pBBox = field_C_pCollisionShape->field_C_corners;
     for (s32 i = 0; i < 4; i++)
     {
-        Fix16_Point* pIter = &pBBox[i];
+        Fix16Point* pIter = &pBBox[i];
         if (gMap_0x370_6F6268->IsWaterBlockAt_4B9F40(pIter->x.ToInt(), pIter->y.ToInt(), zpos_delta.ToInt()))
         {
             bits |= 1 << i;
@@ -748,7 +748,7 @@ char_type Sprite::CollisionCheck_59E590(Sprite* pOther)
 // 0x59E680
 char_type Sprite::CheckDirectionalSliceCollision_59E680(Fix16 sliceLen, Sprite* pSprite)
 {
-    Fix16_Point point;
+    Fix16Point point;
     point.FromPolar_41E210(-sliceLen / 2, pSprite->field_0_rotation);
 
     gSprite_703814->field_C_pCollisionShape->CopyDimensions_447DF0(pSprite->field_C_pCollisionShape);
@@ -1140,7 +1140,7 @@ void Sprite::Draw_59EFF0()
         field_4_pVisualShape->UpdateRotatedBoundingBox_5A3550(field_14_xy.x, field_14_xy.y, field_1C_zpos, field_0_rotation);
     }
 
-    Fix16_Point* pRect = field_4_pVisualShape->field_C_corners;
+    Fix16Point* pRect = field_4_pVisualShape->field_C_corners;
 
     u = pSpriteIndex->field_4_width - 0.30000001F;
     v = pSpriteIndex->field_5_height - 0.30000001F;
@@ -1357,7 +1357,7 @@ void Sprite::FreeShapes_59FAD0()
 }
 
 // 0x59FB10
-bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
+bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
 {
     Fix16 half_width;
     Fix16 half_height;
@@ -1492,7 +1492,7 @@ char_type Sprite::FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* p
 
     char_type counter = 0;
 
-    Fix16_Point* pBBox = pOther->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pBBox = pOther->field_C_pCollisionShape->field_C_corners;
 
     Fix16 pHalfW;
     Fix16 pHalfH;
@@ -1505,7 +1505,7 @@ char_type Sprite::FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* p
     for (i = 0; i < 4; i++)
     {
         Ang16 t = -field_0_rotation;
-        Fix16_Point* pCorner = &pBBox[i];
+        Fix16Point* pCorner = &pBBox[i];
         RotateAndTranslatePoint_42A720(pCorner->x, pCorner->y, t, field_14_xy.x, field_14_xy.y, corner_x, corner_y);
 
         if (((corner_x >= -pHalfW) && (corner_x <= pHalfW) && (corner_y >= -pHalfH) && (corner_y <= pHalfH)))
@@ -1532,7 +1532,7 @@ char_type Sprite::FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* p
 char_type Sprite::CollisionCheck_5A0320(Fix16* pXY1, Fix16* pXY2, u8* pCollisionIdx1, u8* pCollisionIdx2)
 {
     u8 overlapCount = 0;
-    const Fix16_Point* pBoundingBox = &field_C_pCollisionShape->field_C_corners[0];
+    const Fix16Point* pBoundingBox = &field_C_pCollisionShape->field_C_corners[0];
 
     for (u8 i = 0; i < 4; i++)
     {
@@ -1568,7 +1568,7 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     Fix16 half_width;
     Fix16 half_height;
 
-    Fix16_Point* pOtherRenderRect = pOther->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pOtherRenderRect = pOther->field_C_pCollisionShape->field_C_corners;
 
     field_C_pCollisionShape->GetHalfExtents_4BA0A0(&half_width, &half_height);
 
@@ -1666,7 +1666,7 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 // 0x5A0970
 char_type Sprite::CheckBBoxScanlineIntersection_5A0970(Fix16 scanXMin, Fix16 scanXMax, Fix16 scanY)
 {
-    Fix16_Point* pBBox = field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pBBox = field_C_pCollisionShape->field_C_corners;
     if (ComputeScanlineIntersectionY_4F76A0(scanXMin, scanXMax, scanY, pBBox[0], pBBox[1]) ||
         ComputeScanlineIntersectionY_4F76A0(scanXMin, scanXMax, scanY, pBBox[1], pBBox[2]) ||
         ComputeScanlineIntersectionY_4F76A0(scanXMin, scanXMax, scanY, pBBox[2], pBBox[3]) ||
@@ -1684,11 +1684,11 @@ char_type Sprite::CheckBBoxScanlineIntersection_5A0970(Fix16 scanXMin, Fix16 sca
 }
 
 // 0x5A0A70
-bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16_Point& point, u8& a4)
+bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& point, u8& a4)
 {
     // Same as GetNearestVerticalEdgeToCoordinate_5A1030
     UpdateCollisionBoundsIfNeeded_59E9C0();
-    Fix16_Point* RenderingRect = field_C_pCollisionShape->field_C_corners;
+    Fix16Point* RenderingRect = field_C_pCollisionShape->field_C_corners;
 
     Fix16 diff = RenderingRect[0].y - a2;
     Fix16 sign = Sign_4B9C20(diff.mValue);
@@ -1763,7 +1763,7 @@ bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16_Point& 
 // 0x5A0EF0
 char_type Sprite::HitTestVerticalLine_5A0EF0(Fix16 x, Fix16 y1, Fix16 y2)
 {
-    Fix16_Point* pBBox = this->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pBBox = this->field_C_pCollisionShape->field_C_corners;
     if (ComputeScanlineIntersectionX_4F77D0(x, y1, y2, pBBox[0], pBBox[1]) ||
         ComputeScanlineIntersectionX_4F77D0(x, y1, y2, pBBox[1], pBBox[2]) ||
         ComputeScanlineIntersectionX_4F77D0(x, y1, y2, pBBox[2], pBBox[3]) ||
@@ -1776,11 +1776,11 @@ char_type Sprite::HitTestVerticalLine_5A0EF0(Fix16 x, Fix16 y1, Fix16 y2)
 }
 
 // 0x5a1030
-bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16_Point& a3, u8& a4)
+bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3, u8& a4)
 {
     // least_abs assigned (not initialised) so it lives in a register. a3 set with one point copy (smaller
     // than the two field copies): the inline budget then leaves the negation in all four Abs out of line
-    Fix16_Point* RenderingRect = field_C_pCollisionShape->field_C_corners;
+    Fix16Point* RenderingRect = field_C_pCollisionShape->field_C_corners;
     UpdateCollisionBoundsIfNeeded_59E9C0();
 
     Fix16 diff = RenderingRect[0].x - a2;
@@ -1854,11 +1854,11 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16_Point& a3
 }
 
 // 0x5a1490
-bool Sprite::PointInsideRotatedBounds_5A1490(Fix16_Point& point1, Fix16_Point& point2)
+bool Sprite::PointInsideRotatedBounds_5A1490(Fix16Point& point1, Fix16Point& point2)
 {
 
-    Fix16_Point rotated_1;
-    Fix16_Point rotated_2;
+    Fix16Point rotated_1;
+    Fix16Point rotated_2;
     Fix16 half_width;
     Fix16 half_height;
     field_C_pCollisionShape->GetHalfExtents_4BA0A0(&half_width, &half_height);
@@ -2022,7 +2022,7 @@ char_type Sprite::IsTouchingSlopeBlock_5A1EB0()
     s32 zpos_int = this->field_1C_zpos.ToInt();
 
     UpdateCollisionBoundsIfNeeded_59E9C0();
-    Fix16_Point* pBBox = this->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pBBox = this->field_C_pCollisionShape->field_C_corners;
 
     if (gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(pBBox[0].x.ToInt(), pBBox[0].y.ToInt(), zpos_int))
     {
@@ -2196,18 +2196,18 @@ Ang16 Sprite::GetNegatedAngle_5A26E0()
 }
 
 // 0x5a2710
-Fix16_Point Sprite::FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
-                                                          Fix16_Point& newPos,
-                                                          Ang16 newAng,
-                                                          u8& bOutSideSelf,
-                                                          u8& bOutSideOther,
-                                                          u8& pOutHitType)
+Fix16Point Sprite::FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
+                                                         Fix16Point& newPos,
+                                                         Ang16 newAng,
+                                                         u8& bOutSideSelf,
+                                                         u8& bOutSideOther,
+                                                         u8& pOutHitType)
 {
     u8 idx1;
     u8 idx2;
-    Fix16_Point result;
+    Fix16Point result;
 
-    Fix16_Point SpritePos = get_x_y_443580();
+    Fix16Point SpritePos = get_x_y_443580();
     Ang16 SpriteAng = field_0_rotation;
 
     bOutSideSelf = 5;
@@ -2415,11 +2415,11 @@ void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix
     // The five points are constructed up front (EH state 4 at the start), in this order to get the
     // original's stack slots, and the corners
     // (renderingRect[i] = point + corner_i) are shared by every branch.
-    Fix16_Point corner1;
-    Fix16_Point corner2;
-    Fix16_Point corner3;
-    Fix16_Point corner0;
-    Fix16_Point point;
+    Fix16Point corner1;
+    Fix16Point corner2;
+    Fix16Point corner3;
+    Fix16Point corner0;
+    Fix16Point point;
 
     Fix16 width_over_2 = field_0_width / 2;
     Fix16 height_over_2 = field_4_height / 2;

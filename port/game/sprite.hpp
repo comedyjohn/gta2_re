@@ -17,8 +17,8 @@ EXTERN_GLOBAL_ARRAY(Vert, gTileVerts_7036D0, 8);
 
 EXTERN_GLOBAL(Fix16, gFix16_7035C0);
 
-bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const Fix16& scanLineX, Fix16_Point& p0, Fix16_Point& p1);
-char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, const Fix16& scanLineY, Fix16_Point& p0, Fix16_Point& p1);
+bool ComputeScanlineIntersectionX_4F77D0(const Fix16& minX, Fix16& minY, const Fix16& scanLineX, Fix16Point& p0, Fix16Point& p1);
+char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, const Fix16& scanLineY, Fix16Point& p0, Fix16Point& p1);
 
 class Car_BC;
 class Char_B4;
@@ -171,9 +171,9 @@ class SpriteShape_4C
     Fix16 field_0_width;
     Fix16 field_4_height;
     Fix16 field_8_depth;
-    Fix16_Point field_C_corners[4];
+    Fix16Point field_C_corners[4];
     SpriteShape_4C* mpNext;
-    Fix16_Rect field_30_boundingBox;
+    Fix16Rect field_30_boundingBox;
     bool field_48_bbox_up_to_date;
     char_type field_49_unused;
     char_type field_4A_unused;
@@ -194,17 +194,17 @@ class Sprite
     }
 
     // TODO: Ordering
-    Fix16_Point GetBoundingBoxCorner_562450(s32 idx);
+    Fix16Point GetBoundingBoxCorner_562450(s32 idx);
 
-    Fix16_Point get_x_y_443580();
+    Fix16Point get_x_y_443580();
     // 9.6f 0x4207B0, out-of-line copy get_x_y_443580 (emitted by Car_BC.cpp). Returns a Fix16_Point by
     // value, so VC6 charges it to the caller's inline budget and then calls the copy.
-    Fix16_Point get_x_y()
+    Fix16Point get_x_y()
     {
-        return Fix16_Point(field_14_xy.x, field_14_xy.y);
+        return Fix16Point(field_14_xy.x, field_14_xy.y);
     }
     // get_x_y with its body defined at the end of Car_BC.cpp (Car_BC::HandleCarHitByObject_43F130)
-    inline Fix16_Point get_x_y_late_443580();
+    inline Fix16Point get_x_y_late_443580();
     void set_xyz_lazy_451950(Fix16 xpos, Fix16 ypos, Fix16 zpos);
     void setxy_lazy_54EC80(Fix16 xpos, Fix16 ypos);
     bool IsControlledByActivePlayer_59E170();
@@ -236,15 +236,15 @@ class Sprite
     void EnsureVisualShape_59F990();
     void UpdateDimensionsFromSpriteIndex_59FA40();
     void FreeShapes_59FAD0();
-    bool IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect);
+    bool IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect);
     char_type FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* pOut1, u8* pOut2);
     char_type CollisionCheck_5A0320(Fix16* pXY1, Fix16* pXY2, u8* pCollisionIdx1, u8* pCollisionIdx2);
     bool RotatedRectCollisionSAT_5A0380(Sprite* pOther);
     char_type CheckBBoxScanlineIntersection_5A0970(Fix16 scanXMin, Fix16 scanXMax, Fix16 scanY);
-    bool GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16_Point& point, u8& a4);
+    bool GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16Point& point, u8& a4);
     char_type HitTestVerticalLine_5A0EF0(Fix16 x, Fix16 y1, Fix16 y2);
-    bool GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16_Point& a3, u8& a4);
-    bool PointInsideRotatedBounds_5A1490(Fix16_Point& point1, Fix16_Point& point2);
+    bool GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16Point& a3, u8& a4);
+    bool PointInsideRotatedBounds_5A1490(Fix16Point& point1, Fix16Point& point2);
     char_type sub_5A19C0();
     char sub_5A1A60();
     void ResolveZOrder_5A1B30(Sprite* pOther);
@@ -256,12 +256,12 @@ class Sprite
     char_type sub_5A2440();
     char_type CheckSpriteMovementRegion_5A2500();
     Ang16 GetNegatedAngle_5A26E0();
-    Fix16_Point FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
-                                                      Fix16_Point& newPos,
-                                                      Ang16 newAng,
-                                                      u8& pOutSideSelf,
-                                                      u8& pOutSideOther,
-                                                      u8& pOutHitType);
+    Fix16Point FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
+                                                     Fix16Point& newPos,
+                                                     Ang16 newAng,
+                                                     u8& pOutSideSelf,
+                                                     u8& pOutSideOther,
+                                                     u8& pOutHitType);
     void CreateSoundObj_5A29D0();
     bool IsObjectModelEqual_59E930(s32 model);
     void FreeSound_5A2A00();
@@ -575,7 +575,7 @@ class Sprite
         field_28_draw_layer = new_layer;
     }
 
-    Fix16_Point_POD field_14_xy;
+    Fix16PointPOD field_14_xy;
     Fix16 field_1C_zpos;
     s16 field_20_instance_id; // unique per live sprite (SpriteManager id_base counter)
     s16 field_22_type_sprite_idx; // sprite number within its sprite type, looked up with GetSpriteTrueIndex_5AA460

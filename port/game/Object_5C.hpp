@@ -9,7 +9,7 @@
 #include "fix16.hpp"
 #include "sprite.hpp"
 
-EXTERN_GLOBAL(Fix16_Point, gZeroVector_6F8EF0);
+EXTERN_GLOBAL(Fix16Point, gZeroVector_6F8EF0);
 EXTERN_GLOBAL(s32, gObj2C_id_623EC0);
 
 void UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3);
@@ -64,20 +64,20 @@ class Object_2C
     bool ShouldStopAtTrafficLight_525290(Sprite* pSprite);
     bool ShouldCollideWithSprite_522430(Sprite* pSprite);
     bool SelectCollisionSprite_522460(Sprite* pProbe);
-    void SetMovementVector_5224E0(const Fix16_Point& speed);
-    void SetMovementVectorWithRandomState_522640(const Fix16_Point& point);
+    void SetMovementVector_5224E0(const Fix16Point& speed);
+    void SetMovementVectorWithRandomState_522640(const Fix16Point& point);
     void SetConveyorPush_5226A0(char_type conveyor_speed);
-    void ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* pPoint);
-    void ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint, u8 not_used);
-    void ResolveCollisionWithWorld_522B20(Fix16_Point* f18, Fix16_Point* pPoint, Fix16_Point* speed);
-    void ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint);
-    void ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint);
-    void HandleCollision_522E10(Fix16_Point* pPoint);
+    void ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16Point* pPoint);
+    void ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16Point* pPoint, u8 not_used);
+    void ResolveCollisionWithWorld_522B20(Fix16Point* f18, Fix16Point* pPoint, Fix16Point* speed);
+    void ResolveCollisionWithMapTile_522BE0(Fix16Point* pPoint);
+    void ResolveCollisionWithMapTileHorizontal_522D00(Fix16Point* pPoint);
+    void HandleCollision_522E10(Fix16Point* pPoint);
     bool TryStartSlide_5233A0(Fix16 value);
-    void HandleCollisionOutcome_523440(Fix16_Point point, char_type bUnknown1, char_type bUnknown2);
-    bool HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, Fix16 found_z);
-    bool HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2);
-    bool HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z);
+    void HandleCollisionOutcome_523440(Fix16Point point, char_type bUnknown1, char_type bUnknown2);
+    bool HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, Fix16 found_z);
+    bool HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, u8* pHit2);
+    bool HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z);
     void ComputeWallHitSide_524550();
     void IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, Ang16 move_angle);
     void OnExplosionNearby_525190(u8 ped_ref_idx);
@@ -100,7 +100,7 @@ class Object_2C
     void AssignToBucket_527AE0();
     void RemoveFromCollisionBuckets_527D00();
     void ReleaseSubObjects_527F10();
-    void NewObj3C_528130(const Fix16_Point& speed);
+    void NewObj3C_528130(const Fix16Point& speed);
     bool HandleRotationStateTransition_528240(s32 current, s32 desired);
     void TickObject_5283C0(s32 obj_type);
     char_type OnObjectTouched_5288B0(Sprite* pSprite);
@@ -127,12 +127,12 @@ class Object_2C
     ~Object_2C();
     void EnsureObject3C_52A650();
     void ReactivateObjectAfterImpact_52A6D0(Sprite* pSprite);
-    Fix16_Point GetXY_52AE70();
-    Fix16_Point GetSpeedVector_52AE90();
+    Fix16Point GetXY_52AE70();
+    Fix16Point GetSpeedVector_52AE90();
     // 9.6f 0x482C50; GetSpeedVector_52AE90 is its out-of-line copy. It returns a Fix16_Point (which has
     // a destructor), so VC6 never expands it: it is charged to the caller's inline budget and called
     // out of line (SetMovementVector_5224E0)
-    Fix16_Point GetSpeedVector_482C50()
+    Fix16Point GetSpeedVector_482C50()
     {
         if (field_10_obj_3c)
         {

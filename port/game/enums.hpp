@@ -173,7 +173,7 @@ enum
 } // namespace Car_Door_Lock
 
 // Wanted level (star count / cop head), what Police_7B8 sends at each
-namespace cop_level_enum
+namespace CopLevel
 {
 enum cop_level_enum
 {
@@ -185,7 +185,7 @@ enum cop_level_enum
     fbi_5 = 5, // FBI crews
     army_6 = 6, // army
 };
-} // namespace cop_level_enum
+} // namespace CopLevel
 
 namespace cop_level_ped_enum
 {

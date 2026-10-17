@@ -838,7 +838,7 @@ bool Game_0x40::IsPointOnScreen_4B9A80(Fix16 x, Fix16 y)
 }
 
 // 0x4B9B10
-bool Game_0x40::IsRectVisibleToAnyPlayer_4B9B10(Fix16_Rect* pBounds)
+bool Game_0x40::IsRectVisibleToAnyPlayer_4B9B10(Fix16Rect* pBounds)
 {
     s32 i;
     Player** ppPlayer = field_4_players;
@@ -989,7 +989,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
     pPlayer->field_0_is_user = 1;
     field_1C_draw_player = field_38_local_player;
 
-    gpRng_67AB34 = new rng(); // inline
+    gpRng_67AB34 = new Rng(); // inline
     if (!gpRng_67AB34)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1793);

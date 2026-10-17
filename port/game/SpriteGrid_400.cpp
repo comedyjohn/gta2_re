@@ -277,7 +277,7 @@ Sprite* SpriteGrid_400::FindNearestSpriteOfType_477E60(Sprite* pSprite, s32 desi
 }
 
 // 0x477f30
-bool SpriteGrid_400::CollectRectCollisions_477F30(Fix16_Rect* pRect,
+bool SpriteGrid_400::CollectRectCollisions_477F30(Fix16Rect* pRect,
                                                   char_type bDeepCheck,
                                                   s32 exclude_sprite_type,
                                                   Sprite* pExclude,
@@ -290,7 +290,7 @@ bool SpriteGrid_400::CollectRectCollisions_477F30(Fix16_Rect* pRect,
 }
 
 // 0x477f60
-bool SpriteGrid_400::CheckRectForCollisions_477F60(Fix16_Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude)
+bool SpriteGrid_400::CheckRectForCollisions_477F60(Fix16Rect* pRect, char_type bDeepCheck, s32 exclude_sprite_type, Sprite* pExclude)
 {
     bool bRet = false;
     ++gCollisionCounters_6791FC->field_4_query_id;
@@ -680,7 +680,7 @@ GridCell_C* SpriteGrid_400::GetFirstXCellInRow_478590(s32 y_pos)
 }
 
 // 0x4785d0
-char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect* pRect)
+char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16Rect* pRect)
 {
     GridCell_C* pXItemIter = GetFirstXCellInRow_478590(y_pos);
     char bRet = 0;
@@ -702,7 +702,7 @@ char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect
                 //  83:    inc     %edx
                 gCollisionCounters_6791FC->field_0_test_count++;
 
-                Fix16_Rect* pBBox = &pObj->field_0_pSprite->field_C_pCollisionShape->field_30_boundingBox;
+                Fix16Rect* pBBox = &pObj->field_0_pSprite->field_C_pCollisionShape->field_30_boundingBox;
                 if (pRect->AABB_Intersects_41E2F0(pBBox) &&
                     (!bDoCollisionCheck_679006 || pObj->field_0_pSprite->field_C_pCollisionShape->IsZeroWidth_41E390() ||
                      pObj->field_0_pSprite->field_0_rotation.jIsAxisAligned_41E3C0() ||

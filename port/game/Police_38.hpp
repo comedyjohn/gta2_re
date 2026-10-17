@@ -8,7 +8,7 @@ class Ped;
 class Car_BC;
 class Object_2C;
 class PolicePursuitTarget_7C;
-class Fix16_Rect;
+class Fix16Rect;
 
 namespace police_crew_state
 {
@@ -194,5 +194,5 @@ class PoliceRoadblock_A4
     Ped* field_94_guard_4;
     Ped* field_98_guard_5;
     Ped* field_9C_guard_6;
-    Fix16_Rect* field_A0_rect;
+    Fix16Rect* field_A0_rect;
 };

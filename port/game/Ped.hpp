@@ -142,7 +142,7 @@ class Ped
     void Reset_45AFC0();
     void PoolAllocate();
     char_type IsLawEnforcement_45B4E0();
-    Fix16_Point GetVelocityVector_45B520();
+    Fix16Point GetVelocityVector_45B520();
     void SetRecentCrimeTimer_45B550();
     void SetPlayer_45B560(Player* pPlayer, char_type bIsAuxPed);
     bool IsEmergencyOccupation_45B590();
@@ -837,7 +837,7 @@ class Ped
     Object_2C* field_1A0_objective_target_object;
     Object_2C* field_1A4_internal_target_object;
     Ped* field_1A8_ped_killer;
-    Fix16_Vec field_1AC_cam;
+    Fix16Vec field_1AC_cam;
     Fix16 field_1B8_target_x;
     Fix16 field_1BC_target_y;
     Fix16 field_1C0_target_z;

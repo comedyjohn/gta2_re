@@ -56,11 +56,11 @@ EXTERN_GLOBAL(car_rng_list, gBadCarModels_676988);
 EXTERN_GLOBAL(car_rng_list, gGoodCarModels_677384);
 
 EXTERN_GLOBAL(u8, byte_6FEB48);
-EXTERN_GLOBAL(Fix16_Point, kZeroOnePoint_6F6484);
+EXTERN_GLOBAL(Fix16Point, kZeroOnePoint_6F6484);
 
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
-EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
+EXTERN_GLOBAL(Fix16Point, CollisionIntersectionPoint_6FE1A0);
 
 Object_2C* spawned_obj = nullptr;
 Car_BC* pNewCar = nullptr;
@@ -307,7 +307,7 @@ void GetPlayerPos(Fix16& xpos, Fix16& ypos, Fix16& zpos)
 
 void ShowRectAndPointsForSprite4C(SpriteShape_4C* p4C)
 {
-    Fix16_Rect rect = p4C->field_30_boundingBox;
+    Fix16Rect rect = p4C->field_30_boundingBox;
     if (ImGui::TreeNode("bounding box"))
     {
         ImGui::Value("Left", rect.field_0_left.ToFloat(), "%.2f");
@@ -1499,13 +1499,13 @@ void ImGuiDebugDraw()
                     if (ImGui::Button("SpawnDamageFireEffect_43B870 1"))
                     {
                         // TODO: Diff stuff if zero point
-                        Fix16_Point p = pCarIter->field_50_car_sprite->get_x_y_443580();
+                        Fix16Point p = pCarIter->field_50_car_sprite->get_x_y_443580();
                         pCarIter->SpawnDamageFireEffect_43B870(1, &p);
                     }
 
                     if (ImGui::Button("SpawnDamageFireEffect_43B870 2"))
                     {
-                        Fix16_Point p; // = pCarIter->field_50_car_sprite->get_x_y_443580();
+                        Fix16Point p; // = pCarIter->field_50_car_sprite->get_x_y_443580();
                         p.x = 0;
                         p.y = 0;
                         pCarIter->SpawnDamageFireEffect_43B870(3, &p);
@@ -3082,7 +3082,7 @@ void ImGuiDebugDraw()
         {
             pPlayerSprite = GetPlayerSprite();
 
-            static Fix16_Point particle_velocity = Fix16_Point(Fix16(0), Fix16(0));
+            static Fix16Point particle_velocity = Fix16Point(Fix16(0), Fix16(0));
             static auto speed = Fix16(0);
             static auto unknown = Fix16(0);
             static s32 mVar_speed = 0;
@@ -3170,7 +3170,7 @@ void ImGuiDebugDraw()
                 gParticle_8_6FD5E8->EmitImpactParticles_53FE40(pPlayerSprite->field_14_xy.x,
                                                                pPlayerSprite->field_14_xy.y,
                                                                pPlayerSprite->field_1C_zpos,
-                                                               Fix16_Point(0, 0));
+                                                               Fix16Point(0, 0));
             }
             ImGui::TreePop();
         }

@@ -12,7 +12,7 @@
 #include "winmain.hpp"
 
 DEFINE_GLOBAL(MapRenderer*, gpMapRenderer_6F66E4, 0x6F66E4);
-DEFINE_GLOBAL_INIT(Fix16_Point, kZeroOnePoint_6F6484, Fix16_Point(Fix16(0), Fix16(1)), 0x6F6484);
+DEFINE_GLOBAL_INIT(Fix16Point, kZeroOnePoint_6F6484, Fix16Point(Fix16(0), Fix16(1)), 0x6F6484);
 EXTERN_GLOBAL(u16, gBlockLeft_6F62F6);
 DEFINE_GLOBAL(u16, gBlockTop_6F62F4, 0x6F62F4);
 EXTERN_GLOBAL(u16, gBlockRight_6F63C6);
@@ -55,12 +55,12 @@ DEFINE_GLOBAL_INIT(Fix16, kTileTexMax_6F6578, kTileTexSize_6F6548 - kFpEpsilon_6
 DEFINE_GLOBAL_INIT(Fix16, kFpThreeEighths_6F6428, Fix16(0x1800, 0), 0x6F6428);
 DEFINE_GLOBAL_INIT(Fix16, kFpFiveEighths_6F6430, Fix16(0x2800, 0), 0x6F6430);
 DEFINE_GLOBAL_INIT(Fix16, kFpOneSixtyFourth_6F6434, Fix16(0x100, 0), 0x6F6434);
-DEFINE_GLOBAL(Fix16_Point, gUVCorner1_6F6588, 0x6F6588);
-DEFINE_GLOBAL(Fix16_Point, gUVCorner3_6F6598, 0x6F6598);
-DEFINE_GLOBAL(Fix16_Point, gUVCorner2_6F6590, 0x6F6590);
-DEFINE_GLOBAL(Fix16_Point, gUVEdge03_6F62A0, 0x6F62A0);
-DEFINE_GLOBAL(Fix16_Point, gUVEdge01_6F62A8, 0x6F62A8);
-DEFINE_GLOBAL(Fix16_Point, gUVCorner0_6F6580, 0x6F6580);
+DEFINE_GLOBAL(Fix16Point, gUVCorner1_6F6588, 0x6F6588);
+DEFINE_GLOBAL(Fix16Point, gUVCorner3_6F6598, 0x6F6598);
+DEFINE_GLOBAL(Fix16Point, gUVCorner2_6F6590, 0x6F6590);
+DEFINE_GLOBAL(Fix16Point, gUVEdge03_6F62A0, 0x6F62A0);
+DEFINE_GLOBAL(Fix16Point, gUVEdge01_6F62A8, 0x6F62A8);
+DEFINE_GLOBAL(Fix16Point, gUVCorner0_6F6580, 0x6F6580);
 
 // The vertex projection helpers (9.6f: Nanobotz::ProjectVertTop_46BD40, ProjectVertBottom_46BDF0 and
 // ProjectVert_46BC70, called on the caller's this). In 10.5 they are inlined. Called through a global
@@ -2485,7 +2485,7 @@ void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a,
 // 0x4F3FB0
 void draw_4F3FB0(s32 arg)
 {
-    Fix16_Point tmp;
+    Fix16Point tmp;
     switch (arg & 0x60)
     {
         case 32: // rotation code 0
@@ -2540,7 +2540,7 @@ void draw_4F3FB0(s32 arg)
 // 0x4f4190
 void Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
 {
-    Fix16_Point uv_coords = ((gUVEdge01_6F62A8 * a1) + (gUVEdge03_6F62A0 * a2)) + gUVCorner0_6F6580;
+    Fix16Point uv_coords = ((gUVEdge01_6F62A8 * a1) + (gUVEdge03_6F62A0 * a2)) + gUVCorner0_6F6580;
     // Converting through f32 locals (rather than ToFloat()) adds a narrowing step that makes
     // VC6 schedule the index load before the fmuls, like the original.
     f32 u = uv_coords.x.mValue;

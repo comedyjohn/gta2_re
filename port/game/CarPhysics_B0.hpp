@@ -22,21 +22,21 @@ EXTERN_GLOBAL(Ang16, kAng270_6FE154);
 EXTERN_GLOBAL(CarInfo_2C*, gCarInfo_2C_6FE0E4);
 EXTERN_GLOBAL(Fix16, gDamageSpeedFactor_6FE348);
 EXTERN_GLOBAL(Fix16, kDrowningMaxSpeed_677794);
-EXTERN_GLOBAL(Fix16_Point, stru_6FDF50);
+EXTERN_GLOBAL(Fix16Point, stru_6FDF50);
 EXTERN_GLOBAL(Fix16, dword_6FE0B0);
 EXTERN_GLOBAL(Fix16, kF16Zero_677B90);
-EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
+EXTERN_GLOBAL(Fix16Point, CollisionIntersectionPoint_6FE1A0);
 
-Fix16_Point ComputeLineLineIntersection_55F3B0(Fix16 OwnerMass,
-                                               Fix16 TargetMass,
-                                               const Fix16_Point& RelativeVelocity,
-                                               Fix16_Point& DistToCollision_ByRef,
-                                               Fix16_Point& CollisionIntersectPoint,
-                                               const Fix16_Point& CoM_related,
-                                               Fix16_Point& a8,
-                                               Fix16 OwnerMomOfInertia,
-                                               Fix16 TargetMomOfInertia,
-                                               Fix16 offset);
+Fix16Point ComputeLineLineIntersection_55F3B0(Fix16 OwnerMass,
+                                              Fix16 TargetMass,
+                                              const Fix16Point& RelativeVelocity,
+                                              Fix16Point& DistToCollision_ByRef,
+                                              Fix16Point& CollisionIntersectPoint,
+                                              const Fix16Point& CoM_related,
+                                              Fix16Point& a8,
+                                              Fix16 OwnerMomOfInertia,
+                                              Fix16 TargetMomOfInertia,
+                                              Fix16 offset);
 
 namespace car_turn_direction
 {
@@ -71,13 +71,13 @@ class CarPhysics_B0
         field_58_theta = v;
     }
 
-    void set_cp1_40F7E0(const Fix16_Point& v)
+    void set_cp1_40F7E0(const Fix16Point& v)
     {
         field_38_cp1.x = v.x;
         field_38_cp1.y = v.y;
     }
 
-    void set_linvel_421170(const Fix16_Point& v)
+    void set_linvel_421170(const Fix16Point& v)
     {
         field_40_linvel_1.x = v.x;
         field_40_linvel_1.y = v.y;
@@ -117,7 +117,7 @@ class CarPhysics_B0
     // TODO: Ordering
     Fix16 ComputeZPosition_559E90();
 
-    Fix16_Point get_cp1_40B560();
+    Fix16Point get_cp1_40B560();
     ~CarPhysics_B0() = default; // 0x446ee0
     void ShowPhysicsDebug_559430();
     void ShowSpeedRevsDamage_5597B0();
@@ -130,7 +130,7 @@ class CarPhysics_B0
     void ScarePedsOnDrivingFast_559C30();
     void ApplyForcedSteering_559DD0();
     void ApplyObjectImpact_559E20(Object_2C* pObj);
-    Fix16_Point ComputeCombinedCenterOfMass_559EC0();
+    Fix16Point ComputeCombinedCenterOfMass_559EC0();
     Fix16 CalculateMass_559FF0();
     Fix16 GetEffectiveMomentOfInertia_55A050();
     u8 IsInAir_55A0B0();
@@ -167,11 +167,11 @@ class CarPhysics_B0
     char_type TestCollision_55C150();
     char_type SweepTestMovementForCollision_55C3B0(Fix16* outHitStep, Fix16* outNoHitStep);
     void BinarySearchCollisionTime_55C560(Fix16& low, Fix16& high);
-    void HandleMapBoundaryCollisionY_55C5C0(Fix16_Point& pPoint, Ang16 angle);
-    void HandleMapBoundaryCollisionX_55C820(Fix16_Point& pPoint, Ang16 angle);
-    void DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle);
+    void HandleMapBoundaryCollisionY_55C5C0(Fix16Point& pPoint, Ang16 angle);
+    void HandleMapBoundaryCollisionX_55C820(Fix16Point& pPoint, Ang16 angle);
+    void DispatchCollision_55CA70(Fix16Point& point, Ang16 angle);
     void ReplayAndDispatchCollision_55CBB0(Fix16 step_a, Fix16 step_b);
-    void SpawnSkidSegment_55D200(s32 box_idx, Fix16_Point arg_4, s32 surface);
+    void SpawnSkidSegment_55D200(s32 box_idx, Fix16Point arg_4, s32 surface);
     void UpdateWheelSkidEffects_55DC00();
     void DoSkidmarks_55E260();
     char_type StepMovementAndCollisions_55E470();
@@ -183,26 +183,26 @@ class CarPhysics_B0
     char_type ProcessCollisionAndClampVelocity_55F280();
     void StepPhysics_55F330();
     char_type CheckPendingCollision_55F360();
-    void ApplyForceWithTrailerRedirect_55F740(Fix16_Point* pPoint, Fix16_Point* pForce);
-    void ApplyForceAndIntegrate_55F7A0(Fix16_Point* pPoint, Fix16_Point force);
-    void ApplyForceAtPoint_55F800(Fix16_Point* pPoint, Fix16_Point* pForce, s32 bRotate);
-    void AccumulateImpulse_55F930(Fix16_Point* pPoint);
+    void ApplyForceWithTrailerRedirect_55F740(Fix16Point* pPoint, Fix16Point* pForce);
+    void ApplyForceAndIntegrate_55F7A0(Fix16Point* pPoint, Fix16Point force);
+    void ApplyForceAtPoint_55F800(Fix16Point* pPoint, Fix16Point* pForce, s32 bRotate);
+    void AccumulateImpulse_55F930(Fix16Point* pPoint);
     void ApplyAngularImpulse_55F970(Fix16 impulse);
-    void ApplyForceScaledByMass_55F9A0(const Fix16_Point& pForce);
-    void ApplyImpulseWithTrailerRedirect_55FA10(Fix16_Point* pPoint);
-    Fix16 ApplyImpactForcesAndDamage_55FA60(Fix16_Point& PointOfForce, const Fix16_Point& Impulse, s32 base_dmg);
-    void AccumulateImpulse_55FC30(const Fix16_Point& a2, s32 base_dmg);
-    void HandleWorldCollision_55FD00(Fix16_Point& pHitPoint);
+    void ApplyForceScaledByMass_55F9A0(const Fix16Point& pForce);
+    void ApplyImpulseWithTrailerRedirect_55FA10(Fix16Point* pPoint);
+    Fix16 ApplyImpactForcesAndDamage_55FA60(Fix16Point& PointOfForce, const Fix16Point& Impulse, s32 base_dmg);
+    void AccumulateImpulse_55FC30(const Fix16Point& a2, s32 base_dmg);
+    void HandleWorldCollision_55FD00(Fix16Point& pHitPoint);
     void HandleCarCollision_55FF20(Car_BC* pOtherCar);
     void HandleObjectCollision_5606C0(Object_2C* p2C, char_type damage_area);
     void ProcessPedImpact_560B40(Char_B4* pCharB4, u8 hitType);
     void UpdateLinearAndAngularAccel_560EB0();
     void ApplyMovementStep_560F20(Fix16 time_scale);
     void IntegrateAndClampVelocities_5610B0();
-    Fix16_Point ComputeRelativePointVelocity_561130(Fix16_Point* pPoint);
-    Fix16_Point GetPointVelocity_561350(Fix16_Point* pPoint);
-    Fix16_Point ComputePointVelocity_561380(Fix16_Point& point);
-    Fix16 ApplyDriveForce_5615D0(Fix16_Point& wheel_point, Ang16 angle, Fix16_Point& friction, Fix16 slip_speed);
+    Fix16Point ComputeRelativePointVelocity_561130(Fix16Point* pPoint);
+    Fix16Point GetPointVelocity_561350(Fix16Point* pPoint);
+    Fix16Point ComputePointVelocity_561380(Fix16Point& point);
+    Fix16 ApplyDriveForce_5615D0(Fix16Point& wheel_point, Ang16 angle, Fix16Point& friction, Fix16 slip_speed);
     bool get_revs_561940();
     Fix16 ComputeEngineTorque_561970();
     Fix16 ComputeTorqueFromThrottle_561DD0();
@@ -283,7 +283,7 @@ class CarPhysics_B0
     void SetCarInfoGlobal_562ED0();
     void SetCurrentCarInfoAndModelPhysics_562EF0();
 
-    void HandleObjectCollisionAt_482CC0(Object_2C* pObj, Fix16_Point& point, char_type a3)
+    void HandleObjectCollisionAt_482CC0(Object_2C* pObj, Fix16Point& point, char_type a3)
     {
         SetCurrentCarInfoAndModelPhysics_562EF0();
         CollisionIntersectionPoint_6FE1A0 = point;
@@ -303,7 +303,7 @@ class CarPhysics_B0
     void Init_5637A0();
     void PoolAllocate();
 
-    Fix16_Point get_linvel_447010();
+    Fix16Point get_linvel_447010();
 
     void PoolDeallocate()
     {
@@ -426,15 +426,15 @@ class CarPhysics_B0
     void ForceNeutralInput_453F50();
     void ForceForwardAcceleration_453F70();
 
-    Fix16_Point field_0_vel_read_only;
+    Fix16Point field_0_vel_read_only;
     u32 field_8_total_damage_q;
     CarPhysics_B0* mpNext;
-    Fix16_Point field_10_last_skid_pos[4];
-    Fix16_Point field_30_cm1;
-    Fix16_Point field_38_cp1;
-    Fix16_Point field_40_linvel_1;
-    Fix16_Point field_48_force_accum;
-    Fix16_Point field_50_linear_accel;
+    Fix16Point field_10_last_skid_pos[4];
+    Fix16Point field_30_cm1;
+    Fix16Point field_38_cp1;
+    Fix16Point field_40_linvel_1;
+    Fix16Point field_48_force_accum;
+    Fix16Point field_50_linear_accel;
     Ang16 field_58_theta;
     s16 field_5A_unused;
     Car_BC* field_5C_pCar;

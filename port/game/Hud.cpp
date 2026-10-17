@@ -718,7 +718,7 @@ bool Hud_Arrow_7C::CheckVisibility_5D0530()
 // 0x5d0620
 bool Hud_Arrow_7C::UpdateTargets_5D0620()
 {
-    Fix16_Point diff;
+    Fix16Point diff;
     field_18.field_18_primary_target.UpdateAimCoordinates_5D03F0();
     field_18.field_3C_secondary_target.UpdateAimCoordinates_5D03F0();
 
@@ -760,7 +760,7 @@ bool Hud_Arrow_7C::UpdateTargets_5D0620()
 // 0x5d0850
 void Hud_Arrow_7C::UpdateScreenPos_5D0850()
 {
-    Fix16_Point displacement;
+    Fix16Point displacement;
     Fix16 player_xpos;
     Fix16 player_ypos;
     Fix16 player_zpos;

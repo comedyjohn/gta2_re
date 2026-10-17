@@ -137,7 +137,7 @@ class Char_B4
     Fix16 field_8C_jump_base_z;
     Fix16 field_90_fall_speed;
     Fix16 field_94_fall_z_speed;
-    Fix16_Point_POD field_98_velocity_vector;
+    Fix16PointPOD field_98_velocity_vector;
     //Fix16 field_9C;
     s8 field_A0;
     s8 field_A1_unused;
@@ -309,7 +309,7 @@ class Char_B4
     void DrawFlamesAndStartScreamTimer_545430();
     bool HasShadows_5451C0();
 
-    Fix16_Point sub_545580();
+    Fix16Point sub_545580();
     void SetRemap_46DD50(u8 remap);
 
     void RemoveFireSprites_5454B0();

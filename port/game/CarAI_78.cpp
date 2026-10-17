@@ -3064,18 +3064,18 @@ void CarAI_78::UpdateStateMachine_44E560()
                 {
                     switch (pChase->field_30_pTargetPed->get_wanted_star_count_46EF00())
                     {
-                        case cop_level_enum::none_0:
-                        case cop_level_enum::police_1:
+                        case CopLevel::none_0:
+                        case CopLevel::police_1:
                             police_level = 1;
                             break;
-                        case cop_level_enum::police_2:
-                        case cop_level_enum::police_3:
+                        case CopLevel::police_2:
+                        case CopLevel::police_3:
                             police_level = 2;
                             break;
-                        case cop_level_enum::swat_4:
+                        case CopLevel::swat_4:
                             police_level = 3;
                             break;
-                        case cop_level_enum::fbi_5:
+                        case CopLevel::fbi_5:
                             police_level = 4;
                             break;
                         default:
@@ -4917,7 +4917,7 @@ void CarAI_78::ScanAheadForObstacles_452060()
 // 0x452a20
 void CarAI_78::ManageCollisions_452A20()
 {
-    Fix16_Point impact_point;
+    Fix16Point impact_point;
 
     if (field_24_bf.bFlag12)
     {

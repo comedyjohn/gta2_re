@@ -23,7 +23,7 @@ EXTERN_GLOBAL(Fix16, kZero_676818);
 EXTERN_GLOBAL(Fix16, kFpZero_7064C0);
 EXTERN_GLOBAL(Fix16, kZero_679E70);
 
-class Fix16_Point;
+class Fix16Point;
 
 // A point without a destructor. 10.5 has points that don't take part in EH unwinding: struct members
 // (~Sprite is a bare jmp, the Char_B4 ctor's EH states leave out field_98_velocity_vector), a by-value
@@ -32,11 +32,11 @@ class Fix16_Point;
 // separate type, not a base of Fix16_Point: 10.5 charges Fix16_Point's ctor as one size-42 inline
 // site at the top level, which a derived class's ctor (base ctor nested in it) doesn't reproduce.
 // 9.6f doesn't tell the two apart.
-struct Fix16_Point_POD
+struct Fix16PointPOD
 {
-    Fix16_Point_POD() = default;
+    Fix16PointPOD() = default;
 
-    Fix16_Point_POD(Fix16& a1, Fix16& a2)
+    Fix16PointPOD(Fix16& a1, Fix16& a2)
     {
         x = a1;
         y = a2;
@@ -66,19 +66,19 @@ struct Fix16_Point_POD
         y = ((-x_old) * sin) + (y * cos);
     }
 
-    Fix16_Point_POD& operator+=(Fix16_Point& other);
+    Fix16PointPOD& operator+=(Fix16Point& other);
 
     // Same layout: a POD passed where a Fix16_Point is expected (a free inline site, like the other way)
-    operator Fix16_Point&()
+    operator Fix16Point&()
     {
-        return *reinterpret_cast<Fix16_Point*>(this);
+        return *reinterpret_cast<Fix16Point*>(this);
     }
 
     Fix16 x;
     Fix16 y;
 };
 
-class Fix16_Point
+class Fix16Point
 {
   public:
     void SetXY_432860(const Fix16& a2, const Fix16& a3)
@@ -169,14 +169,14 @@ class Fix16_Point
         y = radius * Ang16::cosine_40F520(angle);
     }
 
-    Fix16_Point& operator+=(const Fix16_Point& other)
+    Fix16Point& operator+=(const Fix16Point& other)
     {
         x += other.x;
         y += other.y;
         return *this;
     }
 
-    Fix16_Point& operator-=(Fix16_Point& other)
+    Fix16Point& operator-=(Fix16Point& other)
     {
         x -= other.x;
         y -= other.y;
@@ -184,32 +184,32 @@ class Fix16_Point
     }
 
     // Operator* for Fix16 ?
-    Fix16_Point& MultiplyByFix16_49E3A0(const Fix16& factor)
+    Fix16Point& MultiplyByFix16_49E3A0(const Fix16& factor)
     {
         x *= factor;
         y *= factor;
         return *this;
     }
 
-    Fix16_Point Multiply_438FE0(const Fix16& in) const;
-    Fix16_Point Divide_442CB0(const Fix16& in);
+    Fix16Point Multiply_438FE0(const Fix16& in) const;
+    Fix16Point Divide_442CB0(const Fix16& in);
 
     // Divide_442CB0 as a nothrow inline (see DivideInl_55F9E0; CarPhysics_B0::HandleObjectCollision_5606C0,
     // Car_BC::ApplyExplosionImpulse_443710)
-    Fix16_Point DivideInl_442CB0(Fix16& in) throw()
+    Fix16Point DivideInl_442CB0(Fix16& in) throw()
     {
-        return Fix16_Point(x / in, y / in);
+        return Fix16Point(x / in, y / in);
     }
 
     // Multiply_438FE0 as a nothrow inline (see DivideInl_55F9E0; Car_BC::TryHitchTrailer_442810)
-    Fix16_Point MultiplyInl_438FE0(Fix16& in) throw()
+    Fix16Point MultiplyInl_438FE0(Fix16& in) throw()
     {
-        return Fix16_Point(x * in, y * in);
+        return Fix16Point(x * in, y * in);
     }
 
     // Out-of-line copies emitted in Weapon_30.cpp (used by sub_5DE910).
-    Fix16_Point& AddAssign_5E40C0(const Fix16_Point& other);
-    Fix16_Point& DivAssign_5E40E0(const Fix16& v);
+    Fix16Point& AddAssign_5E40C0(const Fix16Point& other);
+    Fix16Point& DivAssign_5E40E0(const Fix16& v);
     Fix16 MaxAbs_5E4140();
 
     // 9.6f 0x48A270 (the inline of MaxAbs_5E4140)
@@ -238,21 +238,21 @@ class Fix16_Point
     }
 
     // Both inlined and exists as a function... some strange array init behaviour??
-    ~Fix16_Point() = default;
+    ~Fix16Point() = default;
 
     // It needs to be in the header
     // 0x563970
 
-    Fix16_Point() = default;
+    Fix16Point() = default;
 
     // No user-defined copy ctor: 9.6f copies points with plain movs (no call even at /Ob0), and the
     // implicit one does not use up VC6's inline budget (SpawnCabAndTrailerHelper_408370 needs that).
 
-    Fix16_Point(const Fix16& a1, const Fix16& a2) : x(a1), y(a2)
+    Fix16Point(const Fix16& a1, const Fix16& a2) : x(a1), y(a2)
     {
     }
 
-    void ClampTowardsZero_49E480(const Fix16_Point& limit)
+    void ClampTowardsZero_49E480(const Fix16Point& limit)
     {
         if (x >= kFP16Zero_6FE20C)
         {
@@ -280,59 +280,59 @@ class Fix16_Point
     }
 
     // 0x40AC50
-    Fix16_Point operator+(const Fix16_Point& in)
+    Fix16Point operator+(const Fix16Point& in)
     {
-        return Fix16_Point(x + in.x, y + in.y);
+        return Fix16Point(x + in.x, y + in.y);
     }
 
     // 0x40AC80
-    Fix16_Point operator-(const Fix16_Point& rhs) const
+    Fix16Point operator-(const Fix16Point& rhs) const
     {
-        return Fix16_Point(x - rhs.x, y - rhs.y);
+        return Fix16Point(x - rhs.x, y - rhs.y);
     }
 
     // The out-of-line copy of the inline operator-. Called by name where the original keeps an EH state
     // for temporaries around the call (Crane_15C::HookPickupCar_47EF80, ComputeHookPolar_47F6C0); the
     // inline operator- called out of line gets none (CarPhysics_B0::HandleCarCollision_55FF20)
-    Fix16_Point Sub_40AC80(const Fix16_Point& rhs) const;
+    Fix16Point Sub_40AC80(const Fix16Point& rhs) const;
 
     // operator+/operator- with their bodies defined at the end of Car_BC.cpp (HandleCarHitByObject_43F130)
-    inline Fix16_Point AddLate_40AC50(const Fix16_Point& in);
-    inline Fix16_Point SubLate_40AC80(const Fix16_Point& rhs);
+    inline Fix16Point AddLate_40AC50(const Fix16Point& in);
+    inline Fix16Point SubLate_40AC80(const Fix16Point& rhs);
 
     // Out of line operator+ (CarPhysics_B0::SpawnSkidSegment_55D200)
-    Fix16_Point Add_40AC50(const Fix16_Point& in);
+    Fix16Point Add_40AC50(const Fix16Point& in);
 
     // operator+ 0x40AC50 as a nothrow inline that VC6 still calls out of line: no EH state for the
     // temporaries alive across the call (Car_BC::TryHitchTrailer_442810)
-    Fix16_Point AddInl_40AC50(const Fix16_Point& in) throw()
+    Fix16Point AddInl_40AC50(const Fix16Point& in) throw()
     {
-        return Fix16_Point(x + in.x, y + in.y);
+        return Fix16Point(x + in.x, y + in.y);
     }
 
     // Out of line unary minus (Object_2C::ResolveCollisionWithPed_5229B0)
-    Fix16_Point Negate_40ACB0() const;
+    Fix16Point Negate_40ACB0() const;
 
-    Fix16_Point operator*(const Fix16& in)
+    Fix16Point operator*(const Fix16& in)
     {
-        return Fix16_Point(x * in, y * in);
+        return Fix16Point(x * in, y * in);
     }
 
-    Fix16_Point operator-() const
+    Fix16Point operator-() const
     {
-        return Fix16_Point(-x, -y);
+        return Fix16Point(-x, -y);
     }
 
-    Fix16_Point MultBy_442C80(const s32& factor);
+    Fix16Point MultBy_442C80(const s32& factor);
 
     // 10.0 0x442CB0
-    Fix16_Point operator/(const Fix16& in) const;
+    Fix16Point operator/(const Fix16& in) const;
 
-    Fix16_Point NormalizeSafe_442AD0();
+    Fix16Point NormalizeSafe_442AD0();
 
     Ang16 atan2_40ACD0();
 
-    Fix16_Point Rotate90CCW_5605E0();
+    Fix16Point Rotate90CCW_5605E0();
 
     void clear_41E1E0()
     {
@@ -340,34 +340,34 @@ class Fix16_Point
         y = 0;
     }
 
-    Fix16_Point operator/(const s32& a3);
+    Fix16Point operator/(const s32& a3);
 
     // operator/ 0x55F9E0 as a nothrow inline that VC6 still calls out of line: the original sets no EH
     // state for the temporaries that live across this call (CarPhysics_B0::HandleCarCollision_55FF20,
     // HandleObjectCollision_5606C0). throw() on the real operator/ changes 6 matched functions.
-    Fix16_Point DivideInl_55F9E0(const s32& a3) throw()
+    Fix16Point DivideInl_55F9E0(const s32& a3) throw()
     {
-        return Fix16_Point(x / a3, y / a3);
+        return Fix16Point(x / a3, y / a3);
     }
 
     // Same layout: a point sliced into a Fix16_Point_POD (one free inline site, see sub_5DF270)
-    operator Fix16_Point_POD&()
+    operator Fix16PointPOD&()
     {
-        return *reinterpret_cast<Fix16_Point_POD*>(this);
+        return *reinterpret_cast<Fix16PointPOD*>(this);
     }
 
     Fix16 x;
     Fix16 y;
 };
 
-inline Fix16_Point_POD& Fix16_Point_POD::operator+=(Fix16_Point& other)
+inline Fix16PointPOD& Fix16PointPOD::operator+=(Fix16Point& other)
 {
     x += other.x;
     y += other.y;
     return *this;
 }
 
-struct Fix16_Vec
+struct Fix16Vec
 {
     Fix16 x, y, z;
 };

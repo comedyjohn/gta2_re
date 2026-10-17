@@ -85,7 +85,7 @@ Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
 // Negate_4086A0 are not folded in our build). The other operators stay the plain inlines.
 namespace
 {
-inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
+inline void RotateNegExport_(Fix16Point& v, const Ang16& angle)
 {
     Fix16 sin = Ang16::sine_40F500(angle);
     Fix16 cos = Ang16::cosine_40F520(angle);
@@ -103,7 +103,7 @@ inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
 void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
 {
     Ang16 angle;
-    Fix16_Point vector(Fix16(0), Fix16(0));
+    Fix16Point vector(Fix16(0), Fix16(0));
 
     if (!bSkip_particles_67D64D)
     {
@@ -169,8 +169,8 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
     // The original enters with EH state 4 and sets 7 at the top of the car branch, as five points up
     // front and three in the car branch would. Declared like that (unused extras), the ctors stay inline
     // but the rest of the function moves further away, so only the used points are declared for now.
-    Fix16_Point vel(Fix16(0), Fix16(0));
-    Fix16_Point offset;
+    Fix16Point vel(Fix16(0), Fix16(0));
+    Fix16Point offset;
     if (bSkip_particles_67D64D)
     {
         return;
@@ -183,8 +183,8 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
         // 9.6f: the corners rotate by a local copy of the sprite angle (it also sets the inline budget for the
         // second rotation: first + inline, the negate out of line)
         Ang16 angle;
-        Fix16_Point corner_1;
-        Fix16_Point corner_2;
+        Fix16Point corner_1;
+        Fix16Point corner_2;
         Car_BC* pCar = pSprite->field_8_car_bc_ptr;
         pParticle = gParticle_8_6FD5E8->New_53E3C0(vel.x, vel.y, dword_6FD330, 0, 0, 0);
         if (pParticle)
@@ -282,7 +282,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
 void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char_type bRandomRot)
 {
     Ang16 angle_2;
-    Fix16_Point velocity(Fix16(0), Fix16(0));
+    Fix16Point velocity(Fix16(0), Fix16(0));
 
     if (!bSkip_particles_67D64D)
     {
@@ -345,13 +345,13 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
 void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
 {
     {
-        Fix16_Point vel(0, 0);
-        Fix16_Point pos;
-        Fix16_Point offset;
-        Fix16_Point ped_offset;
+        Fix16Point vel(0, 0);
+        Fix16Point pos;
+        Fix16Point offset;
+        Fix16Point ped_offset;
         // point_velocity only receives the unused result of GetPointVelocity_561350 (9.6f passed it
         // to set_xyz_lazy instead of pos).
-        Fix16_Point point_velocity;
+        Fix16Point point_velocity;
         Ang16 angle;
         if (!bSkip_particles_67D64D)
         {
@@ -359,7 +359,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
             {
                 field_0_fire_hit_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(objects::fire_hitting_194, 0, 0, 0, kAngZero_6FD5D4);
             }
-            vel = Fix16_Point(0, 0);
+            vel = Fix16Point(0, 0);
             Particle_4C* pParticle = gParticle_8_6FD5E8->New_53E3C0(vel.x, vel.y, dword_6FD330, 0, 0, 0);
             if (pParticle)
             {
@@ -414,7 +414,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                     ped_offset.x = -dword_6FD464;
                     ped_offset.y = dword_6FD468 + dword_6FD2E8;
                     ped_offset.RotateByAngle_40F6B0(pSprt->field_0_rotation);
-                    ped_offset = ped_offset + *reinterpret_cast<Fix16_Point*>(&pPed->field_98_velocity_vector);
+                    ped_offset = ped_offset + *reinterpret_cast<Fix16Point*>(&pPed->field_98_velocity_vector);
                     pParticle->field_30_pNext->set_ang_lazy_420690(pSprt->field_0_rotation);
                     pParticle->field_30_pNext->set_xyz_lazy_420600(pSprt->field_14_xy.x + ped_offset.x,
                                                                    pSprt->field_14_xy.y + ped_offset.y,
@@ -438,7 +438,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FD500, Fix16(0x1, 0), 0x6FD500);
 void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
 {
     Ang16 angle;
-    Fix16_Point vector(Fix16(0), Fix16(0));
+    Fix16Point vector(Fix16(0), Fix16(0));
     if (!bSkip_particles_67D64D)
     {
         if (!field_4)
@@ -509,14 +509,14 @@ inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radius, Fix
 } // namespace
 
 // 0x53FE40
-void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir)
+void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16Point dir)
 {
     // 9.6f declares both angles up front. dir is destroyed by the callee; the unused point gives
     // the EH state 2 that the original sets once t is built.
     Ang16 ang1;
     Ang16 tanAng;
-    [[maybe_unused]] Fix16_Point unused;
-    Fix16_Point t(Fix16(0), Fix16(0));
+    [[maybe_unused]] Fix16Point unused;
+    Fix16Point t(Fix16(0), Fix16(0));
     tanAng = dir.atan2_40F790();
 
     for (u8 i = 0; i < 6; ++i)
@@ -561,7 +561,7 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Poi
 void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 ang)
 {
     Ang16 angle;
-    Fix16_Point vector(Fix16(0), Fix16(0));
+    Fix16Point vector(Fix16(0), Fix16(0));
 
     if (!bSkip_particles_67D64D)
     {
@@ -630,7 +630,7 @@ void Particle_8::SpawnParticleSprite_5405D0(Sprite* pSprite)
 // 0x5406b0
 void Particle_8::SpawnCigaretteSmokePuff_5406B0(Sprite* pSprite, char_type bUnknown)
 {
-    Fix16_Point vel(Fix16(0), Fix16(0));
+    Fix16Point vel(Fix16(0), Fix16(0));
     if (!bSkip_particles_67D64D)
     {
         vel.x = Fix16(0);

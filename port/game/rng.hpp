@@ -2,10 +2,10 @@
 
 #include "Function.hpp"
 
-class rng
+class Rng
 {
   public:
-    rng()
+    Rng()
     {
         field_0_rng = 0;
         field_4_rnd = 0;
@@ -33,6 +33,6 @@ class rng
     s32 field_4_rnd;
 };
 
-EXTERN_GLOBAL(rng*, gpRng_67AB34);
+EXTERN_GLOBAL(Rng*, gpRng_67AB34);
 
-EXTERN_GLOBAL(rng, gRng_6F6784);
+EXTERN_GLOBAL(Rng, gRng_6F6784);

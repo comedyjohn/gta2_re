@@ -146,7 +146,7 @@ class Worker:
 
         def text(f):
             if f not in sources:
-                sources[f] = open(f, errors="surrogateescape", newline="").read()
+                sources[f] = open(f, encoding="latin-1", newline="").read()
             return sources[f]
 
         def visit(cur):
@@ -288,6 +288,9 @@ def match_paren(text, start):
     return len(code) - 1
 
 
+IDENTITY = {}
+
+
 def load_renames(path):
     wanted, usr_targets = {}, {}
     with open(path, newline="") as f:
@@ -301,6 +304,8 @@ def load_renames(path):
                 sys.exit(f"{path}: {new!r} is not an identifier")
             if old.startswith("usr:"):
                 usr_targets[old[4:]] = new
+            elif old.split("::")[-1] == new:
+                IDENTITY[old] = new  # nothing to edit; address_map.csv still gets the new_name
             else:
                 wanted[old] = new
     return wanted, usr_targets
@@ -308,6 +313,11 @@ def load_renames(path):
 
 def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
     wanted, usr_targets = load_renames(csv_path)
+    if not wanted and not usr_targets:
+        if not dry:
+            update_map(dict(IDENTITY), {})
+        print("nothing to rename; address_map.csv updated" if not dry else "nothing to rename")
+        return 0
     olds = {q.split("::")[-1] for q in wanted}
     argsets = [(wanted, usr_targets, olds, p, a) for p, a in commands(build_dir, only)]
     results = []
@@ -345,7 +355,7 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
 
     def source(p):
         if port_files.get(p) is None:
-            port_files[p] = open(p, errors="surrogateescape", newline="").read()
+            port_files[p] = open(p, encoding="latin-1", newline="").read()
         return port_files[p]
 
     defines = None
@@ -441,7 +451,7 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
                 files.add(os.path.join(dirpath, n))
     olds_re = re.compile(r"\b(" + "|".join(re.escape(o) for o in sorted(olds)) + r")\b") if olds else None
     for p in sorted(files):
-        text = open(p, errors="surrogateescape", newline="").read()
+        text = open(p, encoding="latin-1", newline="").read()
         if olds_re is None or not olds_re.search(text):
             continue
         code = strip_code(text)
@@ -485,12 +495,12 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
     if dry:
         return 0
     for f, es in per_file.items():
-        text = open(f, errors="surrogateescape", newline="").read()
+        text = open(f, encoding="latin-1", newline="").read()
         for off, old, new in sorted(es, reverse=True):
             assert text[off : off + len(old)] == old, (f, off, old)
             text = text[:off] + new + text[off + len(old) :]
-        open(f, "w", errors="surrogateescape", newline="").write(text)
-    update_map(wanted, targets)
+        open(f, "w", encoding="latin-1", newline="").write(text)
+    update_map({**wanted, **IDENTITY}, targets)
     return 0
 
 

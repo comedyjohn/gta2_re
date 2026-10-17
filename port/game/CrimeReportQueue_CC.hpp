@@ -20,7 +20,7 @@ class CrimeReport_14
 
     s32 field_0_crime_type; // crime_stats_type
     s32 field_4_ped_id;
-    Fix16_Vec field_8_pos;
+    Fix16Vec field_8_pos;
 };
 
 // Ring buffer of the last 10 reported crimes, drained by the police sound/AI code (TryPopOldestReport).

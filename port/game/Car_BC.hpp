@@ -21,7 +21,7 @@ struct gmp_zone_info;
 struct SCR_THREAD;
 class Camera_0xBC;
 class Object_2C;
-class Fix16_Rect;
+class Fix16Rect;
 class CarAI_78;
 class CarPhysics_B0;
 class Trailer;
@@ -318,7 +318,7 @@ class CarManager_6C
     s32 field_40_proto_recycled_cars;
     s32 field_44_parked_cars;
     s32 field_48_kind10_cars;
-    Fix16_Point field_4C_tv_van_dir;
+    Fix16Point field_4C_tv_van_dir;
     u8 field_54_spawn_block;
     char_type field_55_visible_cars_count;
     char_type field_56_unused;
@@ -344,7 +344,7 @@ class Trailer
     Ped* GetTruckCabDriver_407B80();
     Car_BC* GetCabOrLoadedCar_407B90(Car_BC* pCar);
     void SetTruckCabAndTrailerCar_407BB0(Car_BC* pTruckCab, Car_BC* pTrailerCar);
-    Fix16_Point GetHitchPosition_407BD0();
+    Fix16Point GetHitchPosition_407BD0();
     void UpdateTrailerAlignment_407CE0();
     char_type ServicePhysics_408140();
     void SetupCarPhysicsAndSpriteBinding_408190();
@@ -487,8 +487,8 @@ class Car_BC
     Fix16 GetDamageFactorOnSpeed_439EE0();
     Fix16 GetMaxSpeed_439F30();
     wchar_t* GetCarStr_439F80();
-    Fix16_Point GetHitchPoint_439FB0();
-    Fix16_Point GetRearWheelOffset_43A0E0();
+    Fix16Point GetHitchPoint_439FB0();
+    Fix16Point GetRearWheelOffset_43A0E0();
     Fix16 GetMass_43A120();
     Fix16 GetAntiStrength_43A1D0();
     bool IsBus_43A1F0();
@@ -496,7 +496,7 @@ class Car_BC
     Fix16 GetCarLinearSpeed_43A240();
     bool IsCarInAir_43A3C0();
     Ang16 GetOrientationAngle_43A3E0();
-    Fix16_Point GetLinearVelocity_43A450();
+    Fix16Point GetLinearVelocity_43A450();
     Fix16 GetVelocity_43A4C0();
     Fix16 GetMomentOfInertia_43A590();
     Fix16 GetMinDimension_43A5B0();
@@ -535,7 +535,7 @@ class Car_BC
     void AssignKillerToOccupants_43B770();
     void AssignDriverBlameForExplosion_43B7B0(Car_BC* pCar);
     bool IsImmuneToExplosionType_43B850(s32 explosion_type);
-    void SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos);
+    void SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos);
     // Called without this in SpawnDamageFireEffect_43B870: a static
     static s32 GetFireExplosionType_43BB90(u8 fire_level);
     void SpawnFire_43BBC0();
@@ -568,9 +568,9 @@ class Car_BC
     void EmitExplosion_43D690(s32 type, Fix16 x, Fix16 y);
     void TriggerExplosion_43D7B0(s32 type);
     void HandleCarExplosion_43D840(s32 type);
-    s16 AccumulateDamage_43DA90(s16 damage, const Fix16_Point* pVec);
+    s16 AccumulateDamage_43DA90(s16 damage, const Fix16Point* pVec);
     // HandleCarHitByObject_43F130 passes the operator temporaries straight in (push %eax of the result)
-    s16 AccumulateDamage_43DA90(s16 damage, const Fix16_Point& vec)
+    s16 AccumulateDamage_43DA90(s16 damage, const Fix16Point& vec)
     {
         return AccumulateDamage_43DA90(damage, &vec);
     }
@@ -612,7 +612,7 @@ class Car_BC
     void UpdateTrainCarriagesOnTrack_4413B0(Fix16 xpos, Fix16 ypos, Fix16 zpos);
     void UpdateEngineStatus_441520();
     void UpdateBrakeLights_4415C0();
-    Fix16_Rect GetOrientedHalfExtentsRect_441600();
+    Fix16Rect GetOrientedHalfExtentsRect_441600();
     void TryHonkHorn_4416D0(s32 horn_mode);
     void UpdateHorn_4417D0();
     void HonkHorn_4417F0();
@@ -658,7 +658,7 @@ class Car_BC
     void InitDoors_4435A0();
     s32 GetCrashSoundCategory_4435B0();
     void UpdateSpriteNum_4435F0();
-    void ApplyExplosionImpulse_443710(Fix16_Point* xy);
+    void ApplyExplosionImpulse_443710(Fix16Point* xy);
     static s32 GetCarWeaponCost_443A50(s32 weapon_kind);
     void BuyCarWeapon_4438C0(s32 weapon_kind);
     static void ShowCantAffordMessage_443AB0(Player* pPlayer, s32 weapon_cost);
@@ -1430,7 +1430,7 @@ struct TrafficSpawner_14
     char_type ResolveSpawnDirection_583930(char_type a1, char_type a2);
 
     Camera_0xBC* field_0_cam;
-    Fix16_Rect* field_4_rect;
+    Fix16Rect* field_4_rect;
     s8 field_8_spawn_side;
     s8 field_9_traffic_car_model;
     s8 field_A_unused;

@@ -741,9 +741,9 @@ char_type Ped::IsLawEnforcement_45B4E0()
 }
 
 // 0x45b520
-Fix16_Point Ped::GetVelocityVector_45B520()
+Fix16Point Ped::GetVelocityVector_45B520()
 {
-    return Fix16_Point(field_168_game_object->field_98_velocity_vector.x, field_168_game_object->field_98_velocity_vector.y);
+    return Fix16Point(field_168_game_object->field_98_velocity_vector.x, field_168_game_object->field_98_velocity_vector.y);
 }
 
 // 0x45b550
@@ -3302,7 +3302,7 @@ void Ped::RoadBlockTank_AI_4619F0()
     }
 
     if (this->field_28C_threat_reaction != threat_reaction_enum::react_as_emergency_1 ||
-        gPolice_7B8_6FEE40->field_654_max_wanted_level == cop_level_enum::army_6)
+        gPolice_7B8_6FEE40->field_654_max_wanted_level == CopLevel::army_6)
     {
         if (this->field_258_objective == objectives_enum::no_obj_0)
         {
@@ -10706,7 +10706,7 @@ bool Ped::CanBeRecruitedToGroup_46E020(PedGroup* pGroup)
 // puts z in desiredCount's dead stack slot.
 namespace
 {
-inline void ComputeRecruitPrism(Fix16_Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
+inline void ComputeRecruitPrism(Fix16Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
 {
     s32 half = offset.mValue / 2;
     r.field_0_left.mValue = x.mValue - half;
@@ -10728,7 +10728,7 @@ void Ped::RecruitNearbyPeds_46E080(s32 desiredCount, Fix16 searchRadius)
     Ped* pPed; // edi
     PedGroup* pGroup; // ecx
     SpriteList_4 collision_list; // [esp+8h] [ebp-1Ch] BYREF
-    Fix16_Rect rect; // [esp+Ch] [ebp-18h] BYREF
+    Fix16Rect rect; // [esp+Ch] [ebp-18h] BYREF
 
     pGroup_ = this->field_164_ped_group;
     if (pGroup_)
@@ -10840,36 +10840,36 @@ u8 Ped::get_wanted_star_count_46EF00()
                     {
                         if (wanted_points < cop_level_ped_enum::cop_1_stars)
                         {
-                            return cop_level_enum::none_0;
+                            return CopLevel::none_0;
                         }
                         else
                         {
-                            return cop_level_enum::police_1;
+                            return CopLevel::police_1;
                         }
                     }
                     else
                     {
-                        return cop_level_enum::police_2;
+                        return CopLevel::police_2;
                     }
                 }
                 else
                 {
-                    return cop_level_enum::police_3;
+                    return CopLevel::police_3;
                 }
             }
             else
             {
-                return cop_level_enum::swat_4;
+                return CopLevel::swat_4;
             }
         }
         else
         {
-            return cop_level_enum::fbi_5;
+            return CopLevel::fbi_5;
         }
     }
     else
     {
-        return cop_level_enum::army_6;
+        return CopLevel::army_6;
     }
 }
 
@@ -10913,25 +10913,25 @@ void Ped::IncreaseWantedLevelFromDebugKeys_46EFD0()
 {
     switch (get_wanted_star_count_46EF00())
     {
-        case cop_level_enum::none_0:
+        case CopLevel::none_0:
             set_wanted_level_46EF40(600U);
             break;
-        case cop_level_enum::police_1:
+        case CopLevel::police_1:
             set_wanted_level_46EF40(1600U);
             break;
-        case cop_level_enum::police_2:
+        case CopLevel::police_2:
             set_wanted_level_46EF40(3000U);
             break;
-        case cop_level_enum::police_3:
+        case CopLevel::police_3:
             set_wanted_level_46EF40(5000U);
             break;
-        case cop_level_enum::swat_4:
+        case CopLevel::swat_4:
             set_wanted_level_46EF40(8000U);
             break;
-        case cop_level_enum::fbi_5:
+        case CopLevel::fbi_5:
             set_wanted_level_46EF40(12000U);
             break;
-        case cop_level_enum::army_6:
+        case CopLevel::army_6:
             set_wanted_level_46EF40(0);
             break;
         default:
@@ -10951,25 +10951,25 @@ void Ped::set_wanted_star_count_46F070(u8 star_count)
 {
     switch (star_count)
     {
-        case cop_level_enum::none_0:
+        case CopLevel::none_0:
             field_20A_wanted_points = 0;
             break;
-        case cop_level_enum::police_1:
+        case CopLevel::police_1:
             field_20A_wanted_points = 600;
             break;
-        case cop_level_enum::police_2:
+        case CopLevel::police_2:
             field_20A_wanted_points = 1600;
             break;
-        case cop_level_enum::police_3:
+        case CopLevel::police_3:
             field_20A_wanted_points = 3000;
             break;
-        case cop_level_enum::swat_4:
+        case CopLevel::swat_4:
             field_20A_wanted_points = 5000;
             break;
-        case cop_level_enum::fbi_5:
+        case CopLevel::fbi_5:
             field_20A_wanted_points = 8000;
             break;
-        case cop_level_enum::army_6:
+        case CopLevel::army_6:
             field_20A_wanted_points = 12000;
             break;
         default:

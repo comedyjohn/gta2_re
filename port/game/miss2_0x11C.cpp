@@ -5425,7 +5425,7 @@ void miss2_0x11C::SCRCMD_SET_DIR_OF_TVVAN_50DD90()
 {
     auto* pCmd = reinterpret_cast<SCR_SET_DIR_OF_TVVAN*>(gBasePtr_6F8070);
 
-    Fix16_Point point(pCmd->field_8_pos.field_0_x, pCmd->field_8_pos.field_4_y);
+    Fix16Point point(pCmd->field_8_pos.field_0_x, pCmd->field_8_pos.field_4_y);
     gCarManager_6C_677930->field_4C_tv_van_dir = point;
 
     miss2_0x11C::Next_503620(gBasePtr_6F8070);

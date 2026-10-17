@@ -9,7 +9,7 @@ class Ped;
 class Fix16;
 class Sprite;
 class Car_BC;
-class Fix16_Point;
+class Fix16Point;
 
 class SoundObject_10;
 
@@ -52,7 +52,7 @@ class Weapon_30
     bool is_max_capacity_5DCEA0();
     bool sub_5DCEF0();
     void TickReloadSpeed_5DCF40();
-    Object_2C* spawn_bullet_5DCF60(s32 bullet_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, const Fix16_Point& speed);
+    Object_2C* spawn_bullet_5DCF60(s32 bullet_type, Fix16 x, Fix16 y, Fix16 z, Ang16 rot, const Fix16Point& speed);
     void flamethrower_5DD0F0();
     void shotgun_5DD290();
     void pistol_5DD860();

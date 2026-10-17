@@ -122,14 +122,14 @@ char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
 
     Fix16 half_height = (half_width * dword_6766F4);
 
-    Fix16_Rect rect;
+    Fix16Rect rect;
     rect.SetHiLowZ_41E370(pSprite->field_1C_zpos, pSprite->field_1C_zpos);
     rect.SetRect_41E350(field_98_cur_pos.field_0_x - half_width,
                         field_98_cur_pos.field_0_x + half_width,
                         field_98_cur_pos.field_4_y - half_height,
                         field_98_cur_pos.field_4_y + half_height);
 
-    Fix16_Rect* pBox = &pSprite->field_C_pCollisionShape->field_30_boundingBox;
+    Fix16Rect* pBox = &pSprite->field_C_pCollisionShape->field_30_boundingBox;
     if (IntervalIntersectsRange_438FB0(rect.field_0_left, rect.field_4_right, pBox->field_0_left, pBox->field_4_right) &&
         IntervalIntersectsRange_438FB0(rect.field_8_top, rect.field_C_bottom, pBox->field_8_top, pBox->field_C_bottom) &&
         IntervalIntersectsRange_438FB0(rect.field_10_low_z, rect.field_14_high_z, pBox->field_10_low_z, pBox->field_14_high_z))
@@ -284,8 +284,8 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
 {
     // 9.6f 0x41EBF0: this source matches it exactly when built with VC7 (compile_vc7.sh, permuter_score.py --96f)
     Ang16 angle;
-    Fix16_Point vel;
-    Fix16_Point offset;
+    Fix16Point vel;
+    Fix16Point offset;
     Fix16 radius;
     Fix16 speed;
 
@@ -347,7 +347,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
 // 0x435A70
 s32 Camera_0xBC::IsCoordsPosVisible_435A70(Fix16 x, Fix16 y, Fix16 z)
 {
-    Fix16_Point_POD pos = WorldToScreen_40CFC0(x, y, z);
+    Fix16PointPOD pos = WorldToScreen_40CFC0(x, y, z);
     if (pos.x >= kZero_676818 && pos.x < Fix16(640) && pos.y >= kZero_676818 && pos.y < Fix16(480))
     {
         return 1;

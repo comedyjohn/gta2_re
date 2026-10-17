@@ -33,10 +33,10 @@ inline bool IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, co
     return false;
 }
 
-class Fix16_Rect
+class Fix16Rect
 {
   public:
-    Fix16_Rect() = default;
+    Fix16Rect() = default;
 
     void ComputeCollisionPrism_4204D0(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
     {
@@ -78,7 +78,7 @@ class Fix16_Rect
     void SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
     void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
-    bool OverlapsZ_433560(Fix16_Rect* pOther)
+    bool OverlapsZ_433560(Fix16Rect* pOther)
     {
         return IntervalsOverlap_41E160(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
     }
@@ -89,7 +89,7 @@ class Fix16_Rect
     }
 
     // 9.6f 0x463690, defined in map_0x370.cpp
-    inline bool EdgesCrossSegment_463690(Fix16_Point& p1, Fix16_Point& p2);
+    inline bool EdgesCrossSegment_463690(Fix16Point& p1, Fix16Point& p2);
 
     void SetFromPosSize_463710(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {
@@ -105,7 +105,7 @@ class Fix16_Rect
         this->field_14_high_z = highZ;
     }
 
-    Fix16_Rect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, Fix16 z)
+    Fix16Rect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, Fix16 z)
     {
         SetRect_41E350(left, right, top, bottom);
         field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
@@ -113,7 +113,7 @@ class Fix16_Rect
     }
 
     // TODO: Get inline addr
-    Fix16_Rect(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
+    Fix16Rect(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
     {
         field_0_left = x;
         field_8_top = y;
@@ -128,12 +128,12 @@ class Fix16_Rect
     bool RectOverlapsZone_59DF20(u8 zone_type);
     bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
 
-    bool IsPointInRect_4B9FD0(Fix16_Point* a2)
+    bool IsPointInRect_4B9FD0(Fix16Point* a2)
     {
         return Fix16::IsBetween_4B9E10(field_0_left, field_4_right, a2->x) && Fix16::IsBetween_4B9E10(field_8_top, field_C_bottom, a2->y);
     }
 
-    bool AABB_Intersects_41E2F0(Fix16_Rect* pOther) const
+    bool AABB_Intersects_41E2F0(Fix16Rect* pOther) const
     {
         return IntervalIntersectsRange_438FB0(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
                 IntervalIntersectsRange_438FB0(field_8_top, this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&

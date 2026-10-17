@@ -254,8 +254,12 @@ def commands(build_dir, only=None):
 
 
 def strip_code(text):
-    """text with comments, string and character literals blanked (same length)."""
+    """text with comments, string and character literals and #include lines blanked (same length)."""
     out = list(text)
+    for m in re.finditer(r"^[ \t]*#[ \t]*(?:include|pragma|error|warning)[^\n]*", text, re.M):
+        for k in range(m.start(), m.end()):
+            out[k] = " "
+    text = "".join(out)
     i, n = 0, len(text)
     while i < n:
         c = text[i]

@@ -502,7 +502,7 @@ CarRemapRng_2::CarRemapRng_2()
 
         for (unsigned short& j : gRngRemapTable_679320)
         {
-            u16 idx = gRng_6F6784.get_int_4F7AE0(1000);
+            u16 idx = gRng_6F6784.GetInt(1000);
             s16 next = j;
             j = gRngRemapTable_679320[idx];
             gRngRemapTable_679320[idx] = next;
@@ -815,10 +815,9 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
                     Fix16 h_val = gPixelsToFix16_6F6850.list[pInfo->h];
                     SwapIf3or4_41FE40(direction, w_val, h_val);
                     Fix16Rect rect;
-                    rect.SetRect_41E350(xpos - w_val, w_val + xpos, ypos - h_val, h_val + ypos);
-                    rect.SetHiLowZ_41E370(pos_z - kFP16One_6777D0, kFP16One_6777D0 + pos_z);
-                    if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) &&
-                        !rect.CanRectEnterMovementRegion_59DE80())
+                    rect.SetRect(xpos - w_val, w_val + xpos, ypos - h_val, h_val + ypos);
+                    rect.SetHiLowZ(pos_z - kFP16One_6777D0, kFP16One_6777D0 + pos_z);
+                    if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) && !rect.CanRectEnterMovementRegion())
                     {
                         field_50_car_sprite->set_xyz_lazy_420600(xpos, ypos, pos_z);
 
@@ -921,7 +920,7 @@ Car_BC* CarManager_6C::DoGetNearestCarFromCoord_444FC0(Fix16 xpos,
                     Fix16 trainDistance;
                     trainDistance = (Fix16::Abs(pTrainIter->field_50_car_sprite->field_14_xy.x - xpos) +
                                      Fix16::Abs(pTrainIter->field_50_car_sprite->field_14_xy.y - ypos))
-                                        .Add_408660(Fix16::Abs(pTrainIter->field_50_car_sprite->field_1C_zpos - zpos));
+                                        .Add(Fix16::Abs(pTrainIter->field_50_car_sprite->field_1C_zpos - zpos));
                     if (trainDistance < smallestDist)
                     {
                         smallestDist = trainDistance;
@@ -946,7 +945,7 @@ Car_BC* CarManager_6C::GetNearestFrontVehicle_445210(Sprite* pSprite, u8 k3)
 
     Fix16 new_x;
     Fix16 new_y;
-    Ang16::PolarToCartesian_41FC20(pSprite->field_0_rotation, kFpHalf_6772D0, new_x, new_y);
+    Ang16::PolarToCartesian(pSprite->field_0_rotation, kFpHalf_6772D0, new_x, new_y);
 
     pSprite->set_xyz_lazy_420600(pSprite->field_14_xy.x + new_x, pSprite->field_14_xy.y + new_y, pSprite->field_1C_zpos);
 
@@ -1100,11 +1099,11 @@ Car_BC* CarManager_6C::SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 
                 SwapIf3or4_41FE40(road_direction, sprite_width, sprite_height);
 
                 Fix16Rect rect;
-                rect.SetRect_41E350(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
-                rect.SetHiLowZ_41E370(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
+                rect.SetRect(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
+                rect.SetHiLowZ(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
 
-                if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) &&
-                    !rect.CanRectEnterMovementRegion_59DE80() && !gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&rect))
+                if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) && !rect.CanRectEnterMovementRegion() &&
+                    !gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&rect))
                 {
                     return CarManager_6C::SpawnCar_426E10_v2(x,
                                                              y,
@@ -1303,11 +1302,11 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
                 SwapIf3or4_41FE40(road_direction, sprite_width, sprite_height);
 
                 Fix16Rect rect;
-                rect.SetRect_41E350(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
-                rect.SetHiLowZ_41E370(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
+                rect.SetRect(x - sprite_width, sprite_width + x, y - sprite_height, sprite_height + y);
+                rect.SetHiLowZ(ground_z - kFP16One_6777D0, ground_z + kFP16One_6777D0);
 
-                if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) &&
-                    !rect.CanRectEnterMovementRegion_59DE80() && !gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&rect))
+                if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&rect, 0, 0, nullptr) && !rect.CanRectEnterMovementRegion() &&
+                    !gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&rect))
                 {
                     Car_BC* pCar = SpawnCar_426E10_v2(x, y, ground_z, ReturnAngleFromRoadDirection_4F7940(&road_direction), car_model_type);
                     pCar->SetupCarPhysicsAndSpriteBinding_43BCA0();
@@ -1490,21 +1489,21 @@ void SpawnCabAndTrailerHelper_408370(Fix16 xpos,
     Fix16Point hitch = gTrailerHitchOffset_66AAC8;
     Fix16Point cab_offset = gTrailerCabOffset_66AAE0;
 
-    hitch.RotateByAngle_40F6B0(rot);
-    hitch_pos = pos.Add_40AC50(hitch);
+    hitch.RotateByAngle(rot);
+    hitch_pos = pos.Add(hitch);
 
-    cab_offset.RotateByAngle_40F6B0(rot);
+    cab_offset.RotateByAngle(rot);
     // 9.6f 0x40F760: negate in place
-    cab_offset.x = cab_offset.x.Negate_4086A0();
-    cab_offset.y = cab_offset.y.Negate_4086A0();
-    cab_offset.RotateByAngle_40F6B0(uknown_rot);
-    trailer_pos = hitch_pos.Add_40AC50(cab_offset);
+    cab_offset.x = cab_offset.x.Negated();
+    cab_offset.y = cab_offset.y.Negated();
+    cab_offset.RotateByAngle(uknown_rot);
+    trailer_pos = hitch_pos.Add(cab_offset);
 
     *pOutZ = zpos;
     *pOutX = trailer_pos.x;
     *pOutY = trailer_pos.y;
     // 9.6f 0x40F640 (unary -) then 0x40F790 (angle of the vector)
-    *pOutRot = cab_offset.Negate_40ACB0().atan2_40F790();
+    *pOutRot = cab_offset.Negate().Atan2();
 }
 
 // 0x446530
@@ -1530,7 +1529,7 @@ Trailer* CarManager_6C::SpawnCabAndTrailer_446530(Fix16 xpos, Fix16 ypos, Ang16 
                                     &out_rot);
 
     Car_BC* pTrailer = SpawnCarAtCorrectZ_426E40(trailer_x, trailer_y, out_rot, trailer_model);
-    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList_420F30(pTrailer);
+    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList(pTrailer);
 
     Trailer* pNewTrailer = gTrailerPool_66AC80->field_0_pool.Allocate();
     pNewTrailer->SetTruckCabAndTrailerCar_407BB0(pCab, pTrailer);
@@ -1870,7 +1869,7 @@ Ang16 Car_BC::GetCornerAngle_4403A0()
     car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 w_fp = Fix16(pCarInfo->w) / 2;
     Fix16 h_fp = Fix16(pCarInfo->h) / 2;
-    return Ang16(Fix16::atan2_fixed_405320(h_fp, w_fp).rValue);
+    return Ang16(Fix16::Atan2Fixed(h_fp, w_fp).rValue);
 }
 
 // 0x439ec0
@@ -1923,7 +1922,7 @@ Fix16Point Car_BC::GetHitchPoint_439FB0()
         point = kCabHitchOffset_677358;
     }
 
-    point.RotateByAngle_40F6B0(field_50_car_sprite->field_0_rotation);
+    point.RotateByAngle(field_50_car_sprite->field_0_rotation);
     return point + field_50_car_sprite->get_x_y_443580();
 }
 
@@ -1976,7 +1975,7 @@ namespace
 {
 inline Fix16 GetLinearSpeed_43A240(CarPhysics_B0* pPhysics)
 {
-    return pPhysics->field_40_linvel_1.GetLength_41E260();
+    return pPhysics->field_40_linvel_1.GetLength();
 }
 } // namespace
 
@@ -2064,7 +2063,7 @@ Fix16 Car_BC::GetVelocity_43A4C0()
     }
     else
     {
-        return field_58_physics->field_0_vel_read_only.GetLength_41E260();
+        return field_58_physics->field_0_vel_read_only.GetLength();
     }
 }
 
@@ -2292,11 +2291,11 @@ void Car_BC::StartLightFlashing_43CAC0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
             }
         }
 
@@ -2304,27 +2303,27 @@ void Car_BC::StartLightFlashing_43CAC0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
             }
         }
 
         if (HasRoofLight_421660())
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
 
         if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
         }
 
         if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
         }
 
         field_8E_flash_count = 50;
@@ -2353,7 +2352,7 @@ void Car_BC::Deactivate_43AA60()
 {
     gSpriteGrid_1_679208->AddToSpriteRectBuckets_477B60(field_50_car_sprite);
     gSpriteGrid_3_679210->AddToSingleBucket_477AE0(field_50_car_sprite);
-    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList_420F30(this);
+    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList(this);
     SetDeactivatedStatus_4214E0();
 }
 
@@ -2646,11 +2645,10 @@ char_type Car_BC::IsDoorAccessible_43AFE0(u8 target_door)
                                                     y.ToInt()))
     {
         byte_6F8EDC = 1;
-        fr.ComputeCollisionPrism_4204D0(x, y, k_dword_6772CC, field_50_car_sprite->field_1C_zpos);
-        fr.ExpandToIncludePoint_59DEE0(field_50_car_sprite->field_14_xy.x, field_50_car_sprite->field_14_xy.y);
+        fr.ComputeCollisionPrism(x, y, k_dword_6772CC, field_50_car_sprite->field_1C_zpos);
+        fr.ExpandToIncludePoint(field_50_car_sprite->field_14_xy.x, field_50_car_sprite->field_14_xy.y);
         gCollisionCounters_6791FC->field_8_bUnknown = 1;
-        if (!fr.CanRectEnterMovementRegion_59DE80() &&
-            !gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&fr, 1, 3, field_50_car_sprite) &&
+        if (!fr.CanRectEnterMovementRegion() && !gSpriteGrid_1_679208->CheckRectForCollisions_477F60(&fr, 1, 3, field_50_car_sprite) &&
             !gMap_0x370_6F6268->RectHitsDiagonalWall_4E11E0(&fr))
         {
             gCollisionCounters_6791FC->field_8_bUnknown = 0;
@@ -2701,7 +2699,7 @@ bool Car_BC::IsStoppedWithPavementAtDoor_43B140(u8 target_car_door)
 
     Fix16 t1;
     Fix16 t2;
-    Ang16::PolarToCartesian_41FC20(angToUse, kFpHalf_6778FC, t1, t2);
+    Ang16::PolarToCartesian(angToUse, kFpHalf_6778FC, t1, t2);
 
     t1 += door_x;
     t2 += door_y;
@@ -2781,8 +2779,8 @@ void Car_BC::GetDoorWorldPos_43B420(u8 door_idx, Fix16* pOutX, Fix16* pOutY)
     Fix16 old_xpos = door_x;
     Ang16& rotation = field_50_car_sprite->field_0_rotation;
     Fix16 x_off;
-    x_off = door_x * Ang16::cosine_40F520(rotation) + door_y * Ang16::sine_40F500(rotation);
-    door_y = (-old_xpos).Multiply_408680(Ang16::sine_40F500(rotation)).Add_408660(door_y.Multiply_408680(Ang16::cosine_40F520(rotation)));
+    x_off = door_x * Ang16::Cosine(rotation) + door_y * Ang16::Sine(rotation);
+    door_y = (-old_xpos).Multiply(Ang16::Sine(rotation)).Add(door_y.Multiply(Ang16::Cosine(rotation)));
 
     *pOutX = field_50_car_sprite->field_14_xy.x + x_off;
     *pOutY = field_50_car_sprite->field_14_xy.y + door_y;
@@ -2807,8 +2805,8 @@ inline void RotateVector_41FC90_NewX(Fix16& xpos, Fix16& ypos, Ang16& rotation)
 {
     Fix16 old_xpos = xpos;
     Fix16 x_new;
-    x_new = xpos * Ang16::cosine_40F520(rotation) + ypos * Ang16::sine_40F500(rotation);
-    ypos = (-old_xpos) * Ang16::sine_40F500(rotation) + ypos * Ang16::cosine_40F520(rotation);
+    x_new = xpos * Ang16::Cosine(rotation) + ypos * Ang16::Sine(rotation);
+    ypos = (-old_xpos) * Ang16::Sine(rotation) + ypos * Ang16::Cosine(rotation);
     xpos = x_new;
 }
 } // namespace
@@ -2999,7 +2997,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
     Fix16 y_hit;
     Fix16Point rot_point; // function scope: the original has its EH state 0 from entry
 
-    if (pPos->IsNull_420360())
+    if (pPos->IsNull())
     {
         switch (static_cast<u8>(fire_size))
         {
@@ -3049,7 +3047,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
     else
     {
         rot_point = *pPos - field_50_car_sprite->get_x_y();
-        rot_point.RotateByAngle_40F6B0(field_50_car_sprite->field_0_rotation);
+        rot_point.RotateByAngle(field_50_car_sprite->field_0_rotation);
         x_hit = rot_point.x;
         y_hit = rot_point.y;
     }
@@ -3160,23 +3158,23 @@ void Car_BC::FlashHeadlights_43BD40()
         {
             if (HasPopupHeadlights_421700())
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
 
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
             }
 
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
 
             if (HasRoofLight_421660())
             {
-                field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+                field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
             }
         }
         else
@@ -3185,11 +3183,11 @@ void Car_BC::FlashHeadlights_43BD40()
             {
                 if (HasPopupHeadlights_421700())
                 {
-                    field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+                    field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
                 }
                 else
                 {
-                    field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+                    field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
                 }
             }
 
@@ -3197,17 +3195,17 @@ void Car_BC::FlashHeadlights_43BD40()
             {
                 if (HasPopupHeadlights_421700())
                 {
-                    field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                    field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28);
                 }
                 else
                 {
-                    field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+                    field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
                 }
             }
 
             if (HasRoofLight_421660())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
             }
         }
 
@@ -3223,11 +3221,11 @@ void Car_BC::BrakeLightsOn_43BF10()
     {
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
         }
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
         }
     }
     this->field_A4_bf.bBrakeLights = true;
@@ -3238,8 +3236,8 @@ void Car_BC::BrakeLightsOff_43BF70()
 {
     if (!this->field_A4_bf.bLightFlashing)
     {
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
     }
     this->field_A4_bf.bBrakeLights = false;
 }
@@ -3253,11 +3251,11 @@ void Car_BC::HeadlightsOn_43BFE0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
             }
         }
 
@@ -3265,17 +3263,17 @@ void Car_BC::HeadlightsOn_43BFE0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
             }
         }
 
         if (HasRoofLight_421660())
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
     }
     this->field_A4_bf.bHeadlights = true;
@@ -3288,23 +3286,23 @@ void Car_BC::HeadlightsOff_43C0C0()
     {
         if (HasPopupHeadlights_421700()) // bit 1
         {
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
 
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
         }
 
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
 
         if (HasRoofLight_421660()) // bit 2
         {
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
     }
 
@@ -3335,7 +3333,7 @@ void Car_BC::UpdateTopRightRoofLight_43C260()
 {
     if (HasTopRoofLights_4216A0() && !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
     {
-        this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightRoofLight_18);
+        this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightRoofLight_18);
         Object_2C* p2C = field_0_attachments.FindObject2CByModel_5A6A90(172);
         p2C->UpdateLight_527A30();
     }
@@ -3346,7 +3344,7 @@ void Car_BC::ResetTopRightRoofLight_43C310()
 {
     if (HasTopRoofLights_4216A0() && !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
     {
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightRoofLight_18);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightRoofLight_18);
         Object_2C* pLight = field_0_attachments.FindObject2CByModel_5A6A90(173);
         if (pLight)
         {
@@ -3360,7 +3358,7 @@ void Car_BC::UpdateTopLeftRoofLight_43C3C0()
 {
     if (HasTopRoofLights_4216A0() && !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
     {
-        this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftRoofLight_17);
+        this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftRoofLight_17);
         Object_2C* pLight = field_0_attachments.FindObject2CByModel_5A6A90(173);
         pLight->UpdateLight_527A30();
     }
@@ -3371,7 +3369,7 @@ void Car_BC::ResetTopLeftRoofLight_43C470()
 {
     if (HasTopRoofLights_4216A0() && !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
     {
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftRoofLight_17);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftRoofLight_17);
         Object_2C* pLight = field_0_attachments.FindObject2CByModel_5A6A90(173);
         if (pLight)
         {
@@ -3389,7 +3387,7 @@ void Car_BC::UpdateRoofLights_43C500()
          !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor3_13) &&
          !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor4_14)))
     {
-        field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomRightRoofLight_16);
+        field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomRightRoofLight_16);
 
         Object_2C* pObj_165 = field_0_attachments.FindObject2CByModel_5A6A90(165);
         pObj_165->UpdateLight_527A30();
@@ -3405,7 +3403,7 @@ void Car_BC::UpdateRoofLights_43C500()
 // 0x43c650
 void Car_BC::ResetRoofLights_43C650()
 {
-    field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomRightRoofLight_16);
+    field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomRightRoofLight_16);
 
     Object_2C* pObj1 = field_0_attachments.FindObject2CByModel_5A6A90(165);
     if (pObj1)
@@ -3432,7 +3430,7 @@ void Car_BC::UpdateBottomLeftRoofLight_43C700()
          !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor3_13) &&
          !field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor4_14)))
     {
-        field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+        field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
     }
 
     if (this->field_84_car_info_idx != car_model_enum::EDSELFBI)
@@ -3451,7 +3449,7 @@ void Car_BC::UpdateBottomLeftRoofLight_43C700()
 // 0x43c840
 void Car_BC::ResetBottomLeftRoofLight_43C840()
 {
-    field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+    field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
 
     if (field_84_car_info_idx != car_model_enum::EDSELFBI)
     {
@@ -3479,7 +3477,7 @@ void Car_BC::ActivateEmergencyLights_43C920()
     {
         if (IsFbiCar_411920())
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
         }
         field_A4_bf.bEmergencyLights = true;
         if (IsFbiCar_411920())
@@ -3503,7 +3501,7 @@ void Car_BC::DeactivateEmergencyLights_43C9D0()
     field_A4_bf.bEmergencyLights = false;
     if (IsFbiCar_411920() && !IsMaxDamage_40F890())
     {
-        field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+        field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor4_14);
     }
 }
 
@@ -3531,11 +3529,11 @@ void Car_BC::StopLightFlashing_43CBE0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
             }
         }
 
@@ -3543,40 +3541,40 @@ void Car_BC::StopLightFlashing_43CBE0()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
             }
         }
 
         if (HasRoofLight_421660())
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
     }
     else
     {
         if (HasPopupHeadlights_421700())
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
 
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
         }
 
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
-        this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+        this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
 
         if (HasRoofLight_421660())
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
     }
 
@@ -3585,20 +3583,20 @@ void Car_BC::StopLightFlashing_43CBE0()
     {
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
         }
 
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
             this->field_8E_flash_count = 0;
             return;
         }
     }
     else
     {
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
     }
 
     this->field_8E_flash_count = 0;
@@ -3607,21 +3605,21 @@ void Car_BC::StopLightFlashing_43CBE0()
 // 0x43cdf0
 void Car_BC::SetCarGraphic_43CDF0(char_type graphic_idx)
 {
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomRightRoofLight_16);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftRoofLight_17);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightRoofLight_18);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::Bit19_19);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::Bit20_20);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomRightRoofLight_16);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftRoofLight_17);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightRoofLight_18);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::Bit19_19);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::Bit20_20);
 
     if (graphic_idx != 10)
     {
         // Hmm... bit annoying to make this clean
-        this->field_8_damaged_areas.set_bit(graphic_idx + CarDeltaBitsEnum::TopRightDoor1_11);
+        this->field_8_damaged_areas.SetBit(graphic_idx + CarDeltaBitsEnum::TopRightDoor1_11);
     }
 }
 
@@ -3631,43 +3629,43 @@ void Car_BC::DamageArea_43CF30(s32 damage_area)
     switch (damage_area)
     {
         case 0:
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
             if (HasPopupHeadlights_421700())
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
             }
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomRightDamage_2);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomRightDamage_2);
             break;
 
         case 1:
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftDamage_3);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftDamage_3);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
             if (HasPopupHeadlights_421700())
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
             }
             break;
 
         case 2:
             ResetTopRightRoofLight_43C310();
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDamage_1);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDamage_1);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
             break;
 
         case 3:
             ResetTopLeftRoofLight_43C470();
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDamage_0);
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDamage_0);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
             break;
 
         case 4:
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::WindshieldDamage_4);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::WindshieldDamage_4);
             break;
         default:
             return;
@@ -3733,11 +3731,11 @@ void Car_BC::RepairDamage_43D400()
     this->field_74_damage = 0;
     this->field_8C_damage_level = 0;
 
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDamage_0);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDamage_1);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomRightDamage_2);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftDamage_3);
-    this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::WindshieldDamage_4);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDamage_0);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDamage_1);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomRightDamage_2);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftDamage_3);
+    this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::WindshieldDamage_4);
 
     if (this->field_A4_bf.bHeadlights)
     {
@@ -3745,11 +3743,11 @@ void Car_BC::RepairDamage_43D400()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
             }
         }
 
@@ -3757,17 +3755,17 @@ void Car_BC::RepairDamage_43D400()
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28);
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
             }
         }
 
         if (HasRoofLight_421660())
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
         }
     }
 
@@ -3775,12 +3773,12 @@ void Car_BC::RepairDamage_43D400()
     {
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackRightBrakeLight_5);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackRightBrakeLight_5);
         }
 
         if (!this->field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0))
         {
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackLeftBrakeLight_22);
         }
     }
 
@@ -4378,14 +4376,14 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
                 if (!IsMaxDamage_40F890())
                 {
                     offset = pObj->field_4->get_x_y_late_443580().SubLate_40AC80(field_50_car_sprite->get_x_y_late_443580());
-                    offset.RotateByAngle_40F6B0(-field_50_car_sprite->field_0_rotation);
+                    offset.RotateByAngle(-field_50_car_sprite->field_0_rotation);
                     EmitExplosion_43D690(18, offset.x, offset.y);
                 }
             }
             else
             {
                 offset = pObj->field_4->get_x_y_late_443580().SubLate_40AC80(field_50_car_sprite->get_x_y_late_443580());
-                offset.RotateByAngle_40F6B0(-field_50_car_sprite->field_0_rotation);
+                offset.RotateByAngle(-field_50_car_sprite->field_0_rotation);
                 EmitExplosion_43D690(18, offset.x, offset.y);
             }
             break;
@@ -4408,7 +4406,7 @@ char_type Car_BC::HandleCarHitByObject_43F130(Object_2C* pObj)
                     if (!IsMaxDamage_40F890())
                     {
                         offset = pObj->field_4->get_x_y_late_443580().SubLate_40AC80(field_50_car_sprite->get_x_y_late_443580());
-                        offset.RotateByAngle_40F6B0(-field_50_car_sprite->field_0_rotation);
+                        offset.RotateByAngle(-field_50_car_sprite->field_0_rotation);
                         EmitExplosion_43D690(18, offset.x, offset.y);
                     }
                 }
@@ -4721,7 +4719,7 @@ char_type Car_BC::RotateRoofObjectTowardTarget_440C10(Ang16 targetAngle)
         return 1;
     }
 
-    if (Ang16::IsAngleAhead_405C60(&ang, &targetAngle))
+    if (Ang16::IsAngleAhead(&ang, &targetAngle))
     {
         pFound->field_10_offset_rot += kRoofTurretAutoRotSpeed_677910;
     }
@@ -4869,7 +4867,7 @@ char_type Car_BC::CountConsecutiveArrowBlocks_4410D0(Ang16 ang, s8* pOutCount, F
     u8 y_add = 0;
     u8 mask1 = 0;
     u8 mask2 = 0;
-    s32 angleFace = Ang16::GetAngleFace_4F78F0(ang);
+    s32 angleFace = Ang16::GetAngleFace(ang);
     u8 x = sprite_x.ToInt();
     u8 y = sprite_y.ToInt();
     u8 z = field_50_car_sprite->field_1C_zpos.ToInt() - 1;
@@ -5131,7 +5129,7 @@ Fix16Rect Car_BC::GetOrientedHalfExtentsRect_441600()
     Fix16 half_w = gPixelsToFix16_6F6850.list[pInfo->w] / k_dword_6777D4;
     Fix16 half_h = gPixelsToFix16_6F6850.list[pInfo->h] / k_dword_6777D4;
 
-    s32 face = Ang16::GetAngleFace_4F78F0(field_50_car_sprite->field_0_rotation);
+    s32 face = Ang16::GetAngleFace(field_50_car_sprite->field_0_rotation);
     if (face >= 3 && face <= 4)
     {
         Fix16 tmp = half_w;
@@ -5366,11 +5364,11 @@ void Car_BC::UpdateTaxiLight_441B20()
 {
     if (field_9C_engine_status != car_engine_status::on_3 || field_4_passengers_list.field_0_pFirstPed)
     {
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
     }
     else
     {
-        field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+        field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
     }
 }
 
@@ -5430,48 +5428,48 @@ void Car_BC::UpdateRoofLightFlasher_441B50()
 // 0x441c00
 void Car_BC::UpdatePopupHeadlights_441C00()
 {
-    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3U))
+    if (!(gpRng_67AB34->GetCurRng() % 3U))
     {
         if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor1_11))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor2_12);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor2_12);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor2_12))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor3_13);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor3_13);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor3_13))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor4_14);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor4_14))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
         }
 
         if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDoor1_28))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor2_29);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDoor2_29))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor3_30);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDoor3_30))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor4_31);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDoor4_31))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
         }
     }
 }
@@ -5479,49 +5477,49 @@ void Car_BC::UpdatePopupHeadlights_441C00()
 // 0x441d40
 void Car_BC::UpdateFbiPopupSiren_441D40()
 {
-    if (!(gpRng_67AB34->get_cur_rng_41CFE0() % 3U))
+    if (!(gpRng_67AB34->GetCurRng() % 3U))
     {
         if (this->field_A4_bf.bEmergencyLights)
         {
             if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor1_11))
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-                this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor2_12);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+                this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor2_12);
             }
             else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor2_12))
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-                this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor3_13);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+                this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor3_13);
             }
             else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor3_13))
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-                this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+                this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor4_14);
             }
             else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor4_14))
             {
-                this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
-                this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+                this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
+                this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
             }
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor4_14))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor3_13);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor3_13);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor3_13))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor2_12);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor2_12);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor2_12))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-            this->field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+            this->field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11);
         }
         else if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDoor1_11))
         {
-            this->field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
+            this->field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
         }
     }
 }
@@ -5738,7 +5736,7 @@ Ang16 Car_BC::GetRadioTowerAngle_442520()
 {
     Fix16Point xy;
     xy = gCarManager_6C_677930->field_4C_tv_van_dir - field_50_car_sprite->get_x_y();
-    return xy.atan2_40F790() - field_50_car_sprite->field_0_rotation;
+    return xy.Atan2() - field_50_car_sprite->field_0_rotation;
 }
 
 // TODO: Move all of these together with SmoothApproachAngle_405CE0
@@ -5847,7 +5845,7 @@ void Car_BC::ManageTVAntenna_4425D0()
                                        spriteAngFp,
                                        kAngFix16OneDegree_677920,
                                        kAngFix16OneDegree_677920);
-            rot = Ang16::Fix16_To_Ang16_40F540(spriteAngFp);
+            rot = Ang16::Fix16ToAng16(spriteAngFp);
         }
     }
 }
@@ -5943,7 +5941,7 @@ void Car_BC::TryHitchTrailer_442810()
             offset = hitch_this - hitch_car;
             // Declared, then assigned: keeps the length in eax (Abs results reloaded from their temp)
             Fix16 v6_len;
-            v6_len = offset.GetLength_41E260();
+            v6_len = offset.GetLength();
 
             Fix16 z_delta = Fix16::Abs(pHitchSprite->field_1C_zpos - field_50_car_sprite->field_1C_zpos);
 
@@ -5961,8 +5959,8 @@ void Car_BC::TryHitchTrailer_442810()
                         pCar->SetupCarPhysicsAndSpriteBinding_43BCA0();
                         if (!pCar->field_58_physics->IsRngBelowDamage_421130())
                         {
-                            hitch_point = pCar->field_50_car_sprite->get_x_y_443580().AddInl_40AC50(
-                                offset.NormalizeSafe_442AD0().MultiplyInl_438FE0(kFpOne64th_677888));
+                            hitch_point =
+                                pCar->field_50_car_sprite->get_x_y_443580().AddInl(offset.NormalizeSafe().MultiplyInl(kFpOne64th_677888));
                             {
                                 s32 a5 = 1;
                                 pCar->field_58_physics->SetVelocityTowardTarget_55A1D0(
@@ -6016,7 +6014,7 @@ inline void SetPrism(Fix16Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 
     rect.field_8_top = top;
     rect.field_C_bottom = bottom;
     rect.field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
-    rect.field_14_high_z = z.Add_408660(kCollisionPrismHalfHeight_6771E4);
+    rect.field_14_high_z = z.Add(kCollisionPrismHalfHeight_6771E4);
 }
 } // namespace
 
@@ -6039,7 +6037,7 @@ char_type Car_BC::TrainUpdate_442D70()
         else
         {
             Fix16Rect rect;
-            switch (Ang16::GetAngleFace_4F78F0(field_50_car_sprite->field_0_rotation))
+            switch (Ang16::GetAngleFace(field_50_car_sprite->field_0_rotation))
             {
                 case 2:
                 {
@@ -6072,10 +6070,10 @@ char_type Car_BC::TrainUpdate_442D70()
                 {
                     // Written out: here the original inlines operator+ for high_z
                     Fix16 z = field_50_car_sprite->field_1C_zpos;
-                    rect.SetRect_41E350(field_50_car_sprite->field_14_xy.x - Fix16(0x28000, 0),
-                                        field_50_car_sprite->field_14_xy.x,
-                                        field_50_car_sprite->field_14_xy.y - Fix16(0x4000, 0),
-                                        field_50_car_sprite->field_14_xy.y + Fix16(0x4000, 0));
+                    rect.SetRect(field_50_car_sprite->field_14_xy.x - Fix16(0x28000, 0),
+                                 field_50_car_sprite->field_14_xy.x,
+                                 field_50_car_sprite->field_14_xy.y - Fix16(0x4000, 0),
+                                 field_50_car_sprite->field_14_xy.y + Fix16(0x4000, 0));
                     rect.field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
                     rect.field_14_high_z = z + kCollisionPrismHalfHeight_6771E4;
                     break;
@@ -6301,7 +6299,7 @@ bool Car_BC::UpdateAttachedToSprite_443360(Sprite* pSprite, Fix16 x, Fix16 y, An
     {
         sprite_x = x;
         sprite_y = y;
-        Ang16::RotateVector_41FC90(sprite_x, sprite_y, pSprite->field_0_rotation);
+        Ang16::RotateVector(sprite_x, sprite_y, pSprite->field_0_rotation);
 
         sprite_x = pSprite->field_14_xy.x + sprite_x;
         sprite_y = pSprite->field_14_xy.y + sprite_y;
@@ -6422,13 +6420,13 @@ void Car_BC::ApplyExplosionImpulse_443710(Fix16Point* xy)
         // helper returning bool runs out of inline budget for GetLength_41E260, and a bool
         // flag tested twice isn't merged by VC6.
         {
-            Fix16 vecLen = impulse_dir.GetLength_41E260();
+            Fix16 vecLen = impulse_dir.GetLength();
             if (vecLen == gFix16_6777CC)
             {
                 goto done;
             }
             vecLen = vecLen * 4;
-            impulse_pos = impulse_dir.NormalizeSafe_442AD0().DivideInl_442CB0(vecLen);
+            impulse_pos = impulse_dir.NormalizeSafe().DivideByFix16(vecLen);
         }
         field_58_physics->SetCurrentCarInfoAndModelPhysics_562EF0();
         field_58_physics->ApplyImpactForcesAndDamage_55FA60(hitch_point, impulse_pos, 10);
@@ -6816,7 +6814,7 @@ void Car_BC::PoolAllocate()
     this->field_6C_car_id = gCarManager_6C_677930->field_14_next_car_id++;
     this->field_74_damage = 0;
     this->field_8C_damage_level = 0;
-    this->field_8_damaged_areas.ClearAllBits_420D90();
+    this->field_8_damaged_areas.ClearAllBits();
     this->field_4_passengers_list.ClearList_420E90();
     this->field_54_driver = nullptr;
     this->field_98_door_lock = Car_Door_Lock::unlocked_3;
@@ -6946,22 +6944,22 @@ void Car_BC::ClearHeadlightDeltas_447360()
     if ((gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags_2 & car_info_flag2::popup_headlights) ==
         car_info_flag2::popup_headlights)
     {
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
 
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
     }
-    field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6);
-    field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
+    field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6);
+    field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23);
     if ((gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx)->info_flags & car_info_flag::roof_light) ==
         car_info_flag::roof_light)
     {
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
     }
 }
 
@@ -7015,11 +7013,11 @@ Fix16Point Trailer::GetHitchPosition_407BD0()
     offset = Fix16Point(gTrailerHitchOffset_66AAC8.x, gTrailerHitchOffset_66AAC8.y);
     Ang16 angle = field_8_truck_cab->field_58_physics->field_58_theta;
     {
-        Fix16 sin = Ang16::sine_40F500(angle);
-        Fix16 cos = Ang16::cosine_40F520(angle);
+        Fix16 sin = Ang16::Sine(angle);
+        Fix16 cos = Ang16::Cosine(angle);
         Fix16 x_old = offset.x;
         offset.x = (offset.x * cos) + (offset.y * sin);
-        offset.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(offset.y.Multiply_408680(cos));
+        offset.y = x_old.Negated().Multiply(sin).Add(offset.y.Multiply(cos));
     }
     offset += field_8_truck_cab->field_58_physics->get_cp1_40B560();
     return offset;
@@ -7031,7 +7029,7 @@ namespace
 {
 inline bool IsVelocityAlignedWithHeading_40F840(CarPhysics_B0* pPhys)
 {
-    Ang16 drift = pPhys->field_40_linvel_1.atan2_40F790().SubtractNormalized_409340(pPhys->field_58_theta);
+    Ang16 drift = pPhys->field_40_linvel_1.Atan2().SubtractNormalized(pPhys->field_58_theta);
     return drift <= word_66A9C8 || drift >= word_66AABC;
 }
 } // namespace
@@ -7052,33 +7050,33 @@ void Trailer::UpdateTrailerAlignment_407CE0()
     Fix16 trailer_theta = Ang16::Ang16_to_Fix16(pTrailerPhys->field_58_theta);
 
     rear = field_C_pCarOnTrailer->GetRearWheelOffset_43A0E0();
-    rear.RotateByAngle_40F6B0(pTrailerPhys->field_58_theta);
+    rear.RotateByAngle(pTrailerPhys->field_58_theta);
     rear += pTrailerPhys->get_cp1_40B560();
 
     hitch = gTrailerHitchOffset_66AAC8;
     Fix16 cab_theta = Ang16::Ang16_to_Fix16(pCabPhys->field_58_theta);
-    hitch.RotateByAngle_40F6B0(Ang16::Fix16_To_Ang16_40F540(cab_theta));
+    hitch.RotateByAngle(Ang16::Fix16ToAng16(cab_theta));
     hitch += pCabPhys->get_cp1_40B560();
 
     // The trailer points along hitch - rear, kept within a window around the cab's angle
-    delta = hitch.Sub_40AC80(rear);
-    Fix16 new_theta = Ang16::Ang16_to_Fix16(delta.atan2_40F790());
-    field_0_hitch_angle_clamped = sub_405E80(&cab_theta, &new_theta);
+    delta = hitch.Sub(rear);
+    Fix16 new_theta = Ang16::Ang16_to_Fix16(delta.Atan2());
+    field_0_hitch_angle_clamped = ClampAngleToWindow(&cab_theta, &new_theta);
 
     if (new_theta.mValue != cab_theta.mValue && new_theta.mValue == trailer_theta.mValue)
     {
         if (IsVelocityAlignedWithHeading_40F840(pCabPhys) && pCabPhys->IsGasPedalPressedEnough_5626A0())
         {
             Fix16 cab_max_turn = field_8_truck_cab->GetMaxTurnRate_440510();
-            new_theta = sub_405DA0(new_theta, &cab_theta, &cab_max_turn);
+            new_theta = TurnAngleToward(new_theta, &cab_theta, &cab_max_turn);
         }
     }
 
-    pTrailerPhys->field_58_theta = Ang16::Fix16_To_Ang16_40F540(new_theta);
+    pTrailerPhys->field_58_theta = Ang16::Fix16ToAng16(new_theta);
 
     offset = gTrailerCabOffset_66AAE0;
-    offset.RotateByAngle_40F6B0(Ang16::Fix16_To_Ang16_40F540(new_theta));
-    field_C_pCarOnTrailer->field_58_physics->field_38_cp1 = hitch.Sub_40AC80(offset);
+    offset.RotateByAngle(Ang16::Fix16ToAng16(new_theta));
+    field_C_pCarOnTrailer->field_58_physics->field_38_cp1 = hitch.Sub(offset);
     pTrailerPhys->field_6C_cp3 = field_8_truck_cab->field_58_physics->field_6C_cp3;
     pTrailerPhys->UpdateCenterOfMassPoint_563350();
 }
@@ -7286,7 +7284,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
     if ((!bLimit_recycling_67D4CA || gCarManager_6C_677930->field_28_recycled_cars < 2) &&
         gCarManager_6C_677930->field_28_recycled_cars + gCarManager_6C_677930->field_40_proto_recycled_cars != 16)
     {
-        s32 angleFace = Ang16::GetAngleFace_4F78F0(field_0_cam->ComputeTargetFacingAngle_4358D0());
+        s32 angleFace = Ang16::GetAngleFace(field_0_cam->ComputeTargetFacingAngle_4358D0());
 
         switch (gPolice_7B8_6FEE40->field_654_max_wanted_level)
         {
@@ -7323,7 +7321,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
         this->field_9_traffic_car_model = 1;
         this->field_A_unused = 1;
 
-        u8 rng_int = gRng_6F6784.get_uint8_4F7B70(5);
+        u8 rng_int = gRng_6F6784.GetUint8(5);
         bool maybe_vel = !!(field_0_cam->ReturnOwnerVelocity_435A20() > kFpZero_6FF580);
 
         switch (rng_int)
@@ -7470,21 +7468,21 @@ Fix16 TrafficSpawner_14::GetRandomTrafficSpeed_583750(Fix16 max_speed, u8* pOut)
     if (max_speed >= dword_6FF85C)
     {
         *pOut = 2;
-        roll = Fix16(gRng_6F6784.get_uint8_4F7B70(100)) / Fix16(1638400, 0);
+        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(1638400, 0);
         lo = dword_6FF85C;
         hi = dword_6FF70C;
     }
     else if (max_speed >= dword_6FF724)
     {
         *pOut = 1;
-        roll = Fix16(gRng_6F6784.get_uint8_4F7B70(100)) / Fix16(1638400, 0);
+        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(1638400, 0);
         lo = dword_6FF724;
         hi = dword_6FF85C;
     }
     else
     {
         *pOut = 0;
-        roll = Fix16(gRng_6F6784.get_uint8_4F7B70(100)) / Fix16(0x190000, 0);
+        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(0x190000, 0);
         lo = dword_6FF6A4;
         hi = dword_6FF724;
     }
@@ -7517,7 +7515,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
     Fix16 car_h = gPixelsToFix16_6F6850.list[pCarInfo->h];
     SwapIf3or4_41FE40(arrow_direction, car_w, car_h);
 
-    DAT_006FF8C4 = gRng_6F6784.get_uint8_4F7B70(100);
+    DAT_006FF8C4 = gRng_6F6784.GetUint8(100);
     switch (arrow_direction)
     {
         case 1:
@@ -7633,9 +7631,9 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                 Fix16 nav_x = xpos.GetRoundValue() + kFpHalf_6FF674;
                 Fix16 nav_y = ypos.GetRoundValue() + kFpHalf_6FF674;
                 gTrafficCarSpeed_6FF570 = dword_6FF5CC;
-                field_4_rect->SetRect_41E350(nav_x - car_w, nav_x + car_w, nav_y - car_h, nav_y + car_h);
-                field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
-                if (field_4_rect->EveryTileMatchesArrowType_59DFB0(arrow_direction))
+                field_4_rect->SetRect(nav_x - car_w, nav_x + car_w, nav_y - car_h, nav_y + car_h);
+                field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                 {
                     gmp_zone_info* pZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(nav_x.ToInt(), nav_y.ToInt());
                     if (pZone && !pZone->field_0_car_density)
@@ -7646,8 +7644,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     s32 car_model;
                     u16 car_kind;
                     u8 rng_val;
-                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.get_int_4F7AE0(40)) <= 20U ||
-                        rng_val >= 30U)
+                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.GetInt(40)) <= 20U || rng_val >= 30U)
                     {
                         car_model =
                             gCarManager_6C_677930->SelectTrafficCarModel_444AB0(field_C_player, field_10_zone, dword_6FF7E8, &car_kind);
@@ -7704,7 +7701,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                         }
                         else if (gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit == crew_type::army_6)
                         {
-                            switch (gRng_6F6784.get_int_4F7AE0(10))
+                            switch (gRng_6F6784.GetInt(10))
                             {
                                 case 0:
                                 case 1:
@@ -7748,9 +7745,9 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     {
                         Fix16 tx = (xpos - x_one).GetRoundValue() + kFpHalf_6FF674;
                         Fix16 ty = (ypos - y_one).GetRoundValue() + kFpHalf_6FF674;
-                        field_4_rect->SetRect_41E350(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
-                        field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
-                        if (field_4_rect->EveryTileMatchesArrowType_59DFB0(arrow_direction))
+                        field_4_rect->SetRect(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
+                        field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                        if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                         {
                             road_len = 2;
                             first_idx = 1;
@@ -7761,9 +7758,9 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     {
                         Fix16 tx = (xpos - x_two).GetRoundValue() + kFpHalf_6FF674;
                         Fix16 ty = (ypos - y_two).GetRoundValue() + kFpHalf_6FF674;
-                        field_4_rect->SetRect_41E350(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
-                        field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
-                        if (field_4_rect->EveryTileMatchesArrowType_59DFB0(arrow_direction))
+                        field_4_rect->SetRect(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
+                        field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                        if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                         {
                             road_len++;
                             first_idx = 0;
@@ -7774,9 +7771,9 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     {
                         Fix16 tx = (xpos + x_one).GetRoundValue() + kFpHalf_6FF674;
                         Fix16 ty = (ypos + y_one).GetRoundValue() + kFpHalf_6FF674;
-                        field_4_rect->SetRect_41E350(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
-                        field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
-                        if (field_4_rect->EveryTileMatchesArrowType_59DFB0(arrow_direction))
+                        field_4_rect->SetRect(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
+                        field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                        if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                         {
                             last_idx = 3;
                             road_len++;
@@ -7787,9 +7784,9 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     {
                         Fix16 tx = (xpos + x_two).GetRoundValue() + kFpHalf_6FF674;
                         Fix16 ty = (ypos + y_two).GetRoundValue() + kFpHalf_6FF674;
-                        field_4_rect->SetRect_41E350(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
-                        field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
-                        if (field_4_rect->EveryTileMatchesArrowType_59DFB0(arrow_direction))
+                        field_4_rect->SetRect(tx - car_w, tx + car_w, ty - car_h, ty + car_h);
+                        field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                        if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                         {
                             last_idx = 4;
                             road_len++;
@@ -7878,8 +7875,8 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
 
                     Fix16 sx = spawn_x.GetRoundValue() + kFpHalf_6FF674;
                     Fix16 sy = spawn_y.GetRoundValue() + kFpHalf_6FF674;
-                    field_4_rect->SetRect_41E350(sx - car_w, sx + car_w, sy - car_h, sy + car_h);
-                    field_4_rect->SetHiLowZ_41E370(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
+                    field_4_rect->SetRect(sx - car_w, sx + car_w, sy - car_h, sy + car_h);
+                    field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
 
                     u8 spawn_chance;
                     if (bStartNetworkGame_7081F0)
@@ -7888,13 +7885,13 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     }
                     else
                     {
-                        spawn_chance = gRng_6F6784.get_uint8_4F7B70(100);
+                        spawn_chance = gRng_6F6784.GetUint8(100);
                     }
 
                     if ((speed_kind == 2 && spawn_chance < 33U) || (speed_kind == 1 && spawn_chance < 67U) || speed_kind == 0)
                     {
                         if (!gSpriteGrid_1_679208->CheckRectForCollisions_477F60(field_4_rect, 0, 0, nullptr) &&
-                            !field_4_rect->CanRectEnterMovementRegion_59DE80() && !field_4_rect->RectOverlapsZone_59DF20(2))
+                            !field_4_rect->CanRectEnterMovementRegion() && !field_4_rect->RectOverlapsZone(2))
                         {
                             Fix16 car_ypos = sy.GetRoundValue() + kFpHalf_6FF674;
                             Fix16 car_x = sx.GetRoundValue() + kFpHalf_6FF674;

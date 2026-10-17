@@ -69,7 +69,7 @@ void BonusTracker_1C0::Init_431E10(PlayerScoreTracker_36C* pScores)
 // 0x431E30
 void BonusTracker_1C0::Service_431E30()
 {
-    field_1BC_cur_time = gpRng_67AB34->get_cur_rng_41CFE0();
+    field_1BC_cur_time = gpRng_67AB34->GetCurRng();
 
     BonusRule_2C* pIter = &field_0_bonuses[0];
     for (s32 i = GTA2_COUNTOF(field_0_bonuses) - 1; i >= 0; i--)
@@ -205,7 +205,7 @@ s16 BonusTracker_1C0::AllocRule_431FE0(s16 event_type,
     field_0_bonuses[idx].field_14_death_cause = death_cause;
     field_0_bonuses[idx].field_18_alt_car_model = alt_car_model;
     field_0_bonuses[idx].field_0_pZone = pZone;
-    field_0_bonuses[idx].field_20_start_time = gpRng_67AB34->get_cur_rng_41CFE0();
+    field_0_bonuses[idx].field_20_start_time = gpRng_67AB34->GetCurRng();
     field_0_bonuses[idx].field_1C_time_limit = time_limit;
     field_0_bonuses[idx].field_24_check_mode = check_mode;
     field_0_bonuses[idx].field_25_target_count = target_count;

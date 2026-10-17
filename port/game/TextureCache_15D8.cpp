@@ -23,7 +23,7 @@ void RemapTextureSet_14::Alloc_5B8E90(s16 sprite_count, s16 remaps_per_sprite, s
             field_10_bDoFree = 1;
             field_8_sprite_type = sprite_type;
             field_C_pal_type = pal_type;
-            field_0_pTextures = static_cast<STexture**>(Memory::malloc_4FE4D0(sizeof(STexture*) * field_4_texture_count));
+            field_0_pTextures = static_cast<STexture**>(Memory::Malloc(sizeof(STexture*) * field_4_texture_count));
 
             for (u32 i = 0; i < field_4_texture_count; i++)
             {

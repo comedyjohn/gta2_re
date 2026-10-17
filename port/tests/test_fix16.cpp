@@ -46,15 +46,15 @@ TEST_CASE("Fix16 fraction, rounding and absolute value")
     CHECK(v.GetFracValue().mValue == 0x2123);
     CHECK(v.GetRoundValue().mValue == 0x4000);
     CHECK(Fix16::Abs(Fix16(-2)).mValue == Fix16(2).mValue);
-    CHECK(Fix16::Max_41E130(Fix16(1), Fix16(2)).mValue == Fix16(2).mValue);
+    CHECK(Fix16::Max(Fix16(1), Fix16(2)).mValue == Fix16(2).mValue);
 }
 
 TEST_CASE("Fix16 square root")
 {
-    CHECK(Fix16::SquareRoot_436A70(Fix16(4)).mValue == Fix16(2).mValue);
-    CHECK(Fix16::SquareRoot_436A70(Fix16(9)).mValue == Fix16(3).mValue);
-    CHECK(Fix16::SquareRoot_436A70(Fix16(0)).mValue == 0);
-    CHECK(Fix16::SquareRoot_436A70(Fix16(2)).mValue == 23170); // sqrt(2) * 16384 = 23170.47
+    CHECK(Fix16::SquareRoot(Fix16(4)).mValue == Fix16(2).mValue);
+    CHECK(Fix16::SquareRoot(Fix16(9)).mValue == Fix16(3).mValue);
+    CHECK(Fix16::SquareRoot(Fix16(0)).mValue == 0);
+    CHECK(Fix16::SquareRoot(Fix16(2)).mValue == 23170); // sqrt(2) * 16384 = 23170.47
 }
 
 TEST_CASE("Fix16 comparisons")

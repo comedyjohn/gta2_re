@@ -20,14 +20,14 @@ TEST_CASE("sine and cosine tables")
 {
     Init_trigonometry_tables();
     // 1440 steps a turn: 360 is 90 degrees
-    CHECK(Ang16::sine_40F500(Ang16(0)).mValue == 0);
-    CHECK(Ang16::sine_40F500(Ang16(360)).mValue == 0x4000);
-    CHECK(Ang16::cosine_40F520(Ang16(0)).mValue == 0x4000);
-    CHECK(Ang16::cosine_40F520(Ang16(720)).mValue == -0x4000);
+    CHECK(Ang16::Sine(Ang16(0)).mValue == 0);
+    CHECK(Ang16::Sine(Ang16(360)).mValue == 0x4000);
+    CHECK(Ang16::Cosine(Ang16(0)).mValue == 0x4000);
+    CHECK(Ang16::Cosine(Ang16(720)).mValue == -0x4000);
 
     Fix16 x;
     Fix16 y;
-    Ang16::PolarToCartesian_41FC20(Ang16(360), Fix16(2), x, y);
+    Ang16::PolarToCartesian(Ang16(360), Fix16(2), x, y);
     CHECK(x.mValue == Fix16(2).mValue);
     CHECK(y.mValue == 0);
 }

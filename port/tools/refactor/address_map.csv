@@ -189,7 +189,7 @@ enumerator,,,armed_gang_member_19,,,,,enums.hpp
 enumerator,,,armed_gang_member_28,,,,,ped_flags.hpp
 enumerator,,,armor_powerup_231,,,,,enums.hpp
 enumerator,,,army_4,,,,,enums.hpp
-enumerator,,,army_6,,,,,enums.hpp
+enumerator,,cop_level_enum,army_6,,,,,enums.hpp
 enumerator,,,arrived_3,,,,,Firefighters.hpp
 enumerator,,,attacking_11,,,,,ped_flags.hpp
 enumerator,,,back2front_10,,,,,voice_line.hpp
@@ -668,8 +668,8 @@ enumerator,,,pickup_physics_7,,,,,ObjectDefinitions_8CA8.hpp
 enumerator,,,pickup_physics_animated_9,,,,,ObjectDefinitions_8CA8.hpp
 enumerator,,,pistol_bullet_265,,,,,enums.hpp
 enumerator,,,player_2,,,,,enums.hpp
-enumerator,,,police_1,,,,,enums.hpp
-enumerator,,,police_3,,,,,enums.hpp
+enumerator,,cop_level_enum,police_1,,,,,enums.hpp
+enumerator,,cop_level_enum,police_3,,,,,enums.hpp
 enumerator,,,police_6,,,,,Car_BC.hpp
 enumerator,,,power_generator_281,,,,,enums.hpp
 enumerator,,,powergen_light_284,,,,,enums.hpp
@@ -1013,7 +1013,7 @@ enumerator,,gmp_zone_type,Unused_3,,,,,map_0x370.hpp
 enumerator,,gmp_zone_type,Unused_4,,,,,map_0x370.hpp
 enumerator,,gmp_zone_type,Unused_9,,,,,map_0x370.hpp
 function,0x5D9690,,ApplyChangedScreenSettings_5D9690,,,,,winmain.cpp
-function,0x405500,,ArcTanLookup_405500,,,,,fix16.cpp
+function,0x405500,,ArcTanLookup_405500,ArcTanLookup,,,,fix16.cpp
 function,0x5DE4F0,,BeamLength_5DE4F0,,,,,Weapon_30.cpp
 function,0x5DE910,,BeamLength_5DE910,,,,,Weapon_30.cpp
 function,0x5DE4F0,,BeamStep_5DE4F0,,,,,Weapon_30.cpp
@@ -1077,7 +1077,7 @@ function,0x4A07C0,,FatalError_4A07C0,,,,,error.cpp
 function,0x4A38C0,,FatalError_4A38C0,,,,,error.cpp
 function,0x4DB120,,FileByteSum_4DB120,,,,,winmain.cpp
 function,0x5707B0,,FindCrewInCar_5707B0,,,,,Police_7B8.cpp
-function,0x5A57E0,,FindMinMax_5A57E0,,,,,fix16.cpp
+function,0x5A57E0,,FindMinMax_5A57E0,FindMinMax,,,,fix16.cpp
 function,0x5707B0,,FindPursuitTargetForCriminal_5707B0,,,,,Police_7B8.cpp
 function,0x577EE0,,FindStationZoneByName_577EE0,,,,,PublicTransport.cpp
 function,0x4DA820,,ForceGameUpdate_4DA820,,,,,winmain.cpp
@@ -1098,7 +1098,7 @@ function,0x45CF90,,GetDamageMultiplier_45CF90,,,,,Car_BC.cpp
 function,0x48E780,,GetDeathCauseForObjectModel_48E780,,,,,Car_BC.cpp
 function,0x4A0650,,GetDirectMusicVer_4A0650,,,,,winmain.cpp
 function,0x4C4EC0,,GetDirectXVersion_4C4EC0,,,,,winmain.cpp
-function,0x4B8FD0,,GetFirstUsed_4B8FD0,,,,,Pool.hpp
+method,0x4B8FD0,Pool,GetFirstUsed_4B8FD0,GetFirstUsed,,,,Pool.hpp
 function,0x5E5D60,,GetGTA2Version_5E5D60,,,,,winmain.cpp
 function,0x5D9800,,GetHwndDCDeviceCaps_5D9800,,,,,winmain.cpp
 function,0x5D7700,,GetLineSpacingFromFontType_5D7700,,,,,Draw.cpp
@@ -1120,8 +1120,8 @@ function,0x5D7BF0,,Input_InitMouse_5D7BF0,,,,,winmain.cpp
 function,0x5D7C60,,Input_MouseAcquire_5D7C60,,,,,winmain.cpp
 function,0x498D10,,Input_Read_498D10,,,,,winmain.cpp
 function,0x5D7C70,,Input_ReleaseMouse_5D7C70,,,,,winmain.cpp
-function,0x438FB0,,IntervalIntersectsRange_438FB0,,,,,fix16.cpp
-function,0x41E160,,IntervalsOverlap_41E160,,,0x41E160,A4s7c,Fix16_Rect.hpp
+function,0x438FB0,,IntervalIntersectsRange_438FB0,IntervalIntersectsRange,,,,fix16.cpp
+function,0x41E160,,IntervalsOverlap_41E160,IntervalsOverlap,,0x41E160,A4s7c,Fix16_Rect.hpp
 function,0x5D8DF0,,InvalidateCachedScreenDimension_5D8DF0,,,,,Game_0x40.cpp
 function,0x481DF0,,IsDirectBufferMode_481DF0,,,,,Bink.cpp
 function,0x5D9280,,IsFullScreen_5D9280,,,,,winmain.cpp
@@ -1167,7 +1167,7 @@ function,0x544F70,,ResetCharUpdateGlobals_544F70,,,,iQH9l,char.cpp
 function,0x4DA830,,ResetFrameTimer_4DA830,,,,,winmain.cpp
 function,0x5822E0,,ResetTrafficSpawnGlobals_5822E0,,,,,Car_BC.cpp
 function,0x4F7940,,ReturnAngleFromRoadDirection_4F7940,,,,,Car_BC.cpp
-function,0x42A720,,RotateAndTranslatePoint_42A720,,,,,ang16.hpp
+function,0x42A720,,RotateAndTranslatePoint_42A720,RotateAndTranslatePoint,,,,ang16.hpp
 function,0x40F6B0,,RotateByAngle_40F6B0_no_budget3,,,,,Weapon_30.cpp
 function,0x491F10,,RotateFace_491F10,,,,,char.cpp
 function,0x41FC90,,RotateVector_41FC90_NewX,,,,,Car_BC.cpp
@@ -1210,7 +1210,7 @@ function,0x5D9250,,ToggleStartMode_5D9250,,,,,winmain.cpp
 function,0x46B910,,TransformTriangleUVs_46B910,,,,,MapRenderer.cpp
 function,0x548BD0,,TurnBy16Deg_548BD0,,,,,char.cpp
 function,0x546360,,TurnBy180Deg_546360,,,,,char.cpp
-function,0x420F30,,UnlinkFromActiveList_420F30,,,,,Pool.hpp
+method,0x420F30,Pool,UnlinkFromActiveList_420F30,UnlinkFromActiveList,,,,Pool.hpp
 function,0x529050,,UnpackSignedNibbles_529050,,,,,char.cpp
 function,0x5D8E00,,UpdateGameScreenSize_5D8E00,,,,,winmain.cpp
 function,0x5D8E70,,UpdateWinXY_5D8E70,,,,,winmain.cpp
@@ -1224,7 +1224,7 @@ function,0x40CFC0,,WorldToScreen_RouteFinder_40CFC0,,,,,RouteFinder.cpp
 function,0x40E790,,WrapAngle_40E790,,,,,Car_BC.cpp
 function,0x40E790,,WrapAngle_40E790,,,0x40E790,,Cranes.cpp
 function,0x45AE40,,abs_sub_less_than_epislon_45AE40,,,,,Ped.cpp
-function,0x4052D0,,arc_tan_table_init_4052D0,,,,,fix16.cpp
+function,0x4052D0,,arc_tan_table_init_4052D0,ArcTanTableInit,,,,fix16.cpp
 function,0x41FA70,,compound_add_41FA70,,,,,Car_BC.cpp
 function,0x41FA70,,compound_add_41FA70,,,,,char.cpp
 function,0x41FA90,,compound_subtract_41FA90,,,,,Car_BC.cpp
@@ -1235,14 +1235,14 @@ function,0x5BEE90,,get_rdtsc_5BEE90,,,,qe97a,SpriteRenderer_1C.cpp
 function,0x55D490,,get_skid_obj_type_55D490,,,,,CarPhysics_B0.cpp
 function,0x4C7250,,get_sprite_height_4C7250,,,,,Hud.hpp
 function,0x4C7220,,get_sprite_width_4C7220,,,,,Hud.hpp
-function,0x48A8F0,,has_pStart_48A8F0,,,0x48A8F0,,Pool.hpp
+method,0x48A8F0,Pool,has_pStart_48A8F0,HasPStart,,0x48A8F0,,Pool.hpp
 function,0x5D9860,,jGBH_Graphics_Free_5D9860,,,,,winmain.cpp
 function,0x5D7CA0,,j_gbh_init_5D7CA0,,,,,winmain.cpp
 function,0x5E53C0,,laughing_blackwell_0x1EB54_sub_5E53C0,,,,,winmain.hpp
 function,0x4EAD90,,set_vert_xyz_relative_to_cam_4EAD90,,,,,MapRenderer.cpp
-function,0x405DA0,,sub_405DA0,,,,,fix16.cpp
-function,0x405E20,,sub_405E20,,,,,fix16.cpp
-function,0x405E80,,sub_405E80,,,,,fix16.cpp
+function,0x405DA0,,sub_405DA0,TurnAngleToward,,,,fix16.cpp
+function,0x405E20,,sub_405E20,IsAngleNear,,,,fix16.cpp
+function,0x405E80,,sub_405E80,ClampAngleToWindow,,,,fix16.cpp
 function,0x447640,,sub_447640,,,,,Car_BC.cpp
 function,0x5345E0,,sub_5345E0,,,,,Garage_48.cpp
 function,0x5A5690,,sub_5A5690,,,,,sprite.cpp
@@ -2889,26 +2889,26 @@ global,0x706DFA,,word_706DFA,,,,,Weapon_30.cpp
 global,0x706E28,,word_706E28,,,,,Weapon_30.cpp
 global,0x707002,,word_707002,,,,,Weapon_30.cpp
 global,0x707004,,word_707004,,,,,Weapon_30.cpp
-member,0x0,,field_0_handle,,,,,Ptr32.hpp
-member,0x0,,field_0_pHead,,,,,Pool.hpp
-member,0x0,,field_0_pStart,,,,,Pool.hpp
-member,0x10,,field_10,,,,,miss2_0x11C.hpp
-member,0x10,,field_10_char_idx,,,,,miss2_0x11C.hpp
-member,0x12,,field_12_car_or_phone_idx,,,,,miss2_0x11C.hpp
-member,0x12,,field_12_offset,,,,,miss2_0x11C.hpp
-member,0x12,,field_12_x,,,,,miss2_0x11C.hpp
-member,0x13,,field_13_y,,,,,miss2_0x11C.hpp
-member,0x14,,field_14_z,,,,,miss2_0x11C.hpp
-member,0x15,,field_15_trigger_idx,,,,,miss2_0x11C.hpp
-member,0x16,,field_16_flag,,,,,miss2_0x11C.hpp
-member,0x4,,field_4_pPrev,,,,,Pool.hpp
-member,0x4,,field_4_pool,,,,,Pool.hpp
+member,0x0,Ptr32,field_0_handle,,,,,Ptr32.hpp
+member,0x0,PoolBasic,field_0_pHead,,,,,Pool.hpp
+member,0x0,Pool,field_0_pStart,,,,,Pool.hpp
+member,0x10,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_10,,,,,miss2_0x11C.hpp
+member,0x10,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_10_char_idx,,,,,miss2_0x11C.hpp
+member,0x12,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_12_car_or_phone_idx,,,,,miss2_0x11C.hpp
+member,0x12,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:217:5),field_12_offset,,,,,miss2_0x11C.hpp
+member,0x12,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_12_x,,,,,miss2_0x11C.hpp
+member,0x13,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_13_y,,,,,miss2_0x11C.hpp
+member,0x14,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_14_z,,,,,miss2_0x11C.hpp
+member,0x15,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_15_trigger_idx,,,,,miss2_0x11C.hpp
+member,0x16,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:177:5),field_16_flag,,,,,miss2_0x11C.hpp
+member,0x4,Pool,field_4_pPrev,,,,,Pool.hpp
+member,0x4,PoolBasic,field_4_pool,,,,,Pool.hpp
 member,0x6,,field_6,,,,,miss2_0x11C.hpp
 member,0x6A,,field_6A_font_type,,,,,Frontend.hpp
-member,0x6C,,field_6C_font_palette,,,,,Frontend.hpp
-member,0x6,,field_6_element_name_str,,,,,Frontend.hpp
+member,0x6C,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/Frontend.hpp:58:5),field_6C_font_palette,,,,,Frontend.hpp
+member,0x6,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/Frontend.hpp:58:5),field_6_element_name_str,,,,,Frontend.hpp
 member,0x8,,field_8,,,,,miss2_0x11C.hpp
-member,0x8,,field_8_pool,,,,,Pool.hpp
+member,0x8,Pool,field_8_pool,,,,,Pool.hpp
 member,0x8,,field_8_signed_1,,,,,miss2_0x11C.hpp
 member,0x8,,field_8_signed_1,,,,,miss2_0x11C.hpp
 member,0x8,,field_8_unsigned_1,,,,,miss2_0x11C.hpp
@@ -2917,14 +2917,14 @@ member,0xA,,field_A_signed_2,,,,,miss2_0x11C.hpp
 member,0xA,,field_A_signed_2,,,,,miss2_0x11C.hpp
 member,0xA,,field_A_unsigned_2,,,,,miss2_0x11C.hpp
 member,0xA,,field_A_unsigned_2,,,,,miss2_0x11C.hpp
-member,0xC,,field_C_car_idx,,,,,miss2_0x11C.hpp
-member,0xC,,field_C_second_item_idx,,,,,miss2_0x11C.hpp
-member,0xC,,field_C_signed_3,,,,,miss2_0x11C.hpp
-member,0xC,,field_C_unsigned_3,,,,,miss2_0x11C.hpp
-member,0xE,,field_E_rotation,,,,,miss2_0x11C.hpp
-member,0xE,,field_E_signed_4,,,,,miss2_0x11C.hpp
-member,0xE,,field_E_unsigned_4,,,,,miss2_0x11C.hpp
-member,0xE,,field_E_variant,,,,,miss2_0x11C.hpp
+member,0xC,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:217:5),field_C_car_idx,,,,,miss2_0x11C.hpp
+member,0xC,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:217:5),field_C_second_item_idx,,,,,miss2_0x11C.hpp
+member,0xC,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:115:5),field_C_signed_3,,,,,miss2_0x11C.hpp
+member,0xC,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:115:5),field_C_unsigned_3,,,,,miss2_0x11C.hpp
+member,0xE,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:217:5),field_E_rotation,,,,,miss2_0x11C.hpp
+member,0xE,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:115:5),field_E_signed_4,,,,,miss2_0x11C.hpp
+member,0xE,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:115:5),field_E_unsigned_4,,,,,miss2_0x11C.hpp
+member,0xE,(anonymous union at /home/lucas/Documents/Code/gta2_re/port/game/miss2_0x11C.hpp:217:5),field_E_variant,,,,,miss2_0x11C.hpp
 member,0x0,Ambulance_110,field_0,,,,,Ambulance_110.hpp
 member,0x1,Ambulance_110,field_1_corpse_count,,,,,Ambulance_110.hpp
 member,0x2,Ambulance_110,field_2_pad,,,,,Ambulance_110.hpp
@@ -6195,31 +6195,31 @@ method,0x4FB330,Ambulance_20,UpdateState_4FB330,,,,,Ambulance_110.cpp
 method,,Ang16,Ang16,,Ang16,0x401C60,0qgcp,ang16.hpp
 method,,Ang16,Ang16,,Ang16,0x40E590,,ang16.hpp
 method,0x4516B0,Ang16,Ang16,,Ang16,,,ang16.cpp
-method,0x409300,Ang16,AssignNormalized_409300,,Ang16,,,ang16.cpp
-method,0x40F540,Ang16,Fix16_To_Ang16_40F540,,Ang16,,,ang16.hpp
-method,0x482740,Ang16,Fix16_To_Ang16_482740,,Ang16,,,ang16.cpp
-method,0x4F78F0,Ang16,GetAngleFace_4F78F0,,Ang16,,,ang16.cpp
-method,0x4056A0,Ang16,GetOctant_4056A0,,Ang16,,,ang16.cpp
-method,0x405C60,Ang16,IsAngleAhead_405C60,,Ang16,,,ang16.cpp
-method,0x41E110,Ang16,IsAxisAligned_41E110,,Ang16,0x41E110,RKAuT,ang16.hpp
-method,0x401CB0,Ang16,MultiplyByFix16_401CB0,,Ang16,,,ang16.hpp
-method,,Ang16,Normalize,,Ang16,0x401C10,bB2VJ,ang16.hpp
-method,0x405B60,Ang16,NormalizeAngleDeltaScaled_405B60,,Ang16,,,ang16.cpp
-method,0x406C20,Ang16,Normalize_406C20,,Ang16,,,ang16.cpp
-method,0x406C20,Ang16,Normalized_406C20,,Ang16,,,ang16.hpp
-method,0x41FC20,Ang16,PolarToCartesian_41FC20,,Ang16,,,ang16.hpp
-method,0x451730,Ang16,PolarToCartesian_451730,,Ang16,,,ang16.cpp
-method,0x41FC90,Ang16,RotateVector_41FC90,,Ang16,,,ang16.hpp
-method,0x405640,Ang16,SnapToAng4_405640,,Ang16,,,ang16.cpp
-method,0x409340,Ang16,SubtractNormalized_409340,,Ang16,,,ang16.cpp
+method,0x409300,Ang16,AssignNormalized_409300,AssignNormalized,Ang16,,,ang16.cpp
+method,0x40F540,Ang16,Fix16_To_Ang16_40F540,Fix16ToAng16,Ang16,,,ang16.hpp
+method,0x482740,Ang16,Fix16_To_Ang16_482740,Fix16ToAng16OutOfLine,Ang16,,,ang16.cpp
+method,0x4F78F0,Ang16,GetAngleFace_4F78F0,GetAngleFace,Ang16,,,ang16.cpp
+method,0x4056A0,Ang16,GetOctant_4056A0,GetOctant,Ang16,,,ang16.cpp
+method,0x405C60,Ang16,IsAngleAhead_405C60,IsAngleAhead,Ang16,,,ang16.cpp
+method,0x41E110,Ang16,IsAxisAligned_41E110,IsAxisAligned,Ang16,0x41E110,RKAuT,ang16.hpp
+method,0x401CB0,Ang16,MultiplyByFix16_401CB0,MultiplyByFix16,Ang16,,,ang16.hpp
+method,,Ang16,Normalize,Normalize,Ang16,0x401C10,bB2VJ,ang16.hpp
+method,0x405B60,Ang16,NormalizeAngleDeltaScaled_405B60,NormalizeAngleDeltaScaled,Ang16,,,ang16.cpp
+method,0x406C20,Ang16,Normalize_406C20,NormalizeOutOfLine,Ang16,,,ang16.cpp
+method,0x406C20,Ang16,Normalized_406C20,Normalized,Ang16,,,ang16.hpp
+method,0x41FC20,Ang16,PolarToCartesian_41FC20,PolarToCartesian,Ang16,,,ang16.hpp
+method,0x451730,Ang16,PolarToCartesian_451730,PolarToCartesianOutOfLine,Ang16,,,ang16.cpp
+method,0x41FC90,Ang16,RotateVector_41FC90,RotateVector,Ang16,,,ang16.hpp
+method,0x405640,Ang16,SnapToAng4_405640,SnapToAng4,Ang16,,,ang16.cpp
+method,0x409340,Ang16,SubtractNormalized_409340,SubtractNormalized,Ang16,,,ang16.cpp
 method,0x49E240,Ang16,ThetaText_49E240,,Ang16,0x49E240,xqLh0,CarPhysics_B0.cpp
-method,0x405680,Ang16,ToAng4_405680,,Ang16,,,ang16.cpp
-method,0x40F520,Ang16,cosine_40F520,,Ang16,,,ang16.hpp
-method,0x40E640,Ang16,divideBy_40E640,,Ang16,,,ang16.hpp
-method,0x41E3C0,Ang16,jIsAxisAligned_41E3C0,,Ang16,0x41E3C0,,ang16.hpp
+method,0x405680,Ang16,ToAng4_405680,ToAng4,Ang16,,,ang16.cpp
+method,0x40F520,Ang16,cosine_40F520,Cosine,Ang16,,,ang16.hpp
+method,0x40E640,Ang16,divideBy_40E640,DivideBy,Ang16,,,ang16.hpp
+method,0x41E3C0,Ang16,jIsAxisAligned_41E3C0,JIsAxisAligned,Ang16,0x41E3C0,,ang16.hpp
 method,,Ang16,operator+,,Ang16,0x40E5A0,Rc5ql,ang16.hpp
 method,,Ang16,operator-,,Ang16,0x40E5D0,,ang16.hpp
-method,0x40F500,Ang16,sine_40F500,,Ang16,,,ang16.hpp
+method,0x40F500,Ang16,sine_40F500,Sine,Ang16,,,ang16.hpp
 method,0x4C6F30,ArrowTrace_24,GetTargetPlayer_4C6F30,,,0x4C6F30,,Hud.hpp
 method,0x4C6F20,ArrowTrace_24,HasNoTarget_4C6F20,,,,,Hud.hpp
 method,0x5D03C0,ArrowTrace_24,PointToInfoPhone_5D03C0,,,,,Hud.cpp
@@ -6247,16 +6247,16 @@ method,0x5137A0,Bink,SetActiveSlot_5137A0,,,,,Bink.cpp
 method,0x5137B0,Bink,SetDDState_5137B0,,,,,Bink.cpp
 method,0x513240,Bink,TickFrame_513240,,,,,Bink.cpp
 method,,BitSet32,BitSet32,,BitSet32,0x420D80,,BitSet32.hpp
-method,0x420D90,BitSet32,ClearAllBits_420D90,,BitSet32,0x420D90,,BitSet32.hpp
-method,0x4BA340,BitSet32,ClearGlobalFlags_4BA340,,BitSet32,,,BitSet32.hpp
-method,0x4A5190,BitSet32,GetRaw_4A5190,,BitSet32,,,BitSet32.hpp
-method,0x4BA330,BitSet32,MaskWithGlobalFlags_4BA330,,BitSet32,,,BitSet32.hpp
-method,0x4BA360,BitSet32,SetGlobal0_4BA360,,BitSet32,0x4BA360,,BitSet32.hpp
-method,0x4BA370,BitSet32,SetGlobal1_4BA370,,BitSet32,0x4BA370,,BitSet32.hpp
-method,0x4BA350,BitSet32,SetGlobal2_4BA350,,BitSet32,0x4BA350,,BitSet32.hpp
-method,,BitSet32,clear_bit,,BitSet32,0x420DE0,,BitSet32.hpp
+method,0x420D90,BitSet32,ClearAllBits_420D90,ClearAllBits,BitSet32,0x420D90,,BitSet32.hpp
+method,0x4BA340,BitSet32,ClearGlobalFlags_4BA340,ClearGlobalFlags,BitSet32,,,BitSet32.hpp
+method,0x4A5190,BitSet32,GetRaw_4A5190,GetRaw,BitSet32,,,BitSet32.hpp
+method,0x4BA330,BitSet32,MaskWithGlobalFlags_4BA330,MaskWithGlobalFlags,BitSet32,,,BitSet32.hpp
+method,0x4BA360,BitSet32,SetGlobal0_4BA360,SetGlobal0,BitSet32,0x4BA360,,BitSet32.hpp
+method,0x4BA370,BitSet32,SetGlobal1_4BA370,SetGlobal1,BitSet32,0x4BA370,,BitSet32.hpp
+method,0x4BA350,BitSet32,SetGlobal2_4BA350,SetGlobal2,BitSet32,0x4BA350,,BitSet32.hpp
+method,,BitSet32,clear_bit,ClearBit,BitSet32,0x420DE0,,BitSet32.hpp
 method,,BitSet32,operator=,,BitSet32,0x4A51A0,,BitSet32.hpp
-method,,BitSet32,set_bit,,BitSet32,0x420DC0,,BitSet32.hpp
+method,,BitSet32,set_bit,SetBit,BitSet32,0x420DC0,,BitSet32.hpp
 method,0x431D30,BonusRule_2C,BonusRule_2C,,,,,BonusTracker_1C0.cpp
 method,0x431DB0,BonusRule_2C,Deactivate_431DB0,,,,,BonusTracker_1C0.cpp
 method,0x431D50,BonusRule_2C,Init_431D50,,,,,BonusTracker_1C0.cpp
@@ -7228,33 +7228,33 @@ method,0x4A81F0,Firefighter_28,Update_4A81F0,,,,,Firefighters.cpp
 method,0x4A81A0,Firefighter_28,deinit_4A81A0,,,,,Firefighters.cpp
 method,0x4A85C0,Firefighter_28,init_4A85C0,,,,,Firefighters.cpp
 method,0x4A7FC0,Firefighter_28,sub_4A7FC0,,,,,Firefighters.cpp
-method,0x436A50,Fix16,Abs_436A50,,Fix16,,,fix16.cpp
-method,0x408660,Fix16,Add_408660,,Fix16,,,fix16.cpp
-method,0x482730,Fix16,ApplyDeadZone_482730,,Fix16,,,fix16.hpp
-method,0x55EEE0,Fix16,ClampToRangeFlexible_55EEE0,,Fix16,,,fix16.hpp
-method,0x539F90,Fix16,DivideAssign_539F90,,Fix16,,,fix16.cpp
-method,0x53E860,Fix16,DivideInt_53E860,,Fix16,,,fix16.cpp
-method,0x436A20,Fix16,Divide_436A20,,Fix16,,,fix16.cpp
+method,0x436A50,Fix16,Abs_436A50,Abs,Fix16,,,fix16.cpp
+method,0x408660,Fix16,Add_408660,Add,Fix16,,,fix16.cpp
+method,0x482730,Fix16,ApplyDeadZone_482730,ApplyDeadZone,Fix16,,,fix16.hpp
+method,0x55EEE0,Fix16,ClampToRangeFlexible_55EEE0,ClampToRangeFlexible,Fix16,,,fix16.hpp
+method,0x539F90,Fix16,DivideAssign_539F90,DivideAssign,Fix16,,,fix16.cpp
+method,0x53E860,Fix16,DivideInt_53E860,DivideInt,Fix16,,,fix16.cpp
+method,0x436A20,Fix16,Divide_436A20,Divide,Fix16,,,fix16.cpp
 method,0x42A630,Fix16,GetFracValue_42A630,,Fix16,,,CarPhysics_B0.cpp
-method,0x40F4B0,Fix16,GetRaw_40F4B0,,Fix16,,,fix16.hpp
-method,0x4B9E10,Fix16,IsBetween_4B9E10,,Fix16,,,fix16.hpp
-method,0x451690,Fix16,IsGreater_451690,,Fix16,,,fix16.cpp
-method,0x451670,Fix16,IsLess_451670,,Fix16,,,fix16.cpp
-method,0x42A6B0,Fix16,MaxAbsDistance_42A6B0,,Fix16,,MqQPJ,fix16.hpp
-method,0x41E130,Fix16,Max_41E130,,Fix16,,,fix16.hpp
-method,0x44E540,Fix16,Max_44E540,,Fix16,,,fix16.cpp
-method,0x562430,Fix16,MultiplyAssign_562430,,Fix16,,,fix16.cpp
-method,0x561DB0,Fix16,MultiplyInt_561DB0,,Fix16,,,fix16.cpp
-method,0x408680,Fix16,Multiply_408680,,Fix16,,,fix16.cpp
-method,0x4086A0,Fix16,Negate_4086A0,,Fix16,,,fix16.cpp
-method,0x410BF0,Fix16,Round_To_Int_410BF0,,Fix16,,,fix16.hpp
-method,0x436A70,Fix16,SquareRoot_436A70,,Fix16,,,fix16.cpp
-method,0x436A00,Fix16,Subtract_436A00,,Fix16,,,fix16.cpp
-method,0x482730,Fix16,ZeroIfNegligible_482730,,Fix16,,,fix16.hpp
-method,0x491EF0,Fix16,add_one_491EF0,,Fix16,,,fix16.hpp
-method,0x405320,Fix16,atan2_fixed_405320,,Fix16,,,fix16.cpp
-method,0x462ED0,Fix16,ctor_462ED0,,Fix16,,,fix16.hpp
-method,0x4754D0,Fix16,get_value_4754D0,,Fix16,,,fix16.hpp
+method,0x40F4B0,Fix16,GetRaw_40F4B0,GetRaw,Fix16,,,fix16.hpp
+method,0x4B9E10,Fix16,IsBetween_4B9E10,IsBetween,Fix16,,,fix16.hpp
+method,0x451690,Fix16,IsGreater_451690,IsGreater,Fix16,,,fix16.cpp
+method,0x451670,Fix16,IsLess_451670,IsLess,Fix16,,,fix16.cpp
+method,0x42A6B0,Fix16,MaxAbsDistance_42A6B0,MaxAbsDistance,Fix16,,MqQPJ,fix16.hpp
+method,0x41E130,Fix16,Max_41E130,Max,Fix16,,,fix16.hpp
+method,0x44E540,Fix16,Max_44E540,Max,Fix16,,,fix16.cpp
+method,0x562430,Fix16,MultiplyAssign_562430,MultiplyAssign,Fix16,,,fix16.cpp
+method,0x561DB0,Fix16,MultiplyInt_561DB0,MultiplyInt,Fix16,,,fix16.cpp
+method,0x408680,Fix16,Multiply_408680,Multiply,Fix16,,,fix16.cpp
+method,0x4086A0,Fix16,Negate_4086A0,Negated,Fix16,,,fix16.cpp
+method,0x410BF0,Fix16,Round_To_Int_410BF0,RoundToInt,Fix16,,,fix16.hpp
+method,0x436A70,Fix16,SquareRoot_436A70,SquareRoot,Fix16,,,fix16.cpp
+method,0x436A00,Fix16,Subtract_436A00,Subtract,Fix16,,,fix16.cpp
+method,0x482730,Fix16,ZeroIfNegligible_482730,ZeroIfNegligible,Fix16,,,fix16.hpp
+method,0x491EF0,Fix16,add_one_491EF0,AddOne,Fix16,,,fix16.hpp
+method,0x405320,Fix16,atan2_fixed_405320,Atan2Fixed,Fix16,,,fix16.cpp
+method,0x462ED0,Fix16,ctor_462ED0,Ctor,Fix16,,,fix16.hpp
+method,0x4754D0,Fix16,get_value_4754D0,GetValue,Fix16,,,fix16.hpp
 method,,Fix16,operator++,,Fix16,0x4824E0,,fix16.hpp
 method,0x4086A0,Fix16,operator-,,Fix16,,,fix16.hpp
 method,,Fix16,operator--,,Fix16,0x482510,,fix16.hpp
@@ -7263,7 +7263,7 @@ method,0x509990,Fix16,operator<,,Fix16,,,fix16.hpp
 method,,Fix16,operator<=,,Fix16,0x40CE50,MBAm6,fix16.hpp
 method,,Fix16,operator==,,Fix16,0x40E570,5BHO3,fix16.hpp
 method,0x509990,Fix16,operator>=,,Fix16,,,fix16.hpp
-method,0x491F00,Fix16,subtract_one_491F00,,Fix16,,,fix16.hpp
+method,0x491F00,Fix16,subtract_one_491F00,SubtractOne,Fix16,,,fix16.hpp
 method,0x410BA0,Fix16,to_float_410BA0,,Fix16,,,CarPhysics_B0.cpp
 method,0x5E40C0,Fix16_Point,AddAssign_5E40C0,,Fix16Point,,,Fix16_Point.cpp
 method,0x40AC50,Fix16_Point,AddInl_40AC50,,Fix16Point,,,Fix16_Point.hpp
@@ -7281,7 +7281,7 @@ method,0x41E210,Fix16_Point,FromPolar_41E210,,Fix16Point,,,Fix16_Point.hpp
 method,0x41E260,Fix16_Point,GetLength_41E260,,Fix16Point,,,Fix16_Point.hpp
 method,0x453590,Fix16_Point,GetLength_453590,,Fix16Point,,,Fix16_Point.cpp
 method,0x49E450,Fix16_Point,HasZeroComponent_49E450,,Fix16Point,0x49E450,,Fix16_Point.hpp
-method,0x420360,Fix16_Point,IsNull_420360,,Fix16Point,,,Fix16_Point.hpp
+method,0x420360,Fix16_Point,IsNull_420360,IsNull,Fix16Point,,,Fix16_Point.hpp
 method,0x48A270,Fix16_Point,MaxAbs_48A270,,Fix16Point,,,Fix16_Point.hpp
 method,0x5E4140,Fix16_Point,MaxAbs_5E4140,,Fix16Point,,,Fix16_Point.cpp
 method,0x442C80,Fix16_Point,MultBy_442C80,,Fix16Point,,,Fix16_Point.cpp
@@ -8010,8 +8010,8 @@ method,0x4DF4D0,Map_0x370,zone_by_pos_and_type_4DF4D0,,,,,map_0x370.cpp
 method,0x4DF0F0,Map_0x370,zone_by_type_bounded_4DF0F0,,,,,map_0x370.cpp
 method,0x4DF050,Map_0x370,zone_idx_by_name_4DF050,,,,,map_0x370.cpp
 method,0x4E9770,Map_0x370,~Map_0x370,,,,,map_0x370.cpp
-method,0x4FE510,Memory,Aligned_malloc_4FE510,,Memory,,,memory.cpp
-method,0x4FE4D0,Memory,malloc_4FE4D0,,Memory,,,memory.cpp
+method,0x4FE510,Memory,Aligned_malloc_4FE510,AlignedMalloc,Memory,,,memory.cpp
+method,0x4FE4D0,Memory,malloc_4FE4D0,Malloc,Memory,,,memory.cpp
 method,0x4B6260,MenuOption_6,MenuOption_6,,,,,Frontend.cpp
 method,0x4B6280,MenuOption_6,~MenuOption_6,,,,,Frontend.cpp
 method,0x4B6070,MenuPage_0xBCA,MenuPage_0xBCA,,,,,Frontend.cpp
@@ -10385,7 +10385,7 @@ type,0x7F8,,PedRefTable_7F8,,,,,PedRefTable_7F8.hpp
 type,0x8,,PedRef_8,,,,,PedRefTable_7F8.hpp
 type,0x4,,Ped_List_4,,,,,Ped_List_4.hpp
 type,,,PixelsToFix16Table,,,,,CarInfo_808.hpp
-type,,,Player,,,,,Player.hpp
+method,,Player,Player,,,,,Player.hpp
 type,0x3C,,PlayerCrimeStats_3C,,,,,PlayerCrimeStats_3C.hpp
 type,0x20,,PlayerName_20,,,,,GameSession_578.hpp
 type,0x36C,,PlayerScoreTracker_36C,,,,,PlayerScoreTracker_36C.hpp
@@ -10603,7 +10603,7 @@ type,,,gmp_tile_animation,,,,,map_0x370.hpp
 type,,,gmp_zone_info,,,,,map_0x370.hpp
 type,,,gmp_zone_list,,,,,map_0x370.hpp
 type,,,gmp_zone_type,,,,,map_0x370.hpp
-type,0x106C,,gtx_0x106C,,,,,gtx_0x106C.hpp
+method,0x106C,gtx_0x106C,gtx_0x106C,,,,,gtx_0x106C.hpp
 type,0x204,,keybrd_0x204,,,,,keybrd_0x204.hpp
 type,0x6E,,menu_element_0x6E,,,,,Frontend.hpp
 type,0x82,,menu_option_0x82,,,,,Frontend.hpp
@@ -10626,7 +10626,7 @@ type,,,sprite_deltas,,,,,gtx_0x106C.hpp
 type,,,sprite_index,,,,,gtx_0x106C.hpp
 type,,,str_table_entry,,,,,ScriptManager_C1EA8.hpp
 type,,,str_table_normalized,,,,,ScriptManager_C1EA8.hpp
-type,0x14,,text_0x14,,,,,text_0x14.hpp
+method,0x14,text_0x14,text_0x14,,,,,text_0x14.hpp
 type,0xC,,text_0xC,,,,,text_0x14.hpp
 type,,,text_tdat,,,,,text_0x14.hpp
 type,,,text_tkey,,,,,text_0x14.hpp

@@ -62,12 +62,12 @@ struct CompilerBitField8
 class BitSet32
 {
   public:
-    void clear_bit(int bit)
+    void ClearBit(int bit)
     {
         m_var &= ~(1 << bit);
     }
 
-    void set_bit(int bit)
+    void SetBit(int bit)
     {
         m_var |= (1 << bit);
     }
@@ -91,37 +91,37 @@ class BitSet32
         return *this;
     }
 
-    u32 GetRaw_4A5190()
+    u32 GetRaw()
     {
         return m_var;
     }
 
-    void SetGlobal0_4BA360()
+    void SetGlobal0()
     {
         gFlags_67ACF8 = kGlobalMask0_61A9AC;
     }
 
-    void SetGlobal1_4BA370()
+    void SetGlobal1()
     {
         gFlags_67ACF8 = kGlobalMask1_61A9A8;
     }
 
-    void SetGlobal2_4BA350()
+    void SetGlobal2()
     {
         gFlags_67ACF8 = kGlobalMask2_61A9A4;
     }
 
-    void MaskWithGlobalFlags_4BA330()
+    void MaskWithGlobalFlags()
     {
         m_var &= gFlags_67ACF8;
     }
 
-    void ClearGlobalFlags_4BA340()
+    void ClearGlobalFlags()
     {
         m_var &= ~gFlags_67ACF8;
     }
 
-    void ClearAllBits_420D90()
+    void ClearAllBits()
     {
         m_var = 0;
     }

@@ -168,10 +168,10 @@ void Ambulance_110::ProcessPatientQueue_4FA500()
             Ambulance_20* pAmbulance = &task;
             if (1 == pAmbulance->field_18_in_use && pAmbulance->field_4_paramedics_crew->IsLeaderAlive_5CBC60())
             {
-                if (Fix16::MaxAbsDistance_42A6B0(pPed->get_cam_x(),
-                                                 pPed->get_cam_y(),
-                                                 Fix16(pAmbulance->field_0_target_x),
-                                                 Fix16(pAmbulance->field_1_target_y)) < dword_6F6FC0 &&
+                if (Fix16::MaxAbsDistance(pPed->get_cam_x(),
+                                          pPed->get_cam_y(),
+                                          Fix16(pAmbulance->field_0_target_x),
+                                          Fix16(pAmbulance->field_1_target_y)) < dword_6F6FC0 &&
                     pAmbulance->field_14_patient_count < 10)
                 {
                     pAmbulance->AddPassenger_4FA800(pPed);
@@ -465,10 +465,10 @@ void Ambulance_20::HandleObjectiveState_4FAAC0()
                     else
                     {
                         // 9.6f calls MaxAbsDistance_42A6B0(get_cam_x(), get_cam_y(), ...)
-                        if (Fix16::MaxAbsDistance_42A6B0(gParamedicCrewPed_6F6D60->get_cam_x(),
-                                                         gParamedicCrewPed_6F6D60->get_cam_y(),
-                                                         Fix16(field_0_target_x),
-                                                         Fix16(field_1_target_y)) >= dword_6F6FC0)
+                        if (Fix16::MaxAbsDistance(gParamedicCrewPed_6F6D60->get_cam_x(),
+                                                  gParamedicCrewPed_6F6D60->get_cam_y(),
+                                                  Fix16(field_0_target_x),
+                                                  Fix16(field_1_target_y)) >= dword_6F6FC0)
                         {
                             break;
                         }

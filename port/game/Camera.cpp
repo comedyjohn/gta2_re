@@ -123,21 +123,21 @@ char_type Camera_0xBC::IsSpriteInView_435630(Sprite* pSprite, s32 wide_view)
     Fix16 half_height = (half_width * dword_6766F4);
 
     Fix16Rect rect;
-    rect.SetHiLowZ_41E370(pSprite->field_1C_zpos, pSprite->field_1C_zpos);
-    rect.SetRect_41E350(field_98_cur_pos.field_0_x - half_width,
-                        field_98_cur_pos.field_0_x + half_width,
-                        field_98_cur_pos.field_4_y - half_height,
-                        field_98_cur_pos.field_4_y + half_height);
+    rect.SetHiLowZ(pSprite->field_1C_zpos, pSprite->field_1C_zpos);
+    rect.SetRect(field_98_cur_pos.field_0_x - half_width,
+                 field_98_cur_pos.field_0_x + half_width,
+                 field_98_cur_pos.field_4_y - half_height,
+                 field_98_cur_pos.field_4_y + half_height);
 
     Fix16Rect* pBox = &pSprite->field_C_pCollisionShape->field_30_boundingBox;
-    if (IntervalIntersectsRange_438FB0(rect.field_0_left, rect.field_4_right, pBox->field_0_left, pBox->field_4_right) &&
-        IntervalIntersectsRange_438FB0(rect.field_8_top, rect.field_C_bottom, pBox->field_8_top, pBox->field_C_bottom) &&
-        IntervalIntersectsRange_438FB0(rect.field_10_low_z, rect.field_14_high_z, pBox->field_10_low_z, pBox->field_14_high_z))
+    if (IntervalIntersectsRange(rect.field_0_left, rect.field_4_right, pBox->field_0_left, pBox->field_4_right) &&
+        IntervalIntersectsRange(rect.field_8_top, rect.field_C_bottom, pBox->field_8_top, pBox->field_C_bottom) &&
+        IntervalIntersectsRange(rect.field_10_low_z, rect.field_14_high_z, pBox->field_10_low_z, pBox->field_14_high_z))
     {
         SpriteShape_4C* p4C = pSprite->field_C_pCollisionShape;
         if ((p4C->field_0_width == p4C->field_4_height && p4C->field_0_width <= dword_676694) || pSprite->field_0_rotation.rValue == 0 ||
             pSprite->field_0_rotation == 360 || pSprite->field_0_rotation == 720 || pSprite->field_0_rotation == 1080 ||
-            pSprite->IntersectsRectSAT_59FB10(&rect) || rect.IntersectsSpriteRenderingRect_59DDF0(pSprite))
+            pSprite->IntersectsRectSAT_59FB10(&rect) || rect.IntersectsSpriteRenderingRect(pSprite))
         {
             return 1;
         }
@@ -296,7 +296,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
     else
     {
         vel = pCar->GetLinearVelocity_43A450() * dword_67696C;
-        speed = vel.GetLength_41E260();
+        speed = vel.GetLength();
     }
 
     if (speed > dword_67674C)
@@ -305,7 +305,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
 
         if (!pCar->IsTrainModel_403BA0() && !pCar->IsTank_411900())
         {
-            angle = vel.atan2_40F790();
+            angle = vel.Atan2();
 
             Fix16 dist;
             if ((angle > kAng45_6766DC && angle < kAng135_676790) || (angle > kAng225_676764 && angle < kAng315_67679C))
@@ -337,7 +337,7 @@ void Camera_0xBC::ApplyCarVelocityCameraOffset_436200(Car_BC* pCar, Fix16* pOutX
             }
 
             radius = dist * (Fix16(8) - pCar->field_50_car_sprite->field_1C_zpos + *pOutZ) / field_60_screen_scale.y;
-            offset.FromPolar_41E210(radius, angle);
+            offset.FromPolar(radius, angle);
             *pOutX += offset.x;
             *pOutY += offset.y;
         }
@@ -593,7 +593,7 @@ void Camera_0xBC::UpdateFollowCarCamera_4364A0(Car_BC* pCar)
         Fix16 new_y;
         new_y = pCar->GetY_41E440();
         Fix16 new_z;
-        new_z = Fix16::Max_41E130(pCar->GetZ_41E450() - kTwo_676820, kOne_67681C);
+        new_z = Fix16::Max(pCar->GetZ_41E450() - kTwo_676820, kOne_67681C);
         Fix16 zoom = kDefaultZoom_6766D4;
 
         AccumulateSuspicionOnDriver_435F90(pCar);
@@ -620,7 +620,7 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
         {
             xpos = pPed->get_cam_x();
             ypos = pPed->get_cam_y();
-            zpos = Fix16::Max_41E130(pPed->get_cam_z() - kTwo_676820, kOne_67681C);
+            zpos = Fix16::Max(pPed->get_cam_z() - kTwo_676820, kOne_67681C);
             zposToUse = zpos;
             if (pCar)
             {
@@ -632,7 +632,7 @@ void Camera_0xBC::UpdateFollowPedCamera_436540(Ped* pPed)
         {
             xpos = pCar_2->GetX_41E430();
             ypos = pCar_2->GetY_41E440();
-            zpos = Fix16::Max_41E130(pCar_2->GetZ_41E450() - kTwo_676820, kOne_67681C);
+            zpos = Fix16::Max(pCar_2->GetZ_41E450() - kTwo_676820, kOne_67681C);
             zposToUse = zpos;
             Camera_0xBC::AccumulateSuspicionOnDriver_435F90(pCar_2);
             Camera_0xBC::ApplyCarVelocityCameraOffset_436200(pCar_2, &xpos, &ypos, &zposToUse);

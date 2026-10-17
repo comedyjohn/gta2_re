@@ -86,17 +86,17 @@ class CarPhysics_B0
     void StopMoving_4895D0()
     {
         field_74_ang_vel_rad = dword_6FD120;
-        field_40_linvel_1.clear_41E1E0();
+        field_40_linvel_1.Clear();
     }
 
     Ang16 GetLinvelAngle_4211E0()
     {
-        return field_40_linvel_1.atan2_40F790();
+        return field_40_linvel_1.Atan2();
     }
 
     bool IsRngBelowDamage_421130()
     {
-        return static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) < field_8_total_damage_q;
+        return static_cast<u32>(gpRng_67AB34->GetCurRng()) < field_8_total_damage_q;
     }
 
     void SetHandBrakeOff_421260()
@@ -209,7 +209,7 @@ class CarPhysics_B0
 
     bool IsVelocityAlignedWithHeading_40F840()
     {
-        Ang16 v14 = (field_40_linvel_1.atan2_40F790() - field_58_theta);
+        Ang16 v14 = (field_40_linvel_1.Atan2() - field_58_theta);
         return v14 <= kAng90_6FE00C || v14 >= kAng270_6FE154;
     }
 
@@ -232,15 +232,13 @@ class CarPhysics_B0
     {
         if (get_revs_561940() != 0)
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add_408660(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply_408680(gDamageSpeedFactor_6FE348)
-                    .Multiply_408680(field_60_gas_pedal)
-                    .MultiplyInt_561DB0(2));
+            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add(
+                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal).MultiplyInt(2));
         }
         else
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add_408660(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply_408680(gDamageSpeedFactor_6FE348).Multiply_408680(field_60_gas_pedal));
+            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add(
+                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal));
         }
     }
 
@@ -260,7 +258,7 @@ class CarPhysics_B0
     {
         if (field_98_surface_type == 8)
         {
-            if (field_40_linvel_1.GetLength_41E260() <= kDrowningMaxSpeed_677794)
+            if (field_40_linvel_1.GetLength() <= kDrowningMaxSpeed_677794)
             {
                 return true;
             }
@@ -314,7 +312,7 @@ class CarPhysics_B0
 
     Fix16 GetLinearSpeed_4211A0()
     {
-        return field_40_linvel_1.GetLength_41E260();
+        return field_40_linvel_1.GetLength();
     }
 
     // 9.6f 0x49EF50, defined in CarPhysics_B0.cpp
@@ -332,7 +330,7 @@ class CarPhysics_B0
 
     Fix16 get_car_velocity_4211C0()
     {
-        return field_0_vel_read_only.GetLength_41E260();
+        return field_0_vel_read_only.GetLength();
     }
 
     void SetField8C_to_1()
@@ -368,7 +366,7 @@ class CarPhysics_B0
 
     void ResetPoint6FDF50()
     {
-        stru_6FDF50.reset();
+        stru_6FDF50.Reset();
     }
 
     void Accelerate_421210()

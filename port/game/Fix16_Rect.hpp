@@ -16,7 +16,7 @@ EXTERN_GLOBAL(Fix16, kCollisionPrismHalfHeight_6771E4);
     #define FIX16_RECT_HALF_HEIGHT kCollisionPrismHalfHeight_6771E4
 #endif
 
-inline bool IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
+inline bool IntervalsOverlap(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
 {
     if (ourMin < otherMin)
     {
@@ -38,7 +38,7 @@ class Fix16Rect
   public:
     Fix16Rect() = default;
 
-    void ComputeCollisionPrism_4204D0(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
+    void ComputeCollisionPrism(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
     {
         Fix16 tmp = offset / 2;
 
@@ -57,16 +57,16 @@ class Fix16Rect
     {
         offset = offset / 2;
 
-        field_0_left = x.Subtract_436A00(offset);
-        field_4_right = x.Add_408660(offset);
-        field_8_top = y.Subtract_436A00(offset);
-        field_C_bottom = y.Add_408660(offset);
+        field_0_left = x.Subtract(offset);
+        field_4_right = x.Add(offset);
+        field_8_top = y.Subtract(offset);
+        field_C_bottom = y.Add(offset);
 
-        field_10_low_z = z.Subtract_436A00(half_z);
-        field_14_high_z = z.Add_408660(half_z);
+        field_10_low_z = z.Subtract(half_z);
+        field_14_high_z = z.Add(half_z);
     }
 
-    void SetRect_41E350(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
+    void SetRect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
     {
         this->field_0_left = left;
         this->field_4_right = right;
@@ -75,23 +75,23 @@ class Fix16Rect
     }
 
     // TODO: None inline version of SetRect_41E350 ??
-    void SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
-    void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
+    void SetRectOutOfLine(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
+    void MakeRect(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
-    bool OverlapsZ_433560(Fix16Rect* pOther)
+    bool OverlapsZ(Fix16Rect* pOther)
     {
-        return IntervalsOverlap_41E160(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
+        return IntervalsOverlap(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
     }
 
-    s32 GetMidZ_463760() const
+    s32 GetMidZ() const
     {
-        return (field_10_low_z.Add_408660(field_14_high_z) / 2).ToInt();
+        return (field_10_low_z.Add(field_14_high_z) / 2).ToInt();
     }
 
     // 9.6f 0x463690, defined in map_0x370.cpp
     inline bool EdgesCrossSegment_463690(Fix16Point& p1, Fix16Point& p2);
 
-    void SetFromPosSize_463710(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
+    void SetFromPosSize(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {
         field_0_left = left;
         field_8_top = top;
@@ -99,7 +99,7 @@ class Fix16Rect
         field_C_bottom = top + height;
     }
 
-    void SetHiLowZ_41E370(Fix16 lowZ, Fix16 highZ)
+    void SetHiLowZ(Fix16 lowZ, Fix16 highZ)
     {
         this->field_10_low_z = lowZ;
         this->field_14_high_z = highZ;
@@ -107,7 +107,7 @@ class Fix16Rect
 
     Fix16Rect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, Fix16 z)
     {
-        SetRect_41E350(left, right, top, bottom);
+        SetRect(left, right, top, bottom);
         field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
         field_14_high_z = z + kCollisionPrismHalfHeight_6771E4;
     }
@@ -121,48 +121,48 @@ class Fix16Rect
         field_C_bottom = h + y;
     }
 
-    void DoSetCurrentRect_59DD60();
-    bool IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite);
-    char_type CanRectEnterMovementRegion_59DE80();
-    void ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y);
-    bool RectOverlapsZone_59DF20(u8 zone_type);
-    bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
+    void DoSetCurrentRect();
+    bool IntersectsSpriteRenderingRect(Sprite* pSprite);
+    char_type CanRectEnterMovementRegion();
+    void ExpandToIncludePoint(Fix16 x, Fix16 y);
+    bool RectOverlapsZone(u8 zone_type);
+    bool EveryTileMatchesArrowType(s32 arrow_type);
 
-    bool IsPointInRect_4B9FD0(Fix16Point* a2)
+    bool IsPointInRect(Fix16Point* a2)
     {
-        return Fix16::IsBetween_4B9E10(field_0_left, field_4_right, a2->x) && Fix16::IsBetween_4B9E10(field_8_top, field_C_bottom, a2->y);
+        return Fix16::IsBetween(field_0_left, field_4_right, a2->x) && Fix16::IsBetween(field_8_top, field_C_bottom, a2->y);
     }
 
-    bool AABB_Intersects_41E2F0(Fix16Rect* pOther) const
+    bool AABBIntersects(Fix16Rect* pOther) const
     {
-        return IntervalIntersectsRange_438FB0(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
-                IntervalIntersectsRange_438FB0(field_8_top, this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
-                IntervalIntersectsRange_438FB0(field_10_low_z, this->field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z) ?
+        return IntervalIntersectsRange(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
+                IntervalIntersectsRange(field_8_top, this->field_C_bottom, pOther->field_8_top, pOther->field_C_bottom) &&
+                IntervalIntersectsRange(field_10_low_z, this->field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z) ?
             true :
             false;
     }
 
-    Fix16 get_top_45ADD0()
+    Fix16 GetTop()
     {
         return field_8_top;
     }
 
-    Fix16 get_left_45ADB0()
+    Fix16 GetLeft()
     {
         return field_0_left;
     }
 
-    Fix16 get_right_45ADA0()
+    Fix16 GetRight()
     {
         return field_4_right;
     }
 
-    Fix16 get_bottom_45ADC0()
+    Fix16 GetBottom()
     {
         return field_C_bottom;
     }
 
-    Fix16 get_low_z_4637A0()
+    Fix16 GetLowZ()
     {
         return field_10_low_z;
     }

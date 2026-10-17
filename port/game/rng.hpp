@@ -11,23 +11,23 @@ class Rng
         field_4_rnd = 0;
     }
 
-    s32 get_cur_rng_41CFE0()
+    s32 GetCurRng()
     {
         return field_0_rng;
     }
 
-    s32 get_rnd_45F9E0()
+    s32 GetRnd()
     {
         return field_4_rnd;
     }
 
-    void AdvanceCycle_48B900();
-    void ShowCycle_48B920();
+    void AdvanceCycle();
+    void ShowCycle();
 
-    void srand_4F7A40();
-    s16 get_int_4F7AE0(const s16& max_rnd);
-    u8 get_uint8_4F7B70(const u8& max_rnd);
-    int rand_4F7C00();
+    void Srand();
+    s16 GetInt(const s16& max_rnd);
+    u8 GetUint8(const u8& max_rnd);
+    int Rand();
 
     s32 field_0_rng;
     s32 field_4_rnd;

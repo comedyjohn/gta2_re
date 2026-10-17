@@ -182,7 +182,7 @@ void Train_58::ReassignTrainHead_578030()
 
         gCar_BC_Pool_67792C->UpdateNextPrev(this->field_C_carriages[0]);
 
-        gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList_420F30(this->field_C_carriages[this->field_43_idx]);
+        gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList(this->field_C_carriages[this->field_43_idx]);
 
         Car_BC* pTrainCar = this->field_C_carriages[this->field_43_idx];
         if (pTrainCar->field_58_physics) // BUG?
@@ -409,7 +409,7 @@ void Train_58::UpdatePassengerAI_578390()
                     {
                         if (this->field_54_passenger_timer <= 0)
                         {
-                            for (gTargetCarDoor_6FF1D8 = gRng_6F6784.get_int_4F7AE0(4);
+                            for (gTargetCarDoor_6FF1D8 = gRng_6F6784.GetInt(4);
                                  gTargetCarDoor_6FF1D8 < static_cast<u8>((*pTrainCar)->GetRemap());
                                  gTargetCarDoor_6FF1D8++)
                             {
@@ -479,11 +479,11 @@ void Train_58::UpdatePassengerAI_578390()
 
                 if (!this->field_0)
                 {
-                    this->field_54_passenger_timer = gRng_6F6784.get_int_4F7AE0(20) + 20;
+                    this->field_54_passenger_timer = gRng_6F6784.GetInt(20) + 20;
                 }
                 else
                 {
-                    this->field_54_passenger_timer = gRng_6F6784.get_int_4F7AE0(20) + 40;
+                    this->field_54_passenger_timer = gRng_6F6784.GetInt(20) + 40;
                 }
             }
             --this->field_54_passenger_timer;
@@ -792,7 +792,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     pTrain->field_43_idx = wagons;
                     for (j = 0; j < wagons; j++)
                     {
-                        gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList_420F30(pTrain->field_C_carriages[j + 1]);
+                        gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList(pTrain->field_C_carriages[j + 1]);
                     }
 
                     Car_BC* pEngine = pTrain->field_C_carriages[0];

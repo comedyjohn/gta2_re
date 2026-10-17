@@ -43,6 +43,10 @@ GAME = os.path.join(ROOT, "port", "game") + os.sep
 CSV_PATH = os.path.join(ROOT, "port", "tools", "refactor", "address_map.csv")
 COLUMNS = ["kind", "address", "owner", "old_name", "new_name", "new_owner", "addr_96f", "decompme", "file"]
 
+OWNERS = (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL, K.CLASS_TEMPLATE, K.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION)
+PLAIN_KINDS = {K.FUNCTION_DECL, K.CXX_METHOD, K.FIELD_DECL, K.VAR_DECL, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL,
+               K.ENUM_DECL, K.ENUM_CONSTANT_DECL, K.TYPEDEF_DECL, K.TYPE_ALIAS_DECL, K.FUNCTION_TEMPLATE, K.CLASS_TEMPLATE}
+SYMBOLS_PATH = os.path.join(ROOT, "port", "tools", "refactor", "symbol_names.csv")
 FUNC_ADDR = re.compile(r"_([0-9A-Fa-f]{6})(?=_|$)")
 COMMENT_ADDR = re.compile(r"^\s*//\s*(?:FUNCTION:\s*)?0x([0-9A-Fa-f]{6})\s*$")
 COMMENT_96F = re.compile(r"^\s*//\s*(?:9\.6f|FUNCTION: 96f)\s+0x([0-9A-Fa-f]{5,6})\s*$")
@@ -78,13 +82,13 @@ def row_for(cur, lines_of):
     if rel.startswith("3rdParty"):
         return None
     owner = ""
-    if cur.semantic_parent is not None and cur.semantic_parent.kind in (K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL):
+    if cur.semantic_parent is not None and cur.semantic_parent.kind in OWNERS:
         parent = cur.semantic_parent
         owner = parent.spelling
         if not owner or owner.startswith("(unnamed") or owner.startswith("(anonymous"):
             # an unnamed enum or union: its enclosing class is the owner (or none at namespace scope)
             outer = parent.semantic_parent
-            owner = outer.spelling if outer is not None and outer.kind in (K.CLASS_DECL, K.STRUCT_DECL) else ""
+            owner = outer.spelling if outer is not None and outer.kind in OWNERS else ""
     row = dict.fromkeys(COLUMNS, "")
     row["old_name"], row["owner"], row["file"] = name, owner, rel
     k = cur.kind
@@ -149,6 +153,7 @@ def scan_tu(args):
         return cache[f]
 
     rows = []
+    plain = set()
 
     def visit(cur):
         if cur.location.file is not None and not cur.location.file.name.startswith(GAME):
@@ -157,13 +162,19 @@ def scan_tu(args):
             r = row_for(cur, lines_of) if cur.kind != K.TRANSLATION_UNIT else None
             if r:
                 rows.append(r)
+            if cur.spelling and not cur.spelling.startswith("(") and cur.kind in PLAIN_KINDS and not os.path.relpath(
+                cur.location.file.name, GAME
+            ).startswith("3rdParty"):
+                p = cur.semantic_parent
+                owner = p.spelling if p is not None and p.kind in OWNERS else ""
+                plain.add((owner, cur.spelling))
         if cur.kind in (K.TRANSLATION_UNIT, K.NAMESPACE, K.CLASS_DECL, K.STRUCT_DECL, K.UNION_DECL, K.ENUM_DECL,
                         K.LINKAGE_SPEC, K.CLASS_TEMPLATE):
             for child in cur.get_children():
                 visit(child)
 
     visit(tu.cursor)
-    return path, rows
+    return path, (rows, sorted(plain))
 
 
 def commands(build_dir):
@@ -195,19 +206,60 @@ def merge(a, b):
     return a
 
 
-def init(build_dir, jobs):
+def fix_owners(build_dir, jobs):
+    """Fill the owner of rows that have none (members of class templates) from a fresh scan."""
+    fresh = collections.defaultdict(set)
+    with concurrent.futures.ProcessPoolExecutor(jobs) as pool:
+        for path, found in pool.map(scan_tu, list(commands(build_dir))):
+            for usr, row in found[0]:
+                if row["owner"]:
+                    fresh[(row["old_name"], row["file"])].add((row["owner"], row["kind"]))
+    with open(CSV_PATH, newline="") as f:
+        rows = list(csv.DictReader(f))
+    fixed = 0
+    for r in rows:
+        if not r["owner"]:
+            owners = fresh.get((r["old_name"], r["file"]), set())
+            if len(owners) == 1:
+                r["owner"], r["kind"] = next(iter(owners))
+                fixed += 1
+    with open(CSV_PATH, "w", newline="") as f:
+        w = csv.DictWriter(f, COLUMNS, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    print(f"{fixed} owners filled in", file=sys.stderr)
+    return 0
+
+
+def init(build_dir, jobs, symbols_only=False):
     rows = {}
     failed = []
+    plain = set()
     with concurrent.futures.ProcessPoolExecutor(jobs) as pool:
         for path, found in pool.map(scan_tu, list(commands(build_dir))):
             if found is None:
                 failed.append(path)
                 continue
-            for usr, row in found:
+            for usr, row in found[0]:
                 rows[usr] = merge(rows[usr], row) if usr in rows else row
+            plain.update(map(tuple, found[1]))
     if failed:
         sys.exit("do not parse: " + ", ".join(failed))
     ordered = sorted(rows.values(), key=lambda r: (r["kind"], r["owner"], r["old_name"]))
+    # keep the names that rename.py has already recorded
+    if os.path.exists(CSV_PATH):
+        old = {(r["kind"], r["owner"], r["old_name"]): r for r in csv.DictReader(open(CSV_PATH, newline=""))}
+        for r in ordered:
+            prev = old.get((r["kind"], r["owner"], r["old_name"]))
+            if prev:
+                r["new_name"], r["new_owner"] = prev["new_name"], prev["new_owner"]
+    with open(SYMBOLS_PATH, "w", newline="") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["owner", "name"])
+        w.writerows(sorted(plain))
+    if symbols_only:
+        print(f"{len(plain)} symbol names -> {os.path.relpath(SYMBOLS_PATH, ROOT)}", file=sys.stderr)
+        return 0
     with open(CSV_PATH, "w", newline="") as f:
         w = csv.DictWriter(f, COLUMNS, lineterminator="\n")
         w.writeheader()
@@ -293,7 +345,9 @@ def selftest():
 def main():
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--init", metavar="BUILD_DIR")
+    g.add_argument("--init", metavar="BUILD_DIR", help="build address_map.csv (only before the first rename: it reads the current names)")
+    g.add_argument("--symbols", metavar="BUILD_DIR", help="refresh symbol_names.csv (every declared name, for collision checks)")
+    g.add_argument("--fix-owners", metavar="BUILD_DIR", help="fill empty owners (class template members) from a scan")
     g.add_argument("--lookup", metavar="KEY")
     g.add_argument("--strip-comments", action="store_true")
     g.add_argument("--selftest", action="store_true")
@@ -303,6 +357,10 @@ def main():
         return selftest()
     if a.init:
         return init(os.path.realpath(a.init), a.j)
+    if a.fix_owners:
+        return fix_owners(os.path.realpath(a.fix_owners), a.j)
+    if a.symbols:
+        return init(os.path.realpath(a.symbols), a.j, symbols_only=True)
     if a.lookup:
         return lookup(a.lookup)
     return strip_comments()

@@ -10,7 +10,7 @@ DEFINE_GLOBAL_INIT(Ang16, kAng225_6F67DC, Ang16(0x384), 0x6F67DC);
 EXTERN_GLOBAL(Ang16, kAng180_669156);
 
 // 0x405640
-void Ang16::SnapToAng4_405640()
+void Ang16::SnapToAng4()
 {
     if (rValue < 180 || rValue > 1260)
     {
@@ -27,34 +27,34 @@ void Ang16::SnapToAng4_405640()
 }
 
 // 0x405680
-u8 Ang16::ToAng4_405680()
+u8 Ang16::ToAng4()
 {
     return rValue / 360;
 }
 
 // 0x4056A0
-u8 Ang16::GetOctant_4056A0()
+u8 Ang16::GetOctant()
 {
     return rValue / 180;
 }
 
 // 0x405B60
-Fix16 Ang16::NormalizeAngleDeltaScaled_405B60(Ang16& from, Ang16& to, Ang16& divisor)
+Fix16 Ang16::NormalizeAngleDeltaScaled(Ang16& from, Ang16& to, Ang16& divisor)
 {
     Ang16 d = to - from;
     if (d > kAng180_669156)
     {
         d = -d;
-        return d.divideBy_40E640(divisor);
+        return d.DivideBy(divisor);
     }
     else
     {
-        return d.divideBy_40E640(divisor);
+        return d.DivideBy(divisor);
     }
 }
 
 // 0x405C60
-bool Ang16::IsAngleAhead_405C60(Ang16* pFrom, Ang16* pTo)
+bool Ang16::IsAngleAhead(Ang16* pFrom, Ang16* pTo)
 {
     if (*pTo - *pFrom <= kAng180_669156)
     {
@@ -64,13 +64,13 @@ bool Ang16::IsAngleAhead_405C60(Ang16* pFrom, Ang16* pTo)
 }
 
 // 0x406C20
-void Ang16::Normalize_406C20()
+void Ang16::NormalizeOutOfLine()
 {
     Normalize();
 }
 
 // 0x409300
-Ang16* Ang16::AssignNormalized_409300(const s16& value, s32 a3)
+Ang16* Ang16::AssignNormalized(const s16& value, s32 a3)
 {
     rValue = value;
     Normalize();
@@ -78,7 +78,7 @@ Ang16* Ang16::AssignNormalized_409300(const s16& value, s32 a3)
 }
 
 // 0x409340
-Ang16 Ang16::SubtractNormalized_409340(const Ang16& toSub)
+Ang16 Ang16::SubtractNormalized(const Ang16& toSub)
 {
     return Ang16(rValue - toSub.rValue, static_cast<u8>(0));
 }
@@ -92,20 +92,20 @@ Ang16::Ang16(Fix16* a2, s32 a3)
 
 // TODO: move
 // 0x451730
-void Ang16::PolarToCartesian_451730(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
+void Ang16::PolarToCartesianOutOfLine(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
 {
-    ret1 = radius * Ang16::sine_40F500(angle);
-    ret2 = radius * Ang16::cosine_40F520(angle);
+    ret1 = radius * Ang16::Sine(angle);
+    ret2 = radius * Ang16::Cosine(angle);
 }
 
 // 0x482740
-Ang16 Ang16::Fix16_To_Ang16_482740(Fix16& value)
+Ang16 Ang16::Fix16ToAng16OutOfLine(Fix16& value)
 {
     return Ang16(value.mValue / 71, 0);
 }
 
 // 0x4F78F0
-s32 Ang16::GetAngleFace_4F78F0(const Ang16& angle)
+s32 Ang16::GetAngleFace(const Ang16& angle)
 {
     if (angle <= kAng45_6F677C || angle > kAng315_6F680C) //  45° and 315°
     {

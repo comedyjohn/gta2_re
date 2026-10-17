@@ -308,7 +308,7 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
 // 0x5cfa70
 void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
 {
-    u32 random_num = gpRng_67AB34->get_cur_rng_41CFE0() & 0xF;
+    u32 random_num = gpRng_67AB34->GetCurRng() & 0xF;
     u8 PlayerIdx = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
     bool bPlusSignDark = random_num > 7U;
 
@@ -744,13 +744,13 @@ bool Hud_Arrow_7C::UpdateTargets_5D0620()
         Fix16 zpos;
         gGame_0x40_67E008->field_38_local_player->get_pos_569920(&xpos, &ypos, &zpos);
 
-        diff.SetXY_432860(xpos - field_18.field_60_curr_target->field_14_aim_x, ypos - field_18.field_60_curr_target->field_18_aim_y);
-        Fix16 distance_1 = diff.GetLength_41E260() - field_10_radius_pos;
+        diff.SetXY(xpos - field_18.field_60_curr_target->field_14_aim_x, ypos - field_18.field_60_curr_target->field_18_aim_y);
+        Fix16 distance_1 = diff.GetLength() - field_10_radius_pos;
 
         swap_arrows_4C7060();
 
-        diff.SetXY_432860(xpos - field_18.field_60_curr_target->field_14_aim_x, ypos - field_18.field_60_curr_target->field_18_aim_y);
-        Fix16 new_radius = diff.GetLength_41E260() - distance_1;
+        diff.SetXY(xpos - field_18.field_60_curr_target->field_14_aim_x, ypos - field_18.field_60_curr_target->field_18_aim_y);
+        Fix16 new_radius = diff.GetLength() - distance_1;
         field_18.field_2E_target_swap_timer = 20;
         field_10_radius_pos = new_radius;
     }
@@ -766,14 +766,14 @@ void Hud_Arrow_7C::UpdateScreenPos_5D0850()
     Fix16 player_zpos;
 
     gGame_0x40_67E008->field_38_local_player->get_pos_569920(&player_xpos, &player_ypos, &player_zpos);
-    displacement.SetXY_432860(player_xpos - field_18.field_60_curr_target->field_14_aim_x,
-                              player_ypos - field_18.field_60_curr_target->field_18_aim_y);
+    displacement.SetXY(player_xpos - field_18.field_60_curr_target->field_14_aim_x,
+                       player_ypos - field_18.field_60_curr_target->field_18_aim_y);
 
-    field_8_rotation = displacement.atan2_40F790();
+    field_8_rotation = displacement.Atan2();
 
     // Assigned, not initialised: GetLength's result goes through a temporary that shares the atan2 temp's slot
     Fix16 distance;
-    distance = displacement.GetLength_41E260();
+    distance = displacement.GetLength();
     Fix16 intended_radius;
 
     if (field_18.field_60_curr_target->field_20_bIsTargetVisible)
@@ -853,8 +853,8 @@ void Hud_Arrow_7C::UpdateScreenPos_5D0850()
         zpos_2 = field_18.field_60_curr_target->field_1C_aim_z;
     }
     ProjectWorldToScreen_Hud_4B90E0(pCamera,
-                                    player_xpos - (Ang16::sine_40F500(field_8_rotation) * projected_radius),
-                                    player_ypos - (Ang16::cosine_40F520(field_8_rotation) * projected_radius),
+                                    player_xpos - (Ang16::Sine(field_8_rotation) * projected_radius),
+                                    player_ypos - (Ang16::Cosine(field_8_rotation) * projected_radius),
                                     zpos_2,
                                     &field_0_screen_pos_x,
                                     &field_4_screen_pos_y);
@@ -886,7 +886,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
     {
         if (IsVisible_4C7050())
         {
-            if (field_18.field_28_arrow_colour != 5 || (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) % 6 >= 3))
+            if (field_18.field_28_arrow_colour != 5 || (static_cast<u32>(gpRng_67AB34->GetCurRng()) % 6 >= 3))
             {
                 drawKind_ = 2;
             }
@@ -1455,7 +1455,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
         {
             if (pPlayerIter->field_794_is_chatting)
             {
-                if ((gpRng_67AB34->get_cur_rng_41CFE0() & 7U) < 4)
+                if ((gpRng_67AB34->GetCurRng() & 7U) < 4)
                 {
                     swprintf(tmpBuff_67BD9C, L"%s:%s_", pPlayerIter->field_83C_player_name, pPlayerIter->field_796_chat_text);
                 }

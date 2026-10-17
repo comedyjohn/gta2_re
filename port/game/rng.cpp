@@ -12,14 +12,14 @@ DEFINE_GLOBAL(Rng, gRng_6F6784, 0x6F6784);
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
 // 0x48B900
-void Rng::AdvanceCycle_48B900()
+void Rng::AdvanceCycle()
 {
     ++field_0_rng;
-    field_4_rnd = gRng_6F6784.rand_4F7C00();
+    field_4_rnd = gRng_6F6784.Rand();
 }
 
 // 0x48B920
-void Rng::ShowCycle_48B920()
+void Rng::ShowCycle()
 {
     if (gInputRecorder_67F8B0.inlined_check())
     {
@@ -33,13 +33,13 @@ void Rng::ShowCycle_48B920()
 }
 
 // 0x4F7A40
-void Rng::srand_4F7A40()
+void Rng::Srand()
 {
     srand(1);
 }
 
 // 0x4F7AE0
-s16 Rng::get_int_4F7AE0(const s16& max_rnd)
+s16 Rng::GetInt(const s16& max_rnd)
 {
     if (bLog_random_67D5FC)
     {
@@ -51,12 +51,9 @@ s16 Rng::get_int_4F7AE0(const s16& max_rnd)
         {
             this->field_0_rng = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598,
-                "%d: random (get_int) %d",
-                gpRng_67AB34->get_cur_rng_41CFE0(),
-                static_cast<s16>(this->get_cur_rng_41CFE0()));
+        sprintf(gTmpBuffer_67C598, "%d: random (get_int) %d", gpRng_67AB34->GetCurRng(), static_cast<s16>(this->GetCurRng()));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
-        return static_cast<s16>(this->get_cur_rng_41CFE0());
+        return static_cast<s16>(this->GetCurRng());
     }
     else
     {
@@ -72,7 +69,7 @@ s16 Rng::get_int_4F7AE0(const s16& max_rnd)
 }
 
 // 0x4F7B70
-u8 Rng::get_uint8_4F7B70(const u8& max_rnd)
+u8 Rng::GetUint8(const u8& max_rnd)
 {
     if (bLog_random_67D5FC)
     {
@@ -84,7 +81,7 @@ u8 Rng::get_uint8_4F7B70(const u8& max_rnd)
         {
             this->field_0_rng = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<u8>(field_0_rng));
+        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gpRng_67AB34->GetCurRng(), static_cast<u8>(field_0_rng));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         return static_cast<u8>(this->field_0_rng);
     }
@@ -102,7 +99,7 @@ u8 Rng::get_uint8_4F7B70(const u8& max_rnd)
 }
 
 // 0x4F7C00
-int Rng::rand_4F7C00()
+int Rng::Rand()
 {
     return rand();
 }

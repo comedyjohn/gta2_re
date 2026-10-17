@@ -122,7 +122,7 @@ void* File::ReadFileToBuffer_4A6C80(const char_type* FileName, size_t* pAllocate
         FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 145);
     }
 
-    void* pBuffer = Memory::malloc_4FE4D0(*pAllocatedBufferSize);
+    void* pBuffer = Memory::Malloc(*pAllocatedBufferSize);
 
     FILE* hFileRead2 = ::fopen(FileName, "rb");
     if (!hFileRead2)

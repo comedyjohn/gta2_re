@@ -97,13 +97,13 @@ class Camera_0xBC
     // ProjectWorldToScreen_4B90E0 with the out-of-line Fix16 helpers (ExplodingScore_50::DrawNumbers_596C90)
     void ProjectWorldToScreen_OutOfLine_4B90E0(Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
     {
-        Fix16 scale = dword_702DE4.Divide_436A20((field_98_cur_pos.field_8_z - z) + dword_702E04);
+        Fix16 scale = dword_702DE4.Divide((field_98_cur_pos.field_8_z - z) + dword_702E04);
 
-        *pOutX = (x.Subtract_436A00(field_98_cur_pos.field_0_x).Multiply_408680(field_60_screen_scale.x).Multiply_408680(scale))
-                     .Add_408660(Fix16(field_70_screen_px_center_x));
+        *pOutX = (x.Subtract(field_98_cur_pos.field_0_x).Multiply(field_60_screen_scale.x).Multiply(scale))
+                     .Add(Fix16(field_70_screen_px_center_x));
 
-        *pOutY = (y.Subtract_436A00(field_98_cur_pos.field_4_y).Multiply_408680(field_60_screen_scale.x).Multiply_408680(scale))
-                     .Add_408660(Fix16(field_74_screen_px_center_y));
+        *pOutY = (y.Subtract(field_98_cur_pos.field_4_y).Multiply(field_60_screen_scale.x).Multiply(scale))
+                     .Add(Fix16(field_74_screen_px_center_y));
     }
 
     void SetSmoothFollow_475B60()
@@ -138,10 +138,9 @@ class Camera_0xBC
 
     bool IsRectInBounds_45AF40(Fix16Rect* pRect)
     {
-        return pRect->get_top_45ADD0() <= field_20_padded_view_bounds.field_C_bottom &&
-            pRect->get_bottom_45ADC0() >= field_20_padded_view_bounds.field_8_top &&
-            pRect->get_left_45ADB0() <= field_20_padded_view_bounds.field_4_right &&
-            pRect->get_right_45ADA0() >= field_20_padded_view_bounds.field_0_left;
+        return pRect->GetTop() <= field_20_padded_view_bounds.field_C_bottom &&
+            pRect->GetBottom() >= field_20_padded_view_bounds.field_8_top &&
+            pRect->GetLeft() <= field_20_padded_view_bounds.field_4_right && pRect->GetRight() >= field_20_padded_view_bounds.field_0_left;
     }
 
     bool IsPointInViewBounds_40CF60(Fix16 x, Fix16 y)

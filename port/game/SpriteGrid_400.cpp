@@ -294,7 +294,7 @@ bool SpriteGrid_400::CheckRectForCollisions_477F60(Fix16Rect* pRect, char_type b
 {
     bool bRet = false;
     ++gCollisionCounters_6791FC->field_4_query_id;
-    pRect->DoSetCurrentRect_59DD60();
+    pRect->DoSetCurrentRect();
     bDoCollisionCheck_679006 = bDeepCheck;
     gSpriteGrid_exclude_types_678F88 = exclude_sprite_type;
     SetSpriteToExclude_477E50(pExclude);
@@ -703,11 +703,10 @@ char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16Rect*
                 gCollisionCounters_6791FC->field_0_test_count++;
 
                 Fix16Rect* pBBox = &pObj->field_0_pSprite->field_C_pCollisionShape->field_30_boundingBox;
-                if (pRect->AABB_Intersects_41E2F0(pBBox) &&
+                if (pRect->AABBIntersects(pBBox) &&
                     (!bDoCollisionCheck_679006 || pObj->field_0_pSprite->field_C_pCollisionShape->IsZeroWidth_41E390() ||
-                     pObj->field_0_pSprite->field_0_rotation.jIsAxisAligned_41E3C0() ||
-                     pObj->field_0_pSprite->IntersectsRectSAT_59FB10(pRect) ||
-                     pRect->IntersectsSpriteRenderingRect_59DDF0(pObj->field_0_pSprite)))
+                     pObj->field_0_pSprite->field_0_rotation.JIsAxisAligned() || pObj->field_0_pSprite->IntersectsRectSAT_59FB10(pRect) ||
+                     pRect->IntersectsSpriteRenderingRect(pObj->field_0_pSprite)))
                 {
                     if (gSpriteGrid_list_679214)
                     {

@@ -627,10 +627,10 @@ bool PoliceCrew_38::sub_572210()
     {
         if (!field_10_subObj->field_24_phase)
         {
-            return Fix16::MaxAbsDistance_42A6B0(gCurrentCrewPed_6FEDDC->get_cam_x(),
-                                                gCurrentCrewPed_6FEDDC->get_cam_y(),
-                                                field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
-                                                field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y()) < kFpEight_6FED48 ?
+            return Fix16::MaxAbsDistance(gCurrentCrewPed_6FEDDC->get_cam_x(),
+                                         gCurrentCrewPed_6FEDDC->get_cam_y(),
+                                         field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
+                                         field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y()) < kFpEight_6FED48 ?
                 true :
                 false;
         }
@@ -841,7 +841,7 @@ inline Fix16 MaxAbsDistance_572920(const Fix16& x1, const Fix16& y1, const Fix16
     Fix16 diff_y;
     diff_y = y2 - y1;
     Fix16 result;
-    result = Fix16::Max_44E540(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
+    result = Fix16::Max(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
     return result;
 }
 } // namespace
@@ -1671,10 +1671,10 @@ void PoliceCrew_38::sub_575310()
     if (field_14_pPursuitTarget->field_0_criminal_ped->field_168_game_object)
     {
         Fix16 dist;
-        dist = Fix16::MaxAbsDistance_42A6B0(gCurrentCrewPed_6FEDDC->get_cam_x(),
-                                            gCurrentCrewPed_6FEDDC->get_cam_y(),
-                                            field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
-                                            field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y());
+        dist = Fix16::MaxAbsDistance(gCurrentCrewPed_6FEDDC->get_cam_x(),
+                                     gCurrentCrewPed_6FEDDC->get_cam_y(),
+                                     field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
+                                     field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y());
         if (dist < dword_6FECF0 + dword_6FEBF4)
         {
             gCurrentCrewPed_6FEDDC->SetObjective(objectives_enum::wait_in_car_27);
@@ -1692,10 +1692,10 @@ void PoliceCrew_38::sub_575310()
     else
     {
         Fix16 dist;
-        dist = Fix16::MaxAbsDistance_42A6B0(gCurrentCrewPed_6FEDDC->get_cam_x(),
-                                            gCurrentCrewPed_6FEDDC->get_cam_y(),
-                                            field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
-                                            field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y());
+        dist = Fix16::MaxAbsDistance(gCurrentCrewPed_6FEDDC->get_cam_x(),
+                                     gCurrentCrewPed_6FEDDC->get_cam_y(),
+                                     field_14_pPursuitTarget->field_0_criminal_ped->get_cam_x(),
+                                     field_14_pPursuitTarget->field_0_criminal_ped->get_cam_y());
 
         Car_BC* pCar = field_10_subObj->field_0_car;
         CarChaseTask_40* pChase = pCar->field_60_pChaseTask;
@@ -2623,8 +2623,8 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
         Fix16 x_right = Fix16(x) + dword_6FEBF4;
         y_bottom = Fix16(y_start + width + 1);
         zpos = Fix16(z);
-        field_A0_rect->SetRect_41E350(x_left - dword_6FEBF4, x_right + dword_6FEBF4, y_top, y_bottom);
-        field_A0_rect->SetHiLowZ_41E370(zpos - dword_6FECEC, zpos + dword_6FECEC);
+        field_A0_rect->SetRect(x_left - dword_6FEBF4, x_right + dword_6FEBF4, y_top, y_bottom);
+        field_A0_rect->SetHiLowZ(zpos - dword_6FECEC, zpos + dword_6FECEC);
         if (gSpriteGrid_1_679208->CheckRectForCollisions_477F60(field_A0_rect, 0, 0, nullptr))
         {
             return 0;
@@ -2646,8 +2646,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                 if (lane > 0 && lane < width - 1)
                 {
                     s16 max = 32;
-                    angle = Ang16::Fix16_To_Ang16_40F540((Fix16(gRng_6F6784.get_int_4F7AE0(max)) - dword_6FED80) * kFpOne64th_6FEB88) +
-                        word_6FEE30;
+                    angle = Ang16::Fix16ToAng16((Fix16(gRng_6F6784.GetInt(max)) - dword_6FED80) * kFpOne64th_6FEB88) + word_6FEE30;
                 }
                 else
                 {
@@ -2924,8 +2923,8 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
         auto x_right = Fix16(x_start + width + 1);
         y_bottom = Fix16(y) + dword_6FEBF4;
         zpos = Fix16(z);
-        field_A0_rect->SetRect_41E350(x_left, x_right, y_top - dword_6FEBF4, y_bottom + dword_6FEBF4);
-        field_A0_rect->SetHiLowZ_41E370(zpos - dword_6FECEC, zpos + dword_6FECEC);
+        field_A0_rect->SetRect(x_left, x_right, y_top - dword_6FEBF4, y_bottom + dword_6FEBF4);
+        field_A0_rect->SetHiLowZ(zpos - dword_6FECEC, zpos + dword_6FECEC);
         if (gSpriteGrid_1_679208->CheckRectForCollisions_477F60(field_A0_rect, 0, 0, nullptr))
         {
             return 0;
@@ -2947,8 +2946,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                 if (lane > 0 && lane < width - 1)
                 {
                     s16 max = 16;
-                    angle = Ang16::Fix16_To_Ang16_40F540((Fix16(gRng_6F6784.get_int_4F7AE0(max)) - dword_6FED0C) * kFpOne64th_6FEB88) +
-                        word_6FEB74;
+                    angle = Ang16::Fix16ToAng16((Fix16(gRng_6F6784.GetInt(max)) - dword_6FED0C) * kFpOne64th_6FEB88) + word_6FEB74;
                 }
                 else
                 {

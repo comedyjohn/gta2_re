@@ -208,7 +208,7 @@ Ped* Ped_List_4::FindClosestActivePed_471340(Fix16 x, Fix16 y)
         Ped* pPed = pIter->field_0_char_ped;
         if (pIter->field_0_char_ped->IsActive_433B40() == 1)
         {
-            Fix16 distance = Fix16::MaxAbsDistance_42A6B0(x, y, pPed->get_cam_x(), pPed->get_cam_y());
+            Fix16 distance = Fix16::MaxAbsDistance(x, y, pPed->get_cam_x(), pPed->get_cam_y());
             if (distance < closestDistance)
             {
                 pClosest = pPed;
@@ -236,10 +236,9 @@ Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing,
         if (pIter->field_0_char_ped->IsActive_433B40() == 1)
         {
             bool withinCone = false;
-            distance = Fix16::MaxAbsDistance_42A6B0(x, y, pIter->field_0_char_ped->get_cam_x(), pIter->field_0_char_ped->get_cam_y());
+            distance = Fix16::MaxAbsDistance(x, y, pIter->field_0_char_ped->get_cam_x(), pIter->field_0_char_ped->get_cam_y());
 
-            angle_diff =
-                Fix16::atan2_fixed_405320(pIter->field_0_char_ped->get_cam_y() - y, pIter->field_0_char_ped->get_cam_x() - x) - facing;
+            angle_diff = Fix16::Atan2Fixed(pIter->field_0_char_ped->get_cam_y() - y, pIter->field_0_char_ped->get_cam_x() - x) - facing;
 
             neg_half_cone = kAng0_678B40 - half_cone;
 

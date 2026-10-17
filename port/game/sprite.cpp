@@ -334,7 +334,7 @@ SpriteMaskCache_3CC::SpriteMaskCache_3CC()
 
     // By the way this is later used, it seems to be an array of a structure of size 0x40.
     // For now, it's a s32* as it make the code to match.
-    u8* pvVar2 = static_cast<u8*>(Memory::Aligned_malloc_4FE510(0x40000, reinterpret_cast<void**>(&field_3C8_unaligned_alloc)));
+    u8* pvVar2 = static_cast<u8*>(Memory::AlignedMalloc(0x40000, reinterpret_cast<void**>(&field_3C8_unaligned_alloc)));
     field_3C4_aligned_buffer = pvVar2;
 
     SpriteMask_14* tmp = field_0_masks;
@@ -470,7 +470,7 @@ char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, co
 
     if (p0.y <= scanLineY && p1.y >= scanLineY)
     {
-        pd = p1.Sub_40AC80(p0);
+        pd = p1.Sub(p0);
         Fix16 x = p0.x + (((scanLineY - p0.y) * ((pd.x) / pd.y)));
         if (x.mValue >= minX.mValue && x.mValue <= minY.mValue)
         {
@@ -480,7 +480,7 @@ char_type ComputeScanlineIntersectionY_4F76A0(const Fix16& minX, Fix16& minY, co
     }
     else if (p1.y <= scanLineY && p0.y >= scanLineY)
     {
-        pd = p0.Sub_40AC80(p1);
+        pd = p0.Sub(p1);
         Fix16 x = p1.x + (((scanLineY - p1.y) * ((pd.x) / pd.y)));
         if (x.mValue >= minX.mValue && x.mValue <= minY.mValue)
         {
@@ -727,10 +727,10 @@ void Sprite::ApplyScaleToDimensions_59E4C0(Fix16 scale, s32 bScale_Field_C_4C)
 char_type Sprite::CollisionCheck_59E590(Sprite* pOther)
 {
     // TODO: inlining issue inside of AABB_Intersects_41E2F0
-    if (field_C_pCollisionShape->field_30_boundingBox.AABB_Intersects_41E2F0(&pOther->field_C_pCollisionShape->field_30_boundingBox))
+    if (field_C_pCollisionShape->field_30_boundingBox.AABBIntersects(&pOther->field_C_pCollisionShape->field_30_boundingBox))
     {
-        if ((field_C_pCollisionShape->IsZeroWidth_41E390() || field_0_rotation.jIsAxisAligned_41E3C0()) &&
-            (pOther->field_C_pCollisionShape->IsZeroWidth_41E390() || pOther->field_0_rotation.jIsAxisAligned_41E3C0()))
+        if ((field_C_pCollisionShape->IsZeroWidth_41E390() || field_0_rotation.JIsAxisAligned()) &&
+            (pOther->field_C_pCollisionShape->IsZeroWidth_41E390() || pOther->field_0_rotation.JIsAxisAligned()))
         {
 
             return 1;
@@ -749,7 +749,7 @@ char_type Sprite::CollisionCheck_59E590(Sprite* pOther)
 char_type Sprite::CheckDirectionalSliceCollision_59E680(Fix16 sliceLen, Sprite* pSprite)
 {
     Fix16Point point;
-    point.FromPolar_41E210(-sliceLen / 2, pSprite->field_0_rotation);
+    point.FromPolar(-sliceLen / 2, pSprite->field_0_rotation);
 
     gSprite_703814->field_C_pCollisionShape->CopyDimensions_447DF0(pSprite->field_C_pCollisionShape);
     gSprite_703814->field_C_pCollisionShape->ReduceHeightNoClamp_4BA110(sliceLen);
@@ -1160,25 +1160,25 @@ void Sprite::Draw_59EFF0()
         {
             gSpriteMaskCache_67AF1C->InvalidateMasksByType_48F6E0(&sprite_idx);
         }
-        car_flags = pCar->field_8_damaged_areas.GetRaw_4A5190();
+        car_flags = pCar->field_8_damaged_areas.GetRaw();
         if (gLighting_626A09)
         {
             if (pCar->HasBottomLeftRoofLight_421680())
             {
-                pCar->field_8_damaged_areas.SetGlobal0_4BA360(); // sets a global to another
+                pCar->field_8_damaged_areas.SetGlobal0(); // sets a global to another
             }
             else
             {
                 if (pCar->IsFbiCar_411920()) // line 6a8
                 {
-                    pCar->field_8_damaged_areas.SetGlobal1_4BA370();
+                    pCar->field_8_damaged_areas.SetGlobal1();
                 }
                 else
                 {
-                    pCar->field_8_damaged_areas.SetGlobal2_4BA350();
+                    pCar->field_8_damaged_areas.SetGlobal2();
                 }
             }
-            pCar->field_8_damaged_areas.ClearGlobalFlags_4BA340();
+            pCar->field_8_damaged_areas.ClearGlobalFlags();
         }
         u8 bRet;
         u16 unkDeltaRelated = pCar->field_8_damaged_areas.Delta_48F8B0(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), false);
@@ -1244,7 +1244,7 @@ void Sprite::Draw_59EFF0()
 
     if (pCar && gLighting_626A09)
     {
-        pCar->field_8_damaged_areas.MaskWithGlobalFlags_4BA330();
+        pCar->field_8_damaged_areas.MaskWithGlobalFlags();
 
         u8 bRet;
         u16 unkDeltaRelated = pCar->field_8_damaged_areas.Delta_48F8B0(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), true);
@@ -1368,13 +1368,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
     Fix16 pRotTransY;
 
     // First rotation
-    RotateAndTranslatePoint_42A720(pOtherRect->get_left_45ADB0(),
-                                   pOtherRect->get_top_45ADD0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRect->GetLeft(),
+                            pOtherRect->GetTop(),
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1385,13 +1385,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
     }
 
     // Second rotation
-    RotateAndTranslatePoint_42A720(pOtherRect->get_right_45ADA0(),
-                                   pOtherRect->get_top_45ADD0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRect->GetRight(),
+                            pOtherRect->GetTop(),
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1402,13 +1402,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
     }
 
     // Third rotation
-    RotateAndTranslatePoint_42A720(pOtherRect->get_right_45ADA0(),
-                                   pOtherRect->get_bottom_45ADC0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRect->GetRight(),
+                            pOtherRect->GetBottom(),
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1419,13 +1419,13 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
     }
 
     // Fourth rotation
-    RotateAndTranslatePoint_42A720(pOtherRect->get_left_45ADB0(),
-                                   pOtherRect->get_bottom_45ADC0(),
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRect->GetLeft(),
+                            pOtherRect->GetBottom(),
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1439,17 +1439,17 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16Rect* pOtherRect)
     // In 9.6f, it's RotateAndTranslatePoint_42A720. Here the function has run out of inline
     // expansions: the rotation is the out-of-line copy and only the y sum stays inline. The
     // operators are the named out-of-line copies used above, so each has a single callee.
-    ProjectOntoAxis_5A5AA0(((pOtherRect->get_left_45ADB0()).Add_408660(pOtherRect->get_right_45ADA0())).DivideInt_53E860(2),
-                           (pOtherRect->get_top_45ADD0() + pOtherRect->get_bottom_45ADC0()).DivideInt_53E860(2),
+    ProjectOntoAxis_5A5AA0(((pOtherRect->GetLeft()).Add(pOtherRect->GetRight())).DivideInt(2),
+                           (pOtherRect->GetTop() + pOtherRect->GetBottom()).DivideInt(2),
                            -field_0_rotation,
                            field_14_xy.x,
                            field_14_xy.y,
                            pRotTransX,
                            pRotTransY);
 
-    if (pRotTransX >= half_width.Negate_4086A0() && pRotTransX <= half_width)
+    if (pRotTransX >= half_width.Negated() && pRotTransX <= half_width)
     {
-        if (pRotTransY >= half_height.Negate_4086A0() && pRotTransY <= half_height)
+        if (pRotTransY >= half_height.Negated() && pRotTransY <= half_height)
         {
             return true;
         }
@@ -1506,7 +1506,7 @@ char_type Sprite::FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* p
     {
         Ang16 t = -field_0_rotation;
         Fix16Point* pCorner = &pBBox[i];
-        RotateAndTranslatePoint_42A720(pCorner->x, pCorner->y, t, field_14_xy.x, field_14_xy.y, corner_x, corner_y);
+        RotateAndTranslatePoint(pCorner->x, pCorner->y, t, field_14_xy.x, field_14_xy.y, corner_x, corner_y);
 
         if (((corner_x >= -pHalfW) && (corner_x <= pHalfW) && (corner_y >= -pHalfH) && (corner_y <= pHalfH)))
         {
@@ -1562,7 +1562,7 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
 {
     if (field_C_pCollisionShape->IsZeroWidth_41E390())
     {
-        return field_C_pCollisionShape->field_30_boundingBox.IntersectsSpriteRenderingRect_59DDF0(pOther);
+        return field_C_pCollisionShape->field_30_boundingBox.IntersectsSpriteRenderingRect(pOther);
     }
 
     Fix16 half_width;
@@ -1576,13 +1576,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     Fix16 pRotTransY;
 
     // First rotation
-    RotateAndTranslatePoint_42A720(pOtherRenderRect[0].x,
-                                   pOtherRenderRect[0].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRenderRect[0].x,
+                            pOtherRenderRect[0].y,
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1593,13 +1593,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Second rotation
-    RotateAndTranslatePoint_42A720(pOtherRenderRect[1].x,
-                                   pOtherRenderRect[1].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRenderRect[1].x,
+                            pOtherRenderRect[1].y,
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1610,13 +1610,13 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Third rotation
-    RotateAndTranslatePoint_42A720(pOtherRenderRect[2].x,
-                                   pOtherRenderRect[2].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRenderRect[2].x,
+                            pOtherRenderRect[2].y,
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
     if (pRotTransX >= -half_width && pRotTransX <= half_width)
     {
@@ -1627,17 +1627,17 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
     }
 
     // Fourth rotation
-    RotateAndTranslatePoint_42A720(pOtherRenderRect[3].x,
-                                   pOtherRenderRect[3].y,
-                                   -field_0_rotation,
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   pRotTransX,
-                                   pRotTransY);
+    RotateAndTranslatePoint(pOtherRenderRect[3].x,
+                            pOtherRenderRect[3].y,
+                            -field_0_rotation,
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            pRotTransX,
+                            pRotTransY);
 
-    if (pRotTransX >= half_width.Negate_4086A0() && pRotTransX <= half_width)
+    if (pRotTransX >= half_width.Negated() && pRotTransX <= half_width)
     {
-        if (pRotTransY >= half_height.Negate_4086A0() && pRotTransY <= half_height)
+        if (pRotTransY >= half_height.Negated() && pRotTransY <= half_height)
         {
             return true;
         }
@@ -1653,9 +1653,9 @@ bool Sprite::RotatedRectCollisionSAT_5A0380(Sprite* pOther)
                            pRotTransX,
                            pRotTransY);
 
-    if (pRotTransX >= half_width.Negate_4086A0() && pRotTransX <= half_width)
+    if (pRotTransX >= half_width.Negated() && pRotTransX <= half_width)
     {
-        if (pRotTransY >= half_height.Negate_4086A0() && pRotTransY <= half_height)
+        if (pRotTransY >= half_height.Negated() && pRotTransY <= half_height)
         {
             return true;
         }
@@ -1864,25 +1864,25 @@ bool Sprite::PointInsideRotatedBounds_5A1490(Fix16Point& point1, Fix16Point& poi
     field_C_pCollisionShape->GetHalfExtents_4BA0A0(&half_width, &half_height);
 
     // The plain mValue compares are cheaper than the Fix16 operators (inline budget).
-    RotateAndTranslatePoint_42A720(point1.x,
-                                   point1.y,
-                                   NegateAng16_401C80(field_0_rotation),
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   rotated_1.x,
-                                   rotated_1.y);
+    RotateAndTranslatePoint(point1.x,
+                            point1.y,
+                            NegateAng16_401C80(field_0_rotation),
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            rotated_1.x,
+                            rotated_1.y);
     if (rotated_1.x.mValue >= -half_width.mValue && rotated_1.x.mValue <= half_width.mValue && rotated_1.y.mValue >= -half_height.mValue &&
         rotated_1.y.mValue <= half_height.mValue)
     {
         return true;
     }
-    RotateAndTranslatePoint_42A720(point2.x,
-                                   point2.y,
-                                   NegateAng16_401C80(field_0_rotation),
-                                   field_14_xy.x,
-                                   field_14_xy.y,
-                                   rotated_2.x,
-                                   rotated_2.y);
+    RotateAndTranslatePoint(point2.x,
+                            point2.y,
+                            NegateAng16_401C80(field_0_rotation),
+                            field_14_xy.x,
+                            field_14_xy.y,
+                            rotated_2.x,
+                            rotated_2.y);
     if (rotated_2.x.mValue >= -half_width.mValue && rotated_2.x.mValue <= half_width.mValue && rotated_2.y.mValue >= -half_height.mValue &&
         rotated_2.y.mValue <= half_height.mValue)
     {
@@ -2083,15 +2083,14 @@ char_type Sprite::CheckMapZCollision_5A21F0()
 // 0x5A22B0
 Fix16 Sprite::MinDistanceToAnySpriteBBoxCorner_5A22B0(Sprite* pOther)
 {
-    Fix16 xy_pos_max = Fix16::MaxAbsDistance_42A6B0(field_14_xy.x, field_14_xy.y, pOther->field_14_xy.x, pOther->field_14_xy.y);
+    Fix16 xy_pos_max = Fix16::MaxAbsDistance(field_14_xy.x, field_14_xy.y, pOther->field_14_xy.x, pOther->field_14_xy.y);
 
     s32 box_idx = 0;
     s32 k4Counter = 4;
     do
     {
         SpriteShape_4C* p4C = pOther->field_C_pCollisionShape;
-        Fix16 d =
-            Fix16::MaxAbsDistance_42A6B0(field_14_xy.x, field_14_xy.y, p4C->field_C_corners[box_idx].x, p4C->field_C_corners[box_idx].y);
+        Fix16 d = Fix16::MaxAbsDistance(field_14_xy.x, field_14_xy.y, p4C->field_C_corners[box_idx].x, p4C->field_C_corners[box_idx].y);
         if (d < xy_pos_max)
         {
             xy_pos_max = d;
@@ -2425,101 +2424,101 @@ void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix
     Fix16 height_over_2 = field_4_height / 2;
     Fix16 depth_over_2 = field_8_depth / 2;
 
-    point.SetXY_432860(xpos, ypos);
+    point.SetXY(xpos, ypos);
 
     if (rotation == gAng16_703804) // = 0
     {
-        corner0.SetXY_432860(-width_over_2, -height_over_2);
-        corner1.SetXY_432860(width_over_2, -height_over_2);
-        corner2.SetXY_432860(width_over_2, height_over_2);
-        corner3.SetXY_432860(-width_over_2, height_over_2);
+        corner0.SetXY(-width_over_2, -height_over_2);
+        corner1.SetXY(width_over_2, -height_over_2);
+        corner2.SetXY(width_over_2, height_over_2);
+        corner3.SetXY(-width_over_2, height_over_2);
 
         field_C_corners[0] = point + corner0;
         field_C_corners[1] = point + corner1;
         field_C_corners[2] = point + corner2;
         field_C_corners[3] = point + corner3;
 
-        field_30_boundingBox.SetRect_41E350(xpos - width_over_2, xpos + width_over_2, ypos - height_over_2, ypos + height_over_2);
+        field_30_boundingBox.SetRect(xpos - width_over_2, xpos + width_over_2, ypos - height_over_2, ypos + height_over_2);
     }
     else if (rotation == kAng90_70344C) // = 360
     {
-        corner0.SetXY_432860(-height_over_2, width_over_2);
-        corner1.SetXY_432860(-height_over_2, -width_over_2);
-        corner2.SetXY_432860(height_over_2, -width_over_2);
-        corner3.SetXY_432860(height_over_2, width_over_2);
+        corner0.SetXY(-height_over_2, width_over_2);
+        corner1.SetXY(-height_over_2, -width_over_2);
+        corner2.SetXY(height_over_2, -width_over_2);
+        corner3.SetXY(height_over_2, width_over_2);
 
         field_C_corners[0] = point + corner0;
         field_C_corners[1] = point + corner1;
         field_C_corners[2] = point + corner2;
         field_C_corners[3] = point + corner3;
 
-        field_30_boundingBox.SetRect_41E350(xpos - height_over_2, xpos + height_over_2, ypos - width_over_2, ypos + width_over_2);
+        field_30_boundingBox.SetRect(xpos - height_over_2, xpos + height_over_2, ypos - width_over_2, ypos + width_over_2);
     }
     else if (rotation == kAng180_70351E) // = 720
     {
-        corner0.SetXY_432860(width_over_2, height_over_2);
-        corner1.SetXY_432860(-width_over_2, height_over_2);
-        corner2.SetXY_432860(-width_over_2, -height_over_2);
-        corner3.SetXY_432860(width_over_2, -height_over_2);
+        corner0.SetXY(width_over_2, height_over_2);
+        corner1.SetXY(-width_over_2, height_over_2);
+        corner2.SetXY(-width_over_2, -height_over_2);
+        corner3.SetXY(width_over_2, -height_over_2);
 
         field_C_corners[0] = point + corner0;
         field_C_corners[1] = point + corner1;
         field_C_corners[2] = point + corner2;
         field_C_corners[3] = point + corner3;
 
-        field_30_boundingBox.SetRect_41E350(xpos - width_over_2, xpos + width_over_2, ypos - height_over_2, ypos + height_over_2);
+        field_30_boundingBox.SetRect(xpos - width_over_2, xpos + width_over_2, ypos - height_over_2, ypos + height_over_2);
     }
     else if (rotation == kAng270_703544) // = 1080
     {
-        corner0.SetXY_432860(height_over_2, -width_over_2);
-        corner1.SetXY_432860(height_over_2, width_over_2);
-        corner2.SetXY_432860(-height_over_2, width_over_2);
-        corner3.SetXY_432860(-height_over_2, -width_over_2);
+        corner0.SetXY(height_over_2, -width_over_2);
+        corner1.SetXY(height_over_2, width_over_2);
+        corner2.SetXY(-height_over_2, width_over_2);
+        corner3.SetXY(-height_over_2, -width_over_2);
 
         field_C_corners[0] = point + corner0;
         field_C_corners[1] = point + corner1;
         field_C_corners[2] = point + corner2;
         field_C_corners[3] = point + corner3;
 
-        field_30_boundingBox.SetRect_41E350(xpos - height_over_2, xpos + height_over_2, ypos - width_over_2, ypos + width_over_2);
+        field_30_boundingBox.SetRect(xpos - height_over_2, xpos + height_over_2, ypos - width_over_2, ypos + width_over_2);
     }
     else
     {
-        corner0.SetXY_432860(-width_over_2, -height_over_2);
-        corner1.SetXY_432860(width_over_2, -height_over_2);
-        corner2.SetXY_432860(width_over_2, height_over_2);
-        corner3.SetXY_432860(-width_over_2, height_over_2);
+        corner0.SetXY(-width_over_2, -height_over_2);
+        corner1.SetXY(width_over_2, -height_over_2);
+        corner2.SetXY(width_over_2, height_over_2);
+        corner3.SetXY(-width_over_2, height_over_2);
 
         // RotateByAngle_40F6B0 with the operators out of line, written out by hand: going through an
         // inline helper (RotateByAngle_40F6B0_all_out_of_line) uses up the inline budget and pushes the
         // first Fix16_Point ctor out of line.
         {
-            Fix16 sin = Ang16::sine_40F500(rotation);
-            Fix16 cos = Ang16::cosine_40F520(rotation);
+            Fix16 sin = Ang16::Sine(rotation);
+            Fix16 cos = Ang16::Cosine(rotation);
             Fix16 x_old = corner0.x;
-            corner0.x = corner0.x.Multiply_408680(cos).Add_408660(corner0.y.Multiply_408680(sin));
-            corner0.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(corner0.y.Multiply_408680(cos));
+            corner0.x = corner0.x.Multiply(cos).Add(corner0.y.Multiply(sin));
+            corner0.y = x_old.Negated().Multiply(sin).Add(corner0.y.Multiply(cos));
         }
         {
-            Fix16 sin = Ang16::sine_40F500(rotation);
-            Fix16 cos = Ang16::cosine_40F520(rotation);
+            Fix16 sin = Ang16::Sine(rotation);
+            Fix16 cos = Ang16::Cosine(rotation);
             Fix16 x_old = corner1.x;
-            corner1.x = corner1.x.Multiply_408680(cos).Add_408660(corner1.y.Multiply_408680(sin));
-            corner1.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(corner1.y.Multiply_408680(cos));
+            corner1.x = corner1.x.Multiply(cos).Add(corner1.y.Multiply(sin));
+            corner1.y = x_old.Negated().Multiply(sin).Add(corner1.y.Multiply(cos));
         }
         {
-            Fix16 sin = Ang16::sine_40F500(rotation);
-            Fix16 cos = Ang16::cosine_40F520(rotation);
+            Fix16 sin = Ang16::Sine(rotation);
+            Fix16 cos = Ang16::Cosine(rotation);
             Fix16 x_old = corner2.x;
-            corner2.x = corner2.x.Multiply_408680(cos).Add_408660(corner2.y.Multiply_408680(sin));
-            corner2.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(corner2.y.Multiply_408680(cos));
+            corner2.x = corner2.x.Multiply(cos).Add(corner2.y.Multiply(sin));
+            corner2.y = x_old.Negated().Multiply(sin).Add(corner2.y.Multiply(cos));
         }
         {
-            Fix16 sin = Ang16::sine_40F500(rotation);
-            Fix16 cos = Ang16::cosine_40F520(rotation);
+            Fix16 sin = Ang16::Sine(rotation);
+            Fix16 cos = Ang16::Cosine(rotation);
             Fix16 x_old = corner3.x;
-            corner3.x = corner3.x.Multiply_408680(cos).Add_408660(corner3.y.Multiply_408680(sin));
-            corner3.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(corner3.y.Multiply_408680(cos));
+            corner3.x = corner3.x.Multiply(cos).Add(corner3.y.Multiply(sin));
+            corner3.y = x_old.Negated().Multiply(sin).Add(corner3.y.Multiply(cos));
         }
 
         field_C_corners[0] = point + corner0;
@@ -2529,36 +2528,36 @@ void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix
 
         // Declared, then assigned through the getters (9.6f calls them): initialised, VC6 interleaves the copies
         Fix16 left, right, top, bottom;
-        left = field_30_boundingBox.get_left_45ADB0();
-        right = field_30_boundingBox.get_right_45ADA0();
-        top = field_30_boundingBox.get_top_45ADD0();
-        bottom = field_30_boundingBox.get_bottom_45ADC0();
+        left = field_30_boundingBox.GetLeft();
+        right = field_30_boundingBox.GetRight();
+        top = field_30_boundingBox.GetTop();
+        bottom = field_30_boundingBox.GetBottom();
 
-        FindMinMax_5A57E0(left, right, field_C_corners[0].x, field_C_corners[1].x, field_C_corners[2].x, field_C_corners[3].x);
+        FindMinMax(left, right, field_C_corners[0].x, field_C_corners[1].x, field_C_corners[2].x, field_C_corners[3].x);
 
-        FindMinMax_5A57E0(top, bottom, field_C_corners[0].y, field_C_corners[1].y, field_C_corners[2].y, field_C_corners[3].y);
+        FindMinMax(top, bottom, field_C_corners[0].y, field_C_corners[1].y, field_C_corners[2].y, field_C_corners[3].y);
 
-        field_30_boundingBox.SetRect_5A5E30(left, right, top, bottom);
+        field_30_boundingBox.SetRectOutOfLine(left, right, top, bottom);
     }
-    field_30_boundingBox.SetHiLowZ_41E370(zpos.Subtract_436A00(depth_over_2), zpos.Add_408660(depth_over_2));
+    field_30_boundingBox.SetHiLowZ(zpos.Subtract(depth_over_2), zpos.Add(depth_over_2));
     field_48_bbox_up_to_date = true;
 
     // Not in 9.6f: the corners are set and rotated again, and the results are never used.
-    corner0.SetXY_432860(width_over_2.Negate_4086A0(), height_over_2.Negate_4086A0());
-    corner1.SetXY_432860(width_over_2, height_over_2.Negate_4086A0());
-    corner2.SetXY_432860(width_over_2, height_over_2);
-    corner3.SetXY_432860(width_over_2.Negate_4086A0(), height_over_2);
+    corner0.SetXY(width_over_2.Negated(), height_over_2.Negated());
+    corner1.SetXY(width_over_2, height_over_2.Negated());
+    corner2.SetXY(width_over_2, height_over_2);
+    corner3.SetXY(width_over_2.Negated(), height_over_2);
 
-    corner0.RotateByAngle_40F6B0(rotation);
-    corner1.RotateByAngle_40F6B0(rotation);
-    corner2.RotateByAngle_40F6B0(rotation);
-    corner3.RotateByAngle_40F6B0(rotation);
+    corner0.RotateByAngle(rotation);
+    corner1.RotateByAngle(rotation);
+    corner2.RotateByAngle(rotation);
+    corner3.RotateByAngle(rotation);
 }
 
 // 0x5A4D90
 void SpriteShape_4C::SetCurrentRect_5A4D90()
 {
-    field_30_boundingBox.DoSetCurrentRect_59DD60();
+    field_30_boundingBox.DoSetCurrentRect();
 }
 
 // 0x5A4DA0
@@ -2576,10 +2575,10 @@ void SpriteShape_4C::DrawCollisionBox_5A4DA0(Fix16 zpos)
         Fix16 y3;
         Fix16 x4;
         Fix16 y4;
-        ProjectToScreen_5A5690(field_30_boundingBox.get_left_45ADB0(), field_30_boundingBox.get_top_45ADD0(), zpos, &x1, &y1);
-        ProjectToScreen_5A5690(field_30_boundingBox.get_right_45ADA0(), field_30_boundingBox.get_top_45ADD0(), zpos, &x2, &y2);
-        ProjectToScreen_5A5690(field_30_boundingBox.get_right_45ADA0(), field_30_boundingBox.get_bottom_45ADC0(), zpos, &x3, &y3);
-        ProjectToScreen_5A5690(field_30_boundingBox.get_left_45ADB0(), field_30_boundingBox.get_bottom_45ADC0(), zpos, &x4, &y4);
+        ProjectToScreen_5A5690(field_30_boundingBox.GetLeft(), field_30_boundingBox.GetTop(), zpos, &x1, &y1);
+        ProjectToScreen_5A5690(field_30_boundingBox.GetRight(), field_30_boundingBox.GetTop(), zpos, &x2, &y2);
+        ProjectToScreen_5A5690(field_30_boundingBox.GetRight(), field_30_boundingBox.GetBottom(), zpos, &x3, &y3);
+        ProjectToScreen_5A5690(field_30_boundingBox.GetLeft(), field_30_boundingBox.GetBottom(), zpos, &x4, &y4);
         DrawDebugLine_5D7DD0(static_cast<s16>(x1.ToInt()),
                              static_cast<s16>(y1.ToInt()),
                              static_cast<s16>(x2.ToInt()),
@@ -2648,16 +2647,13 @@ namespace
 inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
 {
     Fix16 scale;
-    scale =
-        kFP16One_7035C4.Divide_436A20((kFP16Eight_7035E4.Subtract_436A00(z)).Add_408660(gViewCamera_676978->field_98_cur_pos.field_8_z));
-    *pOut1 = (x.Subtract_436A00(gViewCamera_676978->field_98_cur_pos.field_0_x)
-                  .Multiply_408680(gViewCamera_676978->field_60_screen_scale.x)
-                  .Multiply_408680(scale))
-                 .Add_408660(Fix16(gViewCamera_676978->field_70_screen_px_center_x));
-    *pOut2 = (y.Subtract_436A00(gViewCamera_676978->field_98_cur_pos.field_4_y)
-                  .Multiply_408680(gViewCamera_676978->field_60_screen_scale.x)
-                  .Multiply_408680(scale))
-                 .Add_408660(Fix16(gViewCamera_676978->field_74_screen_px_center_y));
+    scale = kFP16One_7035C4.Divide((kFP16Eight_7035E4.Subtract(z)).Add(gViewCamera_676978->field_98_cur_pos.field_8_z));
+    *pOut1 =
+        (x.Subtract(gViewCamera_676978->field_98_cur_pos.field_0_x).Multiply(gViewCamera_676978->field_60_screen_scale.x).Multiply(scale))
+            .Add(Fix16(gViewCamera_676978->field_70_screen_px_center_x));
+    *pOut2 =
+        (y.Subtract(gViewCamera_676978->field_98_cur_pos.field_4_y).Multiply(gViewCamera_676978->field_60_screen_scale.x).Multiply(scale))
+            .Add(Fix16(gViewCamera_676978->field_74_screen_px_center_y));
 }
 } // namespace
 
@@ -2730,8 +2726,8 @@ void ProjectOntoAxis_5A5AA0(const Fix16& xpos1,
                             Fix16& outX,
                             Fix16& outY)
 {
-    outX = (Ang16::cosine_40F520(angle) * (xpos1 - xpos2)) + (Ang16::sine_40F500(angle) * (ypos1 - ypos2));
-    outY = (Ang16::sine_40F500(angle) * (xpos2 - xpos1)) + (Ang16::cosine_40F520(angle) * (ypos1 - ypos2));
+    outX = (Ang16::Cosine(angle) * (xpos1 - xpos2)) + (Ang16::Sine(angle) * (ypos1 - ypos2));
+    outY = (Ang16::Sine(angle) * (xpos2 - xpos1)) + (Ang16::Cosine(angle) * (ypos1 - ypos2));
 }
 
 // 0x5a5b50

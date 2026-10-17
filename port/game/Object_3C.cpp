@@ -31,8 +31,8 @@ void Object_3C::GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle)
         unk.y = dword_6F8ECC * y_related;
         point = unk + GetSpeedVector_482BA0();
 
-        Speed = point.GetLength_41E260();
-        Angle = point.atan2_40F790();
+        Speed = point.GetLength();
+        Angle = point.Atan2();
         ClearF38_482BD0();
     }
     else
@@ -72,7 +72,7 @@ Object_3C::~Object_3C()
 Fix16Point Object_3C::GetSpeedVector_52ADF0()
 {
     Fix16Point p;
-    p.FromPolar_41E210(field_C_speed, field_4_angle);
+    p.FromPolar(field_C_speed, field_4_angle);
     return p;
 }
 
@@ -231,7 +231,7 @@ char_type SpriteList_4::TagSpriteWithRng_5A6C10(Sprite* toFind)
         {
             if (pNext->field_0_pSprite == toFind)
             {
-                pNext->field_14_rng = gpRng_67AB34->get_cur_rng_41CFE0();
+                pNext->field_14_rng = gpRng_67AB34->GetCurRng();
                 return 1;
             }
         }
@@ -406,8 +406,7 @@ Sprite* SpriteList_4::FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff)
     Sprite* new_ret = nullptr;
     for (AttachedSprite_18* pIter = this->field_0_p18; pIter; pIter = pIter->mpNext)
     {
-        Fix16 yDelta =
-            Fix16::MaxAbsDistance_42A6B0(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
+        Fix16 yDelta = Fix16::MaxAbsDistance(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
         if (yDelta < smallest)
         {
             new_ret = pIter->field_0_pSprite;
@@ -428,7 +427,7 @@ Sprite* SpriteList_4::TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos)
 
     for (AttachedSprite_18* pIter = field_0_p18; pIter; pIter = pIter->mpNext)
     {
-        distance = Fix16::MaxAbsDistance_42A6B0(xpos, ypos, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
+        distance = Fix16::MaxAbsDistance(xpos, ypos, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
         if (distance < smallest)
         {
             pClosest = pIter;

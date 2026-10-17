@@ -424,7 +424,7 @@ void gtx_0x106C::load_delx_5AAB30(u32 delx_chunk_size)
         off += size;
     }
 
-    field_50_delta_buffer = static_cast<sprite_deltas*>(Memory::malloc_4FE4D0(field_60_delta_len));
+    field_50_delta_buffer = static_cast<sprite_deltas*>(Memory::Malloc(field_60_delta_len));
     memset(field_50_delta_buffer, 0, field_60_delta_len); // the entries below leave padding bytes unset (valgrind)
     delta_entry* pSrc = field_4C_delta_index;
     u32 off2 = 0;
@@ -609,7 +609,7 @@ void gtx_0x106C::build_delta_container_5AAC70()
         pIter = reinterpret_cast<sprite_deltas*>(reinterpret_cast<u8*>(pIter) + size);
     }
 
-    field_54_del = static_cast<delta_container*>(Memory::malloc_4FE4D0(DELTA_CONTAINER_SIZE(maxSprite + 1)));
+    field_54_del = static_cast<delta_container*>(Memory::Malloc(DELTA_CONTAINER_SIZE(maxSprite + 1)));
     field_54_del->field_0_count = maxSprite + 1;
 
     for (u32 i = 0; i < field_54_del->field_0_count; i++)
@@ -642,7 +642,7 @@ void gtx_0x106C::build_delta_container_5AAC70()
 // 0x5AAD50
 void gtx_0x106C::load_car_info_5AAD50(u32 cari_chunk_size)
 {
-    field_58_car_info = static_cast<car_info**>(Memory::malloc_4FE4D0(cari_chunk_size));
+    field_58_car_info = static_cast<car_info**>(Memory::Malloc(cari_chunk_size));
     File::Global_Read_4A71C0(reinterpret_cast<void*>(field_58_car_info), cari_chunk_size);
 
     BuildCarInfoContainer_5AA9A0(cari_chunk_size);
@@ -651,7 +651,7 @@ void gtx_0x106C::load_car_info_5AAD50(u32 cari_chunk_size)
 // 0x5AAD80
 void gtx_0x106C::load_delta_index_5AAD80(u32 delx_chunk_size)
 {
-    this->field_4C_delta_index = static_cast<delta_entry*>(Memory::malloc_4FE4D0(delx_chunk_size));
+    this->field_4C_delta_index = static_cast<delta_entry*>(Memory::Malloc(delx_chunk_size));
     File::Global_Read_4A71C0(field_4C_delta_index, delx_chunk_size);
 
     load_delx_5AAB30(delx_chunk_size);
@@ -664,14 +664,14 @@ void gtx_0x106C::load_delta_index_5AAD80(u32 delx_chunk_size)
 // 0x5AADD0
 void gtx_0x106C::load_delta_store_5AADD0(u32 dels_chunk_size)
 {
-    field_48_delta_store = static_cast<delta_store_entry*>(Memory::malloc_4FE4D0(dels_chunk_size)); // todo: or new?
+    field_48_delta_store = static_cast<delta_store_entry*>(Memory::Malloc(dels_chunk_size)); // todo: or new?
     File::Global_Read_4A71C0(field_48_delta_store, dels_chunk_size);
 }
 
 // 0x5AADF0
 void gtx_0x106C::load_tiles_5AADF0(u32 tile_chunk_len)
 {
-    field_3C_tiles = static_cast<u8*>(Memory::Aligned_malloc_4FE510(tile_chunk_len, &field_44_aligned_tiles_size));
+    field_3C_tiles = static_cast<u8*>(Memory::AlignedMalloc(tile_chunk_len, &field_44_aligned_tiles_size));
     File::Global_Read_4A71C0(field_3C_tiles, tile_chunk_len);
     InitTileMapping_5AA950();
 }
@@ -691,14 +691,14 @@ void gtx_0x106C::skip_psxt_5AAE30(u32 size)
 // 0x5AAE40
 void gtx_0x106C::load_sprite_graphics_5AAE40(u32 sprg_chunk_len)
 {
-    field_34_sprite_graphics = reinterpret_cast<BYTE*>(Memory::Aligned_malloc_4FE510(sprg_chunk_len, &field_38_sprite_graphics_unaligned));
+    field_34_sprite_graphics = reinterpret_cast<BYTE*>(Memory::AlignedMalloc(sprg_chunk_len, &field_38_sprite_graphics_unaligned));
     File::Global_Read_4A71C0(field_34_sprite_graphics, sprg_chunk_len);
 }
 
 // 0x5AAE70
 void gtx_0x106C::load_physical_palettes_5AAE70(u32 ppal_chunk_size)
 {
-    field_2C_physical_palettes = Memory::Aligned_malloc_4FE510(ppal_chunk_size, &field_30_physical_palettes_size);
+    field_2C_physical_palettes = Memory::AlignedMalloc(ppal_chunk_size, &field_30_physical_palettes_size);
     File::Global_Read_4A71C0(field_2C_physical_palettes, ppal_chunk_size);
     field_8_physical_palettes_len = ppal_chunk_size >> 10;
 }
@@ -723,7 +723,7 @@ void gtx_0x106C::load_palette_index_5AAEA0(u32 palx_chunk_len)
 // 0x5AAF00
 void gtx_0x106C::load_map_object_info_5AAF00(u32 obji_chunk_len)
 {
-    field_24_map_object_info = static_cast<object_info*>(Memory::malloc_4FE4D0(obji_chunk_len));
+    field_24_map_object_info = static_cast<object_info*>(Memory::Malloc(obji_chunk_len));
     File::Global_Read_4A71C0(field_24_map_object_info, obji_chunk_len);
     if (obji_chunk_len / 2 >= 0x10000)
     {
@@ -751,9 +751,9 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
         s16 field_6_pad;
     };
     const u32 entry_count = (sprx_chunk_size >> 3) + 1; // plus the spare last entry, as below
-    auto* pFileEntries = static_cast<sprite_index_file*>(Memory::malloc_4FE4D0(sprx_chunk_size));
+    auto* pFileEntries = static_cast<sprite_index_file*>(Memory::Malloc(sprx_chunk_size));
     File::Global_Read_4A71C0(pFileEntries, sprx_chunk_size);
-    field_20_sprite_index = static_cast<sprite_index*>(Memory::malloc_4FE4D0(entry_count * sizeof(sprite_index)));
+    field_20_sprite_index = static_cast<sprite_index*>(Memory::Malloc(entry_count * sizeof(sprite_index)));
     memset(field_20_sprite_index, 0, entry_count * sizeof(sprite_index));
     for (u32 i = 0; i < entry_count - 1; i++)
     {
@@ -764,7 +764,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     }
     ::free(pFileEntries);
 #else
-    field_20_sprite_index = reinterpret_cast<sprite_index*>(Memory::malloc_4FE4D0(sprx_chunk_size + 8));
+    field_20_sprite_index = reinterpret_cast<sprite_index*>(Memory::Malloc(sprx_chunk_size + 8));
     File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
 #endif
     if ((sprx_chunk_size & ~7U) > 524280)
@@ -821,7 +821,7 @@ void gtx_0x106C::load_font_base_5AB0F0(u32 fonb_chunk_size)
         FatalError_4A38C0(Gta2Error::InvalidChunkSize, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1268, fonb_chunk_size);
     }
 
-    field_1C_font_base = static_cast<font_base*>(Memory::malloc_4FE4D0(fonb_chunk_size));
+    field_1C_font_base = static_cast<font_base*>(Memory::Malloc(fonb_chunk_size));
     File::Global_Read_4A71C0(field_1C_font_base, fonb_chunk_size);
 
     u16 fountCount = field_1C_font_base->field_0_font_count;
@@ -948,7 +948,7 @@ bool gtx_0x106C::IsCarModelInRecycleList_5AB380(u8 car_id)
 // 0x5AB3C0
 void gtx_0x106C::load_car_recycling_info_5AB3C0(u32 recy_chunk_size)
 {
-    field_64_car_recycling_info = static_cast<u8*>(Memory::malloc_4FE4D0(recy_chunk_size));
+    field_64_car_recycling_info = static_cast<u8*>(Memory::Malloc(recy_chunk_size));
     field_68_recy_chunk_size = recy_chunk_size;
     File::Global_Read_4A71C0(field_64_car_recycling_info, recy_chunk_size);
 }

@@ -64,7 +64,7 @@ Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
                                     Fix16 field_1C_value)
 {
     Particle_4C* pNew4C = nullptr;
-    if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0() && gSpritePool_703818->has_free_48A8D0())
+    if (gParticle_4C_Pool_6FD5E4->HasPStart() && gSpritePool_703818->has_free_48A8D0())
     {
         pNew4C = gParticle_4C_Pool_6FD5E4->Allocate();
         pNew4C->field_8_speed_x = speed_x;
@@ -80,18 +80,18 @@ Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
     return pNew4C;
 }
 
-// RotateByAngle_40F6B0 with the x_old negate as the named out-of-line Negate_4086A0: the rotations and the
+// RotateByAngle_40F6B0 with the x_old negate as the named out-of-line Negated: the rotations and the
 // -(v / 15) New_53E3C0 arguments have to reach the same function (the COMDAT copy of operator- and
-// Negate_4086A0 are not folded in our build). The other operators stay the plain inlines.
+// Negated are not folded in our build). The other operators stay the plain inlines.
 namespace
 {
 inline void RotateNegExport_(Fix16Point& v, const Ang16& angle)
 {
-    Fix16 sin = Ang16::sine_40F500(angle);
-    Fix16 cos = Ang16::cosine_40F520(angle);
+    Fix16 sin = Ang16::Sine(angle);
+    Fix16 cos = Ang16::Cosine(angle);
     Fix16 x_old = v.x;
     v.x = (v.x * cos) + (v.y * sin);
-    v.y = (x_old.Negate_4086A0() * sin) + (v.y * cos);
+    v.y = (x_old.Negated() * sin) + (v.y * cos);
 }
 } // namespace
 
@@ -108,24 +108,20 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
     if (!bSkip_particles_67D64D)
     {
         vector.x = Fix16(0);
-        vector.y = Fix16(gRng_6F6784.get_int_4F7AE0(50) + 25) * dword_6FD548;
-        vector.RotateByAngle_40F6B0(ang);
+        vector.y = Fix16(gRng_6F6784.GetInt(50) + 25) * dword_6FD548;
+        vector.RotateByAngle(ang);
 
         s32 count = 6;
         do
         {
             vector.x = Fix16(0);
-            vector.y = (Fix16(gRng_6F6784.get_int_4F7AE0(100)) + dword_6FD558) * dword_6FD4EC;
+            vector.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
 
-            angle = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(16)));
-            vector.RotateByAngle_40F6B0((angle + ang) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(8)));
+            angle = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(16)));
+            vector.RotateByAngle((angle + ang) - word_6FD5CC.MultiplyByFix16(Fix16(8)));
 
-            Particle_4C* pBloodParticle = gParticle_8_6FD5E8->New_53E3C0(vector.x,
-                                                                         vector.y,
-                                                                         dword_6FD330,
-                                                                         -vector.x.DivideInt_53E860(15),
-                                                                         -vector.y.DivideInt_53E860(15),
-                                                                         0);
+            Particle_4C* pBloodParticle =
+                gParticle_8_6FD5E8->New_53E3C0(vector.x, vector.y, dword_6FD330, -vector.x.DivideInt(15), -vector.y.DivideInt(15), 0);
 
             if (pBloodParticle)
             {
@@ -195,8 +191,8 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
             pParticle->field_34_unused = 0;
             pParticle->field_38_state = 40;
             // PolarToCartesian_41FC20 (9.6f) with the results unused: the multiplies stay as calls
-            Ang16::sine_40F500(pSprite->field_0_rotation).Multiply_408680(dword_6FD2E8);
-            Ang16::cosine_40F520(pSprite->field_0_rotation).Multiply_408680(dword_6FD2E8);
+            Ang16::Sine(pSprite->field_0_rotation).Multiply(dword_6FD2E8);
+            Ang16::Cosine(pSprite->field_0_rotation).Multiply(dword_6FD2E8);
             pParticle->field_46_sub_state = 0;
             pParticle->field_48_timer = 0;
 
@@ -205,7 +201,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
             // Two statements: the original computes x before y (SetXY's by-ref arguments go right to left)
             corner_1.x = pCar->GetCarWidth_48A930() / 2 + dword_6FD3C0;
             corner_1.y = pCar->GetCarHeight_48A950() / 2 + dword_6FD5A8;
-            corner_1.RotateByAngle_40F6B0(angle);
+            corner_1.RotateByAngle(angle);
             corner_1 += pSprite->get_x_y();
 
             pParticle->field_28_pSprite = pSprite;
@@ -225,14 +221,14 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
         pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 197);
         pParticle->field_34_unused = 0;
         pParticle->field_38_state = 41;
-        Ang16::sine_40F500(pSprite->field_0_rotation).Multiply_408680(dword_6FD2E8);
-        Ang16::cosine_40F520(pSprite->field_0_rotation).Multiply_408680(dword_6FD2E8);
+        Ang16::Sine(pSprite->field_0_rotation).Multiply(dword_6FD2E8);
+        Ang16::Cosine(pSprite->field_0_rotation).Multiply(dword_6FD2E8);
         pParticle->field_46_sub_state = 0;
         pParticle->field_48_timer = 0;
 
         angle = pSprite->field_0_rotation;
-        corner_2.SetXY_432860(-(pCar->GetCarWidth_48A930() / 2 + dword_6FD3C0), pCar->GetCarHeight_48A950() / 2 + dword_6FD5A8);
-        corner_2.RotateByAngle_40F6B0(angle);
+        corner_2.SetXY(-(pCar->GetCarWidth_48A930() / 2 + dword_6FD3C0), pCar->GetCarHeight_48A950() / 2 + dword_6FD5A8);
+        corner_2.RotateByAngle(angle);
         corner_2 += pSprite->get_x_y();
 
         pParticle->field_30_pNext->set_ang_lazy_420690(pSprite->field_0_rotation);
@@ -253,7 +249,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
         pParticle->field_38_state = 40;
         Fix16 dx;
         Fix16 dy;
-        Ang16::PolarToCartesian_41FC20(pSprite->field_0_rotation, dword_6FD2E8, dx, dy);
+        Ang16::PolarToCartesian(pSprite->field_0_rotation, dword_6FD2E8, dx, dy);
         pParticle->field_46_sub_state = 0;
         pParticle->field_48_timer = 0;
         stru_6FD388 = pSprite->field_14_xy.x + dx;
@@ -263,7 +259,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
         Char_B4* pB4 = pSprite->AsCharB4_40FEA0();
         offset.x = -dword_6FD464;
         offset.y = dword_6FD468 + dword_6FD2E8;
-        offset.RotateByAngle_40F6B0(pSprite->field_0_rotation);
+        offset.RotateByAngle(pSprite->field_0_rotation);
         offset = offset + pB4->field_98_velocity_vector;
 
         pParticle->field_30_pNext->set_ang_lazy_420690(pSprite->field_0_rotation);
@@ -277,7 +273,7 @@ void Particle_8::GunMuzzelFlash_53E970(Sprite* pSprite)
 
 // Something wrong with the velocities https://decomp.me/scratch/2Kz9I
 // 9.6f 0x48D1F0 (unpaired before): plain members (MultiplyByFix16_401CB0, +, -, RotateByAngle_40F6B0 as
-// RotateNegExport_), a count-down loop, -(v / 15) through Negate_4086A0.
+// RotateNegExport_), a count-down loop, -(v / 15) through Negated.
 // 0x53f060
 void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char_type bRandomRot)
 {
@@ -287,14 +283,14 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
     if (!bSkip_particles_67D64D)
     {
         velocity.x = Fix16(0);
-        velocity.y = Fix16(gRng_6F6784.get_int_4F7AE0(50) + 25) * dword_6FD548;
+        velocity.y = Fix16(gRng_6F6784.GetInt(50) + 25) * dword_6FD548;
         RotateNegExport_(velocity, rotation);
 
         for (s32 count = 6; count != 0; count--)
         {
             if (bRandomRot)
             {
-                angle_2 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(360)));
+                angle_2 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(360)));
             }
             else
             {
@@ -302,17 +298,17 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
             }
 
             velocity.x = Fix16(0);
-            velocity.y = (Fix16(gRng_6F6784.get_int_4F7AE0(100)) + dword_6FD558) * dword_6FD4EC;
+            velocity.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
 
-            Ang16 angle_1 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(16)));
-            RotateNegExport_(velocity, (angle_1 + angle_2) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(8)));
+            Ang16 angle_1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(16)));
+            RotateNegExport_(velocity, (angle_1 + angle_2) - word_6FD5CC.MultiplyByFix16(Fix16(8)));
 
             // last arg: plain 0 (the original builds this Fix16 arg in place; Fix16(0) gives a plain push and costs ebp)
             Particle_4C* pWaterSplashParticle = gParticle_8_6FD5E8->New_53E3C0(velocity.x,
                                                                                velocity.y,
                                                                                dword_6FD330,
-                                                                               velocity.x.DivideInt_53E860(15).Negate_4086A0(),
-                                                                               velocity.y.DivideInt_53E860(15).Negate_4086A0(),
+                                                                               velocity.x.DivideInt(15).Negated(),
+                                                                               velocity.y.DivideInt(15).Negated(),
                                                                                0);
 
             if (pWaterSplashParticle)
@@ -374,7 +370,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                 pParticle->field_34_unused = 0;
                 Fix16 vec_x;
                 Fix16 vec_y;
-                Ang16::PolarToCartesian_41FC20(pSprt->field_0_rotation, dword_6FD2E8, vec_x, vec_y);
+                Ang16::PolarToCartesian(pSprt->field_0_rotation, dword_6FD2E8, vec_x, vec_y);
                 pParticle->field_2C_counter = 100;
                 pParticle->field_46_sub_state = 0;
                 pParticle->field_48_timer = 0;
@@ -391,20 +387,20 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                     if (pSprt18)
                     {
                         angle = pSprt18->field_0_pSprite->field_0_rotation + kAng180_6FD3EE;
-                        pos.SetXY_432860(Fix16(0), dword_6FD2D4);
-                        pos.RotateByAngle_40F6B0(angle);
-                        offset.SetXY_432860(Fix16(0), kFP16Eighth_6FD2D0);
+                        pos.SetXY(Fix16(0), dword_6FD2D4);
+                        pos.RotateByAngle(angle);
+                        offset.SetXY(Fix16(0), kFP16Eighth_6FD2D0);
                     }
                     else
                     {
                         AttachedSprite_18* pSprt18_2 = pCar->field_0_attachments.GetSpriteForModel_5A6A50(248);
                         angle = pSprt18_2->field_0_pSprite->field_0_rotation;
-                        pos.SetXY_432860(Fix16(0), dword_6FD48C);
-                        pos.RotateByAngle_40F6B0(angle);
-                        offset.SetXY_432860(Fix16(0), dword_6FD4CC);
+                        pos.SetXY(Fix16(0), dword_6FD48C);
+                        pos.RotateByAngle(angle);
+                        offset.SetXY(Fix16(0), dword_6FD4CC);
                     }
                     pParticle->field_30_pNext->set_ang_lazy_420690(angle);
-                    offset.RotateByAngle_40F6B0(pSprt->field_0_rotation);
+                    offset.RotateByAngle(pSprt->field_0_rotation);
                     pos += offset + pSprt->get_x_y_443580();
                     point_velocity = pSprt->field_8_car_bc_ptr->field_58_physics->GetPointVelocity_561350(&pos); // not used
                     pParticle->field_30_pNext->set_xyz_lazy_420600(pos.x, pos.y, zpos);
@@ -413,7 +409,7 @@ void Particle_8::EmitFlameStreamSegment_53F4C0(Sprite* pSprt)
                 {
                     ped_offset.x = -dword_6FD464;
                     ped_offset.y = dword_6FD468 + dword_6FD2E8;
-                    ped_offset.RotateByAngle_40F6B0(pSprt->field_0_rotation);
+                    ped_offset.RotateByAngle(pSprt->field_0_rotation);
                     ped_offset = ped_offset + *reinterpret_cast<Fix16Point*>(&pPed->field_98_velocity_vector);
                     pParticle->field_30_pNext->set_ang_lazy_420690(pSprt->field_0_rotation);
                     pParticle->field_30_pNext->set_xyz_lazy_420600(pSprt->field_14_xy.x + ped_offset.x,
@@ -460,7 +456,7 @@ void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
             pParticle->field_38_state = 34;
             Fix16 vec_x;
             Fix16 vec_y;
-            Ang16::PolarToCartesian_41FC20(pSprite->field_0_rotation, dword_6FD2E8, vec_x, vec_y);
+            Ang16::PolarToCartesian(pSprite->field_0_rotation, dword_6FD2E8, vec_x, vec_y);
             pParticle->field_2C_counter = 100;
             pParticle->field_46_sub_state = 0;
             pParticle->field_48_timer = 0;
@@ -503,8 +499,8 @@ namespace
 {
 inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radius, Fix16& ret1, Fix16& ret2)
 {
-    ret1 = Ang16::sine_40F500(angle) * radius;
-    ret2 = Ang16::cosine_40F520(angle).Multiply_408680(radius);
+    ret1 = Ang16::Sine(angle) * radius;
+    ret2 = Ang16::Cosine(angle).Multiply(radius);
 }
 } // namespace
 
@@ -517,30 +513,26 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16Poin
     Ang16 tanAng;
     [[maybe_unused]] Fix16Point unused;
     Fix16Point t(Fix16(0), Fix16(0));
-    tanAng = dir.atan2_40F790();
+    tanAng = dir.Atan2();
 
     for (u8 i = 0; i < 6; ++i)
     {
         t.x = Fix16(0);
-        t.y = (Fix16(gRng_6F6784.get_int_4F7AE0(100)) + dword_6FD558) * dword_6FD4EC;
+        t.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
         if (i < 4)
         {
-            ang1 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(32)));
+            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(32)));
             // 9.6f: t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(..)) in both branches
-            t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(16)));
+            t.RotateByAngle((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16(Fix16(16)));
         }
         else
         {
-            ang1 = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(gRng_6F6784.get_int_4F7AE0(360)));
-            t.RotateByAngle_40F6B0(ang1 + tanAng - word_6FD5CC.MultiplyByFix16_401CB0(Fix16(180)));
+            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(360)));
+            t.RotateByAngle(ang1 + tanAng - word_6FD5CC.MultiplyByFix16(Fix16(180)));
         }
 
-        Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(t.x,
-                                                             t.y,
-                                                             dword_6FD330,
-                                                             t.x.DivideInt_53E860(15).Negate_4086A0(),
-                                                             t.y.DivideInt_53E860(15).Negate_4086A0(),
-                                                             0);
+        Particle_4C* pNew4C =
+            gParticle_8_6FD5E8->New_53E3C0(t.x, t.y, dword_6FD330, t.x.DivideInt(15).Negated(), t.y.DivideInt(15).Negated(), 0);
         if (pNew4C)
         {
             pNew4C->field_34_unused = 1;
@@ -565,20 +557,20 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
 
     if (!bSkip_particles_67D64D)
     {
-        gRng_6F6784.get_int_4F7AE0(3);
+        gRng_6F6784.GetInt(3);
         vector.x = Fix16(0);
-        vector.y = (Fix16(gRng_6F6784.get_int_4F7AE0(100)) + dword_6FD558) * dword_6FD500;
+        vector.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD500;
 
         // The rng result is bound to a const s16& temporary: stored as a short and sign extended only after the
         // word is loaded (the word ends up as the imul's eax operand)
-        angle = word_6FD5CC.MultiplyByFix16_401CB0(Fix16(static_cast<const s16&>(gRng_6F6784.get_int_4F7AE0(360))));
+        angle = word_6FD5CC.MultiplyByFix16(Fix16(static_cast<const s16&>(gRng_6F6784.GetInt(360))));
         // RotateByAngle_40F6B0, but x * cos, the y line and both sums use the out-of-line Fix16 operators
         {
-            Fix16 sin = Ang16::sine_40F500(angle);
-            Fix16 cos = Ang16::cosine_40F520(angle);
+            Fix16 sin = Ang16::Sine(angle);
+            Fix16 cos = Ang16::Cosine(angle);
             Fix16 x_old = vector.x;
-            vector.x = vector.x.Multiply_408680(cos).Add_408660(vector.y * sin);
-            vector.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(vector.y.Multiply_408680(cos));
+            vector.x = vector.x.Multiply(cos).Add(vector.y * sin);
+            vector.y = x_old.Negated().Multiply(sin).Add(vector.y.Multiply(cos));
         }
 
         Particle_4C* pNew4C = gParticle_8_6FD5E8->New_53E3C0(vector.x, vector.y, dword_6FD330, 0, 0, 0);
@@ -592,8 +584,8 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             pNew4C->field_30_pNext->set_xyz_lazy_420600(xpos, ypos, zpos);
             pNew4C->field_30_pNext->set_ang_lazy_420690(ang);
-            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng_6F6784.get_int_4F7AE0(4) +
-                                                       gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 175);
+            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng_6F6784.GetInt(4) + gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette +
+                                                       175);
             pNew4C->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pNew4C->field_30_pNext);
@@ -604,7 +596,7 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
 // 0x5405D0
 void Particle_8::SpawnParticleSprite_5405D0(Sprite* pSprite)
 {
-    if (gParticle_4C_Pool_6FD5E4->has_pStart_48A8F0())
+    if (gParticle_4C_Pool_6FD5E4->HasPStart())
     {
         Particle_4C* pNew4C = gParticle_4C_Pool_6FD5E4->Allocate();
         if (pNew4C)

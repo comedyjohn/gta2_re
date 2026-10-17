@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 // 0x4FE4D0
-void* Memory::malloc_4FE4D0(size_t Size)
+void* Memory::Malloc(size_t Size)
 {
     void* result = ::malloc(Size);
     if (!result)
@@ -19,7 +19,7 @@ void* Memory::malloc_4FE4D0(size_t Size)
 }
 
 // 0x4FE510
-void* Memory::Aligned_malloc_4FE510(s32 requestedSize, void** pUnAlignedPtr)
+void* Memory::AlignedMalloc(s32 requestedSize, void** pUnAlignedPtr)
 {
     // Allocate with extra space for alignment
     void* pAlloc = ::malloc(requestedSize + 0x10000);

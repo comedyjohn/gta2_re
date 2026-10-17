@@ -89,14 +89,14 @@ Crane_15C::Crane_15C()
 // 0x47e620
 void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutPoint)
 {
-    pOutPoint->SetXY_432860(kZero_679E70, radius);
+    pOutPoint->SetXY(kZero_679E70, radius);
 
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
-    Fix16 sin = Ang16::sine_40F500(ang);
-    Fix16 cos = Ang16::cosine_40F520(ang);
+    Fix16 sin = Ang16::Sine(ang);
+    Fix16 cos = Ang16::Cosine(ang);
     Fix16 x_old = pOutPoint->x;
     pOutPoint->x = (pOutPoint->x * cos) + (pOutPoint->y * sin);
-    pOutPoint->y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(pOutPoint->y * cos);
+    pOutPoint->y = x_old.Negated().Multiply(sin).Add(pOutPoint->y * cos);
 
     *pOutPoint += field_2C_rotor_obj->field_4->get_x_y();
 }
@@ -104,13 +104,13 @@ void Crane_15C::ComputeHookPos_47E620(Fix16 radius, Ang16 ang, Fix16Point* pOutP
 // 0x47e730
 void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutPoint)
 {
-    pOutPoint->SetXY_432860(kZero_679E70, ang);
+    pOutPoint->SetXY(kZero_679E70, ang);
     // Inlined RotateByAngle_40F6B0, but with the y part using the out-of-line Fix16 operators
-    Fix16 sin = Ang16::sine_40F500(radius);
-    Fix16 cos = Ang16::cosine_40F520(radius);
+    Fix16 sin = Ang16::Sine(radius);
+    Fix16 cos = Ang16::Cosine(radius);
     Fix16 x_old = pOutPoint->x;
     pOutPoint->x = (pOutPoint->x * cos) + (pOutPoint->y * sin);
-    pOutPoint->y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(pOutPoint->y * cos);
+    pOutPoint->y = x_old.Negated().Multiply(sin).Add(pOutPoint->y * cos);
     *pOutPoint += field_2C_rotor_obj->field_4->get_x_y();
 }
 
@@ -118,13 +118,13 @@ void Crane_15C::ComputeHookPos_47E730(Ang16 radius, Fix16 ang, Fix16Point* pOutP
 void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16Point* pOutPoint)
 {
 
-    pOutPoint->SetXY_432860(kZero_679E70, -kFpHalf_679D64);
+    pOutPoint->SetXY(kZero_679E70, -kFpHalf_679D64);
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
-    Fix16 sin = Ang16::sine_40F500(ang);
-    Fix16 cos = Ang16::cosine_40F520(ang);
+    Fix16 sin = Ang16::Sine(ang);
+    Fix16 cos = Ang16::Cosine(ang);
     Fix16 x_old = pOutPoint->x;
     pOutPoint->x = (pOutPoint->x * cos) + (pOutPoint->y * sin);
-    pOutPoint->y = (-x_old).Multiply_408680(sin).Add_408660(pOutPoint->y.Multiply_408680(cos));
+    pOutPoint->y = (-x_old).Multiply(sin).Add(pOutPoint->y.Multiply(cos));
     *pOutPoint += field_2C_rotor_obj->field_4->get_x_y();
 }
 
@@ -132,11 +132,11 @@ void Crane_15C::ComputeHookOffset_47E840(Ang16 ang, Fix16Point* pOutPoint)
 bool Crane_15C::IsDropPositionClear_47E920()
 {
     Fix16Point pos;
-    ComputeHookPos_47E620(field_114_drop_radius, Ang16::Fix16_To_Ang16_40F540(field_110_drop_angle), &pos);
+    ComputeHookPos_47E620(field_114_drop_radius, Ang16::Fix16ToAng16(field_110_drop_angle), &pos);
     pos += field_8_drop_offset;
 
     field_60_probe_sprite->set_xyz_lazy_420600(pos.x, pos.y, this->field_80_ground_z - this->field_11C_drop_hook_depth);
-    field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16_To_Ang16_40F540(field_118_drop_rot));
+    field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_118_drop_rot));
 
     return !gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, sprite_types_enum::unknown_0) &&
         !field_60_probe_sprite->CheckSpriteMovementRegion_5A2500();
@@ -146,11 +146,11 @@ bool Crane_15C::IsDropPositionClear_47E920()
 bool Crane_15C::IsTarget1PositionClear_47EB00()
 {
     Fix16Point hookPos;
-    ComputeHookPos_47E620(field_120_target1_radius, Ang16::Fix16_To_Ang16_40F540(field_124_target1_angle), &hookPos);
+    ComputeHookPos_47E620(field_120_target1_radius, Ang16::Fix16ToAng16(field_124_target1_angle), &hookPos);
     hookPos += field_18_target1_offset;
 
     field_60_probe_sprite->set_xyz_lazy_420600(hookPos.x, hookPos.y, field_80_ground_z - field_12C_target1_hook_depth);
-    field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16_To_Ang16_40F540(field_128_target1_rot));
+    field_60_probe_sprite->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_128_target1_rot));
 
     return gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(field_60_probe_sprite, sprite_types_enum::unknown_0) == nullptr;
 }
@@ -259,14 +259,14 @@ void Crane_15C::HookPickupCar_47EF80()
         }
     }
 
-    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList_420F30(pCar);
+    gCar_BC_Pool_67792C->field_0_pool.UnlinkFromActiveList(pCar);
 
     pCar->SetDeactivatedStatus_4214E0();
     pCar->DeAllocateCarPhysics_43BD00();
     gSpriteGrid_1_679208->AddToSpriteRectBuckets_477B60(field_68_pickup_car);
 
     this->field_74_pSprite_on_hook = this->field_68_pickup_car;
-    this->field_10_hooked_sprite_offset = field_74_pSprite_on_hook->get_x_y().Sub_40AC80(field_54_hook_obj->field_4->get_x_y());
+    this->field_10_hooked_sprite_offset = field_74_pSprite_on_hook->get_x_y().Sub(field_54_hook_obj->field_4->get_x_y());
 
     field_60_probe_sprite->field_C_pCollisionShape->CopyDimensions_447DF0(field_74_pSprite_on_hook->field_C_pCollisionShape);
 
@@ -466,7 +466,7 @@ void Crane_15C::UpdateCraneTargets_47F4C0()
     else if (field_150_hook_job == 1 && this->field_64_drop_transporter)
     {
         this->field_B0_hook_radius_target = field_BC_drop_transporter_radius;
-        this->field_0_hooked_sprite_offset_target.reset();
+        this->field_0_hooked_sprite_offset_target.Reset();
         this->field_AC_crane_angle_target = field_C0_drop_transporter_angle;
         this->field_14D_is_busy = 1;
         this->field_B4_hook_angle_target = field_D0_drop_transporter_rot;
@@ -507,13 +507,13 @@ void Crane_15C::UpdateCraneTargets_47F4C0()
 // 0x47f6c0
 bool Crane_15C::ComputeHookPolar_47F6C0(const Fix16Point& pPoint, Fix16* pOutF16, Fix16* pOutAng)
 {
-    Fix16Point to_hook = (pPoint.Sub_40AC80(field_2C_rotor_obj->field_4->get_x_y()));
-    *pOutF16 = to_hook.GetLength_41E260();
+    Fix16Point to_hook = (pPoint.Sub(field_2C_rotor_obj->field_4->get_x_y()));
+    *pOutF16 = to_hook.GetLength();
 
     // TODO: 1st check is removed in 9.6f ??
     if (*pOutF16 <= kMaxHookRadius_679F68 && *pOutF16 >= kMinHookRadius_679C3C)
     {
-        *pOutAng = Ang16::Ang16_to_Fix16(to_hook.atan2_40F790());
+        *pOutAng = Ang16::Ang16_to_Fix16(to_hook.Atan2());
         return true;
     }
     else
@@ -738,7 +738,7 @@ void Crane_15C::UpdateCraneTick_47FD50()
 void Crane_15C::UpdateCraneSprites_47FE10()
 {
     Fix16Point a4;
-    Ang16 a2 = Ang16::Fix16_To_Ang16_40F540(field_8C_crane_angle);
+    Ang16 a2 = Ang16::Fix16ToAng16(field_8C_crane_angle);
 
     field_30_part_obj_0->RemoveFromCollisionBuckets_527D00();
     field_34_part_obj_1->RemoveFromCollisionBuckets_527D00();
@@ -789,13 +789,13 @@ void Crane_15C::UpdateCraneSprites_47FE10()
     field_50_part_obj_8->field_4->set_xy_lazy_447E20(a4.x, a4.y);
 
     field_54_hook_obj->field_4->set_xyz_lazy_420600(a4.x, a4.y, field_80_ground_z - field_84_hook_depth);
-    field_54_hook_obj->field_4->set_ang_lazy_420690(Ang16::Fix16_To_Ang16_40F540(field_A0_hook_axial_angle));
+    field_54_hook_obj->field_4->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_A0_hook_axial_angle));
 
     if (field_74_pSprite_on_hook)
     {
         a4 += field_10_hooked_sprite_offset;
         field_74_pSprite_on_hook->set_xyz_lazy_420600(a4.x, a4.y, field_80_ground_z - field_84_hook_depth); // INLINED_MODE required
-        field_74_pSprite_on_hook->set_ang_lazy_420690(Ang16::Fix16_To_Ang16_40F540(field_A0_hook_axial_angle));
+        field_74_pSprite_on_hook->set_ang_lazy_420690(Ang16::Fix16ToAng16(field_A0_hook_axial_angle));
     }
 
     field_30_part_obj_0->AssignToBucket_527AE0();
@@ -814,7 +814,7 @@ void Crane_15C::UpdateCraneSprites_47FE10()
 void Crane_15C::Service_480310()
 {
     field_159_hooked_car_this_frame = 0;
-    field_28_strct4.RemoveByRngValue_5A6C40(gpRng_67AB34->get_cur_rng_41CFE0() - 1);
+    field_28_strct4.RemoveByRngValue_5A6C40(gpRng_67AB34->GetCurRng() - 1);
     if (field_74_pSprite_on_hook)
     {
         gSpriteGrid_3_679210->Remove_477B00(field_74_pSprite_on_hook);
@@ -966,7 +966,7 @@ void Crane_15C::CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang)
         field_144_crane_mode = 1;
     }
 
-    ComputeHookPos_47E620(field_120_target1_radius, Ang16::Fix16_To_Ang16_40F540(field_124_target1_angle), &t);
+    ComputeHookPos_47E620(field_120_target1_radius, Ang16::Fix16ToAng16(field_124_target1_angle), &t);
     field_18_target1_offset = target_pos - t;
 
     field_12C_target1_hook_depth = field_80_ground_z - gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos);
@@ -991,7 +991,7 @@ void Crane_15C::ComputePickupAlignment_480B60(Fix16 xpos, Fix16 ypos, Ang16 ang)
         field_155_load_phase = 2;
     }
 
-    ComputeHookPos_47E620(field_130_target2_radius, Ang16::Fix16_To_Ang16_40F540(field_134_target2_angle), &t);
+    ComputeHookPos_47E620(field_130_target2_radius, Ang16::Fix16ToAng16(field_134_target2_angle), &t);
     field_20_target2_offset = target_pos - t;
 
     field_13C_target2_hook_depth = field_80_ground_z - gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos);

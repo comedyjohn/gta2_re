@@ -1427,7 +1427,7 @@ char_type sound_obj::Type6_413A10(CollisionEvent_28* pEvent)
         default:
             return this->field_1454_anRandomTable[++byte_66F542 % 5] % 0xAU + 5;
     }
-    return Fix16::Round_To_Int_410BF0(ratio * dword_66F1CC);
+    return Fix16::RoundToInt(ratio * dword_66F1CC);
 }
 
 // 0x413B90
@@ -1780,7 +1780,7 @@ void sound_obj::Tank_414A50(Sound_Params_8* pParams)
                     vol_mult = max_speed;
                 }
 
-                u8 vol = Fix16::Round_To_Int_410BF0((vol_mult / max_speed) * Fix16(90));
+                u8 vol = Fix16::RoundToInt((vol_mult / max_speed) * Fix16(90));
                 //vol = (int)(((1474560LL * (int)(((__int64)vol_mult << 14) / max_speed)) >> 14) + 0x2000) >> 14;
 
                 if (VolCalc_419070(vol, Fix16(20) / Fix16(2), pParams->field_5_bHasSolidAbove))
@@ -1911,7 +1911,7 @@ void sound_obj::Tank_415190(Sound_Params_8* pParams)
                     vol_mult = gCarInfo_48_6FE258->field_28_max_speed;
                 }
 
-                u8 vol = Fix16::Round_To_Int_410BF0((vol_mult / max_speed) * Fix16(1310720, 0));
+                u8 vol = Fix16::RoundToInt((vol_mult / max_speed) * Fix16(1310720, 0));
 
                 if (VolCalc_419070(vol, Fix16(122880, 0), pParams->field_5_bHasSolidAbove))
                 {
@@ -2101,7 +2101,7 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
                     max_speed = dword_66F1D0;
                 }
                 gas_pedal = pCar->field_58_physics->field_60_gas_pedal;
-                emitting_vol = Fix16::Round_To_Int_410BF0(Fix16(573440, 0) * (gas_pedal / max_speed)) + 25;
+                emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * (gas_pedal / max_speed)) + 25;
             }
             else
             {
@@ -2112,11 +2112,11 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
 
                 if (pCar->field_84_car_info_idx == car_model_enum::TANK || pCar->field_58_physics->field_94_is_backward_gas_on)
                 {
-                    emitting_vol = Fix16::Round_To_Int_410BF0(Fix16(573440, 0) * (gas_pedal / max_speed)) + 25;
+                    emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * (gas_pedal / max_speed)) + 25;
                 }
                 else if (pCar->field_68_scale != kFpOne_66F3F4)
                 {
-                    emitting_vol = Fix16::Round_To_Int_410BF0(Fix16(655360, 0) * (gas_pedal / max_speed));
+                    emitting_vol = Fix16::RoundToInt(Fix16(655360, 0) * (gas_pedal / max_speed));
                 }
                 else
                 {
@@ -2124,17 +2124,16 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
                     Fix16 gear3_speed = gCarInfo_48_6FE258->field_44_gear3_speed;
                     if (gas_pedal < gear2_speed)
                     {
-                        emitting_vol = Fix16::Round_To_Int_410BF0(Fix16(573440, 0) * (gas_pedal / gear2_speed)) + 25;
+                        emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * (gas_pedal / gear2_speed)) + 25;
                     }
                     else if (gas_pedal < gear3_speed)
                     {
-                        emitting_vol =
-                            Fix16::Round_To_Int_410BF0(Fix16(573440, 0) * ((gas_pedal - gear2_speed) / (gear3_speed - gear2_speed))) + 25;
+                        emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * ((gas_pedal - gear2_speed) / (gear3_speed - gear2_speed))) + 25;
                     }
                     else
                     {
-                        emitting_vol = Fix16::Round_To_Int_410BF0((Fix16(573440, 0) * dword_66F258) *
-                                                                  ((gas_pedal - gear3_speed) / (max_speed - gear3_speed))) +
+                        emitting_vol =
+                            Fix16::RoundToInt((Fix16(573440, 0) * dword_66F258) * ((gas_pedal - gear3_speed) / (max_speed - gear3_speed))) +
                             25;
                     }
                 }
@@ -2206,18 +2205,18 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
                         if (pCar->field_68_scale == kFpOne_66F3F4)
                         {
                             speed = pCar->field_58_physics->field_60_gas_pedal;
-                            pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(360448000, 0) * (speed / max_speed)) + 8000;
+                            pSound->field_20_rate = Fix16::RoundToInt(Fix16(360448000, 0) * (speed / max_speed)) + 8000;
                         }
                         else
                         {
                             speed = pCar->field_58_physics->field_60_gas_pedal;
-                            pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(311296000, 0) * (speed / max_speed)) + 11000;
+                            pSound->field_20_rate = Fix16::RoundToInt(Fix16(311296000, 0) * (speed / max_speed)) + 11000;
                         }
                     }
                     else
                     {
                         speed = pCar->field_58_physics->field_60_gas_pedal;
-                        pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
+                        pSound->field_20_rate = Fix16::RoundToInt(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
                     }
                 }
                 else
@@ -2229,11 +2228,11 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
 
                     if (pCar->IsTank_411900() || pCar->field_58_physics->field_94_is_backward_gas_on)
                     {
-                        pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(262144000, 0) * (speed / max_speed)) + 12000;
+                        pSound->field_20_rate = Fix16::RoundToInt(Fix16(262144000, 0) * (speed / max_speed)) + 12000;
                     }
                     else if (pCar->field_68_scale != kFpOne_66F3F4)
                     {
-                        pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(311296000, 0) * (speed / max_speed)) + 11000;
+                        pSound->field_20_rate = Fix16::RoundToInt(Fix16(311296000, 0) * (speed / max_speed)) + 11000;
                     }
                     else
                     {
@@ -2243,31 +2242,30 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
                         {
                             if (pSound->field_58_type == 1)
                             {
-                                pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(262144000, 0) * (speed / gear2_speed)) + 12000;
+                                pSound->field_20_rate = Fix16::RoundToInt(Fix16(262144000, 0) * (speed / gear2_speed)) + 12000;
                             }
                             else
                             {
-                                pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
+                                pSound->field_20_rate = Fix16::RoundToInt(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
                             }
                         }
                         else if (speed < gear3_speed)
                         {
                             pSound->field_20_rate = pSound->field_58_type == 1 ?
-                                Fix16::Round_To_Int_410BF0(Fix16(262144000, 0) * ((speed - gear2_speed) / (gear3_speed - gear2_speed))) +
-                                    14600 :
-                                Fix16::Round_To_Int_410BF0(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
+                                Fix16::RoundToInt(Fix16(262144000, 0) * ((speed - gear2_speed) / (gear3_speed - gear2_speed))) + 14600 :
+                                Fix16::RoundToInt(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
                         }
                         else
                         {
                             if (pSound->field_58_type == 1)
                             {
-                                pSound->field_20_rate = Fix16::Round_To_Int_410BF0((speed - gear3_speed) / (max_speed - gear3_speed) *
-                                                                                   (Fix16(262144000, 0) * dword_66F258)) +
+                                pSound->field_20_rate = Fix16::RoundToInt((speed - gear3_speed) / (max_speed - gear3_speed) *
+                                                                          (Fix16(262144000, 0) * dword_66F258)) +
                                     16000;
                             }
                             else
                             {
-                                pSound->field_20_rate = Fix16::Round_To_Int_410BF0(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
+                                pSound->field_20_rate = Fix16::RoundToInt(Fix16(541900800, 0) * (speed / max_speed)) + 11025;
                             }
                         }
                     }
@@ -2799,7 +2797,7 @@ void sound_obj::HandleTruckCorneringAudio_417FD0(Sound_Params_8* pParams)
     Car_BC* pCar = pParams->field_0_pObj->field_8_car_bc_ptr;
     CarPhysics_B0* pPhysics = pCar->field_58_physics;
 
-    Ang16 slide_angle = pPhysics->field_40_linvel_1.atan2_40F790().SubtractNormalized_409340(pPhysics->field_58_theta);
+    Ang16 slide_angle = pPhysics->field_40_linvel_1.Atan2().SubtractNormalized(pPhysics->field_58_theta);
     if (slide_angle > kMinCorneringAngle_66F274 && slide_angle < kMaxCorneringAngle_66F370)
     {
         if (pCar->GetCarLinearSpeed_43A240() > kMinCorneringSpeed_66F378)
@@ -2863,7 +2861,7 @@ void sound_obj::HandleAICarEngineSound_418190(Sound_Params_8* pParams)
         speed = pParams->field_0_pObj->field_8_car_bc_ptr->GetCarLinearSpeed_43A240();
         if (max_speed > kFpZero_66F3F0 && speed > kFpZero_66F3F0 && CalculateDistance_419020(Fix16(0x144000, 0)))
         {
-            u8 emitting_vol = Fix16::Round_To_Int_410BF0((speed / max_speed) * Fix16(0x2C000, 0));
+            u8 emitting_vol = Fix16::RoundToInt((speed / max_speed) * Fix16(0x2C000, 0));
             if (emitting_vol > 0)
             {
                 if (VolCalc_419070(emitting_vol, Fix16(0x24000, 0), pParams->field_5_bHasSolidAbove))
@@ -3050,7 +3048,7 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
                 {
                     Fix16 speed = pCar->GetCarLinearSpeed_43A240();
                     speed /= gCarInfo_48_6FE258->field_28_max_speed;
-                    emitVol = Fix16::Round_To_Int_410BF0(Fix16(983040, 0) * speed) + 10;
+                    emitVol = Fix16::RoundToInt(Fix16(983040, 0) * speed) + 10;
                 }
                 else
                 {
@@ -3068,7 +3066,7 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
                     {
                         front_scrub = kFpOne_66F3F4;
                     }
-                    u8 tmpVol = Fix16::Round_To_Int_410BF0(Fix16(1146880, 0) * front_scrub);
+                    u8 tmpVol = Fix16::RoundToInt(Fix16(1146880, 0) * front_scrub);
                     if (tmpVol > emitVol)
                     {
                         emitVol = tmpVol;
@@ -3083,7 +3081,7 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
                     {
                         rear_scrub = kFpOne_66F3F4;
                     }
-                    u8 tmpVol = Fix16::Round_To_Int_410BF0(Fix16(1146880, 0) * rear_scrub);
+                    u8 tmpVol = Fix16::RoundToInt(Fix16(1146880, 0) * rear_scrub);
                     if (tmpVol > emitVol)
                     {
                         emitVol = tmpVol;
@@ -3164,7 +3162,7 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
                     skid_amount = Fix16(static_cast<s32>((static_cast<__int64>(pCar->GetCarLinearSpeed_43A240().mValue) << 14) /
                                                          gCarInfo_48_6FE258->field_28_max_speed.mValue),
                                         0);
-                    pSound->field_20_rate = rate + Fix16::Round_To_Int_410BF0(Fix16(98304000, 0) * skid_amount);
+                    pSound->field_20_rate = rate + Fix16::RoundToInt(Fix16(98304000, 0) * skid_amount);
                 }
                 else
                 {
@@ -3200,7 +3198,7 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
                     skid_amount = front_skid;
                 }
 
-                pSound->field_20_rate = rate + Fix16::Round_To_Int_410BF0(Fix16(98304000, 0) * skid_amount);
+                pSound->field_20_rate = rate + Fix16::RoundToInt(Fix16(98304000, 0) * skid_amount);
             }
 
             pSound->field_3C_speed_multiplier = 600;
@@ -3950,7 +3948,7 @@ char_type sound_obj::CalcVolume_41A3F0(u8 base_volume, Fix16 max_dist, Fix16 dis
 
     Fix16 falloff = (max_dist - dist) / max_dist;
     dist = Fix16(base_volume); // 9.6f also reuses the dist slot here
-    s32 volume = Fix16::Round_To_Int_410BF0(falloff * falloff * dist);
+    s32 volume = Fix16::RoundToInt(falloff * falloff * dist);
     if (volume > 127)
     {
         volume = 127;
@@ -4028,7 +4026,7 @@ s32 sound_obj::AdjustPlaybackRate_41A580(s32 snd_rate, Fix16 xpos, Fix16 ypos, F
         Fix16 rate;
         rate = Fix16(snd_rate);
         // The speed of sound is not shifted here (raw ratio speed / (relative_speed + speed))
-        return Fix16::Round_To_Int_410BF0(rate * (Fix16(field_4_speed_of_sound, 0) / Fix16(relative_speed + field_4_speed_of_sound, 0)));
+        return Fix16::RoundToInt(rate * (Fix16(field_4_speed_of_sound, 0) / Fix16(relative_speed + field_4_speed_of_sound, 0)));
     }
 
     return snd_rate;
@@ -5761,13 +5759,13 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
                 if (zpos > dword_675414)
                 {
                     samp_idx_ = 193;
-                    if (Fix16::Round_To_Int_410BF0(Fix16(655360, 0) * (zpos - dword_675414)) > 127)
+                    if (Fix16::RoundToInt(Fix16(655360, 0) * (zpos - dword_675414)) > 127)
                     {
                         vol = 127;
                     }
                     else
                     {
-                        vol = Fix16::Round_To_Int_410BF0(Fix16(655360, 0) * (zpos - dword_675414));
+                        vol = Fix16::RoundToInt(Fix16(655360, 0) * (zpos - dword_675414));
                     }
                     releasingMod_ = 5;
                     f_54 = Fix16(81920, 0);
@@ -5777,7 +5775,7 @@ void sound_obj::ProcessPed_422B70(Sound_Params_8* pType3Entity)
                     rate = gSampManager_6FFF00.GetPlayBackRateIdx_58DBF0(193);
                     this->field_30_sQueueSample.field_20_rate = rate;
                     this->field_30_sQueueSample.field_20_rate =
-                        rate + Fix16::Round_To_Int_410BF0(pType3Entity->field_0_pObj->field_1C_zpos * dword_6751F4);
+                        rate + Fix16::RoundToInt(pType3Entity->field_0_pObj->field_1C_zpos * dword_6751F4);
                     break;
                 }
                 [[fallthrough]]; // zpos too low, play the ped voice instead

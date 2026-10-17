@@ -1570,11 +1570,11 @@ void ImGuiDebugDraw()
                     {
                         if (bits[i])
                         {
-                            pCarIter->field_8_damaged_areas.set_bit(i);
+                            pCarIter->field_8_damaged_areas.SetBit(i);
                         }
                         else
                         {
-                            pCarIter->field_8_damaged_areas.clear_bit(i);
+                            pCarIter->field_8_damaged_areas.ClearBit(i);
                         }
                     }
 
@@ -1964,10 +1964,10 @@ void ImGuiDebugDraw()
                         CarAI_78* pAI_Iter = pCarIter->field_5C_AI;
                         if (pAI_Iter && pCarIter->field_50_car_sprite)
                         {
-                            Fix16 curr_dist = Fix16::MaxAbsDistance_42A6B0(pPlayerSprt->field_14_xy.x,
-                                                                           pPlayerSprt->field_14_xy.y,
-                                                                           pCarIter->field_50_car_sprite->field_14_xy.x,
-                                                                           pCarIter->field_50_car_sprite->field_14_xy.y);
+                            Fix16 curr_dist = Fix16::MaxAbsDistance(pPlayerSprt->field_14_xy.x,
+                                                                    pPlayerSprt->field_14_xy.y,
+                                                                    pCarIter->field_50_car_sprite->field_14_xy.x,
+                                                                    pCarIter->field_50_car_sprite->field_14_xy.y);
                             if (curr_dist < smallest)
                             {
                                 smallest = curr_dist;
@@ -3109,7 +3109,7 @@ void ImGuiDebugDraw()
 
             if (ImGui::Button("Create Particle"))
             {
-                particle_velocity.FromPolar_41E210(speed, pPlayerSprite->field_0_rotation);
+                particle_velocity.FromPolar(speed, pPlayerSprite->field_0_rotation);
                 Particle_4C* pParticle = gParticle_8_6FD5E8->New_53E3C0(particle_velocity.x, particle_velocity.y, unknown, 0, 0, 0);
 
                 if (pParticle)

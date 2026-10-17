@@ -203,10 +203,10 @@ void Firefighter_28::Update_4A81F0()
             }
             else if (sub_4A7FC0())
             {
-                if (Fix16::MaxAbsDistance_42A6B0(field_1C_car->GetX_41E430(),
-                                                 field_1C_car->GetY_41E440(),
-                                                 field_C_target_car->GetX_41E430(),
-                                                 field_C_target_car->GetY_41E440()) < dword_67D384 &&
+                if (Fix16::MaxAbsDistance(field_1C_car->GetX_41E430(),
+                                          field_1C_car->GetY_41E440(),
+                                          field_C_target_car->GetX_41E430(),
+                                          field_C_target_car->GetY_41E440()) < dword_67D384 &&
                     field_24_next_state_timer > 100)
                 {
                     field_8_state = firefighter_state::arrived_3;

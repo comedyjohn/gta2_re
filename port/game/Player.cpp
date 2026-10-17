@@ -1665,7 +1665,7 @@ void Player::ShowDebugInfo_566EE0(char_type skip)
 
         if (gShow_cycle_67D6BD)
         {
-            gpRng_67AB34->ShowCycle_48B920();
+            gpRng_67AB34->ShowCycle();
         }
 
         if (gDo_show_input_67D576)

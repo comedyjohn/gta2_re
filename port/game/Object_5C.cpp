@@ -347,8 +347,8 @@ void Object_2C::SetMovementVector_5224E0(const Fix16Point& speed)
     if (field_10_obj_3c)
     {
         new_velocity = GetSpeedVector_482C50() + speed;
-        this->field_10_obj_3c->field_C_speed = new_velocity.GetLength_41E260();
-        this->field_10_obj_3c->field_4_angle = new_velocity.atan2_40F790();
+        this->field_10_obj_3c->field_C_speed = new_velocity.GetLength();
+        this->field_10_obj_3c->field_4_angle = new_velocity.Atan2();
         this->field_10_obj_3c->field_18_friction = this->field_8->field_14_friction;
     }
     else
@@ -364,7 +364,7 @@ void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16Point& point)
 
     if (field_8->field_4C == 3 && field_10_obj_3c->field_34 == 2)
     {
-        const s16 rng = gRng_6F6784.get_int_4F7AE0(9);
+        const s16 rng = gRng_6F6784.GetInt(9);
         if (rng < 6)
         {
             if (rng < 3)
@@ -417,7 +417,7 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16Point* p
                                                      kFP16One_6F8D38,
                                                      kFP16One_6F8D24);
 
-        pObj->SetMovementVectorWithRandomState_522640(impulse.Negate_40ACB0() / pObj->GetMass_482C80());
+        pObj->SetMovementVectorWithRandomState_522640(impulse.Negate() / pObj->GetMass_482C80());
     }
     else
     {
@@ -454,7 +454,7 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16Point* p
             {
                 Ang16& angle = field_10_obj_3c->field_4_angle;
                 angle.rValue += kAng180_6F8D62.rValue;
-                angle.Normalize_406C20();
+                angle.NormalizeOutOfLine();
             }
         }
     }
@@ -485,8 +485,8 @@ void Object_2C::ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16Point* pPoint,
                                                     kFP16One_6F8D38,
                                                     kFP16One_6F8CE0,
                                                     kFP16One_6F8F74);
-    SetMovementVectorWithRandomState_522640(lineHitPos.Divide_442CB0(GetMass_482C80()));
-    impulse = lineHitPos.Negate_40ACB0().Divide_442CB0(kFP16Half_6F8EE4);
+    SetMovementVectorWithRandomState_522640(lineHitPos.Divide(GetMass_482C80()));
+    impulse = lineHitPos.Negate().Divide(kFP16Half_6F8EE4);
     // The ped impact was compiled out: impulse is overwritten with zero
     impulse.x = kFpZero_6F8E10;
     impulse.y = kFpZero_6F8E10;
@@ -508,7 +508,7 @@ void Object_2C::ResolveCollisionWithWorld_522B20(Fix16Point* f18, Fix16Point* pP
                                                             kFP16One_6F8D38,
                                                             kFpZero_6F8E10,
                                                             kFP16Half_6F8D3C);
-    SetMovementVectorWithRandomState_522640(impulse.Divide_442CB0(GetMass_482C80()));
+    SetMovementVectorWithRandomState_522640(impulse.Divide(GetMass_482C80()));
     HandleImpact_528E50(nullptr);
 }
 
@@ -522,11 +522,11 @@ void Object_2C::ResolveCollisionWithMapTile_522BE0(Fix16Point* pPoint)
     u8 edge_flag;
     if (this->field_4->GetNearestHorizontalEdgeToCoordinate_5A0A70(gCollisionTarget_679188.field_18_hseg_y, t1, edge_flag))
     {
-        reflect_dir.SetXY_432860(Fix16(0), field_4->field_14_xy.y - gCollisionTarget_679188.field_18_hseg_y);
+        reflect_dir.SetXY(Fix16(0), field_4->field_14_xy.y - gCollisionTarget_679188.field_18_hseg_y);
     }
     else
     {
-        t1.SetXY_432860(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_18_hseg_y);
+        t1.SetXY(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_18_hseg_y);
         t1 -= *pPoint;
         t1.x += field_4->field_14_xy.x;
         t1.y = gCollisionTarget_679188.field_18_hseg_y;
@@ -559,11 +559,11 @@ void Object_2C::ResolveCollisionWithMapTileHorizontal_522D00(Fix16Point* pPoint)
     obj_speed = Object_2C::GetSpeedVector_52AE90();
     if (field_4->GetNearestVerticalEdgeToCoordinate_5A1030(gCollisionTarget_679188.field_14_vseg_x, t2, edge_flag))
     {
-        reflect_dir.SetXY_432860(field_4->field_14_xy.x - gCollisionTarget_679188.field_14_vseg_x, Fix16(0));
+        reflect_dir.SetXY(field_4->field_14_xy.x - gCollisionTarget_679188.field_14_vseg_x, Fix16(0));
     }
     else
     {
-        t2.SetXY_432860(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_18_hseg_y);
+        t2.SetXY(gCollisionTarget_679188.field_14_vseg_x, gCollisionTarget_679188.field_18_hseg_y);
         t2 -= *pPoint;
         t2.y += field_4->field_14_xy.y;
         t2.x = gCollisionTarget_679188.field_14_vseg_x;
@@ -1100,7 +1100,7 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
             // The original passes a block-scoped copy of radius (9.6f copies it too); its slot is
             // shared with tmp_radius below
             Fix16 r = radius;
-            Ang16::PolarToCartesian_41FC20(angle, r, unk_x, unk_y);
+            Ang16::PolarToCartesian(angle, r, unk_x, unk_y);
         }
 
         for (s32 i = 1; i <= step_count.ToInt(); i++)
@@ -1165,7 +1165,7 @@ void Object_2C::IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 ang
             for (s32 j = 0; j < 3; j++)
             {
                 tmp_radius = tmp_radius / 2;
-                Ang16::PolarToCartesian_41FC20(angle, tmp_radius, unk_x, unk_y);
+                Ang16::PolarToCartesian(angle, tmp_radius, unk_x, unk_y);
                 pSprt->set_xyz_lazy_420600(pSprt->field_14_xy.x + unk_x, pSprt->field_14_xy.y + unk_y, pSprt->field_1C_zpos);
                 pSprt->set_ang_lazy_420690(angle);
                 Object_2C::Sprite_UpdateZFromSlopeAndTile_522FA0(pSprt);
@@ -1284,8 +1284,8 @@ void Object_2C::IntegrateHorizontalMovementAndCollisions_524630(Fix16 move_len, 
     {
         // 9.6f: PolarToCartesian_41FC20 on a copy of the step
         Fix16 radius = step_len;
-        step_dx = Ang16::sine_40F500(move_angle) * radius;
-        step_dy = Ang16::cosine_40F520(move_angle).Multiply_408680(radius);
+        step_dx = Ang16::Sine(move_angle) * radius;
+        step_dy = Ang16::Cosine(move_angle).Multiply(radius);
     } // 9.6f inlined: PolarToCartesian_41FC20
 
     Ang16 start_rotation;
@@ -1383,8 +1383,8 @@ LABEL_48:
         Fix16 old_y = pProbe->field_14_xy.y;
         start_rotation = pProbe->field_0_rotation;
         step = step / 2;
-        step_dx = Ang16::sine_40F500(move_angle) * step;
-        step_dy = Ang16::cosine_40F520(move_angle) * step;
+        step_dx = Ang16::Sine(move_angle) * step;
+        step_dy = Ang16::Cosine(move_angle) * step;
         pProbe->set_xy_lazy_447E20(pProbe->field_14_xy.x + step_dx, pProbe->field_14_xy.y + step_dy);
         pProbe->set_ang_lazy_420690(move_angle);
 
@@ -1750,7 +1750,7 @@ void Object_2C::UpdatePhysicsAndMovement_525B80()
     }
     SpawnSpriteParticlesForRocketBullet_525B40();
 
-    field_10_obj_3c->field_C_speed = field_10_obj_3c->field_C_speed.ZeroIfNegligible_482730();
+    field_10_obj_3c->field_C_speed = field_10_obj_3c->field_C_speed.ZeroIfNegligible();
 
     if (!DispatchFrameAction_525910())
     {
@@ -1824,7 +1824,7 @@ void Object_2C::UpdatePhysicsMovementAndAnimation_525D90()
         IntegrateMovementAndCollisions_523BF0(mov_speed, ang);
     }
 
-    field_10_obj_3c->field_C_speed = field_10_obj_3c->field_C_speed.ZeroIfNegligible_482730();
+    field_10_obj_3c->field_C_speed = field_10_obj_3c->field_C_speed.ZeroIfNegligible();
 
     ObjectDefinition_74* pDefinition = this->field_8;
     if (pDefinition->field_65 != -1 || pDefinition->field_34_behavior_type == object_behavior_type::pickup_physics_animated_9 ||
@@ -2098,7 +2098,7 @@ bool Object_2C::UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 
         {
             xpos = x;
             ypos = y;
-            Ang16::RotateVector_41FC90(xpos, ypos, pSprite->field_0_rotation);
+            Ang16::RotateVector(xpos, ypos, pSprite->field_0_rotation);
             xpos += pSprite->field_14_xy.x;
             ypos += pSprite->field_14_xy.y;
         }
@@ -2308,8 +2308,8 @@ void Object_2C::NewObj3C_528130(const Fix16Point& speed)
     this->field_10_obj_3c = pNewObj;
     pNewObj->field_20_obj2c_id = field_14_id;
 
-    this->field_10_obj_3c->field_C_speed = speed.GetLength_41E260();
-    this->field_10_obj_3c->field_4_angle = speed.atan2_40F790();
+    this->field_10_obj_3c->field_C_speed = speed.GetLength();
+    this->field_10_obj_3c->field_4_angle = speed.Atan2();
 }
 
 // 0x528240
@@ -2415,7 +2415,7 @@ void Object_2C::TickObject_5283C0(s32 obj_type)
         {
             if (obj_type == 259)
             {
-                dir.SetFromPolar_41E210(k_dword_6F8C9C, field_4->field_0_rotation);
+                dir.SetFromPolar(k_dword_6F8C9C, field_4->field_0_rotation);
                 gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x, field_4->field_14_xy.y, field_4->field_1C_zpos, dir);
                 Object_2C::RequestRemoval_5290A0();
             }
@@ -2618,7 +2618,7 @@ void Object_2C::HandleWaterDeath_528900()
         field_10_obj_3c->field_30_bSkipAnim = 1;
     }
 
-    if ((gpRng_67AB34->get_cur_rng_41CFE0() & 3) == 0)
+    if ((gpRng_67AB34->GetCurRng() & 3) == 0)
     {
         field_4->IncreaseZoom_59E320(1);
         if (field_4->ShrinkSprite_59E390(dword_6F8F5C, dword_6F8F5C, 0))
@@ -2771,7 +2771,7 @@ void Object_2C::HandleImpactNoSprite_528BA0()
         case objects::machine_gun_bullet_254:
         case objects::pistol_bullet_265:
         {
-            point.FromPolar_41E210(k_dword_6F8C9C, field_4->field_0_rotation + kAng180_6F8D62);
+            point.FromPolar(k_dword_6F8C9C, field_4->field_0_rotation + kAng180_6F8D62);
             gParticle_8_6FD5E8->EmitImpactParticles_53FE40(field_4->field_14_xy.x, field_4->field_14_xy.y, field_4->field_1C_zpos, point);
             break;
         }

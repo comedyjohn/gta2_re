@@ -15,47 +15,47 @@ DEFINE_GLOBAL_INIT(Ang16, kAng90_667A7C, Ang16(360), 0x667A7C);
 DEFINE_GLOBAL_INIT(Ang16, kAng270_66916C, Ang16(1080), 0x66916C);
 
 // 0x408660
-Fix16 Fix16::Add_408660(const Fix16& rhs) const throw()
+Fix16 Fix16::Add(const Fix16& rhs) const throw()
 {
     s32 value = mValue + rhs.mValue;
     return Fix16(value, 0);
 }
 
 // 0x408680
-Fix16 Fix16::Multiply_408680(const Fix16& in) const throw()
+Fix16 Fix16::Multiply(const Fix16& in) const throw()
 {
     s32 value = static_cast<s32>((mValue * static_cast<__int64>(in.mValue)) >> 14);
     return Fix16(value, 0);
 }
 
 // 0x436A00
-Fix16 Fix16::Subtract_436A00(const Fix16& in) const
+Fix16 Fix16::Subtract(const Fix16& in) const
 {
     s32 value = mValue - in.mValue;
     return Fix16(value, 0);
 }
 
 // 0x436A20
-Fix16 Fix16::Divide_436A20(const Fix16& in) const
+Fix16 Fix16::Divide(const Fix16& in) const
 {
     s32 value = static_cast<s32>((static_cast<__int64>(mValue) << 14) / in.mValue);
     return Fix16(value, 0);
 }
 
 // 0x451670
-s32 Fix16::IsLess_451670(const Fix16& other) const
+s32 Fix16::IsLess(const Fix16& other) const
 {
     return mValue < other.mValue;
 }
 
 // 0x451690
-s32 Fix16::IsGreater_451690(const Fix16& other) const
+s32 Fix16::IsGreater(const Fix16& other) const
 {
     return mValue > other.mValue;
 }
 
 // 0x539F90
-Fix16& Fix16::DivideAssign_539F90(const Fix16& rhs)
+Fix16& Fix16::DivideAssign(const Fix16& rhs)
 {
     mValue = static_cast<s32>((static_cast<__int64>(mValue) << 14) / rhs.mValue);
     return *this;
@@ -63,45 +63,30 @@ Fix16& Fix16::DivideAssign_539F90(const Fix16& rhs)
 
 // Out-of-line copy of operator/(const s32&) (20 bytes, called by Particle_8::EmitImpactParticles_53FE40)
 // 0x53E860
-Fix16 Fix16::DivideInt_53E860(const s32& in) const
+Fix16 Fix16::DivideInt(const s32& in) const
 {
     s32 value = mValue / in;
     return Fix16(value, 0);
 }
 
 // 0x561DB0
-Fix16 Fix16::MultiplyInt_561DB0(const s32& in) const
+Fix16 Fix16::MultiplyInt(const s32& in) const
 {
     s32 value = mValue * in;
     return Fix16(value, 0);
 }
 
 // 0x562430
-Fix16& Fix16::MultiplyAssign_562430(const Fix16& rhs)
+Fix16& Fix16::MultiplyAssign(const Fix16& rhs)
 {
     mValue = static_cast<s32>((mValue * static_cast<__int64>(rhs.mValue)) >> 14);
     return *this;
 }
 
 // 0x4086A0
-Fix16 Fix16::Negate_4086A0() const throw()
+Fix16 Fix16::Negated() const throw()
 {
     return Fix16(-mValue, 0);
-}
-
-// 0x44E540
-Fix16 Fix16::Max_44E540(const Fix16& pLhs, const Fix16& pRhs)
-{
-    Fix16 result;
-    if (pLhs.mValue > pRhs.mValue)
-    {
-        result.mValue = pLhs.mValue;
-    }
-    else
-    {
-        result.mValue = pRhs.mValue;
-    }
-    return result;
 }
 
 /*
@@ -113,29 +98,10 @@ Fix16 Fix16::operator/(const Fix16& in)
 }
 */
 
-// 0x436A50
-Fix16 Fix16::Abs_436A50(const Fix16& input)
-{
-    if (input.mValue > 0)
-    {
-        return input;
-    }
-    else
-    {
-        return -input;
-    }
-}
-
-// 0x436A70
-Fix16 Fix16::SquareRoot_436A70(const Fix16& input) throw()
-{
-    return Fix16(sqrt(input.AsDouble()));
-}
-
 // 10.5 https://decomp.me/scratch/7a41K
 // 9.6f https://decomp.me/scratch/ZkUbq
 // 0x405320
-Ang16 Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
+Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
 {
     Ang16 table_angle;
     if (y == kFPZero_6691B0)
@@ -162,7 +128,7 @@ Ang16 Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
     }
     else
     {
-        table_angle = ArcTanLookup_405500(Fix16::Abs(x / y));
+        table_angle = ArcTanLookup(Fix16::Abs(x / y));
 
         if (x > kFPZero_6691B0)
         {
@@ -197,7 +163,7 @@ Ang16 Fix16::atan2_fixed_405320(const Fix16& x, const Fix16& y)
 }
 
 // 0x438FB0
-bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax)
+bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax)
 {
     if (intervalStart < rangeMin)
     {
@@ -216,7 +182,7 @@ EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle_6691EC);
 // Turns the angle `cur` toward `*pTarget` by at most `*pSpeed`, the short way round, and wraps the
 // result into [0, 2pi). Called by Trailer::UpdateTrailerAlignment_407CE0.
 // 0x405DA0
-Fix16 sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
+Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
 {
     if (*pTarget - cur > kAngFix16HalfCircle_6691EC)
     {
@@ -261,7 +227,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6691FC, Fix16(0x12B88, 0), 0x6691FC);
 
 // Is `*a` within dword_66A924 of `*b`, directly or one turn (kAngFix16FullCircle_66A8E4) either way.
 // 0x405E20
-s32 sub_405E20(Fix16* a, Fix16* b)
+s32 IsAngleNear(Fix16* a, Fix16* b)
 {
     if ((*a > *b - dword_66A924 && *a < *b + dword_66A924) ||
         (*a > *b - kAngFix16FullCircle_66A8E4 - dword_66A924 && *a < *b - kAngFix16FullCircle_66A8E4 + dword_66A924) ||
@@ -276,7 +242,7 @@ s32 sub_405E20(Fix16* a, Fix16* b)
 // wrap at 0 / 2pi, and returns whether it ends up on either edge. Called by
 // Trailer::UpdateTrailerAlignment_407CE0.
 // 0x405E80
-s32 sub_405E80(Fix16* pTarget, Fix16* pCur)
+s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
 {
     Fix16 lo;
     Fix16 hi;
@@ -333,7 +299,7 @@ s32 sub_405E80(Fix16* pTarget, Fix16* pCur)
         }
     }
 
-    if (static_cast<u8>(sub_405E20(pCur, &lo)) || static_cast<u8>(sub_405E20(pCur, &hi)))
+    if (static_cast<u8>(IsAngleNear(pCur, &lo)) || static_cast<u8>(IsAngleNear(pCur, &hi)))
     {
         return 1;
     }
@@ -343,7 +309,7 @@ s32 sub_405E80(Fix16* pTarget, Fix16* pCur)
 // The original is a CRT init func (called from the CRT init table), here Init_trigonometry_tables
 // calls it. The constants are pi and 1/720: 1440 steps of the full circle.
 // 0x4052D0
-void arc_tan_table_init_4052D0()
+void ArcTanTableInit()
 {
     s32 arg = 0;
     Fix16* pTan = gTanTable_6663C8;
@@ -361,7 +327,7 @@ void arc_tan_table_init_4052D0()
 
 // 9.6f: 0x40E810
 // 0x405500
-Ang16 ArcTanLookup_405500(const Fix16& targetTan)
+Ang16 ArcTanLookup(const Fix16& targetTan)
 {
     s16 low = 0;
     s16 high = 360 - 1;
@@ -411,7 +377,7 @@ Ang16 ArcTanLookup_405500(const Fix16& targetTan)
 }
 
 // 0x5A57E0
-void FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
+void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
 {
     minOut = a;
     maxOut = a;
@@ -459,6 +425,6 @@ void Init_trigonometry_tables()
     {
         gCos_table_669260[entry] = Fix16(cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
     }
-    arc_tan_table_init_4052D0();
+    ArcTanTableInit();
     printf("Sine, cosine and tangent tables initialized!\n");
 }

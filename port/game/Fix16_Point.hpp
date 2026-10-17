@@ -42,23 +42,23 @@ struct Fix16PointPOD
         y = a2;
     }
 
-    void SetXY_432860(const Fix16& a2, const Fix16& a3)
+    void SetXY(const Fix16& a2, const Fix16& a3)
     {
         this->x = a2;
         this->y = a3;
     }
 
-    void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
+    void SetFromPolar(const Fix16& radius, const Ang16& angle)
     {
-        x = Ang16::sine_40F500(angle) * radius;
-        y = Ang16::cosine_40F520(angle) * radius;
+        x = Ang16::Sine(angle) * radius;
+        y = Ang16::Cosine(angle) * radius;
     }
 
     // Matching impl at RotateVelocity_562C20
-    void RotateByAngle_40F6B0(const Ang16& angle)
+    void RotateByAngle(const Ang16& angle)
     {
-        Fix16 sin = Ang16::sine_40F500(angle);
-        Fix16 cos = Ang16::cosine_40F520(angle);
+        Fix16 sin = Ang16::Sine(angle);
+        Fix16 cos = Ang16::Cosine(angle);
 
         Fix16 x_old = x;
 
@@ -81,30 +81,23 @@ struct Fix16PointPOD
 class Fix16Point
 {
   public:
-    void SetXY_432860(const Fix16& a2, const Fix16& a3)
+    void SetXY(const Fix16& a2, const Fix16& a3)
     {
         this->x = a2;
         this->y = a3;
     }
 
-    // Reads the TU's FIX16_POINT_ZERO copy (Weapon_30::throwable_5DDFC0 compares with 0x706EB8)
-    bool IsNull_420360() const
-    {
-        return x == FIX16_POINT_ZERO && y == FIX16_POINT_ZERO;
-    }
-
-    // For some reason uses another constant
     bool IsNull() const
     {
         return x == kFP16Zero_6FE20C && y == kFP16Zero_6FE20C;
     }
 
-    bool HasZeroComponent_49E450() const
+    bool HasZeroComponent() const
     {
         return x == kFP16Zero_6FE20C || y == kFP16Zero_6FE20C;
     }
 
-    void ApplyDeadZone_49E3C0()
+    void ApplyDeadZone()
     {
         Fix16 total = (Fix16::Abs(x) + Fix16::Abs(y));
         if (total < kFP16One256th_6FE07C)
@@ -115,17 +108,17 @@ class Fix16Point
     }
 
     // But also 0x40ACD0 non inlined in 10.5
-    Ang16 atan2_40F790() const
+    Ang16 Atan2() const
     {
-        return Fix16::atan2_fixed_405320(y, x);
+        return Fix16::Atan2Fixed(y, x);
     }
 
-    Fix16 GetLength_453590();
+    Fix16 GetLengthOutOfLine();
 
     // 9.6f 0x41E260; the out-of-line copy is GetLength_453590. The nested if/else (front-end size 162, the
     // else-if chain is 160) gives the original's cut-offs in Crane_15C::ComputeHookPolar_47F6C0 with
     // SquareRoot at 48; matched functions allow 159..162.
-    Fix16 GetLength_41E260() const
+    Fix16 GetLength() const
     {
         if (x == FIX16_POINT_ZERO)
         {
@@ -144,17 +137,17 @@ class Fix16Point
         }
     }
 
-    void SetFromPolar_41E210(const Fix16& radius, const Ang16& angle)
+    void SetFromPolar(const Fix16& radius, const Ang16& angle)
     {
-        x = Ang16::sine_40F500(angle) * radius;
-        y = Ang16::cosine_40F520(angle) * radius;
+        x = Ang16::Sine(angle) * radius;
+        y = Ang16::Cosine(angle) * radius;
     }
 
     // Matching impl at RotateVelocity_562C20
-    void RotateByAngle_40F6B0(const Ang16& angle)
+    void RotateByAngle(const Ang16& angle)
     {
-        Fix16 sin = Ang16::sine_40F500(angle);
-        Fix16 cos = Ang16::cosine_40F520(angle);
+        Fix16 sin = Ang16::Sine(angle);
+        Fix16 cos = Ang16::Cosine(angle);
 
         Fix16 x_old = x;
 
@@ -162,11 +155,11 @@ class Fix16Point
         y = ((-x_old) * sin) + (y * cos);
     }
 
-    void FromPolar_41E210(const Fix16& radius, const Ang16& angle)
+    void FromPolar(const Fix16& radius, const Ang16& angle)
     {
 
-        x = radius * Ang16::sine_40F500(angle);
-        y = radius * Ang16::cosine_40F520(angle);
+        x = radius * Ang16::Sine(angle);
+        y = radius * Ang16::Cosine(angle);
     }
 
     Fix16Point& operator+=(const Fix16Point& other)
@@ -184,39 +177,39 @@ class Fix16Point
     }
 
     // Operator* for Fix16 ?
-    Fix16Point& MultiplyByFix16_49E3A0(const Fix16& factor)
+    Fix16Point& MultiplyByFix16(const Fix16& factor)
     {
         x *= factor;
         y *= factor;
         return *this;
     }
 
-    Fix16Point Multiply_438FE0(const Fix16& in) const;
-    Fix16Point Divide_442CB0(const Fix16& in);
+    Fix16Point Multiply(const Fix16& in) const;
+    Fix16Point Divide(const Fix16& in);
 
     // Divide_442CB0 as a nothrow inline (see DivideInl_55F9E0; CarPhysics_B0::HandleObjectCollision_5606C0,
     // Car_BC::ApplyExplosionImpulse_443710)
-    Fix16Point DivideInl_442CB0(Fix16& in) throw()
+    Fix16Point DivideByFix16(Fix16& in) throw()
     {
         return Fix16Point(x / in, y / in);
     }
 
     // Multiply_438FE0 as a nothrow inline (see DivideInl_55F9E0; Car_BC::TryHitchTrailer_442810)
-    Fix16Point MultiplyInl_438FE0(Fix16& in) throw()
+    Fix16Point MultiplyInl(Fix16& in) throw()
     {
         return Fix16Point(x * in, y * in);
     }
 
     // Out-of-line copies emitted in Weapon_30.cpp (used by sub_5DE910).
-    Fix16Point& AddAssign_5E40C0(const Fix16Point& other);
-    Fix16Point& DivAssign_5E40E0(const Fix16& v);
-    Fix16 MaxAbs_5E4140();
+    Fix16Point& AddAssign(const Fix16Point& other);
+    Fix16Point& DivAssign(const Fix16& v);
+    Fix16 MaxAbsOutOfLine();
 
     // 9.6f 0x48A270 (the inline of MaxAbs_5E4140)
-    Fix16 MaxAbs_48A270()
+    Fix16 MaxAbs()
     {
-        Fix16 ax = Fix16::Abs_436A50(x);
-        Fix16 ay = Fix16::Abs_436A50(y);
+        Fix16 ax = Fix16::Abs(x);
+        Fix16 ay = Fix16::Abs(y);
         if (ax > ay)
         {
             return ax;
@@ -225,13 +218,13 @@ class Fix16Point
     }
 
     // 9.6f 0x48A250: both components through Fix16::DivideAssign (10.5 0x539F90)
-    void DivideAssign_48A250(const Fix16& d)
+    void DivideAssign(const Fix16& d)
     {
-        x.DivideAssign_539F90(d);
-        y.DivideAssign_539F90(d);
+        x.DivideAssign(d);
+        y.DivideAssign(d);
     }
 
-    void reset()
+    void Reset()
     {
         x = Fix16(0);
         y = Fix16(0);
@@ -252,7 +245,7 @@ class Fix16Point
     {
     }
 
-    void ClampTowardsZero_49E480(const Fix16Point& limit)
+    void ClampTowardsZero(const Fix16Point& limit)
     {
         if (x >= kFP16Zero_6FE20C)
         {
@@ -294,24 +287,24 @@ class Fix16Point
     // The out-of-line copy of the inline operator-. Called by name where the original keeps an EH state
     // for temporaries around the call (Crane_15C::HookPickupCar_47EF80, ComputeHookPolar_47F6C0); the
     // inline operator- called out of line gets none (CarPhysics_B0::HandleCarCollision_55FF20)
-    Fix16Point Sub_40AC80(const Fix16Point& rhs) const;
+    Fix16Point Sub(const Fix16Point& rhs) const;
 
     // operator+/operator- with their bodies defined at the end of Car_BC.cpp (HandleCarHitByObject_43F130)
     inline Fix16Point AddLate_40AC50(const Fix16Point& in);
     inline Fix16Point SubLate_40AC80(const Fix16Point& rhs);
 
     // Out of line operator+ (CarPhysics_B0::SpawnSkidSegment_55D200)
-    Fix16Point Add_40AC50(const Fix16Point& in);
+    Fix16Point Add(const Fix16Point& in);
 
     // operator+ 0x40AC50 as a nothrow inline that VC6 still calls out of line: no EH state for the
     // temporaries alive across the call (Car_BC::TryHitchTrailer_442810)
-    Fix16Point AddInl_40AC50(const Fix16Point& in) throw()
+    Fix16Point AddInl(const Fix16Point& in) throw()
     {
         return Fix16Point(x + in.x, y + in.y);
     }
 
     // Out of line unary minus (Object_2C::ResolveCollisionWithPed_5229B0)
-    Fix16Point Negate_40ACB0() const;
+    Fix16Point Negate() const;
 
     Fix16Point operator*(const Fix16& in)
     {
@@ -323,18 +316,18 @@ class Fix16Point
         return Fix16Point(-x, -y);
     }
 
-    Fix16Point MultBy_442C80(const s32& factor);
+    Fix16Point MultBy(const s32& factor);
 
     // 10.0 0x442CB0
     Fix16Point operator/(const Fix16& in) const;
 
-    Fix16Point NormalizeSafe_442AD0();
+    Fix16Point NormalizeSafe();
 
-    Ang16 atan2_40ACD0();
+    Ang16 Atan2OutOfLine();
 
-    Fix16Point Rotate90CCW_5605E0();
+    Fix16Point Rotate90CCW();
 
-    void clear_41E1E0()
+    void Clear()
     {
         x = 0;
         y = 0;
@@ -345,7 +338,7 @@ class Fix16Point
     // operator/ 0x55F9E0 as a nothrow inline that VC6 still calls out of line: the original sets no EH
     // state for the temporaries that live across this call (CarPhysics_B0::HandleCarCollision_55FF20,
     // HandleObjectCollision_5606C0). throw() on the real operator/ changes 6 matched functions.
-    Fix16Point DivideInl_55F9E0(const s32& a3) throw()
+    Fix16Point DivideByInt(const s32& a3) throw()
     {
         return Fix16Point(x / a3, y / a3);
     }

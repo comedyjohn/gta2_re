@@ -1118,8 +1118,8 @@ void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
     gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC + kZeroOnePoint_6F6484.y, gYCoord_6F63B8, &gTileVerts_6F65A8[0]);
     gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC + kZeroOnePoint_6F6484.y, gYCoord_6F63B8, &gTileVerts_6F65A8[1]);
 
-    rotation = Fix16::atan2_fixed_405320(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y),
-                                         Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
+    rotation =
+        Fix16::Atan2Fixed(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y), Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
 
     if (rotation < kAng135_6F6414 || rotation > kAng315_6F6420)
     {
@@ -1146,8 +1146,8 @@ void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
     gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC, gYCoord_6F63B8, &gTileVerts_6F65A8[0]);
     gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC, gYCoord_6F63B8, &gTileVerts_6F65A8[1]);
 
-    rotation = Fix16::atan2_fixed_405320(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y),
-                                         Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
+    rotation =
+        Fix16::Atan2Fixed(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y), Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
 
     if (rotation > kAng45_6F637C && rotation < kAng225_6F63EC)
     {
@@ -1179,8 +1179,8 @@ void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
     gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC, gYCoord_6F63B8, &gTileVerts_6F65A8[0]);
     gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC, gYCoord_6F63B8, &gTileVerts_6F65A8[1]);
 
-    angle = Fix16::atan2_fixed_405320(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y),
-                                      Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
+    angle =
+        Fix16::Atan2Fixed(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y), Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
 
     if (angle > kAng45_6F637C && angle < kAng225_6F63EC)
     {
@@ -1211,8 +1211,8 @@ void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
     gVertProjector2.ProjectVertTop_46BD40(gXCoord_6F63AC + kZeroOnePoint_6F6484.y, gYCoord_6F63B8, &gTileVerts_6F65A8[0]);
     gVertProjector2.ProjectVertBottom_46BDF0(gXCoord_6F63AC + kZeroOnePoint_6F6484.y, gYCoord_6F63B8, &gTileVerts_6F65A8[1]);
 
-    angle = Fix16::atan2_fixed_405320(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y),
-                                      Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
+    angle =
+        Fix16::Atan2Fixed(Fix16(gTileVerts_6F65A8[1].y - gTileVerts_6F65A8[0].y), Fix16(gTileVerts_6F65A8[1].x - gTileVerts_6F65A8[0].x));
 
     if (angle < kAng135_6F6414 || angle > kAng315_6F6420)
     {
@@ -2489,25 +2489,25 @@ void draw_4F3FB0(s32 arg)
     switch (arg & 0x60)
     {
         case 32: // rotation code 0
-            gUVCorner0_6F6580.SetXY_432860(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
-            gUVCorner1_6F6588.SetXY_432860(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
-            gUVCorner2_6F6590.SetXY_432860(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
-            gUVCorner3_6F6598.SetXY_432860(kTileTexMax_6F6578, kTileTexMax_6F6578);
+            gUVCorner0_6F6580.SetXY(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
+            gUVCorner1_6F6588.SetXY(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
+            gUVCorner2_6F6590.SetXY(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
+            gUVCorner3_6F6598.SetXY(kTileTexMax_6F6578, kTileTexMax_6F6578);
             break;
         case 96: // rotation code 2
-            gUVCorner0_6F6580.SetXY_432860(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
-            gUVCorner1_6F6588.SetXY_432860(kTileTexMax_6F6578, kTileTexMax_6F6578);
-            gUVCorner2_6F6590.SetXY_432860(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
-            gUVCorner3_6F6598.SetXY_432860(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
+            gUVCorner0_6F6580.SetXY(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
+            gUVCorner1_6F6588.SetXY(kTileTexMax_6F6578, kTileTexMax_6F6578);
+            gUVCorner2_6F6590.SetXY(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
+            gUVCorner3_6F6598.SetXY(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
             break;
         case 64: // rotation code 1
             arg ^= 0x18;
             [[fallthrough]];
         default: // rotation code 3
-            gUVCorner0_6F6580.SetXY_432860(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
-            gUVCorner1_6F6588.SetXY_432860(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
-            gUVCorner2_6F6590.SetXY_432860(kTileTexMax_6F6578, kTileTexMax_6F6578);
-            gUVCorner3_6F6598.SetXY_432860(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
+            gUVCorner0_6F6580.SetXY(kZeroOnePoint_6F6484.x, kZeroOnePoint_6F6484.x);
+            gUVCorner1_6F6588.SetXY(kTileTexMax_6F6578, kZeroOnePoint_6F6484.x);
+            gUVCorner2_6F6590.SetXY(kTileTexMax_6F6578, kTileTexMax_6F6578);
+            gUVCorner3_6F6598.SetXY(kZeroOnePoint_6F6484.x, kTileTexMax_6F6578);
             break;
     }
 

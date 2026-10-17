@@ -68,7 +68,7 @@ void Garage_48::ValidateParkCommand_534650()
     // The result is unused (the out-of-line Add_408660 on a const Fix16)
     {
         const Fix16 door_z(this->field_10_door->field_0_primary_door_data->field_6_z);
-        door_z.Add_408660(kFpEighth_6FCF60);
+        door_z.Add(kFpEighth_6FCF60);
     }
 
     if (gMap_0x370_6F6268->HasWallInArea_4E18A0(field_18_park_x_min.ToInt(),
@@ -143,57 +143,51 @@ u8 Garage_48::ParkCarAtDoor_534700(Car_BC* pCar, Door_38* pDoor)
         case 1:
             if (field_10_door->IsDoubleDoor_489600())
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x), Fix16(y) - w1 - dword_6FD124);
+                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x), Fix16(y) - w1 - dword_6FD124);
             }
             else
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x), Fix16(y) - w1);
+                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x), Fix16(y) - w1);
             }
-            (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))
-                ->SetXY_432860(Fix16(x) + dword_6FD124 + w2, Fix16(y) + w1 + dword_6FD124);
-            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY_432860(Fix16(x) - dword_6FD218, Fix16(y) + dword_6FCF98);
+            (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY(Fix16(x) + dword_6FD124 + w2, Fix16(y) + w1 + dword_6FD124);
+            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY(Fix16(x) - dword_6FD218, Fix16(y) + dword_6FCF98);
             break;
         case 2:
-            (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x) - w2, Fix16(y) - w1);
+            (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x) - w2, Fix16(y) - w1);
             if (field_10_door->IsDoubleDoor_489600())
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))
-                    ->SetXY_432860(Fix16(x) + dword_6FD124, Fix16(y) + w1 + kFpTwo_6FD128);
+                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY(Fix16(x) + dword_6FD124, Fix16(y) + w1 + kFpTwo_6FD128);
             }
             else
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))
-                    ->SetXY_432860(Fix16(x) + dword_6FD124, Fix16(y) + w1 + dword_6FD124);
+                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY(Fix16(x) + dword_6FD124, Fix16(y) + w1 + dword_6FD124);
             }
-            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))
-                ->SetXY_432860(Fix16(x) + dword_6FD124 + dword_6FD218, Fix16(y) + dword_6FCF98);
+            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY(Fix16(x) + dword_6FD124 + dword_6FD218, Fix16(y) + dword_6FCF98);
             break;
         case 3:
-            (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x) - w1, Fix16(y));
+            (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x) - w1, Fix16(y));
             if (field_10_door->IsDoubleDoor_489600())
             {
                 (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))
-                    ->SetXY_432860(Fix16(x) + kFpTwo_6FD128 + w1, Fix16(y) + w2 + dword_6FD124);
+                    ->SetXY(Fix16(x) + kFpTwo_6FD128 + w1, Fix16(y) + w2 + dword_6FD124);
             }
             else
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))
-                    ->SetXY_432860(Fix16(x) + dword_6FD124 + w1, Fix16(y) + w2 + dword_6FD124);
+                (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY(Fix16(x) + dword_6FD124 + w1, Fix16(y) + w2 + dword_6FD124);
             }
-            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY_432860(Fix16(x) + dword_6FCF98, Fix16(y) - dword_6FD218);
+            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY(Fix16(x) + dword_6FCF98, Fix16(y) - dword_6FD218);
             break;
         case 4:
             if (field_10_door->IsDoubleDoor_489600())
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x) - dword_6FD124 - w1, Fix16(y) - w2);
+                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x) - dword_6FD124 - w1, Fix16(y) - w2);
             }
             else
             {
-                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY_432860(Fix16(x) - w1, Fix16(y) - w2);
+                (reinterpret_cast<Fix16PointPOD*>(&field_18_park_x_min))->SetXY(Fix16(x) - w1, Fix16(y) - w2);
             }
-            (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY_432860(Fix16(x) + dword_6FD124 + w1, Fix16(y) + dword_6FD124);
-            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))
-                ->SetXY_432860(Fix16(x) + dword_6FCF98, Fix16(y) + dword_6FD124 + dword_6FD218);
+            (reinterpret_cast<Fix16PointPOD*>(&field_20_park_x_max))->SetXY(Fix16(x) + dword_6FD124 + w1, Fix16(y) + dword_6FD124);
+            (reinterpret_cast<Fix16PointPOD*>(&field_30_target_x))->SetXY(Fix16(x) + dword_6FCF98, Fix16(y) + dword_6FD124 + dword_6FD218);
             break;
         default:
             break;
@@ -276,9 +270,9 @@ void Garage_48::GaragesService_5349D0()
             field_0_parking_car->LockUnlessPermanent_475C10();
             field_0_parking_car->field_58_physics->StopMoving_4895D0();
 
-            car_pos.SetXY_432860(field_0_parking_car->GetX_41E430(), field_0_parking_car->GetY_41E440());
+            car_pos.SetXY(field_0_parking_car->GetX_41E430(), field_0_parking_car->GetY_41E440());
             SpriteShape_4C* pBox = field_0_parking_car->field_50_car_sprite->field_C_pCollisionShape;
-            field_28_push_dir = (pBox->field_C_corners[idx1] + pBox->field_C_corners[idx2]).Divide_442CB0(kFpTwo_6FD128) - car_pos;
+            field_28_push_dir = (pBox->field_C_corners[idx1] + pBox->field_C_corners[idx2]).Divide(kFpTwo_6FD128) - car_pos;
             if (field_28_push_dir.x == dword_6FD120 && field_28_push_dir.y == dword_6FD120)
             {
                 field_3D_in_position = 1;
@@ -286,7 +280,7 @@ void Garage_48::GaragesService_5349D0()
             }
             else
             {
-                field_28_push_dir = field_28_push_dir.NormalizeSafe_442AD0().Multiply_438FE0(dword_6FCF10);
+                field_28_push_dir = field_28_push_dir.NormalizeSafe().Multiply(dword_6FCF10);
             }
             field_0_parking_car->field_58_physics->ApplyForceScaledByMass_55F9A0(field_28_push_dir);
             field_C_state = 2;

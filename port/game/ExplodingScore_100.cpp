@@ -47,7 +47,7 @@ void ExplodingScorePool::PushScore_596890(Fix16 xpos, Fix16 ypos, Fix16 zpos, u3
 {
     if (this->field_2_free_scores == 0)
     {
-        ExplodingScore_50* pIter = field_4_pool.GetFirstUsed_4B8FD0();
+        ExplodingScore_50* pIter = field_4_pool.GetFirstUsed();
         while (pIter)
         {
             if (pIter->field_4C_score >= score)
@@ -84,7 +84,7 @@ void ExplodingScorePool::Update_596940()
 void ExplodingScorePool::DrawExplodingScores_5969E0()
 {
     // TODO: Would there have been an iterator object ??
-    ExplodingScore_50* pIter = field_4_pool.GetFirstUsed_4B8FD0();
+    ExplodingScore_50* pIter = field_4_pool.GetFirstUsed();
     while (pIter)
     {
         pIter->DrawNumbers_596C90();

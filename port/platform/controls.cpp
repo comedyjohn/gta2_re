@@ -135,7 +135,7 @@ void Spawn(int model)
     const s16 kTurns[] = {0, 180, -180, 360, -360, 540, -540, 720}; // eighths of a turn
     Fix16 dx;
     Fix16 dy;
-    Ang16::PolarToCartesian_41FC20(rotation, ahead, dx, dy);
+    Ang16::PolarToCartesian(rotation, ahead, dx, dy);
     Fix16 spawnX = x + dx;
     Fix16 spawnY = y + dy;
     bool found = false;
@@ -146,7 +146,7 @@ void Spawn(int model)
         {
             const s16 value = static_cast<s16>(rotation.rValue + turn);
             const Ang16 angle(value, 0);
-            Ang16::PolarToCartesian_41FC20(angle, dist, dx, dy);
+            Ang16::PolarToCartesian(angle, dist, dx, dy);
             const Fix16 cx = x + dx;
             const Fix16 cy = y + dy;
             if (gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(cx, cy) <= highest)

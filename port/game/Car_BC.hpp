@@ -861,7 +861,7 @@ class Car_BC
 
     void SetBottomLeftRoofLightDelta_421810()
     {
-        field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
+        field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15);
     }
 
     void SetBulletproof_4218C0()
@@ -947,29 +947,29 @@ class Car_BC
         if (HasPopupHeadlights_421700())
         {
             // clear the popup headlight door frames
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor1_11);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor2_12);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor3_13);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopRightDoor4_14);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor1_11);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor2_12);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor3_13);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopRightDoor4_14);
 
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor1_28);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor2_29);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor3_30);
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::TopLeftDoor4_31);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor1_28);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor2_29);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor3_30);
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::TopLeftDoor4_31);
         }
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontRightHeadlight_6); // clear left front headlight
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23); // clear right front headlight
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontRightHeadlight_6); // clear left front headlight
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::FrontLeftHeadlight_23); // clear right front headlight
         if (HasRoofLight_421660())
         {
-            field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15); // clear right siren light or roof light
+            field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BottomLeftRoofLight_15); // clear right siren light or roof light
         }
     }
 
     // 9.6f inline 0x421430
     void ClearBrakeLightDeltas_421430()
     {
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackRightBrakeLight_5); // clear left rear brake light
-        field_8_damaged_areas.clear_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22); // clear right rear brake light
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackRightBrakeLight_5); // clear left rear brake light
+        field_8_damaged_areas.ClearBit(CarDeltaBitsEnum::BackLeftBrakeLight_22); // clear right rear brake light
     }
 
     // 9.6f inline 0x4213D0
@@ -977,11 +977,11 @@ class Car_BC
     {
         if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopRightDamage_1)) // if not rear left damage
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackRightBrakeLight_5); // set left rear brake light
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackRightBrakeLight_5); // set left rear brake light
         }
         if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::TopLeftDamage_0)) // if not rear right damage
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BackLeftBrakeLight_22); // set right rear brake light
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BackLeftBrakeLight_22); // set right rear brake light
         }
     }
 
@@ -992,11 +992,11 @@ class Car_BC
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopRightDoor1_11); // set left rear door open/close frame 1 ????
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopRightDoor1_11); // set left rear door open/close frame 1 ????
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontRightHeadlight_6); // set left front headlight
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontRightHeadlight_6); // set left front headlight
             }
         }
 
@@ -1004,16 +1004,16 @@ class Car_BC
         {
             if (HasPopupHeadlights_421700())
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::TopLeftDoor1_28); // set right rear door open/close frame 1 ????
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::TopLeftDoor1_28); // set right rear door open/close frame 1 ????
             }
             else
             {
-                field_8_damaged_areas.set_bit(CarDeltaBitsEnum::FrontLeftHeadlight_23); // set right front headlight
+                field_8_damaged_areas.SetBit(CarDeltaBitsEnum::FrontLeftHeadlight_23); // set right front headlight
             }
         }
         if (HasRoofLight_421660())
         {
-            field_8_damaged_areas.set_bit(CarDeltaBitsEnum::BottomLeftRoofLight_15); // set right siren light or roof light
+            field_8_damaged_areas.SetBit(CarDeltaBitsEnum::BottomLeftRoofLight_15); // set right siren light or roof light
         }
     }
 

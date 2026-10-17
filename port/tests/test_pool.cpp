@@ -52,7 +52,7 @@ TEST_CASE("Pool keeps a used list, newest first")
     Item* a = pool.Allocate();
     Item* b = pool.Allocate();
     Item* c = pool.Allocate();
-    CHECK(pool.GetFirstUsed_4B8FD0() == c);
+    CHECK(pool.GetFirstUsed() == c);
     CHECK(c->mpNext == b);
     CHECK(b->mpNext == a);
     CHECK(a->mpNext == nullptr);
@@ -63,7 +63,7 @@ TEST_CASE("Pool::AllocateAppend adds at the end of the used list")
     Pool<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.AllocateAppend();
-    CHECK(pool.GetFirstUsed_4B8FD0() == a);
+    CHECK(pool.GetFirstUsed() == a);
     CHECK(a->mpNext == b);
     CHECK(b->mpNext == nullptr);
 }
@@ -77,7 +77,7 @@ TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the 
     b->remove = true;
     pool.UpdatePool();
     CHECK(pool.field_X_count == 3); // counted before removal
-    CHECK(pool.GetFirstUsed_4B8FD0() == c);
+    CHECK(pool.GetFirstUsed() == c);
     CHECK(c->mpNext == a);
     CHECK(b->deallocations == 1);
     CHECK(pool.Allocate() == b); // back on the free list

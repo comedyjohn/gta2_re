@@ -375,7 +375,7 @@ bool InputDevices_1::game_pad_read_498D20()
         {
             sprintf(gTmpBuffer_67C598,
                     "%d: num_items = %d jres = %d",
-                    gpRng_67AB34->get_cur_rng_41CFE0(),
+                    gpRng_67AB34->GetCurRng(),
                     static_cast<s32>(num_items),
                     static_cast<s32>(jres));
         }
@@ -431,7 +431,7 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
                 {
                     sprintf(gTmpBuffer_67C598,
                             "%d: input num_items = %d dwOfs = %d; data = %d",
-                            gpRng_67AB34->get_cur_rng_41CFE0(),
+                            gpRng_67AB34->GetCurRng(),
                             static_cast<s32>(padItems),
                             gGamePadDeviceData_67B5B0.dwOfs,
                             gGamePadDeviceData_67B5B0.dwData);
@@ -606,14 +606,14 @@ void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
                     {
                         sprintf(gTmpBuffer_67C598,
                                 "%d: KEY OFF: %d",
-                                gpRng_67AB34->get_cur_rng_41CFE0(),
+                                gpRng_67AB34->GetCurRng(),
                                 static_cast<s32>(gKeyboardDeviceData_67B610.dwOfs));
                     }
                     else
                     {
                         sprintf(gTmpBuffer_67C598,
                                 "%d: KEY ON : %d",
-                                gpRng_67AB34->get_cur_rng_41CFE0(),
+                                gpRng_67AB34->GetCurRng(),
                                 static_cast<s32>(gKeyboardDeviceData_67B610.dwOfs));
                     }
                 }
@@ -679,8 +679,8 @@ void InputRecorder_67F8B0::save_replay_record_4CDE20(u32 inputs)
         if (field_75340_rec_buf_idx < k_max_records && field_38_replay_state == ReplayState::Live_0)
         {
             field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs = inputs;
-            field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx = gpRng_67AB34->get_cur_rng_41CFE0();
-            field_3C_rec_buff[field_75340_rec_buf_idx].field_8_rng_rnd = gpRng_67AB34->get_rnd_45F9E0();
+            field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx = gpRng_67AB34->GetCurRng();
+            field_3C_rec_buff[field_75340_rec_buf_idx].field_8_rng_rnd = gpRng_67AB34->GetRnd();
 
             if (bConstant_replay_save_67D5C4 == 1)
             {
@@ -1042,8 +1042,8 @@ void SavePortRecord(InputRecorder_67F8B0& rec, u32 inputs)
     {
         InputRecord_C& r = rec.field_3C_rec_buff[rec.field_75340_rec_buf_idx];
         r.field_4_inputs = inputs;
-        r.field_0_rng_idx = gpRng_67AB34->get_cur_rng_41CFE0();
-        r.field_8_rng_rnd = gpRng_67AB34->get_rnd_45F9E0();
+        r.field_0_rng_idx = gpRng_67AB34->GetCurRng();
+        r.field_8_rng_rnd = gpRng_67AB34->GetRnd();
         if (bConstant_replay_save_67D5C4 == 1)
         {
             u32 rec_len = sizeof(InputRecord_C);
@@ -1118,8 +1118,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
     switch (replay_state)
     {
         case ReplayState::Playback_1:
-            if (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) >=
-                static_cast<u32>(field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx))
+            if (static_cast<u32>(gpRng_67AB34->GetCurRng()) >= static_cast<u32>(field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx))
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;
@@ -1166,8 +1165,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
             break;
 
         case ReplayState::Attract_3:
-            if (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) >=
-                static_cast<u32>(field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx))
+            if (static_cast<u32>(gpRng_67AB34->GetCurRng()) >= static_cast<u32>(field_3C_rec_buff[field_75340_rec_buf_idx].field_0_rng_idx))
             {
                 inputs = field_3C_rec_buff[field_75340_rec_buf_idx].field_4_inputs;
                 field_75340_rec_buf_idx++;
@@ -1241,7 +1239,7 @@ u32 InputRecorder_67F8B0::get_input_bits_4CEAC0()
     {
         if (*control_status != saved_input)
         {
-            sprintf(gTmpBuffer_67C598, "%d: control_status = %d", gpRng_67AB34->get_cur_rng_41CFE0(), *control_status);
+            sprintf(gTmpBuffer_67C598, "%d: control_status = %d", gpRng_67AB34->GetCurRng(), *control_status);
             gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         }
     }

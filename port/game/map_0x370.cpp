@@ -226,7 +226,7 @@ gmp_block_info* Map_0x370::get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord)
 s8 gmp_map_zone::IsZoneVisibleToAnyPlayer_4DEF40()
 {
     Fix16Rect zoneBounds;
-    zoneBounds.SetFromPosSize_463710(field_1_x, field_2_y, field_3_w, field_4_h);
+    zoneBounds.SetFromPosSize(field_1_x, field_2_y, field_3_w, field_4_h);
     return gGame_0x40_67E008->IsRectVisibleToAnyPlayer_4B9B10(&zoneBounds);
 }
 
@@ -352,7 +352,7 @@ gmp_map_zone* Map_0x370::GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_t
         if (pZone->field_0_zone_type == zone_type && !pZone->IsZoneVisibleToAnyPlayer_4DEF40())
         {
             Fix16 dist;
-            dist = Fix16::MaxAbsDistance_42A6B0(Fix16(pZone->field_1_x), Fix16(pZone->field_2_y), Fix16(xpos), Fix16(ypos));
+            dist = Fix16::MaxAbsDistance(Fix16(pZone->field_1_x), Fix16(pZone->field_2_y), Fix16(xpos), Fix16(ypos));
 
             if (dist < nearest_dist)
             {
@@ -723,8 +723,8 @@ void Map_0x370::SpawnMapObjects_4DFB90()
     gmp_map_object* pMapObjects = field_338_pMapObjects;
     for (u32 i = 0; i < this->field_344_map_object_count; i++, ++pMapObjects)
     {
-        Fix16 x_pos = Fix16::ctor_462ED0(pMapObjects->field_0_x);
-        Fix16 y_pos = Fix16::ctor_462ED0(pMapObjects->field_2_y);
+        Fix16 x_pos = Fix16::Ctor(pMapObjects->field_0_x);
+        Fix16 y_pos = Fix16::Ctor(pMapObjects->field_2_y);
 
         Ang16 rotation = pMapObjects->field_4_rotation.convert_to_ang16();
         rotation.Normalize();
@@ -760,10 +760,10 @@ void Map_0x370::update_lights_4DFCD0()
 
     for (u32 light_idx = 0; light_idx < field_348_num_lights; light_idx++, ++pMapLight)
     {
-        Fix16 xpos = Fix16::ctor_462ED0(pMapLight->field_4_x);
-        Fix16 ypos = Fix16::ctor_462ED0(pMapLight->field_6_y);
-        Fix16 zpos = Fix16::ctor_462ED0(pMapLight->field_8_z);
-        Fix16 radius = Fix16::ctor_462ED0(pMapLight->field_A_radius);
+        Fix16 xpos = Fix16::Ctor(pMapLight->field_4_x);
+        Fix16 ypos = Fix16::Ctor(pMapLight->field_6_y);
+        Fix16 zpos = Fix16::Ctor(pMapLight->field_8_z);
+        Fix16 radius = Fix16::Ctor(pMapLight->field_A_radius);
 
         if (radius == kFpEight_6F6130)
         {
@@ -1640,9 +1640,9 @@ char_type Map_0x370::RectHitsDiagonalWall_4E11E0(Fix16Rect* pRect)
     Fix16Point p1;
     Fix16Point p2;
 
-    pRect->DoSetCurrentRect_59DD60();
+    pRect->DoSetCurrentRect();
 
-    s32 z_calc = pRect->GetMidZ_463760();
+    s32 z_calc = pRect->GetMidZ();
 
     for (s32 y_count = gSpriteGrid_top_6F6108; y_count <= gSpriteGrid_bottom_6F5F38; y_count++)
     {
@@ -2402,16 +2402,16 @@ bool Map_0x370::sub_4E4770(Fix16 z_pos)
 // 0x4E4820
 char_type Map_0x370::sub_4E4820(Fix16Rect* pRect, u8 slope_type)
 {
-    s32 left = Fix16::Round_To_Int_410BF0(pRect->get_left_45ADB0());
-    s32 right = Fix16::Round_To_Int_410BF0(pRect->get_right_45ADA0());
-    s32 top = Fix16::Round_To_Int_410BF0(pRect->get_top_45ADD0());
-    s32 bottom = Fix16::Round_To_Int_410BF0(pRect->get_bottom_45ADC0());
+    s32 left = Fix16::RoundToInt(pRect->GetLeft());
+    s32 right = Fix16::RoundToInt(pRect->GetRight());
+    s32 top = Fix16::RoundToInt(pRect->GetTop());
+    s32 bottom = Fix16::RoundToInt(pRect->GetBottom());
 
     for (s32 y = top; y <= bottom; y++)
     {
         for (s32 x = left; x <= right; x++)
         {
-            gBlockInfo0_6F5EB0 = get_block_4DFE10(x, y, pRect->get_low_z_4637A0().ToInt());
+            gBlockInfo0_6F5EB0 = get_block_4DFE10(x, y, pRect->GetLowZ().ToInt());
             switch (slope_type)
             {
                 case 0:
@@ -2967,8 +2967,8 @@ namespace
 {
 inline void PolarToCartesianByVal(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2)
 {
-    ret1 = Ang16::sine_40F500(angle) * radius;
-    ret2 = Ang16::cosine_40F520(angle) * radius;
+    ret1 = Ang16::Sine(angle) * radius;
+    ret2 = Ang16::Cosine(angle) * radius;
 }
 } // namespace
 
@@ -2984,10 +2984,10 @@ char_type Map_0x370::sub_4E5640(Fix16 width, Fix16 height, Fix16 depth, Fix16 x_
 
     gCollisionTarget_679188.Reset_4637B0();
 
-    angle = Fix16::atan2_fixed_405320(y_2 - y_1, x_2 - x_1);
+    angle = Fix16::Atan2Fixed(y_2 - y_1, x_2 - x_1);
 
     Fix16 distance;
-    distance = pos_diff.GetLength_41E260();
+    distance = pos_diff.GetLength();
     pObjSprt->set_xyz_lazy_420600(x_1, y_1, z_1);
     pObjSprt->set_ang_lazy_420690(angle);
     pObjSprt->AllocCollisionShape_59F950(width, height, depth);
@@ -3223,7 +3223,7 @@ void Map_0x370::sub_4E5D10(Fix16* pX, Fix16* pY, Fix16 dist, s32 direction)
 Fix16 Map_0x370::sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle)
 {
     Fix16 result = kFpZero_6F610C;
-    switch (Ang16::GetAngleFace_4F78F0(angle))
+    switch (Ang16::GetAngleFace(angle))
     {
         case 1:
             result = x.GetFracValue();
@@ -3247,7 +3247,7 @@ Fix16 Map_0x370::sub_4E5D70(Fix16 x, Fix16 y, Ang16 angle)
 Fix16 Map_0x370::sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle)
 {
     Fix16 result = kFpZero_6F610C;
-    switch (Ang16::GetAngleFace_4F78F0(angle))
+    switch (Ang16::GetAngleFace(angle))
     {
         case 1:
             result = y.GetFracValue();
@@ -3661,11 +3661,11 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
             // the constant 1 in ebx for the pushes instead.
             pPrev = pBlock;
             sub_4E65A0(x, y, &z, 1, 1);
-            sub_4E5D10(&x,
-                       &y,
-                       kFpOne_6F6110 - to_edge,
-                       Ang16::GetAngleFace_4F78F0(
-                           Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized_406C20()));
+            sub_4E5D10(
+                &x,
+                &y,
+                kFpOne_6F6110 - to_edge,
+                Ang16::GetAngleFace(Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized()));
             dist += kFpOne_6F6110 - to_edge;
             gmp_block_info* pNext = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
             if (pNext && (pNext->field_B_slope_type & 0xFC) == 0xFC)
@@ -3706,11 +3706,11 @@ s32 Map_0x370::sub_4E6660(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 pPrev = pBlock;
                 Fix16 to_edge;
                 to_edge = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-                sub_4E5D10(&x,
-                           &y,
-                           kFpOne_6F6110 - to_edge,
-                           Ang16::GetAngleFace_4F78F0(
-                               Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized_406C20()));
+                sub_4E5D10(
+                    &x,
+                    &y,
+                    kFpOne_6F6110 - to_edge,
+                    Ang16::GetAngleFace(Ang16(ReturnAngleFromRoadDirection_4F7940(&direction).rValue + word_6F603E.rValue).Normalized()));
                 dist += kFpOne_6F6110 - to_edge;
                 SetRoadBlockAt_4E6660(pBlock, x, y, z);
                 if (pBlock != pPrev)
@@ -3863,10 +3863,7 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
         {
             sub_4E65A0(x, y, &z, 0, 1);
             pPrev = pBlock;
-            sub_4E5D10(&x,
-                       &y,
-                       kFpOne_6F6110 - to_edge,
-                       Ang16::GetAngleFace_4F78F0(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
+            sub_4E5D10(&x, &y, kFpOne_6F6110 - to_edge, Ang16::GetAngleFace(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
             dist += kFpOne_6F6110 - to_edge;
             gmp_block_info* pNext = GetRoadBlockAtOrNull_4E7190(x, y, z);
             if (!pNext || !HasGreenArrowForPathDirection_4E5E90(pNext, direction, 0))
@@ -3916,14 +3913,11 @@ s32 Map_0x370::sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist)
                 pPrev = pBlock;
                 Fix16 to_edge;
                 to_edge = sub_4E5E00(x, y, ReturnAngleFromRoadDirection_4F7940(&direction));
-                sub_4E5D10(&x,
-                           &y,
-                           kFpOne_6F6110,
-                           Ang16::GetAngleFace_4F78F0(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
+                sub_4E5D10(&x, &y, kFpOne_6F6110, Ang16::GetAngleFace(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
                 sub_4E5D10(&x,
                            &y,
                            kFpOne_6F6110 - to_edge,
-                           Ang16::GetAngleFace_4F78F0(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
+                           Ang16::GetAngleFace(ReturnAngleFromRoadDirection_4F7940(&direction) + word_6F603E));
                 dist += kFpOne_6F6110 + kFpOne_6F6110 - to_edge;
                 z = last_z;
                 SetRoadBlockAt_4E6660(pBlock, x, y, z);
@@ -4508,7 +4502,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
     u16 zonesSize = field_328_pZoneData ? num_zones : 0;
     if (zonesSize)
     {
-        field_330_pZoneArray = static_cast<u8*>(Memory::malloc_4FE4D0(zonesSize));
+        field_330_pZoneArray = static_cast<u8*>(Memory::Malloc(zonesSize));
     }
 
     for (u16 zoneIdx = 0; zoneIdx < zonesSize; zoneIdx++)
@@ -4544,7 +4538,7 @@ void Map_0x370::do_process_loaded_zone_data_4E8E30()
     }
 
     s32 zoneCount = zone_count + 1;
-    auto* pZoneInfo = static_cast<gmp_zone_info*>(Memory::malloc_4FE4D0(sizeof(gmp_zone_info) * zoneCount));
+    auto* pZoneInfo = static_cast<gmp_zone_info*>(Memory::Malloc(sizeof(gmp_zone_info) * zoneCount));
     field_334_pUnknownZoneData = pZoneInfo;
     s32 t = 0;
     do
@@ -4580,7 +4574,7 @@ void Map_0x370::build_zone_list_4E90E0(u32 chunk_size)
         in_use_size += zone_data_size;
         pZone = reinterpret_cast<gmp_map_zone*>(reinterpret_cast<u8*>(pZone) + zone_data_size);
     }
-    field_32C_pZones = static_cast<gmp_zone_list*>(Memory::malloc_4FE4D0(GMP_ZONE_LIST_SIZE(num_zones)));
+    field_32C_pZones = static_cast<gmp_zone_list*>(Memory::Malloc(GMP_ZONE_LIST_SIZE(num_zones)));
 
     in_use_size = 0;
     field_32C_pZones->field_0_num_zones = num_zones;
@@ -4612,7 +4606,7 @@ void Map_0x370::AddTileAnimations_4E9160(s32 size)
 // 0x4E91A0
 void Map_0x370::load_mobj_4E91A0(size_t len)
 {
-    auto* pData = static_cast<gmp_map_object*>(Memory::malloc_4FE4D0(len));
+    auto* pData = static_cast<gmp_map_object*>(Memory::Malloc(len));
     field_338_pMapObjects = pData;
     File::Global_Read_4A71C0(pData, len);
     field_344_map_object_count = len / 6;
@@ -4625,7 +4619,7 @@ void Map_0x370::load_mobj_4E91A0(size_t len)
 // 0x4E9200
 void Map_0x370::load_lght_4E9200(size_t size)
 {
-    auto* pData = static_cast<gmp_map_light*>(Memory::malloc_4FE4D0(size));
+    auto* pData = static_cast<gmp_map_light*>(Memory::Malloc(size));
     field_33C_pLightData = pData;
     File::Global_Read_4A71C0(pData, size);
     field_348_num_lights = size >> 4;
@@ -4638,7 +4632,7 @@ void Map_0x370::load_lght_4E9200(size_t size)
 // 0x4E9250
 void Map_0x370::load_zone_4E9250(size_t size)
 {
-    auto* pData = static_cast<gmp_map_zone*>(Memory::malloc_4FE4D0(size));
+    auto* pData = static_cast<gmp_map_zone*>(Memory::Malloc(size));
     field_328_pZoneData = pData;
     File::Global_Read_4A71C0(pData, size);
     build_zone_list_4E90E0(size);
@@ -4647,7 +4641,7 @@ void Map_0x370::load_zone_4E9250(size_t size)
 // 0x4E9280
 void Map_0x370::load_anim_4E9280(size_t size)
 {
-    auto* pAlloc = static_cast<gmp_tile_animation*>(Memory::malloc_4FE4D0(size));
+    auto* pAlloc = static_cast<gmp_tile_animation*>(Memory::Malloc(size));
     field_340_pTileAnimData = pAlloc;
     File::Global_Read_4A71C0(pAlloc, size);
     AddTileAnimations_4E9160(size);
@@ -4678,7 +4672,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     u32 m_size = field_35C_column_word_extra * sizeof(DWORD);
     u32 column_data_size = field_0_pDmap->field_40000_column_words * sizeof(DWORD);
 
-    field_0_pDmap->field_40008_pColumn = static_cast<gmp_column_word*>(Memory::malloc_4FE4D0(m_size));
+    field_0_pDmap->field_40008_pColumn = static_cast<gmp_column_word*>(Memory::Malloc(m_size));
 
     File::Global_Read_4A71C0(field_0_pDmap->field_40008_pColumn, column_data_size);
 
@@ -4699,7 +4693,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     u32 m_size2 = field_350_num_blocks_extra * sizeof(gmp_block_info);
     u32 block_info_size = field_0_pDmap->field_40004_num_blocks * sizeof(gmp_block_info);
 
-    field_0_pDmap->field_4000C_block = static_cast<gmp_block_info*>(Memory::malloc_4FE4D0(m_size2));
+    field_0_pDmap->field_4000C_block = static_cast<gmp_block_info*>(Memory::Malloc(m_size2));
 
     File::Global_Read_4A71C0(field_0_pDmap->field_4000C_block, block_info_size);
 

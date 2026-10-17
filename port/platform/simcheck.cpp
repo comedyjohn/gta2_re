@@ -52,13 +52,13 @@ SimcheckHashes port_simcheck_hashes()
     for (s32 v = 0; v < (1 << 24); v += 37)
     {
         Fix16 f(v, 0);
-        maths.Add(Fix16::SquareRoot_436A70(f).mValue);
+        maths.Add(Fix16::SquareRoot(f).mValue);
     }
     for (s32 y = -40000; y <= 40000; y += 997)
     {
         for (s32 x = -40000; x <= 40000; x += 1009)
         {
-            maths.Add(Fix16::atan2_fixed_405320(Fix16(y, 0), Fix16(x, 0)).rValue);
+            maths.Add(Fix16::Atan2Fixed(Fix16(y, 0), Fix16(x, 0)).rValue);
         }
     }
 

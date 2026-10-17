@@ -221,10 +221,10 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
                         return;
                     }
 
-                    if (Fix16::MaxAbsDistance_42A6B0(field_4_ped->get_cam_x(),
-                                                     field_4_ped->get_cam_y(),
-                                                     field_0_car->field_50_car_sprite->field_14_xy.x,
-                                                     field_0_car->field_50_car_sprite->field_14_xy.y) > dword_706148)
+                    if (Fix16::MaxAbsDistance(field_4_ped->get_cam_x(),
+                                              field_4_ped->get_cam_y(),
+                                              field_0_car->field_50_car_sprite->field_14_xy.x,
+                                              field_0_car->field_50_car_sprite->field_14_xy.y) > dword_706148)
                     {
                         bCarGone = 1;
                     }

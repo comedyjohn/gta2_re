@@ -265,9 +265,9 @@ void PlayerScoreTracker_36C::Service_591C70()
     }
 
     // Handle the previous LABEL_63 section
-    const s32 cur_rng = gpRng_67AB34->get_cur_rng_41CFE0();
+    const s32 cur_rng = gpRng_67AB34->GetCurRng();
 
-    if (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0() - field_70_last_car_kill_time) > 15)
+    if (static_cast<u32>(gpRng_67AB34->GetCurRng() - field_70_last_car_kill_time) > 15)
     {
         field_74_car_kill_combo = 1;
     }
@@ -472,7 +472,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                                                killer_car_model,
                                                pZone);
 
-    s32 rng = gpRng_67AB34->get_cur_rng_41CFE0();
+    s32 rng = gpRng_67AB34->GetCurRng();
     if (static_cast<u32>(rng - field_78_last_kill_time) > 15)
     {
         field_7C_execution_count = 1;
@@ -852,12 +852,12 @@ void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pK
         }
     }
 
-    s32 cur_rng = gpRng_67AB34->get_cur_rng_41CFE0();
+    s32 cur_rng = gpRng_67AB34->GetCurRng();
     if (pCar->IsFireTruck_4118F0() || pCar->IsCopCar_421790() || pCar->IsMediCar_421780() || pCar->IsSwatVan_4217A0() ||
         pCar->IsFbiCar_411920())
     {
 
-        if (static_cast<unsigned int>(gpRng_67AB34->get_cur_rng_41CFE0() - field_1A0_last_emergency_car_kill_time) > 150)
+        if (static_cast<unsigned int>(gpRng_67AB34->GetCurRng() - field_1A0_last_emergency_car_kill_time) > 150)
         {
             field_1A4_killed_cars_flags = emergency_car_kill_flag::none_0;
         }

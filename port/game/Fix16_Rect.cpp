@@ -7,7 +7,7 @@ DEFINE_GLOBAL_INIT(Fix16, kSmallWidthEpslion_703450, Fix16(0xCCC, 0), 0x703450);
 DEFINE_GLOBAL_INIT(Fix16, kCollisionPrismHalfHeight_6771E4, Fix16(0x800, 0), 0x6771E4);
 
 // 0x4E6280
-void Fix16Rect::MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
+void Fix16Rect::MakeRect(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
 {
     field_0_left = x;
     field_8_top = y;
@@ -16,7 +16,7 @@ void Fix16Rect::MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h)
 }
 
 // 0x59dd60
-void Fix16Rect::DoSetCurrentRect_59DD60()
+void Fix16Rect::DoSetCurrentRect()
 {
     gSpriteGrid_left_6F5FD4 = field_0_left.ToInt();
     gSpriteGrid_right_6F5B80 = field_4_right.ToInt();
@@ -26,18 +26,17 @@ void Fix16Rect::DoSetCurrentRect_59DD60()
 
 // 0x4BA6C0 9.6f
 // 0x59ddf0
-bool Fix16Rect::IntersectsSpriteRenderingRect_59DDF0(Sprite* pSprite)
+bool Fix16Rect::IntersectsSpriteRenderingRect(Sprite* pSprite)
 {
     Fix16Point* pCorners = pSprite->field_C_pCollisionShape->field_C_corners;
 
-    return (IsPointInRect_4B9FD0(&pCorners[0]) || IsPointInRect_4B9FD0(&pCorners[1]) || IsPointInRect_4B9FD0(&pCorners[2]) ||
-            IsPointInRect_4B9FD0(&pCorners[3]));
+    return (IsPointInRect(&pCorners[0]) || IsPointInRect(&pCorners[1]) || IsPointInRect(&pCorners[2]) || IsPointInRect(&pCorners[3]));
 }
 
 // 0x59de80
-char_type Fix16Rect::CanRectEnterMovementRegion_59DE80()
+char_type Fix16Rect::CanRectEnterMovementRegion()
 {
-    DoSetCurrentRect_59DD60();
+    DoSetCurrentRect();
     s32 x = ((this->field_0_left + this->field_4_right) / 2).ToInt();
     s32 y = ((this->field_8_top + this->field_C_bottom) / 2).ToInt();
     s32 z = ((this->field_10_low_z + this->field_14_high_z) / 2).ToInt();
@@ -45,7 +44,7 @@ char_type Fix16Rect::CanRectEnterMovementRegion_59DE80()
 }
 
 // 0x59dee0
-void Fix16Rect::ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y)
+void Fix16Rect::ExpandToIncludePoint(Fix16 x, Fix16 y)
 {
     if (x < field_0_left)
     {
@@ -73,7 +72,7 @@ void Fix16Rect::ExpandToIncludePoint_59DEE0(Fix16 x, Fix16 y)
 }
 
 // 0x59df20
-bool Fix16Rect::RectOverlapsZone_59DF20(u8 zone_type)
+bool Fix16Rect::RectOverlapsZone(u8 zone_type)
 {
     u8 zone_y = field_8_top.ToUInt8();
     u8 zone_x;
@@ -95,7 +94,7 @@ bool Fix16Rect::RectOverlapsZone_59DF20(u8 zone_type)
 }
 
 // 0x59dfb0
-bool Fix16Rect::EveryTileMatchesArrowType_59DFB0(s32 arrow_type)
+bool Fix16Rect::EveryTileMatchesArrowType(s32 arrow_type)
 {
     u8 y_pos = field_8_top.ToUInt8();
     u8 x_pos;
@@ -149,7 +148,7 @@ bool Fix16Rect::EveryTileMatchesArrowType_59DFB0(s32 arrow_type)
 }
 
 // 0x5A5E30
-void Fix16Rect::SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
+void Fix16Rect::SetRectOutOfLine(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
 {
     this->field_0_left = left;
     this->field_4_right = right;

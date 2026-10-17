@@ -372,7 +372,7 @@ void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
         }
     }
 
-    field_13350_pStringTbl = reinterpret_cast<str_table_normalized*>(Memory::malloc_4FE4D0(sizeof(str_table_normalized)));
+    field_13350_pStringTbl = reinterpret_cast<str_table_normalized*>(Memory::Malloc(sizeof(str_table_normalized)));
     memset(field_13350_pStringTbl, 0, sizeof(str_table_normalized));
 
     str_table_entry* pStringDataIter2 = field_1334C_strings;
@@ -862,7 +862,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
             miss2_0x11C_Pool_6F8064 = new miss2_0x11C_Pool();
         }
     }
-    field_1334C_strings = static_cast<str_table_entry*>(Memory::malloc_4FE4D0(0x1400U));
+    field_1334C_strings = static_cast<str_table_entry*>(Memory::Malloc(0x1400U));
     memset(field_35C_full_scr_file_name, 0, sizeof(field_35C_full_scr_file_name));
     memset(field_334C_script_data, 0, sizeof(field_334C_script_data));
     memset(field_46C_base_pointers, 0, sizeof(field_46C_base_pointers));

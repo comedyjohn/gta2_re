@@ -16,7 +16,7 @@ class Fix16
 {
   public:
     // 9.6f func
-    static s32 Round_To_Int_410BF0(const Fix16& a1)
+    static s32 RoundToInt(const Fix16& a1)
     {
         s32 v = a1.mValue;
         return (v + 0x2000) >> 14;
@@ -239,7 +239,7 @@ class Fix16
         return -input;
     }
 
-    Fix16 ZeroIfNegligible_482730()
+    Fix16 ZeroIfNegligible()
     {
         if (Fix16::Abs(*this) < dword_6F8CF0)
         {
@@ -271,13 +271,13 @@ class Fix16
     }
 
     //  inline sub_4B9E10 in 9.6f
-    static bool IsBetween_4B9E10(Fix16& min, Fix16& max, Fix16& input)
+    static bool IsBetween(Fix16& min, Fix16& max, Fix16& input)
     {
         return input >= min && input <= max;
     }
 
     //  inline sub_462ED0 in 9.6f
-    static Fix16 ctor_462ED0(s16 a1)
+    static Fix16 Ctor(s16 a1)
     {
         return Fix16(a1 << 7, 0);
     }
@@ -305,38 +305,22 @@ class Fix16
         return Fix16(sqrt(value));
     }
 
-    static Fix16 Max_44E540(const Fix16& pLhs, const Fix16& pRhs);
-    // 9.6f 0x41E130, out-of-line copy Max_44E540. Small functions inline it (Ped_List_4::FindClosestActivePed_471340),
-    // and as a site after the two Abs it sets their nested budget in MaxAbsDistance_42A6B0
-    static Fix16 Max_41E130(const Fix16& a, const Fix16& b)
-    {
-        if (a > b)
-        {
-            return a;
-        }
-        else
-        {
-            return b;
-        }
-    }
-    static Fix16 Abs_436A50(const Fix16& input);
-    static Fix16 SquareRoot_436A70(const Fix16& a2) throw();
     // throw(): the original calls these out-of-line copies without an EH frame (their inline
     // bodies were visible there), see CarPhysics_B0::UpdateReferencePoint_563460
     // Out-of-line copy of operator+ (0x408660)
-    Fix16 Add_408660(const Fix16& rhs) const throw();
-    Fix16 Multiply_408680(const Fix16& in) const throw();
+    Fix16 Add(const Fix16& rhs) const throw();
+    Fix16 Multiply(const Fix16& in) const throw();
     // Out-of-line copies of operators, which big functions call once they run out of inline
     // expansions (SpriteShape_4C::DrawCollisionBox_5A4DA0)
-    Fix16 Subtract_436A00(const Fix16& in) const;
-    Fix16 Divide_436A20(const Fix16& in) const;
-    s32 IsLess_451670(const Fix16& other) const;
-    s32 IsGreater_451690(const Fix16& other) const;
-    Fix16& DivideAssign_539F90(const Fix16& rhs);
-    Fix16 MultiplyInt_561DB0(const s32& in) const;
-    Fix16 DivideInt_53E860(const s32& in) const;
-    Fix16& MultiplyAssign_562430(const Fix16& rhs);
-    Fix16 Negate_4086A0() const throw();
+    Fix16 Subtract(const Fix16& in) const;
+    Fix16 Divide(const Fix16& in) const;
+    s32 IsLess(const Fix16& other) const;
+    s32 IsGreater(const Fix16& other) const;
+    Fix16& DivideAssign(const Fix16& rhs);
+    Fix16 MultiplyInt(const s32& in) const;
+    Fix16 DivideInt(const s32& in) const;
+    Fix16& MultiplyAssign(const Fix16& rhs);
+    Fix16 Negated() const throw();
 
     // 0x436A20
     Fix16 operator/(const Fix16& in) const
@@ -354,17 +338,17 @@ class Fix16
         return Fix16(value, 0);
     }
 
-    s32 get_value_4754D0() const
+    s32 GetValue() const
     {
         return mValue;
     }
 
-    s32 GetRaw_40F4B0() const
+    s32 GetRaw() const
     {
         return mValue;
     }
 
-    Fix16 ApplyDeadZone_482730(Fix16 to_abs)
+    Fix16 ApplyDeadZone(Fix16 to_abs)
     {
         if (!(Fix16::Abs(to_abs) < kFP16One256th_6FE07C))
         {
@@ -376,19 +360,19 @@ class Fix16
         }
     }
 
-    static Fix16 MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
+    static Fix16 MaxAbsDistance(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
     {
         Fix16 diff_x;
         diff_x = x2 - x1;
         Fix16 diff_y;
         diff_y = y2 - y1;
         Fix16 result;
-        result = Fix16::Max_41E130(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
+        result = Fix16::Max(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
         return result;
     }
 
     // NOTE: 10.5 function - matched but inlined
-    static Fix16 ClampToRangeFlexible_55EEE0(const Fix16& a2, const Fix16& a3, const Fix16& a4)
+    static Fix16 ClampToRangeFlexible(const Fix16& a2, const Fix16& a3, const Fix16& a4)
     {
         if (a2 > a3)
         {
@@ -414,13 +398,13 @@ class Fix16
         }
     }
 
-    Fix16* subtract_one_491F00()
+    Fix16* SubtractOne()
     {
         mValue -= 0x4000;
         return this;
     }
 
-    Fix16* add_one_491EF0()
+    Fix16* AddOne()
     {
         mValue += 0x4000;
         return this;
@@ -438,20 +422,20 @@ class Fix16
         return Fix16(mValue + 0x4000, 0);
     }
 
-    static class Ang16 atan2_fixed_405320(const Fix16& y, const Fix16& x);
+    static class Ang16 Atan2Fixed(const Fix16& y, const Fix16& x);
 
     s32 mValue;
 };
 
-bool IntervalIntersectsRange_438FB0(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax);
+bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax);
 
 class Ang16;
-Ang16 ArcTanLookup_405500(const Fix16& targetTan);
+Ang16 ArcTanLookup(const Fix16& targetTan);
 
-void FindMinMax_5A57E0(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
+void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
 
-Fix16 sub_405DA0(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
-s32 sub_405E80(Fix16* pTarget, Fix16* pCur);
+Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
+s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur);
 EXTERN_GLOBAL_ARRAY(Fix16, gSin_table_667A80, 1440);
 EXTERN_GLOBAL_ARRAY(Fix16, gCos_table_669260, 1440);
 

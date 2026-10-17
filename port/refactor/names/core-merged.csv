@@ -1,0 +1,7 @@
+old,into,why
+Fix16::Max_41E130,Fix16::Max,"inline copy kept for VC6's inline budget; same result"
+Fix16::Max_44E540,Fix16::Max,"out-of-line copy kept for VC6; same result"
+Fix16::Abs_436A50,Fix16::Abs,"out-of-line copy kept for VC6; same result"
+Fix16::SquareRoot_436A70,Fix16::SquareRoot,"out-of-line copy kept for VC6; same result"
+Fix16_Point::IsNull_420360,Fix16Point::IsNull,"compared with a per-TU copy of the zero constant (all are 0)"
+Fix16::Negate_4086A0,Fix16::Negated,"renamed (not a duplicate of the mutating Negate)"

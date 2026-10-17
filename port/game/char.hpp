@@ -236,7 +236,7 @@ class Char_B4
 
     void sub_4923D0()
     {
-        field_40_rotation.SnapToAng4_405640();
+        field_40_rotation.SnapToAng4();
         field_40_rotation += word_6FD940;
         field_10_char_state = 9;
         field_46_timer = 10;
@@ -244,7 +244,7 @@ class Char_B4
 
     void sub_4923A0()
     {
-        field_40_rotation.SnapToAng4_405640();
+        field_40_rotation.SnapToAng4();
         field_40_rotation += word_6FD8F8;
         field_10_char_state = 8;
         field_46_timer = 10;

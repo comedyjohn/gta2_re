@@ -33,6 +33,7 @@ sys.path.insert(0, HERE)
 from subsystems import SUBSYSTEMS  # noqa: E402
 
 MAP_PATH = os.path.join(HERE, "address_map.csv")
+SYMBOLS_PATH = os.path.join(HERE, "symbol_names.csv")
 KEYWORDS = set(
     """alignas alignof and and_eq asm auto bitand bitor bool break case catch char char8_t char16_t char32_t class
     compl concept const consteval constexpr constinit const_cast continue co_await co_return co_yield decltype default
@@ -177,17 +178,24 @@ def propose(sub, kind, rows):
         elif kind == "globals" and k == "global" and not re.match(r"^k[A-Z]", r["old_name"]):
             selected.append((r, *propose_global(r["old_name"])))
     # names already taken in each scope (current names), then collisions among the proposals
+    def cur_owner(r):
+        return r["new_owner"] or r["owner"]
+
     taken = collections.defaultdict(set)
+    if os.path.exists(SYMBOLS_PATH):  # every name the code declares now, with its owner as spelled now
+        with open(SYMBOLS_PATH, newline="") as f:
+            for sr in csv.DictReader(f):
+                taken[sr["owner"]].add(sr["name"])
     for r in rows:
-        scope = r["owner"] if r["kind"] in ("member", "method", "enumerator") else ""
+        scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
         if r["kind"] == "type" and r["owner"]:
-            scope = r["owner"]
+            scope = cur_owner(r)
         taken[scope].add(r["new_name"] or r["old_name"])
     out, counts = [], collections.defaultdict(list)
     for r, new, why in selected:
-        scope = r["owner"] if r["kind"] in ("member", "method", "enumerator") else ""
+        scope = cur_owner(r) if r["kind"] in ("member", "method", "enumerator") else ""
         if r["kind"] == "type":
-            scope = r["owner"]
+            scope = cur_owner(r)
         if new:
             if new in KEYWORDS:
                 new, why = None, f"{new} is a C++ keyword"

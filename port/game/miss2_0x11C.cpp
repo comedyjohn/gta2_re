@@ -114,7 +114,7 @@ void miss2_0x11C::MissionFailOnArrest_503200()
             v = 5;
         }
 
-        u16 msg_id = gRng_6F6784.get_uint8_4F7B70(5);
+        u16 msg_id = gRng_6F6784.GetUint8(5);
 
         if (gScriptManager_6F8060->field_348_gang_1_mission_flag && *gScriptManager_6F8060->field_348_gang_1_mission_flag == 1)
         {
@@ -236,7 +236,7 @@ void miss2_0x11C::Log_5035D0()
 {
     if (gDo_miss_logging_67D6BC)
     {
-        sprintf(gTmpBuffer_67C598, "%d:\t\t%d ", gpRng_67AB34->get_cur_rng_41CFE0(), static_cast<s16>(field_4_next_cmd));
+        sprintf(gTmpBuffer_67C598, "%d:\t\t%d ", gpRng_67AB34->GetCurRng(), static_cast<s16>(field_4_next_cmd));
         gMiss2Log_6F7698.Write_Log_4D9650(gTmpBuffer_67C598);
     }
 }
@@ -294,7 +294,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
 
     if (pCmd->field_18_obj_id < 0xC8U || pCmd->field_18_obj_id > 0xF4U)
     {
-        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
+        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(pCmd->field_18_obj_id,
                                                                         pCmd->field_C_pos.field_0_x,
@@ -304,7 +304,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_2D_3D_503680(SCR_OBJ_DATA* pCmd, SCR_POINTER
     }
     else
     {
-        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
+        Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_1A_rot.rValue)));
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObjUnlessBlocked_529BC0(pCmd->field_18_obj_id,
                                                                                      pCmd->field_C_pos.field_0_x,
@@ -343,7 +343,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPoi
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, &pCmd->field_1A_rot);
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(pCmd->field_18_obj_id,
                                                                         pCmd->field_C_pos.field_0_x,
@@ -355,7 +355,7 @@ void miss2_0x11C::SCRCMD_OBJ_DECSET_5038D0(SCR_OBJ_DATA* pCmd, SCR_POINTER* pPoi
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, &pCmd->field_1A_rot);
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
 
         pPointer->field_8_obj = gObject_5C_6F8F84->NewPhysicsObjUnlessBlocked_529BC0(pCmd->field_18_obj_id,
                                                                                      pCmd->field_C_pos.field_0_x,
@@ -414,7 +414,7 @@ void miss2_0x11C::SCRCMD_PLAYER_PED_503A20(SCR_PLAYER_PED* pCmd)
                     gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
             }
 
-            Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+            Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
 
             pPed = gPedManager_6787BC->SpawnPedAt(pCmd->field_C_pos.field_0_x,
                                                   pCmd->field_C_pos.field_4_y,
@@ -453,7 +453,7 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, &pCmd->field_18_rot);
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
         pPointer->field_8_car = gCarManager_6C_677930->SpawnCar_426E10(pCmd->field_C_pos.field_0_x,
                                                                        pCmd->field_C_pos.field_4_y,
                                                                        pCmd->field_C_pos.field_8_z,
@@ -464,7 +464,7 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, &pCmd->field_18_rot);
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
         pPointer->field_8_car = gCarManager_6C_677930->SpawnCar_4764A0(pCmd->field_C_pos.field_0_x,
                                                                        pCmd->field_C_pos.field_4_y,
                                                                        pCmd->field_C_pos.field_8_z,
@@ -566,7 +566,7 @@ void miss2_0x11C::SCRCMD_CHAR_DECSET_2D_3D_503FB0(SCR_CHAR_DATA_DEC* pCmd, SCR_P
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
 
     pPed = gPedManager_6787BC->SpawnPedAt(pCmd->field_C_pos.field_0_x,
                                           pCmd->field_C_pos.field_4_y,
@@ -651,13 +651,13 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, reinterpret_cast<Ang16*>(&pBasicCmd->field_24_target_rotation));
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
         pBasicCmd->field_8_crane->CraneTargetPickupCheck_480900(pBasicCmd->field_1C_target_pos.field_0_x,
                                                                 pBasicCmd->field_1C_target_pos.field_4_y,
                                                                 rotation);
 
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, reinterpret_cast<Ang16*>(&pBasicCmd->field_26_second_rotation));
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
         pBasicCmd->field_8_crane->ComputePickupAlignment_480B60(pBasicCmd->field_28_second_pos.field_0_x,
                                                                 pBasicCmd->field_28_second_pos.field_4_y,
                                                                 rotation);
@@ -666,7 +666,7 @@ void miss2_0x11C::SCRCMD_CRANE_5041C0(SCR_CRANE_TARGET_DEC* pTargetCmd, SCR_CRAN
     {
         Ang16 rotation;
         rotation.ConvertAndMultiply(&kDegreesToAng16_6F8044, reinterpret_cast<Ang16*>(&pTargetCmd->field_18_home_rotation));
-        rotation.Normalize_406C20();
+        rotation.NormalizeOutOfLine();
         pBasicCmd->field_8_crane->SetHomeRotation_4768E0(rotation);
     }
 
@@ -706,7 +706,7 @@ void miss2_0x11C::SCRCMD_GENERATOR_DECSET_504420(SCR_GENERATOR* pCmd, SCR_POINTE
             gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(pCmd->field_C_pos.field_0_x, pCmd->field_C_pos.field_4_y);
     }
 
-    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16_401CB0(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
+    Ang16 rotation = kDegreesToAng16_6F8044.MultiplyByFix16(Fix16(static_cast<u16>(pCmd->field_18_rot.rValue)));
 
     pPointer->field_8_generator = gGeneratorPool_14AC_67E5D0->CreateGenerator_4C1DC0(pCmd->field_C_pos.field_0_x,
                                                                                      pCmd->field_C_pos.field_4_y,
@@ -2792,15 +2792,15 @@ void miss2_0x11C::SCRCMD_CAR_IN_AREA_509A70()
     Fix16 top = pCmd->field_C_rect.field_0_pos.field_4_y - height / kFpTwo_6F77C8;
     Fix16 left = pCmd->field_C_rect.field_0_pos.field_0_x - width / kFpTwo_6F77C8;
 
-    gScriptManager_6F8060->field_2F8_area_rect.SetFromPosSize_463710(left, top, width, height);
+    gScriptManager_6F8060->field_2F8_area_rect.SetFromPosSize(left, top, width, height);
 
     Fix16 hz = kFpHalf_6F75F0 + pCmd->field_C_rect.field_0_pos.field_8_z;
     Fix16 lz = pCmd->field_C_rect.field_0_pos.field_8_z - kFpHalf_6F75F0;
-    gScriptManager_6F8060->field_2F8_area_rect.SetHiLowZ_41E370(lz, hz);
+    gScriptManager_6F8060->field_2F8_area_rect.SetHiLowZ(lz, hz);
 
     if (pPointer->field_8_car != nullptr && pPointer->field_8_car->field_88_despawn_status != car_despawn_status::despawned_6 &&
         (pPointer->field_8_car->field_50_car_sprite->IntersectsRectSAT_59FB10(&gScriptManager_6F8060->field_2F8_area_rect) ||
-         gScriptManager_6F8060->field_2F8_area_rect.IntersectsSpriteRenderingRect_59DDF0(pPointer->field_8_car->field_50_car_sprite)))
+         gScriptManager_6F8060->field_2F8_area_rect.IntersectsSpriteRenderingRect(pPointer->field_8_car->field_50_car_sprite)))
     {
         field_8_cond_result = true;
     }
@@ -5203,7 +5203,7 @@ void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
         auto* pCmd = reinterpret_cast<SCR_DO_SAVE_GAME*>(gBasePtr_6F8070);
         miss2_0x11C::DisableThread_505790(pCmd->field_8_triggername);
 
-        if (static_cast<u32>(gpRng_67AB34->get_cur_rng_41CFE0()) > 0)
+        if (static_cast<u32>(gpRng_67AB34->GetCurRng()) > 0)
         {
             u32* mission_flag = reinterpret_cast<u32*>(gScriptManager_6F8060->field_344_mission_flag);
             if (!mission_flag || *mission_flag)
@@ -5631,7 +5631,7 @@ void miss2_0x11C::GetSpeed_50E190()
         case SCRCMD_GET_CAR_SPEED:
             if (pPointer->field_8_car->field_58_physics)
             {
-                pParam2->field_8_counter = pPointer->field_8_car->field_58_physics->get_car_velocity_4211C0().get_value_4754D0();
+                pParam2->field_8_counter = pPointer->field_8_car->field_58_physics->get_car_velocity_4211C0().GetValue();
             }
             else
             {
@@ -5645,7 +5645,7 @@ void miss2_0x11C::GetSpeed_50E190()
                 if (pPointer->field_8_char->get_car_416B60()->field_58_physics)
                 {
                     pParam2->field_8_counter =
-                        pPointer->field_8_char->get_car_416B60()->field_58_physics->get_car_velocity_4211C0().get_value_4754D0();
+                        pPointer->field_8_char->get_car_416B60()->field_58_physics->get_car_velocity_4211C0().GetValue();
                 }
                 else
                 {
@@ -5655,7 +5655,7 @@ void miss2_0x11C::GetSpeed_50E190()
             break;
 
         case SCRCMD_GET_MAX_SPEED:
-            pParam2->field_8_counter = pPointer->field_8_car->GetMaxSpeed_439F30().get_value_4754D0();
+            pParam2->field_8_counter = pPointer->field_8_car->GetMaxSpeed_439F30().GetValue();
             break;
         default:
             break;
@@ -5671,7 +5671,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_SPEED_50E360()
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(gBasePtr_6F8070->field_8_index));
 
     if (pPointer->field_8_car->field_58_physics &&
-        pPointer->field_8_car->field_58_physics->get_car_velocity_4211C0().get_value_4754D0() > pCmd->field_A_value)
+        pPointer->field_8_car->field_58_physics->get_car_velocity_4211C0().GetValue() > pCmd->field_A_value)
     {
         field_8_cond_result = true;
     }

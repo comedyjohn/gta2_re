@@ -561,7 +561,7 @@ void Game_0x40::UpdateGame_4B9410()
     }
 
     gHud_2B00_706620->UpdateHUD_5D69D0();
-    gpRng_67AB34->AdvanceCycle_48B900(); // rng
+    gpRng_67AB34->AdvanceCycle(); // rng
     gDoor_4D4_67BD2C->DoorsService_49D460();
     gFirefighterPool_54_67D4C0->FireEnginesService_4A85F0(); // fire engines
 
@@ -965,7 +965,7 @@ DEFINE_GLOBAL_INIT(Fix16, kInitialAmbient_67DCCC, Fix16(0x666, 0), 0x67DCCC);
 // 0x4B9DE0
 Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
 {
-    gRng_6F6784.srand_4F7A40(); // srand?
+    gRng_6F6784.Srand(); // srand?
 
     field_3C_skip_police = bSkip_police_67D4F9;
 

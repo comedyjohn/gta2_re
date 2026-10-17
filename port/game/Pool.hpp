@@ -56,13 +56,13 @@ template<typename PoolType, s32 PoolSize>
 class Pool
 {
   public:
-    bool has_pStart_48A8F0()
+    bool HasPStart()
     {
         return field_0_pStart != nullptr;
     }
 
     // 9.6f 0x4B8FD0 (CokeZero_FC, 10.5 copy 0x5935C0): first used item
-    PoolType* GetFirstUsed_4B8FD0()
+    PoolType* GetFirstUsed()
     {
         return field_4_pPrev;
     }
@@ -289,7 +289,7 @@ class Pool
         return pToFind;
     }
 
-    void UnlinkFromActiveList_420F30(PoolType* toFind)
+    void UnlinkFromActiveList(PoolType* toFind)
     {
         PoolType* pLast = nullptr;
         for (PoolType* pIter = this->field_4_pPrev; pIter; pIter = pIter->mpNext)

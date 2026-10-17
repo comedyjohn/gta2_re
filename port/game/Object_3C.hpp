@@ -100,7 +100,7 @@ class Object_3C
     Fix16Point GetSpeedVector_482BA0()
     {
         Fix16Point p;
-        p.FromPolar_41E210(field_C_speed, field_4_angle);
+        p.FromPolar(field_C_speed, field_4_angle);
         return p;
     }
 

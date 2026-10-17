@@ -857,7 +857,6 @@ port/game/InputRecorder_67F8B0.cpp,readability-function-size,1
 port/game/InputRecorder_67F8B0.cpp,readability-implicit-bool-conversion,39
 port/game/InputRecorder_67F8B0.cpp,readability-make-member-function-const,2
 port/game/InputRecorder_67F8B0.cpp,readability-non-const-parameter,1
-port/game/InputRecorder_67F8B0.cpp,readability-redundant-casting,2
 port/game/InputRecorder_67F8B0.cpp,readability-simplify-boolean-expr,2
 port/game/InputRecorder_67F8B0.hpp,cppcoreguidelines-avoid-c-arrays,14
 port/game/InputRecorder_67F8B0.hpp,cppcoreguidelines-avoid-non-const-global-variables,5

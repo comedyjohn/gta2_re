@@ -3,7 +3,6 @@
 #include "Object_3C.hpp"
 #include "Car_BC.hpp"
 #include "Explosion_30.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "char.hpp"
 #include "enums.hpp"

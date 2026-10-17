@@ -8,7 +8,6 @@
 #include "Door_4D4.hpp"
 #include "Explosion_30.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Light_1D4CC.hpp"
 #include "ObjectDefinitions_8CA8.hpp"
 #include "Object_2C_Pool.hpp"

@@ -1,12 +1,8 @@
 #include "Door_38.hpp"
 #include "Door_4D4.hpp"
 #include "Garage_48.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"
-#include "TileAnim_2.hpp"
-#include "error.hpp"
-#include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 
 DEFINE_GLOBAL(s32, dword_67BBE0, 0x67BBE0);

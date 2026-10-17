@@ -16,7 +16,6 @@ EXTERN_GLOBAL(Fix16, dword_706CC8);
 #include "Fix16_Rect.hpp"
 #include "Object_3C.hpp"
 #include "Object_5C.hpp"
-#include "Object_8.hpp"
 #include "Particle_8.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"

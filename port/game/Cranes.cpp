@@ -2,7 +2,6 @@
 #define FIX16_POINT_ZERO kZero_679E70
 #include "Cranes.hpp"
 #include "Char_Pool.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Object_5C.hpp"
 #include "ScriptManager_C1EA8.hpp"

@@ -2,7 +2,6 @@
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Particle_4C.hpp"
 #include "Particle_8.hpp"

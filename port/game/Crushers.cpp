@@ -2,7 +2,6 @@
 #include "Camera.hpp"
 #include "Car_BC.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Player.hpp"
 #include "SoundObject_10.hpp"

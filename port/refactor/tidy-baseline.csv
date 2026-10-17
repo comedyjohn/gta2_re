@@ -326,7 +326,7 @@ port/game/Cranes.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
 port/game/Cranes.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Cranes.cpp,cppcoreguidelines-pro-type-union-access,4
 port/game/Cranes.cpp,misc-const-correctness,18
-port/game/Cranes.cpp,misc-include-cleaner,19
+port/game/Cranes.cpp,misc-include-cleaner,18
 port/game/Cranes.cpp,readability-else-after-return,1
 port/game/Cranes.cpp,readability-function-cognitive-complexity,1
 port/game/Cranes.cpp,readability-implicit-bool-conversion,68
@@ -381,7 +381,7 @@ port/game/Crushers.cpp,cppcoreguidelines-pro-bounds-constant-array-index,3
 port/game/Crushers.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
 port/game/Crushers.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Crushers.cpp,misc-const-correctness,1
-port/game/Crushers.cpp,misc-include-cleaner,9
+port/game/Crushers.cpp,misc-include-cleaner,8
 port/game/Crushers.cpp,readability-implicit-bool-conversion,9
 port/game/Crushers.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Crushers.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -402,7 +402,7 @@ port/game/Door_38.cpp,cppcoreguidelines-pro-bounds-constant-array-index,9
 port/game/Door_38.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Door_38.cpp,cppcoreguidelines-pro-type-union-access,12
 port/game/Door_38.cpp,misc-const-correctness,4
-port/game/Door_38.cpp,misc-include-cleaner,15
+port/game/Door_38.cpp,misc-include-cleaner,11
 port/game/Door_38.cpp,modernize-avoid-c-arrays,1
 port/game/Door_38.cpp,readability-function-cognitive-complexity,1
 port/game/Door_38.cpp,readability-implicit-bool-conversion,29
@@ -429,7 +429,7 @@ port/game/Door_4D4.cpp,cppcoreguidelines-pro-bounds-constant-array-index,11
 port/game/Door_4D4.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
 port/game/Door_4D4.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Door_4D4.cpp,cppcoreguidelines-pro-type-vararg,1
-port/game/Door_4D4.cpp,misc-include-cleaner,15
+port/game/Door_4D4.cpp,misc-include-cleaner,14
 port/game/Door_4D4.cpp,modernize-raw-string-literal,1
 port/game/Door_4D4.cpp,readability-convert-member-functions-to-static,2
 port/game/Door_4D4.cpp,readability-implicit-bool-conversion,9
@@ -501,7 +501,7 @@ port/game/Explosion_30.cpp,cppcoreguidelines-pro-bounds-constant-array-index,32
 port/game/Explosion_30.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/Explosion_30.cpp,cppcoreguidelines-pro-type-union-access,2
 port/game/Explosion_30.cpp,misc-const-correctness,17
-port/game/Explosion_30.cpp,misc-include-cleaner,19
+port/game/Explosion_30.cpp,misc-include-cleaner,18
 port/game/Explosion_30.cpp,readability-function-cognitive-complexity,1
 port/game/Explosion_30.cpp,readability-function-size,1
 port/game/Explosion_30.cpp,readability-implicit-bool-conversion,31
@@ -750,7 +750,7 @@ port/game/Generators.cpp,cppcoreguidelines-pro-bounds-constant-array-index,2
 port/game/Generators.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,3
 port/game/Generators.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Generators.cpp,misc-const-correctness,2
-port/game/Generators.cpp,misc-include-cleaner,7
+port/game/Generators.cpp,misc-include-cleaner,6
 port/game/Generators.cpp,readability-implicit-bool-conversion,7
 port/game/Generators.cpp,readability-make-member-function-const,1
 port/game/Generators.hpp,cppcoreguidelines-avoid-c-arrays,1
@@ -1075,7 +1075,7 @@ port/game/ObjectDefinitions_8CA8.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/ObjectDefinitions_8CA8.cpp,cppcoreguidelines-pro-type-union-access,1
 port/game/ObjectDefinitions_8CA8.cpp,cppcoreguidelines-pro-type-vararg,2
 port/game/ObjectDefinitions_8CA8.cpp,misc-const-correctness,3
-port/game/ObjectDefinitions_8CA8.cpp,misc-include-cleaner,14
+port/game/ObjectDefinitions_8CA8.cpp,misc-include-cleaner,13
 port/game/ObjectDefinitions_8CA8.cpp,modernize-avoid-c-arrays,2
 port/game/ObjectDefinitions_8CA8.cpp,modernize-use-std-print,2
 port/game/ObjectDefinitions_8CA8.cpp,readability-function-size,4
@@ -1090,7 +1090,7 @@ port/game/ObjectDefinitions_8CA8.hpp,misc-non-private-member-variables-in-classe
 port/game/ObjectDefinitions_8CA8.hpp,modernize-avoid-c-arrays,4
 port/game/ObjectDefinitions_8CA8.hpp,performance-enum-size,4
 port/game/Object_2C_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
-port/game/Object_2C_Pool.cpp,misc-include-cleaner,2
+port/game/Object_2C_Pool.cpp,misc-include-cleaner,1
 port/game/Object_2C_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Object_3C.cpp,cert-err58-cpp,3
 port/game/Object_3C.cpp,cppcoreguidelines-avoid-non-const-global-variables,4
@@ -1099,7 +1099,7 @@ port/game/Object_3C.cpp,cppcoreguidelines-prefer-member-initializer,15
 port/game/Object_3C.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Object_3C.cpp,cppcoreguidelines-pro-type-union-access,10
 port/game/Object_3C.cpp,misc-const-correctness,3
-port/game/Object_3C.cpp,misc-include-cleaner,10
+port/game/Object_3C.cpp,misc-include-cleaner,9
 port/game/Object_3C.cpp,readability-implicit-bool-conversion,50
 port/game/Object_3C.cpp,readability-make-member-function-const,15
 port/game/Object_3C.hpp,cppcoreguidelines-avoid-non-const-global-variables,4
@@ -1110,7 +1110,7 @@ port/game/Object_3C.hpp,readability-convert-member-functions-to-static,1
 port/game/Object_3C.hpp,readability-make-member-function-const,1
 port/game/Object_3C.hpp,readability-redundant-access-specifiers,1
 port/game/Object_3C_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
-port/game/Object_3C_Pool.cpp,misc-include-cleaner,2
+port/game/Object_3C_Pool.cpp,misc-include-cleaner,1
 port/game/Object_3C_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Object_5C.cpp,bugprone-branch-clone,1
 port/game/Object_5C.cpp,bugprone-narrowing-conversions,17
@@ -1128,7 +1128,7 @@ port/game/Object_5C.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/Object_5C.cpp,cppcoreguidelines-pro-type-union-access,84
 port/game/Object_5C.cpp,cppcoreguidelines-pro-type-vararg,3
 port/game/Object_5C.cpp,misc-const-correctness,23
-port/game/Object_5C.cpp,misc-include-cleaner,24
+port/game/Object_5C.cpp,misc-include-cleaner,23
 port/game/Object_5C.cpp,misc-no-recursion,2
 port/game/Object_5C.cpp,misc-unused-parameters,2
 port/game/Object_5C.cpp,modernize-raw-string-literal,3
@@ -1158,7 +1158,7 @@ port/game/Object_8.hpp,cppcoreguidelines-special-member-functions,1
 port/game/Object_8.hpp,misc-non-private-member-variables-in-classes,4
 port/game/Object_8.hpp,readability-convert-member-functions-to-static,1
 port/game/Object_8_Pool.cpp,cppcoreguidelines-avoid-non-const-global-variables,1
-port/game/Object_8_Pool.cpp,misc-include-cleaner,2
+port/game/Object_8_Pool.cpp,misc-include-cleaner,1
 port/game/Object_8_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/Particle_4C.cpp,bugprone-branch-clone,7
 port/game/Particle_4C.cpp,bugprone-narrowing-conversions,39
@@ -1187,7 +1187,7 @@ port/game/Particle_8.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Particle_8.cpp,cppcoreguidelines-pro-type-union-access,16
 port/game/Particle_8.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Particle_8.cpp,misc-const-correctness,10
-port/game/Particle_8.cpp,misc-include-cleaner,13
+port/game/Particle_8.cpp,misc-include-cleaner,11
 port/game/Particle_8.cpp,modernize-raw-string-literal,1
 port/game/Particle_8.cpp,readability-convert-member-functions-to-static,10
 port/game/Particle_8.cpp,readability-implicit-bool-conversion,25
@@ -1778,7 +1778,7 @@ port/game/Weapon_30.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Weapon_30.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Weapon_30.cpp,cppcoreguidelines-pro-type-union-access,23
 port/game/Weapon_30.cpp,misc-const-correctness,52
-port/game/Weapon_30.cpp,misc-include-cleaner,9
+port/game/Weapon_30.cpp,misc-include-cleaner,8
 port/game/Weapon_30.cpp,misc-no-recursion,1
 port/game/Weapon_30.cpp,readability-else-after-return,3
 port/game/Weapon_30.cpp,readability-function-cognitive-complexity,3
@@ -1798,7 +1798,7 @@ port/game/Weapon_8.cpp,cppcoreguidelines-owning-memory,2
 port/game/Weapon_8.cpp,cppcoreguidelines-pro-bounds-constant-array-index,2
 port/game/Weapon_8.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Weapon_8.cpp,cppcoreguidelines-pro-type-vararg,1
-port/game/Weapon_8.cpp,misc-include-cleaner,12
+port/game/Weapon_8.cpp,misc-include-cleaner,9
 port/game/Weapon_8.cpp,modernize-avoid-c-arrays,2
 port/game/Weapon_8.cpp,readability-convert-member-functions-to-static,5
 port/game/Weapon_8.cpp,readability-implicit-bool-conversion,11

@@ -1,6 +1,5 @@
 #include "Door_4D4.hpp"
 #include "Garage_48.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"
 #include "TileAnim_2.hpp"

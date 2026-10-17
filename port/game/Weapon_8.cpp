@@ -1,11 +1,8 @@
 #include "Weapon_8.hpp"
 #include "Car_BC.hpp"
-#include "Globals.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
-#include "debug.hpp"
 #include "error.hpp"
-#include "root_sound.hpp"
 
 DEFINE_GLOBAL(Weapon_30_Pool*, gWeapon_30_Pool_707014, 0x707014);
 DEFINE_GLOBAL(Weapon_8*, gWeapon_8_707018, 0x707018);

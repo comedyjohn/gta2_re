@@ -1,5 +1,4 @@
 #include "Object_8_Pool.hpp"
-#include "Globals.hpp"
 
 DEFINE_GLOBAL(TObject_8_Pool*, gObject_8_Pool_6F8F78, 0x6F8F78);
 

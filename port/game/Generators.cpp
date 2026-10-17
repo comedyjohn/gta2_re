@@ -1,5 +1,4 @@
 #include "Generators.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "rng.hpp"
 

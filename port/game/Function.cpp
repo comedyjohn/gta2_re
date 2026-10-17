@@ -26,7 +26,9 @@ std::string trim(const std::string& s)
     std::string::size_type start = s.find_first_not_of(" \t\n\r");
     std::string::size_type end = s.find_last_not_of(" \t\n\r");
     if (start == std::string::npos)
+    {
         return "";
+    }
     return s.substr(start, end - start + 1);
 }
 
@@ -35,7 +37,9 @@ u32 hexStringToU32(const std::string& hexStr)
 {
     std::string s = trim(hexStr);
     if (s.size() >= 2 && (s.substr(0, 2) == "0x" || s.substr(0, 2) == "0X"))
+    {
         s = s.substr(2);
+    }
     return static_cast<u32>(strtoul(s.c_str(), nullptr, 16));
 }
 
@@ -46,20 +50,28 @@ std::string extractJsonStringValue(const std::string& objectStr, const std::stri
     std::string value = "";
     std::string::size_type keyPos = objectStr.find(pattern);
     if (keyPos == std::string::npos)
+    {
         return value;
+    }
     // Find the colon after the key.
     std::string::size_type colonPos = objectStr.find(':', keyPos);
     if (colonPos == std::string::npos)
+    {
         return value;
+    }
     // Find the starting quote for the value.
     std::string::size_type valueStart = objectStr.find('\"', colonPos);
     if (valueStart == std::string::npos)
+    {
         return value;
+    }
     ++valueStart; // Skip the quote.
     // Find the ending quote.
     std::string::size_type valueEnd = objectStr.find('\"', valueStart);
     if (valueEnd == std::string::npos)
+    {
         return value;
+    }
     value = objectStr.substr(valueStart, valueEnd - valueStart);
     return trim(value);
 }
@@ -113,10 +125,14 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
     {
         std::string::size_type objStart = fileContent.find('{', pos);
         if (objStart == std::string::npos)
+        {
             break;
+        }
         std::string::size_type objEnd = fileContent.find('}', objStart);
         if (objEnd == std::string::npos)
+        {
             break;
+        }
 
         // Extract the JSON object text.
         std::string objText = fileContent.substr(objStart, objEnd - objStart + 1);
@@ -143,7 +159,9 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
         pos = objEnd + 1;
         std::string::size_type arrayEnd = fileContent.find(']', pos);
         if (arrayEnd != std::string::npos && pos > arrayEnd)
+        {
             break;
+        }
     }
     return functions;
 }

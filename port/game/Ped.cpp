@@ -2479,7 +2479,9 @@ void Ped::SetOccupation_45EE00(u32 occupation)
                 break;
             case ped_ocupation_enum::bus_customer_8:
                 if (--gNumberBusCustomers_6787D3 < 0)
+                {
                     gNumberBusCustomers_6787D3 = 0;
+                }
                 field_240_occupation = occupation;
                 break;
             default:
@@ -2487,7 +2489,9 @@ void Ped::SetOccupation_45EE00(u32 occupation)
         }
     }
     else
+    {
         field_240_occupation = occupation;
+    }
 }
 
 // 0x45ee70
@@ -4007,7 +4011,8 @@ void Ped::UpdateCharB4_462B80()
             else
             {
                 field_16C_car->ShowCarName_4406B0(this);
-                bool train_dummy = field_25C_internal_objective == objectives_enum::enter_train_37 && field_238_ped_type == ped_type::dummy_3;
+                bool train_dummy =
+                    field_25C_internal_objective == objectives_enum::enter_train_37 && field_238_ped_type == ped_type::dummy_3;
                 if (!train_dummy)
                 {
                     field_16C_car->field_4_passengers_list.AddPedToFront_471140(this);

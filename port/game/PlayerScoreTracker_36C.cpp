@@ -645,67 +645,123 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 case ped_death_cause::shotgun_19:
                 case ped_death_cause::burning_20:
                     if (bOtherGang)
+                    {
                         score = 50;
+                    }
                     else if (bCop)
+                    {
                         score = 200;
+                    }
                     else if (bArmy)
+                    {
                         score = 500;
+                    }
                     else if (bSwat)
+                    {
                         score = 300;
+                    }
                     else if (bFbi)
+                    {
                         score = 400;
+                    }
                     else if (bGangA)
+                    {
                         score = 40;
+                    }
                     else
+                    {
                         score = bGangB ? 40 : 20;
+                    }
                     break;
                 case ped_death_cause::run_over_1:
                     if (bOtherGang)
+                    {
                         score = 20;
+                    }
                     else if (bCop)
+                    {
                         score = 100;
+                    }
                     else if (bArmy)
+                    {
                         score = 250;
+                    }
                     else if (bSwat)
+                    {
                         score = 150;
+                    }
                     else if (bFbi)
+                    {
                         score = 200;
+                    }
                     else if (bGangA)
+                    {
                         score = 20;
+                    }
                     else
+                    {
                         score = bGangB ? 20 : 10;
+                    }
                     break;
                 case ped_death_cause::electrocuted_2:
                     if (bOtherGang)
+                    {
                         score = 200;
+                    }
                     else if (bCop)
+                    {
                         score = 500;
+                    }
                     else if (bArmy)
+                    {
                         score = 1250;
+                    }
                     else if (bSwat)
+                    {
                         score = 750;
+                    }
                     else if (bFbi)
+                    {
                         score = 1000;
+                    }
                     else if (bGangA)
+                    {
                         score = 100;
+                    }
                     else
+                    {
                         score = bGangB ? 100 : 50;
+                    }
                     break;
                 case ped_death_cause::run_over_by_stolen_car_3:
                     if (bOtherGang)
+                    {
                         score = 200;
+                    }
                     else if (bCop)
+                    {
                         score = 1000;
+                    }
                     else if (bArmy)
+                    {
                         score = 2500;
+                    }
                     else if (bSwat)
+                    {
                         score = 1500;
+                    }
                     else if (bFbi)
+                    {
                         score = 2000;
+                    }
                     else if (bGangA)
+                    {
                         score = 200;
+                    }
                     else
+                    {
                         score = bGangB ? 200 : 100;
+                    }
                     break;
                 case ped_death_cause::unknown_4:
                     score = 20;

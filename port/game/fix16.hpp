@@ -237,7 +237,9 @@ class Fix16
     inline static Fix16 Abs(const Fix16& input)
     {
         if (input.mValue > 0)
+        {
             return input;
+        }
         return -input;
     }
 

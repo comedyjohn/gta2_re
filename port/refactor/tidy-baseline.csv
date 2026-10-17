@@ -667,7 +667,6 @@ port/game/Function.cpp,misc-include-cleaner,2
 port/game/Function.cpp,misc-use-anonymous-namespace,1
 port/game/Function.cpp,modernize-use-std-print,8
 port/game/Function.cpp,performance-no-int-to-ptr,1
-port/game/Function.cpp,readability-braces-around-statements,9
 port/game/Function.cpp,readability-duplicate-include,1
 port/game/Function.cpp,readability-implicit-bool-conversion,1
 port/game/Function.cpp,readability-redundant-string-init,1
@@ -1337,7 +1336,6 @@ port/game/Ped.cpp,misc-const-correctness,58
 port/game/Ped.cpp,misc-include-cleaner,221
 port/game/Ped.cpp,misc-use-anonymous-namespace,6
 port/game/Ped.cpp,modernize-raw-string-literal,1
-port/game/Ped.cpp,readability-braces-around-statements,2
 port/game/Ped.cpp,readability-convert-member-functions-to-static,7
 port/game/Ped.cpp,readability-else-after-return,10
 port/game/Ped.cpp,readability-function-cognitive-complexity,34
@@ -1485,7 +1483,6 @@ port/game/PlayerScoreTracker_36C.cpp,cppcoreguidelines-pro-bounds-constant-array
 port/game/PlayerScoreTracker_36C.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/PlayerScoreTracker_36C.cpp,misc-const-correctness,19
 port/game/PlayerScoreTracker_36C.cpp,misc-include-cleaner,47
-port/game/PlayerScoreTracker_36C.cpp,readability-braces-around-statements,28
 port/game/PlayerScoreTracker_36C.cpp,readability-convert-member-functions-to-static,1
 port/game/PlayerScoreTracker_36C.cpp,readability-function-cognitive-complexity,2
 port/game/PlayerScoreTracker_36C.cpp,readability-function-size,2
@@ -1669,7 +1666,6 @@ port/game/RouteFinder.cpp,misc-const-correctness,25
 port/game/RouteFinder.cpp,misc-include-cleaner,15
 port/game/RouteFinder.cpp,misc-unused-parameters,2
 port/game/RouteFinder.cpp,misc-use-anonymous-namespace,2
-port/game/RouteFinder.cpp,readability-braces-around-statements,1
 port/game/RouteFinder.cpp,readability-convert-member-functions-to-static,1
 port/game/RouteFinder.cpp,readability-else-after-return,6
 port/game/RouteFinder.cpp,readability-function-cognitive-complexity,2

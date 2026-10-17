@@ -971,7 +971,9 @@ RouteFinder_10* RouteFinder::GetFirstUnexpandedNode_589E00()
     RouteFinder_10* pNode;
 
     for (pNode = field_A82C_open_list; pNode != nullptr && pNode->field_4_expanded != 0; pNode = pNode->field_C_pNext)
+    {
         ;
+    }
     return pNode;
 }
 

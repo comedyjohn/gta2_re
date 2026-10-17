@@ -1,5 +1,5 @@
 // This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO dword_706EB8
+#define FIX16_POINT_ZERO kFixZero
 // This TU's copy of the Fix16_Rect::ComputeCollisionPrism_4204D0 half height (see Fix16_Rect.hpp)
 #define FIX16_RECT_HALF_HEIGHT dword_706CC8
 #include "PlayerCrimeStats_3C.hpp"
@@ -40,7 +40,6 @@ DEFINE_GLOBAL(bool, bAllowFlameSegment_706D60, 0x706D60);
 // TODO: Check these for inits
 DEFINE_GLOBAL_INIT(Fix16, dword_706FF4, Fix16(0x100, 0), 0x706FF4);
 DEFINE_GLOBAL_INIT(Fix16, dword_706FEC, Fix16(0x1200, 0), 0x706FEC);
-DEFINE_GLOBAL(Fix16, dword_706EB8, 0x706EB8);
 DEFINE_GLOBAL_INIT(Fix16, dword_706EBC, Fix16(1), 0x706EBC);
 DEFINE_GLOBAL_INIT(Fix16, dword_706EC4, Fix16(3), 0x706EC4);
 DEFINE_GLOBAL_INIT(Ang16, word_706D6C, Ang16(180), 0x706D6C);
@@ -767,11 +766,11 @@ namespace
 {
 inline Fix16 BeamLength_5DE4F0(Fix16Point& d)
 {
-    if (d.x == dword_706EB8)
+    if (d.x == kFixZero)
     {
         return Fix16::Abs(d.y);
     }
-    else if (d.y == dword_706EB8)
+    else if (d.y == kFixZero)
     {
         return Fix16::Abs(d.x);
     }
@@ -827,15 +826,15 @@ void Weapon_30::sub_5DE4F0()
             pBeam->AllocCollisionShape_59F950(dword_706CF0, dword_706CF0, dword_706CF0);
 
             Fix16 step_len;
-            if (dist != dword_706EB8)
+            if (dist != kFixZero)
             {
                 steps = dist / dword_706CF0;
                 step_len = dist / steps;
             }
             else
             {
-                steps = dword_706EB8;
-                step_len = dword_706EB8;
+                steps = kFixZero;
+                step_len = kFixZero;
             }
 
             if (steps < dword_706EBC)
@@ -901,17 +900,17 @@ void Weapon_30::sub_5DE4F0()
 DEFINE_GLOBAL_INIT(Fix16, dword_706CF8, Fix16(0xCCC, 0), 0x706CF8);
 DEFINE_GLOBAL_INIT(Fix16, dword_706D34, Fix16(0x100, 0), 0x706D34);
 
-// Length of `d`, with dword_706EB8 as the zero (the multiplies, the add and the square root are the named
+// Length of `d`, with kFixZero as the zero (the multiplies, the add and the square root are the named
 // out-of-line copies; Abs follows the inline budget).
 namespace
 {
 inline Fix16 BeamLength_5DE910(Fix16Point& d)
 {
-    if (d.x == dword_706EB8)
+    if (d.x == kFixZero)
     {
         return Fix16::Abs(d.y);
     }
-    else if (d.y == dword_706EB8)
+    else if (d.y == kFixZero)
     {
         return Fix16::Abs(d.x);
     }
@@ -1007,7 +1006,7 @@ void sub_5DE910(Fix16PointPOD a1, const Fix16Point& a2, Fix16 a3)
     d = a2.Sub(cur);
     seg_angle = d.Atan2();
     len = d.MaxAbsOutOfLine() / seg_len;
-    if (len != dword_706EB8)
+    if (len != kFixZero)
     {
         d.DivAssign(len);
         cur = next;
@@ -1769,7 +1768,7 @@ void Weapon_30::car_mine_5E2550()
     Sprite* Sprite_440840 = field_14_car->GetSprite_440840();
 
     p.y = -(dword_706FF4 + (dword_706FEC + Sprite_440840->field_C_pCollisionShape->GetHeight_447E10()) / kFP16Two_706EC0);
-    p.x = dword_706EB8;
+    p.x = kFixZero;
 
     p.RotateByAngle(Sprite_440840->field_0_rotation);
 

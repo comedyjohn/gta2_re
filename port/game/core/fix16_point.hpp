@@ -14,7 +14,6 @@ EXTERN_GLOBAL(Fix16, kFpZero_6F77C0);
 #ifndef FIX16_POINT_ZERO
     #define FIX16_POINT_ZERO gFix16_6777CC
 #endif
-EXTERN_GLOBAL(Fix16, dword_706EB8);
 
 class Fix16Point;
 

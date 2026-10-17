@@ -18,3 +18,5 @@ Fix16Rect::SetRect_5A5E30,SetRectOutOfLine
 sub_405DA0,TurnAngleToward
 sub_405E20,IsAngleNear
 sub_405E80,ClampAngleToWindow
+DamageAreaFlags::Delta_48F820,ApplyDelta
+DamageAreaFlags::Delta_48F8B0,ApplyDeltaForPalette

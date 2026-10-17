@@ -220,11 +220,6 @@ inline wchar_t* Ang16::ThetaText_49E240()
     return gThetaText_66A8EC;
 }
 
-inline f64 Fix16::to_float_410BA0() const
-{
-    return ((mValue / 16384.0));
-}
-
 // 0x453F50
 void CarPhysics_B0::ForceNeutralInput_453F50()
 {
@@ -262,31 +257,31 @@ void CarPhysics_B0::ShowPhysicsDebug_559430()
 
         swprintf(tmpBuff_67BD9C,
                  L"CM = (%3.3f,%3.3f) CP = (%3.3f,%3.3f,%3.3f)",
-                 field_30_cm1.x.to_float_410BA0(),
-                 field_30_cm1.y.to_float_410BA0(),
-                 field_38_cp1.x.to_float_410BA0(),
-                 field_38_cp1.y.to_float_410BA0(),
-                 field_6C_cp3.to_float_410BA0());
+                 field_30_cm1.x.AsDouble(),
+                 field_30_cm1.y.AsDouble(),
+                 field_38_cp1.x.AsDouble(),
+                 field_38_cp1.y.AsDouble(),
+                 field_6C_cp3.AsDouble());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);
 
         swprintf(tmpBuff_67BD9C,
                  L"linvel = (%3.3f,%3.3f) angvelrad = %3.3f",
-                 field_40_linvel_1.x.to_float_410BA0(),
-                 field_40_linvel_1.y.to_float_410BA0(),
-                 field_74_ang_vel_rad.to_float_410BA0());
+                 field_40_linvel_1.x.AsDouble(),
+                 field_40_linvel_1.y.AsDouble(),
+                 field_74_ang_vel_rad.AsDouble());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
 
         swprintf(tmpBuff_67BD9C, L"theta = %s", field_58_theta.ThetaText_49E240());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 96, gDebugFont_706600, 1);
 
         // TODO: the format string at 0x623FFC is a guess
-        swprintf(tmpBuff_67BD9C, L"pointing ang = %3.3f", field_78_pointing_ang_rad.to_float_410BA0());
+        swprintf(tmpBuff_67BD9C, L"pointing ang = %3.3f", field_78_pointing_ang_rad.AsDouble());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 112, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"mass = %3.3f", CalculateMass_559FF0().to_float_410BA0());
+        swprintf(tmpBuff_67BD9C, L"mass = %3.3f", CalculateMass_559FF0().AsDouble());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 128, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"front skid = %3.3f", field_84_front_skid.to_float_410BA0());
+        swprintf(tmpBuff_67BD9C, L"front skid = %3.3f", field_84_front_skid.AsDouble());
         pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 144, gDebugFont_706600, 1);
         if (field_84_front_skid >= gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1 ||
             (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFixZero))
@@ -294,7 +289,7 @@ void CarPhysics_B0::ShowPhysicsDebug_559430()
             pText->SetDrawKind8_45AFD0(5);
         }
 
-        swprintf(tmpBuff_67BD9C, L"rear skid = %3.3f", field_88_rear_skid.to_float_410BA0());
+        swprintf(tmpBuff_67BD9C, L"rear skid = %3.3f", field_88_rear_skid.AsDouble());
         pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 160, gDebugFont_706600, 1);
         if (field_88_rear_skid >= gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2 ||
             (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFixZero))
@@ -804,13 +799,6 @@ Fix16 CarPhysics_B0::ComputeRequiredSweepSteps_55A6A0()
     return steps;
 }
 
-// 9.6f 0x42A630 called as a static with the value by reference (its 9.6f copy takes a pointer and a hidden
-// return). Declared in fix16.hpp, defined here so no other TU changes.
-inline Fix16 Fix16::GetFracValue_42A630(const Fix16& v)
-{
-    return Fix16(v.mValue & 0x3FFF, 0);
-}
-
 // 0x55a840
 void CarPhysics_B0::ResetForceAccumulators_55A840()
 {
@@ -1073,7 +1061,7 @@ void CarPhysics_B0::UpdateZPhysics_55AD90(Fix16 dt)
         {
             if (!((field_98_surface_type == CarSurfaceType::kSlopeNorthwards || field_98_surface_type == CarSurfaceType::kSlopeSouthwards ||
                    field_98_surface_type == CarSurfaceType::kSlopeWestwards || field_98_surface_type == CarSurfaceType::kSlopeEastwards) &&
-                  Fix16::GetFracValue_42A630(zpos) != kFixZero && zpos <= field_6C_cp3 + k_dword_6FE210))
+                  zpos.GetFracValue() != kFixZero && zpos <= field_6C_cp3 + k_dword_6FE210))
             {
                 zpos = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(field_38_cp1.x, field_38_cp1.y, zpos - kFP16One64th_6FE2E0);
                 if (zpos > field_6C_cp3)

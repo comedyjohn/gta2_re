@@ -1202,7 +1202,6 @@ enum Gta2Error
     InvalidCarModelStyleData = 1107U,
     ReleasingTwiceInReleasePassive = 1138U,
     ReleasingTwiceInRelease = 1139U,
-    AssertionFailure = 1095U,
     TooManySymbols = 1096U,
     FailedToCreateCharacterInScript = 1098U,
     FailedToFindUidInScript = 1099U,

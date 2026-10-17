@@ -83,12 +83,14 @@ def main():
         subprocess.check_call([PY, os.path.join(HERE, "symbols.py"), os.path.join(ROOT, "build_port", "clang64")])
     syms = json.load(open(SYMBOLS))
     rows = {k: [new, why, name] for k, new, why, name in propose.propose(sub, kind, syms)}
+    current = {propose.key_of(s) for s in syms}  # an override for a name that no longer exists is history
     ov_path = os.path.join(NAMES, f"{sub}-{kind}.overrides.csv")
     if os.path.exists(ov_path):
         with open(ov_path, newline="") as f:
             for r in csv.reader(f):
                 if r and r[0] != "old" and not r[0].startswith("#"):
-                    rows[r[0]] = [r[1], "", r[0]]
+                    if r[0] in current or r[0] in rows:
+                        rows[r[0]] = [r[1], "", r[0]]
     final = os.path.join(NAMES, f"{sub}-{kind}.csv")
     n = 1
     while committed(final):  # a record that was already applied stays; a new batch gets the next file

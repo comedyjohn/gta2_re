@@ -65,6 +65,8 @@ SKIP_FUNCTIONS = {"main", "WinMain", "DllMain"}
 def pascal(name):
     """get_input_bits -> GetInputBits; GetInputBits stays; keeps digits and inner capitals."""
     parts = [p for p in name.split("_") if p]
+    if name.upper() == name and any(c.isalpha() for c in name):  # MAX_PLAYERS -> MaxPlayers
+        parts = [p.lower() for p in parts]
     return "".join(p[0].upper() + p[1:] for p in parts)
 
 
@@ -266,6 +268,7 @@ def selftest():
     assert propose_member("field_4_pPrev", True) == ("prev_", "")
     assert propose_member("mValue", True) == ("value_", "")
     assert propose_member("field_2C", True)[0] is None
+    assert pascal("MAX_PLAYERS") == "MaxPlayers" and pascal("DMA_Video") == "DMAVideo"
     assert propose_type("Garage_48") == ("Garage", "")
     assert propose_type("sound_obj")[0] == "SoundObj"
     assert propose_type("T_gbh_Init")[0] == "GbhInit"

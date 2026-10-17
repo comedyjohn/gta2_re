@@ -6,6 +6,7 @@
 #   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix vehicles
 #   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix all   (port/game only)
 #   port/tools/refactor/tidy_fix.sh readability-uppercase-literal-suffix platform   (or tests)
+#   REMOVE_ONLY=1 keeps only the fix-its that delete text (for misc-include-cleaner: unused includes)
 #   BUILD=build_port/clang64 T=~/.venvs/gta2-refactor/bin  (defaults)
 set -eu
 check=$1
@@ -39,6 +40,20 @@ P
 )
 [ -n "$files" ] || { echo "no files for $sub"; exit 1; }
 printf '%s\n' $files | awk '{print NR, $0}' | xargs -P 8 -L 1 bash -c '"$0" -p "$1" --quiet --checks="-*,'"$check"'" --export-fixes="$2/$3.yaml" "$4" >/dev/null 2>&1 || true' "$T/clang-tidy" "$BUILD" "$out"
+if [ -n "${REMOVE_ONLY:-}" ]; then
+    # keep only the deletions (misc-include-cleaner also wants to add includes, at one spot
+    # several times over, and clang-apply-replacements refuses those)
+    $T/python - "$out" <<'P'
+import glob, sys, yaml
+for f in glob.glob(sys.argv[1] + "/*.yaml"):
+    d = yaml.safe_load(open(f))
+    d["Diagnostics"] = [x for x in d.get("Diagnostics", []) if x["DiagnosticMessage"].get("Replacements")]
+    for x in d["Diagnostics"]:
+        x["DiagnosticMessage"]["Replacements"] = [r for r in x["DiagnosticMessage"]["Replacements"] if r["ReplacementText"] == ""]
+    d["Diagnostics"] = [x for x in d["Diagnostics"] if x["DiagnosticMessage"]["Replacements"]]
+    yaml.safe_dump(d, open(f, "w"))
+P
+fi
 ls "$out"/*.yaml >/dev/null 2>&1 || { echo "no fixes"; exit 0; }
 clang-apply-replacements-18 "$out"
 git diff --name-only -- port/game port/platform port/tests | grep -E '\.(cpp|hpp|h)$' | xargs -r "$T/clang-format" -i

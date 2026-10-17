@@ -16,17 +16,17 @@ EXTERN_GLOBAL(Fix16, kCollisionPrismHalfHeight);
     #define FIX16_RECT_HALF_HEIGHT kCollisionPrismHalfHeight
 #endif
 
-inline bool IntervalsOverlap(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
+inline bool IntervalsOverlap(const Fix16& our_min, const Fix16& our_max, const Fix16& other_min, const Fix16& other_max)
 {
-    if (ourMin < otherMin)
+    if (our_min < other_min)
     {
-        if (ourMax < otherMin)
+        if (our_max < other_min)
         {
             return false;
         }
         return true;
     }
-    if (ourMin <= otherMax)
+    if (our_min <= other_max)
     {
         return true;
     }
@@ -78,9 +78,9 @@ class Fix16Rect
     void SetRectOutOfLine(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
     void MakeRect(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
-    bool OverlapsZ(Fix16Rect* pOther)
+    bool OverlapsZ(Fix16Rect* other)
     {
-        return IntervalsOverlap(low_z_, high_z_, pOther->low_z_, pOther->high_z_);
+        return IntervalsOverlap(low_z_, high_z_, other->low_z_, other->high_z_);
     }
 
     s32 GetMidZ() const
@@ -99,10 +99,10 @@ class Fix16Rect
         bottom_ = top + height;
     }
 
-    void SetHiLowZ(Fix16 lowZ, Fix16 highZ)
+    void SetHiLowZ(Fix16 low_z, Fix16 high_z)
     {
-        this->low_z_ = lowZ;
-        this->high_z_ = highZ;
+        this->low_z_ = low_z;
+        this->high_z_ = high_z;
     }
 
     Fix16Rect(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, Fix16 z)
@@ -122,7 +122,7 @@ class Fix16Rect
     }
 
     void DoSetCurrentRect();
-    bool IntersectsSpriteRenderingRect(Sprite* pSprite);
+    bool IntersectsSpriteRenderingRect(Sprite* sprite);
     char_type CanRectEnterMovementRegion();
     void ExpandToIncludePoint(Fix16 x, Fix16 y);
     bool RectOverlapsZone(u8 zone_type);
@@ -133,11 +133,11 @@ class Fix16Rect
         return Fix16::IsBetween(left_, right_, a2->x) && Fix16::IsBetween(top_, bottom_, a2->y);
     }
 
-    bool AABBIntersects(Fix16Rect* pOther) const
+    bool AABBIntersects(Fix16Rect* other) const
     {
-        return IntervalIntersectsRange(left_, this->right_, pOther->left_, pOther->right_) &&
-                IntervalIntersectsRange(top_, this->bottom_, pOther->top_, pOther->bottom_) &&
-                IntervalIntersectsRange(low_z_, this->high_z_, pOther->low_z_, pOther->high_z_) ?
+        return IntervalIntersectsRange(left_, this->right_, other->left_, other->right_) &&
+                IntervalIntersectsRange(top_, this->bottom_, other->top_, other->bottom_) &&
+                IntervalIntersectsRange(low_z_, this->high_z_, other->low_z_, other->high_z_) ?
             true :
             false;
     }

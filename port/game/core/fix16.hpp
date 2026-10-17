@@ -419,15 +419,15 @@ class Fix16
     s32 value_;
 };
 
-bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax);
+bool IntervalIntersectsRange(const Fix16& interval_start, const Fix16& interval_end, const Fix16& range_min, const Fix16& range_max);
 
 class Ang16;
-Ang16 ArcTanLookup(const Fix16& targetTan);
+Ang16 ArcTanLookup(const Fix16& target_tan);
 
-void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
+void FindMinMax(Fix16& min_out, Fix16& max_out, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d);
 
-Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
-s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur);
+Fix16 TurnAngleToward(Fix16 cur, Fix16* target, Fix16* speed);
+s32 ClampAngleToWindow(Fix16* target, Fix16* cur);
 EXTERN_GLOBAL_ARRAY(Fix16, gSinTable, 1440);
 EXTERN_GLOBAL_ARRAY(Fix16, gCosTable, 1440);
 

@@ -26,9 +26,9 @@ void Fix16Rect::DoSetCurrentRect()
 
 // 0x4BA6C0 9.6f
 // 0x59ddf0
-bool Fix16Rect::IntersectsSpriteRenderingRect(Sprite* pSprite)
+bool Fix16Rect::IntersectsSpriteRenderingRect(Sprite* sprite)
 {
-    Fix16Point* pCorners = pSprite->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* pCorners = sprite->field_C_pCollisionShape->field_C_corners;
 
     return (IsPointInRect(&pCorners[0]) || IsPointInRect(&pCorners[1]) || IsPointInRect(&pCorners[2]) || IsPointInRect(&pCorners[3]));
 }

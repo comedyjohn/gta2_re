@@ -32,9 +32,9 @@ std::string Trim(const std::string& s)
 }
 
 // Converts a hex string (optionally starting with "0x" or "0X") into a u32.
-u32 HexStringToU32(const std::string& hexStr)
+u32 HexStringToU32(const std::string& hex_str)
 {
-    std::string s = Trim(hexStr);
+    std::string s = Trim(hex_str);
     if (s.size() >= 2 && (s.substr(0, 2) == "0x" || s.substr(0, 2) == "0X"))
     {
         s = s.substr(2);
@@ -43,35 +43,35 @@ u32 HexStringToU32(const std::string& hexStr)
 }
 
 // Extracts the value of a given key (assumed to be in quotes) from a JSON object string.
-std::string ExtractJsonStringValue(const std::string& objectStr, const std::string& key)
+std::string ExtractJsonStringValue(const std::string& object_str, const std::string& key)
 {
     std::string pattern = "\"" + key + "\"";
     std::string value;
-    std::string::size_type keyPos = objectStr.find(pattern);
+    std::string::size_type keyPos = object_str.find(pattern);
     if (keyPos == std::string::npos)
     {
         return value;
     }
     // Find the colon after the key.
-    std::string::size_type colonPos = objectStr.find(':', keyPos);
+    std::string::size_type colonPos = object_str.find(':', keyPos);
     if (colonPos == std::string::npos)
     {
         return value;
     }
     // Find the starting quote for the value.
-    std::string::size_type valueStart = objectStr.find('\"', colonPos);
+    std::string::size_type valueStart = object_str.find('\"', colonPos);
     if (valueStart == std::string::npos)
     {
         return value;
     }
     ++valueStart; // Skip the quote.
     // Find the ending quote.
-    std::string::size_type valueEnd = objectStr.find('\"', valueStart);
+    std::string::size_type valueEnd = object_str.find('\"', valueStart);
     if (valueEnd == std::string::npos)
     {
         return value;
     }
-    value = objectStr.substr(valueStart, valueEnd - valueStart);
+    value = object_str.substr(valueStart, valueEnd - valueStart);
     return Trim(value);
 }
 
@@ -170,12 +170,12 @@ std::vector<FunctionMetadata> LoadFunctionMetadataFromFile(const std::string& fi
 // If found, returns the address (as u32) where the pattern starts; otherwise returns 0.
 namespace
 {
-u32 FindFuncMetaData(u32 codeAddr)
+u32 FindFuncMetaData(u32 code_addr)
 {
     // Search backwards up to 10 bytes.
     for (u32 offset = 1; offset <= 100; ++offset)
     {
-        u32 candidateAddr = codeAddr - offset;
+        u32 candidateAddr = code_addr - offset;
         // Cast the candidate address into a pointer to bytes.
         const u8* candidate = reinterpret_cast<const u8*>(candidateAddr);
         // Check for the pattern.
@@ -189,12 +189,12 @@ u32 FindFuncMetaData(u32 codeAddr)
 }
 } // namespace
 
-void LogFuncAddr(u32 codeAddr, s32 mode)
+void LogFuncAddr(u32 code_addr, s32 mode)
 {
-    const u32 ogAddr = FindFuncMetaData(codeAddr);
+    const u32 ogAddr = FindFuncMetaData(code_addr);
     if (ogAddr == 0)
     {
-        printf("CANT FIND OG ADDR!!!! 0x%X\n", codeAddr);
+        printf("CANT FIND OG ADDR!!!! 0x%X\n", code_addr);
     }
     else
     {

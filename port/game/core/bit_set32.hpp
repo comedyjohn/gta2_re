@@ -140,6 +140,6 @@ class BitSet32
 
 struct DamageAreaFlags : BitSet32
 {
-    s16 ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5);
-    void ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width);
+    s16 ApplyDeltaForPalette(u16& sprite_idx, u8& ret, const u16& a4, const u32& a5);
+    void ApplyDelta(u16& sprite_idx, u8* array, u32& a3, u8& width);
 };

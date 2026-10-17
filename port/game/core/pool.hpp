@@ -33,18 +33,18 @@ class PoolBasic
         return pNew;
     }
 
-    void DeAllocate(PoolType* pItem)
+    void DeAllocate(PoolType* item)
     {
-        pItem->PoolDeallocate();
-        pItem->mpNext = head_;
-        head_ = pItem;
+        item->PoolDeallocate();
+        item->mpNext = head_;
+        head_ = item;
     }
 
-    PoolType* UnlinkAndReturnNext(PoolType* pOldItem)
+    PoolType* UnlinkAndReturnNext(PoolType* old_item)
     {
-        PoolType* pNewItem = pOldItem->mpNext;
-        pOldItem->mpNext = this->head_;
-        this->head_ = pOldItem;
+        PoolType* pNewItem = old_item->mpNext;
+        old_item->mpNext = this->head_;
+        this->head_ = old_item;
         return pNewItem;
     }
 
@@ -135,23 +135,23 @@ class Pool
         return tmp;
     }
 
-    void DeAllocate(PoolType* pItem)
+    void DeAllocate(PoolType* item)
     {
-        pItem->PoolDeallocate();
-        pItem->mpNext = start_;
-        start_ = pItem;
+        item->PoolDeallocate();
+        item->mpNext = start_;
+        start_ = item;
     }
 
-    void RemoveNoDeAllocate(PoolType* pItem)
+    void RemoveNoDeAllocate(PoolType* item)
     {
-        pItem->mpNext = start_;
-        start_ = pItem;
+        item->mpNext = start_;
+        start_ = item;
     }
 
-    void UpdateNextPrev(PoolType* pItem)
+    void UpdateNextPrev(PoolType* item)
     {
-        pItem->mpNext = prev_;
-        prev_ = pItem;
+        item->mpNext = prev_;
+        prev_ = item;
     }
 
     void UpdatePool()
@@ -262,13 +262,13 @@ class Pool
         }
     }
 
-    PoolType* FindAndDeAllocate(PoolType* pToFind)
+    PoolType* FindAndDeAllocate(PoolType* to_find)
     {
         PoolType* pLast = nullptr;
 
         for (PoolType* pIter = prev_; pIter; pIter = pIter->mpNext)
         {
-            if (pIter == pToFind)
+            if (pIter == to_find)
             {
                 pIter->PoolDeallocate();
 
@@ -282,19 +282,19 @@ class Pool
                 }
                 pIter->mpNext = start_;
                 start_ = pIter;
-                return pToFind;
+                return to_find;
             }
             pLast = pIter;
         }
-        return pToFind;
+        return to_find;
     }
 
-    void UnlinkFromActiveList(PoolType* toFind)
+    void UnlinkFromActiveList(PoolType* to_find)
     {
         PoolType* pLast = nullptr;
         for (PoolType* pIter = this->prev_; pIter; pIter = pIter->mpNext)
         {
-            if (pIter == toFind)
+            if (pIter == to_find)
             {
                 if (pLast)
                 {

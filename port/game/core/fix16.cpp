@@ -163,15 +163,15 @@ Ang16 Fix16::Atan2Fixed(const Fix16& x, const Fix16& y)
 }
 
 // 0x438FB0
-bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEnd, const Fix16& rangeMin, const Fix16& rangeMax)
+bool IntervalIntersectsRange(const Fix16& interval_start, const Fix16& interval_end, const Fix16& range_min, const Fix16& range_max)
 {
-    if (intervalStart < rangeMin)
+    if (interval_start < range_min)
     {
-        return intervalEnd >= rangeMin ? true : false;
+        return interval_end >= range_min ? true : false;
     }
     else
     {
-        return intervalStart <= rangeMax ? true : false;
+        return interval_start <= range_max ? true : false;
     }
 }
 
@@ -181,30 +181,30 @@ EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle);
 // Turns the angle `cur` toward `*pTarget` by at most `*pSpeed`, the short way round, and wraps the
 // result into [0, 2pi). Called by Trailer::UpdateTrailerAlignment_407CE0.
 // 0x405DA0
-Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
+Fix16 TurnAngleToward(Fix16 cur, Fix16* target, Fix16* speed)
 {
-    if (*pTarget - cur > kAngFix16HalfCircle)
+    if (*target - cur > kAngFix16HalfCircle)
     {
         cur += kAngFix16FullCircle;
     }
-    else if (*pTarget - cur < -kAngFix16HalfCircle)
+    else if (*target - cur < -kAngFix16HalfCircle)
     {
         cur -= kAngFix16FullCircle;
     }
 
-    Fix16 diff = *pTarget - cur;
+    Fix16 diff = *target - cur;
     if (diff > kFixZero)
     {
-        if (diff > *pSpeed)
+        if (diff > *speed)
         {
-            diff = *pSpeed;
+            diff = *speed;
         }
     }
     else if (diff < kFixZero)
     {
-        if (diff < -*pSpeed)
+        if (diff < -*speed)
         {
-            diff = -*pSpeed;
+            diff = -*speed;
         }
     }
 
@@ -241,64 +241,64 @@ s32 IsAngleNear(Fix16* a, Fix16* b)
 // wrap at 0 / 2pi, and returns whether it ends up on either edge. Called by
 // Trailer::UpdateTrailerAlignment_407CE0.
 // 0x405E80
-s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
+s32 ClampAngleToWindow(Fix16* target, Fix16* cur)
 {
     Fix16 lo;
     Fix16 hi;
-    if (*pTarget < kHitchAngleWindow)
+    if (*target < kHitchAngleWindow)
     {
-        lo = kHitchAngleWrapOffset + *pTarget;
-        hi = *pTarget + kHitchAngleWindow;
-        if (*pCur > lo - kHitchAngleWindow && *pCur < lo)
+        lo = kHitchAngleWrapOffset + *target;
+        hi = *target + kHitchAngleWindow;
+        if (*cur > lo - kHitchAngleWindow && *cur < lo)
         {
-            *pCur = lo;
+            *cur = lo;
         }
-        else if (*pCur > hi && *pCur < lo)
+        else if (*cur > hi && *cur < lo)
         {
-            *pCur = hi;
+            *cur = hi;
         }
     }
-    else if (*pTarget < kAngFix16HalfCircle)
+    else if (*target < kAngFix16HalfCircle)
     {
-        lo = *pTarget - kHitchAngleWindow;
-        hi = *pTarget + kHitchAngleWindow;
-        if (*pCur < lo || *pCur > hi + kHitchAngleWindow)
+        lo = *target - kHitchAngleWindow;
+        hi = *target + kHitchAngleWindow;
+        if (*cur < lo || *cur > hi + kHitchAngleWindow)
         {
-            *pCur = lo;
+            *cur = lo;
         }
-        else if (*pCur > hi)
+        else if (*cur > hi)
         {
-            *pCur = hi;
+            *cur = hi;
         }
     }
-    else if (*pTarget < kHitchAngleWrapOffset)
+    else if (*target < kHitchAngleWrapOffset)
     {
-        lo = *pTarget - kHitchAngleWindow;
-        hi = *pTarget + kHitchAngleWindow;
-        if (*pCur < hi - kHitchAngleWrapOffset || *pCur > hi)
+        lo = *target - kHitchAngleWindow;
+        hi = *target + kHitchAngleWindow;
+        if (*cur < hi - kHitchAngleWrapOffset || *cur > hi)
         {
-            *pCur = hi;
+            *cur = hi;
         }
-        else if (*pCur < lo)
+        else if (*cur < lo)
         {
-            *pCur = lo;
+            *cur = lo;
         }
     }
     else
     {
-        lo = *pTarget - kHitchAngleWindow;
-        hi = *pTarget - kHitchAngleWrapOffset;
-        if (*pCur > hi && *pCur < hi + kHitchAngleWindow)
+        lo = *target - kHitchAngleWindow;
+        hi = *target - kHitchAngleWrapOffset;
+        if (*cur > hi && *cur < hi + kHitchAngleWindow)
         {
-            *pCur = hi;
+            *cur = hi;
         }
-        else if (*pCur < lo && *pCur > hi)
+        else if (*cur < lo && *cur > hi)
         {
-            *pCur = lo;
+            *cur = lo;
         }
     }
 
-    if (static_cast<u8>(IsAngleNear(pCur, &lo)) || static_cast<u8>(IsAngleNear(pCur, &hi)))
+    if (static_cast<u8>(IsAngleNear(cur, &lo)) || static_cast<u8>(IsAngleNear(cur, &hi)))
     {
         return 1;
     }
@@ -326,7 +326,7 @@ void ArcTanTableInit()
 
 // 9.6f: 0x40E810
 // 0x405500
-Ang16 ArcTanLookup(const Fix16& targetTan)
+Ang16 ArcTanLookup(const Fix16& target_tan)
 {
     s16 low = 0;
     s16 high = 360 - 1;
@@ -339,11 +339,11 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
         // Binary search: go left if target < tanAtMid,
         // go right if target > tanAtMid,
         // exact match if equal
-        if (targetTan < tanAtMid)
+        if (target_tan < tanAtMid)
         {
             high = mid - 1;
         }
-        else if (targetTan > tanAtMid)
+        else if (target_tan > tanAtMid)
         {
             low = mid + 1;
         }
@@ -357,7 +357,7 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
             // Lower bound case
             if (mid == (0 + 1))
             {
-                if (targetTan < gTanTable[0 + 1])
+                if (target_tan < gTanTable[0 + 1])
                 {
                     mid = 0;
                 }
@@ -365,7 +365,7 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
             // Upper bound case
             else if (mid == (360 - 1))
             {
-                if (targetTan > gTanTable[360 - 1])
+                if (target_tan > gTanTable[360 - 1])
                 {
                     mid = 360;
                 }
@@ -376,39 +376,39 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
 }
 
 // 0x5A57E0
-void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
+void FindMinMax(Fix16& min_out, Fix16& max_out, const Fix16& a, const Fix16& b, const Fix16& c, const Fix16& d)
 {
-    minOut = a;
-    maxOut = a;
+    min_out = a;
+    max_out = a;
 
     // b
-    if (b < minOut)
+    if (b < min_out)
     {
-        minOut = b;
+        min_out = b;
     }
-    else if (b > maxOut)
+    else if (b > max_out)
     {
-        maxOut = b;
+        max_out = b;
     }
 
     // c
-    if (c < minOut)
+    if (c < min_out)
     {
-        minOut = c;
+        min_out = c;
     }
-    else if (c > maxOut)
+    else if (c > max_out)
     {
-        maxOut = c;
+        max_out = c;
     }
 
     // d
-    if (d < minOut)
+    if (d < min_out)
     {
-        minOut = d;
+        min_out = d;
     }
-    else if (d > maxOut)
+    else if (d > max_out)
     {
-        maxOut = d;
+        max_out = d;
     }
 }
 

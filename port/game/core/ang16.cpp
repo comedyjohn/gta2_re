@@ -54,9 +54,9 @@ Fix16 Ang16::NormalizeAngleDeltaScaled(Ang16& from, Ang16& to, Ang16& divisor)
 }
 
 // 0x405C60
-bool Ang16::IsAngleAhead(Ang16* pFrom, Ang16* pTo)
+bool Ang16::IsAngleAhead(Ang16* from, Ang16* to)
 {
-    if (*pTo - *pFrom <= kAng180)
+    if (*to - *from <= kAng180)
     {
         return true;
     }
@@ -78,9 +78,9 @@ Ang16* Ang16::AssignNormalized(const s16& value, s32 a3)
 }
 
 // 0x409340
-Ang16 Ang16::SubtractNormalized(const Ang16& toSub)
+Ang16 Ang16::SubtractNormalized(const Ang16& to_sub)
 {
-    return Ang16(r_value_ - toSub.r_value_, static_cast<u8>(0));
+    return Ang16(r_value_ - to_sub.r_value_, static_cast<u8>(0));
 }
 
 // 0x4516B0

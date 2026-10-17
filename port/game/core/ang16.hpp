@@ -194,11 +194,11 @@ class Ang16
         }
     }
 
-    static bool IsAngleAhead(Ang16* pFrom, Ang16* pTo);
+    static bool IsAngleAhead(Ang16* from, Ang16* to);
 
     void SnapToAng4();
     Ang16* AssignNormalized(const s16& value, s32 a3);
-    Ang16 SubtractNormalized(const Ang16& toSub);
+    Ang16 SubtractNormalized(const Ang16& to_sub);
     static Ang16 Fix16ToAng16OutOfLine(Fix16& value);
 
     // 10.5 0x409300 (AssignNormalized_409300) is the out-of-line copy of the normalizing constructor
@@ -344,14 +344,14 @@ class Ang8
     u8 r_value_;
 };
 
-inline void RotateAndTranslatePoint(const Fix16& pInX,
-                                    const Fix16& pInY,
-                                    const Ang16& pRotAng,
-                                    Fix16& pTransX,
-                                    Fix16& pTransY,
-                                    Fix16& pRotTransX,
-                                    Fix16& pRotTransY)
+inline void RotateAndTranslatePoint(const Fix16& in_x,
+                                    const Fix16& in_y,
+                                    const Ang16& rot_ang,
+                                    Fix16& trans_x,
+                                    Fix16& trans_y,
+                                    Fix16& rot_trans_x,
+                                    Fix16& rot_trans_y)
 {
-    pRotTransX = (((pInX - pTransX) * Ang16::Cosine(pRotAng)) + ((pInY - pTransY) * Ang16::Sine(pRotAng)));
-    pRotTransY = ((-(pInX - pTransX) * Ang16::Sine(pRotAng)) + ((pInY - pTransY) * Ang16::Cosine(pRotAng)));
+    rot_trans_x = (((in_x - trans_x) * Ang16::Cosine(rot_ang)) + ((in_y - trans_y) * Ang16::Sine(rot_ang)));
+    rot_trans_y = ((-(in_x - trans_x) * Ang16::Sine(rot_ang)) + ((in_y - trans_y) * Ang16::Cosine(rot_ang)));
 }

@@ -177,8 +177,8 @@ def qual(s):
 
 def scope_of(s):
     """Where a name must be unique. The parameters of a function's declaration and of its definition are different
-    declarations (the names may differ), so a parameter's scope includes the file."""
-    return s["owner"] + "@" + s["file"] if s["kind"] in ("param", "local") else s["owner"]
+    declarations (the names may differ), so a parameter's scope is its function declaration (the usr without the name)."""
+    return s["usr"].rsplit("@", 1)[0] if s["kind"] in ("param", "local") else s["owner"]
 
 
 def key_of(s):

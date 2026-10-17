@@ -17,7 +17,7 @@ jobs:
     - name: clang-format --dry-run -Werror
       run: |
         shopt -s globstar nullglob
-        clang-format --dry-run -Werror port/game/*.{cpp,hpp,h} port/platform/**/*.{cpp,h} port/tests/*.{cpp,hpp}
+        clang-format --dry-run -Werror port/game/**/*.{cpp,hpp,h} port/platform/**/*.{cpp,h} port/tests/*.{cpp,hpp}
       shell: bash
 
   # Every preset builds with -Werror (the presets set GTA2_WERROR=ON). aarch64 is not here yet: it

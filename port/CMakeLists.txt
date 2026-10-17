@@ -74,7 +74,8 @@ message(STATUS "SDL2: ${SDL2_LIBRARY}")
 # The game code: port/game/, forked from the decompilation's Source/ (which still builds the
 # byte-matching VC6 executable). Every .cpp in it is part of the game.
 set(GAME_DIR ${CMAKE_CURRENT_SOURCE_DIR}/game)
-file(GLOB game_sources CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp)
+file(GLOB_RECURSE game_sources CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp)
+list(FILTER game_sources EXCLUDE REGEX "/3rdParty/") # bink.cpp is added by hand below
 
 # GTA2Hax includes its own headers with Windows separators; forward them from the build directory
 set(FORWARDERS ${CMAKE_BINARY_DIR}/forwarders)
@@ -141,7 +142,7 @@ target_compile_options(gta2-server PRIVATE -Wall)
 target_link_libraries(gta2-server PRIVATE gta2_net)
 
 # Which builds can play together: a hash of the game code, regenerated when it changes
-file(GLOB compat_inputs CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp ${GAME_DIR}/*.hpp ${GAME_DIR}/*.h
+file(GLOB_RECURSE compat_inputs CONFIGURE_DEPENDS ${GAME_DIR}/*.cpp ${GAME_DIR}/*.hpp ${GAME_DIR}/*.h
      ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${CMAKE_CURRENT_SOURCE_DIR}/platform/crt.cpp)
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/gta2_compat.h
     COMMAND ${CMAKE_COMMAND} -DREPO=${REPO_ROOT} -DOUT=${CMAKE_BINARY_DIR}/gta2_compat.h

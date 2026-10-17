@@ -29,7 +29,7 @@ def demangle(names):
     return out.split("\n")
 
 
-sources = sorted(glob.glob(f"{root}/port/game/*.cpp") + glob.glob(f"{root}/port/platform/*.cpp")
+sources = sorted(glob.glob(f"{root}/port/game/**/*.cpp", recursive=True) + glob.glob(f"{root}/port/platform/*.cpp")
                  + glob.glob(f"{root}/port/platform/*/*.cpp"))
 rows = []
 # "File '...':" headers group the functions (the same inline function appears under every file using it)

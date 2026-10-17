@@ -30,10 +30,10 @@ for e in json.load(open(sys.argv[1] + "/compile_commands.json")):
         break
 P
 )
-headers=${*:-$(cd port/game && ls *.hpp *.h 2>/dev/null)}
+headers=${*:-$(cd port/game && find . -name "*.hpp" -o -name "*.h" | grep -v 3rdParty | sed "s|^\./||")}
 one() {
     h=$1
-    f="$tmp/$h.cpp"
+    f="$tmp/${h//\//_}.cpp"
     printf '#include "%s"\n' "$h" >"$f"
     if ! out=$(eval "$cmd" -fsyntax-only -x c++ "$f" 2>&1); then
         echo "FAIL $h: $(echo "$out" | grep -m1 'error' | sed 's|.*/port/game/||')"

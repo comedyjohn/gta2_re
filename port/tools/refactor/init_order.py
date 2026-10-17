@@ -42,7 +42,7 @@ def split_args(text):
 
 def definitions():
     """Yields (file, line, name, initialiser or None) for every DEFINE_GLOBAL* in the game."""
-    for path in sorted(GAME.glob("*.cpp")):
+    for path in sorted(GAME.rglob("*.cpp")):
         text = path.read_text(errors="replace")
         for m in DEFINE.finditer(text):
             depth, end = 1, m.end()

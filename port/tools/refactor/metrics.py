@@ -64,8 +64,8 @@ def main():
     args = ap.parse_args()
 
     per_file = {}
-    for p in sorted(GAME.iterdir()):
-        if p.suffix in (".cpp", ".hpp", ".h"):
+    for p in sorted(GAME.rglob("*")):
+        if p.suffix in (".cpp", ".hpp", ".h") and "3rdParty" not in p.parts:
             per_file[p.name] = file_metrics(p)
 
     cols = list(METRICS)

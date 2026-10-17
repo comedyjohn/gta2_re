@@ -21,6 +21,10 @@ sys.path.insert(0, HERE)
 import propose  # noqa: E402
 
 
+def _committed(path):
+    return subprocess.run(["git", "ls-files", "--error-unmatch", path], capture_output=True, cwd=ROOT).returncode == 0
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     apply_ = "--apply" in sys.argv
@@ -37,6 +41,10 @@ def main():
             if r and r[0] != "old" and not r[0].startswith("#"):
                 rows[r[0]] = [r[1], ""]
     final = os.path.join(NAMES, f"{sub}-{kind}.csv")
+    n = 1
+    while _committed(final):  # a record that was already applied stays; a new batch gets the next file
+        n += 1
+        final = os.path.join(NAMES, f"{sub}-{kind}-{n}.csv")
     with open(final, "w", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["old", "new"])

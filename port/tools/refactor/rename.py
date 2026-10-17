@@ -118,6 +118,8 @@ class Worker:
 
     def target_of(self, decl):
         """(new name, old spelling) if decl is renamed by this batch, else None."""
+        if not decl.spelling or decl.spelling.startswith("("):
+            return None  # unnamed enum or struct: it has no name to change
         usr = decl.get_usr()
         key = usr or ("q:" + qualified_name(decl))
         if key in self.cache:

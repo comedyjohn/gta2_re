@@ -1,7 +1,6 @@
 #include "PedGroup.hpp"
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
-#include "Globals.hpp"
 #include "Ped.hpp"
 #include "enums.hpp"
 #include "rng.hpp"

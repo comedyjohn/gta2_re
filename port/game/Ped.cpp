@@ -12,7 +12,6 @@
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
 #include "Garage_48.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Object_5C.hpp"
 #include "Particle_8.hpp"

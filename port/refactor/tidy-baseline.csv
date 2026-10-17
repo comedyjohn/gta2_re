@@ -1247,7 +1247,7 @@ port/game/Ped.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Ped.cpp,cppcoreguidelines-pro-type-union-access,14
 port/game/Ped.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Ped.cpp,misc-const-correctness,58
-port/game/Ped.cpp,misc-include-cleaner,221
+port/game/Ped.cpp,misc-include-cleaner,220
 port/game/Ped.cpp,modernize-raw-string-literal,1
 port/game/Ped.cpp,readability-convert-member-functions-to-static,7
 port/game/Ped.cpp,readability-else-after-return,10
@@ -1286,7 +1286,7 @@ port/game/PedGroup.cpp,cppcoreguidelines-pro-bounds-constant-array-index,89
 port/game/PedGroup.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,3
 port/game/PedGroup.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/PedGroup.cpp,misc-const-correctness,29
-port/game/PedGroup.cpp,misc-include-cleaner,11
+port/game/PedGroup.cpp,misc-include-cleaner,10
 port/game/PedGroup.cpp,modernize-avoid-c-arrays,1
 port/game/PedGroup.cpp,readability-convert-member-functions-to-static,1
 port/game/PedGroup.cpp,readability-else-after-return,1
@@ -1897,7 +1897,7 @@ port/game/char.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/char.cpp,cppcoreguidelines-pro-type-reinterpret-cast,7
 port/game/char.cpp,cppcoreguidelines-pro-type-union-access,111
 port/game/char.cpp,misc-const-correctness,60
-port/game/char.cpp,misc-include-cleaner,109
+port/game/char.cpp,misc-include-cleaner,105
 port/game/char.cpp,misc-no-recursion,6
 port/game/char.cpp,misc-unused-parameters,1
 port/game/char.cpp,readability-convert-member-functions-to-static,2

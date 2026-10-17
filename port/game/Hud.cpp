@@ -502,8 +502,8 @@ void Hud_CopHead_C_Array::Init_5D0210()
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, 14);
     SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
 
-    field_4C_w_fp.FromU8(SpriteIndex->field_4_width);
-    field_50_h_fp.FromU8(SpriteIndex->field_5_height);
+    field_4C_w_fp.FromU8(SpriteIndex->width_);
+    field_50_h_fp.FromU8(SpriteIndex->height_);
 
     for (auto& cop_head : field_1028_cop_heads)
     {
@@ -3090,7 +3090,7 @@ void Hud_PauseScreen_2::DrawPause_5D63B0()
         s32 max_width = Frontend::GetMaxTextWidth_5D8990(pWMessage, gPauseFont_7063F8);
 
         // u32: converts with the Fix16(u32) constructor, whose out-of-line copy is 0x4926F0
-        u32 y_offset = (gText_0x14_704DFC->field_10_lang_code != 'j') ? 158 : 164;
+        u32 y_offset = (gText_0x14_704DFC->lang_code_ != 'j') ? 158 : 164;
 
         DrawText_5D7720(pWMessage, (640 - max_width) / 2, y_offset, gPauseFont_7063F8, 2, 0, 0, 0);
 

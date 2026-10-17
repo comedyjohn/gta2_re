@@ -4889,7 +4889,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
             Car_BC* pCar = pPointer->field_8_car;
             StyleCarInfo* pInfo = gGtx_0x106C_703DD4->GetCarInfo(pCar->field_84_car_info_idx);
 
-            if ((pInfo->info_flags & car_info_flag::emergency) == car_info_flag::emergency ||
+            if ((pInfo->info_flags_ & car_info_flag::emergency) == car_info_flag::emergency ||
                 pCar->field_84_car_info_idx == CarModel::kEdselfbi)
             {
                 if (pCar->field_A4_bf.bEmergencyLights)

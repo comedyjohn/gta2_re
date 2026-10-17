@@ -6,7 +6,7 @@
 struct TextEntry
 {
     wchar_t* field_0_pwstr;
-    const char_type* field_4_pKey;
+    const char_type* key;
     s32 field_8;
 };
 
@@ -15,19 +15,19 @@ class TextTdat
   public:
     TextTdat() // inline 0x4C2420
     {
-        field_0_data = nullptr;
-        field_4_len = 0;
+        data_ = nullptr;
+        len_ = 0;
     }
 
     ~TextTdat() // inline 0x4C2430
     {
 
-        delete[] field_0_data;
+        delete[] data_;
 
-        field_0_data = nullptr;
+        data_ = nullptr;
     }
-    BYTE* field_0_data;
-    s32 field_4_len;
+    BYTE* data_;
+    s32 len_;
     void TDATLoad(u32 size);
 };
 
@@ -36,19 +36,19 @@ class TextTkey
   public:
     TextTkey() // inline 4C23F0
     {
-        field_0_tKey = nullptr;
-        field_4_tKey_count = 0;
+        t_key_ = nullptr;
+        t_key_count_ = 0;
     }
 
     ~TextTkey() // inline 0x4C2400
     {
 
-        delete[] field_0_tKey;
+        delete[] t_key_;
 
-        field_0_tKey = nullptr;
+        t_key_ = nullptr;
     }
-    TextEntry* field_0_tKey;
-    u32 field_4_tKey_count;
+    TextEntry* t_key_;
+    u32 t_key_count_;
 };
 
 class GameText
@@ -56,13 +56,13 @@ class GameText
   public:
     bool LangIsJapanese()
     {
-        return field_10_lang_code == 106;
+        return lang_code_ == 106;
     }
 
-    TextTkey field_0_tKey;
-    TextTdat field_8_tDat;
-    char_type field_10_lang_code;
-    char_type field_11_pad[3];
+    TextTkey t_key_;
+    TextTdat t_dat_;
+    char_type lang_code_;
+    char_type pad_[3];
 
     u16 RemapExtendedChar(u16 ch);
 

@@ -177,9 +177,9 @@ EXTERN_GLOBAL(CrimeReportQueue_CC*, gCrimeReportQueue_67A4B8);
 // crt_init_own_libname_21 or sub_4F7530
 void Init_Unk_Width_Height_F16_array()
 {
-    for (u32 i = 0; i < GTA2_COUNTOF(gPixelsToFix16_6F6850.list); i++)
+    for (u32 i = 0; i < GTA2_COUNTOF(gPixelsToFix16_6F6850.list_); i++)
     {
-        gPixelsToFix16_6F6850.list[i] = Fix16(i) / 64;
+        gPixelsToFix16_6F6850.list_[i] = Fix16(i) / 64;
     }
 }
 
@@ -1373,14 +1373,14 @@ void ImGuiDebugDraw()
 
         if (ImGui::Button("Change language"))
         {
-            gText_0x14_704DFC->field_10_lang_code = char_lang[currentCharIndex];
+            gText_0x14_704DFC->lang_code_ = char_lang[currentCharIndex];
             gText_0x14_704DFC->Load();
             if (gFrontend_67DC84)
             {
                 gFrontend_67DC84->SetupMenuStringsOptionsElements_4B0220();
             }
         }
-        ImGui::Text("Curr Lang Code: %c", gText_0x14_704DFC->field_10_lang_code);
+        ImGui::Text("Curr Lang Code: %c", gText_0x14_704DFC->lang_code_);
     }
 
     if (gGame_0x40_67E008)
@@ -2102,7 +2102,7 @@ void ImGuiDebugDraw()
                     SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(true_idx);
                     if (sprite_index_5AA440)
                     {
-                        if (sprite_index_5AA440->field_4_width == 20 && sprite_index_5AA440->field_5_height == 16)
+                        if (sprite_index_5AA440->width_ == 20 && sprite_index_5AA440->height_ == 16)
                         {
                             bFound = true;
                             if (spawned_obj != nullptr && spawned_obj->field_4)
@@ -2231,20 +2231,17 @@ void ImGuiDebugDraw()
                                         gCarInfo_808_678098->GetModelPhysicsFromIdx(pPlayerCar->field_84_car_info_idx);
                                     if (pModelPhy)
                                     {
-                                        ImGui::SliderInt("Turn In", &pModelPhy->field_14_turn_in.value_, 0, 4 * 16384);
-                                        ImGui::SliderInt("Turn Ratio", &pModelPhy->field_18_turn_ratio.value_, 0, 4 * 16384);
-                                        ImGui::SliderInt("Mass", &pModelPhy->field_4_mass.value_, 0, 30 * 16384);
-                                        ImGui::SliderInt("Anti Strength", &pModelPhy->field_2C_anti_strngth.value_, 0, 10 * 16384);
-                                        ImGui::SliderInt("Brake Friction", &pModelPhy->field_10_brake_friction.value_, 0, 10 * 16384);
-                                        ImGui::SliderInt("Rear End Stability",
-                                                         &pModelPhy->field_1C_rear_end_stability.value_,
-                                                         0,
-                                                         10 * 16384);
-                                        ImGui::SliderInt("Thrust", &pModelPhy->field_24_thrust.value_, 0, 10 * 16384);
-                                        ImGui::SliderInt("Skid Threshold", &pModelPhy->field_30_sked_threshold.value_, 0, 10 * 16384);
-                                        ImGui::SliderInt("Front Drive Bias", &pModelPhy->field_8_front_drive_bias.value_, 0, 10 * 16384);
-                                        ImGui::SliderInt("Front Mass Bias", &pModelPhy->field_C_front_mass_bias.value_, 0, 10 * 16384);
-                                        ImGui::SliderS8("Turbo", reinterpret_cast<char_type*>(&pModelPhy->field_1_turbo), 0, 10);
+                                        ImGui::SliderInt("Turn In", &pModelPhy->turn_in_.value_, 0, 4 * 16384);
+                                        ImGui::SliderInt("Turn Ratio", &pModelPhy->turn_ratio_.value_, 0, 4 * 16384);
+                                        ImGui::SliderInt("Mass", &pModelPhy->mass_.value_, 0, 30 * 16384);
+                                        ImGui::SliderInt("Anti Strength", &pModelPhy->anti_strngth_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Brake Friction", &pModelPhy->brake_friction_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Rear End Stability", &pModelPhy->rear_end_stability_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Thrust", &pModelPhy->thrust_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Skid Threshold", &pModelPhy->sked_threshold_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Front Drive Bias", &pModelPhy->front_drive_bias_.value_, 0, 10 * 16384);
+                                        ImGui::SliderInt("Front Mass Bias", &pModelPhy->front_mass_bias_.value_, 0, 10 * 16384);
+                                        ImGui::SliderS8("Turbo", reinterpret_cast<char_type*>(&pModelPhy->turbo_), 0, 10);
                                     }
                                     ImGui::TreePop();
                                 }
@@ -2906,7 +2903,7 @@ void ImGuiDebugDraw()
             {
                 static s32 tile_idx = 0;
                 ImGui::InputInt("Tile idx", &tile_idx, 1, 1);
-                s32 spec = gGtx_0x106C_703DD4->field_6C_spec[tile_idx];
+                s32 spec = gGtx_0x106C_703DD4->spec_[tile_idx];
                 ImGui::Value("Spec", spec);
             }
             ImGui::TreePop();
@@ -3428,7 +3425,7 @@ void ImGuiDebugDraw()
             {
                 static s32 struc_221_id = 0;
                 ImGui::SliderInt("BestStageStats_28 ID", &struc_221_id, 0, 2);
-                BestStageStats* struc = &gPlyDat_6FEAC0->field_1800_best_stats[struc_221_id];
+                BestStageStats* struc = &gPlyDat_6FEAC0->best_stats_[struc_221_id];
 
                 static s32 byte_id = 0;
                 ImGui::SliderInt("Byte ID", &byte_id, 0, 39);
@@ -3453,22 +3450,22 @@ void ImGuiDebugDraw()
                 switch (table_type)
                 {
                     case 0:
-                        pTable = &gPlyDat_6FEAC0->field_1890_stage_scores[id_1][id_2];
+                        pTable = &gPlyDat_6FEAC0->stage_scores_[id_1][id_2];
                         break;
                     case 1:
-                        pTable = &gPlyDat_6FEAC0->field_23D0_total_scores;
+                        pTable = &gPlyDat_6FEAC0->total_scores_;
                         break;
                     case 2:
-                        pTable = &gPlyDat_6FEAC0->field_24C0_alt_scores;
+                        pTable = &gPlyDat_6FEAC0->alt_scores_;
                         break;
                     default:
-                        pTable = &gPlyDat_6FEAC0->field_25B0;
+                        pTable = &gPlyDat_6FEAC0->extra_scores_;
                         break;
                 }
 
                 static s32 string_id = 0;
                 ImGui::SliderInt("string_id", &string_id, 0, 9);
-                ScoreTableLine* s_string = &pTable->field_0_score_table_line[string_id];
+                ScoreTableLine* s_string = &pTable->score_table_line_[string_id];
 
                 static char str_buf_3[10];
                 wchar_to_char(s_string->field_0_player_name, str_buf_3, 10);
@@ -3482,17 +3479,17 @@ void ImGuiDebugDraw()
             {
                 static s32 table_idx = 0;
                 ImGui::SliderInt("table_idx", &table_idx, 0, 7);
-                PlySlot* dreamy = &gPlyDat_6FEAC0->field_26A0_plyr_stats[table_idx];
+                PlySlot* dreamy = &gPlyDat_6FEAC0->plyr_stats_[table_idx];
 
                 static char str_buf_4[9];
-                wchar_to_char(dreamy->field_90_strPlayerName, str_buf_4, 9);
+                wchar_to_char(dreamy->str_player_name_, str_buf_4, 9);
                 ImGui::Text(str_buf_4);
 
                 static s32 gifted_joliot_id_1 = 0;
                 static s32 gifted_joliot_id_2 = 0;
                 ImGui::SliderInt("StageStats_C ID 1", &gifted_joliot_id_1, 0, 2);
                 ImGui::SliderInt("StageStats_C ID 2", &gifted_joliot_id_2, 0, 3);
-                StageStats* g_joliot = &dreamy->field_0_plyr_stage_stats[gifted_joliot_id_1][gifted_joliot_id_2];
+                StageStats* g_joliot = &dreamy->plyr_stage_stats_[gifted_joliot_id_1][gifted_joliot_id_2];
 
                 ImGui::Value("Joliot field_0", g_joliot->field_0_is_stage_unlocked);
                 ImGui::Value("Joliot field_4", g_joliot->field_4_stage_best_score);

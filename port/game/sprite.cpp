@@ -416,7 +416,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
         return -1;
     }
     SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
-    u32 bUnk = sprite_index_5AA440->field_5_height > 0x40U;
+    u32 bUnk = sprite_index_5AA440->height_ > 0x40U;
     SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var_, &a4);
     if (pSprt14)
     {
@@ -424,7 +424,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
         {
             bRet = 1;
             u32 sub = m_var_ - pSprt14->field_8_delta_mask;
-            ApplyDelta(sprite_idx, pSprt14->field_0_pixels, sub, sprite_index_5AA440->field_4_width);
+            ApplyDelta(sprite_idx, pSprt14->field_0_pixels, sub, sprite_index_5AA440->width_);
             pSprt14->SetKey_44AF50(sprite_idx, m_var_, a4);
         }
         else
@@ -442,10 +442,10 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
         }
         else
         {
-            pSprt14->ClearMask_48F5C0(sprite_index_5AA440->field_4_width, sprite_index_5AA440->field_5_height);
+            pSprt14->ClearMask_48F5C0(sprite_index_5AA440->width_, sprite_index_5AA440->height_);
         }
 
-        ApplyDelta(sprite_idx, pSprt14->field_0_pixels, m_var_, sprite_index_5AA440->field_4_width);
+        ApplyDelta(sprite_idx, pSprt14->field_0_pixels, m_var_, sprite_index_5AA440->width_);
         pSprt14->SetKey_44AF50(sprite_idx, m_var_, a4);
     }
 
@@ -640,8 +640,8 @@ void Sprite::IncreaseZoom_59E320(char_type delta)
 {
     u16 sprite_idx = GetTrueSpriteIdx_4BA230();
     SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
-    u32 field_5_height = sprite_index_5AA440->field_5_height;
-    u32 field_4_width = sprite_index_5AA440->field_4_width;
+    u32 field_5_height = sprite_index_5AA440->height_;
+    u32 field_4_width = sprite_index_5AA440->width_;
 
     s32 result;
     if (static_cast<s32>(field_4_width & 0xFFFFFFFE) < static_cast<s32>(field_5_height & 0xFFFFFFFE))
@@ -1106,22 +1106,20 @@ void Sprite::Draw_59EFF0()
     Sprite::EnsureVisualShape_59F990();
     if (field_38_zoom != 0)
     {
-        sprite_idx = gGtx_0x106C_703DD4->field_4_sprite_index_count - 1;
+        sprite_idx = gGtx_0x106C_703DD4->sprite_index_count_ - 1;
         pSpriteIndex = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
         converted_pal = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_30_sprite_type_enum, field_22_type_sprite_idx);
         pSpriteIndex2 = gGtx_0x106C_703DD4->GetSpriteIndex(converted_pal);
-        pSpriteIndex->field_4_width = pSpriteIndex2->field_4_width - 2 * field_38_zoom;
-        pSpriteIndex->field_5_height = pSpriteIndex2->field_5_height - 2 * field_38_zoom;
-        if (!pSpriteIndex->field_4_width || !pSpriteIndex->field_5_height)
+        pSpriteIndex->width_ = pSpriteIndex2->width_ - 2 * field_38_zoom;
+        pSpriteIndex->height_ = pSpriteIndex2->height_ - 2 * field_38_zoom;
+        if (!pSpriteIndex->width_ || !pSpriteIndex->height_)
         {
             return;
         }
-        pSpriteIndex->field_0_pData = &pSpriteIndex2->field_0_pData[257 * static_cast<u8>(field_38_zoom)];
+        pSpriteIndex->data_ = &pSpriteIndex2->data_[257 * static_cast<u8>(field_38_zoom)];
         pal = Sprite::GetTruePalette_59EAA0();
-        pTexture = gTextureCache_15D8_705064->SetSharedTextureData_5B9710(pSpriteIndex->field_4_width,
-                                                                          pSpriteIndex->field_5_height,
-                                                                          pSpriteIndex->field_0_pData,
-                                                                          pal);
+        pTexture =
+            gTextureCache_15D8_705064->SetSharedTextureData_5B9710(pSpriteIndex->width_, pSpriteIndex->height_, pSpriteIndex->data_, pal);
     }
     else
     {
@@ -1140,8 +1138,8 @@ void Sprite::Draw_59EFF0()
 
     Fix16Point* pRect = field_4_pVisualShape->field_C_corners;
 
-    u = pSpriteIndex->field_4_width - 0.30000001F;
-    v = pSpriteIndex->field_5_height - 0.30000001F;
+    u = pSpriteIndex->width_ - 0.30000001F;
+    v = pSpriteIndex->height_ - 0.30000001F;
 
     Fix16 new_zpos = RoundZToLayer_4B9C70(field_1C_zpos);
 
@@ -1185,8 +1183,8 @@ void Sprite::Draw_59EFF0()
             if (bRet)
             {
                 gTextureCache_15D8_705064->SetCarDamageTextureSizeAndPalette_5B96B0(unkDeltaRelated,
-                                                                                    pSpriteIndex->field_4_width,
-                                                                                    pSpriteIndex->field_5_height,
+                                                                                    pSpriteIndex->width_,
+                                                                                    pSpriteIndex->height_,
                                                                                     Sprite::GetTruePalette_59EAA0());
             }
             pTexture = gTextureCache_15D8_705064->GetCarDamageTexture_5B95D0(unkDeltaRelated);
@@ -1251,8 +1249,8 @@ void Sprite::Draw_59EFF0()
             if (bRet)
             {
                 gTextureCache_15D8_705064->SetCarDamageTextureSizeAndPalette_5B96B0(unkDeltaRelated,
-                                                                                    pSpriteIndex->field_4_width,
-                                                                                    pSpriteIndex->field_5_height,
+                                                                                    pSpriteIndex->width_,
+                                                                                    pSpriteIndex->height_,
                                                                                     Sprite::GetTruePalette_59EAA0());
             }
             pTexture = gTextureCache_15D8_705064->GetCarDamageTexture_5B95D0(unkDeltaRelated);
@@ -1301,13 +1299,13 @@ void Sprite::EnsureVisualShape_59F990()
 
         if (this->field_30_sprite_type_enum == SpriteTypes::kCodeObj2)
         {
-            w = gPixelsToFix16_6F6850.list[SpriteIndex->field_4_width] / 2;
-            h = gPixelsToFix16_6F6850.list[SpriteIndex->field_5_height] / 2;
+            w = gPixelsToFix16_6F6850.list_[SpriteIndex->width_] / 2;
+            h = gPixelsToFix16_6F6850.list_[SpriteIndex->height_] / 2;
         }
         else
         {
-            w = gPixelsToFix16_6F6850.list[SpriteIndex->field_4_width];
-            h = gPixelsToFix16_6F6850.list[SpriteIndex->field_5_height];
+            w = gPixelsToFix16_6F6850.list_[SpriteIndex->width_];
+            h = gPixelsToFix16_6F6850.list_[SpriteIndex->height_];
         }
         field_4_pVisualShape->SetWidthHeight_4BA070(w, h);
     }
@@ -1321,8 +1319,8 @@ void Sprite::UpdateDimensionsFromSpriteIndex_59FA40()
         const u16 idx = GetTrueSpriteIdx_4BA230();
         SpriteIndex* pSprite_index = gGtx_0x106C_703DD4->GetSpriteIndex(idx);
 
-        const Fix16 height = gPixelsToFix16_6F6850.list[pSprite_index->field_5_height];
-        const Fix16 width = gPixelsToFix16_6F6850.list[pSprite_index->field_4_width];
+        const Fix16 height = gPixelsToFix16_6F6850.list_[pSprite_index->height_];
+        const Fix16 width = gPixelsToFix16_6F6850.list_[pSprite_index->width_];
 
         field_4_pVisualShape->SetWidthHeightLazy_4BA030(width, height);
     }

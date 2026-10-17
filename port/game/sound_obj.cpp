@@ -1593,7 +1593,7 @@ void sound_obj::HandleTrainEngineSound_4140C0(Sound_Params_8* pParams)
     Car_BC* pCar = pParams->field_0_pObj->field_8_car_bc_ptr;
     Fix16 car_speed;
     car_speed = pCar->GetCarLinearSpeed_43A240();
-    Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+    Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
 
     if (car_speed > kFixZero && max_speed > kFixZero)
     {
@@ -1640,7 +1640,7 @@ void sound_obj::HandleTrainCabRollingFrictionSound_4143A0(Sound_Params_8* pParam
     Car_BC* pCar = pParams->field_0_pObj->field_8_car_bc_ptr;
     Fix16 car_speed;
     car_speed = pCar->GetCarLinearSpeed_43A240();
-    Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+    Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
     if (car_speed > kFixZero && max_speed > kFixZero)
     {
         if (CalculateDistance_419020(Fix16(3686400, 0)))
@@ -1769,7 +1769,7 @@ void sound_obj::Tank_414A50(Sound_Params_8* pParams)
         {
             Fix16 vol_mult;
             vol_mult = pCar->GetCarLinearSpeed_43A240();
-            Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+            Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
             if (max_speed > kFixZero)
             {
                 if (vol_mult > max_speed)
@@ -1900,12 +1900,12 @@ void sound_obj::Tank_415190(Sound_Params_8* pParams)
         {
             Fix16 vol_mult;
             vol_mult = pCar->GetCarLinearSpeed_43A240();
-            Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+            Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
             if (max_speed > kFixZero)
             {
                 if (vol_mult > max_speed)
                 {
-                    vol_mult = gCarInfo_48_6FE258->field_28_max_speed;
+                    vol_mult = gCarInfo_48_6FE258->max_speed_;
                 }
 
                 u8 vol = Fix16::RoundToInt((vol_mult / max_speed) * Fix16(1310720, 0));
@@ -2081,7 +2081,7 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
     {
         Fix16 gas_pedal;
         gas_pedal = pCar->GetCarLinearSpeed_43A240();
-        Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+        Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
         u8 emitting_vol;
         if (max_speed > kFixZero)
         {
@@ -2117,8 +2117,8 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
                 }
                 else
                 {
-                    Fix16 gear2_speed = gCarInfo_48_6FE258->field_40_gear2_speed;
-                    Fix16 gear3_speed = gCarInfo_48_6FE258->field_44_gear3_speed;
+                    Fix16 gear2_speed = gCarInfo_48_6FE258->gear2_speed_;
+                    Fix16 gear3_speed = gCarInfo_48_6FE258->gear3_speed_;
                     if (gas_pedal < gear2_speed)
                     {
                         emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * (gas_pedal / gear2_speed)) + 25;
@@ -2183,7 +2183,7 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
         if (pCar->field_58_physics)
         {
             pCar->field_58_physics->SetModelPhysicsGlobal_562EB0();
-            Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+            Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
             Fix16 speed;
             speed = pCar->GetCarLinearSpeed_43A240();
 
@@ -2233,8 +2233,8 @@ char_type sound_obj::Type_1_6_416260(sound_0x68* pSound)
                     }
                     else
                     {
-                        Fix16 gear2_speed = gCarInfo_48_6FE258->field_40_gear2_speed;
-                        Fix16 gear3_speed = gCarInfo_48_6FE258->field_44_gear3_speed;
+                        Fix16 gear2_speed = gCarInfo_48_6FE258->gear2_speed_;
+                        Fix16 gear3_speed = gCarInfo_48_6FE258->gear3_speed_;
                         if (speed < gear2_speed)
                         {
                             if (pSound->field_58_type == 1)
@@ -2853,7 +2853,7 @@ void sound_obj::HandleAICarEngineSound_418190(Sound_Params_8* pParams)
 {
     if (!pParams->field_4_bDrivenByPlayer)
     {
-        Fix16 max_speed = gCarInfo_48_6FE258->field_28_max_speed;
+        Fix16 max_speed = gCarInfo_48_6FE258->max_speed_;
         Fix16 speed;
         speed = pParams->field_0_pObj->field_8_car_bc_ptr->GetCarLinearSpeed_43A240();
         if (max_speed > kFixZero && speed > kFixZero && CalculateDistance_419020(Fix16(0x144000, 0)))
@@ -3041,10 +3041,10 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
         {
             if (pPhysics->field_AC_drive_wheels_locked_q > 0)
             {
-                if (gCarInfo_48_6FE258->field_28_max_speed > kFixZero)
+                if (gCarInfo_48_6FE258->max_speed_ > kFixZero)
                 {
                     Fix16 speed = pCar->GetCarLinearSpeed_43A240();
-                    speed /= gCarInfo_48_6FE258->field_28_max_speed;
+                    speed /= gCarInfo_48_6FE258->max_speed_;
                     emitVol = Fix16::RoundToInt(Fix16(983040, 0) * speed) + 10;
                 }
                 else
@@ -3055,10 +3055,10 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
             else
             {
                 pPhysics->SetCarInfoGlobal_562ED0();
-                if (pPhysics->field_84_front_skid > gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1)
+                if (pPhysics->field_84_front_skid > gCarInfo_2C_6FE0E4->skid_threshhold_1_)
                 {
-                    Fix16 front_scrub = (pPhysics->field_84_front_skid - gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1) /
-                        gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1;
+                    Fix16 front_scrub =
+                        (pPhysics->field_84_front_skid - gCarInfo_2C_6FE0E4->skid_threshhold_1_) / gCarInfo_2C_6FE0E4->skid_threshhold_1_;
                     if (front_scrub > kFpOne_66F3F4)
                     {
                         front_scrub = kFpOne_66F3F4;
@@ -3070,10 +3070,10 @@ void sound_obj::HandleCarTireScrubSound_418720(Sound_Params_8* pParams)
                     }
                 }
 
-                if (pPhysics->field_88_rear_skid > gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2)
+                if (pPhysics->field_88_rear_skid > gCarInfo_2C_6FE0E4->skid_threshhold_2_)
                 {
-                    Fix16 rear_scrub = (pPhysics->field_88_rear_skid - gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2) /
-                        gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2;
+                    Fix16 rear_scrub =
+                        (pPhysics->field_88_rear_skid - gCarInfo_2C_6FE0E4->skid_threshhold_2_) / gCarInfo_2C_6FE0E4->skid_threshhold_2_;
                     if (rear_scrub > kFpOne_66F3F4)
                     {
                         rear_scrub = kFpOne_66F3F4;
@@ -3151,13 +3151,13 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
 
             if (pPhysics->field_AC_drive_wheels_locked_q > 0)
             {
-                if (gCarInfo_48_6FE258->field_28_max_speed > kFixZero)
+                if (gCarInfo_48_6FE258->max_speed_ > kFixZero)
                 {
                     // Written out: with `GetCarLinearSpeed() / gCarInfo->field_28` VC6 binds the divisor's
                     // reference before the call (`lea 0x28(%ecx)` held across it); the original reloads
                     // gCarInfo_48 after the shift, which only the raw expression gives.
                     skid_amount = Fix16(static_cast<s32>((static_cast<__int64>(pCar->GetCarLinearSpeed_43A240().value_) << 14) /
-                                                         gCarInfo_48_6FE258->field_28_max_speed.value_),
+                                                         gCarInfo_48_6FE258->max_speed_.value_),
                                         0);
                     pSound->field_20_rate = rate + Fix16::RoundToInt(Fix16(98304000, 0) * skid_amount);
                 }
@@ -3168,20 +3168,20 @@ char_type sound_obj::Type_10_HandleCarSkidSound_418940(sound_0x68* pSound)
             }
             else
             {
-                if (pPhysics->field_84_front_skid > gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1)
+                if (pPhysics->field_84_front_skid > gCarInfo_2C_6FE0E4->skid_threshhold_1_)
                 {
-                    front_skid = (pPhysics->field_84_front_skid - gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1) /
-                        gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1;
+                    front_skid =
+                        (pPhysics->field_84_front_skid - gCarInfo_2C_6FE0E4->skid_threshhold_1_) / gCarInfo_2C_6FE0E4->skid_threshhold_1_;
                     if (front_skid > kFpOne_66F3F4)
                     {
                         front_skid = kFpOne_66F3F4;
                     }
                 }
 
-                if (pPhysics->field_88_rear_skid > gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2)
+                if (pPhysics->field_88_rear_skid > gCarInfo_2C_6FE0E4->skid_threshhold_2_)
                 {
-                    rear_skid = (pPhysics->field_88_rear_skid - gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2) /
-                        gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2;
+                    rear_skid =
+                        (pPhysics->field_88_rear_skid - gCarInfo_2C_6FE0E4->skid_threshhold_2_) / gCarInfo_2C_6FE0E4->skid_threshhold_2_;
                     if (rear_skid > kFpOne_66F3F4)
                     {
                         rear_skid = kFpOne_66F3F4;

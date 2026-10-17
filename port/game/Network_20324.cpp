@@ -984,7 +984,7 @@ char_type* GetString_519A00(const char_type* pKey)
 {
     wchar_t* pText = gtext_0x14_6F87F0->Find(pKey);
 
-    if (gtext_0x14_6F87F0->field_10_lang_code == 'j')
+    if (gtext_0x14_6F87F0->lang_code_ == 'j')
     {
         WideToDbcs_519960(Dest_6F88A4, pText);
     }
@@ -998,7 +998,7 @@ char_type* GetString_519A00(const char_type* pKey)
 // 0x519a50
 void Network_20324::GetString_519A50(wchar_t* Dest, char_type* Source, size_t MaxCount)
 {
-    if (gtext_0x14_6F87F0->field_10_lang_code == 'j')
+    if (gtext_0x14_6F87F0->lang_code_ == 'j')
     {
         DbcsToWide_5199B0(Dest, Source);
     }
@@ -1147,7 +1147,7 @@ void Network_20324::cb_AddPlayerToList_519E30(Network_20324* pNetUi, wchar_t* pN
     LVITEMA item;
     char_type name[260];
 
-    if (gtext_0x14_6F87F0->field_10_lang_code == 'j')
+    if (gtext_0x14_6F87F0->lang_code_ == 'j')
     {
         WideToDbcs_519960(name, pName);
     }

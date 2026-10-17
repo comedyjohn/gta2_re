@@ -16,8 +16,8 @@ struct StageStats
 // One player slot: name and the stats of the 3 main stages x 4 (main + 3 bonus) stages
 struct PlySlot
 {
-    StageStats field_0_plyr_stage_stats[3][4];
-    wchar_t field_90_strPlayerName[9];
+    StageStats plyr_stage_stats_[3][4];
+    wchar_t str_player_name_[9];
 
     PlySlot();
     ~PlySlot() = default; // 0x56B620
@@ -44,7 +44,7 @@ struct HighScoreTable
 
     char_type InsertScore(const wchar_t* pFindStr, u32 findScore);
 
-    ScoreTableLine field_0_score_table_line[10];
+    ScoreTableLine score_table_line_[10];
 };
 
 // The best of each of the 10 statistics (GameSession statistics) in a main stage
@@ -57,15 +57,15 @@ struct BestStageStats
 // (player\hiscores.hsc)
 struct PlyDat
 {
-    u8 field_0_file_buffer[0x1800]; // the start of the object is reused as the buffer when saving the files
-    BestStageStats field_1800_best_stats[3];
-    s32 field_1878_best_car_damage_cost[3];
-    s32 field_1884_best_evasion_rating[3];
-    HighScoreTable field_1890_stage_scores[3][4];
-    HighScoreTable field_23D0_total_scores;
-    HighScoreTable field_24C0_alt_scores;
-    HighScoreTable field_25B0;
-    PlySlot field_26A0_plyr_stats[8];
+    u8 file_buffer_[0x1800]; // the start of the object is reused as the buffer when saving the files
+    BestStageStats best_stats_[3];
+    s32 best_car_damage_cost_[3];
+    s32 best_evasion_rating_[3];
+    HighScoreTable stage_scores_[3][4];
+    HighScoreTable total_scores_;
+    HighScoreTable alt_scores_;
+    HighScoreTable extra_scores_;
+    PlySlot plyr_stats_[8];
 
     PlyDat();
     ~PlyDat() = default; // 0x56B810

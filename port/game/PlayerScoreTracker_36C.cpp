@@ -322,7 +322,7 @@ void PlayerScoreTracker_36C::ResetCarModelFlags_592380(char_type bits)
         {
             if (gGtx_0x106C_703DD4->DoesCarExist(i) && gGtx_0x106C_703DD4->IsCarModelInRecycleList(i))
             {
-                const u8 wreck = gGtx_0x106C_703DD4->GetCarInfo(i)->wreck;
+                const u8 wreck = gGtx_0x106C_703DD4->GetCarInfo(i)->wreck_;
 
                 if (wreck == car_wreck::none_99)
                 {
@@ -394,7 +394,7 @@ void PlayerScoreTracker_36C::SetCarModelFlag_592570(char_type flag, s32 car_mode
 // 0x5925b0
 s32 PlayerScoreTracker_36C::GetCarScoreValue_5925B0(u32 car_model, u8 reward_tier)
 {
-    u32 result = gCarInfo_808_678098->GetModelPhysicsFromIdx(car_model)->field_2_value;
+    u32 result = gCarInfo_808_678098->GetModelPhysicsFromIdx(car_model)->value_;
 
     switch (reward_tier)
     {

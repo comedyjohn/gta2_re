@@ -215,13 +215,13 @@ class CarPhysics_B0
     {
         if (get_revs_561940() != 0)
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust +
-                ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->field_18_fith_thrust)))) * 2;
+            return gCarInfo_2C_6FE0E4->half_thrust_ +
+                ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->fith_thrust_)))) * 2;
         }
         else
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust +
-                ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->field_18_fith_thrust))));
+            return gCarInfo_2C_6FE0E4->half_thrust_ +
+                ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->fith_thrust_))));
         }
     }
 
@@ -230,13 +230,13 @@ class CarPhysics_B0
     {
         if (get_revs_561940() != 0)
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal).MultiplyInt(2));
+            return gCarInfo_2C_6FE0E4->half_thrust_.Add(
+                gCarInfo_2C_6FE0E4->fith_thrust_.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal).MultiplyInt(2));
         }
         else
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust.Add(
-                gCarInfo_2C_6FE0E4->field_18_fith_thrust.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal));
+            return gCarInfo_2C_6FE0E4->half_thrust_.Add(
+                gCarInfo_2C_6FE0E4->fith_thrust_.Multiply(gDamageSpeedFactor_6FE348).Multiply(field_60_gas_pedal));
         }
     }
 
@@ -244,11 +244,11 @@ class CarPhysics_B0
     {
         if (get_revs_561940())
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust + (gCarInfo_2C_6FE0E4->field_18_fith_thrust * this->field_60_gas_pedal) * 2;
+            return gCarInfo_2C_6FE0E4->half_thrust_ + (gCarInfo_2C_6FE0E4->fith_thrust_ * this->field_60_gas_pedal) * 2;
         }
         else
         {
-            return gCarInfo_2C_6FE0E4->field_14_half_thrust + gCarInfo_2C_6FE0E4->field_18_fith_thrust * this->field_60_gas_pedal;
+            return gCarInfo_2C_6FE0E4->half_thrust_ + gCarInfo_2C_6FE0E4->fith_thrust_ * this->field_60_gas_pedal;
         }
     }
 

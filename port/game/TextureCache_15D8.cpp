@@ -50,9 +50,9 @@ void RemapTextureSet_14::LoadTextures_5B8F00()
 
             field_0_pTextures[i++] = pgbh_RegisterTexture(
                 pSpriteIndex
-                    ->field_4_width, // note: missing xor of register due to passing BYTE -> BYTE param instead of BYTE -> s32 param, xor clears up 24 bits
-                pSpriteIndex->field_5_height,
-                pSpriteIndex->field_0_pData,
+                    ->width_, // note: missing xor of register due to passing BYTE -> BYTE param instead of BYTE -> s32 param, xor clears up 24 bits
+                pSpriteIndex->height_,
+                pSpriteIndex->data_,
                 t2, // pal idx
                 0);
         }
@@ -76,11 +76,8 @@ void RemapTextureSet_14::LoadRemappedTextures_5B8F70()
             {
                 const s16 converted_pal_idx = gGtx_0x106C_703DD4->GetTruePalette(field_C_pal_type, texture_idx);
                 const u16 physPal = gGtx_0x106C_703DD4->GetPhysPal(converted_pal_idx);
-                field_0_pTextures[texture_idx + (pal_idx * field_6_remaps_per_sprite)] = pgbh_RegisterTexture(pSpriteIndex->field_4_width,
-                                                                                                              pSpriteIndex->field_5_height,
-                                                                                                              pSpriteIndex->field_0_pData,
-                                                                                                              physPal,
-                                                                                                              1);
+                field_0_pTextures[texture_idx + (pal_idx * field_6_remaps_per_sprite)] =
+                    pgbh_RegisterTexture(pSpriteIndex->width_, pSpriteIndex->height_, pSpriteIndex->data_, physPal, 1);
 
                 gRemappedTextureCounter_704F28++;
             }
@@ -166,18 +163,15 @@ s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
     const u16 og_idx = field_15D4_next_digit_idx;
     const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex(SpriteTypes::kUser, palette);
     SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_idx);
-    u8* field_0_pData = sprite_index_5AA440->field_0_pData;
+    u8* field_0_pData = sprite_index_5AA440->data_;
     const u16 phys_pal_5AA6F0 = gGtx_0x106C_703DD4->GetPhysPal(gGtx_0x106C_703DD4->GetTruePalette(PaletteTypes::kSprites, sprite_idx));
 
     field_15D4_next_digit_idx += num_of_digits;
 
     for (s32 i = 0; i < num_of_digits; i++)
     {
-        field_10C4_digit_textures[og_idx + i].field_4_pTexture = pgbh_RegisterTexture(sprite_index_5AA440->field_4_width,
-                                                                                      sprite_index_5AA440->field_5_height,
-                                                                                      field_0_pData,
-                                                                                      phys_pal_5AA6F0,
-                                                                                      0);
+        field_10C4_digit_textures[og_idx + i].field_4_pTexture =
+            pgbh_RegisterTexture(sprite_index_5AA440->width_, sprite_index_5AA440->height_, field_0_pData, phys_pal_5AA6F0, 0);
         field_10C4_digit_textures[og_idx + i].field_0_pPixelData = field_0_pData;
     }
     return og_idx;

@@ -54,9 +54,9 @@ void KanjiFont_8EC::Load_kanji_dat_4D2090()
     ChunkHeader chunkHeader; // [esp+10h] [ebp-8h] BYREF
     for (readSize = sizeof(chunkHeader); File::GlobalRead(&chunkHeader, &readSize); readSize = sizeof(chunkHeader))
     {
-        if (chunkHeader.field_4_size)
+        if (chunkHeader.size_)
         {
-            LoadChunks_4D1FC0(chunkHeader.field_0_type, chunkHeader.field_4_size);
+            LoadChunks_4D1FC0(chunkHeader.type_, chunkHeader.size_);
         }
     }
     File::GlobalClose();
@@ -303,7 +303,7 @@ STexture* KanjiFont_8EC::GetSmallGlyphTexture_4D2710(wchar_t text_char)
         }
     }
 
-    field_8D0_pSprtData = pOldest->field_8_sprt_index->field_0_pData;
+    field_8D0_pSprtData = pOldest->field_8_sprt_index->data_;
     field_8D8_pTexture = pOldest->field_4_pTexture;
 
     pOldest->field_0_colour = field_8E8_colour;
@@ -340,7 +340,7 @@ STexture* KanjiFont_8EC::GetLargeGlyphTexture_4D27D0(wchar_t text_char)
         }
     }
 
-    field_8DC_pSprtData = pOldest->field_8_sprt_index->field_0_pData;
+    field_8DC_pSprtData = pOldest->field_8_sprt_index->data_;
     field_8E4_pTexture = pOldest->field_4_pTexture;
 
     pOldest->field_0_colour = field_8E8_colour;

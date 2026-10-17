@@ -117,7 +117,7 @@ void ConvertColourBanks_5D7CB0()
 // 0x5D7CC0
 void ConvertColourBanks_5D7CC0()
 {
-    if (gGtx_0x106C_703DD4 && gGtx_0x106C_703DD4->field_6A_palettes_converted == 0)
+    if (gGtx_0x106C_703DD4 && gGtx_0x106C_703DD4->palettes_converted_ == 0)
     {
         s32 phys_pal_len = gGtx_0x106C_703DD4->GetPhysicalPalettesLen();
         u32 max_idx = static_cast<u32>(phys_pal_len) / 64;
@@ -130,7 +130,7 @@ void ConvertColourBanks_5D7CC0()
         {
             pConvertColourBank(gGtx_0x106C_703DD4->GetPalData(i * 64));
         }
-        gGtx_0x106C_703DD4->field_6A_palettes_converted = 1;
+        gGtx_0x106C_703DD4->palettes_converted_ = 1;
     }
 }
 
@@ -178,8 +178,8 @@ void DrawFigure_5D7EC0(s32 sprite_type,
 
     Fix16 half_w;
     Fix16 half_h;
-    half_w = (Fix16(sprite_index_5AA440->field_4_width) / 2) * scale;
-    half_h = (Fix16(sprite_index_5AA440->field_5_height) / 2) * scale;
+    half_w = (Fix16(sprite_index_5AA440->width_) / 2) * scale;
+    half_h = (Fix16(sprite_index_5AA440->height_) / 2) * scale;
 
     u32 flags;
 
@@ -217,8 +217,8 @@ void DrawFigure_5D7EC0(s32 sprite_type,
     gQuadVerts_706B88.field_0_verts[3].y = ((y_pos + point.y).ToFloat());
     gQuadVerts_706B88.field_0_verts[3].z = 0.000099999997F;
 
-    f32 u = sprite_index_5AA440->field_4_width - 0.000099999997F;
-    f32 v = sprite_index_5AA440->field_5_height - 0.000099999997F;
+    f32 u = sprite_index_5AA440->width_ - 0.000099999997F;
+    f32 v = sprite_index_5AA440->height_ - 0.000099999997F;
     gQuadVerts_706B88.field_0_verts[0].u = 0.0;
     gQuadVerts_706B88.field_0_verts[0].v = 0.0;
     gQuadVerts_706B88.field_0_verts[1].v = 0.0;
@@ -472,8 +472,8 @@ void DrawText_5D8A10(const wchar_t* pText,
                 pTexture = gKanjiFont_6F5168->GetSmallGlyphTexture_4D2710(text_char);
             }
 
-            sprite_w = Fix16(pSprIdx->field_4_width) * scale_fp;
-            sprite_h = Fix16(pSprIdx->field_5_height) * scale_fp;
+            sprite_w = Fix16(pSprIdx->width_) * scale_fp;
+            sprite_h = Fix16(pSprIdx->height_) * scale_fp;
 
             // Each corner converts its coordinate again: VC6 CSEs the repeated ToFloat()s
             // (x0/y0 stay on the FPU stack, x1/y1 go through a stack temp like the original)
@@ -493,8 +493,8 @@ void DrawText_5D8A10(const wchar_t* pText,
             // The double parentheses are two no-op expression nodes each (see "x87 code: the scheduler
             // works in 81-node windows" in docs/matching_quirks.md). With these 4 nodes the window
             // breaks before the zero u/v stores, so they are issued after the DrawQuad pushes
-            Fix16 u(((pSprIdx->field_4_width - 0.0001F)));
-            Fix16 v(((pSprIdx->field_5_height - 0.0001F)));
+            Fix16 u(((pSprIdx->width_ - 0.0001F)));
+            Fix16 v(((pSprIdx->height_ - 0.0001F)));
 
             gQuadVerts_706B88.field_0_verts[0].u = 0.0F;
             gQuadVerts_706B88.field_0_verts[0].v = 0.0F;

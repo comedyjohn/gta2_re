@@ -28,7 +28,7 @@ struct PixelsToFix16Table
     {
         for (s32 i = 0; i < 256; i++)
         {
-            list[i] = Fix16(i) / 64;
+            list_[i] = Fix16(i) / 64;
         }
     }
 
@@ -36,12 +36,12 @@ struct PixelsToFix16Table
     {
         if (var < 0)
         {
-            return -list[-var];
+            return -list_[-var];
         }
-        return list[var];
+        return list_[var];
     }
 
-    Fix16 list[256];
+    Fix16 list_[256];
 };
 
 EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16_6F6850);
@@ -49,31 +49,31 @@ EXTERN_GLOBAL(PixelsToFix16Table, gPixelsToFix16_6F6850);
 class ModelPhysics
 {
   public:
-    u8 field_0_model;
-    s8 field_1_turbo;
-    u8 field_2_value;
-    s8 field_3_padding;
-    Fix16 field_4_mass;
-    Fix16 field_8_front_drive_bias;
-    Fix16 field_C_front_mass_bias;
-    Fix16 field_10_brake_friction;
-    Fix16 field_14_turn_in;
-    Fix16 field_18_turn_ratio;
-    Fix16 field_1C_rear_end_stability;
-    Fix16 field_20_handbrake_slide_value;
-    Fix16 field_24_thrust;
-    Fix16 field_28_max_speed;
-    Fix16 field_2C_anti_strngth;
-    Fix16 field_30_sked_threshold;
-    Fix16 field_34_gear1_multiplier;
-    Fix16 field_38_gear2_multiplier;
-    Fix16 field_3C_gear3_multiplier;
-    Fix16 field_40_gear2_speed;
-    Fix16 field_44_gear3_speed;
+    u8 model_;
+    s8 turbo_;
+    u8 value_;
+    s8 padding_;
+    Fix16 mass_;
+    Fix16 front_drive_bias_;
+    Fix16 front_mass_bias_;
+    Fix16 brake_friction_;
+    Fix16 turn_in_;
+    Fix16 turn_ratio_;
+    Fix16 rear_end_stability_;
+    Fix16 handbrake_slide_value_;
+    Fix16 thrust_;
+    Fix16 max_speed_;
+    Fix16 anti_strngth_;
+    Fix16 sked_threshold_;
+    Fix16 gear1_multiplier_;
+    Fix16 gear2_multiplier_;
+    Fix16 gear3_multiplier_;
+    Fix16 gear2_speed_;
+    Fix16 gear3_speed_;
 
     Fix16 GetAntiStrngth()
     {
-        return field_2C_anti_strngth;
+        return anti_strngth_;
     }
 
     void ConvertMass();
@@ -86,16 +86,16 @@ class CarModelInfo
     ~CarModelInfo() = default; // 0x4549B0
     void CalculateCarInfo(s32 idx);
 
-    Fix16 field_0_moment_of_inertia;
-    Fix16 field_4_front_wheel_offset;
-    Fix16 field_8_rear_wheel_offset;
-    Fix16Point field_C_center_of_mass_offset;
-    Fix16 field_14_half_thrust;
-    Fix16 field_18_fith_thrust;
-    Fix16 field_1C_max_thrust_with_turbo;
-    Fix16 field_20_front_drive_bias;
-    Fix16 field_24_skid_threshhold_1;
-    Fix16 field_28_skid_threshhold_2;
+    Fix16 moment_of_inertia_;
+    Fix16 front_wheel_offset_;
+    Fix16 rear_wheel_offset_;
+    Fix16Point center_of_mass_offset_;
+    Fix16 half_thrust_;
+    Fix16 fith_thrust_;
+    Fix16 max_thrust_with_turbo_;
+    Fix16 front_drive_bias_;
+    Fix16 skid_threshhold_1_;
+    Fix16 skid_threshhold_2_;
 };
 
 class CarInfoTable
@@ -123,10 +123,10 @@ class CarInfoTable
     static s32 FloatStrToFix16(char* pStr, Fix16& pOut);
     static s32 StrToInt(const char* pStr, s16* pOut);
 
-    CarModelInfo* field_0_ptr_array[256];
-    CarModelInfo* field_400_raw_data;
-    ModelPhysics* field_404_model_physics_array[256];
-    ModelPhysics* field_804_raw_data;
+    CarModelInfo* ptr_array_[256];
+    CarModelInfo* raw_car_info_;
+    ModelPhysics* model_physics_array_[256];
+    ModelPhysics* raw_model_physics_;
 };
 
 EXTERN_GLOBAL(CarInfoTable*, gCarInfo_808_678098);

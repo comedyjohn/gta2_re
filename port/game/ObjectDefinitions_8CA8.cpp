@@ -4614,8 +4614,8 @@ void ObjectDefinition_74::SetDimensionsFromSprite_533090()
     {
         u16 sprite_id = gGtx_0x106C_703DD4->GetSpriteTrueIndex(field_28_sprite_type, field_1E_base_sprite_idx);
         SpriteIndex* sprite = gGtx_0x106C_703DD4->GetSpriteIndex(sprite_id);
-        field_0_width = Fix16(sprite->field_4_width) / 0x40;
-        field_4_height = Fix16(sprite->field_5_height) / 0x40;
+        field_0_width = Fix16(sprite->width_) / 0x40;
+        field_4_height = Fix16(sprite->height_) / 0x40;
         field_8_depth = kFpQuarter_6FCED0;
     }
     else

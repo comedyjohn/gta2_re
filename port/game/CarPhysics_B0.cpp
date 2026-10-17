@@ -280,16 +280,16 @@ void CarPhysics_B0::ShowPhysicsDebug_559430()
 
         swprintf(gTmpBuff, L"front skid = %3.3f", field_84_front_skid.AsDouble());
         pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 144, gDebugFont_706600, 1);
-        if (field_84_front_skid >= gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1 ||
-            (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFixZero))
+        if (field_84_front_skid >= gCarInfo_2C_6FE0E4->skid_threshhold_1_ ||
+            (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->front_drive_bias_ > kFixZero))
         {
             pText->SetDrawKind8_45AFD0(5);
         }
 
         swprintf(gTmpBuff, L"rear skid = %3.3f", field_88_rear_skid.AsDouble());
         pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 160, gDebugFont_706600, 1);
-        if (field_88_rear_skid >= gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2 ||
-            (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFixZero))
+        if (field_88_rear_skid >= gCarInfo_2C_6FE0E4->skid_threshhold_2_ ||
+            (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->front_drive_bias_ > kFixZero))
         {
             pText->SetDrawKind8_45AFD0(5);
         }
@@ -312,13 +312,13 @@ void CarPhysics_B0::ShowSpeedRevsDamage_5597B0()
 
         Fix16 speed = field_40_linvel_1.GetLength();
         s32 gear;
-        if (speed > gCarInfo_48_6FE258->field_44_gear3_speed)
+        if (speed > gCarInfo_48_6FE258->gear3_speed_)
         {
             gear = 3;
         }
         else
         {
-            gear = (speed > gCarInfo_48_6FE258->field_40_gear2_speed) + 1;
+            gear = (speed > gCarInfo_48_6FE258->gear2_speed_) + 1;
         }
 
         swprintf(gTmpBuff, L"speed:%3.3f(%d)", GetLinearSpeed_4211A0().AsDouble(), gear);
@@ -581,11 +581,11 @@ Fix16 CarPhysics_B0::GetTrailerAwareTurnRatio_55A100()
 {
     if (field_5C_pCar->IsTrailerCab_41E460())
     {
-        return dword_6FE1B0 * gCarInfo_48_6FE258->field_18_turn_ratio;
+        return dword_6FE1B0 * gCarInfo_48_6FE258->turn_ratio_;
     }
     else
     {
-        return gCarInfo_48_6FE258->field_18_turn_ratio;
+        return gCarInfo_48_6FE258->turn_ratio_;
     }
 }
 
@@ -639,7 +639,7 @@ void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY,
     Fix16Point local(targetX, targetY);
     Fix16Point offset;
     CarModelInfo* pCarInfo = gCarInfo_808_678098->GetInfoAtIdx(field_5C_pCar->field_84_car_info_idx);
-    offset = pCarInfo->field_C_center_of_mass_offset;
+    offset = pCarInfo->center_of_mass_offset_;
     Fix16Point worldPoint;
     offset.RotateByAngle(field_58_theta);
     worldPoint = local.Add(offset);
@@ -1826,8 +1826,8 @@ void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
         s32 b_d9C = (field_9C_block_spec == 2 || field_9C_block_spec == 10) ? 2 : 0;
 
         Fix16 half_width = field_5C_pCar->GetCarWidth_48A930() * dword_6FE004;
-        rear_wheel_offset_ = field_5C_pCar->ApplyScale_421910(gCarInfo_2C_6FE0E4->field_8_rear_wheel_offset);
-        front_wheel_offset_ = field_5C_pCar->ApplyScale_421910(gCarInfo_2C_6FE0E4->field_4_front_wheel_offset);
+        rear_wheel_offset_ = field_5C_pCar->ApplyScale_421910(gCarInfo_2C_6FE0E4->rear_wheel_offset_);
+        front_wheel_offset_ = field_5C_pCar->ApplyScale_421910(gCarInfo_2C_6FE0E4->front_wheel_offset_);
 
         if (field_98_surface_type == CarSurfaceType::kUnknownSurface7 || field_98_surface_type == CarSurfaceType::kWaterSurface ||
             field_98_surface_type == CarSurfaceType::kUnknownSurface9)
@@ -1835,8 +1835,8 @@ void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
             SpawnSkidSegment_55D200(0, Fix16Point(-half_width, rear_wheel_offset_), 3); // spawns the skid obj?
             SpawnSkidSegment_55D200(1, Fix16Point(half_width, rear_wheel_offset_), 3);
         }
-        else if ((field_88_rear_skid >= gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2 ||
-                  (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFixZero)) &&
+        else if ((field_88_rear_skid >= gCarInfo_2C_6FE0E4->skid_threshhold_2_ ||
+                  (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->front_drive_bias_ > kFixZero)) &&
                  field_98_surface_type != CarSurfaceType::kAirSurface)
         {
             SpawnSkidSegment_55D200(0, Fix16Point(-half_width, rear_wheel_offset_), b_d9C);
@@ -1854,8 +1854,8 @@ void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
             SpawnSkidSegment_55D200(3, Fix16Point(-half_width, front_wheel_offset_), 3);
             SpawnSkidSegment_55D200(2, Fix16Point(half_width, front_wheel_offset_), 3);
         }
-        else if ((field_84_front_skid >= gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1 ||
-                  (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFixZero)) &&
+        else if ((field_84_front_skid >= gCarInfo_2C_6FE0E4->skid_threshhold_1_ ||
+                  (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->front_drive_bias_ > kFixZero)) &&
                  field_98_surface_type != CarSurfaceType::kAirSurface)
         {
             SpawnSkidSegment_55D200(3, Fix16Point(-half_width, front_wheel_offset_), b_d9C);
@@ -2305,7 +2305,7 @@ void CarPhysics_B0::ApplyForceAtPoint_55F800(Fix16Point* pPoint, Fix16Point* pFo
 // 0x55f930
 void CarPhysics_B0::AccumulateImpulse_55F930(Fix16Point* pPoint)
 {
-    field_48_force_accum += (*pPoint * gCarInfo_48_6FE258->field_4_mass);
+    field_48_force_accum += (*pPoint * gCarInfo_48_6FE258->mass_);
 }
 
 // https://decomp.me/scratch/qCXRd
@@ -2322,7 +2322,7 @@ inline void EmitImpact_55FD00(Fix16& z, const Fix16Point& dir)
 // 0x55f970
 void CarPhysics_B0::ApplyAngularImpulse_55F970(Fix16 impulse)
 {
-    this->field_7C_torque_accum -= (gCarInfo_2C_6FE0E4->field_0_moment_of_inertia * impulse);
+    this->field_7C_torque_accum -= (gCarInfo_2C_6FE0E4->moment_of_inertia_ * impulse);
 }
 
 // 0x55f9a0
@@ -2904,7 +2904,7 @@ Fix16Point CarPhysics_B0::ComputeRelativePointVelocity_561130(Fix16Point* pPoint
 {
     Fix16Point rel_pos = (*pPoint - field_38_cp1);
     rel_pos.RotateByAngle(-field_58_theta);
-    rel_pos -= gCarInfo_2C_6FE0E4->field_C_center_of_mass_offset;
+    rel_pos -= gCarInfo_2C_6FE0E4->center_of_mass_offset_;
     rel_pos.RotateByAngle(Ang16::Fix16ToAng16(field_74_ang_vel_rad) + field_58_theta);
     rel_pos += (field_30_cm1 + field_40_linvel_1);
     return rel_pos - *pPoint;
@@ -2928,7 +2928,7 @@ Fix16Point CarPhysics_B0::ComputePointVelocity_561380(Fix16Point& point)
 
     {
         Fix16Point local_pos;
-        local_pos = point - gCarInfo_2C_6FE0E4->field_C_center_of_mass_offset;
+        local_pos = point - gCarInfo_2C_6FE0E4->center_of_mass_offset_;
 
         old_pos = local_pos;
         old_pos.RotateByAngle(field_58_theta);
@@ -2997,7 +2997,7 @@ Fix16 CarPhysics_B0::ApplyDriveForce_5615D0(Fix16Point& wheel_point, Ang16 angle
 // 0x561940
 bool CarPhysics_B0::get_revs_561940()
 {
-    return gCarInfo_48_6FE258->field_1_turbo && this->field_60_gas_pedal >= k_dword_6FE1B8;
+    return gCarInfo_48_6FE258->turbo_ && this->field_60_gas_pedal >= k_dword_6FE1B8;
 }
 
 // 0x561970
@@ -3021,7 +3021,7 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
                 }
                 else
                 {
-                    torque = -ComputeTorqueUnknown_49E8E0() * gCarInfo_48_6FE258->field_34_gear1_multiplier;
+                    torque = -ComputeTorqueUnknown_49E8E0() * gCarInfo_48_6FE258->gear1_multiplier_;
                 }
             }
             else if (field_93_is_forward_gas_on)
@@ -3030,22 +3030,21 @@ Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
                 {
                     torque = kFixZero;
                 }
-                else if (vel_len > gCarInfo_48_6FE258->field_44_gear3_speed)
+                else if (vel_len > gCarInfo_48_6FE258->gear3_speed_)
                 {
                     // Gear 3
-                    torque = inline_ComputeTorqueFromThrottle_561DD0_ool() * gCarInfo_48_6FE258->field_3C_gear3_multiplier;
+                    torque = inline_ComputeTorqueFromThrottle_561DD0_ool() * gCarInfo_48_6FE258->gear3_multiplier_;
                 }
-                else if (vel_len > gCarInfo_48_6FE258->field_40_gear2_speed)
+                else if (vel_len > gCarInfo_48_6FE258->gear2_speed_)
                 {
                     // Gear 2
-                    torque = inline_ComputeTorqueFromThrottle_561DD0_ool() * gCarInfo_48_6FE258->field_38_gear2_multiplier;
+                    torque = inline_ComputeTorqueFromThrottle_561DD0_ool() * gCarInfo_48_6FE258->gear2_multiplier_;
                 }
                 else
                 {
                     // Gear 1. The original inlines this multiply, ours goes out of line (inline budget), so it's written out
-                    torque.value_ = static_cast<s32>((ComputeTorqueUnknown_49E8E0().value_ *
-                                                      static_cast<__int64>(gCarInfo_48_6FE258->field_34_gear1_multiplier.value_)) >>
-                                                     14);
+                    torque.value_ = static_cast<s32>(
+                        (ComputeTorqueUnknown_49E8E0().value_ * static_cast<__int64>(gCarInfo_48_6FE258->gear1_multiplier_.value_)) >> 14);
                 }
             }
             else
@@ -3084,20 +3083,19 @@ Fix16 CarPhysics_B0::ComputeTorqueFromThrottle_561DD0()
 {
     if (get_revs_561940() != 0)
     {
-        return gCarInfo_2C_6FE0E4->field_14_half_thrust +
-            ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->field_18_fith_thrust)))) * 2;
+        return gCarInfo_2C_6FE0E4->half_thrust_ +
+            ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->fith_thrust_)))) * 2;
     }
     else
     {
-        return gCarInfo_2C_6FE0E4->field_14_half_thrust +
-            ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->field_18_fith_thrust))));
+        return gCarInfo_2C_6FE0E4->half_thrust_ + ((field_60_gas_pedal * ((gDamageSpeedFactor_6FE348 * gCarInfo_2C_6FE0E4->fith_thrust_))));
     }
 }
 
 // 0x561e50
 Fix16 CarPhysics_B0::CalculateFrontWheelForce_561E50()
 {
-    Fix16Point point(Fix16(0), gCarInfo_2C_6FE0E4->field_4_front_wheel_offset);
+    Fix16Point point(Fix16(0), gCarInfo_2C_6FE0E4->front_wheel_offset_);
     Fix16Point point2;
 
     if (CarPhysics_B0::IsInAir_55A0B0())
@@ -3107,11 +3105,11 @@ Fix16 CarPhysics_B0::CalculateFrontWheelForce_561E50()
     else
     {
         Fix16 grip_scale;
-        Fix16 front_torque = CarPhysics_B0::ComputeEngineTorque_561970() * gCarInfo_48_6FE258->field_8_front_drive_bias;
+        Fix16 front_torque = CarPhysics_B0::ComputeEngineTorque_561970() * gCarInfo_48_6FE258->front_drive_bias_;
 
         if (field_AD_turn_direction != car_turn_direction::none_0)
         {
-            grip_scale = k_dword_6FE210 + gCarInfo_48_6FE258->field_14_turn_in;
+            grip_scale = k_dword_6FE210 + gCarInfo_48_6FE258->turn_in_;
         }
         else
         {
@@ -3177,7 +3175,7 @@ Fix16 CarPhysics_B0::CalculateFrontWheelForce_561E50()
 // 0x5620d0
 Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
 {
-    Fix16Point wheel_point(Fix16(0), gCarInfo_2C_6FE0E4->field_8_rear_wheel_offset);
+    Fix16Point wheel_point(Fix16(0), gCarInfo_2C_6FE0E4->rear_wheel_offset_);
     Fix16Point rear_force;
     Fix16 v;
 
@@ -3186,13 +3184,13 @@ Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
         return kFixZero;
     }
 
-    Fix16& front_drive_bias = gCarInfo_2C_6FE0E4->field_20_front_drive_bias;
+    Fix16& front_drive_bias = gCarInfo_2C_6FE0E4->front_drive_bias_;
     Fix16 engine_torque = ComputeEngineTorque_561970() * front_drive_bias;
 
     Fix16 grip_scale;
     if (field_AD_turn_direction != car_turn_direction::none_0)
     {
-        grip_scale = k_dword_6FE210 - gCarInfo_48_6FE258->field_14_turn_in;
+        grip_scale = k_dword_6FE210 - gCarInfo_48_6FE258->turn_in_;
     }
     else
     {
@@ -3246,8 +3244,8 @@ Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
             {
                 field_A8_hand_brake_force++;
             }
-            new_x = kFP16One_6FE3D0 * grip_scale * gCarInfo_48_6FE258->field_20_handbrake_slide_value;
-            brake_force3 = gCarInfo_48_6FE258->field_10_brake_friction * static_cast<s32>(static_cast<u8>(field_A8_hand_brake_force)) / 128;
+            new_x = kFP16One_6FE3D0 * grip_scale * gCarInfo_48_6FE258->handbrake_slide_value_;
+            brake_force3 = gCarInfo_48_6FE258->brake_friction_ * static_cast<s32>(static_cast<u8>(field_A8_hand_brake_force)) / 128;
         }
         else
         {
@@ -3259,7 +3257,7 @@ Fix16 CarPhysics_B0::CalculateRearWheelForce_5620D0()
     }
 
     rear_force.SetXY(new_x, brake_force1 + brake_force2 + brake_force3);
-    rear_force.MultiplyByFix16(gCarInfo_48_6FE258->field_1C_rear_end_stability);
+    rear_force.MultiplyByFix16(gCarInfo_48_6FE258->rear_end_stability_);
 
     // The function is at VC6's inline budget: Fix16_To_Ang16_40F540 / Ang16 - Ang16 here push the Ang16
     // constructors and y * y out of line, so the angle is built and normalised (Normalize_406C20) by hand.
@@ -3328,7 +3326,7 @@ void CarPhysics_B0::ApplyBrakePhysics_5624F0()
         {
             field_64_brake_pressure = kBrakePressureMax_6FE1C0; // 0x4000 fp16
         }
-        gBrakeForce_6FE0D8 = field_64_brake_pressure * gCarInfo_48_6FE258->field_10_brake_friction;
+        gBrakeForce_6FE0D8 = field_64_brake_pressure * gCarInfo_48_6FE258->brake_friction_;
     }
 }
 
@@ -3544,11 +3542,11 @@ void CarPhysics_B0::EnforceGearSensitiveMaxSpeed_562D00()
         Fix16 radius;
         if (IsVelocityAlignedWithHeading_40F840())
         {
-            radius = gCarInfo_48_6FE258->field_28_max_speed;
+            radius = gCarInfo_48_6FE258->max_speed_;
         }
         else
         {
-            radius = gCarInfo_48_6FE258->field_40_gear2_speed;
+            radius = gCarInfo_48_6FE258->gear2_speed_;
         }
 
         if (field_40_linvel_1.GetLength() > radius)
@@ -3737,7 +3735,7 @@ bool CarPhysics_B0::ProcessCarPhysicsStateMachine_562FE0()
 // 0x563280
 void CarPhysics_B0::UpdateCp1FromCm1_563280()
 {
-    Fix16Point point = gCarInfo_2C_6FE0E4->field_C_center_of_mass_offset;
+    Fix16Point point = gCarInfo_2C_6FE0E4->center_of_mass_offset_;
     NegateInPlace_40F760(point);
 
     point.RotateByAngle(field_58_theta);
@@ -3750,7 +3748,7 @@ void CarPhysics_B0::UpdateCenterOfMassPoint_563350()
 {
     const CarModelInfo* info = gCarInfo_808_678098->GetInfoAtIdx(field_5C_pCar->GetCarModelForPhysics_43A850());
 
-    Fix16Point point(info->field_C_center_of_mass_offset.x, info->field_C_center_of_mass_offset.y);
+    Fix16Point point(info->center_of_mass_offset_.x, info->center_of_mass_offset_.y);
 
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
     Fix16 sin = Ang16::Sine(field_58_theta);
@@ -3766,7 +3764,7 @@ void CarPhysics_B0::UpdateCenterOfMassPoint_563350()
 // 0x563460
 void CarPhysics_B0::UpdateReferencePoint_563460()
 {
-    Fix16Point point = gCarInfo_2C_6FE0E4->field_C_center_of_mass_offset;
+    Fix16Point point = gCarInfo_2C_6FE0E4->center_of_mass_offset_;
 
     // RotateByAngle_40F6B0, but the y part uses the out-of-line Fix16 operators
     Fix16 sin = Ang16::Sine(field_58_theta);

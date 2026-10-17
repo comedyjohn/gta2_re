@@ -487,7 +487,7 @@ void Frontend::ChangeMenuPage_4B3170(u16 menu_page_idx)
         field_136_menu_pages_array[3].field_B8A[3].field_4_is_option_unlocked = 0;
         for (i = 1; i < 4; i++)
         {
-            if (pStats->field_0_plyr_stage_stats[stage_idx][i].field_0_is_stage_unlocked && i < field_1EB51_num_bonus_stages[stage_idx])
+            if (pStats->plyr_stage_stats_[stage_idx][i].field_0_is_stage_unlocked && i < field_1EB51_num_bonus_stages[stage_idx])
             {
                 field_136_menu_pages_array[3].field_4_options_array[3].field_1_is_unlocked = 1;
                 field_136_menu_pages_array[3].field_B8A[3].field_4_is_option_unlocked = 1;
@@ -497,10 +497,10 @@ void Frontend::ChangeMenuPage_4B3170(u16 menu_page_idx)
     else if (menu_page_idx == MENUPAGE_BONUS_AREA)
     {
         gGameSession_67E8E0.DecodeStage_453A60(gGameSession_67E8E0.GetStage_4C5990(), &stage_idx, &bonus_count);
-        swprintf(gTmpBuff, L"%d", pStats->field_0_plyr_stage_stats[stage_idx][bonus_count].field_8_stage_latest_score);
+        swprintf(gTmpBuff, L"%d", pStats->plyr_stage_stats_[stage_idx][bonus_count].field_8_stage_latest_score);
         wcsncpy(field_136_menu_pages_array[6].field_518_elements_array[2].field_6_element_name_str, gTmpBuff, 50);
         if (gGameSession_67E8E0.IsStartedFromPlayBonusMenu_4C5AE0() || stage_idx >= static_cast<u8>(field_1EB50_num_main_stages) - 1 ||
-            !pStats->field_0_plyr_stage_stats[stage_idx + 1][0].field_0_is_stage_unlocked)
+            !pStats->plyr_stage_stats_[stage_idx + 1][0].field_0_is_stage_unlocked)
         {
             field_136_menu_pages_array[6].field_4_options_array[1].field_1_is_unlocked = 0;
             field_136_menu_pages_array[6].field_B8A[1].field_4_is_option_unlocked = 0;
@@ -763,7 +763,7 @@ void Frontend::GetOptionText_4B3AF0(u16 menu_page_idx, u16 option_idx, wchar_t**
     if (menu_page_idx == MENUPAGE_PLAY && option_idx == 0) // option 0 = change player/name
     {
         u16 plyr_idx = pOption->field_6E_horizontal_selected_idx;
-        auto* p_wName = reinterpret_cast<wchar_t*>(&gPlyDat_6FEAC0->field_26A0_plyr_stats[plyr_idx].field_90_strPlayerName);
+        auto* p_wName = reinterpret_cast<wchar_t*>(&gPlyDat_6FEAC0->plyr_stats_[plyr_idx].str_player_name_);
         if (field_110_state == FrontendState::User_Typing_New_Player_Name_3)
         {
             // player typing a name
@@ -778,7 +778,7 @@ void Frontend::GetOptionText_4B3AF0(u16 menu_page_idx, u16 option_idx, wchar_t**
         else
         {
             // get saved player name
-            swprintf(gTmpWideStr_67C7D8, L"%s", gPlyDat_6FEAC0->field_26A0_plyr_stats[plyr_idx].field_90_strPlayerName);
+            swprintf(gTmpWideStr_67C7D8, L"%s", gPlyDat_6FEAC0->plyr_stats_[plyr_idx].str_player_name_);
         }
     }
     else if (menu_page_idx == MENUPAGE_VIEW_HIGH_SCORE && option_idx == 0)
@@ -960,7 +960,7 @@ void Frontend::DrawScoreTable_4B5430(ScoreTableLine* pStrings,
         }
         swprintf(gTmpBuff, L"%d", pIter->field_14_score);
 
-        if (gText_0x14_704DFC->field_10_lang_code == 'j')
+        if (gText_0x14_704DFC->lang_code_ == 'j')
         {
             Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, new_xpos, text_ypos_to_use, arg_fontType, palette, 1, 16, true);
         }
@@ -980,7 +980,7 @@ EXTERN_GLOBAL(s32, gGTA2VersionMajor_708284);
 // 0x4AD140
 void Frontend::DrawMenu_4AD140()
 {
-    const s32 line_height = gText_0x14_704DFC->field_10_lang_code != 'j' ? 14 : 16;
+    const s32 line_height = gText_0x14_704DFC->lang_code_ != 'j' ? 14 : 16;
 
     MenuPage_0xBCA* pMenuPage = &field_136_menu_pages_array[field_132_f136_idx];
 
@@ -1012,9 +1012,7 @@ void Frontend::DrawMenu_4AD140()
         {
             u16 idx = pMenuPage->field_4_options_array[0].field_6E_horizontal_selected_idx;
             selected_option_idx = idx;
-            u16 unk_xpos =
-                Frontend::GetMaxTextWidth_5D8990(gPlyDat_6FEAC0->field_26A0_plyr_stats[idx].field_90_strPlayerName, field_11C_normal_font) +
-                10;
+            u16 unk_xpos = Frontend::GetMaxTextWidth_5D8990(gPlyDat_6FEAC0->plyr_stats_[idx].str_player_name_, field_11C_normal_font) + 10;
 
             if (unk_xpos == 10)
             {
@@ -1032,8 +1030,8 @@ void Frontend::DrawMenu_4AD140()
     {
         if (field_EE0D_hiscore_table_idx < 3) //  line 1b8
         {
-            pHighScoreTable = &gPlyDat_6FEAC0->field_1890_stage_scores[field_EE0D_hiscore_table_idx][0]; // main district score
-            Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->field_0_score_table_line),
+            pHighScoreTable = &gPlyDat_6FEAC0->stage_scores_[field_EE0D_hiscore_table_idx][0]; // main district score
+            Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->score_table_line_),
                                             300,
                                             250,
                                             5,
@@ -1043,8 +1041,8 @@ void Frontend::DrawMenu_4AD140()
         }
         else if (field_EE0D_hiscore_table_idx < 6)
         {
-            pHighScoreTable = &gPlyDat_6FEAC0->field_1890_stage_scores[0][field_EE0D_hiscore_table_idx - 2];
-            Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->field_0_score_table_line),
+            pHighScoreTable = &gPlyDat_6FEAC0->stage_scores_[0][field_EE0D_hiscore_table_idx - 2];
+            Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->score_table_line_),
                                             300,
                                             250,
                                             5,
@@ -1056,8 +1054,8 @@ void Frontend::DrawMenu_4AD140()
         {
             if (field_EE0D_hiscore_table_idx < 9)
             {
-                pHighScoreTable = &gPlyDat_6FEAC0->field_1890_stage_scores[1][field_EE0D_hiscore_table_idx - 5];
-                Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->field_0_score_table_line),
+                pHighScoreTable = &gPlyDat_6FEAC0->stage_scores_[1][field_EE0D_hiscore_table_idx - 5];
+                Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->score_table_line_),
                                                 300,
                                                 250,
                                                 5,
@@ -1067,8 +1065,8 @@ void Frontend::DrawMenu_4AD140()
             }
             else
             {
-                pHighScoreTable = &gPlyDat_6FEAC0->field_1890_stage_scores[2][field_EE0D_hiscore_table_idx - 8];
-                Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->field_0_score_table_line),
+                pHighScoreTable = &gPlyDat_6FEAC0->stage_scores_[2][field_EE0D_hiscore_table_idx - 8];
+                Frontend::DrawScoreTable_4B5430(reinterpret_cast<ScoreTableLine*>(&pHighScoreTable->score_table_line_),
                                                 300,
                                                 250,
                                                 5,
@@ -1125,8 +1123,7 @@ void Frontend::DrawMenu_4AD140()
         }
 
         Frontend::DrawScoreTable_4B5430(
-            reinterpret_cast<ScoreTableLine*>(
-                &gPlyDat_6FEAC0->field_1890_stage_scores[main_level_idx][bonus_stage_idx].field_0_score_table_line),
+            reinterpret_cast<ScoreTableLine*>(&gPlyDat_6FEAC0->stage_scores_[main_level_idx][bonus_stage_idx].score_table_line_),
             0xAAU,
             155,
             3,
@@ -1338,8 +1335,7 @@ void Frontend::DrawMenu_4AD140()
             gGameSession_67E8E0.DecodeStage_453A60(gGameSession_67E8E0.GetStage_4C5990(), &main_level_idx, &bonus_level_idx);
         }
         Frontend::DrawScoreTable_4B5430(
-            reinterpret_cast<ScoreTableLine*>(
-                &gPlyDat_6FEAC0->field_1890_stage_scores[main_level_idx][bonus_level_idx].field_0_score_table_line),
+            reinterpret_cast<ScoreTableLine*>(&gPlyDat_6FEAC0->stage_scores_[main_level_idx][bonus_level_idx].score_table_line_),
             0x12CU,
             line_height,
             1,
@@ -1451,7 +1447,7 @@ void Frontend::DrawMenu_4AD140()
         }
         wcscpy(gTmpBuff, gText_0x14_704DFC->Find("entrnam"));
         x_pos = 0x15EU;
-        y_pos = gText_0x14_704DFC->field_10_lang_code != 'j' ? 12 : 16;
+        y_pos = gText_0x14_704DFC->lang_code_ != 'j' ? 12 : 16;
         DrawText_4B87A0(gTmpBuff, x_pos, y_pos, field_126, 1);
     }
     if (field_110_state == 5 && field_114_cursor_blink) //  change current player name
@@ -1911,8 +1907,7 @@ void Frontend::UpdatePageFromUserInput_4AE2D0()
                 case 263U:
                     stage_main_idx = gGameSession_67E8E0.GetMainStageIdx_4C5980();
                     bonus_scan_idx = 3;
-                    for (stage_bonus_idx = 3;
-                         !pStats->field_0_plyr_stage_stats[stage_main_idx][stage_bonus_idx].field_0_is_stage_unlocked ||
+                    for (stage_bonus_idx = 3; !pStats->plyr_stage_stats_[stage_main_idx][stage_bonus_idx].field_0_is_stage_unlocked ||
                          bonus_scan_idx >= field_1EB51_num_bonus_stages[stage_main_idx];
                          stage_bonus_idx = bonus_scan_idx)
                     {
@@ -1941,7 +1936,7 @@ void Frontend::UpdatePageFromUserInput_4AE2D0()
                             FatalError_4A38C0(Gta2Error::kInvalidLevelAdvancement, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 1543);
                         }
 
-                        if (!pStats->field_0_plyr_stage_stats[stage_main_idx][0].field_0_is_stage_unlocked)
+                        if (!pStats->plyr_stage_stats_[stage_main_idx][0].field_0_is_stage_unlocked)
                         {
                             FatalError_4A38C0(Gta2Error::kLevelNotOpened, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 1548);
                         }
@@ -2533,7 +2528,7 @@ PlySlot* Frontend::GetCurrPlayerStats_4B43E0()
 {
     // note: movsx vs movzx due to signedness
     u16 idx = gGameSession_67E8E0.GetPlySlotIdx_4C59B0();
-    return &gPlyDat_6FEAC0->field_26A0_plyr_stats[idx];
+    return &gPlyDat_6FEAC0->plyr_stats_[idx];
 }
 
 // 0x4B42E0
@@ -2584,7 +2579,7 @@ void Frontend::UpdateMenuForCurrPlayer_4B42E0()
 void Frontend::SaveAndUpdatePlayerName_4B4230()
 {
     u16 player_slot_idx = field_136_menu_pages_array[1].field_4_options_array[0].field_6E_horizontal_selected_idx;
-    wchar_t* pPlayerName = gPlyDat_6FEAC0->field_26A0_plyr_stats[player_slot_idx].field_90_strPlayerName;
+    wchar_t* pPlayerName = gPlyDat_6FEAC0->plyr_stats_[player_slot_idx].str_player_name_;
     wcsncpy(pPlayerName, field_C9A0_curr_plyr_name, 9U);
     HandleCheatCode_4B3DD0(pPlayerName);
     gPlyDat_6FEAC0->SavePlySlotDat(player_slot_idx);
@@ -2780,8 +2775,8 @@ void Frontend::HandleCheatCode_4B3DD0(const wchar_t* cheat_str_wide)
 void Frontend::LoadCurrPlayerName_4B4280()
 {
     wcsncpy(field_C9A0_curr_plyr_name,
-            gPlyDat_6FEAC0->field_26A0_plyr_stats[field_136_menu_pages_array[1].field_4_options_array[0].field_6E_horizontal_selected_idx]
-                .field_90_strPlayerName,
+            gPlyDat_6FEAC0->plyr_stats_[field_136_menu_pages_array[1].field_4_options_array[0].field_6E_horizontal_selected_idx]
+                .str_player_name_,
             9U);
 }
 
@@ -2853,7 +2848,7 @@ void Frontend::ContinueToNextStage_4B8020()
         // Load next stage. Can be a Bonus stage or a Main stage
         // note: reg swap + push swap due to redundant local
         u8 substage_idx = 3;
-        while (!pClarke->field_0_plyr_stage_stats[main_stage_idx][substage_idx].field_0_is_stage_unlocked ||
+        while (!pClarke->plyr_stage_stats_[main_stage_idx][substage_idx].field_0_is_stage_unlocked ||
                substage_idx >= field_1EB51_num_bonus_stages[main_stage_idx])
         {
             substage_idx--;
@@ -2956,7 +2951,7 @@ char_type Frontend::AreAllStagesUnlocked_4B7FB0()
         u16 bonus_stage_idx = 0;
         while (bonus_stage_idx < field_1EB51_num_bonus_stages[main_stage_idx])
         {
-            if (!pPlayerSlot->field_0_plyr_stage_stats[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked)
+            if (!pPlayerSlot->plyr_stage_stats_[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked)
             {
                 return false;
             }
@@ -3014,7 +3009,7 @@ void Frontend::DrawDeletePlayerDialog_4ADDE0()
     {
         case 1:
         {
-            u16 ypos = gText_0x14_704DFC->field_10_lang_code != 'j' ? 12 : 16;
+            u16 ypos = gText_0x14_704DFC->lang_code_ != 'j' ? 12 : 16;
             DrawText_4B87A0(gText_0x14_704DFC->Find("clrchar"), static_cast<u16>(275), ypos, field_126, 1);
             break;
         }
@@ -3352,7 +3347,7 @@ Frontend::Frontend()
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 2292);
     }
 
-    if (gText_0x14_704DFC->field_10_lang_code == 'j')
+    if (gText_0x14_704DFC->lang_code_ == 'j')
     {
         // pKanjiFont_8EC = pKanjiFont_8EC_mem ? KanjiFont_8EC::ctor_4D2C80(pKanjiFont_8EC_mem) : 0;
         gKanjiFont_6F5168 = new KanjiFont_8EC();
@@ -3553,7 +3548,7 @@ void Frontend::InitKeyBoardDevice_4AFBE0()
 // 0x4AF0E0
 void Frontend::SetFontTypes_4AF0E0()
 {
-    if (gText_0x14_704DFC->field_10_lang_code == 'j')
+    if (gText_0x14_704DFC->lang_code_ == 'j')
     {
         this->field_11C_normal_font = 101;
         this->field_11E = 101;
@@ -3589,7 +3584,7 @@ void Frontend::SetupMenuStringsOptionsElements_4B0220()
 
     // local_4 = (-(ushort)(cVar1 != 'j') & 0xfffc) + 0x10;
 
-    s32 line_height = gText_0x14_704DFC->field_10_lang_code != 'j' ? 12 : 16;
+    s32 line_height = gText_0x14_704DFC->lang_code_ != 'j' ? 12 : 16;
     field_134_unused = 16;
 
     field_136_menu_pages_array[0].field_4_options_array[0].field_0_option_type = STRING_TEXT_1;
@@ -4371,7 +4366,7 @@ u8 Frontend::GetPrevUnlockedStageIndex_4B77B0(PlySlot* pStats)
 {
     u8 result;
 
-    for (result = field_1EB50_num_main_stages - 1; !pStats->field_0_plyr_stage_stats[result][0].field_0_is_stage_unlocked; --result)
+    for (result = field_1EB50_num_main_stages - 1; !pStats->plyr_stage_stats_[result][0].field_0_is_stage_unlocked; --result)
     {
         if (result <= 0)
         {
@@ -4399,11 +4394,11 @@ u8 Frontend::GetPrevUnlockedStageBonusCode_4B7800(PlySlot* pStats)
         }
         else
         {
-            while (!pStats->field_0_plyr_stage_stats[stage][bonus].field_0_is_stage_unlocked && bonus > 0)
+            while (!pStats->plyr_stage_stats_[stage][bonus].field_0_is_stage_unlocked && bonus > 0)
             {
                 bonus--;
             }
-            if (pStats->field_0_plyr_stage_stats[stage][bonus].field_0_is_stage_unlocked == 1 && bonus > 0)
+            if (pStats->plyr_stage_stats_[stage][bonus].field_0_is_stage_unlocked == 1 && bonus > 0)
             {
                 break;
             }
@@ -4574,10 +4569,10 @@ void Frontend::DrawMultiplayerScores_4B55F0()
 void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
 {
     u16 font_type = field_12A_score_font;
-    s32 line_height = gText_0x14_704DFC->field_10_lang_code != 106 ? 14 : 16;
+    s32 line_height = gText_0x14_704DFC->lang_code_ != 106 ? 14 : 16;
     u8 main_stage_idx = gGameSession_67E8E0.GetMainStageIdx_4C5980();
 
-    if (gText_0x14_704DFC->field_10_lang_code == 106)
+    if (gText_0x14_704DFC->lang_code_ == 106)
     {
         text_ypos += 5;
     }
@@ -4597,7 +4592,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos - 15;
     DrawText_4B87A0(gTmpBuff, static_cast<u16>(text_xpos - x + 624), y_pos, font_type, 1);
 
-    if (gText_0x14_704DFC->field_10_lang_code == 106)
+    if (gText_0x14_704DFC->lang_code_ == 106)
     {
         text_ypos += 5;
     }
@@ -4612,7 +4607,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     u16 x_pos_last = text_xpos + 480;
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, text_ypos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[20]));
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->best_stats_[main_stage_idx].field_0[20]));
     u16 x_pos_best = text_xpos + 610;
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, text_ypos, font_type, 10, 1, line_height, 1);
 
@@ -4625,7 +4620,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     swprintf(gTmpBuff, L"$%d", gGameSession_67E8E0.GetCarDamageCost_4C5A80());
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"$%d", gPlyDat_6FEAC0->field_1878_best_car_damage_cost[main_stage_idx]);
+    swprintf(gTmpBuff, L"$%d", gPlyDat_6FEAC0->best_car_damage_cost_[main_stage_idx]);
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  civilians run down
@@ -4637,7 +4632,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(6U));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[24]));
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->best_stats_[main_stage_idx].field_0[24]));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  civilians murdered
@@ -4649,7 +4644,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(7U));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[28]));
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->best_stats_[main_stage_idx].field_0[28]));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  lawmen killed
@@ -4663,7 +4658,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
         swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(8U));
         Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-        swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[32]));
+        swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->best_stats_[main_stage_idx].field_0[32]));
         Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
     }
 
@@ -4676,7 +4671,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(9U));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[36]));
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->best_stats_[main_stage_idx].field_0[36]));
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  fugitive factor
@@ -4688,7 +4683,7 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetEvasionRating_4C5AA0());
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(gTmpBuff, L"%d", gPlyDat_6FEAC0->field_1884_best_evasion_rating[main_stage_idx]);
+    swprintf(gTmpBuff, L"%d", gPlyDat_6FEAC0->best_evasion_rating_[main_stage_idx]);
     Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 }
 
@@ -4717,7 +4712,7 @@ u8 Frontend::GetPreviousUnlockedMainStage_4B7060(u8 stage_idx)
         if (bIsLeftRightLoopEnabled_67DA80)
         {
             result = 2;
-            while (!pStats->field_0_plyr_stage_stats[result][0].field_0_is_stage_unlocked)
+            while (!pStats->plyr_stage_stats_[result][0].field_0_is_stage_unlocked)
             {
                 --result;
             }
@@ -4746,7 +4741,7 @@ u8 Frontend::GetNextUnlockedMainStage_4B7270(char_type main_stage_idx)
     else
     {
         result = main_stage_idx + 1;
-        while (!pStats->field_0_plyr_stage_stats[result][0].field_0_is_stage_unlocked)
+        while (!pStats->plyr_stage_stats_[result][0].field_0_is_stage_unlocked)
         {
             if (result == 2)
             {
@@ -4844,7 +4839,7 @@ char_type Frontend::GetPreviousUnlockedBonusStage_4B7120(u8 stage)
     u8 bonus_og = bonus_stage_idx;
     u8 bFirstIteration = true;
 
-    while (!player_stats->field_0_plyr_stage_stats[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked || bFirstIteration)
+    while (!player_stats->plyr_stage_stats_[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked || bFirstIteration)
     {
         bFirstIteration = false;
         if (bonus_stage_idx == 1)
@@ -4966,7 +4961,7 @@ char_type Frontend::GetNextUnlockedBonusStage_4B7360(u8 stage)
 
     u8 bFirstIteration = true;
 
-    while (!player_stats->field_0_plyr_stage_stats[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked || bFirstIteration)
+    while (!player_stats->plyr_stage_stats_[main_stage_idx][bonus_stage_idx].field_0_is_stage_unlocked || bFirstIteration)
     {
         bFirstIteration = false;
         if (bonus_stage_idx == field_1EB51_num_bonus_stages[main_stage_idx] - 1)

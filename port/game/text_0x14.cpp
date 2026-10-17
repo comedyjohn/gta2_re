@@ -56,7 +56,7 @@ u16 GameText::RemapExtendedChar(u16 ch)
         }
         else
         {
-            result = field_10_lang_code == 'r' ? kExtendedRussianCharMap_626490[ch - 128] : kExtendedWesternCharMap[ch - 128];
+            result = lang_code_ == 'r' ? kExtendedRussianCharMap_626490[ch - 128] : kExtendedWesternCharMap[ch - 128];
             if (!result)
             {
                 result = 63;
@@ -69,7 +69,7 @@ u16 GameText::RemapExtendedChar(u16 ch)
 // 0x5B5910
 void GameText::RemapExtendedCharsIfNotJapanese(wchar_t* pText)
 {
-    if (field_10_lang_code != 'j')
+    if (lang_code_ != 'j')
     {
         RemapExtendedChars(pText);
     }
@@ -96,39 +96,39 @@ void GameText::TKEYLoad(u32 chunkSize)
         u32 field_0_offset;
         char_type field_4_key[8];
     };
-    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(Text0xCFile);
-    field_0_tKey.field_0_tKey = new TextEntry[field_0_tKey.field_4_tKey_count];
-    auto* pFileEntries = new Text0xCFile[field_0_tKey.field_4_tKey_count];
+    t_key_.t_key_count_ = chunkSize / sizeof(Text0xCFile);
+    t_key_.t_key_ = new TextEntry[t_key_.t_key_count_];
+    auto* pFileEntries = new Text0xCFile[t_key_.t_key_count_];
     File::GlobalRead(pFileEntries, chunkSize);
-    for (u32 i = 0; i < field_0_tKey.field_4_tKey_count; i++)
+    for (u32 i = 0; i < t_key_.t_key_count_; i++)
     {
-        TextEntry& entry = field_0_tKey.field_0_tKey[i];
+        TextEntry& entry = t_key_.t_key_[i];
         memset(&entry, 0, sizeof(entry));
         entry.field_0_pwstr = reinterpret_cast<wchar_t*>(static_cast<sptr>(pFileEntries[i].field_0_offset));
-        memcpy(reinterpret_cast<void*>(&entry.field_4_pKey),
+        memcpy(reinterpret_cast<void*>(&entry.key),
                reinterpret_cast<const void*>(pFileEntries[i].field_4_key),
                sizeof(pFileEntries[i].field_4_key));
     }
     delete[] pFileEntries;
 #else
     // TODO: probably an inline
-    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(TextEntry);
-    field_0_tKey.field_0_tKey = new TextEntry[field_0_tKey.field_4_tKey_count];
-    if (!field_0_tKey.field_0_tKey)
+    t_key_.t_key_count_ = chunkSize / sizeof(TextEntry);
+    t_key_.t_key_ = new TextEntry[t_key_.t_key_count_];
+    if (!t_key_.t_key_)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
     }
 
-    File::GlobalRead(field_0_tKey.field_0_tKey, chunkSize);
+    File::GlobalRead(t_key_.t_key_, chunkSize);
 #endif
 }
 
 // 0x5B59B0
 void GameText::TDATOffsets2Strings(BYTE* pDat)
 {
-    TextEntry* ptKeyIter = field_0_tKey.field_0_tKey;
+    TextEntry* ptKeyIter = t_key_.t_key_;
 
-    for (u32 idx = 0; idx < field_0_tKey.field_4_tKey_count; idx++)
+    for (u32 idx = 0; idx < t_key_.t_key_count_; idx++)
     {
         // The raw file record is an offset, convert it to pos32 to the string data in the TDAT
         const s32 offsetInBytes = static_cast<s32>(reinterpret_cast<uintptr_t>(ptKeyIter->field_0_pwstr));
@@ -141,8 +141,8 @@ void GameText::TDATOffsets2Strings(BYTE* pDat)
 bool GameText::HasKey(const char_type* pIdStr)
 {
     return bsearch(pIdStr, // search key
-                   field_0_tKey.field_0_tKey, // array to search
-                   field_0_tKey.field_4_tKey_count, // array count
+                   t_key_.t_key_, // array to search
+                   t_key_.t_key_count_, // array count
                    sizeof(TextEntry), // element size
                    TKeySearch) ?
         true :
@@ -154,15 +154,15 @@ s32 GameText::TKeySearch(const void* a, const void* b)
 {
     const auto* pIdStr = static_cast<const char_type*>(a);
     const auto* a2 = static_cast<const TextEntry*>(b);
-    return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->field_4_pKey)); // TODO: ???
+    return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->key)); // TODO: ???
 }
 
 // 0x5B5A50
 wchar_t* GameText::FindText(const char_type* pIdStr)
 {
     auto* pFound = static_cast<TextEntry*>(bsearch(pIdStr, // key
-                                                   field_0_tKey.field_0_tKey, // array
-                                                   field_0_tKey.field_4_tKey_count, // array count
+                                                   t_key_.t_key_, // array
+                                                   t_key_.t_key_count_, // array count
                                                    sizeof(TextEntry), // element size
                                                    TKeySearch));
     if (!pFound)
@@ -179,15 +179,15 @@ wchar_t* GameText::FindText(const char_type* pIdStr)
 // 0x5B5A80
 void TextTdat::TDATLoad(u32 size)
 {
-    field_4_len = size / sizeof(wchar_t);
-    field_0_data = new BYTE[field_4_len * sizeof(wchar_t)];
+    len_ = size / sizeof(wchar_t);
+    data_ = new BYTE[len_ * sizeof(wchar_t)];
 
-    if (!field_0_data)
+    if (!data_)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 378);
     }
 
-    File::GlobalRead(field_0_data, size);
+    File::GlobalRead(data_, size);
 }
 
 // 0x5B5AD0
@@ -197,7 +197,7 @@ u16 GameText::ToUpper(wchar_t ch)
     // past kExtendedRussianCharMap_626490 into word_626590[0..127], which follows it in memory. That
     // read is spelled out below; 'f' reads word_626590[128..255].
     // TODO: the contents of these arrays are very wrong
-    switch (field_10_lang_code)
+    switch (lang_code_)
     {
         case 'e':
             if (ch >= 'a' && ch <= 'z')
@@ -377,7 +377,7 @@ void GameText::LoadChunk(const char_type* chunk_type, u32 chunk_len)
     }
     else if (!strncmp(chunk_type, "TDAT", 4U))
     {
-        field_8_tDat.TDATLoad(chunk_len);
+        t_dat_.TDATLoad(chunk_len);
     }
     else
     {
@@ -392,9 +392,9 @@ void GameText::Load()
 
     ChunkHeader chunkHeader;
     char_type gxtFileName[20];
-    sprintf(gxtFileName, "data\\%c.gxt", field_10_lang_code);
+    sprintf(gxtFileName, "data\\%c.gxt", lang_code_);
 
-    sprintf(expected_code, "GBL%c", field_10_lang_code - ' ');
+    sprintf(expected_code, "GBL%c", lang_code_ - ' ');
 
     File::GlobalOpen(gxtFileName);
 
@@ -407,13 +407,13 @@ void GameText::Load()
 
     for (len = sizeof(ChunkHeader); File::GlobalRead(&chunkHeader, &len); len = sizeof(ChunkHeader))
     {
-        if (chunkHeader.field_4_size != 0)
+        if (chunkHeader.size_ != 0)
         {
-            LoadChunk(chunkHeader.field_0_type, chunkHeader.field_4_size);
+            LoadChunk(chunkHeader.type_, chunkHeader.size_);
         }
     }
     File::GlobalClose();
-    TDATOffsets2Strings(field_8_tDat.field_0_data);
+    TDATOffsets2Strings(t_dat_.data_);
 }
 
 // 0x5B5F90
@@ -436,11 +436,11 @@ GameText::GameText()
     if (gTmpBuffer_67C598[0] == 'e' || gTmpBuffer_67C598[0] == 'f' || gTmpBuffer_67C598[0] == 'g' || gTmpBuffer_67C598[0] == 'i' ||
         gTmpBuffer_67C598[0] == 's' || gTmpBuffer_67C598[0] == 'j' || gTmpBuffer_67C598[0] == 'r')
     {
-        field_10_lang_code = gTmpBuffer_67C598[0];
+        lang_code_ = gTmpBuffer_67C598[0];
     }
     else
     {
-        field_10_lang_code = 'e';
+        lang_code_ = 'e';
     }
 }
 

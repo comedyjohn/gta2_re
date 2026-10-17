@@ -4759,9 +4759,9 @@ void Map_0x370::LoadMap_4E95B0(const char_type* pGmpFileName)
     len = sizeof(ChunkHeader);
     while (File::GlobalRead(&chunkHeader, &len))
     {
-        if (chunkHeader.field_4_size != 0)
+        if (chunkHeader.size_ != 0)
         {
-            load_chunk_4E94B0(chunkHeader.field_0_type, chunkHeader.field_4_size);
+            load_chunk_4E94B0(chunkHeader.type_, chunkHeader.size_);
         }
         len = sizeof(ChunkHeader);
     }

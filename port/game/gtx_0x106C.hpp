@@ -12,9 +12,9 @@ struct PaletteBase
     u16 field_4_car_remap;
     u16 field_6_ped_remap;
     u16 field_8_code_obj_remap;
-    u16 field_A_map_obj_remap;
-    u16 field_C_user_remap;
-    u16 field_E_font_remap;
+    u16 map_obj_remap;
+    u16 user_remap;
+    u16 font_remap;
 };
 
 struct SpriteBase
@@ -24,7 +24,7 @@ struct SpriteBase
     u16 field_4_code_obj;
     u16 field_6_map_obj;
     u16 field_8_user;
-    u16 field_A_font;
+    u16 font;
 };
 
 struct FontBase
@@ -38,10 +38,10 @@ struct SpriteIndex
     void ClearPixelsOfColour(u8 clear_target);
     void CopyPixels(u8* dst_x);
 
-    BYTE* field_0_pData;
-    u8 field_4_width;
-    u8 field_5_height;
-    s16 field_6_pad;
+    BYTE* data_;
+    u8 width_;
+    u8 height_;
+    s16 pad_;
 };
 
 struct ObjectInfo
@@ -101,44 +101,44 @@ enum
 class StyleCarInfo
 {
   public:
-    BYTE model;
-    BYTE sprite;
+    BYTE model_;
+    BYTE sprite_;
     BYTE w;
-    BYTE h;
-    BYTE num_remaps;
-    BYTE passengers;
-    BYTE wreck;
-    BYTE rating;
-    s8 front_wheel_offset;
-    s8 rear_wheel_offset;
-    s8 front_window_offset;
-    s8 rear_window_offset;
-    BYTE info_flags;
-    BYTE info_flags_2;
-    BYTE remap[1]; // [variable � see num_remaps];
-    BYTE num_doors;
-    DoorInfo doors[1]; // [variable � see num_doors];
+    BYTE h_;
+    BYTE num_remaps_;
+    BYTE passengers_;
+    BYTE wreck_;
+    BYTE rating_;
+    s8 front_wheel_offset_;
+    s8 rear_wheel_offset_;
+    s8 front_window_offset_;
+    s8 rear_window_offset_;
+    BYTE info_flags_;
+    BYTE info_flags_2_;
+    BYTE remap_[1]; // [variable � see num_remaps];
+    BYTE num_doors_;
+    DoorInfo doors_[1]; // [variable � see num_doors];
 
     bool HasRemaps() const
     {
-        return num_remaps > 1;
+        return num_remaps_ > 1;
     }
 
     bool IsTruckCab() const
     {
-        return (this->info_flags & car_info_flag::truck_cab) == car_info_flag::truck_cab;
+        return (this->info_flags_ & car_info_flag::truck_cab) == car_info_flag::truck_cab;
     }
 
     // Like IsTruckCab_41FEA0; going through a car_info method keeps the check a plain branch in
     // Car_BC::CanBeLiftedByCrane_447F00 (a direct `(flags & 0x10) == 0x10` there gives a sete)
     bool IsTrailer() const
     {
-        return (this->info_flags & car_info_flag::trailer) == car_info_flag::trailer;
+        return (this->info_flags_ & car_info_flag::trailer) == car_info_flag::trailer;
     }
 
     bool IsHeavy() const
     {
-        return (this->info_flags_2 & car_info_flag2::heavy) == car_info_flag2::heavy;
+        return (this->info_flags_2_ & car_info_flag2::heavy) == car_info_flag2::heavy;
     }
 };
 
@@ -146,11 +146,11 @@ struct CarInfoContainer
 {
     CarInfoContainer()
     {
-        field_400_count = 0;
-        memset(reinterpret_cast<void*>(field_0_car_info), 0, sizeof(field_0_car_info));
+        count_ = 0;
+        memset(reinterpret_cast<void*>(car_info_), 0, sizeof(car_info_));
     }
-    StyleCarInfo* field_0_car_info[256];
-    u8 field_400_count;
+    StyleCarInfo* car_info_[256];
+    u8 count_;
     //char_type field_401;// pad
     //char_type field_402;// pad
     //char_type field_403;// pad
@@ -168,9 +168,9 @@ struct SpriteDelta
     void Delta(u8* pArray);
     void Delta(u8* pArray, u32 width);
 
-    DeltaStoreEntry* field_0_pData;
-    u16 field_4_len;
-    u16 field_6_pad;
+    DeltaStoreEntry* data_;
+    u16 len_;
+    u16 pad_;
 };
 
 struct SpriteDeltas
@@ -221,7 +221,7 @@ class Gtx
   public:
     bool IsRemappedWaterTile(u16 spec_idx)
     {
-        if (field_6C_spec[spec_idx] == 4 && IsTileRemapped(spec_idx))
+        if (spec_[spec_idx] == 4 && IsTileRemapped(spec_idx))
         {
             return true;
         }
@@ -231,7 +231,7 @@ class Gtx
     // 9.6f 0x4C03D0 (a ctor of the spec array there)
     void ResetSpecs()
     {
-        for (int& i : field_6C_spec)
+        for (int& i : spec_)
         {
             i = 1;
         }
@@ -239,17 +239,17 @@ class Gtx
 
     bool IsWaterTile(u16 spec_idx)
     {
-        return field_6C_spec[spec_idx] == 4;
+        return spec_[spec_idx] == 4;
     }
 
     bool IsRoadTile(u16 spec_idx)
     {
-        return field_6C_spec[spec_idx] == 3;
+        return spec_[spec_idx] == 3;
     }
 
     s32 GetSpecWith3AsOne(u16 spec_idx)
     {
-        s32 result = field_6C_spec[spec_idx];
+        s32 result = spec_[spec_idx];
         if (result == 3)
         {
             result = 1;
@@ -259,7 +259,7 @@ class Gtx
 
     bool IsSpec4NotRemapped(u16 spec_idx)
     {
-        if (field_6C_spec[spec_idx] == 4 && !IsTileRemapped(spec_idx))
+        if (spec_[spec_idx] == 4 && !IsTileRemapped(spec_idx))
         {
             return true;
         }
@@ -269,23 +269,23 @@ class Gtx
     // inline
     bool HasTiles() const
     {
-        return field_3C_tiles != nullptr;
+        return tiles_ != nullptr;
     }
 
     // inline
     u8* GetTilePixels(u16 tile_num)
     {
-        return &field_3C_tiles[(((tile_num & ~3) * 64) + (tile_num & 3)) * 64];
+        return &tiles_[(((tile_num & ~3) * 64) + (tile_num & 3)) * 64];
     }
 
     u8 GetSpriteWidth(u16 a2)
     {
-        return GetSpriteIndex(a2)->field_4_width;
+        return GetSpriteIndex(a2)->width_;
     }
 
     u8 GetSpriteHeight(u16 a2)
     {
-        return GetSpriteIndex(a2)->field_5_height;
+        return GetSpriteIndex(a2)->height_;
     }
 
     StyleCarInfo* GetCarInfo(u8 idx);
@@ -399,53 +399,53 @@ class Gtx
     // inlined v9.6f, 0x432850
     u8 GetNumberOfCars() const
     {
-        return field_5C_cari->field_400_count;
+        return cari_->count_;
     }
 
     // inlined v9.6f, 0x420200
     bool DoesCarExist(u8 iParm1) const
     {
-        return field_5C_cari->field_0_car_info[iParm1] != nullptr;
+        return cari_->car_info_[iParm1] != nullptr;
     }
 
     bool IsElectrifiedFloorType(u16 tile_idx)
     {
-        return field_6C_spec[tile_idx] == SpecSurfaceType::kSpecElectrified;
+        return spec_[tile_idx] == SpecSurfaceType::kSpecElectrified;
     }
 
-    s16 field_0_totalPalBase;
-    u16 field_2_font_base_total;
-    s16 field_4_sprite_index_count;
-    u16 field_6_map_object_info_len;
-    s16 field_8_physical_palettes_len;
-    s16 field_A_unused;
-    PaletteBase* field_C_palette_base2;
-    PaletteBase* field_10_palette_base1;
-    SpriteBase* field_14_sprite_base2;
-    SpriteBase* field_18_sprite_base1;
-    FontBase* field_1C_font_base;
-    SpriteIndex* field_20_sprite_index;
-    ObjectInfo* field_24_map_object_info;
-    PaletteIndex* field_28_palette_index;
-    void* field_2C_physical_palettes;
-    void* field_30_physical_palettes_size;
-    BYTE* field_34_sprite_graphics;
-    void* field_38_sprite_graphics_unaligned;
-    u8* field_3C_tiles;
-    TileArray* field_40_tile;
-    void* field_44_aligned_tiles_size;
-    DeltaStoreEntry* field_48_delta_store;
-    DeltaEntry* field_4C_delta_index;
-    void* field_50_delta_buffer;
-    DeltaContainer* field_54_del;
-    StyleCarInfo** field_58_car_info;
-    CarInfoContainer* field_5C_cari;
-    s32 field_60_delta_len;
-    u8* field_64_car_recycling_info;
-    s16 field_68_recy_chunk_size;
-    char_type field_6A_palettes_converted;
-    char_type field_6B_unused;
-    s32 field_6C_spec[1024];
+    s16 total_pal_base_;
+    u16 font_base_total_;
+    s16 sprite_index_count_;
+    u16 map_object_info_len_;
+    s16 physical_palettes_len_;
+    s16 unused_after_physical_palettes_len_;
+    PaletteBase* palette_base2_;
+    PaletteBase* palette_base1_;
+    SpriteBase* sprite_base2_;
+    SpriteBase* sprite_base1_;
+    FontBase* font_base_;
+    SpriteIndex* sprite_index_;
+    ObjectInfo* map_object_info_;
+    PaletteIndex* palette_index_;
+    void* physical_palettes_;
+    void* physical_palettes_size_;
+    BYTE* sprite_graphics_;
+    void* sprite_graphics_unaligned_;
+    u8* tiles_;
+    TileArray* tile_;
+    void* aligned_tiles_size_;
+    DeltaStoreEntry* delta_store_;
+    DeltaEntry* delta_index_;
+    void* delta_buffer_;
+    DeltaContainer* del_;
+    StyleCarInfo** car_info_;
+    CarInfoContainer* cari_;
+    s32 delta_len_;
+    u8* car_recycling_info_;
+    s16 recy_chunk_size_;
+    char_type palettes_converted_;
+    char_type unused_after_palettes_converted_;
+    s32 spec_[1024];
 };
 
 EXTERN_GLOBAL(Gtx*, gGtx_0x106C_703DD4);

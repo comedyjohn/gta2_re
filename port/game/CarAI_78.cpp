@@ -5100,7 +5100,7 @@ void CarAI_78::UpdateDrivingAI_452DF0()
 
     field_4C_curr_direction = Ang16::GetAngleFace(field_10_angle);
     dword_677A8C = field_74_max_speed;
-    dword_677C9C = gPixelsToFix16_6F6850.list[gGtx_0x106C_703DD4->GetCarInfo(field_0_car->field_84_car_info_idx)->h];
+    dword_677C9C = gPixelsToFix16_6F6850.list_[gGtx_0x106C_703DD4->GetCarInfo(field_0_car->field_84_car_info_idx)->h_];
 
     field_24_flags = (field_24_flags & ~0x200000U) | (field_0_car->field_54_driver->field_21C_bf.bDriveAggressively << 21);
 

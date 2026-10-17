@@ -1274,7 +1274,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1918);
     }
 
-    if (gText_0x14_704DFC->field_10_lang_code == 'j')
+    if (gText_0x14_704DFC->lang_code_ == 'j')
     {
         gKanjiFont_6F5168 = new KanjiFont_8EC(); // ctor call
         if (!gKanjiFont_6F5168)

@@ -32,19 +32,19 @@ struct Fixture
         {
             keys[i].field_0_pwstr = reinterpret_cast<wchar_t*>(offsets[i]);
             // The key's characters run on from field_4_pKey into field_8 (the file's 8-byte key).
-            char* key = reinterpret_cast<char*>(&keys[i]) + offsetof(TextEntry, field_4_pKey);
+            char* key = reinterpret_cast<char*>(&keys[i]) + offsetof(TextEntry, key);
             std::memcpy(key, names[i], std::strlen(names[i]) + 1);
         }
-        text.field_0_tKey.field_0_tKey = keys;
-        text.field_0_tKey.field_4_tKey_count = kCount;
-        text.field_10_lang_code = lang;
+        text.t_key_.t_key_ = keys;
+        text.t_key_.t_key_count_ = kCount;
+        text.lang_code_ = lang;
         text.TDATOffsets2Strings(data);
     }
     // The fixture's arrays are not owned by the text object.
     ~Fixture()
     {
-        text.field_0_tKey.field_0_tKey = nullptr;
-        text.field_0_tKey.field_4_tKey_count = 0;
+        text.t_key_.t_key_ = nullptr;
+        text.t_key_.t_key_count_ = 0;
     }
 };
 } // namespace

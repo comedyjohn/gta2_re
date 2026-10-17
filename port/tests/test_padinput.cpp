@@ -31,10 +31,10 @@ TEST_CASE("pad buttons drive the controls of the layout in use")
     plat::PadState p = Rest();
     CHECK(r.Read(&p, OnFoot, s, true, false).bits == 0);
     p.buttons[2] = 0x80; // X: fire on foot
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1u << 4));
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1U << 4));
     p.buttons[2] = 0;
     p.buttons[5] = 0x80; // RB: next weapon on foot ...
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1u << 8));
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1U << 8));
     p.buttons[5] = 0;
     CHECK(r.Read(&p, OnFoot, s, true, false).bits == 0);
     CHECK(r.Read(nullptr, OnFoot, s, true, false).bits == 0);
@@ -48,14 +48,14 @@ TEST_CASE("the stick is four directions with hysteresis")
     p.axisY = -32767 * 30 / 100; // under the 40% that turns it on
     CHECK(r.Read(&p, OnFoot, s, true, false).bits == 0);
     p.axisY = -32767 * 50 / 100;
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == 1u); // Forward
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == 1U); // Forward
     p.axisY = -32767 * 30 / 100; // still above the 25% that turns it off
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == 1u);
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == 1U);
     p.axisY = -32767 * 20 / 100;
     CHECK(r.Read(&p, OnFoot, s, true, false).bits == 0);
     p.axisY = 0;
     p.axisX = 32767;
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1u << 3)); // Right
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1U << 3)); // Right
 }
 
 TEST_CASE("on foot with world directions the stick gives a heading and a speed, not direction bits")
@@ -92,11 +92,11 @@ TEST_CASE("in a car the triggers are analog pedals and the right stick turns the
     plat::PadState p = Rest();
     p.triggerRight = 32767; // RT: Forward
     Frame f = r.Read(&p, InCar, s, true, false);
-    CHECK(f.bits == 1u);
+    CHECK(f.bits == 1U);
     CHECK(f.analog.gas == 15);
     p.triggerRight = 8000; // a light press, under the trigger's 16000 as a button
     f = r.Read(&p, InCar, s, true, false);
-    CHECK(f.bits == 1u);
+    CHECK(f.bits == 1U);
     CHECK(f.analog.gas > 0);
     CHECK(f.analog.gas < 5);
     CHECK(r.Read(&p, InCar, s, false, false).analog.gas == 0);
@@ -116,14 +116,14 @@ TEST_CASE("what is held when the layout changes or a menu closes is ignored unti
     const Settings s = ButtonsOnly();
     plat::PadState p = Rest();
     p.buttons[3] = 0x80; // Y: enter a car
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1u << 5));
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1U << 5));
     // In the car Y leaves it again: still held, so not yet
     CHECK(r.Read(&p, InCar, s, true, false).bits == 0);
     CHECK(r.Read(&p, InCar, s, true, false).bits == 0);
     p.buttons[3] = 0;
     CHECK(r.Read(&p, InCar, s, true, false).bits == 0);
     p.buttons[3] = 0x80;
-    CHECK(r.Read(&p, InCar, s, true, false).bits == (1u << 5));
+    CHECK(r.Read(&p, InCar, s, true, false).bits == (1U << 5));
 
     // A menu has the pad: the game sees it at rest, and A (pressed to choose) stays out when it closes
     p = Rest();
@@ -133,7 +133,7 @@ TEST_CASE("what is held when the layout changes or a menu closes is ignored unti
     p.buttons[0] = 0;
     r.Read(&p, OnFoot, s, true, false);
     p.buttons[0] = 0x80;
-    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1u << 6));
+    CHECK(r.Read(&p, OnFoot, s, true, false).bits == (1U << 6));
 }
 
 TEST_CASE("analog state packs into 17 bits and back")
@@ -152,7 +152,7 @@ TEST_CASE("analog state packs into 17 bits and back")
                     a.gas = gas;
                     a.turret = turret;
                     const uint32_t packed = Pack(a);
-                    CHECK(packed < (1u << 17));
+                    CHECK(packed < (1U << 17));
                     CHECK(Unpack(packed) == a);
                 }
             }

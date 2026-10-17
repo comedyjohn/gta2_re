@@ -10,7 +10,7 @@ TEST_CASE("BitSet32 sets, clears and tests bits")
     CHECK(b.check_bit(0));
     CHECK(b.check_bit(31));
     CHECK_FALSE(b.check_bit(5));
-    CHECK(b.GetRaw_4A5190() == 0x80000001u);
+    CHECK(b.GetRaw_4A5190() == 0x80000001U);
     b.clear_bit(0);
     CHECK_FALSE(b.check_bit(0));
     CHECK(b.mask_bit(31));

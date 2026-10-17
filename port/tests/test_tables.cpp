@@ -11,9 +11,9 @@
 TEST_CASE("simcheck hashes")
 {
     const SimcheckHashes h = port_simcheck_hashes();
-    CHECK(h.trigonometry == 0xe0d0be9e58500fa6ull);
-    CHECK(h.random == 0xe7012a80d9cc4025ull);
-    CHECK(h.maths == 0x92fd71d7f5ee31efull);
+    CHECK(h.trigonometry == 0xe0d0be9e58500fa6ULL);
+    CHECK(h.random == 0xe7012a80d9cc4025ULL);
+    CHECK(h.maths == 0x92fd71d7f5ee31efULL);
 }
 
 TEST_CASE("sine and cosine tables")

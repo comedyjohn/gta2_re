@@ -19,7 +19,7 @@ struct SyntheticMap
     SyntheticMap()
     {
         // A column is one header word (height, offset, 2 bytes padding) and one word per block.
-        words = {4u | (1u << 8), 0, 1, 2, 2u | (0u << 8), 3, 4};
+        words = {4U | (1U << 8), 0, 1, 2, 2U | (0U << 8), 3, 4};
         blocks.resize(5);
         for (auto& b : blocks)
         {

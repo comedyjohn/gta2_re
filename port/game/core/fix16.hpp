@@ -276,7 +276,7 @@ class Fix16
 
     // Non-member style add of two references. Unlike the member operator+ it loads the left
     // operand into the result register first (CarPhysics_B0::ComputeEngineTorque_561970's length).
-    static Fix16 Add_ref(const Fix16& lhs, const Fix16& rhs)
+    static Fix16 AddRef(const Fix16& lhs, const Fix16& rhs)
     {
         return Fix16(lhs.mValue + rhs.mValue, 0);
     }
@@ -431,4 +431,4 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur);
 EXTERN_GLOBAL_ARRAY(Fix16, gSinTable, 1440);
 EXTERN_GLOBAL_ARRAY(Fix16, gCosTable, 1440);
 
-void Init_trigonometry_tables();
+void InitTrigonometryTables();

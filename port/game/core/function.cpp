@@ -20,7 +20,7 @@ struct FunctionMetadata
 };
 
 // A simple trim function to remove whitespace from the beginning and end of a string.
-std::string trim(const std::string& s)
+std::string Trim(const std::string& s)
 {
     std::string::size_type start = s.find_first_not_of(" \t\n\r");
     std::string::size_type end = s.find_last_not_of(" \t\n\r");
@@ -32,9 +32,9 @@ std::string trim(const std::string& s)
 }
 
 // Converts a hex string (optionally starting with "0x" or "0X") into a u32.
-u32 hexStringToU32(const std::string& hexStr)
+u32 HexStringToU32(const std::string& hexStr)
 {
-    std::string s = trim(hexStr);
+    std::string s = Trim(hexStr);
     if (s.size() >= 2 && (s.substr(0, 2) == "0x" || s.substr(0, 2) == "0X"))
     {
         s = s.substr(2);
@@ -43,7 +43,7 @@ u32 hexStringToU32(const std::string& hexStr)
 }
 
 // Extracts the value of a given key (assumed to be in quotes) from a JSON object string.
-std::string extractJsonStringValue(const std::string& objectStr, const std::string& key)
+std::string ExtractJsonStringValue(const std::string& objectStr, const std::string& key)
 {
     std::string pattern = "\"" + key + "\"";
     std::string value;
@@ -72,13 +72,13 @@ std::string extractJsonStringValue(const std::string& objectStr, const std::stri
         return value;
     }
     value = objectStr.substr(valueStart, valueEnd - valueStart);
-    return trim(value);
+    return Trim(value);
 }
 
 // Loads and parses the JSON from file "new_data.json", reading only the specific subset.
 // It expects a key "functions" with an array of objects, where each object has keys:
 // "mangled_name", "func_va", "func_fo", "og_addr", and "func_status".
-std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& filename)
+std::vector<FunctionMetadata> LoadFunctionMetadataFromFile(const std::string& filename)
 {
     std::vector<FunctionMetadata> functions;
     FILE* fp = fopen(filename.c_str(), "rb");
@@ -137,21 +137,21 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
         std::string objText = fileContent.substr(objStart, objEnd - objStart + 1);
 
         // Extract all required values.
-        std::string mangledName = extractJsonStringValue(objText, "mangled_name");
-        std::string funcVaStr = extractJsonStringValue(objText, "func_va");
-        std::string funcFoStr = extractJsonStringValue(objText, "func_fo");
-        std::string ogAddrStr = extractJsonStringValue(objText, "og_addr");
-        std::string funcStatusStr = extractJsonStringValue(objText, "func_status");
+        std::string mangledName = ExtractJsonStringValue(objText, "mangled_name");
+        std::string funcVaStr = ExtractJsonStringValue(objText, "func_va");
+        std::string funcFoStr = ExtractJsonStringValue(objText, "func_fo");
+        std::string ogAddrStr = ExtractJsonStringValue(objText, "og_addr");
+        std::string funcStatusStr = ExtractJsonStringValue(objText, "func_status");
 
         // If every field is non-empty, then convert the hex strings to u32 values and add the metadata.
         if (!mangledName.empty() && !funcVaStr.empty() && !funcFoStr.empty() && !ogAddrStr.empty() && !funcStatusStr.empty())
         {
             FunctionMetadata meta;
             meta.mangled_name = mangledName;
-            meta.func_va = hexStringToU32(funcVaStr);
-            meta.func_fo = hexStringToU32(funcFoStr);
-            meta.og_addr = hexStringToU32(ogAddrStr);
-            meta.func_status = hexStringToU32(funcStatusStr);
+            meta.func_va = HexStringToU32(funcVaStr);
+            meta.func_fo = HexStringToU32(funcFoStr);
+            meta.og_addr = HexStringToU32(ogAddrStr);
+            meta.func_status = HexStringToU32(funcStatusStr);
             functions.push_back(meta);
         }
 
@@ -170,7 +170,7 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
 // If found, returns the address (as u32) where the pattern starts; otherwise returns 0.
 namespace
 {
-u32 find_func_meta_data(u32 codeAddr)
+u32 FindFuncMetaData(u32 codeAddr)
 {
     // Search backwards up to 10 bytes.
     for (u32 offset = 1; offset <= 100; ++offset)
@@ -191,14 +191,14 @@ u32 find_func_meta_data(u32 codeAddr)
 
 void LogFuncAddr(u32 codeAddr, s32 mode)
 {
-    const u32 ogAddr = find_func_meta_data(codeAddr);
+    const u32 ogAddr = FindFuncMetaData(codeAddr);
     if (ogAddr == 0)
     {
         printf("CANT FIND OG ADDR!!!! 0x%X\n", codeAddr);
     }
     else
     {
-        static std::vector<FunctionMetadata> functions = loadFunctionMetadataFromFile("new_data.json");
+        static std::vector<FunctionMetadata> functions = LoadFunctionMetadataFromFile("new_data.json");
         for (auto& function : functions)
         {
             if (function.og_addr == ogAddr)

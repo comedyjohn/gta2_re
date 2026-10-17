@@ -282,8 +282,8 @@ class Fix16Point
     Fix16Point Sub(const Fix16Point& rhs) const;
 
     // operator+/operator- with their bodies defined at the end of Car_BC.cpp (HandleCarHitByObject_43F130)
-    inline Fix16Point AddLate_40AC50(const Fix16Point& in);
-    inline Fix16Point SubLate_40AC80(const Fix16Point& rhs);
+    inline Fix16Point AddLate(const Fix16Point& in);
+    inline Fix16Point SubLate(const Fix16Point& rhs);
 
     // Out of line operator+ (CarPhysics_B0::SpawnSkidSegment_55D200)
     Fix16Point Add(const Fix16Point& in);

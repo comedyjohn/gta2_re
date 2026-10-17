@@ -328,7 +328,7 @@ void Crane_15C::SetTransporterCargoTarget_47F220(Fix16 radius, Fix16 angle, Spri
     field_F8_transporter_cargo_angle = angle;
     field_6C_transporter_cargo = pCargo;
     field_70_cargo_transporter = pTransporter;
-    field_108_transporter_cargo_rot = Ang16::Ang16_to_Fix16(pCargo->field_0_rotation);
+    field_108_transporter_cargo_rot = Ang16::Ang16ToFix16(pCargo->field_0_rotation);
     field_FC_transporter_cargo_x = pCargo->field_14_xy.x;
     field_100_transporter_cargo_y = pCargo->field_14_xy.y;
     field_104_transporter_cargo_z = pCargo->field_1C_zpos;
@@ -341,7 +341,7 @@ void Crane_15C::SetDropTransporterTarget_47F290(Fix16 radius, Fix16 angle, Sprit
     field_BC_drop_transporter_radius = radius;
     field_C0_drop_transporter_angle = angle;
     field_64_drop_transporter = pSprite;
-    field_D0_drop_transporter_rot = Ang16::Ang16_to_Fix16(pSprite->field_0_rotation);
+    field_D0_drop_transporter_rot = Ang16::Ang16ToFix16(pSprite->field_0_rotation);
     field_C4_drop_transporter_pos.x = pSprite->field_14_xy.x;
     field_C4_drop_transporter_pos.y = pSprite->field_14_xy.y;
     field_CC_drop_transporter_z = pSprite->field_1C_zpos;
@@ -354,7 +354,7 @@ void Crane_15C::SetPickupCarTarget_47F2F0(Fix16 radius, Fix16 angle, Sprite* pSp
     field_D8_pickup_car_radius = radius;
     field_DC_pickup_car_angle = angle;
     field_68_pickup_car = pSprite;
-    field_EC_pickup_car_rot = Ang16::Ang16_to_Fix16(pSprite->field_0_rotation);
+    field_EC_pickup_car_rot = Ang16::Ang16ToFix16(pSprite->field_0_rotation);
     field_E0_pickup_car_x = pSprite->field_14_xy.x;
     field_E4_pickup_car_y = pSprite->field_14_xy.y;
     field_E8_pickup_car_z = pSprite->field_1C_zpos;
@@ -371,7 +371,7 @@ bool Crane_15C::IsTransporterCargoTargetValid_47F350()
         Car_BC* pCar2 = sp->AsCar_40FEB0();
         if (!(pCar2->IsDespawning_4215B0() || field_FC_transporter_cargo_x != sp->field_14_xy.x ||
               field_100_transporter_cargo_y != sp->field_14_xy.y || field_104_transporter_cargo_z != sp->field_1C_zpos ||
-              field_108_transporter_cargo_rot != Ang16::Ang16_to_Fix16(sp->field_0_rotation)))
+              field_108_transporter_cargo_rot != Ang16::Ang16ToFix16(sp->field_0_rotation)))
         {
             return true;
         }
@@ -386,7 +386,7 @@ bool Crane_15C::IsPickupCarTargetValid_47F3D0()
     if (!pCar->IsDespawning_4215B0() && this->field_E0_pickup_car_x == field_68_pickup_car->field_14_xy.x &&
         this->field_E4_pickup_car_y == field_68_pickup_car->field_14_xy.y &&
         this->field_E8_pickup_car_z == field_68_pickup_car->field_1C_zpos &&
-        this->field_EC_pickup_car_rot == Ang16::Ang16_to_Fix16(field_68_pickup_car->field_0_rotation) && !pCar->field_54_driver &&
+        this->field_EC_pickup_car_rot == Ang16::Ang16ToFix16(field_68_pickup_car->field_0_rotation) && !pCar->field_54_driver &&
         pCar->AreAllDoorsClosed_441A40())
     {
         return true;
@@ -401,7 +401,7 @@ bool Crane_15C::IsDropTransporterTargetValid_47F450()
     if (!pCar->IsDespawning_4215B0() && this->field_C4_drop_transporter_pos.x == field_64_drop_transporter->field_14_xy.x &&
         this->field_C4_drop_transporter_pos.y == field_64_drop_transporter->field_14_xy.y &&
         this->field_CC_drop_transporter_z == field_64_drop_transporter->field_1C_zpos &&
-        this->field_D0_drop_transporter_rot == Ang16::Ang16_to_Fix16(field_64_drop_transporter->field_0_rotation))
+        this->field_D0_drop_transporter_rot == Ang16::Ang16ToFix16(field_64_drop_transporter->field_0_rotation))
     {
         return pCar->field_0_attachments.FirstSpriteOfType_5A6CA0(SpriteTypes::kCar) ? false : true;
     }
@@ -512,7 +512,7 @@ bool Crane_15C::ComputeHookPolar_47F6C0(const Fix16Point& pPoint, Fix16* pOutF16
     // TODO: 1st check is removed in 9.6f ??
     if (*pOutF16 <= kMaxHookRadius_679F68 && *pOutF16 >= kMinHookRadius_679C3C)
     {
-        *pOutAng = Ang16::Ang16_to_Fix16(to_hook.Atan2());
+        *pOutAng = Ang16::Ang16ToFix16(to_hook.Atan2());
         return true;
     }
     else
@@ -948,7 +948,7 @@ void Crane_15C::CraneTargetPickupCheck_480900(Fix16 xpos, Fix16 ypos, Ang16 ang)
     Fix16Point t;
     ComputeHookPolar_47F6C0(target_pos, &field_120_target1_radius, &field_124_target1_angle);
 
-    field_128_target1_rot = Ang16::Ang16_to_Fix16(ang);
+    field_128_target1_rot = Ang16::Ang16ToFix16(ang);
 
     if (field_144_crane_mode == 3)
     {
@@ -973,7 +973,7 @@ void Crane_15C::ComputePickupAlignment_480B60(Fix16 xpos, Fix16 ypos, Ang16 ang)
     Fix16Point t;
     ComputeHookPolar_47F6C0(target_pos, &field_130_target2_radius, &field_134_target2_angle);
 
-    field_138_target2_rot = Ang16::Ang16_to_Fix16(ang);
+    field_138_target2_rot = Ang16::Ang16ToFix16(ang);
 
     if (field_144_crane_mode == 1)
     {

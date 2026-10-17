@@ -517,7 +517,7 @@ uint64_t HashScript(std::string* dump, const PoolMap& pools)
             Ctx* ctx = static_cast<Ctx*>(c);
             u32 handle;
             memcpy(&handle, ctx->data + offset, sizeof(handle));
-            const u32 idx = static_cast<u32>(ctx->pools->Of(Ptr32_FromHandle(handle)));
+            const u32 idx = static_cast<u32>(ctx->pools->Of(Ptr32FromHandle(handle)));
             memcpy(ctx->data + offset, &idx, sizeof(idx));
         },
         &ctx);

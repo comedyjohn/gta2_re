@@ -60,6 +60,8 @@ RE_G = re.compile(r"^g[A-Z][A-Za-z0-9]*$")
 KEEP_ALIASES = {"s8", "s16", "s32", "s64", "u8", "u16", "u32", "u64", "f32", "f64", "char_type", "wchar_type", "uptr", "sptr",
                 "size_t", "ptrdiff_t", "uintptr_t", "intptr_t", "wchar_t"}
 SKIP_FUNCTIONS = {"main", "WinMain", "DllMain"}
+# the components of a point or a vector are its interface: they keep their names (no trailing underscore)
+COORDINATES = {"x", "y", "z", "w"}
 
 
 def pascal(name):
@@ -193,7 +195,7 @@ def wanted_symbols(sub, kind, syms):
                 out.append((s, *propose_global(name, True)))
                 continue
             us = s.get("has_methods", True) if k == "field" else True
-            if (RE_SNAKE_US if us else RE_SNAKE).match(name):
+            if name in COORDINATES or (RE_SNAKE_US if us else RE_SNAKE).match(name):
                 continue
             out.append((s, *propose_member(name, us)))
         elif kind == "enumerators" and k == "enumerator":

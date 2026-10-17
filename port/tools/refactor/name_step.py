@@ -89,8 +89,12 @@ def main():
         with open(ov_path, newline="") as f:
             for r in csv.reader(f):
                 if r and r[0] != "old" and not r[0].startswith("#"):
-                    if r[0] in current or r[0] in rows:
-                        rows[r[0]] = [r[1], "", r[0]]
+                    key = r[0]
+                    if key not in rows and key not in current:  # a local or parameter is keyed by its usr; the override gives its name
+                        hits = [k for k, v in rows.items() if k.startswith("usr:") and v[2] == key]
+                        key = hits[0] if len(hits) == 1 else key
+                    if key in current or key in rows:
+                        rows[key] = [r[1], "", rows[key][2] if key in rows else key]
     final = os.path.join(NAMES, f"{sub}-{kind}.csv")
     n = 1
     while committed(final):  # a record that was already applied stays; a new batch gets the next file

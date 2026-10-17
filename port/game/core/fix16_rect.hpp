@@ -89,7 +89,7 @@ class Fix16Rect
     }
 
     // 9.6f 0x463690, defined in map_0x370.cpp
-    inline bool EdgesCrossSegment_463690(Fix16Point& p1, Fix16Point& p2);
+    inline bool EdgesCrossSegment(Fix16Point& p1, Fix16Point& p2);
 
     void SetFromPosSize(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {

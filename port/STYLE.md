@@ -23,7 +23,7 @@ name, not before.
 | Namespaces | `snake_case` | `gta2`, `gta2::sim` |
 | Files | `snake_case`, after the main type; one directory per subsystem | `vehicles/car.cpp` |
 
-The trailing underscore also keeps a member from being shadowed by the constructor and setter parameters
+The components of a point or a vector (`x`, `y`, `z`, `w`) are its interface and keep their names. The trailing underscore also keeps a member from being shadowed by the constructor and setter parameters
 of the same name (`-Wshadow` is an error).
 
 The type says what a variable is, so `b`, `p`, `pp`, `u` and `n` prefixes go. A pointer member that

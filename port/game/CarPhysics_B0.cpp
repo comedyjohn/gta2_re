@@ -214,7 +214,7 @@ Fix16Point CarPhysics_B0::get_linvel_447010()
 
 wchar_t gThetaText_66A8EC[32]; //DEFINE_GLOBAL_ARRAY(wchar_t, gThetaText_66A8EC, 32, 0x66A8EC); // global crashing standalone
 
-inline wchar_t* Ang16::ThetaText_49E240()
+inline wchar_t* Ang16::ThetaText()
 {
     swprintf(gThetaText_66A8EC, L"%3.2f", (rValue * 0.25));
     return gThetaText_66A8EC;
@@ -271,7 +271,7 @@ void CarPhysics_B0::ShowPhysicsDebug_559430()
                  field_74_ang_vel_rad.AsDouble());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"theta = %s", field_58_theta.ThetaText_49E240());
+        swprintf(tmpBuff_67BD9C, L"theta = %s", field_58_theta.ThetaText());
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 96, gDebugFont_706600, 1);
 
         // TODO: the format string at 0x623FFC is a guess
@@ -360,7 +360,7 @@ void CarPhysics_B0::UpdateTrailerPhysicsFromTowingCar_559A40()
         CarPhysics_B0* pPhysics = field_5C_pCar->field_64_pTrailer->field_C_pCarOnTrailer->field_58_physics;
         pPhysics->field_40_linvel_1 = (pPhysics->field_38_cp1 - gTrailer_cp1_6FE3A8) * inv_step;
         pPhysics->field_74_ang_vel_rad =
-            inv_step * Ang16::Ang16_to_Fix16(ComputeShortestAngleDelta_4056C0(gTrailer_theta_6FE018, pPhysics->field_58_theta));
+            inv_step * Ang16::Ang16ToFix16(ComputeShortestAngleDelta_4056C0(gTrailer_theta_6FE018, pPhysics->field_58_theta));
         pPhysics->field_70_z_vel = (inv_step * (pPhysics->field_6C_cp3 - gTrailer_cp3_6FE1B4));
     }
 }
@@ -649,7 +649,7 @@ void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY,
 
     field_40_linvel_1 = worldPoint - field_30_cm1;
 
-    field_74_ang_vel_rad = targetAngle - Ang16::Ang16_to_Fix16(field_58_theta);
+    field_74_ang_vel_rad = targetAngle - Ang16::Ang16ToFix16(field_58_theta);
 
     if (*rotationMode == 1)
     {
@@ -3387,7 +3387,7 @@ Fix16 CarPhysics_B0::MinGasPedalPressure_5626C0()
 // 0x5626f0
 void CarPhysics_B0::ApplyArrowSteerAssist_5626F0()
 {
-    Fix16 theta_fp = Ang16::Ang16_to_Fix16(field_58_theta);
+    Fix16 theta_fp = Ang16::Ang16ToFix16(field_58_theta);
     dword_6FE0B0 = kFixZero;
     CarAI_78* pAi = this->field_5C_pCar->field_5C_AI;
     if ((!pAi || pAi->field_24_bf.bFlag13) && this->field_78_pointing_ang_rad == kFixZero)

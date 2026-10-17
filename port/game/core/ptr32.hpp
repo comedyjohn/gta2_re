@@ -15,21 +15,21 @@
 // the script data holds a pointer (Ptr32_NoteSlot). The state hash (port/platform/statehash.cpp)
 // hashes those slots as the object they point at, never as an address.
 #if defined(GTA2_PORT_64BIT)
-u32 Ptr32_ToHandle(const void* p);
-void* Ptr32_FromHandle(u32 handle);
+u32 Ptr32ToHandle(const void* p);
+void* Ptr32FromHandle(u32 handle);
 #else
-inline u32 Ptr32_ToHandle(const void* p)
+inline u32 Ptr32ToHandle(const void* p)
 {
     return static_cast<u32>(reinterpret_cast<uintptr_t>(p));
 }
 
-inline void* Ptr32_FromHandle(u32 handle)
+inline void* Ptr32FromHandle(u32 handle)
 {
     return reinterpret_cast<void*>(static_cast<uintptr_t>(handle));
 }
 #endif
 
-void Ptr32_NoteSlot(const void* slot, u32 handle);
+void Ptr32NoteSlot(const void* slot, u32 handle);
 
 template<typename T>
 struct Ptr32
@@ -39,7 +39,7 @@ struct Ptr32
 
     operator T*() const
     {
-        return static_cast<T*>(Ptr32_FromHandle(handle_));
+        return static_cast<T*>(Ptr32FromHandle(handle_));
     }
 
     T* operator->() const
@@ -51,13 +51,13 @@ struct Ptr32
     template<typename U>
     explicit operator U*() const
     {
-        return reinterpret_cast<U*>(Ptr32_FromHandle(handle_));
+        return reinterpret_cast<U*>(Ptr32FromHandle(handle_));
     }
 
     Ptr32& operator=(T* p)
     {
-        handle_ = Ptr32_ToHandle(p);
-        Ptr32_NoteSlot(this, handle_);
+        handle_ = Ptr32ToHandle(p);
+        Ptr32NoteSlot(this, handle_);
         return *this;
     }
 };

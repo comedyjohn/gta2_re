@@ -374,7 +374,7 @@ SpriteMaskCache_3CC::~SpriteMaskCache_3CC()
 }
 
 // 0x48F820
-void DamageAreaFlags::Delta_48F820(u16& sprite_idx, u8* pArray, u32& a3, u8& width)
+void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width)
 {
     u32 unknown = a3;
     u32 delta_idx = 0;
@@ -409,7 +409,7 @@ inline u16 Sprite::GetTrueSpriteIdx_4BA230()
 }
 
 // 0x48F8B0
-s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5)
+s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5)
 {
     if (!m_var)
     {
@@ -424,7 +424,7 @@ s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, cons
         {
             bRet = 1;
             u32 sub = m_var - pSprt14->field_8_delta_mask;
-            Delta_48F820(sprite_idx, pSprt14->field_0_pixels, sub, sprite_index_5AA440->field_4_width);
+            ApplyDelta(sprite_idx, pSprt14->field_0_pixels, sub, sprite_index_5AA440->field_4_width);
             pSprt14->SetKey_44AF50(sprite_idx, m_var, a4);
         }
         else
@@ -445,7 +445,7 @@ s16 DamageAreaFlags::Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, cons
             pSprt14->ClearMask_48F5C0(sprite_index_5AA440->field_4_width, sprite_index_5AA440->field_5_height);
         }
 
-        Delta_48F820(sprite_idx, pSprt14->field_0_pixels, m_var, sprite_index_5AA440->field_4_width);
+        ApplyDelta(sprite_idx, pSprt14->field_0_pixels, m_var, sprite_index_5AA440->field_4_width);
         pSprt14->SetKey_44AF50(sprite_idx, m_var, a4);
     }
 
@@ -1179,7 +1179,7 @@ void Sprite::Draw_59EFF0()
             pCar->field_8_damaged_areas.ClearGlobalFlags();
         }
         u8 bRet;
-        u16 unkDeltaRelated = pCar->field_8_damaged_areas.Delta_48F8B0(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), false);
+        u16 unkDeltaRelated = pCar->field_8_damaged_areas.ApplyDeltaForPalette(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), false);
         if (unkDeltaRelated != 0xFFFF)
         {
             if (bRet)
@@ -1245,7 +1245,7 @@ void Sprite::Draw_59EFF0()
         pCar->field_8_damaged_areas.MaskWithGlobalFlags();
 
         u8 bRet;
-        u16 unkDeltaRelated = pCar->field_8_damaged_areas.Delta_48F8B0(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), true);
+        u16 unkDeltaRelated = pCar->field_8_damaged_areas.ApplyDeltaForPalette(sprite_idx, bRet, Sprite::GetTruePalette_59EAA0(), true);
         if (unkDeltaRelated != 0xFFFF)
         {
             if (bRet)

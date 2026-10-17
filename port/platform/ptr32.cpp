@@ -23,7 +23,7 @@ std::unordered_map<const void*, u32>& Slots()
 }
 } // namespace
 
-void Ptr32_NoteSlot(const void* slot, u32 handle)
+void Ptr32NoteSlot(const void* slot, u32 handle)
 {
     Slots()[slot] = handle;
 }
@@ -64,7 +64,7 @@ std::vector<void*>& Pointers()
 }
 } // namespace
 
-u32 Ptr32_ToHandle(const void* p)
+u32 Ptr32ToHandle(const void* p)
 {
     if (!p)
     {
@@ -83,7 +83,7 @@ u32 Ptr32_ToHandle(const void* p)
     return handle;
 }
 
-void* Ptr32_FromHandle(u32 handle)
+void* Ptr32FromHandle(u32 handle)
 {
     std::vector<void*>& pointers = Pointers();
     if (handle >= pointers.size())

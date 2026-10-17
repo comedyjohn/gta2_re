@@ -204,7 +204,7 @@ void EnableBoot2MapDebugOptions()
     InitMapObjectOverrides();
     InitCodeObjectTemplates();
     Init_gmp_slopes_array();
-    Init_trigonometry_tables();
+    InitTrigonometryTables();
     Init_Unk_Width_Height_F16_array();
     Init_InputRecorder();
 

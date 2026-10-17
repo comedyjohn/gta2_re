@@ -18,7 +18,7 @@ TEST_CASE("simcheck hashes")
 
 TEST_CASE("sine and cosine tables")
 {
-    Init_trigonometry_tables();
+    InitTrigonometryTables();
     // 1440 steps a turn: 360 is 90 degrees
     CHECK(Ang16::Sine(Ang16(0)).mValue == 0);
     CHECK(Ang16::Sine(Ang16(360)).mValue == 0x4000);

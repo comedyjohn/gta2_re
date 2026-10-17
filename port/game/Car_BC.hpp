@@ -975,11 +975,11 @@ class Car_BC
     // 9.6f inline 0x4213D0
     void SetBrakeLightDeltas_4213D0()
     {
-        if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::kTopRightDamage)) // if not rear left damage
+        if (!field_8_damaged_areas.MaskBit(CarDeltaBitsEnum::kTopRightDamage)) // if not rear left damage
         {
             field_8_damaged_areas.SetBit(CarDeltaBitsEnum::kBackRightBrakeLight); // set left rear brake light
         }
-        if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::kTopLeftDamage)) // if not rear right damage
+        if (!field_8_damaged_areas.MaskBit(CarDeltaBitsEnum::kTopLeftDamage)) // if not rear right damage
         {
             field_8_damaged_areas.SetBit(CarDeltaBitsEnum::kBackLeftBrakeLight); // set right rear brake light
         }
@@ -988,7 +988,7 @@ class Car_BC
     // 9.6f inline 0x425590
     void SetHeadlightDeltas_425590()
     {
-        if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::kBottomRightDamage)) // if not front left damage
+        if (!field_8_damaged_areas.MaskBit(CarDeltaBitsEnum::kBottomRightDamage)) // if not front left damage
         {
             if (HasPopupHeadlights_421700())
             {
@@ -1000,7 +1000,7 @@ class Car_BC
             }
         }
 
-        if (!field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::kBottomLeftDamage)) // if not front right damage
+        if (!field_8_damaged_areas.MaskBit(CarDeltaBitsEnum::kBottomLeftDamage)) // if not front right damage
         {
             if (HasPopupHeadlights_421700())
             {

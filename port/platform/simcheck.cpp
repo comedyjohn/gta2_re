@@ -29,7 +29,7 @@ struct Hash
 
 SimcheckHashes port_simcheck_hashes()
 {
-    Init_trigonometry_tables();
+    InitTrigonometryTables();
 
     Hash trig;
     for (int i = 0; i < 1440; i++)

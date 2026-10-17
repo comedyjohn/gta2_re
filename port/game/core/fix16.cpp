@@ -412,7 +412,7 @@ void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, co
     }
 }
 
-void Init_trigonometry_tables()
+void InitTrigonometryTables()
 {
     s16 arg = 0;
     for (u32 idx = 0; idx < GTA2_COUNTOF(gSinTable); idx++, arg++)

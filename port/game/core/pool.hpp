@@ -142,7 +142,7 @@ class Pool
         start_ = pItem;
     }
 
-    void Remove_NoDeAllocate(PoolType* pItem)
+    void RemoveNoDeAllocate(PoolType* pItem)
     {
         pItem->mpNext = start_;
         start_ = pItem;

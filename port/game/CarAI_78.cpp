@@ -5418,7 +5418,7 @@ void CarAI_78::UpdateTrainMovement_453A40()
     }
 
     Fix16 i;
-    for (i = Ang16::Ang16_to_Fix16(ReturnAngleFromRoadDirection_4F7940(&track_dir)); i < kFixZero; i += kFpTwoPi_677C84)
+    for (i = Ang16::Ang16ToFix16(ReturnAngleFromRoadDirection_4F7940(&track_dir)); i < kFixZero; i += kFpTwoPi_677C84)
     {
         ;
     }

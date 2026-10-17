@@ -81,7 +81,7 @@ class Ang16
     }
 
     // 9.6f 0x49E240, defined in CarPhysics_B0.cpp
-    inline wchar_t* ThetaText_49E240();
+    inline wchar_t* ThetaText();
 
     Ang16 operator-()
     {
@@ -250,7 +250,7 @@ class Ang16
 
     // inlined from 0x40f580 on v9.6f
     // I was tempted to put this on the Fix16 header, but that will create a circular dependency...
-    static Fix16 _stdcall Ang16_to_Fix16(const Ang16& v)
+    static Fix16 _stdcall Ang16ToFix16(const Ang16& v)
     {
         s32 value = v.rValue * 71;
         return Fix16(value, 0);
@@ -336,7 +336,7 @@ class Ang8
 {
   public:
     //  maybe an Ang8 inline at 0x462EF0 in 9.6f
-    Ang16 convert_to_ang16()
+    Ang16 ConvertToAng16()
     {
         return Ang16((Fix16(rValue) / 256) * 1440);
     }

@@ -14,16 +14,16 @@ struct Angle
     Angle(const s16& param_1, s32)
     {
         this->value_ = param_1;
-        clamp();
+        Clamp();
     }
 
     Angle(const Fix16& param_1, s32)
     {
         value_ = param_1.ToInt();
-        clamp();
+        Clamp();
     }
 
-    void clamp();
+    void Clamp();
 
     s32 operator!=(const Angle& right) const
     {
@@ -63,14 +63,14 @@ struct Angle
     Angle& operator+=(const Angle& right)
     {
         value_ = value_ + right.value_;
-        clamp();
+        Clamp();
         return *this;
     }
 
     Angle& operator-=(const Angle& right)
     {
         value_ = value_ - right.value_;
-        clamp();
+        Clamp();
         return *this;
     }
 };

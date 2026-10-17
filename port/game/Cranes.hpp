@@ -57,7 +57,7 @@ class Crane_15C
 
     void SetHomeRotation_4768E0(Ang16 rotation)
     {
-        field_A8_home_angle = Ang16::Ang16_to_Fix16(rotation);
+        field_A8_home_angle = Ang16::Ang16ToFix16(rotation);
     }
 
     Sprite* GetRotorSprite_411A00()

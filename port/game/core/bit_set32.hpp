@@ -73,13 +73,13 @@ class BitSet32
     }
 
     // TODO: Find in 9.6f
-    bool check_bit(s32 bit)
+    bool CheckBit(s32 bit)
     {
         return (m_var & (1 << bit)) ? true : false;
     }
 
     // 9.6f 0x420E20 TODO: Check if matches
-    bool mask_bit(u32 bit)
+    bool MaskBit(u32 bit)
     {
         return (m_var & (1U << bit)) == (1U << bit);
     }
@@ -140,6 +140,6 @@ class BitSet32
 
 struct DamageAreaFlags : BitSet32
 {
-    s16 Delta_48F8B0(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5);
-    void Delta_48F820(u16& sprite_idx, u8* pArray, u32& a3, u8& width);
+    s16 ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& a4, const u32& a5);
+    void ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width);
 };

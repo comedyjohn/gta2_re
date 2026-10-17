@@ -1088,7 +1088,6 @@ port/game/ObjectDefinitions_8CA8.cpp,modernize-use-std-print,2
 port/game/ObjectDefinitions_8CA8.cpp,readability-function-size,4
 port/game/ObjectDefinitions_8CA8.cpp,readability-implicit-bool-conversion,13
 port/game/ObjectDefinitions_8CA8.cpp,readability-make-member-function-const,1
-port/game/ObjectDefinitions_8CA8.cpp,readability-redundant-control-flow,1
 port/game/ObjectDefinitions_8CA8.cpp,readability-simplify-boolean-expr,3
 port/game/ObjectDefinitions_8CA8.hpp,cppcoreguidelines-avoid-c-arrays,4
 port/game/ObjectDefinitions_8CA8.hpp,cppcoreguidelines-avoid-non-const-global-variables,9
@@ -1302,7 +1301,6 @@ port/game/PedGroup.cpp,readability-function-cognitive-complexity,4
 port/game/PedGroup.cpp,readability-function-size,1
 port/game/PedGroup.cpp,readability-implicit-bool-conversion,65
 port/game/PedGroup.cpp,readability-make-member-function-const,4
-port/game/PedGroup.cpp,readability-redundant-control-flow,1
 port/game/PedGroup.cpp,readability-simplify-boolean-expr,7
 port/game/PedGroup.hpp,bugprone-narrowing-conversions,1
 port/game/PedGroup.hpp,cppcoreguidelines-avoid-c-arrays,1

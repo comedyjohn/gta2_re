@@ -325,7 +325,6 @@ void PedGroup::DestroyGroup_4C93A0()
         }
     }
     ClearGroupData_4C8E90();
-    return;
 }
 
 // 0x4c94e0

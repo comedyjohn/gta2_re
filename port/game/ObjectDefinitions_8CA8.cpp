@@ -5098,7 +5098,6 @@ void ObjectDefinitions_8CA8::CloneAnimatedDefinitions_533420()
     pAVar1 = GetObjectDefinition_534360(0x19);
     pAVar1->field_28_sprite_type = 1;
     pAVar1->field_8_depth = kFpTwo_6FCE10;
-    return;
 }
 
 // 0x533b30

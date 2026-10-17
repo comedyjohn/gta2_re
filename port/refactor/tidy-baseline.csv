@@ -2067,7 +2067,6 @@ port/game/error.cpp,misc-use-anonymous-namespace,1
 port/game/error.cpp,modernize-avoid-c-arrays,6
 port/game/error.cpp,readability-function-size,1
 port/game/error.cpp,readability-implicit-bool-conversion,5
-port/game/error.cpp,readability-uppercase-literal-suffix,6
 port/game/error.hpp,cppcoreguidelines-avoid-c-arrays,3
 port/game/error.hpp,cppcoreguidelines-avoid-non-const-global-variables,8
 port/game/error.hpp,cppcoreguidelines-special-member-functions,1
@@ -2558,7 +2557,6 @@ port/game/winmain.cpp,readability-else-after-return,4
 port/game/winmain.cpp,readability-function-cognitive-complexity,3
 port/game/winmain.cpp,readability-function-size,2
 port/game/winmain.cpp,readability-implicit-bool-conversion,132
-port/game/winmain.cpp,readability-uppercase-literal-suffix,39
 port/game/winmain.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/winmain.hpp,cppcoreguidelines-avoid-non-const-global-variables,6
 port/game/winmain.hpp,modernize-avoid-c-arrays,2

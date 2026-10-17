@@ -346,7 +346,7 @@ void SetFullScreenMode_5D93A0()
     HideCursor_5D94F0();
 
     SetWindowLongA(gHwnd_707F04, -16, 0x10000000);
-    SetWindowPos(gHwnd_707F04, nullptr, 0, 0, 0, 0, 0x63Bu);
+    SetWindowPos(gHwnd_707F04, nullptr, 0, 0, 0, 0, 0x63BU);
     UpdateWindow(gHwnd_707F04);
     ShowWindow(gHwnd_707F04, SW_SHOWNORMAL);
 
@@ -389,7 +389,7 @@ char_type SetWindowedMode_5D9510()
 
     Input_ReleaseMouse_5D7C70();
     SetWindowLongA(gHwnd_707F04, -16, 0x10CF0000);
-    SetWindowPos(gHwnd_707F04, nullptr, 0, 0, 0, 0, 0x63Bu);
+    SetWindowPos(gHwnd_707F04, nullptr, 0, 0, 0, 0, 0x63BU);
     UpdateWindow(gHwnd_707F04);
     ShowWindow(gHwnd_707F04, SW_SHOW);
 
@@ -487,7 +487,7 @@ s32 ReadScreenSettings_5D8F70()
 // 0x5D98E0
 void SetSavedGamma_5D98E0()
 {
-    DWORD Screen_Setting_5870D0 = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 0xAu);
+    DWORD Screen_Setting_5870D0 = gRegistry_6FF968.Get_Screen_Setting_5870D0("gamma", 0xAU);
     if (SetGamma_5D9910(Screen_Setting_5870D0))
     {
         counter_706C4C = 30;
@@ -510,7 +510,7 @@ void SetVideoModeFromSettings_5D92D0()
     }
     else
     {
-        gVidSys_7071D0->field_4_flags &= ~0x10u;
+        gVidSys_7071D0->field_4_flags &= ~0x10U;
     }
 
     if (!gStartMode_626A0C)
@@ -528,7 +528,7 @@ void SetVideoModeFromSettings_5D92D0()
             {
                 SetFullScreenMode_5D93A0();
                 gStartMode_626A0C = 1;
-                gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", 1u);
+                gRegistry_6FF968.Set_Screen_Setting_587170("start_mode", 1U);
             }
             else
             {
@@ -1320,7 +1320,7 @@ bool RunGameFrame_4DA850()
         {
             updated_logic = 1;
         }
-        if (gFramesSinceDraw_6F58D8 >= 8u || (!min_frame_rate_706C50 && gFramesSinceDraw_6F58D8))
+        if (gFramesSinceDraw_6F58D8 >= 8U || (!min_frame_rate_706C50 && gFramesSinceDraw_6F58D8))
         {
             updated_logic = 0;
         }
@@ -1370,8 +1370,8 @@ bool RunGameFrame_4DA850()
     return exit_requested;
 }
 
-GUID IID_DirectMusic = {1667997456u, 3197u, 4561u, {149u, 178u, 0u, 32u, 175u, 220u, 116u, 33u}};
-GUID IDD_IDirectMusic = {1698042202u, 31533u, 4562u, {186u, 24u, 0u, 0u, 248u, 117u, 172u, 18u}};
+GUID IID_DirectMusic = {1667997456U, 3197U, 4561U, {149U, 178U, 0U, 32U, 175U, 220U, 116U, 33U}};
+GUID IDD_IDirectMusic = {1698042202U, 31533U, 4562U, {186U, 24U, 0U, 0U, 248U, 117U, 172U, 18U}};
 
 // todo move to another file for ordering
 // 0x4A0650
@@ -1385,7 +1385,7 @@ void GetDirectMusicVer_4A0650()
     hDMusic = LoadLibraryA("DMUSIC.DLL");
     if (hDMusic)
     {
-        if (CoCreateInstance(IID_DirectMusic, nullptr, 1u, IDD_IDirectMusic, reinterpret_cast<LPVOID*>(&pDMusic)) >= 0)
+        if (CoCreateInstance(IID_DirectMusic, nullptr, 1U, IDD_IDirectMusic, reinterpret_cast<LPVOID*>(&pDMusic)) >= 0)
         {
             gDMusicVer_67BD32 = 0x601;
             pDMusic->Release();
@@ -1417,8 +1417,8 @@ void Video_Render_Inits_5D90E0()
     gVideodevice_70694C = gRegistry_6FF968.Get_Screen_Setting_5870D0("videodevice", 1);
     strcpy(gRenderDllName_7067F0, kDefaultDllNames_626A00[0]);
     strcpy(gVideoDllName_706654, kDefaultDllNames_626A00[1]);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFu);
-    gRegistry_6FF968.Set_Screen_Setting_5871E0("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFu);
+    gRegistry_6FF968.Set_Screen_Setting_5871E0("rendername", reinterpret_cast<BYTE*>(gRenderDllName_7067F0), 0xFFU);
+    gRegistry_6FF968.Set_Screen_Setting_5871E0("videoname", reinterpret_cast<BYTE*>(gVideoDllName_706654), 0xFFU);
 
     if (strcmp(gRenderDllName_7067F0, "softdll.dll") == 0)
     {
@@ -1777,18 +1777,18 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         case WM_SIZE:
             switch (wParam)
             {
-                case 0u:
+                case 0U:
                     // goto wm_size_case_2;
                     gMinimizedState_70827C = 0;
                     gRoot_sound_66B038.Reacquire_40F140();
                     break;
 
-                case 1u:
+                case 1U:
                     gMinimizedState_70827C = 2;
                     gRoot_sound_66B038.Release_40F130();
                     break;
 
-                case 2u:
+                case 2U:
                     // wm_size_case_2:
                     gMinimizedState_70827C = 0;
                     gRoot_sound_66B038.Reacquire_40F140();
@@ -1865,7 +1865,7 @@ LRESULT WindowProc_5E4EE0(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
                     UpdateWinXY_5D8E70();
                     if (gMinimizedState_70827C != 2)
                     {
-                        SetStartMode_5D9230(1u);
+                        SetStartMode_5D9230(1U);
                         SetVideoModeFromSettings_5D92D0();
                         OnVideoModeChanged_5D9680();
                     }
@@ -1913,7 +1913,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 0;
     }
 
-    if (OpenMutexA(0x1F0001u, 0, "GBH_COOP_MUTEX"))
+    if (OpenMutexA(0x1F0001U, 0, "GBH_COOP_MUTEX"))
     {
         return 0;
     }
@@ -1965,7 +1965,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // Starting game...
 
     sprintf(gTmpBuffer_67C598, "GTA2");
-    gHwnd_707F04 = CreateWindowExA(0, "WinMain", gTmpBuffer_67C598, 0xCF0000u, 0, 0, 100, 100, nullptr, nullptr, hInstance, nullptr);
+    gHwnd_707F04 = CreateWindowExA(0, "WinMain", gTmpBuffer_67C598, 0xCF0000U, 0, 0, 100, 100, nullptr, nullptr, hInstance, nullptr);
     if (!gHwnd_707F04)
     {
         return 0;
@@ -1992,7 +1992,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         gWindowY_706B64 = (GetSystemMetrics(1) - window_h) / 2;
     }
 
-    if (!SetWindowPos(gHwnd_707F04, nullptr, gWindowX_706B60, gWindowY_706B64, window_w, window_h, 0x314u))
+    if (!SetWindowPos(gHwnd_707F04, nullptr, gWindowX_706B60, gWindowY_706B64, window_w, window_h, 0x314U))
     {
         FatalError_4A38C0(Gta2Error::SetWindowPosFail, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 661);
     }
@@ -2056,7 +2056,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         while (true)
         {
             MSG msg;
-            if (PeekMessageA(&msg, nullptr, 0, 0, 1u))
+            if (PeekMessageA(&msg, nullptr, 0, 0, 1U))
             {
                 if (msg.message == 18) // WM_QUIT
                 {

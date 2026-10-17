@@ -665,14 +665,19 @@ void Char_B4::DrownPed_5459E0()
 // 9.6f 0x497DF0
 // By-value angle, as TurnBy16Deg_548BD0: the copy is what loads field_40 before adding kAng180
 // By-value angle, like TurnBy16Deg_548BD0: the copy makes VC6 load field_40 first and add kAng180
-static inline Ang16 TurnBy180Deg_546360(Ang16 a)
+namespace
+{
+inline Ang16 TurnBy180Deg_546360(Ang16 a)
 {
     return a + kAng180_6FD936;
 }
+} // namespace
 
 // Frame delay of the lying-on-floor animations (cases 15/16): an if/return inline returning u8
 // gives the original's byte compare with the delay in al and field_68 kept in cl
-static inline u8 FrameDelay_546360(Char_B4* pThis)
+namespace
+{
+inline u8 FrameDelay_546360(Char_B4* pThis)
 {
     if (pThis->field_68_animation_frame > 5)
     {
@@ -680,6 +685,7 @@ static inline u8 FrameDelay_546360(Char_B4* pThis)
     }
     return 4;
 }
+} // namespace
 
 // 0x546360
 void Char_B4::UpdateAnimState_546360()
@@ -1692,10 +1698,13 @@ DEFINE_GLOBAL_INIT(Ang16, word_6FD888, Ang16(64), 0x6FD888);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD860, Fix16(0x80, 0), 0x6FD860);
 
 // The angle is a by-value parameter: the original keeps it in memory and adds it as a dword
-static inline Ang16 TurnBy16Deg_548BD0(Ang16 angle)
+namespace
+{
+inline Ang16 TurnBy16Deg_548BD0(Ang16 angle)
 {
     return word_6FD888 + angle;
 }
+} // namespace
 
 // 9.6f 0x499F00
 // 0x548670
@@ -1797,13 +1806,18 @@ void Char_B4::DispatchCollision_548670(char_type bFlag)
 
 // PolarToCartesian_41FC20 as ApplyMovement_54CC40 expands it: the big function is past the
 // inline budget, so the original calls Multiply_408680 instead of inlining operator*
-static inline void PolarToCartesian_OutOfLineMul(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
+namespace
+{
+inline void PolarToCartesian_OutOfLineMul(Ang16& angle, const Fix16& radius, Fix16& ret1, Fix16& ret2)
 {
     ret1 = Ang16::sine_40F500(angle).Multiply_408680(radius);
     ret2 = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
+} // namespace
 
-[[maybe_unused]] static inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
+namespace
+{
+[[maybe_unused]] inline bool CanJumpOver_54A530(Char_B4* pThis, Char_B4* pChar)
 {
     if (!pThis->field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2))
     {
@@ -1819,6 +1833,7 @@ static inline void PolarToCartesian_OutOfLineMul(Ang16& angle, const Fix16& radi
     }
     return false;
 }
+} // namespace
 
 // 0x548840
 void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
@@ -1884,15 +1899,20 @@ void Char_B4::HandleObjectCollision_548840(Object_2C* pObj)
 
 // What happens when this ped walks into pOther, by the types of both peds (field_238)
 // 9.6f 0x41FA70
-static inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
+namespace
+{
+inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
 {
     a.rValue += b.rValue;
     a.Normalize();
     return a;
 }
+} // namespace
 
 // 9.6f 0x493040 (a Ped method there)
-static inline void CollideWithElvis_493040(Ped* pPed, Char_B4* pChar)
+namespace
+{
+inline void CollideWithElvis_493040(Ped* pPed, Char_B4* pChar)
 {
     if (reinterpret_cast<sptr>(pChar) != pPed->field_138_collided_char_b4)
     {
@@ -1902,9 +1922,12 @@ static inline void CollideWithElvis_493040(Ped* pPed, Char_B4* pChar)
         pPed->SetVoiceEvent_IfBit24Clear_433DD0(ped_ocupation_enum::elvis);
     }
 }
+} // namespace
 
 // 9.6f 0x493000 (a Ped method there)
-static inline void CollideWithPed_493000(Ped* pPed, Char_B4* pOther)
+namespace
+{
+inline void CollideWithPed_493000(Ped* pPed, Char_B4* pOther)
 {
     if (reinterpret_cast<sptr>(pOther) != pPed->field_138_collided_char_b4)
     {
@@ -1913,6 +1936,7 @@ static inline void CollideWithPed_493000(Ped* pPed, Char_B4* pOther)
         pOther->field_7C_pPed->field_138_collided_char_b4 = reinterpret_cast<sptr>(pPed->field_168_game_object);
     }
 }
+} // namespace
 
 // 0x548bd0
 void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
@@ -2666,7 +2690,9 @@ done:
 }
 
 // 9.6f 0x491F10: the face (1-4) next to `face`, clockwise or not
-static inline s32 RotateFace_491F10(s32* face, bool* clockwise)
+namespace
+{
+inline s32 RotateFace_491F10(s32* face, bool* clockwise)
 {
     switch (*face)
     {
@@ -2682,6 +2708,7 @@ static inline s32 RotateFace_491F10(s32* face, bool* clockwise)
             return 2;
     }
 }
+} // namespace
 
 // 9.6f 0x492400
 inline void Char_B4::SetTurnTarget_492400(Ang16 target_rotation)
@@ -3391,7 +3418,9 @@ void Char_B4::sub_54DD70()
 // Inline helper: written out in the caller, VC6 lays the out-of-range `return false` inline and
 // merges the later `return false` into it. As an inline returning true/false it keeps the original's
 // inline `return true` and one shared `return false` at the end.
-static inline bool IsBlockTypeInRange_1_4(u8 block_type)
+namespace
+{
+inline bool IsBlockTypeInRange_1_4(u8 block_type)
 {
     if (block_type > 0 && block_type <= 4)
     {
@@ -3399,6 +3428,7 @@ static inline bool IsBlockTypeInRange_1_4(u8 block_type)
     }
     return false;
 }
+} // namespace
 
 // https://decomp.me/scratch/56qkT
 // 0x54ddf0
@@ -4664,7 +4694,9 @@ bool Char_B4::CanReachTile_550090(u8 xpos, u8 ypos)
     return false;
 }
 
-static inline s32 IsOnSlopeBlock(gmp_block_info* pBlock)
+namespace
+{
+inline s32 IsOnSlopeBlock(gmp_block_info* pBlock)
 {
     if ((pBlock->field_B_slope_type & 0xFC) != 0 && (pBlock->field_B_slope_type & 0xFC) != 0xFC)
     {
@@ -4672,10 +4704,13 @@ static inline s32 IsOnSlopeBlock(gmp_block_info* pBlock)
     }
     return 0;
 }
+} // namespace
 
 // MaxAbsDistance_42A6B0 as state_1_5504F0 inlines it: past the nested inline budget, Max is the named
 // out-of-line copy Max_44E540 (as in Weapon_30's MaxAbsDistance_5DF270)
-static inline Fix16 MaxAbsDistance_5504F0(Fix16& x1, Fix16& y1, const Fix16& x2, const Fix16& y2)
+namespace
+{
+inline Fix16 MaxAbsDistance_5504F0(Fix16& x1, Fix16& y1, const Fix16& x2, const Fix16& y2)
 {
     Fix16 diff_x;
     diff_x = x2 - x1;
@@ -4685,6 +4720,7 @@ static inline Fix16 MaxAbsDistance_5504F0(Fix16& x1, Fix16& y1, const Fix16& x2,
     result = Fix16::Max_44E540(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
     return result;
 }
+} // namespace
 
 // https://decomp.me/scratch/chZqY
 // 0x5504f0

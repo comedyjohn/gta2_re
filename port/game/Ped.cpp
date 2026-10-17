@@ -2306,11 +2306,14 @@ void Ped::DeallocateWithGroupCleanup_45EA00()
 // Clearing the flag through a reference keeps VC6 from hoisting the field_16C_car load above it.
 // The flags word is passed and returned by value: VC6 then loads it into eax before the timer store
 // and clears the bit with the short `and al, 0xFE` form, like the original
-static inline PedFlags32 ClearActive_45EB60(PedFlags32 bf)
+namespace
+{
+inline PedFlags32 ClearActive_45EB60(PedFlags32 bf)
 {
     bf.bActive = 0;
     return bf;
 }
+} // namespace
 
 // 0x45eb60
 void Ped::Deallocate_45EB60()
@@ -5041,18 +5044,24 @@ void Ped::ProcessInCarObjective_463FB0()
 
 // https://decomp.me/scratch/cMSHI
 // Polar to cartesian with the out-of-line Fix16 multiply
-static inline void PolarToCartesianMul_4645B0(Ang16& angle, Fix16& radius, Fix16& x, Fix16& y)
+namespace
+{
+inline void PolarToCartesianMul_4645B0(Ang16& angle, Fix16& radius, Fix16& x, Fix16& y)
 {
     x = Ang16::sine_40F500(angle).Multiply_408680(radius);
     y = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
+} // namespace
 
 // Same, with the sine multiply inlined
-static inline void PolarToCartesianMulInlSin_4645B0(Ang16& angle, Fix16& radius, Fix16& x, Fix16& y)
+namespace
+{
+inline void PolarToCartesianMulInlSin_4645B0(Ang16& angle, Fix16& radius, Fix16& x, Fix16& y)
 {
     x = Ang16::sine_40F500(angle) * radius;
     y = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
+} // namespace
 
 // 0x4645b0
 void Ped::CalcApproachPointNearTargetPed_4645B0()
@@ -6070,16 +6079,22 @@ ret_false:
 
 // The normalizing Ang16 ctor (out of line, AssignNormalized_409300) on a by-value parameter: the
 // original stores the 16-bit difference as a dword before the call (as Particle_4C's NormalizedAng)
-static inline Ang16 NormalizedAng(s16 value)
+namespace
+{
+inline Ang16 NormalizedAng(s16 value)
 {
     return Ang16(&value, 0);
 }
+} // namespace
 
 // Ang16::operator- with the normalizing ctor called out of line and its argument stored as a dword
-static inline Ang16 SubAng16(const Ang16& lhs, const Ang16& rhs)
+namespace
+{
+inline Ang16 SubAng16(const Ang16& lhs, const Ang16& rhs)
 {
     return NormalizedAng(lhs.rValue - rhs.rValue);
 }
+} // namespace
 
 // https://decomp.me/scratch/0VTTk
 // 9.6f 0x437670. Mode 1 is IsPedAThreat (9.6f 0x4371D0) inlined, with the nested budget (42) sending
@@ -10710,7 +10725,9 @@ bool Ped::CanBeRecruitedToGroup_46E020(PedGroup* pGroup)
 // kFpOneEighth_67845C (the Fix16_Rect.hpp one uses kCollisionPrismHalfHeight_6771E4), inline x/y
 // arithmetic and the out-of-line Subtract_436A00/operator+ for z. The by-value z parameter is what
 // puts z in desiredCount's dead stack slot.
-static inline void ComputeRecruitPrism(Fix16_Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
+namespace
+{
+inline void ComputeRecruitPrism(Fix16_Rect& r, Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
 {
     s32 half = offset.mValue / 2;
     r.field_0_left.mValue = x.mValue - half;
@@ -10720,6 +10737,7 @@ static inline void ComputeRecruitPrism(Fix16_Rect& r, Fix16 x, Fix16 y, Fix16 of
     r.field_10_low_z = z.Subtract_436A00(kFpOneEighth_67845C);
     r.field_14_high_z = (z).Add_408660(kFpOneEighth_67845C);
 }
+} // namespace
 
 // 0x46e080
 void Ped::RecruitNearbyPeds_46E080(s32 desiredCount, Fix16 searchRadius)

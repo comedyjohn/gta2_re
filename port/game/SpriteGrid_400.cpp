@@ -46,7 +46,9 @@ DEFINE_GLOBAL_INIT(Fix16, kFpOneAndHalf_678F80, Fix16(0x6000, 0), 0x678F80);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_679084, Fix16(1), 0x679084);
 
 // TODO: might be used elsewhere too or have been a macro
-static inline s32 Clamp(s32 value, s32 min, s32 max)
+namespace
+{
+inline s32 Clamp(s32 value, s32 min, s32 max)
 {
     if (value < min)
     {
@@ -58,6 +60,7 @@ static inline s32 Clamp(s32 value, s32 min, s32 max)
     }
     return value;
 }
+} // namespace
 
 // 0x477a40
 void SpriteGrid_400::DrawSpritesClipped_477A40()

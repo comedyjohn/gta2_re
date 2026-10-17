@@ -9,7 +9,9 @@
 
 using namespace padinput;
 
-static plat::PadState Rest()
+namespace
+{
+plat::PadState Rest()
 {
     plat::PadState p;
     memset(&p, 0, sizeof(p));
@@ -17,12 +19,13 @@ static plat::PadState Rest()
     return p;
 }
 
-static Settings ButtonsOnly()
+Settings ButtonsOnly()
 {
     Settings s = Defaults();
     s.worldDirections = false;
     return s;
 }
+} // namespace
 
 TEST_CASE("pad buttons drive the controls of the layout in use")
 {

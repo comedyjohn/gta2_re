@@ -161,25 +161,31 @@ DEFINE_GLOBAL_INIT(Fix16, dword_66F258, Fix16(0x2000, 0), 0x66F258);
 //DEFINE_GLOBAL(char_type, byte_5FE434[8][44], 0x5FE434);
 char_type byte_5FE434[8][44];
 
-static inline s32 Min(s32 a, s32 b)
+namespace
+{
+inline s32 Min(s32 a, s32 b)
+{
+    return a < b ? a : b;
+}
+} // namespace
+
+namespace
+{
+[[maybe_unused]] inline u8 MinU8(u8 a, u8 b)
 {
     return a < b ? a : b;
 }
 
-[[maybe_unused]] static inline u8 MinU8(u8 a, u8 b)
-{
-    return a < b ? a : b;
-}
-
-static inline s32 Max(s32 a, s32 b)
+inline s32 Max(s32 a, s32 b)
 {
     return a > b ? a : b;
 }
 
-static inline s32 Clamp2(s32 v, s32 center, s32 radius)
+inline s32 Clamp2(s32 v, s32 center, s32 radius)
 {
     return v > center ? Min(center + radius, v) : Max(center - radius, v);
 }
+} // namespace
 
 // 0x412240
 void sound_obj::null_412240()

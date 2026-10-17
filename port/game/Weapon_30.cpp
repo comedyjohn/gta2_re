@@ -407,11 +407,14 @@ void Weapon_30::shotgun_5DD290()
 // Fix16_Point::FromPolar_41E210 (9.6f 0x41E210) as it comes out in pistol_5DD860: the x line
 // reads the sine table directly (through Ang16::sine_40F500 VC6 loads the radius first), the
 // y line is the out of line radius * cos
-static inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radius, const Ang16& angle)
+namespace
+{
+inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radius, const Ang16& angle)
 {
     p.x = radius * gSin_table_667A80[angle.rValue];
     p.y = radius * Ang16::cosine_40F520(angle);
 }
+} // namespace
 
 // 9.6f 0x4CE070
 // 0x5dd860
@@ -767,7 +770,9 @@ void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_char
 void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3);
 
 // GetLength_41E260 with both Abs and the x multiply, the add and the square root out of line
-static inline Fix16 BeamLength_5DE4F0(Fix16_Point& d)
+namespace
+{
+inline Fix16 BeamLength_5DE4F0(Fix16_Point& d)
 {
     if (d.x == dword_706EB8)
     {
@@ -782,14 +787,18 @@ static inline Fix16 BeamLength_5DE4F0(Fix16_Point& d)
         return Fix16::SquareRoot_436A70(d.x.Multiply_408680(d.x).Add_408660(d.y * d.y));
     }
 }
+} // namespace
 
 // PolarToCartesian_41FC20 with the cosine multiply out of line. The radius is a by-value copy: the original
 // stores it once after the joins and its slot is shared with step_y, which is not address-taken.
-static inline void BeamStep_5DE4F0(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2)
+namespace
+{
+inline void BeamStep_5DE4F0(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2)
 {
     ret1 = Ang16::sine_40F500(angle) * radius;
     ret2 = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
+} // namespace
 
 // The direct field_1AC_cam.x read in `delta` (instead of get_cam_x()) drops one register candidate from the
 // first block, so `angle` loses ebx to the `dist << 14` temp and is spilled like in the original.
@@ -901,7 +910,9 @@ DEFINE_GLOBAL_INIT(Fix16, dword_706D34, Fix16(0x100, 0), 0x706D34);
 
 // Length of `d`, with dword_706EB8 as the zero (the multiplies, the add and the square root are the named
 // out-of-line copies; Abs follows the inline budget).
-static inline Fix16 BeamLength_5DE910(Fix16_Point& d)
+namespace
+{
+inline Fix16 BeamLength_5DE910(Fix16_Point& d)
 {
     if (d.x == dword_706EB8)
     {
@@ -916,6 +927,7 @@ static inline Fix16 BeamLength_5DE910(Fix16_Point& d)
         return Fix16::SquareRoot_436A70(d.x.Multiply_408680(d.x).Add_408660(d.y.Multiply_408680(d.y)));
     }
 }
+} // namespace
 
 // Draws the electro beam from `a1` (or the gun muzzle when byte_706C94 is clear) to `a2` at height
 // `a3`: kFP16Quarter_706CF4 long segments with a random kink each, then straight segments for the rest.
@@ -1021,7 +1033,9 @@ void sub_5DE910(Fix16_Point_POD a1, const Fix16_Point& a2, Fix16 a3)
 
 // MaxAbsDistance_42A6B0 as sub_5DF270 inlines it: past the inline budget, Max is the named out-of-line copy
 // Max_44E540 (the Abs calls and the y subtraction go out of line by themselves)
-static inline Fix16 MaxAbsDistance_5DF270(const Fix16& x1, const Fix16& y1, Fix16& x2, Fix16& y2)
+namespace
+{
+inline Fix16 MaxAbsDistance_5DF270(const Fix16& x1, const Fix16& y1, Fix16& x2, Fix16& y2)
 {
     Fix16 diff_x;
     diff_x = x2 - x1;
@@ -1031,6 +1045,7 @@ static inline Fix16 MaxAbsDistance_5DF270(const Fix16& x1, const Fix16& y1, Fix1
     result = Fix16::Max_44E540(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
     return result;
 }
+} // namespace
 
 // The a6 check is a do-while under an if (the first loop's exit jumps straight to the tail, which stays last),
 // and the !a4 (shock counter) branch comes first in the source: its get_x_y temporaries take EH states 0/1.
@@ -1552,22 +1567,30 @@ void Weapon_30::fire_truck_gun_5E0E70()
 // Fix16 operator* with the __int64 cast on the left operand: VC6 then keeps the left value (the point's y)
 // in eax for the imul as the original does; with Fix16::operator* sin goes to eax
 // (tank_main_gun_5E10E0, army_gun_jeep_5E13E0)
-static inline Fix16 MultiplyLeftWide(const Fix16& a, const Fix16& b)
+namespace
+{
+inline Fix16 MultiplyLeftWide(const Fix16& a, const Fix16& b)
 {
     return Fix16(static_cast<s32>((static_cast<__int64>(a.mValue) * b.mValue) >> 14), 0);
 }
+} // namespace
 
 // Fix16 sum as a free function: the sum lands in ecx (operator+ gives eax)
-static inline Fix16 AddFree(const Fix16& a, const Fix16& b)
+namespace
+{
+inline Fix16 AddFree(const Fix16& a, const Fix16& b)
 {
     s32 v = a.mValue + b.mValue;
     return Fix16(v, 0);
 }
+} // namespace
 
 // Fix16_Point::RotateByAngle_40F6B0 as VC6 emits it in a caller that has run out of inline
 // expansions: the multiplies, the negate and the y line's add are the out of line operator
 // copies, and the x line's sum is AddFree (tank_main_gun_5E10E0, army_gun_jeep_5E13E0)
-static inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& angle)
+namespace
+{
+inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& angle)
 {
     Fix16 sin = Ang16::sine_40F500(angle);
     Fix16 cos = Ang16::cosine_40F520(angle);
@@ -1575,6 +1598,7 @@ static inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& 
     p.x = AddFree(p.x.Multiply_408680(cos), p.y.Multiply_408680(sin));
     p.y = x_old.Negate_4086A0().Multiply_408680(sin).Add_408660(p.y.Multiply_408680(cos));
 }
+} // namespace
 
 // https://decomp.me/scratch/QliaE
 // 0x5e10e0

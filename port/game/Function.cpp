@@ -169,7 +169,9 @@ std::vector<FunctionMetadata> loadFunctionMetadataFromFile(const std::string& fi
 // Searches backward from the given code address for a metadata signature.
 // The assumed signature is: two NOPs (0x90, 0x90) followed by a MOV EAX immediate opcode (0xB8).
 // If found, returns the address (as u32) where the pattern starts; otherwise returns 0.
-static u32 find_func_meta_data(u32 codeAddr)
+namespace
+{
+u32 find_func_meta_data(u32 codeAddr)
 {
     // Search backwards up to 10 bytes.
     for (u32 offset = 1; offset <= 100; ++offset)
@@ -186,6 +188,7 @@ static u32 find_func_meta_data(u32 codeAddr)
     }
     return 0; // Not found.
 }
+} // namespace
 
 void LogFuncAddr(u32 codeAddr, s32 mode)
 {

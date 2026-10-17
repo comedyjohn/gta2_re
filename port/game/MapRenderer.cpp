@@ -72,21 +72,27 @@ DEFINE_GLOBAL(Fix16_Point, gUVCorner0_6F6580, 0x6F6580);
 // the centre load and the dead zero hi dword between them, as the original does. Written in the helper
 // body the local would cost inline size (draw_left_4F3C00 & co. end their budget at exactly 0); as a
 // free inline (size <= 40) it costs nothing.
-static inline f32 Fix16ToF32_Rounded(const Fix16& v)
+namespace
+{
+inline f32 Fix16ToF32_Rounded(const Fix16& v)
 {
     f32 f = v.mValue;
     return f / 16384.0F;
 }
+} // namespace
 
 // ProjectVert_46BC70 in the Draw*Side functions converts the camera's field_60 first (fildl 0x60(%eax)
 // before the x/y load): the extra parentheses make that operand the heavier subtree, so VC6 evaluates
 // it first. As a free inline (size <= 40) they cost no inline size; written in the helper body they
 // would, and DrawLeftSide_4EA390 ends its budget at exactly 0. The slope functions inline
 // VertProjector2/VertProjector3::ProjectVert_46BC70 instead (see Fix16ToF32_Rounded2/3).
-static inline f32 Fix16ToFloat_Paren(const Fix16& v)
+namespace
+{
+inline f32 Fix16ToFloat_Paren(const Fix16& v)
 {
     return ((v.mValue / 16384.0F));
 }
+} // namespace
 
 // The slope functions' ProjectVert_46BC70 (VertProjector2/VertProjector3 below) converts x/y and the
 // camera's field_60 through f32 locals with two or three parentheses. The f32 local is the "rounding
@@ -95,22 +101,25 @@ static inline f32 Fix16ToFloat_Paren(const Fix16& v)
 // stores) between the x87 ones. The heavier operand is loaded first: DrawGradientSlopeNorthwards and
 // Westwards load x/y first, Southwards and Eastwards field_60 first, which is why there are two copies.
 // Free inlines (size <= 40), so they don't change the inline budget.
-static inline f32 Fix16ToF32_Rounded2(const Fix16& v)
+namespace
+{
+inline f32 Fix16ToF32_Rounded2(const Fix16& v)
 {
     f32 f = v.mValue;
     return ((f / 16384.0F));
 }
 
-static inline f32 Fix16ToF32_Rounded3(const Fix16& v)
+inline f32 Fix16ToF32_Rounded3(const Fix16& v)
 {
     f32 f = v.mValue;
     return (((f / 16384.0F)));
 }
 
-static inline f32 Fix16ToF32_P3(const Fix16& v)
+inline f32 Fix16ToF32_P3(const Fix16& v)
 {
     return (((v.mValue / 16384.0F)));
 }
+} // namespace
 
 struct VertProjector
 {
@@ -142,7 +151,10 @@ struct VertProjector
     }
 };
 
-static VertProjector gVertProjector;
+namespace
+{
+VertProjector gVertProjector;
+} // namespace
 
 // The same Top/Bottom projection as VertProjector, in the form every draw function except the four
 // Draw*Side functions (4EA390, 4EAF40, 4EBA60, 4ED290) inlines. 10.5 has two versions of these helpers:
@@ -188,7 +200,10 @@ struct VertProjector2
     }
 };
 
-static VertProjector2 gVertProjector2;
+namespace
+{
+VertProjector2 gVertProjector2;
+} // namespace
 
 // DrawGradientSlopeSouthwards_4F1660 and Eastwards_4F33B0 load field_60 before x/y (see above).
 struct VertProjector3
@@ -205,15 +220,21 @@ struct VertProjector3
     }
 };
 
-static VertProjector3 gVertProjector3;
+namespace
+{
+VertProjector3 gVertProjector3;
+} // namespace
 
 // Converts through two f32 locals (the stores are x87 no-op nodes).
-static inline f32 Fix16ToF32_Stored(const Fix16& v)
+namespace
+{
+inline f32 Fix16ToF32_Stored(const Fix16& v)
 {
     f32 f = v.mValue;
     f32 g = f / 16384.0F;
     return g;
 }
+} // namespace
 
 // As VertProjector3, with field_60 converted first in the y line and both conversions stored to f32
 // locals. Used for the vertex right before one whose z needs an idiv: the extra no-op nodes keep the
@@ -231,9 +252,11 @@ struct VertProjector4
     }
 };
 
-static VertProjector4 gVertProjector4;
+namespace
+{
+VertProjector4 gVertProjector4;
 
-static inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
+inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
 {
     s32 vert_idx;
 
@@ -354,6 +377,7 @@ static inline void TransformTriangleUVs_46B910(u16& rotation_and_flip)
             break;
     }
 }
+} // namespace
 
 // 0x4e9d50
 void MapRenderer::SetAmbientLevel_4E9D50(s32& target_level, u16& cycles)
@@ -3584,7 +3608,9 @@ void MapRenderer::ClearDrawnTileCount_4F6A10()
 // counter), which VC6 only does when the expressions are written in the calls themselves (with
 // `xpos_right`/`ypos_upwards` locals it reduces one of the two), and the header's `s32&` parameters
 // can't take those rvalues.
-static inline void AddToDrawListByVal(MapRenderer* pThis, s32 x, s32 y)
+namespace
+{
+inline void AddToDrawListByVal(MapRenderer* pThis, s32 x, s32 y)
 {
     Nanobotz_8* pPos = &pThis->field_1C_draw_list[pThis->field_2EFC_curr_draw_layer_size];
     pPos->field_0_x = x;
@@ -3600,6 +3626,7 @@ static inline void AddToDrawListByVal(MapRenderer* pThis, s32 x, s32 y)
     }
     ++pThis->field_2EFC_curr_draw_layer_size;
 }
+} // namespace
 
 // https://decomp.me/scratch/VJVUz
 // 0x4f6a20

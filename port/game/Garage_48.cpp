@@ -51,7 +51,9 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FCF98, Fix16(0.5), 0x6FCF98);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD218, Fix16(0x3333, 0), 0x6FD218);
 
 // Car_BC::IsLongerThanOneBlock_447ED0 (9.6f), with this file's copy of the 1.0 constant
-static inline bool IsLongerThanOneBlock_447ED0(Car_BC* pCar)
+namespace
+{
+inline bool IsLongerThanOneBlock_447ED0(Car_BC* pCar)
 {
     if (pCar->field_50_car_sprite->GetHeight_447E70() > dword_6FD124)
     {
@@ -59,6 +61,7 @@ static inline bool IsLongerThanOneBlock_447ED0(Car_BC* pCar)
     }
     return false;
 }
+} // namespace
 
 // 9.6f 0x489B10
 // 0x534650

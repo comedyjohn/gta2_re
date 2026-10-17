@@ -17,10 +17,13 @@ keybrd_0x204::keybrd_0x204()
     memset(field_0_keys, 0, sizeof(field_0_keys));
 }
 
-static inline bool is_line_break_or_space(wchar_t letter)
+namespace
+{
+inline bool is_line_break_or_space(wchar_t letter)
 {
     return letter == '\n' || letter == ' ';
 }
+} // namespace
 
 // 0x4D5DA0
 void keybrd_0x204::ReadCfg_4D5DA0(FILE* Stream, wchar_t* pOut)

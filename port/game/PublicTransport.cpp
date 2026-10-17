@@ -109,13 +109,16 @@ gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
 }
 
 // 9.6f 0x421510 (Car_BC member there), inlined
-static inline void EnsureAI_421510(Car_BC* pCar)
+namespace
+{
+inline void EnsureAI_421510(Car_BC* pCar)
 {
     if (!pCar->field_5C_AI)
     {
         pCar->field_5C_AI = gCarAI_78_Pool_677CF8->Allocate();
     }
 }
+} // namespace
 
 // 0x577f80
 s32 TrainStation_34::GetWagonType_577f80(u8 idx)
@@ -1467,7 +1470,9 @@ void PublicTransport_181C::BusesService_579CA0()
 }
 
 // Tells the player driving the train which station it is heading for
-static inline void SetDriverStation(Train_58* pTrain, TrainStation_34* pStation)
+namespace
+{
+inline void SetDriverStation(Train_58* pTrain, TrainStation_34* pStation)
 {
     Car_BC* pCar = pTrain->field_C_carriages[0];
     if (pCar)
@@ -1479,6 +1484,7 @@ static inline void SetDriverStation(Train_58* pTrain, TrainStation_34* pStation)
         }
     }
 }
+} // namespace
 
 // 0x57a7a0
 void PublicTransport_181C::PublicTransportService_57A7A0()

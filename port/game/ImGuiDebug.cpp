@@ -225,7 +225,9 @@ void EnableBoot2MapDebugOptions()
     */
 }
 
-static Sprite* GetPedSprite(Ped* pPed)
+namespace
+{
+Sprite* GetPedSprite(Ped* pPed)
 {
     if (!pPed->field_168_game_object)
     {
@@ -235,7 +237,7 @@ static Sprite* GetPedSprite(Ped* pPed)
     return pPed->field_168_game_object->field_80_sprite_ptr;
 }
 
-static Ped* GetPlayerPed()
+Ped* GetPlayerPed()
 {
     if (!gGame_0x40_67E008)
     {
@@ -256,7 +258,7 @@ static Ped* GetPlayerPed()
     return pPlayer->field_2C4_player_ped;
 }
 
-static Sprite* GetPlayerSprite()
+Sprite* GetPlayerSprite()
 {
     Ped* pPed = GetPlayerPed();
     if (!pPed)
@@ -267,7 +269,7 @@ static Sprite* GetPlayerSprite()
     return GetPedSprite(pPed);
 }
 
-static Sprite* GetPlayerAssociatedSprite()
+Sprite* GetPlayerAssociatedSprite()
 {
     Ped* pPed = GetPlayerPed();
     if (!pPed)
@@ -286,7 +288,7 @@ static Sprite* GetPlayerAssociatedSprite()
     return pPed->field_168_game_object->field_80_sprite_ptr;
 }
 
-static void GetPlayerPos(Fix16& xpos, Fix16& ypos, Fix16& zpos)
+void GetPlayerPos(Fix16& xpos, Fix16& ypos, Fix16& zpos)
 {
     Ped* pPlayerPed = GetPlayerPed();
     Sprite* pPlayerSprite = GetPedSprite(pPlayerPed);
@@ -305,7 +307,7 @@ static void GetPlayerPos(Fix16& xpos, Fix16& ypos, Fix16& zpos)
     }
 }
 
-static void ShowRectAndPointsForSprite4C(SpriteShape_4C* p4C)
+void ShowRectAndPointsForSprite4C(SpriteShape_4C* p4C)
 {
     Fix16_Rect rect = p4C->field_30_boundingBox;
     if (ImGui::TreeNode("bounding box"))
@@ -333,7 +335,7 @@ static void ShowRectAndPointsForSprite4C(SpriteShape_4C* p4C)
     }
 }
 
-static void ShowPedBitMask(Ped* pPed)
+void ShowPedBitMask(Ped* pPed)
 {
     if (pPed)
     {
@@ -375,9 +377,12 @@ static void ShowPedBitMask(Ped* pPed)
         }
     }
 }
+} // namespace
 
 // Bit order of PedFlags32
-static const char* const kPedFlagNames[32] = {
+namespace
+{
+const char* const kPedFlagNames[32] = {
     "bActive",
     "bUnused1",
     "bPanicking",
@@ -412,7 +417,7 @@ static const char* const kPedFlagNames[32] = {
     "bUnused31",
 };
 
-static void ShowPedBitMaskSetting(PedFlags32* flags)
+void ShowPedBitMaskSetting(PedFlags32* flags)
 {
     if (flags && ImGui::TreeNode("Ped BitMask Setting"))
     {
@@ -426,7 +431,7 @@ static void ShowPedBitMaskSetting(PedFlags32* flags)
     }
 }
 
-static const char_type* GetOccupationStrFromPed(Ped* pPed)
+const char_type* GetOccupationStrFromPed(Ped* pPed)
 {
     if (pPed)
     {
@@ -477,6 +482,7 @@ static const char_type* GetOccupationStrFromPed(Ped* pPed)
         return "No Ped";
     }
 }
+} // namespace
 
 // Test scene globals
 DEFINE_GLOBAL(Car_BC*, gTestCar1_704418, 0x704418);
@@ -653,7 +659,9 @@ void NoRefs_sub_5B1170()
     gObject_5C_6F8F84->NewPhysicsObj_5299B0(218, 128, 179, 2, word_704500);
 }
 
-static const char* ObjectIdToString(s32 id)
+namespace
+{
+const char* ObjectIdToString(s32 id)
 {
     switch (id)
     {
@@ -931,7 +939,7 @@ static const char* ObjectIdToString(s32 id)
     }
 }
 
-static Camera_0xBC* GetPlayerCam()
+Camera_0xBC* GetPlayerCam()
 {
     if (gGame_0x40_67E008)
     {
@@ -954,12 +962,15 @@ static Camera_0xBC* GetPlayerCam()
     }
     return nullptr;
 }
+} // namespace
 
 EXTERN_GLOBAL(Fix16, kFpOne_7064C4);
 EXTERN_GLOBAL(Fix16, kFpEight_7064E8);
 EXTERN_GLOBAL(s16, gDebugFont_706600);
 
-static void ProjectXYZ_intoScreen(Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16& screen_x, Fix16& screen_y, Camera_0xBC* pCam)
+namespace
+{
+void ProjectXYZ_intoScreen(Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16& screen_x, Fix16& screen_y, Camera_0xBC* pCam)
 {
     Fix16 zCalc = (kFpOne_7064C4) / (kFpEight_7064E8 + (pCam->field_98_cur_pos.field_8_z - zpos)); // kFpOne_7064C4 ??
 
@@ -969,9 +980,12 @@ static void ProjectXYZ_intoScreen(Fix16 xpos, Fix16 ypos, Fix16 zpos, Fix16& scr
     Fix16 yTmp = (pCam->field_60_screen_scale.y * (ypos - pCam->field_98_cur_pos.field_4_y));
     screen_y = ((zCalc * yTmp) + Fix16(240));
 }
+} // namespace
 
 // Draw Text with wchar_t
-static void DisplayWideTextAtSprite(wchar_t* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
+namespace
+{
+void DisplayWideTextAtSprite(wchar_t* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
 {
     if (gHud_2B00_706620)
     {
@@ -998,29 +1012,41 @@ static void DisplayWideTextAtSprite(wchar_t* pStr, Sprite* pSprt, s16 x_offset, 
         }
     }
 }
+} // namespace
 
 // Draw Text with char_type
-static void DisplayTextAtSprite(const char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
+namespace
+{
+void DisplayTextAtSprite(const char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
 {
     DisplayWideTextAtSprite(text_0x14::Ascii2Wide_5B5DF0(pStr), pSprt, x_offset, y_offset);
 }
+} // namespace
 
 // Draw Text at fixed position in screen (like OG debug stuff)
-static void DisplayWideTextAtScreenCoords(wchar_t* pStr, s16 screen_xpos, s16 screen_ypos)
+namespace
+{
+void DisplayWideTextAtScreenCoords(wchar_t* pStr, s16 screen_xpos, s16 screen_ypos)
 {
     if (gHud_2B00_706620 && gHud_2B00_706620->field_650_texts.field_964_pFreeList) // avoid annoying crash when pausing the game
     {
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(pStr, screen_xpos, screen_ypos, gDebugFont_706600, 1);
     }
 }
+} // namespace
 
-[[maybe_unused]] static void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
+namespace
+{
+[[maybe_unused]] void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
 {
     DisplayWideTextAtScreenCoords(text_0x14::Ascii2Wide_5B5DF0(pStr), screen_xpos, screen_ypos);
 }
+} // namespace
 
 // Draw Text with wchar_t
-static void DisplayWideTextAtXYZ(const wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fix16 zpos)
+namespace
+{
+void DisplayWideTextAtXYZ(const wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
     if (gHud_2B00_706620)
     {
@@ -1044,6 +1070,7 @@ static void DisplayWideTextAtXYZ(const wchar_t* pStr, Fix16 xpos, Fix16 ypos, Fi
         }
     }
 }
+} // namespace
 
 void AddMenuOption(u32 page_idx, s16 xpos, s16 ypos, const wchar_t* pLabelStr, s16 target_page)
 {

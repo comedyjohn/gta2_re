@@ -55,7 +55,9 @@ const char* PortNetUsage()
            "  --net-log            log what the network does\n";
 }
 
-static bool ParseInt(const char* s, int& out)
+namespace
+{
+bool ParseInt(const char* s, int& out)
 {
     char* end = nullptr;
     const long v = strtol(s, &end, 10);
@@ -66,6 +68,7 @@ static bool ParseInt(const char* s, int& out)
     out = static_cast<int>(v);
     return true;
 }
+} // namespace
 
 bool PortParseNetArgs(int argc, char** argv, std::vector<std::string>& rest, std::string& error)
 {

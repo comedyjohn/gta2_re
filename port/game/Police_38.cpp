@@ -834,7 +834,9 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FECB8, Fix16(0x147, 0), 0x6FECB8);
 
 // MaxAbsDistance_42A6B0 as State5_PursueOrChase_572920 inlines it: past the nested inline budget, Max is the named
 // out-of-line copy Max_44E540 (as in Weapon_30's MaxAbsDistance_5DF270)
-static inline Fix16 MaxAbsDistance_572920(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
+namespace
+{
+inline Fix16 MaxAbsDistance_572920(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
 {
     Fix16 diff_x;
     diff_x = x2 - x1;
@@ -844,6 +846,7 @@ static inline Fix16 MaxAbsDistance_572920(const Fix16& x1, const Fix16& y1, cons
     result = Fix16::Max_44E540(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
     return result;
 }
+} // namespace
 
 // The crew chasing the criminal: like State3_AlertedSearch_572340, then each member follows the criminal on foot
 // or in the car depending on how far away and how fast the criminal is.

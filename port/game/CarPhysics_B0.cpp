@@ -22,8 +22,12 @@
 
 // Forward declarations: the functions below are in address order
 s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx);
-static inline Fix16 DotProductOOL_49E500(const Fix16_Point& Vector1, const Fix16_Point& Vector2);
-static inline Fix16 Square_49E0E0(const Fix16& value);
+namespace
+{
+inline Fix16 DotProductOOL_49E500(const Fix16_Point& Vector1, const Fix16_Point& Vector2);
+inline Fix16 Square_49E0E0(const Fix16& value);
+} // namespace
+
 Fix16 DotProduct_560680(const Fix16_Point& Vector1, const Fix16_Point& Vector2);
 
 DEFINE_GLOBAL(CarPhyisicsPool*, gCarPhysicsPool_6FE3E0, 0x6FE3E0);
@@ -681,7 +685,9 @@ void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY,
 
 // Like Fix16::Max, but by value and keeping the larger value in b. Fix16::Max picks the address of
 // the larger operand and reads it through memory, which the original doesn't do here.
-static inline Fix16 MaxByValue_55A6A0(Fix16 a, Fix16 b)
+namespace
+{
+inline Fix16 MaxByValue_55A6A0(Fix16 a, Fix16 b)
 {
     if (a > b)
     {
@@ -689,6 +695,7 @@ static inline Fix16 MaxByValue_55A6A0(Fix16 a, Fix16 b)
     }
     return b;
 }
+} // namespace
 
 // 0x55a400
 void CarPhysics_B0::restore_saved_physics_state_55A400()
@@ -2343,10 +2350,13 @@ void CarPhysics_B0::AccumulateImpulse_55F930(Fix16_Point* pPoint)
 // https://decomp.me/scratch/qCXRd
 // Takes the direction by reference, so the negated point is read through the pointer the
 // negation returns (a named local reads it from its stack slot instead)
-static inline void EmitImpact_55FD00(Fix16& z, const Fix16_Point& dir)
+namespace
+{
+inline void EmitImpact_55FD00(Fix16& z, const Fix16_Point& dir)
 {
     gParticle_8_6FD5E8->EmitImpactParticles_53FE40(CollisionIntersectionPoint_6FE1A0.x, CollisionIntersectionPoint_6FE1A0.y, z, dir);
 }
+} // namespace
 
 // 0x55f970
 void CarPhysics_B0::ApplyAngularImpulse_55F970(Fix16 impulse)
@@ -2416,22 +2426,31 @@ Fix16 CarPhysics_B0::ApplyImpactForcesAndDamage_55FA60(Fix16_Point& PointOfForce
     return ImpulseIntensity;
 }
 
-[[maybe_unused]] static inline Fix16 DotProductInlined_49E500(Fix16_Point& Vector1, Fix16_Point& Vector2)
+namespace
+{
+[[maybe_unused]] inline Fix16 DotProductInlined_49E500(Fix16_Point& Vector1, Fix16_Point& Vector2)
 {
     return (Vector1.x * Vector2.x) + (Vector1.y * Vector2.y);
 }
+} // namespace
 
 // DotProductInlined_49E500 with the out-of-line Fix16 operator copies
-static inline Fix16 DotProductOOL_49E500(const Fix16_Point& Vector1, const Fix16_Point& Vector2)
+namespace
+{
+inline Fix16 DotProductOOL_49E500(const Fix16_Point& Vector1, const Fix16_Point& Vector2)
 {
     return Vector1.x.Multiply_408680(Vector2.x).Add_408660(Vector1.y.Multiply_408680(Vector2.y));
 }
+} // namespace
 
 // 9.6f 0x49E0E0, inlined in 10.5
-static inline Fix16 Square_49E0E0(const Fix16& value)
+namespace
+{
+inline Fix16 Square_49E0E0(const Fix16& value)
 {
     return value.Multiply_408680(value);
 }
+} // namespace
 
 // 0x55fc30
 void CarPhysics_B0::AccumulateImpulse_55FC30(const Fix16_Point& point, s32 base_dmg)
@@ -3363,11 +3382,14 @@ void CarPhysics_B0::ApplyBrakePhysics_5624F0()
 
 // https://decomp.me/scratch/vdIqi
 // Fix16::operator*= with the product in a temporary (StabilizeVelocityAtSpeed_562910)
-static inline void MultiplyAssign_ProductTemp(Fix16& value, const Fix16& factor)
+namespace
+{
+inline void MultiplyAssign_ProductTemp(Fix16& value, const Fix16& factor)
 {
     __int64 product = static_cast<__int64>(value.mValue) * factor.mValue;
     value.mValue = static_cast<s32>(product >> 14);
 }
+} // namespace
 
 // https://decomp.me/scratch/f2UpJ
 // 0x562560
@@ -3603,11 +3625,14 @@ void CarPhysics_B0::SetCarInfoGlobal_562ED0()
 
 // https://decomp.me/scratch/Uxers
 // 9.6f 0x40F760: negates a point in place (inlined in 10.5)
-static inline void NegateInPlace_40F760(Fix16_Point& p)
+namespace
+{
+inline void NegateInPlace_40F760(Fix16_Point& p)
 {
     p.x = -p.x;
     p.y = -p.y;
 }
+} // namespace
 
 // 0x562ef0
 void CarPhysics_B0::SetCurrentCarInfoAndModelPhysics_562EF0()

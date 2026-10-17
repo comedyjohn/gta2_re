@@ -5,13 +5,16 @@
 #include <dinput.h>
 #include <string.h>
 
-static plat::PadState Rest()
+namespace
+{
+plat::PadState Rest()
 {
     plat::PadState p;
     memset(&p, 0, sizeof(p));
     p.pov = -1;
     return p;
 }
+} // namespace
 
 TEST_CASE("overlay names keys and bindings")
 {

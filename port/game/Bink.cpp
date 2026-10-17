@@ -10,10 +10,13 @@ DEFINE_GLOBAL(s32, gBinkSummary_6F8250, 0x6F8250);
 DEFINE_GLOBAL(s32, gBinkPixelFormat_6F81B0, 0x6F81B0);
 
 // 9.6f 0x481DF0
-static inline bool IsDirectBufferMode_481DF0()
+namespace
+{
+inline bool IsDirectBufferMode_481DF0()
 {
     return gBufferMode_706B34 == 2;
 }
+} // namespace
 
 // 0x513210
 void Bink::Reset_513210()

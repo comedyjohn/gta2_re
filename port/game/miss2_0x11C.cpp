@@ -82,10 +82,13 @@ EXTERN_GLOBAL(Ang16, kAngZero_6F804C);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_6F77C4, Fix16(0x4000, 0), 0x6F77C4);
 DEFINE_GLOBAL_INIT(Fix16, kFpTwo_6F77C8, Fix16(2), 0x6F77C8);
 
-static inline bool is_car_weapon(s32& weapon_idx)
+namespace
+{
+inline bool is_car_weapon(s32& weapon_idx)
 {
     return weapon_idx >= 15 && weapon_idx <= 27;
 }
+} // namespace
 
 // 0x503200
 void miss2_0x11C::MissionFailOnArrest_503200()

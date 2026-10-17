@@ -28,9 +28,11 @@ struct Item
 };
 } // namespace
 
+namespace
+{
 TEST_CASE("PoolBasic hands out items in array order and reuses the last freed first")
 {
-    static PoolBasic<Item, 4> pool;
+    PoolBasic<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.Allocate();
     CHECK(a == &pool.field_4_pool[0]);
@@ -46,7 +48,7 @@ TEST_CASE("PoolBasic hands out items in array order and reuses the last freed fi
 
 TEST_CASE("Pool keeps a used list, newest first")
 {
-    static Pool<Item, 4> pool;
+    Pool<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.Allocate();
     Item* c = pool.Allocate();
@@ -58,7 +60,7 @@ TEST_CASE("Pool keeps a used list, newest first")
 
 TEST_CASE("Pool::AllocateAppend adds at the end of the used list")
 {
-    static Pool<Item, 4> pool;
+    Pool<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.AllocateAppend();
     CHECK(pool.GetFirstUsed_4B8FD0() == a);
@@ -68,7 +70,7 @@ TEST_CASE("Pool::AllocateAppend adds at the end of the used list")
 
 TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the order")
 {
-    static Pool<Item, 4> pool;
+    Pool<Item, 4> pool;
     Item* a = pool.Allocate();
     Item* b = pool.Allocate();
     Item* c = pool.Allocate();
@@ -80,3 +82,4 @@ TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the 
     CHECK(b->deallocations == 1);
     CHECK(pool.Allocate() == b); // back on the free list
 }
+} // namespace

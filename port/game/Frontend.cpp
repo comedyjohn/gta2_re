@@ -2360,7 +2360,9 @@ void Frontend::HandleDeletePlayerDialog_4AE9A0()
 // edited. 10.5 has three identical copies (a static function in a header included by three files), so the body
 // is a forced inline here. The count must be defined in another file: with its definition in view VC6 reads it
 // with 32 bit loads instead of the original's 16 bit ones.
-static inline bool CheckCdFile()
+namespace
+{
+inline bool CheckCdFile()
 {
     char_type path[255] = "\0";
 
@@ -2400,6 +2402,7 @@ static inline bool CheckCdFile()
     }
     return false;
 }
+} // namespace
 
 // 0x4B80F0
 bool CheckCdFile_4B80F0()
@@ -3095,7 +3098,9 @@ void FreeSurface_5D7DC0()
 }
 
 // 16.16 step along a line, 0 for a point
-static inline s32 StepFor_5D7DD0(s32 delta, s32 count)
+namespace
+{
+inline s32 StepFor_5D7DD0(s32 delta, s32 count)
 {
     if (count == 0)
     {
@@ -3103,6 +3108,7 @@ static inline s32 StepFor_5D7DD0(s32 delta, s32 count)
     }
     return (delta << 16) / count;
 }
+} // namespace
 
 // Debug line, one gbh_Plot per pixel along the longer axis. x2 and y2 become the deltas, y2 then the y step
 // 0x5D7DD0

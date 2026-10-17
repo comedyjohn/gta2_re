@@ -385,13 +385,18 @@ char_type Particle_4C::UpdateBeamSegment_state_43_538A40()
 
 // The normalizing Ang16 ctor (out of line, AssignNormalized_409300) on a by-value parameter: the
 // original stores the 16-bit sum as a dword before the call (UpdateObjectBeamLink_state_38_538AC0)
-static inline Ang16 NormalizedAng(s16 value)
+namespace
+{
+inline Ang16 NormalizedAng(s16 value)
 {
     return Ang16(&value, 0);
 }
+} // namespace
 
 // Inlined Fix16::Max_44E540: compares and returns the values, not references
-[[maybe_unused]] static inline Fix16 MaxValue_44E540(const Fix16& a, const Fix16& b)
+namespace
+{
+[[maybe_unused]] inline Fix16 MaxValue_44E540(const Fix16& a, const Fix16& b)
 {
     if (a > b)
     {
@@ -399,6 +404,7 @@ static inline Ang16 NormalizedAng(s16 value)
     }
     return b;
 }
+} // namespace
 
 // 9.6f 0x48F230: SetXY_432860 for src/dst, delta = dst - src, delta.atan2_40F790() (result discarded), segments
 // from delta.MaxAbs_48A270() / dword_6FD364, delta.DivideAssign_48A250(segments), cur += delta, mid = cur - prev,
@@ -1381,11 +1387,14 @@ char_type Particle_4C::UpdateBurstAnimation_state_29_30_53B9F0()
 
 // Polar offset of length dword_6FD2E8 with the Ang16 by value (the original keeps the table index
 // in a register across the first multiply instead of reloading the angle)
-static inline void PolarToXY_6FD2E8(Ang16 angle, Fix16& x, Fix16& y)
+namespace
+{
+inline void PolarToXY_6FD2E8(Ang16 angle, Fix16& x, Fix16& y)
 {
     x = Ang16::sine_40F500(angle) * dword_6FD2E8;
     y = Ang16::cosine_40F520(angle).Multiply_408680(dword_6FD2E8);
 }
+} // namespace
 
 // 0x53bac0
 char_type Particle_4C::UpdateCollisionBurst_state_31_34_53BAC0()

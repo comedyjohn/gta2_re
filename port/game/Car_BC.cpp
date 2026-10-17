@@ -176,7 +176,9 @@ DEFINE_GLOBAL_INIT(Fix16, kHitchPullDist_6772C0, kFpOne64th_677888 * 8, 0x6772C0
 DEFINE_GLOBAL_INIT(Fix16, kHitchAttachDist_677900, kFpOne64th_677888 * 3, 0x677900);
 
 // TODO: Move
-static inline void SwapIf3or4_41FE40(s32 a1, Fix16& a2, Fix16& a3)
+namespace
+{
+inline void SwapIf3or4_41FE40(s32 a1, Fix16& a2, Fix16& a3)
 {
     if (a1 >= 3 && a1 <= 4)
     {
@@ -185,6 +187,7 @@ static inline void SwapIf3or4_41FE40(s32 a1, Fix16& a2, Fix16& a3)
         a3 = tmp;
     }
 }
+} // namespace
 
 // 0x5639c0
 void ClearCarInfoGlobals_5639C0()
@@ -1977,10 +1980,13 @@ bool Car_BC::HasSpriteZoom_43A230()
 }
 
 // CarPhysics_B0::GetLinearSpeed_4211A0
-static inline Fix16 GetLinearSpeed_43A240(CarPhysics_B0* pPhysics)
+namespace
+{
+inline Fix16 GetLinearSpeed_43A240(CarPhysics_B0* pPhysics)
 {
     return pPhysics->field_40_linvel_1.GetLength_41E260();
 }
+} // namespace
 
 // 0x43a240
 Fix16 Car_BC::GetCarLinearSpeed_43A240()
@@ -2806,7 +2812,9 @@ bool Car_BC::IsDoorOffsetLarge_43B540(u8 targetDoor)
 
 // Ang16::RotateVector_41FC90 with the new x built in a local and stored last: with the header
 // version VC6 folds the new x into the caller's final add (GetDoorWorldPosition_43B5A0)
-static inline void RotateVector_41FC90_NewX(Fix16& xpos, Fix16& ypos, Ang16& rotation)
+namespace
+{
+inline void RotateVector_41FC90_NewX(Fix16& xpos, Fix16& ypos, Ang16& rotation)
 {
     Fix16 old_xpos = xpos;
     Fix16 x_new;
@@ -2814,6 +2822,7 @@ static inline void RotateVector_41FC90_NewX(Fix16& xpos, Fix16& ypos, Ang16& rot
     ypos = (-old_xpos) * Ang16::sine_40F500(rotation) + ypos * Ang16::cosine_40F520(rotation);
     xpos = x_new;
 }
+} // namespace
 
 // https://decomp.me/scratch/2BtJU
 // 0x43b5a0
@@ -2901,10 +2910,13 @@ void Car_BC::AssignKillerToOccupants_43B770()
 }
 
 // 9.6f 0x420C30 (a method of an unknown global object in 9.6f that only looks at its argument)
-static inline bool IsPlayerPedId_420C30(u32 ped_id)
+namespace
+{
+inline bool IsPlayerPedId_420C30(u32 ped_id)
 {
     return ped_id <= 12;
 }
+} // namespace
 
 // 0x43b7b0
 void Car_BC::AssignDriverBlameForExplosion_43B7B0(Car_BC* pCar)
@@ -2964,20 +2976,32 @@ bool Car_BC::IsImmuneToExplosionType_43B850(s32 explosion_type)
 // 9.6f 0x4226C0
 
 // 9.6f 0x41FF40 (a car_info helper, inlined in 10.5): each inlined call gets its own return temp
-static inline Fix16 Get_front_window_offset(car_info* p)
+namespace
+{
+inline Fix16 Get_front_window_offset(car_info* p)
 {
     return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->front_window_offset);
 }
+} // namespace
+
 // 9.6f 0x41FF20
-static inline Fix16 Get_rear_window_offset(car_info* p)
+namespace
+{
+inline Fix16 Get_rear_window_offset(car_info* p)
 {
     return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->rear_window_offset);
 }
+} // namespace
+
 // 9.6f 0x41FF60
-static inline Fix16 Get_half_width(car_info* p)
+namespace
+{
+inline Fix16 Get_half_width(car_info* p)
 {
     return dword_677214 * gPixelsToFix16_6F6850.list[p->w];
 }
+} // namespace
+
 // 0x43b870
 void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16_Point* pPos)
 {
@@ -4722,20 +4746,26 @@ char_type Car_BC::RotateRoofObjectTowardTarget_440C10(Ang16 targetAngle)
 }
 
 // 9.6f 0x41FA70
-static inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
+namespace
+{
+inline Ang16& compound_add_41FA70(Ang16& a, const Ang16& b)
 {
     a.rValue += b.rValue;
     a.Normalize();
     return a;
 }
+} // namespace
 
 // 9.6f 0x41FA90
-static inline Ang16& compound_subtract_41FA90(Ang16& a, const Ang16& b)
+namespace
+{
+inline Ang16& compound_subtract_41FA90(Ang16& a, const Ang16& b)
 {
     a.rValue -= b.rValue;
     a.Normalize();
     return a;
 }
+} // namespace
 
 // 0x440d90
 char_type Car_BC::HandleRoofTurretRotation_440D90(char_type left_on)
@@ -5998,7 +6028,9 @@ void Car_BC::LightUpdate_442D10()
 // Not in 9.6f (no pair for TrainUpdate_442D70). high_z calls the out-of-line
 // Fix16::Add_408660 (operator+) as the original does; all the arguments are
 // evaluated before any store, which gives the original's schedule.
-static inline void SetPrism(Fix16_Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, const Fix16 z)
+namespace
+{
+inline void SetPrism(Fix16_Rect& rect, Fix16 left, Fix16 right, Fix16 top, Fix16 bottom, const Fix16 z)
 {
     rect.field_0_left = left;
     rect.field_4_right = right;
@@ -6007,6 +6039,7 @@ static inline void SetPrism(Fix16_Rect& rect, Fix16 left, Fix16 right, Fix16 top
     rect.field_10_low_z = z - kCollisionPrismHalfHeight_6771E4;
     rect.field_14_high_z = z.Add_408660(kCollisionPrismHalfHeight_6771E4);
 }
+} // namespace
 
 // 0x442d70
 char_type Car_BC::TrainUpdate_442D70()
@@ -7016,11 +7049,14 @@ Fix16_Point Trailer::GetHitchPosition_407BD0()
 
 // 9.6f 0x40F840 CarPhysics_B0::IsVelocityAlignedWithHeading_40F840, inlined here with car.cpp's own
 // static copies of the 90/270 degree constants
-static inline bool IsVelocityAlignedWithHeading_40F840(CarPhysics_B0* pPhys)
+namespace
+{
+inline bool IsVelocityAlignedWithHeading_40F840(CarPhysics_B0* pPhys)
 {
     Ang16 drift = pPhys->field_40_linvel_1.atan2_40F790().SubtractNormalized_409340(pPhys->field_58_theta);
     return drift <= word_66A9C8 || drift >= word_66AABC;
 }
+} // namespace
 
 // 0x407ce0
 void Trailer::UpdateTrailerAlignment_407CE0()

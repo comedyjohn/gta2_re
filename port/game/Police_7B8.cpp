@@ -999,7 +999,9 @@ bool Police_7B8::AssignCrewToPursuit_570790(PoliceCrew_38* pCrew, PolicePursuitT
 
 // https://decomp.me/scratch/pfRaI
 // Inlined search helpers: their NULL results are tested by the caller
-static inline PolicePursuitTarget_7C* FindPursuitTargetForCriminal_5707B0(Police_7B8* pThis, Ped* pCriminal)
+namespace
+{
+inline PolicePursuitTarget_7C* FindPursuitTargetForCriminal_5707B0(Police_7B8* pThis, Ped* pCriminal)
 {
     for (auto& pursuit_target : pThis->field_464_pursuit_targets)
     {
@@ -1011,7 +1013,7 @@ static inline PolicePursuitTarget_7C* FindPursuitTargetForCriminal_5707B0(Police
     return nullptr;
 }
 
-static inline PoliceCrew_38* FindCrewInCar_5707B0(Police_7B8* pThis, Car_BC* pCar)
+inline PoliceCrew_38* FindCrewInCar_5707B0(Police_7B8* pThis, Car_BC* pCar)
 {
     for (auto& j : pThis->field_4_cop_crew)
     {
@@ -1023,6 +1025,7 @@ static inline PoliceCrew_38* FindCrewInCar_5707B0(Police_7B8* pThis, Car_BC* pCa
     }
     return nullptr;
 }
+} // namespace
 
 // 0x5707b0
 bool Police_7B8::TryAssignCarCrewToCriminal_5707B0(Car_BC* pCar, Ped* pCriminal)

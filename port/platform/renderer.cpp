@@ -942,7 +942,9 @@ void SetShadeTableA(int, int, int, int, int)
 
 // MakeScreenTable with pointer-sized rows (d3ddll.hpp declares it with int ones, which can't hold an
 // address at 64 bits); exported under the original name below
-static intptr_t* MakeScreenTablePtr(intptr_t value, int elementSize, unsigned int size)
+namespace
+{
+intptr_t* MakeScreenTablePtr(intptr_t value, int elementSize, unsigned int size)
 {
     intptr_t* result = 0;
     gScreenTableSize = static_cast<int>(size);
@@ -957,6 +959,7 @@ static intptr_t* MakeScreenTablePtr(intptr_t value, int elementSize, unsigned in
     }
     return result;
 }
+} // namespace
 
 int gbh_AddLight(SLight* pLight)
 {

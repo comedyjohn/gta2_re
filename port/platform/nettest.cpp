@@ -545,7 +545,9 @@ int Run(const Options& o)
 }
 } // namespace
 
-static void OnCrash(int sig)
+namespace
+{
+void OnCrash(int sig)
 {
     void* frames[64];
     const int n = backtrace(frames, 64);
@@ -553,6 +555,7 @@ static void OnCrash(int sig)
     backtrace_symbols_fd(frames, n, 2);
     _exit(128 + sig);
 }
+} // namespace
 
 int port_nettest(int argc, char** argv)
 {

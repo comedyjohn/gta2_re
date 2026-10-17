@@ -12,7 +12,10 @@
 #include <cstdio>
 
 // Forward declarations: the functions below are in address order
-static inline void WorldToScreen_RouteFinder_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY);
+namespace
+{
+inline void WorldToScreen_RouteFinder_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY);
+} // namespace
 
 DEFINE_GLOBAL(RouteFinder*, gRouteFinder_6FFDC8, 0x6FFDC8);
 DEFINE_GLOBAL(u16, gLastRouteLength_6FFDCC, 0x6ffdcc);
@@ -106,13 +109,16 @@ void RouteFinder::ShowJunctionIds_588620()
 // 9.6f 0x40CFC0: Camera_0xBC::WorldToScreen_40CFC0 (x/y/z by value, writes through two out pointers), but
 // the original reads this file's copies of the constants (0x6FFC7C, 0x6FFC9C), so the Camera.hpp inline can't
 // be used here
-static inline void WorldToScreen_RouteFinder_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
+namespace
+{
+inline void WorldToScreen_RouteFinder_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
 {
     Fix16 u = pCam->field_98_cur_pos.field_8_z - z;
     Fix16 t(dword_6FFC7C / Fix16(u.mValue + dword_6FFC9C.mValue, 0));
     *pOutX = (((x - pCam->field_98_cur_pos.field_0_x) * pCam->field_60_screen_scale.y) * t) + Fix16(320);
     *pOutY = (((y - pCam->field_98_cur_pos.field_4_y) * pCam->field_60_screen_scale.y) * t) + Fix16(240);
 }
+} // namespace
 
 // 0x588810
 void RouteFinder::RoadOff_588810(u8 x, u8 y, u8 z)

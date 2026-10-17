@@ -84,7 +84,9 @@ DEFINE_GLOBAL_INIT(Ang16, word_6F603E, Ang16(720), 0x6F603E);
 
 Fix16 kFpOne_6F6110 = Fix16(1); // = 0x4000; // todo
 
-static inline s32 clamp_z_from_column(s32 height, s32 offset, s32 z_pos)
+namespace
+{
+inline s32 clamp_z_from_column(s32 height, s32 offset, s32 z_pos)
 {
     if (z_pos >= height)
     {
@@ -96,45 +98,46 @@ static inline s32 clamp_z_from_column(s32 height, s32 offset, s32 z_pos)
     }
 }
 
-static inline u16 get_tile_idx(u16& side_word)
+inline u16 get_tile_idx(u16& side_word)
 {
     return side_word & 1023;
 }
 
-static inline bool has_any_green_arrows(u8& arrow_data)
+inline bool has_any_green_arrows(u8& arrow_data)
 {
     return (arrow_data & 0xF) != 0;
 }
 
-static inline bool check_green_up(u8& arrow_data)
+inline bool check_green_up(u8& arrow_data)
 {
     return (arrow_data >> 2) & 1;
 }
 
-static inline bool check_green_down(u8& arrow_data)
+inline bool check_green_down(u8& arrow_data)
 {
     return (arrow_data >> 3) & 1;
 }
 
-static inline bool check_green_right(u8& arrow_data)
+inline bool check_green_right(u8& arrow_data)
 {
     return (arrow_data >> 1) & 1;
 }
 
-static inline bool check_green_left(u8& arrow_data)
+inline bool check_green_left(u8& arrow_data)
 {
     return arrow_data & 1;
 }
 
-static inline bool has_bottom(gmp_block_info* pBlock)
+inline bool has_bottom(gmp_block_info* pBlock)
 {
     return pBlock->field_6_bottom != 0;
 }
 
-static inline bool has_top(gmp_block_info* pBlock)
+inline bool has_top(gmp_block_info* pBlock)
 {
     return pBlock->field_4_top != 0;
 }
+} // namespace
 
 void Init_gmp_slopes_array()
 {
@@ -2964,11 +2967,14 @@ bool Map_0x370::CanPlaceOilOrMine_4E5480(Fix16 x, Fix16 y, Fix16 z, Fix16 unk_z_
 
 // Ang16::PolarToCartesian_41FC20 with the radius taken by value: the original copies value_2 into a
 // temporary before the two multiplications (the by-reference version passes value_2's own slot).
-static inline void PolarToCartesianByVal(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2)
+namespace
+{
+inline void PolarToCartesianByVal(Ang16& angle, Fix16 radius, Fix16& ret1, Fix16& ret2)
 {
     ret1 = Ang16::sine_40F500(angle) * radius;
     ret2 = Ang16::cosine_40F520(angle) * radius;
 }
+} // namespace
 
 // Walks the collision probe sprite from (x_1, y_1, z_1) towards (x_2, y_2, z_2) in steps of about `height`,
 // returning 0 as soon as it hits something (line of sight / clear path test).

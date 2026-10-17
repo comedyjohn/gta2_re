@@ -264,11 +264,14 @@ s32 CalcQuadFlags_5D83E0(s32 mode, u8 a2)
 // Converts through an f32 local: the store to it is an x87 no-op node between the fildl and the fmuls
 // (as Fix16ToF32_Rounded in MapRenderer.cpp), which lets the scheduler put two integer loads between them.
 // Free inline (size <= 40), so it doesn't touch the inline budget.
-static inline f32 Fix16ToF32_Rounded(const Fix16& v)
+namespace
+{
+inline f32 Fix16ToF32_Rounded(const Fix16& v)
 {
     f32 f = v.mValue;
     return (f / 16384.0F);
 }
+} // namespace
 
 // https://decomp.me/scratch/SCz1D
 // 0x5D8470

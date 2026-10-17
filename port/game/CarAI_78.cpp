@@ -77,8 +77,12 @@ DEFINE_GLOBAL_INIT(Fix16, kFpQuarter_6779BC, Fix16(0x1000, 0), 0x6779BC);
 DEFINE_GLOBAL_INIT(Fix16, kFpEighth_677CBC, Fix16(0x800, 0), 0x677CBC);
 
 // File-local: VC6 then propagates their value into the first use (ManageTrafficCarDirection_448CE0)
-static Ang16 kAng180_677ADE = Ang16(720);
-static Ang16 kAng90_6779E4 = Ang16(360);
+namespace
+{
+Ang16 kAng180_677ADE = Ang16(720);
+Ang16 kAng90_6779E4 = Ang16(360);
+} // namespace
+
 EXTERN_GLOBAL(Ang16, dword_677A2E);
 // Defined in Car_10.cpp: with the definition (and its dynamic initialiser) in this TU, VC6
 // loads it with a 32-bit mov in FollowRoadDirection_44A1F0 instead of the original's 16-bit mov/sub.
@@ -86,7 +90,11 @@ EXTERN_GLOBAL(Ang16, dword_677A2E);
 EXTERN_GLOBAL(Ang16, word_677CE2);
 
 DEFINE_GLOBAL_INIT(Fix16, kFpTwoPi_677C84, Fix16(0x18F60, 0), 0x677C84);
-static Ang16 kAng270_677B08 = Ang16(1080);
+namespace
+{
+Ang16 kAng270_677B08 = Ang16(1080);
+} // namespace
+
 DEFINE_GLOBAL_INIT(Fix16, kFpFive_677BA4, Fix16(0x14000, 0), 0x677BA4);
 DEFINE_GLOBAL_INIT(Fix16, kFpFive_677CA0, Fix16(0x14000, 0), 0x677CA0);
 DEFINE_GLOBAL_INIT(Fix16, dword_677B78, Fix16(0x5C2, 0), 0x677B78);
@@ -3008,7 +3016,9 @@ void CarAI_78::Init_AI_Chase_44E0C0()
 // https://decomp.me/scratch/Auxlx
 // MaxAbsDistance_42A6B0 past the inline budget: the y difference stays inline, the Abs calls
 // go out of line (budget)
-static inline Fix16 MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, Fix16& y2)
+namespace
+{
+inline Fix16 MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, Fix16& y2)
 {
     Fix16 diff_x = x2 - x1;
     Fix16 diff_y;
@@ -3018,6 +3028,7 @@ static inline Fix16 MaxAbsDistanceRawY_451980(Fix16& x1, Fix16& y1, Fix16& x2, F
     result = Fix16::Max_44E540(Fix16::Abs(diff_x), Fix16::Abs(diff_y));
     return result;
 }
+} // namespace
 
 // 0x44e560
 void CarAI_78::UpdateStateMachine_44E560()
@@ -4569,10 +4580,13 @@ void CarAI_78::ReactToNearbyPed_451FF0()
 }
 
 // 9.6f 0x42ACE0 (a Car_BC method there): sets the flag Object_5C reads while the car probes ahead
-static inline void SetByte6771DC_42ACE0(u8 value)
+namespace
+{
+inline void SetByte6771DC_42ACE0(u8 value)
 {
     byte_6771DC = value;
 }
+} // namespace
 
 // 0x452060
 void CarAI_78::ScanAheadForObstacles_452060()
@@ -5460,11 +5474,14 @@ void CarAI_78::SetCar_453BF0(Car_BC* pCar)
 // https://decomp.me/scratch/kidaG
 // Keeps the angle temporaries in their own scope, so the speed temporary below can reuse
 // their stack slot (as in the original)
-static inline bool IsMovingBackwards_453C00(CarPhysics_B0* pPhysics)
+namespace
+{
+inline bool IsMovingBackwards_453C00(CarPhysics_B0* pPhysics)
 {
     Ang16 heading_delta = pPhysics->field_40_linvel_1.atan2_40F790() - pPhysics->field_58_theta;
     return heading_delta <= kAng90_6779E4 || heading_delta >= kAng270_677B08;
 }
+} // namespace
 
 // 0x453c00
 void CarAI_78::ReverseOrNeutral_453C00()

@@ -74,15 +74,17 @@ EXTERN_GLOBAL(s32, bStartNetworkGame_7081F0);
 EXTERN_GLOBAL_ARRAY(wchar_t, gEmptyWStr_67DC8C, 32);
 
 // 9.6f inline
-static inline void DrawFigureScaled_4C71B0(s32 type,
-                                           s16 pal,
-                                           Fix16 x_pos,
-                                           Fix16 y_pos,
-                                           const Ang16& rotation,
-                                           const s32& drawkind,
-                                           s16 palette,
-                                           s32 alpha_value,
-                                           u8 flags)
+namespace
+{
+inline void DrawFigureScaled_4C71B0(s32 type,
+                                    s16 pal,
+                                    Fix16 x_pos,
+                                    Fix16 y_pos,
+                                    const Ang16& rotation,
+                                    const s32& drawkind,
+                                    s16 palette,
+                                    s32 alpha_value,
+                                    u8 flags)
 {
     DrawFigure_5D7EC0(type,
                       pal,
@@ -96,26 +98,32 @@ static inline void DrawFigureScaled_4C71B0(s32 type,
                       flags,
                       0);
 }
+} // namespace
 
 // Camera_0xBC::WorldToScreen_40CFC0 (9.6f 0x40CFC0: x/y/z by value, writes through two out pointers)
 // with this file's copies of the 1 and 8 constants
-static inline void WorldToScreen_Hud_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
+namespace
+{
+inline void WorldToScreen_Hud_40CFC0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOutX, Fix16* pOutY)
 {
     Fix16 u = pCam->field_98_cur_pos.field_8_z - z;
     Fix16 t(kFpOne_7064C4 / Fix16(u.mValue + kFpEight_7064E8.mValue, 0));
     *pOutX = (((x - pCam->field_98_cur_pos.field_0_x) * pCam->field_60_screen_scale.y) * t) + Fix16(320);
     *pOutY = (((y - pCam->field_98_cur_pos.field_4_y) * pCam->field_60_screen_scale.y) * t) + Fix16(240);
 }
+} // namespace
 
 // 9.6f 0x4C7280: DrawText_5D8A10 at a position and size scaled by the UI scale
-static inline void DrawTextScaled_4C7280(const wchar_t* pStr,
-                                         Fix16 x,
-                                         Fix16 y,
-                                         u16 font,
-                                         const s32& palette_type,
-                                         u16 palette,
-                                         s32 alpha,
-                                         u8 flags)
+namespace
+{
+inline void DrawTextScaled_4C7280(const wchar_t* pStr,
+                                  Fix16 x,
+                                  Fix16 y,
+                                  u16 font,
+                                  const s32& palette_type,
+                                  u16 palette,
+                                  s32 alpha,
+                                  u8 flags)
 {
     DrawText_5D8A10(pStr,
                     x * gViewCamera_676978->field_A8_ui_scale,
@@ -127,15 +135,19 @@ static inline void DrawTextScaled_4C7280(const wchar_t* pStr,
                     alpha,
                     flags);
 }
+} // namespace
 
 // Camera_0xBC::ProjectWorldToScreen_4B90E0 (9.6f 0x4B90E0, inlined in 10.5) with this file's copies of the
 // 1 and 8 constants
-static inline void ProjectWorldToScreen_Hud_4B90E0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
+namespace
+{
+inline void ProjectWorldToScreen_Hud_4B90E0(Camera_0xBC* pCam, Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
 {
     Fix16 scale = kFpOne_7064C4 / ((kFpEight_7064E8 - z) + pCam->field_98_cur_pos.field_8_z);
     *pOut1 = (((x - pCam->field_98_cur_pos.field_0_x) * pCam->field_60_screen_scale.x) * scale) + Fix16(pCam->field_70_screen_px_center_x);
     *pOut2 = (((y - pCam->field_98_cur_pos.field_4_y) * pCam->field_60_screen_scale.x) * scale) + Fix16(pCam->field_74_screen_px_center_y);
 }
+} // namespace
 
 // 0x4bbbb0
 Hud_2B00::~Hud_2B00() = default;
@@ -3079,10 +3091,13 @@ void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count)
 // https://decomp.me/scratch/1IbxU
 // The original passes the gtx pointer through an inlined helper: its parameter is one more live range in
 // the first block, which tips the register priorities so width gets ebx and base_xpos ebp
-static inline u16 GetPowerupSpriteIndex_5D61A0(gtx_0x106C* pGtx, s32 sprite_pal)
+namespace
+{
+inline u16 GetPowerupSpriteIndex_5D61A0(gtx_0x106C* pGtx, s32 sprite_pal)
 {
     return pGtx->GetSpriteTrueIndex_5AA460(sprite_types_enum::user_6, sprite_pal);
 }
+} // namespace
 
 // 0x5D61A0
 s32 DrawPlayerStatsHelper_5D61A0(s32 powerup_idx, s32 base_xpos, u16 optional_number)

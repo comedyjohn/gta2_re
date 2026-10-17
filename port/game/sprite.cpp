@@ -37,7 +37,11 @@ void ProjectOntoAxis_5A5AA0(const Fix16& xpos1,
                             Fix16& ypos2,
                             Fix16& outX,
                             Fix16& outY);
-static inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2);
+namespace
+{
+inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2);
+} // namespace
+
 EXTERN_GLOBAL(u16, gDebugColour_626260);
 
 DEFINE_GLOBAL(SpriteManager_8*, gSpriteManager_703820, 0x703820);
@@ -77,13 +81,18 @@ EXTERN_GLOBAL(s32, window_width_706630);
 EXTERN_GLOBAL(s32, window_height_706B50);
 
 // matched
-static inline Fix16 RoundZToLayer_4B9C70(Fix16& in)
+namespace
+{
+inline Fix16 RoundZToLayer_4B9C70(Fix16& in)
 {
     return Fix16((in.mValue + 0x80) & 0xFFFFFF00, 0);
 }
+} // namespace
 
 // matched
-static inline void SaveUnprojectedVertex_4B9990(f32 xCoord, f32 yCoord, f32 z_val, Vert* pVerts)
+namespace
+{
+inline void SaveUnprojectedVertex_4B9990(f32 xCoord, f32 yCoord, f32 z_val, Vert* pVerts)
 {
     s32 next_idx = (pVerts - gTileVerts_7036D0) + 4;
 
@@ -91,12 +100,15 @@ static inline void SaveUnprojectedVertex_4B9990(f32 xCoord, f32 yCoord, f32 z_va
     gTileVerts_7036D0[next_idx].y = yCoord;
     gTileVerts_7036D0[next_idx].z = z_val;
 }
+} // namespace
 
 // partially matched: https://decomp.me/scratch/qtmIe
 // 9.6f 0x4BA4D0 takes zpos by value (on the stack, ret $4); the body compiles to the 9.6f code with VC7.
 // The extra parentheses are x87 no-op nodes for VC6's scheduler (VC7 ignores them): they put the 81-node
 // window breaks of Sprite::Draw_59EFF0's four expansions where the original's are (Scripts/x87_sched).
-static inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
+namespace
+{
+inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
 {
     SaveUnprojectedVertex_4B9990(point.x.ToFloat(), point.y.ToFloat(), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
@@ -110,15 +122,18 @@ static inline void ProjectWorldPointToScreen_4BA4D0(Fix16_Point& point, Vert* pV
                 static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y));
 }
 
-static inline f32 Fix16ToFloat_Paren(const Fix16& v)
+inline f32 Fix16ToFloat_Paren(const Fix16& v)
 {
     return ((v.mValue / 16384.0F));
 }
+} // namespace
 
 // The first expansion in Draw_59EFF0: four more no-op nodes before the y line (point.x/point.y) and four
 // fewer in it, so the window break falls between the field_60 load and its fmul and the y line's fmulp
 // waits behind the centre store, as in the original (regsearch: window 9 limit 76, window 10 limit 84).
-static inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
+namespace
+{
+inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Vert* pVert, Fix16 zpos)
 {
     SaveUnprojectedVertex_4B9990((Fix16ToFloat_Paren(point.x)), (point.y.ToFloat()), zpos.ToFloat(), pVert);
     pVert->z = 1.0 / (gViewCamera_676978->field_98_cur_pos.field_8_z.ToFloat() + (8.0 - zpos.ToFloat()));
@@ -130,9 +145,12 @@ static inline void ProjectWorldPointToScreen_First_4BA4D0(Fix16_Point& point, Ve
             ((point.y.ToFloat() - (gViewCamera_676978->field_98_cur_pos.field_4_y.ToFloat()))) * pVert->z +
         static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
 }
+} // namespace
 
 // not exactly but something similar... https://decomp.me/scratch/N5g2D
-static inline void SetUV_4B9BC0(f32& u, f32& v)
+namespace
+{
+inline void SetUV_4B9BC0(f32& u, f32& v)
 {
     gTileVerts_7036D0[0].u = 0.30000001F;
     gTileVerts_7036D0[0].v = 0.30000001F;
@@ -146,9 +164,12 @@ static inline void SetUV_4B9BC0(f32& u, f32& v)
     gTileVerts_7036D0[3].u = 0.30000001F;
     gTileVerts_7036D0[3].v = v;
 }
+} // namespace
 
 // matched https://decomp.me/scratch/RhBO0
-static inline Fix16 Sign_4B9C20(s32& a2)
+namespace
+{
+inline Fix16 Sign_4B9C20(s32& a2)
 {
     if (a2 > 0)
     {
@@ -163,6 +184,7 @@ static inline Fix16 Sign_4B9C20(s32& a2)
         return Fix16(0);
     }
 }
+} // namespace
 
 // 9.6f 0x4207B0
 // 0x443580
@@ -762,7 +784,9 @@ void Sprite::ResetZCollisionAndDebugBoxes_59E7B0()
     }
 }
 
-static inline void DrawTextScaled_4BA2C0(const wchar_t* pStr, Fix16 x, Fix16 y, u16 font)
+namespace
+{
+inline void DrawTextScaled_4BA2C0(const wchar_t* pStr, Fix16 x, Fix16 y, u16 font)
 {
     s32 palette_type = palette_types_enum::sprites_2;
     Fix16 scale_y = y * gViewCamera_676978->field_A8_ui_scale;
@@ -776,6 +800,7 @@ static inline void DrawTextScaled_4BA2C0(const wchar_t* pStr, Fix16 x, Fix16 y, 
                     0,
                     0);
 }
+} // namespace
 
 // 0x59e7d0
 Sprite* Sprite::QuerySpriteCollision_59E7D0(s32 sprite_type)
@@ -1313,11 +1338,14 @@ void Sprite::UpdateDimensionsFromSpriteIndex_59FA40()
 }
 
 // 9.6f 0x401C80: Ang16::operator-(), the normalizing ctor called out of line (AssignNormalized_409300)
-static inline Ang16 NegateAng16_401C80(const Ang16& angle)
+namespace
+{
+inline Ang16 NegateAng16_401C80(const Ang16& angle)
 {
     s16 value = -angle.rValue;
     return Ang16(&value, 0);
 }
+} // namespace
 
 // 0x59fad0
 void Sprite::FreeShapes_59FAD0()
@@ -1438,7 +1466,9 @@ bool Sprite::IntersectsRectSAT_59FB10(Fix16_Rect* pOtherRect)
 }
 
 // 9.6f 0x4B9F80: clamp the current rect to the map
-static inline void ClampPurpleRectToMap_4B9F80()
+namespace
+{
+inline void ClampPurpleRectToMap_4B9F80()
 {
     if (gSpriteGrid_left_6F5FD4 < 0)
     {
@@ -1460,6 +1490,7 @@ static inline void ClampPurpleRectToMap_4B9F80()
         gSpriteGrid_bottom_6F5F38 = 255;
     }
 }
+} // namespace
 
 // 0x5a0150
 char_type Sprite::FindOverlappingBoundingBoxCorners_5A0150(Sprite* pOther, u8* pOut1, u8* pOut2)
@@ -2624,7 +2655,9 @@ void sub_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
 // is the out-of-line copy sub_5A5690.
 // Like the original, the function runs out of inline expansions, so the Fix16 operators are the
 // out-of-line copies.
-static inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
+namespace
+{
+inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut1, Fix16* pOut2)
 {
     Fix16 scale;
     scale =
@@ -2638,6 +2671,7 @@ static inline void ProjectToScreen_5A5690(Fix16 x, Fix16 y, Fix16 z, Fix16* pOut
                   .Multiply_408680(scale))
                  .Add_408660(Fix16(gViewCamera_676978->field_74_screen_px_center_y));
 }
+} // namespace
 
 DEFINE_GLOBAL_INIT(u16, gDebugColour_626260, 0x1111, 0x626260);
 

@@ -10,20 +10,23 @@
 #include <string.h>
 #include <unistd.h>
 
-static volatile sig_atomic_t gStop = 0;
+namespace
+{
+volatile sig_atomic_t gStop = 0;
 
-static void OnSignal(int)
+void OnSignal(int)
 {
     gStop = 1;
 }
 
-static void Usage()
+void Usage()
 {
     printf("usage: gta2-server [--port N] [--quiet]\n"
            "  --port N   UDP port to listen on (default %u)\n"
            "  --quiet    don't log connections and games\n",
            net::kDefaultPort);
 }
+} // namespace
 
 int main(int argc, char** argv)
 {

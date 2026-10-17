@@ -16,7 +16,9 @@ DEFINE_GLOBAL_ARRAY(char_type, byte_6F8A64, 24, 0x6F8A64);
 
 // 9.6f 0x409C50
 // Signed difference between two 8-bit sequence numbers, allowing for wrap around
-static inline s32 SeqDiff(u8 a, u8 b)
+namespace
+{
+inline s32 SeqDiff(u8 a, u8 b)
 {
     s32 diff = static_cast<u8>(a - b);
     if (diff == 0)
@@ -30,12 +32,16 @@ static inline s32 SeqDiff(u8 a, u8 b)
     }
     return diff;
 }
+} // namespace
 
 // Advances a player's 8-bit sequence number
-static inline void NextSeq(Network_Game_Session* pN2, s32 idx)
+namespace
+{
+inline void NextSeq(Network_Game_Session* pN2, s32 idx)
 {
     pN2->field_8_packet_game_tick[idx] = (pN2->field_8_packet_game_tick[idx] + 1) % 256;
 }
+} // namespace
 
 // 0x51d6b0
 NetPlay::NetPlay()

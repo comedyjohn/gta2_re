@@ -85,7 +85,9 @@ Particle_4C* Particle_8::New_53E3C0(Fix16 speed_x,
 // RotateByAngle_40F6B0 with the x_old negate as the named out-of-line Negate_4086A0: the rotations and the
 // -(v / 15) New_53E3C0 arguments have to reach the same function (the COMDAT copy of operator- and
 // Negate_4086A0 are not folded in our build). The other operators stay the plain inlines.
-static inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
+namespace
+{
+inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
 {
     Fix16 sin = Ang16::sine_40F500(angle);
     Fix16 cos = Ang16::cosine_40F520(angle);
@@ -93,6 +95,7 @@ static inline void RotateNegExport_(Fix16_Point& v, const Ang16& angle)
     v.x = (v.x * cos) + (v.y * sin);
     v.y = (x_old.Negate_4086A0() * sin) + (v.y * cos);
 }
+} // namespace
 
 // 9.6f 0x48C9C0: plain members and operators. The do-while count-down loop (smaller than the for form) and
 // the unary minus on the divides (never inlined: it builds a by-value argument, so it adds two sites) set
@@ -500,11 +503,14 @@ void Particle_8::EmitFireTruckSprayParticle_53FAE0(Sprite* pSprite)
 
 // Ang16::PolarToCartesian_41FC20 with the cosine multiply written as the out-of-line Multiply_408680
 // the original calls (past the inline budget VC6 would call a COMDAT copy of operator* instead).
-static inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radius, Fix16& ret1, Fix16& ret2)
+namespace
+{
+inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radius, Fix16& ret1, Fix16& ret2)
 {
     ret1 = Ang16::sine_40F500(angle) * radius;
     ret2 = Ang16::cosine_40F520(angle).Multiply_408680(radius);
 }
+} // namespace
 
 // https://decomp.me/scratch/wfzEd
 // 0x53FE40

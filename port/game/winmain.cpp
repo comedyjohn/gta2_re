@@ -93,7 +93,10 @@ DEFINE_GLOBAL(s32, dword_6F5944, 0x6F5944);
 s32 dword_67ED24; //DEFINE_GLOBAL(s32, dword_67ED24, 0x67ED24); // global crashing standalone
 DEFINE_GLOBAL(u8, byte_6F59C0, 0x6F59C0); // TODO: move
 
-static T_gbh_SetBeginSceneCB pBeginSceneCB = nullptr;
+namespace
+{
+T_gbh_SetBeginSceneCB pBeginSceneCB = nullptr;
+} // namespace
 
 class DllRaii
 {

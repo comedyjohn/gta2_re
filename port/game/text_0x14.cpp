@@ -35,12 +35,15 @@ const s16 kExtendedRussianCharMap_626490[128] = {
     238, 211, 214, 230, 237, 216, 229, 227, 228, 236, 239, 213, 223, 221, 212, 235, 218, 219, 222, 224, 240, 233, 242, 234};
 
 // Extended characters 128-255, corresponding to original data at 0x626390.
-static const u16 kExtendedWesternCharMap[128] = {
+namespace
+{
+const u16 kExtendedWesternCharMap[128] = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   176, 0,   0,   0,   0,   0,   0,   0,   0, 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   175, 128, 129, 130, 0, 131, 0,   132, 133, 134, 135, 136, 137, 138, 139,
     140, 141, 0,   173, 142, 143, 144, 0,   145, 0,   0,   146, 147, 148, 149, 0, 0,   150, 151, 152, 153, 0,   154, 0,   155, 156,
     157, 158, 159, 160, 161, 162, 163, 164, 0,   174, 165, 166, 167, 0,   168, 0, 0,   169, 170, 171, 172, 0,   0,   0};
+} // namespace
 
 // 0x5B58D0
 u16 text_0x14::RemapExtendedChar_5B58D0(u16 ch)
@@ -245,10 +248,13 @@ wchar_t* text_0x14::StrToUpper_5B5B80(wchar_t* pWideStr)
 }
 
 // 9.6f 0x4539D0, file-local copy of GetCharWidth_4539D0 (Draw.hpp): including Draw.hpp changes this file's static init code
-static inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
+namespace
+{
+inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
 {
     return gGtx_0x106C_703DD4->GetFontWidth_5AA760(&font_type, &chr);
 }
+} // namespace
 
 // https://decomp.me/scratch/JzIDq
 // 0x5B5BC0

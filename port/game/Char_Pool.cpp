@@ -142,10 +142,13 @@ Ped* SpawnPedChainGroupAt_46DB90(char_type remap, u8 number_followers, Fix16 xpo
 
 // Not in 9.6f (0x440CC0 calls Fix16::multiply_401BD0 directly), but written inline the product
 // lands in ebx directly instead of through eax like 10.5.
-static inline Fix16 GetSpawnJitter()
+namespace
+{
+inline Fix16 GetSpawnJitter()
 {
     return gSpawnJitterScale_678618 * (gRng_6F6784.get_int_4F7AE0(32) + 8);
 }
+} // namespace
 
 // TODO: Prob a method of PedManager?
 // 0x46E380

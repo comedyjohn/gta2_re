@@ -169,7 +169,9 @@ struct Coord2
 };
 
 // 0x4A07C0
-static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, va_list va)
+namespace
+{
+void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, va_list va)
 {
     snprintf(gTmpBuffer_67C598,
              sizeof(gTmpBuffer_67C598),
@@ -1877,6 +1879,7 @@ static void FatalError_4A07C0(s32 code, const char_type* pFileName, s32 lineNo, 
     ErrorMsgBox_5E4EC0(gTmpBuffer_67C598);
     gErrorLog_67CF58.Write_4D9620(gTmpBuffer_67C598);
 }
+} // namespace
 
 // 0x4A38C0
 void FatalError_4A38C0(s32 Code, const char_type* pSourceFile, s32 lineNo, ...)

@@ -29,9 +29,16 @@ bool port_audio_manual; // --audiotest: no device; the test pulls frames with po
 // The audio event log (see port_audio_log_open): what the game's sound code asked the mixer to do,
 // hashed into a running value the replay tests compare, and optionally written out as text.
 long port_audio_frame; // the update the replay is at, for the text log
-static uint64_t gAudioHash = 14695981039346656037ULL; // FNV-1a basis
-static uint64_t gAudioEvents;
-static FILE* gAudioText;
+namespace
+{
+uint64_t gAudioHash = 14695981039346656037ULL;
+} // namespace
+// FNV-1a basis
+namespace
+{
+uint64_t gAudioEvents;
+FILE* gAudioText;
+} // namespace
 
 namespace
 {

@@ -89,6 +89,8 @@ def qualified_name(cur):
 
 def scope_key(cur):
     """The scope a declaration lives in: the USR of its class, function or namespace; "" for global."""
+    if cur.kind == K.PARM_DECL and cur.get_usr():
+        return cur.get_usr().rsplit("@", 1)[0]  # the parameters of one declaration of the function
     p = cur.semantic_parent
     while p is not None and p.kind in (K.LINKAGE_SPEC,):
         p = p.semantic_parent

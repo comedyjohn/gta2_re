@@ -423,7 +423,7 @@ class CarPhysics_B0
 
     Fix16Point field_0_vel_read_only;
     u32 field_8_total_damage_q;
-    CarPhysics_B0* mpNext;
+    CarPhysics_B0* next_;
     Fix16Point field_10_last_skid_pos[4];
     Fix16Point field_30_cm1;
     Fix16Point field_38_cp1;

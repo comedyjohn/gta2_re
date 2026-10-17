@@ -19,7 +19,7 @@ class GridSpriteLink_8
     }
 
     Sprite* field_0_pSprite;
-    GridSpriteLink_8* mpNext;
+    GridSpriteLink_8* next_;
 };
 
 class GridSpriteLink_Pool : public PoolBasic<GridSpriteLink_8, 4096>

@@ -884,7 +884,7 @@ Car_BC* CarManager_6C::DoGetNearestCarFromCoord_444FC0(Fix16 xpos,
     // 9.6f calls sub_421D80 and sub_421DF0 here, which are HasSpriteZoom_43A230 and IsCarInAir_43A3C0 (not inlined in 10.5)
     auto smallestDist = Fix16(0x300);
     Car_BC* pNearestCar = nullptr;
-    for (Car_BC* pCarIter = gCar_BC_Pool_67792C->GetFirstCar_420E50(); pCarIter; pCarIter = pCarIter->mpNext)
+    for (Car_BC* pCarIter = gCar_BC_Pool_67792C->GetFirstCar_420E50(); pCarIter; pCarIter = pCarIter->next_)
     {
         if (!pCarIter->IsMaxDamage_40F890() && !pCarIter->IsTrailerInfo_421640() &&
             (bIgnorePedRestrictions || !pCarIter->IsDoorLockedForPed_43B2B0(pPed)) && !pCarIter->HasSpriteZoom_43A230() &&
@@ -5865,19 +5865,19 @@ void Car_BC::AttachTrailer_4427A0(Car_BC* pToFind)
     field_64_pTrailer->SetTruckCabAndTrailerCar_407BB0(this, pToFind);
 
     Car_BC* pLast = nullptr;
-    for (Car_BC* pIter = gCar_BC_Pool_67792C->field_0_pool.prev_; pIter; pIter = pIter->mpNext)
+    for (Car_BC* pIter = gCar_BC_Pool_67792C->field_0_pool.prev_; pIter; pIter = pIter->next_)
     {
         if (pIter == pToFind)
         {
             if (pLast)
             {
-                pLast->mpNext = pIter->mpNext;
+                pLast->next_ = pIter->next_;
             }
             else
             {
-                gCar_BC_Pool_67792C->field_0_pool.prev_ = pIter->mpNext;
+                gCar_BC_Pool_67792C->field_0_pool.prev_ = pIter->next_;
             }
-            pIter->mpNext = nullptr;
+            pIter->next_ = nullptr;
             return;
         }
         pLast = pIter;
@@ -6886,7 +6886,7 @@ Car_BC::Car_BC()
     field_A4_light_flags = 0;
     field_A5_flash_phase_counter = 0;
     field_A6_turn_flags = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_84_car_info_idx = CarModel::kNone;
     field_50_car_sprite = nullptr;
     field_58_physics = nullptr;
@@ -6911,7 +6911,7 @@ Car_BC::Car_BC()
 // 0x444960
 Car_BC::~Car_BC()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_50_car_sprite = nullptr;
     field_5C_AI = nullptr;
 }

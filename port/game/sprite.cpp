@@ -2288,7 +2288,7 @@ void Sprite::ResolveCollisionWithCarPedOrObject_5A2A30()
     SpriteList_4 collisions;
     collisions.field_0_p18 = nullptr;
     gSpriteGrid_1_679208->CollectRectCollisions_477F30(&field_C_pCollisionShape->field_30_boundingBox, 0, 0, this, &collisions);
-    for (AttachedSprite_18* pCollisionIter = collisions.field_0_p18; pCollisionIter; pCollisionIter = pCollisionIter->mpNext)
+    for (AttachedSprite_18* pCollisionIter = collisions.field_0_p18; pCollisionIter; pCollisionIter = pCollisionIter->next_)
     {
         Sprite* pCurrent = pCollisionIter->field_0_pSprite;
         if (pCurrent->GetType_416B40() == SpriteTypes::kCar)
@@ -2660,7 +2660,7 @@ DEFINE_GLOBAL_INIT(u16, gDebugColour_626260, 0x1111, 0x626260);
 // 0x5a57a0
 s32 SpriteShape_4C::PoolAllocate()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_48_bbox_up_to_date = false;
     return 0;
 }
@@ -2779,7 +2779,7 @@ Sprite::Sprite() : field_0_rotation(gAng16_703804)
     field_38_zoom = 0;
     field_39_z_col = -1;
     field_8_car_bc_ptr = nullptr;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_10_sound = nullptr;
 }
 

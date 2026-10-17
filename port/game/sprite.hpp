@@ -44,12 +44,12 @@ class SpriteShape_4C
     // until its put back ??
     void SetCollisionId_446920(u32 id)
     {
-        this->mpNext = reinterpret_cast<SpriteShape_4C*>(static_cast<uintptr_t>(id));
+        this->next_ = reinterpret_cast<SpriteShape_4C*>(static_cast<uintptr_t>(id));
     }
 
     bool CollisionIdIs_446930(u32 a2)
     {
-        return static_cast<u32>(reinterpret_cast<uintptr_t>(mpNext)) == a2;
+        return static_cast<u32>(reinterpret_cast<uintptr_t>(next_)) == a2;
     }
 
     bool IsZeroWidth_41E390() const
@@ -172,7 +172,7 @@ class SpriteShape_4C
     Fix16 field_4_height;
     Fix16 field_8_depth;
     Fix16Point field_C_corners[4];
-    SpriteShape_4C* mpNext;
+    SpriteShape_4C* next_;
     Fix16Rect field_30_boundingBox;
     bool field_48_bbox_up_to_date;
     char_type field_49_unused;
@@ -294,7 +294,7 @@ class Sprite
         field_38_zoom = 0;
         field_39_z_col = -1;
         field_8_car_bc_ptr = nullptr;
-        mpNext = nullptr;
+        next_ = nullptr;
         field_10_sound = nullptr;
     }
 
@@ -455,7 +455,7 @@ class Sprite
     // Otherwise, the field_C_pCollisionShape is active. i.e. the instance belongs to another object.
     union
     {
-        Sprite* mpNext;
+        Sprite* next_;
         SpriteShape_4C* field_C_pCollisionShape;
         class Object_5C* field_C_o5c;
     };
@@ -692,7 +692,7 @@ class AttachedSprite_18
     bool UpdateAttached_5A6910(Sprite* pSprite);
 
     Sprite* field_0_pSprite;
-    AttachedSprite_18* mpNext;
+    AttachedSprite_18* next_;
     Fix16 field_6_offset_x; // NOTE: Fix16_Point here breaks match of UpdateAttached_5A6910
     Fix16 field_8_offset_y;
     Ang16 field_10_offset_rot;

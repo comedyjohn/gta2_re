@@ -1414,7 +1414,7 @@ void ImGuiDebugDraw()
                         //                                      pPedSprite->field_1C_zpos);
                         gParticle_8_6FD5E8->EmitFireTruckSprayParticle_53FAE0(pPedSprite);
                     }
-                    pIter = pIter->mpNext;
+                    pIter = pIter->next_;
                 }
             }
         }
@@ -1430,7 +1430,7 @@ void ImGuiDebugDraw()
                     {
                         pIter->SetOnFire();
                     }
-                    pIter = pIter->mpNext;
+                    pIter = pIter->next_;
                 }
             }
         }
@@ -1467,7 +1467,7 @@ void ImGuiDebugDraw()
                     //ImGui::Value("Field 88", pCarIter->field_88);
                     swprintf(gTmpBuff, L"%d", pCarIter->field_88_despawn_status);
                     DisplayWideTextAtSprite(gTmpBuff, pCarIter->GetSprite_440840(), 0, 0);
-                    pCarIter = pCarIter->mpNext;
+                    pCarIter = pCarIter->next_;
                 }
                 ImGui::TreePop();
             }
@@ -1580,7 +1580,7 @@ void ImGuiDebugDraw()
                     ImGui::End();
                     ImGui::TreePop();
                 }
-                pCarIter = pCarIter->mpNext;
+                pCarIter = pCarIter->next_;
             }
             ImGui::TreePop();
         }
@@ -1940,7 +1940,7 @@ void ImGuiDebugDraw()
                         }
                         num_AI_count++;
                     }
-                    pCarIter = pCarIter->mpNext;
+                    pCarIter = pCarIter->next_;
                 }
                 ImGui::Value("Count", num_AI_count);
                 ImGui::TreePop();
@@ -1969,7 +1969,7 @@ void ImGuiDebugDraw()
                                 pNearestAI = pAI_Iter;
                             }
                         }
-                        pCarIter = pCarIter->mpNext;
+                        pCarIter = pCarIter->next_;
                     }
 
                     if (pNearestAI)
@@ -2662,7 +2662,7 @@ void ImGuiDebugDraw()
                             pIter->ChangeNextPedState1_45C500(ped_state);
                             pIter->ChangeNextPedState2_45C540(move_state);
                         }
-                        pIter = pIter->mpNext;
+                        pIter = pIter->next_;
                     }
                 }
 
@@ -2676,7 +2676,7 @@ void ImGuiDebugDraw()
                             swprintf(gTmpBuff, L"%d", pPedIter->field_238_ped_type);
                             DisplayWideTextAtSprite(gTmpBuff, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        pPedIter = pPedIter->mpNext;
+                        pPedIter = pPedIter->next_;
                     }
                     ImGui::TreePop();
                 }
@@ -2767,7 +2767,7 @@ void ImGuiDebugDraw()
                         {
                             DisplayTextAtSprite("Obj 43", pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        pPedIter = pPedIter->mpNext;
+                        pPedIter = pPedIter->next_;
                     }
                     ImGui::TreePop();
                 }
@@ -2781,7 +2781,7 @@ void ImGuiDebugDraw()
                             swprintf(gTmpBuff, L"%d", pPedIter->field_168_game_object->field_69_is_colliding_with_sprite);
                             DisplayWideTextAtSprite(gTmpBuff, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
-                        pPedIter = pPedIter->mpNext;
+                        pPedIter = pPedIter->next_;
                     }
                     ImGui::TreePop();
                 }
@@ -3019,7 +3019,7 @@ void ImGuiDebugDraw()
         if (gParticle_4C_Pool_6FD5E4 && ImGui::TreeNode("gParticle_4C_Pool_6FD5E4"))
         {
             Particle_4C* pIter = gParticle_4C_Pool_6FD5E4->prev_;
-            for (; pIter; pIter = pIter->mpNext)
+            for (; pIter; pIter = pIter->next_)
             {
                 swprintf(gTmpBuff, L"%d", pIter->field_38_state);
                 if (pIter->field_28_pSprite)

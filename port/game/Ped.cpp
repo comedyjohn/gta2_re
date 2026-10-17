@@ -508,7 +508,7 @@ Ped::Ped()
 {
     field_200_id = 0;
     Reset_45AFC0();
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x45af00
@@ -522,7 +522,7 @@ Ped::~Ped()
     this->field_150_target_objective_car = nullptr;
     this->field_158_escape_car = nullptr;
     this->field_154_target_to_enter = nullptr;
-    this->mpNext = nullptr;
+    this->next_ = nullptr;
     this->field_164_ped_group = nullptr;
     this->field_168_game_object = nullptr;
     this->field_16C_car = nullptr;

@@ -44,7 +44,7 @@ void Object_3C::GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle)
 Object_3C::Object_3C()
 {
     this->field_4_angle = 0;
-    this->mpNext = nullptr;
+    this->next_ = nullptr;
     this->field_1C_z_accel = dword_6F8BF0;
     this->field_18_friction = dword_6F8BF0;
     this->field_10_z_speed = dword_6F8BF0;
@@ -63,7 +63,7 @@ Object_3C::Object_3C()
 // 0x52ade0
 Object_3C::~Object_3C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x52adf0
@@ -88,7 +88,7 @@ AttachedSprite_18* SpriteList_4::GetSpriteForModel_5A6A50(s32 obj_type)
                 return pIter;
             }
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return nullptr;
 }
@@ -112,7 +112,7 @@ Object_2C* SpriteList_4::FindObject2CByModel_5A6A90(s32 obj_type)
                 }
             }
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return nullptr;
 }
@@ -135,7 +135,7 @@ AttachedSprite_18* SpriteList_4::FindFirstActiveObject_5A6AD0()
                 }
             }
         }
-        pObjIter = pObjIter->mpNext;
+        pObjIter = pObjIter->next_;
     }
     return nullptr;
 }
@@ -151,18 +151,18 @@ void SpriteList_4::RemoveSprite_5A6B10(Sprite* toFind)
         {
             if (pLast)
             {
-                pLast->mpNext = pIter->mpNext;
+                pLast->next_ = pIter->next_;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
             }
             else
             {
-                this->field_0_p18 = pIter->mpNext;
+                this->field_0_p18 = pIter->next_;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
             }
             return;
         }
         pLast = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 }
 
@@ -177,25 +177,25 @@ void SpriteList_4::RemoveSpriteSafe_5A6B60(Sprite* toFind)
         {
             if (pLast)
             {
-                pLast->mpNext = pIter->mpNext;
+                pLast->next_ = pIter->next_;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
             }
             else
             {
-                this->field_0_p18 = pIter->mpNext;
+                this->field_0_p18 = pIter->next_;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
             }
             return;
         }
         pLast = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 }
 
 // 0x5a6bb0
 void SpriteList_4::sub_5A6BB0()
 {
-    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         p18Iter->DestroyAttached_5A69E0();
     }
@@ -204,7 +204,7 @@ void SpriteList_4::sub_5A6BB0()
 // 0x5a6bd0
 void SpriteList_4::sub_5A6BD0()
 {
-    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         p18Iter->SinkAttachedCar_5A6A20();
     }
@@ -213,7 +213,7 @@ void SpriteList_4::sub_5A6BD0()
 // 0x5a6bf0
 void SpriteList_4::DispatchCarImpactEvents_5A6BF0(Sprite* pSprite)
 {
-    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         p18Iter->field_0_pSprite->ProcessCarToCarImpactIfCar_59E910(pSprite);
     }
@@ -224,7 +224,7 @@ char_type SpriteList_4::TagSpriteWithRng_5A6C10(Sprite* toFind)
 {
     if (field_0_p18 != nullptr)
     {
-        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->mpNext)
+        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->next_)
         {
             if (pNext->field_0_pSprite == toFind)
             {
@@ -247,16 +247,16 @@ void SpriteList_4::RemoveByRngValue_5A6C40(s32 toFind)
         if (pIter->field_14_rng == toFind)
         {
             pLast = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
         else
         {
-            AttachedSprite_18* pSavedNext = pIter->mpNext;
+            AttachedSprite_18* pSavedNext = pIter->next_;
             if (pLast)
             {
-                pLast->mpNext = pSavedNext;
+                pLast->next_ = pSavedNext;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
-                pIter = pLast->mpNext;
+                pIter = pLast->next_;
             }
             else
             {
@@ -273,7 +273,7 @@ Sprite* SpriteList_4::FirstSpriteOfType_5A6CA0(s32 sprite_type)
 {
     if (field_0_p18 != nullptr)
     {
-        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->mpNext)
+        for (AttachedSprite_18* pNext = field_0_p18; pNext != nullptr; pNext = pNext->next_)
         {
             if (pNext->field_0_pSprite->field_30_sprite_type_enum == sprite_type)
             {
@@ -289,7 +289,7 @@ void SpriteList_4::AddSprite_5A6CD0(Sprite* pSprite)
 {
     AttachedSprite_18* p18 = gAttachedSpritePool_703B80->Allocate();
     p18->field_0_pSprite = pSprite;
-    p18->mpNext = this->field_0_p18;
+    p18->next_ = this->field_0_p18;
     p18->field_6_offset_x = 0;
     p18->field_8_offset_y = 0;
     field_0_p18 = p18;
@@ -300,7 +300,7 @@ void SpriteList_4::PushImpactEvent_5A6D00(Sprite* pSprite1, Fix16 x, Fix16 y, An
 {
     AttachedSprite_18* p18 = gAttachedSpritePool_703B80->Allocate();
     p18->field_0_pSprite = pSprite1;
-    p18->mpNext = field_0_p18;
+    p18->next_ = field_0_p18;
     p18->field_6_offset_x = x;
     p18->field_8_offset_y = y;
     p18->field_10_offset_rot = angle;
@@ -317,13 +317,13 @@ void SpriteList_4::PushSprite_5A6D40(Sprite* pToFind)
         {
             return;
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 
     AttachedSprite_18* pNew = gAttachedSpritePool_703B80->Allocate();
     pNew->field_0_pSprite = pToFind;
 
-    pNew->mpNext = this->field_0_p18;
+    pNew->next_ = this->field_0_p18;
     this->field_0_p18 = pNew;
 }
 
@@ -337,7 +337,7 @@ char_type SpriteList_4::SpriteExists_5A6D80(Sprite* pToFind)
         {
             return 1;
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return 0;
 }
@@ -351,7 +351,7 @@ Sprite* SpriteList_4::PopFrontSprite_5A6DA0()
         return nullptr;
     }
     Sprite* pOld = p18->field_0_pSprite;
-    this->field_0_p18 = p18->mpNext;
+    this->field_0_p18 = p18->next_;
     gAttachedSpritePool_703B80->DeAllocate(p18);
     return pOld;
 }
@@ -361,16 +361,16 @@ Sprite* SpriteList_4::PopBackSprite_5A6DC0()
 {
     AttachedSprite_18* pIter = this->field_0_p18;
     AttachedSprite_18* pLast = nullptr;
-    while (pIter->mpNext)
+    while (pIter->next_)
     {
         pLast = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 
     Sprite* result = pIter->field_0_pSprite;
     if (pLast)
     {
-        pLast->mpNext = nullptr;
+        pLast->next_ = nullptr;
     }
     else
     {
@@ -388,7 +388,7 @@ AttachedSprite_18* SpriteList_4::ClearList_5A6E10()
     while (pIter)
     {
         AttachedSprite_18* pLast = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
         gAttachedSpritePool_703B80->DeAllocate(pLast);
     }
     this->field_0_p18 = nullptr;
@@ -401,7 +401,7 @@ Sprite* SpriteList_4::FindClosestSprite_5A6E40(Fix16 xOff, Fix16 yOff)
     Fix16 smallest(99999);
 
     Sprite* new_ret = nullptr;
-    for (AttachedSprite_18* pIter = this->field_0_p18; pIter; pIter = pIter->mpNext)
+    for (AttachedSprite_18* pIter = this->field_0_p18; pIter; pIter = pIter->next_)
     {
         Fix16 yDelta = Fix16::MaxAbsDistance(xOff, yOff, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
         if (yDelta < smallest)
@@ -422,7 +422,7 @@ Sprite* SpriteList_4::TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos)
     Fix16 smallest(99999);
     Fix16 distance;
 
-    for (AttachedSprite_18* pIter = field_0_p18; pIter; pIter = pIter->mpNext)
+    for (AttachedSprite_18* pIter = field_0_p18; pIter; pIter = pIter->next_)
     {
         distance = Fix16::MaxAbsDistance(xpos, ypos, pIter->field_0_pSprite->field_14_xy.x, pIter->field_0_pSprite->field_14_xy.y);
         if (distance < smallest)
@@ -442,11 +442,11 @@ Sprite* SpriteList_4::TakeClosestSprite_5A6EA0(Fix16 xpos, Fix16 ypos)
     Sprite* pSprite = pClosest->field_0_pSprite;
     if (pBeforeClosest)
     {
-        pBeforeClosest->mpNext = pClosest->mpNext;
+        pBeforeClosest->next_ = pClosest->next_;
     }
     else
     {
-        field_0_p18 = pClosest->mpNext;
+        field_0_p18 = pClosest->next_;
     }
     gAttachedSpritePool_703B80->DeAllocate(pClosest);
     return pSprite;
@@ -463,32 +463,32 @@ void SpriteList_4::PoolUpdate_5A6F70(Sprite* pSprite)
     AttachedSprite_18* pCurrItem = field_0_p18;
     while (pCurrItem)
     {
-        AttachedSprite_18* pNext = pCurrItem->mpNext;
+        AttachedSprite_18* pNext = pCurrItem->next_;
         if (pCurrItem->UpdateAttached_5A6910(pSprite))
         {
-            if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
+            if (pPreviousItem && pPreviousItem->next_ != pCurrItem)
             {
                 pPreviousItem = nullptr;
             }
 
             if (pPreviousItem)
             {
-                pPreviousItem->mpNext = pCurrItem->mpNext;
+                pPreviousItem->next_ = pCurrItem->next_;
             }
             else
             {
                 if (field_0_p18 == pCurrItem)
                 {
-                    field_0_p18 = pCurrItem->mpNext;
+                    field_0_p18 = pCurrItem->next_;
                 }
                 else
                 {
                     pPreviousItem = field_0_p18;
-                    while (pPreviousItem->mpNext != pCurrItem)
+                    while (pPreviousItem->next_ != pCurrItem)
                     {
-                        pPreviousItem = pPreviousItem->mpNext;
+                        pPreviousItem = pPreviousItem->next_;
                     }
-                    pPreviousItem->mpNext = pCurrItem->mpNext;
+                    pPreviousItem->next_ = pCurrItem->next_;
                 }
             }
             gAttachedSpritePool_703B80->DeAllocate(pCurrItem);
@@ -522,7 +522,7 @@ void SpriteList_4::DestroyAllSprites_5A7010()
             default:
                 break;
         }
-        p18Iter = p18Iter->mpNext;
+        p18Iter = p18Iter->next_;
     }
     ClearList_5A6E10();
 }
@@ -542,9 +542,9 @@ void SpriteList_4::CleanupSpriteList_5A7080()
             gObject_5C_6F8F84->RemoveAndFree_52A610(pIter->field_0_pSprite->field_8_object_2C_ptr);
             if (pLast)
             {
-                pLast->mpNext = pIter->mpNext;
+                pLast->next_ = pIter->next_;
                 gAttachedSpritePool_703B80->DeAllocate(pIter);
-                pIter = pLast->mpNext;
+                pIter = pLast->next_;
             }
             else
             {
@@ -554,12 +554,12 @@ void SpriteList_4::CleanupSpriteList_5A7080()
         else
         {
             pLast = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
 
         if (bUnlinkHead)
         {
-            AttachedSprite_18* pNext = pIter->mpNext;
+            AttachedSprite_18* pNext = pIter->next_;
             gAttachedSpritePool_703B80->DeAllocate(pIter);
             pIter = pNext;
             this->field_0_p18 = pNext;
@@ -587,7 +587,7 @@ void SpriteList_4::ClearGangIconSprite_5A7110()
                 }
             }
             pLast = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
             if (!pIter)
             {
                 return;
@@ -598,11 +598,11 @@ void SpriteList_4::ClearGangIconSprite_5A7110()
 
         if (pLast)
         {
-            pLast->mpNext = pIter->mpNext;
+            pLast->next_ = pIter->next_;
         }
         else
         {
-            this->field_0_p18 = pIter->mpNext;
+            this->field_0_p18 = pIter->next_;
         }
         gAttachedSpritePool_703B80->DeAllocate(pIter);
     }
@@ -627,7 +627,7 @@ s32 SpriteList_4::GetGangIdxFromSpriteIfAny_5A71A0()
                 }
             }
         }
-        p18Iter = p18Iter->mpNext;
+        p18Iter = p18Iter->next_;
         if (!p18Iter)
         {
             return 0;
@@ -639,7 +639,7 @@ s32 SpriteList_4::GetGangIdxFromSpriteIfAny_5A71A0()
 // 0x5a71f0
 void SpriteList_4::sub_5A71F0()
 {
-    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (AttachedSprite_18* p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         const s32 type = p18Iter->field_0_pSprite->GetType_416B40();
         if (type == SpriteTypes::kObject || (type > SpriteTypes::kPed && type <= SpriteTypes::kMapObj))
@@ -666,17 +666,17 @@ void SpriteList_4::PruneNonCollidingSprites_5A7240(Sprite* pSprite)
         if (pSprite->CollisionCheck_59E590(pNext->field_0_pSprite))
         {
             pLast = pNext;
-            pNext = pNext->mpNext;
+            pNext = pNext->next_;
         }
         else if (pLast)
         {
-            pLast->mpNext = pNext->mpNext;
+            pLast->next_ = pNext->next_;
             gAttachedSpritePool_703B80->DeAllocate(pNext);
-            pNext = pLast->mpNext;
+            pNext = pLast->next_;
         }
         else
         {
-            AttachedSprite_18* pSaveNext = pNext->mpNext;
+            AttachedSprite_18* pSaveNext = pNext->next_;
             gAttachedSpritePool_703B80->DeAllocate(pNext);
             pNext = pSaveNext;
             this->field_0_p18 = pSaveNext;
@@ -691,7 +691,7 @@ void SpriteList_4::PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown
     char max_val = start_val;
 
     AttachedSprite_18* p18Iter;
-    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         if (p18Iter->field_0_pSprite->IsTypeAbove1_446950()) // object_5c type
         {
@@ -708,7 +708,7 @@ void SpriteList_4::PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown
         pSprite->set_z_col_4BA220(max_val);
     }
 
-    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         p18Iter->field_0_pSprite->set_z_col_4BA220(max_val);
     }
@@ -718,7 +718,7 @@ void SpriteList_4::PropagateMaxZLayer_5A72B0(Sprite* pSprite, char_type bUnknown
 char_type SpriteList_4::sub_5A7310()
 {
     AttachedSprite_18* p18Iter;
-    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->mpNext)
+    for (p18Iter = this->field_0_p18; p18Iter; p18Iter = p18Iter->next_)
     {
         if (p18Iter->field_0_pSprite->sub_5A1A60())
         {

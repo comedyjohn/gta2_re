@@ -90,3 +90,11 @@ CheckOptions:
     value: lower_case
   - key: readability-identifier-naming.MacroDefinitionCase
     value: UPPER_CASE
+  # a namespace that stands in for an enum is named like the enum (STYLE.md)
+  - key: readability-identifier-naming.NamespaceIgnoredRegexp
+    value: '^[A-Z][A-Za-z0-9]*$'
+  # the fixed-width aliases of core/types.hpp keep their names until phase 3
+  - key: readability-identifier-naming.TypeAliasIgnoredRegexp
+    value: '^([su](8|16|32|64)|f(32|64)|char_type|wchar_type|[su]ptr)$'
+  - key: readability-identifier-naming.TypedefIgnoredRegexp
+    value: '^([su](8|16|32|64)|f(32|64)|char_type|wchar_type|[su]ptr)$'

@@ -22,7 +22,7 @@ struct GridCell_C
 
     u8 field_0_x;
     GridSpriteLink_8* field_4_pSpriteLinks;
-    GridCell_C* mpNext;
+    GridCell_C* next_;
 };
 
 // Sparse 256x256 spatial hash of sprites: 256 rows, each a sorted linked list of occupied cells. Collision and
@@ -34,7 +34,7 @@ class SpriteGrid_400
     {
         if (y_pos <= 255 && y_pos >= 0)
         {
-            for (GridCell_C* i = field_0_rows[y_pos]; i; i = i->mpNext)
+            for (GridCell_C* i = field_0_rows[y_pos]; i; i = i->next_)
             {
                 s32 x_len = i->field_0_x;
 

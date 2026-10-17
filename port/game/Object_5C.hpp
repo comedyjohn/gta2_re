@@ -328,7 +328,7 @@ class Object_2C
         field_4->SetDrawLayer_40F7B0(29);
     }
 
-    Object_2C* mpNext;
+    Object_2C* next_;
     Sprite* field_4;
     ObjectDefinition_74* field_8;
     union TAny

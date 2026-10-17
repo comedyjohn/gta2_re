@@ -8,7 +8,7 @@ namespace
 {
 struct Item
 {
-    Item* mpNext;
+    Item* next_;
     int allocations = 0;
     int deallocations = 0;
     bool remove = false;
@@ -53,9 +53,9 @@ TEST_CASE("Pool keeps a used list, newest first")
     Item* b = pool.Allocate();
     Item* c = pool.Allocate();
     CHECK(pool.GetFirstUsed() == c);
-    CHECK(c->mpNext == b);
-    CHECK(b->mpNext == a);
-    CHECK(a->mpNext == nullptr);
+    CHECK(c->next_ == b);
+    CHECK(b->next_ == a);
+    CHECK(a->next_ == nullptr);
 }
 
 TEST_CASE("Pool::AllocateAppend adds at the end of the used list")
@@ -64,8 +64,8 @@ TEST_CASE("Pool::AllocateAppend adds at the end of the used list")
     Item* a = pool.Allocate();
     Item* b = pool.AllocateAppend();
     CHECK(pool.GetFirstUsed() == a);
-    CHECK(a->mpNext == b);
-    CHECK(b->mpNext == nullptr);
+    CHECK(a->next_ == b);
+    CHECK(b->next_ == nullptr);
 }
 
 TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the order")
@@ -78,7 +78,7 @@ TEST_CASE("Pool::UpdatePool removes the items whose update says so, keeping the 
     pool.UpdatePool();
     CHECK(pool.field_x_count_ == 3); // counted before removal
     CHECK(pool.GetFirstUsed() == c);
-    CHECK(c->mpNext == a);
+    CHECK(c->next_ == a);
     CHECK(b->deallocations == 1);
     CHECK(pool.Allocate() == b); // back on the free list
 }

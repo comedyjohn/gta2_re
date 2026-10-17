@@ -3893,6 +3893,6 @@ void CarPhysics_B0::SetCar_5638C0(Car_BC* pCar)
 // 0x563900
 CarPhysics_B0::CarPhysics_B0()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     PoolAllocate();
 }

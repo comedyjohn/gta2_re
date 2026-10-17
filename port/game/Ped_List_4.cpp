@@ -14,7 +14,7 @@ Char_8* Ped_List_4::AddPedToFront_471140(Ped* pPed)
 
     pNew->field_0_char_ped = pPed;
 
-    pNew->mpNext = field_0_pFirstPed;
+    pNew->next_ = field_0_pFirstPed;
     field_0_pFirstPed = pNew;
 
     return pNew;
@@ -36,7 +36,7 @@ void Ped_List_4::AddPedToBackIfMissing_471160(Ped* pPed)
             }
 
             pTail = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
     }
 
@@ -45,14 +45,14 @@ void Ped_List_4::AddPedToBackIfMissing_471160(Ped* pPed)
 
     if (pTail)
     {
-        pTail->mpNext = pNew;
-        pNew->mpNext = nullptr;
+        pTail->next_ = pNew;
+        pNew->next_ = nullptr;
     }
     else
     {
         // List was empty
         field_0_pFirstPed = pNew;
-        pNew->mpNext = nullptr;
+        pNew->next_ = nullptr;
     }
 }
 
@@ -70,14 +70,14 @@ void Ped_List_4::AddPedToFrontIfMissing_4711B0(Ped* pPed)
                 return;
             }
 
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
     }
 
     Char_8* pNew = gChar_8_Pool_678b50->Allocate_445EF0();
     pNew->field_0_char_ped = pPed;
 
-    pNew->mpNext = field_0_pFirstPed;
+    pNew->next_ = field_0_pFirstPed;
     field_0_pFirstPed = pNew;
 }
 
@@ -92,17 +92,17 @@ void Ped_List_4::RemovePed_4711F0(Ped* pPed)
         {
             if (pPrev)
             {
-                pPrev->mpNext = pIter->mpNext;
+                pPrev->next_ = pIter->next_;
             }
             else
             {
-                field_0_pFirstPed = pIter->mpNext;
+                field_0_pFirstPed = pIter->next_;
             }
             gChar_8_Pool_678b50->DeAllocate_445F00(pIter);
             break;
         }
         pPrev = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 }
 
@@ -117,17 +117,17 @@ void Ped_List_4::RemovePed_471240(Ped* pPed)
         {
             if (pPrev)
             {
-                pPrev->mpNext = pIter->mpNext;
+                pPrev->next_ = pIter->next_;
             }
             else
             {
-                field_0_pFirstPed = pIter->mpNext;
+                field_0_pFirstPed = pIter->next_;
             }
             gChar_8_Pool_678b50->DeAllocate_445F00(pIter);
             break;
         }
         pPrev = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 }
 
@@ -142,20 +142,20 @@ u8 Ped_List_4::RemoveNonCorpses_471290()
         if (pIter->field_0_char_ped->IsActive_433B40() && pIter->field_0_char_ped->field_278_ped_state_1 == PedState1::kDead)
         {
             pPrevKept = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
         else
         {
             if (pPrevKept)
             {
-                pPrevKept->mpNext = pIter->mpNext;
+                pPrevKept->next_ = pIter->next_;
             }
             else
             {
-                field_0_pFirstPed = pIter->mpNext;
+                field_0_pFirstPed = pIter->next_;
             }
 
-            Char_8* pNext = pIter->mpNext;
+            Char_8* pNext = pIter->next_;
 
             gChar_8_Pool_678b50->DeAllocate_445F00(pIter);
             pIter = pNext;
@@ -173,7 +173,7 @@ void Ped_List_4::ClearPeds_4712F0()
     while (pIter)
     {
         Char_8* pFreed = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
         gChar_8_Pool_678b50->field_0_pool.DeAllocate(pFreed);
     }
 
@@ -190,7 +190,7 @@ Ped* Ped_List_4::RemoveFirstPed_471320()
     }
 
     Ped* pPed = pIter->field_0_char_ped;
-    field_0_pFirstPed = pIter->mpNext;
+    field_0_pFirstPed = pIter->next_;
     gChar_8_Pool_678b50->DeAllocate_445F00(pIter);
     return pPed;
 }
@@ -215,7 +215,7 @@ Ped* Ped_List_4::FindClosestActivePed_471340(Fix16 x, Fix16 y)
                 closestDistance = distance;
             }
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return pClosest;
 }
@@ -231,7 +231,7 @@ Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing,
     Char_8* pIter = field_0_pFirstPed;
     Ped* pClosest = nullptr;
 
-    for (; pIter; pIter = pIter->mpNext)
+    for (; pIter; pIter = pIter->next_)
     {
         if (pIter->field_0_char_ped->IsActive_433B40() == 1)
         {
@@ -264,7 +264,7 @@ void Ped_List_4::KillAndClearAllPeds_4715A0()
     {
         Char_8* pFreed = pIter;
         pIter->field_0_char_ped->Kill_46F9D0();
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
         gChar_8_Pool_678b50->DeAllocate_445F00(pFreed);
     }
 
@@ -280,7 +280,7 @@ void Ped_List_4::KillAndClearAllPedsResetCarRef_4715E0()
         Char_8* pFreed = pIter;
         pIter->field_0_char_ped->Kill_46F9D0();
         pIter->field_0_char_ped->field_16C_car = nullptr;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
         gChar_8_Pool_678b50->DeAllocate_445F00(pFreed);
     }
 
@@ -290,7 +290,7 @@ void Ped_List_4::KillAndClearAllPedsResetCarRef_4715E0()
 // 0x471630
 void Ped_List_4::ApplyPassengerBusStopBehavior_471630()
 {
-    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
+    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->next_)
     {
         if (pIter->field_0_char_ped->get_occupation_403980() == PedOcupation::kBusCustomer)
         {
@@ -304,7 +304,7 @@ void Ped_List_4::ApplyPassengerBusStopBehavior_471630()
 // 0x471680
 void Ped_List_4::ForceTaxiPassengersToExit_471680()
 {
-    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
+    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->next_)
     {
         if (pIter->field_0_char_ped->field_240_occupation == PedOcupation::kTaxiCustomer)
         {
@@ -320,7 +320,7 @@ u16 Ped_List_4::GetPedsCount_4716B0()
     Char_8* pIter = field_0_pFirstPed;
     for (passengerCount = 0; pIter; ++passengerCount)
     {
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return passengerCount;
 }
@@ -328,7 +328,7 @@ u16 Ped_List_4::GetPedsCount_4716B0()
 // 0x4716d0
 void Ped_List_4::SyncPassengersWithCarState_4716D0(Car_BC* pCar)
 {
-    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->mpNext)
+    for (Char_8* pIter = field_0_pFirstPed; pIter; pIter = pIter->next_)
     {
         pIter->field_0_char_ped->field_204_killer_id = pCar->field_70_exploder_ped_id;
         pIter->field_0_char_ped->field_290_death_cause = pCar->field_90_death_cause;
@@ -346,7 +346,7 @@ bool Ped_List_4::HasScriptCreatedPed_471710()
         {
             return true;
         }
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
     return false;
 }

@@ -10,7 +10,7 @@ void Taxi_4::PushTaxi_457BA0(Car_BC* pCar)
 {
     Taxi_8* pFirst = gTaxi_4_Pool_6783F8->Allocate();
     pFirst->field_0_pCar = pCar;
-    pFirst->mpNext = this->field_0_pFirst;
+    pFirst->next_ = this->field_0_pFirst;
     this->field_0_pFirst = pFirst;
 }
 
@@ -21,7 +21,7 @@ void Taxi_4::PopAll_457BC0()
     while (pIter)
     {
         Taxi_8* pOldIter = pIter;
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
         gTaxi_4_Pool_6783F8->DeAllocate(pOldIter);
     }
     this->field_0_pFirst = nullptr;
@@ -33,7 +33,7 @@ Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
     Car_BC* pCarRet = nullptr;
     Fix16 smallest(99999);
 
-    for (Taxi_8* pIter = field_0_pFirst; pIter; pIter = pIter->mpNext)
+    for (Taxi_8* pIter = field_0_pFirst; pIter; pIter = pIter->next_)
     {
         // 9.6f passes references to the sprite position, not get_x/get_y copies
         Fix16 distance = Fix16::MaxAbsDistance(xpos,

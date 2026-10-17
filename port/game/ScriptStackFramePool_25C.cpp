@@ -9,7 +9,7 @@ ScriptStackFramePool_25C::~ScriptStackFramePool_25C()
 // 0x4bea80
 ScriptStackFrame_C::ScriptStackFrame_C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_0_cond_result = 125;
     field_4_return_cmd = 205;
 }
@@ -17,7 +17,7 @@ ScriptStackFrame_C::ScriptStackFrame_C()
 // 0x4beaa0
 ScriptStackFrame_C::~ScriptStackFrame_C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x503110
@@ -25,5 +25,5 @@ void ScriptStackFrame_C::PoolAllocate()
 {
     field_0_cond_result = 0;
     field_4_return_cmd = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
 }

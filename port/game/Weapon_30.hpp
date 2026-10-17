@@ -166,7 +166,7 @@ class Weapon_30
     s16 field_10;
     s16 field_12;
     Car_BC* field_14_car;
-    Weapon_30* mpNext;
+    Weapon_30* next_;
     s32 field_1C_idx; // weapon_type
     s8 field_20;
     s8 field_21;

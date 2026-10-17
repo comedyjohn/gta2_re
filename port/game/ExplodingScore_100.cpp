@@ -52,7 +52,7 @@ void ExplodingScorePool::PushScore_596890(Fix16 xpos, Fix16 ypos, Fix16 zpos, u3
         {
             if (pIter->field_4C_score >= score)
             {
-                pIter = pIter->mpNext;
+                pIter = pIter->next_;
             }
             else
             {
@@ -88,7 +88,7 @@ void ExplodingScorePool::DrawExplodingScores_5969E0()
     while (pIter)
     {
         pIter->DrawNumbers_596C90();
-        pIter = pIter->mpNext;
+        pIter = pIter->next_;
     }
 }
 
@@ -106,14 +106,14 @@ ExplodingScore_50::ExplodingScore_50()
     field_40 = 0;
     field_4C_score = 0;
     field_48_unused = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_34_palette = 9;
 }
 
 // 0x596a40
 ExplodingScore_50::~ExplodingScore_50()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x596a50

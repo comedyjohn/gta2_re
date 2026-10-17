@@ -368,7 +368,7 @@ class Trailer
     //Inlined in CarManager_6C constructor 9.6f -> 0x4212d0
     Trailer()
     {
-        mpNext = nullptr;
+        next_ = nullptr;
         field_8_truck_cab = nullptr;
         field_C_pCarOnTrailer = nullptr;
         field_0_hitch_angle_clamped = 0;
@@ -379,7 +379,7 @@ class Trailer
     char_type field_1_unused;
     char_type field_2_unused;
     char_type field_3_unused;
-    Trailer* mpNext;
+    Trailer* next_;
     Car_BC* field_8_truck_cab;
     Car_BC* field_C_pCarOnTrailer;
 };
@@ -1301,7 +1301,7 @@ class Car_BC
     Ped_List_4 field_4_passengers_list;
     DamageAreaFlags field_8_damaged_areas; // TODO: check if it's a bitset
     Car_Door_10 field_C_doors[4];
-    Car_BC* mpNext;
+    Car_BC* next_;
     Sprite* field_50_car_sprite;
     Ped* field_54_driver;
     CarPhysics_B0* field_58_physics;

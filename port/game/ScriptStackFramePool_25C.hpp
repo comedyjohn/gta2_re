@@ -17,7 +17,7 @@ class ScriptStackFrame_C
 
     s32 field_0_cond_result;
     s16 field_4_return_cmd;
-    ScriptStackFrame_C* mpNext;
+    ScriptStackFrame_C* next_;
 };
 
 // Pool of the stack frames (GOSUB return info) of all script threads (miss2_8)

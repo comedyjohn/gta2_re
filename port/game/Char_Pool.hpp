@@ -40,7 +40,7 @@ class Char_8
     }
 
     Ped* field_0_char_ped;
-    Char_8* mpNext;
+    Char_8* next_;
 };
 
 class Char_8_Pool
@@ -122,39 +122,39 @@ class PedPool
         {
             ++field_0_pool.field_x_count_;
 
-            Ped* pNext = pCurrItem->mpNext;
+            Ped* pNext = pCurrItem->next_;
 
             if (pCurrItem->PoolUpdate())
             {
                 pCurrItem->PoolDeallocate();
 
-                if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
+                if (pPreviousItem && pPreviousItem->next_ != pCurrItem)
                 {
                     pPreviousItem = nullptr;
                 }
 
                 if (pPreviousItem)
                 {
-                    pPreviousItem->mpNext = pCurrItem->mpNext;
+                    pPreviousItem->next_ = pCurrItem->next_;
                 }
                 else
                 {
                     if (field_0_pool.prev_ == pCurrItem)
                     {
-                        field_0_pool.prev_ = pCurrItem->mpNext;
+                        field_0_pool.prev_ = pCurrItem->next_;
                     }
                     else
                     {
                         pPreviousItem = field_0_pool.prev_;
-                        while (pPreviousItem->mpNext != pCurrItem)
+                        while (pPreviousItem->next_ != pCurrItem)
                         {
-                            pPreviousItem = pPreviousItem->mpNext;
+                            pPreviousItem = pPreviousItem->next_;
                         }
-                        pPreviousItem->mpNext = pCurrItem->mpNext;
+                        pPreviousItem->next_ = pCurrItem->next_;
                     }
                 }
 
-                pCurrItem->mpNext = field_0_pool.start_;
+                pCurrItem->next_ = field_0_pool.start_;
                 field_0_pool.start_ = pCurrItem;
                 pCurrItem = pNext;
             }

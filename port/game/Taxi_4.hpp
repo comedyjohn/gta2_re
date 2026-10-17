@@ -18,7 +18,7 @@ struct Taxi_8
     }
 
     Car_BC* field_0_pCar;
-    Taxi_8* mpNext;
+    Taxi_8* next_;
 };
 
 class Taxi_4_Pool : public PoolBasic<Taxi_8, 100>

@@ -84,7 +84,7 @@ Weapon_30::Weapon_30()
     field_14_car = nullptr;
     field_2_reload_speed = 0;
     field_4_bTargetHit = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_1C_idx = 0;
     field_10 = 0;
     field_8 = 0;
@@ -99,7 +99,7 @@ Weapon_30::Weapon_30()
 Weapon_30::~Weapon_30()
 {
     field_24_pPed = nullptr;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_14_car = nullptr;
     field_8 = 0;
     if (field_28_pSound)

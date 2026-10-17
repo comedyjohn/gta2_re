@@ -42,8 +42,8 @@ class Weapon_30_Pool
     Weapon_30* Allocate()
     {
         Weapon_30* pWeapon = field_0_pool.start_;
-        field_0_pool.start_ = pWeapon->mpNext;
-        pWeapon->mpNext = field_0_pool.prev_;
+        field_0_pool.start_ = pWeapon->next_;
+        pWeapon->next_ = field_0_pool.prev_;
         field_0_pool.prev_ = pWeapon;
         return pWeapon;
     }
@@ -52,8 +52,8 @@ class Weapon_30_Pool
     Weapon_30* AllocateUnlinked_4CC9E0()
     {
         Weapon_30* pWeapon = field_0_pool.start_;
-        field_0_pool.start_ = pWeapon->mpNext;
-        pWeapon->mpNext = nullptr;
+        field_0_pool.start_ = pWeapon->next_;
+        pWeapon->next_ = nullptr;
         return pWeapon;
     }
 
@@ -70,20 +70,20 @@ class Weapon_30_Pool
                 pIter->PoolDeallocate();
                 if (pLastIter)
                 {
-                    pLastIter->mpNext = pIter->mpNext;
+                    pLastIter->next_ = pIter->next_;
                 }
                 else
                 {
-                    this->field_0_pool.prev_ = pIter->mpNext;
+                    this->field_0_pool.prev_ = pIter->next_;
                 }
-                pIter->mpNext = this->field_0_pool.start_;
+                pIter->next_ = this->field_0_pool.start_;
                 this->field_0_pool.start_ = pIter;
                 break;
             }
             else
             {
                 pLastIter = pIter;
-                pIter = pIter->mpNext;
+                pIter = pIter->next_;
             }
         }
     }

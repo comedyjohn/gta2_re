@@ -1159,7 +1159,7 @@ class miss2_0x11C
     void DisableBasicKfsFromSave_511CD0();
     ~miss2_0x11C();
 
-    miss2_0x11C* mpNext;
+    miss2_0x11C* next_;
     u16 field_4_next_cmd;
     char_type field_6;
     char_type field_7_unused;
@@ -1186,8 +1186,8 @@ class miss2_0x11C_Pool
     miss2_0x11C* Allocate_4767A0()
     {
         miss2_0x11C* pf_0 = field_0_pool.start_;
-        field_0_pool.start_ = pf_0->mpNext;
-        pf_0->mpNext = field_0_pool.prev_;
+        field_0_pool.start_ = pf_0->next_;
+        pf_0->next_ = field_0_pool.prev_;
         field_0_pool.prev_ = pf_0;
         pf_0->PoolAllocate_5035B0();
         return pf_0; // ??
@@ -1198,7 +1198,7 @@ class miss2_0x11C_Pool
 
     void LogAll_47F4D0()
     {
-        for (miss2_0x11C* pThread = field_0_pool.prev_; pThread; pThread = pThread->mpNext)
+        for (miss2_0x11C* pThread = field_0_pool.prev_; pThread; pThread = pThread->next_)
         {
             pThread->Log_5035D0();
         }

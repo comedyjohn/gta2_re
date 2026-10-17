@@ -18,8 +18,8 @@ Light_28* Light_1D4CC::CreateLight_52B2A0(Fix16 xpos, Fix16 ypos, Fix16 zpos, s3
 Light_28* Light_1D4CC::Alloc_5C2B70()
 {
     Light_28* result = field_0_pool.start_;
-    field_0_pool.start_ = field_0_pool.start_->mpNext;
-    result->mpNext = nullptr;
+    field_0_pool.start_ = field_0_pool.start_->next_;
+    result->next_ = nullptr;
     result->field_0.flag = 0;
     result->field_14_on_time = 0;
     return result;

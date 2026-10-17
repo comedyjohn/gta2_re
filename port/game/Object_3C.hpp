@@ -109,7 +109,7 @@ class Object_3C
     SpriteList_4 field_0;
     Ang16 field_4_angle;
     s16 field_6_unused;
-    Object_3C* mpNext;
+    Object_3C* next_;
     Fix16 field_C_speed;
     Fix16 field_10_z_speed;
     Fix16 field_14;

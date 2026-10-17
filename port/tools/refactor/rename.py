@@ -359,7 +359,8 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
 
     refused = []
     port_files = {}
-    for dirpath, _, names in os.walk(PORT):
+    for dirpath, dirs, names in os.walk(PORT):
+        dirs[:] = [d for d in dirs if d not in ("tools", "upstream")]  # the scripts and their fixtures are not the game
         for n in names:
             if n.endswith((".cpp", ".hpp", ".h", ".inl", ".c")):
                 port_files[os.path.join(dirpath, n)] = None
@@ -454,9 +455,8 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
     edited = {(f, o) for (f, o) in edits}
     res_template, res_other = [], []
     files = set()
-    for dirpath, _, names in os.walk(PORT):
-        if "/tests/rename/" in dirpath + "/":
-            pass
+    for dirpath, dirs, names in os.walk(PORT):
+        dirs[:] = [d for d in dirs if d not in ("tools", "upstream")]
         for n in names:
             if n.endswith((".cpp", ".hpp", ".h", ".inl", ".c")):
                 files.add(os.path.join(dirpath, n))

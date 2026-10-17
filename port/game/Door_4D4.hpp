@@ -41,7 +41,7 @@ class DoorData_10 // Contains only position, face and DoorInfo id
     u8 field_6_z;
     u8 field_7_gr_id;
     s32 field_8_face;
-    DoorData_10* mpNext;
+    DoorData_10* next_;
 };
 
 inline bool Door_38::IsOpen_44C860()
@@ -71,7 +71,7 @@ class DoorData_10_Pool
     DoorData_10* Allocate()
     {
         DoorData_10* tmp = field_0_pool.head_;
-        field_0_pool.head_ = tmp->mpNext;
+        field_0_pool.head_ = tmp->next_;
         tmp->PoolAllocate();
         return tmp;
     }

@@ -12,11 +12,11 @@ class PoolBasic
         PoolType* iter = &pool_[0];
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
-            iter->mpNext = iter + 1;
+            iter->next_ = iter + 1;
             iter++;
         }
 
-        pool_[PoolSize - 1].mpNext = nullptr;
+        pool_[PoolSize - 1].next_ = nullptr;
         head_ = pool_;
     }
 
@@ -28,7 +28,7 @@ class PoolBasic
     PoolType* Allocate()
     {
         PoolType* new_item = head_;
-        head_ = new_item->mpNext;
+        head_ = new_item->next_;
         new_item->PoolAllocate();
         return new_item;
     }
@@ -36,14 +36,14 @@ class PoolBasic
     void DeAllocate(PoolType* item)
     {
         item->PoolDeallocate();
-        item->mpNext = head_;
+        item->next_ = head_;
         head_ = item;
     }
 
     PoolType* UnlinkAndReturnNext(PoolType* old_item)
     {
-        PoolType* new_item = old_item->mpNext;
-        old_item->mpNext = this->head_;
+        PoolType* new_item = old_item->next_;
+        old_item->next_ = this->head_;
         this->head_ = old_item;
         return new_item;
     }
@@ -72,11 +72,11 @@ class Pool
         PoolType* iter = pool_;
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
-            iter->mpNext = iter + 1;
+            iter->next_ = iter + 1;
             iter++;
         }
 
-        pool_[PoolSize - 1].mpNext = nullptr;
+        pool_[PoolSize - 1].next_ = nullptr;
         start_ = pool_;
 
         prev_ = nullptr;
@@ -92,8 +92,8 @@ class Pool
     PoolType* Allocate()
     {
         PoolType* tmp = start_;
-        start_ = tmp->mpNext;
-        tmp->mpNext = prev_;
+        start_ = tmp->next_;
+        tmp->next_ = prev_;
         prev_ = tmp;
         tmp->PoolAllocate();
         return tmp;
@@ -104,8 +104,8 @@ class Pool
     {
         // Pop from free list
         PoolType* obj = start_;
-        start_ = obj->mpNext;
-        obj->mpNext = nullptr;
+        start_ = obj->next_;
+        obj->next_ = nullptr;
 
         // Append to active list (FIFO style)
         if (!prev_)
@@ -115,11 +115,11 @@ class Pool
         else
         {
             PoolType* tail = prev_;
-            while (tail->mpNext)
+            while (tail->next_)
             {
-                tail = tail->mpNext;
+                tail = tail->next_;
             }
-            tail->mpNext = obj;
+            tail->next_ = obj;
         }
 
         obj->PoolAllocate(); // per-object init
@@ -129,8 +129,8 @@ class Pool
     PoolType* AllocateUntracked()
     {
         PoolType* tmp = this->start_;
-        this->start_ = tmp->mpNext;
-        tmp->mpNext = nullptr;
+        this->start_ = tmp->next_;
+        tmp->next_ = nullptr;
         tmp->PoolAllocate();
         return tmp;
     }
@@ -138,19 +138,19 @@ class Pool
     void DeAllocate(PoolType* item)
     {
         item->PoolDeallocate();
-        item->mpNext = start_;
+        item->next_ = start_;
         start_ = item;
     }
 
     void RemoveNoDeAllocate(PoolType* item)
     {
-        item->mpNext = start_;
+        item->next_ = start_;
         start_ = item;
     }
 
     void UpdateNextPrev(PoolType* item)
     {
-        item->mpNext = prev_;
+        item->next_ = prev_;
         prev_ = item;
     }
 
@@ -165,39 +165,39 @@ class Pool
         {
             ++field_x_count_;
 
-            PoolType* next = curr_item->mpNext;
+            PoolType* next = curr_item->next_;
 
             if (curr_item->PoolUpdate())
             {
                 curr_item->PoolDeallocate();
 
-                if (previous_item && previous_item->mpNext != curr_item)
+                if (previous_item && previous_item->next_ != curr_item)
                 {
                     previous_item = nullptr;
                 }
 
                 if (previous_item)
                 {
-                    previous_item->mpNext = curr_item->mpNext;
+                    previous_item->next_ = curr_item->next_;
                 }
                 else
                 {
                     if (prev_ == curr_item)
                     {
-                        prev_ = curr_item->mpNext;
+                        prev_ = curr_item->next_;
                     }
                     else
                     {
                         previous_item = prev_;
-                        while (previous_item->mpNext != curr_item)
+                        while (previous_item->next_ != curr_item)
                         {
-                            previous_item = previous_item->mpNext;
+                            previous_item = previous_item->next_;
                         }
-                        previous_item->mpNext = curr_item->mpNext;
+                        previous_item->next_ = curr_item->next_;
                     }
                 }
 
-                curr_item->mpNext = start_;
+                curr_item->next_ = start_;
                 start_ = curr_item;
             }
             else
@@ -220,37 +220,37 @@ class Pool
         {
             ++field_x_count_;
 
-            PoolType* next = curr_item->mpNext;
+            PoolType* next = curr_item->next_;
 
             if (curr_item->PoolUpdate())
             {
-                if (previous_item && previous_item->mpNext != curr_item)
+                if (previous_item && previous_item->next_ != curr_item)
                 {
                     previous_item = nullptr;
                 }
 
                 if (previous_item)
                 {
-                    previous_item->mpNext = curr_item->mpNext;
+                    previous_item->next_ = curr_item->next_;
                 }
                 else
                 {
                     if (prev_ == curr_item)
                     {
-                        prev_ = curr_item->mpNext;
+                        prev_ = curr_item->next_;
                     }
                     else
                     {
                         previous_item = prev_;
-                        while (previous_item->mpNext != curr_item)
+                        while (previous_item->next_ != curr_item)
                         {
-                            previous_item = previous_item->mpNext;
+                            previous_item = previous_item->next_;
                         }
-                        previous_item->mpNext = curr_item->mpNext;
+                        previous_item->next_ = curr_item->next_;
                     }
                 }
 
-                curr_item->mpNext = start_;
+                curr_item->next_ = start_;
                 start_ = curr_item;
             }
             else
@@ -266,7 +266,7 @@ class Pool
     {
         PoolType* last = nullptr;
 
-        for (PoolType* iter = prev_; iter; iter = iter->mpNext)
+        for (PoolType* iter = prev_; iter; iter = iter->next_)
         {
             if (iter == to_find)
             {
@@ -274,13 +274,13 @@ class Pool
 
                 if (last)
                 {
-                    last->mpNext = iter->mpNext;
+                    last->next_ = iter->next_;
                 }
                 else
                 {
-                    prev_ = iter->mpNext;
+                    prev_ = iter->next_;
                 }
-                iter->mpNext = start_;
+                iter->next_ = start_;
                 start_ = iter;
                 return to_find;
             }
@@ -292,19 +292,19 @@ class Pool
     void UnlinkFromActiveList(PoolType* to_find)
     {
         PoolType* last = nullptr;
-        for (PoolType* iter = this->prev_; iter; iter = iter->mpNext)
+        for (PoolType* iter = this->prev_; iter; iter = iter->next_)
         {
             if (iter == to_find)
             {
                 if (last)
                 {
-                    last->mpNext = iter->mpNext;
+                    last->next_ = iter->next_;
                 }
                 else
                 {
-                    this->prev_ = iter->mpNext;
+                    this->prev_ = iter->next_;
                 }
-                iter->mpNext = nullptr;
+                iter->next_ = nullptr;
                 return;
             }
             last = iter;

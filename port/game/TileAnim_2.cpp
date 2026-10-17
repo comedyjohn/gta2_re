@@ -146,12 +146,12 @@ TileAnim_18::TileAnim_18()
     field_C_ptr = nullptr;
     field_10_base = 0;
     field_12_idx = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x5bebd0
 TileAnim_18::~TileAnim_18()
 {
     field_C_ptr = nullptr;
-    mpNext = nullptr;
+    next_ = nullptr;
 }

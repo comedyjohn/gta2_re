@@ -817,7 +817,7 @@ class Ped
     Car_BC* field_154_target_to_enter;
     Car_BC* field_158_escape_car;
     Player* field_15C_player;
-    Ped* mpNext;
+    Ped* next_;
     PedGroup* field_164_ped_group;
     Char_B4* field_168_game_object;
     Car_BC* field_16C_car;

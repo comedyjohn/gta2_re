@@ -114,7 +114,7 @@ class Light_28
     u8 field_16_flicker_range;
     char_type field_17_timer;
     char_type field_18_intensity;
-    Light_28* mpNext;
+    Light_28* next_;
     Light_28* field_20_pGridNext;
     Light_28* field_24_pGridPrev;
 };

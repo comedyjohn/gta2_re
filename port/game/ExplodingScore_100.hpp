@@ -29,7 +29,7 @@ class ExplodingScore_50
     s32 field_3C; // xoff ?
     s32 field_40; // yoff ?
     // NOTE: Used by a template so the name maters
-    ExplodingScore_50* mpNext;
+    ExplodingScore_50* next_;
     s16 field_48_unused; // set to 0, never used ??
     s16 field_4A_unused; // pad?
     u32 field_4C_score;

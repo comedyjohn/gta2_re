@@ -49,7 +49,7 @@ KEYWORDS = set(
 ADDR_SUFFIX = re.compile(r"_(?:[0-9A-Fa-f]{6})(?=_|$)")
 SIZE_SUFFIX = re.compile(r"_(?:0x[0-9A-Fa-f]+|[0-9A-F]{1,5})$")
 INLINE_TAG = re.compile(r"_(?:inline|ool|OOL|no_budget\d*)(?=_|$)")
-HUNGARIAN = re.compile(r"^(?:pp|p|b|n|u|dw|w|i|f|sz|e|m)(?=[A-Z0-9])")
+HUNGARIAN = re.compile(r"^(?:mp|pp|p|b|n|u|dw|w|i|f|sz|e|m)(?=[A-Z0-9])")
 
 RE_TYPE = re.compile(r"^[A-Z][A-Za-z0-9]*$")
 RE_SNAKE = re.compile(r"^[a-z][a-z0-9]*(_[a-z0-9]+)*$")
@@ -174,13 +174,15 @@ def key_of(s):
     return ("usr:" + s["usr"]) if s["kind"] in ("param", "local") else qual(s)
 
 
-def wanted_symbols(sub, kind, syms):
+def wanted_symbols(sub, kind, syms, names=None):
     """(symbol, proposed name, reason) for every symbol of the kind that does not follow the style yet."""
     out = []
     for s in syms:
         if sub != "all" and subsystem_of(s["file"]) != sub:
             continue
         k, name = s["kind"], s["name"]
+        if names and name not in names:
+            continue
         if kind == "types" and k in ("type", "alias"):
             if k == "alias" and (name in KEEP_ALIASES or s["file"].endswith("types.hpp")):
                 continue
@@ -226,8 +228,8 @@ def wanted_symbols(sub, kind, syms):
     return out
 
 
-def propose(sub, kind, syms):
-    chosen = wanted_symbols(sub, kind, syms)
+def propose(sub, kind, syms, names=None):
+    chosen = wanted_symbols(sub, kind, syms, names)
     taken = collections.defaultdict(set)  # scope -> names in use now
     for s in syms:
         taken[s["owner"]].add(s["name"])
@@ -279,6 +281,7 @@ def selftest():
     assert propose_member("field_0_pHead", False) == ("head", "")
     assert propose_member("field_4_pPrev", True) == ("prev_", "")
     assert propose_member("mValue", True) == ("value_", "")
+    assert propose_member("mpNext", True) == ("next_", "")
     assert propose_member("field_2C", True)[0] is None
     assert pascal("MAX_PLAYERS") == "MaxPlayers" and pascal("DMA_Video") == "DMAVideo"
     assert propose_type("Garage_48") == ("Garage", "")
@@ -307,6 +310,7 @@ def main():
     ap.add_argument("kind", nargs="?")
     ap.add_argument("-o", "--output")
     ap.add_argument("--symbols", default=SYMBOLS)
+    ap.add_argument("--names", help="only these names, comma separated (a batch that must change them together)")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -316,7 +320,7 @@ def main():
     if a.subsystem != "all" and a.subsystem not in SUBSYSTEMS:
         ap.error("subsystem must be one of " + ", ".join(SUBSYSTEMS))
     syms = json.load(open(a.symbols))
-    rows = propose(a.subsystem, a.kind, syms)
+    rows = propose(a.subsystem, a.kind, syms, set(a.names.split(",")) if a.names else None)
     out = open(a.output, "w", newline="") if a.output else sys.stdout
     w = csv.writer(out, lineterminator="\n")
     w.writerow(["old", "new", "todo", "name"])

@@ -73,8 +73,14 @@ def update_map(pairs, syms_by_qual):
 
 
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    flags = [a for a in sys.argv[1:] if a.startswith("--")]
+    argv = sys.argv[1:]
+    names = None
+    if "--names" in argv:  # --names a,b: only these names (a batch that must change them together, e.g. the pool protocol)
+        i = argv.index("--names")
+        names = set(argv[i + 1].split(","))
+        del argv[i : i + 2]
+    args = [a for a in argv if not a.startswith("--")]
+    flags = [a for a in argv if a.startswith("--")]
     if len(args) != 2:
         sys.exit(__doc__)
     sub, kind = args
@@ -82,9 +88,9 @@ def main():
     if "--no-scan" not in flags:
         subprocess.check_call([PY, os.path.join(HERE, "symbols.py"), os.path.join(ROOT, "build_port", "clang64")])
     syms = json.load(open(SYMBOLS))
-    rows = {k: [new, why, name] for k, new, why, name in propose.propose(sub, kind, syms)}
+    rows = {k: [new, why, name] for k, new, why, name in propose.propose(sub, kind, syms, names)}
     current = {propose.key_of(s) for s in syms}  # an override for a name that no longer exists is history
-    ov_path = os.path.join(NAMES, f"{sub}-{kind}.overrides.csv")
+    ov_path = os.path.join(NAMES, f"{sub}-{kind}.overrides.csv")  # (shared by --names batches)
     if os.path.exists(ov_path):
         with open(ov_path, newline="") as f:
             for r in csv.reader(f):
@@ -95,11 +101,12 @@ def main():
                         key = hits[0] if len(hits) == 1 else key
                     if key in current or key in rows:
                         rows[key] = [r[1], "", rows[key][2] if key in rows else key]
-    final = os.path.join(NAMES, f"{sub}-{kind}.csv")
+    tag = f"{sub}-{kind}" + ("-" + "-".join(sorted(names)).replace("/", "_") if names else "")
+    final = os.path.join(NAMES, f"{tag}.csv")
     n = 1
     while committed(final):  # a record that was already applied stays; a new batch gets the next file
         n += 1
-        final = os.path.join(NAMES, f"{sub}-{kind}-{n}.csv")
+        final = os.path.join(NAMES, f"{tag}-{n}.csv")
     with open(final, "w", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["old", "new", "name"])

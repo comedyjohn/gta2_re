@@ -53,7 +53,7 @@ class Particle_4C
     Sprite* field_30_pNext;
     s32 field_34_unused;
     s32 field_38_state;
-    Particle_4C* mpNext; // 0x3C
+    Particle_4C* next_; // 0x3C
     Explosion_30* field_40_pExplosion;
     s16 field_44;
     u8 field_46_sub_state;

@@ -206,7 +206,7 @@ template<typename T, s32 N>
 std::vector<bool> UsedItems(PoolBasic<T, N>& pool)
 {
     std::vector<bool> used(N, true);
-    for (T* p = pool.head_; p; p = p->mpNext)
+    for (T* p = pool.head_; p; p = p->next_)
     {
         used[p - pool.pool_] = false;
     }
@@ -217,7 +217,7 @@ template<typename T, s32 N>
 std::vector<bool> UsedItems(Pool<T, N>& pool)
 {
     std::vector<bool> used(N, true);
-    for (T* p = pool.start_; p; p = p->mpNext)
+    for (T* p = pool.start_; p; p = p->next_)
     {
         used[p - pool.pool_] = false;
     }
@@ -229,7 +229,7 @@ template<typename T, s32 N>
 void AddUsedOrder(Hasher& h, const PoolMap& pools, Pool<T, N>& pool)
 {
     int count = 0;
-    for (T* p = pool.prev_; p && count <= N; p = p->mpNext, count++)
+    for (T* p = pool.prev_; p && count <= N; p = p->next_, count++)
     {
         h.Add("used_list", pools.Of(p));
     }

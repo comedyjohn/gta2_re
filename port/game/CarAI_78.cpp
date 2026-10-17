@@ -5482,7 +5482,7 @@ CarAI_78::CarAI_78()
     this->field_8_maneuver_active = 0;
     this->field_9_probe_x = 0;
     this->field_A_probe_y = 0;
-    this->mpNext = nullptr;
+    this->next_ = nullptr;
     this->field_10_angle = kAng0_677CE8;
     this->field_14_speed = kFixZero;
     this->field_18_target_speed = kDefaultTargetSpeed_677CB4;

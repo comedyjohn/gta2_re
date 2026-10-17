@@ -129,7 +129,7 @@ class Char_B4
     Ang16 field_74;
     s8 field_76_unused;
     s8 field_77_unused;
-    Char_B4* mpNext;
+    Char_B4* next_;
     Ped* field_7C_pPed;
     Sprite* field_80_sprite_ptr; // TODO: Or sprite_3c, are they the same type ??
     Car_BC* field_84_target_car;

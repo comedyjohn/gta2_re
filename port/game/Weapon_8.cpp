@@ -62,7 +62,7 @@ void Weapon_8::deallocate_5E3CB0(Weapon_30* pWeapon)
 {
     Weapon_30_Pool* pRoot = gWeapon_30_Pool_707014;
     pWeapon->PoolDeallocate();
-    pWeapon->mpNext = pRoot->field_0_pool.start_;
+    pWeapon->next_ = pRoot->field_0_pool.start_;
     pRoot->field_0_pool.start_ = pWeapon;
     field_4_ref_count--;
 }
@@ -90,7 +90,7 @@ Weapon_30* Weapon_8::find_5E3D20(Car_BC* pCar, s32 weapon_kind)
     // TODO: Can probably invert this
     while (result->field_14_car != pCar || result->field_1C_idx != weapon_kind)
     {
-        result = result->mpNext;
+        result = result->next_;
         if (!result)
         {
             return nullptr;
@@ -145,12 +145,12 @@ void Weapon_8::dealloc_car_weapon_5E3DF0(Car_BC* pCar)
         if (pIter->field_14_car == pCar)
         {
             Weapon_30* pOldIter = pIter;
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
             gWeapon_30_Pool_707014->DeAllocate_4A4F20(pOldIter);
         }
         else
         {
-            pIter = pIter->mpNext;
+            pIter = pIter->next_;
         }
     }
 }

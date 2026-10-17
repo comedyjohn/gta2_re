@@ -14,7 +14,7 @@ Light_28::Light_28()
     field_8_y = 0;
     field_C_z = 0;
     field_10_argb = 0xFFFFFF;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_24_pGridPrev = nullptr;
     field_20_pGridNext = nullptr;
     field_14_on_time = 0;
@@ -27,7 +27,7 @@ Light_28::Light_28()
 // 0x4D6D60
 Light_28::~Light_28()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_24_pGridPrev = nullptr;
     field_20_pGridNext = nullptr;
 }

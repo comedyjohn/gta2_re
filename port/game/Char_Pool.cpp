@@ -991,9 +991,9 @@ Ped* PedManager::AllocatePed_470F30()
 Ped* PedManager::ClonePed_470F90(Ped* pSrc)
 {
     Ped* pDst = gPedPool_6787B8->Allocate();
-    Ped* pNext = pDst->mpNext;
+    Ped* pNext = pDst->next_;
     memcpy(static_cast<void*>(pDst), static_cast<const void*>(pSrc), sizeof(Ped)); // raw copy of the whole Ped, as the original does
-    pDst->mpNext = pNext;
+    pDst->next_ = pNext;
 
     if (pSrc->field_168_game_object)
     {
@@ -1029,7 +1029,7 @@ void PedManager::DoIanTest_471060(u16 key)
 // 0x4710c0
 Ped* PedManager::PedById(s32 pedId)
 {
-    for (Ped* pPedIter = gPedPool_6787B8->GetFirstPed_435530(); pPedIter; pPedIter = pPedIter->mpNext)
+    for (Ped* pPedIter = gPedPool_6787B8->GetFirstPed_435530(); pPedIter; pPedIter = pPedIter->next_)
     {
         if (pPedIter->field_200_id == pedId)
         {

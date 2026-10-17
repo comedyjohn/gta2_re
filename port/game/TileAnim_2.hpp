@@ -51,7 +51,7 @@ class TileAnim_18
     const gmp_tile_animation* field_C_ptr;
     s16 field_10_base;
     s16 field_12_idx;
-    TileAnim_18* mpNext;
+    TileAnim_18* next_;
 };
 
 class TileAnimPool

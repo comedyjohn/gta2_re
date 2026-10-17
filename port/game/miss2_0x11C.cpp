@@ -7874,7 +7874,7 @@ void miss2_0x11C::launch_mission_5119A0(SCR_CMD_HEADER* BasePointer, char_type* 
 // 0x511a00
 miss2_0x11C::miss2_0x11C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_114_gosub_stack = new miss2_8();
     field_4_next_cmd = 0;
     field_6 = 0;
@@ -7912,7 +7912,7 @@ miss2_0x11C::~miss2_0x11C()
     {
         GTA2_DELETE_AND_NULL(field_114_gosub_stack);
     }
-    mpNext = nullptr;
+    next_ = nullptr;
 }
 
 // 0x5131C0

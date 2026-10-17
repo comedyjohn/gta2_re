@@ -84,7 +84,7 @@ class CarAI_78
     char_type field_9_probe_x;
     char_type field_A_probe_y;
     char_type field_B_pad;
-    CarAI_78* mpNext;
+    CarAI_78* next_;
     Ang16 field_10_angle;
     s16 field_12_pad;
     Fix16 field_14_speed;

@@ -104,7 +104,7 @@ inline bool Object_2C::IsAnimFinished_482C10()
 // 0x522140
 Object_2C::Object_2C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_4 = nullptr;
     field_18_model = 0;
     field_8 = nullptr;
@@ -219,7 +219,7 @@ void Object_2C::PoolGive_522340()
     {
         // TODO: Missing inline here
         TObject_2C_Pool* pRoot = gObject_2C_Pool_6F8F80;
-        mpNext = pRoot->prev_;
+        next_ = pRoot->prev_;
         pRoot->prev_ = this;
         field_20_pool_list_state = object_pool_state::in_pool_list_1;
     }
@@ -234,19 +234,19 @@ void Object_2C::PoolTake_522360()
     if (field_20_pool_list_state == object_pool_state::in_pool_list_1)
     {
         pLast = nullptr;
-        for (pIter = gObject_2C_Pool_6F8F80->prev_; pIter; pIter = pIter->mpNext)
+        for (pIter = gObject_2C_Pool_6F8F80->prev_; pIter; pIter = pIter->next_)
         {
             if (pIter == this)
             {
                 if (pLast)
                 {
-                    pLast->mpNext = pIter->mpNext;
+                    pLast->next_ = pIter->next_;
                 }
                 else
                 {
-                    gObject_2C_Pool_6F8F80->prev_ = pIter->mpNext;
+                    gObject_2C_Pool_6F8F80->prev_ = pIter->next_;
                 }
-                pIter->mpNext = nullptr;
+                pIter->next_ = nullptr;
                 break;
             }
             else
@@ -3795,7 +3795,7 @@ void Object_2C::ReactivateObjectAfterImpact_52A6D0(Sprite* pSprite)
 // 0x52ae60
 Object_2C::~Object_2C()
 {
-    mpNext = nullptr;
+    next_ = nullptr;
     field_4 = nullptr;
     field_8 = nullptr;
     field_10_obj_3c = nullptr;

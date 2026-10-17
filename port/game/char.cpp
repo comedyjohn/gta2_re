@@ -254,7 +254,7 @@ Char_B4::Char_B4()
     field_5C = 0;
     field_46_timer = 0; // maybe field_46_shock_counter
     field_48_lying_on_floor_timer = 0;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_7C_pPed = nullptr;
     field_80_sprite_ptr = nullptr;
     field_68_animation_frame = 0;
@@ -287,7 +287,7 @@ Char_B4::~Char_B4()
 {
     field_18_collided_entity = nullptr;
     field_1C_prev_collided_entity = nullptr;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_7C_pPed = nullptr;
     field_80_sprite_ptr = nullptr;
     field_84_target_car = nullptr;
@@ -342,7 +342,7 @@ void Char_B4::PoolAllocate()
     field_46_timer = 0;
     field_48_lying_on_floor_timer = 0;
     field_4A = 500;
-    mpNext = nullptr;
+    next_ = nullptr;
     field_7C_pPed = nullptr;
     field_68_animation_frame = 0;
     field_69_is_colliding_with_sprite = 0;

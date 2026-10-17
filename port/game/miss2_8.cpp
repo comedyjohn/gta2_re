@@ -16,7 +16,7 @@ miss2_8::~miss2_8() // 503130
 {
     for (ScriptStackFrame_C* pOld = field_0_current; field_0_current; pOld = field_0_current)
     {
-        field_0_current = pOld->mpNext;
+        field_0_current = pOld->next_;
         gScriptStackFramePool_6F8068->DeAllocate_476780(pOld);
         field_4_count--;
     }
@@ -25,7 +25,7 @@ miss2_8::~miss2_8() // 503130
 // 0x503160
 void miss2_8::add_503160(ScriptStackFrame_C* pFrame)
 {
-    pFrame->mpNext = field_0_current;
+    pFrame->next_ = field_0_current;
     field_0_current = pFrame;
     field_4_count++;
 }
@@ -36,8 +36,8 @@ ScriptStackFrame_C* miss2_8::remove_503180()
     ScriptStackFrame_C* pOld = field_0_current;
     if (pOld)
     {
-        field_0_current = pOld->mpNext;
-        pOld->mpNext = nullptr;
+        field_0_current = pOld->next_;
+        pOld->next_ = nullptr;
         field_4_count--;
     }
 
@@ -48,7 +48,7 @@ ScriptStackFrame_C* miss2_8::remove_503180()
 ScriptStackFrame_C* miss2_8::AllocFrame_5031A0()
 {
     ScriptStackFrame_C* pFrame = gScriptStackFramePool_6F8068->field_0_pool.head_;
-    gScriptStackFramePool_6F8068->field_0_pool.head_ = gScriptStackFramePool_6F8068->field_0_pool.head_->mpNext;
+    gScriptStackFramePool_6F8068->field_0_pool.head_ = gScriptStackFramePool_6F8068->field_0_pool.head_->next_;
     pFrame->PoolAllocate();
     return pFrame;
 

@@ -21,10 +21,9 @@ class text_tdat
 
     ~text_tdat() // inline 0x4C2430
     {
-        if (field_0_data)
-        {
-            delete[] field_0_data;
-        }
+
+        delete[] field_0_data;
+
         field_0_data = nullptr;
     }
     BYTE* field_0_data;
@@ -43,10 +42,9 @@ class text_tkey
 
     ~text_tkey() // inline 0x4C2400
     {
-        if (field_0_tKey)
-        {
-            delete[] field_0_tKey;
-        }
+
+        delete[] field_0_tKey;
+
         field_0_tKey = nullptr;
     }
     text_0xC* field_0_tKey;

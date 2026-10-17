@@ -150,10 +150,9 @@ port/game/CarInfo_808.cpp,misc-include-cleaner,19
 port/game/CarInfo_808.cpp,modernize-avoid-c-arrays,4
 port/game/CarInfo_808.cpp,modernize-deprecated-headers,2
 port/game/CarInfo_808.cpp,modernize-raw-string-literal,4
-port/game/CarInfo_808.cpp,readability-delete-null-pointer,1
 port/game/CarInfo_808.cpp,readability-function-cognitive-complexity,1
 port/game/CarInfo_808.cpp,readability-function-size,1
-port/game/CarInfo_808.cpp,readability-implicit-bool-conversion,20
+port/game/CarInfo_808.cpp,readability-implicit-bool-conversion,19
 port/game/CarInfo_808.cpp,readability-make-member-function-const,1
 port/game/CarInfo_808.hpp,cppcoreguidelines-avoid-c-arrays,3
 port/game/CarInfo_808.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
@@ -885,8 +884,7 @@ port/game/KanjiFont_8EC.cpp,misc-include-cleaner,10
 port/game/KanjiFont_8EC.cpp,modernize-avoid-c-arrays,1
 port/game/KanjiFont_8EC.cpp,modernize-raw-string-literal,2
 port/game/KanjiFont_8EC.cpp,performance-no-int-to-ptr,1
-port/game/KanjiFont_8EC.cpp,readability-delete-null-pointer,2
-port/game/KanjiFont_8EC.cpp,readability-implicit-bool-conversion,40
+port/game/KanjiFont_8EC.cpp,readability-implicit-bool-conversion,38
 port/game/KanjiFont_8EC.cpp,readability-make-member-function-const,3
 port/game/KanjiFont_8EC.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/KanjiFont_8EC.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -2315,7 +2313,7 @@ port/game/sound_obj.cpp,cppcoreguidelines-narrowing-conversions,145
 port/game/sound_obj.cpp,cppcoreguidelines-owning-memory,2
 port/game/sound_obj.cpp,cppcoreguidelines-prefer-member-initializer,25
 port/game/sound_obj.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,1
-port/game/sound_obj.cpp,cppcoreguidelines-pro-bounds-constant-array-index,166
+port/game/sound_obj.cpp,cppcoreguidelines-pro-bounds-constant-array-index,165
 port/game/sound_obj.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,12
 port/game/sound_obj.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/sound_obj.cpp,cppcoreguidelines-pro-type-reinterpret-cast,15
@@ -2326,11 +2324,10 @@ port/game/sound_obj.cpp,misc-redundant-expression,1
 port/game/sound_obj.cpp,modernize-avoid-c-arrays,5
 port/game/sound_obj.cpp,readability-avoid-nested-conditional-operator,1
 port/game/sound_obj.cpp,readability-convert-member-functions-to-static,27
-port/game/sound_obj.cpp,readability-delete-null-pointer,1
 port/game/sound_obj.cpp,readability-else-after-return,6
 port/game/sound_obj.cpp,readability-function-cognitive-complexity,13
 port/game/sound_obj.cpp,readability-function-size,9
-port/game/sound_obj.cpp,readability-implicit-bool-conversion,358
+port/game/sound_obj.cpp,readability-implicit-bool-conversion,357
 port/game/sound_obj.cpp,readability-make-member-function-const,8
 port/game/sound_obj.cpp,readability-simplify-boolean-expr,4
 port/game/sound_obj.hpp,cppcoreguidelines-avoid-c-arrays,13
@@ -3035,7 +3032,6 @@ port/tests/test_text.cpp,cppcoreguidelines-pro-type-reinterpret-cast,5
 port/tests/test_text.cpp,cppcoreguidelines-special-member-functions,1
 port/tests/test_text.cpp,misc-include-cleaner,5
 port/tests/test_text.cpp,misc-non-private-member-variables-in-classes,3
-port/tests/test_text.cpp,misc-use-anonymous-namespace,6
 port/tests/test_text.cpp,modernize-avoid-c-arrays,9
 port/tests/test_text.cpp,performance-no-int-to-ptr,1
 port/tests/test_text.cpp,readability-function-cognitive-complexity,1

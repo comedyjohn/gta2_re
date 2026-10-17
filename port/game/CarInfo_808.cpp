@@ -743,10 +743,8 @@ void CarInfo_808::Free_454AA0()
     delete[] field_400_raw_data;
     field_400_raw_data = nullptr;
 
-    if (field_804_raw_data)
-    {
-        delete[] field_804_raw_data;
-    }
+    delete[] field_804_raw_data;
+
     field_804_raw_data = nullptr;
 }
 

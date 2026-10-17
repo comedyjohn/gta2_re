@@ -548,15 +548,10 @@ KanjiFont_8EC::KanjiFont_8EC()
 // 0x4D2CC0
 KanjiFont_8EC::~KanjiFont_8EC()
 {
-    if (field_8C8_pKBIT)
-    {
-        delete[] field_8C8_pKBIT;
-    }
 
-    if (field_8C4_pKidX)
-    {
-        delete[] field_8C4_pKidX;
-    }
+    delete[] field_8C8_pKBIT;
+
+    delete[] field_8C4_pKidX;
 
     field_8CC_kidx_size_words = 0;
 }

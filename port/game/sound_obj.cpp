@@ -3743,10 +3743,9 @@ void sound_obj::FreeSoundEntry_41A090(u32 idx)
                 switch (pAny->GetType_416B40())
                 {
                     case sprite_types_enum::car_2:
-                        if (field_147C_audio_entities[idx].field_8_pAlloc)
-                        {
-                            delete field_147C_audio_entities[idx].field_8_pAlloc;
-                        }
+
+                        delete field_147C_audio_entities[idx].field_8_pAlloc;
+
                         break;
                     default:
                         break;

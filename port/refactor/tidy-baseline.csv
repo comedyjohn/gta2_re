@@ -15,7 +15,7 @@ port/game/Ambulance_110.cpp,cppcoreguidelines-pro-bounds-constant-array-index,1
 port/game/Ambulance_110.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Ambulance_110.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Ambulance_110.cpp,misc-const-correctness,2
-port/game/Ambulance_110.cpp,misc-include-cleaner,28
+port/game/Ambulance_110.cpp,misc-include-cleaner,27
 port/game/Ambulance_110.cpp,modernize-raw-string-literal,1
 port/game/Ambulance_110.cpp,readability-function-cognitive-complexity,2
 port/game/Ambulance_110.cpp,readability-function-size,1
@@ -361,7 +361,7 @@ port/game/CrimeReportQueue_CC.cpp,cppcoreguidelines-avoid-non-const-global-varia
 port/game/CrimeReportQueue_CC.cpp,cppcoreguidelines-narrowing-conversions,4
 port/game/CrimeReportQueue_CC.cpp,cppcoreguidelines-prefer-member-initializer,4
 port/game/CrimeReportQueue_CC.cpp,cppcoreguidelines-pro-bounds-constant-array-index,4
-port/game/CrimeReportQueue_CC.cpp,misc-include-cleaner,19
+port/game/CrimeReportQueue_CC.cpp,misc-include-cleaner,18
 port/game/CrimeReportQueue_CC.cpp,readability-convert-member-functions-to-static,2
 port/game/CrimeReportQueue_CC.cpp,readability-else-after-return,1
 port/game/CrimeReportQueue_CC.cpp,readability-implicit-bool-conversion,7
@@ -700,7 +700,7 @@ port/game/Gang.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/Gang.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Gang.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/Gang.cpp,misc-const-correctness,2
-port/game/Gang.cpp,misc-include-cleaner,8
+port/game/Gang.cpp,misc-include-cleaner,7
 port/game/Gang.cpp,modernize-avoid-c-arrays,2
 port/game/Gang.cpp,readability-else-after-return,2
 port/game/Gang.cpp,readability-implicit-bool-conversion,13
@@ -1435,7 +1435,7 @@ port/game/Police_38.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/Police_38.cpp,cppcoreguidelines-pro-type-reinterpret-cast,2
 port/game/Police_38.cpp,cppcoreguidelines-pro-type-union-access,1
 port/game/Police_38.cpp,misc-const-correctness,13
-port/game/Police_38.cpp,misc-include-cleaner,67
+port/game/Police_38.cpp,misc-include-cleaner,66
 port/game/Police_38.cpp,performance-no-int-to-ptr,1
 port/game/Police_38.cpp,readability-else-after-return,2
 port/game/Police_38.cpp,readability-function-cognitive-complexity,9
@@ -1459,7 +1459,7 @@ port/game/Police_7B8.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,2
 port/game/Police_7B8.cpp,cppcoreguidelines-pro-bounds-constant-array-index,14
 port/game/Police_7B8.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Police_7B8.cpp,misc-const-correctness,2
-port/game/Police_7B8.cpp,misc-include-cleaner,58
+port/game/Police_7B8.cpp,misc-include-cleaner,57
 port/game/Police_7B8.cpp,misc-unused-parameters,1
 port/game/Police_7B8.cpp,readability-convert-member-functions-to-static,2
 port/game/Police_7B8.cpp,readability-else-after-return,2

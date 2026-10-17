@@ -1,6 +1,5 @@
 #include "Gang.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "error.hpp"
 #include "map_0x370.hpp"
 #include "text_0x14.hpp"

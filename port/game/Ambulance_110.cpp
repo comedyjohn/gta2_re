@@ -4,7 +4,6 @@
 #include "Car_BC.hpp"
 #include "Char_Pool.hpp"
 #include "EmergencyCrewPool_1E0.hpp"
-#include "Globals.hpp"
 #include "PathFinder_2FD4.hpp"
 #include "Ped.hpp"
 #include "PedGroup.hpp"

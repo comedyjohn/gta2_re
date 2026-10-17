@@ -6,7 +6,6 @@
 #include "EmergencyCrewPool_1E0.hpp"
 #include "Fix16_Rect.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "PathFinder_2FD4.hpp"
 #include "Ped.hpp"

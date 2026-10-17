@@ -1,6 +1,5 @@
 #include "root_sound.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "cSampleManager.hpp"
 #include "debug.hpp"
 #include "sound_obj.hpp"

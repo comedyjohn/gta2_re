@@ -1865,7 +1865,7 @@ port/game/cSampleManager.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/cSampleManager.cpp,cppcoreguidelines-pro-type-reinterpret-cast,2
 port/game/cSampleManager.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/cSampleManager.cpp,misc-const-correctness,3
-port/game/cSampleManager.cpp,misc-include-cleaner,22
+port/game/cSampleManager.cpp,misc-include-cleaner,21
 port/game/cSampleManager.cpp,misc-unused-parameters,2
 port/game/cSampleManager.cpp,modernize-avoid-c-arrays,10
 port/game/cSampleManager.cpp,modernize-raw-string-literal,1
@@ -2287,7 +2287,7 @@ port/game/root_sound.cpp,cppcoreguidelines-pro-bounds-constant-array-index,3
 port/game/root_sound.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,2
 port/game/root_sound.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/root_sound.cpp,cppcoreguidelines-pro-type-union-access,3
-port/game/root_sound.cpp,misc-include-cleaner,6
+port/game/root_sound.cpp,misc-include-cleaner,5
 port/game/root_sound.cpp,readability-convert-member-functions-to-static,20
 port/game/root_sound.cpp,readability-implicit-bool-conversion,2
 port/game/root_sound.hpp,cppcoreguidelines-avoid-c-arrays,1
@@ -2314,7 +2314,7 @@ port/game/sound_obj.cpp,cppcoreguidelines-pro-type-member-init,2
 port/game/sound_obj.cpp,cppcoreguidelines-pro-type-reinterpret-cast,15
 port/game/sound_obj.cpp,cppcoreguidelines-pro-type-union-access,54
 port/game/sound_obj.cpp,misc-const-correctness,68
-port/game/sound_obj.cpp,misc-include-cleaner,132
+port/game/sound_obj.cpp,misc-include-cleaner,131
 port/game/sound_obj.cpp,misc-redundant-expression,1
 port/game/sound_obj.cpp,modernize-avoid-c-arrays,5
 port/game/sound_obj.cpp,readability-avoid-nested-conditional-operator,1

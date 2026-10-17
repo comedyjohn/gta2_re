@@ -14,7 +14,6 @@
 #include "Frontend.hpp"
 #include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"

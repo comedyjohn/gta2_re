@@ -1,6 +1,5 @@
 #include "cSampleManager.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(cSampleManager, gSampManager_6FFF00, 0x6FFF00);

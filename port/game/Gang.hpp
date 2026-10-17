@@ -102,7 +102,7 @@ class Gang_144
     char field_110_has_high_respect;
     char field_111_kill_affects_respect;
     char field_112_hostile_to_gang[10];
-    s8 field_11C_respect[MAX_PLAYERS];
+    s8 field_11C_respect[kMaxPlayers];
     char field_122_gang_kill_reaction[10];
     Fix16 field_12C_info_phone_x;
     Fix16 field_130_info_phone_y;

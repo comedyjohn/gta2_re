@@ -4,7 +4,7 @@
 #include "core/fix16.hpp"
 #include "core/function.hpp"
 
-EXTERN_GLOBAL(Fix16, kFP16One256th_6FE07C);
+EXTERN_GLOBAL(Fix16, kFP16One256th);
 
 class Fix16Point;
 
@@ -83,7 +83,7 @@ class Fix16Point
     void ApplyDeadZone()
     {
         Fix16 total = (Fix16::Abs(x) + Fix16::Abs(y));
-        if (total < kFP16One256th_6FE07C)
+        if (total < kFP16One256th)
         {
             x = kFixZero;
             y = kFixZero;

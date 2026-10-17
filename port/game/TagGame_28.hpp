@@ -45,9 +45,9 @@ class TagGame_28
     inline s32 GetLeaderIdx_453AB0();
 
     Player* field_0_fugitive; //  the player who is "IT"
-    s32 field_4_it_time_secs[MAX_PLAYERS]; //  seconds each player has spent as "IT" (counted while the net time limit is enabled)
+    s32 field_4_it_time_secs[kMaxPlayers]; //  seconds each player has spent as "IT" (counted while the net time limit is enabled)
     s32 field_1C_tick_timer;
-    u8 field_20_bHasQuit[MAX_PLAYERS];
+    u8 field_20_bHasQuit[kMaxPlayers];
 };
 
 EXTERN_GLOBAL(TagGame_28, gTagGame_6F8450);

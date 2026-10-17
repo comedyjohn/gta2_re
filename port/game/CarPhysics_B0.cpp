@@ -74,7 +74,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FDF3C, dword_6FE1D8, 0x6FDF3C);
 DEFINE_GLOBAL_INIT(Fix16, kFP16One_6FDF7C, Fix16(1), 0x6FDF7C);
 DEFINE_GLOBAL_INIT(Fix16, kFP16SixtyFour_6FE2EC, Fix16(0x100000, 0), 0x6FE2EC);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Four_6FE21C, Fix16(0x10000, 0), 0x6FE21C);
-DEFINE_GLOBAL_INIT(Fix16, kFP16One256th_6FE07C, k_dword_6FE210 / (kFP16SixtyFour_6FE2EC * kFP16Four_6FE21C), 0x6FE07C);
+DEFINE_GLOBAL_INIT(Fix16, kFP16One256th, k_dword_6FE210 / (kFP16SixtyFour_6FE2EC * kFP16Four_6FE21C), 0x6FE07C);
 
 DEFINE_GLOBAL_INIT(Fix16, FastCarMinVelocity_6FE1CC, Fix16(0x1EB, 0), 0x6FE1CC);
 DEFINE_GLOBAL(Fix16, gRemainingTimeStep_6FE198, 0x6FE198);
@@ -252,54 +252,54 @@ void CarPhysics_B0::ShowPhysicsDebug_559430()
         Hud_TextEntry_C4* pText;
         SetCurrentCarInfoAndModelPhysics_562EF0();
 
-        swprintf(tmpBuff_67BD9C,
+        swprintf(gTmpBuff,
                  L"CM = (%3.3f,%3.3f) CP = (%3.3f,%3.3f,%3.3f)",
                  field_30_cm1.x.AsDouble(),
                  field_30_cm1.y.AsDouble(),
                  field_38_cp1.x.AsDouble(),
                  field_38_cp1.y.AsDouble(),
                  field_6C_cp3.AsDouble());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 64, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C,
+        swprintf(gTmpBuff,
                  L"linvel = (%3.3f,%3.3f) angvelrad = %3.3f",
                  field_40_linvel_1.x.AsDouble(),
                  field_40_linvel_1.y.AsDouble(),
                  field_74_ang_vel_rad.AsDouble());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 80, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"theta = %s", field_58_theta.ThetaText());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 96, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"theta = %s", field_58_theta.ThetaText());
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 96, gDebugFont_706600, 1);
 
         // TODO: the format string at 0x623FFC is a guess
-        swprintf(tmpBuff_67BD9C, L"pointing ang = %3.3f", field_78_pointing_ang_rad.AsDouble());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 112, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"pointing ang = %3.3f", field_78_pointing_ang_rad.AsDouble());
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 112, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"mass = %3.3f", CalculateMass_559FF0().AsDouble());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 128, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"mass = %3.3f", CalculateMass_559FF0().AsDouble());
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 128, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"front skid = %3.3f", field_84_front_skid.AsDouble());
-        pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 144, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"front skid = %3.3f", field_84_front_skid.AsDouble());
+        pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 144, gDebugFont_706600, 1);
         if (field_84_front_skid >= gCarInfo_2C_6FE0E4->field_24_skid_threshhold_1 ||
             (field_AC_drive_wheels_locked_q > 0 && gCarInfo_48_6FE258->field_8_front_drive_bias > kFixZero))
         {
             pText->SetDrawKind8_45AFD0(5);
         }
 
-        swprintf(tmpBuff_67BD9C, L"rear skid = %3.3f", field_88_rear_skid.AsDouble());
-        pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 160, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"rear skid = %3.3f", field_88_rear_skid.AsDouble());
+        pText = gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 160, gDebugFont_706600, 1);
         if (field_88_rear_skid >= gCarInfo_2C_6FE0E4->field_28_skid_threshhold_2 ||
             (field_AC_drive_wheels_locked_q > 0 && gCarInfo_2C_6FE0E4->field_20_front_drive_bias > kFixZero))
         {
             pText->SetDrawKind8_45AFD0(5);
         }
 
-        swprintf(tmpBuff_67BD9C,
+        swprintf(gTmpBuff,
                  L"surface_mode = %d sbw = %d tpa = %d",
                  field_98_surface_type,
                  static_cast<u8>(field_AA_sbw),
                  static_cast<u8>(field_AB_tpa));
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 176, gDebugFont_706600, 1);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 176, gDebugFont_706600, 1);
     }
 }
 
@@ -321,15 +321,15 @@ void CarPhysics_B0::ShowSpeedRevsDamage_5597B0()
             gear = (speed > gCarInfo_48_6FE258->field_40_gear2_speed) + 1;
         }
 
-        swprintf(tmpBuff_67BD9C, L"speed:%3.3f(%d)", GetLinearSpeed_4211A0().AsDouble(), gear);
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 16, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"speed:%3.3f(%d)", GetLinearSpeed_4211A0().AsDouble(), gear);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 16, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"revs:%3.3f %c", field_60_gas_pedal.AsDouble(), get_revs_561940() ? 'T' : ' ');
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 32, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"revs:%3.3f %c", field_60_gas_pedal.AsDouble(), get_revs_561940() ? 'T' : ' ');
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 32, gDebugFont_706600, 1);
 
         // TODO: the format string at 0x6240FC is a guess
-        swprintf(tmpBuff_67BD9C, L"damage:%d", field_5C_pCar->field_74_damage * 100 / 32000);
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 48, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"damage:%d", field_5C_pCar->field_74_damage * 100 / 32000);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 48, gDebugFont_706600, 1);
     }
 }
 

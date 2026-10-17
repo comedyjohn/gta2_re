@@ -335,34 +335,34 @@ void Game_0x40::BootGame_4B8EB0()
 // 0x4B8FF0
 void Game_0x40::ShowCounters_4B8FF0()
 {
-    swprintf(tmpBuff_67BD9C, L"recycled cars : %d", gCarManager_6C_677930->field_28_recycled_cars);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 32, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"recycled cars : %d", gCarManager_6C_677930->field_28_recycled_cars);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 32, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"prot. recycled cars : %d", gCarManager_6C_677930->field_40_proto_recycled_cars);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 48, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"prot. recycled cars : %d", gCarManager_6C_677930->field_40_proto_recycled_cars);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 48, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"mission cars : %d", gCarManager_6C_677930->field_3C_mission_cars);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"mission cars : %d", gCarManager_6C_677930->field_3C_mission_cars);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 64, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"unit cars : %d", gCarManager_6C_677930->field_34_unit_cars);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"unit cars : %d", gCarManager_6C_677930->field_34_unit_cars);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 80, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"cars:%d", gCar_BC_Pool_67792C->get_cars_count_45AD30());
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 96, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"cars:%d", gCar_BC_Pool_67792C->get_cars_count_45AD30());
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 96, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"dummy_chars : %d", static_cast<unsigned __int8>(gPedManager_6787BC->field_2_num_dummy_chars));
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 112, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"dummy_chars : %d", static_cast<unsigned __int8>(gPedManager_6787BC->field_2_num_dummy_chars));
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 112, gDebugFont_706600, 1);
 
     Player* pLocalPlayer = gGame_0x40_67E008->field_38_local_player;
     if (pLocalPlayer)
     {
-        swprintf(tmpBuff_67BD9C,
+        swprintf(gTmpBuff,
                  L"accuracy_count : %d",
                  static_cast<unsigned __int8>(pLocalPlayer->field_2D4_scores.get_accuracy_count_45B0A0()));
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 128, gDebugFont_706600, 1);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 128, gDebugFont_706600, 1);
 
-        swprintf(tmpBuff_67BD9C, L"reverse_count : %d", pLocalPlayer->field_2D4_scores.get_reverse_count_45B0B0());
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 144, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"reverse_count : %d", pLocalPlayer->field_2D4_scores.get_reverse_count_45B0B0());
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 144, gDebugFont_706600, 1);
 
         // TODO: Seems strange, converted to a local integer point or something ??
         const u32 x = pLocalPlayer->field_2C4_player_ped->get_cam_x().ToInt();
@@ -370,8 +370,8 @@ void Game_0x40::ShowCounters_4B8FF0()
 
         gmp_zone_info* pNavZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(x, y);
 
-        swprintf(tmpBuff_67BD9C, L"density:%d", pNavZone->field_0_car_density);
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 160, gDebugFont_706600, 1);
+        swprintf(gTmpBuff, L"density:%d", pNavZone->field_0_car_density);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 160, gDebugFont_706600, 1);
     }
 }
 

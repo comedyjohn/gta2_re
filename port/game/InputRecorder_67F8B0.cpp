@@ -26,7 +26,7 @@ constexpr s32 ATTRACT_COUNT = 3;
 // TODO: From frontend.cpp
 extern DIDATAFORMAT gInputDeviceFormat_601A6C;
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 // TODO: for some reason it does not have uAppData.
 // Otherwise using DIDEVICEOBJECTDATA (size 0x14) makes gGamePadDeviceData_67B5B0 overlaps gKeyboardDevice_67B5C0
@@ -1322,8 +1322,8 @@ void InputRecorder_67F8B0::DisplayInputBits_4CED90()
     {
         if (((1 << bit_idx) & field_4_input_bits) != 0)
         {
-            swprintf(tmpBuff_67BD9C, L"Control %d", bit_idx);
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 10, 16 * (i + 1), gDebugFont_706600, 1);
+            swprintf(gTmpBuff, L"Control %d", bit_idx);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 10, 16 * (i + 1), gDebugFont_706600, 1);
         }
         ++i;
         ++bit_idx;

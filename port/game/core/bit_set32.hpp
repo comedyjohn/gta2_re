@@ -3,10 +3,10 @@
 #include "core/function.hpp"
 #include "core/types.hpp"
 
-EXTERN_GLOBAL(u32, kGlobalMask0_61A9AC);
-EXTERN_GLOBAL(u32, kGlobalMask1_61A9A8);
-EXTERN_GLOBAL(u32, kGlobalMask2_61A9A4);
-EXTERN_GLOBAL(u32, gFlags_67ACF8);
+EXTERN_GLOBAL(u32, kGlobalMask0);
+EXTERN_GLOBAL(u32, kGlobalMask1);
+EXTERN_GLOBAL(u32, kGlobalMask2);
+EXTERN_GLOBAL(u32, gFlags);
 
 // Dumb name to avoid conflict with BitField32
 struct CompilerBitField32
@@ -98,27 +98,27 @@ class BitSet32
 
     void SetGlobal0()
     {
-        gFlags_67ACF8 = kGlobalMask0_61A9AC;
+        gFlags = kGlobalMask0;
     }
 
     void SetGlobal1()
     {
-        gFlags_67ACF8 = kGlobalMask1_61A9A8;
+        gFlags = kGlobalMask1;
     }
 
     void SetGlobal2()
     {
-        gFlags_67ACF8 = kGlobalMask2_61A9A4;
+        gFlags = kGlobalMask2;
     }
 
     void MaskWithGlobalFlags()
     {
-        m_var_ &= gFlags_67ACF8;
+        m_var_ &= gFlags;
     }
 
     void ClearGlobalFlags()
     {
-        m_var_ &= ~gFlags_67ACF8;
+        m_var_ &= ~gFlags;
     }
 
     void ClearAllBits()

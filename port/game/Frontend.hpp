@@ -508,7 +508,7 @@ s32 SetGamma_5D9910(s32 gamma);
 
 EXTERN_GLOBAL(Frontend*, gFrontend_67DC84);
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 void MakeScreenTableAndSetWindow_5D7D30();
 void FreeSurface_5D7DC0();

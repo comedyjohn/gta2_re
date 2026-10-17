@@ -1643,22 +1643,22 @@ void Player::ShowDebugInfo_566EE0(char_type skip)
             double x = this->field_90_game_camera.field_98_cur_pos.field_0_x.AsDouble();
             double y = this->field_90_game_camera.field_98_cur_pos.field_4_y.AsDouble();
             double z = this->field_90_game_camera.field_98_cur_pos.field_8_z.AsDouble();
-            swprintf(tmpBuff_67BD9C, L"game camera: (%3.3f,%3.3f,%3.3f)", x, y, z);
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);
+            swprintf(gTmpBuff, L"game camera: (%3.3f,%3.3f,%3.3f)", x, y, z);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 64, gDebugFont_706600, 1);
 
-            swprintf(tmpBuff_67BD9C,
+            swprintf(gTmpBuff,
                      L"aux game camera: (%3.3f,%3.3f,%3.3f)",
                      this->field_208_aux_game_camera.field_98_cur_pos.field_0_x.AsDouble(),
                      this->field_208_aux_game_camera.field_98_cur_pos.field_4_y.AsDouble(),
                      this->field_208_aux_game_camera.field_98_cur_pos.field_8_z.AsDouble());
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 80, gDebugFont_706600, 1);
 
-            swprintf(tmpBuff_67BD9C,
+            swprintf(gTmpBuff,
                      L"view camera: (%3.3f,%3.3f,%3.3f)",
                      this->field_14C_view_camera.field_98_cur_pos.field_0_x.AsDouble(),
                      this->field_14C_view_camera.field_98_cur_pos.field_4_y.AsDouble(),
                      this->field_14C_view_camera.field_98_cur_pos.field_8_z.AsDouble());
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 96, gDebugFont_706600, 1);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 96, gDebugFont_706600, 1);
         }
 
         if (gShow_cycle_67D6BD)

@@ -75,9 +75,9 @@ class Network_Game_Session
   public:
     DPID field_0_group_id;
     u32 field_4_players_count;
-    u8 field_8_packet_game_tick[MAX_PLAYERS];
+    u8 field_8_packet_game_tick[kMaxPlayers];
     u16 field_E_not_used;
-    Network_Player field_10_players[MAX_PLAYERS];
+    Network_Player field_10_players[kMaxPlayers];
     u8* field_118_game_settings;
     s32 field_11C_group_data_len;
     DPSESSIONDESC2 field_120_session_desc;
@@ -162,7 +162,7 @@ struct Network_14
 
 struct Network_PlayerInputs_0x30
 {
-    Network_InputData_0x8 field_0_inputs[MAX_PLAYERS];
+    Network_InputData_0x8 field_0_inputs[kMaxPlayers];
 };
 
 struct PacketHandlerSlot
@@ -289,7 +289,7 @@ struct NetPlay
     IDirectPlay3* field_5E4_pDPlay3;
     Network_Game_Session field_5E8_n1;
     Network_Game_Session field_758_n2;
-    naughty_sinoussi_0x800* field_8C8_not_used[MAX_PLAYERS];
+    naughty_sinoussi_0x800* field_8C8_not_used[kMaxPlayers];
     sptr field_8E0_pSendDataBuffer; // 0x1800 of alloc size
     sptr field_8E4_pReceivedDataBuffer; // 0x1800 of alloc size
     s32 field_8E8_time;

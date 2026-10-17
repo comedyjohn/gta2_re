@@ -721,8 +721,8 @@ void ShowPlayerLeftMessage_4DB070(u8 idx)
 {
     Player* pPlayer = gGame_0x40_67E008->GetPlayer_4219E0(idx);
     pPlayer->Disconnect_568730();
-    swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("comms1"), pPlayer->field_83C_player_name);
-    gHud_2B00_706620->field_12F0_mp_message.ShowText_5D5730(tmpBuff_67BD9C);
+    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("comms1"), pPlayer->field_83C_player_name);
+    gHud_2B00_706620->field_12F0_mp_message.ShowText_5D5730(gTmpBuff);
 }
 
 // 0x4DB0D0
@@ -1110,7 +1110,7 @@ void Net_Send_Our_Inputs_4DACB0()
 // 0x4DAD50
 void Net_Set_Local_Player_Inputs_4DAD50()
 {
-    for (u32 player_idx = 0; player_idx < MAX_PLAYERS; player_idx++)
+    for (u32 player_idx = 0; player_idx < kMaxPlayers; player_idx++)
     {
         Player* pPlayer = gGame_0x40_67E008->GetPlayer_4219E0(player_idx);
         if (pPlayer && pPlayer->GetInUse_461DB0())

@@ -345,7 +345,7 @@ int PrintPlayers()
     std::string list;
     int count = 0;
     Network_Game_Session& s = gNetPlay_7071E8.field_758_n2;
-    for (int i = 0; i < MAX_PLAYERS; i++)
+    for (int i = 0; i < kMaxPlayers; i++)
     {
         if (s.field_10_players[i].field_0_in_use)
         {

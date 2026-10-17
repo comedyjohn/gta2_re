@@ -66,10 +66,10 @@ DEFINE_GLOBAL_INIT(Ang16, kAng90_70344C, Ang16(360), 0x70344C);
 DEFINE_GLOBAL_INIT(Ang16, kAng180_70351E, Ang16(720), 0x70351E);
 DEFINE_GLOBAL_INIT(Ang16, kAng270_703544, Ang16(1080), 0x703544);
 DEFINE_GLOBAL_ARRAY(Vert, gTileVerts_7036D0, 8, 0x7036D0);
-DEFINE_GLOBAL_INIT(u32, kGlobalMask0_61A9AC, 0x0C00060, 0x61A9AC); // BitSet32 flag
-DEFINE_GLOBAL_INIT(u32, kGlobalMask1_61A9A8, 0x0C70060, 0x61A9A8); // BitSet32 flag
-DEFINE_GLOBAL_INIT(u32, kGlobalMask2_61A9A4, 0x0C78060, 0x61A9A4); // BitSet32 flag
-DEFINE_GLOBAL(u32, gFlags_67ACF8, 0x67ACF8); // BitSet32 flag
+DEFINE_GLOBAL_INIT(u32, kGlobalMask0, 0x0C00060, 0x61A9AC); // BitSet32 flag
+DEFINE_GLOBAL_INIT(u32, kGlobalMask1, 0x0C70060, 0x61A9A8); // BitSet32 flag
+DEFINE_GLOBAL_INIT(u32, kGlobalMask2, 0x0C78060, 0x61A9A4); // BitSet32 flag
+DEFINE_GLOBAL(u32, gFlags, 0x67ACF8); // BitSet32 flag
 
 DEFINE_GLOBAL_INIT(Fix16, k_dword_7033B4, Fix16(0x3FC000, 0), 0x7033B4);
 DEFINE_GLOBAL_INIT(Fix16, dword_7035DC, Fix16(0x1C000, 0), 0x7035DC);
@@ -1008,8 +1008,8 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
             Fix16 ypos;
             ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
-            swprintf(tmpBuff_67BD9C, L"%d", pCar->field_6C_car_id);
-            DrawTextScaled_4BA2C0(tmpBuff_67BD9C, xpos, ypos, word_703BAA);
+            swprintf(gTmpBuff, L"%d", pCar->field_6C_car_id);
+            DrawTextScaled_4BA2C0(gTmpBuff, xpos, ypos, word_703BAA);
         }
         else
         {
@@ -1020,9 +1020,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
                 xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
                 Fix16 ypos;
                 ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
-                swprintf(tmpBuff_67BD9C, L"%d", pB4->field_7C_pPed->field_200_id);
+                swprintf(gTmpBuff, L"%d", pB4->field_7C_pPed->field_200_id);
                 s32 palette_type = 2;
-                DrawText_5D8A10(tmpBuff_67BD9C,
+                DrawText_5D8A10(gTmpBuff,
                                 xpos * gViewCamera_676978->field_A8_ui_scale,
                                 ypos * gViewCamera_676978->field_A8_ui_scale,
                                 word_703BAA,
@@ -1044,9 +1044,9 @@ void Sprite::ShowId_59EB30(f32& x, f32& y)
             xpos = Fix16(static_cast<s32>((x / static_cast<f32>(static_cast<u32>(window_width_706630))) * 640.0F));
             Fix16 ypos;
             ypos = Fix16(static_cast<s32>((y / static_cast<f32>(static_cast<u32>(window_height_706B50))) * 480.0F));
-            swprintf(tmpBuff_67BD9C, L"%d:%d", pObj->field_18_model, pObj->field_14_id);
+            swprintf(gTmpBuff, L"%d:%d", pObj->field_18_model, pObj->field_14_id);
             s32 palette_type = 2;
-            DrawText_5D8A10(tmpBuff_67BD9C,
+            DrawText_5D8A10(gTmpBuff,
                             xpos * gViewCamera_676978->field_A8_ui_scale,
                             ypos * gViewCamera_676978->field_A8_ui_scale,
                             word_703BAA,

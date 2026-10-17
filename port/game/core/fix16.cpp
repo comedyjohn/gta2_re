@@ -175,21 +175,21 @@ bool IntervalIntersectsRange(const Fix16& intervalStart, const Fix16& intervalEn
     }
 }
 
-EXTERN_GLOBAL(Fix16, kAngFix16FullCircle_66A8E4);
-EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle_6691EC);
+EXTERN_GLOBAL(Fix16, kAngFix16FullCircle);
+EXTERN_GLOBAL(Fix16, kAngFix16HalfCircle);
 
 // Turns the angle `cur` toward `*pTarget` by at most `*pSpeed`, the short way round, and wraps the
 // result into [0, 2pi). Called by Trailer::UpdateTrailerAlignment_407CE0.
 // 0x405DA0
 Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
 {
-    if (*pTarget - cur > kAngFix16HalfCircle_6691EC)
+    if (*pTarget - cur > kAngFix16HalfCircle)
     {
-        cur += kAngFix16FullCircle_66A8E4;
+        cur += kAngFix16FullCircle;
     }
-    else if (*pTarget - cur < -kAngFix16HalfCircle_6691EC)
+    else if (*pTarget - cur < -kAngFix16HalfCircle)
     {
-        cur -= kAngFix16FullCircle_66A8E4;
+        cur -= kAngFix16FullCircle;
     }
 
     Fix16 diff = *pTarget - cur;
@@ -209,11 +209,11 @@ Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
     }
 
     Fix16 result = diff + cur;
-    for (; result < kFixZero; result += kAngFix16FullCircle_66A8E4)
+    for (; result < kFixZero; result += kAngFix16FullCircle)
     {
         ;
     }
-    for (; result >= kAngFix16FullCircle_66A8E4; result -= kAngFix16FullCircle_66A8E4)
+    for (; result >= kAngFix16FullCircle; result -= kAngFix16FullCircle)
     {
         ;
     }
@@ -229,8 +229,8 @@ DEFINE_GLOBAL_INIT(Fix16, kHitchAngleWrapOffset, Fix16(0x12B88, 0), 0x6691FC);
 s32 IsAngleNear(Fix16* a, Fix16* b)
 {
     if ((*a > *b - kAngleNearTolerance && *a < *b + kAngleNearTolerance) ||
-        (*a > *b - kAngFix16FullCircle_66A8E4 - kAngleNearTolerance && *a < *b - kAngFix16FullCircle_66A8E4 + kAngleNearTolerance) ||
-        (*a > *b - kAngleNearTolerance + kAngFix16FullCircle_66A8E4 && *a < *b + kAngFix16FullCircle_66A8E4 + kAngleNearTolerance))
+        (*a > *b - kAngFix16FullCircle - kAngleNearTolerance && *a < *b - kAngFix16FullCircle + kAngleNearTolerance) ||
+        (*a > *b - kAngleNearTolerance + kAngFix16FullCircle && *a < *b + kAngFix16FullCircle + kAngleNearTolerance))
     {
         return 1;
     }
@@ -258,7 +258,7 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
             *pCur = hi;
         }
     }
-    else if (*pTarget < kAngFix16HalfCircle_6691EC)
+    else if (*pTarget < kAngFix16HalfCircle)
     {
         lo = *pTarget - kHitchAngleWindow;
         hi = *pTarget + kHitchAngleWindow;

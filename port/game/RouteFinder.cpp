@@ -99,8 +99,8 @@ void RouteFinder::ShowJunctionIds_588620()
                 &screen_x,
                 &screen_y);
 
-            swprintf(tmpBuff_67BD9C, L"%d", i);
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, screen_x.ToInt(), screen_y.ToInt(), word_703BAA, 1);
+            swprintf(gTmpBuff, L"%d", i);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, screen_x.ToInt(), screen_y.ToInt(), word_703BAA, 1);
         }
     }
 }

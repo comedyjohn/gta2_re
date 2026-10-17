@@ -9,7 +9,7 @@
 DEFINE_GLOBAL(Rng*, gAmbientRng, 0x67AB34);
 DEFINE_GLOBAL(Rng, gRng, 0x6F6784);
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 // 0x48B900
 void Rng::AdvanceCycle()
@@ -23,13 +23,13 @@ void Rng::ShowCycle()
 {
     if (gInputRecorder_67F8B0.inlined_check())
     {
-        swprintf(tmpBuff_67BD9C, L"%d / %d", this->rng_, gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
+        swprintf(gTmpBuff, L"%d / %d", this->rng_, gInputRecorder_67F8B0.GetLastRecRngIdx_44AA80());
     }
     else
     {
-        swprintf(tmpBuff_67BD9C, L"%d", this->rng_);
+        swprintf(gTmpBuff, L"%d", this->rng_);
     }
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 460, gDebugFont_706600, 1);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 460, gDebugFont_706600, 1);
 }
 
 // 0x4F7A40

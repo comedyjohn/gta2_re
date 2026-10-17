@@ -1877,7 +1877,7 @@ global,0x67D4C0,,gFirefighterPool_54_67D4C0,,,,,Firefighters.cpp
 global,0x6777CC,,gFix16_6777CC,,,,,Car_BC.cpp
 global,0x7035C0,,gFix16_7035C0,,,,,sprite.cpp
 global,0x6FD9EC,,gFix16_Two_6FD9EC,,,,,char.cpp
-global,0x67ACF8,,gFlags_67ACF8,,,,,sprite.cpp
+global,0x67ACF8,,gFlags_67ACF8,gFlags,,,,sprite.cpp
 global,0x7055D4,,gFpsCounter_7055D4,,,,,FpsCounter_54.cpp
 global,0x6F58D8,,gFramesSinceDraw_6F58D8,,,,,winmain.cpp
 global,0x67DC84,,gFrontend_67DC84,,,,,Frontend.cpp
@@ -2316,10 +2316,10 @@ global,0x6FDA64,,kAng90_6FDA64,,,,,char.cpp
 global,0x6FE00C,,kAng90_6FE00C,,,,,CarPhysics_B0.cpp
 global,0x70344C,,kAng90_70344C,,,,,sprite.cpp
 global,0x705690,,kAng90_705690,,,,,TrafficLights_194.cpp
-global,0x66A8E4,,kAngFix16FullCircle_66A8E4,,,,,Car_BC.cpp
+global,0x66A8E4,,kAngFix16FullCircle_66A8E4,kAngFix16FullCircle,,,,Car_BC.cpp
 global,0x679F58,,kAngFix16FullCircle_679F58,,,,,Cranes.cpp
 global,0x6FE314,,kAngFix16FullCircle_6FE314,,,,,CarPhysics_B0.cpp
-global,0x6691EC,,kAngFix16HalfCircle_6691EC,,,,,Car_BC.cpp
+global,0x6691EC,,kAngFix16HalfCircle_6691EC,kAngFix16HalfCircle,,,,Car_BC.cpp
 global,0x679EB8,,kAngFix16HalfCircle_679EB8,,,,,Cranes.cpp
 global,0x6FE260,,kAngFix16HalfCircle_6FE260,,,,,CarPhysics_B0.cpp
 global,0x677920,,kAngFix16OneDegree_677920,,,,,Car_BC.cpp
@@ -2401,7 +2401,7 @@ global,0x6FDF1C,,kFP16MinusOne_6FDF1C,,,,,CarPhysics_B0.cpp
 global,0x6FDFDC,,kFP16One128th_6FDFDC,,,,,CarPhysics_B0.cpp
 global,0x6FE0A0,,kFP16One128th_6FE0A0,,,,,CarPhysics_B0.cpp
 global,0x6FE270,,kFP16One16th_6FE270,,,,,CarPhysics_B0.cpp
-global,0x6FE07C,,kFP16One256th_6FE07C,,,,,CarPhysics_B0.cpp
+global,0x6FE07C,,kFP16One256th_6FE07C,kFP16One256th,,,,CarPhysics_B0.cpp
 global,0x6FE118,,kFP16One32nd_6FE118,,,,,CarPhysics_B0.cpp
 global,0x6FE1AC,,kFP16One64th_6FE1AC,,,,,CarPhysics_B0.cpp
 global,0x6FE2E0,,kFP16One64th_6FE2E0,,,,,CarPhysics_B0.cpp
@@ -2657,9 +2657,9 @@ global,0x6FF580,,kFpZero_6FF580,,,,,Car_BC.cpp
 global,0x6FF774,,kFpZero_6FF774,,,,,Car_BC.cpp
 global,0x705AC4,,kFpZero_705AC4,,,,,SpriteRenderer_1C.cpp
 global,0x7064C0,,kFpZero_7064C0,,,,,Hud.cpp
-global,0x61A9AC,,kGlobalMask0_61A9AC,,,,,sprite.cpp
-global,0x61A9A8,,kGlobalMask1_61A9A8,,,,,sprite.cpp
-global,0x61A9A4,,kGlobalMask2_61A9A4,,,,,sprite.cpp
+global,0x61A9AC,,kGlobalMask0_61A9AC,kGlobalMask0,,,,sprite.cpp
+global,0x61A9A8,,kGlobalMask1_61A9A8,kGlobalMask1,,,,sprite.cpp
+global,0x61A9A4,,kGlobalMask2_61A9A4,kGlobalMask2,,,,sprite.cpp
 global,0x6F5ED8,,kGradientScaleSize1_6F5ED8,,,,,map_0x370.cpp
 global,0x6F5FA8,,kGradientScaleSize2_6F5FA8,,,,,map_0x370.cpp
 global,0x6F6214,,kGradientScaleSize8_6F6214,,,,,map_0x370.cpp
@@ -2806,7 +2806,7 @@ global,0x706E58,,stru_706E58,,,,,Weapon_30.cpp
 global,0x706F90,,stru_706F90,,,,,Weapon_30.cpp
 global,0x61F0C8,,tgaArray_61F0C8,,,,,Frontend.cpp
 global,0x70488C,,tmpAscii2WideStr_70488C,,,,,text_0x14.cpp
-global,0x67BD9C,,tmpBuff_67BD9C,,,,,Char_Pool.cpp
+global,0x67BD9C,,tmpBuff_67BD9C,gTmpBuff,,,,Char_Pool.cpp
 global,0x70462C,,tmpWide2AsciiStr_70462C,,,,,text_0x14.cpp
 global,0x676024,,token_buffer_676024,,,,,CarInfo_808.cpp
 global,0x626840,,traffic_light_phase_timers_626840,,,,,TrafficLights_194.cpp
@@ -11325,3 +11325,4 @@ enumerator,,WeaponType,silence_smg,kSilenceSmg,,,,core/enums.hpp
 enumerator,,WeaponType,smg,kSmg,,,,core/enums.hpp
 enumerator,,WeaponType,tank_main_gun,kTankMainGun,,,,core/enums.hpp
 enumerator,,WeaponType,weapon_0x17,kWeapon0x17,,,,core/enums.hpp
+global,,,MAX_PLAYERS,kMaxPlayers,,,,core/types.hpp

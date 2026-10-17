@@ -121,7 +121,7 @@ NetPlay::~NetPlay()
         field_30_enumed_connections.field_4_d_array_8_entries = nullptr;
     }
 
-    for (s32 j = 0; j < MAX_PLAYERS; j++)
+    for (s32 j = 0; j < kMaxPlayers; j++)
     {
         operator delete(field_8C8_not_used[j]);
         operator delete(field_758_n2.field_10_players[j].field_1C_player_name);
@@ -703,11 +703,11 @@ s32 NetPlay::HostSession_51E7A0(wchar_t* pSessionName, wchar_t* pPlayerName, Net
 u32 NetPlay::AddPlayer_51E9C0(Network_8* pData, DPID player_id, DPNAME name, Network_Game_Session* pSession)
 {
     u32 i = 0;
-    if (pSession->field_4_players_count != MAX_PLAYERS)
+    if (pSession->field_4_players_count != kMaxPlayers)
     {
         while (true)
         {
-            if (i >= MAX_PLAYERS)
+            if (i >= kMaxPlayers)
             {
                 break;
             }
@@ -1828,7 +1828,7 @@ s32 NetPlay::RemovePlayerByName_520F80(wchar_t* pToRemove)
 // 0x521000
 s32 NetPlay::DeletePlayerFromGroup_521000(u32 idx)
 {
-    if (idx < MAX_PLAYERS && field_758_n2.field_10_players[idx].field_0_in_use)
+    if (idx < kMaxPlayers && field_758_n2.field_10_players[idx].field_0_in_use)
     {
         DPID idPlayer = field_758_n2.field_10_players[idx].field_10_player_id;
         FreePlayerSlot_5201A0(idx, &field_758_n2);
@@ -2003,7 +2003,7 @@ bool NetPlay::WaitForPlayersSync_5213E0()
     // One bit per other player: waiting for their ack and for their sync data
     u32 waitingForAck = 0;
     u32 waitingForSync = 0;
-    for (s32 i = 0; i < MAX_PLAYERS; i++)
+    for (s32 i = 0; i < kMaxPlayers; i++)
     {
         if (field_758_n2.field_10_players[i].field_0_in_use && i != GetPlayerIdx_409C40())
         {

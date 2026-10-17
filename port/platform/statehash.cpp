@@ -446,7 +446,7 @@ uint64_t HashObjects(std::string* dump, const PoolMap& pools)
 uint64_t HashPlayers(std::string* dump, const PoolMap& pools)
 {
     Hasher h(dump, "players");
-    for (int i = 0; i < MAX_PLAYERS; i++)
+    for (int i = 0; i < kMaxPlayers; i++)
     {
         Player* p = gGame_0x40_67E008->field_4_players[i];
         h.Item("player", i);

@@ -51,7 +51,7 @@ DEFINE_GLOBAL(s16, word_703DAC, 0x703DAC);
 DEFINE_GLOBAL(s16, word_703B9C, 0x703B9C);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_67DA70, Ang16(0), 0x67DA70);
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_67D934, Fix16(1), 0x67D934);
-DEFINE_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640, 0x67BD9C);
+DEFINE_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640, 0x67BD9C);
 DEFINE_GLOBAL(BYTE, bIsLeftRightLoopEnabled_67DA80, 0x67DA80);
 DEFINE_GLOBAL_ARRAY(wchar_t, gTmpWideStr_67C7D8, 640, 0x67C7D8);
 DEFINE_GLOBAL(bool, gCheatOnlyMuggerPeds_67D5A4, 0x67D5A4);
@@ -404,7 +404,7 @@ inline s32 TagGame_28::GetLeaderIdx_453AB0()
     s32 leader_time = -1;
     if (IsTagGame_434B20())
     {
-        for (s32 i = 0; i < MAX_PLAYERS; i++)
+        for (s32 i = 0; i < kMaxPlayers; i++)
         {
             if (field_4_it_time_secs[i] > leader_time && !field_20_bHasQuit[i])
             {
@@ -497,8 +497,8 @@ void Frontend::ChangeMenuPage_4B3170(u16 menu_page_idx)
     else if (menu_page_idx == MENUPAGE_BONUS_AREA)
     {
         gGameSession_67E8E0.DecodeStage_453A60(gGameSession_67E8E0.GetStage_4C5990(), &stage_idx, &bonus_count);
-        swprintf(tmpBuff_67BD9C, L"%d", pStats->field_0_plyr_stage_stats[stage_idx][bonus_count].field_8_stage_latest_score);
-        wcsncpy(field_136_menu_pages_array[6].field_518_elements_array[2].field_6_element_name_str, tmpBuff_67BD9C, 50);
+        swprintf(gTmpBuff, L"%d", pStats->field_0_plyr_stage_stats[stage_idx][bonus_count].field_8_stage_latest_score);
+        wcsncpy(field_136_menu_pages_array[6].field_518_elements_array[2].field_6_element_name_str, gTmpBuff, 50);
         if (gGameSession_67E8E0.IsStartedFromPlayBonusMenu_4C5AE0() || stage_idx >= static_cast<u8>(field_1EB50_num_main_stages) - 1 ||
             !pStats->field_0_plyr_stage_stats[stage_idx + 1][0].field_0_is_stage_unlocked)
         {
@@ -772,8 +772,8 @@ void Frontend::GetOptionText_4B3AF0(u16 menu_page_idx, u16 option_idx, wchar_t**
         else if (!*p_wName)
         {
             // player 1, 2, 3 etc.
-            swprintf(tmpBuff_67BD9C, L"%d", plyr_idx);
-            swprintf(gTmpWideStr_67C7D8, L"%s %s", pOption->field_6_option_name_str, tmpBuff_67BD9C);
+            swprintf(gTmpBuff, L"%d", plyr_idx);
+            swprintf(gTmpWideStr_67C7D8, L"%s %s", pOption->field_6_option_name_str, gTmpBuff);
         }
         else
         {
@@ -787,8 +787,8 @@ void Frontend::GetOptionText_4B3AF0(u16 menu_page_idx, u16 option_idx, wchar_t**
     }
     else
     {
-        swprintf(tmpBuff_67BD9C, L"%d", pOption->field_6E_horizontal_selected_idx);
-        swprintf(gTmpWideStr_67C7D8, L"%s %s", pOption->field_6_option_name_str, tmpBuff_67BD9C);
+        swprintf(gTmpBuff, L"%d", pOption->field_6E_horizontal_selected_idx);
+        swprintf(gTmpWideStr_67C7D8, L"%s %s", pOption->field_6_option_name_str, gTmpBuff);
     }
     *w_buffer = reinterpret_cast<wchar_t*>(&gTmpWideStr_67C7D8);
 }
@@ -935,19 +935,19 @@ void Frontend::DrawScoreTable_4B5430(ScoreTableLine_18* pStrings,
         }
         if (!wcscmp(pIter->field_0_player_name, reinterpret_cast<wchar_t*>(&gEmptyWStr_67DC8C)))
         {
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("hi_empt"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("hi_empt"));
         }
         else
         {
-            swprintf(tmpBuff_67BD9C, L"%s", pIter->field_0_player_name);
+            swprintf(gTmpBuff, L"%s", pIter->field_0_player_name);
         }
         if (palette == 0xFFFFU)
         {
-            DrawText_4B87A0(tmpBuff_67BD9C, text_xpos, text_ypos_to_use, arg_fontType, 1);
+            DrawText_4B87A0(gTmpBuff, text_xpos, text_ypos_to_use, arg_fontType, 1);
         }
         else
         {
-            DrawText_5D8A10(tmpBuff_67BD9C, text_xpos, text_ypos_to_use, arg_fontType, 1, 8, palette, false, 0);
+            DrawText_5D8A10(gTmpBuff, text_xpos, text_ypos_to_use, arg_fontType, 1, 8, palette, false, 0);
         }
         if (spacing_type == 0)
         {
@@ -958,15 +958,15 @@ void Frontend::DrawScoreTable_4B5430(ScoreTableLine_18* pStrings,
         {
             new_xpos = spacing_type == 1 ? text_xpos + 600 : text_xpos + 300;
         }
-        swprintf(tmpBuff_67BD9C, L"%d", pIter->field_14_score);
+        swprintf(gTmpBuff, L"%d", pIter->field_14_score);
 
         if (gText_0x14_704DFC->field_10_lang_code == 'j')
         {
-            Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, new_xpos, text_ypos_to_use, arg_fontType, palette, 1, 16, true);
+            Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, new_xpos, text_ypos_to_use, arg_fontType, palette, 1, 16, true);
         }
         else
         {
-            Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, new_xpos, text_ypos_to_use, arg_fontType, palette, 1, 13, true);
+            Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, new_xpos, text_ypos_to_use, arg_fontType, palette, 1, 13, true);
         }
     }
 }
@@ -989,8 +989,8 @@ void Frontend::DrawMenu_4AD140()
 
     if (field_132_f136_idx == MENUPAGE_START_MENU)
     {
-        swprintf(tmpBuff_67BD9C, L"GTA2 V%d.%d", gGTA2VersionMajor_708280, gGTA2VersionMajor_708284);
-        DrawText_4B87A0(tmpBuff_67BD9C, 300, 460, font_type_703C14, 1);
+        swprintf(gTmpBuff, L"GTA2 V%d.%d", gGTA2VersionMajor_708280, gGTA2VersionMajor_708284);
+        DrawText_4B87A0(gTmpBuff, 300, 460, font_type_703C14, 1);
     }
 
     if (field_132_f136_idx == MENUPAGE_PLAY)
@@ -1119,8 +1119,8 @@ void Frontend::DrawMenu_4AD140()
         if (field_132_f136_idx == MENUPAGE_BONUS_AREA)
         {
             s32 unk_offset = (3 * main_level_idx) + bonus_stage_idx + 64;
-            swprintf(tmpBuff_67BD9C, L"%s %c", gText_0x14_704DFC->Find_5B5F90("bonslev"), unk_offset);
-            wcsncpy(pMenuPage->field_518_elements_array[0].field_6_element_name_str, tmpBuff_67BD9C, 0x32U);
+            swprintf(gTmpBuff, L"%s %c", gText_0x14_704DFC->Find_5B5F90("bonslev"), unk_offset);
+            wcsncpy(pMenuPage->field_518_elements_array[0].field_6_element_name_str, gTmpBuff, 0x32U);
             DrawBonusRating_4B7D60();
         }
 
@@ -1446,21 +1446,21 @@ void Frontend::DrawMenu_4AD140()
             x_pos = pMenuPage->field_4_options_array[0].field_2_x_pos +
                 Frontend::GetMaxTextWidth_5D8990(field_C9A0_curr_plyr_name, field_11C_normal_font);
             y_pos = pMenuPage->field_4_options_array[0].field_4_y_pos;
-            swprintf(tmpBuff_67BD9C, L"_");
-            DrawText_4B87A0(tmpBuff_67BD9C, x_pos, y_pos, field_11C_normal_font, 1);
+            swprintf(gTmpBuff, L"_");
+            DrawText_4B87A0(gTmpBuff, x_pos, y_pos, field_11C_normal_font, 1);
         }
-        wcscpy(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("entrnam"));
+        wcscpy(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("entrnam"));
         x_pos = 0x15EU;
         y_pos = gText_0x14_704DFC->field_10_lang_code != 'j' ? 12 : 16;
-        DrawText_4B87A0(tmpBuff_67BD9C, x_pos, y_pos, field_126, 1);
+        DrawText_4B87A0(gTmpBuff, x_pos, y_pos, field_126, 1);
     }
     if (field_110_state == 5 && field_114_cursor_blink) //  change current player name
     {
         x_pos = pMenuPage->field_518_elements_array[4].field_2_xpos +
             Frontend::GetMaxTextWidth_5D8990(field_C9B8_password, field_11C_normal_font);
         y_pos = pMenuPage->field_518_elements_array[4].field_4_ypos;
-        swprintf(tmpBuff_67BD9C, L"_");
-        DrawText_4B87A0(tmpBuff_67BD9C, x_pos, y_pos, field_11C_normal_font, 1);
+        swprintf(gTmpBuff, L"_");
+        DrawText_4B87A0(gTmpBuff, x_pos, y_pos, field_11C_normal_font, 1);
     }
 }
 
@@ -2890,44 +2890,44 @@ int Frontend::sub_4B7E10(u8 str_id_idx, u16 text_xpos, u16 text_ypos, u16 fontTy
     switch (str_id_idx)
     {
         case 0:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey0"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey0"));
             break;
         case 1:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey1"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey1"));
             break;
         case 2:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey2"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey2"));
             break;
         case 3:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey3"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey3"));
             break;
         case 4:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey4"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey4"));
             break;
         case 5:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey5"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey5"));
             break;
         case 6:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey6"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey6"));
             break;
         case 7:
-            swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("fekey7"));
+            swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("fekey7"));
             break;
         case 8:
             swprintf(gTmpWideStr_67C7D8, gText_0x14_704DFC->Find_5B5F90("fekey8"));
-            swprintf(tmpBuff_67BD9C, L": %s", gTmpWideStr_67C7D8);
+            swprintf(gTmpBuff, L": %s", gTmpWideStr_67C7D8);
             break;
         case 9:
             swprintf(gTmpWideStr_67C7D8, gText_0x14_704DFC->Find_5B5F90("fekey9"));
-            swprintf(tmpBuff_67BD9C, L": %s", gTmpWideStr_67C7D8);
+            swprintf(gTmpBuff, L": %s", gTmpWideStr_67C7D8);
             break;
         case 10:
             swprintf(gTmpWideStr_67C7D8, gText_0x14_704DFC->Find_5B5F90("fekey10"));
-            swprintf(tmpBuff_67BD9C, L": %s", gTmpWideStr_67C7D8);
+            swprintf(gTmpBuff, L": %s", gTmpWideStr_67C7D8);
             break;
         case 11:
             swprintf(gTmpWideStr_67C7D8, gText_0x14_704DFC->Find_5B5F90("fekey11"));
-            swprintf(tmpBuff_67BD9C, L": %s", gTmpWideStr_67C7D8);
+            swprintf(gTmpBuff, L": %s", gTmpWideStr_67C7D8);
             break;
         default:
             FatalError_4A38C0(Gta2Error::kInvalidCase, "C:\\Splitting\\GTA2\\Source\\frontend2.cpp", 8148);
@@ -2936,13 +2936,13 @@ int Frontend::sub_4B7E10(u8 str_id_idx, u16 text_xpos, u16 text_ypos, u16 fontTy
 
     if (static_cast<u16>(palette) == 0xFFFF)
     {
-        DrawText_4B87A0(tmpBuff_67BD9C, text_xpos, text_ypos, fontType, 1);
+        DrawText_4B87A0(gTmpBuff, text_xpos, text_ypos, fontType, 1);
     }
     else
     {
-        DrawText_5D8A10(tmpBuff_67BD9C, text_xpos, text_ypos, fontType, 1, 8, palette, 0, 0);
+        DrawText_5D8A10(gTmpBuff, text_xpos, text_ypos, fontType, 1, 8, palette, 0, 0);
     }
-    return GetMaxTextWidth_5D8990(tmpBuff_67BD9C, fontType);
+    return GetMaxTextWidth_5D8990(gTmpBuff, fontType);
 }
 
 // 0x4B7FB0
@@ -4416,11 +4416,11 @@ void Frontend::DrawSavedStage_4B5270()
     {
         gGameSession_67E8E0.DecodeStage_453A60(codified_stages, &main_stage, &bonus_stage);
     }
-    swprintf(tmpBuff_67BD9C, L"%d", main_stage);
-    DrawText_4B87A0(tmpBuff_67BD9C, static_cast<s16>(450), static_cast<s16>(90), field_11C_normal_font, 1);
+    swprintf(gTmpBuff, L"%d", main_stage);
+    DrawText_4B87A0(gTmpBuff, static_cast<s16>(450), static_cast<s16>(90), field_11C_normal_font, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", bonus_stage);
-    DrawText_4B87A0(tmpBuff_67BD9C, static_cast<s16>(450), static_cast<s16>(110), field_11C_normal_font, 1);
+    swprintf(gTmpBuff, L"%d", bonus_stage);
+    DrawText_4B87A0(gTmpBuff, static_cast<s16>(450), static_cast<s16>(110), field_11C_normal_font, 1);
 }
 
 // 0x4B5370
@@ -4656,20 +4656,20 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
         text_ypos += 5;
     }
     wchar_t* _5B5F90 = gText_0x14_704DFC->Find_5B5F90("last");
-    swprintf(tmpBuff_67BD9C, _5B5F90);
+    swprintf(gTmpBuff, _5B5F90);
 
-    s32 x = Frontend::GetMaxTextWidth_5D8990(tmpBuff_67BD9C, font_type);
+    s32 x = Frontend::GetMaxTextWidth_5D8990(gTmpBuff, font_type);
 
     u16 x_pos;
     u16 y_pos;
-    DrawText_4B87A0(tmpBuff_67BD9C, static_cast<u16>(text_xpos - x + 494), static_cast<u16>(text_ypos - 15), font_type, 1);
+    DrawText_4B87A0(gTmpBuff, static_cast<u16>(text_xpos - x + 494), static_cast<u16>(text_ypos - 15), font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, gText_0x14_704DFC->Find_5B5F90("best"));
+    swprintf(gTmpBuff, gText_0x14_704DFC->Find_5B5F90("best"));
 
-    x = Frontend::GetMaxTextWidth_5D8990(tmpBuff_67BD9C, font_type);
+    x = Frontend::GetMaxTextWidth_5D8990(gTmpBuff, font_type);
 
     y_pos = text_ypos - 15;
-    DrawText_4B87A0(tmpBuff_67BD9C, static_cast<u16>(text_xpos - x + 624), y_pos, font_type, 1);
+    DrawText_4B87A0(gTmpBuff, static_cast<u16>(text_xpos - x + 624), y_pos, font_type, 1);
 
     if (gText_0x14_704DFC->field_10_lang_code == 106)
     {
@@ -4682,13 +4682,13 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("carjack"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(5));
+    swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(5));
     u16 x_pos_last = text_xpos + 480;
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, text_ypos, font_type, 10, 1, line_height, 1);
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, text_ypos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[20]));
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[20]));
     u16 x_pos_best = text_xpos + 610;
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, text_ypos, font_type, 10, 1, line_height, 1);
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, text_ypos, font_type, 10, 1, line_height, 1);
 
     //  auto damage cost
 
@@ -4696,11 +4696,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos + 20;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("car_cst"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"$%d", gGameSession_67E8E0.GetCarDamageCost_4C5A80());
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"$%d", gGameSession_67E8E0.GetCarDamageCost_4C5A80());
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"$%d", gPlyDat_6FEAC0->field_1878_best_car_damage_cost[main_stage_idx]);
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"$%d", gPlyDat_6FEAC0->field_1878_best_car_damage_cost[main_stage_idx]);
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  civilians run down
 
@@ -4708,11 +4708,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos + 40;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("run_ovr"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(6U));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(6U));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[24]));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[24]));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  civilians murdered
 
@@ -4720,11 +4720,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos + 60;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("murder"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(7U));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(7U));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[28]));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[28]));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  lawmen killed
 
@@ -4734,11 +4734,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
         y_pos = text_ypos + 80;
         DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("cop_kl"), x_pos, y_pos, font_type, 1);
 
-        swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(8U));
-        Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+        swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(8U));
+        Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-        swprintf(tmpBuff_67BD9C, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[32]));
-        Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+        swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[32]));
+        Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
     }
 
     //  gang members killed
@@ -4747,11 +4747,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos + 100;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("gng_kl"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(9U));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetStatistic_4C59F0(9U));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[36]));
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", *reinterpret_cast<u32*>(&gPlyDat_6FEAC0->field_1800_best_stats[main_stage_idx].field_0[36]));
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 
     //  fugitive factor
 
@@ -4759,11 +4759,11 @@ void Frontend::DrawLastAndBestStats_4B57B0(u16 text_xpos, u16 text_ypos)
     y_pos = text_ypos + 120;
     DrawText_4B87A0(gText_0x14_704DFC->Find_5B5F90("evsnrtg"), x_pos, y_pos, font_type, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gGameSession_67E8E0.GetEvasionRating_4C5AA0());
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", gGameSession_67E8E0.GetEvasionRating_4C5AA0());
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_last, y_pos, font_type, 10, 1, line_height, 1);
 
-    swprintf(tmpBuff_67BD9C, L"%d", gPlyDat_6FEAC0->field_1884_best_evasion_rating[main_stage_idx]);
-    Frontend::DrawTextFixedWidth_4B78B0(tmpBuff_67BD9C, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
+    swprintf(gTmpBuff, L"%d", gPlyDat_6FEAC0->field_1884_best_evasion_rating[main_stage_idx]);
+    Frontend::DrawTextFixedWidth_4B78B0(gTmpBuff, x_pos_best, y_pos, font_type, 10, 1, line_height, 1);
 }
 
 // 0x4B0190
@@ -4856,8 +4856,8 @@ void Frontend::UpdateMainStageArrows_4B7550()
 {
     MenuPage_0xBCA* pMenuPage = &field_136_menu_pages_array[field_132_f136_idx];
     u8 main_stage_idx = gGameSession_67E8E0.GetMainStageIdx_4C5980();
-    swprintf(tmpBuff_67BD9C, L"%d", main_stage_idx + 1);
-    wcsncpy(pMenuPage->field_518_elements_array[2].field_6_element_name_str, tmpBuff_67BD9C, 0x32U);
+    swprintf(gTmpBuff, L"%d", main_stage_idx + 1);
+    wcsncpy(pMenuPage->field_518_elements_array[2].field_6_element_name_str, gTmpBuff, 0x32U);
 
     if (ExistsPreviousMainStage_4B7490())
     {

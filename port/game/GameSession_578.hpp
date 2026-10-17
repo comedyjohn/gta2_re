@@ -6,7 +6,7 @@
 
 struct FragsByVictim_C
 {
-    s16 field_0_frags_on_victim[MAX_PLAYERS];
+    s16 field_0_frags_on_victim[kMaxPlayers];
 };
 
 struct PlayerName_20
@@ -74,10 +74,10 @@ struct GameSession_578
     char_type field_441_max_players;
     char_type field_442_winner_player_idx;
     s32 field_444_game_time_limit;
-    FragsByVictim_C field_448_frags_by_victim[MAX_PLAYERS];
-    s16 field_490_frags_list[MAX_PLAYERS];
-    s32 field_49C_points_list[MAX_PLAYERS];
-    PlayerName_20 field_4B4_player_names[MAX_PLAYERS];
+    FragsByVictim_C field_448_frags_by_victim[kMaxPlayers];
+    s16 field_490_frags_list[kMaxPlayers];
+    s32 field_49C_points_list[kMaxPlayers];
+    PlayerName_20 field_4B4_player_names[kMaxPlayers];
     s32 field_574_secret_tokens_collected;
 
     // inlined at 45b420 in 9.6f

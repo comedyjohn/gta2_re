@@ -80,7 +80,7 @@ EXTERN_GLOBAL(u8, gNewTaxiCustomersThisTick_6787D2);
 EXTERN_GLOBAL(Fix16, kFpHalf_67853C);
 EXTERN_GLOBAL(Ang16, gDummyPedAng_6787A8);
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 EXTERN_GLOBAL(Fix16, gSpawnJitterScale_678618);
 EXTERN_GLOBAL(Fix16, kFpOne_678664);
@@ -676,16 +676,16 @@ void PedManager::PedsService_4703F0()
     if (bDo_iain_test_67D4E9)
     {
         u16 num_peds = gNumPedsOnScreen_6787EC;
-        swprintf(tmpBuff_67BD9C, L"num peds on screen : %d",
+        swprintf(gTmpBuff, L"num peds on screen : %d",
                  num_peds); // num peds on screen : %d
-        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 64, gDebugFont_706600, 1);
+        gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 64, gDebugFont_706600, 1);
 
         if (gPolice_7B8_6FEE40)
         {
-            swprintf(tmpBuff_67BD9C,
+            swprintf(gTmpBuff,
                      L"num police peds in range screen : %d", // num police peds in range screen : %d
                      gPolice_7B8_6FEE40->field_7AD_police_peds_in_range_screen);
-            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 80, gDebugFont_706600, 1);
+            gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 80, gDebugFont_706600, 1);
         }
     }
 }

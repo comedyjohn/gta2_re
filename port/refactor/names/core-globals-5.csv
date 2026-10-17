@@ -1,0 +1,10 @@
+old,new,name
+MAX_PLAYERS,kMaxPlayers,MAX_PLAYERS
+gFlags_67ACF8,gFlags,gFlags_67ACF8
+kAngFix16FullCircle_66A8E4,kAngFix16FullCircle,kAngFix16FullCircle_66A8E4
+kAngFix16HalfCircle_6691EC,kAngFix16HalfCircle,kAngFix16HalfCircle_6691EC
+kFP16One256th_6FE07C,kFP16One256th,kFP16One256th_6FE07C
+kGlobalMask0_61A9AC,kGlobalMask0,kGlobalMask0_61A9AC
+kGlobalMask1_61A9A8,kGlobalMask1,kGlobalMask1_61A9A8
+kGlobalMask2_61A9A4,kGlobalMask2,kGlobalMask2_61A9A4
+tmpBuff_67BD9C,gTmpBuff,tmpBuff_67BD9C

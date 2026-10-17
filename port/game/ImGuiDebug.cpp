@@ -58,7 +58,7 @@ EXTERN_GLOBAL(car_rng_list, gGoodCarModels_677384);
 EXTERN_GLOBAL(u8, byte_6FEB48);
 EXTERN_GLOBAL(Fix16Point, kZeroOnePoint_6F6484);
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 EXTERN_GLOBAL(Fix16Point, CollisionIntersectionPoint_6FE1A0);
 
@@ -1465,8 +1465,8 @@ void ImGuiDebugDraw()
                 while (pCarIter)
                 {
                     //ImGui::Value("Field 88", pCarIter->field_88);
-                    swprintf(tmpBuff_67BD9C, L"%d", pCarIter->field_88_despawn_status);
-                    DisplayWideTextAtSprite(tmpBuff_67BD9C, pCarIter->GetSprite_440840(), 0, 0);
+                    swprintf(gTmpBuff, L"%d", pCarIter->field_88_despawn_status);
+                    DisplayWideTextAtSprite(gTmpBuff, pCarIter->GetSprite_440840(), 0, 0);
                     pCarIter = pCarIter->mpNext;
                 }
                 ImGui::TreePop();
@@ -1854,12 +1854,12 @@ void ImGuiDebugDraw()
 
                 if (ImGui::TreeNode("Draw Testing") && pNewCar->field_50_car_sprite)
                 {
-                    swprintf(tmpBuff_67BD9C,
+                    swprintf(gTmpBuff,
                              L"Testing Draw\nCoords (%.1f, %.1f, %.1f)",
                              pNewCar->field_50_car_sprite->field_14_xy.x.ToFloat(),
                              pNewCar->field_50_car_sprite->field_14_xy.y.ToFloat(),
                              pNewCar->field_50_car_sprite->field_1C_zpos.ToFloat());
-                    DisplayWideTextAtSprite(tmpBuff_67BD9C, pNewCar->field_50_car_sprite, 0, 0);
+                    DisplayWideTextAtSprite(gTmpBuff, pNewCar->field_50_car_sprite, 0, 0);
                     ImGui::TreePop();
                 }
             }
@@ -1877,8 +1877,8 @@ void ImGuiDebugDraw()
                             Car_BC* pCarIter = &i;
                             if (pCarIter && pCarIter->field_50_car_sprite)
                             {
-                                swprintf(tmpBuff_67BD9C, L"%d", pCarIter->field_9C_engine_status);
-                                DisplayWideTextAtSprite(tmpBuff_67BD9C, pCarIter->field_50_car_sprite, 0, 0);
+                                swprintf(gTmpBuff, L"%d", pCarIter->field_9C_engine_status);
+                                DisplayWideTextAtSprite(gTmpBuff, pCarIter->field_50_car_sprite, 0, 0);
                             }
                         }
                     }
@@ -1935,8 +1935,8 @@ void ImGuiDebugDraw()
                         */
                         if (pAI_Iter)
                         {
-                            swprintf(tmpBuff_67BD9C, L"%d", pAI_Iter->field_48_probe_direction);
-                            DisplayWideTextAtSprite(tmpBuff_67BD9C, pCarIter->field_50_car_sprite, 0, 0);
+                            swprintf(gTmpBuff, L"%d", pAI_Iter->field_48_probe_direction);
+                            DisplayWideTextAtSprite(gTmpBuff, pCarIter->field_50_car_sprite, 0, 0);
                         }
                         num_AI_count++;
                     }
@@ -2130,10 +2130,10 @@ void ImGuiDebugDraw()
                     Object_2C* pObjIter = &gObject_2C_Pool_6F8F80->pool_[i];
                     if (pObjIter && pObjIter->field_18_model != 0)
                     {
-                        swprintf(tmpBuff_67BD9C, L"%d", pObjIter->field_18_model);
+                        swprintf(gTmpBuff, L"%d", pObjIter->field_18_model);
                         if (pObjIter->field_4 != nullptr)
                         {
-                            DisplayWideTextAtSprite(tmpBuff_67BD9C, pObjIter->field_4, 0, 0);
+                            DisplayWideTextAtSprite(gTmpBuff, pObjIter->field_4, 0, 0);
                         }
                     }
                 }
@@ -2673,8 +2673,8 @@ void ImGuiDebugDraw()
                     {
                         if (true) // pPedIter->field_168_game_object
                         {
-                            swprintf(tmpBuff_67BD9C, L"%d", pPedIter->field_238_ped_type);
-                            DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);
+                            swprintf(gTmpBuff, L"%d", pPedIter->field_238_ped_type);
+                            DisplayWideTextAtSprite(gTmpBuff, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
                         pPedIter = pPedIter->mpNext;
                     }
@@ -2724,8 +2724,8 @@ void ImGuiDebugDraw()
                         if (pPedIter->field_240_occupation == PedOcupation::kMugger ||
                             pPedIter->field_240_occupation == PedOcupation::kCarThief)
                         {
-                            swprintf(tmpBuff_67BD9C, L"(%d, %d)", pPedIter->field_21C_bf.bPanicking, pPedIter->field_21C_bf.bAttacking);
-                            DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);
+                            swprintf(gTmpBuff, L"(%d, %d)", pPedIter->field_21C_bf.bPanicking, pPedIter->field_21C_bf.bAttacking);
+                            DisplayWideTextAtSprite(gTmpBuff, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
                         else if (pPedIter->field_258_objective == Objectives::kObjective7)
                         {
@@ -2778,8 +2778,8 @@ void ImGuiDebugDraw()
                     {
                         if (pPedIter->field_168_game_object)
                         {
-                            swprintf(tmpBuff_67BD9C, L"%d", pPedIter->field_168_game_object->field_69_is_colliding_with_sprite);
-                            DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);
+                            swprintf(gTmpBuff, L"%d", pPedIter->field_168_game_object->field_69_is_colliding_with_sprite);
+                            DisplayWideTextAtSprite(gTmpBuff, pPedIter->GetSprite_46DF50(), 0, 0);
                         }
                         pPedIter = pPedIter->mpNext;
                     }
@@ -2925,15 +2925,15 @@ void ImGuiDebugDraw()
                         PoliceCrew_38* pCrew = &gPolice_7B8_6FEE40->field_4_cop_crew[idx];
                         if (pCrew && pCrew->field_1C_used)
                         {
-                            swprintf(tmpBuff_67BD9C, L"Crew %d state: %d", idx, pCrew->field_24_state);
-                            DisplayWideTextAtScreenCoords(tmpBuff_67BD9C, 0, ypos);
+                            swprintf(gTmpBuff, L"Crew %d state: %d", idx, pCrew->field_24_state);
+                            DisplayWideTextAtScreenCoords(gTmpBuff, 0, ypos);
 
                             // display on cop sprite
                             if (pCrew->field_10_subObj && pCrew->field_10_subObj->field_8_group &&
                                 pCrew->field_10_subObj->field_8_group->field_2C_ped_leader)
                             {
-                                swprintf(tmpBuff_67BD9C, L"State %d", pCrew->field_24_state);
-                                DisplayWideTextAtSprite(tmpBuff_67BD9C,
+                                swprintf(gTmpBuff, L"State %d", pCrew->field_24_state);
+                                DisplayWideTextAtSprite(gTmpBuff,
                                                         pCrew->field_10_subObj->field_8_group->field_2C_ped_leader->GetSprite_46DF50(),
                                                         0,
                                                         0);
@@ -2949,12 +2949,12 @@ void ImGuiDebugDraw()
                         PolicePursuitTarget_7C* p7C = &pursuit_target;
                         if (p7C && p7C->field_18_z != kFixZero)
                         {
-                            swprintf(tmpBuff_67BD9C,
+                            swprintf(gTmpBuff,
                                      L"P7C target coords (%.1f, %.1f, %.1f)",
                                      p7C->field_10_x.ToFloat(),
                                      p7C->field_14_y.ToFloat(),
                                      p7C->field_18_z.ToFloat());
-                            DisplayWideTextAtScreenCoords(tmpBuff_67BD9C, 0, ypos);
+                            DisplayWideTextAtScreenCoords(gTmpBuff, 0, ypos);
                             ypos += 16;
                         }
                     }
@@ -3021,14 +3021,14 @@ void ImGuiDebugDraw()
             Particle_4C* pIter = gParticle_4C_Pool_6FD5E4->prev_;
             for (; pIter; pIter = pIter->mpNext)
             {
-                swprintf(tmpBuff_67BD9C, L"%d", pIter->field_38_state);
+                swprintf(gTmpBuff, L"%d", pIter->field_38_state);
                 if (pIter->field_28_pSprite)
                 {
-                    DisplayWideTextAtSprite(tmpBuff_67BD9C, pIter->field_28_pSprite, 0, 0);
+                    DisplayWideTextAtSprite(gTmpBuff, pIter->field_28_pSprite, 0, 0);
                 }
                 else if (pIter->field_30_pNext)
                 {
-                    DisplayWideTextAtSprite(tmpBuff_67BD9C, pIter->field_30_pNext, 0, 0);
+                    DisplayWideTextAtSprite(gTmpBuff, pIter->field_30_pNext, 0, 0);
                 }
             }
             ImGui::TreePop();

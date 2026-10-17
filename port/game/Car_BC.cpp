@@ -5719,16 +5719,16 @@ Ang16 Car_BC::GetRadioTowerAngle_442520()
 }
 
 // TODO: Move all of these together with SmoothApproachAngle_405CE0
-DEFINE_GLOBAL_INIT(Fix16, kAngFix16FullCircle_66A8E4, Fix16(0x18F60, 0), 0x66A8E4);
-DEFINE_GLOBAL_INIT(Fix16, kAngFix16HalfCircle_6691EC, Fix16(0xC7B0, 0), 0x6691EC);
+DEFINE_GLOBAL_INIT(Fix16, kAngFix16FullCircle, Fix16(0x18F60, 0), 0x66A8E4);
+DEFINE_GLOBAL_INIT(Fix16, kAngFix16HalfCircle, Fix16(0xC7B0, 0), 0x6691EC);
 inline Fix16 WrapAngle_40E790(const Fix16& unk) // 9.6f inlined func
 {
     Fix16 result = unk;
-    for (; result < kFixZero; result += kAngFix16FullCircle_66A8E4)
+    for (; result < kFixZero; result += kAngFix16FullCircle)
     {
         ;
     }
-    for (; result >= kAngFix16FullCircle_66A8E4; result -= kAngFix16FullCircle_66A8E4)
+    for (; result >= kAngFix16FullCircle; result -= kAngFix16FullCircle)
     {
         ;
     }
@@ -5739,15 +5739,15 @@ inline Fix16 WrapAngle_40E790(const Fix16& unk) // 9.6f inlined func
 // 0x405CE0
 void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4, Fix16& a5)
 {
-    if (a1 - a3 > kAngFix16HalfCircle_6691EC)
+    if (a1 - a3 > kAngFix16HalfCircle)
     {
-        a3 += kAngFix16FullCircle_66A8E4;
+        a3 += kAngFix16FullCircle;
     }
     else
     {
-        if (a1 - a3 < -kAngFix16HalfCircle_6691EC)
+        if (a1 - a3 < -kAngFix16HalfCircle)
         {
-            a3 -= kAngFix16FullCircle_66A8E4;
+            a3 -= kAngFix16FullCircle;
         }
     }
 

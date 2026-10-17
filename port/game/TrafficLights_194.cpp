@@ -8,7 +8,7 @@
 #include "debug.hpp"
 #include "map_0x370.hpp"
 
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 DEFINE_GLOBAL(TrafficLights_194*, gTrafficLights_194_705958, 0x705958);
 
@@ -416,11 +416,11 @@ void TrafficLights_194::TrafficLightsService_5C2950()
 // 0x5c2a10
 void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
 {
-    swprintf(tmpBuff_67BD9C, L"timer: %d", field_193_timer);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, -1, 0, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"timer: %d", field_193_timer);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, -1, 0, gDebugFont_706600, 1);
 
-    swprintf(tmpBuff_67BD9C, L"phase: %d", field_192_phase);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, -1, 16, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"phase: %d", field_192_phase);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, -1, 16, gDebugFont_706600, 1);
 
     if (field_192_phase == traffic_light_phase::peds_crossing_7)
     {

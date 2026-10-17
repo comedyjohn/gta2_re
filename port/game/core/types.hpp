@@ -20,4 +20,4 @@ using f32 = float;
 using f64 = double;
 
 // Maximum number of players in a (network) game
-inline constexpr s32 MAX_PLAYERS = 6;
+inline constexpr s32 kMaxPlayers = 6;

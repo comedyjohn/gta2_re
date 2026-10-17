@@ -7,7 +7,7 @@
 class Fix16;
 
 EXTERN_GLOBAL(Fix16, kFixZero);
-EXTERN_GLOBAL(Fix16, kFP16One256th_6FE07C);
+EXTERN_GLOBAL(Fix16, kFP16One256th);
 EXTERN_GLOBAL(Fix16, kNegligibleValue);
 
 class Fix16
@@ -342,7 +342,7 @@ class Fix16
 
     Fix16 ApplyDeadZone(Fix16 to_abs)
     {
-        if (!(Fix16::Abs(to_abs) < kFP16One256th_6FE07C))
+        if (!(Fix16::Abs(to_abs) < kFP16One256th))
         {
             return to_abs;
         }

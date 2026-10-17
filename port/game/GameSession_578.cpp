@@ -319,7 +319,7 @@ char_type GameSession_578::GetMaxPlayers_4C5BF0()
 // 0x4C5C00
 void GameSession_578::SetWinnerIdx_4C5C00(char_type player_idx)
 {
-    if (field_442_winner_player_idx == MAX_PLAYERS)
+    if (field_442_winner_player_idx == kMaxPlayers)
     {
         field_442_winner_player_idx = player_idx;
     }

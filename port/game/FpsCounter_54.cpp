@@ -8,13 +8,13 @@
 DEFINE_GLOBAL(FpsCounter_54*, gFpsCounter_7055D4, 0x7055D4);
 
 // TODO
-EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
+EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
 // 0x5BEC30
 void FpsCounter_54::ShowFps_5BEC30()
 {
-    swprintf(tmpBuff_67BD9C, L"%d/%d fps", field_8_update_fps, field_14_draw_fps);
-    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(tmpBuff_67BD9C, 0, 0, gDebugFont_706600, 1);
+    swprintf(gTmpBuff, L"%d/%d fps", field_8_update_fps, field_14_draw_fps);
+    gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 0, gDebugFont_706600, 1);
 }
 
 // 0x5BEC70

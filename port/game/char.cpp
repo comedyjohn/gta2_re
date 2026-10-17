@@ -424,7 +424,7 @@ void Char_B4::DoJump_5454D0()
     {
         if (field_10_char_state == Char_B4_state::Jumping_15 && field_6C_animation_state == Char_Anim_state::Jumping_5)
         {
-            if (field_68_animation_frame >= 5u)
+            if (field_68_animation_frame >= 5U)
             {
                 field_68_animation_frame = 5;
                 field_71_frame_delay = 2;
@@ -2823,7 +2823,7 @@ char_type Char_B4::CanMoveOntoSlope_54C1A0(s32 path_direction)
             field_80_sprite_ptr->field_1C_zpos++;
             result = CanMoveOntoSlope_54C1A0(path_direction);
             field_80_sprite_ptr->field_1C_zpos--;
-            field_58_flags |= 1u;
+            field_58_flags |= 1U;
             break;
         case ROAD:
         case FIELD:
@@ -3971,9 +3971,9 @@ bool Char_B4::CanStepForwardWithRegionCheck_54ECB0(s32 direction)
     {
         if (zpos.GetFracValue() < dword_6FD91C)
         {
-            field_58_flags &= ~1u;
+            field_58_flags &= ~1U;
             bool result = Char_B4::CanStepForward_54FEC0(direction);
-            field_58_flags |= 1u;
+            field_58_flags |= 1U;
             return result;
         }
         if (!field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2))
@@ -4437,9 +4437,9 @@ bool Char_B4::CanStepForward_54FEC0(s32 direction)
         z_frac = field_1C_zpos.GetFracValue();
         if (z_frac < kFP16Half_6FD8E4)
         {
-            field_58_flags &= ~1u;
+            field_58_flags &= ~1U;
             result = Char_B4::CanStepForward_54FEC0(direction);
-            field_58_flags |= 1u;
+            field_58_flags |= 1U;
             return result;
         }
         if (field_7C_pPed->PedTypeIs_45EDE0(ped_type::player_2))
@@ -4448,11 +4448,11 @@ bool Char_B4::CanStepForward_54FEC0(s32 direction)
         }
         if (z_frac > kFP16Half_6FD8E4)
         {
-            field_58_flags &= ~1u;
+            field_58_flags &= ~1U;
             field_80_sprite_ptr->field_1C_zpos += Fix16(1);
             result = Char_B4::CanStepForward_54FEC0(direction);
             field_80_sprite_ptr->field_1C_zpos -= Fix16(1);
-            field_58_flags |= 1u;
+            field_58_flags |= 1U;
             return result;
         }
         return false;
@@ -6287,7 +6287,7 @@ void Char_B4::state_8_5520A0()
                         field_7C_pPed->field_264_killer_id_timer = 99;
                     }
                 }
-                if (field_46_timer > 100u)
+                if (field_46_timer > 100U)
                 {
                     if (!bStartNetworkGame_7081F0)
                     {

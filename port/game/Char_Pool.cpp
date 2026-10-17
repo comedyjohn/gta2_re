@@ -178,7 +178,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                  static_cast<u16>(pZone->field_10_elvis_ratio) + static_cast<u16>(pZone->field_12_gangchar_ratio))
     {
         // Gang member, limited to 8
-        kind = gNumberArmedGangMembers_6787CE < 8u ? 4 : 0;
+        kind = gNumberArmedGangMembers_6787CE < 8U ? 4 : 0;
     }
     else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) +
                  static_cast<u16>(pZone->field_10_elvis_ratio) + static_cast<u16>(pZone->field_12_gangchar_ratio) +
@@ -252,18 +252,18 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                 {
                     goto delloc_ret_2;
                 }
-                SpawnPedChainGroupAt_46DB90(12, 5u, xpos, ypos, zpos);
+                SpawnPedChainGroupAt_46DB90(12, 5U, xpos, ypos, zpos);
                 pPed->Deallocate_45EB60();
                 ++gNumberElvisLeadersSpawned_6787CC;
                 break;
 
             case 4:
             {
-                gmp_map_zone* pMapZone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(xpos.ToInt(), ypos.ToInt(), 14u);
+                gmp_map_zone* pMapZone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(xpos.ToInt(), ypos.ToInt(), 14U);
                 if (pMapZone)
                 {
                     Gang_144* pGang = gGangPool_CA8_67E274->FindGangByName_4BF100(pMapZone->field_6_name);
-                    if (gNumberArmedGangMembers_6787CE < 4u)
+                    if (gNumberArmedGangMembers_6787CE < 4U)
                     {
                         ++gNumberArmedGangMembers_6787CE;
                         pPed->SetPedType_403920(ped_type::special_ped_4);
@@ -400,7 +400,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                     else
                     {
                         u8 remap = gRng_6F6784.get_int_4F7AE0(25);
-                        if (remap < 4u)
+                        if (remap < 4U)
                         {
                             remap += 18;
                         }
@@ -458,7 +458,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
 
     } // End if
 
-    if (static_cast<u16>(gSpawnCounter_6787C6) > 200u)
+    if (static_cast<u16>(gSpawnCounter_6787C6) > 200U)
     {
         gSpawnCounter_6787C6 = 0;
     }

@@ -958,19 +958,19 @@ void PedGroup::UpdateFormation_4CA4B0()
                 {
                     switch (i)
                     {
-                        case 3u:
+                        case 3U:
                             pIter->field_14C_internal_target_ped = this->field_4_ped_list[0];
                             break;
-                        case 4u:
+                        case 4U:
                             pIter->field_14C_internal_target_ped = this->field_4_ped_list[1];
                             break;
-                        case 5u:
+                        case 5U:
                             pIter->field_14C_internal_target_ped = this->field_4_ped_list[2];
                             break;
-                        case 6u:
+                        case 6U:
                             pIter->field_14C_internal_target_ped = this->field_4_ped_list[3];
                             break;
-                        case 7u:
+                        case 7U:
                             pIter->field_14C_internal_target_ped = this->field_4_ped_list[4];
                             break;
                         default:

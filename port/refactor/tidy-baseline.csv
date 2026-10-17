@@ -306,7 +306,6 @@ port/game/Char_Pool.cpp,readability-function-cognitive-complexity,1
 port/game/Char_Pool.cpp,readability-function-size,1
 port/game/Char_Pool.cpp,readability-implicit-bool-conversion,43
 port/game/Char_Pool.cpp,readability-make-member-function-const,1
-port/game/Char_Pool.cpp,readability-uppercase-literal-suffix,6
 port/game/Char_Pool.hpp,cppcoreguidelines-avoid-non-const-global-variables,6
 port/game/Char_Pool.hpp,cppcoreguidelines-special-member-functions,4
 port/game/Char_Pool.hpp,misc-non-private-member-variables-in-classes,13
@@ -1334,7 +1333,6 @@ port/game/Ped.cpp,readability-function-size,19
 port/game/Ped.cpp,readability-implicit-bool-conversion,689
 port/game/Ped.cpp,readability-make-member-function-const,25
 port/game/Ped.cpp,readability-simplify-boolean-expr,21
-port/game/Ped.cpp,readability-uppercase-literal-suffix,33
 port/game/Ped.hpp,bugprone-narrowing-conversions,1
 port/game/Ped.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/Ped.hpp,cppcoreguidelines-avoid-non-const-global-variables,10
@@ -1376,7 +1374,6 @@ port/game/PedGroup.cpp,readability-implicit-bool-conversion,65
 port/game/PedGroup.cpp,readability-make-member-function-const,4
 port/game/PedGroup.cpp,readability-redundant-control-flow,1
 port/game/PedGroup.cpp,readability-simplify-boolean-expr,7
-port/game/PedGroup.cpp,readability-uppercase-literal-suffix,5
 port/game/PedGroup.hpp,bugprone-narrowing-conversions,1
 port/game/PedGroup.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/PedGroup.hpp,cppcoreguidelines-narrowing-conversions,1
@@ -2022,7 +2019,6 @@ port/game/char.cpp,readability-isolate-declaration,2
 port/game/char.cpp,readability-make-member-function-const,11
 port/game/char.cpp,readability-non-const-parameter,2
 port/game/char.cpp,readability-simplify-boolean-expr,20
-port/game/char.cpp,readability-uppercase-literal-suffix,9
 port/game/char.hpp,cppcoreguidelines-avoid-non-const-global-variables,9
 port/game/char.hpp,cppcoreguidelines-special-member-functions,2
 port/game/char.hpp,misc-non-private-member-variables-in-classes,76

@@ -2,7 +2,6 @@
 #include "Camera.hpp"
 #include "Frontend.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Player.hpp"
 #include "debug.hpp"

@@ -1,5 +1,4 @@
 #include "Light_28.hpp"
-#include "Globals.hpp"
 #include "gbh_graphics.hpp"
 #include <cstdlib>
 #include <stdio.h>

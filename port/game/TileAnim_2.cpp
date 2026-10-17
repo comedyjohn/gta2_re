@@ -1,6 +1,5 @@
 #include "TileAnim_2.hpp"
 
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "gtx_0x106C.hpp"

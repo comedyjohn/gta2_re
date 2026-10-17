@@ -1,6 +1,5 @@
 #include "TrafficLights_194.hpp"
 #include "Car_BC.hpp"
-#include "Globals.hpp"
 #include "Hud.hpp"
 #include "Light_1D4CC.hpp"
 #include "Light_28.hpp"

@@ -8,7 +8,6 @@
 #include "Function.hpp"
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
-#include "Globals.hpp"
 #include "Light_1D4CC.hpp"
 #include "Object_5C.hpp"
 #include "RouteFinder.hpp"

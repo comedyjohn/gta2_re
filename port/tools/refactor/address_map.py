@@ -88,7 +88,7 @@ def row_for(cur, lines_of):
     row = dict.fromkeys(COLUMNS, "")
     row["old_name"], row["owner"], row["file"] = name, owner, rel
     k = cur.kind
-    if k in (K.CXX_METHOD, K.FUNCTION_DECL):
+    if k in (K.CXX_METHOD, K.FUNCTION_DECL, K.CONSTRUCTOR, K.DESTRUCTOR, K.FUNCTION_TEMPLATE):
         row["kind"] = "method" if owner else "function"
         row["address"] = address_from_name(name)
     elif k == K.VAR_DECL:
@@ -117,7 +117,7 @@ def row_for(cur, lines_of):
         row["kind"] = "enumerator"
     else:
         return None
-    if k in (K.CXX_METHOD, K.FUNCTION_DECL):
+    if k in (K.CXX_METHOD, K.FUNCTION_DECL, K.CONSTRUCTOR, K.DESTRUCTOR, K.FUNCTION_TEMPLATE):
         lines = lines_of(f)
         for text in comment_block(lines, cur.location.line):
             m = COMMENT_ADDR.match(text)
@@ -129,7 +129,7 @@ def row_for(cur, lines_of):
             m = COMMENT_DECOMPME.match(text)
             if m:
                 row["decompme"] = m.group(1)
-        if not row["address"]:
+        if not (row["address"] or row["addr_96f"] or row["decompme"]):
             return None
     elif k == K.VAR_DECL and not row["address"]:
         return None
@@ -238,7 +238,19 @@ def lookup(key):
 
 
 def strip_comments():
-    removed = 0
+    removed = kept = 0
+    with open(CSV_PATH) as f:
+        rows = list(csv.DictReader(f))
+    known_96f = {r["addr_96f"] for r in rows if r["addr_96f"]}
+    known_scratch = {r["decompme"] for r in rows if r["decompme"]}
+
+    def in_csv(body):
+        m = COMMENT_96F.match(body)
+        if m:
+            return "0x" + m.group(1).upper() in known_96f
+        m = COMMENT_DECOMPME.match(body)
+        return bool(m) and m.group(1) in known_scratch
+
     for dirpath, _, files in os.walk(GAME):
         for name in files:
             if not name.endswith((".cpp", ".hpp", ".h", ".inl")):
@@ -248,13 +260,15 @@ def strip_comments():
             keep = []
             for line in text.split("\n"):
                 body = line.rstrip("\r")
-                if COMMENT_96F.match(body) or COMMENT_DECOMPME.match(body):
+                if (COMMENT_96F.match(body) or COMMENT_DECOMPME.match(body)) and in_csv(body):
                     removed += 1
                 else:
+                    if COMMENT_96F.match(body) or COMMENT_DECOMPME.match(body):
+                        kept += 1
                     keep.append(line)
             if len(keep) != len(text.split("\n")):
                 open(p, "w", newline="", errors="surrogateescape").write("\n".join(keep))
-    print(f"{removed} comment lines removed", file=sys.stderr)
+    print(f"{removed} comment lines removed, {kept} kept (not in the CSV)", file=sys.stderr)
     return 0
 
 

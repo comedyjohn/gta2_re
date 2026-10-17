@@ -35,6 +35,21 @@ def committed(path):
     return subprocess.run(["git", "ls-files", "--error-unmatch", path], capture_output=True, cwd=ROOT).returncode == 0
 
 
+def renamed_owner_path(key):
+    """An override written with the names of the original (`gtx_0x106C::sub_462FD0`) gets the names the
+    owners have now (`Gtx::sub_462FD0`): the owner part is mapped through the types renamed so far."""
+    with open(MAP_PATH, newline="") as f:
+        rows = list(csv.DictReader(f))
+    renamed = {}
+    for r in rows:
+        if r["kind"] in ("type", "namespace") and r["new_name"]:
+            renamed[(r["owner"] + "::" if r["owner"] else "") + r["old_name"]] = r["new_name"]
+    comps = key.split("::")
+    owner, name = comps[:-1], comps[-1]
+    out = [renamed.get("::".join(owner[: i + 1]), c) for i, c in enumerate(owner)]
+    return "::".join(out + [name])
+
+
 def update_map(pairs, syms_by_qual):
     """Record old -> new in address_map.csv (adding a row for a name the map did not have)."""
     with open(MAP_PATH, newline="") as f:
@@ -96,6 +111,8 @@ def main():
             for r in csv.reader(f):
                 if r and r[0] != "old" and not r[0].startswith("#"):
                     key = r[0]
+                    if key not in rows and key not in current and not key.startswith("usr:"):
+                        key = renamed_owner_path(key)
                     if key not in rows and key not in current:  # a local or parameter is keyed by its usr; the override gives its name
                         hits = [k for k, v in rows.items() if k.startswith("usr:") and v[2] == key]
                         key = hits[0] if len(hits) == 1 else key

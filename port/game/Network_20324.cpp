@@ -1,6 +1,5 @@
 #include "Network_20324.hpp"
 #include "Frontend.hpp"
-#include "Globals.hpp"
 #include "NetPlay.hpp"
 #include "registry.hpp"
 #include "text_0x14.hpp"

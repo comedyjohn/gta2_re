@@ -1,5 +1,4 @@
 #include "NetPlay.hpp"
-#include "Globals.hpp"
 #include "debug.hpp"
 #include "enums.hpp"
 #include "error.hpp"

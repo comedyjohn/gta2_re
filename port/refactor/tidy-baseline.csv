@@ -1005,7 +1005,7 @@ port/game/NetPlay.cpp,cppcoreguidelines-pro-type-member-init,21
 port/game/NetPlay.cpp,cppcoreguidelines-pro-type-reinterpret-cast,98
 port/game/NetPlay.cpp,cppcoreguidelines-pro-type-union-access,31
 port/game/NetPlay.cpp,misc-const-correctness,20
-port/game/NetPlay.cpp,misc-include-cleaner,97
+port/game/NetPlay.cpp,misc-include-cleaner,96
 port/game/NetPlay.cpp,misc-unused-parameters,7
 port/game/NetPlay.cpp,modernize-avoid-c-arrays,8
 port/game/NetPlay.cpp,modernize-deprecated-headers,2
@@ -1044,7 +1044,7 @@ port/game/Network_20324.cpp,cppcoreguidelines-pro-type-member-init,7
 port/game/Network_20324.cpp,cppcoreguidelines-pro-type-reinterpret-cast,107
 port/game/Network_20324.cpp,cppcoreguidelines-pro-type-vararg,22
 port/game/Network_20324.cpp,misc-const-correctness,29
-port/game/Network_20324.cpp,misc-include-cleaner,129
+port/game/Network_20324.cpp,misc-include-cleaner,128
 port/game/Network_20324.cpp,misc-non-private-member-variables-in-classes,1
 port/game/Network_20324.cpp,misc-unused-parameters,6
 port/game/Network_20324.cpp,modernize-avoid-c-arrays,46

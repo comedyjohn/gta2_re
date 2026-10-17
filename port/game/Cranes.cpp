@@ -5,7 +5,7 @@
 #include "ScriptManager_C1EA8.hpp"
 #include "SpriteGrid_400.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "map_0x370.hpp"
 #include "root_sound.hpp"
 #include "sprite.hpp"

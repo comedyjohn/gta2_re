@@ -3,7 +3,6 @@
 // Keep cSampleManager.hpp early: the include order changes the order VC6 emits the
 // sampManager and sound_obj calls in e.g. Type_9_4186D0 and Type6_2_412D40
 #include "Camera.hpp"
-#include "CarInfo_808.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"
 #include "CollisionSoundQueue_C88.hpp"
@@ -23,6 +22,7 @@
 #include "cSampleManager.hpp"
 #include "collision_event_type.hpp"
 #include "core/function.hpp"
+#include "data/car_info_table.hpp"
 #include "map_0x370.hpp"
 #include "sprite.hpp"
 #include <cmath>

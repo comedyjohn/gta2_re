@@ -7,7 +7,7 @@
 #include "SpriteGrid_400.hpp"
 #include "core/enums.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "error.hpp"
 #include "sprite.hpp"
 

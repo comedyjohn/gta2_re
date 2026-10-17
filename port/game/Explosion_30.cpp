@@ -9,7 +9,7 @@
 #include "Player.hpp"
 #include "SpriteGrid_400.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "explosion_type.hpp"
 #include "ped_death_cause.hpp"
 

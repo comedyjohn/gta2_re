@@ -1,8 +1,8 @@
 #include "Gang.hpp"
 #include "core/function.hpp"
+#include "data/game_text.hpp"
 #include "error.hpp"
 #include "map_0x370.hpp"
-#include "text_0x14.hpp"
 #include <cstring>
 
 DEFINE_GLOBAL(GangPool_CA8*, gGangPool_CA8_67E274, 0x67E274);

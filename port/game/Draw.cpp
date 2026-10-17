@@ -4,9 +4,9 @@
 #include "TextureCache_15D8.hpp"
 #include "core/fix16_point.hpp"
 #include "core/function.hpp"
+#include "data/gtx.hpp"
 #include "dma_video.hpp"
 #include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_706A6C, Fix16(1), 0x706A6C);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_706C3C, Ang16(0), 0x706C3C);

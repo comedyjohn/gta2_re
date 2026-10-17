@@ -1,4 +1,4 @@
-#include "registry.hpp"
+#include "data/registry.hpp"
 #include "core/enums.hpp"
 #include "core/function.hpp"
 #include "error.hpp"

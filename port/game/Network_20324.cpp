@@ -1,8 +1,8 @@
 #include "Network_20324.hpp"
 #include "Frontend.hpp"
 #include "NetPlay.hpp"
-#include "registry.hpp"
-#include "text_0x14.hpp"
+#include "data/game_text.hpp"
+#include "data/registry.hpp"
 #include <commctrl.h>
 #include <direct.h>
 

@@ -3,8 +3,8 @@
 #include "Object_5C.hpp"
 #include "Ped.hpp"
 #include "TileAnim_2.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
-#include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 
 DEFINE_GLOBAL(DoorData_10_Pool*, gDoor_10_Pool_67BD28, 0x67BD28);

@@ -2,8 +2,8 @@
 #include "Draw.hpp"
 #include "Frontend.hpp"
 #include "core/fix16.hpp"
+#include "data/gtx.hpp"
 #include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 #include <cstdarg>
 #include <cstdio>
 #include <mmsystem.h>

@@ -2,7 +2,7 @@
 #include "Game_0x40.hpp"
 #include "Player.hpp"
 #include "core/function.hpp"
-#include "registry.hpp"
+#include "data/registry.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(GameSession_578, gGameSession_67E8E0, 0x67E8E0);

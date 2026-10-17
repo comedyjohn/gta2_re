@@ -6,7 +6,7 @@
 #include "Player.hpp"
 #include "SoundObject_10.hpp"
 #include "car_despawn_status.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "explosion_type.hpp"
 #include "map_0x370.hpp"
 #include "ped_death_cause.hpp"

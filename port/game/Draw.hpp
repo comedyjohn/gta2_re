@@ -3,8 +3,8 @@
 #include "core/ang16.hpp"
 #include "core/fix16.hpp"
 #include "core/function.hpp"
+#include "data/gtx.hpp"
 #include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 
 struct QuadVerts // TODO: Same as Verts in gbh header (d3ddll)
 {

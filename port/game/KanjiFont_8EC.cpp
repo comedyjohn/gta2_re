@@ -1,13 +1,13 @@
 #include "KanjiFont_8EC.hpp"
 #include "Game_0x40.hpp"
 #include "TextureCache_15D8.hpp"
-#include "chunk.hpp"
 #include "core/enums.hpp"
 #include "core/function.hpp"
+#include "data/chunk.hpp"
+#include "data/file.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
-#include "file.hpp"
 #include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 
 DEFINE_GLOBAL(KanjiFont_8EC*, gKanjiFont_6F5168, 0x6F5168);
 

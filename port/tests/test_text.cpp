@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <cstring>
 
-#include "text_0x14.hpp"
+#include "data/game_text.hpp"
 
 namespace
 {

@@ -1,6 +1,6 @@
 #include "NetPlay.hpp"
 #include "core/enums.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "error.hpp"
 #include "network_data.hpp"
 #include "winmain.hpp"

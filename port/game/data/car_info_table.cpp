@@ -1,8 +1,8 @@
-#include "CarInfo_808.hpp"
+#include "data/car_info_table.hpp"
 #include "core/enums.hpp"
+#include "data/file.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
-#include "file.hpp"
-#include "gtx_0x106C.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

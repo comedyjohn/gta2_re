@@ -6,10 +6,11 @@
 #include "Game_0x40.hpp"
 #include "InputRecorder_67F8B0.hpp"
 #include "NetPlay.hpp"
-#include "PlyDat_2BC0.hpp"
 #include "core/function.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
+#include "data/ply_dat.hpp"
+#include "data/registry.hpp"
 #include "dma_video.hpp"
 #include "error.hpp"
 #include "gbh_graphics.hpp"
@@ -17,7 +18,6 @@
 #include "input.hpp"
 #include "keybrd_0x204.hpp"
 #include "network_data.hpp"
-#include "registry.hpp"
 #include "resource.h"
 #include "root_sound.hpp"
 #include <cstdio>
@@ -40,8 +40,8 @@
 #include "Network_20324.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
+#include "data/game_text.hpp"
 #include "sprite.hpp"
-#include "text_0x14.hpp"
 
 DEFINE_GLOBAL(u8, gNetInUsePlayerBits_6F56B8, 0x6F56B8); // TODO: move
 DEFINE_GLOBAL(u32, gNetworkPlayerIdx_6F56C8, 0x6F56C8); // TODO: move

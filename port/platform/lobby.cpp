@@ -16,7 +16,7 @@
 
 #include "NetPlay.hpp"
 #include "Network_20324.hpp"
-#include "registry.hpp"
+#include "data/registry.hpp"
 
 #include <poll.h>
 #include <stdio.h>

@@ -4,9 +4,9 @@
 #include "Game_0x40.hpp"
 #include "Hud.hpp"
 #include "Player.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
+#include "data/file.hpp"
 #include "error.hpp"
-#include "file.hpp"
 #include "map_0x370.hpp"
 #include <cstdio>
 

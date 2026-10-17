@@ -1,7 +1,7 @@
 #include "ObjectDefinitions_8CA8.hpp"
 #include "core/enums.hpp"
-#include "debug.hpp"
-#include "gtx_0x106C.hpp"
+#include "data/debug.hpp"
+#include "data/gtx.hpp"
 #include "sprite.hpp"
 #include <memory.h>
 

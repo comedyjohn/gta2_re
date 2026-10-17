@@ -1,6 +1,5 @@
 #include "sprite.hpp"
 #include "Camera.hpp"
-#include "CarInfo_808.hpp" // TODO: only because of gPixelsToFix16_6F6850
 #include "Car_BC.hpp"
 #include "CollisionSoundQueue_C88.hpp"
 #include "Draw.hpp"
@@ -17,11 +16,12 @@
 #include "char.hpp"
 #include "core/enums.hpp"
 #include "core/memory.hpp"
-#include "debug.hpp"
+#include "data/car_info_table.hpp" // TODO: only because of gPixelsToFix16_6F6850
+#include "data/debug.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
 #include "explosion_type.hpp"
 #include "gbh_graphics.hpp"
-#include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 #include "root_sound.hpp"
 #include "winmain.hpp" // TODO: only because of gLighting_626A09

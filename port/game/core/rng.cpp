@@ -1,7 +1,7 @@
 #include "core/rng.hpp"
 #include "Hud.hpp"
 #include "InputRecorder_67F8B0.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "error.hpp"
 #include <cstdio>
 #include <cstdlib>

@@ -4,12 +4,12 @@
 #include "Hud.hpp"
 #include "core/enums.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
+#include "data/file.hpp"
+#include "data/registry.hpp"
 #include "error.hpp"
-#include "file.hpp"
 #include "input.hpp"
 #include "port_input.h"
-#include "registry.hpp"
 #include <cstdio>
 #include <cstring>
 #include <ctime>

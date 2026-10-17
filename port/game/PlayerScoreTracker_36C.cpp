@@ -1,5 +1,4 @@
 #include "PlayerScoreTracker_36C.hpp"
-#include "CarInfo_808.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"
 #include "CrimeReportQueue_CC.hpp"
@@ -18,13 +17,14 @@
 #include "car_score_tier.hpp"
 #include "car_wreck.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/car_info_table.hpp"
+#include "data/debug.hpp"
+#include "data/game_text.hpp"
+#include "data/gtx.hpp"
 #include "emergency_car_kill_flag.hpp"
-#include "gtx_0x106C.hpp"
 #include "hud_message_priority.hpp"
 #include "ped_death_cause.hpp"
 #include "root_sound.hpp"
-#include "text_0x14.hpp"
 #include "voice_line.hpp"
 #include <cstring>
 

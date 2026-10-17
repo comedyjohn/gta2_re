@@ -20,7 +20,7 @@ SUBSYSTEMS = {
     # File formats and loading: style (.sty), text (.gxt), car info (.gci), chunks, player data, the
     # registry and debug settings.
     "data": {
-        "file", "chunk", "gtx_0x106C", "text_0x14", "CarInfo_808", "registry", "debug", "PlyDat_2BC0",
+        "file", "chunk", "gtx", "game_text", "car_info_table", "registry", "debug", "ply_dat",
     },
     # The map (.gmp), routes, path finding, lighting, tile animations, traffic lights.
     "world": {

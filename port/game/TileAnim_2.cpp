@@ -1,8 +1,8 @@
 #include "TileAnim_2.hpp"
 
 #include "core/enums.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
-#include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 #include <cstdio>
 

@@ -4,7 +4,7 @@
 #include "core/ang16.hpp"
 #include "core/fix16.hpp"
 #include "core/function.hpp"
-#include "gtx_0x106C.hpp"
+#include "data/gtx.hpp"
 #include "map_0x370.hpp"
 #include <wchar.h>
 

@@ -1,10 +1,10 @@
-#include "PlyDat_2BC0.hpp"
+#include "data/ply_dat.hpp"
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Player.hpp"
 #include "core/function.hpp"
+#include "data/file.hpp"
 #include "error.hpp"
-#include "file.hpp"
 #include <io.h>
 
 DEFINE_GLOBAL(PlyDat*, gPlyDat, 0x6FEAC0);

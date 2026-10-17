@@ -1,7 +1,7 @@
 #include "RollingDigitCounter_38.hpp"
 #include "Draw.hpp"
 #include "TextureCache_15D8.hpp"
-#include "gtx_0x106C.hpp"
+#include "data/gtx.hpp"
 
 // Forward declarations: the functions below are in address order
 s32 GetMaxNumOfDigits_4F7660(s32& max_value);

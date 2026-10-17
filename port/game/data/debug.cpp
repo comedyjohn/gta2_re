@@ -1,6 +1,6 @@
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "core/function.hpp"
-#include "registry.hpp"
+#include "data/registry.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL(bool, gDoInfiniteLives, 0x67D4C9);

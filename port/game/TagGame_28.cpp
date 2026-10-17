@@ -5,9 +5,9 @@
 #include "Hud.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"
+#include "data/game_text.hpp"
 #include "error.hpp"
 #include "hud_message_priority.hpp"
-#include "text_0x14.hpp"
 
 DEFINE_GLOBAL(TagGame_28, gTagGame_6F8450, 0x6F8450);
 DEFINE_GLOBAL(Fix16Point, stru_6F8720, 0x6F8720);

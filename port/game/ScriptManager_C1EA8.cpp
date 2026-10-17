@@ -9,9 +9,9 @@
 #include "core/enums.hpp"
 #include "core/function.hpp"
 #include "core/memory.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
+#include "data/file.hpp"
 #include "error.hpp"
-#include "file.hpp"
 #include "map_0x370.hpp"
 #include "miss2_0x11C.hpp"
 

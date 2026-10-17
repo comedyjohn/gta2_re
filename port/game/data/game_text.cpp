@@ -1,11 +1,11 @@
-#include "text_0x14.hpp"
-#include "chunk.hpp"
+#include "data/game_text.hpp"
 #include "core/enums.hpp"
 #include "core/function.hpp"
+#include "data/chunk.hpp"
+#include "data/file.hpp"
+#include "data/gtx.hpp"
+#include "data/registry.hpp"
 #include "error.hpp"
-#include "file.hpp"
-#include "gtx_0x106C.hpp"
-#include "registry.hpp"
 
 DEFINE_GLOBAL(GameText*, gText, 0x704DFC);
 DEFINE_GLOBAL(GameText*, gGtext, 0x6F87F0);

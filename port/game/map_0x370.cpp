@@ -8,14 +8,14 @@
 #include "RouteFinder.hpp"
 #include "SpriteGrid_400.hpp"
 #include "TileAnim_2.hpp"
-#include "chunk.hpp"
 #include "core/enums.hpp"
 #include "core/fix16_rect.hpp"
 #include "core/function.hpp"
 #include "core/memory.hpp"
+#include "data/chunk.hpp"
+#include "data/file.hpp"
+#include "data/gtx.hpp"
 #include "error.hpp"
-#include "file.hpp"
-#include "gtx_0x106C.hpp"
 #include "port_world3d.h" // port: world3d
 #include "sprite.hpp"
 #include <stdio.h>

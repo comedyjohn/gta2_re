@@ -1,7 +1,7 @@
 #include "root_sound.hpp"
 #include "cSampleManager.hpp"
 #include "core/function.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "sound_obj.hpp"
 
 DEFINE_GLOBAL(root_sound, gRoot_sound_66B038, 0x66B038);

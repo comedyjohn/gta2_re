@@ -4,11 +4,11 @@
 #include "Camera.hpp"
 #include "GameSession_578.hpp"
 #include "MapRenderer.hpp"
-#include "gtx_0x106C.hpp"
+#include "TextureCache_15D8.hpp"
+#include "data/gtx.hpp"
 #include "map_0x370.hpp"
 #include "renderer.h"
 #include "winmain.hpp"
-#include "TextureCache_15D8.hpp"
 
 namespace world3d
 {
@@ -38,7 +38,8 @@ bool ReadMap(gta2::Map& out, std::string* error)
                             reinterpret_cast<const uint8_t*>(dmap->field_40008_pColumn),
                             static_cast<size_t>(dmap->field_40000_column_words) * 4,
                             reinterpret_cast<const uint8_t*>(dmap->field_4000C_block),
-                            static_cast<size_t>(dmap->field_40004_num_blocks) * 12, error);
+                            static_cast<size_t>(dmap->field_40004_num_blocks) * 12,
+                            error);
 }
 
 void ReadSlopes(gta2::SlopeInfo out[gta2::kSlopeTypeCount])

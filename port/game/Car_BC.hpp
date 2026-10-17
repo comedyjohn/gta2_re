@@ -11,7 +11,7 @@
 #include "core/fix16.hpp"
 #include "core/function.hpp"
 #include "core/pool.hpp"
-#include "gtx_0x106C.hpp"
+#include "data/gtx.hpp"
 #include "map_0x370.hpp"
 #include "miss2_xyz.hpp"
 #include "sprite.hpp"

@@ -12,7 +12,7 @@
 #include "Weapon_30.hpp"
 #include "char.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "error.hpp"
 #include "ped_class.hpp"
 #include "ped_fire_mode.hpp"

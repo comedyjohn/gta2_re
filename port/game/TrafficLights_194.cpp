@@ -5,7 +5,7 @@
 #include "Light_28.hpp"
 #include "Object_5C.hpp"
 #include "core/rgb.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "map_0x370.hpp"
 
 EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);

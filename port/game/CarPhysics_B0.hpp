@@ -1,10 +1,10 @@
 #pragma once
 
-#include "CarInfo_808.hpp"
 #include "Car_BC.hpp"
 #include "core/ang16.hpp"
 #include "core/fix16.hpp"
 #include "core/function.hpp"
+#include "data/car_info_table.hpp"
 
 class Sprite;
 class Car_BC;

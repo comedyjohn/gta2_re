@@ -7,7 +7,7 @@
 #include "Game_0x40.hpp"
 #include "PathFinder_2FD4.hpp"
 #include "car_despawn_status.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 
 // Forward declarations: the functions below are in address order
 EXTERN_GLOBAL(Fix16, dword_67D384);

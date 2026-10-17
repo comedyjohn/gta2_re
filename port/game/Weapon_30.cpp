@@ -26,7 +26,7 @@ EXTERN_GLOBAL(Fix16, dword_706CC8);
 #include "core/enums.hpp"
 #include "core/fix16_rect.hpp"
 #include "core/rng.hpp"
-#include "debug.hpp"
+#include "data/debug.hpp"
 #include "map_0x370.hpp"
 #include "root_sound.hpp"
 #include "sprite.hpp"

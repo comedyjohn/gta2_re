@@ -206,27 +206,27 @@ s32 ParseTokenAndPush(char_type* pStr)
         {
             if (*pCurr == 'b')
             {
-                type = DataType::byte;
+                type = DataType::kByte;
                 ++pCurr;
             }
             else if (*pCurr == 'w')
             {
-                type = DataType::word;
+                type = DataType::kWord;
                 ++pCurr;
             }
             else if (*pCurr == 'l')
             {
-                type = DataType::dword;
+                type = DataType::kDword;
                 ++pCurr;
             }
             else if (*pCurr == 'f')
             {
-                type = DataType::fix16_float;
+                type = DataType::kFix16Float;
                 ++pCurr;
             }
             else
             {
-                type = DataType::byte;
+                type = DataType::kByte;
             }
 
             if (*pCurr == 'h')
@@ -242,7 +242,7 @@ s32 ParseTokenAndPush(char_type* pStr)
 
             switch (type)
             {
-                case DataType::byte:
+                case DataType::kByte:
                     if (bHex == 1)
                     {
                         error_ret = CarInfoTable::HexStr2Int(pCurr, &tmp);
@@ -276,7 +276,7 @@ s32 ParseTokenAndPush(char_type* pStr)
                     }
                     return error_ret;
 
-                case DataType::word:
+                case DataType::kWord:
                     if (bHex == 1)
                     {
                         error_ret = CarInfoTable::HexStr2Int(pCurr, &tmp);
@@ -306,7 +306,7 @@ s32 ParseTokenAndPush(char_type* pStr)
                     }
                     return error_ret;
 
-                case DataType::dword:
+                case DataType::kDword:
                     if (bHex == 1)
                     {
                         error_ret = CarInfoTable::HexStr2Int(pCurr, &parsed_value);
@@ -335,7 +335,7 @@ s32 ParseTokenAndPush(char_type* pStr)
                     }
                     return error_ret;
 
-                case DataType::fix16_float:
+                case DataType::kFix16Float:
                     error_ret = CarInfoTable::FloatStrToFix16(static_cast<char*>(pCurr), fix16_num);
 
                     if (!error_ret)

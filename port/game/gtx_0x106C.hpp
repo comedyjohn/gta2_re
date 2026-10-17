@@ -78,13 +78,13 @@ namespace car_info_flag
 {
 enum
 {
-    emergency = 0x2, // police/ambulance/FBI style lights, excluded from respray
-    roof_light = 0x4,
-    truck_cab = 0x8, // can pull a trailer
-    trailer = 0x10, // is a trailer (not enterable, has a hitch point)
-    taxi_light = 0x20,
-    bottom_roof_light = 0x40,
-    top_roof_lights = 0x80,
+    kEmergency = 0x2, // police/ambulance/FBI style lights, excluded from respray
+    kRoofLight = 0x4,
+    kTruckCab = 0x8, // can pull a trailer
+    kTrailer = 0x10, // is a trailer (not enterable, has a hitch point)
+    kTaxiLight = 0x20,
+    kBottomRoofLight = 0x40,
+    kTopRoofLights = 0x80,
 };
 } // namespace car_info_flag
 
@@ -93,8 +93,8 @@ namespace car_info_flag2
 {
 enum
 {
-    heavy = 0x1, // crushes cars, different crash sound and sprite number
-    popup_headlights = 0x2,
+    kHeavy = 0x1, // crushes cars, different crash sound and sprite number
+    kPopupHeadlights = 0x2,
 };
 } // namespace car_info_flag2
 
@@ -126,19 +126,19 @@ class StyleCarInfo
 
     bool IsTruckCab() const
     {
-        return (this->info_flags_ & car_info_flag::truck_cab) == car_info_flag::truck_cab;
+        return (this->info_flags_ & car_info_flag::kTruckCab) == car_info_flag::kTruckCab;
     }
 
     // Like IsTruckCab_41FEA0; going through a car_info method keeps the check a plain branch in
     // Car_BC::CanBeLiftedByCrane_447F00 (a direct `(flags & 0x10) == 0x10` there gives a sete)
     bool IsTrailer() const
     {
-        return (this->info_flags_ & car_info_flag::trailer) == car_info_flag::trailer;
+        return (this->info_flags_ & car_info_flag::kTrailer) == car_info_flag::kTrailer;
     }
 
     bool IsHeavy() const
     {
-        return (this->info_flags_2_ & car_info_flag2::heavy) == car_info_flag2::heavy;
+        return (this->info_flags_2_ & car_info_flag2::kHeavy) == car_info_flag2::kHeavy;
     }
 };
 
@@ -202,16 +202,16 @@ namespace tile_spec
 {
 enum
 {
-    none = 1,
-    grass_dirt_floor = 2,
-    road_junction_special = 3,
-    water = 4,
-    electrified_floor = 5,
-    electrified_platform_floor = 6,
-    wood_floor = 7,
-    metal_floor = 8,
-    metal_wall = 9,
-    grass_dirt_wall = 10,
+    kNone = 1,
+    kGrassDirtFloor = 2,
+    kRoadJunctionSpecial = 3,
+    kWater = 4,
+    kElectrifiedFloor = 5,
+    kElectrifiedPlatformFloor = 6,
+    kWoodFloor = 7,
+    kMetalFloor = 8,
+    kMetalWall = 9,
+    kGrassDirtWall = 10,
 };
 //static_assert(sizeof(tile_spec) == 1)
 } // namespace tile_spec

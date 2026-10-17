@@ -780,7 +780,8 @@ class Car_BC
     // TODO: Find 9.6f addr
     bool HasEmergencyInfoFlag()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::emergency) == car_info_flag::emergency;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kEmergency) ==
+            car_info_flag::kEmergency;
     }
 
     bool IsMaxDamage_40F890()
@@ -820,41 +821,41 @@ class Car_BC
     // 9.6f inline 0x421700
     bool HasPopupHeadlights_421700()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_2_ & car_info_flag2::popup_headlights) ==
-            car_info_flag2::popup_headlights;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_2_ & car_info_flag2::kPopupHeadlights) ==
+            car_info_flag2::kPopupHeadlights;
     }
 
     // 9.6f inline 0x421660
     bool HasRoofLight_421660()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::roof_light) ==
-            car_info_flag::roof_light;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kRoofLight) ==
+            car_info_flag::kRoofLight;
     }
 
     bool IsTrailerInfo_421640()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::trailer) == car_info_flag::trailer;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTrailer) == car_info_flag::kTrailer;
     }
 
     // 9.6f inline 0x4216C0
     bool HasTaxiLight_4216C0()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::taxi_light) ==
-            car_info_flag::taxi_light;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTaxiLight) ==
+            car_info_flag::kTaxiLight;
     }
 
     // 9.6f inline 0x421680
     bool HasBottomLeftRoofLight_421680()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::bottom_roof_light) ==
-            car_info_flag::bottom_roof_light;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kBottomRoofLight) ==
+            car_info_flag::kBottomRoofLight;
     }
 
     // 9.6f inline 0x4216A0
     bool HasTopRoofLights_4216A0()
     {
-        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::top_roof_lights) ==
-            car_info_flag::top_roof_lights;
+        return (gGtx_0x106C_703DD4->GetCarInfo(field_84_car_info_idx)->info_flags_ & car_info_flag::kTopRoofLights) ==
+            car_info_flag::kTopRoofLights;
     }
 
     void SetBottomLeftRoofLightDelta_421810()

@@ -8,10 +8,10 @@ namespace DataType
 {
 enum
 {
-    byte = 0,
-    word = 1,
-    dword = 2,
-    fix16_float = 3,
+    kByte = 0,
+    kWord = 1,
+    kDword = 2,
+    kFix16Float = 3,
 };
 } // namespace DataType
 

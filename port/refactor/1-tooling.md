@@ -181,10 +181,10 @@ Disabled for good, with the reason in `.clang-tidy`: `modernize-use-trailing-ret
 
 ## 1.6 Includes
 
-- [ ] `misc-include-cleaner` (2,886) with `-fix`, one subsystem per commit; add forward declarations
+- [x] `misc-include-cleaner` (2,886) with `-fix`, one subsystem per commit; add forward declarations
       where a header only needs a pointer. Headers that pull in `<windows.h>` without needing it go first
       (`fix16.hpp` does, and every file includes it).
-- [ ] Every header compiles on its own: CI builds a generated `.cpp` per header that includes only it.
+- [x] Every header compiles on its own: CI builds a generated `.cpp` per header that includes only it.
 - [ ] Measure build time before and after (`ninja -t compdb`, `time cmake --build` from clean).
 
 ## 1.7 Build and CI

@@ -49,7 +49,7 @@ DEFINE_GLOBAL(u8, gPathFinder_edge4_grid_y_6FDBF1, 0x6FDBF1);
 // 0x554080
 bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
 {
-    if (field_25_xpos > 1u && field_25_xpos < 254u && field_26_ypos > 1u && field_26_ypos < 254u)
+    if (field_25_xpos > 1U && field_25_xpos < 254U && field_26_ypos > 1U && field_26_ypos < 254U)
     {
         bool result = gMap_0x370_6F6268->CanMoveOntoSlopeTile_4E0130(field_25_xpos,
                                                                      field_26_ypos,
@@ -926,7 +926,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     {
         return false;
     }
-    if (*zpos > 6u || *zpos == 0)
+    if (*zpos > 6U || *zpos == 0)
     {
         return false;
     }

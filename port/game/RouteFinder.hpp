@@ -27,12 +27,12 @@ class Link_2
 
     void Disable_40CEC0()
     {
-        field_0 &= ~0x8000u;
+        field_0 &= ~0x8000U;
     }
 
     void Enable_40CEB0()
     {
-        field_0 |= 0x8000u;
+        field_0 |= 0x8000U;
     }
 
     u16 field_0;

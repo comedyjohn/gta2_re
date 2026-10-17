@@ -1294,7 +1294,6 @@ port/game/PathFinder_2FD4.cpp,readability-function-size,3
 port/game/PathFinder_2FD4.cpp,readability-implicit-bool-conversion,42
 port/game/PathFinder_2FD4.cpp,readability-make-member-function-const,2
 port/game/PathFinder_2FD4.cpp,readability-simplify-boolean-expr,5
-port/game/PathFinder_2FD4.cpp,readability-uppercase-literal-suffix,5
 port/game/PathFinder_2FD4.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/PathFinder_2FD4.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/PathFinder_2FD4.hpp,cppcoreguidelines-pro-type-member-init,1
@@ -2289,7 +2288,6 @@ port/game/map_0x370.cpp,readability-function-size,4
 port/game/map_0x370.cpp,readability-implicit-bool-conversion,363
 port/game/map_0x370.cpp,readability-make-member-function-const,16
 port/game/map_0x370.cpp,readability-simplify-boolean-expr,4
-port/game/map_0x370.cpp,readability-uppercase-literal-suffix,21
 port/game/map_0x370.hpp,cppcoreguidelines-avoid-c-arrays,8
 port/game/map_0x370.hpp,cppcoreguidelines-avoid-non-const-global-variables,10
 port/game/map_0x370.hpp,cppcoreguidelines-macro-usage,1

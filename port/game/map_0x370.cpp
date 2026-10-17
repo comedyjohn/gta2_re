@@ -65,7 +65,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFpSevenEighths_6F6218, Fix16(0x3800, 0), 0x6F6218);
 DEFINE_GLOBAL_INIT(Fix16, kFp255_6F5B8C, Fix16(255), 0x6F5B8C);
 DEFINE_GLOBAL_INIT(Fix16, kFpTen_6F6184, Fix16(10), 0x6F6184);
 DEFINE_GLOBAL_INIT(Fix16, kFpSeven_6F6128, Fix16(7), 0x6F6128);
-DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6F5FE0, Fix16(0.5f), 0x6F5FE0);
+DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6F5FE0, Fix16(0.5F), 0x6F5FE0);
 
 DEFINE_GLOBAL(gmp_block_info*, dword_6F5F98, 0x6F5F98);
 DEFINE_GLOBAL(gmp_map_slope*, dword_6F6080, 0x6F6080);
@@ -285,7 +285,7 @@ gmp_map_zone* Map_0x370::zone_by_type_bounded_4DF0F0(u8 zone_type)
             if (get_zone_4DFB30(field_364_cur_zone_idx)->field_0_zone_type == field_368_zone_type)
             {
                 zone_stack[idx++] = field_364_cur_zone_idx;
-                if (idx >= 40u)
+                if (idx >= 40U)
                 {
                     break;
                 }
@@ -1914,16 +1914,16 @@ char Map_0x370::CanSpriteEnterTile_4E1E00(s32 regionLeft,
         gradient_direction = dword_6F5EC8->field_0_gradient_direction;
         switch (gradient_direction)
         {
-            case 1u:
+            case 1U:
                 ++dword_6F5FAC;
                 break;
-            case 2u:
+            case 2U:
                 ++dword_6F6248;
                 break;
-            case 3u:
+            case 3U:
                 ++dword_6F5BA0;
                 break;
-            case 4u:
+            case 4U:
                 ++dword_6F620C;
                 break;
             default:
@@ -2353,7 +2353,7 @@ char_type Map_0x370::sub_4E4630(Fix16 zpos_f16)
                 }
                 else
                 {
-                    if (bUnk && get_slope_bits(slope_byte) == 0xFCu)
+                    if (bUnk && get_slope_bits(slope_byte) == 0xFCU)
                     {
                         return 2;
                     }
@@ -2691,7 +2691,7 @@ Fix16 Map_0x370::sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos)
                 if (!is_air_type(slope_byte))
                 {
                     u8 slope = get_slope_bits(slope_byte);
-                    if (slope <= 0 || slope >= 0xB4u) // !is_gradient_slope(slope_byte)
+                    if (slope <= 0 || slope >= 0xB4U) // !is_gradient_slope(slope_byte)
                     {
                         return curr_z;
                     }
@@ -4089,8 +4089,8 @@ char_type Map_0x370::CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z)
             {
                 u8 slope_type = pDMap->field_4000C_block[block_idx].field_B_slope_type;
                 u8 slope_type_masked = slope_type & 0xFC;
-                if (((slope_type & 0xFCu) < 0xB4 || slope_type_masked > 0xF4u) &&
-                    (slope_type_masked <= 0 || slope_type_masked >= 0xB4u || (slope_type & 3) == 0))
+                if (((slope_type & 0xFCU) < 0xB4 || slope_type_masked > 0xF4U) &&
+                    (slope_type_masked <= 0 || slope_type_masked >= 0xB4U || (slope_type & 3) == 0))
                 {
                     return 1;
                 }
@@ -4108,7 +4108,7 @@ char_type Map_0x370::CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z)
                 if ((pDMap->field_4000C_block[idx].field_8_lid & 0x1000) == 0)
                 {
                     u8 slope_type_masked_ = pDMap->field_4000C_block[idx].field_B_slope_type & 0xFC;
-                    if (slope_type_masked_ < 0xB4u || slope_type_masked_ > 0xF4u)
+                    if (slope_type_masked_ < 0xB4U || slope_type_masked_ > 0xF4U)
                     {
                         return 1;
                     }
@@ -4666,7 +4666,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
     File::Global_Read_4A71C0(&field_0_pDmap->field_0_base[0][0], 0x40000);
     File::Global_Read_4A71C0(&field_0_pDmap->field_40000_column_words, sizeof(DWORD));
 
-    if ((field_0_pDmap->field_40000_column_words + 1024) > 0x20000u)
+    if ((field_0_pDmap->field_40000_column_words + 1024) > 0x20000U)
     {
         FatalError_4A38C0(Gta2Error::MapHasTooManyColumns,
                           "C:\\Splitting\\Gta2\\Source\\map.cpp",
@@ -4688,7 +4688,7 @@ void Map_0x370::load_dmap_4E92B0(u32 len)
 
     File::Global_Read_4A71C0(&field_0_pDmap->field_40004_num_blocks, 4);
 
-    if ((field_0_pDmap->field_40004_num_blocks + 200) > 0x20000u)
+    if ((field_0_pDmap->field_40004_num_blocks + 200) > 0x20000U)
     {
         FatalError_4A38C0(Gta2Error::MapHasTooManyBlocks,
                           "C:\\Splitting\\Gta2\\Source\\map.cpp",
@@ -4722,27 +4722,27 @@ void Map_0x370::load_rgen_4E94A0()
 // 0x4E94B0
 void Map_0x370::load_chunk_4E94B0(const char_type* pChunkType, u32 chunkLen)
 {
-    if (!strncmp(pChunkType, "DMAP", 4u))
+    if (!strncmp(pChunkType, "DMAP", 4U))
     {
         load_dmap_4E92B0(chunkLen);
     }
-    else if (!strncmp(pChunkType, "ZONE", 4u))
+    else if (!strncmp(pChunkType, "ZONE", 4U))
     {
         load_zone_4E9250(chunkLen);
     }
-    else if (!strncmp(pChunkType, "MOBJ", 4u))
+    else if (!strncmp(pChunkType, "MOBJ", 4U))
     {
         load_mobj_4E91A0(chunkLen);
     }
-    else if (!strncmp(pChunkType, "ANIM", 4u))
+    else if (!strncmp(pChunkType, "ANIM", 4U))
     {
         load_anim_4E9280(chunkLen);
     }
-    else if (!strncmp(pChunkType, "LGHT", 4u))
+    else if (!strncmp(pChunkType, "LGHT", 4U))
     {
         load_lght_4E9200(chunkLen);
     }
-    else if (!strncmp(pChunkType, "RGEN", 4u))
+    else if (!strncmp(pChunkType, "RGEN", 4U))
     {
         load_rgen_4E94A0();
     }

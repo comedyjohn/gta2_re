@@ -74,7 +74,6 @@ class SpriteTreeNodePool_2EE4
         }
     }
 
-    // 9.6f 0x4C4B70
     void Reset_4C4B70()
     {
         field_2EE0_next_free_idx = 0;

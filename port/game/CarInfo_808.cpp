@@ -184,7 +184,6 @@ s32 CarInfo_808::ReadToken_430B10(char* pOut)
     return -5;
 }
 
-// https://decomp.me/scratch/YniJR
 // 0x430C70
 s32 ParseTokenAndPush_430C70(char_type* pStr)
 {

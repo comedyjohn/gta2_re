@@ -679,7 +679,6 @@ GridCell_C* SpriteGrid_400::GetFirstXCellInRow_478590(s32 y_pos)
     return pIter;
 }
 
-// https://decomp.me/scratch/me1ge
 // 0x4785d0
 char_type SpriteGrid_400::CheckRowForRectCollisions_4785D0(u32 y_pos, Fix16_Rect* pRect)
 {

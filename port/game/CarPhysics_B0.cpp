@@ -192,7 +192,6 @@ DEFINE_GLOBAL_INIT(Fix16, kFP16One_6FE0F4, k_dword_6FE210, 0x6FE0F4);
 DEFINE_GLOBAL_INIT(Fix16, kFP16One_6FE0D4, k_dword_6FE210, 0x6FE0D4);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Quarter_6FDFB8, kFP16Quarter_6FDFD4, 0x6FDFB8);
 
-// 9.6f 0x49EF50
 inline void CarPhysics_B0::AddDamage_49EF50(s32 damage)
 {
     u32 new_damage = gpRng_67AB34->get_cur_rng_41CFE0() + damage;
@@ -216,8 +215,6 @@ Fix16_Point CarPhysics_B0::get_linvel_447010()
 
 wchar_t gThetaText_66A8EC[32]; //DEFINE_GLOBAL_ARRAY(wchar_t, gThetaText_66A8EC, 32, 0x66A8EC); // global crashing standalone
 
-// https://decomp.me/scratch/xqLh0
-// 9.6f 0x49E240
 inline wchar_t* Ang16::ThetaText_49E240()
 {
     swprintf(gThetaText_66A8EC, L"%3.2f", (rValue * 0.25));
@@ -645,7 +642,6 @@ char_type CarPhysics_B0::IsAccelerationOrReverseOn_55A180()
     return 0;
 }
 
-// 9.6f 0x49F760
 // 0x55a1d0
 void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY, Fix16 targetAngle, s32* rotationMode)
 {
@@ -827,7 +823,6 @@ void CarPhysics_B0::ResetForceAccumulators_55A840()
     field_80_angular_accel = 0;
 }
 
-// https://decomp.me/scratch/efo3b
 // 0x55a860
 void CarPhysics_B0::HandleUserInputs_55A860(char_type bForwardGasOn,
                                             char_type bFootBrakeOn,
@@ -1558,7 +1553,6 @@ void CarPhysics_B0::BinarySearchCollisionTime_55C560(Fix16& low, Fix16& high)
     }
 }
 
-// https://decomp.me/scratch/A5Yhg
 // 0x55c5c0
 void CarPhysics_B0::HandleMapBoundaryCollisionY_55C5C0(Fix16_Point& pPoint, Ang16 angle)
 {
@@ -1604,7 +1598,6 @@ void CarPhysics_B0::HandleMapBoundaryCollisionY_55C5C0(Fix16_Point& pPoint, Ang1
     CarPhysics_B0::HandleWorldCollision_55FD00(RelativePointVelocity);
 }
 
-// https://decomp.me/scratch/N4ktT
 // 0x55c820
 void CarPhysics_B0::HandleMapBoundaryCollisionX_55C820(Fix16_Point& pPoint, Ang16 angle)
 {
@@ -1650,7 +1643,6 @@ void CarPhysics_B0::HandleMapBoundaryCollisionX_55C820(Fix16_Point& pPoint, Ang1
     CarPhysics_B0::HandleWorldCollision_55FD00(RelativePointVelocity);
 }
 
-// 9.6f 0x4A4170
 // 0x55ca70
 void CarPhysics_B0::DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle)
 {
@@ -1703,7 +1695,6 @@ void CarPhysics_B0::DispatchCollision_55CA70(Fix16_Point& point, Ang16 angle)
     gCollisionSoundQueue_66AFE0->AddCollision_40BBA0(field_5C_pCar->field_50_car_sprite, gCollisionDamage_6FE33C);
 }
 
-// https://decomp.me/scratch/0TpGe
 // 0x55cbb0
 void CarPhysics_B0::ReplayAndDispatchCollision_55CBB0(Fix16 step_a, Fix16 step_b)
 {
@@ -1730,7 +1721,6 @@ void CarPhysics_B0::ReplayAndDispatchCollision_55CBB0(Fix16 step_a, Fix16 step_b
     }
 }
 
-// 9.6f 0x4A0120
 // 0x55d200
 void CarPhysics_B0::SpawnSkidSegment_55D200(s32 box_idx, Fix16_Point arg_4, s32 surface)
 {
@@ -1847,7 +1837,6 @@ s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx)
     return 117;
 }
 
-// https://decomp.me/scratch/y9UHj
 // 0x55dc00
 void CarPhysics_B0::UpdateWheelSkidEffects_55DC00()
 {
@@ -2233,7 +2222,6 @@ char_type CarPhysics_B0::CheckPendingCollision_55F360()
 }
 
 // TODO: Probably move & Rename to ComputeImpulse or something
-// https://decomp.me/scratch/dN85v
 // 0x55F3B0
 Fix16_Point ComputeLineLineIntersection_55F3B0(Fix16 OwnerMass,
                                                Fix16 TargetMass,
@@ -2316,7 +2304,6 @@ void CarPhysics_B0::ApplyForceAndIntegrate_55F7A0(Fix16_Point* pPoint, Fix16_Poi
     IntegrateAndClampVelocities_5610B0();
 }
 
-// 9.6f 0x4A0850
 // 0x55f800
 void CarPhysics_B0::ApplyForceAtPoint_55F800(Fix16_Point* pPoint, Fix16_Point* pForce, s32 bRotate)
 {
@@ -2386,7 +2373,6 @@ void CarPhysics_B0::ApplyImpulseWithTrailerRedirect_55FA10(Fix16_Point* pPoint)
     }
 }
 
-// https://decomp.me/scratch/TSKLx
 // 0x55fa60
 Fix16 CarPhysics_B0::ApplyImpactForcesAndDamage_55FA60(Fix16_Point& PointOfForce, const Fix16_Point& Impulse, s32 base_dmg)
 {
@@ -2526,7 +2512,6 @@ void CarPhysics_B0::HandleWorldCollision_55FD00(Fix16_Point& pHitPoint)
     }
 }
 
-// https://decomp.me/scratch/IiClE
 // 0x55ff20
 void CarPhysics_B0::HandleCarCollision_55FF20(Car_BC* pOtherCar)
 {
@@ -2704,7 +2689,6 @@ Fix16 DotProduct_560680(const Fix16_Point& Vector1, const Fix16_Point& Vector2)
     return (Vector1.x * Vector2.x) + (Vector1.y * Vector2.y);
 }
 
-// https://decomp.me/scratch/tc7DX
 // 0x5606c0
 void CarPhysics_B0::HandleObjectCollision_5606C0(Object_2C* p2C, char_type damage_area)
 {
@@ -2986,8 +2970,6 @@ Fix16_Point CarPhysics_B0::ComputePointVelocity_561380(Fix16_Point& point)
     return new_pos - old_pos;
 }
 
-// https://decomp.me/scratch/5Hj13
-// 9.6f 0x4A0D40
 // 0x5615d0
 Fix16 CarPhysics_B0::ApplyDriveForce_5615D0(Fix16_Point& wheel_point, Ang16 angle, Fix16_Point& friction, Fix16 slip_speed)
 {
@@ -3044,8 +3026,6 @@ bool CarPhysics_B0::get_revs_561940()
     return gCarInfo_48_6FE258->field_1_turbo && this->field_60_gas_pedal >= k_dword_6FE1B8;
 }
 
-// https://decomp.me/scratch/0MzjM
-// 9.6f 0x4A0F30
 // 0x561970
 Fix16 CarPhysics_B0::ComputeEngineTorque_561970()
 {
@@ -3140,7 +3120,6 @@ Fix16 CarPhysics_B0::ComputeTorqueFromThrottle_561DD0()
     }
 }
 
-// https://decomp.me/scratch/46zAM
 // 0x561e50
 Fix16 CarPhysics_B0::CalculateFrontWheelForce_561E50()
 {
@@ -3390,7 +3369,6 @@ inline void MultiplyAssign_ProductTemp(Fix16& value, const Fix16& factor)
 }
 } // namespace
 
-// https://decomp.me/scratch/f2UpJ
 // 0x562560
 void CarPhysics_B0::UpdateSteeringAngle_562560()
 {
@@ -3582,8 +3560,6 @@ void CarPhysics_B0::StabilizeVelocityAtSpeed_562910()
     }
 }
 
-// https://decomp.me/scratch/0X4pK
-// 9.6f 0x4A1B20
 // 0x562d00
 void CarPhysics_B0::EnforceGearSensitiveMaxSpeed_562D00()
 {
@@ -3784,7 +3760,6 @@ bool CarPhysics_B0::ProcessCarPhysicsStateMachine_562FE0()
             field_98_surface_type != car_surface_type::water_surface_8 && field_98_surface_type != car_surface_type::air_surface_6);
 }
 
-// 9.6f 0x49ED00
 // 0x563280
 void CarPhysics_B0::UpdateCp1FromCm1_563280()
 {
@@ -3814,7 +3789,6 @@ void CarPhysics_B0::UpdateCenterOfMassPoint_563350()
 }
 
 // 0x49EDC0 9.6f
-// https://decomp.me/scratch/xDPiP
 // 0x563460
 void CarPhysics_B0::UpdateReferencePoint_563460()
 {

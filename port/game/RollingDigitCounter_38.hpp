@@ -21,7 +21,6 @@ class RollingDigitCounter_38
     bool IsAnyDigitRolling_4925C0();
     void UpdateRollingDigits_4925E0();
 
-    // 9.6f 0x4A50B0
     void SetValueClamped_4A50B0(s32 value)
     {
         if (value < -field_30_max_value)
@@ -38,7 +37,6 @@ class RollingDigitCounter_38
         }
     }
 
-    // 9.6f 0x41DC30
     s32 get_value()
     {
         return field_0_value;

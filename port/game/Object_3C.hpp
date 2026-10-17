@@ -66,7 +66,6 @@ class Object_3C
     Object_3C(); // 0x52ad80
     ~Object_3C(); // 0x52ade0
 
-    // 9.6f 0x482B20
     void PoolAllocate()
     {
         ++gObj3C_id_6F8E54;
@@ -81,7 +80,6 @@ class Object_3C
         field_30_bSkipAnim = 0;
     }
 
-    // 9.6f 0x482B80
     void PoolDeallocate()
     {
         --gObj3C_id_6F8E54;

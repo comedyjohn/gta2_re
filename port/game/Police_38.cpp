@@ -619,7 +619,6 @@ void PoliceCrew_38::sub_5720C0()
     }
 }
 
-// https://decomp.me/scratch/p2NiN
 // MaxAbsDistance_42A6B0 with a by-value max, which keeps the compare in registers
 // 0x572210
 bool PoliceCrew_38::sub_572210()
@@ -1262,7 +1261,6 @@ void PoliceCrew_38::State5_PursueOrChase_572920()
     }
 }
 
-// https://decomp.me/scratch/mAN9o
 // 0x574720
 void PoliceCrew_38::State6_ShutDown_574720()
 {

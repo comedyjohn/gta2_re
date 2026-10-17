@@ -34,7 +34,6 @@ class Ped_List_4
     void ApplyPassengerBusStopBehavior_471630();
     void ForceTaxiPassengersToExit_471680();
 
-    // 9.6f 0x445BB0
     u16 GetPedsCount_4716B0();
     void SyncPassengersWithCarState_4716D0(Car_BC* pCar);
     bool HasScriptCreatedPed_471710();
@@ -45,7 +44,6 @@ class Ped_List_4
         field_0_pFirstPed = nullptr;
     }
 
-    // 9.6f 0x420EA0
     bool IsEmpty_420EA0()
     {
         return field_0_pFirstPed == nullptr;

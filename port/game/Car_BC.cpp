@@ -878,7 +878,6 @@ Car_BC* CarManager_6C::GetNearestEnterableCarFromCoord_444FA0(Fix16 x, Fix16 y, 
     return DoGetNearestCarFromCoord_444FC0(x, y, z, 0, pPed, 0);
 }
 
-// 9.6f 0x424BD0
 // 0x444FC0
 Car_BC* CarManager_6C::DoGetNearestCarFromCoord_444FC0(Fix16 xpos,
                                                        Fix16 ypos,
@@ -1353,8 +1352,6 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
     return nullptr;
 }
 
-// https://decomp.me/scratch/HFGKH
-// 9.6f 0x426AC0
 // 0x446230
 Car_BC* CarManager_6C::SpawnCarAt_446230(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, s32 car_info_idx, Fix16 maybe_w_scale)
 {
@@ -1510,7 +1507,6 @@ void SpawnCabAndTrailerHelper_408370(Fix16 xpos,
     *pOutRot = cab_offset.Negate_40ACB0().atan2_40F790();
 }
 
-// 9.6f 0x428EC0
 // 0x446530
 Trailer* CarManager_6C::SpawnCabAndTrailer_446530(Fix16 xpos, Fix16 ypos, Ang16 rotation, s32 car_model, s32 trailer_model)
 {
@@ -1885,7 +1881,6 @@ bool Car_BC::IsPoliceCar_439EC0()
     return b;
 }
 
-// https://decomp.me/scratch/I0oG6
 // 0x439ee0
 Fix16 Car_BC::GetDamageFactorOnSpeed_439EE0()
 {
@@ -1914,7 +1909,6 @@ wchar_t* Car_BC::GetCarStr_439F80()
     return gText_0x14_704DFC->Find_5B5F90(gTmpGxtKey_67CE50);
 }
 
-// 9.6f 0x421C40
 // 0x439fb0
 Fix16_Point Car_BC::GetHitchPoint_439FB0()
 {
@@ -2020,7 +2014,6 @@ bool Car_BC::IsCarInAir_43A3C0()
     return field_58_physics->field_98_surface_type == car_surface_type::air_surface_6;
 }
 
-// 9.6f 0x421E00
 // 0x43a3e0
 Ang16 Car_BC::GetOrientationAngle_43A3E0()
 {
@@ -2170,7 +2163,6 @@ void Car_BC::AssignRandomRemap_43A7D0()
     }
 }
 
-// https://decomp.me/scratch/zoRIL
 // 0x43a850
 char_type Car_BC::GetCarModelForPhysics_43A850()
 {
@@ -2671,7 +2663,6 @@ char_type Car_BC::IsDoorAccessible_43AFE0(u8 target_door)
     return 0;
 }
 
-// 9.6f 0x425B60
 // 0x43b140
 bool Car_BC::IsStoppedWithPavementAtDoor_43B140(u8 target_car_door)
 {
@@ -2822,7 +2813,6 @@ inline void RotateVector_41FC90_NewX(Fix16& xpos, Fix16& ypos, Ang16& rotation)
 }
 } // namespace
 
-// https://decomp.me/scratch/2BtJU
 // 0x43b5a0
 void Car_BC::GetDoorWorldPosition_43B5A0(u8 target_door, Fix16* pOutX, Fix16* pOutY)
 {
@@ -3915,7 +3905,6 @@ void Car_BC::HandleCarExplosion_43D840(s32 type)
     }
 }
 
-// 9.6f 0x427180
 // 0x43da90
 s16 Car_BC::AccumulateDamage_43DA90(s16 damage, const Fix16_Point* pVec)
 {
@@ -4873,7 +4862,6 @@ void Car_BC::GotoBlock_441080(u8 x, u8 y, u8 z, s32 direction)
     field_5C_AI->GoToBlock_447CA0(x, y, z, direction);
 }
 
-// 9.6f 0x41FF90
 // 0x4410d0
 char_type Car_BC::CountConsecutiveArrowBlocks_4410D0(Ang16 ang, s8* pOutCount, Fix16 sprite_x, Fix16 sprite_y)
 {
@@ -5265,7 +5253,6 @@ void Car_BC::DetachTrailerAndUpdateDamage_4418B0()
     AddFlags_421890(car_flag::TrailerDetached);
 }
 
-// https://decomp.me/scratch/KU02C
 // 0x4418d0
 void Car_BC::HandleUserInput_4418D0(char_type forward_gas_on,
                                     char_type foot_brake_on,
@@ -5746,8 +5733,6 @@ char_type Car_BC::UpdateCarDespawnStatus_4424C0()
     }
 }
 
-// 9.6f 0x424220
-// https://decomp.me/scratch/vhWKK
 // 0x442520
 Ang16 Car_BC::GetRadioTowerAngle_442520()
 {
@@ -5774,9 +5759,7 @@ inline Fix16 WrapAngle_40E790(const Fix16& unk) // 9.6f inlined func
     return result;
 }
 
-// 9.6f 0x40ECB0
 // TODO: Move
-// https://decomp.me/scratch/GnD4O
 // 0x405CE0
 void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4, Fix16& a5)
 {
@@ -5842,7 +5825,6 @@ void SmoothApproachAngle_405CE0(const Fix16& a1, Fix16& a2, Fix16& a3, Fix16& a4
     a3 = WrapAngle_40E790(a3 + a2);
 }
 
-// 9.6f 0x424280
 // 0x4425d0
 void Car_BC::ManageTVAntenna_4425D0()
 {
@@ -5926,7 +5908,6 @@ void Car_BC::AttachTrailer_4427A0(Car_BC* pToFind)
     }
 }
 
-// 9.6f 0x4262E0
 // 0x442810
 void Car_BC::TryHitchTrailer_442810()
 {
@@ -6420,7 +6401,6 @@ void Car_BC::UpdateSpriteNum_4435F0()
     }
 }
 
-// 9.6f 0x426580
 // 0x443710
 void Car_BC::ApplyExplosionImpulse_443710(Fix16_Point* xy)
 {
@@ -7297,7 +7277,6 @@ char TrafficSpawner_14::IsInsideCameraEdge_582360(int direction, Fix16 x, Fix16 
     return 0;
 }
 
-// 9.6f 0x4B4A60
 // 0x5832C0
 void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
 {
@@ -7516,7 +7495,6 @@ Fix16 TrafficSpawner_14::GetRandomTrafficSpeed_583750(Fix16 max_speed, u8* pOut)
     return result;
 }
 
-// 9.6f 0x4B34E0
 // 0x582480
 char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_direction, s32 blocked_direction)
 {

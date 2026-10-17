@@ -62,7 +62,6 @@ inline bool IsLongerThanOneBlock_447ED0(Car_BC* pCar)
 }
 } // namespace
 
-// 9.6f 0x489B10
 // 0x534650
 void Garage_48::ValidateParkCommand_534650()
 {

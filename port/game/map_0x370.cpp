@@ -329,7 +329,6 @@ gmp_map_zone* Map_0x370::first_zone_by_type_4DF1D0(u8 zone_type)
     return nullptr;
 }
 
-// https://decomp.me/scratch/MqQPJ
 // 0x4DF240
 gmp_map_zone* Map_0x370::GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_type)
 {
@@ -950,7 +949,6 @@ char_type Map_0x370::sub_4E0120()
     return result;
 }
 
-// https://decomp.me/scratch/RMgzo
 // Returns true when moving from block (x, y, z) one step in path_direction is blocked, false when the move is allowed.
 // 0x400 in a block face word is the wall bit.
 // field_36E_bBlockedByTerrain is set when the move fails because there is no usable ground ahead (a missing block,
@@ -1683,7 +1681,6 @@ char_type Map_0x370::RectHitsDiagonalWall_4E11E0(Fix16_Rect* pRect)
     return 0;
 }
 
-// https://decomp.me/scratch/jaBFe
 // 0x4E1520
 bool Map_0x370::SpriteHitsDiagonalWall_4E1520(s32 z_pos)
 {
@@ -3270,7 +3267,6 @@ Fix16 Map_0x370::sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle)
     return result;
 }
 
-// https://decomp.me/scratch/9rRLR
 // 0x4E5E90
 char_type Map_0x370::HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock, s32 direction, char_type bDefault)
 {
@@ -3359,7 +3355,6 @@ s32 Map_0x370::GetArrowDirectionFromBlock_4E5FC0(gmp_block_info* pBlock, char_ty
     return result;
 }
 
-// https://decomp.me/scratch/RZ1Gp
 // 0x4E6190
 s16 Map_0x370::sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bFlag)
 {
@@ -4504,7 +4499,6 @@ void Map_0x370::GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
     *outSubObjBytes = 8 * this->field_4_obj.field_320_max_idx;
 }
 
-// https://decomp.me/scratch/eGx1i
 // 0x4E8E30
 void Map_0x370::do_process_loaded_zone_data_4E8E30()
 {

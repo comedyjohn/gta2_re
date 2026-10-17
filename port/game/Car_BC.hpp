@@ -108,7 +108,6 @@ class CarThreadTriggers_214
     void Reset_5C8750();
     void CheckThreadTrigger_5C8780(u8 idx, Sprite* pSprite);
 
-    // 9.6f 0x4768C0
     void SetTriggerEnableState_4768C0(u8 idx, s32 state)
     {
         field_0_triggers[idx].field_14_enable_state = state;
@@ -152,13 +151,11 @@ EXTERN_GLOBAL(Fix16, kFpOne_679E74);
 class CarManager_6C
 {
   public:
-    // 9.6f 0x421960
     Ped* GetSpareDriver_421960()
     {
         return field_4_unused;
     }
 
-    // 9.6f 0x421970
     void SetSpareDriver_421970(Ped* pPed)
     {
         field_4_unused = pPed;
@@ -363,7 +360,6 @@ class Trailer
     {
     }
 
-    // 9.6f 0x49EFB0
     char_type IsHitchAngleClamped_49EFB0()
     {
         return field_0_hitch_angle_clamped;
@@ -396,103 +392,86 @@ static inline bool IsArmyModel(s32 idx1)
 class Car_BC
 {
   public:
-    // 9.6f 0x42AC70
     void SetTurnRight_42AC70()
     {
         field_A6_bf.bTurnRight = 1;
     }
 
-    // 9.6f 0x42AC80
     void SetTurnLeft_42AC80()
     {
         field_A6_bf.bTurnLeft = 1;
     }
 
-    // 9.6f 0x42AC90
     void SetTurnRightReady_42AC90()
     {
         field_A6_bf.bTurnRightReady = 1;
     }
 
-    // 9.6f 0x421530
     void SetTurnLeftReady_421530()
     {
         field_A6_bf.bTurnLeftReady = 1;
     }
 
-    // 9.6f 0x421540
     void SetAIHalted_421540()
     {
         field_A6_bf.bAIHalted = 1;
     }
 
-    // 9.6f 0x421550
     void ClearAIHalted_421550()
     {
         field_A6_bf.bAIHalted = 0;
     }
 
-    // 9.6f 0x42ACA0
     void ClearTurnRight_42ACA0()
     {
         field_A6_bf.bTurnRight = 0;
     }
 
-    // 9.6f 0x42ACB0
     void ClearTurnLeft_42ACB0()
     {
         field_A6_bf.bTurnLeft = 0;
     }
 
-    // 9.6f 0x42AC60
     bool IsAIHalted_42AC60()
     {
         return field_A6_bf.bAIHalted == 1;
     }
 
-    // 9.6f 0x42AC20
     bool IsTurnRight_42AC20()
     {
         return field_A6_bf.bTurnRight == 1;
     }
 
-    // 9.6f 0x42AC30
     bool IsTurnLeft_42AC30()
     {
         return field_A6_bf.bTurnLeft == 1;
     }
 
-    // 9.6f 0x42AC40
     bool IsTurnRightReady_42AC40()
     {
         return field_A6_bf.bTurnRightReady == 1;
     }
 
-    // 9.6f 0x42AC50
     bool IsTurnLeftReady_42AC50()
     {
         return field_A6_bf.bTurnLeftReady == 1;
     }
 
-    // 9.6f 0x4118C0
     bool IsEngineOn_4118C0()
     {
         return field_9C_engine_status == car_engine_status::on_3;
     }
 
-    // 9.6f 0x421610
     bool IsTrain_421610()
     {
         return field_84_car_info_idx == car_model_enum::TRAIN;
     }
 
-    // 9.6f 0x421950
     void SetWeaponKind_421950(s32 v)
     {
         field_B4_weapon_kind = v;
     }
 
-    // 9.6f 0x4A51B0
     void SetDamage_4A51B0(s16 v)
     {
         field_74_damage = v;
@@ -707,7 +686,6 @@ class Car_BC
     void ClearHeadlightDeltas_447360();
     bool IsDrivenByNonPlayer_564300();
 
-    // 9.6f 0x411930
     bool IsFlagSet_411930(u16 flag)
     {
         if (field_78_flags & flag)
@@ -717,13 +695,11 @@ class Car_BC
         return false;
     }
 
-    // 9.6f 0x425770
     bool IsFlameproof_425770()
     {
         return IsFlagSet_411930(car_flag::Flameproof);
     }
 
-    // FUNCTION: 96f 0x4118d0
     s32 IsDrivenByPlayer_4118D0() const
     {
         if (field_54_driver != nullptr && field_54_driver->field_15C_player != nullptr)
@@ -818,7 +794,6 @@ class Car_BC
         return HasEmergencyLights_414F20() && field_A4_bf.bEmergencyLights;
     }
 
-    // 9.6f 0x4119D0
     s32 TakeWeaponKind_4119D0()
     {
         s32 ret = field_B4_weapon_kind;
@@ -826,7 +801,6 @@ class Car_BC
         return ret;
     }
 
-    // 9.6f 0x411950
     s32 TakeSoundEvent_411950()
     {
         s32 ret = field_AC_sound_event;
@@ -834,7 +808,6 @@ class Car_BC
         return ret;
     }
 
-    // FUNCTION: 96f 0x411940
     s32 GetCarInfoIdx_411940()
     {
         return field_84_car_info_idx;
@@ -901,13 +874,11 @@ class Car_BC
         AddFlags_421890(car_flag::Flameproof);
     }
 
-    // 9.6f 0x44A3E0
     void SetNoCollide_44A3E0()
     {
         AddFlags_421890(car_flag::NoCollide);
     }
 
-    // 9.6f 0x475C10
     void LockUnlessPermanent_475C10()
     {
         if (field_98_door_lock != Car_Door_Lock::locked_permanently_4)
@@ -916,13 +887,11 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x476360
     void SetCarThreadPending_476360()
     {
         field_8D_car_thread_flags |= 1;
     }
 
-    // 9.6f 0x475C40
     void LockoutThiefUnlessPermanent_475C40()
     {
         if (field_98_door_lock != Car_Door_Lock::locked_permanently_4)
@@ -931,13 +900,11 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x476270
     void SetFlag4_476270()
     {
         AddFlags_421890(car_flag::Flag4);
     }
 
-    // 9.6f 0x475C80
     void UnlockUnlessPermanent_475C80()
     {
         if (field_98_door_lock != Car_Door_Lock::locked_permanently_4)
@@ -946,13 +913,11 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x475C30
     void LockPermanently_475C30()
     {
         field_98_door_lock = Car_Door_Lock::locked_permanently_4;
     }
 
-    // 9.6f 0x421490
     void SetDespawn3IfNot5_421490()
     {
         if (field_88_despawn_status != car_despawn_status::despawning_5)
@@ -1071,19 +1036,16 @@ class Car_BC
             field_88_despawn_status == car_despawn_status::despawn_soon_3;
     }
 
-    // 9.6f 0x421870
     Player* GetDriverPlayer_421870()
     {
         return field_54_driver->field_15C_player;
     }
 
-    // 9.6f 0x421460
     void ClearHorn_421460()
     {
         field_A7_horn = 0;
     }
 
-    // 9.6f 0x4215F0
     void CancelDespawn_4215F0()
     {
         if (field_88_despawn_status == car_despawn_status::despawn_pending_2 ||
@@ -1094,19 +1056,16 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x4218F0
     s32 IsCarThreadPending_4218F0()
     {
         return field_8D_car_thread_flags & 1;
     }
 
-    // 9.6f 0x4218E0
     void ClearCarThreadPending_4218E0()
     {
         field_8D_car_thread_flags &= ~1U;
     }
 
-    // 9.6f 0x421570
     void ResetEngineStatus_421570()
     {
         if (field_9C_engine_status == car_engine_status::destroyed_6 || field_9C_engine_status == car_engine_status::unknown_5)
@@ -1115,7 +1074,6 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x421590
     void SetEngineDamaged_421590()
     {
         if (field_9C_engine_status != car_engine_status::destroyed_6)
@@ -1124,7 +1082,6 @@ class Car_BC
         }
     }
 
-    // 9.6f 0x421490
     void DespawnSoon_421490()
     {
         if (field_88_despawn_status != car_despawn_status::despawning_5)
@@ -1153,7 +1110,6 @@ class Car_BC
         field_88_despawn_status = car_despawn_status::deactivated_7;
     }
 
-    // FUNCTION: 96f 0x447ea0
     void ResetDespawnStatus_447EA0()
     {
         field_88_despawn_status = car_despawn_status::active_1;
@@ -1174,13 +1130,11 @@ class Car_BC
         return field_84_car_info_idx == car_model_enum::SWATVAN;
     }
 
-    // 9.6f 0x403BC0
     bool IsSwatVanOrBankVan_403BC0()
     {
         return field_84_car_info_idx == car_model_enum::SWATVAN || field_84_car_info_idx == car_model_enum::bank_van;
     }
 
-    // 9.6f 0x4119F0
     char_type IsTurretRotated_4119F0()
     {
         return field_B8_turret_rotated;
@@ -1191,7 +1145,6 @@ class Car_BC
         return field_84_car_info_idx == car_model_enum::FIRETRUK;
     }
 
-    // 9.6f 0x421780
     bool IsMediCar_421780()
     {
         return field_84_car_info_idx == car_model_enum::MEDICAR;
@@ -1276,7 +1229,6 @@ class Car_BC
         return field_76_last_seen_timer;
     }
 
-    // FUNCTION: 96f 0x4215b0
     bool IsDespawning_4215B0()
     {
         return field_88_despawn_status == car_despawn_status::despawning_5;
@@ -1305,7 +1257,6 @@ class Car_BC
         HeadlightsOn_43BFE0();
     }
 
-    // 9.6f 0x416B80
     void GetXYZ_416B80(Fix16* pX, Fix16* pY, Fix16* pZ)
     {
         *pX = field_50_car_sprite->field_14_xy.x;
@@ -1313,7 +1264,6 @@ class Car_BC
         *pZ = field_50_car_sprite->field_1C_zpos;
     }
 
-    // 9.6f 0x416BB0
     Ang16 GetCarRotation_416BB0()
     {
         return field_50_car_sprite->field_0_rotation;
@@ -1423,19 +1373,16 @@ struct Car_BC_Pool
         field_0_pool.DeAllocate(pCar);
     }
 
-    // 9.6f 0x45AD30
     s16 get_cars_count_45AD30()
     {
         return field_0_pool.field_X_count;
     }
 
-    // 9.6f 0x420E50
     Car_BC* GetFirstCar_420E50()
     {
         return field_0_pool.field_4_pPrev;
     }
 
-    // FUNCTION: 96f 0x420f20
     void UpdateNextPrev(Car_BC* pItem)
     {
         field_0_pool.UpdateNextPrev(pItem);
@@ -1455,7 +1402,6 @@ class TrailerPool
         field_0_pool.field_0_pHead = nullptr;
     }
 
-    // 9.6f 0x425580
     void Remove_425580(Trailer* pTrailer)
     {
         field_0_pool.DeAllocate(pTrailer);

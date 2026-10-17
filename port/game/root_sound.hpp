@@ -20,7 +20,6 @@ class root_sound
         return result;
     }
 
-    // 9.6f 0x410730
     SoundObject_10* PopFree_410730()
     {
         SoundObject_10* pCurrent = field_0_pFreeList;

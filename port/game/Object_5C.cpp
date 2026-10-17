@@ -99,7 +99,6 @@ DEFINE_GLOBAL_INIT(Fix16, kObjectBounceRestitution_6F8DBC, dword_6F8C78, 0x6F8DB
 // TODO: From CarPhysics_B0
 EXTERN_GLOBAL(Fix16_Point, CollisionIntersectionPoint_6FE1A0);
 
-// 9.6f 0x482C10
 inline bool Object_2C::IsAnimFinished_482C10()
 {
     return !field_C_pAny.o8->field_4_timer && !field_C_pAny.o8->field_7_anim_speed_counter;
@@ -464,7 +463,6 @@ void Object_2C::ResolveCollisionWithObject_522710(Object_2C* pObj, Fix16_Point* 
     HandleImpact_528E50(pObj->field_4);
 }
 
-// 9.6f 0x4867E0
 // 0x5229b0
 void Object_2C::ResolveCollisionWithPed_5229B0(Char_B4* pB4, Fix16_Point* pPoint, u8 not_used)
 {
@@ -551,7 +549,6 @@ void Object_2C::ResolveCollisionWithMapTile_522BE0(Fix16_Point* pPoint)
     ResolveCollisionWithWorld_522B20(&t1, &reflect_dir, &obj_speed);
 }
 
-// https://decomp.me/scratch/PMCb4
 // 0x522d00
 void Object_2C::ResolveCollisionWithMapTileHorizontal_522D00(Fix16_Point* pPoint)
 {
@@ -830,7 +827,6 @@ bool Object_2C::HandleSpriteGroundAndCollision_5235B0(Sprite* pSprite, Fix16_Poi
     }
 }
 
-// https://decomp.me/scratch/soZJL
 // 0x523770
 bool Object_2C::HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2)
 {
@@ -884,7 +880,6 @@ bool Object_2C::HandleSpriteGroundAndCollisionSimple_523770(Sprite* pSprite, Fix
     }
 }
 
-// https://decomp.me/scratch/1RN5H
 // 0x5238B0
 bool Object_2C::HandleSpriteZCollision_5238B0(Sprite* pSprite, Fix16_Point* pPoint, u8* pHit, u8* pHit2, Fix16 found_z)
 {
@@ -1437,7 +1432,6 @@ void Object_2C::OnAttachedSpriteDestroyed_525100()
     }
 }
 
-// https://decomp.me/scratch/jLuSq
 // 0x525190
 void Object_2C::OnExplosionNearby_525190(u8 ped_ref_idx)
 {
@@ -1986,7 +1980,6 @@ bool Object_2C::PoolUpdate()
     }
 }
 
-// 9.6f 0x4837F0
 // 0x526790
 void Object_2C::TriggerCarExplosionIfApplicable_526790(Sprite* pSprite)
 {
@@ -2075,7 +2068,6 @@ void Object_2C::InheritMotionFromSprite_526B40(Sprite* pSprite)
     }
 }
 
-// https://decomp.me/scratch/zqssg
 // 0x527070
 bool Object_2C::UpdateMovementAndEffects_527070(Sprite* pSprite, Fix16 x, Fix16 y, Ang16 rot)
 {
@@ -2273,7 +2265,6 @@ void Object_2C::RemoveFromCollisionBuckets_527D00()
     }
 }
 
-// 9.6f 0x484760
 // 0x527f10
 void Object_2C::ReleaseSubObjects_527F10()
 {
@@ -2309,7 +2300,6 @@ void Object_2C::ReleaseSubObjects_527F10()
     }
 }
 
-// 9.6f 0x4847D0
 // 0x528130
 void Object_2C::NewObj3C_528130(const Fix16_Point& speed)
 {
@@ -3088,7 +3078,6 @@ bool Object_2C::IsNotModel_174_529200()
     return (field_18_model != 174) ? true : false;
 }
 
-// https://decomp.me/scratch/lXvKN
 // 0x529210
 s32 Object_2C::GetExplosionSideFromDiagonalWall_529210()
 {
@@ -3402,7 +3391,6 @@ Object_2C* Object_5C::NewPhysicsObjUnlessBlocked_529BC0(s32 object_type, Fix16 x
     return tmp;
 }
 
-// 9.6f 0x484E00
 // 0x529c00
 Object_2C* Object_5C::CreateObject_529C00(int object_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation, char fail_if_blocked)
 {
@@ -3739,7 +3727,6 @@ void Object_5C::SaveObjects_52A500(SavedObjectData_164* pData)
 }
 
 // TODO: This is a mess, probably a fake match
-// https://decomp.me/scratch/juEUq
 // 0x52A590
 void Object_5C::RestoreObjects_52A590(SavedObjectData_164* pData)
 {

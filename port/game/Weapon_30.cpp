@@ -224,7 +224,6 @@ void Weapon_30::TickReloadSpeed_5DCF40()
     }
 }
 
-// 9.6f 0x4CDA90
 // 0x5dcf60
 Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rot, const Fix16_Point& speed)
 {
@@ -267,7 +266,6 @@ Object_2C* Weapon_30::spawn_bullet_5DCF60(s32 bullet_type, Fix16 xpos, Fix16 ypo
     return pNewBullet;
 }
 
-// https://decomp.me/scratch/73olU
 // 0x5dd0f0
 void Weapon_30::flamethrower_5DD0F0()
 {
@@ -314,7 +312,6 @@ void Weapon_30::flamethrower_5DD0F0()
     }
 }
 
-// https://decomp.me/scratch/3qEdg
 // The spread angles are built three ways: Ang16(s16, u8) gives the 16-bit add/sub + jns, operator+
 // (the const s16& ctor) gives the 32-bit lea + test/jge of the first tank shot, and the last tank shot
 // normalizes out of line through Normalize_406C20.
@@ -415,7 +412,6 @@ inline void FromPolar_41E210_sin_table(Fix16_Point& p, const Fix16& radius, cons
 }
 } // namespace
 
-// 9.6f 0x4CE070
 // 0x5dd860
 void Weapon_30::pistol_5DD860()
 {
@@ -543,7 +539,6 @@ void Weapon_30::dual_pistol_5DDA70()
     }
 }
 
-// https://decomp.me/scratch/lAo1H
 // 0x5ddd20
 void Weapon_30::smg_5DDD20()
 {
@@ -606,7 +601,6 @@ void Weapon_30::smg_5DDD20()
     }
 }
 
-// https://decomp.me/scratch/OrmRn
 // 0x5ddfc0
 void Weapon_30::throwable_5DDFC0(s32 obj_idx, s32 throw_strength, s32 throw_charge)
 {
@@ -1599,7 +1593,6 @@ inline void RotateByAngle_40F6B0_no_budget3(Fix16_Point& p, const Ang16& angle)
 }
 } // namespace
 
-// https://decomp.me/scratch/QliaE
 // 0x5e10e0
 void Weapon_30::tank_main_gun_5E10E0()
 {
@@ -1737,7 +1730,6 @@ void Weapon_30::army_gun_jeep_5E13E0()
     }
 }
 
-// https://decomp.me/scratch/75934
 // 0x5e1dc0
 void Weapon_30::oil_stain_5E1DC0()
 {
@@ -1809,7 +1801,6 @@ void Weapon_30::car_mine_5E2550()
     }
 }
 
-// 9.6f 0x4D0230
 // 10.5 https://decomp.me/scratch/odtu0
 // 0x5e2940
 void Weapon_30::car_smg_5E2940()
@@ -2161,7 +2152,6 @@ char_type Weapon_30::IsExplosiveWeapon_5E3BD0()
     return result;
 }
 
-// 9.6f 0x4CD8C0
 // 0x5E3F90
 void Weapon_30::GetSoundPos_5E3F90(Fix16* pX, Fix16* pY, Fix16* pZ)
 {

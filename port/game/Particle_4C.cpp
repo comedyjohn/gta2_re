@@ -59,7 +59,6 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FD5A8, Fix16(0xDCC, 0), 0x6FD5A8);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD2F8, Fix16(0x1999, 0), 0x6FD2F8);
 DEFINE_GLOBAL_INIT(Fix16, dword_6FD4AC, Fix16(4), 0x6FD4AC);
 
-// https://decomp.me/scratch/nKSYL
 // 0x538060
 char_type Particle_4C::UpdateFloatingParticle_state_6_15_16_17_538060()
 {
@@ -722,7 +721,6 @@ char_type Particle_4C::UpdateDirectedBurst_state_13_14_36_539480()
     return true;
 }
 
-// https://decomp.me/scratch/2UJLM
 // 0x539890
 char_type Particle_4C::UpdateCircularBurst_state_5_539890()
 {
@@ -1066,7 +1064,6 @@ char_type Particle_4C::Empty_state_42_53AB70()
     return 0;
 }
 
-// 9.6f 0x48C270
 // 0x53aba0
 char_type Particle_4C::UpdateSimpleBallisticMotion_state_1_53ABA0()
 {
@@ -1159,7 +1156,6 @@ char_type Particle_4C::Empty_state_44_53B170()
     return 0;
 }
 
-// https://decomp.me/scratch/fW2BZ
 // 0x53b1a0
 bool Particle_4C::UpdateDebrisArc_state_7_53B1A0()
 {
@@ -1219,7 +1215,6 @@ bool Particle_4C::UpdateDebrisArc_state_7_53B1A0()
     return false;
 }
 
-// 9.6f 0x48C790
 // 0x53b580
 char_type Particle_4C::UpdateShortAnim_state_37_53B580()
 {

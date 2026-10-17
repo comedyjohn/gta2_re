@@ -48,7 +48,6 @@ enum
 // TODO: Is this too big?
 u8 traffic_light_phase_timers_626840[] = {0x00, 0x64, 0x18, 0x18, 0x64, 0x18, 0x18, 0x96, 0x50, 0x00, 0x00, 0x00};
 
-// https://decomp.me/scratch/JogBj
 // 0x5C1D00
 void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
 {

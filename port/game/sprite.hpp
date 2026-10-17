@@ -52,14 +52,11 @@ class SpriteShape_4C
         return static_cast<u32>(reinterpret_cast<uintptr_t>(mpNext)) == a2;
     }
 
-    // 9.6f 0x41E390
-    // https://decomp.me/scratch/YTMyx
     bool IsZeroWidth_41E390() const
     {
         return (field_0_width == field_4_height && field_0_width <= kSmallWidthEpslion_703450) ? true : false;
     }
 
-    // 9.6f 0x482980
     void SetDimensions_482980(Fix16 w, Fix16 h, Fix16 depth)
     {
         field_0_width = w;
@@ -186,13 +183,11 @@ class SpriteShape_4C
 class Sprite
 {
   public:
-    // 9.6f 0x41C1F0
     s16 get_remap_41C1F0()
     {
         return field_24_remap;
     }
 
-    // 9.6f 0x4BA220
     void set_z_col_4BA220(char_type v)
     {
         field_39_z_col = v;
@@ -325,7 +320,6 @@ class Sprite
         *a4 = this->field_1C_zpos;
     }
 
-    // 9.6f 0x420700
     void SetPaletteSprites_420700()
     {
         field_34_palette_type = palette_types_enum::sprites_2;
@@ -336,7 +330,6 @@ class Sprite
         return field_30_sprite_type_enum;
     }
 
-    // FUNCTION: 96f 0x40feb0
     Car_BC* AsCar_40FEB0()
     {
         if (field_30_sprite_type_enum == sprite_types_enum::car_2)
@@ -364,13 +357,11 @@ class Sprite
     // 9.6f 0x4BA230, defined in sprite.cpp
     inline u16 GetTrueSpriteIdx_4BA230();
 
-    // 9.6f 0x446960
     Fix16 ManhattanDistance_446960(Sprite* pOther)
     {
         return Fix16::Abs(pOther->field_14_xy.x - field_14_xy.x) + Fix16::Abs(pOther->field_14_xy.y - field_14_xy.y);
     }
 
-    // 9.6f 0x446950
     bool IsTypeAbove1_446950()
     {
         return field_30_sprite_type_enum > sprite_types_enum::object_1;
@@ -505,20 +496,17 @@ class Sprite
         this->field_2C_flags |= 4U;
     }
 
-    // 9.6f 0x482A40
     void SetDimensions_482A40(Fix16 w, Fix16 h, Fix16 depth)
     {
         field_C_pCollisionShape->SetDimensions_482980(w, h, depth);
         ResetZCollisionAndDebugBoxes_59E7B0();
     }
 
-    // 9.6f 0x433800
     void ClearNoLighting_433800()
     {
         this->field_2C_flags &= ~4U;
     }
 
-    // 9.6f 0x4337D0
     void SetBlendAndAlpha_4337D0(u8 low_bits, u8 high_bits)
     {
         this->field_2C_flags = (high_bits << 3) | low_bits;
@@ -618,7 +606,6 @@ class SpriteMask_14
 
     void ClearMask_48F5C0(u8 xCount, u8 yCount);
 
-    // 9.6f 0x44af30
     SpriteMask_14()
     {
         field_C_last_used = 0;
@@ -627,7 +614,6 @@ class SpriteMask_14
         field_12 = 0;
     }
 
-    // 9.6f 0x44AF70
     void Invalidate_44AF70()
     {
         field_4_sprite_idx = -1;
@@ -778,7 +764,6 @@ class SpritePool
         field_0_pool.DeAllocate(pSprite);
     }
 
-    // 9.6f 0x48A8D0
     bool has_free_48A8D0()
     {
         return field_0_pool.field_0_pHead != nullptr;

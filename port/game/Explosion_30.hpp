@@ -32,7 +32,6 @@ class Explosion_30
     void Init_543650();
     void SetObject_543680(Object_2C* pObj);
 
-    // 9.6f 0x482A90
     void SetType_482A90(s32 type_or_state)
     {
         field_10_type = type_or_state;

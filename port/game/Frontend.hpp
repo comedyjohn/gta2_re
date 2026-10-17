@@ -300,7 +300,6 @@ struct Frontend
     u8 field_1EB50_num_main_stages;
     u8 field_1EB51_num_bonus_stages[3];
 
-    // 9.6f 0x453A30
     void SetField10D_453A30(const char_type& value)
     {
         field_10D_bInputEnabled = value;

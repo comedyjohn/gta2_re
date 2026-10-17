@@ -112,7 +112,6 @@ void RollingDigitCounter_38::ColorDigits_4921F0(s32 palette_type, s16 palette)
     }
 }
 
-// https://decomp.me/scratch/6E5vt
 // 0x492260
 s32 RollingDigitCounter_38::DrawDigitsRightAligned_492260(s32 base_xpos, s32 base_ypos)
 {

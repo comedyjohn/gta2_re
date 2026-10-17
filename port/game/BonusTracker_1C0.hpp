@@ -42,13 +42,11 @@ class BonusTracker_1C0
         k_max_rules = 10
     };
 
-    // 9.6f 0x476660
     u8 GetProgressCount_476660(u16 idx)
     {
         return field_0_bonuses[idx].field_26_progress_count;
     }
 
-    // 9.6f 0x476680
     void DeactivateBonus_476680(u16 idx)
     {
         field_0_bonuses[idx].Deactivate_431DB0();

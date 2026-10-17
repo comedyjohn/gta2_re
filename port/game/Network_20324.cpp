@@ -2242,7 +2242,6 @@ void Network_20324::OnEnterPressed_51BEB0(s32 nIDDlgItem, s32 player_idx)
     Network_20324::AppendChatMessage_51B4F0(player_idx, String);
 }
 
-// https://decomp.me/scratch/tQkqa
 // 0x51bfa0
 void Network_20324::EnumerateMaps_51BFA0()
 {
@@ -2523,7 +2522,6 @@ void Network_20324::SetFragsNumberAndLabel_51CDC0(s32 gameType, s32 fragLimit, H
     }
 }
 
-// https://decomp.me/scratch/gzeUC
 // The original leaves pText uninitialised for an unknown speed (it pushes whatever is in the
 // argument slot), and that is what gives each case its own copy of the call.
 // 0x51cfc0

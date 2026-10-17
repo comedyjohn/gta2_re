@@ -7,7 +7,6 @@ class Ped;
 class Car_Door_10
 {
   public:
-    // 9.6f 0x4341B0
     Ped* get_pObj_4341B0()
     {
         return field_8_pObj;
@@ -22,13 +21,11 @@ class Car_Door_10
     Car_Door_10(); // 447330
     ~Car_Door_10(); // 447350
 
-    // 9.6f 0x421360
     bool IsStateActive_421360()
     {
         return field_4_state != 0 && field_4_state != 6;
     }
 
-    // 9.6f 0x421340
     void ResetState_421340()
     {
         field_4_state = 0;

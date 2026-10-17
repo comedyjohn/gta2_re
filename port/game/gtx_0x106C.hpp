@@ -237,19 +237,16 @@ class gtx_0x106C
         }
     }
 
-    // 9.6f 0x462FB0
     bool IsWaterTile_462FB0(u16 spec_idx)
     {
         return field_6C_spec[spec_idx] == 4;
     }
 
-    // 9.6f 0x42A810
     bool IsRoadTile_42A810(u16 spec_idx)
     {
         return field_6C_spec[spec_idx] == 3;
     }
 
-    // 9.6f 0x462FD0
     s32 sub_462FD0(u16 spec_idx)
     {
         s32 result = field_6C_spec[spec_idx];
@@ -260,7 +257,6 @@ class gtx_0x106C
         return result;
     }
 
-    // 9.6f 0x49E570
     bool sub_49E570(u16 spec_idx)
     {
         if (field_6C_spec[spec_idx] == 4 && !IsTileRemapped_5AA850(spec_idx))
@@ -459,7 +455,6 @@ class gtx_0x106C
 
 EXTERN_GLOBAL(gtx_0x106C*, gGtx_0x106C_703DD4);
 
-// 9.6f 0x4C23D0
 inline s32 GetSpaceWidth_4C23D0(u16 font_type)
 {
     return gGtx_0x106C_703DD4->GetSpaceCharWidth_5AA7B0(&font_type);

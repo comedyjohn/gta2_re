@@ -903,7 +903,6 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
     }
 }
 
-// 9.6f 0x430650
 // 0x448770
 void CarAI_78::CheckRoadAhead_448770()
 {
@@ -1097,7 +1096,6 @@ void CarAI_78::CheckRoadAhead_448770()
     }
 }
 
-// https://decomp.me/scratch/NIiIz
 // 9.6f 0x430CC0. ClearSteeringIfTurning_4538B0 (9.6f 0x42FE40) is called once and inlined three times in 10.5
 // 0x448ce0
 void CarAI_78::ManageTrafficCarDirection_448CE0()
@@ -1675,7 +1673,6 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
     }
 }
 
-// https://decomp.me/scratch/FqWRo
 // 0x44a1f0
 void CarAI_78::FollowRoadDirection_44A1F0()
 {
@@ -4917,7 +4914,6 @@ void CarAI_78::ScanAheadForObstacles_452060()
     }
 }
 
-// https://decomp.me/scratch/zCa7m
 // 0x452a20
 void CarAI_78::ManageCollisions_452A20()
 {
@@ -5069,7 +5065,6 @@ void CarAI_78::ManageCollisions_452A20()
     }
 }
 
-// https://decomp.me/scratch/uZlwP
 // 0x452df0
 void CarAI_78::UpdateDrivingAI_452DF0()
 {

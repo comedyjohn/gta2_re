@@ -879,7 +879,6 @@ void PublicTransport_181C::InitTrainStations_579440()
     }
 }
 
-// https://decomp.me/scratch/kgg76
 // 0x5794b0
 void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
 {
@@ -1224,7 +1223,6 @@ bool PublicTransport_181C::GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk)
     return false;
 }
 
-// https://decomp.me/scratch/5m4jV
 // 0x579ca0
 void PublicTransport_181C::BusesService_579CA0()
 {

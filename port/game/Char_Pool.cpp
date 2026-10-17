@@ -632,7 +632,6 @@ void PedManager::Dummies_470330()
     }
 }
 
-// https://decomp.me/scratch/dQf8H
 // 0x4703f0
 void PedManager::PedsService_4703F0()
 {
@@ -693,7 +692,6 @@ void PedManager::PedsService_4703F0()
     }
 }
 
-// https://decomp.me/scratch/P1OvR
 // 0x470650
 PedManager::PedManager()
 {
@@ -850,7 +848,6 @@ Ped* PedManager::SpawnDriver_470B00(Car_BC* pCar)
     return pNewPed;
 }
 
-// https://decomp.me/scratch/6AW5o
 // 0x470ba0
 Ped* PedManager::SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang)
 {
@@ -949,7 +946,6 @@ Ped* PedManager::SpawnRunAwayGuy_470D60()
     return pPed;
 }
 
-// 9.6f 0x43DEB0
 // 0x470e30
 Ped* PedManager::SpawnTrainLeaver_470E30()
 {

@@ -185,7 +185,6 @@ inline Fix16 Sign_4B9C20(s32& a2)
 }
 } // namespace
 
-// 9.6f 0x4207B0
 // 0x443580
 Fix16_Point Sprite::get_x_y_443580()
 {
@@ -405,7 +404,6 @@ void DamageAreaFlags::Delta_48F820(u16& sprite_idx, u8* pArray, u32& a3, u8& wid
     }
 }
 
-// 9.6f 0x4BA230
 inline u16 Sprite::GetTrueSpriteIdx_4BA230()
 {
     return gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_30_sprite_type_enum, field_22_type_sprite_idx);
@@ -662,7 +660,6 @@ void Sprite::IncreaseZoom_59E320(char_type delta)
     }
 }
 
-// https://decomp.me/scratch/dijmx
 // 0x59e390
 bool Sprite::ShrinkSprite_59E390(Fix16 xoff, Fix16 yoff, s32 bUnknown)
 {
@@ -726,7 +723,6 @@ void Sprite::ApplyScaleToDimensions_59E4C0(Fix16 scale, s32 bScale_Field_C_4C)
     }
 }
 
-// https://decomp.me/scratch/GIpfM
 // 0x59E590
 char_type Sprite::CollisionCheck_59E590(Sprite* pOther)
 {
@@ -749,7 +745,6 @@ char_type Sprite::CollisionCheck_59E590(Sprite* pOther)
     return 0;
 }
 
-// 9.6f 0x4BDF20
 // 0x59E680
 char_type Sprite::CheckDirectionalSliceCollision_59E680(Fix16 sliceLen, Sprite* pSprite)
 {
@@ -1096,7 +1091,6 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
     }
 }
 
-// https://decomp.me/scratch/EHeIY
 // 0x59eff0
 void Sprite::Draw_59EFF0()
 {
@@ -1689,7 +1683,6 @@ char_type Sprite::CheckBBoxScanlineIntersection_5A0970(Fix16 scanXMin, Fix16 sca
     return 0;
 }
 
-// https://decomp.me/scratch/EK1Y2
 // 0x5A0A70
 bool Sprite::GetNearestHorizontalEdgeToCoordinate_5A0A70(Fix16 a2, Fix16_Point& point, u8& a4)
 {
@@ -1782,7 +1775,6 @@ char_type Sprite::HitTestVerticalLine_5A0EF0(Fix16 x, Fix16 y1, Fix16 y2)
     return 0;
 }
 
-// https://decomp.me/scratch/ScgaC
 // 0x5a1030
 bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16_Point& a3, u8& a4)
 {
@@ -1861,7 +1853,6 @@ bool Sprite::GetNearestVerticalEdgeToCoordinate_5A1030(Fix16 a2, Fix16_Point& a3
     return true;
 }
 
-// https://decomp.me/scratch/2RoLd
 // 0x5a1490
 bool Sprite::PointInsideRotatedBounds_5A1490(Fix16_Point& point1, Fix16_Point& point2)
 {
@@ -2204,7 +2195,6 @@ Ang16 Sprite::GetNegatedAngle_5A26E0()
     return -field_0_rotation;
 }
 
-// https://decomp.me/scratch/tc76b
 // 0x5a2710
 Fix16_Point Sprite::FindCollisionIntersectionPoint_5A2710(Sprite* pOther,
                                                           Fix16_Point& newPos,
@@ -2419,7 +2409,6 @@ Sprite::~Sprite()
     FreeSound_5A2A00();
 }
 
-// https://decomp.me/scratch/RAdGk
 // 0x5A3550
 void SpriteShape_4C::UpdateRotatedBoundingBox_5A3550(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation)
 {

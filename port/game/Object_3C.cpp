@@ -17,7 +17,6 @@ DEFINE_GLOBAL(SpriteList_4, stru_67727C, 0x67727C);
 EXTERN_GLOBAL(Fix16, dword_6F8ECC);
 
 // 10.5 https://decomp.me/scratch/kj3y3
-// 9.6f 0x482D90
 // 0x521FD0
 void Object_3C::GetMovementSpeedAndAngle_521FD0(Fix16& Speed, Ang16& Angle)
 {
@@ -69,7 +68,6 @@ Object_3C::~Object_3C()
     mpNext = nullptr;
 }
 
-// 9.6f 0x482BA0
 // 0x52adf0
 Fix16_Point Object_3C::GetSpeedVector_52ADF0()
 {
@@ -533,7 +531,6 @@ void SpriteList_4::DestroyAllSprites_5A7010()
     ClearList_5A6E10();
 }
 
-// https://decomp.me/scratch/hQof2
 // 0x5a7080
 void SpriteList_4::CleanupSpriteList_5A7080()
 {

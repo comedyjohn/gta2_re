@@ -19,7 +19,6 @@ class Object_8
         field_4_timer = 0;
     }
 
-    // 9.6f 0x482AF0
     void PoolDeallocate()
     {
         --gObj8_count_6F8F18;

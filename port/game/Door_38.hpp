@@ -51,7 +51,6 @@ struct DoorAnimInfo_A
 class Door_38
 {
   public:
-    // 9.6f 0x476A90
     s32 get_state_476A90()
     {
         return field_20_state;
@@ -93,20 +92,17 @@ class Door_38
     // 9.6f 0x476A30, defined in Door_4D4.hpp (needs DoorData_10)
     inline void CloseDoors_476A30();
 
-    // 9.6f 0x4895F0
     void ClearF2C_4895F0()
     {
         field_2C_bCanAutoOpen = 0;
     }
 
-    // 9.6f 0x489600
     bool IsDoubleDoor_489600()
     {
         return field_0_primary_door_data && field_4_secondary_door_data;
     }
 
     // inlined in 0x476990
-    // 9.6f 0x476990
     void set_field_20(u32 v)
     {
         field_20_state = v;

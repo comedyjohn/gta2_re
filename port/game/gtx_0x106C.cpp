@@ -349,7 +349,6 @@ void gtx_0x106C::InitTileMapping_5AA950()
 }
 
 // Better score:
-// https://decomp.me/scratch/IKsR3
 // Current WIP (lower score, but more runtime correct?):
 // https://decomp.me/scratch/CqJJm
 // 0x5AA9A0
@@ -1255,7 +1254,6 @@ gtx_0x106C::~gtx_0x106C()
     field_40_tile = nullptr;
 }
 
-// https://decomp.me/scratch/CjuP1
 // 0x5ABA00
 void sprite_delta::Delta_5ABA00(u8* pArray)
 {

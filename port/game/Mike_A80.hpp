@@ -61,7 +61,6 @@ struct Mike_8
         field_0 = 0;
         field_4 = 0;
     }
-    // 9.6f 0x474430
     s32 TakeElapsed()
     {
         s32 elapsed = field_4 - field_0;

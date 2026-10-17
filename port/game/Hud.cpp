@@ -305,7 +305,6 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
 
 // ----------------------------------------------------
 
-// https://decomp.me/scratch/bd2MO
 // 0x5cfa70
 void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
 {
@@ -485,7 +484,6 @@ void Hud_CopHead_C_Array::UpdateWantedLevel_5D00B0()
     }
 }
 
-// https://decomp.me/scratch/QYlEW
 // 0x5d0110
 void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
 {
@@ -717,7 +715,6 @@ bool Hud_Arrow_7C::CheckVisibility_5D0530()
     return true;
 }
 
-// https://decomp.me/scratch/pp6SY
 // 0x5d0620
 bool Hud_Arrow_7C::UpdateTargets_5D0620()
 {
@@ -760,7 +757,6 @@ bool Hud_Arrow_7C::UpdateTargets_5D0620()
     return false;
 }
 
-// https://decomp.me/scratch/CoKn3
 // 0x5d0850
 void Hud_Arrow_7C::UpdateScreenPos_5D0850()
 {
@@ -955,7 +951,6 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
 
 // ----------------------------------------------------
 
-// 9.6f 0x4C7380
 inline s32 TagGame_28::GetPlayerTime_4C7380(Player* pPlayer)
 {
     return field_4_it_time_secs[pPlayer->get_idx_4219D0()];
@@ -1448,7 +1443,6 @@ bool Hud_ChatInput_1::IsTypingOnChat_5D15E0(s32 action, Player* pPlayer)
     return false;
 }
 
-// https://decomp.me/scratch/gMsUi
 // 0x5d16b0
 void Hud_ChatInput_1::DrawChatMessages_5D16B0()
 {
@@ -1694,7 +1688,6 @@ void Hud_TextList_968::Service_5D2010()
     }
 }
 
-// 9.6f 0x4C7130
 inline void Hud_Pager_C::SetCounter_4C7130(s32* pCounter)
 {
     field_4_ptr_counter = pCounter;
@@ -1914,7 +1907,6 @@ void Hud_Pager_C::DrawDigits_5D2680(s32 xpos, s32 ypos)
                             0);
 }
 
-// https://decomp.me/scratch/3IY3c
 // 0x5d2ab0
 void Hud_Pager_C::DrawPager_5D2AB0(u32 xpos, s32 ypos)
 {
@@ -2323,7 +2315,6 @@ void Hud_Brief_704::StartCurrentBrief_5D39D0()
     field_6F8_curr_briefs->field_10_was_displayed = 0;
 }
 
-// https://decomp.me/scratch/exFU8
 // 0x5d3b80
 void Hud_Brief_704::DrawBrief_5D3B80()
 {
@@ -2399,7 +2390,6 @@ void Hud_Brief_704::SetHudBrief_5D3F10(s32 priority, const char_type* pText, s32
     }
 }
 
-// 9.6f 0x4CA610
 inline void Hud_Arrow_7C::Reset_4CA610()
 {
     field_10_radius_pos = kFpZero_7064C0;
@@ -2411,7 +2401,6 @@ inline void Hud_Arrow_7C::Reset_4CA610()
     field_18.field_10.field_34_min_respect = 0;
 }
 
-// 9.6f 0x4C6FF0
 inline void Hud_Arrow_7C::SetMinRadiusPos_4C6FF0(s32 steps)
 {
     field_C_min_radius_pos = kArrowRadiusOffset_7065B4 + kArrowMinRadiusStep_706338 * steps;
@@ -2480,7 +2469,6 @@ void Hud_Brief_704::ShowBrief_5D4850()
     }
 }
 
-// https://decomp.me/scratch/N327U
 // 0x5d4890
 void Hud_Brief_704::ClearAllBriefsWithPriority_5D4890(s32 priority)
 {
@@ -2685,7 +2673,6 @@ void Hud_MpMessage_D0::CalcTextWidth_5D56B0()
     }
 }
 
-//https://decomp.me/scratch/QUvWb
 // 0x5d56d0
 void Hud_MpMessage_D0::Draw_5D56D0()
 {
@@ -2719,7 +2706,6 @@ void Hud_MpMessage_D0::DecrementTimer_5D5760()
     }
 }
 
-//https://decomp.me/scratch/3hVt8
 // 0x5d5770
 void Hud_MpMessage_D0::AnnounceKill_5D5770(Player* killer, Player* victim)
 {
@@ -3190,7 +3176,6 @@ void Hud_PauseScreen_2::UpdatePauseSection_5D6300()
     }
 }
 
-// https://decomp.me/scratch/Uq97l
 // 0x5d63b0
 void Hud_PauseScreen_2::DrawPause_5D63B0()
 {

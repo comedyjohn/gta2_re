@@ -27,7 +27,6 @@ void Taxi_4::PopAll_457BC0()
     this->field_0_pFirst = nullptr;
 }
 
-// https://decomp.me/scratch/tPr1q
 // 0x457bf0
 Car_BC* Taxi_4::GetTaxiNear_457BF0(Fix16 xpos, Fix16 ypos)
 {

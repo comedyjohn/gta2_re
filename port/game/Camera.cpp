@@ -779,7 +779,6 @@ void Camera_0xBC::SetTarget_4397D0(Fix16 x, Fix16 y, Fix16 z, Fix16 zoom)
 }
 
 // TODO: move
-// https://decomp.me/scratch/qYIak
 // 0x4F7540
 void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fix16& Velocity_2, Fix16& Velocity_3)
 {
@@ -837,7 +836,6 @@ void SmoothApproach_4F7540(Fix16& Coord_1, Fix16& Velocity_1, Fix16& Coord_2, Fi
 }
 
 // TODO: move
-// https://decomp.me/scratch/kwM8W
 // 0x4F75D0
 void SmoothApproachClamped_4F75D0(Fix16* target_coord,
                                   Fix16* coord_velocity,

@@ -349,7 +349,6 @@ void ScriptManager_C1EA8::Update_512160()
     }
 }
 
-// https://decomp.me/scratch/W4gXh
 // See docs/match_attempts.md
 // 0x5121E0
 void ScriptManager_C1EA8::LoadStringTbl_5121E0(u16 tableSize)
@@ -784,7 +783,6 @@ void ScriptManager_C1EA8::ClearWeaponHitFlag_512BA0(s32 id, char_type bUnk)
     }
 }
 
-// https://decomp.me/scratch/r6LhX
 // 0x512c00
 void ScriptManager_C1EA8::RecordWeaponHit_512C00(s32 entity_id, s32 projectile_model, char_type bUnk)
 {
@@ -852,7 +850,6 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
     return false;
 }
 
-// https://decomp.me/scratch/qh4EW
 // 0x512ce0
 ScriptManager_C1EA8::ScriptManager_C1EA8()
 {

@@ -42,7 +42,6 @@ enum
 
 struct gmp_block_info
 {
-    // 9.6f 0x44C840
     void init_44C840()
     {
         field_0_left = 0;
@@ -137,7 +136,6 @@ struct gmp_compressed_map_32
 {
     void ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub);
 
-    // 9.6f 0x4630B0
     gmp_compressed_map_32()
     {
         field_40008_pColumn = nullptr;
@@ -180,7 +178,6 @@ struct gmp_dmap_info
 
 struct DmapInfoList
 {
-    // 9.6f 0x4630A0
     DmapInfoList()
     {
         field_320_max_idx = 0;
@@ -206,7 +203,6 @@ class gmp_map_zone
     s8 IsZoneVisibleToAnyPlayer_4DEF40();
     wchar_t* get_zone_str_4DEF00();
 
-    // 9.6f 0x463020
     bool ContainsPoint_463020(u8 x, u8 y)
     {
         return x >= field_1_x && y >= field_2_y && x < field_1_x + field_3_w && y < field_2_y + field_4_h;
@@ -690,7 +686,6 @@ class Map_0x370
         return 0;
     }
 
-    // 9.6f 0x433430
     bool IsSlopeB4ToD0At_433430(s32 xpos, s32 ypos, s32 zpos)
     {
         gmp_block_info* pBlock = get_block_4DFE10(xpos, ypos, zpos);

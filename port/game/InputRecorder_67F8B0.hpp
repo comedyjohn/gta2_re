@@ -95,7 +95,6 @@ class InputRecorder_67F8B0
     bool RecOrPlayBackState_4CEDF0();
     void ShowInput_4CEE10();
 
-    // 9.6f 0x44AA60
     bool inlined_check()
     {
         if (field_38_replay_state == ReplayState::Playback_1 || field_38_replay_state == ReplayState::Attract_3)
@@ -105,13 +104,11 @@ class InputRecorder_67F8B0
         return false;
     }
 
-    // 9.6f 0x44C050
     bool IsInputSet_44C050(s32 mask_idx)
     {
         return static_cast<u32>(field_4_input_bits & field_8_input_masks[mask_idx]) > 0;
     }
 
-    // 9.6f 0x44AA80
     s32 GetLastRecRngIdx_44AA80()
     {
         return field_3C_rec_buff[field_7533C_used_recs_count - 1].field_0_rng_idx;

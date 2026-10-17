@@ -162,7 +162,6 @@ void Gang_144::SetGangKillReaction_4BEF50(u8 gang_idx, char_type kill_reaction_v
     field_122_gang_kill_reaction[gang_idx] = kill_reaction_value;
 }
 
-// https://decomp.me/scratch/lPPny
 // 0x4BEF70
 void Gang_144::ApplyKillRespectChange_4BEF70(u8 player_idx, u8 respect)
 {

@@ -395,7 +395,6 @@ void MapRenderer::SetAmbientLevel_4E9D50(s32& target_level, u16& cycles)
     }
 }
 
-// https://decomp.me/scratch/SrbHE
 // 0x4e9db0
 void MapRenderer::set_shading_lev_4E9DB0(u8 shading_lev)
 {
@@ -598,7 +597,6 @@ void MapRenderer::draw_4EA190(u16& rotation_and_flip)
     }
 }
 
-// https://decomp.me/scratch/FGVOK
 // 0x4ea390
 void MapRenderer::DrawLeftSide_4EA390(u16& left_word)
 {
@@ -783,7 +781,6 @@ void MapRenderer::ProjectVertBottom_4EAEA0(const Fix16& xCoord, const Fix16& yCo
     pVert->z = gInvDepthBottom_6F6318.ToFloat();
 }
 
-// https://decomp.me/scratch/mWsfM
 // 0x4eaf40
 void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
 {
@@ -951,7 +948,6 @@ void MapRenderer::DrawRightSide_4EAF40(u16& right_word)
     }
 }
 
-// https://decomp.me/scratch/GkGnQ
 // 0x4EB940
 void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const Fix16& zpos, Vert* pVert)
 {
@@ -967,7 +963,6 @@ void MapRenderer::ProjectVert_4EB940(const Fix16& xpos, const Fix16& ypos, const
         static_cast<u32>(gViewCamera_676978->field_74_screen_px_center_y);
 }
 
-// https://decomp.me/scratch/a6z18
 // 0x4eba60
 void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
 {
@@ -1116,7 +1111,6 @@ void MapRenderer::DrawTopSide_4EBA60(u16& top_word)
     }
 }
 
-// https://decomp.me/scratch/MyepN
 // 0x4ec450
 void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
 {
@@ -1145,7 +1139,6 @@ void MapRenderer::DrawDiagonalUpLeftFace_4EC450(u16& left_word)
     }
 }
 
-// https://decomp.me/scratch/8QjCQ
 // 0x4ec7a0
 void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
 {
@@ -1178,7 +1171,6 @@ void MapRenderer::DrawDiagonalUpRightFace_4EC7A0(u16& right_word)
     }
 }
 
-// https://decomp.me/scratch/eGEBV
 // 9.6f: MapRenderer::sub_46D680
 // 0x4ecaf0
 void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
@@ -1211,7 +1203,6 @@ void MapRenderer::DrawDiagonalDownLeftFace_4ECAF0(u16& left_word)
     }
 }
 
-// https://decomp.me/scratch/3kT2F
 // 9.6f: MapRenderer::sub_46D810
 // 0x4ece40
 void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
@@ -1240,7 +1231,6 @@ void MapRenderer::DrawDiagonalDownRightFace_4ECE40(u16& right_word)
     }
 }
 
-// https://decomp.me/scratch/4EDti
 // 9.6f: MapRenderer::sub_46D9A0
 // 0x4ed290
 void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
@@ -1409,7 +1399,6 @@ void MapRenderer::draw_bottom_4ED290(u16& bottom_word)
     }
 }
 
-// https://decomp.me/scratch/pJOfC
 // 0x4ee130
 void MapRenderer::draw_lid_4EE130()
 {
@@ -1570,7 +1559,6 @@ void MapRenderer::DrawDiagonalWallDownRight_4EEA40()
     }
 }
 
-// https://decomp.me/scratch/husii
 // 0x4eeaf0
 void MapRenderer::Draw3SidedDiagonalUpLeft_4EEAF0()
 {
@@ -1603,7 +1591,6 @@ void MapRenderer::Draw3SidedDiagonalUpLeft_4EEAF0()
     }
 }
 
-// https://decomp.me/scratch/XGan6
 // 0x4eee60
 void MapRenderer::Draw3SidedDiagonalUpRight_4EEE60()
 {
@@ -1637,7 +1624,6 @@ void MapRenderer::Draw3SidedDiagonalUpRight_4EEE60()
     }
 }
 
-// https://decomp.me/scratch/O0oa4
 // 0x4ef1c0
 void MapRenderer::Draw3SidedDiagonalDownLeft_4EF1C0()
 {
@@ -1671,7 +1657,6 @@ void MapRenderer::Draw3SidedDiagonalDownLeft_4EF1C0()
     }
 }
 
-// https://decomp.me/scratch/6WLOw
 // Remaining diff: an lea operand-order tie-break (fails against 10.5.exe)
 // 0x4ef520
 void MapRenderer::Draw3SidedDiagonalDownRight_4EF520()
@@ -1704,7 +1689,6 @@ void MapRenderer::Draw3SidedDiagonalDownRight_4EF520()
     }
 }
 
-// https://decomp.me/scratch/YoWOt
 // 0x4ef880
 void MapRenderer::Draw4SidedDiagonalUpLeft_4EF880()
 {
@@ -1737,7 +1721,6 @@ void MapRenderer::Draw4SidedDiagonalUpLeft_4EF880()
     }
 }
 
-// https://decomp.me/scratch/ZTyHA
 // 0x4efb20
 void MapRenderer::Draw4SidedDiagonalUpRight_4EFB20()
 {
@@ -1772,7 +1755,6 @@ void MapRenderer::Draw4SidedDiagonalUpRight_4EFB20()
     }
 }
 
-// https://decomp.me/scratch/IdZ0n
 // Remaining diff: an lea operand-order tie-break (fails against 10.5.exe)
 // 0x4efdb0
 void MapRenderer::Draw4SidedDiagonalDownLeft_4EFDB0()
@@ -1809,7 +1791,6 @@ void MapRenderer::Draw4SidedDiagonalDownLeft_4EFDB0()
     }
 }
 
-// https://decomp.me/scratch/AKo7h
 // 0x4f0030
 void MapRenderer::Draw4SidedDiagonalDownRight_4F0030()
 {
@@ -1918,7 +1899,6 @@ void MapRenderer::DrawTriangularDiagonal_4F0340()
     }
 }
 
-// https://decomp.me/scratch/MyE2X
 // 9.6f: MapRenderer::sub_46EF10
 // 0x4f0420
 void MapRenderer::DrawGradientSlopeNorthwards_4F0420()
@@ -2070,7 +2050,6 @@ char_type MapRenderer::GetColour_4F0BD0(s32 lid_type)
     }
 }
 
-// https://decomp.me/scratch/HfCiT
 // 0x4f1660
 void MapRenderer::DrawGradientSlopeSouthwards_4F1660()
 {
@@ -2202,7 +2181,6 @@ void MapRenderer::DrawGradientSlopeSouthwards_4F1660()
     }
 }
 
-// https://decomp.me/scratch/6Zrn3
 // 0x4f22f0
 void MapRenderer::DrawGradientSlopeWestwards_4F22F0()
 {
@@ -2333,7 +2311,6 @@ void MapRenderer::DrawGradientSlopeWestwards_4F22F0()
     }
 }
 
-// https://decomp.me/scratch/cvW2D
 // 0x4f33b0
 void MapRenderer::DrawGradientSlopeEastwards_4F33B0()
 {
@@ -2465,7 +2442,6 @@ void MapRenderer::DrawGradientSlopeEastwards_4F33B0()
     }
 }
 
-// https://decomp.me/scratch/zty5O
 // 0x4f3c00
 void MapRenderer::draw_left_4F3C00(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b)
 {
@@ -2573,7 +2549,6 @@ void Set_UV_4F4190(Fix16& a1, Fix16& a2, const u32& pVertIdx)
     gTileVerts_6F65A8[pVertIdx].v = v / 16384.0F;
 }
 
-// https://decomp.me/scratch/dGqKl
 // 0x4f4250
 void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a, Fix16& y_off_b)
 {
@@ -2614,7 +2589,6 @@ void MapRenderer::draw_right_4F4250(u16& side_word, Fix16& x_off, Fix16& y_off_a
     }
 }
 
-// https://decomp.me/scratch/7xF8P
 // 0x4f4600
 void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off)
 {
@@ -2655,7 +2629,6 @@ void MapRenderer::draw_top_4F4600(u16& side_word, Fix16& x_off_a, Fix16& x_off_b
     }
 }
 
-// https://decomp.me/scratch/QiYzx
 // 0x4f49b0
 void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_off_b, Fix16& y_off)
 {
@@ -2696,7 +2669,6 @@ void MapRenderer::draw_bottom_4F49B0(u16& side_word, Fix16& x_off_a, Fix16& x_of
     }
 }
 
-// https://decomp.me/scratch/sV2SV
 // 0x4f4d60
 void MapRenderer::draw_lid_4F4D60(Fix16& unk1, Fix16& unk2, Fix16& unk3, Fix16& unk4)
 {
@@ -3628,7 +3600,6 @@ inline void AddToDrawListByVal(MapRenderer* pThis, s32 x, s32 y)
 }
 } // namespace
 
-// https://decomp.me/scratch/VJVUz
 // 0x4f6a20
 void MapRenderer::Draw_4F6A20()
 {

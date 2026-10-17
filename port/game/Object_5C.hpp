@@ -48,7 +48,6 @@ enum
 class Object_2C
 {
   public:
-    // 9.6f 0x4C4F10
     void SetThreadTriggerIdx_4C4F10(char_type v)
     {
         field_27_thread_trigger_idx = v;
@@ -153,13 +152,11 @@ class Object_2C
     void IntegrateMovementAndCollisions_523BF0(Fix16 mov_speed, Ang16 angle);
     void Sprite_UpdateZFromSlopeAndTile_522FA0(Sprite* pSprite);
 
-    // 9.6f 0x475A70
     bool IsStaticCollisionCheck_475A70()
     {
         return field_8->field_34_behavior_type == object_behavior_type::static_collision_check_1;
     }
 
-    // 9.6f 0x475A60
     bool IsShop_475A60()
     {
         s32 v1 = field_8->field_34_behavior_type;
@@ -227,25 +224,21 @@ class Object_2C
         return field_26_ped_ref_idx;
     }
 
-    // 9.6f 0x434130
     void SetO8Timer_434130(s16 timer)
     {
         field_C_pAny.o8->field_4_timer = timer;
     }
 
-    // 9.6f 0x40FEF0
     s32 GetModel_40FEF0()
     {
         return field_18_model;
     }
 
-    // 9.6f 0x40FF00
     char_type GetDefHasShadowsField_40FF00()
     {
         return field_8->field_63;
     }
 
-    // 9.6f 0x475AA0
     bool IsModel176To181_475AA0()
     {
         s32 model = field_18_model;
@@ -260,7 +253,6 @@ class Object_2C
             field_8->field_34_behavior_type == object_behavior_type::pickup_physics_animated_9;
     }
 
-    // 9.6f 0x482490
     void PoolAllocate()
     {
         field_14_id = gObj2C_id_623EC0++;
@@ -288,7 +280,6 @@ class Object_2C
         return field_4->field_1C_zpos;
     }
 
-    // 9.6f 0x4BE850
     bool IsGangIcon_4BE850()
     {
         return field_18_model >= 287 && field_18_model <= 293; // loonies_icon_287 .. russian_mafia_icon_293
@@ -309,13 +300,11 @@ class Object_2C
         return false;
     }
 
-    // 9.6f 0x482400
     static bool IsExplosiveItemDefinition_482400(s32 idx)
     {
         return idx >= 39 && idx <= 42;
     }
 
-    // 9.6f 0x482C80
     Fix16 GetMass_482C80()
     {
         return field_8->field_18_mass;
@@ -329,13 +318,11 @@ class Object_2C
     // 9.6f 0x482C10, defined in Object_5C.cpp (needs Object_8)
     inline bool IsAnimFinished_482C10();
 
-    // 9.6f 0x493090
     void GetConveyorDirection_493090(s8* pX, s8* pY)
     {
         UnpackSignedNibbles_529050(get_field_26_420FF0(), pX, pY);
     }
 
-    // 9.6f 0x482BF0
     void SetTopDrawLayer_482BF0()
     {
         field_4->SetDrawLayer_40F7B0(29);

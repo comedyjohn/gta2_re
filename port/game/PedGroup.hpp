@@ -8,13 +8,11 @@ class Fix16;
 class PedGroup
 {
   public:
-    // 9.6f 0x4038E0
     void set_in_use_4038E0()
     {
         field_40_in_use = 1;
     }
 
-    // 9.6f 0x4038F0
     char_type get_in_use_4038F0()
     {
         return field_40_in_use;
@@ -59,7 +57,6 @@ class PedGroup
     PedGroup();
     ~PedGroup() = default; // 0x4cb870
 
-    // 9.6f 0x433360
     void SetCounts_433360(u8 count)
     {
         field_36_count = count;

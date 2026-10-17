@@ -4186,7 +4186,6 @@ void miss2_0x11C::SCRCMD_SET_MIN_ALIVE_50BCD0()
     miss2_0x11C::Next_503620(gBasePtr_6F8070);
 }
 
-// 9.6f 0x47BAC0
 // 0x50bd10
 void miss2_0x11C::SCRCMD_CHAR_GROUP_50BD10()
 {
@@ -7895,7 +7894,6 @@ miss2_0x11C::miss2_0x11C()
     field_118_in_level_start = 0;
 }
 
-// https://decomp.me/scratch/gmYBd
 // 0x511cd0
 void miss2_0x11C::DisableBasicKfsFromSave_511CD0()
 {

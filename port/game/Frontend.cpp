@@ -914,7 +914,6 @@ s32 Frontend::Run_4AEDB0()
     }
 }
 
-// https://decomp.me/scratch/ci11a
 // 0x4B5430
 void Frontend::DrawScoreTable_4B5430(ScoreTableLine_18* pStrings,
                                      u16 text_xpos,
@@ -978,7 +977,6 @@ EXTERN_GLOBAL(s32, gGTA2VersionMajor_708280);
 EXTERN_GLOBAL(s32, gGTA2VersionMajor_708284);
 
 // sub_457920 in 9.6f
-// https://decomp.me/scratch/jchxT
 // 0x4AD140
 void Frontend::DrawMenu_4AD140()
 {
@@ -1827,7 +1825,6 @@ void Frontend::UpdateMenuScreen_4B6780()
     }
 }
 
-// https://decomp.me/scratch/3NE2J
 // 0x4B7A10
 void Frontend::ManageCredits_4B7A10()
 {
@@ -2164,7 +2161,6 @@ void Frontend::SetWinMainStateToBootMap_4AE990()
 }
 
 // It matches, but we need to get rid of goto's
-// https://decomp.me/scratch/LYZij
 // 0x4B2F60
 void Frontend::HandlePlayerNameTyping_4B2F60()
 {
@@ -2418,7 +2414,6 @@ bool CheckCdFile_4BBFA0()
     return CheckCdFile();
 }
 
-// https://decomp.me/scratch/ySQ2h
 // 0x4B8280
 void Frontend::HandlePasswordTyping_4B8280()
 {
@@ -3157,7 +3152,6 @@ void Frontend::Render_4ADFB0()
     pVid_ClearScreen(gVidSys_7071D0, 0, 0, 0, 0, 0, gVidSys_7071D0->field_48_rect_right, gVidSys_7071D0->field_4C_rect_bottom);
 }
 
-// https://decomp.me/scratch/IOmk7
 // The second GetTgaIdxsForMenuScreen_4B6B00 output lives in a dword local that also takes the
 // result of the last right-hand blit, and that result is tested afterwards. Without the store
 // (and the read that keeps it alive until after tail merging) VC6 merges the two final retry
@@ -3335,7 +3329,6 @@ void Frontend::Load_tga_4B6520(u16 idx)
     free(pAlloc);
 }
 
-// https://decomp.me/scratch/MuqZh
 // 0x4AF2A0
 Frontend::Frontend()
 {
@@ -4912,7 +4905,6 @@ void Frontend::StripPlayerNameToCurrLength_4B42B0()
     }
 }
 
-// https://decomp.me/scratch/2DKTF
 // 0x4B7120
 char_type Frontend::GetPreviousUnlockedBonusStage_4B7120(u8 stage)
 {
@@ -5034,7 +5026,6 @@ bool Frontend::ExistsPreviousBonusStage_4B74F0()
     return result;
 }
 
-// https://decomp.me/scratch/kyxJQ
 // 0x4B7360
 char_type Frontend::GetNextUnlockedBonusStage_4B7360(u8 stage)
 {

@@ -48,49 +48,41 @@ enum
 class Player
 {
   public:
-    // 9.6f 0x45B0C0
     bool has_player_ped_45B0C0()
     {
         return field_2C4_player_ped != nullptr;
     }
 
-    // 9.6f 0x4766D0
     Gang_144* get_gang_curr_location_4766D0()
     {
         return field_34_gang_curr_location;
     }
 
-    // 9.6f 0x4A5170
     void set_in_use_4A5170(bool in_use)
     {
         field_8E_in_use = in_use;
     }
 
-    // 9.6f 0x4C7340
     gmp_map_zone* get_arrow_blocker_zone_4C7340()
     {
         return field_40_arrow_blocker_zone;
     }
 
-    // 9.6f 0x434920
     bool HasPowerUp_434920(s32 power_up_idx)
     {
         return field_6F4_power_up_timers[power_up_idx] != 0;
     }
 
-    // 9.6f 0x434940
     void DecPowerUp_434940(s32 power_up_idx)
     {
         field_6F4_power_up_timers[power_up_idx]--;
     }
 
-    // 9.6f 0x4766B0
     void ChangeMultipliers_4766B0(s32 amount)
     {
         field_6BC_multipliers.ChangeStatByAmount_4921B0(amount);
     }
 
-    // 9.6f 0x476700
     bool IsBustedNotObjective54_476700()
     {
         Ped* pPed;
@@ -98,7 +90,6 @@ class Player
             ((pPed = field_2C4_player_ped) == nullptr || pPed->get_objective_403A80() != objectives_enum::objective_54);
     }
 
-    // 9.6f 0x476730
     bool IsBustedObjective54_476730()
     {
         Ped* pPed;
@@ -106,31 +97,26 @@ class Player
             pPed->get_objective_403A80() == objectives_enum::objective_54;
     }
 
-    // 9.6f 0x4766C0
     s32 get_lives_4766C0()
     {
         return field_684_lives.get_value();
     }
 
-    // 9.6f 0x421990
     void AddCash_421990(s32 cash)
     {
         field_2D4_scores.AddCash_592620(cash);
     }
 
-    // 9.6f 0x421980
     s32 GetScore_421980()
     {
         return field_2D4_scores.GetScore_592370();
     }
 
-    // 9.6f 0x4766A0
     s32 get_multiplier_4766A0()
     {
         return field_6BC_multipliers.get_value();
     }
 
-    // 9.6f 0x41DC40
     void AddScore_41DC40(s32 score)
     {
         field_2D4_scores.AddCash_592620(score * field_6BC_multipliers.field_0_value);
@@ -200,7 +186,6 @@ class Player
         field_44_death_type = death_type;
     }
 
-    // 9.6f 0x4A5100
     bool IsRemoteControlActive_4A5100()
     {
         s32 occupation;
@@ -317,13 +302,11 @@ class Player
         return field_2E_idx;
     }
 
-    // 9.6f 0x4A5150
     Ped* GetActivePed_4A5150()
     {
         return (field_68_camera_mode == 2 || field_68_camera_mode == 3) ? field_2C8_aux_ped : field_2C4_player_ped;
     }
 
-    // 9.6f 0x434900
     Camera_0xBC* get_camera_434900()
     {
         if (field_68_camera_mode == 2 || field_68_camera_mode == 3)
@@ -458,7 +441,6 @@ class Player
     wchar_t field_83C_player_name[16];
 };
 
-// 9.6f 0x434B60
 inline bool TagGame_28::IsFugitivePed_434B60(Ped* pPed)
 {
     return field_0_fugitive && field_0_fugitive->GetPlayerPed_41D020() == pPed;

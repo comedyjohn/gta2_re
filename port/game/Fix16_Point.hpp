@@ -99,7 +99,6 @@ class Fix16_Point
         return x == kFP16Zero_6FE20C && y == kFP16Zero_6FE20C;
     }
 
-    // 9.6f 0x49E450
     bool HasZeroComponent_49E450() const
     {
         return x == kFP16Zero_6FE20C || y == kFP16Zero_6FE20C;
@@ -177,7 +176,6 @@ class Fix16_Point
         return *this;
     }
 
-    // FUNCTION: 96f 0x4828c0
     Fix16_Point& operator-=(Fix16_Point& other)
     {
         x -= other.x;
@@ -233,7 +231,6 @@ class Fix16_Point
         y.DivideAssign_539F90(d);
     }
 
-    // FUNCTION: 96f 0x41e1e0
     void reset()
     {
         x = Fix16(0);
@@ -251,7 +248,6 @@ class Fix16_Point
     // No user-defined copy ctor: 9.6f copies points with plain movs (no call even at /Ob0), and the
     // implicit one does not use up VC6's inline budget (SpawnCabAndTrailerHelper_408370 needs that).
 
-    // 9.6f 0x401D20
     Fix16_Point(const Fix16& a1, const Fix16& a2) : x(a1), y(a2)
     {
     }

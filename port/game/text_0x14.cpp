@@ -255,7 +255,6 @@ inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
 }
 } // namespace
 
-// https://decomp.me/scratch/JzIDq
 // 0x5B5BC0
 s32 text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
 {

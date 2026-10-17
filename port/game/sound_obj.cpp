@@ -1703,7 +1703,6 @@ char_type sound_obj::Type_17_414690(sound_0x68* pObj)
     return 1;
 }
 
-// 9.6f 0x412A20
 // 0x414710
 void sound_obj::TrainCab_414710(Sound_Params_8* pParams)
 {
@@ -4081,7 +4080,6 @@ void sound_obj::IncrementAudioEntitiesAge_41A6F0()
     }
 }
 
-// https://decomp.me/scratch/i3zcW
 // 0x41A730
 void sound_obj::InterrogateAudioEntities_41A730()
 {
@@ -6909,7 +6907,6 @@ void sound_obj::ProcessType3_CopRadioAndMusic_57DD50()
 // SetVocalPosMs/Update tail is merged into the first block's copy, as in the original.
 // TODO: the original has one station-restart block; the copy in the `bStationChanged` arm here is
 // only partly cross-jumped into the last one.
-// 9.6f 0x4B25D0
 // 0x57DF10
 void sound_obj::HandleVocalStreamSwitching_57DF10(char_type bFastForward)
 {

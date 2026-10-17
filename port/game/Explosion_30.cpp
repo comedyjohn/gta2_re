@@ -212,7 +212,6 @@ void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
     }
 }
 
-// 9.6f 0x48E5F0
 // 0x540f90
 void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
 {
@@ -583,7 +582,6 @@ void Explosion_30::ApplyBlastDamage_541850(u16 timerVal)
     }
 }
 
-// 9.6f 0x48EB00
 // 0x541d60
 void Explosion_30::EmitExplosion_18_33_541D60()
 {

@@ -18,31 +18,26 @@ void sub_5DF270(Sprite* a1, Fix16 a2, char_type a3, char_type a4, Ped* a5, Sprit
 class Weapon_30
 {
   public:
-    // 9.6f 0x4A4FE0
     u16 get_ammo_4A4FE0()
     {
         return field_0_ammo;
     }
 
-    // 9.6f 0x4A4F90
     void set_infinite_ammo_4A4F90()
     {
         field_0_ammo = 0xFFFF;
     }
 
-    // 9.6f 0x4CCA00
     void set_idx_4CCA00(s32 v)
     {
         field_1C_idx = v;
     }
 
-    // 9.6f 0x4CCA10
     void set_pPed_4CCA10(Ped* v)
     {
         field_24_pPed = v;
     }
 
-    // 9.6f 0x4CCA20
     void set_car_4CCA20(Car_BC* v)
     {
         field_14_car = v;
@@ -130,7 +125,6 @@ class Weapon_30
         field_2C_shot_fired = new_value;
     }
 
-    // 9.6f 0x41CC80
     s8 TakeF2C_41CC80()
     {
         s8 ret = field_2C_shot_fired;

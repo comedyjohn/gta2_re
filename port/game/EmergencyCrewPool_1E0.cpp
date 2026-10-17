@@ -74,7 +74,6 @@ void EmergencyCrew_30::RemovePed_5CBC40(Ped* pPed)
     field_4_ped = field_8_group->field_2C_ped_leader;
 }
 
-// https://decomp.me/scratch/HmQPr
 // 0x5cbc60
 bool EmergencyCrew_30::IsLeaderAlive_5CBC60()
 {
@@ -139,7 +138,6 @@ bool EmergencyCrew_30::ReplaceLeaderIfNeeded_5CBC90()
     return false;
 }
 
-// https://decomp.me/scratch/sUPg8
 // 0x5cbd50
 void EmergencyCrew_30::UpdateStateMachine_5CBD50()
 {
@@ -418,7 +416,6 @@ void EmergencyCrew_30::UpdateStateMachine_5CBD50()
     }
 }
 
-// 9.6f 0x4C5A00
 // 0x5cc1c0
 void EmergencyCrew_30::CleanupExpiredEntities_5CC1C0()
 {

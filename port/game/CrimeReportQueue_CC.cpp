@@ -127,7 +127,6 @@ bool CrimeReportQueue_CC::IsCrimeQueued(s32 crime_type)
 // 0x484fc0
 CrimeReportQueue_CC_Sub::CrimeReportQueue_CC_Sub() = default;
 
-// https://decomp.me/scratch/0XcCw
 // 0x484fe0
 void CrimeReportQueue_CC::ReportCrimeForPed(u32 crime_type, Ped* pPed)
 {
@@ -185,7 +184,6 @@ void CrimeReportQueue_CC::ReportCrimeForPed(u32 crime_type, Ped* pPed)
     }
 }
 
-// https://decomp.me/scratch/xN2BK
 // 0x485090
 bool CrimeReportQueue_CC::ShouldReportCarCrime_485090(Car_BC* pCar, Player* pPlayer)
 {
@@ -206,7 +204,6 @@ bool CrimeReportQueue_CC::ShouldReportCarCrime_485090(Car_BC* pCar, Player* pPla
     return bInRange;
 }
 
-// https://decomp.me/scratch/KvTvv
 // 0x4850f0
 bool CrimeReportQueue_CC::ShouldReportCharCrime_4850F0(Char_B4* pB4, Player* pPlayer)
 {

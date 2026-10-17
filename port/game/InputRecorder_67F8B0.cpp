@@ -387,7 +387,6 @@ bool InputDevices_1::game_pad_read_498D20()
     return num_items > 0;
 }
 
-// https://decomp.me/scratch/75Pau
 // 0x498DA0
 void InputDevices_1::read_input_device_498DA0(s32* input_bits, u8 bUnknown)
 {
@@ -706,7 +705,6 @@ void InputRecorder_67F8B0::SaveReplay_4CDED0()
     }
 }
 
-// https://decomp.me/scratch/c6Gy5
 // Register allocation differs, see docs/match_attempts.md
 // 0x4cdf30
 void InputRecorder_67F8B0::modify_inputs_4CDF30(s32 match_mask)

@@ -68,15 +68,12 @@ class Ang16
         return Ang16((Fix16(rValue) * Fix16(other.rValue)).ToInt());
     }
 
-    // 9.6f 0x40E5A0
-    // https://decomp.me/scratch/Rc5ql
     Ang16 operator+(const Ang16& rhs)
     {
         s16 value = rValue + rhs.rValue;
         return Ang16(value, 0);
     }
 
-    // 9.6f 0x40E5D0
     Ang16 operator-(const Ang16& other)
     {
         s16 value = rValue - other.rValue;
@@ -185,8 +182,6 @@ class Ang16
         return *this;
     }
 
-    // 9.6f 0x401C10
-    // https://decomp.me/scratch/bB2VJ
     void Normalize()
     {
         for (; rValue < 0; rValue += 1440)
@@ -267,27 +262,21 @@ class Ang16
         return Ang16(a2.GetRaw_40F4B0() / 71, 0);
     }
 
-    // 9.6f 0x41E110
-    // https://decomp.me/scratch/RKAuT
     bool IsAxisAligned_41E110() const
     {
         return (rValue == 0 || rValue == 360 || rValue == 720 || rValue == 1080) ? true : false;
     }
 
-    // 9.6f 0x41E3C0
     bool jIsAxisAligned_41E3C0()
     {
         return IsAxisAligned_41E110();
     }
 
-    // 9.6f 0x401C60
-    // https://decomp.me/scratch/0qgcp
     Ang16(const s16& value, s32 not_used) : rValue(value)
     {
         this->Normalize();
     }
 
-    // 9.6f 0x40E590
     Ang16() : rValue(0)
     {
     }

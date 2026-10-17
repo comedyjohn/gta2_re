@@ -36,37 +36,31 @@ class SpriteList_4_dtor : public SpriteList_4
 class Char_B4
 {
   public:
-    // 9.6f 0x41B080
     Fix16 get_velocity_41B080()
     {
         return field_38_velocity;
     }
 
-    // 9.6f 0x433930
     void UseRunOrJumpSpeed_433930()
     {
         field_38_velocity = field_3C_run_or_jump_speed;
     }
 
-    // 9.6f 0x4338F0
     void SetSpriteNum_4338F0(s32 num)
     {
         field_80_sprite_ptr->SetDrawLayer_40F7B0(num);
     }
 
-    // 9.6f 0x41B090
     s32 get_ped_state_2_41B090()
     {
         return field_C_ped_state_2;
     }
 
-    // 9.6f 0x4338D0
     Sprite* get_sprite_ptr_4338D0()
     {
         return field_80_sprite_ptr;
     }
 
-    // 9.6f 0x4338E0
     void set_pPed_4338E0(Ped* v)
     {
         field_7C_pPed = v;
@@ -154,13 +148,11 @@ class Char_B4
     Fix16 field_AC_zpos;
     s32 field_B0_scream_timer;
 
-    // 9.6f 0x48A4C0
     s32 get_ped_state_1_48A4C0()
     {
         return field_8_ped_state_1;
     }
 
-    // 9.6f 0x492180
     void Set_F8_ped_state_1_433910(s32 a2)
     {
         field_8_ped_state_1 = a2;
@@ -176,19 +168,16 @@ class Char_B4
         field_40_rotation = rotation;
     }
 
-    // 9.6f 0x4339C0
     Fix16 get_sprite_xpos()
     {
         return field_80_sprite_ptr->field_14_xy.x;
     }
 
-    // 9.6f 0x4339E0
     Fix16 get_sprite_ypos()
     {
         return field_80_sprite_ptr->field_14_xy.y;
     }
 
-    // 9.6f 0x433A00
     Fix16 get_sprite_zpos()
     {
         return field_80_sprite_ptr->field_1C_zpos;
@@ -271,13 +260,11 @@ class Char_B4
         field_10_char_state = char_state;
     }
 
-    // 9.6f 0x433A90
     s8 Get_F44_433A90()
     {
         return field_44_block_type;
     }
 
-    // 9.6f 0x403900
     Car_BC* Get_F84_403900()
     {
         return field_84_target_car;

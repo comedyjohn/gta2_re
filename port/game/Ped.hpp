@@ -30,31 +30,26 @@ class TrainStation_34;
 class Ped
 {
   public:
-    // 9.6f 0x433C90
     bool Is_occupation_elvis_433C90()
     {
         return field_240_occupation == ped_ocupation_enum::elvis;
     }
 
-    // 9.6f 0x4039B0
     void set_enter_car_as_passenger_4039B0(s32 v)
     {
         field_248_enter_car_as_passenger = v;
     }
 
-    // 9.6f 0x4039C0
     s32 get_enter_car_as_passenger_4039C0()
     {
         return field_248_enter_car_as_passenger;
     }
 
-    // 9.6f 0x4039D0
     char_type GetInternalObjectiveStatus_4039D0()
     {
         return field_226_internal_objective_status;
     }
 
-    // 9.6f 0x433C20
     Fix16 GetGameObjectVelocity_433C20()
     {
         return field_168_game_object->get_velocity_41B080();
@@ -77,79 +72,66 @@ class Ped
         return pStation;
     }
 
-    // 9.6f 0x403A70
     void set_target_car_door_403A70(u8 v)
     {
         field_24C_target_car_door = v;
     }
 
-    // 9.6f 0x403AC0
     void set_objective_target_ped_403AC0(Ped* v)
     {
         field_148_objective_target_ped = v;
     }
 
-    // 9.6f 0x403AD0
     Ped* get_objective_target_ped_403AD0()
     {
         return field_148_objective_target_ped;
     }
 
-    // 9.6f 0x403B00
     void set_target_to_enter_403B00(Car_BC* v)
     {
         field_154_target_to_enter = v;
     }
 
-    // 9.6f 0x403B20
     u16 get_car_state_timer_403B20()
     {
         return field_21A_car_state_timer;
     }
 
-    // 9.6f 0x403B30
     u16 get_objective_timer_403B30()
     {
         return field_218_objective_timer;
     }
 
-    // 9.6f 0x403B40
     void set_objective_status_403B40(u8 v)
     {
         field_225_objective_status = v;
     }
 
-    // 9.6f 0x403B50
     void SetInternalObjectiveStatus_403B50(char_type v)
     {
         field_226_internal_objective_status = v;
     }
 
-    // 9.6f 0x433B80
     void SetOffscreenCounter_433B80(u16 v)
     {
         field_20E_offscreen_counter = v;
     }
 
-    // 9.6f 0x433C80
     void set_objective_timer_433C80(u16 v)
     {
         field_218_objective_timer = v;
     }
 
-    // 9.6f 0x475B40
     void clear_last_char_punched_475B40()
     {
         field_188_last_char_punched = nullptr;
     }
 
-    // 9.6f 0x475B10
     Ped* get_last_char_punched_475B10()
     {
         return field_188_last_char_punched;
     }
 
-    // 9.6f 0x4A5020
     Char_B4* get_game_object_4A5020()
     {
         return field_168_game_object;
@@ -390,13 +372,11 @@ class Ped
         field_21C_bf.bAttacking = 0;
     }
 
-    // 9.6f 0x4A5060
     void SetElectrofingers_4A5060()
     {
         field_21C_bf.bElectroFingers = true;
     }
 
-    // 9.6f 0x4A5050
     void SetFullHealth_4A5050()
     {
         set_health_4039A0(100);
@@ -434,7 +414,6 @@ class Ped
         field_164_ped_group = ptr;
     }
 
-    // 9.6f 0x403940
     void set_ped_group_id(s8 group_idx)
     {
         field_23C_group_idx = group_idx;
@@ -455,13 +434,11 @@ class Ped
         return field_278_ped_state_1;
     }
 
-    // 9.6f 0x492CB0
     void SetStolenCar_492CB0(Car_BC* pCar)
     {
         field_140_stolen_car = pCar;
     }
 
-    // 9.6f 0x49EF40
     Car_BC* GetStolenCar_49EF40()
     {
         return field_140_stolen_car;
@@ -484,13 +461,11 @@ class Ped
         return field_21C_bf.bPanicking;
     }
 
-    // 9.6f 0x403960
     void ClearPanicking_403960()
     {
         field_21C_bf.bPanicking = false;
     }
 
-    // 9.6f 0x403AA0
     void SetTargetObjectiveCar(Car_BC* ptr)
     {
         field_150_target_objective_car = ptr;
@@ -506,19 +481,16 @@ class Ped
         field_238_ped_type = type;
     }
 
-    // 9.6f 0x403A00
     Fix16 get_cam_x()
     {
         return field_1AC_cam.x;
     }
 
-    // 9.6f 0x403A10
     Fix16 get_cam_y()
     {
         return field_1AC_cam.y;
     }
 
-    // 9.6f 0x416B50
     Fix16 get_cam_z()
     {
         return field_1AC_cam.z;
@@ -578,7 +550,6 @@ class Ped
         return field_15C_player != nullptr;
     }
 
-    // 9.6f 0x433C40
     void DoJump_433C40()
     {
         if (field_168_game_object)
@@ -587,7 +558,6 @@ class Ped
         }
     }
 
-    // 9.6f 0x41B0B0
     s32 TakeVoiceEvent_41B0B0()
     {
         s32 ret = field_250_voice_event; // sound id the ped says next
@@ -688,13 +658,11 @@ class Ped
         field_230_jump_over_mode = value;
     }
 
-    // 9.6f 0x492CC0
     Ang16 GetTargetFacingAngle_492CC0()
     {
         return field_130_target_facing_angle;
     }
 
-    // 9.6f 0x492C20
     s32 GetJumpOverMode_492C20()
     {
         return field_230_jump_over_mode;
@@ -705,31 +673,26 @@ class Ped
         field_22C_ped_class = value;
     }
 
-    // 9.6f 0x403A20
     void ClearHitCount_403A20()
     {
         field_228_hit_count = 0;
     }
 
-    // 9.6f 0x420B80
     void ClearWantedPoints_420B80()
     {
         field_20A_wanted_points = 0;
     }
 
-    // 9.6f 0x472FD0
     bool IsGroupLeader_472FD0()
     {
         return field_23C_group_idx == 99;
     }
 
-    // 9.6f 0x433BE0
     void ClearAttacker_433BE0()
     {
         field_144_attacker = nullptr;
     }
 
-    // 9.6f 0x433C00
     void SetRotation_433C00(Ang16 rotation)
     {
         field_168_game_object->set_rotation_433A30(rotation);
@@ -787,13 +750,11 @@ class Ped
         return field_154_target_to_enter;
     }
 
-    // 9.6f 0x4A5010
     void SetAttacking_4A5010()
     {
         field_21C_bf.bAttacking = true;
     }
 
-    // 9.6f 0x403A40
     void ClearAttacking_403A40()
     {
         field_21C_bf.bAttacking = false;

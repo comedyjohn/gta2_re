@@ -69,7 +69,6 @@ SpriteRenderer_1C::~SpriteRenderer_1C()
 }
 
 // TODO: move
-// https://decomp.me/scratch/qe97a
 // 0x5BEE90
 s32 get_rdtsc_5BEE90()
 {
@@ -87,7 +86,6 @@ s32 sub_5BEED0(s32 cycles)
     return static_cast<u32>(cycles) / dword_705334;
 }
 
-// https://decomp.me/scratch/qyVgM
 // 0x5c5cf0
 void SpriteTree_4::AddSprite_5C5CF0(Sprite* pSprite)
 {

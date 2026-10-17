@@ -925,7 +925,6 @@ void Player::IncreaseWantedLevelFromDebugKeys_565860()
     field_2C4_player_ped->IncreaseWantedLevelFromDebugKeys_46EFD0();
 }
 
-// https://decomp.me/scratch/jvjpT
 // pre processor bugged, should match ??
 // 0x565890
 void Player::Hud_Controls_565890(u16 action)

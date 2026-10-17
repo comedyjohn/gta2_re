@@ -11,19 +11,16 @@ class Ped;
 class PlayerScoreTracker_36C
 {
   public:
-    // 9.6f 0x4A50E0
     void SetMoney_4A50E0(s32 money)
     {
         field_0_money.SetValueClamped_4A50B0(money);
     }
 
-    // 9.6f 0x45B0A0
     u8 get_accuracy_count_45B0A0()
     {
         return field_198_accuracy_count;
     }
 
-    // 9.6f 0x45B0B0
     s32 get_reverse_count_45B0B0()
     {
         return field_19C_reverse_time_ms;

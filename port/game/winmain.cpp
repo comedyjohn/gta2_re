@@ -735,7 +735,6 @@ void ExitGameCallback_4DB0D0(Game_0x40* pGame, int reason)
 }
 
 // todo move to another file for ordering
-// https://decomp.me/scratch/VazoB
 // 0x4DA4D0
 void InitializeGame_4DA4D0()
 {

@@ -195,7 +195,6 @@ Ped* Ped_List_4::RemoveFirstPed_471320()
     return pPed;
 }
 
-// 9.6f 0x445C30
 // 9.6f calls MaxAbsDistance_42A6B0 here. By value, with the y difference first, VC6 keeps
 // both differences and the max in registers as the original does.
 // 0x471340
@@ -221,7 +220,6 @@ Ped* Ped_List_4::FindClosestActivePed_471340(Fix16 x, Fix16 y)
     return pClosest;
 }
 
-// https://decomp.me/scratch/GJ2JR
 // 0x4713C0
 Ped* Ped_List_4::FindClosestPedInViewCone_4713C0(Fix16 x, Fix16 y, Ang16 facing, Ang16 half_cone)
 {

@@ -27,7 +27,6 @@ Ang16 Fix16_Point::atan2_40ACD0()
     return Fix16::atan2_fixed_405320(y, x);
 }
 
-// https://decomp.me/scratch/qQwG3
 // 0x438FE0
 Fix16_Point Fix16_Point::Multiply_438FE0(const Fix16& in) const
 {
@@ -61,7 +60,6 @@ Fix16_Point Fix16_Point::MultBy_442C80(const s32& factor)
     return Fix16_Point(x * factor, y * factor);
 }
 
-// https://decomp.me/scratch/nFSYS
 // 0x442CB0
 Fix16_Point Fix16_Point::Divide_442CB0(const Fix16& in)
 {

@@ -62,13 +62,11 @@ struct CompilerBitField8
 class BitSet32
 {
   public:
-    // 9.6f 0x420DE0
     void clear_bit(int bit)
     {
         m_var &= ~(1 << bit);
     }
 
-    // 9.6f 0x420DC0
     void set_bit(int bit)
     {
         m_var |= (1 << bit);
@@ -86,7 +84,6 @@ class BitSet32
         return (m_var & (1U << bit)) == (1U << bit);
     }
 
-    // 9.6f 0x4A51A0
     BitSet32& operator=(u32& value) // Note: arg as reference
     {
         // TODO: Value is probably another BitSet32
@@ -99,19 +96,16 @@ class BitSet32
         return m_var;
     }
 
-    // 9.6f 0x4BA360
     void SetGlobal0_4BA360()
     {
         gFlags_67ACF8 = kGlobalMask0_61A9AC;
     }
 
-    // 9.6f 0x4BA370
     void SetGlobal1_4BA370()
     {
         gFlags_67ACF8 = kGlobalMask1_61A9A8;
     }
 
-    // 9.6f 0x4BA350
     void SetGlobal2_4BA350()
     {
         gFlags_67ACF8 = kGlobalMask2_61A9A4;
@@ -127,13 +121,11 @@ class BitSet32
         m_var &= ~gFlags_67ACF8;
     }
 
-    // 9.6f 0x420D90
     void ClearAllBits_420D90()
     {
         m_var = 0;
     }
 
-    // 9.6f 0x420D80
     BitSet32() : m_var(0)
     {
     }

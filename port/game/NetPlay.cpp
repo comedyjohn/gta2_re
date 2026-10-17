@@ -1803,7 +1803,6 @@ void NetPlay::Set18_520F50(sptr pCallback, sptr pContext)
     this->field_4C_func_ptrs_and_params[6].field_8_fn_type = 6;
 }
 
-// https://decomp.me/scratch/oYBrX
 // 0x520f80
 s32 NetPlay::RemovePlayerByName_520F80(wchar_t* pToRemove)
 {

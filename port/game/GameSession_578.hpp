@@ -18,25 +18,21 @@ class Player;
 
 struct GameSession_578
 {
-    // 9.6f 0x453A80
     s32 get_secret_tokens_collected_453A80()
     {
         return field_574_secret_tokens_collected;
     }
 
-    // 9.6f 0x476B10
     void set_secret_tokens_collected_476B10(s32 count)
     {
         field_574_secret_tokens_collected = count;
     }
 
-    // 9.6f 0x434A10
     void IncSecretTokensCollected_434A10()
     {
         field_574_secret_tokens_collected++;
     }
 
-    // 9.6f 0x453A40
     u8 EncodeStage_453A40(u8 main_stage_idx, u8 bonus_stage_idx)
     {
         main_stage_idx <<= 4;
@@ -44,7 +40,6 @@ struct GameSession_578
         return main_stage_idx;
     }
 
-    // 9.6f 0x453A60
     void DecodeStage_453A60(u8 stage, u8* pMainStageIdx, u8* pBonusStageIdx)
     {
         *pMainStageIdx = stage >> 4;
@@ -86,7 +81,6 @@ struct GameSession_578
     s32 field_574_secret_tokens_collected;
 
     // inlined at 45b420 in 9.6f
-    // 9.6f 0x45B420
     void clear_secret_tokens_collected()
     {
         field_574_secret_tokens_collected = 0;
@@ -190,7 +184,6 @@ struct GameSession_578
 
 EXTERN_GLOBAL(GameSession_578, gGameSession_67E8E0);
 
-// 9.6f 0x434B20
 inline bool IsTagGame_434B20()
 {
     return gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() == TAG_GAME_3;

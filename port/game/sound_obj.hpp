@@ -23,7 +23,6 @@ class SoundPos_C
 
 struct SoundPosEntry_C
 {
-    // 9.6f 0x416C00
     SoundPosEntry_C() = default;
 
     Fix16 field_0_x;

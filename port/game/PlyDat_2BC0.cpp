@@ -424,7 +424,6 @@ void PlyDat_2BC0::SavePlySlotDat_56BA60(s16 slotIdx)
     File::WriteBufferToFile_4A6E80(FileName, this, &len);
 }
 
-// https://decomp.me/scratch/oIJET
 // 0x56BB10
 void PlyDat_2BC0::UpdateStageScore_56BB10(Player* pPlayer)
 {

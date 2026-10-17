@@ -56,7 +56,6 @@ template<typename PoolType, s32 PoolSize>
 class Pool
 {
   public:
-    // 9.6f 0x48A8F0
     bool has_pStart_48A8F0()
     {
         return field_0_pStart != nullptr;

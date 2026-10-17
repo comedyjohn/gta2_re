@@ -46,7 +46,6 @@ struct WorldRect
 class Camera_0xBC
 {
   public:
-    // 9.6f 0x416B70
     Ped* GetFollowedPed_416B70()
     {
         return field_34_target_ped;
@@ -112,13 +111,11 @@ class Camera_0xBC
         field_3C_follow_mode = camera_follow_mode::smooth_1;
     }
 
-    // 9.6f 0x4A5070
     void SetSnapFollow_4A5070()
     {
         field_3C_follow_mode = camera_follow_mode::snap_2;
     }
 
-    // FUNCTION: 96f 0x40cfc0
     Fix16_Point_POD WorldToScreen_40CFC0(Fix16 x, Fix16 y, Fix16 z)
     {
         Fix16_Point_POD tmp;
@@ -131,7 +128,6 @@ class Camera_0xBC
         return tmp;
     }
 
-    // 9.6f 0x45AEA0
     bool IsSpriteInBounds_45AEA0(Sprite* pSprite, Fix16 margin)
     {
         return pSprite->field_14_xy.x >= field_20_padded_view_bounds.field_0_left - margin &&
@@ -140,7 +136,6 @@ class Camera_0xBC
             pSprite->field_14_xy.y <= field_20_padded_view_bounds.field_C_bottom + margin;
     }
 
-    // 9.6f 0x45AF40
     bool IsRectInBounds_45AF40(Fix16_Rect* pRect)
     {
         return pRect->get_top_45ADD0() <= field_20_padded_view_bounds.field_C_bottom &&
@@ -149,7 +144,6 @@ class Camera_0xBC
             pRect->get_right_45ADA0() >= field_20_padded_view_bounds.field_0_left;
     }
 
-    // 9.6f 0x40CF60
     bool IsPointInViewBounds_40CF60(Fix16 x, Fix16 y)
     {
         return x >= field_78_view_bounds.field_0_left && x <= field_78_view_bounds.field_4_right && y >= field_78_view_bounds.field_8_top &&

@@ -143,7 +143,6 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
     }
 }
 
-// 9.6f 0x48CC50
 // 0x53e880
 void Particle_8::SpawnBlood_53E880(Fix16 xpos, Fix16 ypos, Fix16 zpos)
 {
@@ -334,7 +333,6 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
     }
 }
 
-// https://decomp.me/scratch/3Ars7
 // 9.6f 0x48D4E0. The original enters with EH state 4 (five points) and sets no state in the car
 // branch: the `offset + get_x_y()` sum is the plain inline operator+ (charged, called out of line,
 // no EH state for the temporaries) in both branches. `Ang16 angle` is at function scope as in 9.6f.
@@ -510,7 +508,6 @@ inline void PolarToCartesian_OutOfLineCos(const Ang16& angle, Fix16& radius, Fix
 }
 } // namespace
 
-// https://decomp.me/scratch/wfzEd
 // 0x53FE40
 void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16_Point dir)
 {

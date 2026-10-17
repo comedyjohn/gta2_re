@@ -253,13 +253,11 @@ struct NetPlay
     s32 SendSyncCheckData_521E40(sptr pSendData);
     static void static_dtor_5E4DD0();
 
-    // 9.6f 0x461DA0
     u32 GetPlayerCount_461DA0()
     {
         return field_758_n2.field_4_players_count;
     }
 
-    // 9.6f 0x409C40
     s32 GetPlayerIdx_409C40()
     {
         return field_5D4_player_idx;

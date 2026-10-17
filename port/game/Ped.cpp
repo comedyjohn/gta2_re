@@ -187,7 +187,6 @@ EXTERN_GLOBAL(Ang16, gSpawnRotationRight_678578);
 EXTERN_GLOBAL(Ang16, gSpawnRotationBottom_678540);
 
 // TODO: move
-// https://decomp.me/scratch/BzcQt
 // 0x545AF0
 void CarDoorAlignmentSolver_545AF0(u8 animPhase, Car_BC* pCar, u8 doorId, Fix16& outX, Fix16& outY, Ang16& outAng)
 {
@@ -546,7 +545,6 @@ Ped::~Ped()
     this->field_1A4_internal_target_object = nullptr;
 }
 
-// https://decomp.me/scratch/2yWEK
 // 0x45afc0
 void Ped::Reset_45AFC0()
 {
@@ -1535,7 +1533,6 @@ Fix16 Ped::GetMoveDirection_45C9B0()
     return field_15C_player->field_C_move_direction;
 }
 
-// 9.6f 0x43E3A0
 // 0x45c9d0
 Ang16 Ped::ComputeAimAngle_45C9D0()
 {
@@ -1694,7 +1691,6 @@ void Ped::HandlePedCrossingTrigger_45CF20(Object_2C* pObj)
     }
 }
 
-// https://decomp.me/scratch/Yg4cw
 // 0x45d000
 char_type Ped::HandlePedHitByObject_45D000(Object_2C* pTargetPed)
 {
@@ -2124,7 +2120,6 @@ void Ped::SpawnWeaponOnDeath_45E080()
     }
 }
 
-// https://decomp.me/scratch/PNiZo
 // 0x45e4a0
 void Ped::StartCrossingRoad_45E4A0()
 {
@@ -2452,7 +2447,6 @@ bool Ped::PedTypeIs_45EDE0(s32 type)
     return field_238_ped_type == type ? true : false;
 }
 
-// https://decomp.me/scratch/pXF8g
 // 0x45ee00
 void Ped::SetOccupation_45EE00(u32 occupation)
 {
@@ -4835,7 +4829,6 @@ void Ped::ProcessOnFootObjective_463AA0()
     }
 }
 
-// https://decomp.me/scratch/0fIeI
 // 0x463fb0
 void Ped::ProcessInCarObjective_463FB0()
 {
@@ -5257,7 +5250,6 @@ void Ped::CalcApproachPointNearTargetPed_4645B0()
     }
 }
 
-// https://decomp.me/scratch/LvHfw
 // 0x465270
 void Ped::Threat_Reaction_AI_465270()
 {
@@ -5715,7 +5707,6 @@ bool Ped::IsAttackingTargetPed_465CD0()
     return false;
 }
 
-// https://decomp.me/scratch/Fh1iq
 // 0x466b70
 char_type Ped::IsInvisibleOnFoot_466B70()
 {
@@ -5729,7 +5720,6 @@ char_type Ped::IsInvisibleOnFoot_466B70()
 
 // Returns Fix16 by value (hidden out pointer, ret $0x14). Max of the two Abs written out with
 // the y abs first: Fix16::Max takes references and spills both to the stack.
-// https://decomp.me/scratch/Fh1iq
 // 0x465d00
 bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
 {
@@ -6095,7 +6085,6 @@ inline Ang16 SubAng16(const Ang16& lhs, const Ang16& rhs)
 }
 } // namespace
 
-// https://decomp.me/scratch/0VTTk
 // 9.6f 0x437670. Mode 1 is IsPedAThreat (9.6f 0x4371D0) inlined, with the nested budget (42) sending
 // IsInvisibleOnFoot and MaxAbsDistance out of line. The angle and distance locals are at function scope
 // (9.6f default-constructs three Ang16 at the top): the original's 4-byte slots for the mode 4 and 5
@@ -6378,8 +6367,6 @@ Ped* Ped::FindBestTargetPed_Mode5_466BD0(s32 max_x_check)
     return Ped::FindBestTargetPed_466BF0(max_x_check);
 }
 
-// https://decomp.me/scratch/jl40w
-// 9.6f 0x437BE0
 // 0x466bf0
 Ped* Ped::FindBestTargetPed_466BF0(s32 a2)
 {
@@ -6647,7 +6634,6 @@ Sprite* Ped::ResetAnimAndFindNearestSprite_467280()
     return gSpriteGrid_1_679208->FindNearestSpriteOfType_477E60(this->field_168_game_object->field_80_sprite_ptr, 2);
 }
 
-// https://decomp.me/scratch/ec0hn
 // 0x4672e0
 void Ped::UpdateMovementTowardsTarget_4672E0(Fix16 distance, u8 type)
 {
@@ -7881,7 +7867,6 @@ void Ped::UpdateKillerIdTimer_469030()
     }
 }
 
-// https://decomp.me/scratch/rHsAD
 // 0x469060
 void Ped::GotoAreaByAnyMeans_469060()
 {
@@ -8956,7 +8941,6 @@ void Ped::CheckFollowTargetPedStillValid_46AB50()
     }
 }
 
-// https://decomp.me/scratch/ahbj8
 // 0x46ac20
 void Ped::FollowTargetStateMachine_46AC20()
 {
@@ -9152,7 +9136,6 @@ void Ped::ChaseTargetStateMachine_46B170()
     }
 }
 
-// https://decomp.me/scratch/1MwH3
 // 0x46b2f0
 void Ped::PullDriverOutOfCarStateMachine_46B2F0()
 {
@@ -9283,7 +9266,6 @@ void Ped::PullDriverOutOfCarStateMachine_46B2F0()
     field_226_internal_objective_status = 2;
 }
 
-// https://decomp.me/scratch/aE2Ac
 // Logic follows the 10.5 asm. The mugging and criminal checks of the hurt block are nested per player
 // test, so VC6 keeps the original's separate copies.
 // 0x46b670
@@ -10062,7 +10044,6 @@ void Ped::FollowPedInCar_46CA70()
     this->field_16C_car->field_60_pChaseTask->field_20_can_snap_to_target = 1;
 }
 
-// 9.6f 0x43A550
 // 0x46cb30
 void Ped::StartPedCrossingAtTrafficLight_Y_Backward_46CB30()
 {
@@ -10346,7 +10327,6 @@ void Ped::FollowCarOnFoot_46D300()
     }
 }
 
-// https://decomp.me/scratch/5y8iN
 // 0x46d460
 void Ped::AttackTargetStateMachine_46D460(u8 targetType)
 {
@@ -11187,7 +11167,6 @@ void Ped::ManageWeapon_46F390()
     }
 }
 
-// 9.6f 0x434E60
 // 0x46f490
 Weapon_30* Ped::ChooseAttackWeapon_46F490()
 {

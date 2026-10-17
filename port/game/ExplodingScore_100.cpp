@@ -385,7 +385,6 @@ char_type ExplodingScore_50::PoolUpdate()
     }
 }
 
-// 9.6f 0x4B92B0
 // 0x597100
 void ExplodingScore_50::DrawSingleNumber_597100(s32 number_to_draw, s32 xpos_sub)
 {

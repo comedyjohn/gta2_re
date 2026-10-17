@@ -16,8 +16,6 @@ EXTERN_GLOBAL(Fix16, kCollisionPrismHalfHeight_6771E4);
     #define FIX16_RECT_HALF_HEIGHT kCollisionPrismHalfHeight_6771E4
 #endif
 
-// 9.6f 0x41E160
-// https://decomp.me/scratch/A4s7c
 inline bool IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, const Fix16& otherMin, const Fix16& otherMax)
 {
     if (ourMin < otherMin)
@@ -38,10 +36,8 @@ inline bool IntervalsOverlap_41E160(const Fix16& ourMin, const Fix16& ourMax, co
 class Fix16_Rect
 {
   public:
-    // 9.6f 0x41D070
     Fix16_Rect() = default;
 
-    // 9.6f 0x4204D0
     void ComputeCollisionPrism_4204D0(Fix16 x, Fix16 y, Fix16 offset, Fix16 z)
     {
         Fix16 tmp = offset / 2;
@@ -70,8 +66,6 @@ class Fix16_Rect
         field_14_high_z = z.Add_408660(half_z);
     }
 
-    // 9.6f 0x41E350
-    // https://decomp.me/scratch/HVOft
     void SetRect_41E350(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom)
     {
         this->field_0_left = left;
@@ -84,13 +78,11 @@ class Fix16_Rect
     void SetRect_5A5E30(Fix16 left, Fix16 right, Fix16 top, Fix16 bottom);
     void MakeRect_4E6280(Fix16 x, Fix16 y, Fix16 w, Fix16 h);
 
-    // 9.6f 0x433560
     bool OverlapsZ_433560(Fix16_Rect* pOther)
     {
         return IntervalsOverlap_41E160(field_10_low_z, field_14_high_z, pOther->field_10_low_z, pOther->field_14_high_z);
     }
 
-    // 9.6f 0x463760
     s32 GetMidZ_463760() const
     {
         return (field_10_low_z.Add_408660(field_14_high_z) / 2).ToInt();
@@ -99,7 +91,6 @@ class Fix16_Rect
     // 9.6f 0x463690, defined in map_0x370.cpp
     inline bool EdgesCrossSegment_463690(Fix16_Point& p1, Fix16_Point& p2);
 
-    // 9.6f 0x463710
     void SetFromPosSize_463710(Fix16 left, Fix16 top, Fix16 width, Fix16 height)
     {
         field_0_left = left;
@@ -137,14 +128,11 @@ class Fix16_Rect
     bool RectOverlapsZone_59DF20(u8 zone_type);
     bool EveryTileMatchesArrowType_59DFB0(s32 arrow_type);
 
-    // 9.6f 0x4B9FD0
     bool IsPointInRect_4B9FD0(Fix16_Point* a2)
     {
         return Fix16::IsBetween_4B9E10(field_0_left, field_4_right, a2->x) && Fix16::IsBetween_4B9E10(field_8_top, field_C_bottom, a2->y);
     }
 
-    // 9.6f 0x41E2F0
-    // https://decomp.me/scratch/TT06X
     bool AABB_Intersects_41E2F0(Fix16_Rect* pOther) const
     {
         return IntervalIntersectsRange_438FB0(field_0_left, this->field_4_right, pOther->field_0_left, pOther->field_4_right) &&
@@ -174,7 +162,6 @@ class Fix16_Rect
         return field_C_bottom;
     }
 
-    // 9.6f 0x4637A0
     Fix16 get_low_z_4637A0()
     {
         return field_10_low_z;

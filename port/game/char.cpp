@@ -201,7 +201,6 @@ void UnpackSignedNibbles_529050(u8 a1, s8* a2, s8* a3)
     *a3 = (a1 & 0xF) - 7;
 }
 
-//https://decomp.me/scratch/iQH9l
 // 0x544F70
 void ResetCharUpdateGlobals_544F70()
 {
@@ -227,7 +226,6 @@ void ResetCharUpdateGlobals_544F70()
     byte_6FDB58 = 0;
 }
 
-// https://decomp.me/scratch/ZsDjc
 // 0x544ff0
 Char_B4::Char_B4()
 {
@@ -453,7 +451,6 @@ s32 Char_B4::IsOnWater_545570()
     return field_80_sprite_ptr->IsOnWater_59E1D0();
 }
 
-// 9.6f 0x493780
 // 0x545580
 Fix16_Point Char_B4::sub_545580()
 {
@@ -1702,7 +1699,6 @@ inline Ang16 TurnBy16Deg_548BD0(Ang16 angle)
 }
 } // namespace
 
-// 9.6f 0x499F00
 // 0x548670
 void Char_B4::DispatchCollision_548670(char_type bFlag)
 {
@@ -2165,7 +2161,6 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
     }
 }
 
-// https://decomp.me/scratch/ph2wn
 // 9.6f 0x4948C0. The 18 Ang16 normalisations are the plain operators (`-pSprt->field_0`, `kAng180 +
 // corner_ang`, `pSprt->field_0 - kAng90`): the first 9 go out of line (one Normalize target), the rest
 // inline, and the inline budget only cuts there (side 0 out of line, side 1 inline) when the function's
@@ -2553,7 +2548,6 @@ void Char_B4::HandleGenericCollision_54A530(Car_BC* pCar, Object_2C* pObj, Char_
     }
 }
 
-// https://decomp.me/scratch/aRlEV
 // 0x54b8f0
 char_type Char_B4::ContinueMovementAfterCollision_54B8F0()
 {
@@ -2706,7 +2700,6 @@ inline s32 RotateFace_491F10(s32* face, bool* clockwise)
 }
 } // namespace
 
-// 9.6f 0x492400
 inline void Char_B4::SetTurnTarget_492400(Ang16 target_rotation)
 {
     field_10_char_state = 25;
@@ -2864,7 +2857,6 @@ char_type Char_B4::CanMoveOntoSlope_54C1A0(s32 path_direction)
     return result;
 }
 
-// 9.6f 0x495470
 // 0x54c3e0
 void Char_B4::sub_54C3E0()
 {
@@ -2906,7 +2898,6 @@ void Char_B4::sub_54C3E0()
     }
 }
 
-// 9.6f 0x495540
 // 0x54c500
 char_type Char_B4::CanMoveToTile_54C500(char_type x, char_type y)
 {
@@ -3143,7 +3134,6 @@ void Char_B4::TurnTowardsAngle_54CAE0()
     }
 }
 
-// https://decomp.me/scratch/RGvHW
 // 0x54cc40
 void Char_B4::ApplyMovement_54CC40()
 {
@@ -3426,7 +3416,6 @@ inline bool IsBlockTypeInRange_1_4(u8 block_type)
 }
 } // namespace
 
-// https://decomp.me/scratch/56qkT
 // 0x54ddf0
 void Char_B4::state_0_54DDF0()
 {
@@ -3930,7 +3919,6 @@ LABEL_152:
     Char_B4::sub_54DD70();
 }
 
-// https://decomp.me/scratch/Zk9Eh
 // 0x54ecb0
 bool Char_B4::CanStepForwardWithRegionCheck_54ECB0(s32 direction)
 {
@@ -4010,7 +3998,6 @@ bool Char_B4::CanStepForwardWithRegionCheck_54ECB0(s32 direction)
     return true;
 }
 
-// https://decomp.me/scratch/Ub1EN
 // 9.6f 0x495BF0: the collision offset division is written at each use (VC6 CSEs it), bCanStep is set
 // in each leaf and leaves 2-4 return explicitly (leaf 1's tail is the cross-jump keeper).
 // 0x54EF60
@@ -4398,7 +4385,6 @@ bool Char_B4::CanStepDiagonal_54EF60(char_type target_x, char_type target_y)
     return CanStepForwardWithRegionCheck_54ECB0(path_direction::down_2);
 }
 
-// https://decomp.me/scratch/xc0PO
 // 0x54fec0
 bool Char_B4::CanStepForward_54FEC0(s32 direction)
 {
@@ -4718,7 +4704,6 @@ inline Fix16 MaxAbsDistance_5504F0(Fix16& x1, Fix16& y1, const Fix16& x2, const 
 }
 } // namespace
 
-// https://decomp.me/scratch/chZqY
 // 0x5504f0
 void Char_B4::state_1_5504F0()
 {
@@ -5131,7 +5116,6 @@ LABEL_65:
     Char_B4::sub_54DD70();
 }
 
-// https://decomp.me/scratch/4eLOQ
 // 0x550f60
 Ang16 Char_B4::GetNextRotationToward_550F60(Ang16 inputAng)
 {
@@ -5684,7 +5668,6 @@ void Char_B4::state_5_551BB0()
     }
 }
 
-// https://decomp.me/scratch/qNjdM
 // 0x551CB0
 void Char_B4::state_7_551CB0()
 {
@@ -5871,7 +5854,6 @@ void Char_B4::state_7_551CB0()
     }
 }
 
-// https://decomp.me/scratch/x9UcS
 // 0x5520A0
 void Char_B4::state_8_5520A0()
 {
@@ -6354,7 +6336,6 @@ void Char_B4::state_8_5520A0()
     }
 }
 
-// https://decomp.me/scratch/4c8aU
 // 0x552DE0
 Fix16 CarPhysics_B0::vec_len_552DE0() // Weird location, I'm putting this here to preserve ordering
 {
@@ -6519,7 +6500,6 @@ char_type Char_B4::IsThreatToSearchingPed_553330()
     return field_7C_pPed->IsThreatToSearchingPed_4661F0();
 }
 
-// 9.6f 0x497480
 // 0x553340
 bool Char_B4::ShouldCollideWithSprite_553340(Sprite* pSprite)
 {

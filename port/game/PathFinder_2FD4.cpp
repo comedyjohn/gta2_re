@@ -348,7 +348,6 @@ char_type PathFinder_2FD4::EvaluateGridCell_554640()
     return 0;
 }
 
-// https://decomp.me/scratch/f8WDL
 // 0x554710
 void PathFinder_2FD4::AddGridCell_554710()
 {
@@ -545,7 +544,6 @@ s32 PathFinder_2FD4::IsFirstPassenger_554A90(Ped* pPed)
     return field_3C_ped_list.field_0_pFirstPed->field_0_char_ped == pPed;
 }
 
-// https://decomp.me/scratch/Fr0bT
 // 0x554ab0
 char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
                                               Ped* pPed,
@@ -916,7 +914,6 @@ LABEL_61:
     return 1;
 }
 
-// https://decomp.me/scratch/19LIh
 // 0x5552b0
 bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer)
 {

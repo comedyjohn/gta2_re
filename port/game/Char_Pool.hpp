@@ -26,7 +26,6 @@ class Char_B4_Pool
 class Char_8
 {
   public:
-    // 9.6f 0x420EA0
     bool no_char_ped_420EA0()
     {
         return field_0_char_ped == nullptr;
@@ -54,13 +53,11 @@ class Char_8_Pool
         field_0_pool.field_0_pHead = nullptr;
     }
 
-    // 9.6f 0x445EF0
     Char_8* Allocate_445EF0()
     {
         return field_0_pool.Allocate();
     }
 
-    // 9.6f 0x445F00
     void DeAllocate_445F00(Char_8* pItem)
     {
         field_0_pool.DeAllocate(pItem);
@@ -108,13 +105,11 @@ class PedPool
 
     ~PedPool();
 
-    // 9.6f 0x403890
     Ped* Allocate()
     {
         return field_0_pool.Allocate();
     }
 
-    // 9.6f 0x445960
     // Pool::UpdatePool with the next item stored in both branches
     void UpdatePool_445960()
     {
@@ -171,7 +166,6 @@ class PedPool
         }
     }
 
-    // 9.6f 0x435530
     Ped* GetFirstPed_435530()
     {
         return field_0_pool.field_4_pPrev;

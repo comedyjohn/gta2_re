@@ -22,20 +22,17 @@ class CollisionTarget_28
         this->field_24_pSourceSprite = nullptr;
     }
 
-    // 9.6f 0x49EF10
     void SetSourceSprite_49EF10(Sprite* pSprite)
     {
         this->field_24_pSourceSprite = pSprite;
     }
 
-    // 9.6f 0x482A70
     void SetType4_482A70()
     {
         this->field_0_type = collision_target_type::floor_below_4;
         this->field_20_pHitSprite = nullptr;
     }
 
-    // 9.6f 0x482A80
     void SetType5_482A80()
     {
         this->field_0_type = collision_target_type::block_at_z_5;

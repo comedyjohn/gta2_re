@@ -15,7 +15,6 @@ class TagGame_28
     void ExecuteGamemodeTick_516660();
     void UpdateFugitive_516740(Player* pFormerPlayerFugitive, Player* pPlayer_killer);
 
-    // 9.6f 0x434B20
     bool IsTagGame_434B20()
     {
         return gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0() == TAG_GAME_3;
@@ -24,7 +23,6 @@ class TagGame_28
     // 9.6f 0x434B60, defined in Player.hpp
     inline bool IsFugitivePed_434B60(Ped* pPed);
 
-    // 9.6f 0x453A90
     u8 HasQuit_453A90(s32 player_idx)
     {
         return field_20_bHasQuit[player_idx];
@@ -33,13 +31,11 @@ class TagGame_28
     // 9.6f 0x4C7380, defined in Hud.cpp (needs Player)
     inline s32 GetPlayerTime_4C7380(Player* pPlayer);
 
-    // 9.6f 0x461DD0
     void SetQuit_461DD0(s32 player_idx)
     {
         field_20_bHasQuit[player_idx] = 1;
     }
 
-    // 9.6f 0x453AA0
     s32 GetTime_453AA0(s32 player_idx)
     {
         return field_4_it_time_secs[player_idx];

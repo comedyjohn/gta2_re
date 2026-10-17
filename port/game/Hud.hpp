@@ -170,7 +170,6 @@ class Hud_ShowCoords_1
     }
     void ShowPlayerCoords_5CF970();
 
-    // 9.6f 0x4A4760
     void ToggleShowCoords_4A4760()
     {
         field_0_show_coords = field_0_show_coords == 0;
@@ -225,20 +224,17 @@ class Hud_TextEntry_C4
     bool DecrementDisplayTime_5D1DB0();
     bool operator_equals_5D1E10(Hud_TextEntry_C4* pOther);
 
-    // 9.6f 0x4C70F0
     void Expire_4C70F0()
     {
         field_A4_display_time = 0;
     }
 
-    // 9.6f 0x4C70E0
     void ClearAlpha_4C70E0()
     {
         field_B8_alpha = 0;
         *reinterpret_cast<u8*>(&field_BC_alpha_flag) = 0; // byte store in both 9.6f and 10.5, the field is read as s32 elsewhere
     }
 
-    // 9.6f 0x45AFD0
     void SetDrawKind8_45AFD0(s16 palette)
     {
         field_B0_drawKind = 8;
@@ -274,19 +270,16 @@ class Hud_TextList_968
 class Hud_Pager_C
 {
   public:
-    // 9.6f 0x4C7160
     bool no_ptr_counter_4C7160()
     {
         return field_4_ptr_counter == nullptr;
     }
 
-    // 9.6f 0x4C7170
     bool IsTimerOff_4C7170()
     {
         return field_0_timer < 0;
     }
 
-    // 9.6f 0x4C7120
     void SetTimer_4C7120(s32 timer)
     {
         field_0_timer = timer;
@@ -295,7 +288,6 @@ class Hud_Pager_C
     // 9.6f 0x4C7130, defined in Hud.cpp
     inline void SetCounter_4C7130(s32* pCounter);
 
-    // 9.6f 0x411A40
     s32 get_timer_411A40()
     {
         return field_0_timer;
@@ -390,14 +382,12 @@ class ArrowTrace_24
         field_10_target_type = ArrowTargetType::Car_3;
     }
 
-    // 9.6f 0x4767E0
     void SetTargetPed_4767E0(Ped* pPed)
     {
         field_0_ped = pPed;
         field_10_target_type = ArrowTargetType::Ped_2;
     }
 
-    // 9.6f 0x476810
     void SetTargetObject_476810(Object_2C* pObj)
     {
         field_8_obj = pObj;
@@ -428,7 +418,6 @@ class ArrowTrace_24
         return field_10_target_type == ArrowTargetType::Nothing_0;
     }
 
-    // 9.6f 0x4C6F30
     Player* GetTargetPlayer_4C6F30()
     {
         return field_C_player;
@@ -481,7 +470,6 @@ class Hud_Arrow_7C
     // 9.6f 0x4C6FF0, defined in Hud.cpp
     inline void SetMinRadiusPos_4C6FF0(s32 steps);
 
-    // 9.6f 0x4C6F20
     bool Is_radius_pos_0_4C6F20()
     {
         return field_10_radius_pos == 0;
@@ -527,19 +515,16 @@ class Hud_Arrow_7C
         }
     }
 
-    // 9.6f 0x476850
     void SetArrowTargetPed_476850(Ped* pPed)
     {
         field_18.field_18_primary_target.SetTargetPed_4767E0(pPed);
     }
 
-    // 9.6f 0x476860
     void SetArrowTargetCar_476860(Car_BC* pCar)
     {
         field_18.field_18_primary_target.SetTargetCar(pCar);
     }
 
-    // 9.6f 0x476870
     void SetArrowTargetObject_476870(Object_2C* pObj)
     {
         field_18.field_18_primary_target.SetTargetObject_476810(pObj);
@@ -567,7 +552,6 @@ class Hud_Arrow_7C
 class Hud_Arrow_7C_Array
 {
   public:
-    // 9.6f 0x4C70B0
     char_type ShowGangArrows_4C70B0()
     {
         return field_83C_show_gang_arrows;
@@ -642,7 +626,6 @@ class gmp_map_zone;
 class Hud_MapZone_98
 {
   public:
-    // 9.6f 0x4A4770
     void clear_zones()
     {
         field_88_nav_zone = nullptr;

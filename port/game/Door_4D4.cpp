@@ -351,7 +351,6 @@ Door_38* Door_4D4::GetNextFreeDoor_49D3A0()
     return &field_0_doors[field_4D0_count];
 }
 
-// https://decomp.me/scratch/dGqMg
 // 0x49d3c0
 char_type Door_4D4::CheckDoorAccess_49D3C0(Sprite* pSprite, u8 door_idx)
 {

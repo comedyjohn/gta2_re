@@ -22,15 +22,11 @@ class Fix16
         return (v + 0x2000) >> 14;
     }
 
-    // 9.6f 0x40E570
-    // https://decomp.me/scratch/5BHO3
     s32 operator==(const Fix16& value) const
     {
         return mValue == value.mValue;
     }
 
-    // 9.6f 0x40CE50
-    // https://decomp.me/scratch/MBAm6
     s32 operator<=(const Fix16& other) const
     {
         return mValue <= other.mValue;
@@ -380,7 +376,6 @@ class Fix16
         }
     }
 
-    // https://decomp.me/scratch/MqQPJ
     static Fix16 MaxAbsDistance_42A6B0(const Fix16& x1, const Fix16& y1, const Fix16& x2, const Fix16& y2)
     {
         Fix16 diff_x;
@@ -431,14 +426,12 @@ class Fix16
         return this;
     }
 
-    // 9.6f 0x4824E0
     Fix16 operator++(int)
     {
         mValue += 0x4000;
         return Fix16(mValue - 0x4000, 0);
     }
 
-    // 9.6f 0x482510
     Fix16 operator--(int)
     {
         mValue -= 0x4000;

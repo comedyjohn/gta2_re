@@ -114,7 +114,6 @@ void ConvertColourBanks_5D7CB0()
     ConvertColourBanks_5D7CC0();
 }
 
-// https://decomp.me/scratch/zpWhI
 // 0x5D7CC0
 void ConvertColourBanks_5D7CC0()
 {
@@ -157,7 +156,6 @@ void MakeScreenTableAndSetWindow_5D7D30()
     pgbh_SetWindow(0, 0, static_cast<f32>(gWindowRight_70675C), static_cast<f32>(gWindowBottom_70679C));
 }
 
-// https://decomp.me/scratch/Zmms7
 // 9.6f 0x4CBA50: half_w/half_h are assigned after their declaration (the multiply result is copied into
 // them), the flags test is one equality condition and the widths go through the Fix16(u8) ctor.
 // The ternary, the field reads in u/v and `u32 flags` set the front-end size that gives the
@@ -273,7 +271,6 @@ inline f32 Fix16ToF32_Rounded(const Fix16& v)
 }
 } // namespace
 
-// https://decomp.me/scratch/SCz1D
 // 0x5D8470
 void DrawTexture_5D8470(STexture* pTexture, Fix16 x_pos, Fix16 y_pos, u8 width, u8 height, Ang16 rotation, Fix16 scale, s32 a8, u8 a9)
 {
@@ -361,7 +358,6 @@ s32 CountLineSpacing_5D8940(wchar_t* pStr, u16 font_type)
     return result;
 }
 
-// https://decomp.me/scratch/HX0q9
 // 0x5D8A10
 void DrawText_5D8A10(const wchar_t* pText,
                      Fix16 xpos_fp,

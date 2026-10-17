@@ -1,5 +1,4 @@
 #include "collide.hpp"
-#include "Globals.hpp"
 #include "SpriteGrid_400.hpp"
 #include "enums.hpp"
 #include "error.hpp"

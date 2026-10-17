@@ -5,7 +5,6 @@
 #include "CollisionSoundQueue_C88.hpp"
 #include "Draw.hpp"
 #include "Frontend.hpp"
-#include "Globals.hpp"
 #include "Object_2C_Pool.hpp"
 #include "Object_5C.hpp"
 #include "PathFinder_2FD4.hpp"

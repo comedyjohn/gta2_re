@@ -1635,7 +1635,7 @@ port/game/SpriteGrid_400.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/SpriteGrid_400.cpp,cppcoreguidelines-pro-type-union-access,16
 port/game/SpriteGrid_400.cpp,cppcoreguidelines-pro-type-vararg,2
 port/game/SpriteGrid_400.cpp,misc-const-correctness,1
-port/game/SpriteGrid_400.cpp,misc-include-cleaner,12
+port/game/SpriteGrid_400.cpp,misc-include-cleaner,11
 port/game/SpriteGrid_400.cpp,readability-convert-member-functions-to-static,2
 port/game/SpriteGrid_400.cpp,readability-function-cognitive-complexity,1
 port/game/SpriteGrid_400.cpp,readability-implicit-bool-conversion,55
@@ -1927,7 +1927,7 @@ port/game/collide.cpp,cppcoreguidelines-avoid-non-const-global-variables,3
 port/game/collide.cpp,cppcoreguidelines-owning-memory,10
 port/game/collide.cpp,cppcoreguidelines-prefer-member-initializer,3
 port/game/collide.cpp,cppcoreguidelines-pro-type-vararg,5
-port/game/collide.cpp,misc-include-cleaner,3
+port/game/collide.cpp,misc-include-cleaner,2
 port/game/collide.cpp,modernize-raw-string-literal,5
 port/game/collide.cpp,readability-implicit-bool-conversion,5
 port/game/collide.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
@@ -2352,7 +2352,7 @@ port/game/sprite.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/sprite.cpp,cppcoreguidelines-pro-type-union-access,78
 port/game/sprite.cpp,cppcoreguidelines-pro-type-vararg,7
 port/game/sprite.cpp,misc-const-correctness,53
-port/game/sprite.cpp,misc-include-cleaner,24
+port/game/sprite.cpp,misc-include-cleaner,23
 port/game/sprite.cpp,modernize-avoid-c-arrays,2
 port/game/sprite.cpp,modernize-deprecated-headers,2
 port/game/sprite.cpp,modernize-raw-string-literal,4

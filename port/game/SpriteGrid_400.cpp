@@ -1,7 +1,6 @@
 #include "SpriteGrid_400.hpp"
 #include "Camera.hpp"
 #include "Car_BC.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "SpriteRenderer_1C.hpp"
 #include "collide.hpp"

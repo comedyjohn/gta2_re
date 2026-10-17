@@ -34,7 +34,6 @@
 #include "car_despawn_status.hpp"
 #include "collide.hpp"
 #include "debug.hpp"
-#include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
 #include "map_0x370.hpp"
 #include "registry.hpp"
@@ -44,7 +43,6 @@
 #include "text_0x14.hpp"
 #include <cstdarg>
 #include <direct.h>
-#include <vector>
 
 #include <shlwapi.h>
 

@@ -1,7 +1,6 @@
 #include "KanjiFont_8EC.hpp"
 #include "Function.hpp"
 #include "Game_0x40.hpp"
-#include "Globals.hpp"
 #include "TextureCache_15D8.hpp"
 #include "chunk.hpp"
 #include "enums.hpp"

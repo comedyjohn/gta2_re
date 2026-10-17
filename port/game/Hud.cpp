@@ -6,7 +6,6 @@
 #include "GameSession_578.hpp"
 #include "Game_0x40.hpp"
 #include "Gang.hpp"
-#include "Globals.hpp"
 #include "Object_5C.hpp"
 #include "Ped.hpp"
 #include "Player.hpp"

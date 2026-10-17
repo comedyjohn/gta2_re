@@ -1,6 +1,5 @@
 #include "TextureCache_15D8.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "gbh_graphics.hpp"
 #include "gtx_0x106C.hpp"
 #include "memory.hpp"

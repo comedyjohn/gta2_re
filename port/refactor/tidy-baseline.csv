@@ -481,7 +481,7 @@ port/game/ExplodingScore_100.cpp,cppcoreguidelines-prefer-member-initializer,11
 port/game/ExplodingScore_100.cpp,cppcoreguidelines-pro-bounds-constant-array-index,1
 port/game/ExplodingScore_100.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/ExplodingScore_100.cpp,misc-const-correctness,4
-port/game/ExplodingScore_100.cpp,misc-include-cleaner,11
+port/game/ExplodingScore_100.cpp,misc-include-cleaner,10
 port/game/ExplodingScore_100.cpp,readability-else-after-return,1
 port/game/ExplodingScore_100.cpp,readability-implicit-bool-conversion,18
 port/game/ExplodingScore_100.cpp,readability-make-member-function-const,1
@@ -597,7 +597,7 @@ port/game/Frontend.cpp,cppcoreguidelines-pro-type-reinterpret-cast,23
 port/game/Frontend.cpp,cppcoreguidelines-pro-type-union-access,103
 port/game/Frontend.cpp,cppcoreguidelines-pro-type-vararg,94
 port/game/Frontend.cpp,misc-const-correctness,83
-port/game/Frontend.cpp,misc-include-cleaner,79
+port/game/Frontend.cpp,misc-include-cleaner,77
 port/game/Frontend.cpp,modernize-avoid-c-arrays,43
 port/game/Frontend.cpp,modernize-deprecated-headers,2
 port/game/Frontend.cpp,modernize-raw-string-literal,37
@@ -775,7 +775,7 @@ port/game/Hud.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/Hud.cpp,cppcoreguidelines-pro-type-union-access,1
 port/game/Hud.cpp,cppcoreguidelines-pro-type-vararg,33
 port/game/Hud.cpp,misc-const-correctness,65
-port/game/Hud.cpp,misc-include-cleaner,44
+port/game/Hud.cpp,misc-include-cleaner,43
 port/game/Hud.cpp,modernize-avoid-c-arrays,6
 port/game/Hud.cpp,modernize-raw-string-literal,2
 port/game/Hud.cpp,readability-convert-member-functions-to-static,15
@@ -815,7 +815,7 @@ port/game/ImGuiDebug.cpp,cppcoreguidelines-pro-type-reinterpret-cast,11
 port/game/ImGuiDebug.cpp,cppcoreguidelines-pro-type-union-access,8
 port/game/ImGuiDebug.cpp,cppcoreguidelines-pro-type-vararg,52
 port/game/ImGuiDebug.cpp,misc-const-correctness,32
-port/game/ImGuiDebug.cpp,misc-include-cleaner,210
+port/game/ImGuiDebug.cpp,misc-include-cleaner,208
 port/game/ImGuiDebug.cpp,modernize-avoid-c-arrays,25
 port/game/ImGuiDebug.cpp,modernize-use-std-print,1
 port/game/ImGuiDebug.cpp,performance-no-int-to-ptr,1
@@ -876,7 +876,7 @@ port/game/KanjiFont_8EC.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/KanjiFont_8EC.cpp,cppcoreguidelines-pro-type-reinterpret-cast,7
 port/game/KanjiFont_8EC.cpp,cppcoreguidelines-pro-type-vararg,2
 port/game/KanjiFont_8EC.cpp,misc-const-correctness,8
-port/game/KanjiFont_8EC.cpp,misc-include-cleaner,10
+port/game/KanjiFont_8EC.cpp,misc-include-cleaner,9
 port/game/KanjiFont_8EC.cpp,modernize-avoid-c-arrays,1
 port/game/KanjiFont_8EC.cpp,modernize-raw-string-literal,2
 port/game/KanjiFont_8EC.cpp,performance-no-int-to-ptr,1
@@ -1657,7 +1657,7 @@ port/game/SpriteRenderer_1C.cpp,cppcoreguidelines-pro-bounds-constant-array-inde
 port/game/SpriteRenderer_1C.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/SpriteRenderer_1C.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/SpriteRenderer_1C.cpp,misc-const-correctness,1
-port/game/SpriteRenderer_1C.cpp,misc-include-cleaner,9
+port/game/SpriteRenderer_1C.cpp,misc-include-cleaner,8
 port/game/SpriteRenderer_1C.cpp,modernize-raw-string-literal,1
 port/game/SpriteRenderer_1C.cpp,readability-implicit-bool-conversion,12
 port/game/SpriteRenderer_1C.cpp,readability-make-member-function-const,1
@@ -1716,7 +1716,7 @@ port/game/TextureCache_15D8.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,
 port/game/TextureCache_15D8.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/TextureCache_15D8.cpp,cppcoreguidelines-pro-type-reinterpret-cast,2
 port/game/TextureCache_15D8.cpp,misc-const-correctness,6
-port/game/TextureCache_15D8.cpp,misc-include-cleaner,22
+port/game/TextureCache_15D8.cpp,misc-include-cleaner,21
 port/game/TextureCache_15D8.cpp,modernize-deprecated-headers,2
 port/game/TextureCache_15D8.cpp,readability-implicit-bool-conversion,13
 port/game/TextureCache_15D8.cpp,readability-make-member-function-const,5
@@ -1952,7 +1952,7 @@ port/game/dma_video.cpp,cppcoreguidelines-macro-usage,1
 port/game/dma_video.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,24
 port/game/dma_video.cpp,cppcoreguidelines-pro-type-reinterpret-cast,67
 port/game/dma_video.cpp,cppcoreguidelines-pro-type-vararg,23
-port/game/dma_video.cpp,misc-include-cleaner,33
+port/game/dma_video.cpp,misc-include-cleaner,32
 port/game/dma_video.cpp,modernize-avoid-c-arrays,23
 port/game/dma_video.cpp,readability-else-after-return,1
 port/game/dma_video.cpp,readability-function-cognitive-complexity,1
@@ -2043,7 +2043,7 @@ port/game/gbh_graphics.cpp,cppcoreguidelines-macro-usage,1
 port/game/gbh_graphics.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,42
 port/game/gbh_graphics.cpp,cppcoreguidelines-pro-type-reinterpret-cast,105
 port/game/gbh_graphics.cpp,cppcoreguidelines-pro-type-vararg,41
-port/game/gbh_graphics.cpp,misc-include-cleaner,12
+port/game/gbh_graphics.cpp,misc-include-cleaner,11
 port/game/gbh_graphics.cpp,modernize-avoid-c-arrays,41
 port/game/gbh_graphics.cpp,readability-function-cognitive-complexity,1
 port/game/gbh_graphics.cpp,readability-implicit-bool-conversion,4

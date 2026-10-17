@@ -48,7 +48,7 @@ import glob, os, sys, yaml
 for f in glob.glob(sys.argv[1] + "/*.yaml"):
     d = yaml.safe_load(open(f))
     # never a file's own header, nor the ones that carry macros or platform names the build needs
-    keep_always = {"Function.hpp", "windows.h", "stdio.h", "memory.h", "types.h", "stat.h", "shlwapi.h", "ddraw.h"}
+    keep_always = {"Light_1D4CC.hpp", "Function.hpp", "windows.h", "stdio.h", "memory.h", "types.h", "stat.h", "shlwapi.h", "ddraw.h"}
     def removable(x):
         m = x["DiagnosticMessage"]
         parts = m["Message"].split()

@@ -1,6 +1,5 @@
 #include "gbh_graphics.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include <cstdio>
 
 DEFINE_GLOBAL_INIT(T_gbh_InitDLL, pgbh_InitDLL, reinterpret_cast<T_gbh_InitDLL>(GBH_Graphics_Stub_5EA4D0), 0x626C54);

@@ -33,6 +33,6 @@ class Rng
     s32 rnd_;
 };
 
-EXTERN_GLOBAL(Rng*, gpRng_67AB34);
+EXTERN_GLOBAL(Rng*, gAmbientRng);
 
-EXTERN_GLOBAL(Rng, gRng_6F6784);
+EXTERN_GLOBAL(Rng, gRng);

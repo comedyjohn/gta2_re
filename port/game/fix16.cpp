@@ -3,11 +3,11 @@
 #include "ang16.hpp"
 #include <cmath>
 
-DEFINE_GLOBAL_ARRAY(Fix16, gSin_table_667A80, 1440, 0x667A80);
-DEFINE_GLOBAL_ARRAY(Fix16, gCos_table_669260, 1440, 0x669260);
+DEFINE_GLOBAL_ARRAY(Fix16, gSinTable, 1440, 0x667A80);
+DEFINE_GLOBAL_ARRAY(Fix16, gCosTable, 1440, 0x669260);
 
 // TODO: hmm, shouldn't this be 360 entries ??
-DEFINE_GLOBAL_ARRAY(Fix16, gTanTable_6663C8, 1440, 0x6663C8);
+DEFINE_GLOBAL_ARRAY(Fix16, gTanTable, 1440, 0x6663C8);
 DEFINE_GLOBAL_INIT(Fix16, kFPZero_6691B0, Fix16(0), 0x6691B0);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero, Ang16(0), 0x66A920);
 DEFINE_GLOBAL_INIT(Ang16, kAng180, Ang16(720), 0x669156);
@@ -221,17 +221,17 @@ Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed)
     return result;
 }
 
-DEFINE_GLOBAL_INIT(Fix16, dword_66A924, Fix16(0x11C, 0), 0x66A924);
-DEFINE_GLOBAL_INIT(Fix16, dword_669140, Fix16(0x63D8, 0), 0x669140);
-DEFINE_GLOBAL_INIT(Fix16, dword_6691FC, Fix16(0x12B88, 0), 0x6691FC);
+DEFINE_GLOBAL_INIT(Fix16, kAngleNearTolerance, Fix16(0x11C, 0), 0x66A924);
+DEFINE_GLOBAL_INIT(Fix16, kHitchAngleWindow, Fix16(0x63D8, 0), 0x669140);
+DEFINE_GLOBAL_INIT(Fix16, kHitchAngleWrapOffset, Fix16(0x12B88, 0), 0x6691FC);
 
 // Is `*a` within dword_66A924 of `*b`, directly or one turn (kAngFix16FullCircle_66A8E4) either way.
 // 0x405E20
 s32 IsAngleNear(Fix16* a, Fix16* b)
 {
-    if ((*a > *b - dword_66A924 && *a < *b + dword_66A924) ||
-        (*a > *b - kAngFix16FullCircle_66A8E4 - dword_66A924 && *a < *b - kAngFix16FullCircle_66A8E4 + dword_66A924) ||
-        (*a > *b - dword_66A924 + kAngFix16FullCircle_66A8E4 && *a < *b + kAngFix16FullCircle_66A8E4 + dword_66A924))
+    if ((*a > *b - kAngleNearTolerance && *a < *b + kAngleNearTolerance) ||
+        (*a > *b - kAngFix16FullCircle_66A8E4 - kAngleNearTolerance && *a < *b - kAngFix16FullCircle_66A8E4 + kAngleNearTolerance) ||
+        (*a > *b - kAngleNearTolerance + kAngFix16FullCircle_66A8E4 && *a < *b + kAngFix16FullCircle_66A8E4 + kAngleNearTolerance))
     {
         return 1;
     }
@@ -246,11 +246,11 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
 {
     Fix16 lo;
     Fix16 hi;
-    if (*pTarget < dword_669140)
+    if (*pTarget < kHitchAngleWindow)
     {
-        lo = dword_6691FC + *pTarget;
-        hi = *pTarget + dword_669140;
-        if (*pCur > lo - dword_669140 && *pCur < lo)
+        lo = kHitchAngleWrapOffset + *pTarget;
+        hi = *pTarget + kHitchAngleWindow;
+        if (*pCur > lo - kHitchAngleWindow && *pCur < lo)
         {
             *pCur = lo;
         }
@@ -261,9 +261,9 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
     }
     else if (*pTarget < kAngFix16HalfCircle_6691EC)
     {
-        lo = *pTarget - dword_669140;
-        hi = *pTarget + dword_669140;
-        if (*pCur < lo || *pCur > hi + dword_669140)
+        lo = *pTarget - kHitchAngleWindow;
+        hi = *pTarget + kHitchAngleWindow;
+        if (*pCur < lo || *pCur > hi + kHitchAngleWindow)
         {
             *pCur = lo;
         }
@@ -272,11 +272,11 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
             *pCur = hi;
         }
     }
-    else if (*pTarget < dword_6691FC)
+    else if (*pTarget < kHitchAngleWrapOffset)
     {
-        lo = *pTarget - dword_669140;
-        hi = *pTarget + dword_669140;
-        if (*pCur < hi - dword_6691FC || *pCur > hi)
+        lo = *pTarget - kHitchAngleWindow;
+        hi = *pTarget + kHitchAngleWindow;
+        if (*pCur < hi - kHitchAngleWrapOffset || *pCur > hi)
         {
             *pCur = hi;
         }
@@ -287,9 +287,9 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
     }
     else
     {
-        lo = *pTarget - dword_669140;
-        hi = *pTarget - dword_6691FC;
-        if (*pCur > hi && *pCur < hi + dword_669140)
+        lo = *pTarget - kHitchAngleWindow;
+        hi = *pTarget - kHitchAngleWrapOffset;
+        if (*pCur > hi && *pCur < hi + kHitchAngleWindow)
         {
             *pCur = hi;
         }
@@ -312,7 +312,7 @@ s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur)
 void ArcTanTableInit()
 {
     s32 arg = 0;
-    Fix16* pTan = gTanTable_6663C8;
+    Fix16* pTan = gTanTable;
     for (s32 i = 1440; i != 0; i--)
     {
         f64 radians = arg * 3.141592654;
@@ -335,7 +335,7 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
     while (true)
     {
         s16 mid = (low + high) >> 1;
-        Fix16 tanAtMid = gTanTable_6663C8[mid];
+        Fix16 tanAtMid = gTanTable[mid];
 
         // Binary search: go left if target < tanAtMid,
         // go right if target > tanAtMid,
@@ -358,7 +358,7 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
             // Lower bound case
             if (mid == (0 + 1))
             {
-                if (targetTan < gTanTable_6663C8[0 + 1])
+                if (targetTan < gTanTable[0 + 1])
                 {
                     mid = 0;
                 }
@@ -366,7 +366,7 @@ Ang16 ArcTanLookup(const Fix16& targetTan)
             // Upper bound case
             else if (mid == (360 - 1))
             {
-                if (targetTan > gTanTable_6663C8[360 - 1])
+                if (targetTan > gTanTable[360 - 1])
                 {
                     mid = 360;
                 }
@@ -416,14 +416,14 @@ void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, co
 void Init_trigonometry_tables()
 {
     s16 arg = 0;
-    for (u32 idx = 0; idx < GTA2_COUNTOF(gSin_table_667A80); idx++, arg++)
+    for (u32 idx = 0; idx < GTA2_COUNTOF(gSinTable); idx++, arg++)
     {
-        gSin_table_667A80[idx] = Fix16(sin((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
+        gSinTable[idx] = Fix16(sin((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
     }
     arg = 0;
-    for (u32 entry = 0; entry < GTA2_COUNTOF(gCos_table_669260); entry++, arg++)
+    for (u32 entry = 0; entry < GTA2_COUNTOF(gCosTable); entry++, arg++)
     {
-        gCos_table_669260[entry] = Fix16(cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
+        gCosTable[entry] = Fix16(cos((static_cast<f64>(arg) / 1440.0) * 2 * 3.141592654));
     }
     ArcTanTableInit();
     printf("Sine, cosine and tangent tables initialized!\n");

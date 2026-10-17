@@ -407,7 +407,7 @@ namespace
 {
 inline void FromPolar_41E210_sin_table(Fix16Point& p, const Fix16& radius, const Ang16& angle)
 {
-    p.x = radius * gSin_table_667A80[angle.rValue];
+    p.x = radius * gSinTable[angle.rValue];
     p.y = radius * Ang16::Cosine(angle);
 }
 } // namespace
@@ -972,7 +972,7 @@ void sub_5DE910(Fix16PointPOD a1, const Fix16Point& a2, Fix16 a3)
     from = start;
     d = a2.Sub(start);
     len = BeamLength_5DE910(d);
-    gRng_6F6784.GetInt(2);
+    gRng.GetInt(2);
 
     from = start;
     to = a2;
@@ -986,8 +986,8 @@ void sub_5DE910(Fix16PointPOD a1, const Fix16Point& a2, Fix16 a3)
     {
         // 9.6f: Fix16(s16) 0x401AE0 minus Fix16(u16) 0x41F990, times dword_706D34. The kink stays a
         // temporary (a named local moves the frame slots) and `-=` evaluates the half first.
-        u16 spread = (gRng_6F6784.GetInt(4) + 1) * 32;
-        Ang16 jitter = Ang16::Fix16ToAng16((Fix16(gRng_6F6784.GetInt(spread)) -= Fix16(static_cast<u16>(spread >> 1))) * dword_706D34);
+        u16 spread = (gRng.GetInt(4) + 1) * 32;
+        Ang16 jitter = Ang16::Fix16ToAng16((Fix16(gRng.GetInt(spread)) -= Fix16(static_cast<u16>(spread >> 1))) * dword_706D34);
 
         step.x = seg_len.Multiply(Ang16::Sine(angle));
         step.y = seg_len.Multiply(Ang16::Cosine(angle));
@@ -1357,7 +1357,7 @@ void Weapon_30::sub_5DFB60(u8 bFlag, Sprite* pSprite, Ang16 target_angle)
         if (bHit && !bFlag)
         {
             set_field_2C_4CCA80(1);
-            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && (gpRng_67AB34->GetCurRng() & 1))
+            if (field_24_pPed->PedTypeIs_45EDE0(PedType::kPlayer) && (gAmbientRng->GetCurRng() & 1))
             {
                 DecreaseAmmo_4CCA60();
             }

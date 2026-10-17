@@ -105,7 +105,7 @@ void Explosion_30::EmitRandomDiagonalParticle_540A40()
     if (this->field_18_particle_cooldown == 0)
     {
         Particle_4C* pParticle;
-        gDebrisDirection_6FD5F8 = gRng_6F6784.GetInt(4);
+        gDebrisDirection_6FD5F8 = gRng.GetInt(4);
         switch (gDebrisDirection_6FD5F8)
         {
             case 0:
@@ -151,7 +151,7 @@ void Explosion_30::EmitRandomDiagonalParticle_540A40()
                                                            field_14_pObj2C->field_4->field_14_xy.y,
                                                            field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
-            this->field_18_particle_cooldown = gRng_6F6784.GetInt(5);
+            this->field_18_particle_cooldown = gRng.GetInt(5);
         }
     }
     else
@@ -195,7 +195,7 @@ void Explosion_30::EmitFireTrail_3_12_540D30(Ang16 ang, Fix16 speed)
                                                            field_14_pObj2C->field_4->field_14_xy.y,
                                                            field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
-            this->field_18_particle_cooldown = gRng_6F6784.GetInt(2);
+            this->field_18_particle_cooldown = gRng.GetInt(2);
         }
     }
     else
@@ -239,7 +239,7 @@ void Explosion_30::EmitFireTrail_4_540F90(Ang16 ang, Fix16 speed)
                                                            field_14_pObj2C->field_4->field_14_xy.y,
                                                            field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
-            this->field_18_particle_cooldown = gRng_6F6784.GetInt(2);
+            this->field_18_particle_cooldown = gRng.GetInt(2);
         }
     }
     else
@@ -283,7 +283,7 @@ void Explosion_30::EmitFireTrail_13_14_5411E0(Ang16 ang, Fix16 speed)
                                                            field_14_pObj2C->field_4->field_14_xy.y,
                                                            field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
-            this->field_18_particle_cooldown = gRng_6F6784.GetInt(2);
+            this->field_18_particle_cooldown = gRng.GetInt(2);
         }
     }
     else
@@ -329,7 +329,7 @@ void Explosion_30::EmitFireTrail_5_541430(Ang16 ang, Fix16 speed)
                                                            field_14_pObj2C->field_4->field_14_xy.y,
                                                            field_14_pObj2C->field_4->field_1C_zpos);
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pParticle->field_30_pNext);
-            this->field_18_particle_cooldown = gRng_6F6784.GetInt(2);
+            this->field_18_particle_cooldown = gRng.GetInt(2);
             pParticle->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
             pParticle->field_30_pNext->SetNoLighting_4337F0();
         }
@@ -584,9 +584,9 @@ void Explosion_30::EmitExplosion_18_33_541D60()
             if (static_cast<u16>(field_1A_timer) > 0x5AU)
             {
                 Fix16 radius;
-                radius = this->field_24_particle_spread * Fix16(gRng_6F6784.GetInt(8));
+                radius = this->field_24_particle_spread * Fix16(gRng.GetInt(8));
 
-                this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng_6F6784.GetInt(360)));
+                this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng.GetInt(360)));
 
                 // 9.6f calls Ang16::PolarToCartesian_41FC20
                 Ang16::PolarToCartesian(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -635,8 +635,8 @@ void Explosion_30::EmitExplosion_19_32_542060()
         if (this->field_1A_timer > 8U)
         {
             Fix16 radius;
-            radius = this->field_24_particle_spread * Fix16(gRng_6F6784.GetInt(48));
-            this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng_6F6784.GetInt(360)));
+            radius = this->field_24_particle_spread * Fix16(gRng.GetInt(48));
+            this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng.GetInt(360)));
 
             // 9.6f calls Ang16::PolarToCartesian_41FC20
             Ang16::PolarToCartesian(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -684,8 +684,8 @@ void Explosion_30::EmitExplosion_20_542340()
         if (this->field_1A_timer > 8U)
         {
             Fix16 radius;
-            radius = this->field_24_particle_spread * Fix16(gRng_6F6784.GetInt(80));
-            this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng_6F6784.GetInt(360)));
+            radius = this->field_24_particle_spread * Fix16(gRng.GetInt(80));
+            this->field_22_spawn_angle = Ang16::Fix16ToAng16(dword_6FD448 * Fix16(gRng.GetInt(360)));
 
             // 9.6f calls Ang16::PolarToCartesian_41FC20
             Ang16::PolarToCartesian(field_22_spawn_angle, radius, stru_6FD388, stru_6FD38C);
@@ -858,7 +858,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     {
                         pParticle->field_38_state = 24;
                         this->field_22_spawn_angle =
-                            (kAng135_6FD40C + dword_6FD350) + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng_6F6784.GetInt(45))));
+                            (kAng135_6FD40C + dword_6FD350) + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng.GetInt(45))));
 
                         Ang16::PolarToCartesian(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -871,7 +871,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     {
                         pParticle->field_38_state = 25;
                         this->field_22_spawn_angle =
-                            (kAng315_6FD418 + dword_6FD350) + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng_6F6784.GetInt(90))));
+                            (kAng315_6FD418 + dword_6FD350) + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng.GetInt(90))));
 
                         Ang16::PolarToCartesian(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -884,7 +884,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     {
                         pParticle->field_38_state = 23;
                         this->field_22_spawn_angle =
-                            kAng225_6FD3E0 + dword_6FD350 + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng_6F6784.GetInt(90))));
+                            kAng225_6FD3E0 + dword_6FD350 + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng.GetInt(90))));
 
                         Ang16::PolarToCartesian(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -897,7 +897,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     {
                         pParticle->field_38_state = 22;
                         this->field_22_spawn_angle =
-                            kAng45_6FD35C + dword_6FD350 + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng_6F6784.GetInt(90))));
+                            kAng45_6FD35C + dword_6FD350 + Ang16::Fix16ToAng16((dword_6FD448 * Fix16(gRng.GetInt(90))));
 
                         Ang16::PolarToCartesian(field_22_spawn_angle, dword_6FD540, stru_6FD388, stru_6FD38C);
 
@@ -921,7 +921,7 @@ void Explosion_30::EmitBuildingDebris_22_23_24_25_542E30(u8 direction_idx)
                     i = 4;
                 }
 
-                pParticle->field_20_speed = (dword_6FD548 * Fix16(gRng_6F6784.GetInt(field_1A_timer)));
+                pParticle->field_20_speed = (dword_6FD548 * Fix16(gRng.GetInt(field_1A_timer)));
                 pParticle->field_30_pNext->set_id_lazy_4206C0(gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 40);
 
                 if (field_14_pObj2C->field_4->field_1C_zpos + kFP16One_6FD4A0 >= kFP16Eight_6FD4C0)

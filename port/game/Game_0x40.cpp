@@ -561,7 +561,7 @@ void Game_0x40::UpdateGame_4B9410()
     }
 
     gHud_2B00_706620->UpdateHUD_5D69D0();
-    gpRng_67AB34->AdvanceCycle(); // rng
+    gAmbientRng->AdvanceCycle(); // rng
     gDoor_4D4_67BD2C->DoorsService_49D460();
     gFirefighterPool_54_67D4C0->FireEnginesService_4A85F0(); // fire engines
 
@@ -965,7 +965,7 @@ DEFINE_GLOBAL_INIT(Fix16, kInitialAmbient_67DCCC, Fix16(0x666, 0), 0x67DCCC);
 // 0x4B9DE0
 Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
 {
-    gRng_6F6784.Srand(); // srand?
+    gRng.Srand(); // srand?
 
     field_3C_skip_police = bSkip_police_67D4F9;
 
@@ -989,8 +989,8 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
     pPlayer->field_0_is_user = 1;
     field_1C_draw_player = field_38_local_player;
 
-    gpRng_67AB34 = new Rng(); // inline
-    if (!gpRng_67AB34)
+    gAmbientRng = new Rng(); // inline
+    if (!gAmbientRng)
     {
         FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1793);
     }
@@ -1313,7 +1313,7 @@ Game_0x40::~Game_0x40()
         GTA2_DELETE_AND_NULL(field_4_players[i]);
     }
 
-    GTA2_DELETE_AND_NULL(gpRng_67AB34);
+    GTA2_DELETE_AND_NULL(gAmbientRng);
     GTA2_DELETE_AND_NULL(gText_0x14_704DFC);
     GTA2_DELETE_AND_NULL(gGtx_0x106C_703DD4);
     GTA2_DELETE_AND_NULL(gMap_0x370_6F6268);

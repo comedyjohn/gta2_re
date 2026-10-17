@@ -2645,7 +2645,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                 if (lane > 0 && lane < width - 1)
                 {
                     s16 max = 32;
-                    angle = Ang16::Fix16ToAng16((Fix16(gRng_6F6784.GetInt(max)) - dword_6FED80) * kFpOne64th_6FEB88) + word_6FEE30;
+                    angle = Ang16::Fix16ToAng16((Fix16(gRng.GetInt(max)) - dword_6FED80) * kFpOne64th_6FEB88) + word_6FEE30;
                 }
                 else
                 {
@@ -2945,7 +2945,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                 if (lane > 0 && lane < width - 1)
                 {
                     s16 max = 16;
-                    angle = Ang16::Fix16ToAng16((Fix16(gRng_6F6784.GetInt(max)) - dword_6FED0C) * kFpOne64th_6FEB88) + word_6FEB74;
+                    angle = Ang16::Fix16ToAng16((Fix16(gRng.GetInt(max)) - dword_6FED0C) * kFpOne64th_6FEB88) + word_6FEB74;
                 }
                 else
                 {

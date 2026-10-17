@@ -259,8 +259,8 @@ void AddPoint(Hasher& h, const char* name, const Fix16Point& p)
 uint64_t HashRng(std::string* dump)
 {
     Hasher h(dump, "rng");
-    h.Add("count", gpRng_67AB34->rng_);
-    h.Add("rnd", gpRng_67AB34->rnd_);
+    h.Add("count", gAmbientRng->rng_);
+    h.Add("rnd", gAmbientRng->rnd_);
     return h.Value();
 }
 

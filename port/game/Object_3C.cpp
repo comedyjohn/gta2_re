@@ -230,7 +230,7 @@ char_type SpriteList_4::TagSpriteWithRng_5A6C10(Sprite* toFind)
         {
             if (pNext->field_0_pSprite == toFind)
             {
-                pNext->field_14_rng = gpRng_67AB34->GetCurRng();
+                pNext->field_14_rng = gAmbientRng->GetCurRng();
                 return 1;
             }
         }

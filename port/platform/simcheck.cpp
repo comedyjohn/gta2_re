@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-EXTERN_GLOBAL_ARRAY(Fix16, gTanTable_6663C8, 1440);
+EXTERN_GLOBAL_ARRAY(Fix16, gTanTable, 1440);
 
 namespace
 {
@@ -34,9 +34,9 @@ SimcheckHashes port_simcheck_hashes()
     Hash trig;
     for (int i = 0; i < 1440; i++)
     {
-        trig.Add(gSin_table_667A80[i].mValue);
-        trig.Add(gCos_table_669260[i].mValue);
-        trig.Add(gTanTable_6663C8[i].mValue);
+        trig.Add(gSinTable[i].mValue);
+        trig.Add(gCosTable[i].mValue);
+        trig.Add(gTanTable[i].mValue);
     }
 
     // rng::get_int_4F7AE0 and friends draw from rand(), seeded with 1 (rng::srand_4F7A40)
@@ -68,7 +68,7 @@ SimcheckHashes port_simcheck_hashes()
 int port_simcheck()
 {
     const SimcheckHashes h = port_simcheck_hashes();
-    printf("sin(90) %d, cos(180) %d\n", gSin_table_667A80[360].mValue, gCos_table_669260[720].mValue);
+    printf("sin(90) %d, cos(180) %d\n", gSinTable[360].mValue, gCosTable[720].mValue);
     printf("trigonometry %016llx\n", static_cast<unsigned long long>(h.trigonometry));
     printf("random %016llx\n", static_cast<unsigned long long>(h.random));
     printf("maths %016llx\n", static_cast<unsigned long long>(h.maths));

@@ -308,7 +308,7 @@ void Hud_ShowCoords_1::ShowPlayerCoords_5CF970()
 // 0x5cfa70
 void Hud_GangRespectBars_1::DrawGangRespectBars_5CFA70()
 {
-    u32 random_num = gpRng_67AB34->GetCurRng() & 0xF;
+    u32 random_num = gAmbientRng->GetCurRng() & 0xF;
     u8 PlayerIdx = gGame_0x40_67E008->field_38_local_player->get_idx_4219D0();
     bool bPlusSignDark = random_num > 7U;
 
@@ -886,7 +886,7 @@ void Hud_Arrow_7C::DrawArrow_5D0C90()
     {
         if (IsVisible_4C7050())
         {
-            if (field_18.field_28_arrow_colour != 5 || (static_cast<u32>(gpRng_67AB34->GetCurRng()) % 6 >= 3))
+            if (field_18.field_28_arrow_colour != 5 || (static_cast<u32>(gAmbientRng->GetCurRng()) % 6 >= 3))
             {
                 drawKind_ = 2;
             }
@@ -1455,7 +1455,7 @@ void Hud_ChatInput_1::DrawChatMessages_5D16B0()
         {
             if (pPlayerIter->field_794_is_chatting)
             {
-                if ((gpRng_67AB34->GetCurRng() & 7U) < 4)
+                if ((gAmbientRng->GetCurRng() & 7U) < 4)
                 {
                     swprintf(tmpBuff_67BD9C, L"%s:%s_", pPlayerIter->field_83C_player_name, pPlayerIter->field_796_chat_text);
                 }

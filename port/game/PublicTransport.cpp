@@ -409,8 +409,7 @@ void Train_58::UpdatePassengerAI_578390()
                     {
                         if (this->field_54_passenger_timer <= 0)
                         {
-                            for (gTargetCarDoor_6FF1D8 = gRng_6F6784.GetInt(4);
-                                 gTargetCarDoor_6FF1D8 < static_cast<u8>((*pTrainCar)->GetRemap());
+                            for (gTargetCarDoor_6FF1D8 = gRng.GetInt(4); gTargetCarDoor_6FF1D8 < static_cast<u8>((*pTrainCar)->GetRemap());
                                  gTargetCarDoor_6FF1D8++)
                             {
                                 if ((*pTrainCar)->IsStoppedWithPavementAtDoor_43B140(gTargetCarDoor_6FF1D8) &&
@@ -479,11 +478,11 @@ void Train_58::UpdatePassengerAI_578390()
 
                 if (!this->field_0)
                 {
-                    this->field_54_passenger_timer = gRng_6F6784.GetInt(20) + 20;
+                    this->field_54_passenger_timer = gRng.GetInt(20) + 20;
                 }
                 else
                 {
-                    this->field_54_passenger_timer = gRng_6F6784.GetInt(20) + 40;
+                    this->field_54_passenger_timer = gRng.GetInt(20) + 40;
                 }
             }
             --this->field_54_passenger_timer;

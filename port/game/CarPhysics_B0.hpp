@@ -96,7 +96,7 @@ class CarPhysics_B0
 
     bool IsRngBelowDamage_421130()
     {
-        return static_cast<u32>(gpRng_67AB34->GetCurRng()) < field_8_total_damage_q;
+        return static_cast<u32>(gAmbientRng->GetCurRng()) < field_8_total_damage_q;
     }
 
     void SetHandBrakeOff_421260()

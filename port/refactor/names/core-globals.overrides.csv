@@ -1,0 +1,5 @@
+old,new
+dword_669140,kHitchAngleWindow
+dword_6691FC,kHitchAngleWrapOffset
+dword_66A924,kAngleNearTolerance
+gpRng_67AB34,gAmbientRng

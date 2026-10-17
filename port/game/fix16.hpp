@@ -436,7 +436,7 @@ void FindMinMax(Fix16& minOut, Fix16& maxOut, const Fix16& a, const Fix16& b, co
 
 Fix16 TurnAngleToward(Fix16 cur, Fix16* pTarget, Fix16* pSpeed);
 s32 ClampAngleToWindow(Fix16* pTarget, Fix16* pCur);
-EXTERN_GLOBAL_ARRAY(Fix16, gSin_table_667A80, 1440);
-EXTERN_GLOBAL_ARRAY(Fix16, gCos_table_669260, 1440);
+EXTERN_GLOBAL_ARRAY(Fix16, gSinTable, 1440);
+EXTERN_GLOBAL_ARRAY(Fix16, gCosTable, 1440);
 
 void Init_trigonometry_tables();

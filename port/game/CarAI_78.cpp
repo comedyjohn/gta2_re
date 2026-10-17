@@ -3721,7 +3721,7 @@ void CarAI_78::UpdateStateMachine_44E560()
         Ang16 angle_b = angle_a - word_677CE2;
         if (heading_copy < angle_b)
         {
-            if (!gRng_6F6784.GetInt(4))
+            if (!gRng.GetInt(4))
             {
                 if (this->field_24_bf.bFlag6)
                 {
@@ -3739,7 +3739,7 @@ void CarAI_78::UpdateStateMachine_44E560()
             angle_b = angle_a + word_677CE2;
             if (heading_copy > angle_b)
             {
-                if (!gRng_6F6784.GetInt(4))
+                if (!gRng.GetInt(4))
                 {
                     if (this->field_24_bf.bFlag6)
                     {
@@ -5307,7 +5307,7 @@ void CarAI_78::ChooseRandomTurn_4537D0()
 {
     if (!this->field_0_car->IsTurnLeft_42AC30() && !this->field_0_car->IsTurnRight_42AC20())
     {
-        if (gRng_6F6784.GetInt(2) > 0)
+        if (gRng.GetInt(2) > 0)
         {
             field_0_car->field_A6_bf.bTurnLeft = true;
         }

@@ -146,7 +146,7 @@ namespace
 {
 inline Fix16 GetSpawnJitter()
 {
-    return gSpawnJitterScale_678618 * (gRng_6F6784.GetInt(32) + 8);
+    return gSpawnJitterScale_678618 * (gRng.GetInt(32) + 8);
 }
 } // namespace
 
@@ -155,7 +155,7 @@ inline Fix16 GetSpawnJitter()
 void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation)
 {
     u8 kind = 0;
-    s16 rng_val = gRng_6F6784.GetInt(1000);
+    s16 rng_val = gRng.GetInt(1000);
 
     Ped* pPed = gPedPool_6787B8->Allocate();
 
@@ -175,7 +175,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                  static_cast<u16>(pZone->field_10_elvis_ratio))
     {
         // 1 in 50 chance of elvis
-        kind = gRng_6F6784.GetInt(50) == 25 ? 3 : 0;
+        kind = gRng.GetInt(50) == 25 ? 3 : 0;
     }
     else if (rng_val < static_cast<u16>(pZone->field_C_mugger_ratio) + static_cast<u16>(pZone->field_E_carthief_ratio) +
                  static_cast<u16>(pZone->field_10_elvis_ratio) + static_cast<u16>(pZone->field_12_gangchar_ratio))
@@ -275,7 +275,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                         pPed->set_remap_433B90(pGang->field_101_remap);
                         if (pPed->get_remap_433BA0() == 5)
                         {
-                            if (!gRng_6F6784.GetInt(2))
+                            if (!gRng.GetInt(2))
                             {
                                 pPed->set_remap_433B90(6);
                             }
@@ -305,7 +305,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                         pPed->field_26C_graphic_type = ped_graphic_type::character_1;
                         if (pPed->get_remap_433BA0() == 5)
                         {
-                            if (!gRng_6F6784.GetInt(2))
+                            if (!gRng.GetInt(2))
                             {
                                 pPed->set_remap_433B90(6);
                             }
@@ -320,7 +320,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                     pPed->field_288_threat_search = ThreatSearch::kArea;
                     pPed->field_28C_threat_reaction = ThreatReaction::kRunAway;
                     pPed->field_26C_graphic_type = ped_graphic_type::civilian_0;
-                    switch (gRng_6F6784.GetInt(4))
+                    switch (gRng.GetInt(4))
                     {
                         case 0:
                             pPed->set_remap_433B90(18);
@@ -402,7 +402,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
                     }
                     else
                     {
-                        u8 remap = gRng_6F6784.GetInt(25);
+                        u8 remap = gRng.GetInt(25);
                         if (remap < 4U)
                         {
                             remap += 18;
@@ -444,7 +444,7 @@ void SpawnPedestrianAt_46E380(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang16 rotation
 
         if (gPedManager_6787BC->field_7_make_all_muggers)
         {
-            if (!gRng_6F6784.GetInt(2))
+            if (!gRng.GetInt(2))
             {
                 if (pPed->get_occupation_403980() == PedOcupation::kArmedGangMember)
                 {
@@ -873,7 +873,7 @@ Ped* PedManager::SpawnGangDriver_470BA0(Car_BC* pCar, Gang_144* pGang)
 
     if (pNewPed->get_remap_433BA0() == 5)
     {
-        if (!gRng_6F6784.GetInt(2))
+        if (!gRng.GetInt(2))
         {
             pNewPed->set_remap_433B90(6);
         }
@@ -916,7 +916,7 @@ Ped* PedManager::SpawnRunAwayGuy_470D60()
 {
     Ped* pPed = gPedPool_6787B8->Allocate();
 
-    s32 rng_val = gRng_6F6784.GetInt(4);
+    s32 rng_val = gRng.GetInt(4);
     switch (rng_val)
     {
         default:
@@ -954,7 +954,7 @@ Ped* PedManager::SpawnTrainLeaver_470E30()
     // TODO: Instruction swap here
     pPed->field_26C_graphic_type = ped_graphic_type::civilian_0;
 
-    switch (gRng_6F6784.GetInt(4))
+    switch (gRng.GetInt(4))
     {
         case 0:
             pPed->set_remap_433B90(18);

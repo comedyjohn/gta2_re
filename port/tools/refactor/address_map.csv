@@ -1406,9 +1406,9 @@ global,0x61A6D0,,dword_61A6D0,,,,,sound_obj.cpp
 global,0x620FE4,,dword_620FE4,,,,,MapRenderer.cpp
 global,0x621004,,dword_621004,,,,,MapRenderer.cpp
 global,0x621024,,dword_621024,,,,,MapRenderer.cpp
-global,0x669140,,dword_669140,,,,,fix16.cpp
-global,0x6691FC,,dword_6691FC,,,,,fix16.cpp
-global,0x66A924,,dword_66A924,,,,,fix16.cpp
+global,0x669140,,dword_669140,kHitchAngleWindow,,,,fix16.cpp
+global,0x6691FC,,dword_6691FC,kHitchAngleWrapOffset,,,,fix16.cpp
+global,0x66A924,,dword_66A924,kAngleNearTolerance,,,,fix16.cpp
 global,0x66F1CC,,dword_66F1CC,,,,,sound_obj.cpp
 global,0x66F1D0,,dword_66F1D0,,,,,sound_obj.cpp
 global,0x66F220,,dword_66F220,,,,,sound_obj.cpp
@@ -1817,7 +1817,7 @@ global,0x6FE33C,,gCollisionDamage_6FE33C,,,,,CarPhysics_B0.cpp
 global,0x66AFE0,,gCollisionSoundQueue_66AFE0,,,,,CollisionSoundQueue_C88.cpp
 global,0x679188,,gCollisionTarget_679188,,,,,CollisionSoundQueue_C88.cpp
 global,0x67554D,,gCooldownCounter_67554D,,,,,sound_obj.cpp
-global,0x669260,,gCos_table_669260,,,,,fix16.cpp
+global,0x669260,,gCos_table_669260,gCosTable,,,,fix16.cpp
 global,0x679FD4,,gCranePool_D9C_679FD4,,,,,Cranes.cpp
 global,0x6FEDB8,,gCrewKind_6FEDB8,,,,,Police_7B8.cpp
 global,0x67A4B8,,gCrimeReportQueue_67A4B8,,,,,CrimeReportQueue_CC.cpp
@@ -2061,7 +2061,7 @@ global,0x704F28,,gRemappedTextureCounter_704F28,,,,,TextureCache_15D8.cpp
 global,0x7067F0,,gRenderDllName_7067F0,,,,,winmain.cpp
 global,0x706998,,gRenderdevice_706998,,,,,winmain.cpp
 global,0x679320,,gRngRemapTable_679320,,,,,Car_BC.cpp
-global,0x6F6784,,gRng_6F6784,,,,,rng.cpp
+global,0x6F6784,,gRng_6F6784,gRng,,,,rng.cpp
 global,0x66B038,,gRoot_sound_66B038,,,,,root_sound.cpp
 global,0x6FFDC8,,gRouteFinder_6FFDC8,,,,,RouteFinder.cpp
 global,0x6FD7D0,,gRunOrJumpSpeed_6FD7D0,,,,,char.cpp
@@ -2084,7 +2084,7 @@ global,0x6F8060,,gScriptManager_6F8060,,,,,ScriptManager_C1EA8.cpp
 global,0x6F8068,,gScriptStackFramePool_6F8068,,,,,miss2_8.cpp
 global,0x6787DC,,gSearchingPed_6787DC,,,,,Char_Pool.cpp
 global,0x67D6BD,,gShow_cycle_67D6BD,,,,,debug.cpp
-global,0x667A80,,gSin_table_667A80,,,,,fix16.cpp
+global,0x667A80,,gSin_table_667A80,gSinTable,,,,fix16.cpp
 global,0x674E28,,gSoundFileName_674E28,,,,,sound_obj.cpp
 global,0x61A684,,gSoundSampleIdx_61A684,,,,,sound_obj.cpp
 global,0x6FF539,,gSoundSwitchRadioCoolDown_6FF539,,,,,sound_obj.cpp
@@ -2138,7 +2138,7 @@ global,0x6F7560,,gStoredCar_6F7560,,,,,ScriptManager_C1EA8.cpp
 global,0x6F58E0,,gSyncCheckData_6F58E0,,,,,winmain.cpp
 global,0x61FF20,,gTableSize_61FF20,,,,,Frontend.cpp
 global,0x6F8450,,gTagGame_6F8450,,,,,TagGame_28.cpp
-global,0x6663C8,,gTanTable_6663C8,,,,,fix16.cpp
+global,0x6663C8,,gTanTable_6663C8,gTanTable,,,,fix16.cpp
 global,0x706E20,,gTankCannonLength_706E20,,,,,Weapon_30.cpp
 global,0x6FF1D8,,gTargetCarDoor_6FF1D8,,,,,PublicTransport.cpp
 global,0x6787D7,,gTargetSearchMode_6787D7,,,,,Char_Pool.cpp
@@ -2225,7 +2225,7 @@ global,0x67B804,,gpDInput_67B804,,,,,input.cpp
 global,0x7085E4,,gpGBH_Globals_7085E4,,,,,gbh_graphics.cpp
 global,0x6F58C0,,gpInputBuffer_6F58C0,,,,,winmain.cpp
 global,0x6F66E4,,gpMapRenderer_6F66E4,,,,,MapRenderer.cpp
-global,0x67AB34,,gpRng_67AB34,,,,,rng.cpp
+global,0x67AB34,,gpRng_67AB34,gAmbientRng,,,,rng.cpp
 global,0x6F87F0,,gtext_0x14_6F87F0,,,,,text_0x14.cpp
 global,0x7085E8,,hDmaVideoDll_7085E8,,,,,dma_video.cpp
 global,0x6FEE46,,id_counter_6FEE46,,,,,Police_7B8.cpp

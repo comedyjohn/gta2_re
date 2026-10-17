@@ -626,7 +626,7 @@ void PedGroup::MergeWithOtherGroup_4C9B60(Ped* pPed)
                 else
                 {
                     s16 max = pOther->field_34_count + 1;
-                    s16 rnd = gRng_6F6784.GetInt(max);
+                    s16 rnd = gRng.GetInt(max);
                     if (rnd == pOther->field_34_count)
                     {
                         if (!pOther->field_2C_ped_leader || pOther->field_2C_ped_leader->GetPedState_403990() == PedState1::kDead)

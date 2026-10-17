@@ -6,8 +6,8 @@
 #include <cstdio>
 #include <cstdlib>
 
-DEFINE_GLOBAL(Rng*, gpRng_67AB34, 0x67AB34);
-DEFINE_GLOBAL(Rng, gRng_6F6784, 0x6F6784);
+DEFINE_GLOBAL(Rng*, gAmbientRng, 0x67AB34);
+DEFINE_GLOBAL(Rng, gRng, 0x6F6784);
 
 EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 
@@ -15,7 +15,7 @@ EXTERN_GLOBAL_ARRAY(wchar_t, tmpBuff_67BD9C, 640);
 void Rng::AdvanceCycle()
 {
     ++rng_;
-    rnd_ = gRng_6F6784.Rand();
+    rnd_ = gRng.Rand();
 }
 
 // 0x48B920
@@ -51,7 +51,7 @@ s16 Rng::GetInt(const s16& max_rnd)
         {
             this->rng_ = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598, "%d: random (get_int) %d", gpRng_67AB34->GetCurRng(), static_cast<s16>(this->GetCurRng()));
+        sprintf(gTmpBuffer_67C598, "%d: random (get_int) %d", gAmbientRng->GetCurRng(), static_cast<s16>(this->GetCurRng()));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         return static_cast<s16>(this->GetCurRng());
     }
@@ -81,7 +81,7 @@ u8 Rng::GetUint8(const u8& max_rnd)
         {
             this->rng_ = rand() % max_rnd;
         }
-        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gpRng_67AB34->GetCurRng(), static_cast<u8>(rng_));
+        sprintf(gTmpBuffer_67C598, "%d: random (get_uint8) %d", gAmbientRng->GetCurRng(), static_cast<u8>(rng_));
         gFile_67C530.Write_4D9620(gTmpBuffer_67C598);
         return static_cast<u8>(this->rng_);
     }

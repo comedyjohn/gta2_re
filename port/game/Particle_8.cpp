@@ -108,16 +108,16 @@ void Particle_8::EmitBloodBurst_53E450(Fix16 x, Fix16 y, Fix16 z, Ang16 ang)
     if (!bSkip_particles_67D64D)
     {
         vector.x = Fix16(0);
-        vector.y = Fix16(gRng_6F6784.GetInt(50) + 25) * dword_6FD548;
+        vector.y = Fix16(gRng.GetInt(50) + 25) * dword_6FD548;
         vector.RotateByAngle(ang);
 
         s32 count = 6;
         do
         {
             vector.x = Fix16(0);
-            vector.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
+            vector.y = (Fix16(gRng.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
 
-            angle = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(16)));
+            angle = word_6FD5CC.MultiplyByFix16(Fix16(gRng.GetInt(16)));
             vector.RotateByAngle((angle + ang) - word_6FD5CC.MultiplyByFix16(Fix16(8)));
 
             Particle_4C* pBloodParticle =
@@ -283,14 +283,14 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
     if (!bSkip_particles_67D64D)
     {
         velocity.x = Fix16(0);
-        velocity.y = Fix16(gRng_6F6784.GetInt(50) + 25) * dword_6FD548;
+        velocity.y = Fix16(gRng.GetInt(50) + 25) * dword_6FD548;
         RotateNegExport_(velocity, rotation);
 
         for (s32 count = 6; count != 0; count--)
         {
             if (bRandomRot)
             {
-                angle_2 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(360)));
+                angle_2 = word_6FD5CC.MultiplyByFix16(Fix16(gRng.GetInt(360)));
             }
             else
             {
@@ -298,9 +298,9 @@ void Particle_8::EmitWaterSplash_53F060(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang1
             }
 
             velocity.x = Fix16(0);
-            velocity.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
+            velocity.y = (Fix16(gRng.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
 
-            Ang16 angle_1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(16)));
+            Ang16 angle_1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng.GetInt(16)));
             RotateNegExport_(velocity, (angle_1 + angle_2) - word_6FD5CC.MultiplyByFix16(Fix16(8)));
 
             // last arg: plain 0 (the original builds this Fix16 arg in place; Fix16(0) gives a plain push and costs ebp)
@@ -518,16 +518,16 @@ void Particle_8::EmitImpactParticles_53FE40(Fix16 x, Fix16 y, Fix16 z, Fix16Poin
     for (u8 i = 0; i < 6; ++i)
     {
         t.x = Fix16(0);
-        t.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
+        t.y = (Fix16(gRng.GetInt(100)) + dword_6FD558) * dword_6FD4EC;
         if (i < 4)
         {
-            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(32)));
+            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng.GetInt(32)));
             // 9.6f: t.RotateByAngle_40F6B0((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16_401CB0(..)) in both branches
             t.RotateByAngle((ang1 + tanAng) - word_6FD5CC.MultiplyByFix16(Fix16(16)));
         }
         else
         {
-            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng_6F6784.GetInt(360)));
+            ang1 = word_6FD5CC.MultiplyByFix16(Fix16(gRng.GetInt(360)));
             t.RotateByAngle(ang1 + tanAng - word_6FD5CC.MultiplyByFix16(Fix16(180)));
         }
 
@@ -557,13 +557,13 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
 
     if (!bSkip_particles_67D64D)
     {
-        gRng_6F6784.GetInt(3);
+        gRng.GetInt(3);
         vector.x = Fix16(0);
-        vector.y = (Fix16(gRng_6F6784.GetInt(100)) + dword_6FD558) * dword_6FD500;
+        vector.y = (Fix16(gRng.GetInt(100)) + dword_6FD558) * dword_6FD500;
 
         // The rng result is bound to a const s16& temporary: stored as a short and sign extended only after the
         // word is loaded (the word ends up as the imul's eax operand)
-        angle = word_6FD5CC.MultiplyByFix16(Fix16(static_cast<const s16&>(gRng_6F6784.GetInt(360))));
+        angle = word_6FD5CC.MultiplyByFix16(Fix16(static_cast<const s16&>(gRng.GetInt(360))));
         // RotateByAngle_40F6B0, but x * cos, the y line and both sums use the out-of-line Fix16 operators
         {
             Fix16 sin = Ang16::Sine(angle);
@@ -584,8 +584,7 @@ void Particle_8::EmitElectricArcParticle(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             pNew4C->field_30_pNext->set_xyz_lazy_420600(xpos, ypos, zpos);
             pNew4C->field_30_pNext->set_ang_lazy_420690(ang);
-            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng_6F6784.GetInt(4) + gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette +
-                                                       175);
+            pNew4C->field_30_pNext->set_id_lazy_4206C0(gRng.GetInt(4) + gObjectDefinitions_6FCF00->field_8CA4_def112_sprite_palette + 175);
             pNew4C->field_30_pNext->SetBlendAndAlpha_4337D0(2, 20);
             pNew4C->field_30_pNext->SetNoLighting_4337F0();
             gSpriteGrid_3_679210->AddToSingleBucket_477AE0(pNew4C->field_30_pNext);

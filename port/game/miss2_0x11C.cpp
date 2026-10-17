@@ -114,7 +114,7 @@ void miss2_0x11C::MissionFailOnArrest_503200()
             v = 5;
         }
 
-        u16 msg_id = gRng_6F6784.GetUint8(5);
+        u16 msg_id = gRng.GetUint8(5);
 
         if (gScriptManager_6F8060->field_348_gang_1_mission_flag && *gScriptManager_6F8060->field_348_gang_1_mission_flag == 1)
         {
@@ -236,7 +236,7 @@ void miss2_0x11C::Log_5035D0()
 {
     if (gDo_miss_logging_67D6BC)
     {
-        sprintf(gTmpBuffer_67C598, "%d:\t\t%d ", gpRng_67AB34->GetCurRng(), static_cast<s16>(field_4_next_cmd));
+        sprintf(gTmpBuffer_67C598, "%d:\t\t%d ", gAmbientRng->GetCurRng(), static_cast<s16>(field_4_next_cmd));
         gMiss2Log_6F7698.Write_Log_4D9650(gTmpBuffer_67C598);
     }
 }
@@ -5203,7 +5203,7 @@ void miss2_0x11C::SCRCMD_DO_SAVE_GAME_50D3C0()
         auto* pCmd = reinterpret_cast<SCR_DO_SAVE_GAME*>(gBasePtr_6F8070);
         miss2_0x11C::DisableThread_505790(pCmd->field_8_triggername);
 
-        if (static_cast<u32>(gpRng_67AB34->GetCurRng()) > 0)
+        if (static_cast<u32>(gAmbientRng->GetCurRng()) > 0)
         {
             u32* mission_flag = reinterpret_cast<u32*>(gScriptManager_6F8060->field_344_mission_flag);
             if (!mission_flag || *mission_flag)

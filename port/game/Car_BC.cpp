@@ -502,7 +502,7 @@ CarRemapRng_2::CarRemapRng_2()
 
         for (unsigned short& j : gRngRemapTable_679320)
         {
-            u16 idx = gRng_6F6784.GetInt(1000);
+            u16 idx = gRng.GetInt(1000);
             s16 next = j;
             j = gRngRemapTable_679320[idx];
             gRngRemapTable_679320[idx] = next;
@@ -5422,7 +5422,7 @@ void Car_BC::UpdateRoofLightFlasher_441B50()
 // 0x441c00
 void Car_BC::UpdatePopupHeadlights_441C00()
 {
-    if (!(gpRng_67AB34->GetCurRng() % 3U))
+    if (!(gAmbientRng->GetCurRng() % 3U))
     {
         if (field_8_damaged_areas.mask_bit(CarDeltaBitsEnum::kTopRightDoor1))
         {
@@ -5471,7 +5471,7 @@ void Car_BC::UpdatePopupHeadlights_441C00()
 // 0x441d40
 void Car_BC::UpdateFbiPopupSiren_441D40()
 {
-    if (!(gpRng_67AB34->GetCurRng() % 3U))
+    if (!(gAmbientRng->GetCurRng() % 3U))
     {
         if (this->field_A4_bf.bEmergencyLights)
         {
@@ -7315,7 +7315,7 @@ void TrafficSpawner_14::MakeTrafficForCurrCamera_5832C0()
         this->field_9_traffic_car_model = 1;
         this->field_A_unused = 1;
 
-        u8 rng_int = gRng_6F6784.GetUint8(5);
+        u8 rng_int = gRng.GetUint8(5);
         bool maybe_vel = !!(field_0_cam->ReturnOwnerVelocity_435A20() > kFpZero_6FF580);
 
         switch (rng_int)
@@ -7462,21 +7462,21 @@ Fix16 TrafficSpawner_14::GetRandomTrafficSpeed_583750(Fix16 max_speed, u8* pOut)
     if (max_speed >= dword_6FF85C)
     {
         *pOut = 2;
-        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(1638400, 0);
+        roll = Fix16(gRng.GetUint8(100)) / Fix16(1638400, 0);
         lo = dword_6FF85C;
         hi = dword_6FF70C;
     }
     else if (max_speed >= dword_6FF724)
     {
         *pOut = 1;
-        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(1638400, 0);
+        roll = Fix16(gRng.GetUint8(100)) / Fix16(1638400, 0);
         lo = dword_6FF724;
         hi = dword_6FF85C;
     }
     else
     {
         *pOut = 0;
-        roll = Fix16(gRng_6F6784.GetUint8(100)) / Fix16(0x190000, 0);
+        roll = Fix16(gRng.GetUint8(100)) / Fix16(0x190000, 0);
         lo = dword_6FF6A4;
         hi = dword_6FF724;
     }
@@ -7509,7 +7509,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
     Fix16 car_h = gPixelsToFix16_6F6850.list[pCarInfo->h];
     SwapIf3or4_41FE40(arrow_direction, car_w, car_h);
 
-    DAT_006FF8C4 = gRng_6F6784.GetUint8(100);
+    DAT_006FF8C4 = gRng.GetUint8(100);
     switch (arrow_direction)
     {
         case 1:
@@ -7638,7 +7638,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     s32 car_model;
                     u16 car_kind;
                     u8 rng_val;
-                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng_6F6784.GetInt(40)) <= 20U || rng_val >= 30U)
+                    if (gPolice_7B8_6FEE40->field_654_max_wanted_level < 1 || (rng_val = gRng.GetInt(40)) <= 20U || rng_val >= 30U)
                     {
                         car_model =
                             gCarManager_6C_677930->SelectTrafficCarModel_444AB0(field_C_player, field_10_zone, dword_6FF7E8, &car_kind);
@@ -7695,7 +7695,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                         }
                         else if (gPolice_7B8_6FEE40->field_65C_highest_crew_type_in_pursuit == CrewType::kArmy)
                         {
-                            switch (gRng_6F6784.GetInt(10))
+                            switch (gRng.GetInt(10))
                             {
                                 case 0:
                                 case 1:
@@ -7879,7 +7879,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                     }
                     else
                     {
-                        spawn_chance = gRng_6F6784.GetUint8(100);
+                        spawn_chance = gRng.GetUint8(100);
                     }
 
                     if ((speed_kind == 2 && spawn_chance < 33U) || (speed_kind == 1 && spawn_chance < 67U) || speed_kind == 0)

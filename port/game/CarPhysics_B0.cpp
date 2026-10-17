@@ -194,7 +194,7 @@ DEFINE_GLOBAL_INIT(Fix16, kFP16Quarter_6FDFB8, kFP16Quarter_6FDFD4, 0x6FDFB8);
 
 inline void CarPhysics_B0::AddDamage_49EF50(s32 damage)
 {
-    u32 new_damage = gpRng_67AB34->GetCurRng() + damage;
+    u32 new_damage = gAmbientRng->GetCurRng() + damage;
     if (new_damage > field_8_total_damage_q)
     {
         field_8_total_damage_q = new_damage;
@@ -415,7 +415,7 @@ void CarPhysics_B0::SpinOutOnOil_559BA0()
     {
         if (field_A0_oil_spin_dir != 1 && field_A0_oil_spin_dir != 2)
         {
-            if (gRng_6F6784.GetInt(2))
+            if (gRng.GetInt(2))
             {
                 set_field_A0_559B90(1);
             }
@@ -2446,7 +2446,7 @@ void CarPhysics_B0::AccumulateImpulse_55FC30(const Fix16Point& point, s32 base_d
 
         ApplyImpulseWithTrailerRedirect_55FA10(&a2);
 
-        u32 rng_damage = base_dmg + gpRng_67AB34->GetCurRng();
+        u32 rng_damage = base_dmg + gAmbientRng->GetCurRng();
         if (rng_damage > this->field_8_total_damage_q)
         {
             this->field_8_total_damage_q = rng_damage;

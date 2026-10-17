@@ -363,7 +363,7 @@ void Object_2C::SetMovementVectorWithRandomState_522640(const Fix16Point& point)
 
     if (field_8->field_4C == 3 && field_10_obj_3c->field_34 == 2)
     {
-        const s16 rng = gRng_6F6784.GetInt(9);
+        const s16 rng = gRng.GetInt(9);
         if (rng < 6)
         {
             if (rng < 3)
@@ -2617,7 +2617,7 @@ void Object_2C::HandleWaterDeath_528900()
         field_10_obj_3c->field_30_bSkipAnim = 1;
     }
 
-    if ((gpRng_67AB34->GetCurRng() & 3) == 0)
+    if ((gAmbientRng->GetCurRng() & 3) == 0)
     {
         field_4->IncreaseZoom_59E320(1);
         if (field_4->ShrinkSprite_59E390(dword_6F8F5C, dword_6F8F5C, 0))

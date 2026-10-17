@@ -1602,7 +1602,7 @@ void Ped::HandleClosePedInteraction_45CAA0()
                 pNearPed_->field_204_killer_id = this->field_200_id;
                 pNearPed_->field_290_death_cause = ped_death_cause::punched_10;
                 pNearPed_->field_264_killer_id_timer = 50;
-                rng = gRng_6F6784.GetInt(20);
+                rng = gRng.GetInt(20);
                 if (pNearPed_->get_health_433B70() > 30)
                 {
                     if (pNearPed_->PedTypeIs_45EDE0(PedType::kPlayer))
@@ -2150,7 +2150,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 0;
             max_north = 2;
-            if (static_cast<u8>(gRng_6F6784.GetInt(max_north)) > 0)
+            if (static_cast<u8>(gRng.GetInt(max_north)) > 0)
             {
                 break;
             }
@@ -2160,7 +2160,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 1;
             max_east = 2;
-            if (static_cast<u8>(gRng_6F6784.GetInt(max_east)) > 0)
+            if (static_cast<u8>(gRng.GetInt(max_east)) > 0)
             {
                 break;
             }
@@ -2170,7 +2170,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 2;
             max_south = 2;
-            if (gRng_6F6784.GetInt(max_south) > 0)
+            if (gRng.GetInt(max_south) > 0)
             {
                 break;
             }
@@ -2180,7 +2180,7 @@ void Ped::StartCrossingRoad_45E4A0()
         {
             direction = 3;
             max_west = 2;
-            if (gRng_6F6784.GetInt(max_west) > 0)
+            if (gRng.GetInt(max_west) > 0)
             {
                 break;
             }
@@ -2500,7 +2500,7 @@ void Ped::EnterPublicTransport_45EE70()
         {
             if (!bSkip_buses_67D558)
             {
-                if (gRng_6F6784.GetInt(100) > 90 && gNumberBusCustomers_6787D3 < 5 && pZoneIter->field_0_zone_type == 7 &&
+                if (gRng.GetInt(100) > 90 && gNumberBusCustomers_6787D3 < 5 && pZoneIter->field_0_zone_type == 7 &&
                     !gPublicTransport_181C_6FF1D4->is_bus_full_579AF0())
                 {
                     if (field_25C_internal_objective != Objectives::kEnterTrain &&
@@ -2516,7 +2516,7 @@ void Ped::EnterPublicTransport_45EE70()
         else
         {
             TrainStation_34* pTrainStation = gPublicTransport_181C_6FF1D4->TrainStationForZone_57B4B0(pZoneIter);
-            if (gRng_6F6784.GetInt(100) > 90 && gNumberBusCustomers_6787D3 < 5)
+            if (gRng.GetInt(100) > 90 && gNumberBusCustomers_6787D3 < 5)
             {
                 if (field_25C_internal_objective != Objectives::kEnterTrain && field_25C_internal_objective != Objectives::kLeaveTrain &&
                     field_25C_internal_objective != Objectives::kGotoAreaOnFoot)
@@ -3113,7 +3113,7 @@ void Ped::RobbedDriver_AI_461630()
             {
                 if (field_278_ped_state_1 != PedState1::kImmobilized)
                 {
-                    u16 rng_val = gRng_6F6784.GetInt(40);
+                    u16 rng_val = gRng.GetInt(40);
                     if (bDont_get_car_back_67D4F5)
                     {
                         rng_val = 6;
@@ -3370,14 +3370,14 @@ void Ped::UpdateFacingAngle_461A60()
                     Ang16 jitter;
                     if ((this->field_200_id & 1) != 0)
                     {
-                        jitter = Ang16::Fix16ToAng16(kFpOne64th_6784C4 * Fix16(gRng_6F6784.GetInt(45)));
+                        jitter = Ang16::Fix16ToAng16(kFpOne64th_6784C4 * Fix16(gRng.GetInt(45)));
                         this->field_168_game_object->field_74 = field_130_target_facing_angle + kAng90_6784B0 + jitter;
                     }
                     else
                     {
                         // 9.6f uses Fix16_To_Ang16 and operator- here too, but 10.5 needs the
                         // conversion written out and the subtraction split to inline like the original
-                        jitter.rValue = (kFpOne64th_6784C4 * Fix16(gRng_6F6784.GetInt(45))).GetRaw() / 71;
+                        jitter.rValue = (kFpOne64th_6784C4 * Fix16(gRng.GetInt(45))).GetRaw() / 71;
                         jitter.Normalize();
                         Ang16 tmp = field_130_target_facing_angle - kAng90_6784B0;
                         tmp = tmp - jitter;
@@ -3419,7 +3419,7 @@ void Ped::Occupation_AI_461F20()
             {
                 if (field_168_game_object)
                 {
-                    if (field_20E_offscreen_counter || gNewTaxiCustomersThisTick_6787D2 || gRng_6F6784.GetInt(1000) >= 2)
+                    if (field_20E_offscreen_counter || gNewTaxiCustomersThisTick_6787D2 || gRng.GetInt(1000) >= 2)
                     {
                         Ped::EnterPublicTransport_45EE70();
                     }
@@ -4047,7 +4047,7 @@ bool Ped::PoolUpdate()
         else
         {
             SetVoiceEvent_IfBit24Clear_433DD0(23);
-            word_6787F2 = gRng_6F6784.GetInt(300) + 450;
+            word_6787F2 = gRng.GetInt(300) + 450;
         }
     }
 
@@ -11038,16 +11038,16 @@ void Ped::ApplyAimJitter_46F1E0(Weapon_30* pWeapon)
             if (GetPedVelocity_45C920() == kFpZero_678660)
             {
                 max_still = 3;
-                rng_val = gRng_6F6784.GetInt(max_still);
+                rng_val = gRng.GetInt(max_still);
             }
             else
             {
                 max_moving = 5;
-                rng_val = gRng_6F6784.GetInt(max_moving);
+                rng_val = gRng.GetInt(max_moving);
                 if (rng_val == 0)
                 {
                     max_moving_retry = 5;
-                    rng_val = gRng_6F6784.GetInt(max_moving_retry);
+                    rng_val = gRng.GetInt(max_moving_retry);
                 }
             }
         }

@@ -646,10 +646,10 @@ class Ped
 
     void TriggerVoiceEventRateLimited_433E50()
     {
-        if (static_cast<u32>(gpRng_67AB34->GetCurRng() - field_220_last_voice_rng) > 5)
+        if (static_cast<u32>(gAmbientRng->GetCurRng() - field_220_last_voice_rng) > 5)
         {
             SetVoiceEvent_IfBit24Clear_433DD0(25);
-            field_220_last_voice_rng = gpRng_67AB34->GetCurRng();
+            field_220_last_voice_rng = gAmbientRng->GetCurRng();
         }
     }
 

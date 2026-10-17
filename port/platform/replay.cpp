@@ -556,7 +556,7 @@ void port_replay_before_update()
     for (u32 i = gLastRecord; i < rec.field_75340_rec_buf_idx && i < InputRecorder_67F8B0::k_max_records; i++)
     {
         const InputRecord_C& r = rec.field_3C_rec_buff[i];
-        if (r.field_8_rng_rnd != gpRng_67AB34->rnd_ || r.field_0_rng_idx != gpRng_67AB34->rng_)
+        if (r.field_8_rng_rnd != gAmbientRng->rnd_ || r.field_0_rng_idx != gAmbientRng->rng_)
         {
             if (!gSyncMismatches)
             {
@@ -567,8 +567,8 @@ void port_replay_before_update()
                         i,
                         r.field_0_rng_idx,
                         r.field_8_rng_rnd,
-                        gpRng_67AB34->rng_,
-                        gpRng_67AB34->rnd_);
+                        gAmbientRng->rng_,
+                        gAmbientRng->rnd_);
             }
             gSyncMismatches++;
         }
@@ -597,7 +597,7 @@ void port_replay_after_update()
         fprintf(gLog,
                 "%ld %d %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx %016llx\n",
                 gFrame,
-                gpRng_67AB34->rng_,
+                gAmbientRng->rng_,
                 static_cast<unsigned long long>(s.total),
                 static_cast<unsigned long long>(s.rng),
                 static_cast<unsigned long long>(s.sprites),

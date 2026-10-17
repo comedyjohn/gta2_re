@@ -1578,7 +1578,7 @@ void Char_B4::UpdateAnimState_546360()
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
                 {
-                    switch (gRng_6F6784.GetInt(2))
+                    switch (gRng.GetInt(2))
                     {
                         case 0:
                             field_6C_animation_state = 19;
@@ -1601,7 +1601,7 @@ void Char_B4::UpdateAnimState_546360()
                 field_68_animation_frame++;
                 if (field_68_animation_frame > 7)
                 {
-                    switch (gRng_6F6784.GetInt(3))
+                    switch (gRng.GetInt(3))
                     {
                         case 0:
                             field_6C_animation_state = CharAnimState::kUnknown14;
@@ -2935,7 +2935,7 @@ void Char_B4::SelectRandomIdleBehavior_54C580()
             {
                 this->field_10_char_state = 1;
                 this->field_6C_animation_state = 0;
-                this->field_46_timer = gRng_6F6784.GetInt(400);
+                this->field_46_timer = gRng.GetInt(400);
                 break;
             }
             case 9:
@@ -2947,21 +2947,21 @@ void Char_B4::SelectRandomIdleBehavior_54C580()
             {
                 this->field_10_char_state = 3;
                 this->field_6C_animation_state = 0;
-                this->field_46_timer = gRng_6F6784.GetInt(200);
+                this->field_46_timer = gRng.GetInt(200);
                 break;
             }
             case 15:
             {
                 this->field_10_char_state = 4;
                 this->field_6C_animation_state = 1;
-                this->field_46_timer = gRng_6F6784.GetInt(200);
+                this->field_46_timer = gRng.GetInt(200);
                 break;
             }
             case 20:
             {
                 this->field_10_char_state = 7;
                 this->field_6C_animation_state = 2;
-                this->field_46_timer = gRng_6F6784.GetInt(200);
+                this->field_46_timer = gRng.GetInt(200);
                 break;
             }
             default:
@@ -2978,11 +2978,11 @@ void Char_B4::SelectRandomIdleBehavior_54C580()
 // 0x54c6c0
 void Char_B4::ApplyRandomRotationJitter_54C6C0()
 {
-    if (gRng_6F6784.GetInt(32) > 22)
+    if (gRng.GetInt(32) > 22)
     {
         Ang16 old_angle = field_42_rotation_jitter;
         field_42_rotation_jitter =
-            Ang16::Fix16ToAng16(k_dword_6FD868 * (Fix16(gRng_6F6784.GetInt(16)) - kFP16Eight_6FDA08)); // INLINED_MODE required
+            Ang16::Fix16ToAng16(k_dword_6FD868 * (Fix16(gRng.GetInt(16)) - kFP16Eight_6FDA08)); // INLINED_MODE required
         if (old_angle > kAng180_6FD936 && field_42_rotation_jitter > kAng180_6FD936)
         {
             field_42_rotation_jitter = -field_42_rotation_jitter;
@@ -5050,7 +5050,7 @@ LABEL_65:
                     if (byte_6FDB58)
                     {
                         unk_ypos = 4;
-                        s16 int_4F7AE0 = gRng_6F6784.GetInt(4);
+                        s16 int_4F7AE0 = gRng.GetInt(4);
                         switch (int_4F7AE0)
                         {
                             case 0:
@@ -5818,7 +5818,7 @@ void Char_B4::state_7_551CB0()
                     if ((field_7C_pPed->PedTypeIs_45EDE0(PedType::kScriptCreated) || field_7C_pPed->PedTypeIs_45EDE0(PedType::kPlayer)) &&
                         !field_4A)
                     {
-                        if (gRng_6F6784.GetInt(600) < 4 && field_10_char_state != CharB4State::kSmoking)
+                        if (gRng.GetInt(600) < 4 && field_10_char_state != CharB4State::kSmoking)
                         {
                             field_10_char_state = CharB4State::kSmoking;
                             field_68_animation_frame = 0;
@@ -6357,7 +6357,7 @@ void Char_B4::state_9_552E90()
             default:
                 if (field_6C_animation_state != 21)
                 {
-                    rng = gRng_6F6784.GetInt(3);
+                    rng = gRng.GetInt(3);
 
                     switch (rng)
                     {
@@ -6444,7 +6444,7 @@ void Char_B4::state_9_552E90()
             default:
                 if (field_6C_animation_state != 21)
                 {
-                    rng = gRng_6F6784.GetInt(3);
+                    rng = gRng.GetInt(3);
                     switch (rng)
                     {
                         case 0:

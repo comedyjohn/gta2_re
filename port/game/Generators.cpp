@@ -17,7 +17,7 @@ void Generator_2C::Activate_4C1A70()
     }
     else
     {
-        field_18_cycle = gpRng_67AB34->GetCurRng() + 1;
+        field_18_cycle = gAmbientRng->GetCurRng() + 1;
         gGeneratorPool_14AC_67E5D0->field_14A4_kill_count++;
     }
 }
@@ -32,9 +32,9 @@ s32 Generator_2C::next_cycle_4C1AB0()
     }
     else
     {
-        result = gRng_6F6784.GetInt(4 * (field_14_max_delay - field_12_min_delay)) + 4 * field_12_min_delay;
+        result = gRng.GetInt(4 * (field_14_max_delay - field_12_min_delay)) + 4 * field_12_min_delay;
     }
-    return result + gpRng_67AB34->GetCurRng();
+    return result + gAmbientRng->GetCurRng();
 }
 
 // 0x4C1B10
@@ -114,7 +114,7 @@ void Generator_2C::SpawnObject_4C1B10()
 // 0x4c1c50
 void Generator_2C::Service_4C1C50()
 {
-    if (static_cast<u32>(gpRng_67AB34->GetCurRng()) >= field_18_cycle)
+    if (static_cast<u32>(gAmbientRng->GetCurRng()) >= field_18_cycle)
     {
         if (field_1E_kill_timer > 0)
         {
@@ -133,7 +133,7 @@ void Generator_2C::Init_4C1C70(Fix16 x, Fix16 y, Fix16 z, Ang16 rot, s32 generat
     field_0_gen_type = generator_type;
     field_12_min_delay = min_delay;
     field_14_max_delay = max_delay;
-    field_18_cycle = gpRng_67AB34->GetCurRng() + 1;
+    field_18_cycle = gAmbientRng->GetCurRng() + 1;
     field_20 = 1;
     field_1E_kill_timer = 0;
     field_1C_ammo = 0;
@@ -177,7 +177,7 @@ void GeneratorPool_14AC::sub_4C1CD0()
 // 0x4c1d70
 void GeneratorPool_14AC::GeneratorsService_4C1D70()
 {
-    s32 start_idx = field_14A8_count_d3 * (gpRng_67AB34->GetCurRng() & 3);
+    s32 start_idx = field_14A8_count_d3 * (gAmbientRng->GetCurRng() & 3);
     s32 end_idx = start_idx + field_14A8_count_d3;
     if (end_idx > field_14A0_count)
     {

@@ -46,7 +46,7 @@ class Light_28
                 field_17_timer = field_15_off_time;
                 if (field_16_flicker_range)
                 {
-                    field_17_timer += gRng_6F6784.GetUint8(field_16_flicker_range);
+                    field_17_timer += gRng.GetUint8(field_16_flicker_range);
                 }
             }
             else
@@ -57,7 +57,7 @@ class Light_28
                 field_17_timer = field_14_on_time;
                 if (field_16_flicker_range)
                 {
-                    field_17_timer += gRng_6F6784.GetUint8(field_16_flicker_range);
+                    field_17_timer += gRng.GetUint8(field_16_flicker_range);
                 }
             }
         }

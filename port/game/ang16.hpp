@@ -228,12 +228,12 @@ class Ang16
 
     static Fix16 Cosine(const Ang16& angle)
     {
-        return gCos_table_669260[angle.rValue];
+        return gCosTable[angle.rValue];
     }
 
     static Fix16 Sine(const Ang16& angle)
     {
-        return gSin_table_667A80[angle.rValue];
+        return gSinTable[angle.rValue];
     }
 
     // 9.6f 0x41FC20: the table value is the left operand (this) of the multiply

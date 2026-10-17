@@ -814,7 +814,7 @@ void Crane_15C::UpdateCraneSprites_47FE10()
 void Crane_15C::Service_480310()
 {
     field_159_hooked_car_this_frame = 0;
-    field_28_strct4.RemoveByRngValue_5A6C40(gpRng_67AB34->GetCurRng() - 1);
+    field_28_strct4.RemoveByRngValue_5A6C40(gAmbientRng->GetCurRng() - 1);
     if (field_74_pSprite_on_hook)
     {
         gSpriteGrid_3_679210->Remove_477B00(field_74_pSprite_on_hook);

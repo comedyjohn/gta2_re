@@ -9,3 +9,4 @@ gtx_0x106C::sub_462FD0,GetSpecWith3AsOne
 gtx_0x106C::sub_49E570,IsSpec4NotRemapped
 text_0x14::TKeyFind_5B59E0,HasKey
 text_0x14::TKeyFind_5B5A50,FindText
+PixelsToFix16Table::SignedPixelsToFix16_41FE70,SignedPixelsToFix16

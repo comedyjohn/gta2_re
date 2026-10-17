@@ -2960,7 +2960,7 @@ namespace
 {
 inline Fix16 Get_front_window_offset(StyleCarInfo* p)
 {
-    return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->front_window_offset);
+    return gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(p->front_window_offset);
 }
 } // namespace
 
@@ -2969,7 +2969,7 @@ namespace
 {
 inline Fix16 Get_rear_window_offset(StyleCarInfo* p)
 {
-    return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->rear_window_offset);
+    return gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(p->rear_window_offset);
 }
 } // namespace
 

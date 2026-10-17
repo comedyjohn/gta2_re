@@ -1,2 +1,3 @@
 old,into,why
 gtx_0x106C::get_car_info_4BF1F0,gtx_0x106C::get_car_info_5AA3B0,"same body (field_5C_cari->field_0_car_info[idx])"
+PixelsToFix16Table::SignedPixelsToFix16_440860,PixelsToFix16Table::SignedPixelsToFix16_41FE70,"same body; the by-value copy was kept for VC6"

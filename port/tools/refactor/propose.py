@@ -156,6 +156,13 @@ def propose_local(name):
     return n, ""
 
 
+def overload_sig(sig):
+    """The parameter types as overload resolution tells them apart: `s8` and `const s8&` are not different."""
+    inner, _, tail = sig.rpartition(")")
+    inner = re.sub(r"\bconst\b|\bvolatile\b|&", "", inner)
+    return re.sub(r"\s+", "", inner) + ")" + tail
+
+
 def subsystem_of(file):
     stem = os.path.basename(file).rsplit(".", 1)[0]
     for sub, stems in SUBSYSTEMS.items():
@@ -241,7 +248,7 @@ def propose(sub, kind, syms, names=None):
     fn_sigs = collections.defaultdict(set)  # (scope, name) -> parameter types of the functions called so
     for s in syms:
         if s["kind"] in ("function", "method"):
-            fn_sigs[(s["owner"], s["name"])].add(s.get("sig", ""))
+            fn_sigs[(s["owner"], s["name"])].add(overload_sig(s.get("sig", "")))
     batch_names = collections.defaultdict(set)  # scope -> old names renamed in this batch
     for s, _, _ in rows:
         batch_names[s["owner"]].add(s["name"])
@@ -258,7 +265,7 @@ def propose(sub, kind, syms, names=None):
             if len(clash) > 1 and s["kind"] in ("function", "method"):
                 # same name, different parameter types: an overload set, if no two are alike
                 group = [x for x in rows if x[1] == new and x[0]["owner"] == s["owner"] and x[0]["kind"] in ("function", "method")]
-                by_name = {x[0]["name"]: x[0].get("sig", "") for x in group}  # a declaration and its definition share a name
+                by_name = {x[0]["name"]: overload_sig(x[0].get("sig", "")) for x in group}  # a declaration and its definition share a name
                 if len(set(by_name.values())) == len(by_name):
                     continue
                 r[1], r[2] = None, "collides with " + ", ".join(sorted(clash - {s["name"]})) + " (same parameter types)"
@@ -271,7 +278,7 @@ def propose(sub, kind, syms, names=None):
             elif new in taken[s["owner"]] and new != s["name"] and new not in batch_names[s["owner"]]:
                 existing = fn_sigs.get((s["owner"], new), set())
                 other_kinds = any(x["name"] == new and x["owner"] == s["owner"] and x["kind"] not in ("function", "method") for x in syms)
-                if s["kind"] in ("function", "method") and existing and not other_kinds and s.get("sig", "") not in existing:
+                if s["kind"] in ("function", "method") and existing and not other_kinds and overload_sig(s.get("sig", "")) not in existing:
                     continue  # an overload of a function that is already there
                 r[1], r[2] = None, f"{new} already exists in {s['owner'] or 'the global scope'}"
     result = {}

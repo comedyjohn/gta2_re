@@ -520,16 +520,6 @@ s32 CarInfoTable::StrToInt_431080(const char* pStr, s16* pOut)
     return 0;
 }
 
-// 0x440860
-Fix16 PixelsToFix16Table::SignedPixelsToFix16_440860(s8 var)
-{
-    if (var < 0)
-    {
-        return -list[-var];
-    }
-    return list[var];
-}
-
 // 0x4542A0
 void CarModelInfo::CalculateCarInfo_4542A0(s32 idx)
 {

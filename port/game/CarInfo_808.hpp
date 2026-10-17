@@ -41,10 +41,6 @@ struct PixelsToFix16Table
         return list[var];
     }
 
-    // This one won't match with a ref argument even though its the
-    // same as the above function :')
-    Fix16 SignedPixelsToFix16_440860(s8 var);
-
     Fix16 list[256];
 };
 

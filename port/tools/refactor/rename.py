@@ -309,6 +309,19 @@ IDENTITY = {}
 USR_NAMES = {}  # usr -> the name as spelled (params and locals), for the text scan
 
 
+def macro_parameters(text, pos):
+    """The parameter names of the #define that contains pos, or an empty set."""
+    start = text.rfind("\n", 0, pos) + 1
+    while start > 0:  # continuation lines belong to the line before
+        prev = text.rfind("\n", 0, start - 1) + 1
+        if text[prev : start - 1].rstrip("\r").endswith("\\"):
+            start = prev
+        else:
+            break
+    m = re.match(r"[ \t]*#[ \t]*define[ \t]+\w+\(([^)]*)\)", text[start:])
+    return {p.strip() for p in m.group(1).split(",")} if m else set()
+
+
 def load_renames(path):
     wanted, usr_targets = {}, {}
     with open(path, newline="") as f:
@@ -484,6 +497,8 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overl
             key = (p, m.start())
             if key in edited or key in seen:
                 continue
+            if m.group(1) in macro_parameters(text, m.start()):
+                continue  # a macro's own parameter, not a use of the symbol
             line = text.count("\n", 0, m.start()) + 1
             inside = any(f == p and s <= m.start() < e for (f, s, e) in templ)
             (res_template if inside else res_other).append((p, m.start(), m.group(1), line))

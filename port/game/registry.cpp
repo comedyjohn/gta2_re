@@ -396,7 +396,7 @@ void Registry::Set_Screen_Setting_5871E0(const char_type* lpValueName, BYTE* lpD
 
     cbData = maxLen;
     if (RegQueryValueExA(hKey, lpValueName, nullptr, nullptr, lpData, &cbData) &&
-        RegSetValueExA(hKey, lpValueName, 0, 1u, lpData, strlen(reinterpret_cast<const char_type*>(lpData)) + 1))
+        RegSetValueExA(hKey, lpValueName, 0, 1U, lpData, strlen(reinterpret_cast<const char_type*>(lpData)) + 1))
     {
         FatalError_4A38C0(Gta2Error::SetRegistryValueFail, "C:\\Splitting\\Gta2\\Source\\registry.cpp", 781);
     }

@@ -1103,7 +1103,7 @@ class Car_BC
     // 9.6f 0x4218E0
     void ClearCarThreadPending_4218E0()
     {
-        field_8D_car_thread_flags &= ~1u;
+        field_8D_car_thread_flags &= ~1U;
     }
 
     // 9.6f 0x421570
@@ -1262,13 +1262,13 @@ class Car_BC
 
     bool IsEmittingHorn_411970()
     {
-        return field_A7_horn > 0 && field_A7_horn <= 0xF8u;
+        return field_A7_horn > 0 && field_A7_horn <= 0xF8U;
     }
 
     bool IsEmittingHorn_411990()
     {
         // Not sure what is going on here, seems to same as 0x411970 ??
-        return field_A7_horn <= 0xF8u && field_A7_horn > 0;
+        return field_A7_horn <= 0xF8U && field_A7_horn > 0;
     }
 
     s16 GetLastSeenTimer_4A9AD0()

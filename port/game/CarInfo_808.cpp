@@ -272,7 +272,7 @@ s32 ParseTokenAndPush_430C70(char_type* pStr)
                         }
                         else
                         {
-                            if (static_cast<u16>(tmp) > 0xFFu)
+                            if (static_cast<u16>(tmp) > 0xFFU)
                             {
                                 return -2;
                             }

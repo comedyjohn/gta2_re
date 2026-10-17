@@ -164,7 +164,6 @@ port/game/CarInfo_808.cpp,readability-function-cognitive-complexity,1
 port/game/CarInfo_808.cpp,readability-function-size,1
 port/game/CarInfo_808.cpp,readability-implicit-bool-conversion,20
 port/game/CarInfo_808.cpp,readability-make-member-function-const,1
-port/game/CarInfo_808.cpp,readability-uppercase-literal-suffix,1
 port/game/CarInfo_808.hpp,cppcoreguidelines-avoid-c-arrays,3
 port/game/CarInfo_808.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/CarInfo_808.hpp,cppcoreguidelines-pro-bounds-constant-array-index,3
@@ -1511,7 +1510,6 @@ port/game/PlyDat_2BC0.cpp,modernize-avoid-c-arrays,10
 port/game/PlyDat_2BC0.cpp,modernize-raw-string-literal,1
 port/game/PlyDat_2BC0.cpp,readability-convert-member-functions-to-static,2
 port/game/PlyDat_2BC0.cpp,readability-implicit-bool-conversion,16
-port/game/PlyDat_2BC0.cpp,readability-uppercase-literal-suffix,13
 port/game/PlyDat_2BC0.hpp,cppcoreguidelines-avoid-c-arrays,11
 port/game/PlyDat_2BC0.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/PlyDat_2BC0.hpp,cppcoreguidelines-special-member-functions,3
@@ -2128,7 +2126,6 @@ port/game/file.cpp,modernize-raw-string-literal,34
 port/game/file.cpp,readability-implicit-bool-conversion,32
 port/game/file.cpp,readability-non-const-parameter,6
 port/game/file.cpp,readability-simplify-boolean-expr,2
-port/game/file.cpp,readability-uppercase-literal-suffix,29
 port/game/file.hpp,cppcoreguidelines-avoid-c-arrays,2
 port/game/file.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/file.hpp,modernize-avoid-c-arrays,2
@@ -2208,7 +2205,6 @@ port/game/gtx_0x106C.cpp,readability-else-after-return,3
 port/game/gtx_0x106C.cpp,readability-implicit-bool-conversion,43
 port/game/gtx_0x106C.cpp,readability-make-member-function-const,27
 port/game/gtx_0x106C.cpp,readability-non-const-parameter,4
-port/game/gtx_0x106C.cpp,readability-uppercase-literal-suffix,24
 port/game/gtx_0x106C.hpp,bugprone-implicit-widening-of-multiplication-result,1
 port/game/gtx_0x106C.hpp,cppcoreguidelines-avoid-c-arrays,11
 port/game/gtx_0x106C.hpp,cppcoreguidelines-avoid-non-const-global-variables,8
@@ -2404,7 +2400,6 @@ port/game/registry.cpp,modernize-avoid-c-arrays,7
 port/game/registry.cpp,modernize-raw-string-literal,47
 port/game/registry.cpp,readability-convert-member-functions-to-static,9
 port/game/registry.cpp,readability-implicit-bool-conversion,15
-port/game/registry.cpp,readability-uppercase-literal-suffix,1
 port/game/registry.hpp,cppcoreguidelines-avoid-non-const-global-variables,1
 port/game/resource.h,bugprone-macro-parentheses,1
 port/game/resource.h,cppcoreguidelines-macro-usage,11
@@ -2563,7 +2558,6 @@ port/game/text_0x14.cpp,readability-else-after-return,1
 port/game/text_0x14.cpp,readability-implicit-bool-conversion,13
 port/game/text_0x14.cpp,readability-make-member-function-const,5
 port/game/text_0x14.cpp,readability-simplify-boolean-expr,1
-port/game/text_0x14.cpp,readability-uppercase-literal-suffix,261
 port/game/text_0x14.hpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/text_0x14.hpp,cppcoreguidelines-avoid-non-const-global-variables,2
 port/game/text_0x14.hpp,cppcoreguidelines-prefer-member-initializer,4

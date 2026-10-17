@@ -259,9 +259,9 @@ u16 gtx_0x106C::GetSpaceCharWidth_5AA7B0(u16* font_type)
 // 0x5AA800
 s16 gtx_0x106C::GetLineSpacing_5AA800(u16* font_type)
 {
-    if (*font_type >= 0x65u)
+    if (*font_type >= 0x65U)
     {
-        return (*font_type < 0xC9u) ? 0x11 : 0x22;
+        return (*font_type < 0xC9U) ? 0x11 : 0x22;
     }
     else
     {
@@ -376,7 +376,7 @@ void gtx_0x106C::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
             FatalError_4A38C0(Gta2Error::FileOverflow, "C:\\Splitting\\Gta2\\Source\\style.cpp", 825);
         }
 
-        if (pCarInfoIter->w > 0x80u || pCarInfoIter->h > 0x80u || pCarInfoIter->num_remaps > 0x40u)
+        if (pCarInfoIter->w > 0x80U || pCarInfoIter->h > 0x80U || pCarInfoIter->num_remaps > 0x40U)
         {
             FatalError_4A38C0(Gta2Error::InvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 826, pCarInfoIter->model);
         }
@@ -399,7 +399,7 @@ void gtx_0x106C::BuildCarInfoContainer_5AA9A0(u32 chunk_size)
         // Offset of num_doors. The door part (2 * num_doors + 1) is its own local, added to the offset at
         // both uses: one expression folds it into a single lea, the original keeps lea / add / add.
         u32 off = pCarInfoIter->num_remaps + 0xE;
-        if ((reinterpret_cast<u8*>(pCarInfoIter))[off] > 5u)
+        if ((reinterpret_cast<u8*>(pCarInfoIter))[off] > 5U)
         {
             FatalError_4A38C0(Gta2Error::InvalidCarModelStyleData, "C:\\Splitting\\Gta2\\Source\\style.cpp", 842, pCarInfoIter->model);
         }
@@ -769,7 +769,7 @@ void gtx_0x106C::load_sprite_index_5AAF80(u32 sprx_chunk_size)
     field_20_sprite_index = reinterpret_cast<sprite_index*>(Memory::malloc_4FE4D0(sprx_chunk_size + 8));
     File::Global_Read_4A71C0(field_20_sprite_index, sprx_chunk_size);
 #endif
-    if ((sprx_chunk_size & ~7u) > 524280)
+    if ((sprx_chunk_size & ~7U) > 524280)
     {
         FatalError_4A38C0(Gta2Error::TooManySprites, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1198, sprx_chunk_size >> 3);
     }
@@ -827,7 +827,7 @@ void gtx_0x106C::load_font_base_5AB0F0(u32 fonb_chunk_size)
     File::Global_Read_4A71C0(field_1C_font_base, fonb_chunk_size);
 
     u16 fountCount = field_1C_font_base->field_0_font_count;
-    if (fonb_chunk_size != (fountCount * 2u) + 2)
+    if (fonb_chunk_size != (fountCount * 2U) + 2)
     {
         FatalError_4A38C0(Gta2Error::InvalidChunkSize, "C:\\Splitting\\Gta2\\Source\\style.cpp", 1271, fonb_chunk_size);
     }
@@ -986,67 +986,67 @@ void gtx_0x106C::load_spec_5AB450()
 // 0x5AB4B0
 void gtx_0x106C::LoadChunk_5AB4B0(const char_type* Str1, u32 chunk_len)
 {
-    if (!strncmp(Str1, "PALB", 4u))
+    if (!strncmp(Str1, "PALB", 4U))
     {
         load_palete_base_5AB2C0(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRB", 4u))
+    else if (!strncmp(Str1, "SPRB", 4U))
     {
         load_sprite_base_5AB210(chunk_len);
     }
-    else if (!strncmp(Str1, "FONB", 4u))
+    else if (!strncmp(Str1, "FONB", 4U))
     {
         load_font_base_5AB0F0(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRX", 4u))
+    else if (!strncmp(Str1, "SPRX", 4U))
     {
         load_sprite_index_5AAF80(chunk_len);
     }
-    else if (!strncmp(Str1, "OBJI", 4u))
+    else if (!strncmp(Str1, "OBJI", 4U))
     {
         load_map_object_info_5AAF00(chunk_len);
     }
-    else if (!strncmp(Str1, "PALX", 4u))
+    else if (!strncmp(Str1, "PALX", 4U))
     {
         load_palette_index_5AAEA0(chunk_len);
     }
-    else if (!strncmp(Str1, "PPAL", 4u))
+    else if (!strncmp(Str1, "PPAL", 4U))
     {
         load_physical_palettes_5AAE70(chunk_len);
     }
-    else if (!strncmp(Str1, "SPRG", 4u))
+    else if (!strncmp(Str1, "SPRG", 4U))
     {
         load_sprite_graphics_5AAE40(chunk_len);
     }
-    else if (!strncmp(Str1, "TILE", 4u))
+    else if (!strncmp(Str1, "TILE", 4U))
     {
         load_tiles_5AADF0(chunk_len);
     }
-    else if (!strncmp(Str1, "DELS", 4u))
+    else if (!strncmp(Str1, "DELS", 4U))
     {
         load_delta_store_5AADD0(chunk_len);
     }
-    else if (!strncmp(Str1, "DELX", 4u))
+    else if (!strncmp(Str1, "DELX", 4U))
     {
         load_delta_index_5AAD80(chunk_len);
     }
-    else if (!strncmp(Str1, "CARI", 4u))
+    else if (!strncmp(Str1, "CARI", 4U))
     {
         load_car_info_5AAD50(chunk_len);
     }
-    else if (!strncmp(Str1, "PSXT", 4u))
+    else if (!strncmp(Str1, "PSXT", 4U))
     {
         skip_psxt_5AAE30(chunk_len);
     }
-    else if (!strncmp(Str1, "OVLY", 4u))
+    else if (!strncmp(Str1, "OVLY", 4U))
     {
         skip_ovly_5AAE20(chunk_len);
     }
-    else if (!strncmp(Str1, "SPEC", 4u))
+    else if (!strncmp(Str1, "SPEC", 4U))
     {
         load_spec_5AB450();
     }
-    else if (!strncmp(Str1, "RECY", 4u))
+    else if (!strncmp(Str1, "RECY", 4U))
     {
         load_car_recycling_info_5AB3C0(chunk_len);
     }

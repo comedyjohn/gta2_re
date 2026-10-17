@@ -83,7 +83,7 @@ class BitSet32
     // 9.6f 0x420E20 TODO: Check if matches
     bool mask_bit(u32 bit)
     {
-        return (m_var & (1u << bit)) == (1u << bit);
+        return (m_var & (1U << bit)) == (1U << bit);
     }
 
     // 9.6f 0x4A51A0

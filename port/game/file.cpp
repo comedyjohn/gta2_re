@@ -16,28 +16,28 @@ DEFINE_GLOBAL_ARRAY_INIT(CdCheckFile_84,
                          gCdCheckFiles_6252E8,
                          22,
                          0x6252E8,
-                         {"GTAudio\\1.wav", 31971388u},
-                         {"GTAudio\\10.wav", 15985724u},
-                         {"GTAudio\\101A.wav", 9838652u},
-                         {"GTAudio\\10a.wav", 7992892u},
-                         {"GTAudio\\11.wav", 15985724u},
-                         {"GTAudio\\11a.wav", 7992892u},
-                         {"GTAudio\\12.wav", 16932924u},
-                         {"GTAudio\\2.wav", 15985724u},
-                         {"GTAudio\\3.wav", 15985724u},
-                         {"GTAudio\\4.wav", 15985724u},
-                         {"GTAudio\\5.wav", 15985724u},
-                         {"GTAudio\\5a.wav", 7992892u},
-                         {"GTAudio\\6.wav", 15985724u},
-                         {"GTAudio\\6a.wav", 7992892u},
-                         {"GTAudio\\7.wav", 16003132u},
-                         {"GTAudio\\7a.wav", 7992892u},
-                         {"GTAudio\\8.wav", 15985724u},
-                         {"GTAudio\\8a.wav", 7992892u},
-                         {"GTAudio\\9.wav", 15985724u},
-                         {"GTAudio\\9a.wav", 7992892u},
-                         {"GTAudio\\A.wav", 23026196u},
-                         {"GTAudio\\D.wav", 6532888u});
+                         {"GTAudio\\1.wav", 31971388U},
+                         {"GTAudio\\10.wav", 15985724U},
+                         {"GTAudio\\101A.wav", 9838652U},
+                         {"GTAudio\\10a.wav", 7992892U},
+                         {"GTAudio\\11.wav", 15985724U},
+                         {"GTAudio\\11a.wav", 7992892U},
+                         {"GTAudio\\12.wav", 16932924U},
+                         {"GTAudio\\2.wav", 15985724U},
+                         {"GTAudio\\3.wav", 15985724U},
+                         {"GTAudio\\4.wav", 15985724U},
+                         {"GTAudio\\5.wav", 15985724U},
+                         {"GTAudio\\5a.wav", 7992892U},
+                         {"GTAudio\\6.wav", 15985724U},
+                         {"GTAudio\\6a.wav", 7992892U},
+                         {"GTAudio\\7.wav", 16003132U},
+                         {"GTAudio\\7a.wav", 7992892U},
+                         {"GTAudio\\8.wav", 15985724U},
+                         {"GTAudio\\8a.wav", 7992892U},
+                         {"GTAudio\\9.wav", 15985724U},
+                         {"GTAudio\\9a.wav", 7992892U},
+                         {"GTAudio\\A.wav", 23026196U},
+                         {"GTAudio\\D.wav", 6532888U});
 
 // 0x4A6B10
 s32 File::GetFileSize_4A6B10(FILE* Stream)
@@ -132,7 +132,7 @@ void* File::ReadFileToBuffer_4A6C80(const char_type* FileName, size_t* pAllocate
         FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 151);
     }
 
-    if (Read_4A6D90(pBuffer, *pAllocatedBufferSize, 1u, hFileRead2) != 1)
+    if (Read_4A6D90(pBuffer, *pAllocatedBufferSize, 1U, hFileRead2) != 1)
     {
         ::free(pBuffer);
         ::fclose(hFileRead2);
@@ -173,7 +173,7 @@ size_t File::ReadFileToFixedBuffer_4A6DB0(const char_type* FileName, void* pBuff
         FatalError_4A38C0(Gta2Error::FileTooLarge, "C:\\Splitting\\Gta2\\Source\\File.cpp", 198, static_cast<s32>(size - *pMaxSize));
     }
 
-    if (Read_4A6D90(pBuffer, size, 1u, hFile) != 1)
+    if (Read_4A6D90(pBuffer, size, 1U, hFile) != 1)
     {
         ::fclose(hFile);
         FatalError_4A38C0(Gta2Error::FileReadFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 204);
@@ -201,7 +201,7 @@ void File::WriteBufferToFile_4A6E80(const char_type* FileName, void* Buffer, siz
         FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 231);
     }
 
-    if (Write_4A6F30(Buffer, *pBufferSize, 1u, hFile) != 1)
+    if (Write_4A6F30(Buffer, *pBufferSize, 1U, hFile) != 1)
     {
         ::fclose(hFile);
         FatalError_4A38C0(Gta2Error::FileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 237);
@@ -234,7 +234,7 @@ void File::AppendBufferToFile_4A6F50(const char_type* FileName, void* pBuffer, u
         FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 264);
     }
 
-    if (Write_4A6F30(pBuffer, *pBufferSize, 1u, hFile) != 1)
+    if (Write_4A6F30(pBuffer, *pBufferSize, 1U, hFile) != 1)
     {
         ::fclose(hFile);
         FatalError_4A38C0(Gta2Error::FileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 270);
@@ -335,7 +335,7 @@ void File::Global_Read_4A71C0(void* pBuffer, const u32& pBufferSize)
         FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 438);
     }
 
-    if (Read_4A6D90(pBuffer, pBufferSize, 1u, ghFile_67CFEC) != 1)
+    if (Read_4A6D90(pBuffer, pBufferSize, 1U, ghFile_67CFEC) != 1)
     {
         File_Error_4A7190(15, 0, 0);
     }
@@ -348,7 +348,7 @@ bool File::Global_Read_4A7210(void* Buffer, u32* pSize)
     {
         FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 460);
     }
-    return (Read_4A6D90(Buffer, *pSize, 1u, ghFile_67CFEC) == 1) ? true : false;
+    return (Read_4A6D90(Buffer, *pSize, 1U, ghFile_67CFEC) == 1) ? true : false;
 }
 
 // 0x4A7250
@@ -387,7 +387,7 @@ size_t File::GetRemainderSize_4A7250(void* Buffer, u32* pMaxFileSize)
         File_Error_4A7190(1022, remainderSize - *pMaxFileSize, 0);
     }
 
-    if (Read_4A6D90(Buffer, remainderSize, 1u, ghFile_67CFEC) != 1)
+    if (Read_4A6D90(Buffer, remainderSize, 1U, ghFile_67CFEC) != 1)
     {
         File_Error_4A7190(15, 0, 0);
     }

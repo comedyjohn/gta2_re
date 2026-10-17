@@ -23,7 +23,7 @@ void DoorData_10::PoolAllocate()
 void DoorData_10::Init_49C340(u8 id, u8 x, u8 y, u8 z, u32 face, u8 bDoFlip)
 {
 
-    gmp_block_info blockData; // [esp+10h] [ebp-Ch] BYREF
+    GmpBlockInfo blockData; // [esp+10h] [ebp-Ch] BYREF
 
     this->field_4_x = x;
     this->field_5_y = y;

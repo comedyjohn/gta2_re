@@ -49,7 +49,7 @@
 EXTERN_GLOBAL(Ambulance_110*, gAmbulance_110_6F70A8);
 EXTERN_GLOBAL(CollisionCounters_C*, gCollisionCounters_6791FC);
 EXTERN_GLOBAL(FirefighterPool_54*, gFirefighterPool_54_67D4C0);
-EXTERN_GLOBAL(PathFinder_2FD4*, gPathFinder_6FDEF0);
+EXTERN_GLOBAL(PathFinder*, gPathFinder_6FDEF0);
 
 EXTERN_GLOBAL(car_rng_list, gAverageCarModels_676DB4);
 EXTERN_GLOBAL(car_rng_list, gBadCarModels_676988);
@@ -500,7 +500,7 @@ EXTERN_GLOBAL(Car_BC*, gTestArrowCar_7043F0);
 // 0x5B1170
 void NoRefs_sub_5B1170()
 {
-    gmp_block_info block;
+    GmpBlockInfo block;
     gGtx->GetSpriteIndex(gGtx->GetSpriteTrueIndex(7, gGtx->GetSpriteIdxFromFont(gFontType1, 0)));
     block.field_A_arrows = 0;
     block.field_0_left = 7206;
@@ -2966,7 +2966,7 @@ void ImGuiDebugDraw()
             Fix16 player_ypos;
             Fix16 player_zpos;
             GetPlayerPos(player_xpos, player_ypos, player_zpos);
-            gmp_block_info* pPlayerBlock =
+            GmpBlockInfo* pPlayerBlock =
                 gMap_0x370_6F6268->get_block_4DFE10(player_xpos.ToInt(), player_ypos.ToInt(), player_zpos.ToInt() - 1);
             if (pPlayerBlock)
             {
@@ -3506,7 +3506,7 @@ void ImGuiDebugDraw()
         {
             static u8 slope_idx = 0;
             ImGui::SliderU8("slope_idx", &slope_idx, 0, 63);
-            gmp_map_slope* slope_struct = &gGmpSlopes_6F5BA8[slope_idx];
+            GmpMapSlope* slope_struct = &gGmpSlopes_6F5BA8[slope_idx];
             if (slope_struct)
             {
                 ImGui::Value("field_0", slope_struct->field_0_gradient_direction);

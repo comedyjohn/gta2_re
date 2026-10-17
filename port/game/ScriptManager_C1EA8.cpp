@@ -186,10 +186,10 @@ void ScriptManager_C1EA8::SaveMapInfo_511D40()
 // 0x511e10
 void ScriptManager_C1EA8::SaveGame_511E10(char_type* pFileName)
 {
-    gmp_column_word* pColData;
+    GmpColumnWord* pColData;
     unsigned int colBytes;
 
-    gmp_block_info* pBlockInfo;
+    GmpBlockInfo* pBlockInfo;
     unsigned int blockInfoBytes;
 
     DmapInfoList* pMapSub;
@@ -256,8 +256,8 @@ void ScriptManager_C1EA8::LoadSave_511F80(char_type* pFileName)
     u32 mapSubLen;
     u32 blockInfoLen;
     u32 colDataLen;
-    gmp_column_word* pColData;
-    gmp_block_info* pBlockInfo;
+    GmpColumnWord* pColData;
+    GmpBlockInfo* pBlockInfo;
     DmapInfoList* pMapSub;
 
     gMap_0x370_6F6268

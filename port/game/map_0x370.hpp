@@ -10,7 +10,7 @@ class Gang_144;
 class Sprite;
 class Fix16Rect;
 
-struct gmp_col_info
+struct GmpColInfo
 {
     u8 field_0_height;
     u8 field_1_offset;
@@ -40,7 +40,7 @@ enum
 };
 } // namespace block_arrow
 
-struct gmp_block_info
+struct GmpBlockInfo
 {
     void init_44C840()
     {
@@ -62,7 +62,7 @@ struct gmp_block_info
     u8 field_B_slope_type;
 };
 
-enum gmp_slope_type
+enum GmpSlopeType
 {
     AIR = 0,
     ROAD = 1,
@@ -91,7 +91,7 @@ enum MapSlopes
     PARTIAL_CENTRE_BLOCK = 0xF4,
 };
 
-struct gmp_header
+struct GmpHeader
 {
     char_type field_0_file_type[4];
     s16 field_4_version;
@@ -102,16 +102,16 @@ struct DmapInfoList;
 // One 4-byte word of a .gmp file's column data. The original types the column array as u16**, which
 // has the right element size at 32 bits only; at 64 bits the words would be read 8 bytes apart.
 #if defined(GTA2_PORT_64BIT)
-using gmp_column_word = u32;
+using GmpColumnWord = u32;
 #else
-using gmp_column_word = u16*;
+using GmpColumnWord = u16*;
 #endif
 
-struct gmp_compressed_map_32
+struct GmpCompressedMap
 {
     void ApplyDmapInfos_4E80A0(DmapInfoList* pMapSub);
 
-    gmp_compressed_map_32()
+    GmpCompressedMap()
     {
         field_40008_pColumn = nullptr;
         field_4000C_block = nullptr;
@@ -122,10 +122,10 @@ struct gmp_compressed_map_32
     u32 field_0_base[256][256];
     u32 field_40000_column_words;
     u32 field_40004_num_blocks;
-    gmp_column_word* field_40008_pColumn;
-    gmp_block_info* field_4000C_block;
+    GmpColumnWord* field_40008_pColumn;
+    GmpBlockInfo* field_4000C_block;
 
-    gmp_block_info* get_block(u32 block)
+    GmpBlockInfo* get_block(u32 block)
     {
         return &field_4000C_block[block];
     }
@@ -136,7 +136,7 @@ struct gmp_compressed_map_32
     }
 };
 
-struct gmp_dmap_info
+struct GmpDmapInfo
 {
     void set_data_463080(u8 x, u8 y, u32 column_idx)
     {
@@ -160,11 +160,11 @@ struct DmapInfoList
 
     void AddOrUpdateDmapInfo_4E80E0(u8 x, u8 y, u32 column_idx);
 
-    gmp_dmap_info field_0_dmap_infos[100];
+    GmpDmapInfo field_0_dmap_infos[100];
     u32 field_320_max_idx;
 };
 
-class gmp_map_zone
+class GmpMapZone
 {
   public:
     u8 field_0_zone_type;
@@ -184,7 +184,7 @@ class gmp_map_zone
     }
 };
 
-struct gmp_zone_info
+struct GmpZoneInfo
 {
     u16 field_0_car_density;
     s16 field_2_goodcar_ratio;
@@ -199,7 +199,7 @@ struct gmp_zone_info
     s16 field_14_policeped_ratio;
 };
 
-struct gmp_map_object
+struct GmpMapObject
 {
     u16 field_0_x;
     u16 field_2_y;
@@ -207,7 +207,7 @@ struct gmp_map_object
     u8 field_5_object_type;
 };
 
-struct gmp_map_light
+struct GmpMapLight
 {
     s32 field_0_argb;
     s16 field_4_x;
@@ -220,7 +220,7 @@ struct gmp_map_light
     u8 field_F_off_time;
 };
 
-struct gmp_tile_animation
+struct GmpTileAnimation
 {
     u16 field_0_base; // The base tile of the animation. This marks the tile as an animating tile.
     u8 field_2_frame_rate; // The number of game frames that each frame of the animation is displayed for.
@@ -231,11 +231,11 @@ struct gmp_tile_animation
     u16 field_6_tiles[1]; // Size given by field_4_anim_length
 };
 
-struct gmp_map_slope
+struct GmpMapSlope
 {
-    gmp_map_slope(u8 gradient_direction, u8 gradient_size, u8 gradient_level, Fix16 zpos_lower, Fix16 zpos_higher);
+    GmpMapSlope(u8 gradient_direction, u8 gradient_size, u8 gradient_level, Fix16 zpos_lower, Fix16 zpos_higher);
 
-    gmp_map_slope() = default;
+    GmpMapSlope() = default;
 
     u8 field_0_gradient_direction; // the direction the slope level increases. E.g. "direction north" means it increases the level from south to north
     u8 field_1_gradient_size; // 1 = 45 degree; 2 = 26 degree; 8 = 7 degree slope
@@ -245,7 +245,7 @@ struct gmp_map_slope
     Fix16 field_8_zpos_higher; // relative z coordinate from the highest point of the slope
 };
 
-enum gmp_gradient_slope_direction // direction: low to high
+enum GmpGradientSlopeDirection // direction: low to high
 {
     NO_GRADIENT_SLOPE_0 = 0,
     NORTH_1 = 1,
@@ -254,14 +254,14 @@ enum gmp_gradient_slope_direction // direction: low to high
     EAST_4 = 4,
 };
 
-enum gmp_gradient_slope_size
+enum GmpGradientSlopeSize
 {
     SIZE_1 = 1,
     SIZE_2 = 2,
     SIZE_8 = 8,
 };
 
-enum gmp_arrow_direction
+enum GmpArrowDirection
 {
     UP_1 = 1,
     DOWN_2 = 2,
@@ -291,14 +291,14 @@ enum
 };
 } // namespace road_direction
 
-enum gmp_arrow_type
+enum GmpArrowType
 {
     green_1 = 1,
     red_2 = 2,
     green_or_red_3 = 3,
 };
 
-EXTERN_GLOBAL_ARRAY(gmp_map_slope, gGmpSlopes_6F5BA8, 64);
+EXTERN_GLOBAL_ARRAY(GmpMapSlope, gGmpSlopes_6F5BA8, 64);
 
 EXTERN_GLOBAL(Fix16, kGradientScaleSize1_6F5ED8);
 
@@ -310,46 +310,46 @@ extern Fix16 kFpOne_6F6110;
 EXTERN_GLOBAL(Ang16, word_6F603E);
 Ang16 ReturnAngleFromRoadDirection_4F7940(s32* road_direction);
 
-struct gmp_zone_list
+struct GmpZoneList
 {
     u16 field_0_num_zones;
     u16 field_2_pad;
-    gmp_map_zone* field_4_zone_array[2];
+    GmpMapZone* field_4_zone_array[2];
 };
 
-// Bytes taken by a gmp_zone_list of count zones. The original spells it for 4-byte pointers.
+// Bytes taken by a GmpZoneList of count zones. The original spells it for 4-byte pointers.
 #if defined(GTA2_PORT_64BIT)
-    #define GMP_ZONE_LIST_SIZE(count) (offsetof(gmp_zone_list, field_4_zone_array) + sizeof(gmp_map_zone*) * (count))
+    #define GMP_ZONE_LIST_SIZE(count) (offsetof(GmpZoneList, field_4_zone_array) + sizeof(GmpMapZone*) * (count))
 #else
     #define GMP_ZONE_LIST_SIZE(count) (4 * (count) + 4)
 #endif
 
-class Map_0x370
+class Map
 {
   public:
-    gmp_block_info* get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord);
+    GmpBlockInfo* get_block_452980(u8 x_coord, u8 y_coord, u8 z_coord);
 
-    gmp_map_zone* zone_by_name_4DEFD0(const char_type* pZoneName);
+    GmpMapZone* zone_by_name_4DEFD0(const char_type* pZoneName);
 
     s32 zone_idx_by_name_4DF050(const char_type* pZoneName, BYTE zone_name_len);
 
-    gmp_map_zone* zone_by_type_bounded_4DF0F0(u8 zone_type);
+    GmpMapZone* zone_by_type_bounded_4DF0F0(u8 zone_type);
 
-    gmp_map_zone* first_zone_by_type_4DF1D0(u8 zone_type);
+    GmpMapZone* first_zone_by_type_4DF1D0(u8 zone_type);
 
-    gmp_map_zone* GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_type);
-    gmp_map_zone* sub_4DF3E0(u8 xpos, u8 ypos, u8 zone_type);
+    GmpMapZone* GetNearestZoneOfType_4DF240(u8 xpos, u8 ypos, u8 zone_type);
+    GmpMapZone* sub_4DF3E0(u8 xpos, u8 ypos, u8 zone_type);
 
-    gmp_map_zone* zone_by_pos_and_type_4DF4D0(u8 zone_x, u8 zone_y, u8 zone_type);
-    gmp_map_zone* nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y);
+    GmpMapZone* zone_by_pos_and_type_4DF4D0(u8 zone_x, u8 zone_y, u8 zone_type);
+    GmpMapZone* nav_zone_by_pos_4DF5C0(u8 zone_x, u8 zone_y);
 
-    gmp_map_zone* first_zone_by_pos_4DF6A0(u8 zone_x, u8 zone_y);
+    GmpMapZone* first_zone_by_pos_4DF6A0(u8 zone_x, u8 zone_y);
 
-    gmp_map_zone* next_zone_4DF770();
+    GmpMapZone* next_zone_4DF770();
 
-    gmp_zone_info* cur_zone_4DF840();
+    GmpZoneInfo* cur_zone_4DF840();
 
-    gmp_zone_info* GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y);
+    GmpZoneInfo* GetZoneInfoAt_4DF890(s32 zone_x, s32 zone_y);
 
     void SetZoneInfo_4DF8C0(s32 zone_idx,
                             s16 car_density,
@@ -364,7 +364,7 @@ class Map_0x370
                             s16 gangchar_ratio,
                             s16 policeped_ratio);
 
-    gmp_zone_info* GetZoneInfo_4DF9A0(u16 zone_idx);
+    GmpZoneInfo* GetZoneInfo_4DF9A0(u16 zone_idx);
 
     void SetZoneCarDensity_4DF9D0(u16 zone_idx, s16 value);
 
@@ -388,7 +388,7 @@ class Map_0x370
 
     void SetZonePolicePedRatio_4DFB10(u16 zone_idx, s16 value);
 
-    gmp_map_zone* get_zone_4DFB30(u16 zone_idx);
+    GmpMapZone* get_zone_4DFB30(u16 zone_idx);
 
     Gang_144* GetGangAtCoords_4DFB50(Fix16 x, Fix16 y);
 
@@ -396,10 +396,10 @@ class Map_0x370
     void alloc_zones_4DFCA0();
     void update_lights_4DFCD0();
 
-    gmp_block_info* get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord);
+    GmpBlockInfo* get_block_4DFE10(s32 x_coord, s32 y_coord, s32 z_coord);
 
-    gmp_block_info* GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z);
-    gmp_block_info* GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 z_coord);
+    GmpBlockInfo* GetEffectiveBlock_4DFE60(s32 x, s32 y, s32 z);
+    GmpBlockInfo* GetBlockClamped_4DFEE0(s32 x_coord, s32 y_coord, s32 z_coord);
 
     DWORD GetLeftEdgeSpec_4DFF60(Fix16 x_coord, Fix16 y_coord, Fix16 z_coord);
 
@@ -422,10 +422,10 @@ class Map_0x370
     char_type sub_4E4820(Fix16Rect* pRect, u8 slope_type);
     void FindNearbyBlockOfType_4E4930(u8* pX, u8* pY, u8* pZ, char_type block_type);
     static bool IsSearchBlockOfType_4E4AC0(char_type block_type);
-    bool CheckGreenArrowDirection_4E4B40(s32 direction, gmp_block_info* pBlock);
-    gmp_block_info* FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z);
-    gmp_block_info* FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z);
-    gmp_block_info* FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z);
+    bool CheckGreenArrowDirection_4E4B40(s32 direction, GmpBlockInfo* pBlock);
+    GmpBlockInfo* FindPavementBlockForCoord_4E4BB0(s32 x, s32 y, s32& z);
+    GmpBlockInfo* FindHighestBlockForCoord_4E4C30(s32 x, s32 y, s32* found_z);
+    GmpBlockInfo* FindNonAirBlockAtOrBelowZ_4E4CB0(s32 x, s32 y, s32& z);
     Fix16 FindGroundZBelowCoord_4E4D40(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
     Fix16 sub_4E4E50(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
     Fix16 GetGroundZBelowCoord_4E4F40(Fix16 x, Fix16 y, Fix16 z);
@@ -438,12 +438,12 @@ class Map_0x370
     Fix16 FindGroundZForCoord_4E5B60(Fix16 x_pos, Fix16 y_pos);
     u8 UpdateZFromSlopeAtCoord_4E5BF0(Fix16 x_pos, Fix16 y_pos, Fix16& z_pos);
     bool RoundedZIsAboveSlope(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos, Fix16& new_z);
-    char_type HasGreenArrowForPathDirection_4E5E90(gmp_block_info* pBlock, s32 direction, char_type bDefault);
-    s32 GetArrowDirectionFromBlock_4E5FC0(gmp_block_info* pBlock, char_type bDontFlip);
+    char_type HasGreenArrowForPathDirection_4E5E90(GmpBlockInfo* pBlock, s32 direction, char_type bDefault);
+    s32 GetArrowDirectionFromBlock_4E5FC0(GmpBlockInfo* pBlock, char_type bDontFlip);
     s16 sub_4E6190(Fix16 x, Fix16 y, Fix16 z, s32 arrow_dir, char_type bFlag);
     Fix16 FloorPlusOne_4E62B0(Fix16 value);
-    gmp_block_info* FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z);
-    gmp_block_info* FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z);
+    GmpBlockInfo* FindRailwayAtCoord_4E62D0(s32 x, s32 y, s32& found_z);
+    GmpBlockInfo* FindRailwayBelowZAtCoord_4E6360(s32 x, s32 y, s32& z);
     Fix16 GetRailwayZBelowCoord_4E6400(Fix16 x_pos, Fix16 y_pos, Fix16 z_pos);
     Fix16 GetRailwayZCoordAtXY_4E6510(Fix16 x, Fix16 y);
     void sub_4E65A0(Fix16 x, Fix16 y, Fix16* z_pos, char_type arrow_param, char_type bFlag);
@@ -452,9 +452,9 @@ class Map_0x370
     Fix16 sub_4E5E00(Fix16 x, Fix16 y, Ang16 angle);
 
     // The block under (x, y, z), or the one at z when the one under is a lid-less "air" block
-    gmp_block_info* GetRoadBlockAt_4E6660(Fix16& x, Fix16& y, Fix16& z)
+    GmpBlockInfo* GetRoadBlockAt_4E6660(Fix16& x, Fix16& y, Fix16& z)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
+        GmpBlockInfo* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if ((pBlock->field_B_slope_type & 0xFC) == 0xFC)
         {
             pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), z.ToInt());
@@ -464,7 +464,7 @@ class Map_0x370
 
     // As GetRoadBlockAt_4E6660, writing straight into pBlock (the original keeps pBlock in a register
     // through both lookups, which a returned temporary doesn't give)
-    void SetRoadBlockAt_4E6660(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
+    void SetRoadBlockAt_4E6660(GmpBlockInfo*& pBlock, Fix16& x, Fix16& y, Fix16& z)
     {
         pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if ((pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -474,7 +474,7 @@ class Map_0x370
     }
 
     // As SetRoadBlockAt_4E6660, but copes with no block under (x, y, z)
-    void SetRoadBlockAtOrNull_4E7190(gmp_block_info*& pBlock, Fix16& x, Fix16& y, Fix16& z)
+    void SetRoadBlockAtOrNull_4E7190(GmpBlockInfo*& pBlock, Fix16& x, Fix16& y, Fix16& z)
     {
         pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if (pBlock && (pBlock->field_B_slope_type & 0xFC) == 0xFC)
@@ -484,9 +484,9 @@ class Map_0x370
     }
 
     // As GetRoadBlockAt_4E6660, but copes with no block under (x, y, z)
-    gmp_block_info* GetRoadBlockAtOrNull_4E7190(Fix16& x, Fix16& y, Fix16& z)
+    GmpBlockInfo* GetRoadBlockAtOrNull_4E7190(Fix16& x, Fix16& y, Fix16& z)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
+        GmpBlockInfo* pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), (z - kFpOne_6F6110).ToInt());
         if (pBlock && (pBlock->field_B_slope_type & 0xFC) == 0xFC)
         {
             pBlock = get_block_4DFE10(x.ToInt(), y.ToInt(), z.ToInt());
@@ -513,20 +513,20 @@ class Map_0x370
     s32 sub_4E7190(Fix16* pX, Fix16* pY, Fix16* pZ, Fix16 dist);
     char_type FindFirstPavementCoord_4E7E90(u8* pX, char_type* pY);
     char_type CheckColumnHasSolidAbove_4E7FC0(Fix16 x, Fix16 y, Fix16 z);
-    s32 AddBlock_4E8140(gmp_block_info* pBlockInfo);
+    s32 AddBlock_4E8140(GmpBlockInfo* pBlockInfo);
     s32 CloneOriginalBlock_4E8180(u32 read_block_idx);
     s32 CloneOriginalColumn_4E81D0(u32 column_idx);
     s32 CloneColumnExtendedToZ_4E8220(u32 column_idx, s32 z);
     s32 sub_4E8370(u32 column_idx, s32 z, char_type do_drop);
     void ChangeBlock_4E8620(s32 x, s32 y, s32 z, s32 info_type_to_set, u16 info_value);
-    void AddNewBlock_4E87C0(s32 x, s32 y, s32 z, gmp_block_info* pBlockData);
+    void AddNewBlock_4E87C0(s32 x, s32 y, s32 z, GmpBlockInfo* pBlockData);
     void RemoveBlock_4E8940(s32 x_pos, s32 y_pos, s32 offset, char_type do_drop);
     void LowerColumn_4E8A10(s32 x_pos, s32 y_pos);
     void LowerLevel_4E8B70(s32 x_min, s32 x_max, s32 y_min, s32 y_max);
     void OnModifiedMapDataLoaded_4E8C00(u32 column_bytes, u32 block_bytes, u32 obj_bytes);
-    void GetModifiedMapData_4E8CF0(gmp_column_word** outColumnPtr,
+    void GetModifiedMapData_4E8CF0(GmpColumnWord** outColumnPtr,
                                    u32* outColumnBytes,
-                                   gmp_block_info** outBlockPtr,
+                                   GmpBlockInfo** outBlockPtr,
                                    u32* outBlockBytes,
                                    DmapInfoList** outSubObj,
                                    s32* outSubObjBytes);
@@ -555,13 +555,13 @@ class Map_0x370
 
     void LoadMap_4E95B0(const char_type* pGmpFileName);
 
-    Map_0x370();
+    Map();
 
-    ~Map_0x370();
+    ~Map();
 
     bool IsWaterBlockAt_4B9F40(s32 x, s32 y, s32 z)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(x, y, z);
+        GmpBlockInfo* pBlock = get_block_4DFE10(x, y, z);
         return pBlock && gGtx->IsRemappedWaterTile(pBlock->field_8_lid & 0x3FF);
     }
 
@@ -586,10 +586,10 @@ class Map_0x370
         return scale;
     }
 
-    gmp_block_info* get_block_42A850(u8 x, u8 y, u8 z)
+    GmpBlockInfo* get_block_42A850(u8 x, u8 y, u8 z)
     {
         u32 col_idx = *field_0_pDmap->get_base_42A830(y, x);
-        auto* pCol = reinterpret_cast<gmp_col_info*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
+        auto* pCol = reinterpret_cast<GmpColInfo*>(&field_0_pDmap->field_40008_pColumn[col_idx]);
         if (z >= pCol->field_0_height || z < pCol->field_1_offset)
         {
             return nullptr;
@@ -599,7 +599,7 @@ class Map_0x370
 
     bool IsBlockPavementType_42A8C0(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x, y, z);
+        GmpBlockInfo* pBlock = get_block_452980(x, y, z);
         if (pBlock && (pBlock->field_B_slope_type & 3) == PAVEMENT)
         {
             return true;
@@ -609,7 +609,7 @@ class Map_0x370
 
     bool IsBlockPavementTypeInlined_433530(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_42A850(x, y, z);
+        GmpBlockInfo* pBlock = get_block_42A850(x, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == PAVEMENT;
@@ -620,7 +620,7 @@ class Map_0x370
     // Like IsBlockPavementTypeInlined_433530 but via get_block_452980 (TrafficLight_20::Init_5C1D00)
     bool IsBlockPavementTypeAt_452980(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x, y, z);
+        GmpBlockInfo* pBlock = get_block_452980(x, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == PAVEMENT;
@@ -630,7 +630,7 @@ class Map_0x370
 
     bool IsBlockRoadType_42A8C0(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x, y, z);
+        GmpBlockInfo* pBlock = get_block_452980(x, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -641,7 +641,7 @@ class Map_0x370
     // 9.6f out of line 0x433470 (North), 0x4334A0 (East), 0x4334D0 (South), 0x433500 (West).
     bool IsBlockRoadTypeInlined_433470(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_42A850(x, y, z);
+        GmpBlockInfo* pBlock = get_block_42A850(x, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -652,7 +652,7 @@ class Map_0x370
     // 9.6f inline 0x420420
     u8 GetBlockTypeAtCoord_420420(s32 a2, s32 a3, s32 a4)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(a2, a3, a4);
+        GmpBlockInfo* pBlock = get_block_4DFE10(a2, a3, a4);
         if (pBlock)
         {
             return pBlock->field_B_slope_type & 3;
@@ -662,7 +662,7 @@ class Map_0x370
 
     bool IsSlopeB4ToD0At_433430(s32 xpos, s32 ypos, s32 zpos)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(xpos, ypos, zpos);
+        GmpBlockInfo* pBlock = get_block_4DFE10(xpos, ypos, zpos);
         if (pBlock)
         {
             u32 slope_type = pBlock->field_B_slope_type & 0xFC;
@@ -676,7 +676,7 @@ class Map_0x370
 
     bool IsGradientSlopeAt_466CF0(s32 xpos, s32 ypos, s32 zpos)
     {
-        gmp_block_info* block_4DFE10 = get_block_4DFE10(xpos, ypos, zpos);
+        GmpBlockInfo* block_4DFE10 = get_block_4DFE10(xpos, ypos, zpos);
         if (block_4DFE10 && (block_4DFE10->field_B_slope_type & 0xFC) > 0 &&
             (block_4DFE10->field_B_slope_type & 0xFC) < 0xB4 //is_gradient_slope(block_4DFE10->field_B_slope_type)
             && (block_4DFE10->field_B_slope_type & 3) != 0) // !is_air_type(block_4DFE10->field_B_slope_type)
@@ -688,7 +688,7 @@ class Map_0x370
 
     bool HasBlockAnyArrows_492140(s32 xpos, s32 ypos, s32 zpos)
     {
-        gmp_block_info* pBlock = get_block_4DFE10(xpos, ypos, zpos);
+        GmpBlockInfo* pBlock = get_block_4DFE10(xpos, ypos, zpos);
         return pBlock && pBlock->field_A_arrows;
     }
 
@@ -697,9 +697,9 @@ class Map_0x370
         field_36E_bBlockedByTerrain = 0;
     }
 
-    bool IsNorthOrSouthGradSlope_4634B0(gmp_block_info* pBlock)
+    bool IsNorthOrSouthGradSlope_4634B0(GmpBlockInfo* pBlock)
     {
-        gmp_map_slope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
+        GmpMapSlope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
         if (gradient_slope->field_0_gradient_direction == NORTH_1 || gradient_slope->field_0_gradient_direction == SOUTH_2)
         {
             return true;
@@ -708,9 +708,9 @@ class Map_0x370
     }
 
     // 9.6f 0x463480 (the name's 0x4634B0 is the north/south one)
-    bool IsWestOrEastGradSlope_4634B0(gmp_block_info* pBlock)
+    bool IsWestOrEastGradSlope_4634B0(GmpBlockInfo* pBlock)
     {
-        gmp_map_slope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
+        GmpMapSlope* gradient_slope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
         if (gradient_slope->field_0_gradient_direction == WEST_3 || gradient_slope->field_0_gradient_direction == EAST_4)
         {
             return true;
@@ -720,7 +720,7 @@ class Map_0x370
 
     bool IsNorthBlockRoadType_433470(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x, y - 1, z);
+        GmpBlockInfo* pBlock = get_block_452980(x, y - 1, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -730,7 +730,7 @@ class Map_0x370
 
     bool IsEastBlockRoadType_4334A0(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x + 1, y, z);
+        GmpBlockInfo* pBlock = get_block_452980(x + 1, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -740,7 +740,7 @@ class Map_0x370
 
     bool IsSouthBlockRoadType_4334D0(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_42A850(x, y + 1, z);
+        GmpBlockInfo* pBlock = get_block_42A850(x, y + 1, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -750,7 +750,7 @@ class Map_0x370
 
     bool IsWestBlockRoadType_433500(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_42A850(x - 1, y, z);
+        GmpBlockInfo* pBlock = get_block_42A850(x - 1, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) == ROAD;
@@ -760,7 +760,7 @@ class Map_0x370
 
     bool IsBlockNonAirType_48A350(u8 x, u8 y, u8 z)
     {
-        gmp_block_info* pBlock = get_block_452980(x, y, z);
+        GmpBlockInfo* pBlock = get_block_452980(x, y, z);
         if (pBlock)
         {
             return (pBlock->field_B_slope_type & 3) != AIR;
@@ -768,15 +768,15 @@ class Map_0x370
         return false;
     }
 
-    gmp_compressed_map_32* field_0_pDmap;
+    GmpCompressedMap* field_0_pDmap;
     DmapInfoList field_4_obj;
-    gmp_map_zone* field_328_pZoneData;
-    gmp_zone_list* field_32C_pZones;
+    GmpMapZone* field_328_pZoneData;
+    GmpZoneList* field_32C_pZones;
     BYTE* field_330_pZoneArray;
-    gmp_zone_info* field_334_pUnknownZoneData;
-    gmp_map_object* field_338_pMapObjects;
-    gmp_map_light* field_33C_pLightData;
-    gmp_tile_animation* field_340_pTileAnimData;
+    GmpZoneInfo* field_334_pUnknownZoneData;
+    GmpMapObject* field_338_pMapObjects;
+    GmpMapLight* field_33C_pLightData;
+    GmpTileAnimation* field_340_pTileAnimData;
     u32 field_344_map_object_count;
     u32 field_348_num_lights;
     u32 field_34C_num_blocks;
@@ -797,7 +797,7 @@ class Map_0x370
     char_type field_36F_bLowerBlockHasArrows;
 };
 
-EXTERN_GLOBAL(Map_0x370*, gMap_0x370_6F6268);
+EXTERN_GLOBAL(Map*, gMap_0x370_6F6268);
 
 EXTERN_GLOBAL(s32, gSpriteGrid_left_6F5FD4);
 
@@ -841,7 +841,7 @@ static inline bool is_tridiagonal_block(s32& slope)
     return slope >= 0xC4 && slope <= 0xD0;
 }
 
-static inline gmp_map_slope* get_slope_struct(u8& slope_byte)
+static inline GmpMapSlope* get_slope_struct(u8& slope_byte)
 {
     return &gGmpSlopes_6F5BA8[get_slope_idx(slope_byte)];
 }

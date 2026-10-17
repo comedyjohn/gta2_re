@@ -431,7 +431,7 @@ void CarPhysics_B0::ScarePedsOnDrivingFast_559C30()
         cp3 = field_6C_cp3 - kOneFixed;
     }
 
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_38_cp1.x.ToInt(), field_38_cp1.y.ToInt(), cp3.ToInt());
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_38_cp1.x.ToInt(), field_38_cp1.y.ToInt(), cp3.ToInt());
     if (pBlock)
     {
         u8 type = pBlock->field_B_slope_type & 3; //get_block_type(pBlock->field_B_slope_type);
@@ -1139,9 +1139,9 @@ void CarPhysics_B0::UpdateZPhysics_55AD90(Fix16 dt)
 }
 
 // 9.6f 0x49EBE0 (a Map_0x370 method: 9.6f calls it with gMap in ecx)
-inline u8 Map_0x370::GetBlockSurfaceType_49EBE0(s32 x, s32 y, s32 z, u8* pGradientSize, u8* pGradientLevel)
+inline u8 Map::GetBlockSurfaceType_49EBE0(s32 x, s32 y, s32 z, u8* pGradientSize, u8* pGradientLevel)
 {
-    gmp_block_info* pBlock = get_block_4DFE10(x, y, z);
+    GmpBlockInfo* pBlock = get_block_4DFE10(x, y, z);
     if (pBlock)
     {
         if (gGtx->IsRemappedWaterTile(pBlock->field_8_lid & 0x3FF))
@@ -1155,7 +1155,7 @@ inline u8 Map_0x370::GetBlockSurfaceType_49EBE0(s32 x, s32 y, s32 z, u8* pGradie
             {
                 return 9;
             }
-            gmp_map_slope* pSlope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
+            GmpMapSlope* pSlope = &gGmpSlopes_6F5BA8[pBlock->field_B_slope_type >> 2];
             *pGradientSize = pSlope->field_1_gradient_size;
             *pGradientLevel = pSlope->field_2_gradient_level;
             return pSlope->field_0_gradient_direction;
@@ -3391,9 +3391,9 @@ void CarPhysics_B0::ApplyArrowSteerAssist_5626F0()
         {
             if (IsVelocityAlignedWithHeading_40F840() && !this->field_40_linvel_1.IsNull() && !this->field_A0_oil_spin_dir)
             {
-                gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(this->field_38_cp1.x.ToInt(),
-                                                                             this->field_38_cp1.y.ToInt(),
-                                                                             (this->field_6C_cp3 - kOneFixed).ToInt());
+                GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(this->field_38_cp1.x.ToInt(),
+                                                                           this->field_38_cp1.y.ToInt(),
+                                                                           (this->field_6C_cp3 - kOneFixed).ToInt());
                 if (pBlock)
                 {
                     if ((pBlock->field_B_slope_type & 3) == 1)

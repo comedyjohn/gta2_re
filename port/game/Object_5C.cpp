@@ -3094,7 +3094,7 @@ s32 Object_2C::GetExplosionSideFromDiagonalWall_529210()
 s32 Object_2C::GetMapBlockSoundSpec_529240()
 {
     s32 result;
-    gmp_block_info* pBlockInfo =
+    GmpBlockInfo* pBlockInfo =
         gMap_0x370_6F6268->get_block_4DFE10(field_4->field_14_xy.x.ToInt(), field_4->field_14_xy.y.ToInt(), field_4->field_1C_zpos.ToInt());
     switch (get_field_26_420FF0())
     {

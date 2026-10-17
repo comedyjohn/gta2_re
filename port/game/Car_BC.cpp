@@ -579,7 +579,7 @@ void CarManager_6C::DistributeCarsByRating_444980()
 }
 
 // 0x444ab0
-u32 CarManager_6C::SelectTrafficCarModel_444AB0(Player* pPlayer, gmp_zone_info* pZoneInfo, Fix16 density_scale, u16* pOut)
+u32 CarManager_6C::SelectTrafficCarModel_444AB0(Player* pPlayer, GmpZoneInfo* pZoneInfo, Fix16 density_scale, u16* pOut)
 {
     s32 result;
     Fix16 density_calc = Fix16(pZoneInfo->field_0_car_density) / Fix16(0xFA0000, 0);
@@ -704,7 +704,7 @@ Car_BC* CarManager_6C::SpawnCarAtRoadDirection_444CF0(s32 car_model_type, Fix16 
     u8 z = zpos.ToInt();
     Car_BC* pCar = nullptr;
 
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(tile_x, tile_y, z - 1);
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(tile_x, tile_y, z - 1);
 
     if (gMap_0x370_6F6268->CheckGreenArrowDirection_4E4B40(4, pBlock))
     {
@@ -735,7 +735,7 @@ char Car_BC::SnapCarToGreenArrow_444E40(Fix16 xpos, Fix16 ypos, Fix16 zpos)
     const u8 x_int = xpos.ToInt();
     const u8 y_int = ypos.ToInt();
     const u8 z_int = zpos.ToInt();
-    gmp_block_info* pBlockInfo = gMap_0x370_6F6268->get_block_4DFE10(x_int, y_int, z_int - 1);
+    GmpBlockInfo* pBlockInfo = gMap_0x370_6F6268->get_block_4DFE10(x_int, y_int, z_int - 1);
 
     if (pBlockInfo)
     {
@@ -773,7 +773,7 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
     s32 zTmpInt = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos).ToInt();
     while (true)
     {
-        gmp_block_info* pBlock = gMap_0x370_6F6268->FindNonAirBlockAtOrBelowZ_4E4CB0(xpos.ToInt(), ypos.ToInt(), zTmpInt);
+        GmpBlockInfo* pBlock = gMap_0x370_6F6268->FindNonAirBlockAtOrBelowZ_4E4CB0(xpos.ToInt(), ypos.ToInt(), zTmpInt);
         ++zTmpInt;
         if (pBlock)
         {
@@ -981,7 +981,7 @@ Car_BC* CarManager_6C::SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 
     gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x.ToInt(), y.ToInt(), &found_z);
     do
     {
-        gmp_block_info* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x.ToInt(), y.ToInt(), &found_z);
+        GmpBlockInfo* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x.ToInt(), y.ToInt(), &found_z);
         if (pBlock)
         {
             if ((pBlock->field_B_slope_type & 3) == 1 && !gRouteFinder_6FFDC8->sub_588DE0(pBlock, green_1, road_direction))
@@ -1155,8 +1155,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
         return nullptr;
     }
 
-    Junction_10* pJunction =
-        gRouteFinder_6FFDC8->GetJunction_58A0B0(gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[0]);
+    Junction* pJunction = gRouteFinder_6FFDC8->GetJunction_58A0B0(gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[0]);
     u16 junction_idx = gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[0];
     u16 next_idx = gRouteFinder_6FFDC8->field_2218_routes[route_idx].field_0_junctions[1];
     s32 dir;
@@ -1185,7 +1184,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
 
     do
     {
-        gmp_block_info* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x.ToInt(), y.ToInt(), &found_z);
+        GmpBlockInfo* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x.ToInt(), y.ToInt(), &found_z);
         if (pBlock)
         {
             if (!gRouteFinder_6FFDC8->sub_588DE0(pBlock, green_1, road_direction) && (pBlock->field_B_slope_type & 3) == 1)
@@ -4871,7 +4870,7 @@ char_type Car_BC::CountConsecutiveArrowBlocks_4410D0(Ang16 ang, s8* pOutCount, F
             break;
     }
 
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
     if (pBlock && ((pBlock->field_A_arrows & mask1) || (pBlock->field_A_arrows & mask2)))
     {
         x += x_add;
@@ -7587,7 +7586,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
 
     while (xpos > kFixZero && ypos > kFixZero && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
     {
-        gmp_block_info* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &found_z);
+        GmpBlockInfo* pBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &found_z);
         ground_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(xpos, ypos);
         if (pBlock)
         {
@@ -7601,7 +7600,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
                 field_4_rect->SetHiLowZ(ground_z - kFpOne_6FF778, ground_z + kFpOne_6FF778);
                 if (field_4_rect->EveryTileMatchesArrowType(arrow_direction))
                 {
-                    gmp_zone_info* pZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(nav_x.ToInt(), nav_y.ToInt());
+                    GmpZoneInfo* pZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(nav_x.ToInt(), nav_y.ToInt());
                     if (pZone && !pZone->field_0_car_density)
                     {
                         return 0;
@@ -7949,7 +7948,7 @@ char_type TrafficSpawner_14::IsFlatRoadAt_583870(Fix16 xpos, Fix16 ypos)
     if (xpos > kFixZero && ypos > kFixZero && xpos < kFp255_6FF558 && ypos < kFp255_6FF558)
     {
         s32 zpos;
-        gmp_block_info* pHighBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &zpos);
+        GmpBlockInfo* pHighBlock = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &zpos);
         if (!pHighBlock)
         {
             return 0;

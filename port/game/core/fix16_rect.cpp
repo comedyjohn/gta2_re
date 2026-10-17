@@ -111,7 +111,7 @@ bool Fix16Rect::EveryTileMatchesArrowType(s32 arrow_type)
                 return false;
             }
 
-            gmp_block_info* block_4_dfe10 = gMap_0x370_6F6268->get_block_4DFE10(x_pos, y_pos, low_z_.ToInt());
+            GmpBlockInfo* block_4_dfe10 = gMap_0x370_6F6268->get_block_4DFE10(x_pos, y_pos, low_z_.ToInt());
             if (block_4_dfe10)
             {
 

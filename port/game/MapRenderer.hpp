@@ -25,7 +25,7 @@ EXTERN_GLOBAL(Fix16, gYCoord_6F63B8);
 
 EXTERN_GLOBAL(u32, gZCoord_6F63E0);
 
-EXTERN_GLOBAL(gmp_map_slope, gCurrentSlope_6F646C);
+EXTERN_GLOBAL(GmpMapSlope, gCurrentSlope_6F646C);
 
 EXTERN_GLOBAL(u32, gGradientSize_6F6480);
 

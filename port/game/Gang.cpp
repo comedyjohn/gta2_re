@@ -287,7 +287,7 @@ Gang_144* GangPool_CA8::GangByIdx_4BF1C0(u8 gang_idx)
 }
 
 // 0x4BF1E0
-void GangPool_CA8::AddGangForMapZone_4BF1E0(gmp_map_zone* pMapZone)
+void GangPool_CA8::AddGangForMapZone_4BF1E0(GmpMapZone* pMapZone)
 {
     if (!FindGangByName_4BF100(pMapZone->field_6_name))
     {

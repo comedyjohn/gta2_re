@@ -41,7 +41,7 @@ Fix16 kTrainSpeedState4_6FEEDC = Fix16(0xCCC, 0); //DEFINE_GLOBAL_INIT(Fix16, kT
 Fix16 kTrainSpeedState5_6FEEE4 = Fix16(0x1999, 0); //DEFINE_GLOBAL_INIT(Fix16, kTrainSpeedState5_6FEEE4, Fix16(0x1999, 0), 0x6FEEE4);
 
 // 0x577E20
-char HasBlockGreenArrowAtDirection_577E20(s32 direction, gmp_block_info* param_2)
+char HasBlockGreenArrowAtDirection_577E20(s32 direction, GmpBlockInfo* param_2)
 {
     switch (direction)
     {
@@ -72,7 +72,7 @@ bool CompareNameChars_577E90(char_type* pChar1, char_type* pChar2)
 }
 
 // 0x577EE0
-gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
+GmpMapZone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
 {
     u32 zone_type = GmpZoneType::kRailwayStationEntryPoint;
 
@@ -92,7 +92,7 @@ gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value)
             break;
     }
 
-    gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(zone_type);
+    GmpMapZone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(zone_type);
     gNameCompareLen_6FF158 = 6;
     while (!CompareNameChars_577E90(reinterpret_cast<char_type*>(&pZone->field_6_name), pChar))
     {
@@ -665,9 +665,9 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     pTrain->field_8_alloc_state = 2;
 
                     s32 rail_z;
-                    gmp_block_info* pBlock = gMap_0x370_6F6268->FindRailwayAtCoord_4E62D0(pStation->field_C_stop_point->field_1_x,
-                                                                                          pStation->field_C_stop_point->field_2_y,
-                                                                                          rail_z);
+                    GmpBlockInfo* pBlock = gMap_0x370_6F6268->FindRailwayAtCoord_4E62D0(pStation->field_C_stop_point->field_1_x,
+                                                                                        pStation->field_C_stop_point->field_2_y,
+                                                                                        rail_z);
                     u8 j;
                     if (HasBlockGreenArrowAtDirection_577E20(4, pBlock))
                     {
@@ -913,7 +913,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
             }
             gTrainStationList_6FEE68.field_194_count = 0;
 
-            gmp_map_zone* i;
+            GmpMapZone* i;
             for (i = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kRailwayStationPlatform); i != nullptr;
                  i = gMap_0x370_6F6268->next_zone_4DF770())
             {
@@ -960,7 +960,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
 
     if (!gDebugSkipBuses)
     {
-        for (gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kBusStopPavement); pZone != nullptr;)
+        for (GmpMapZone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kBusStopPavement); pZone != nullptr;)
         {
             TrainStation_34* pBusStop = gPublicTransport_181C_6FF1D4->AllocateTrainStation_5787E0();
             pBusStop->field_0_station_type = 1;
@@ -1286,7 +1286,7 @@ void PublicTransport_181C::BusesService_579CA0()
                     }
                 }
 
-                gmp_block_info* HighestBlockForCoord_4E4C30 =
+                GmpBlockInfo* HighestBlockForCoord_4E4C30 =
                     gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(xpos.ToInt(), ypos.ToInt(), &found_z);
                 if (HasBlockGreenArrowAtDirection_577E20(4, HighestBlockForCoord_4E4C30))
                 {
@@ -1810,7 +1810,7 @@ void PublicTransport_181C::PublicTransportService_57A7A0()
 }
 
 // 0x57b4b0
-TrainStation_34* PublicTransport_181C::TrainStationForZone_57B4B0(gmp_map_zone* pZone)
+TrainStation_34* PublicTransport_181C::TrainStationForZone_57B4B0(GmpMapZone* pZone)
 {
     TrainStation_34* pIter = &field_0_stations[0];
     for (s32 i = 0; i < GTA2_COUNTOF_S(field_0_stations); i++)

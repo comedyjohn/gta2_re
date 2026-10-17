@@ -3,7 +3,7 @@
 #include "core/function.hpp"
 
 class Car_BC;
-class gmp_map_zone;
+class GmpMapZone;
 class Fix16;
 class TrainStation_34;
 
@@ -57,10 +57,10 @@ class TrainStation_34
     void CalculateWagonCount_578820(u8* pWagons); //  Maybe 'a2' is the train wagon array of size 10 bytes
 
     s32 field_0_station_type;
-    gmp_map_zone* field_4_entry_point;
-    gmp_map_zone* field_8_exit_point;
-    gmp_map_zone* field_C_stop_point;
-    gmp_map_zone* field_10_pZone;
+    GmpMapZone* field_4_entry_point;
+    GmpMapZone* field_8_exit_point;
+    GmpMapZone* field_C_stop_point;
+    GmpMapZone* field_10_pZone;
     s32 field_14_used;
     Train_58* field_18_pStoppedTrain; // train stopped at the station?
     s32 field_1C_bOccupied;
@@ -103,7 +103,7 @@ class PublicTransport_181C
     bool GetTrainSpeed_579B90(Car_BC* pToFind, Fix16* pF16Unk);
     void BusesService_579CA0();
     void PublicTransportService_57A7A0();
-    TrainStation_34* TrainStationForZone_57B4B0(gmp_map_zone* pZone);
+    TrainStation_34* TrainStationForZone_57B4B0(GmpMapZone* pZone);
     Car_BC* GetLeadTrainCar_57B540(Car_BC* pCar);
     Train_58* GetTrainFromCar_57B5C0(Car_BC* pToFind);
     Train_58* GetTrainFromCarExcludingLeadCar_57B6A0(Car_BC* pToFind);
@@ -124,4 +124,4 @@ EXTERN_GLOBAL(PublicTransport_181C*, gPublicTransport_181C_6FF1D4);
 
 bool CompareNameChars_577E90(char_type* pChar1, char_type* pChar2);
 
-gmp_map_zone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value);
+GmpMapZone* FindStationZoneByName_577EE0(char_type* pChar, u8 case_value);

@@ -23,7 +23,7 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FFC9C, Fix16(8), 0x6FFC9C);
 EXTERN_GLOBAL(s16, gFontTypeSlot1Of7);
 
 // 0x588580
-char_type Junction_10::sub_588580(s32 arrow_type)
+char_type Junction::sub_588580(s32 arrow_type)
 {
     if (arrow_type == 2)
     {
@@ -47,7 +47,7 @@ char_type Junction_10::sub_588580(s32 arrow_type)
 }
 
 // 0x5885c0
-u16 Junction_10::GetDirectionToJunction_5885C0(u16 junction_idx)
+u16 Junction::GetDirectionToJunction_5885C0(u16 junction_idx)
 {
     if (junction_idx != 0)
     {
@@ -77,7 +77,7 @@ u16 Junction_10::GetDirectionToJunction_5885C0(u16 junction_idx)
 // 0x588620
 void RouteFinder::ShowJunctionIds_588620()
 {
-    Junction_10* pJunction = &field_8_junctions[1];
+    Junction* pJunction = &field_8_junctions[1];
     for (u16 i = 1; i < GTA2_COUNTOF(field_8_junctions); i++, pJunction++)
     {
         if (!pJunction->field_C_min_x)
@@ -126,8 +126,8 @@ void RouteFinder::RoadOff_588810(u8 x, u8 y, u8 z)
     const u16 r2 = RouteFinder::FindHorzSegmentJunction_588E60(x, y, z, 1, green_or_red_3);
     if (r1 && r2)
     {
-        Junction_10* j1 = &field_8_junctions[r1];
-        Junction_10* j2 = &field_8_junctions[r2];
+        Junction* j1 = &field_8_junctions[r1];
+        Junction* j2 = &field_8_junctions[r2];
         if ((j1->field_4_e.GetIndex_0040CE90()) == r2)
         {
             j1->field_4_e.Disable_40CEC0();
@@ -145,8 +145,8 @@ void RouteFinder::RoadOff_588810(u8 x, u8 y, u8 z)
         const u16 r4 = RouteFinder::FindVertSegmentJunction_588F30(x, y, z, 1, green_or_red_3);
         if (r3 && r4)
         {
-            Junction_10* j1 = &field_8_junctions[r3];
-            Junction_10* j2 = &field_8_junctions[r4];
+            Junction* j1 = &field_8_junctions[r3];
+            Junction* j2 = &field_8_junctions[r4];
 
             if ((j1->field_2_s.GetIndex_0040CE90()) == r4)
             {
@@ -170,8 +170,8 @@ void RouteFinder::RoadOn_588950(u8 x, u8 y, u8 z)
     const u16 r2 = RouteFinder::FindHorzSegmentJunction_588E60(x, y, z, 1, green_or_red_3);
     if (r1 && r2)
     {
-        Junction_10* j1 = &field_8_junctions[r1];
-        Junction_10* j2 = &field_8_junctions[r2];
+        Junction* j1 = &field_8_junctions[r1];
+        Junction* j2 = &field_8_junctions[r2];
         if ((j1->field_4_e.GetIndex_0040CE90()) == r2)
         {
             j1->field_4_e.Enable_40CEB0();
@@ -188,8 +188,8 @@ void RouteFinder::RoadOn_588950(u8 x, u8 y, u8 z)
     const u16 r4 = RouteFinder::FindVertSegmentJunction_588F30(x, y, z, 1, green_or_red_3);
     if (r3 && r4)
     {
-        Junction_10* j1 = &field_8_junctions[r3];
-        Junction_10* j2 = &field_8_junctions[r4];
+        Junction* j1 = &field_8_junctions[r3];
+        Junction* j2 = &field_8_junctions[r4];
 
         if ((j1->field_2_s.GetIndex_0040CE90()) == r4)
         {
@@ -219,8 +219,8 @@ u16 RouteFinder::IsPointInJunctionBounds_588AA0(u8 x, u8 y, u16 junc_idx1, u16 j
     u8 y2;
     u8 x2;
 
-    Junction_10* pJ1 = &this->field_8_junctions[junc_idx1];
-    Junction_10* pJ2 = &this->field_8_junctions[junc_idx2];
+    Junction* pJ1 = &this->field_8_junctions[junc_idx1];
+    Junction* pJ2 = &this->field_8_junctions[junc_idx2];
 
     if (pJ1->field_C_min_x <= pJ2->field_C_min_x)
     {
@@ -313,7 +313,7 @@ void RouteFinder::Reset_588C60()
 }
 
 // 0x588ca0
-bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_type, u8 direction)
+bool RouteFinder::HasBlockDesiredArrow_588CA0(GmpBlockInfo* block, s32 arrow_type, u8 direction)
 {
     switch (direction)
     {
@@ -428,7 +428,7 @@ bool RouteFinder::HasBlockDesiredArrow_588CA0(gmp_block_info* block, s32 arrow_t
 }
 
 // 0x588de0
-char_type RouteFinder::sub_588DE0(gmp_block_info* pBlock, s32 arrow_type, s32 road_direction)
+char_type RouteFinder::sub_588DE0(GmpBlockInfo* pBlock, s32 arrow_type, s32 road_direction)
 {
 
     char_type result = 0;
@@ -455,8 +455,8 @@ char_type RouteFinder::sub_588DE0(gmp_block_info* pBlock, s32 arrow_type, s32 ro
 // 0x588e60
 u16 RouteFinder::FindHorzSegmentJunction_588E60(u8 x, u8 y, u8 z, char_type bIsDest, s32 arrow_type)
 {
-    JunctionSegment_0x8* pSegment = field_A830_horz_segments;
-    gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
+    JunctionSegment* pSegment = field_A830_horz_segments;
+    GmpBlockInfo* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
 
     if (block_4DFE10 != nullptr)
     {
@@ -496,8 +496,8 @@ u16 RouteFinder::FindHorzSegmentJunction_588E60(u8 x, u8 y, u8 z, char_type bIsD
 // 0x588f30
 u16 RouteFinder::FindVertSegmentJunction_588F30(u8 x, u8 y, u8 z, char_type bIsDest, s32 arrow_type)
 {
-    JunctionSegment_0x8* pSegment = field_B938_vert_segments;
-    gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
+    JunctionSegment* pSegment = field_B938_vert_segments;
+    GmpBlockInfo* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x, y, z);
 
     if (block_4DFE10 != nullptr)
     {
@@ -537,7 +537,7 @@ u16 RouteFinder::FindVertSegmentJunction_588F30(u8 x, u8 y, u8 z, char_type bIsD
 // 0x589000
 u16 RouteFinder::FindSegmentJunction_589000(u8 x_coord, u8 y_coord, u8 z_coord, char_type bIsDest, s32 arrow_type)
 {
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(x_coord, y_coord, z_coord);
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(x_coord, y_coord, z_coord);
 
     if (pBlock)
     {
@@ -563,7 +563,7 @@ void RouteFinder::FindArrowBlockInJunction_5890D0(u16 junction_idx, s32 directio
         for (u8 x = field_8_junctions[junction_idx].field_C_min_x; x <= field_8_junctions[junction_idx].field_E_max_x; x++)
         {
             s32 z;
-            gmp_block_info* block = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x, y, &z);
+            GmpBlockInfo* block = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x, y, &z);
             if (gMap_0x370_6F6268->CheckGreenArrowDirection_4E4B40(direction, block))
             {
                 *xpos = x;
@@ -578,7 +578,7 @@ void RouteFinder::FindArrowBlockInJunction_5890D0(u16 junction_idx, s32 directio
         for (u8 x_pos = field_8_junctions[junction_idx].field_C_min_x; x_pos <= field_8_junctions[junction_idx].field_E_max_x; x_pos++)
         {
             s32 z;
-            gmp_block_info* block = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x_pos, y_pos, &z);
+            GmpBlockInfo* block = gMap_0x370_6F6268->FindHighestBlockForCoord_4E4C30(x_pos, y_pos, &z);
             if (gMap_0x370_6F6268->GetArrowDirectionFromBlock_4E5FC0(block, 0))
             {
                 *xpos = x_pos;
@@ -592,7 +592,7 @@ void RouteFinder::FindArrowBlockInJunction_5890D0(u16 junction_idx, s32 directio
 // 0x589210
 s32 RouteFinder::NoRefs_589210(u8 x, u8 y, s32 a4, u8 direction, s32 a6, u16 junction_idx)
 {
-    Junction_10* pJunction = &field_8_junctions[junction_idx];
+    Junction* pJunction = &field_8_junctions[junction_idx];
     s32 dy = 0;
     s16 dx = 0;
     switch (direction)
@@ -627,7 +627,7 @@ s32 RouteFinder::NoRefs_589210(u8 x, u8 y, s32 a4, u8 direction, s32 a6, u16 jun
 
 // dx/dy are uninitialised for a direction that isn't 1, 2, 4 or 8, as in the original
 // 0x5892d0
-RouteFinder_10::RouteFinder_10()
+RouteNode::RouteNode()
 {
     field_0_idx = 0;
     field_2_cost = -1;
@@ -637,9 +637,9 @@ RouteFinder_10::RouteFinder_10()
 }
 
 // 0x5892f0
-RouteFinder_10* RouteFinder::NewChildNode_5892F0(RouteFinder_10* pRoute, u16 idx, s16 step_cost)
+RouteNode* RouteFinder::NewChildNode_5892F0(RouteNode* pRoute, u16 idx, s16 step_cost)
 {
-    RouteFinder_10* pNew10 = &this->field_861C_nodes[this->field_CC66_545_count++];
+    RouteNode* pNew10 = &this->field_861C_nodes[this->field_CC66_545_count++];
 
     s32 dy =
         abs(static_cast<u8>(field_8_junctions[idx].field_D_min_y) - static_cast<u8>(field_8_junctions[field_861A_dest_idx].field_D_min_y));
@@ -657,9 +657,9 @@ RouteFinder_10* RouteFinder::NewChildNode_5892F0(RouteFinder_10* pRoute, u16 idx
 }
 
 // 0x589390
-RouteFinder_10* RouteFinder::NewStartNode_589390(u16 junction_idx)
+RouteNode* RouteFinder::NewStartNode_589390(u16 junction_idx)
 {
-    RouteFinder_10* pNew10 = &field_861C_nodes[field_CC66_545_count++];
+    RouteNode* pNew10 = &field_861C_nodes[field_CC66_545_count++];
     s32 distance = abs(field_8_junctions[junction_idx].field_C_min_x - field_8_junctions[field_861A_dest_idx].field_C_min_x) +
         abs(field_8_junctions[junction_idx].field_D_min_y - field_8_junctions[field_861A_dest_idx].field_D_min_y);
 
@@ -673,7 +673,7 @@ RouteFinder_10* RouteFinder::NewStartNode_589390(u16 junction_idx)
 }
 
 // 0x589420
-void RouteFinder::InsertIntoOpenList_589420(RouteFinder_10* pRoute)
+void RouteFinder::InsertIntoOpenList_589420(RouteNode* pRoute)
 {
     field_CA40_visited[pRoute->field_0_idx] = 1;
 
@@ -684,7 +684,7 @@ void RouteFinder::InsertIntoOpenList_589420(RouteFinder_10* pRoute)
     }
     else
     {
-        RouteFinder_10* pInsertAfter;
+        RouteNode* pInsertAfter;
         for (pInsertAfter = field_A82C_open_list;
              pInsertAfter->field_C_pNext != nullptr && pInsertAfter->field_C_pNext->field_2_cost < pRoute->field_2_cost;
              pInsertAfter = pInsertAfter->field_C_pNext)
@@ -709,7 +709,7 @@ char_type RouteFinder::InitSearch_589480(u8 start_x, u8 start_y, u8 start_z, u8 
     }
 
     u16 initialIdx = field_8618_idx;
-    Junction_10* pJunction = &field_8_junctions[initialIdx];
+    Junction* pJunction = &field_8_junctions[initialIdx];
     if (start_x < pJunction->field_C_min_x || start_x > pJunction->field_E_max_x || start_y < pJunction->field_D_min_y ||
         start_y > pJunction->field_F_max_y)
     {
@@ -738,7 +738,7 @@ char_type RouteFinder::sub_5895C0(u8 x, u8 y, u8 z, s32 arrow_type, s32 directio
 {
     field_CC66_545_count = 0;
     memset(field_CA40_visited, 0, sizeof(field_CA40_visited));
-    RouteFinder_10* pStart = field_861C_nodes;
+    RouteNode* pStart = field_861C_nodes;
     memset(static_cast<void*>(pStart), 0, sizeof(field_861C_nodes));
 
     field_8618_idx = FindSegmentJunction_589000(x, y, z, 0, arrow_type);
@@ -749,7 +749,7 @@ char_type RouteFinder::sub_5895C0(u8 x, u8 y, u8 z, s32 arrow_type, s32 directio
 
     if (field_8618_idx != 0)
     {
-        Junction_10* pJunction = &field_8_junctions[field_8618_idx];
+        Junction* pJunction = &field_8_junctions[field_8618_idx];
         if (x < pJunction->field_C_min_x || x > pJunction->field_E_max_x || y < pJunction->field_D_min_y || y > pJunction->field_F_max_y)
         {
             field_8618_idx = FindSegmentJunction_589000(x, y, z, 1, arrow_type);
@@ -892,18 +892,18 @@ s16 RouteFinder::GetFreeRouteIdx_589960()
 }
 
 // 0x589990
-u16 RouteFinder::AddChildNode_589990(RouteFinder_10* pRoute, u16 junction_idx, s16 step_cost)
+u16 RouteFinder::AddChildNode_589990(RouteNode* pRoute, u16 junction_idx, s16 step_cost)
 {
-    RouteFinder_10* pChild = NewChildNode_5892F0(pRoute, junction_idx, step_cost);
+    RouteNode* pChild = NewChildNode_5892F0(pRoute, junction_idx, step_cost);
     InsertIntoOpenList_589420(pChild);
     return pChild->field_0_idx;
 }
 
 // Returns true if a neighbour of the node's junction that hasn't been visited yet completes the route
 // 0x5899c0
-bool RouteFinder::sub_5899C0(RouteFinder_10* pNode, s32 arrow_type)
+bool RouteFinder::sub_5899C0(RouteNode* pNode, s32 arrow_type)
 {
-    Junction_10* pJunction = &field_8_junctions[pNode->field_0_idx];
+    Junction* pJunction = &field_8_junctions[pNode->field_0_idx];
     u16 north = pJunction->field_0_n.GetIndex_0040CE90();
     u16 west = pJunction->field_6_w.GetIndex_0040CE90();
     u16 south = pJunction->field_2_s.GetIndex_0040CE90();
@@ -934,9 +934,9 @@ bool RouteFinder::sub_5899C0(RouteFinder_10* pNode, s32 arrow_type)
 }
 
 // 0x589bb0
-char_type RouteFinder::sub_589BB0(RouteFinder_10* pRoute, s32 arrow_type)
+char_type RouteFinder::sub_589BB0(RouteNode* pRoute, s32 arrow_type)
 {
-    Junction_10* pJunction = &field_8_junctions[pRoute->field_0_idx];
+    Junction* pJunction = &field_8_junctions[pRoute->field_0_idx];
     if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(pJunction->field_C_min_x, pJunction->field_D_min_y) &&
         !gGame_0x40_67E008->IsPointOnScreen_4B9A80(pJunction->field_E_max_x, pJunction->field_D_min_y) &&
         !gGame_0x40_67E008->IsPointOnScreen_4B9A80(pJunction->field_C_min_x, pJunction->field_F_max_y) &&
@@ -971,9 +971,9 @@ char_type RouteFinder::sub_589BB0(RouteFinder_10* pRoute, s32 arrow_type)
 }
 
 // 0x589e00
-RouteFinder_10* RouteFinder::GetFirstUnexpandedNode_589E00()
+RouteNode* RouteFinder::GetFirstUnexpandedNode_589E00()
 {
-    RouteFinder_10* pNode;
+    RouteNode* pNode;
 
     for (pNode = field_A82C_open_list; pNode != nullptr && pNode->field_4_expanded != 0; pNode = pNode->field_C_pNext)
     {
@@ -986,7 +986,7 @@ RouteFinder_10* RouteFinder::GetFirstUnexpandedNode_589E00()
 char_type RouteFinder::sub_589E20(s32 arrow_type)
 {
     bool bRet = false;
-    RouteFinder_10* f_A82C = this->field_A82C_open_list;
+    RouteNode* f_A82C = this->field_A82C_open_list;
     if (f_A82C->field_0_idx == this->field_861A_dest_idx)
     {
         return 1;
@@ -1002,7 +1002,7 @@ char_type RouteFinder::sub_589E20(s32 arrow_type)
                 break;
             }
 
-            RouteFinder_10* p10 = GetFirstUnexpandedNode_589E00();
+            RouteNode* p10 = GetFirstUnexpandedNode_589E00();
             if (!p10)
             {
                 break;
@@ -1017,7 +1017,7 @@ char_type RouteFinder::sub_589E20(s32 arrow_type)
 char_type RouteFinder::sub_589E70(s32 arrow_type)
 {
     char result;
-    RouteFinder_10* pNode;
+    RouteNode* pNode;
 
     result = '\0';
     if (this->field_A82C_open_list != nullptr)
@@ -1049,7 +1049,7 @@ s16 RouteFinder::sub_589EB0()
         return -1;
     }
 
-    RouteFinder_10* pNode = &field_861C_nodes[field_CC66_545_count - 1];
+    RouteNode* pNode = &field_861C_nodes[field_CC66_545_count - 1];
     s16 route_idx = GetFreeRouteIdx_589960();
     if (route_idx == -1)
     {
@@ -1088,7 +1088,7 @@ s16 RouteFinder::sub_589F70()
         return -1;
     }
 
-    RouteFinder_10* pNode = &field_861C_nodes[field_CC66_545_count - 1];
+    RouteNode* pNode = &field_861C_nodes[field_CC66_545_count - 1];
     s16 route_idx = GetFreeRouteIdx_589960();
     if (route_idx == -1)
     {
@@ -1125,7 +1125,7 @@ void RouteFinder::DebugPrintRoute_58A020(char_type junc_idx)
     u16 i = this->field_2218_routes[junc_idx].field_0_junctions[static_cast<u16>(route_pos)];
     while (i)
     {
-        Junction_10* pJunc = &this->field_8_junctions[i];
+        Junction* pJunc = &this->field_8_junctions[i];
         sprintf(gTmpBuffer_67C598,
                 "Junc: %d : (%d, %d)(%d, %d)",
                 i,
@@ -1140,7 +1140,7 @@ void RouteFinder::DebugPrintRoute_58A020(char_type junc_idx)
 }
 
 // 0x58a0b0
-Junction_10* RouteFinder::GetJunction_58A0B0(u16 jIdx)
+Junction* RouteFinder::GetJunction_58A0B0(u16 jIdx)
 {
     return &field_8_junctions[jIdx];
 }

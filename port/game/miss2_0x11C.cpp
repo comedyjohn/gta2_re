@@ -1157,12 +1157,12 @@ void miss2_0x11C::SCRCMD_DECLARE_MISSION_504DD0(SCR_TWO_PARAMS* pCmd)
 // 0x504ee0
 void miss2_0x11C::CreateLight_504EE0(SCR_CREATE_LIGHT* pCmd, SCR_POINTER* pPointer)
 {
-    Light_28* pNewLight = gLight_1D4CC_6F5520->Init_469010(pCmd->field_C_xpos,
-                                                           pCmd->field_10_ypos,
-                                                           pCmd->field_14_zpos,
-                                                           pCmd->field_18_argb,
-                                                           pCmd->field_1C_radius,
-                                                           pCmd->field_20_intensity);
+    Light* pNewLight = gLight_1D4CC_6F5520->Init_469010(pCmd->field_C_xpos,
+                                                        pCmd->field_10_ypos,
+                                                        pCmd->field_14_zpos,
+                                                        pCmd->field_18_argb,
+                                                        pCmd->field_1C_radius,
+                                                        pCmd->field_20_intensity);
     pPointer->field_8_light = pNewLight;
     if (pCmd->field_21_on_time > 0)
     {
@@ -1179,7 +1179,7 @@ void miss2_0x11C::SCRCMD_SET_STATION_EMPTY_STATION_505030(SCR_SET_STATION* pCmd)
     if (!gDebugSkipTrains)
     {
         str_table_entry* StringById_503080 = gScriptManager_6F8060->FindStringById_503080(pCmd->field_8_platform);
-        gmp_map_zone* station_zone = gMap_0x370_6F6268->zone_by_name_4DEFD0(reinterpret_cast<const char*>(&StringById_503080[1]));
+        GmpMapZone* station_zone = gMap_0x370_6F6268->zone_by_name_4DEFD0(reinterpret_cast<const char*>(&StringById_503080[1]));
         TrainStation_34* pStation = gPublicTransport_181C_6FF1D4->TrainStationForZone_57B4B0(station_zone);
 
         for (u8 wagon_idx = 0; wagon_idx < 10; wagon_idx++)
@@ -1225,7 +1225,7 @@ void miss2_0x11C::CRCMD_SET_TRAIN_STATIONS_505210(SCR_TWO_PARAMS* pCmd)
     {
         StringById = gScriptManager_6F8060->FindStringById_503080(pCmd->field_8_unsigned_1);
         const char* station_zone_name = reinterpret_cast<const char*>(&StringById[1]);
-        gmp_map_zone* station_zone = gMap_0x370_6F6268->zone_by_name_4DEFD0(station_zone_name);
+        GmpMapZone* station_zone = gMap_0x370_6F6268->zone_by_name_4DEFD0(station_zone_name);
         TrainStation_34* pTrainStation = gPublicTransport_181C_6FF1D4->TrainStationForZone_57B4B0(station_zone);
         pTrainStation->CalculateWagonCount_578820(
             reinterpret_cast<u8*>(&pCmd->field_A_unsigned_2)); //  The parameter may be the train wagon array, not sure
@@ -3995,7 +3995,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_GANG_50B7D0()
     }
     else
     {
-        gmp_map_zone* pZone =
+        GmpMapZone* pZone =
             gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(pPed->get_cam_x().ToInt(), pPed->get_cam_y().ToInt(), GmpZoneType::kGang);
         if (pZone && !_strnicmp(pZone->field_6_name, pGang->field_2_name, pZone->field_5_name_length))
         {
@@ -4285,8 +4285,8 @@ void miss2_0x11C::SCRCMD_IS_CHAR_IN_ZONE_50BF40()
     str_table_entry* pStrEntry = gScriptManager_6F8060->FindStringById_503080(pCmd->field_A_signed_2);
     Player* pPlayer = pPointer->field_8_char->field_15C_player;
 
-    gmp_map_zone* pZone1;
-    gmp_map_zone* pZone2;
+    GmpMapZone* pZone1;
+    GmpMapZone* pZone2;
 
     if (pPlayer)
     {
@@ -4798,7 +4798,7 @@ void miss2_0x11C::SCRCMD_CHANGE_BLOCK_50CA70()
 // 0x50cab0
 void miss2_0x11C::SCRCMD_ADD_NEW_BLOCK_50CAB0()
 {
-    gmp_block_info Block;
+    GmpBlockInfo Block;
 
     Block.init_44C840();
 

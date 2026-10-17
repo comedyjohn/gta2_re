@@ -4,7 +4,7 @@
 #include "core/function.hpp"
 #include <wchar.h>
 
-class gmp_map_zone;
+class GmpMapZone;
 
 class Gang_144
 {
@@ -129,7 +129,7 @@ class GangPool_CA8
     Gang_144* FindGangByName_4BF100(const char* pGangName);
     Gang_144* AllocGang_4BF170();
     Gang_144* GangByIdx_4BF1C0(u8 gang_idx);
-    void AddGangForMapZone_4BF1E0(gmp_map_zone* pMapZone);
+    void AddGangForMapZone_4BF1E0(GmpMapZone* pMapZone);
     s8 GetGangIdxByName_4BF210(const char* gangName);
     void SwapGangSlots_4BF230(Gang_144* pGang, u8 gang_idx);
     s8 FindGangByCarModel_4BF2F0(s32 car_model);

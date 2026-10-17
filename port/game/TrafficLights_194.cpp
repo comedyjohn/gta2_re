@@ -10,7 +10,7 @@
 
 EXTERN_GLOBAL_ARRAY(wchar_t, gTmpBuff, 640);
 
-DEFINE_GLOBAL(TrafficLights_194*, gTrafficLights_194_705958, 0x705958);
+DEFINE_GLOBAL(TrafficLights*, gTrafficLights_194_705958, 0x705958);
 
 DEFINE_GLOBAL_INIT(Fix16, kFpOne_70580C, Fix16(1), 0x70580C);
 DEFINE_GLOBAL_INIT(Fix16, kFpTwo_705810, Fix16(2), 0x705810);
@@ -49,7 +49,7 @@ enum
 u8 traffic_light_phase_timers_626840[] = {0x00, 0x64, 0x18, 0x18, 0x64, 0x18, 0x18, 0x96, 0x50, 0x00, 0x00, 0x00};
 
 // 0x5C1D00
-void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
+void TrafficLight::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
 {
 
     Fix16 zpos = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(x, y);
@@ -203,9 +203,9 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
     {
         for (s32 i = 0; i < w; i++)
         {
-            gmp_block_info* pBlock1 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x + i) + kFpHalf_705714).ToInt(),
-                                                                          (Fix16(y) - dword_705660).ToInt(),
-                                                                          (zpos - kFpOne_70580C).ToInt());
+            GmpBlockInfo* pBlock1 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x + i) + kFpHalf_705714).ToInt(),
+                                                                        (Fix16(y) - dword_705660).ToInt(),
+                                                                        (zpos - kFpOne_70580C).ToInt());
             if (pBlock1 && (pBlock1->field_A_arrows & block_arrow::green_down_8) != 0)
             {
                 gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kPedestrianCrossingMarker,
@@ -222,9 +222,9 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
         Fix16 xIter2(x);
         for (s32 i = 0; i < w; i++)
         {
-            gmp_block_info* pBlock2 = gMap_0x370_6F6268->get_block_4DFE10((xIter2 + kFpHalf_705714).ToInt(),
-                                                                          (Fix16(y + h) + dword_705660).ToInt(),
-                                                                          (zpos - kFpOne_70580C).ToInt());
+            GmpBlockInfo* pBlock2 = gMap_0x370_6F6268->get_block_4DFE10((xIter2 + kFpHalf_705714).ToInt(),
+                                                                        (Fix16(y + h) + dword_705660).ToInt(),
+                                                                        (zpos - kFpOne_70580C).ToInt());
             if (pBlock2 && (pBlock2->field_A_arrows & block_arrow::green_up_4) != 0)
             {
                 gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kPedestrianCrossingMarker,
@@ -242,9 +242,9 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
         Fix16 yOff(y);
         for (s32 i = 0; i < h; i++)
         {
-            gmp_block_info* pBlock3 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x + w) + dword_705660).ToInt(),
-                                                                          (yOff + kFpHalf_705714).ToInt(),
-                                                                          (zpos - kFpOne_70580C).ToInt());
+            GmpBlockInfo* pBlock3 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x + w) + dword_705660).ToInt(),
+                                                                        (yOff + kFpHalf_705714).ToInt(),
+                                                                        (zpos - kFpOne_70580C).ToInt());
             if (pBlock3 && (pBlock3->field_A_arrows & block_arrow::green_left_1) != 0)
             {
                 gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kPedestrianCrossingMarker,
@@ -262,9 +262,9 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
         Fix16 yOff(y);
         for (s32 i = 0; i < h; i++)
         {
-            gmp_block_info* pBlock4 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x) - (dword_705660)).ToInt(),
-                                                                          (yOff + kFpHalf_705714).ToInt(),
-                                                                          (zpos - kFpOne_70580C).ToInt());
+            GmpBlockInfo* pBlock4 = gMap_0x370_6F6268->get_block_4DFE10((Fix16(x) - (dword_705660)).ToInt(),
+                                                                        (yOff + kFpHalf_705714).ToInt(),
+                                                                        (zpos - kFpOne_70580C).ToInt());
             if (pBlock4 && (pBlock4->field_A_arrows & block_arrow::green_right_2) != 0)
             {
                 gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kPedestrianCrossingMarker,
@@ -279,7 +279,7 @@ void TrafficLight_20::Init_5C1D00(u8 x, u8 y, u8 w, u8 h)
 }
 
 // 0x5C27A0
-void TrafficLight_20::UpdateLightsFromPhase_5C27A0(u8 phase)
+void TrafficLight::UpdateLightsFromPhase_5C27A0(u8 phase)
 {
     switch (phase)
     {
@@ -373,15 +373,15 @@ void TrafficLight_20::UpdateLightsFromPhase_5C27A0(u8 phase)
 }
 
 // 0x5c2910
-void TrafficLights_194::AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h)
+void TrafficLights::AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h)
 {
-    auto* pMem = new TrafficLight_20();
+    auto* pMem = new TrafficLight();
     field_0_traffic_lights[field_190_array_used_count++] = pMem;
     pMem->Init_5C1D00(x, y, w, h);
 }
 
 // 0x5c2950
-void TrafficLights_194::TrafficLightsService_5C2950()
+void TrafficLights::TrafficLightsService_5C2950()
 {
     field_193_timer--;
 
@@ -414,7 +414,7 @@ void TrafficLights_194::TrafficLightsService_5C2950()
 }
 
 // 0x5c2a10
-void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
+void TrafficLights::ShowTrafficLightsInfo_5C2A10()
 {
     swprintf(gTmpBuff, L"timer: %d", field_193_timer);
     gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, -1, 0, gDebugFont_706600, 1);
@@ -429,9 +429,9 @@ void TrafficLights_194::ShowTrafficLightsInfo_5C2A10()
 }
 
 // 0x5c2ac0
-void TrafficLights_194::CreateFromMapZones_5C2AC0()
+void TrafficLights::CreateFromMapZones_5C2AC0()
 {
-    gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kTrafficLight);
+    GmpMapZone* pZoneIter = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kTrafficLight);
     while (pZoneIter)
     {
         AddTrafficLight_5C2910(pZoneIter->field_1_x, pZoneIter->field_2_y, pZoneIter->field_3_w, pZoneIter->field_4_h);
@@ -440,7 +440,7 @@ void TrafficLights_194::CreateFromMapZones_5C2AC0()
 }
 
 // 0x5c2b00
-TrafficLights_194::TrafficLights_194()
+TrafficLights::TrafficLights()
 {
     field_190_array_used_count = 0;
     for (auto& traffic_light : field_0_traffic_lights)
@@ -452,7 +452,7 @@ TrafficLights_194::TrafficLights_194()
 }
 
 // 0x5c2b30
-TrafficLights_194::~TrafficLights_194()
+TrafficLights::~TrafficLights()
 {
     for (u32 i = 0; i < field_190_array_used_count; i++)
     {

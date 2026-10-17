@@ -12,7 +12,7 @@
 
 namespace world3d
 {
-static_assert(sizeof(gmp_block_info) == 12, "upstream's Map::LoadFromDmap reads 12-byte blocks");
+static_assert(sizeof(GmpBlockInfo) == 12, "upstream's Map::LoadFromDmap reads 12-byte blocks");
 
 const void* MapIdentity()
 {
@@ -33,7 +33,7 @@ bool ReadMap(gta2::Map& out, std::string* error)
         }
         return false;
     }
-    const gmp_compressed_map_32* dmap = gMap_0x370_6F6268->field_0_pDmap;
+    const GmpCompressedMap* dmap = gMap_0x370_6F6268->field_0_pDmap;
     return out.LoadFromDmap(reinterpret_cast<const uint8_t*>(dmap->field_0_base),
                             reinterpret_cast<const uint8_t*>(dmap->field_40008_pColumn),
                             static_cast<size_t>(dmap->field_40000_column_words) * 4,
@@ -58,7 +58,7 @@ int BlockSlopeType(int x, int y, int level)
     {
         return -1;
     }
-    const gmp_block_info* block = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(x, y, level);
+    const GmpBlockInfo* block = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(x, y, level);
     return block ? block->field_B_slope_type >> 2 : -1;
 }
 

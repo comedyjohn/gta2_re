@@ -112,7 +112,7 @@ u16 BonusTracker_1C0::FindMatchingRule_431EC0(u16 start_idx,
                                               s16 remap,
                                               s32 death_cause,
                                               s32 alt_car_model,
-                                              gmp_map_zone* pZone)
+                                              GmpMapZone* pZone)
 {
     u16 i;
     BonusRule_2C* pBonus;
@@ -189,7 +189,7 @@ s16 BonusTracker_1C0::AllocRule_431FE0(s16 event_type,
                                        s8 check_mode,
                                        s8 target_count,
                                        u16 reward,
-                                       gmp_map_zone* pZone)
+                                       GmpMapZone* pZone)
 {
     const s16 idx = FindFreeRule_431E90();
     if (idx == k_max_rules)
@@ -251,7 +251,7 @@ void BonusTracker_1C0::ProcessBonusEvent_4320D0(s16 event_type,
                                                 s16 remap,
                                                 s32 death_cause,
                                                 s32 alt_car_model,
-                                                gmp_map_zone* pZone)
+                                                GmpMapZone* pZone)
 {
     for (u16 i = 0; i < k_max_rules; i++)
     {

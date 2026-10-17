@@ -63,7 +63,7 @@ class Player
         field_8E_in_use = in_use;
     }
 
-    gmp_map_zone* get_arrow_blocker_zone_4C7340()
+    GmpMapZone* get_arrow_blocker_zone_4C7340()
     {
         return field_40_arrow_blocker_zone;
     }
@@ -349,9 +349,9 @@ class Player
     char_type field_32_pad;
     char_type field_33_pad;
     Gang_144* field_34_gang_curr_location;
-    gmp_map_zone* field_38_local_navigation_zone;
-    gmp_map_zone* field_3C_navigation_zone;
-    gmp_map_zone* field_40_arrow_blocker_zone;
+    GmpMapZone* field_38_local_navigation_zone;
+    GmpMapZone* field_3C_navigation_zone;
+    GmpMapZone* field_40_arrow_blocker_zone;
     s32 field_44_death_type;
     char_type field_48_dbg_cam_follow_player;
     char_type field_49_pad;

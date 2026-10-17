@@ -1684,7 +1684,7 @@ void Player::RespawnPlayer_5670B0()
     }
     if (field_684_lives.get_value() > 0)
     {
-        gmp_map_zone* pZone;
+        GmpMapZone* pZone;
         if (IsNetworkGame_434B10())
         {
             pZone = gMap_0x370_6F6268->zone_by_type_bounded_4DF0F0(0x10U);

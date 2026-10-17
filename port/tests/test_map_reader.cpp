@@ -7,7 +7,7 @@
 
 #include "map_0x370.hpp"
 
-EXTERN_GLOBAL(gmp_block_info, gBlockInfo2_6F6028);
+EXTERN_GLOBAL(GmpBlockInfo, gBlockInfo2_6F6028);
 
 namespace
 {
@@ -31,10 +31,10 @@ struct SyntheticMap
         blocks[3].field_B_slope_type = FIELD;
         blocks[4].field_B_slope_type = TRIANGULAR_SIDES_DIAGONAL_UP_LEFT | ROAD;
 
-        dmap = new gmp_compressed_map_32();
+        dmap = new GmpCompressedMap();
         std::memset(dmap->field_0_base, 0, sizeof(dmap->field_0_base));
         dmap->field_0_base[0][1] = 4;
-        dmap->field_40008_pColumn = reinterpret_cast<gmp_column_word*>(words.data());
+        dmap->field_40008_pColumn = reinterpret_cast<GmpColumnWord*>(words.data());
         dmap->field_4000C_block = blocks.data();
         map.field_0_pDmap = dmap;
     }
@@ -49,9 +49,9 @@ struct SyntheticMap
     SyntheticMap& operator=(const SyntheticMap&) = delete;
 
     std::vector<u32> words;
-    std::vector<gmp_block_info> blocks;
-    gmp_compressed_map_32* dmap;
-    Map_0x370 map;
+    std::vector<GmpBlockInfo> blocks;
+    GmpCompressedMap* dmap;
+    Map map;
 };
 } // namespace
 

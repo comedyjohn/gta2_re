@@ -368,7 +368,7 @@ void Game_0x40::ShowCounters_4B8FF0()
         const u32 x = pLocalPlayer->field_2C4_player_ped->get_cam_x().ToInt();
         const u32 y = pLocalPlayer->field_2C4_player_ped->get_cam_y().ToInt();
 
-        gmp_zone_info* pNavZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(x, y);
+        GmpZoneInfo* pNavZone = gMap_0x370_6F6268->GetZoneInfoAt_4DF890(x, y);
 
         swprintf(gTmpBuff, L"density:%d", pNavZone->field_0_car_density);
         gHud_2B00_706620->field_650_texts.DisplayText_5D1F50(gTmpBuff, 0, 160, gDebugFont_706600, 1);
@@ -1007,7 +1007,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1803);
     }
 
-    gMap_0x370_6F6268 = new Map_0x370(); // ctor call
+    gMap_0x370_6F6268 = new Map(); // ctor call
     if (!gMap_0x370_6F6268)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1806);
@@ -1097,7 +1097,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1849);
     }
 
-    gTileAnim_2_7052C4 = new TileAnim_2(); // ctor call
+    gTileAnim_2_7052C4 = new TileAnimSet(); // ctor call
     if (!gTileAnim_2_7052C4)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1851);
@@ -1145,7 +1145,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1867);
     }
 
-    gTrafficLights_194_705958 = new TrafficLights_194(); // ctor call
+    gTrafficLights_194_705958 = new TrafficLights(); // ctor call
     if (!gTrafficLights_194_705958)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1869);
@@ -1163,7 +1163,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1873);
     }
 
-    gPathFinder_6FDEF0 = new PathFinder_2FD4(); // inline
+    gPathFinder_6FDEF0 = new PathFinder(); // inline
     if (!gPathFinder_6FDEF0)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1875);
@@ -1223,7 +1223,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1893);
     }
 
-    gLight_1D4CC_6F5520 = new Light_1D4CC(); // multi level inline
+    gLight_1D4CC_6F5520 = new LightManager(); // multi level inline
     if (!gLight_1D4CC_6F5520)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1896);

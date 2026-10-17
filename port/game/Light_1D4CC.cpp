@@ -1,23 +1,23 @@
 #include "Light_1D4CC.hpp"
 
-DEFINE_GLOBAL(Light_1D4CC*, gLight_1D4CC_6F5520, 0x6F5520);
+DEFINE_GLOBAL(LightManager*, gLight_1D4CC_6F5520, 0x6F5520);
 
 // 0x4bebc0
-Light_1D4CC::~Light_1D4CC()
+LightManager::~LightManager()
 {
     LightGrid::FreeGrid_4D6E30();
 }
 
 // 0x52B2A0
-Light_28* Light_1D4CC::CreateLight_52B2A0(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
+Light* LightManager::CreateLight_52B2A0(Fix16 xpos, Fix16 ypos, Fix16 zpos, s32 argb, Fix16 radius, u8 intensity)
 {
     return Init_469010(xpos, ypos, zpos, argb, radius, intensity);
 }
 
 // 0x5c2b70
-Light_28* Light_1D4CC::Alloc_5C2B70()
+Light* LightManager::Alloc_5C2B70()
 {
-    Light_28* result = field_0_pool.start_;
+    Light* result = field_0_pool.start_;
     field_0_pool.start_ = field_0_pool.start_->next_;
     result->next_ = nullptr;
     result->field_0.flag = 0;

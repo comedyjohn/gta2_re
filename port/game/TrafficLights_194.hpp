@@ -17,10 +17,10 @@ enum
 };
 } // namespace traffic_light_phase
 
-class Light_28;
+class Light;
 class Object_2C;
 
-class TrafficLight_20
+class TrafficLight
 {
   public:
     void Init_5C1D00(u8 x, u8 y, u8 w, u8 h);
@@ -30,29 +30,29 @@ class TrafficLight_20
     Object_2C* field_4_south_headlight_obj;
     Object_2C* field_8_west_headlight_obj;
     Object_2C* field_C_east_headlight_obj;
-    Light_28* field_10_north_light;
-    Light_28* field_14_south_light;
-    Light_28* field_18_west_light;
-    Light_28* field_1C_east_light;
+    Light* field_10_north_light;
+    Light* field_14_south_light;
+    Light* field_18_west_light;
+    Light* field_1C_east_light;
 };
 
-class TrafficLights_194
+class TrafficLights
 {
   public:
     void AddTrafficLight_5C2910(u8 x, u8 y, u8 w, u8 h);
     void TrafficLightsService_5C2950();
     void ShowTrafficLightsInfo_5C2A10();
     void CreateFromMapZones_5C2AC0();
-    TrafficLights_194();
-    ~TrafficLights_194();
+    TrafficLights();
+    ~TrafficLights();
     bool ArePedsCrossing_434960() const
     {
         return field_192_phase == traffic_light_phase::peds_crossing_7;
     }
-    TrafficLight_20* field_0_traffic_lights[100];
+    TrafficLight* field_0_traffic_lights[100];
     u16 field_190_array_used_count;
     u8 field_192_phase;
     u8 field_193_timer;
 };
 
-EXTERN_GLOBAL(TrafficLights_194*, gTrafficLights_194_705958);
+EXTERN_GLOBAL(TrafficLights*, gTrafficLights_194_705958);

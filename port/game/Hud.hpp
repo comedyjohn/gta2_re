@@ -621,7 +621,7 @@ class Hud_Brief_704 // size 0x704
     Hud_BriefEntry_18* field_700_prev_briefs;
 };
 
-class gmp_map_zone;
+class GmpMapZone;
 
 class Hud_MapZone_98
 {
@@ -634,15 +634,15 @@ class Hud_MapZone_98
 
     void DrawZoneName_5D5900();
     void GetXPosOffset_5D5AD0();
-    void ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZone2);
+    void ShowZoneName_5D5AF0(GmpMapZone* pZone1, GmpMapZone* pZone2);
     void UpdateZoneName_5D5B60();
     void ResetTransparency_5D5C50();
     Hud_MapZone_98();
     u8 field_0_timer;
     wchar_t field_2_wstr[65];
     s32 field_84_xpos_offset;
-    gmp_map_zone* field_88_nav_zone;
-    gmp_map_zone* field_8C_local_nav_zone;
+    GmpMapZone* field_88_nav_zone;
+    GmpMapZone* field_8C_local_nav_zone;
     s32 field_90_alpha_flag;
     u8 field_94_transparency; // range from 0 to 31
 };

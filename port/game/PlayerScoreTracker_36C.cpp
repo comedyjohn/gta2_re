@@ -425,7 +425,7 @@ void PlayerScoreTracker_36C::AddCash_592620(s32 cash)
 void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKiller)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
-    gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(pKiller->get_cam_x().ToInt(), pKiller->get_cam_y().ToInt());
+    GmpMapZone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(pKiller->get_cam_x().ToInt(), pKiller->get_cam_y().ToInt());
 
     s16 gang_idx;
     if (pVictim->field_17C_pGang)
@@ -816,7 +816,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
 void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pKiller)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
-    gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(pKiller->get_cam_x().ToInt(), pKiller->get_cam_y().ToInt());
+    GmpMapZone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(pKiller->get_cam_x().ToInt(), pKiller->get_cam_y().ToInt());
 
     u32 killer_car_model = pKiller->get_car_model();
 
@@ -1003,8 +1003,8 @@ void PlayerScoreTracker_36C::AddCashWithMultiplier_593220()
 void PlayerScoreTracker_36C::AwardCarHijackedScore_593240(Car_BC* pCar)
 {
     const s32 multiplier = field_368_player->get_multiplier_4766A0();
-    gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(field_368_player->field_2C4_player_ped->get_cam_x().ToInt(),
-                                                                      field_368_player->field_2C4_player_ped->get_cam_y().ToInt());
+    GmpMapZone* pZone = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(field_368_player->field_2C4_player_ped->get_cam_x().ToInt(),
+                                                                    field_368_player->field_2C4_player_ped->get_cam_y().ToInt());
 
     const u16 gang_idx = gGangPool_CA8_67E274->FindGangByCarModel_4BF2F0(pCar->field_84_car_info_idx);
     field_1A8_bonuses.ProcessBonusEvent_4320D0(bonus_event_type::car_hijacked_2,

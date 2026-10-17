@@ -160,7 +160,7 @@ void CarAI_78::PlanTurnAtNextJunction_447710()
     s8 arrow_run_len = 0;
     if (field_28_junc_idx >= 0)
     {
-        Junction_10* Junction_58A0B0 = gRouteFinder_6FFDC8->GetJunction_58A0B0(
+        Junction* Junction_58A0B0 = gRouteFinder_6FFDC8->GetJunction_58A0B0(
             gRouteFinder_6FFDC8->field_2218_routes[field_28_junc_idx].field_0_junctions[static_cast<u16>(this->field_56_route_pos)]);
         u16 next_junction_idx = gRouteFinder_6FFDC8->field_2218_routes[this->field_28_junc_idx]
                                     .field_0_junctions[static_cast<u16>(this->field_56_route_pos) + 1];
@@ -313,7 +313,7 @@ void CarAI_78::DoShortcutsUsingJunctions_447970()
             return;
         }
 
-        Junction_10* pJunction = gRouteFinder_6FFDC8->GetJunction_58A0B0(junc);
+        Junction* pJunction = gRouteFinder_6FFDC8->GetJunction_58A0B0(junc);
         if (x > 0)
         {
             if (gRouteFinder_6FFDC8->IsPointInJunctionBounds_588AA0(
@@ -432,7 +432,7 @@ bool CarAI_78::GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction)
 }
 
 // 0x447d40
-char_type CarAI_78::TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBlock)
+char_type CarAI_78::TrySetTargetDirectionFromArrows_447D40(GmpBlockInfo* pBlock)
 {
     Ang16 angle = this->field_10_angle;
 
@@ -903,11 +903,11 @@ void CarAI_78::BrakeForBlockedRoadAhead_4482C0()
 void CarAI_78::CheckRoadAhead_448770()
 {
     Fix16 toUse = kFixZero;
-    gmp_block_info* pBlock_ = nullptr;
+    GmpBlockInfo* pBlock_ = nullptr;
     Sprite* obj_5C_f58 = gObject_5C_6F8F84->field_58_collision_probe_sprite;
     Sprite* pCarSprite = this->field_0_car->field_50_car_sprite;
-    gmp_block_info* pBlock_far = nullptr;
-    gmp_block_info* pBlock_near = nullptr;
+    GmpBlockInfo* pBlock_far = nullptr;
+    GmpBlockInfo* pBlock_near = nullptr;
 
     Fix16 sprite_x = pCarSprite->field_14_xy.x;
     Fix16 sprite_y = pCarSprite->field_14_xy.y;
@@ -1104,10 +1104,10 @@ void CarAI_78::ManageTrafficCarDirection_448CE0()
     field_0_car->field_50_car_sprite->set_xyz_lazy_420600(gCurrCarAI_xpos_677C38, gCurrCarAI_ypos_677C30, gCurrCarAI_zpos_677C48);
 
     this->field_24_bf.bFlag10 = true;
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_0_car->field_50_car_sprite->field_14_xy.x.ToInt(),
-                                                                 field_0_car->field_50_car_sprite->field_14_xy.y.ToInt(),
-                                                                 field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
-    gmp_block_info* pArrowBlock = pBlock;
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_0_car->field_50_car_sprite->field_14_xy.x.ToInt(),
+                                                               field_0_car->field_50_car_sprite->field_14_xy.y.ToInt(),
+                                                               field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
+    GmpBlockInfo* pArrowBlock = pBlock;
     if (pBlock != nullptr && (pBlock->field_B_slope_type & 0xFC) > 0 && (pBlock->field_B_slope_type & 0xFC) < 0xB4 &&
         (pBlock->field_B_slope_type & 3) != 0)
     {
@@ -1682,9 +1682,9 @@ void CarAI_78::FollowRoadDirection_44A1F0()
 
     Ang16 lane_angle_copy = lane_angle;
 
-    gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(dword_677A74.ToInt(),
-                                                                       dword_677A80.ToInt(),
-                                                                       field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
+    GmpBlockInfo* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(dword_677A74.ToInt(),
+                                                                     dword_677A80.ToInt(),
+                                                                     field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
     if (!block_4DFE10 || (block_4DFE10->field_B_slope_type & 0xFC) <= 0 || (block_4DFE10->field_B_slope_type & 0xFCU) >= 0xB4 ||
         (block_4DFE10->field_B_slope_type & 3) == 0)
     {
@@ -2022,7 +2022,7 @@ void CarAI_78::FollowRoadDirection_44A1F0()
                     xpos += vec_x;
                     ypos += vec_y;
 
-                    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(xpos.ToInt(), ypos.ToInt(), zpos.ToInt());
+                    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(xpos.ToInt(), ypos.ToInt(), zpos.ToInt());
                     if (!pBlock || (pBlock->field_B_slope_type & 0xFC) <= 0 || (pBlock->field_B_slope_type & 0xFCU) >= 0xB4 ||
                         (pBlock->field_B_slope_type & 3) == 0)
                     {
@@ -2565,9 +2565,9 @@ void CarAI_78::DetectCarAhead_44D1D0()
 
         if (dword_677A74 > kFixZero && dword_677A80 > kFixZero && dword_677A74 < kFp255_677950 && dword_677A80 < kFp255_677950)
         {
-            gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(dword_677A74.ToInt(),
-                                                                         dword_677A80.ToInt(),
-                                                                         field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
+            GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(dword_677A74.ToInt(),
+                                                                       dword_677A80.ToInt(),
+                                                                       field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
 
             if (!pBlock ||
                 !(static_cast<u8>(pBlock->field_B_slope_type & 0xFC) > 0 && static_cast<u8>(pBlock->field_B_slope_type & 0xFC) < 0xB4 &&
@@ -2940,9 +2940,9 @@ void CarAI_78::Init_AI_Chase_44E0C0()
             this->field_28_junc_idx = -1;
         }
 
-        gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(gCurrCarAI_TargetX_6779F0.ToInt(),
-                                                                     gCurrCarAI_TargetY_6779F4.ToInt(),
-                                                                     gCurrCarAI_TargetZ_6779F8.ToInt());
+        GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(gCurrCarAI_TargetX_6779F0.ToInt(),
+                                                                   gCurrCarAI_TargetY_6779F4.ToInt(),
+                                                                   gCurrCarAI_TargetZ_6779F8.ToInt());
         Fix16 maybe_z = gCurrCarAI_TargetZ_6779F8;
         if (!(pBlock && (pBlock->field_B_slope_type & 0xFC) > 0 && (pBlock->field_B_slope_type & 0xFC) < 0xB4 &&
               (pBlock->field_B_slope_type & 3) != 0))
@@ -2981,9 +2981,9 @@ void CarAI_78::Init_AI_Chase_44E0C0()
             gCurrCarAI_TargetX_6779F0 = Fix16(t_x);
             gCurrCarAI_TargetY_6779F4 = Fix16(t_y);
             gCurrCarAI_TargetZ_6779F8 = Fix16(t_z);
-            gmp_block_info* pBlock_ = gMap_0x370_6F6268->get_block_4DFE10(gCurrCarAI_TargetX_6779F0.ToInt(),
-                                                                          gCurrCarAI_TargetY_6779F4.ToInt(),
-                                                                          gCurrCarAI_TargetZ_6779F8.ToInt());
+            GmpBlockInfo* pBlock_ = gMap_0x370_6F6268->get_block_4DFE10(gCurrCarAI_TargetX_6779F0.ToInt(),
+                                                                        gCurrCarAI_TargetY_6779F4.ToInt(),
+                                                                        gCurrCarAI_TargetZ_6779F8.ToInt());
             maybe_z = gCurrCarAI_TargetZ_6779F8;
             if (!(pBlock_ && (pBlock_->field_B_slope_type & 0xFC) > 0 && (pBlock_->field_B_slope_type & 0xFC) < 0xB4 &&
                   (pBlock_->field_B_slope_type & 3) != 0))
@@ -5069,9 +5069,9 @@ void CarAI_78::UpdateDrivingAI_452DF0()
         byte_677BBC = 0;
     }
 
-    gmp_block_info* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_0_car->field_50_car_sprite->field_14_xy.x.ToInt(),
-                                                                 field_0_car->field_50_car_sprite->field_14_xy.y.ToInt(),
-                                                                 field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->get_block_4DFE10(field_0_car->field_50_car_sprite->field_14_xy.x.ToInt(),
+                                                               field_0_car->field_50_car_sprite->field_14_xy.y.ToInt(),
+                                                               field_0_car->field_50_car_sprite->field_1C_zpos.ToInt());
 
     if (pBlock && (pBlock->field_B_slope_type & 0xFC) > 0 && (pBlock->field_B_slope_type & 0xFCU) < 0xB4 &&
         (pBlock->field_B_slope_type & 3) != AIR)

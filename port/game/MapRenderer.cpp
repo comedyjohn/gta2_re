@@ -23,8 +23,8 @@ DEFINE_GLOBAL(Fix16, gYCoord_6F63B8, 0x6F63B8);
 DEFINE_GLOBAL(u32, gZCoord_6F63E0, 0x6F63E0); // u32: the projection helpers pass it to Fix16(u32) (0x4926F0)
 DEFINE_GLOBAL(u32, gGradientSize_6F6480, 0x6F6480);
 DEFINE_GLOBAL(u32, gGradientLevel_6F647C, 0x6F647C);
-DEFINE_GLOBAL(gmp_block_info*, gpBlock_6F6478, 0x6F6478);
-DEFINE_GLOBAL(gmp_map_slope, gCurrentSlope_6F646C, 0x6F646C);
+DEFINE_GLOBAL(GmpBlockInfo*, gpBlock_6F6478, 0x6F6478);
+DEFINE_GLOBAL(GmpMapSlope, gCurrentSlope_6F646C, 0x6F646C);
 DEFINE_GLOBAL_ARRAY(Vert, gTileVerts_6F65A8, 8, 0x6F65A8);
 
 DEFINE_GLOBAL(u32, gZCoordTop_6F62B0, 0x6F62B0); // u32: as gZCoord_6F63E0
@@ -3497,7 +3497,7 @@ void MapRenderer::RenderFlatBlock_4F66C0()
 void MapRenderer::RenderBlockAt_4F6880(s32& pXCoord, s32& pYCoord)
 {
     port_world3d_block(pXCoord, pYCoord, gZCoord_6F63E0); // port: world3d
-    gmp_block_info* pBlock = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(pXCoord, pYCoord, gZCoord_6F63E0);
+    GmpBlockInfo* pBlock = gMap_0x370_6F6268->GetBlockClamped_4DFEE0(pXCoord, pYCoord, gZCoord_6F63E0);
     gpBlock_6F6478 = pBlock;
     if (pBlock)
     {

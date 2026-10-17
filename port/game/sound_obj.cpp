@@ -6345,7 +6345,7 @@ void sound_obj::PoliceRadioMessageGeneration_426790()
 void sound_obj::EnqueueRadioLocationPhrase_426E10(u8 xpos, u8 ypos)
 {
     char_type bUnknown = 0;
-    gmp_map_zone* pZone = nullptr;
+    GmpMapZone* pZone = nullptr;
     const u32 cop_zone = sound_obj::GetCopRadioZoneIndex_427400(xpos, ypos, &pZone);
     if (!cop_zone && !pZone)
     {
@@ -6647,7 +6647,7 @@ void sound_obj::AppendRadioMessageSuffix_4273B0()
 }
 
 // 0x427400
-u32 sound_obj::GetCopRadioZoneIndex_427400(u8 x, u8 y, gmp_map_zone** ppZone)
+u32 sound_obj::GetCopRadioZoneIndex_427400(u8 x, u8 y, GmpMapZone** ppZone)
 {
     *ppZone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(x, y, 15U);
     if (!(*ppZone) || (*ppZone)->field_5_name_length != 3)

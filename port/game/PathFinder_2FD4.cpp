@@ -6,7 +6,7 @@
 DEFINE_GLOBAL(u8, gPathFinder_SlopeZDelta_6FDEEC, 0x6FDEEC);
 DEFINE_GLOBAL(s16, gPathFinder_best_cost_6FDECE, 0x6FDECE);
 
-DEFINE_GLOBAL(PathFinder_2FD4*, gPathFinder_6FDEF0, 0x6FDEF0);
+DEFINE_GLOBAL(PathFinder*, gPathFinder_6FDEF0, 0x6FDEF0);
 
 DEFINE_GLOBAL_INIT(Fix16, kFpOne64th_6FDD50, Fix16(0x100, 0), 0x6FDD50);
 DEFINE_GLOBAL_INIT(Fix16, kFpQuarter_6FDC00, Fix16(0.25), 0x6FDC00);
@@ -45,7 +45,7 @@ DEFINE_GLOBAL(u8, gPathFinder_edge4_grid_x_6FDBF0, 0x6FDBF0);
 DEFINE_GLOBAL(u8, gPathFinder_edge4_grid_y_6FDBF1, 0x6FDBF1);
 
 // 0x554080
-bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
+bool PathFinder::CanMoveInDirection_554080(s32 path_direction)
 {
     if (field_25_xpos > 1U && field_25_xpos < 254U && field_26_ypos > 1U && field_26_ypos < 254U)
     {
@@ -61,7 +61,7 @@ bool PathFinder_2FD4::CanMoveInDirection_554080(s32 path_direction)
 }
 
 // 0x5540e0
-char_type PathFinder_2FD4::TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u8 curr_zpos, u8 desired_xpos, u8 desired_ypos)
+char_type PathFinder::TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u8 curr_zpos, u8 desired_xpos, u8 desired_ypos)
 {
     field_25_xpos = curr_xpos;
     field_26_ypos = curr_ypos;
@@ -70,7 +70,7 @@ char_type PathFinder_2FD4::TestDiagonalMove_5540E0(u8 curr_xpos, u8 curr_ypos, u
 }
 
 // 0x554110
-char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_ypos)
+char_type PathFinder::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_ypos)
 {
 
     gPathFinder_SlopeZDelta_6FDEEC = 0;
@@ -256,13 +256,13 @@ char_type PathFinder_2FD4::CanMoveDiagonally_554110(u8 desired_xpos, u8 desired_
 }
 
 // 0x5545c0
-void PathFinder_2FD4::ClearGrid_5545C0()
+void PathFinder::ClearGrid_5545C0()
 {
     memset(this->field_40_grid, 0, sizeof(this->field_40_grid));
 }
 
 // 0x5545e0
-void PathFinder_2FD4::Init_5545E0()
+void PathFinder::Init_5545E0()
 {
     memset(this->field_40_grid, 0, sizeof(this->field_40_grid));
     field_0_ped_id = 0; // was never set before the first RemovePed_554620 (valgrind)
@@ -275,7 +275,7 @@ void PathFinder_2FD4::Init_5545E0()
 }
 
 // 0x554620
-void PathFinder_2FD4::RemovePed_554620(s32 ped_id)
+void PathFinder::RemovePed_554620(s32 ped_id)
 {
     if (ped_id == field_0_ped_id)
     {
@@ -285,7 +285,7 @@ void PathFinder_2FD4::RemovePed_554620(s32 ped_id)
 }
 
 // 0x554640
-char_type PathFinder_2FD4::EvaluateGridCell_554640()
+char_type PathFinder::EvaluateGridCell_554640()
 {
     if (field_23_grid_x <= 32)
     {
@@ -294,7 +294,7 @@ char_type PathFinder_2FD4::EvaluateGridCell_554640()
             if (field_22_zpos <= 8)
             {
                 field_1C_grid_idx = field_23_grid_x + 34 * field_24_grid_y;
-                PathNode_8* p8 = &field_40_grid[field_1C_grid_idx]; // 1122 len
+                PathNode* p8 = &field_40_grid[field_1C_grid_idx]; // 1122 len
                 if (p8->field_1_idx2 == 0)
                 {
                     return 1;
@@ -348,7 +348,7 @@ char_type PathFinder_2FD4::EvaluateGridCell_554640()
 }
 
 // 0x554710
-void PathFinder_2FD4::AddGridCell_554710()
+void PathFinder::AddGridCell_554710()
 {
     u16 cost_scale;
     // zpos assigned in both arms (not `zpos = field_22_zpos; if (..) zpos += ..;`): the extra
@@ -373,7 +373,7 @@ void PathFinder_2FD4::AddGridCell_554710()
     }
 
     field_1C_grid_idx = field_23_grid_x + 34 * field_24_grid_y;
-    PathNode_8* p8 = &field_40_grid[field_1C_grid_idx];
+    PathNode* p8 = &field_40_grid[field_1C_grid_idx];
     if (field_40_grid[field_1C_grid_idx].field_0_idx1 == 1 && zpos == p8->field_2_xpos)
     {
         p8->field_0_idx1 = 0;
@@ -459,18 +459,18 @@ void PathFinder_2FD4::AddGridCell_554710()
 }
 
 // 0x5548c0
-bool PathFinder_2FD4::ProcessGridCell_5548C0()
+bool PathFinder::ProcessGridCell_5548C0()
 {
-    char_type cell_result = PathFinder_2FD4::EvaluateGridCell_554640();
+    char_type cell_result = PathFinder::EvaluateGridCell_554640();
     if (cell_result == 1)
     {
-        if (PathFinder_2FD4::CanMoveDiagonally_554110(field_20_xpos, field_21_ypos))
+        if (PathFinder::CanMoveDiagonally_554110(field_20_xpos, field_21_ypos))
         {
-            PathFinder_2FD4::AddGridCell_554710();
+            PathFinder::AddGridCell_554710();
         }
         else
         {
-            PathNode_8* pCell = &field_40_grid[field_1C_grid_idx];
+            PathNode* pCell = &field_40_grid[field_1C_grid_idx];
             if (pCell->field_0_idx1 == 1 && pCell->field_3_ypos == 0)
             {
                 pCell->field_0_idx1 = 0;
@@ -488,7 +488,7 @@ bool PathFinder_2FD4::ProcessGridCell_5548C0()
 }
 
 // 0x554920
-void PathFinder_2FD4::RestoreSavedPosition_554920()
+void PathFinder::RestoreSavedPosition_554920()
 {
     switch (gPathFinder_angle_face_6FDD38)
     {
@@ -538,25 +538,25 @@ void PathFinder_2FD4::RestoreSavedPosition_554920()
 }
 
 // 0x554a90
-s32 PathFinder_2FD4::IsFirstPassenger_554A90(Ped* pPed)
+s32 PathFinder::IsFirstPassenger_554A90(Ped* pPed)
 {
     return field_3C_ped_list.field_0_pFirstPed->field_0_char_ped == pPed;
 }
 
 // 0x554ab0
-char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
-                                              Ped* pPed,
-                                              u8 x_start,
-                                              u8 y_start,
-                                              u8 z_start,
-                                              u8 x_end,
-                                              u8 y_end,
-                                              u8 z_end,
-                                              s32 angle_face,
-                                              u8* pOutPathFailCount)
+char_type PathFinder::ComputePath_554AB0(s32 ped_id,
+                                         Ped* pPed,
+                                         u8 x_start,
+                                         u8 y_start,
+                                         u8 z_start,
+                                         u8 x_end,
+                                         u8 y_end,
+                                         u8 z_end,
+                                         s32 angle_face,
+                                         u8* pOutPathFailCount)
 {
-    PathNode_8* pBestNode; // eax
-    PathNode_8* pCell; // ecx
+    PathNode* pBestNode; // eax
+    PathNode* pCell; // ecx
     u8 yCoord;
     u8 idx1;
     u8 idx2;
@@ -603,7 +603,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
         field_2FD1_time_out_counter = 0;
         gPathFinder_angle_face_6FDD38 = angle_face;
         field_4_bFindTileMode = 0;
-        PathFinder_2FD4::ClearGrid_5545C0();
+        PathFinder::ClearGrid_5545C0();
 
         if (!gMap_0x370_6F6268->IsGradientSlopeAt_466CF0(x_start, y_start, z_start))
         {
@@ -618,7 +618,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
         field_23_grid_x = 16;
         field_24_grid_y = 16;
         field_1B_direction = 66;
-        PathFinder_2FD4::AddGridCell_554710();
+        PathFinder::AddGridCell_554710();
         field_8_pNode = field_2350_nodes;
         field_1C_grid_idx = 560;
         field_40_grid[field_1C_grid_idx].field_6_cost = 0;
@@ -683,7 +683,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 - 1;
             field_1B_direction = 1;
 
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -694,7 +694,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 - 1;
             field_1B_direction = 5;
 
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -705,7 +705,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9;
             field_1B_direction = 2;
 
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -716,7 +716,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 + 1;
             field_1B_direction = 6;
 
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -726,7 +726,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_23_grid_x = gPathFinder_best_grid_x_6FDEC8;
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 + 1;
             field_1B_direction = 3;
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -736,7 +736,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_23_grid_x = gPathFinder_best_grid_x_6FDEC8 - 1;
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 + 1;
             field_1B_direction = 7;
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -746,7 +746,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_23_grid_x = gPathFinder_best_grid_x_6FDEC8 - 1;
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9;
             field_1B_direction = 4;
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -757,7 +757,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 - 1;
             field_1B_direction = 8;
 
-            if (PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (PathFinder::ProcessGridCell_5548C0())
             {
                 goto LABEL_35;
             }
@@ -765,7 +765,7 @@ char_type PathFinder_2FD4::ComputePath_554AB0(s32 ped_id,
             {
                 field_18_bSearching = 0;
                 field_19_unused = 1;
-                PathFinder_2FD4::RestoreSavedPosition_554920();
+                PathFinder::RestoreSavedPosition_554920();
                 if (gPathFinder_best_x_6FDECA)
                 {
                     goto LABEL_30;
@@ -909,12 +909,12 @@ LABEL_35:
         }
     }
 LABEL_61:
-    PathFinder_2FD4::RemovePed_554620(field_0_ped_id);
+    PathFinder::RemovePed_554620(field_0_ped_id);
     return 1;
 }
 
 // 0x5552b0
-bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer)
+bool PathFinder::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* xpos, u8* ypos, u8* zpos, char_type maybe_timer)
 {
     u8 j = 0;
     if (field_38_bComputePathInProgress && !maybe_timer)
@@ -931,7 +931,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     field_25_xpos = default_pos;
     field_28_grid_origin_x = *xpos - 16;
     field_29_grid_origin_y = *ypos - 16;
-    PathFinder_2FD4::ClearGrid_5545C0();
+    PathFinder::ClearGrid_5545C0();
     field_E_xStart = *xpos;
     field_F_yStart = *ypos;
     field_10_zStart = *zpos;
@@ -955,7 +955,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     field_20_xpos = field_E_xStart;
     field_21_ypos = field_F_yStart;
     field_1B_direction = 66;
-    PathFinder_2FD4::AddGridCell_554710();
+    PathFinder::AddGridCell_554710();
     field_8_pNode = field_2350_nodes;
     field_1C_grid_idx = 560;
     field_40_grid[field_1C_grid_idx].field_6_cost = field_16_start_cost;
@@ -965,7 +965,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
     while (field_C_node_count)
     {
         bListWasEmpty = false;
-        PathNode_8* pIter = field_2350_nodes;
+        PathNode* pIter = field_2350_nodes;
         field_8_pNode = field_2350_nodes;
 
         for (s32 i = 0; i < field_C_node_count - 1; i++)
@@ -1043,7 +1043,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
         field_23_grid_x = gPathFinder_best_grid_x_6FDEC8;
         field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 - 1;
         field_1B_direction = 1;
-        if (!PathFinder_2FD4::ProcessGridCell_5548C0())
+        if (!PathFinder::ProcessGridCell_5548C0())
         {
             field_20_xpos = gPathFinder_best_x_6FDECA + 1;
             field_21_ypos = gPathFinder_best_y_6FDECB;
@@ -1051,7 +1051,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
             field_23_grid_x = gPathFinder_best_grid_x_6FDEC8 + 1;
             field_24_grid_y = gPathFinder_best_grid_y_6FDEC9;
             field_1B_direction = 2;
-            if (!PathFinder_2FD4::ProcessGridCell_5548C0())
+            if (!PathFinder::ProcessGridCell_5548C0())
             {
                 field_20_xpos = gPathFinder_best_x_6FDECA;
                 field_21_ypos = gPathFinder_best_y_6FDECB + 1;
@@ -1059,7 +1059,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
                 field_23_grid_x = gPathFinder_best_grid_x_6FDEC8;
                 field_24_grid_y = gPathFinder_best_grid_y_6FDEC9 + 1;
                 field_1B_direction = 3;
-                if (!PathFinder_2FD4::ProcessGridCell_5548C0())
+                if (!PathFinder::ProcessGridCell_5548C0())
                 {
                     field_20_xpos = gPathFinder_best_x_6FDECA - 1;
                     field_21_ypos = gPathFinder_best_y_6FDECB;
@@ -1067,7 +1067,7 @@ bool PathFinder_2FD4::FindNearbyTileMatchingSlopeType_5552B0(u8 block_type, u8* 
                     field_23_grid_x = gPathFinder_best_grid_x_6FDEC8 - 1;
                     field_24_grid_y = gPathFinder_best_grid_y_6FDEC9;
                     field_1B_direction = 4;
-                    if (!PathFinder_2FD4::ProcessGridCell_5548C0())
+                    if (!PathFinder::ProcessGridCell_5548C0())
                     {
                         ++field_16_start_cost;
                         if (++j <= 6 || maybe_timer != 0)

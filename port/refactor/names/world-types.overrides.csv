@@ -1,0 +1,7 @@
+old,new
+Light_28,Light
+Light_1D4CC,LightManager
+RouteFinder_10,RouteNode
+RouteFinder_200,RouteJunctionList
+TileAnim_2,TileAnimSet
+TileAnim_18,TileAnimation

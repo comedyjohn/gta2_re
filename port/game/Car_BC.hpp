@@ -17,7 +17,7 @@
 #include "sprite.hpp"
 #include <wchar.h>
 
-struct gmp_zone_info;
+struct GmpZoneInfo;
 struct SCR_THREAD;
 class Camera_0xBC;
 class Object_2C;
@@ -183,7 +183,7 @@ class CarManager_6C
     }
 
     void DistributeCarsByRating_444980();
-    u32 SelectTrafficCarModel_444AB0(Player* pPlayer, gmp_zone_info* pZoneInfo, Fix16 density_scale, u16* pOut);
+    u32 SelectTrafficCarModel_444AB0(Player* pPlayer, GmpZoneInfo* pZoneInfo, Fix16 density_scale, u16* pOut);
     char_type NoRefs_444CE0(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
     Car_BC* SpawnCarAtRoadDirection_444CF0(s32 car_model_type, Fix16 xpos, Fix16 ypos, Fix16 zpos);
     Car_BC* GetNearestCarFromCoord_444F80(Fix16 x, Fix16 y, Fix16 z, Ped* pPed);
@@ -1429,7 +1429,7 @@ struct TrafficSpawner_14
     s8 field_A_unused;
     s8 field_B_unused;
     Player* field_C_player;
-    gmp_zone_info* field_10_zone;
+    GmpZoneInfo* field_10_zone;
 };
 
 EXTERN_GLOBAL(Car_BC_Pool*, gCar_BC_Pool_67792C);

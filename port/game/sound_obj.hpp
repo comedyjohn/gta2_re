@@ -8,7 +8,7 @@
 
 class Car_BC;
 class Object_2C;
-class gmp_map_zone;
+class GmpMapZone;
 class CollisionEvent_28;
 class SoundObject_10;
 
@@ -393,7 +393,7 @@ class sound_obj
     void EnqueueRadioCrimeCallout_427340(s32 crime_word, u8 loc_a, u8 loc_b);
     void AppendRadioMessageSuffix_4273B0();
     void nullsub_4();
-    u32 GetCopRadioZoneIndex_427400(u8 x, u8 y, gmp_map_zone** ppZone);
+    u32 GetCopRadioZoneIndex_427400(u8 x, u8 y, GmpMapZone** ppZone);
 
     void ProcessType7_Weapon_42A500(s32 idx);
 

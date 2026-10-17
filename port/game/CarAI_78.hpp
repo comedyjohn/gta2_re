@@ -10,7 +10,7 @@
 class Car_BC;
 class Sprite;
 class CarChaseTask_40;
-struct gmp_block_info;
+struct GmpBlockInfo;
 
 namespace car_ai_direction
 {
@@ -44,7 +44,7 @@ class CarAI_78
     void DoShortcutsUsingJunctions_447970();
     inline void TurnAround_447970();
     bool GoToBlock_447CA0(u8 x, u8 y, u8 z, s32 maybe_direction);
-    char_type TrySetTargetDirectionFromArrows_447D40(gmp_block_info* pBlock);
+    char_type TrySetTargetDirectionFromArrows_447D40(GmpBlockInfo* pBlock);
     bool IsClockwiseTurning_448270();
     void BrakeForBlockedRoadAhead_4482C0();
     void CheckRoadAhead_448770();

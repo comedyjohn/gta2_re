@@ -15,7 +15,7 @@
 #include <cstdio>
 
 class Player;
-class gmp_map_zone;
+class GmpMapZone;
 class PedGroup;
 class Weapon_30;
 class Gang_144;
@@ -163,9 +163,9 @@ class Ped
     void ClearInvulnerable_45C050();
     void SetSpriteFlagIfInvulnerable_45C070();
     void RestoreCarOrPedHealth();
-    void SpawnCharInZone_45C0C0(gmp_map_zone* pZone);
+    void SpawnCharInZone_45C0C0(GmpMapZone* pZone);
     void PoolDeallocate();
-    void RespawnPed_45C350(gmp_map_zone* pZone);
+    void RespawnPed_45C350(GmpMapZone* pZone);
     void ResetForPlayerRespawn_45C410();
     void UpdatePositionFromCar_45C4B0();
     void ChangeNextPedState1_45C500(s32 new_state);

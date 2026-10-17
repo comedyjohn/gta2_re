@@ -165,7 +165,7 @@ Hud_Pager_C::~Hud_Pager_C()
 // ----------------------------------------------------
 
 // 0x4DEF00
-wchar_t* gmp_map_zone::get_zone_str_4DEF00()
+wchar_t* GmpMapZone::get_zone_str_4DEF00()
 {
     char buf[4];
     if (field_5_name_length == 3)
@@ -2714,9 +2714,9 @@ void Hud_MapZone_98::GetXPosOffset_5D5AD0()
 // ----------------------------------------------------
 
 // 0x5d5af0
-void Hud_MapZone_98::ShowZoneName_5D5AF0(gmp_map_zone* pZone1, gmp_map_zone* pZone2)
+void Hud_MapZone_98::ShowZoneName_5D5AF0(GmpMapZone* pZone1, GmpMapZone* pZone2)
 {
-    gmp_map_zone* pArg2Or3 = pZone2;
+    GmpMapZone* pArg2Or3 = pZone2;
     if (!pZone2)
     {
         pArg2Or3 = pZone1;
@@ -2744,8 +2744,8 @@ void Hud_MapZone_98::UpdateZoneName_5D5B60()
     u8 z;
 
     gGame_0x40_67E008->field_38_local_player->GetPosU8_569840(x, y, z);
-    gmp_map_zone* navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(x, y, GmpZoneType::kNavigation);
-    gmp_map_zone* local_navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(x, y, GmpZoneType::kLocalNavigation);
+    GmpMapZone* navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(x, y, GmpZoneType::kNavigation);
+    GmpMapZone* local_navigation_zone = gMap_0x370_6F6268->zone_by_pos_and_type_4DF4D0(x, y, GmpZoneType::kLocalNavigation);
 
     if (navigation_zone || local_navigation_zone)
     {

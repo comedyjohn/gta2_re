@@ -1154,7 +1154,7 @@ void Ped::RestoreCarOrPedHealth()
 }
 
 // 0x45c0c0
-void Ped::SpawnCharInZone_45C0C0(gmp_map_zone* pZone)
+void Ped::SpawnCharInZone_45C0C0(GmpMapZone* pZone)
 {
     u8 next = 0;
 
@@ -1243,7 +1243,7 @@ void Ped::PoolDeallocate()
 }
 
 // 0x45c350
-void Ped::RespawnPed_45C350(gmp_map_zone* pZone)
+void Ped::RespawnPed_45C350(GmpMapZone* pZone)
 {
     if (field_168_game_object)
     {
@@ -2490,7 +2490,7 @@ void Ped::SetOccupation_45EE00(u32 occupation)
 // 0x45ee70
 void Ped::EnterPublicTransport_45EE70()
 {
-    for (gmp_map_zone* pZoneIter = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(field_1AC_cam.x.ToInt(), field_1AC_cam.y.ToInt()); pZoneIter;
+    for (GmpMapZone* pZoneIter = gMap_0x370_6F6268->first_zone_by_pos_4DF6A0(field_1AC_cam.x.ToInt(), field_1AC_cam.y.ToInt()); pZoneIter;
          pZoneIter = gMap_0x370_6F6268->next_zone_4DF770())
     {
         if (gDebugSkipTrains || pZoneIter->field_0_zone_type != GmpZoneType::kRailwayStationPlatform)

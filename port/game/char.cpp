@@ -3422,7 +3422,7 @@ void Char_B4::state_0_54DDF0()
     Ang16 new_rotation(0); //new_rotation = 0;
 
     u8 block_type;
-    gmp_block_info* pBlock;
+    GmpBlockInfo* pBlock;
 
     if ((field_58_flags & 1) == 0 && gCharB4_Saved_Zpos_6FD7FC.GetFracValue() == kFixZero)
     {
@@ -4664,7 +4664,7 @@ bool Char_B4::CanReachTile_550090(u8 xpos, u8 ypos)
 
 namespace
 {
-inline s32 IsOnSlopeBlock(gmp_block_info* pBlock)
+inline s32 IsOnSlopeBlock(GmpBlockInfo* pBlock)
 {
     if ((pBlock->field_B_slope_type & 0xFC) != 0 && (pBlock->field_B_slope_type & 0xFC) != 0xFC)
     {
@@ -4720,7 +4720,7 @@ void Char_B4::state_1_5504F0()
     u8 unk_xpos = gCharB4_Saved_Xpos_6FD7F8.ToUInt8();
     u8 unk_ypos = gCharB4_Saved_Ypos_6FD800.ToUInt8();
     u8 block_type;
-    gmp_block_info* pBlock;
+    GmpBlockInfo* pBlock;
     if (field_58_flags_bf.bOnSlope == false && gCharB4_Saved_Zpos_6FD7FC.GetFracValue() == kFixZero && gCharB4_Saved_Zpos_6FD7FC > kFixZero)
     {
         block_type = gMap_0x370_6F6268->GetBlockTypeAtCoord_420420(gCharB4_Saved_Xpos_6FD7F8.ToInt(),
@@ -5657,7 +5657,7 @@ void Char_B4::state_5_551BB0()
 void Char_B4::state_7_551CB0()
 {
     u8 block_type;
-    gmp_block_info* block_4DFE10;
+    GmpBlockInfo* block_4DFE10;
     field_38_velocity = kZeroVelocity_6FD7C0;
     if (field_10_char_state != CharB4State::kJumping)
     {

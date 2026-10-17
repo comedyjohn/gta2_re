@@ -172,7 +172,7 @@ Disabled for good, with the reason in `.clang-tidy`: `modernize-use-trailing-ret
       'port/(game|platform|tests)/'`, and the `CheckOptions` for `readability-identifier-naming` (written in
       phase 2), `readability-function-size` (`LineThreshold: 150`), `readability-function-cognitive-complexity`
       (`Threshold: 40`).
-- [ ] `port/tools/refactor/tidy_ratchet.py`:
+- [x] `port/tools/refactor/tidy_ratchet.py`:
       - `--baseline <build-dir>`: runs clang-tidy on every file (8 jobs in parallel; about 15 minutes),
         writes `port/refactor/tidy-baseline.csv` (`file,check,count`).
       - `--check <build-dir> [files...]`: runs on the given files (or the ones changed since `master`) and

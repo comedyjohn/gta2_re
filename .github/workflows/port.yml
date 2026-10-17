@@ -19,3 +19,118 @@ jobs:
         shopt -s globstar nullglob
         clang-format --dry-run -Werror port/game/*.{cpp,hpp,h} port/platform/**/*.{cpp,h} port/tests/*.{cpp,hpp}
       shell: bash
+
+  # Every preset builds with -Werror (the presets set GTA2_WERROR=ON). aarch64 is not here yet: it
+  # needs the cross toolchain of phase 7.
+  port-build:
+    runs-on: ubuntu-24.04
+    name: port-build (${{ matrix.preset }})
+    strategy:
+      fail-fast: false
+      matrix:
+        preset: [linux64, clang64, noworld3d64]
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install the toolchain
+      run: sudo apt-get update -qq && sudo apt-get install -y -qq ninja-build cmake libsdl2-dev clang-18 g++
+    - name: Build
+      run: cd port && cmake --preset ${{ matrix.preset }} && cmake --build --preset ${{ matrix.preset }}
+    - name: Every header compiles on its own
+      if: matrix.preset == 'clang64'
+      run: port/tools/refactor/header_check.sh build_port/clang64
+
+  port-tests:
+    runs-on: ubuntu-24.04
+    name: port-tests
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install the toolchain
+      run: sudo apt-get update -qq && sudo apt-get install -y -qq ninja-build cmake libsdl2-dev g++ g++-multilib xvfb
+    - name: 32-bit SDL
+      run: port/tools/setup_sdl32.sh $HOME/sdl32
+    - name: Build linux32 and linux64
+      run: |
+        cd port
+        for p in linux32 linux64; do cmake --preset $p && cmake --build --preset $p; done
+    - name: Unit tests
+      run: ctest --test-dir build_port/linux64 --output-on-failure
+    - name: Renderer self-test
+      run: xvfb-run -a build_port/linux64/gta2 --selftest
+    - name: Mixer self-test
+      run: build_port/linux64/gta2 --audiotest
+    - name: Maths tables
+      run: build_port/linux32/gta2 --simcheck
+    - name: Network
+      run: port/tools/nettest.sh build_port/linux32 build_port/linux64
+
+  port-sanitizers:
+    runs-on: ubuntu-24.04
+    name: port-sanitizers (${{ matrix.preset }})
+    strategy:
+      fail-fast: false
+      matrix:
+        preset: [asan64, ubsan64]
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install the toolchain
+      run: sudo apt-get update -qq && sudo apt-get install -y -qq ninja-build cmake libsdl2-dev g++
+    - name: Build and run the unit tests
+      run: |
+        cd port
+        cmake --preset ${{ matrix.preset }} && cmake --build --preset ${{ matrix.preset }}
+        ASAN_OPTIONS=detect_leaks=0 ctest --test-dir ../build_port/${{ matrix.preset }} --output-on-failure
+
+  # The ratchet of port/refactor/tidy-baseline.csv: on pull requests, the files the PR changes
+  # (the full run is `tidy_ratchet.py --baseline`, nightly or by hand)
+  port-tidy:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    name: port-tidy
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+    - name: Install the toolchain
+      run: |
+        sudo apt-get update -qq && sudo apt-get install -y -qq ninja-build cmake libsdl2-dev clang-18
+        pip install -r port/tools/refactor/requirements.txt
+    - name: Configure
+      run: cd port && cmake --preset clang64
+    - name: Ratchet on the changed files
+      run: TIDY=$(which clang-tidy) python3 port/tools/refactor/tidy_ratchet.py --check build_port/clang64
+
+  port-metrics:
+    runs-on: ubuntu-24.04
+    name: port-metrics
+    steps:
+    - uses: actions/checkout@v4
+    - name: metrics.py
+      run: |
+        python3 port/tools/refactor/metrics.py --subsystems | tee metrics.txt >> "$GITHUB_STEP_SUMMARY"
+    - uses: actions/upload-artifact@v4
+      with:
+        name: port-metrics
+        path: metrics.txt
+
+  # Needs the game data and the replay corpus: only a self-hosted runner has them (decision 3 of
+  # port/refactor/EXECUTOR.md). Without such a runner this job waits; run replaytest.sh by hand.
+  port-replays:
+    runs-on: [self-hosted, gta2-data]
+    name: port-replays
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Build linux32, linux64 and clang64
+      run: |
+        cd port
+        for p in linux32 linux64 clang64; do cmake --preset $p && cmake --build --preset $p; done
+    - name: Replays
+      run: port/tools/replaytest.sh build_port/linux32 build_port/linux64 build_port/clang64

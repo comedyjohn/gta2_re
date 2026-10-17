@@ -185,13 +185,13 @@ Disabled for good, with the reason in `.clang-tidy`: `modernize-use-trailing-ret
       where a header only needs a pointer. Headers that pull in `<windows.h>` without needing it go first
       (`fix16.hpp` does, and every file includes it).
 - [x] Every header compiles on its own: CI builds a generated `.cpp` per header that includes only it.
-- [ ] Measure build time before and after (`ninja -t compdb`, `time cmake --build` from clean).
+- [x] Measure build time before and after (`ninja -t compdb`, `time cmake --build` from clean).
 
 ## 1.7 Build and CI
 
 - [ ] `CMakePresets.json`: `linux32`, `linux64`, `clang64`, `asan64`, `ubsan64`, `tsan64` (phase 7),
       `aarch64`, each with `CMAKE_EXPORT_COMPILE_COMMANDS=ON`; `ccache` when found.
-- [ ] CI workflow `port.yml` (separate from the decompilation's `ci.yml`):
+- [x] CI workflow `port.yml` (separate from the decompilation's `ci.yml`):
 
 | Job | Runs | When |
 |---|---|---|

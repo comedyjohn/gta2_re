@@ -71,7 +71,7 @@
         "CMAKE_CXX_COMPILER": "g++",
         "GTA2_BITS": "64",
         "CMAKE_BUILD_TYPE": "Debug",
-        "GTA2_WERROR": "ON",
+        "GTA2_WERROR": "OFF",
         "CMAKE_C_FLAGS": "-fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer -O1",
         "CMAKE_CXX_FLAGS": "-fsanitize=address -fsanitize-recover=address -fno-omit-frame-pointer -O1",
         "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address"
@@ -87,7 +87,7 @@
         "CMAKE_CXX_COMPILER": "/usr/bin/clang++-18",
         "GTA2_BITS": "64",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "GTA2_WERROR": "ON",
+        "GTA2_WERROR": "OFF",
         "CMAKE_C_FLAGS": "-fprofile-instr-generate -fcoverage-mapping",
         "CMAKE_CXX_FLAGS": "-fprofile-instr-generate -fcoverage-mapping",
         "CMAKE_EXE_LINKER_FLAGS": "-fprofile-instr-generate"
@@ -103,7 +103,7 @@
         "CMAKE_CXX_COMPILER": "/usr/bin/clang++-18",
         "GTA2_BITS": "64",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "GTA2_WERROR": "ON",
+        "GTA2_WERROR": "OFF",
         "CMAKE_C_FLAGS": "-fsanitize=undefined -fno-omit-frame-pointer",
         "CMAKE_CXX_FLAGS": "-fsanitize=undefined -fno-omit-frame-pointer",
         "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined"

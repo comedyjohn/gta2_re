@@ -1,6 +1,5 @@
 #include "file.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "memory.hpp"

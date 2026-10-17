@@ -1,7 +1,6 @@
 #include "gtx_0x106C.hpp"
 #include "Frontend.hpp" // TODO: for some globals, prob should be put some where else
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "chunk.hpp"
 #include "enums.hpp"
 #include "error.hpp"

@@ -1,6 +1,5 @@
 #include "text_0x14.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "chunk.hpp"
 #include "enums.hpp"
 #include "error.hpp"

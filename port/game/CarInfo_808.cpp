@@ -1,5 +1,4 @@
 #include "CarInfo_808.hpp"
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include "file.hpp"

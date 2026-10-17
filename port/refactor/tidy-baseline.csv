@@ -146,7 +146,7 @@ port/game/CarInfo_808.cpp,cppcoreguidelines-pro-type-member-init,1
 port/game/CarInfo_808.cpp,cppcoreguidelines-pro-type-reinterpret-cast,1
 port/game/CarInfo_808.cpp,cppcoreguidelines-pro-type-vararg,5
 port/game/CarInfo_808.cpp,misc-const-correctness,14
-port/game/CarInfo_808.cpp,misc-include-cleaner,19
+port/game/CarInfo_808.cpp,misc-include-cleaner,18
 port/game/CarInfo_808.cpp,modernize-avoid-c-arrays,4
 port/game/CarInfo_808.cpp,modernize-deprecated-headers,2
 port/game/CarInfo_808.cpp,modernize-raw-string-literal,4
@@ -1410,7 +1410,7 @@ port/game/PlyDat_2BC0.cpp,cppcoreguidelines-pro-type-member-init,5
 port/game/PlyDat_2BC0.cpp,cppcoreguidelines-pro-type-reinterpret-cast,7
 port/game/PlyDat_2BC0.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/PlyDat_2BC0.cpp,misc-const-correctness,4
-port/game/PlyDat_2BC0.cpp,misc-include-cleaner,17
+port/game/PlyDat_2BC0.cpp,misc-include-cleaner,16
 port/game/PlyDat_2BC0.cpp,modernize-avoid-c-arrays,10
 port/game/PlyDat_2BC0.cpp,modernize-raw-string-literal,1
 port/game/PlyDat_2BC0.cpp,readability-convert-member-functions-to-static,2
@@ -1940,7 +1940,6 @@ port/game/debug.cpp,cert-err33-c,6
 port/game/debug.cpp,cppcoreguidelines-avoid-non-const-global-variables,83
 port/game/debug.cpp,cppcoreguidelines-owning-memory,6
 port/game/debug.cpp,misc-const-correctness,1
-port/game/debug.cpp,misc-include-cleaner,1
 port/game/debug.cpp,readability-convert-member-functions-to-static,1
 port/game/debug.cpp,readability-implicit-bool-conversion,6
 port/game/debug.cpp,readability-simplify-boolean-expr,1
@@ -1991,7 +1990,7 @@ port/game/file.cpp,cppcoreguidelines-owning-memory,17
 port/game/file.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,2
 port/game/file.cpp,cppcoreguidelines-pro-type-vararg,35
 port/game/file.cpp,misc-const-correctness,9
-port/game/file.cpp,misc-include-cleaner,7
+port/game/file.cpp,misc-include-cleaner,6
 port/game/file.cpp,modernize-avoid-c-arrays,1
 port/game/file.cpp,modernize-deprecated-headers,2
 port/game/file.cpp,modernize-raw-string-literal,34
@@ -2065,7 +2064,7 @@ port/game/gtx_0x106C.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/gtx_0x106C.cpp,cppcoreguidelines-pro-type-reinterpret-cast,27
 port/game/gtx_0x106C.cpp,cppcoreguidelines-pro-type-vararg,20
 port/game/gtx_0x106C.cpp,misc-const-correctness,13
-port/game/gtx_0x106C.cpp,misc-include-cleaner,11
+port/game/gtx_0x106C.cpp,misc-include-cleaner,10
 port/game/gtx_0x106C.cpp,modernize-deprecated-headers,2
 port/game/gtx_0x106C.cpp,modernize-raw-string-literal,20
 port/game/gtx_0x106C.cpp,performance-no-int-to-ptr,2
@@ -2256,7 +2255,7 @@ port/game/registry.cpp,cppcoreguidelines-pro-type-const-cast,8
 port/game/registry.cpp,cppcoreguidelines-pro-type-reinterpret-cast,25
 port/game/registry.cpp,cppcoreguidelines-pro-type-vararg,42
 port/game/registry.cpp,misc-const-correctness,2
-port/game/registry.cpp,misc-include-cleaner,22
+port/game/registry.cpp,misc-include-cleaner,21
 port/game/registry.cpp,modernize-avoid-c-arrays,7
 port/game/registry.cpp,modernize-raw-string-literal,47
 port/game/registry.cpp,readability-convert-member-functions-to-static,9
@@ -2400,7 +2399,7 @@ port/game/text_0x14.cpp,cppcoreguidelines-pro-type-member-init,3
 port/game/text_0x14.cpp,cppcoreguidelines-pro-type-reinterpret-cast,7
 port/game/text_0x14.cpp,cppcoreguidelines-pro-type-vararg,3
 port/game/text_0x14.cpp,misc-const-correctness,1
-port/game/text_0x14.cpp,misc-include-cleaner,15
+port/game/text_0x14.cpp,misc-include-cleaner,14
 port/game/text_0x14.cpp,modernize-avoid-c-arrays,9
 port/game/text_0x14.cpp,modernize-raw-string-literal,1
 port/game/text_0x14.cpp,performance-no-int-to-ptr,1

@@ -1,6 +1,5 @@
 #include "debug.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "registry.hpp"
 #include <cstdio>
 

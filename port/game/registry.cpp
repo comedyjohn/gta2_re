@@ -1,6 +1,5 @@
 #include "registry.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "enums.hpp"
 #include "error.hpp"
 #include <cstdio>

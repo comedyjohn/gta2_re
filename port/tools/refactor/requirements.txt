@@ -3,3 +3,4 @@ clang-tidy==18.1.8
 clang-format==18.1.8
 libclang==18.1.1
 PyYAML==6.0.2
+pytest==8.3.3

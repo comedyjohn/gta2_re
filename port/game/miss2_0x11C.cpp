@@ -1,6 +1,3 @@
-// This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFpZero_6F77C0
-
 #include "miss2_0x11C.hpp"
 #include "CarAI_78.hpp"
 #include "CarPhysics_B0.hpp"
@@ -74,7 +71,6 @@ DEFINE_GLOBAL(miss2_0x11C_Pool*, miss2_0x11C_Pool_6F8064, 0x6F8064);
 DEFINE_GLOBAL(SCR_POINTER*, gBasePtr_6F8070, 0x6F8070);
 DEFINE_GLOBAL_INIT(Fix16, kFpOneAndHalf_6F76DC, Fix16(0x6000, 0), 0x6F76DC);
 DEFINE_GLOBAL_INIT(Fix16, kFpHalf_6F75F0, Fix16(0x2000, 0), 0x6F75F0);
-DEFINE_GLOBAL(Fix16, kFpZero_6F77C0, 0x6F77C0);
 DEFINE_GLOBAL_INIT(Ang16, kDegreesToAng16_6F8044, Ang16(0x4), 0x6F8044);
 DEFINE_GLOBAL_INIT(Fix16, kFp255_6F7570, Fix16(0x3FC000, 0), 0x6F7570);
 EXTERN_GLOBAL(Ang16, kAngZero_6F804C);
@@ -492,8 +488,8 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
                                                                            rotation,
                                                                            pCmd->field_1C_car_id);
             pPointer->field_8_car->field_50_car_sprite->DispatchCollisionEvent_5A3100(pTrailerCar->field_50_car_sprite,
-                                                                                      kFpZero_6F77C0,
-                                                                                      kFpZero_6F77C0,
+                                                                                      kFixZero,
+                                                                                      kFixZero,
                                                                                       kAng180_6F771E);
             pTrailerCar->IncrementCarStats_443D70(car_kind::mission_car_8);
         }
@@ -878,7 +874,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
 {
     if (pCmd->field_2_type == SCRCMD_DOOR_DECLARE_S1)
     {
-        if (pCmd->field_14_check.field_C_size.field_0_x == kFpZero_6F77C0 && pCmd->field_14_check.field_C_size.field_4_y == kFpZero_6F77C0)
+        if (pCmd->field_14_check.field_C_size.field_0_x == kFixZero && pCmd->field_14_check.field_C_size.field_4_y == kFixZero)
         {
             pCmd->field_8_door = gDoor_4D4_67BD2C->RegisterSingleDoorNoCheck_49CF50(pCmd->field_10_gr_id,
                                                                                     pCmd->field_C_block.field_0_x,
@@ -906,7 +902,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D1_S1_504970(SCR_DOOR_DATA_DEC* pCmd)
     }
     else
     {
-        if (pCmd->field_14_check.field_C_size.field_0_x == kFpZero_6F77C0 && pCmd->field_14_check.field_C_size.field_4_y == kFpZero_6F77C0)
+        if (pCmd->field_14_check.field_C_size.field_0_x == kFixZero && pCmd->field_14_check.field_C_size.field_4_y == kFixZero)
         {
             pCmd->field_8_door = gDoor_4D4_67BD2C->RegisterDoubleDoorNoCheck_49CFA0(pCmd->field_10_gr_id,
                                                                                     pCmd->field_C_block.field_0_x,
@@ -1007,7 +1003,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
 {
     if (pCmd->field_2_type == SCRCMD_DOOR_DECLARE_S2)
     {
-        if (pCmd->field_14_check.field_C_size.field_0_x == kFpZero_6F77C0 && pCmd->field_14_check.field_C_size.field_4_y == kFpZero_6F77C0)
+        if (pCmd->field_14_check.field_C_size.field_0_x == kFixZero && pCmd->field_14_check.field_C_size.field_4_y == kFixZero)
         {
             pCmd->field_8_door = gDoor_4D4_67BD2C->RegisterSingleDoorNoCheck_49CF50(pCmd->field_10_gr_id,
                                                                                     pCmd->field_C_block.field_0_x,
@@ -1035,7 +1031,7 @@ void miss2_0x11C::SCRCMD_DOOR_DECLARE_D2_S2_504B80(SCR_DOOR_DATA_DEC* pCmd)
     }
     else
     {
-        if (pCmd->field_14_check.field_C_size.field_0_x == kFpZero_6F77C0 && pCmd->field_14_check.field_C_size.field_4_y == kFpZero_6F77C0)
+        if (pCmd->field_14_check.field_C_size.field_0_x == kFixZero && pCmd->field_14_check.field_C_size.field_4_y == kFixZero)
         {
             pCmd->field_8_door = gDoor_4D4_67BD2C->RegisterDoubleDoorNoCheck_49CFA0(pCmd->field_10_gr_id,
                                                                                     pCmd->field_C_block.field_0_x,
@@ -2948,7 +2944,7 @@ void miss2_0x11C::SCRCMD_IS_CHAR_STOPPED_509E70()
 
     Fix16 temp;
 
-    if (pPed != nullptr && (temp = pPed->field_168_game_object->field_38_velocity) == kFpZero_6F77C0)
+    if (pPed != nullptr && (temp = pPed->field_168_game_object->field_38_velocity) == kFixZero)
     {
         field_8_cond_result = true;
     }
@@ -3089,11 +3085,11 @@ void miss2_0x11C::Locate_509FD0()
                     break;
                 case SCRCMD_STOP_LOCATE_CHAR_ANY:
                     if (pPointer->field_8_char->field_168_game_object &&
-                        (vel = pPointer->field_8_char->field_168_game_object->field_38_velocity) == kFpZero_6F77C0)
+                        (vel = pPointer->field_8_char->field_168_game_object->field_38_velocity) == kFixZero)
                     {
                         field_8_cond_result = true;
                     }
-                    else if (pPointer->field_8_char->field_16C_car && pPointer->field_8_char->GetPedVelocity_45C920() == kFpZero_6F77C0)
+                    else if (pPointer->field_8_char->field_16C_car && pPointer->field_8_char->GetPedVelocity_45C920() == kFixZero)
                     {
                         field_8_cond_result = true;
                     }
@@ -3103,7 +3099,7 @@ void miss2_0x11C::Locate_509FD0()
                     if (pPointer->field_8_char->field_168_game_object)
                     {
                         vel = pPointer->field_8_char->field_168_game_object->field_38_velocity;
-                        if (vel == kFpZero_6F77C0)
+                        if (vel == kFixZero)
                         {
                             field_8_cond_result = true;
                         }
@@ -3111,7 +3107,7 @@ void miss2_0x11C::Locate_509FD0()
 
                     break;
                 case SCRCMD_STOP_LOCATE_CHAR_CAR:
-                    if (pPointer->field_8_char->field_16C_car && pPointer->field_8_char->GetPedVelocity_45C920() == kFpZero_6F77C0)
+                    if (pPointer->field_8_char->field_16C_car && pPointer->field_8_char->GetPedVelocity_45C920() == kFixZero)
                     {
                         field_8_cond_result = true;
                     }
@@ -5635,7 +5631,7 @@ void miss2_0x11C::GetSpeed_50E190()
             }
             else
             {
-                pParam2->field_8_counter = kFpZero_6F77C0.ToInt();
+                pParam2->field_8_counter = kFixZero.ToInt();
             }
             break;
 
@@ -5649,7 +5645,7 @@ void miss2_0x11C::GetSpeed_50E190()
                 }
                 else
                 {
-                    pParam2->field_8_counter = kFpZero_6F77C0.ToInt();
+                    pParam2->field_8_counter = kFixZero.ToInt();
                 }
             }
             break;
@@ -5868,16 +5864,16 @@ void miss2_0x11C::SCRCMD_PUT_CAR_ON_TRAILER_50E900()
         {
             // put car on the trailer attached to the truck cab
             pDstCar->GetSprite_440840()->DispatchCollisionEvent_5A3100(pCarPointer->field_8_car->field_50_car_sprite,
-                                                                       kFpZero_6F77C0,
-                                                                       kFpZero_6F77C0,
+                                                                       kFixZero,
+                                                                       kFixZero,
                                                                        kAng180_6F771E);
         }
         else
         {
             // put car directly on the trailer
             pDstCar->field_50_car_sprite->DispatchCollisionEvent_5A3100(pCarPointer->field_8_car->field_50_car_sprite,
-                                                                        kFpZero_6F77C0,
-                                                                        kFpZero_6F77C0,
+                                                                        kFixZero,
+                                                                        kFixZero,
                                                                         kAng180_6F771E);
         }
     }

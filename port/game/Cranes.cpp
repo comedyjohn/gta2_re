@@ -1,5 +1,3 @@
-// This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFixZero
 #include "Cranes.hpp"
 #include "Char_Pool.hpp"
 #include "Hud.hpp"

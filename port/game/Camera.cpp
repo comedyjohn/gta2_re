@@ -1,4 +1,3 @@
-#define FIX16_POINT_ZERO kFixZero
 #include "Camera.hpp"
 #include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"

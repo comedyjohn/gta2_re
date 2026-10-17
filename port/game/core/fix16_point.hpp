@@ -4,16 +4,7 @@
 #include "core/fix16.hpp"
 #include "core/function.hpp"
 
-EXTERN_GLOBAL(Fix16, gFix16_6777CC);
 EXTERN_GLOBAL(Fix16, kFP16One256th_6FE07C);
-EXTERN_GLOBAL(Fix16, kFpZero_6F77C0);
-
-// GetLength_41E260 compares against a zero constant that each TU of the original has its own copy of
-// (a header static, like 9.6f's single 0x5E3DC8 in vec_len 0x41E260). A TU whose copy isn't
-// gFix16_6777CC defines FIX16_POINT_ZERO to it before its first include.
-#ifndef FIX16_POINT_ZERO
-    #define FIX16_POINT_ZERO gFix16_6777CC
-#endif
 
 class Fix16Point;
 
@@ -112,13 +103,13 @@ class Fix16Point
     // SquareRoot at 48; matched functions allow 159..162.
     Fix16 GetLength() const
     {
-        if (x == FIX16_POINT_ZERO)
+        if (x == kFixZero)
         {
             return Fix16::Abs(y);
         }
         else
         {
-            if (y == FIX16_POINT_ZERO)
+            if (y == kFixZero)
             {
                 return Fix16::Abs(x);
             }

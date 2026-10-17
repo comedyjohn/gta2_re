@@ -63,7 +63,6 @@ DEFINE_GLOBAL_INIT(Fix16, dword_6FF6A4, Fix16(0x1EB, 0), 0x6FF6A4);
 // In fact, it's only allocated and deallocated, it's never used.
 DEFINE_GLOBAL(Sprite*, gSprite_Unused_677938, 0x677938);
 
-DEFINE_GLOBAL_INIT(Fix16, gFix16_6777CC, Fix16(0), 0x6777CC);
 DEFINE_GLOBAL_INIT(Fix16, kTvAntennaOffsetY_6778A0, Fix16(0x100, 0), 0x6778A0);
 DEFINE_GLOBAL_INIT(Fix16, kMachineGunOffsetY_6777FC, Fix16(0xFFFFEE00, 0), 0x6777FC);
 
@@ -584,7 +583,7 @@ u32 CarManager_6C::SelectTrafficCarModel_444AB0(Player* pPlayer, gmp_zone_info* 
 {
     s32 result;
     Fix16 density_calc = Fix16(pZoneInfo->field_0_car_density) / Fix16(0xFA0000, 0);
-    if (density_calc == gFix16_6777CC)
+    if (density_calc == kFixZero)
     {
         *pOut = 0;
         return CarModel::none;
@@ -850,7 +849,7 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
                 break;
         }
 
-        if (xpos < gFix16_6777CC || xpos > kFp255_676D98 || ypos < gFix16_6777CC || ypos > kFp255_676D98 || zTmpInt < 0 || zTmpInt > 7)
+        if (xpos < kFixZero || xpos > kFp255_676D98 || ypos < kFixZero || ypos > kFp255_676D98 || zTmpInt < 0 || zTmpInt > 7)
         {
             time_out_counter = 200;
         }
@@ -961,7 +960,7 @@ Car_BC* CarManager_6C::GetNearestFrontVehicle_445210(Sprite* pSprite, u8 k3)
         if (pCar->IsTrain_421610())
         {
             Car_BC* pLeadCar = gPublicTransport_181C_6FF1D4->GetLeadTrainCar_57B540(pNearest->field_8_car_bc_ptr);
-            if (pLeadCar->GetCarLinearSpeed_43A240() == gFix16_6777CC)
+            if (pLeadCar->GetCarLinearSpeed_43A240() == kFixZero)
             {
                 return pCar;
             }
@@ -1127,7 +1126,7 @@ Car_BC* CarManager_6C::SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 
             default:
                 break;
         }
-        if (x < gFix16_6777CC || x > kFp255_676D98 || y < gFix16_6777CC || y > kFp255_676D98 || found_z < 0 || found_z > 1)
+        if (x < kFixZero || x > kFp255_676D98 || y < kFixZero || y > kFp255_676D98 || found_z < 0 || found_z > 1)
         {
             attempts = 200;
         }
@@ -1334,7 +1333,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
             default:
                 break;
         }
-        if (x < gFix16_6777CC || x > kFp255_676D98 || y < gFix16_6777CC || y > kFp255_676D98 || found_z < 0 || found_z > 7)
+        if (x < kFixZero || x > kFp255_676D98 || y < kFixZero || y > kFp255_676D98 || found_z < 0 || found_z > 7)
         {
             attempts = 200;
         }
@@ -1722,7 +1721,7 @@ CarManager_6C::CarManager_6C()
         }
     }
 
-    field_64_zpos = gFix16_6777CC;
+    field_64_zpos = kFixZero;
     field_60_impact_mode = 0;
     field_4_unused = nullptr;
     field_14_next_car_id = 1;
@@ -1753,7 +1752,7 @@ CarManager_6C::CarManager_6C()
 
     if (!gSprite_Unused_677938)
     {
-        gSprite_Unused_677938 = new Sprite(kAngZero_67791C, gFix16_6777CC);
+        gSprite_Unused_677938 = new Sprite(kAngZero_67791C, kFixZero);
         if (!gSprite_Unused_677938)
         {
             FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\car.cpp", 8375);
@@ -1985,7 +1984,7 @@ Fix16 Car_BC::GetCarLinearSpeed_43A240()
         pPhysics = gPublicTransport_181C_6FF1D4->GetLeadTrainCar_57B540(this)->field_58_physics;
         if (!pPhysics)
         {
-            return gFix16_6777CC;
+            return kFixZero;
         }
         return GetLinearSpeed_43A240(pPhysics);
     }
@@ -1994,7 +1993,7 @@ Fix16 Car_BC::GetCarLinearSpeed_43A240()
         pPhysics = this->field_58_physics;
         if (!pPhysics)
         {
-            return gFix16_6777CC;
+            return kFixZero;
         }
         return GetLinearSpeed_43A240(pPhysics);
     }
@@ -2662,7 +2661,7 @@ bool Car_BC::IsStoppedWithPavementAtDoor_43B140(u8 target_car_door)
     Ang16 angToUse;
 
     u8 remap = GetRemap();
-    if (GetCarLinearSpeed_43A240() > gFix16_6777CC)
+    if (GetCarLinearSpeed_43A240() > kFixZero)
     {
         return false;
     }
@@ -2839,11 +2838,11 @@ void Car_BC::GetDoorWorldPosition_43B5A0(u8 target_door, Fix16* pOutX, Fix16* pO
             door_relative_xpos -= dword_6772BC;
             break;
         case 2:
-            if (door_relative_xpos == gFix16_6777CC)
+            if (door_relative_xpos == kFixZero)
             {
                 door_relative_ypos -= dword_6772BC;
             }
-            else if (door_relative_xpos < gFix16_6777CC)
+            else if (door_relative_xpos < kFixZero)
             {
                 door_relative_xpos -= dword_6772BC;
             }
@@ -3000,7 +2999,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
                 y_hit = Get_rear_window_offset(pCarInfo);
                 if (gCarManager_6C_677930->field_1A_fire_effect_cycle && gCarManager_6C_677930->field_1A_fire_effect_cycle != 2)
                 {
-                    x_hit = gFix16_6777CC;
+                    x_hit = kFixZero;
                 }
                 else
                 {
@@ -3024,7 +3023,7 @@ void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
                 y_hit = Get_front_window_offset(pCarInfo);
                 if (gCarManager_6C_677930->field_1A_fire_effect_cycle && gCarManager_6C_677930->field_1A_fire_effect_cycle != 2)
                 {
-                    x_hit = gFix16_6777CC;
+                    x_hit = kFixZero;
                 }
                 else
                 {
@@ -3095,7 +3094,7 @@ void Car_BC::SpawnFire_43BBC0()
                                                                           field_70_exploder_ped_id);
         if (pExplosion)
         {
-            field_50_car_sprite->DispatchCollisionEvent_5A3100(pExplosion->field_4, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
+            field_50_car_sprite->DispatchCollisionEvent_5A3100(pExplosion->field_4, kFixZero, kFixZero, kAngZero_67791C);
         }
     }
 }
@@ -3786,8 +3785,7 @@ void Car_BC::EmitExplosion_43D690(s32 type, Fix16 x, Fix16 y)
 {
     [[maybe_unused]] Fix16Point unused; // EH frame with state 0 before the first call: the original has a destructible local
 
-    Object_2C* p2C =
-        gObject_5C_6F8F84->CreateExplosion_52A3D0(gFix16_6777CC, gFix16_6777CC, 2, kAngZero_67791C, type, field_70_exploder_ped_id);
+    Object_2C* p2C = gObject_5C_6F8F84->CreateExplosion_52A3D0(kFixZero, kFixZero, 2, kAngZero_67791C, type, field_70_exploder_ped_id);
     if (p2C)
     {
         field_50_car_sprite->DispatchCollisionEvent_5A3100(p2C->field_4, x, y, kAngZero_67791C);
@@ -3797,7 +3795,7 @@ void Car_BC::EmitExplosion_43D690(s32 type, Fix16 x, Fix16 y)
 // 0x43d7b0
 void Car_BC::TriggerExplosion_43D7B0(s32 type)
 {
-    if (GetAntiStrength_43A1D0() != gFix16_6777CC && !this->IsMaxDamage_40F890())
+    if (GetAntiStrength_43A1D0() != kFixZero && !this->IsMaxDamage_40F890())
     {
         HandleCarExplosion_43D840(type);
     }
@@ -3913,7 +3911,7 @@ s16 Car_BC::AccumulateDamage_43DA90(s16 damage, const Fix16Point* pVec)
 
     if (damage_1 == 0)
     {
-        if (anti_s != gFix16_6777CC)
+        if (anti_s != kFixZero)
         {
             damage_1 = 1;
         }
@@ -3986,7 +3984,7 @@ void Car_BC::StopMovement_43DBD0()
     if (pPhysics)
     {
         pPhysics->field_40_linvel_1 = kZeroPoint_6778A8;
-        this->field_58_physics->field_74_ang_vel_rad = gFix16_6777CC;
+        this->field_58_physics->field_74_ang_vel_rad = kFixZero;
     }
 }
 
@@ -4113,7 +4111,7 @@ void Car_BC::DestroyWhileSinking_43DD60()
         SetEngineDamaged_421590();
         PrepareForExplosion_43C1C0();
         field_0_attachments.DestroyAllSprites_5A7010();
-        field_50_car_sprite->set_z_lazy_420660(gFix16_6777CC);
+        field_50_car_sprite->set_z_lazy_420660(kFixZero);
         MarkForDespawn_421470();
         DeAllocateCarPhysics_43BD00();
     }
@@ -4545,9 +4543,8 @@ void Car_BC::AddGangDriver_440630(Gang_144* pGang)
 // 0x440660
 void Car_BC::AttachGangIcon_440660(u8 arrow_colour)
 {
-    Object_2C* pIcon =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(arrow_colour + 286, gFix16_6777CC, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
-    field_50_car_sprite->DispatchCollisionEvent_5A3100(pIcon->field_4, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
+    Object_2C* pIcon = gObject_5C_6F8F84->NewPhysicsObj_5299B0(arrow_colour + 286, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
+    field_50_car_sprite->DispatchCollisionEvent_5A3100(pIcon->field_4, kFixZero, kFixZero, kAngZero_67791C);
 }
 
 // 0x4406b0
@@ -4653,34 +4650,29 @@ Sprite* Car_BC::GetSprite_440840()
 // 0x440ac0
 void Car_BC::PutWaterCannonOnRoof_440AC0()
 {
-    Object_2C* p2C =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kWaterCannon, gFix16_6777CC, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
-    field_50_car_sprite->DispatchCollisionEvent_5A3100(p2C->field_4, gFix16_6777CC, kWaterCannonOffsetY_6771F0, kAng180_677326);
+    Object_2C* p2C = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kWaterCannon, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
+    field_50_car_sprite->DispatchCollisionEvent_5A3100(p2C->field_4, kFixZero, kWaterCannonOffsetY_6771F0, kAng180_677326);
 }
 
 // 0x440b10
 void Car_BC::PutTankCannonOnRoof_440B10()
 {
-    Object_2C* p2C =
-        gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kSmallBrownSkid, gFix16_6777CC, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
-    field_50_car_sprite->DispatchCollisionEvent_5A3100(p2C->field_4, gFix16_6777CC, kTankCannonOffsetY_6772A4, kAngZero_67791C);
+    Object_2C* p2C = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kSmallBrownSkid, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
+    field_50_car_sprite->DispatchCollisionEvent_5A3100(p2C->field_4, kFixZero, kTankCannonOffsetY_6772A4, kAngZero_67791C);
 }
 
 // 0x440b60
 void Car_BC::PutMachineGunOnRoof_440B60()
 {
-    Object_2C* pObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(248, gFix16_6777CC, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
-    field_50_car_sprite->DispatchCollisionEvent_5A3100(pObj->field_4, gFix16_6777CC, kMachineGunOffsetY_6777FC, kAngZero_67791C);
+    Object_2C* pObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(248, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
+    field_50_car_sprite->DispatchCollisionEvent_5A3100(pObj->field_4, kFixZero, kMachineGunOffsetY_6777FC, kAngZero_67791C);
 }
 
 // 0x440bb0
 void Car_BC::PutTV_Antenna_440BB0()
 {
-    Object_2C* pNewObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(149, gFix16_6777CC, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
-    field_50_car_sprite->DispatchCollisionEvent_5A3100(pNewObj->field_4,
-                                                       gFix16_6777CC,
-                                                       kTvAntennaOffsetY_6778A0,
-                                                       GetRadioTowerAngle_442520());
+    Object_2C* pNewObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(149, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
+    field_50_car_sprite->DispatchCollisionEvent_5A3100(pNewObj->field_4, kFixZero, kTvAntennaOffsetY_6778A0, GetRadioTowerAngle_442520());
 }
 
 // 0x440c10
@@ -4815,17 +4807,14 @@ void Car_BC::FireCarBomb_440F90(char_type instant_bomb)
     }
     else
     {
-        Object_2C* pNew2C = gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kMovingCollect36,
-                                                                    gFix16_6777CC,
-                                                                    gFix16_6777CC,
-                                                                    gFix16_6777CC,
-                                                                    kAngZero_67791C);
+        Object_2C* pNew2C =
+            gObject_5C_6F8F84->NewPhysicsObj_5299B0(Objects::kMovingCollect36, kFixZero, kFixZero, kFixZero, kAngZero_67791C);
         Ped* pDriver = this->field_54_driver;
         if (pDriver)
         {
             pNew2C->SetDamageOwner_529080(pDriver->get_ped_ref_idx_420B50());
         }
-        field_50_car_sprite->DispatchCollisionEvent_5A3100(pNew2C->field_4, gFix16_6777CC, gFix16_6777CC, kAngZero_67791C);
+        field_50_car_sprite->DispatchCollisionEvent_5A3100(pNew2C->field_4, kFixZero, kFixZero, kAngZero_67791C);
     }
 }
 
@@ -5825,7 +5814,7 @@ void Car_BC::ManageTVAntenna_4425D0()
         towerAng = GetRadioTowerAngle_442520();
         if (pSprite->field_10_offset_rot != towerAng)
         {
-            zero = gFix16_6777CC;
+            zero = kFixZero;
             // A reference makes VC6 reload the rotation instead of reusing the compared value
             Ang16& rot = pSprite->field_10_offset_rot;
             spriteAngFp = Ang16::Ang16ToFix16(rot);
@@ -6014,7 +6003,7 @@ char_type Car_BC::TrainUpdate_442D70()
     Fix16 player_x;
     Fix16 player_y;
     Fix16 player_z;
-    if (GetCarLinearSpeed_43A240() > gFix16_6777CC)
+    if (GetCarLinearSpeed_43A240() > kFixZero)
     {
         gGame_0x40_67E008->field_38_local_player->get_pos_569920(&player_x, &player_y, &player_z);
 
@@ -6284,7 +6273,7 @@ bool Car_BC::UpdateAttachedToSprite_443360(Sprite* pSprite, Fix16 x, Fix16 y, An
     Fix16 sprite_x;
     Fix16 sprite_y;
 
-    if (x != gFix16_6777CC || y != gFix16_6777CC)
+    if (x != kFixZero || y != kFixZero)
     {
         sprite_x = x;
         sprite_y = y;
@@ -6410,7 +6399,7 @@ void Car_BC::ApplyExplosionImpulse_443710(Fix16Point* xy)
         // flag tested twice isn't merged by VC6.
         {
             Fix16 vecLen = impulse_dir.GetLength();
-            if (vecLen == gFix16_6777CC)
+            if (vecLen == kFixZero)
             {
                 goto done;
             }

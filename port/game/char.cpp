@@ -1,4 +1,3 @@
-#define FIX16_POINT_ZERO kFixZero
 #include "char.hpp"
 #include "CarAI_78.hpp"
 #include "CarPhysics_B0.hpp"

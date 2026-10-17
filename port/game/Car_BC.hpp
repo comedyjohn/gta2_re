@@ -144,7 +144,7 @@ EXTERN_GLOBAL(Ang16, kAngZero_6F804C);
 
 EXTERN_GLOBAL(Ang16, kAng180_6F771E);
 
-EXTERN_GLOBAL(Fix16, kFpZero_6F77C0);
+EXTERN_GLOBAL(Fix16, kFixZero);
 EXTERN_GLOBAL(Fix16, kFpOne_6F77C4);
 EXTERN_GLOBAL(Fix16, kFpOne_679E74);
 
@@ -237,7 +237,7 @@ class CarManager_6C
     // unknown inlined function
     Car_BC* SpawnCar_shortened(s32 car_info_idx)
     {
-        return SpawnCarAt_446230(kFpFive_6F77D4, kFpFive_6F77D4, kFpZero_6F77C0, kAngZero_6F804C, car_info_idx, kFpOne_6F77C4);
+        return SpawnCarAt_446230(kFpFive_6F77D4, kFpFive_6F77D4, kFixZero, kAngZero_6F804C, car_info_idx, kFpOne_6F77C4);
     }
 
     // As SpawnCarAtCorrectZ_426E40 with the scale passed in (PublicTransport_181C::SpawnTrainsFromStations_578860)

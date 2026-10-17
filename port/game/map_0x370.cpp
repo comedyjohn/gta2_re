@@ -1,6 +1,3 @@
-// This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFixZero
-
 #include "map_0x370.hpp"
 #include "Car_BC.hpp"
 #include "CollisionSoundQueue_C88.hpp"

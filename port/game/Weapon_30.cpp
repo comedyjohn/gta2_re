@@ -1,5 +1,3 @@
-// This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFixZero
 // This TU's copy of the Fix16_Rect::ComputeCollisionPrism_4204D0 half height (see Fix16_Rect.hpp)
 #define FIX16_RECT_HALF_HEIGHT dword_706CC8
 #include "PlayerCrimeStats_3C.hpp"

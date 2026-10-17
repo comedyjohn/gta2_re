@@ -1,4 +1,3 @@
-#define FIX16_POINT_ZERO kFixZero
 #include "Hud.hpp"
 #include "Car_BC.hpp"
 #include "Draw.hpp"

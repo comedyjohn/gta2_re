@@ -1,6 +1,3 @@
-// This TU's copy of the Fix16_Point length zero (see Fix16_Point.hpp)
-#define FIX16_POINT_ZERO kFixZero
-
 #include "CarAI_78.hpp"
 #include "CarChaseTaskTable_500.hpp"
 #include "CarPhysics_B0.hpp"

@@ -37,7 +37,7 @@ Fix16Point Fix16Point::Multiply(const Fix16& in) const
 Fix16Point Fix16Point::NormalizeSafe()
 {
     Fix16 length = GetLength();
-    if (length == gFix16_6777CC)
+    if (length == kFixZero)
     {
         Fix16Point scaled = MultBy(128);
         length = scaled.GetLength();
@@ -69,11 +69,11 @@ Fix16Point Fix16Point::Divide(const Fix16& in)
 // 0x453590
 Fix16 Fix16Point::GetLengthOutOfLine()
 {
-    if (x == gFix16_6777CC)
+    if (x == kFixZero)
     {
         return Fix16::Abs(y);
     }
-    else if (y == gFix16_6777CC)
+    else if (y == kFixZero)
     {
         return Fix16::Abs(x);
     }

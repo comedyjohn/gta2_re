@@ -1,5 +1,3 @@
-// GetLength_41E260 compares against this TU's zero
-#define FIX16_POINT_ZERO kFixZero
 #include "Object_5C.hpp"
 #include "CarPhysics_B0.hpp"
 #include "Car_BC.hpp"

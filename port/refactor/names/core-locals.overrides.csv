@@ -1,2 +1,3 @@
 old,new
 PoolBasic::Allocate::pNew,new_item
+ArcTanTableInit::pTan,tan_entry

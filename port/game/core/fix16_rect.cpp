@@ -28,9 +28,9 @@ void Fix16Rect::DoSetCurrentRect()
 // 0x59ddf0
 bool Fix16Rect::IntersectsSpriteRenderingRect(Sprite* sprite)
 {
-    Fix16Point* pCorners = sprite->field_C_pCollisionShape->field_C_corners;
+    Fix16Point* corners = sprite->field_C_pCollisionShape->field_C_corners;
 
-    return (IsPointInRect(&pCorners[0]) || IsPointInRect(&pCorners[1]) || IsPointInRect(&pCorners[2]) || IsPointInRect(&pCorners[3]));
+    return (IsPointInRect(&corners[0]) || IsPointInRect(&corners[1]) || IsPointInRect(&corners[2]) || IsPointInRect(&corners[3]));
 }
 
 // 0x59de80
@@ -99,38 +99,38 @@ bool Fix16Rect::EveryTileMatchesArrowType(s32 arrow_type)
     u8 y_pos = top_.ToUInt8();
     u8 x_pos;
 
-    bool bMatches = true;
+    bool matches = true;
 
     while (y_pos <= bottom_.ToUInt8())
     {
         x_pos = left_.ToUInt8();
         while (x_pos <= right_.ToUInt8())
         {
-            if (!bMatches)
+            if (!matches)
             {
                 return false;
             }
 
-            gmp_block_info* block_4DFE10 = gMap_0x370_6F6268->get_block_4DFE10(x_pos, y_pos, low_z_.ToInt());
-            if (block_4DFE10)
+            gmp_block_info* block_4_dfe10 = gMap_0x370_6F6268->get_block_4DFE10(x_pos, y_pos, low_z_.ToInt());
+            if (block_4_dfe10)
             {
 
                 switch (arrow_type)
                 {
                     case 1:
-                        bMatches = (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_up_4; //  green arrow up
+                        matches = (block_4_dfe10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_up_4; //  green arrow up
                         break;
                     case 2:
-                        bMatches =
-                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_down_8; //  green arrow down
+                        matches =
+                            (block_4_dfe10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_down_8; //  green arrow down
                         break;
                     case 3:
-                        bMatches =
-                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_right_2; //  green arrow right
+                        matches =
+                            (block_4_dfe10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_right_2; //  green arrow right
                         break;
                     case 4:
-                        bMatches =
-                            (block_4DFE10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_left_1; //  green arrow left
+                        matches =
+                            (block_4_dfe10->field_A_arrows & block_arrow::green_mask) == block_arrow::green_left_1; //  green arrow left
                         break;
                     default:
                         break;
@@ -138,7 +138,7 @@ bool Fix16Rect::EveryTileMatchesArrowType(s32 arrow_type)
             }
             else
             {
-                bMatches = false;
+                matches = false;
             }
             ++x_pos;
         }

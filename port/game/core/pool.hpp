@@ -9,11 +9,11 @@ class PoolBasic
   public:
     PoolBasic()
     {
-        PoolType* pIter = &pool_[0];
+        PoolType* iter = &pool_[0];
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
-            pIter->mpNext = pIter + 1;
-            pIter++;
+            iter->mpNext = iter + 1;
+            iter++;
         }
 
         pool_[PoolSize - 1].mpNext = nullptr;
@@ -27,10 +27,10 @@ class PoolBasic
 
     PoolType* Allocate()
     {
-        PoolType* pNew = head_;
-        head_ = pNew->mpNext;
-        pNew->PoolAllocate();
-        return pNew;
+        PoolType* new_item = head_;
+        head_ = new_item->mpNext;
+        new_item->PoolAllocate();
+        return new_item;
     }
 
     void DeAllocate(PoolType* item)
@@ -42,10 +42,10 @@ class PoolBasic
 
     PoolType* UnlinkAndReturnNext(PoolType* old_item)
     {
-        PoolType* pNewItem = old_item->mpNext;
+        PoolType* new_item = old_item->mpNext;
         old_item->mpNext = this->head_;
         this->head_ = old_item;
-        return pNewItem;
+        return new_item;
     }
 
     PoolType* head_;
@@ -69,11 +69,11 @@ class Pool
 
     Pool()
     {
-        PoolType* pIter = pool_;
+        PoolType* iter = pool_;
         for (s32 i = 0; i < PoolSize - 1; i++)
         {
-            pIter->mpNext = pIter + 1;
-            pIter++;
+            iter->mpNext = iter + 1;
+            iter++;
         }
 
         pool_[PoolSize - 1].mpNext = nullptr;
@@ -158,54 +158,54 @@ class Pool
     {
         field_x_count_ = 0;
 
-        PoolType* pPreviousItem = nullptr;
-        PoolType* pCurrItem = prev_;
+        PoolType* previous_item = nullptr;
+        PoolType* curr_item = prev_;
 
-        while (pCurrItem)
+        while (curr_item)
         {
             ++field_x_count_;
 
-            PoolType* pNext = pCurrItem->mpNext;
+            PoolType* next = curr_item->mpNext;
 
-            if (pCurrItem->PoolUpdate())
+            if (curr_item->PoolUpdate())
             {
-                pCurrItem->PoolDeallocate();
+                curr_item->PoolDeallocate();
 
-                if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
+                if (previous_item && previous_item->mpNext != curr_item)
                 {
-                    pPreviousItem = nullptr;
+                    previous_item = nullptr;
                 }
 
-                if (pPreviousItem)
+                if (previous_item)
                 {
-                    pPreviousItem->mpNext = pCurrItem->mpNext;
+                    previous_item->mpNext = curr_item->mpNext;
                 }
                 else
                 {
-                    if (prev_ == pCurrItem)
+                    if (prev_ == curr_item)
                     {
-                        prev_ = pCurrItem->mpNext;
+                        prev_ = curr_item->mpNext;
                     }
                     else
                     {
-                        pPreviousItem = prev_;
-                        while (pPreviousItem->mpNext != pCurrItem)
+                        previous_item = prev_;
+                        while (previous_item->mpNext != curr_item)
                         {
-                            pPreviousItem = pPreviousItem->mpNext;
+                            previous_item = previous_item->mpNext;
                         }
-                        pPreviousItem->mpNext = pCurrItem->mpNext;
+                        previous_item->mpNext = curr_item->mpNext;
                     }
                 }
 
-                pCurrItem->mpNext = start_;
-                start_ = pCurrItem;
+                curr_item->mpNext = start_;
+                start_ = curr_item;
             }
             else
             {
-                pPreviousItem = pCurrItem;
+                previous_item = curr_item;
             }
 
-            pCurrItem = pNext;
+            curr_item = next;
         }
     }
 
@@ -213,101 +213,101 @@ class Pool
     {
         field_x_count_ = 0;
 
-        PoolType* pPreviousItem = nullptr;
-        PoolType* pCurrItem = prev_;
+        PoolType* previous_item = nullptr;
+        PoolType* curr_item = prev_;
 
-        while (pCurrItem)
+        while (curr_item)
         {
             ++field_x_count_;
 
-            PoolType* pNext = pCurrItem->mpNext;
+            PoolType* next = curr_item->mpNext;
 
-            if (pCurrItem->PoolUpdate())
+            if (curr_item->PoolUpdate())
             {
-                if (pPreviousItem && pPreviousItem->mpNext != pCurrItem)
+                if (previous_item && previous_item->mpNext != curr_item)
                 {
-                    pPreviousItem = nullptr;
+                    previous_item = nullptr;
                 }
 
-                if (pPreviousItem)
+                if (previous_item)
                 {
-                    pPreviousItem->mpNext = pCurrItem->mpNext;
+                    previous_item->mpNext = curr_item->mpNext;
                 }
                 else
                 {
-                    if (prev_ == pCurrItem)
+                    if (prev_ == curr_item)
                     {
-                        prev_ = pCurrItem->mpNext;
+                        prev_ = curr_item->mpNext;
                     }
                     else
                     {
-                        pPreviousItem = prev_;
-                        while (pPreviousItem->mpNext != pCurrItem)
+                        previous_item = prev_;
+                        while (previous_item->mpNext != curr_item)
                         {
-                            pPreviousItem = pPreviousItem->mpNext;
+                            previous_item = previous_item->mpNext;
                         }
-                        pPreviousItem->mpNext = pCurrItem->mpNext;
+                        previous_item->mpNext = curr_item->mpNext;
                     }
                 }
 
-                pCurrItem->mpNext = start_;
-                start_ = pCurrItem;
+                curr_item->mpNext = start_;
+                start_ = curr_item;
             }
             else
             {
-                pPreviousItem = pCurrItem;
+                previous_item = curr_item;
             }
 
-            pCurrItem = pNext;
+            curr_item = next;
         }
     }
 
     PoolType* FindAndDeAllocate(PoolType* to_find)
     {
-        PoolType* pLast = nullptr;
+        PoolType* last = nullptr;
 
-        for (PoolType* pIter = prev_; pIter; pIter = pIter->mpNext)
+        for (PoolType* iter = prev_; iter; iter = iter->mpNext)
         {
-            if (pIter == to_find)
+            if (iter == to_find)
             {
-                pIter->PoolDeallocate();
+                iter->PoolDeallocate();
 
-                if (pLast)
+                if (last)
                 {
-                    pLast->mpNext = pIter->mpNext;
+                    last->mpNext = iter->mpNext;
                 }
                 else
                 {
-                    prev_ = pIter->mpNext;
+                    prev_ = iter->mpNext;
                 }
-                pIter->mpNext = start_;
-                start_ = pIter;
+                iter->mpNext = start_;
+                start_ = iter;
                 return to_find;
             }
-            pLast = pIter;
+            last = iter;
         }
         return to_find;
     }
 
     void UnlinkFromActiveList(PoolType* to_find)
     {
-        PoolType* pLast = nullptr;
-        for (PoolType* pIter = this->prev_; pIter; pIter = pIter->mpNext)
+        PoolType* last = nullptr;
+        for (PoolType* iter = this->prev_; iter; iter = iter->mpNext)
         {
-            if (pIter == to_find)
+            if (iter == to_find)
             {
-                if (pLast)
+                if (last)
                 {
-                    pLast->mpNext = pIter->mpNext;
+                    last->mpNext = iter->mpNext;
                 }
                 else
                 {
-                    this->prev_ = pIter->mpNext;
+                    this->prev_ = iter->mpNext;
                 }
-                pIter->mpNext = nullptr;
+                iter->mpNext = nullptr;
                 return;
             }
-            pLast = pIter;
+            last = iter;
         }
     }
 

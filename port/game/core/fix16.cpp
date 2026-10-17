@@ -311,16 +311,16 @@ s32 ClampAngleToWindow(Fix16* target, Fix16* cur)
 void ArcTanTableInit()
 {
     s32 arg = 0;
-    Fix16* pTan = gTanTable;
+    Fix16* tan_entry = gTanTable;
     for (s32 i = 1440; i != 0; i--)
     {
         f64 radians = arg * 3.141592654;
         const f64 value = tan(radians * 0.001388888888888889) * 16384.0;
         // tan(90) and tan(270) don't fit a Fix16. The original's conversion (x87 fistp) gives
         // 0x80000000 for them, as x86's SSE one does; C++ leaves it undefined, and ARM saturates.
-        *pTan = Fix16(value >= -2147483648.0 && value < 2147483648.0 ? static_cast<s32>(value) : INT32_MIN, 0);
+        *tan_entry = Fix16(value >= -2147483648.0 && value < 2147483648.0 ? static_cast<s32>(value) : INT32_MIN, 0);
         arg++;
-        pTan++;
+        tan_entry++;
     }
 }
 
@@ -334,16 +334,16 @@ Ang16 ArcTanLookup(const Fix16& target_tan)
     while (true)
     {
         s16 mid = (low + high) >> 1;
-        Fix16 tanAtMid = gTanTable[mid];
+        Fix16 tan_at_mid = gTanTable[mid];
 
         // Binary search: go left if target < tanAtMid,
         // go right if target > tanAtMid,
         // exact match if equal
-        if (target_tan < tanAtMid)
+        if (target_tan < tan_at_mid)
         {
             high = mid - 1;
         }
-        else if (target_tan > tanAtMid)
+        else if (target_tan > tan_at_mid)
         {
             low = mid + 1;
         }

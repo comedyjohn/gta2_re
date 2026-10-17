@@ -59,6 +59,14 @@ RE_G = re.compile(r"^g[A-Z][A-Za-z0-9]*$")
 # the project's fixed-width and char aliases (types.hpp) keep their names until phase 3
 KEEP_ALIASES = {"s8", "s16", "s32", "s64", "u8", "u16", "u32", "u64", "f32", "f64", "char_type", "wchar_type", "uptr", "sptr",
                 "size_t", "ptrdiff_t", "uintptr_t", "intptr_t", "wchar_t"}
+# names a local or parameter must not take: a library function or macro it would hide or break
+LIBRARY_NAMES = set("""sin cos tan asin acos atan atan2 sinh cosh tanh sqrt pow exp log log10 floor ceil fabs abs labs fmod ldexp
+    frexp modf min max time clock rand srand free malloc calloc realloc exit abort atoi atof strlen strcpy strcmp
+    strcat memcpy memset memcmp memmove printf sprintf snprintf sscanf fopen fclose fread fwrite fseek ftell remove
+    rename signal select index rindex stat access open close read write link unlink send recv bind listen accept
+    connect socket div ldiv bsearch qsort swap errno stdin stdout stderr assert offsetof va_list va_start va_end
+    max_align_t size_t ssize_t data size begin end empty count move forward ref cref tie get set string vector
+    array map list pair optional variant tuple""".split())
 SKIP_FUNCTIONS = {"main", "WinMain", "DllMain"}
 # the components of a point or a vector are its interface: they keep their names (no trailing underscore)
 COORDINATES = {"x", "y", "z", "w"}
@@ -227,6 +235,8 @@ def propose(sub, kind, syms):
     for s, new, why in chosen:
         if new and new in KEYWORDS:
             new, why = None, f"{new} is a C++ keyword"
+        elif new and s["kind"] in ("param", "local") and (new in LIBRARY_NAMES or new in taken[""]):
+            new, why = None, f"{new} would hide a library or global name"
         rows.append([s, new, why])
     batch_names = collections.defaultdict(set)  # scope -> old names renamed in this batch
     for s, _, _ in rows:

@@ -39,7 +39,7 @@ void RemapTextureSet_14::LoadTextures_5B8F00()
     if (field_10_bDoFree)
     {
         u32 i = 0;
-        sprite_index* pSpriteIndex;
+        SpriteIndex* pSpriteIndex;
         u16 tmp;
         u16 t2;
         while (i < field_4_texture_count)
@@ -68,7 +68,7 @@ void RemapTextureSet_14::LoadRemappedTextures_5B8F70()
         for (u32 pal_idx = 0; pal_idx < palTotal; pal_idx++)
         {
             const u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(field_8_sprite_type, pal_idx);
-            sprite_index* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+            SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
 
             gRemappedSpriteCounter_704ED0++;
 
@@ -165,7 +165,7 @@ s16 TextureCache_15D8::RegisterDigits_5B9220(u16 num_of_digits, u16 palette)
 {
     const u16 og_idx = field_15D4_next_digit_idx;
     const s16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, palette);
-    sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u8* field_0_pData = sprite_index_5AA440->field_0_pData;
     const u16 phys_pal_5AA6F0 =
         gGtx_0x106C_703DD4->get_phys_pal_5AA6F0(gGtx_0x106C_703DD4->GetTruePalette_5AA5F0(PaletteTypes::kSprites, sprite_idx));

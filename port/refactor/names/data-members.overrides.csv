@@ -1,0 +1,6 @@
+old,new
+CarInfo_808::field_400_raw_data,raw_car_info_
+CarInfo_808::field_804_raw_data,raw_model_physics_
+PlyDat_2BC0::field_25B0,extra_scores_
+gtx_0x106C::field_6B_unused,unused_after_palettes_converted_
+gtx_0x106C::field_A_unused,unused_after_physical_palettes_len_

@@ -4,7 +4,7 @@
 #include <windows.h>
 
 struct STexture;
-struct sprite_index;
+struct SpriteIndex;
 
 // A cached glyph texture: the character it currently shows, drawn with colour/outline_colour
 struct KanjiGlyph_10
@@ -13,7 +13,7 @@ struct KanjiGlyph_10
     u8 field_1_outline_colour;
     wchar_t field_2_text_char;
     STexture* field_4_pTexture;
-    sprite_index* field_8_sprt_index;
+    SpriteIndex* field_8_sprt_index;
     u32 field_C_last_used;
 };
 
@@ -48,10 +48,10 @@ class KanjiFont_8EC
     BYTE* field_8C8_pKBIT;
     s32 field_8CC_kidx_size_words;
     BYTE* field_8D0_pSprtData;
-    sprite_index* field_8D4_sprite_index;
+    SpriteIndex* field_8D4_sprite_index;
     STexture* field_8D8_pTexture;
     BYTE* field_8DC_pSprtData;
-    sprite_index* field_8E0_sprite_index;
+    SpriteIndex* field_8E0_sprite_index;
     STexture* field_8E4_pTexture;
     u8 field_8E8_colour;
     u8 field_8E9_outline_colour;

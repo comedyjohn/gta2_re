@@ -61,12 +61,10 @@ KEEP_ALIASES = {"s8", "s16", "s32", "s64", "u8", "u16", "u32", "u64", "f32", "f6
                 "size_t", "ptrdiff_t", "uintptr_t", "intptr_t", "wchar_t"}
 # names a local or parameter must not take: a library function or macro it would hide or break
 LIBRARY_NAMES = set("""sin cos tan asin acos atan atan2 sinh cosh tanh sqrt pow exp log log10 floor ceil fabs abs labs fmod ldexp
-    frexp modf min max time clock rand srand free malloc calloc realloc exit abort atoi atof strlen strcpy strcmp
-    strcat memcpy memset memcmp memmove printf sprintf snprintf sscanf fopen fclose fread fwrite fseek ftell remove
-    rename signal select index rindex stat access open close read write link unlink send recv bind listen accept
-    connect socket div ldiv bsearch qsort swap errno stdin stdout stderr assert offsetof va_list va_start va_end
-    max_align_t size_t ssize_t data size begin end empty count move forward ref cref tie get set string vector
-    array map list pair optional variant tuple""".split())
+    frexp modf time clock rand srand free malloc calloc realloc exit abort atoi atof strlen strcpy strcmp strcat
+    memcpy memset memcmp memmove printf sprintf snprintf sscanf fopen fclose fread fwrite fseek ftell remove rename
+    signal select index rindex stat access open close read write link unlink send recv bind listen accept connect
+    socket div ldiv bsearch qsort errno stdin stdout stderr""".split())
 SKIP_FUNCTIONS = {"main", "WinMain", "DllMain"}
 # the components of a point or a vector are its interface: they keep their names (no trailing underscore)
 COORDINATES = {"x", "y", "z", "w"}
@@ -240,6 +238,10 @@ def propose(sub, kind, syms, names=None):
         elif new and s["kind"] in ("param", "local") and (new in LIBRARY_NAMES or new in taken[""]):
             new, why = None, f"{new} would hide a library or global name"
         rows.append([s, new, why])
+    fn_sigs = collections.defaultdict(set)  # (scope, name) -> parameter types of the functions called so
+    for s in syms:
+        if s["kind"] in ("function", "method"):
+            fn_sigs[(s["owner"], s["name"])].add(s.get("sig", ""))
     batch_names = collections.defaultdict(set)  # scope -> old names renamed in this batch
     for s, _, _ in rows:
         batch_names[s["owner"]].add(s["name"])
@@ -253,13 +255,24 @@ def propose(sub, kind, syms, names=None):
             if not new:
                 continue
             clash = counts[(s["owner"], new)]
-            if len(clash) > 1:
+            if len(clash) > 1 and s["kind"] in ("function", "method"):
+                # same name, different parameter types: an overload set, if no two are alike
+                group = [x for x in rows if x[1] == new and x[0]["owner"] == s["owner"] and x[0]["kind"] in ("function", "method")]
+                by_name = {x[0]["name"]: x[0].get("sig", "") for x in group}  # a declaration and its definition share a name
+                if len(set(by_name.values())) == len(by_name):
+                    continue
+                r[1], r[2] = None, "collides with " + ", ".join(sorted(clash - {s["name"]})) + " (same parameter types)"
+            elif len(clash) > 1:
                 m = re.search(r"_(\d+)$", s["name"])
                 if s["kind"] == "enumerator" and m and not new.endswith(m.group(1)):
                     r[1], r[2] = new + m.group(1), ""
                 else:
                     r[1], r[2] = None, "collides with " + ", ".join(sorted(clash - {s["name"]}))
             elif new in taken[s["owner"]] and new != s["name"] and new not in batch_names[s["owner"]]:
+                existing = fn_sigs.get((s["owner"], new), set())
+                other_kinds = any(x["name"] == new and x["owner"] == s["owner"] and x["kind"] not in ("function", "method") for x in syms)
+                if s["kind"] in ("function", "method") and existing and not other_kinds and s.get("sig", "") not in existing:
+                    continue  # an overload of a function that is already there
                 r[1], r[2] = None, f"{new} already exists in {s['owner'] or 'the global scope'}"
     result = {}
     for s, new, why in rows:

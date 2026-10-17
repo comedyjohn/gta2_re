@@ -1,0 +1,11 @@
+old,new
+Registry::Set_Sound_Setting_586AE0,GetOrCreateSoundSetting
+Registry::Set_Sound_Setting_586B80,SetSoundSetting
+gtx_0x106C::ConvertToVirtualOffsets_5AB1A0,SumOffsets
+gtx_0x106C::ConvertToVirtualOffsets_5AB1C0,ConvertToVirtualOffsets
+gtx_0x106C::GetTile_5AA870,GetTileMapping
+gtx_0x106C::get_tile_4C2EB0,GetTilePixels
+gtx_0x106C::sub_462FD0,GetSpecWith3AsOne
+gtx_0x106C::sub_49E570,IsSpec4NotRemapped
+text_0x14::TKeyFind_5B59E0,HasKey
+text_0x14::TKeyFind_5B5A50,FindText

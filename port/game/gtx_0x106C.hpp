@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <windows.h>
 
-struct palette_base
+struct PaletteBase
 {
     u16 field_0_tile;
     u16 field_2_sprite;
@@ -17,7 +17,7 @@ struct palette_base
     u16 field_E_font_remap;
 };
 
-struct sprite_base
+struct SpriteBase
 {
     u16 field_0_car;
     u16 field_2_ped;
@@ -27,13 +27,13 @@ struct sprite_base
     u16 field_A_font;
 };
 
-struct font_base
+struct FontBase
 {
     u16 field_0_font_count;
     u16 field_2_base[1]; // variable � see font_count
 };
 
-struct sprite_index
+struct SpriteIndex
 {
     void ClearPixelsOfColour_5ABAA0(u8 clear_target);
     void CopyPixels_5ABB00(u8* dst_x);
@@ -44,23 +44,23 @@ struct sprite_index
     s16 field_6_pad;
 };
 
-struct object_info
+struct ObjectInfo
 {
     u8 field_0_model;
     u8 field_1_sprites;
 };
 
-struct palette_index
+struct PaletteIndex
 {
     u16 field_0_phys_palette[16384];
 };
 
-struct tile_array
+struct TileArray
 {
     u16 field_0_tile_mapping[1024];
 };
 
-struct delta_entry
+struct DeltaEntry
 {
     s16 field_0_which_sprite;
     u8 field_2_delta_count;
@@ -68,7 +68,7 @@ struct delta_entry
     s16 field_4_delta[2];
 };
 
-struct door_info
+struct DoorInfo
 {
     char_type rx, ry;
 };
@@ -98,7 +98,7 @@ enum
 };
 } // namespace car_info_flag2
 
-class car_info
+class StyleCarInfo
 {
   public:
     BYTE model;
@@ -117,7 +117,7 @@ class car_info
     BYTE info_flags_2;
     BYTE remap[1]; // [variable � see num_remaps];
     BYTE num_doors;
-    door_info doors[1]; // [variable � see num_doors];
+    DoorInfo doors[1]; // [variable � see num_doors];
 
     bool has_remaps() const
     {
@@ -142,57 +142,57 @@ class car_info
     }
 };
 
-struct car_info_container
+struct CarInfoContainer
 {
-    car_info_container()
+    CarInfoContainer()
     {
         field_400_count = 0;
         memset(reinterpret_cast<void*>(field_0_car_info), 0, sizeof(field_0_car_info));
     }
-    car_info* field_0_car_info[256];
+    StyleCarInfo* field_0_car_info[256];
     u8 field_400_count;
     //char_type field_401;// pad
     //char_type field_402;// pad
     //char_type field_403;// pad
 };
 
-struct delta_store_entry
+struct DeltaStoreEntry
 {
     u16 field_0_offset;
     u8 field_2_len;
     u8 field_3_data[1]; // variable � see field_2_len
 };
 
-struct sprite_delta
+struct SpriteDelta
 {
     void Delta_5ABA00(u8* pArray);
     void Delta_5ABA40(u8* pArray, u32 width);
 
-    delta_store_entry* field_0_pData;
+    DeltaStoreEntry* field_0_pData;
     u16 field_4_len;
     u16 field_6_pad;
 };
 
-struct sprite_deltas
+struct SpriteDeltas
 {
     u16 field_0_which_sprite;
     u8 field_2_count;
     u8 field_3_pad;
-    sprite_delta field_4_deltas[1];
+    SpriteDelta field_4_deltas[1];
 };
 
-struct delta_container
+struct DeltaContainer
 {
     u16 field_0_count;
     u16 field_2_pad;
-    sprite_deltas* field_4_entries[1];
+    SpriteDeltas* field_4_entries[1];
 };
 
 // Bytes taken by a sprite_deltas with count deltas, and by a delta_container with count entries. The
 // original spells them for 4-byte pointers; at 64 bits the pointers, and the padding before them, grow.
 #if defined(GTA2_PORT_64BIT)
-    #define SPRITE_DELTAS_SIZE(count) (offsetof(sprite_deltas, field_4_deltas) + sizeof(sprite_delta) * (count))
-    #define DELTA_CONTAINER_SIZE(count) (offsetof(delta_container, field_4_entries) + sizeof(sprite_deltas*) * (count))
+    #define SPRITE_DELTAS_SIZE(count) (offsetof(SpriteDeltas, field_4_deltas) + sizeof(SpriteDelta) * (count))
+    #define DELTA_CONTAINER_SIZE(count) (offsetof(DeltaContainer, field_4_entries) + sizeof(SpriteDeltas*) * (count))
 #else
     #define SPRITE_DELTAS_SIZE(count) (8 * (count) + 4)
     #define DELTA_CONTAINER_SIZE(count) (4 * (count) + 4)
@@ -216,7 +216,7 @@ enum
 //static_assert(sizeof(tile_spec) == 1)
 } // namespace tile_spec
 
-class gtx_0x106C
+class Gtx
 {
   public:
     bool IsRemappedWaterTile_49E540(u16 spec_idx)
@@ -288,13 +288,13 @@ class gtx_0x106C
         return get_sprite_index_5AA440(a2)->field_5_height;
     }
 
-    car_info* get_car_info_5AA3B0(u8 idx);
+    StyleCarInfo* get_car_info_5AA3B0(u8 idx);
 
     BYTE* get_car_remap_5AA3D0(u8 idx);
 
-    sprite_delta* get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx);
+    SpriteDelta* get_delta_5AA3F0(u16 sprite_idx, u8 delta_idx);
 
-    sprite_index* get_sprite_index_5AA440(u16 idx);
+    SpriteIndex* get_sprite_index_5AA440(u16 idx);
 
     u16 GetSpriteTrueIndex_5AA460(s32 sprite_type, s16 sprite_pal);
 
@@ -326,7 +326,7 @@ class gtx_0x106C
 
     u16 get_physical_palettes_len_5AA900();
 
-    object_info* get_map_object_info_5AA910(u16 idx);
+    ObjectInfo* get_map_object_info_5AA910(u16 idx);
 
     void SetTileRemap_5AA930(u16 tile_idx, s16 tile_val);
 
@@ -391,10 +391,10 @@ class gtx_0x106C
     void LoadSty_5AB750(const char_type* pStyFileName);
 
     // 0x5AB820
-    gtx_0x106C();
+    Gtx();
 
     // 0x5AB8A0
-    ~gtx_0x106C();
+    ~Gtx();
 
     // inlined v9.6f, 0x432850
     u8 get_number_of_cars() const
@@ -413,38 +413,33 @@ class gtx_0x106C
         return field_6C_spec[tile_idx] == SpecSurfaceType::kSpecElectrified;
     }
 
-    car_info* get_car_info_4BF1F0(u8 model_idx)
-    {
-        return field_5C_cari->field_0_car_info[model_idx];
-    }
-
     s16 field_0_totalPalBase;
     u16 field_2_font_base_total;
     s16 field_4_sprite_index_count;
     u16 field_6_map_object_info_len;
     s16 field_8_physical_palettes_len;
     s16 field_A_unused;
-    palette_base* field_C_palette_base2;
-    palette_base* field_10_palette_base1;
-    sprite_base* field_14_sprite_base2;
-    sprite_base* field_18_sprite_base1;
-    font_base* field_1C_font_base;
-    sprite_index* field_20_sprite_index;
-    object_info* field_24_map_object_info;
-    palette_index* field_28_palette_index;
+    PaletteBase* field_C_palette_base2;
+    PaletteBase* field_10_palette_base1;
+    SpriteBase* field_14_sprite_base2;
+    SpriteBase* field_18_sprite_base1;
+    FontBase* field_1C_font_base;
+    SpriteIndex* field_20_sprite_index;
+    ObjectInfo* field_24_map_object_info;
+    PaletteIndex* field_28_palette_index;
     void* field_2C_physical_palettes;
     void* field_30_physical_palettes_size;
     BYTE* field_34_sprite_graphics;
     void* field_38_sprite_graphics_unaligned;
     u8* field_3C_tiles;
-    tile_array* field_40_tile;
+    TileArray* field_40_tile;
     void* field_44_aligned_tiles_size;
-    delta_store_entry* field_48_delta_store;
-    delta_entry* field_4C_delta_index;
+    DeltaStoreEntry* field_48_delta_store;
+    DeltaEntry* field_4C_delta_index;
     void* field_50_delta_buffer;
-    delta_container* field_54_del;
-    car_info** field_58_car_info;
-    car_info_container* field_5C_cari;
+    DeltaContainer* field_54_del;
+    StyleCarInfo** field_58_car_info;
+    CarInfoContainer* field_5C_cari;
     s32 field_60_delta_len;
     u8* field_64_car_recycling_info;
     s16 field_68_recy_chunk_size;
@@ -453,7 +448,7 @@ class gtx_0x106C
     s32 field_6C_spec[1024];
 };
 
-EXTERN_GLOBAL(gtx_0x106C*, gGtx_0x106C_703DD4);
+EXTERN_GLOBAL(Gtx*, gGtx_0x106C_703DD4);
 
 inline s32 GetSpaceWidth_4C23D0(u16 font_type)
 {

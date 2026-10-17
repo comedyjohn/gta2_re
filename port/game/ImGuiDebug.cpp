@@ -1017,7 +1017,7 @@ namespace
 {
 void DisplayTextAtSprite(const char* pStr, Sprite* pSprt, s16 x_offset, s16 y_offset)
 {
-    DisplayWideTextAtSprite(text_0x14::Ascii2Wide_5B5DF0(pStr), pSprt, x_offset, y_offset);
+    DisplayWideTextAtSprite(GameText::Ascii2Wide_5B5DF0(pStr), pSprt, x_offset, y_offset);
 }
 } // namespace
 
@@ -1037,7 +1037,7 @@ namespace
 {
 [[maybe_unused]] void DisplayTextAtScreenCoords(char* pStr, s16 screen_xpos, s16 screen_ypos)
 {
-    DisplayWideTextAtScreenCoords(text_0x14::Ascii2Wide_5B5DF0(pStr), screen_xpos, screen_ypos);
+    DisplayWideTextAtScreenCoords(GameText::Ascii2Wide_5B5DF0(pStr), screen_xpos, screen_ypos);
 }
 } // namespace
 
@@ -1357,7 +1357,7 @@ void ImGuiDebugDraw()
 
         static char tmpBuffer[512];
         sprintf(tmpBuffer, "c%02d", model_num);
-        ImGui::Text(text_0x14::Wide2PesudoAscii_5B5D10(gText_0x14_704DFC->Find_5B5F90(tmpBuffer)));
+        ImGui::Text(GameText::Wide2PesudoAscii_5B5D10(gText_0x14_704DFC->Find_5B5F90(tmpBuffer)));
 
         static int currentCharIndex = 0;
         const char* char_lang_codes[] = {"english", "french", "italian", "german", "spanish", "russian??", "japanese??"};
@@ -2100,7 +2100,7 @@ void ImGuiDebugDraw()
                 for (; id < 8000; id++)
                 {
                     u16 true_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCodeObj1, id);
-                    sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
+                    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_idx);
                     if (sprite_index_5AA440)
                     {
                         if (sprite_index_5AA440->field_4_width == 20 && sprite_index_5AA440->field_5_height == 16)
@@ -2228,7 +2228,7 @@ void ImGuiDebugDraw()
 
                                 if (ImGui::TreeNode("Model Physics"))
                                 {
-                                    ModelPhysics_48* pModelPhy =
+                                    ModelPhysics* pModelPhy =
                                         gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(pPlayerCar->field_84_car_info_idx);
                                     if (pModelPhy)
                                     {
@@ -3429,7 +3429,7 @@ void ImGuiDebugDraw()
             {
                 static s32 struc_221_id = 0;
                 ImGui::SliderInt("BestStageStats_28 ID", &struc_221_id, 0, 2);
-                BestStageStats_28* struc = &gPlyDat_6FEAC0->field_1800_best_stats[struc_221_id];
+                BestStageStats* struc = &gPlyDat_6FEAC0->field_1800_best_stats[struc_221_id];
 
                 static s32 byte_id = 0;
                 ImGui::SliderInt("Byte ID", &byte_id, 0, 39);
@@ -3449,7 +3449,7 @@ void ImGuiDebugDraw()
                 ImGui::SliderInt("field_1890 ID 1", &id_1, 0, 2);
                 ImGui::SliderInt("field_1890 ID 2", &id_2, 0, 3);
 
-                HighScoreTable_F0* pTable;
+                HighScoreTable* pTable;
 
                 switch (table_type)
                 {
@@ -3469,7 +3469,7 @@ void ImGuiDebugDraw()
 
                 static s32 string_id = 0;
                 ImGui::SliderInt("string_id", &string_id, 0, 9);
-                ScoreTableLine_18* s_string = &pTable->field_0_score_table_line[string_id];
+                ScoreTableLine* s_string = &pTable->field_0_score_table_line[string_id];
 
                 static char str_buf_3[10];
                 wchar_to_char(s_string->field_0_player_name, str_buf_3, 10);
@@ -3483,7 +3483,7 @@ void ImGuiDebugDraw()
             {
                 static s32 table_idx = 0;
                 ImGui::SliderInt("table_idx", &table_idx, 0, 7);
-                PlySlot_A4* dreamy = &gPlyDat_6FEAC0->field_26A0_plyr_stats[table_idx];
+                PlySlot* dreamy = &gPlyDat_6FEAC0->field_26A0_plyr_stats[table_idx];
 
                 static char str_buf_4[9];
                 wchar_to_char(dreamy->field_90_strPlayerName, str_buf_4, 9);
@@ -3493,7 +3493,7 @@ void ImGuiDebugDraw()
                 static s32 gifted_joliot_id_2 = 0;
                 ImGui::SliderInt("StageStats_C ID 1", &gifted_joliot_id_1, 0, 2);
                 ImGui::SliderInt("StageStats_C ID 2", &gifted_joliot_id_2, 0, 3);
-                StageStats_C* g_joliot = &dreamy->field_0_plyr_stage_stats[gifted_joliot_id_1][gifted_joliot_id_2];
+                StageStats* g_joliot = &dreamy->field_0_plyr_stage_stats[gifted_joliot_id_1][gifted_joliot_id_2];
 
                 ImGui::Value("Joliot field_0", g_joliot->field_0_is_stage_unlocked);
                 ImGui::Value("Joliot field_4", g_joliot->field_4_stage_best_score);

@@ -500,10 +500,10 @@ void Hud_CopHead_C_Array::DrawWantedLevel_5D0110()
 void Hud_CopHead_C_Array::Init_5D0210()
 {
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, 14);
-    sprite_index* sprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
 
-    field_4C_w_fp.FromU8(sprite_index->field_4_width);
-    field_50_h_fp.FromU8(sprite_index->field_5_height);
+    field_4C_w_fp.FromU8(SpriteIndex->field_4_width);
+    field_50_h_fp.FromU8(SpriteIndex->field_5_height);
 
     for (auto& cop_head : field_1028_cop_heads)
     {
@@ -1520,7 +1520,7 @@ void Hud_Message_1C8::FormatMessage_5D1860()
 {
     if (this->field_0_time_to_show)
     {
-        text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(&this->field_2_str[100], this->field_2_str, 580, gMessageFont_7062F0);
+        GameText::InsertLineBreaksAndGetNumLines_5B5BC0(&this->field_2_str[100], this->field_2_str, 580, gMessageFont_7062F0);
         this->field_1BC_str_width =
             static_cast<u16>((640 - Frontend::GetMaxTextWidth_5D8990(&this->field_2_str[100], gMessageFont_7062F0)) / 2);
         this->field_1C0_num_lines = static_cast<u16>((480 - CountLineSpacing_5D8940(&this->field_2_str[100], gMessageFont_7062F0)) / 4);
@@ -1572,7 +1572,7 @@ void Hud_TextEntry_C4::FormatAndSetupText_5D1B10(const wchar_t* pStr, s16 xpos, 
 {
     this->field_AC_fontType = fontType;
 
-    text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str_buf, pStr, 640, fontType);
+    GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str_buf, pStr, 640, fontType);
 
     if (field_AC_fontType == word_703C9C || field_AC_fontType == word_703D9C)
     {
@@ -2112,7 +2112,7 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
             }
 
             field_508_num_lines =
-                text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
+                GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str, pStartStr, MaxLineWidth_62689C, gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
             if (bShow_brief_number_67D504)
             {
@@ -2134,12 +2134,12 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                 }
                 swprintf(gTmpWideStr_67C7D8,
                          L"(%s)%s",
-                         text_0x14::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str),
+                         GameText::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str),
                          pStartStr_2);
-                field_508_num_lines = text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                       gTmpWideStr_67C7D8,
-                                                                                       MaxLineWidth_62689C,
-                                                                                       gBriefFont_7065C4);
+                field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
+                                                                                      gTmpWideStr_67C7D8,
+                                                                                      MaxLineWidth_62689C,
+                                                                                      gBriefFont_7065C4);
             }
         }
         else
@@ -2156,10 +2156,10 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
             {
                 field_502_face_idx = 8; // neutral face
             }
-            field_508_num_lines = text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                   static_cast<const wchar_t*>(_5B5F90),
-                                                                                   MaxLineWidth_62689C,
-                                                                                   gBriefFont_7065C4);
+            field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
+                                                                                  static_cast<const wchar_t*>(_5B5F90),
+                                                                                  MaxLineWidth_62689C,
+                                                                                  gBriefFont_7065C4);
             num_chars = wcslen(field_0_str);
 
             if (bShow_brief_number_67D504)
@@ -2176,11 +2176,11 @@ size_t Hud_Brief_704::FormatCurrentBrief_5D3470()
                 {
                     field_502_face_idx = 8; // neutral face
                 }
-                swprintf(gTmpWideStr_67C7D8, L"(%s)%s", text_0x14::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str), pString);
-                field_508_num_lines = text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
-                                                                                       gTmpWideStr_67C7D8,
-                                                                                       MaxLineWidth_62689C,
-                                                                                       gBriefFont_7065C4);
+                swprintf(gTmpWideStr_67C7D8, L"(%s)%s", GameText::Ascii2Wide_5B5DF0(field_6F8_curr_briefs->field_0_brief_id_str), pString);
+                field_508_num_lines = GameText::InsertLineBreaksAndGetNumLines_5B5BC0(field_0_str,
+                                                                                      gTmpWideStr_67C7D8,
+                                                                                      MaxLineWidth_62689C,
+                                                                                      gBriefFont_7065C4);
             }
         }
     }
@@ -2988,7 +2988,7 @@ void DrawAmmo_5D6060(s16 ammo_idx, u8 ammo_count)
 // the first block, which tips the register priorities so width gets ebx and base_xpos ebp
 namespace
 {
-inline u16 GetPowerupSpriteIndex_5D61A0(gtx_0x106C* pGtx, s32 sprite_pal)
+inline u16 GetPowerupSpriteIndex_5D61A0(Gtx* pGtx, s32 sprite_pal)
 {
     return pGtx->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, sprite_pal);
 }

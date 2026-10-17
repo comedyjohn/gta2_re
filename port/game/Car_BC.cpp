@@ -66,8 +66,8 @@ DEFINE_GLOBAL(Sprite*, gSprite_Unused_677938, 0x677938);
 DEFINE_GLOBAL_INIT(Fix16, kTvAntennaOffsetY_6778A0, Fix16(0x100, 0), 0x6778A0);
 DEFINE_GLOBAL_INIT(Fix16, kMachineGunOffsetY_6777FC, Fix16(0xFFFFEE00, 0), 0x6777FC);
 
-EXTERN_GLOBAL(CarInfo_2C*, gCarInfo_2C_6FE0E4);
-EXTERN_GLOBAL(ModelPhysics_48*, gCarInfo_48_6FE258);
+EXTERN_GLOBAL(CarModelInfo*, gCarInfo_2C_6FE0E4);
+EXTERN_GLOBAL(ModelPhysics*, gCarInfo_48_6FE258);
 
 DEFINE_GLOBAL(u16, word_677CFC, 0x677CFC);
 DEFINE_GLOBAL(SpriteList_4, stru_67737C, 0x67737c);
@@ -531,7 +531,7 @@ void CarManager_6C::DistributeCarsByRating_444980()
         {
             if (bStartNetworkGame_7081F0 || gGtx_0x106C_703DD4->IsCarModelInRecycleList_5AB380(i))
             {
-                car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(i);
+                StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(i);
 
                 if (pInfo->rating != 99)
                 {
@@ -806,7 +806,7 @@ char Car_BC::TrySnapCarToNearestDrivableRoadAndDriveForward_445EC0(Fix16 xpos, F
                 if (!gGame_0x40_67E008->IsPointOnScreen_4B9A80(xpos, ypos))
                 {
                     Fix16 pos_z = gMap_0x370_6F6268->FindGroundZBelowCoord_4E4D40(xpos, ypos, zTmpInt);
-                    car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+                    StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
                     Fix16 w_val = gPixelsToFix16_6F6850.list[pInfo->w];
                     Fix16 h_val = gPixelsToFix16_6F6850.list[pInfo->h];
                     SwapIf3or4_41FE40(direction, w_val, h_val);
@@ -1087,7 +1087,7 @@ Car_BC* CarManager_6C::SpawnBusAtValidRoadPosition_4453E0(Fix16 x, Fix16 y, s32 
             if ((pBlock->field_B_slope_type & 3) == 1 && !gGame_0x40_67E008->IsPointOnScreen_4B9A80(x, y))
             {
                 Fix16 ground_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(x, y);
-                car_info* car_info_5AA3B0 = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_model);
+                StyleCarInfo* car_info_5AA3B0 = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_model);
 
                 Fix16 sprite_width = gPixelsToFix16_6F6850.list[car_info_5AA3B0->w];
                 Fix16 sprite_height = gPixelsToFix16_6F6850.list[car_info_5AA3B0->h];
@@ -1290,7 +1290,7 @@ Car_BC* CarManager_6C::SpawnCarOnRoadNetwork_4458B0(Fix16 xpos, Fix16 ypos, s32 
             if ((pBlock->field_B_slope_type & 3) == 1 && !gGame_0x40_67E008->IsPointOnScreen_4B9A80(x, y))
             {
                 Fix16 ground_z = gMap_0x370_6F6268->FindGroundZForCoord_4E5B60(x, y);
-                car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_model_type);
+                StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_model_type);
 
                 Fix16 sprite_width = gPixelsToFix16_6F6850.list[pCarInfo->w];
                 Fix16 sprite_height = gPixelsToFix16_6F6850.list[pCarInfo->h];
@@ -1358,7 +1358,7 @@ Car_BC* CarManager_6C::SpawnCarAt_446230(Fix16 xpos, Fix16 ypos, Fix16 zpos, Ang
         }
     }
 
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(car_info_idx);
 
     Car_BC* pCar; // esi
     if (pCarInfo->IsTruckCab_41FEA0())
@@ -1862,7 +1862,7 @@ s16 Car_BC::ApplyImpactDamage_43D5D0(Fix16 damage)
 // 0x4403a0
 Ang16 Car_BC::GetCornerAngle_4403A0()
 {
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 w_fp = Fix16(pCarInfo->w) / 2;
     Fix16 h_fp = Fix16(pCarInfo->h) / 2;
     return Ang16(Fix16::Atan2Fixed(h_fp, w_fp).r_value_);
@@ -1892,7 +1892,7 @@ Fix16 Car_BC::GetDamageFactorOnSpeed_439EE0()
 // 0x439f30
 Fix16 Car_BC::GetMaxSpeed_439F30()
 {
-    ModelPhysics_48* pModelPhysics = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(field_84_car_info_idx);
+    ModelPhysics* pModelPhysics = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(field_84_car_info_idx);
     // Max speed is limited by how smashed up the car is
     return GetDamageFactorOnSpeed_439EE0() * pModelPhysics->field_28_max_speed;
 }
@@ -1908,7 +1908,7 @@ wchar_t* Car_BC::GetCarStr_439F80()
 Fix16Point Car_BC::GetHitchPoint_439FB0()
 {
     Fix16Point point;
-    car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     if ((pInfo->info_flags & car_info_flag::trailer) == car_info_flag::trailer)
     {
         point = kTrailerHitchOffset_677370;
@@ -1925,14 +1925,14 @@ Fix16Point Car_BC::GetHitchPoint_439FB0()
 // 0x43a0e0
 Fix16Point Car_BC::GetRearWheelOffset_43A0E0()
 {
-    CarInfo_2C* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_84_car_info_idx);
+    CarModelInfo* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_84_car_info_idx);
     return Fix16Point(Fix16(0), pInfo->field_8_rear_wheel_offset);
 }
 
 // 0x43a120
 Fix16 Car_BC::GetMass_43A120()
 {
-    ModelPhysics_48* pCarInfo = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(field_84_car_info_idx);
+    ModelPhysics* pCarInfo = gCarInfo_808_678098->GetModelPhysicsFromIdx_4546B0(field_84_car_info_idx);
 
     if (HasPlayerDriver_4215C0())
     {
@@ -2072,7 +2072,7 @@ Fix16 Car_BC::GetMomentOfInertia_43A590()
 // 0x43a5b0
 Fix16 Car_BC::GetMinDimension_43A5B0()
 {
-    const car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    const StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     if (pInfo->w < pInfo->h)
     {
         Fix16 t = gPixelsToFix16_6F6850.list[pInfo->w];
@@ -2141,7 +2141,7 @@ void Car_BC::SetCarRemap(u8 remap)
 // 0x43a7d0
 void Car_BC::AssignRandomRemap_43A7D0()
 {
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     if (pCarInfo->num_remaps)
     {
         const u32 remap_idx = gCarManager_6C_677930->field_10_remap_rng.GetRngValue_4212D0() % (pCarInfo->num_remaps + 1);
@@ -2762,7 +2762,7 @@ void Car_BC::CloseAllDoors_43B3D0()
 // 0x43b420
 void Car_BC::GetDoorWorldPos_43B420(u8 door_idx, Fix16* pOutX, Fix16* pOutY)
 {
-    door_info* pDoor = reinterpret_cast<door_info*>(gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx) + 1) + door_idx;
+    DoorInfo* pDoor = reinterpret_cast<DoorInfo*>(gGtx_0x106C_703DD4->get_car_remap_5AA3D0(field_84_car_info_idx) + 1) + door_idx;
     Fix16 door_x = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(pDoor->rx);
     Fix16 door_y = gPixelsToFix16_6F6850.SignedPixelsToFix16_41FE70(pDoor->ry);
 
@@ -2958,7 +2958,7 @@ bool Car_BC::IsImmuneToExplosionType_43B850(s32 explosion_type)
 // 9.6f 0x41FF40 (a car_info helper, inlined in 10.5): each inlined call gets its own return temp
 namespace
 {
-inline Fix16 Get_front_window_offset(car_info* p)
+inline Fix16 Get_front_window_offset(StyleCarInfo* p)
 {
     return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->front_window_offset);
 }
@@ -2967,7 +2967,7 @@ inline Fix16 Get_front_window_offset(car_info* p)
 // 9.6f 0x41FF20
 namespace
 {
-inline Fix16 Get_rear_window_offset(car_info* p)
+inline Fix16 Get_rear_window_offset(StyleCarInfo* p)
 {
     return gPixelsToFix16_6F6850.SignedPixelsToFix16_440860(p->rear_window_offset);
 }
@@ -2976,7 +2976,7 @@ inline Fix16 Get_rear_window_offset(car_info* p)
 // 9.6f 0x41FF60
 namespace
 {
-inline Fix16 Get_half_width(car_info* p)
+inline Fix16 Get_half_width(StyleCarInfo* p)
 {
     return dword_677214 * gPixelsToFix16_6F6850.list[p->w];
 }
@@ -2985,7 +2985,7 @@ inline Fix16 Get_half_width(car_info* p)
 // 0x43b870
 void Car_BC::SpawnDamageFireEffect_43B870(s32 fire_size, const Fix16Point* pPos)
 {
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
 
     Fix16 x_hit;
     Fix16 y_hit;
@@ -3991,7 +3991,7 @@ void Car_BC::StopMovement_43DBD0()
 // 0x43dc00
 bool Car_BC::IsSpriteShrunk_43DC00()
 {
-    car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     if (field_74_damage == 32001)
     {
         SpriteShape_4C* pSprite4C = field_50_car_sprite->field_C_pCollisionShape;
@@ -4002,7 +4002,7 @@ bool Car_BC::IsSpriteShrunk_43DC00()
     }
 
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCar, pInfo->sprite);
-    sprite_index* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     Fix16 lenWidth = field_50_car_sprite->field_4_pVisualShape->field_0_width;
     return lenWidth.value_ != gPixelsToFix16_6F6850.list[pSpriteIndex->field_4_width].value_;
 }
@@ -4010,11 +4010,11 @@ bool Car_BC::IsSpriteShrunk_43DC00()
 // 0x43dc80
 bool Car_BC::CarShrinkSprite_43DC80(s32 xoff, s32 yoff)
 {
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 w_fp(pCarInfo->w << 14, 0);
     Fix16 h_fp(pCarInfo->h << 14, 0);
     u16 sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kCar, pCarInfo->sprite);
-    sprite_index* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     Fix16 sprite_w = gPixelsToFix16_6F6850.list[pSpriteIndex->field_4_width];
     Fix16 sprite_h = gPixelsToFix16_6F6850.list[pSpriteIndex->field_5_height];
     return field_50_car_sprite->ShrinkSprite_59E390((sprite_w * xoff) / w_fp, (sprite_h * yoff) / h_fp, 0);
@@ -4947,7 +4947,7 @@ void Car_BC::CountDownToWreck_441360()
 // 0x4436A0
 void Car_BC::TurnToWreck_4436A0()
 {
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     s32 wreck_idx = pCarInfo->wreck + CarModel::kWreck0;
     field_50_car_sprite->field_22_type_sprite_idx = gGtx_0x106C_703DD4->get_car_info_5AA3B0(wreck_idx)->sprite;
     field_50_car_sprite->CopyCollisionShapeToVisual_59E2E0();
@@ -5105,7 +5105,7 @@ void Car_BC::UpdateBrakeLights_4415C0()
 // 0x441600
 Fix16Rect Car_BC::GetOrientedHalfExtentsRect_441600()
 {
-    car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
+    StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_84_car_info_idx);
     Fix16 half_w = gPixelsToFix16_6F6850.list[pInfo->w] / k_dword_6777D4;
     Fix16 half_h = gPixelsToFix16_6F6850.list[pInfo->h] / k_dword_6777D4;
 
@@ -7488,7 +7488,7 @@ char_type TrafficSpawner_14::SpawnTrafficCar_582480(s32 spawn_type, s32 arrow_di
         return 0;
     }
 
-    car_info* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_9_traffic_car_model);
+    StyleCarInfo* pCarInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(field_9_traffic_car_model);
     Fix16 car_w = gPixelsToFix16_6F6850.list[pCarInfo->w];
     Fix16 car_h = gPixelsToFix16_6F6850.list[pCarInfo->h];
     SwapIf3or4_41FE40(arrow_direction, car_w, car_h);

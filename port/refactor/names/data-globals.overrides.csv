@@ -1,0 +1,14 @@
+old,new
+byte_67D56B,gCheatJailCardAndAmmo
+byte_67D654,gUnusedDebugFlag
+k_dword_6FDEFC,kFiveFixed
+k_dword_6FDFEC,kHalfFixed
+k_dword_6FE210,kOneFixed
+word_626590,kExtendedCharMapPart2
+word_703BAA,gFontTypeSlot1Of7
+word_703C3E,gFontType1
+word_703C9C,gFontTypeSlot5Of7
+word_703D98,gFontTypeSlot2Of7
+word_703D9A,gFontType2
+word_703D9C,gFontType0
+word_703DA4,gFontType3

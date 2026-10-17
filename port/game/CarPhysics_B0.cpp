@@ -27,8 +27,8 @@ inline Fix16 Square_49E0E0(const Fix16& value);
 Fix16 DotProduct_560680(const Fix16Point& Vector1, const Fix16Point& Vector2);
 
 DEFINE_GLOBAL(CarPhyisicsPool*, gCarPhysicsPool_6FE3E0, 0x6FE3E0);
-DEFINE_GLOBAL(CarInfo_2C*, gCarInfo_2C_6FE0E4, 0x6FE0E4);
-DEFINE_GLOBAL(ModelPhysics_48*, gCarInfo_48_6FE258, 0x6FE258);
+DEFINE_GLOBAL(CarModelInfo*, gCarInfo_2C_6FE0E4, 0x6FE0E4);
+DEFINE_GLOBAL(ModelPhysics*, gCarInfo_48_6FE258, 0x6FE258);
 DEFINE_GLOBAL_INIT(Ang16, kAngZero_6FE3C0, Ang16(0), 0x6FE3C0);
 DEFINE_GLOBAL_INIT(Fix16, k_dword_6FE290, Fix16(0), 0x6FE290);
 DEFINE_GLOBAL_INIT(Fix16, kFP16Five_6FE220, Fix16(5), 0x6FE220);
@@ -638,7 +638,7 @@ void CarPhysics_B0::SetVelocityTowardTarget_55A1D0(Fix16 targetX, Fix16 targetY,
 {
     Fix16Point local(targetX, targetY);
     Fix16Point offset;
-    CarInfo_2C* pCarInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->field_84_car_info_idx);
+    CarModelInfo* pCarInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->field_84_car_info_idx);
     offset = pCarInfo->field_C_center_of_mass_offset;
     Fix16Point worldPoint;
     offset.RotateByAngle(field_58_theta);
@@ -3568,7 +3568,7 @@ void CarPhysics_B0::SetModelPhysicsGlobal_562EB0()
 // 0x562ed0
 void CarPhysics_B0::SetCarInfoGlobal_562ED0()
 {
-    CarInfo_2C* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
+    CarModelInfo* pInfo = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
     gCarInfo_2C_6FE0E4 = pInfo;
 }
 
@@ -3748,7 +3748,7 @@ void CarPhysics_B0::UpdateCp1FromCm1_563280()
 // 0x563350
 void CarPhysics_B0::UpdateCenterOfMassPoint_563350()
 {
-    const CarInfo_2C* info = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
+    const CarModelInfo* info = gCarInfo_808_678098->GetInfoAtIdx_454840(field_5C_pCar->GetCarModelForPhysics_43A850());
 
     Fix16Point point(info->field_C_center_of_mass_offset.x, info->field_C_center_of_mass_offset.y);
 

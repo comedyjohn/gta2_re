@@ -11,14 +11,14 @@ class Car_BC;
 class Trailer;
 class SpriteShape_4C;
 class Ped;
-class ModelPhysics_48;
+class ModelPhysics;
 class CarAI_78;
 
 EXTERN_GLOBAL(Fix16, dword_6FD120);
-EXTERN_GLOBAL(ModelPhysics_48*, gCarInfo_48_6FE258);
+EXTERN_GLOBAL(ModelPhysics*, gCarInfo_48_6FE258);
 EXTERN_GLOBAL(Ang16, kAng90_6FE00C);
 EXTERN_GLOBAL(Ang16, kAng270_6FE154);
-EXTERN_GLOBAL(CarInfo_2C*, gCarInfo_2C_6FE0E4);
+EXTERN_GLOBAL(CarModelInfo*, gCarInfo_2C_6FE0E4);
 EXTERN_GLOBAL(Fix16, gDamageSpeedFactor_6FE348);
 EXTERN_GLOBAL(Fix16, kDrowningMaxSpeed_677794);
 EXTERN_GLOBAL(Fix16Point, stru_6FDF50);

@@ -73,6 +73,9 @@ def record(cur, in_function):
         r["kind"] = FUNCS[k]
         r["operator"] = name.startswith("operator")
         r["static"] = cur.is_static_method() if k == K.CXX_METHOD else False
+        # the parameter types and the const-ness: what makes two functions of one name different overloads
+        r["sig"] = "(" + ",".join(a.type.get_canonical().spelling for a in cur.get_arguments()) + ")" + (
+            "const" if k == K.CXX_METHOD and cur.is_const_method() else "")
     elif k == K.FIELD_DECL:
         parent = cur.semantic_parent
         r.update(kind="field", has_methods=has_methods(parent) if parent is not None else False,

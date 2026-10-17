@@ -4753,17 +4753,17 @@ void Map_0x370::LoadMap_4E95B0(const char_type* pGmpFileName)
     File::Global_Open_4A7060(pGmpFileName);
 
     u32 len = sizeof(gmp_header);
-    chunk_header chunkHeader;
+    ChunkHeader chunkHeader;
     File::Global_Read_4A71C0(&header, len);
 
-    len = sizeof(chunk_header);
+    len = sizeof(ChunkHeader);
     while (File::Global_Read_4A7210(&chunkHeader, &len))
     {
         if (chunkHeader.field_4_size != 0)
         {
             load_chunk_4E94B0(chunkHeader.field_0_type, chunkHeader.field_4_size);
         }
-        len = sizeof(chunk_header);
+        len = sizeof(ChunkHeader);
     }
     File::Global_Close_4A70C0();
 

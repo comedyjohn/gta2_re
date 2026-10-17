@@ -48,7 +48,7 @@ void RollingDigitCounter_38::SetupDigitsParams_492110(s16 digit_transition_speed
 void RollingDigitCounter_38::InitDigitSprites_492150()
 {
     u16 true_sprite_idx = gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(SpriteTypes::kUser, field_36_sprite_idx);
-    sprite_index* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_sprite_idx);
+    SpriteIndex* pSpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(true_sprite_idx);
     field_27_sprite_w = pSpriteIndex->field_4_width;
     field_28_sprite_h_calc = pSpriteIndex->field_5_height / 11;
     field_34_first_digit_texture_idx = gTextureCache_15D8_705064->RegisterDigits_5B9220(field_2A_max_num_of_digits, field_36_sprite_idx);

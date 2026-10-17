@@ -3,23 +3,23 @@
 #include "core/function.hpp"
 #include <windows.h>
 
-struct text_0xC
+struct TextEntry
 {
     wchar_t* field_0_pwstr;
     const char_type* field_4_pKey;
     s32 field_8;
 };
 
-class text_tdat
+class TextTdat
 {
   public:
-    text_tdat() // inline 0x4C2420
+    TextTdat() // inline 0x4C2420
     {
         field_0_data = nullptr;
         field_4_len = 0;
     }
 
-    ~text_tdat() // inline 0x4C2430
+    ~TextTdat() // inline 0x4C2430
     {
 
         delete[] field_0_data;
@@ -31,27 +31,27 @@ class text_tdat
     void TDAT_Load_5B5A80(u32 size);
 };
 
-class text_tkey
+class TextTkey
 {
   public:
-    text_tkey() // inline 4C23F0
+    TextTkey() // inline 4C23F0
     {
         field_0_tKey = nullptr;
         field_4_tKey_count = 0;
     }
 
-    ~text_tkey() // inline 0x4C2400
+    ~TextTkey() // inline 0x4C2400
     {
 
         delete[] field_0_tKey;
 
         field_0_tKey = nullptr;
     }
-    text_0xC* field_0_tKey;
+    TextEntry* field_0_tKey;
     u32 field_4_tKey_count;
 };
 
-class text_0x14
+class GameText
 {
   public:
     bool LangIsJapanese_452E60()
@@ -59,8 +59,8 @@ class text_0x14
         return field_10_lang_code == 106;
     }
 
-    text_tkey field_0_tKey;
-    text_tdat field_8_tDat;
+    TextTkey field_0_tKey;
+    TextTdat field_8_tDat;
     char_type field_10_lang_code;
     char_type field_11_pad[3];
 
@@ -99,12 +99,12 @@ class text_0x14
     bool KeyExists_5B5FA0(const char_type* pIdStr);
 
     // 0x5B5FB0
-    text_0x14();
+    GameText();
 
     // 0x5B6050
-    ~text_0x14();
+    ~GameText();
 };
 
-EXTERN_GLOBAL(text_0x14*, gText_0x14_704DFC);
+EXTERN_GLOBAL(GameText*, gText_0x14_704DFC);
 
-EXTERN_GLOBAL(text_0x14*, gtext_0x14_6F87F0);
+EXTERN_GLOBAL(GameText*, gtext_0x14_6F87F0);

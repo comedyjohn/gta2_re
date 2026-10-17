@@ -7,8 +7,8 @@
 #include "gtx_0x106C.hpp"
 #include "registry.hpp"
 
-DEFINE_GLOBAL(text_0x14*, gText_0x14_704DFC, 0x704DFC);
-DEFINE_GLOBAL(text_0x14*, gtext_0x14_6F87F0, 0x6F87F0);
+DEFINE_GLOBAL(GameText*, gText_0x14_704DFC, 0x704DFC);
+DEFINE_GLOBAL(GameText*, gtext_0x14_6F87F0, 0x6F87F0);
 DEFINE_GLOBAL_ARRAY(wchar_t, tmpAscii2WideStr_70488C, 640, 0x70488C);
 DEFINE_GLOBAL_ARRAY(char_type, tmpWide2AsciiStr_70462C, 80, 0x70462C);
 
@@ -45,7 +45,7 @@ const u16 kExtendedWesternCharMap[128] = {
 } // namespace
 
 // 0x5B58D0
-u16 text_0x14::RemapExtendedChar_5B58D0(u16 ch)
+u16 GameText::RemapExtendedChar_5B58D0(u16 ch)
 {
     u16 result = ch;
     if (ch >= 128U)
@@ -67,7 +67,7 @@ u16 text_0x14::RemapExtendedChar_5B58D0(u16 ch)
 }
 
 // 0x5B5910
-void text_0x14::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
+void GameText::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
 {
     if (field_10_lang_code != 'j')
     {
@@ -76,7 +76,7 @@ void text_0x14::RemapExtendedCharsIfNotJapanese_5B5910(wchar_t* pText)
 }
 
 // 0x5B5930
-void text_0x14::RemapExtendedChars_5B5930(wchar_t* pStr)
+void GameText::RemapExtendedChars_5B5930(wchar_t* pStr)
 {
     for (wchar_t* pStrIter = pStr; *pStrIter; ++pStrIter)
     {
@@ -85,24 +85,24 @@ void text_0x14::RemapExtendedChars_5B5930(wchar_t* pStr)
 }
 
 // 0x5B5960
-void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
+void GameText::TKEY_Load_5B5960(u32 chunkSize)
 {
 #if defined(GTA2_PORT_64BIT)
     // The file's 12-byte entries hold a 4-byte offset where text_0xC has a pointer, then the 8-byte
     // key. Read them as they are and widen them; TDAT_Offsets2Strings_5B59B0 turns the offsets into
     // pointers later. field_8 stays zero, so a key of all 8 characters still ends there.
-    struct text_0xC_file
+    struct Text0xCFile
     {
         u32 field_0_offset;
         char_type field_4_key[8];
     };
-    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(text_0xC_file);
-    field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
-    auto* pFileEntries = new text_0xC_file[field_0_tKey.field_4_tKey_count];
+    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(Text0xCFile);
+    field_0_tKey.field_0_tKey = new TextEntry[field_0_tKey.field_4_tKey_count];
+    auto* pFileEntries = new Text0xCFile[field_0_tKey.field_4_tKey_count];
     File::Global_Read_4A71C0(pFileEntries, chunkSize);
     for (u32 i = 0; i < field_0_tKey.field_4_tKey_count; i++)
     {
-        text_0xC& entry = field_0_tKey.field_0_tKey[i];
+        TextEntry& entry = field_0_tKey.field_0_tKey[i];
         memset(&entry, 0, sizeof(entry));
         entry.field_0_pwstr = reinterpret_cast<wchar_t*>(static_cast<sptr>(pFileEntries[i].field_0_offset));
         memcpy(reinterpret_cast<void*>(&entry.field_4_pKey),
@@ -112,8 +112,8 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
     delete[] pFileEntries;
 #else
     // TODO: probably an inline
-    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(text_0xC);
-    field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
+    field_0_tKey.field_4_tKey_count = chunkSize / sizeof(TextEntry);
+    field_0_tKey.field_0_tKey = new TextEntry[field_0_tKey.field_4_tKey_count];
     if (!field_0_tKey.field_0_tKey)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
@@ -124,9 +124,9 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
 }
 
 // 0x5B59B0
-void text_0x14::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
+void GameText::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
 {
-    text_0xC* ptKeyIter = field_0_tKey.field_0_tKey;
+    TextEntry* ptKeyIter = field_0_tKey.field_0_tKey;
 
     for (u32 idx = 0; idx < field_0_tKey.field_4_tKey_count; idx++)
     {
@@ -138,33 +138,33 @@ void text_0x14::TDAT_Offsets2Strings_5B59B0(BYTE* pDat)
 }
 
 // 0x5B59E0
-bool text_0x14::TKeyFind_5B59E0(const char_type* pIdStr)
+bool GameText::TKeyFind_5B59E0(const char_type* pIdStr)
 {
     return bsearch(pIdStr, // search key
                    field_0_tKey.field_0_tKey, // array to search
                    field_0_tKey.field_4_tKey_count, // array count
-                   sizeof(text_0xC), // element size
+                   sizeof(TextEntry), // element size
                    TKeySearch_5B5A10) ?
         true :
         false;
 }
 
 // 0x5B5A10
-s32 text_0x14::TKeySearch_5B5A10(const void* a, const void* b)
+s32 GameText::TKeySearch_5B5A10(const void* a, const void* b)
 {
     const auto* pIdStr = static_cast<const char_type*>(a);
-    const auto* a2 = static_cast<const text_0xC*>(b);
+    const auto* a2 = static_cast<const TextEntry*>(b);
     return strcmp(pIdStr, reinterpret_cast<const char_type*>(&a2->field_4_pKey)); // TODO: ???
 }
 
 // 0x5B5A50
-wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
+wchar_t* GameText::TKeyFind_5B5A50(const char_type* pIdStr)
 {
-    auto* pFound = static_cast<text_0xC*>(bsearch(pIdStr, // key
-                                                  field_0_tKey.field_0_tKey, // array
-                                                  field_0_tKey.field_4_tKey_count, // array count
-                                                  sizeof(text_0xC), // element size
-                                                  TKeySearch_5B5A10));
+    auto* pFound = static_cast<TextEntry*>(bsearch(pIdStr, // key
+                                                   field_0_tKey.field_0_tKey, // array
+                                                   field_0_tKey.field_4_tKey_count, // array count
+                                                   sizeof(TextEntry), // element size
+                                                   TKeySearch_5B5A10));
     if (!pFound)
     {
         static wchar_t kBlank[] = L" "; // writable, like the text the callers usually get
@@ -177,7 +177,7 @@ wchar_t* text_0x14::TKeyFind_5B5A50(const char_type* pIdStr)
 }
 
 // 0x5B5A80
-void text_tdat::TDAT_Load_5B5A80(u32 size)
+void TextTdat::TDAT_Load_5B5A80(u32 size)
 {
     field_4_len = size / sizeof(wchar_t);
     field_0_data = new BYTE[field_4_len * sizeof(wchar_t)];
@@ -191,7 +191,7 @@ void text_tdat::TDAT_Load_5B5A80(u32 size)
 }
 
 // 0x5B5AD0
-u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
+u16 GameText::ToUpper_5B5AD0(wchar_t ch)
 {
     // The original indexed both tables with the raw char (0x80-0xFF), so its 'g'/'i'/'r'/'s' lookup read
     // past kExtendedRussianCharMap_626490 into word_626590[0..127], which follows it in memory. That
@@ -237,7 +237,7 @@ u16 text_0x14::ToUpper_5B5AD0(wchar_t ch)
 }
 
 // 0x5B5B80
-wchar_t* text_0x14::StrToUpper_5B5B80(wchar_t* pWideStr)
+wchar_t* GameText::StrToUpper_5B5B80(wchar_t* pWideStr)
 {
     for (wchar_t* pStrIter = pWideStr; *pStrIter; ++pStrIter)
     {
@@ -256,7 +256,7 @@ inline s32 GetCharWidth_local_4539D0(u16 font_type, wchar_t chr)
 } // namespace
 
 // 0x5B5BC0
-s32 text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
+s32 GameText::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wchar_t* pSrcStr, s32 max_line_width, u16 font_type)
 {
     const wchar_t* pSrcStrCopy = pSrcStr;
     wchar_t* pDestStrCopy = pDestStr;
@@ -319,7 +319,7 @@ s32 text_0x14::InsertLineBreaksAndGetNumLines_5B5BC0(wchar_t* pDestStr, const wc
 }
 
 // 0x5B5D10
-char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
+char* GameText::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
 {
     const wchar_t* pSrc = pText;
     // jnb forced to jge by changing u32 loop index to int
@@ -352,7 +352,7 @@ char* text_0x14::Wide2PesudoAscii_5B5D10(const wchar_t* pText)
 }
 
 // 0x5B5DF0
-wchar_t* text_0x14::Ascii2Wide_5B5DF0(const char_type* pStr)
+wchar_t* GameText::Ascii2Wide_5B5DF0(const char_type* pStr)
 {
     // movsx vs movzx caused by unsigned vs s8
     wchar_t* pDst = tmpAscii2WideStr_70488C;
@@ -369,7 +369,7 @@ wchar_t* text_0x14::Ascii2Wide_5B5DF0(const char_type* pStr)
 }
 
 // 0x5B5E20
-void text_0x14::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
+void GameText::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
 {
     if (!strncmp(chunk_type, "TKEY", 4U))
     {
@@ -386,11 +386,11 @@ void text_0x14::load_chunk_5B5E20(const char_type* chunk_type, u32 chunk_len)
 }
 
 // 0x5B5E90
-void text_0x14::Load_5B5E90()
+void GameText::Load_5B5E90()
 {
     char_type expected_code[5];
 
-    chunk_header chunkHeader;
+    ChunkHeader chunkHeader;
     char_type gxtFileName[20];
     sprintf(gxtFileName, "data\\%c.gxt", field_10_lang_code);
 
@@ -398,14 +398,14 @@ void text_0x14::Load_5B5E90()
 
     File::Global_Open_4A7060(gxtFileName);
 
-    file_header gtxHeader;
-    u32 len = sizeof(file_header);
+    FileHeader gtxHeader;
+    u32 len = sizeof(FileHeader);
     File::Global_Read_4A71C0(&gtxHeader, len);
 
     gtxHeader.verify_type(expected_code);
     gtxHeader.verify_version(100);
 
-    for (len = sizeof(chunk_header); File::Global_Read_4A7210(&chunkHeader, &len); len = sizeof(chunk_header))
+    for (len = sizeof(ChunkHeader); File::Global_Read_4A7210(&chunkHeader, &len); len = sizeof(ChunkHeader))
     {
         if (chunkHeader.field_4_size != 0)
         {
@@ -417,19 +417,19 @@ void text_0x14::Load_5B5E90()
 }
 
 // 0x5B5F90
-wchar_t* text_0x14::Find_5B5F90(const char_type* pIdStr)
+wchar_t* GameText::Find_5B5F90(const char_type* pIdStr)
 {
     return TKeyFind_5B5A50(pIdStr);
 }
 
 // 0x5B5FA0
-bool text_0x14::KeyExists_5B5FA0(const char_type* pIdStr)
+bool GameText::KeyExists_5B5FA0(const char_type* pIdStr)
 {
     return TKeyFind_5B59E0(pIdStr);
 }
 
 // 0x5B5FB0
-text_0x14::text_0x14()
+GameText::GameText()
 {
     gRegistry_6FF968.Get_Option_586F00("language", reinterpret_cast<BYTE*>(gTmpBuffer_67C598), sizeof(gTmpBuffer_67C598));
 
@@ -446,4 +446,4 @@ text_0x14::text_0x14()
 
 // Only gets its EH frame when <new> isn't included, see Globals.hpp
 // 0x5B6050
-text_0x14::~text_0x14() = default;
+GameText::~GameText() = default;

@@ -1,0 +1,5 @@
+old,new
+File::AppendBufferToFile_4A6F50::pBuffer,buffer
+File::AppendBufferToFile_4A6F50::Buffer,file_buffer
+PlyDat_2BC0::InitDefaultHiScores_56C1D0::p10StruIter,iter
+Registry::Get_Debug_Setting_586E20::bRead,read_ok

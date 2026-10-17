@@ -4887,7 +4887,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
         case SCRCMD_EMERG_LIGHTS_ON:
         {
             Car_BC* pCar = pPointer->field_8_car;
-            car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(pCar->field_84_car_info_idx);
+            StyleCarInfo* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(pCar->field_84_car_info_idx);
 
             if ((pInfo->info_flags & car_info_flag::emergency) == car_info_flag::emergency ||
                 pCar->field_84_car_info_idx == CarModel::kEdselfbi)

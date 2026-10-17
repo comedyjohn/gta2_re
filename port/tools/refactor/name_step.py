@@ -119,6 +119,8 @@ def main():
     if todo or "--apply" not in flags:
         return 1 if todo else 0
     extra = [f for f in flags if f in ("--templates", "--residual")]
+    if kind == "functions":
+        extra.append("--allow-overloads")  # propose.py only lets functions share a name if their parameter types differ
     rc = subprocess.call([PY, os.path.join(HERE, "rename.py"), final, "-j", "8", *extra])
     if rc:
         return rc

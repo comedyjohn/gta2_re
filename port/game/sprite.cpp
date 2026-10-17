@@ -384,7 +384,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
         {
             if (delta_idx >= 22)
             {
-                sprite_delta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx - 17);
+                SpriteDelta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx - 17);
                 if (pDelta)
                 {
                     pDelta->Delta_5ABA40(pArray, width);
@@ -392,7 +392,7 @@ void DamageAreaFlags::ApplyDelta(u16& sprite_idx, u8* pArray, u32& a3, u8& width
             }
             else
             {
-                sprite_delta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx);
+                SpriteDelta* pDelta = gGtx_0x106C_703DD4->get_delta_5AA3F0(sprite_idx, delta_idx);
                 if (pDelta)
                 {
                     pDelta->Delta_5ABA00(pArray);
@@ -415,7 +415,7 @@ s16 DamageAreaFlags::ApplyDeltaForPalette(u16& sprite_idx, u8& bRet, const u16& 
     {
         return -1;
     }
-    sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u32 bUnk = sprite_index_5AA440->field_5_height > 0x40U;
     SpriteMask_14* pSprt14 = gSpriteMaskCache_67AF1C->FindCachedMask_48F600(sprite_idx, &bUnk, &m_var_, &a4);
     if (pSprt14)
@@ -639,7 +639,7 @@ void Sprite::CopyVisualShapeToCollision_59E300()
 void Sprite::IncreaseZoom_59E320(char_type delta)
 {
     u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-    sprite_index* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+    SpriteIndex* sprite_index_5AA440 = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
     u32 field_5_height = sprite_index_5AA440->field_5_height;
     u32 field_4_width = sprite_index_5AA440->field_4_width;
 
@@ -1092,9 +1092,9 @@ void Sprite::ShowHorn_59EE40(f32& x, f32& y)
 // 0x59eff0
 void Sprite::Draw_59EFF0()
 {
-    sprite_index* pSpriteIndex;
+    SpriteIndex* pSpriteIndex;
     u16 converted_pal;
-    sprite_index* pSpriteIndex2;
+    SpriteIndex* pSpriteIndex2;
     u16 pal;
     STexture* pTexture;
     f32 u;
@@ -1294,20 +1294,20 @@ void Sprite::EnsureVisualShape_59F990()
         this->field_4_pVisualShape = gSpriteShapePool_70381C->Allocate();
 
         const u16 sprite_idx = GetTrueSpriteIdx_4BA230();
-        const sprite_index* sprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
+        const SpriteIndex* SpriteIndex = gGtx_0x106C_703DD4->get_sprite_index_5AA440(sprite_idx);
 
         Fix16 w;
         Fix16 h;
 
         if (this->field_30_sprite_type_enum == SpriteTypes::kCodeObj2)
         {
-            w = gPixelsToFix16_6F6850.list[sprite_index->field_4_width] / 2;
-            h = gPixelsToFix16_6F6850.list[sprite_index->field_5_height] / 2;
+            w = gPixelsToFix16_6F6850.list[SpriteIndex->field_4_width] / 2;
+            h = gPixelsToFix16_6F6850.list[SpriteIndex->field_5_height] / 2;
         }
         else
         {
-            w = gPixelsToFix16_6F6850.list[sprite_index->field_4_width];
-            h = gPixelsToFix16_6F6850.list[sprite_index->field_5_height];
+            w = gPixelsToFix16_6F6850.list[SpriteIndex->field_4_width];
+            h = gPixelsToFix16_6F6850.list[SpriteIndex->field_5_height];
         }
         field_4_pVisualShape->SetWidthHeight_4BA070(w, h);
     }
@@ -1319,7 +1319,7 @@ void Sprite::UpdateDimensionsFromSpriteIndex_59FA40()
     if (field_4_pVisualShape)
     {
         const u16 idx = GetTrueSpriteIdx_4BA230();
-        sprite_index* pSprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(idx);
+        SpriteIndex* pSprite_index = gGtx_0x106C_703DD4->get_sprite_index_5AA440(idx);
 
         const Fix16 height = gPixelsToFix16_6F6850.list[pSprite_index->field_5_height];
         const Fix16 width = gPixelsToFix16_6F6850.list[pSprite_index->field_4_width];

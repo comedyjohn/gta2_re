@@ -14,8 +14,8 @@ struct Fixture
 {
     static constexpr u32 kCount = 3;
     BYTE data[64] = {};
-    text_0xC keys[kCount] = {};
-    text_0x14 text;
+    TextEntry keys[kCount] = {};
+    GameText text;
 
     explicit Fixture(char_type lang = 'e')
     {
@@ -32,7 +32,7 @@ struct Fixture
         {
             keys[i].field_0_pwstr = reinterpret_cast<wchar_t*>(offsets[i]);
             // The key's characters run on from field_4_pKey into field_8 (the file's 8-byte key).
-            char* key = reinterpret_cast<char*>(&keys[i]) + offsetof(text_0xC, field_4_pKey);
+            char* key = reinterpret_cast<char*>(&keys[i]) + offsetof(TextEntry, field_4_pKey);
             std::memcpy(key, names[i], std::strlen(names[i]) + 1);
         }
         text.field_0_tKey.field_0_tKey = keys;
@@ -120,10 +120,10 @@ TEST_CASE("StrToUpper upper-cases ASCII, in the languages that have it")
 TEST_CASE("Ascii2Wide widens, Wide2PesudoAscii narrows with '#' for anything above 127")
 {
     char_type narrow[] = "Hi 42";
-    CHECK(wcscmp(text_0x14::Ascii2Wide_5B5DF0(narrow), L"Hi 42") == 0);
+    CHECK(wcscmp(GameText::Ascii2Wide_5B5DF0(narrow), L"Hi 42") == 0);
 
     const wchar_t wide[] = {L'o', L'k', 0x100, L'!', 0};
-    const char_type* out = text_0x14::Wide2PesudoAscii_5B5D10(wide);
+    const char_type* out = GameText::Wide2PesudoAscii_5B5D10(wide);
     CHECK(out[0] == 'o');
     CHECK(out[1] == 'k');
     CHECK(out[2] == '#');

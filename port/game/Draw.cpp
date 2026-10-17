@@ -173,7 +173,7 @@ void DrawFigure_5D7EC0(s32 sprite_type,
                        u8 og_flags,
                        char_type a11)
 {
-    sprite_index* sprite_index_5AA440 =
+    SpriteIndex* sprite_index_5AA440 =
         gGtx_0x106C_703DD4->get_sprite_index_5AA440(gGtx_0x106C_703DD4->GetSpriteTrueIndex_5AA460(sprite_type, sprite_idx));
     Fix16Point point;
 
@@ -447,7 +447,7 @@ void DrawText_5D8A10(const wchar_t* pText,
         }
         else
         {
-            sprite_index* pSprIdx;
+            SpriteIndex* pSprIdx;
             STexture* pTexture;
             if (font_type < 0x65 || font_type > 107)
             {

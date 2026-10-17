@@ -4,7 +4,7 @@
 #include "core/types.hpp"
 #include "error.hpp"
 
-struct chunk_base
+struct ChunkBase
 {
     char_type field_0_type[4];
 
@@ -18,7 +18,7 @@ struct chunk_base
     }
 };
 
-struct file_header : public chunk_base
+struct FileHeader : public ChunkBase
 {
     u16 field_4_version;
 
@@ -32,7 +32,7 @@ struct file_header : public chunk_base
     }
 };
 
-struct chunk_header : public chunk_base
+struct ChunkHeader : public ChunkBase
 {
     s32 field_4_size;
 };

@@ -11,7 +11,7 @@
 DEFINE_GLOBAL(s32, gbGlobalFileOpen_67D160, 0x67D160);
 DEFINE_GLOBAL(FILE*, ghFile_67CFEC, 0x67CFEC);
 DEFINE_GLOBAL_INIT(u16, gCdCheckFileCount_6252E0, 22, 0x6252E0);
-DEFINE_GLOBAL_ARRAY_INIT(CdCheckFile_84,
+DEFINE_GLOBAL_ARRAY_INIT(CdCheckFile,
                          gCdCheckFiles_6252E8,
                          22,
                          0x6252E8,

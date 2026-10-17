@@ -44,14 +44,14 @@ void KanjiFont_8EC::Load_kanji_dat_4D2090()
 {
     File::Global_Open_4A7060("data\\kanji.dat");
 
-    file_header header;
-    u32 readSize = sizeof(file_header);
+    FileHeader header;
+    u32 readSize = sizeof(FileHeader);
     File::Global_Read_4A71C0(&header, readSize);
 
     header.verify_type("KANJ");
     header.verify_version(100);
 
-    chunk_header chunkHeader; // [esp+10h] [ebp-8h] BYREF
+    ChunkHeader chunkHeader; // [esp+10h] [ebp-8h] BYREF
     for (readSize = sizeof(chunkHeader); File::Global_Read_4A7210(&chunkHeader, &readSize); readSize = sizeof(chunkHeader))
     {
         if (chunkHeader.field_4_size)

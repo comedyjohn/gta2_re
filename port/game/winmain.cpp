@@ -628,7 +628,7 @@ void InitVideo_5D96C0()
 void Init_keybrd_jolly_and_sound_4DA440()
 {
     keybrd_0x204::create_4D5F50();
-    PlyDat_2BC0::Create_56C2C0();
+    PlyDat::Create_56C2C0();
 
     if (!bSkip_audio_67D6BE)
     {
@@ -2179,7 +2179,7 @@ void Shutdown_4DA740()
     {
         bDestroyed_6F5B70 = 1;
         keybrd_0x204::destroy_4D5FA0();
-        PlyDat_2BC0::Destroy_56C340();
+        PlyDat::Destroy_56C340();
         CleanUpInputAndOthers_4DA700();
         Frontend::destroy_4AD070();
 

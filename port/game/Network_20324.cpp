@@ -1027,7 +1027,7 @@ Network_20324::Network_20324()
     this->field_20088_game_settings.field_201A0_police_on = 0;
     this->field_20088_game_settings.field_201A4_game_time_limit = 0;
     memset(field_4_maps, 0, sizeof(field_4_maps));
-    gtext_0x14_6F87F0 = new text_0x14();
+    gtext_0x14_6F87F0 = new GameText();
     gtext_0x14_6F87F0->Load_5B5E90();
     LoadPlayerNameFromRegistry_51BC90();
     EnumerateMaps_51BFA0();

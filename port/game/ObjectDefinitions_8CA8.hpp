@@ -3,7 +3,7 @@
 #include "core/fix16.hpp"
 #include "core/function.hpp"
 
-struct object_info;
+struct ObjectInfo;
 class Sprite;
 
 // Static table entry (gMapObjectOverrides_6FC5F8): overrides the properties of an existing (map) object definition,

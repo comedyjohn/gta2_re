@@ -15,7 +15,7 @@
 
 class Player;
 class Ang16;
-struct ScoreTableLine_18;
+struct ScoreTableLine;
 
 struct SaveSlotInfo_52
 {
@@ -127,7 +127,7 @@ struct MenuPage_0xBCA
     s16 field_BC8_default_option_idx;
 };
 
-struct PlySlot_A4;
+struct PlySlot;
 
 enum WinMainState
 {
@@ -349,7 +349,7 @@ struct Frontend
 
     void DeleteCurrentPlayer_4B4410();
 
-    PlySlot_A4* GetCurrPlayerStats_4B43E0();
+    PlySlot* GetCurrPlayerStats_4B43E0();
 
     void UpdateMenuForCurrPlayer_4B42E0();
 
@@ -359,9 +359,9 @@ struct Frontend
 
     void LoadCurrPlayerName_4B4280();
 
-    u8 GetPrevUnlockedStageIndex_4B77B0(PlySlot_A4* pStats);
+    u8 GetPrevUnlockedStageIndex_4B77B0(PlySlot* pStats);
 
-    u8 GetPrevUnlockedStageBonusCode_4B7800(PlySlot_A4* pStats);
+    u8 GetPrevUnlockedStageBonusCode_4B7800(PlySlot* pStats);
 
     void StripPasswordToCurrLength_4B8530();
 
@@ -485,7 +485,7 @@ struct Frontend
                                    u16 char_width,
                                    u8 pStr);
 
-    void DrawScoreTable_4B5430(ScoreTableLine_18* pStrings,
+    void DrawScoreTable_4B5430(ScoreTableLine* pStrings,
                                u16 text_xpos,
                                u16 text_ypos,
                                u16 num_entries,

@@ -995,13 +995,13 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1793);
     }
 
-    gText_0x14_704DFC = new text_0x14(); // ctor call
+    gText_0x14_704DFC = new GameText(); // ctor call
     if (!gText_0x14_704DFC)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1795);
     }
 
-    gGtx_0x106C_703DD4 = new gtx_0x106C(); // ctor call
+    gGtx_0x106C_703DD4 = new Gtx(); // ctor call
     if (!gGtx_0x106C_703DD4)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1803);
@@ -1169,7 +1169,7 @@ Game_0x40::Game_0x40(u8 max_players, s8 player_idx) // 4B9DE0
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1875);
     }
 
-    gCarInfo_808_678098 = new CarInfo_808(); // ctor call
+    gCarInfo_808_678098 = new CarInfoTable(); // ctor call
     if (!gCarInfo_808_678098)
     {
         FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\game.cpp", 1877);

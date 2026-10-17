@@ -322,7 +322,7 @@ def load_renames(path):
     return wanted, usr_targets
 
 
-def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
+def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overloads=False):
     wanted, usr_targets = load_renames(csv_path)
     if not wanted and not usr_targets:
         if not dry:
@@ -444,12 +444,14 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None):
         if kind in ("CONSTRUCTOR", "DESTRUCTOR"):
             continue
         prev = by_scope[scope].setdefault(new, q)
-        if prev != q:
+        if prev != q and not (overloads and kind in ("FUNCTION_DECL", "CXX_METHOD", "FUNCTION_TEMPLATE")):
             refused.append(f"{q} and {prev} would both be called {new} in one scope")
         scopes_to_check = {scope} | all_bases(scope) | all_derived(scope)
         for sc in scopes_to_check:
             for name, other in names_in(sc):
-                if name == new and other != usr and new_of.get(other, name) == new:
+                if name == new and other != usr and new_of.get(other, name) == new and not (
+                    overloads and kind in ("FUNCTION_DECL", "CXX_METHOD", "FUNCTION_TEMPLATE")
+                ):
                     refused.append(f"{q}: the new name {new} already exists in the scope {sc or '(global)'}")
     # residuals
     edited = {(f, o) for (f, o) in edits}
@@ -548,12 +550,13 @@ def main():
     ap.add_argument("--build-dir", default=os.path.join(ROOT, "build_port", "clang64"))
     ap.add_argument("--templates", action="store_true", help="also edit residuals inside templates")
     ap.add_argument("--residual", action="store_true", help="also edit the other residuals")
+    ap.add_argument("--allow-overloads", action="store_true", help="functions may take the name of another function of the same scope (propose.py checked that their parameter types differ)")
     ap.add_argument("--only", action="append", help="regex: only parse the TUs whose path matches (tests)")
     ap.add_argument("-j", type=int, default=6)
     a = ap.parse_args()
     if not a.renames:
         ap.error("renames.csv missing")
-    return rename(a.renames, os.path.realpath(a.build_dir), a.dry_run, a.templates, a.residual, a.j, a.only)
+    return rename(a.renames, os.path.realpath(a.build_dir), a.dry_run, a.templates, a.residual, a.j, a.only, a.allow_overloads)
 
 
 if __name__ == "__main__":

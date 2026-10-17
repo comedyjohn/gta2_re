@@ -1,6 +1,5 @@
 #include "fix16.hpp"
 #include "Function.hpp"
-#include "Globals.hpp"
 #include "ang16.hpp"
 #include <cmath>
 

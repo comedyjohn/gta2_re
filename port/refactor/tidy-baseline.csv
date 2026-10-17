@@ -2010,7 +2010,7 @@ port/game/fix16.cpp,cppcoreguidelines-pro-bounds-constant-array-index,3
 port/game/fix16.cpp,cppcoreguidelines-pro-bounds-pointer-arithmetic,1
 port/game/fix16.cpp,cppcoreguidelines-pro-type-vararg,1
 port/game/fix16.cpp,misc-const-correctness,8
-port/game/fix16.cpp,misc-include-cleaner,9
+port/game/fix16.cpp,misc-include-cleaner,8
 port/game/fix16.cpp,modernize-avoid-c-arrays,3
 port/game/fix16.cpp,modernize-use-noexcept,4
 port/game/fix16.cpp,modernize-use-std-numbers,3
@@ -2270,7 +2270,7 @@ port/game/rng.cpp,cppcoreguidelines-avoid-c-arrays,1
 port/game/rng.cpp,cppcoreguidelines-avoid-non-const-global-variables,3
 port/game/rng.cpp,cppcoreguidelines-pro-bounds-array-to-pointer-decay,7
 port/game/rng.cpp,cppcoreguidelines-pro-type-vararg,4
-port/game/rng.cpp,misc-include-cleaner,6
+port/game/rng.cpp,misc-include-cleaner,5
 port/game/rng.cpp,modernize-avoid-c-arrays,1
 port/game/rng.cpp,readability-convert-member-functions-to-static,2
 port/game/rng.cpp,readability-else-after-return,4

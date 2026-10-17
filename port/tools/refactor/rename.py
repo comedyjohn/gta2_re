@@ -466,7 +466,10 @@ def rename(csv_path, build_dir, dry, templates, residual, jobs, only=None, overl
         for n in names:
             if n.endswith((".cpp", ".hpp", ".h", ".inl", ".c")):
                 files.add(os.path.join(dirpath, n))
-    olds_re = re.compile(r"\b(" + "|".join(re.escape(o) for o in sorted(olds)) + r")\b") if olds else None
+    # A name like `h` or `count` is spelled in unrelated code all over: a text scan for it proves nothing.
+    # Only distinctive names (long, with an underscore, a capital or a digit) are looked for.
+    distinctive = {o for o in olds if len(o) >= 6 and re.search(r"[_A-Z0-9]", o)}
+    olds_re = re.compile(r"\b(" + "|".join(re.escape(o) for o in sorted(distinctive)) + r")\b") if distinctive else None
     for p in sorted(files):
         text = open(p, encoding="latin-1", newline="").read()
         if olds_re is None or not olds_re.search(text):

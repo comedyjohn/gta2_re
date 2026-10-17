@@ -461,10 +461,10 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     }
     else
     {
-        killer_car_model = CarModel::none;
+        killer_car_model = CarModel::kNone;
     }
     field_1A8_bonuses.ProcessBonusEvent_4320D0(bonus_event_type::ped_killed_0,
-                                               CarModel::none,
+                                               CarModel::kNone,
                                                pVictim->get_occupation_403980(),
                                                gang_idx,
                                                pVictim->get_remap_433BA0(),
@@ -541,10 +541,10 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
         switch (pVictim->get_occupation_403980())
         {
             case PedOcupation::kParamedic:
-            case PedOcupation::police:
+            case PedOcupation::kPolice:
             case PedOcupation::kWalkingGuard:
             case PedOcupation::kRoadblockCop:
-            case PedOcupation::fireman:
+            case PedOcupation::kFireman:
                 bCop = true;
                 bFbi = false;
                 bSwat = false;
@@ -552,7 +552,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangA = false;
                 bGangB = false;
                 break;
-            case PedOcupation::swat:
+            case PedOcupation::kSwat:
             case PedOcupation::kUnknownCopOccu30:
                 bSwat = true;
                 bFbi = false;
@@ -561,7 +561,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangA = false;
                 bGangB = false;
                 break;
-            case PedOcupation::fbi:
+            case PedOcupation::kFbi:
                 bFbi = true;
                 bSwat = false;
                 bArmy = false;
@@ -569,10 +569,10 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangA = false;
                 bGangB = false;
                 break;
-            case PedOcupation::army_army:
+            case PedOcupation::kArmyArmy:
             case PedOcupation::kUnknownCopOccu31:
-            case PedOcupation::tank_driver:
-            case PedOcupation::road_block_tank_man:
+            case PedOcupation::kTankDriver:
+            case PedOcupation::kRoadBlockTankMan:
                 bArmy = true;
                 bFbi = false;
                 bSwat = false;
@@ -580,15 +580,15 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bGangA = false;
                 bGangB = false;
                 break;
-            case PedOcupation::elvis:
-            case PedOcupation::elvis_leader:
+            case PedOcupation::kElvis:
+            case PedOcupation::kElvisLeader:
                 bCop = false;
                 bFbi = false;
                 bSwat = false;
                 bArmy = false;
                 score = 100;
                 break;
-            case PedOcupation::mugger:
+            case PedOcupation::kMugger:
                 bGangA = true;
                 bCop = false;
                 bFbi = false;
@@ -596,7 +596,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
                 bArmy = false;
                 bGangB = false;
                 break;
-            case PedOcupation::car_thief:
+            case PedOcupation::kCarThief:
                 bGangB = true;
                 bCop = false;
                 bFbi = false;
@@ -778,7 +778,7 @@ void PlayerScoreTracker_36C::AwardPedKilledScore_592660(Ped* pVictim, Ped* pKill
     if (bIsFrench_67D53C)
     {
         s32 occupation = pVictim->get_occupation_403980();
-        if (occupation == PedOcupation::police || occupation == PedOcupation::kWalkingGuard || occupation == PedOcupation::kRoadblockCop ||
+        if (occupation == PedOcupation::kPolice || occupation == PedOcupation::kWalkingGuard || occupation == PedOcupation::kRoadblockCop ||
             bFbi || bSwat || bArmy)
         {
             bAwardScore = false;
@@ -836,7 +836,7 @@ void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pK
 
     field_1A8_bonuses.ProcessBonusEvent_4320D0(bonus_event_type::car_destroyed_1,
                                                pCar->field_84_car_info_idx,
-                                               PedOcupation::no_occupation,
+                                               PedOcupation::kNoOccupation,
                                                gang_idx,
                                                pCar->field_50_car_sprite->get_remap_41C1F0(),
                                                pCar->field_90_death_cause,
@@ -864,16 +864,16 @@ void PlayerScoreTracker_36C::AwardCarDestroyedScore_592DD0(Car_BC* pCar, Ped* pK
 
         u32 destroyed_car_model = pCar->field_84_car_info_idx;
 
-        if (destroyed_car_model == CarModel::MEDICAR)
+        if (destroyed_car_model == CarModel::kMedicar)
         {
             field_1A4_killed_cars_flags |= emergency_car_kill_flag::medicar_1;
         }
-        else if (destroyed_car_model == CarModel::COPCAR || destroyed_car_model == CarModel::SWATVAN ||
-                 destroyed_car_model == CarModel::EDSELFBI)
+        else if (destroyed_car_model == CarModel::kCopcar || destroyed_car_model == CarModel::kSwatvan ||
+                 destroyed_car_model == CarModel::kEdselfbi)
         {
             field_1A4_killed_cars_flags |= emergency_car_kill_flag::cop_car_2;
         }
-        else if (destroyed_car_model == CarModel::FIRETRUK)
+        else if (destroyed_car_model == CarModel::kFiretruk)
         {
             field_1A4_killed_cars_flags |= emergency_car_kill_flag::fire_truck_4;
         }
@@ -1021,11 +1021,11 @@ void PlayerScoreTracker_36C::AwardCarHijackedScore_593240(Car_BC* pCar)
     const u16 gang_idx = gGangPool_CA8_67E274->FindGangByCarModel_4BF2F0(pCar->field_84_car_info_idx);
     field_1A8_bonuses.ProcessBonusEvent_4320D0(bonus_event_type::car_hijacked_2,
                                                pCar->field_84_car_info_idx,
-                                               PedOcupation::no_occupation,
+                                               PedOcupation::kNoOccupation,
                                                gang_idx,
                                                pCar->field_50_car_sprite->get_remap_41C1F0(),
                                                ped_death_cause::any_23,
-                                               CarModel::none,
+                                               CarModel::kNone,
                                                pZone);
 
     field_8A_cars_stolen_count++;
@@ -1085,16 +1085,16 @@ void PlayerScoreTracker_36C::UpdateAccuracyCount_5934F0(u32 event, s32 weapon_mo
     {
         switch (pTarget->get_occupation_403980())
         {
-            case PedOcupation::police:
-            case PedOcupation::swat:
-            case PedOcupation::fbi:
-            case PedOcupation::army_army:
+            case PedOcupation::kPolice:
+            case PedOcupation::kSwat:
+            case PedOcupation::kFbi:
+            case PedOcupation::kArmyArmy:
             case PedOcupation::kWalkingGuard:
             case PedOcupation::kUnknownCopOccu30:
             case PedOcupation::kUnknownCopOccu31:
-            case PedOcupation::tank_driver:
+            case PedOcupation::kTankDriver:
             case PedOcupation::kRoadblockCop:
-            case PedOcupation::road_block_tank_man:
+            case PedOcupation::kRoadBlockTankMan:
                 field_198_accuracy_count = 0;
                 return;
             default:

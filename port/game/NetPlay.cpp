@@ -1123,7 +1123,7 @@ s32 NetPlay::CalcPacketLen_51F210(sptr pPacket, u32 packetLen)
 
         default:
             // TODO: the source file name is a guess
-            FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2192, 0);
+            FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2192, 0);
             break;
     }
     return len;
@@ -1173,7 +1173,7 @@ void NetPlay::MakeSendData_51F420(Packet_SubType_3* pPacket, sptr* pData, u32* p
                                 break;
                             default:
                                 // TODO: the source file name is a guess
-                                FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2277, 0);
+                                FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2277, 0);
                                 break;
                         }
                         break;
@@ -1216,7 +1216,7 @@ void NetPlay::MakeSendData_51F420(Packet_SubType_3* pPacket, sptr* pData, u32* p
                         break;
 
                     default:
-                        FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2338, 0);
+                        FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2338, 0);
                         break;
                 }
             }
@@ -1228,7 +1228,7 @@ void NetPlay::MakeSendData_51F420(Packet_SubType_3* pPacket, sptr* pData, u32* p
             break;
 
         default:
-            FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2356, 0);
+            FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\netplay.cpp", 2356, 0);
             break;
     }
     *pData = reinterpret_cast<sptr>(pBuffer);

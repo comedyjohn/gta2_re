@@ -195,7 +195,7 @@ void Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver)
         if (gBinkBufferSlot2_6F80C4 == nullptr)
         {
             gBinkDDState_6F83FE = 0;
-            FatalError_4A38C0(Gta2Error::BinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 360);
+            FatalError_4A38C0(Gta2Error::kBinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 360);
         }
         else
         {
@@ -204,7 +204,7 @@ void Bink::OpenSlot2_5133E0(const char_type* pFileName, HDIGDRIVER hDriver)
     }
     else
     {
-        FatalError_4A38C0(Gta2Error::BinkOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 376);
+        FatalError_4A38C0(Gta2Error::kBinkOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 376);
     }
     gBinkActiveSlot_6F83FF = 2;
 }
@@ -265,7 +265,7 @@ void Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver)
         if (gBinkBufferSlot1_6F8170 == nullptr)
         {
             gBinkDDState_6F83FE = 0;
-            FatalError_4A38C0(Gta2Error::BinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 450);
+            FatalError_4A38C0(Gta2Error::kBinkBufferOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 450);
             gBinkActiveSlot_6F83FF = 1;
             return;
         }
@@ -275,7 +275,7 @@ void Bink::OpenSlot1_513560(const char_type* pFileName, HDIGDRIVER hDriver)
     }
     else
     {
-        FatalError_4A38C0(Gta2Error::BinkOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 460);
+        FatalError_4A38C0(Gta2Error::kBinkOpenError, "C:\\Splitting\\Gta2\\Source\\movie2.cpp", 460);
     }
 }
 

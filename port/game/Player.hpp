@@ -190,7 +190,7 @@ class Player
     {
         s32 occupation;
         if (!field_2D0_aux_cam_active || !field_2C8_aux_ped ||
-            (occupation = field_2C8_aux_ped->get_occupation_403980()) != PedOcupation::empty)
+            (occupation = field_2C8_aux_ped->get_occupation_403980()) != PedOcupation::kEmpty)
         {
             return false;
         }

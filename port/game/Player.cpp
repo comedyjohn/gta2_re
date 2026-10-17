@@ -112,20 +112,20 @@ s32 Player::ObjectTypeToWeaponType_443CB0(u8 object_type)
     switch (object_type)
     {
         case Objects::kShopCarMines:
-            weapon_kind = WeaponType::car_mines;
+            weapon_kind = WeaponType::kCarMines;
             break;
         case Objects::kShopCarOilStain:
-            weapon_kind = WeaponType::oil_stain;
+            weapon_kind = WeaponType::kOilStain;
             break;
         case Objects::kShopCarSmg:
-            weapon_kind = WeaponType::car_smg;
+            weapon_kind = WeaponType::kCarSmg;
             break;
         case 253:
         case Objects::kMachineGunBullet:
-            weapon_kind = WeaponType::car_bomb;
+            weapon_kind = WeaponType::kCarBomb;
             break;
         default:
-            weapon_kind = WeaponType::car_bomb;
+            weapon_kind = WeaponType::kCarBomb;
             break;
     }
     return weapon_kind;
@@ -311,8 +311,8 @@ void Player::ClearKFWeapon_5647D0()
         }
         else
         {
-            if ((gCheatUnlimitedElectroGun_67D4F7 && field_1C_kf_weapon_kind == WeaponType::shocker) ||
-                (gCheatUnlimitedFlameThrower_67D6CC && field_1C_kf_weapon_kind == WeaponType::flamethrower))
+            if ((gCheatUnlimitedElectroGun_67D4F7 && field_1C_kf_weapon_kind == WeaponType::kShocker) ||
+                (gCheatUnlimitedFlameThrower_67D6CC && field_1C_kf_weapon_kind == WeaponType::kFlamethrower))
             {
                 this->field_18_pre_kf_weapon_kind = -2;
                 return;
@@ -398,7 +398,7 @@ void Player::SelectNextOrPrevWeapon_5649D0(char_type go_forwards, char_type go_b
         s32 max_idx;
         if (!pPlayerPed || !pPlayerPed->get_car_416B60())
         {
-            max_idx = WeaponType::car_bomb; // 15
+            max_idx = WeaponType::kCarBomb; // 15
         }
         else
         {
@@ -541,13 +541,13 @@ void Player::UnloadCarWeapons_564C00()
 {
     CleanupEmptyAmmoWeapons_564B80();
 
-    if (field_788_curr_weapon_idx >= WeaponType::car_bomb)
+    if (field_788_curr_weapon_idx >= WeaponType::kCarBomb)
     {
         field_16_saved_car_weapon_idx = field_788_curr_weapon_idx;
         field_788_curr_weapon_idx = field_14_saved_ped_weapon_idx;
     }
 
-    if (field_18_pre_kf_weapon_kind >= WeaponType::car_bomb)
+    if (field_18_pre_kf_weapon_kind >= WeaponType::kCarBomb)
     {
         field_16_saved_car_weapon_idx = field_18_pre_kf_weapon_kind;
         field_18_pre_kf_weapon_kind = field_14_saved_ped_weapon_idx;
@@ -563,8 +563,8 @@ void Player::RemovePlayerWeapons_564C50()
     Weapon_30* pWeapon = this->field_718_weapons[0];
     do
     {
-        if ((!gCheatUnlimitedElectroGun_67D4F7 || pWeapon->field_1C_idx != WeaponType::shocker) &&
-            (!gCheatUnlimitedFlameThrower_67D6CC || pWeapon->field_1C_idx != WeaponType::flamethrower))
+        if ((!gCheatUnlimitedElectroGun_67D4F7 || pWeapon->field_1C_idx != WeaponType::kShocker) &&
+            (!gCheatUnlimitedFlameThrower_67D6CC || pWeapon->field_1C_idx != WeaponType::kFlamethrower))
         {
             if (pWeapon->HasAmmo_4A4F80())
             {
@@ -869,9 +869,9 @@ void Player::InitPlayerPed_565490(Ped* pPed)
 
     u8 ammo;
 
-    for (s32 weapon_idx = WeaponType::pistol; weapon_idx < WeaponType::car_bomb; ++weapon_idx)
+    for (s32 weapon_idx = WeaponType::kPistol; weapon_idx < WeaponType::kCarBomb; ++weapon_idx)
     {
-        if (!bGet_all_weapons_67D684 || weapon_idx >= WeaponType::kWeapon11 || weapon_idx == WeaponType::electro_batton)
+        if (!bGet_all_weapons_67D684 || weapon_idx >= WeaponType::kWeapon11 || weapon_idx == WeaponType::kElectroBatton)
         {
             ammo = 0;
         }
@@ -1395,7 +1395,7 @@ void Player::HandleControls_5668D0(Ped* pPed)
             if (pPedCar->CanExitCar_43AF10())
             {
                 pPed->SetObjective2_463830(Objectives::kNoObj);
-                if (pPed->get_car_416B60()->field_84_car_info_idx == CarModel::TRAIN)
+                if (pPed->get_car_416B60()->field_84_car_info_idx == CarModel::kTrain)
                 {
                     pPed->SetObjective(Objectives::kLeaveTrain);
                 }
@@ -2303,7 +2303,7 @@ void Player::StartRemoteControl_569600(Car_BC* pCar)
 {
     field_2C8_aux_ped = gPedManager_6787BC->SpawnDriver_470B00(pCar);
     field_2C8_aux_ped->SetPedType_403920(PedType::kPlayer);
-    field_2C8_aux_ped->set_occupation_403970(PedOcupation::empty);
+    field_2C8_aux_ped->set_occupation_403970(PedOcupation::kEmpty);
     field_2C8_aux_ped->SetPlayer_45B560(this, 1);
     field_2C8_aux_ped->UpdatePositionFromCar_45C4B0();
     pCar->AssignDriver_4406E0(field_2C8_aux_ped);
@@ -2435,50 +2435,50 @@ void Player::ColorScoreFromRemap_569A10()
 {
     switch (field_2C4_player_ped->field_244_remap)
     {
-        case PedRemap::ped_remap_yakuza:
+        case PedRemap::kPedRemapYakuza:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 2);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 2);
             field_790_hud_palette = 2;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_lonny:
+        case PedRemap::kPedRemapLonny:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 3);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 3);
             field_790_hud_palette = 3;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_russian:
+        case PedRemap::kPedRemapRussian:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 6);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 6);
             field_790_hud_palette = 6;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_kristna:
+        case PedRemap::kPedRemapKristna:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 5);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 5);
             field_790_hud_palette = 5;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_zaibatsu:
+        case PedRemap::kPedRemapZaibatsu:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 7);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 7);
             field_790_hud_palette = 7;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_yellow_scientist:
+        case PedRemap::kPedRemapYellowScientist:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 8);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 8);
             field_790_hud_palette = 8;
             field_78C_hud_palette_type = 7;
             break;
 
-        case PedRemap::ped_remap_red_head_redneck:
-        case PedRemap::ped_remap_blond_head_redneck:
+        case PedRemap::kPedRemapRedHeadRedneck:
+        case PedRemap::kPedRemapBlondHeadRedneck:
             field_2D4_scores.GetScoreDigits_592360()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 4);
             field_2D4_scores.GetMultiplayerFragDigits_5935B0()->ColorDigits_4921F0(PaletteTypes::kUserRemaps, 4);
             field_790_hud_palette = 4;
@@ -2522,7 +2522,7 @@ void Player::InitializePlayerState_569CB0()
 {
     if (!gMap_0x370_6F6268->first_zone_by_type_4DF1D0(Restart_16))
     {
-        FatalError_4A38C0(Gta2Error::NoRestartZone, "C:\\Splitting\\Gta2\\Source\\player.cpp",
+        FatalError_4A38C0(Gta2Error::kNoRestartZone, "C:\\Splitting\\Gta2\\Source\\player.cpp",
                           2905); // No Restart Zone
     }
     field_60_finish_score_reached = 0;
@@ -2822,11 +2822,11 @@ void Player::ApplyCheats_56A490()
     }
     if (gCheatUnlimitedElectroGun_67D4F7)
     {
-        field_718_weapons[WeaponType::shocker]->set_infinite_ammo_4A4F90();
+        field_718_weapons[WeaponType::kShocker]->set_infinite_ammo_4A4F90();
     }
     if (gCheatUnlimitedFlameThrower_67D6CC)
     {
-        field_718_weapons[WeaponType::flamethrower]->set_infinite_ammo_4A4F90();
+        field_718_weapons[WeaponType::kFlamethrower]->set_infinite_ammo_4A4F90();
     }
     if (gCheatAllGangMaxRespect_67D587)
     {

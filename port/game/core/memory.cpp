@@ -12,7 +12,7 @@ void* Memory::Malloc(size_t Size)
     void* result = ::malloc(Size);
     if (!result)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 44, Size);
+        FatalError_4A38C0(Gta2Error::kOutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 44, Size);
     }
 
     return result;
@@ -30,7 +30,7 @@ void* Memory::AlignedMalloc(s32 requestedSize, void** pUnAlignedPtr)
     // Fail if no alloc
     if (!pAlloc)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 76, requestedSize + 0x10000);
+        FatalError_4A38C0(Gta2Error::kOutOfMemory, "C:\\Splitting\\Gta2\\Source\\Memory.cpp", 76, requestedSize + 0x10000);
     }
 
     // Zeroed so that reads past the chunk the caller fills are defined (valgrind found them in the tile reader)

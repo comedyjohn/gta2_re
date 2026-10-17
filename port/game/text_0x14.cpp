@@ -116,7 +116,7 @@ void text_0x14::TKEY_Load_5B5960(u32 chunkSize)
     field_0_tKey.field_0_tKey = new text_0xC[field_0_tKey.field_4_tKey_count];
     if (!field_0_tKey.field_0_tKey)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 218);
     }
 
     File::Global_Read_4A71C0(field_0_tKey.field_0_tKey, chunkSize);
@@ -184,7 +184,7 @@ void text_tdat::TDAT_Load_5B5A80(u32 size)
 
     if (!field_0_data)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 378);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\text.cpp", 378);
     }
 
     File::Global_Read_4A71C0(field_0_data, size);

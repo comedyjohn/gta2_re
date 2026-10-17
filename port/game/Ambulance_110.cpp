@@ -642,7 +642,7 @@ void Ambulance_20::HandleObjectiveState_4FAAC0()
                             pVictim->field_1E0_objective_target_y = pVictim->get_cam_y();
                             pVictim->field_1E4_objective_target_z = pVictim->get_cam_z();
                             pVictim->SetPedType_403920(3);
-                            pVictim->set_occupation_403970(PedOcupation::dummy);
+                            pVictim->set_occupation_403970(PedOcupation::kDummy);
                             pVictim->field_28C_threat_reaction = ThreatReaction::kRunAway;
                         }
                         else
@@ -825,7 +825,7 @@ void Ambulance_20::UpdateState_4FB330()
             break;
         }
         default:
-            FatalError_4A38C0(Gta2Error::InvalidCase, "C:\\Splitting\\Gta2\\Source\\medical.cpp", 1087);
+            FatalError_4A38C0(Gta2Error::kInvalidCase, "C:\\Splitting\\Gta2\\Source\\medical.cpp", 1087);
             break;
     }
     if (bHandle)

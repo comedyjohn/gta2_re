@@ -9,7 +9,7 @@ inline s32 Ped::get_car_model()
     }
     else
     {
-        m = CarModel::none;
+        m = CarModel::kNone;
     }
     return m;
 }

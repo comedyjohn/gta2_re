@@ -155,7 +155,7 @@ void Firefighter_28::Update_4A81F0()
                 !field_C_target_car->IsDespawning_4215B0() && gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::firefighter_5))
             {
                 field_1C_car =
-                    gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::FIRETRUK, field_10_xpos, field_14_ypos, field_18_zpos);
+                    gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::kFiretruk, field_10_xpos, field_14_ypos, field_18_zpos);
                 if (field_1C_car)
                 {
                     field_1C_car->IncrementCarStats_443D70(5);
@@ -169,7 +169,7 @@ void Firefighter_28::Update_4A81F0()
 
                     field_20_ped = gPedManager_6787BC->AllocatePed_470F30();
                     field_20_ped->SetPedType_403920(PedType::kSpecialPed);
-                    field_20_ped->set_occupation_403970(PedOcupation::fireman);
+                    field_20_ped->set_occupation_403970(PedOcupation::kFireman);
                     field_20_ped->SpawnPedInCar_45C730(field_1C_car);
                     field_20_ped->SetObjective(Objectives::kGotoAreaInCar);
                     field_20_ped->field_1DC_objective_target_x = Fix16(field_C_target_car->GetX_41E430().ToUInt8());

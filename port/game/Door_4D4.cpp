@@ -404,7 +404,7 @@ Door_4D4::Door_4D4()
         gDoor_10_Pool_67BD28 = new DoorData_10_Pool();
         if (!gDoor_10_Pool_67BD28)
         {
-            FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\door.cpp", 1194);
+            FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\door.cpp", 1194);
         }
     }
     memset(gDoorAnimInfo_67BB38, 0, sizeof(gDoorAnimInfo_67BB38));

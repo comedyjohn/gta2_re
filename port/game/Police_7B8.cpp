@@ -154,7 +154,7 @@ Ped* Police_7B8::SpawnRoadblockGuard_56F5C0(Fix16 xpos, Fix16 ypos, Fix16 zpos, 
             pCop->SetObjective(Objectives::kGuardSpot, 0);
             pCop->set_remap_433B90(8);
             pCop->field_26C_graphic_type = ped_graphic_type::character_1;
-            pCop->ForceWeapon_46F600(WeaponType::silence_smg);
+            pCop->ForceWeapon_46F600(WeaponType::kSilenceSmg);
             pCop->set_health_4039A0(200);
             pCop->field_288_threat_search = ThreatSearch::kArea;
             pCop->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
@@ -167,7 +167,7 @@ Ped* Police_7B8::SpawnRoadblockGuard_56F5C0(Fix16 xpos, Fix16 ypos, Fix16 zpos, 
             pCop->set_remap_433B90(0);
             pCop->field_26C_graphic_type = ped_graphic_type::cop_2;
             pCop->field_170_selected_weapon = nullptr;
-            pCop->GiveWeapon_46F650(WeaponType::pistol);
+            pCop->GiveWeapon_46F650(WeaponType::kPistol);
             pCop->set_health_4039A0(200);
             pCop->field_288_threat_search = ThreatSearch::kArea;
             pCop->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
@@ -830,13 +830,13 @@ void Police_7B8::SpawnWalkingGuard_570320(Ped* pPed, Fix16 xpos, Fix16 ypos, Fix
     {
         pPed->set_occupation_403970(PedOcupation::kUnknownCopOccu31);
         pPed->SetPedType_403920(3);
-        pPed->set_remap_433B90(PedRemap::ped_remap_army);
+        pPed->set_remap_433B90(PedRemap::kPedRemapArmy);
     }
     else
     {
         pPed->set_occupation_403970(PedOcupation::kWalkingGuard);
         pPed->SetPedType_403920(3);
-        pPed->set_remap_433B90(PedRemap::ped_remap_blue_police);
+        pPed->set_remap_433B90(PedRemap::kPedRemapBluePolice);
     }
     pPed->field_26C_graphic_type = ped_graphic_type::cop_2;
     pPed->field_288_threat_search = ThreatSearch::kLineOfSight;
@@ -879,7 +879,7 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
     PedGroup* pNewPedGroup = PedGroup::New_4CB0D0();
     Ped* pNewPed1 = gPedManager_6787BC->AllocatePed_470F30();
     pNewPed1->SetPedType_403920(4);
-    pNewPed1->set_occupation_403970(PedOcupation::police);
+    pNewPed1->set_occupation_403970(PedOcupation::kPolice);
     pNewPed1->SpawnPedInCar_45C730(pEmergencyCrew->field_0_car);
     pNewPed1->SetObjective(Objectives::kObjective43);
     pNewPed1->field_288_threat_search = ThreatSearch::kLineOfSight;
@@ -888,7 +888,7 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
     pNewPed2->SetObjective(Objectives::kNoObj);
     pNewPed2->EnterCarAsPassenger_45C7F0(pEmergencyCrew->field_0_car);
     pNewPed2->SetPedType_403920(4);
-    pNewPed2->set_occupation_403970(PedOcupation::police);
+    pNewPed2->set_occupation_403970(PedOcupation::kPolice);
     pNewPed2->field_288_threat_search = ThreatSearch::kLineOfSight;
     pNewPed2->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
 
@@ -897,16 +897,16 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
         case CrewType::kFbi:
             // ok
             pNewPed1->set_health_4039A0(250);
-            pNewPed1->ForceWeapon_46F600(WeaponType::shotgun);
-            pNewPed1->GiveWeapon_46F650(WeaponType::silence_smg);
-            pNewPed1->set_occupation_403970(PedOcupation::fbi);
+            pNewPed1->ForceWeapon_46F600(WeaponType::kShotgun);
+            pNewPed1->GiveWeapon_46F650(WeaponType::kSilenceSmg);
+            pNewPed1->set_occupation_403970(PedOcupation::kFbi);
             pNewPed1->set_remap_433B90(8);
             pNewPed1->field_26C_graphic_type = ped_graphic_type::character_1;
             pNewPed2->set_health_4039A0(250);
             pNewPed2->set_remap_433B90(8);
-            pNewPed2->ForceWeapon_46F600(WeaponType::silence_smg);
+            pNewPed2->ForceWeapon_46F600(WeaponType::kSilenceSmg);
             pNewPed2->field_26C_graphic_type = ped_graphic_type::character_1;
-            pNewPed2->set_occupation_403970(PedOcupation::fbi);
+            pNewPed2->set_occupation_403970(PedOcupation::kFbi);
             pNewCrew->field_20_crew_kind = CrewKind::kFbi;
             break;
 
@@ -917,11 +917,11 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
                 case CopLevel::kNone:
                 case CopLevel::kPolice1:
                     pNewPed1->field_170_selected_weapon = nullptr;
-                    pNewPed1->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed1->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed1->set_health_4039A0(50);
                     pNewPed1->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
                     pNewPed2->field_170_selected_weapon = nullptr;
-                    pNewPed2->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed2->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed2->set_health_4039A0(50);
                     pNewPed2->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
 
@@ -929,10 +929,10 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
 
                 case CopLevel::kPolice2:
                     // line 231
-                    pNewPed1->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed1->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed1->set_health_4039A0(100);
                     pNewPed1->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
-                    pNewPed2->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed2->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed2->set_health_4039A0(100);
 
                     pNewPed2->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
@@ -941,18 +941,18 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
 
                 default:
                     // ok
-                    pNewPed1->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed1->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed1->set_health_4039A0(100);
-                    pNewPed2->GiveWeapon_46F650(WeaponType::pistol);
+                    pNewPed2->GiveWeapon_46F650(WeaponType::kPistol);
                     pNewPed2->set_health_4039A0(100);
 
                     break;
             }
 
-            pNewPed1->set_occupation_403970(PedOcupation::police);
-            pNewPed1->set_remap_433B90(PedRemap::ped_remap_blue_police);
+            pNewPed1->set_occupation_403970(PedOcupation::kPolice);
+            pNewPed1->set_remap_433B90(PedRemap::kPedRemapBluePolice);
             pNewPed1->field_26C_graphic_type = ped_graphic_type::cop_2;
-            pNewPed2->set_remap_433B90(PedRemap::ped_remap_blue_police);
+            pNewPed2->set_remap_433B90(PedRemap::kPedRemapBluePolice);
             pNewPed2->field_26C_graphic_type = ped_graphic_type::cop_2;
             pNewCrew->field_20_crew_kind = CrewKind::kPolice;
 
@@ -960,14 +960,14 @@ bool Police_7B8::SpawnCrewInCar_5703E0(Car_BC* pCar)
 
         default:
             pNewPed1->set_health_4039A0(250);
-            pNewPed1->ForceWeapon_46F600(WeaponType::smg);
+            pNewPed1->ForceWeapon_46F600(WeaponType::kSmg);
             pNewPed1->set_remap_433B90(4);
-            pNewPed1->set_occupation_403970(PedOcupation::army_army);
+            pNewPed1->set_occupation_403970(PedOcupation::kArmyArmy);
             pNewPed1->field_26C_graphic_type = ped_graphic_type::cop_2;
             pNewPed2->set_health_4039A0(250);
-            pNewPed2->ForceWeapon_46F600(WeaponType::smg);
+            pNewPed2->ForceWeapon_46F600(WeaponType::kSmg);
             pNewPed2->set_remap_433B90(4);
-            pNewPed2->set_occupation_403970(PedOcupation::army_army);
+            pNewPed2->set_occupation_403970(PedOcupation::kArmyArmy);
             pNewPed2->field_26C_graphic_type = ped_graphic_type::cop_2;
             pNewCrew->field_20_crew_kind = CrewKind::kArmy;
             break;

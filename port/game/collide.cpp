@@ -24,31 +24,31 @@ CollisionCounters_C::CollisionCounters_C()
     gGridSpriteLink_Pool_679200 = new GridSpriteLink_Pool();
     if (!gGridSpriteLink_Pool_679200)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1416);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1416);
     }
 
     gGridCell_Pool_679204 = new GridCell_Pool();
     if (!gGridCell_Pool_679204)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1418);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1418);
     }
 
     gSpriteGrid_1_679208 = new SpriteGrid_400();
     if (!gSpriteGrid_1_679208)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1420);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1420);
     }
 
     gSpriteGrid_2_67920C = new SpriteGrid_400();
     if (!gSpriteGrid_2_67920C)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1422);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1422);
     }
 
     gSpriteGrid_3_679210 = new SpriteGrid_400();
     if (!gSpriteGrid_3_679210)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1424);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\collide.cpp", 1424);
     }
 
     gSpriteGrid_exclusion_sprite_678F84 = nullptr;

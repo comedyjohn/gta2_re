@@ -338,7 +338,7 @@ void ScriptManager_C1EA8::Update_512160()
         SCR_CMD_HEADER* pLevelStart = FindCommandByType_512100(59, 0);
         if (!pLevelStart)
         {
-            FatalError_4A38C0(Gta2Error::ScriptfileNo_LEVELSTART_Declaration,
+            FatalError_4A38C0(Gta2Error::kScriptfileNoLEVELSTARTDeclaration,
                               "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
                               12774); // No LEVELSTART declaration in scriptfile
             return;
@@ -713,7 +713,7 @@ char_type ScriptManager_C1EA8::TestAndRecordWeaponHit_512AF0(s32 id, char_type w
 
         if (pTable->field_0_entity_id == id)
         {
-            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::weapon_0x17)
+            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::kWeapon0x17)
             {
                 if (bUnk)
                 {
@@ -794,7 +794,7 @@ void ScriptManager_C1EA8::RecordWeaponHit_512C00(s32 entity_id, s32 projectile_m
     {
         if (pTable->field_0_entity_id == entity_id)
         {
-            if (pTable->field_4_weapon_idx == WeaponType::weapon_0x17 || pTable->field_4_weapon_idx == projectile_type)
+            if (pTable->field_4_weapon_idx == WeaponType::kWeapon0x17 || pTable->field_4_weapon_idx == projectile_type)
             {
                 if (bUnk)
                 {
@@ -828,7 +828,7 @@ bool ScriptManager_C1EA8::IsWeaponHitRecorded_512C70(s32 id, char_type weapon_id
     {
         if (pTable->field_0_entity_id == id)
         {
-            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::weapon_0x17)
+            if (pTable->field_4_weapon_idx == weapon_idx || pTable->field_4_weapon_idx == WeaponType::kWeapon0x17)
             {
                 if (bUnk)
                 {
@@ -879,7 +879,7 @@ ScriptManager_C1EA8::ScriptManager_C1EA8()
     gMiss2_25C_6F805C = pMiss2_25C;
     if (!pMiss2_25C)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\miss2.cpp", 13630);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\miss2.cpp", 13630);
     }
 
     memset(field_13354_mission_script_data, 0, sizeof(field_13354_mission_script_data));

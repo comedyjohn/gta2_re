@@ -243,8 +243,8 @@ class CarManager_6C
     // As SpawnCarAtCorrectZ_426E40 with the scale passed in (PublicTransport_181C::SpawnTrainsFromStations_578860)
     Car_BC* SpawnCarAtCorrectZ_Scaled(Fix16 xpos, Fix16 ypos, const Ang16& rotation, s32 car_model, const Fix16& scale)
     {
-        if (car_model == CarModel::TRAIN || car_model == CarModel::TRAINCAB || car_model == CarModel::TRAINFB ||
-            car_model == CarModel::boxcar)
+        if (car_model == CarModel::kTrain || car_model == CarModel::kTraincab || car_model == CarModel::kTrainfb ||
+            car_model == CarModel::kBoxcar)
         {
             return SpawnCarAt_446230(xpos, ypos, gMap_0x370_6F6268->GetRailwayZCoordAtXY_4E6510(xpos, ypos), rotation, car_model, scale);
         }
@@ -257,8 +257,8 @@ class CarManager_6C
     // As SpawnCarAtCorrectZ_426E40 but with the scale passed in (TrafficSpawner_14::SpawnTrafficCar_582480 passes its own kFpOne_6FF778)
     Car_BC* SpawnCarAtCorrectZ_WithScale(Fix16 xpos, Fix16 ypos, Ang16 rotation, s32 car_model, const Fix16& scale)
     {
-        if (car_model == CarModel::TRAIN || car_model == CarModel::TRAINCAB || car_model == CarModel::TRAINFB ||
-            car_model == CarModel::boxcar)
+        if (car_model == CarModel::kTrain || car_model == CarModel::kTraincab || car_model == CarModel::kTrainfb ||
+            car_model == CarModel::kBoxcar)
         {
             return SpawnCarAt_446230(xpos, ypos, gMap_0x370_6F6268->GetRailwayZCoordAtXY_4E6510(xpos, ypos), rotation, car_model, scale);
         }
@@ -270,8 +270,8 @@ class CarManager_6C
 
     Car_BC* SpawnCarAtCorrectZ_426E40(Fix16 xpos, Fix16 ypos, Ang16 rotation, s32 car_model)
     {
-        if (car_model == CarModel::TRAIN || car_model == CarModel::TRAINCAB || car_model == CarModel::TRAINFB ||
-            car_model == CarModel::boxcar)
+        if (car_model == CarModel::kTrain || car_model == CarModel::kTraincab || car_model == CarModel::kTrainfb ||
+            car_model == CarModel::kBoxcar)
         {
             return SpawnCarAt_446230(xpos,
                                      ypos,
@@ -386,7 +386,7 @@ class Trailer
 
 static inline bool IsArmyModel(s32 idx1)
 {
-    return idx1 == CarModel::TANK || idx1 == 22 || idx1 == 30 || idx1 == 3;
+    return idx1 == CarModel::kTank || idx1 == 22 || idx1 == 30 || idx1 == 3;
 }
 
 class Car_BC
@@ -464,7 +464,7 @@ class Car_BC
 
     bool IsTrain_421610()
     {
-        return field_84_car_info_idx == CarModel::TRAIN;
+        return field_84_car_info_idx == CarModel::kTrain;
     }
 
     void SetWeaponKind_421950(s32 v)
@@ -766,8 +766,8 @@ class Car_BC
 
     bool IsTrainModel_403BA0()
     {
-        return field_84_car_info_idx == CarModel::TRAIN || field_84_car_info_idx == CarModel::TRAINCAB ||
-            field_84_car_info_idx == CarModel::TRAINFB || field_84_car_info_idx == CarModel::boxcar;
+        return field_84_car_info_idx == CarModel::kTrain || field_84_car_info_idx == CarModel::kTraincab ||
+            field_84_car_info_idx == CarModel::kTrainfb || field_84_car_info_idx == CarModel::kBoxcar;
     }
 
     // 9.6f inline 0x421560
@@ -1117,22 +1117,22 @@ class Car_BC
 
     bool IsGunJeep_411910()
     {
-        return field_84_car_info_idx == CarModel::GUNJEEP;
+        return field_84_car_info_idx == CarModel::kGunjeep;
     }
 
     bool IsTank_411900()
     {
-        return field_84_car_info_idx == CarModel::TANK;
+        return field_84_car_info_idx == CarModel::kTank;
     }
 
     bool IsSwatVan_4217A0()
     {
-        return field_84_car_info_idx == CarModel::SWATVAN;
+        return field_84_car_info_idx == CarModel::kSwatvan;
     }
 
     bool IsSwatVanOrBankVan_403BC0()
     {
-        return field_84_car_info_idx == CarModel::SWATVAN || field_84_car_info_idx == CarModel::bank_van;
+        return field_84_car_info_idx == CarModel::kSwatvan || field_84_car_info_idx == CarModel::kBankVan;
     }
 
     char_type IsTurretRotated_4119F0()
@@ -1142,42 +1142,42 @@ class Car_BC
 
     bool IsFireTruck_4118F0()
     {
-        return field_84_car_info_idx == CarModel::FIRETRUK;
+        return field_84_car_info_idx == CarModel::kFiretruk;
     }
 
     bool IsMediCar_421780()
     {
-        return field_84_car_info_idx == CarModel::MEDICAR;
+        return field_84_car_info_idx == CarModel::kMedicar;
     }
 
     bool IsCopCar_421790()
     {
-        return field_84_car_info_idx == CarModel::COPCAR;
+        return field_84_car_info_idx == CarModel::kCopcar;
     }
 
     bool IsFbiCar_411920()
     {
-        return field_84_car_info_idx == CarModel::EDSELFBI;
+        return field_84_car_info_idx == CarModel::kEdselfbi;
     }
 
     bool IsGt24640_4217D0()
     {
-        return field_84_car_info_idx == CarModel::GT24640;
+        return field_84_car_info_idx == CarModel::kGt24640;
     }
 
     bool IsTvVan_4217E0()
     {
-        return this->field_84_car_info_idx == CarModel::TVVAN;
+        return this->field_84_car_info_idx == CarModel::kTvvan;
     }
 
     bool IsTruckTransport_447EC0()
     {
-        return this->field_84_car_info_idx == CarModel::TRUKTRNS;
+        return this->field_84_car_info_idx == CarModel::kTruktrns;
     }
 
     bool HasPlayerDriver_4215C0()
     {
-        return field_54_driver && field_54_driver->field_15C_player && field_54_driver->get_occupation_403980() != PedOcupation::empty;
+        return field_54_driver && field_54_driver->field_15C_player && field_54_driver->get_occupation_403980() != PedOcupation::kEmpty;
     }
 
     bool IsEngineCrushed_447EB0()

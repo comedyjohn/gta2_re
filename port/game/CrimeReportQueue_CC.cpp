@@ -130,10 +130,10 @@ void CrimeReportQueue_CC::ReportCrimeForPed(u32 crime_type, Ped* pPed)
 {
     switch (pPed->get_occupation_403980())
     {
-        case PedOcupation::police:
-        case PedOcupation::swat:
-        case PedOcupation::fbi:
-        case PedOcupation::army_army:
+        case PedOcupation::kPolice:
+        case PedOcupation::kSwat:
+        case PedOcupation::kFbi:
+        case PedOcupation::kArmyArmy:
         case PedOcupation::kWalkingGuard:
         case PedOcupation::kUnknownCopOccu30:
         case PedOcupation::kUnknownCopOccu31:

@@ -32,7 +32,7 @@ class Ped
   public:
     bool Is_occupation_elvis_433C90()
     {
-        return field_240_occupation == PedOcupation::elvis;
+        return field_240_occupation == PedOcupation::kElvis;
     }
 
     void set_enter_car_as_passenger_4039B0(s32 v)

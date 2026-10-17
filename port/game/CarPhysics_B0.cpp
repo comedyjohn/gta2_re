@@ -1776,7 +1776,7 @@ s32 get_skid_obj_type_55D490(s32 surface, Fix16 box_idx)
             case 3:
                 return 125;
             default:
-                FatalError_4A38C0(Gta2Error::InvalidCase, "C:\\Splitting\\Gta2\\Source\\physics.cpp", 2331, surface);
+                FatalError_4A38C0(Gta2Error::kInvalidCase, "C:\\Splitting\\Gta2\\Source\\physics.cpp", 2331, surface);
         }
     }
     else if (box_idx <= dword_6FE178)

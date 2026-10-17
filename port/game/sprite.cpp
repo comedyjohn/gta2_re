@@ -2690,25 +2690,25 @@ SpriteManager_8::SpriteManager_8()
     gSpritePool_703818 = new SpritePool();
     if (gSpritePool_703818 == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5039);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5039);
     }
 
     gSpriteShapePool_70381C = new SpriteShapePool();
     if (gSpriteShapePool_70381C == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5041);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5041);
     }
 
     gSpriteMaskCache_67AF1C = new SpriteMaskCache_3CC();
     if (gSpriteMaskCache_67AF1C == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5043);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5043);
     }
 
     gAttachedSpritePool_703B80 = new AttachedSpritePool();
     if (gAttachedSpritePool_703B80 == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5046);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\sprite.cpp", 5046);
     }
 
     field_0_drawn_sprite_count = 0;

@@ -475,7 +475,7 @@ void miss2_0x11C::SCRCMD_CAR_DECSET_503BC0(SCR_CAR_DATA_DEC* pCmd, SCR_POINTER* 
     }
     else //  There is a trailer
     {
-        if (pCmd->field_1C_car_id == CarModel::TRUKTRNS) // 66 = TRUKTRNS Truck Trailer, Flatbed
+        if (pCmd->field_1C_car_id == CarModel::kTruktrns) // 66 = TRUKTRNS Truck Trailer, Flatbed
         {
             Car_BC* pTrailerCar = gCarManager_6C_677930->SpawnCar_shortened(pCmd->field_1E_trailer_id);
             Ang16 rotation;
@@ -1474,7 +1474,7 @@ void miss2_0x11C::SCRCMD_DISPLAY_MESSAGES_505F50(SCR_TWO_PARAMS* pCmd)
         sprintf(gTmpBuffer_67C598, "%d", pCmd->field_8_unsigned_1);
         if (!gText_0x14_704DFC->Find_5B5F90(gTmpBuffer_67C598))
         {
-            FatalError_4A38C0(Gta2Error::MissionScriptIsReferringToTextIdThatDoesNotExist,
+            FatalError_4A38C0(Gta2Error::kMissionScriptIsReferringToTextIdThatDoesNotExist,
                               "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
                               2460,
                               pCmd->field_8_unsigned_1); // Mission script is referring to a 'text id' that doesn't exist. ID
@@ -3114,7 +3114,7 @@ void miss2_0x11C::Locate_509FD0()
 
                     break;
                 default:
-                    FatalError_4A38C0(Gta2Error::InvalidCase,
+                    FatalError_4A38C0(Gta2Error::kInvalidCase,
                                       "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
                                       4622,
                                       gBasePtr_6F8070->field_2_type);
@@ -3566,7 +3566,7 @@ void miss2_0x11C::SCRCMD_SET_GANG_KILL_REACTION_50AC20()
     gang_1_str = gScriptManager_6F8060->FindStringById_503080(gBasePtr_6F8070->field_8_index);
     if (gang_1_str == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::UnableToFindGangMatchingNameInSetGangRespect,
+        FatalError_4A38C0(Gta2Error::kUnableToFindGangMatchingNameInSetGangRespect,
                           "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
                           5217,
                           static_cast<u16>(gBasePtr_6F8070->field_0_cmd_this));
@@ -3575,7 +3575,7 @@ void miss2_0x11C::SCRCMD_SET_GANG_KILL_REACTION_50AC20()
     str_table_entry* gang_2_str = gScriptManager_6F8060->FindStringById_503080(pCmd->field_C_unsigned_3);
     if (gang_2_str == nullptr)
     {
-        FatalError_4A38C0(Gta2Error::UnableToFindGangMatchingNameInSetGangRespect2,
+        FatalError_4A38C0(Gta2Error::kUnableToFindGangMatchingNameInSetGangRespect2,
                           "C:\\Splitting\\Gta2\\Source\\miss2.cpp",
                           5223,
                           static_cast<u16>(gBasePtr_6F8070->field_0_cmd_this));
@@ -4890,7 +4890,7 @@ void miss2_0x11C::SCRCMD_CHECK_CAR_DRIVER_50CB70()
             car_info* pInfo = gGtx_0x106C_703DD4->get_car_info_5AA3B0(pCar->field_84_car_info_idx);
 
             if ((pInfo->info_flags & car_info_flag::emergency) == car_info_flag::emergency ||
-                pCar->field_84_car_info_idx == CarModel::EDSELFBI)
+                pCar->field_84_car_info_idx == CarModel::kEdselfbi)
             {
                 if (pCar->field_A4_bf.bEmergencyLights)
                 {
@@ -5481,10 +5481,10 @@ void miss2_0x11C::StartBonus_50DF10()
 {
     auto* pCmd = reinterpret_cast<SCR_START_BONUS*>(gBasePtr_6F8070);
 
-    s32 car_model = CarModel::none;
+    s32 car_model = CarModel::kNone;
     s16 gang_idx = -1;
     s32 alt_car_model = car_model;
-    s32 occupation = PedOcupation::no_occupation;
+    s32 occupation = PedOcupation::kNoOccupation;
 
     auto* pPointer = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_18_ptr));
 
@@ -5513,10 +5513,10 @@ void miss2_0x11C::StartBonus_50DF10()
 
                 // French version neutralizes bonuses against law enforcement.
                 if (bIsFrench_67D53C &&
-                    (car_model == CarModel::COPCAR || car_model == CarModel::apc || car_model == CarModel::GUNJEEP ||
-                     car_model == CarModel::JEEP || car_model == CarModel::SWATVAN || car_model == CarModel::EDSELFBI))
+                    (car_model == CarModel::kCopcar || car_model == CarModel::kApc || car_model == CarModel::kGunjeep ||
+                     car_model == CarModel::kJeep || car_model == CarModel::kSwatvan || car_model == CarModel::kEdselfbi))
                 {
-                    car_model = CarModel::none;
+                    car_model = CarModel::kNone;
                 }
             }
 
@@ -5525,9 +5525,9 @@ void miss2_0x11C::StartBonus_50DF10()
             occupation = pCmd->field_E_id;
 
             // French version neutralizes bonuses against law enforcement.
-            if (bIsFrench_67D53C && (occupation == PedOcupation::any_law_enforcement || occupation == PedOcupation::police))
+            if (bIsFrench_67D53C && (occupation == PedOcupation::kAnyLawEnforcement || occupation == PedOcupation::kPolice))
             {
-                occupation = PedOcupation::no_occupation;
+                occupation = PedOcupation::kNoOccupation;
             }
 
             break;
@@ -6252,7 +6252,7 @@ void miss2_0x11C::SCRCMD_SUPPRESS_MODEL_50F220()
 {
     if (static_cast<u16>(gBasePtr_6F8070->field_8_index) == 0xFFFFU) //  TODO: fix gBasePtr_6F8070
     {
-        gCarManager_6C_677930->field_C_suppressed_model = CarModel::none; //  No model suppressed
+        gCarManager_6C_677930->field_C_suppressed_model = CarModel::kNone; //  No model suppressed
     }
     else
     {
@@ -6838,7 +6838,7 @@ void miss2_0x11C::SCRCMD_START_BASIC_KF_510100() // START_BASIC_KF_TEMPLATE
         gHud_2B00_706620->field_DC_brief.SetHudBrief_5D4400(1, gTmpBuffer_67C598);
         auto* pPlayerPedPtr = static_cast<SCR_POINTER*>(gScriptManager_6F8060->GetBasePointer_512770(pCmd->field_E_playername));
         u8 weapon_idx = pCmd->field_10_weapon;
-        if (weapon_idx < WeaponType::car_bomb || weapon_idx > 27)
+        if (weapon_idx < WeaponType::kCarBomb || weapon_idx > 27)
         {
             // Ped weapons
             if (weapon_idx != 28)
@@ -6976,7 +6976,7 @@ void miss2_0x11C::SCRCMD_SET_MODEL_WANTED_5105B0()
 
     if (model_idx == -1)
     {
-        gScriptManager_6F8060->field_C1E70_wanted_car_model = CarModel::none;
+        gScriptManager_6F8060->field_C1E70_wanted_car_model = CarModel::kNone;
     }
     else
     {

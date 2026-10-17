@@ -435,41 +435,41 @@ const char_type* GetOccupationStrFromPed(Ped* pPed)
     {
         switch (pPed->field_240_occupation)
         {
-            case PedOcupation::car_thief:
+            case PedOcupation::kCarThief:
                 return "Car Thief";
-            case PedOcupation::mugger:
+            case PedOcupation::kMugger:
                 return "Mugger";
-            case PedOcupation::driver:
+            case PedOcupation::kDriver:
                 return "Driver";
-            case PedOcupation::fireman:
+            case PedOcupation::kFireman:
                 return "Fireman";
-            case PedOcupation::elvis_leader:
+            case PedOcupation::kElvisLeader:
                 return "Elvis Leader";
-            case PedOcupation::elvis:
+            case PedOcupation::kElvis:
                 return "Elvis";
-            case PedOcupation::dummy:
+            case PedOcupation::kDummy:
                 return "Dummy";
             case PedOcupation::kRobbedDriver:
                 return "Driver 2";
             case PedOcupation::kScaredDriver:
                 return "Driv3r";
-            case PedOcupation::no_occupation:
+            case PedOcupation::kNoOccupation:
                 return "None";
-            case PedOcupation::any_gang_member:
+            case PedOcupation::kAnyGangMember:
                 return "Gang member";
-            case PedOcupation::police:
+            case PedOcupation::kPolice:
                 return "Police";
-            case PedOcupation::fbi:
+            case PedOcupation::kFbi:
                 return "FBI";
-            case PedOcupation::player:
+            case PedOcupation::kPlayer:
                 return "Player";
-            case PedOcupation::swat:
+            case PedOcupation::kSwat:
                 return "SWAT";
-            case PedOcupation::road_block_tank_man:
+            case PedOcupation::kRoadBlockTankMan:
                 return "Roadblock Tank Man";
-            case PedOcupation::army_army:
+            case PedOcupation::kArmyArmy:
                 return "Army";
-            case PedOcupation::tank_driver:
+            case PedOcupation::kTankDriver:
                 return "Tank Driver";
             default:
                 return "Other";
@@ -1781,7 +1781,7 @@ void ImGuiDebugDraw()
                     pNewCar->IncrementCarStats_443D70(car_kind::recycled_1); // avoid crashes when entering the car
 
                     // Spawns a cab and connected trailer, can spawn trains too apparently
-                    gCarManager_6C_677930->SpawnCabAndTrailer_446530(xpos + xOff, ypos, 0, CarModel::TRUKCAB1, CarModel::TRUKTRNS);
+                    gCarManager_6C_677930->SpawnCabAndTrailer_446530(xpos + xOff, ypos, 0, CarModel::kTrukcab1, CarModel::kTruktrns);
 
                     pNewCar->SetupCarPhysicsAndSpriteBinding_43BCA0();
                     if (!pNewCar->field_5C_AI)
@@ -2721,8 +2721,8 @@ void ImGuiDebugDraw()
                             ImGui::TreePop();
                         }
 
-                        if (pPedIter->field_240_occupation == PedOcupation::mugger ||
-                            pPedIter->field_240_occupation == PedOcupation::car_thief)
+                        if (pPedIter->field_240_occupation == PedOcupation::kMugger ||
+                            pPedIter->field_240_occupation == PedOcupation::kCarThief)
                         {
                             swprintf(tmpBuff_67BD9C, L"(%d, %d)", pPedIter->field_21C_bf.bPanicking, pPedIter->field_21C_bf.bAttacking);
                             DisplayWideTextAtSprite(tmpBuff_67BD9C, pPedIter->GetSprite_46DF50(), 0, 0);

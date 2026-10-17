@@ -44,23 +44,23 @@ s32 File::GetFileSize_4A6B10(FILE* Stream)
     s32 oldPos = ::ftell(Stream);
     if (oldPos == -1)
     {
-        FatalError_4A38C0(Gta2Error::FtellError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 56);
+        FatalError_4A38C0(Gta2Error::kFtellError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 56);
     }
 
     if (::fseek(Stream, 0, SEEK_END))
     {
-        FatalError_4A38C0(Gta2Error::FseekError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 58);
+        FatalError_4A38C0(Gta2Error::kFseekError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 58);
     }
 
     s32 endPos = ::ftell(Stream);
     if (endPos == -1)
     {
-        FatalError_4A38C0(Gta2Error::FtellError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 60);
+        FatalError_4A38C0(Gta2Error::kFtellError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 60);
     }
 
     if (::fseek(Stream, oldPos, SEEK_SET))
     {
-        FatalError_4A38C0(Gta2Error::FseekError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 62);
+        FatalError_4A38C0(Gta2Error::kFseekError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 62);
     }
 
     return endPos;
@@ -85,24 +85,24 @@ void File::CheckReadOnlyFile_4A6BE0(const char_type* FileName, s32 expectedSize)
     FILE* hFile = ::fopen(FileName, "rb");
     if (!hFile)
     {
-        FatalError_4A38C0(Gta2Error::SecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 104);
+        FatalError_4A38C0(Gta2Error::kSecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 104);
     }
 
     if (GetFileSize_4A6B10(hFile) != expectedSize)
     {
-        FatalError_4A38C0(Gta2Error::SecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 108);
+        FatalError_4A38C0(Gta2Error::kSecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 108);
     }
 
     s32 closeRet = ::fclose(hFile);
     gbGlobalFileOpen_67D160 = 0;
     if (closeRet)
     {
-        FatalError_4A38C0(Gta2Error::SecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 113);
+        FatalError_4A38C0(Gta2Error::kSecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 113);
     }
 
     if (::fopen(FileName, "wb"))
     {
-        FatalError_4A38C0(Gta2Error::SecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 117);
+        FatalError_4A38C0(Gta2Error::kSecurityFail, "C:\\Splitting\\Gta2\\Source\\File.cpp", 117);
     }
 }
 
@@ -113,13 +113,13 @@ void* File::ReadFileToBuffer_4A6C80(const char_type* FileName, size_t* pAllocate
     FILE* hFileRead1 = ::fopen(FileName, "rb");
     if (!hFileRead1)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 141);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 141);
     }
 
     *pAllocatedBufferSize = GetFileSize_4A6B10(hFileRead1);
     if (::fclose(hFileRead1))
     {
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 145);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 145);
     }
 
     void* pBuffer = Memory::Malloc(*pAllocatedBufferSize);
@@ -128,20 +128,20 @@ void* File::ReadFileToBuffer_4A6C80(const char_type* FileName, size_t* pAllocate
     if (!hFileRead2)
     {
         ::free(pBuffer);
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 151);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 151);
     }
 
     if (Read_4A6D90(pBuffer, *pAllocatedBufferSize, 1U, hFileRead2) != 1)
     {
         ::free(pBuffer);
         ::fclose(hFileRead2);
-        FatalError_4A38C0(Gta2Error::FileReadFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 158);
+        FatalError_4A38C0(Gta2Error::kFileReadFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 158);
     }
 
     if (::fclose(hFileRead2))
     {
         ::free(pBuffer);
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 164);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 164);
     }
 
     return pBuffer;
@@ -162,25 +162,25 @@ size_t File::ReadFileToFixedBuffer_4A6DB0(const char_type* FileName, void* pBuff
     FILE* hFile = ::fopen(FileName, "rb");
     if (!hFile)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 192);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 192);
     }
 
     size_t size = GetFileSize_4A6B10(hFile);
     if (size > *pMaxSize)
     {
         ::fclose(hFile);
-        FatalError_4A38C0(Gta2Error::FileTooLarge, "C:\\Splitting\\Gta2\\Source\\File.cpp", 198, static_cast<s32>(size - *pMaxSize));
+        FatalError_4A38C0(Gta2Error::kFileTooLarge, "C:\\Splitting\\Gta2\\Source\\File.cpp", 198, static_cast<s32>(size - *pMaxSize));
     }
 
     if (Read_4A6D90(pBuffer, size, 1U, hFile) != 1)
     {
         ::fclose(hFile);
-        FatalError_4A38C0(Gta2Error::FileReadFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 204);
+        FatalError_4A38C0(Gta2Error::kFileReadFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 204);
     }
 
     if (::fclose(hFile))
     {
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 208);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 208);
     }
     return size;
 }
@@ -191,24 +191,24 @@ void File::WriteBufferToFile_4A6E80(const char_type* FileName, void* Buffer, siz
     Error_SetName_4A0770(FileName);
     if (!*pBufferSize)
     {
-        FatalError_4A38C0(Gta2Error::WritingZeroBytesToFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 228);
+        FatalError_4A38C0(Gta2Error::kWritingZeroBytesToFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 228);
     }
 
     FILE* hFile = ::fopen(FileName, "wb");
     if (!hFile)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 231);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 231);
     }
 
     if (Write_4A6F30(Buffer, *pBufferSize, 1U, hFile) != 1)
     {
         ::fclose(hFile);
-        FatalError_4A38C0(Gta2Error::FileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 237);
+        FatalError_4A38C0(Gta2Error::kFileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 237);
     }
 
     if (::fclose(hFile))
     {
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 241);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 241);
     }
 }
 
@@ -224,24 +224,24 @@ void File::AppendBufferToFile_4A6F50(const char_type* FileName, void* pBuffer, u
     Error_SetName_4A0770(FileName);
     if (!*pBufferSize)
     {
-        FatalError_4A38C0(Gta2Error::WritingZeroBytesToFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 261);
+        FatalError_4A38C0(Gta2Error::kWritingZeroBytesToFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 261);
     }
 
     FILE* hFile = ::fopen(FileName, "ab"); // TODO: check
     if (!hFile)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 264);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 264);
     }
 
     if (Write_4A6F30(pBuffer, *pBufferSize, 1U, hFile) != 1)
     {
         ::fclose(hFile);
-        FatalError_4A38C0(Gta2Error::FileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 270);
+        FatalError_4A38C0(Gta2Error::kFileWriteFailure, "C:\\Splitting\\Gta2\\Source\\File.cpp", 270);
     }
 
     if (::fclose(hFile))
     {
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 274);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 274);
     }
 }
 
@@ -253,12 +253,12 @@ void File::CreateFile_4A7000(const char_type* FileName)
     FILE* hFile = ::fopen(FileName, "wb");
     if (!hFile)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 296);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 296);
     }
 
     if (::fclose(hFile))
     {
-        FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 300);
+        FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 300);
     }
 }
 
@@ -275,7 +275,7 @@ void File::Global_Open_4A7060(const char_type* FileName)
     ghFile_67CFEC = ::fopen(FileName, "rb");
     if (!ghFile_67CFEC)
     {
-        FatalError_4A38C0(Gta2Error::FreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 323);
+        FatalError_4A38C0(Gta2Error::kFreeloaderEpisodeUnknown, "C:\\Splitting\\Gta2\\Source\\File.cpp", 323);
     }
 
     gbGlobalFileOpen_67D160 = 1;
@@ -290,7 +290,7 @@ void File::Global_Close_4A70C0()
         gbGlobalFileOpen_67D160 = 0;
         if (close_result)
         {
-            FatalError_4A38C0(Gta2Error::FileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 345);
+            FatalError_4A38C0(Gta2Error::kFileCloseError, "C:\\Splitting\\Gta2\\Source\\File.cpp", 345);
         }
     }
 }
@@ -310,7 +310,7 @@ void File::Global_Seek_4A7140(u32* pOffset)
 {
     if (!gbGlobalFileOpen_67D160)
     {
-        FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 416);
+        FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 416);
     }
 
     if (::fseek(ghFile_67CFEC, *pOffset, 1))
@@ -331,7 +331,7 @@ void File::Global_Read_4A71C0(void* pBuffer, const u32& pBufferSize)
 {
     if (!gbGlobalFileOpen_67D160)
     {
-        FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 438);
+        FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 438);
     }
 
     if (Read_4A6D90(pBuffer, pBufferSize, 1U, ghFile_67CFEC) != 1)
@@ -345,7 +345,7 @@ bool File::Global_Read_4A7210(void* Buffer, u32* pSize)
 {
     if (!gbGlobalFileOpen_67D160)
     {
-        FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 460);
+        FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 460);
     }
     return (Read_4A6D90(Buffer, *pSize, 1U, ghFile_67CFEC) == 1) ? true : false;
 }
@@ -355,7 +355,7 @@ size_t File::GetRemainderSize_4A7250(void* Buffer, u32* pMaxFileSize)
 {
     if (!gbGlobalFileOpen_67D160)
     {
-        FatalError_4A38C0(Gta2Error::FileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 487);
+        FatalError_4A38C0(Gta2Error::kFileReadingNotOpenedFile, "C:\\Splitting\\Gta2\\Source\\File.cpp", 487);
     }
 
     s32 curPos = ::ftell(ghFile_67CFEC);

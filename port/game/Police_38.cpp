@@ -147,7 +147,7 @@ void PoliceCrew_38::SpawnPoliceInCar_570BF0()
     PedGroup* pGroup = PedGroup::New_4CB0D0();
     Ped* pCopLeader = gPedManager_6787BC->AllocatePed_470F30();
     pCopLeader->SetPedType_403920(PedType::kSpecialPed);
-    pCopLeader->set_occupation_403970(PedOcupation::police);
+    pCopLeader->set_occupation_403970(PedOcupation::kPolice);
     pCopLeader->SpawnPedInCar_45C730(field_10_subObj->field_0_car);
     pCopLeader->SetObjective(Objectives::kGotoAreaInCar, 0);
     pCopLeader->field_1DC_objective_target_x = Fix16(field_2_targ_x);
@@ -163,17 +163,17 @@ void PoliceCrew_38::SpawnPoliceInCar_570BF0()
         case CopLevel::kNone:
         case CopLevel::kPolice1:
             pCopLeader->field_170_selected_weapon = nullptr;
-            pCopLeader->GiveWeapon_46F650(WeaponType::pistol);
+            pCopLeader->GiveWeapon_46F650(WeaponType::kPistol);
             pCopLeader->set_health_4039A0(50);
             pCopLeader->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
             break;
         case CopLevel::kPolice2:
-            pCopLeader->GiveWeapon_46F650(WeaponType::pistol);
+            pCopLeader->GiveWeapon_46F650(WeaponType::kPistol);
             pCopLeader->set_health_4039A0(100);
             pCopLeader->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
             break;
         default:
-            pCopLeader->GiveWeapon_46F650(WeaponType::pistol);
+            pCopLeader->GiveWeapon_46F650(WeaponType::kPistol);
             pCopLeader->set_health_4039A0(100);
             break;
     }
@@ -184,7 +184,7 @@ void PoliceCrew_38::SpawnPoliceInCar_570BF0()
     Ped* pCopSupporter = gPedManager_6787BC->AllocatePed_470F30();
     pCopSupporter->EnterCarAsPassenger_45C7F0(field_10_subObj->field_0_car);
     pCopSupporter->SetPedType_403920(PedType::kSpecialPed);
-    pCopSupporter->set_occupation_403970(PedOcupation::police);
+    pCopSupporter->set_occupation_403970(PedOcupation::kPolice);
     pCopSupporter->SetObjective(Objectives::kNoObj);
     pCopSupporter->set_remap_433B90(0);
 
@@ -192,17 +192,17 @@ void PoliceCrew_38::SpawnPoliceInCar_570BF0()
     {
         case CopLevel::kPolice1:
             pCopSupporter->field_170_selected_weapon = nullptr;
-            pCopSupporter->GiveWeapon_46F650(WeaponType::pistol);
+            pCopSupporter->GiveWeapon_46F650(WeaponType::kPistol);
             pCopSupporter->field_216_health = 50;
             pCopSupporter->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
             break;
         case CopLevel::kPolice2:
-            pCopSupporter->GiveWeapon_46F650(WeaponType::pistol);
+            pCopSupporter->GiveWeapon_46F650(WeaponType::kPistol);
             pCopSupporter->field_216_health = 100;
             pCopSupporter->field_1F0_max_speed = kFpOneSixteenth_6FEB0C * kFpPoint8_6FEB68;
             break;
         default:
-            pCopSupporter->GiveWeapon_46F650(WeaponType::pistol);
+            pCopSupporter->GiveWeapon_46F650(WeaponType::kPistol);
             pCopSupporter->field_216_health = 100;
             break;
     }
@@ -229,14 +229,14 @@ void PoliceCrew_38::SpawnSWAT_570E30()
     PedGroup* pSwatGroup = PedGroup::New_4CB0D0();
     Ped* pSwatLeader = gPedManager_6787BC->AllocatePed_470F30();
     pSwatLeader->SetPedType_403920(PedType::kSpecialPed);
-    pSwatLeader->set_occupation_403970(PedOcupation::swat);
+    pSwatLeader->set_occupation_403970(PedOcupation::kSwat);
     pSwatLeader->SpawnPedInCar_45C730(field_10_subObj->field_0_car);
     pSwatLeader->SetObjective(Objectives::kGotoAreaInCar, 0);
     pSwatLeader->field_1DC_objective_target_x = Fix16(field_2_targ_x);
     pSwatLeader->field_1E0_objective_target_y = Fix16(field_3_targ_y);
     pSwatLeader->field_1E4_objective_target_z = Fix16(field_4_targ_z);
     pSwatLeader->set_remap_433B90(-1);
-    pSwatLeader->ForceWeapon_46F600(WeaponType::pistol);
+    pSwatLeader->ForceWeapon_46F600(WeaponType::kPistol);
     pSwatLeader->set_health_4039A0(400);
     pSwatLeader->field_288_threat_search = ThreatSearch::kLineOfSight;
     pSwatLeader->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
@@ -248,10 +248,10 @@ void PoliceCrew_38::SpawnSWAT_570E30()
         Ped* pSwatMember = gPedManager_6787BC->AllocatePed_470F30();
         pSwatMember->EnterCarAsPassenger_45C7F0(field_10_subObj->field_0_car);
         pSwatMember->SetPedType_403920(PedType::kSpecialPed);
-        pSwatMember->set_occupation_403970(PedOcupation::swat);
+        pSwatMember->set_occupation_403970(PedOcupation::kSwat);
         pSwatMember->SetObjective(Objectives::kNoObj);
         pSwatMember->set_remap_433B90(-1);
-        pSwatMember->ForceWeapon_46F600(WeaponType::pistol);
+        pSwatMember->ForceWeapon_46F600(WeaponType::kPistol);
         pSwatMember->set_health_4039A0(400);
         pSwatMember->field_288_threat_search = ThreatSearch::kLineOfSight;
         pSwatMember->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
@@ -274,14 +274,14 @@ void PoliceCrew_38::SpawnFBI_nonused_571150()
 {
     Ped* pFBI = gPedManager_6787BC->AllocatePed_470F30();
     pFBI->SetPedType_403920(PedType::kSpecialPed);
-    pFBI->set_occupation_403970(PedOcupation::fbi);
+    pFBI->set_occupation_403970(PedOcupation::kFbi);
     pFBI->SpawnPedInCar_45C730(field_10_subObj->field_0_car);
     pFBI->SetObjective(Objectives::kGotoAreaInCar, 0);
     pFBI->field_1DC_objective_target_x = Fix16(field_2_targ_x);
     pFBI->field_1E0_objective_target_y = Fix16(field_3_targ_y);
     pFBI->field_1E4_objective_target_z = Fix16(field_4_targ_z);
     pFBI->set_remap_433B90(0);
-    pFBI->ForceWeapon_46F600(WeaponType::smg);
+    pFBI->ForceWeapon_46F600(WeaponType::kSmg);
     pFBI->set_health_4039A0(200);
     pFBI->field_288_threat_search = ThreatSearch::kLineOfSight;
     pFBI->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
@@ -2662,7 +2662,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x) + dword_6FEBF4,
                                                                                     Fix16(y_start + lane) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::COPCAR,
+                                                                                    CarModel::kCopcar,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             byte_624FBD = 1;
@@ -2671,7 +2671,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x) + dword_6FEBF4,
                                                                                     Fix16(y_start + lane) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::COPCAR,
+                                                                                    CarModel::kCopcar,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             byte_624FBD = 1;
@@ -2680,7 +2680,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x) + dword_6FEBF4,
                                                                                     Fix16(y_start + lane) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::EDSELFBI,
+                                                                                    CarModel::kEdselfbi,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             byte_624FBD = 1;
@@ -2691,13 +2691,13 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                                 pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x) + dword_6FEBF4,
                                                                                         Fix16(y_start + lane) + dword_6FEBD0,
                                                                                         angle,
-                                                                                        CarModel::TANK,
+                                                                                        CarModel::kTank,
                                                                                         dword_6FECEC);
                                 byte_624FBC = 0;
                                 byte_624FBD = 0;
                                 Ped* pDriver = gPedManager_6787BC->SpawnDriver_470B00(pCar);
                                 pDriver->SetPedType_403920(5);
-                                pDriver->set_occupation_403970(PedOcupation::road_block_tank_man);
+                                pDriver->set_occupation_403970(PedOcupation::kRoadBlockTankMan);
                                 pDriver->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
                                 pCar->field_0_attachments.GetSpriteForModel_5A6A50(148)->field_10_offset_rot = word_6FEB74;
                             }
@@ -2962,7 +2962,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x_start + lane) + dword_6FEBF4,
                                                                                     Fix16(y) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::COPCAR,
+                                                                                    CarModel::kCopcar,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             break;
@@ -2970,7 +2970,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x_start + lane) + dword_6FEBF4,
                                                                                     Fix16(y) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::COPCAR,
+                                                                                    CarModel::kCopcar,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             break;
@@ -2978,7 +2978,7 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                             pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x_start + lane) + dword_6FEBF4,
                                                                                     Fix16(y) + dword_6FEBF4,
                                                                                     angle,
-                                                                                    CarModel::EDSELFBI,
+                                                                                    CarModel::kEdselfbi,
                                                                                     dword_6FECEC);
                             byte_624FBC = 1;
                             break;
@@ -2988,13 +2988,13 @@ char_type PoliceRoadblock_A4::CreateRoadblock_575FF0(u8 x, u8 y, u8 z, s32 orien
                                 pCar = gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(x_start + lane) + dword_6FEBD0,
                                                                                         Fix16(y) + dword_6FEBF4,
                                                                                         angle,
-                                                                                        CarModel::TANK,
+                                                                                        CarModel::kTank,
                                                                                         dword_6FECEC);
                                 byte_624FBC = 0;
                                 byte_624FBD = 0;
                                 Ped* pDriver = gPedManager_6787BC->SpawnDriver_470B00(pCar);
                                 pDriver->SetPedType_403920(5);
-                                pDriver->set_occupation_403970(PedOcupation::road_block_tank_man);
+                                pDriver->set_occupation_403970(PedOcupation::kRoadBlockTankMan);
                                 pDriver->field_28C_threat_reaction = ThreatReaction::kReactAsEmergency;
                             }
                             break;

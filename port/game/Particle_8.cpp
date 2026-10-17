@@ -687,7 +687,7 @@ Particle_8::Particle_8()
         gParticle_4C_Pool_6FD5E4 = new T_Particle_4C_Pool();
         if (!gParticle_4C_Pool_6FD5E4)
         {
-            FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\particle.cpp", 4167);
+            FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\particle.cpp", 4167);
         }
     }
     field_0_fire_hit_obj = nullptr;

@@ -188,17 +188,17 @@ bool Weapon_30::sub_5DCEF0()
     bool result;
     switch (field_1C_idx)
     {
-        case WeaponType::car_bomb:
-        case WeaponType::oil_stain:
-        case WeaponType::car_mines:
-        case WeaponType::fire_truck_gun:
-        case WeaponType::weapon_0x17:
+        case WeaponType::kCarBomb:
+        case WeaponType::kOilStain:
+        case WeaponType::kCarMines:
+        case WeaponType::kFireTruckGun:
+        case WeaponType::kWeapon0x17:
             result = false;
             break;
-        case WeaponType::car_smg:
-        case WeaponType::tank_main_gun:
-        case WeaponType::fire_truck_flamethrower:
-        case WeaponType::army_gun_jeep:
+        case WeaponType::kCarSmg:
+        case WeaponType::kTankMainGun:
+        case WeaponType::kFireTruckFlamethrower:
+        case WeaponType::kArmyGunJeep:
             result = true;
             break;
         default:
@@ -571,7 +571,7 @@ void Weapon_30::smg_5DDD20()
             field_2_reload_speed = 2;
             gParticle_8_6FD5E8->GunMuzzelFlash_53E970(field_24_pPed->field_168_game_object->field_80_sprite_ptr);
 
-            if (field_1C_idx != WeaponType::silence_smg)
+            if (field_1C_idx != WeaponType::kSilenceSmg)
             {
                 field_24_pPed->AddThreateningPedToList_46FC70();
                 if (field_24_pPed->is_player_41B0A0())
@@ -1874,11 +1874,11 @@ char_type Weapon_30::sub_5E33C0()
     char result;
     switch (this->field_1C_idx)
     {
-        case WeaponType::car_bomb:
-        case WeaponType::oil_stain:
-        case WeaponType::car_mines:
-        case WeaponType::tank_main_gun:
-        case WeaponType::weapon_0x17:
+        case WeaponType::kCarBomb:
+        case WeaponType::kOilStain:
+        case WeaponType::kCarMines:
+        case WeaponType::kTankMainGun:
+        case WeaponType::kWeapon0x17:
             result = 0;
             break;
         default:
@@ -1901,9 +1901,9 @@ void Weapon_30::ChuckThrowable_5E34B0()
         {
             if (field_24_pPed->field_15C_player)
             {
-                if (field_1C_idx == WeaponType::molotov || field_1C_idx == WeaponType::grenade)
+                if (field_1C_idx == WeaponType::kMolotov || field_1C_idx == WeaponType::kGrenade)
                 {
-                    s32 obj_type = (field_1C_idx != WeaponType::molotov ? 183 : 138);
+                    s32 obj_type = (field_1C_idx != WeaponType::kMolotov ? 183 : 138);
                     if (field_24_pPed->field_15C_player->IsThrowCharging_4CCB00())
                     {
                         s32 throw_strength = field_24_pPed->field_15C_player->GetThrowStrength_4CCAD0();
@@ -1922,48 +1922,48 @@ void Weapon_30::pull_trigger_5E3670()
 {
     switch (field_1C_idx)
     {
-        case WeaponType::pistol:
+        case WeaponType::kPistol:
             pistol_5DD860();
             break;
 
-        case WeaponType::smg:
-        case WeaponType::silence_smg:
+        case WeaponType::kSmg:
+        case WeaponType::kSilenceSmg:
             smg_5DDD20();
             break;
 
-        case WeaponType::rocket:
+        case WeaponType::kRocket:
             rocket_5E3850();
             break;
 
-        case WeaponType::car_bomb:
+        case WeaponType::kCarBomb:
             car_bomb_5E0AB0(0);
             break;
 
-        case WeaponType::oil_stain:
+        case WeaponType::kOilStain:
             oil_stain_5E1DC0();
             break;
 
-        case WeaponType::car_mines:
+        case WeaponType::kCarMines:
             car_mine_5E2550();
             break;
 
-        case WeaponType::tank_main_gun:
+        case WeaponType::kTankMainGun:
             tank_main_gun_5E10E0();
             break;
 
-        case WeaponType::army_gun_jeep:
+        case WeaponType::kArmyGunJeep:
             army_gun_jeep_5E13E0();
             break;
 
-        case WeaponType::electro_batton:
+        case WeaponType::kElectroBatton:
             electro_batton_5E0740();
             break;
 
-        case WeaponType::shocker:
+        case WeaponType::kShocker:
             shocker_5E06B0();
             break;
 
-        case WeaponType::molotov:
+        case WeaponType::kMolotov:
             if (field_24_pPed && (field_24_pPed->field_15C_player) != nullptr)
             {
                 field_24_pPed->field_15C_player->IncrementThrowCharge_4CCAB0();
@@ -1974,7 +1974,7 @@ void Weapon_30::pull_trigger_5E3670()
             }
             break;
 
-        case WeaponType::grenade:
+        case WeaponType::kGrenade:
             if (field_24_pPed && (field_24_pPed->field_15C_player) != nullptr)
             {
                 Player* p = field_24_pPed->field_15C_player;
@@ -1995,31 +1995,31 @@ void Weapon_30::pull_trigger_5E3670()
             }
             break;
 
-        case WeaponType::dual_pistol:
+        case WeaponType::kDualPistol:
             dual_pistol_5DDA70();
             break;
 
-        case WeaponType::shotgun:
+        case WeaponType::kShotgun:
             shotgun_5DD290();
             break;
 
-        case WeaponType::car_smg:
+        case WeaponType::kCarSmg:
             car_smg_5E2940();
             break;
 
-        case WeaponType::flamethrower:
+        case WeaponType::kFlamethrower:
             flamethrower_5DD0F0();
             break;
 
-        case WeaponType::fire_truck_gun:
+        case WeaponType::kFireTruckGun:
             fire_truck_gun_5E0E70();
             break;
 
-        case WeaponType::fire_truck_flamethrower:
+        case WeaponType::kFireTruckFlamethrower:
             fire_truck_flamethrower_5E0B10();
             break;
 
-        case WeaponType::weapon_0x17:
+        case WeaponType::kWeapon0x17:
             car_bomb_5E0AB0(1);
             break;
 
@@ -2119,11 +2119,11 @@ char_type Weapon_30::IsExplosiveWeapon_5E3BD0()
     char result;
     switch (this->field_1C_idx)
     {
-        case WeaponType::rocket:
-        case WeaponType::molotov:
-        case WeaponType::car_bomb:
-        case WeaponType::car_mines:
-        case WeaponType::tank_main_gun:
+        case WeaponType::kRocket:
+        case WeaponType::kMolotov:
+        case WeaponType::kCarBomb:
+        case WeaponType::kCarMines:
+        case WeaponType::kTankMainGun:
             result = 1;
             break;
         default:

@@ -550,7 +550,7 @@ void Ped::Reset_45AFC0()
     field_234_lifetime_timer = ped_lifetime::remove_0;
     field_238_ped_type = PedType::kDummy;
     field_23C_group_idx = 0;
-    field_240_occupation = PedOcupation::dummy;
+    field_240_occupation = PedOcupation::kDummy;
     field_216_health = 0;
     field_20E_offscreen_counter = 0;
     field_244_remap = -1;
@@ -681,7 +681,7 @@ void Ped::Reset_45AFC0()
     field_21C_bf.bNoWeapon = 0;
     field_229_mug_count = 0;
     field_21C_bf.bScheduledForRemoval = 0;
-    field_274_gang_car_model = CarModel::MERC;
+    field_274_gang_car_model = CarModel::kMerc;
     field_1A8_ped_killer = nullptr;
     field_224_bf.bWaitingOnTarget = 0;
     field_21C_bf.bArmedGangMember = 0;
@@ -700,13 +700,13 @@ void Ped::PoolAllocate()
 
     switch (field_240_occupation)
     {
-        case PedOcupation::mugger:
+        case PedOcupation::kMugger:
             gNumberMuggersSpawned_6787CA = 0;
             break;
-        case PedOcupation::car_thief:
+        case PedOcupation::kCarThief:
             gNumberCarThiefsSpawned_6787CB = 0;
             break;
-        case PedOcupation::elvis:
+        case PedOcupation::kElvis:
             gNumberElvisLeadersSpawned_6787CC = 0;
             break;
         case PedOcupation::kWalkingGuard:
@@ -722,10 +722,10 @@ char_type Ped::IsLawEnforcement_45B4E0()
 {
     switch (field_240_occupation)
     {
-        case PedOcupation::police:
-        case PedOcupation::swat:
-        case PedOcupation::fbi:
-        case PedOcupation::army_army:
+        case PedOcupation::kPolice:
+        case PedOcupation::kSwat:
+        case PedOcupation::kFbi:
+        case PedOcupation::kArmyArmy:
         case PedOcupation::kWalkingGuard:
         case PedOcupation::kUnknownCopOccu30:
         case PedOcupation::kUnknownCopOccu31:
@@ -765,7 +765,7 @@ bool Ped::IsEmergencyOccupation_45B590()
 {
     // TODO: was probably a switch case rather than checking a "between" on occupation?
     if (field_240_occupation >= PedOcupation::kParamedic &&
-        (field_240_occupation <= PedOcupation::army_army || field_240_occupation == PedOcupation::kRoadblockCop))
+        (field_240_occupation <= PedOcupation::kArmyArmy || field_240_occupation == PedOcupation::kRoadblockCop))
     {
         return true;
     }
@@ -1147,7 +1147,7 @@ void Ped::RestoreCarOrPedHealth()
     {
         pBc->RemoveAllDamage();
     }
-    else if (field_278_ped_state_1 != PedState1Alias::ped_wasted)
+    else if (field_278_ped_state_1 != PedState1Alias::kPedWasted)
     {
         field_216_health = 100;
     }
@@ -1309,17 +1309,17 @@ void Ped::UpdatePositionFromCar_45C4B0()
 void Ped::ChangeNextPedState1_45C500(s32 new_state)
 {
     // If the ped is immobilized, store the new ped state for later use
-    if (field_278_ped_state_1 != PedState1Alias::ped_fall_on_ground)
+    if (field_278_ped_state_1 != PedState1Alias::kPedFallOnGround)
     {
         // Ped is currently not immobilized
-        if (new_state == PedState1Alias::ped_fall_on_ground)
+        if (new_state == PedState1Alias::kPedFallOnGround)
         {
             // Ped now must be immobilized, so store the previous state
             field_280_stored_ped_state_1 = field_278_ped_state_1;
         }
         field_278_ped_state_1 = new_state; // update state
     }
-    else if (new_state != PedState1Alias::ped_fall_on_ground)
+    else if (new_state != PedState1Alias::kPedFallOnGround)
     {
         // current state of the ped is immobilized, so store the new state (if not the same "immobilized")
         field_280_stored_ped_state_1 = new_state;
@@ -1383,17 +1383,17 @@ void Ped::SpawnDriverRunAway_45C650(Car_BC* pCar, Ped* pOther)
 {
     switch (pCar->field_84_car_info_idx)
     {
-        case CarModel::apc:
-        case CarModel::bank_van:
-        case CarModel::boxcar:
-        case CarModel::boxtruck:
-        case CarModel::FIRETRUK:
-        case CarModel::GUNJEEP:
-        case CarModel::JEEP:
-        case CarModel::TANK:
-        case CarModel::TRAIN:
-        case CarModel::TRAINCAB:
-        case CarModel::TRAINFB:
+        case CarModel::kApc:
+        case CarModel::kBankVan:
+        case CarModel::kBoxcar:
+        case CarModel::kBoxtruck:
+        case CarModel::kFiretruk:
+        case CarModel::kGunjeep:
+        case CarModel::kJeep:
+        case CarModel::kTank:
+        case CarModel::kTrain:
+        case CarModel::kTraincab:
+        case CarModel::kTrainfb:
             return;
         default:
             if (pCar->GetRemap())
@@ -1587,7 +1587,7 @@ void Ped::HandleClosePedInteraction_45CAA0()
                 {
                     goto LABEL_27;
                 }
-                if (this->field_240_occupation == PedOcupation::mugger)
+                if (this->field_240_occupation == PedOcupation::kMugger)
                 {
                     SetVoiceEvent_IfBit24Clear_433DD0(8);
                     pNearPed_->SetVoiceEvent_IfBit24Clear_433DD0(7);
@@ -1604,7 +1604,7 @@ void Ped::HandleClosePedInteraction_45CAA0()
                 {
                     if (pNearPed_->PedTypeIs_45EDE0(PedType::kPlayer))
                     {
-                        if (this->field_240_occupation == PedOcupation::mugger)
+                        if (this->field_240_occupation == PedOcupation::kMugger)
                         {
                             pNearPed_->field_15C_player->AddScore_41DC40(-10);
                             this->field_229_mug_count++;
@@ -2017,7 +2017,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
             {
                 switch (this->field_170_selected_weapon->field_1C_idx)
                 {
-                    case WeaponType::pistol:
+                    case WeaponType::kPistol:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(200,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2025,7 +2025,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::smg:
+                    case WeaponType::kSmg:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(201,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2033,7 +2033,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::rocket:
+                    case WeaponType::kRocket:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(202,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2041,7 +2041,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::shocker:
+                    case WeaponType::kShocker:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(203,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2049,7 +2049,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::molotov:
+                    case WeaponType::kMolotov:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(204,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2057,7 +2057,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::grenade:
+                    case WeaponType::kGrenade:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(205,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2065,7 +2065,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::shotgun:
+                    case WeaponType::kShotgun:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(206,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2073,7 +2073,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::electro_batton:
+                    case WeaponType::kElectroBatton:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(200,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2081,7 +2081,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::flamethrower:
+                    case WeaponType::kFlamethrower:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(208,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2089,7 +2089,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::silence_smg:
+                    case WeaponType::kSilenceSmg:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(209,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2097,7 +2097,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
                                                                              gDummyPedAng_6787A8);
                         break;
 
-                    case WeaponType::dual_pistol:
+                    case WeaponType::kDualPistol:
                         pWeaponObj = gObject_5C_6F8F84->NewPhysicsObj_5299B0(210,
                                                                              field_1AC_cam.x,
                                                                              field_1AC_cam.y,
@@ -2120,7 +2120,7 @@ void Ped::SpawnWeaponOnDeath_45E080()
 // 0x45e4a0
 void Ped::StartCrossingRoad_45E4A0()
 {
-    if (field_240_occupation != PedOcupation::dummy || field_258_objective != Objectives::kNoObj ||
+    if (field_240_occupation != PedOcupation::kDummy || field_258_objective != Objectives::kNoObj ||
         field_25C_internal_objective != Objectives::kNoObj)
     {
         return;
@@ -2311,19 +2311,19 @@ void Ped::Deallocate_45EB60()
 {
     switch (field_240_occupation)
     {
-        case PedOcupation::mugger:
+        case PedOcupation::kMugger:
             --gNumberMuggersSpawned_6787CA;
             break;
-        case PedOcupation::car_thief:
+        case PedOcupation::kCarThief:
             --gNumberCarThiefsSpawned_6787CB;
             break;
-        case PedOcupation::elvis_leader:
+        case PedOcupation::kElvisLeader:
             if (gNumberElvisLeadersSpawned_6787CC > 0)
             {
                 --gNumberElvisLeadersSpawned_6787CC;
             }
             break;
-        case PedOcupation::guard:
+        case PedOcupation::kGuard:
             --gNumberWalkingCopsSpawned_6787CD;
             break;
         case PedOcupation::kArmedGangMember:
@@ -2378,7 +2378,7 @@ void Ped::Deallocate_45EB60()
             }
             else
             {
-                if ((field_240_occupation != PedOcupation::elvis_leader && field_240_occupation != PedOcupation::elvis))
+                if ((field_240_occupation != PedOcupation::kElvisLeader && field_240_occupation != PedOcupation::kElvis))
                 {
                     field_164_ped_group->DestroyGroup_4C93A0();
                 }
@@ -2392,7 +2392,7 @@ void Ped::Deallocate_45EB60()
                 }
             }
         }
-        else if (field_240_occupation == PedOcupation::elvis)
+        else if (field_240_occupation == PedOcupation::kElvis)
         {
             field_164_ped_group->DisbandGroupDueToAttack_4C94E0(field_1A8_ped_killer);
         }
@@ -2430,7 +2430,7 @@ char_type Ped::IsActivePlayerPed_45EDC0()
 {
     if (field_238_ped_type == PedType::kPlayer)
     {
-        if (field_240_occupation != PedOcupation::empty)
+        if (field_240_occupation != PedOcupation::kEmpty)
         {
             return true;
         }
@@ -2447,16 +2447,16 @@ bool Ped::PedTypeIs_45EDE0(s32 type)
 // 0x45ee00
 void Ped::SetOccupation_45EE00(u32 occupation)
 {
-    if (static_cast<u32>(field_240_occupation) <= static_cast<u32>(PedOcupation::bank_robber))
+    if (static_cast<u32>(field_240_occupation) <= static_cast<u32>(PedOcupation::kBankRobber))
     {
         switch (field_240_occupation)
         {
-            case PedOcupation::player:
-            case PedOcupation::empty:
+            case PedOcupation::kPlayer:
+            case PedOcupation::kEmpty:
             case PedOcupation::kUnknown1:
-            case PedOcupation::dummy:
+            case PedOcupation::kDummy:
             case PedOcupation::kUnknown2:
-            case PedOcupation::driver:
+            case PedOcupation::kDriver:
             case PedOcupation::kUnknown3:
             case PedOcupation::kTaxiCustomer:
             case PedOcupation::kTrainCustomer:
@@ -2464,10 +2464,10 @@ void Ped::SetOccupation_45EE00(u32 occupation)
             case PedOcupation::kFleeingRobbedDriver:
             case PedOcupation::kAngryArmedRobbedDriver:
             case PedOcupation::kVeryAngryArmedRobbedDriver:
-            case PedOcupation::psycho:
-            case PedOcupation::mugger:
-            case PedOcupation::car_thief:
-            case PedOcupation::bank_robber:
+            case PedOcupation::kPsycho:
+            case PedOcupation::kMugger:
+            case PedOcupation::kCarThief:
+            case PedOcupation::kBankRobber:
                 field_240_occupation = occupation;
                 break;
             case PedOcupation::kBusCustomer:
@@ -2521,7 +2521,7 @@ void Ped::EnterPublicTransport_45EE70()
                     Train_58* pTrain = pTrainStation->field_18_pStoppedTrain;
                     if (pTrain)
                     {
-                        if (pTrain->field_C_carriages[1]->GetCarInfoIdx_411940() == CarModel::TRAIN)
+                        if (pTrain->field_C_carriages[1]->GetCarInfoIdx_411940() == CarModel::kTrain)
                         {
                             SetOccupation_45EE00(PedOcupation::kTrainCustomer);
                             SetObjective2_463830(Objectives::kObjective29);
@@ -2607,7 +2607,7 @@ void Ped::Mugger_AI_45F360()
                 field_278_ped_state_1 = PedState1::kWalking;
                 field_27C_ped_state_2 = PedState2::kPed2Walking;
                 Ped::SetObjective(Objectives::kNoObj);
-                Ped::SetOccupation_45EE00(PedOcupation::dummy);
+                Ped::SetOccupation_45EE00(PedOcupation::kDummy);
                 --gNumberMuggersSpawned_6787CA;
             }
             break;
@@ -2656,7 +2656,7 @@ void Ped::CarThief_AI_45FF60()
                 else
                 {
                     ForceDoNothing_462590();
-                    this->field_240_occupation = PedOcupation::dummy;
+                    this->field_240_occupation = PedOcupation::kDummy;
                 }
             }
             if (!this->field_20E_offscreen_counter)
@@ -2673,7 +2673,7 @@ void Ped::CarThief_AI_45FF60()
                         if (pNearestSteal->field_7C_ped_type != PedType::kPlayer)
                         {
                             if (!pNearestSteal->IsTrainModel_403BA0() && !pNearestSteal_->IsPoliceCar_439EC0() &&
-                                pNearestSteal_->field_84_car_info_idx != CarModel::BUS &&
+                                pNearestSteal_->field_84_car_info_idx != CarModel::kBus &&
                                 pNearestSteal_->field_4_passengers_list.IsEmpty_420EA0() &&
                                 pNearestSteal_->field_7C_ped_type == PedType::kDummy)
                             {
@@ -2882,7 +2882,7 @@ void Ped::TaxiCustomer_AI_460820()
                     this->field_150_target_objective_car->ResumeAIDriving_43AF40();
                     SetObjective(Objectives::kNoObj);
                     SetObjective2_463830(Objectives::kNoObj);
-                    this->set_occupation_403970(PedOcupation::dummy);
+                    this->set_occupation_403970(PedOcupation::kDummy);
                     this->SetPedType_403920(PedType::kDummy);
                     return;
                 }
@@ -2894,7 +2894,7 @@ void Ped::TaxiCustomer_AI_460820()
                 pCar->ResumeAIDriving_43AF40();
                 SetObjective(Objectives::kNoObj);
                 SetObjective2_463830(Objectives::kNoObj);
-                this->set_occupation_403970(PedOcupation::dummy);
+                this->set_occupation_403970(PedOcupation::kDummy);
                 this->SetPedType_403920(PedType::kDummy);
             }
             else if (this->field_150_target_objective_car->IsDespawning_4215B0())
@@ -2935,7 +2935,7 @@ void Ped::TaxiCustomer_AI_460820()
                 {
                     // taxi without driver -> exit
                     SetObjective(Objectives::kLeaveCar);
-                    SetOccupation_45EE00(PedOcupation::dummy);
+                    SetOccupation_45EE00(PedOcupation::kDummy);
                     this->SetPedType_403920(PedType::kDummy);
                     this->field_150_target_objective_car = this->field_16C_car;
                 }
@@ -2963,7 +2963,7 @@ void Ped::BusCustomer_AI_461290()
             if (this->field_225_objective_status != ObjectiveStatus::kNotFinished)
             {
                 this->SetPedType_403920(PedType::kDummy);
-                SetOccupation_45EE00(PedOcupation::dummy);
+                SetOccupation_45EE00(PedOcupation::kDummy);
                 SetObjective2_463830(Objectives::kNoObj);
                 SetObjective(Objectives::kFleeOnFootTillSafe);
                 this->field_1B8_target_x = this->field_1AC_cam.x;
@@ -3002,7 +3002,7 @@ void Ped::BusCustomer_AI_461290()
                     pTargetCar->ResumeAIDriving_43AF40();
                     SetObjective(Objectives::kNoObj);
                     SetObjective2_463830(Objectives::kNoObj);
-                    this->set_occupation_403970(PedOcupation::dummy);
+                    this->set_occupation_403970(PedOcupation::kDummy);
                     this->SetPedType_403920(PedType::kDummy);
                 }
                 else
@@ -3025,7 +3025,7 @@ void Ped::BusCustomer_AI_461290()
             if (this->field_25C_internal_objective == Objectives::kLeaveCar && this->field_226_internal_objective_status == 1)
             {
                 this->SetPedType_403920(PedType::kDummy);
-                SetOccupation_45EE00(PedOcupation::dummy);
+                SetOccupation_45EE00(PedOcupation::kDummy);
                 SetObjective2_463830(Objectives::kNoObj);
                 SetObjective(Objectives::kFleeOnFootTillSafe);
                 this->field_1B8_target_x = this->field_1AC_cam.x;
@@ -3071,7 +3071,7 @@ void Ped::TrainCustomer_AI_461530()
             if (field_154_target_to_enter->GetVelocity_43A4C0() != kFixZero)
             {
                 this->SetPedType_403920(PedType::kDummy);
-                SetOccupation_45EE00(PedOcupation::dummy);
+                SetOccupation_45EE00(PedOcupation::kDummy);
                 SetObjective2_463830(Objectives::kNoObj);
                 SetObjective(Objectives::kNoObj);
                 this->field_1B8_target_x = this->field_1AC_cam.x;
@@ -3083,7 +3083,7 @@ void Ped::TrainCustomer_AI_461530()
             if (this->field_226_internal_objective_status)
             {
                 this->SetPedType_403920(PedType::kDummy);
-                SetOccupation_45EE00(PedOcupation::dummy);
+                SetOccupation_45EE00(PedOcupation::kDummy);
                 SetObjective2_463830(Objectives::kNoObj);
                 SetObjective(Objectives::kFleeOnFootTillSafe);
                 this->field_1B8_target_x = this->field_1AC_cam.x;
@@ -3137,7 +3137,7 @@ void Ped::RobbedDriver_AI_461630()
                             ForceDoNothing_462590();
                             SetObjective(Objectives::kKillCharOnFoot);
                             this->field_148_objective_target_ped = this->field_180_car_thief;
-                            ForceWeapon_46F600(WeaponType::pistol);
+                            ForceWeapon_46F600(WeaponType::kPistol);
                             break;
 
                         case 7:
@@ -3162,7 +3162,7 @@ void Ped::RobbedDriver_AI_461630()
                             }
                             else
                             {
-                                ForceWeapon_46F600(WeaponType::pistol);
+                                ForceWeapon_46F600(WeaponType::kPistol);
                                 this->field_248_enter_car_as_passenger = 0;
                             }
                             break;
@@ -3204,7 +3204,7 @@ void Ped::RobbedDriver_AI_461630()
                 }
                 else
                 {
-                    this->field_240_occupation = PedOcupation::driver;
+                    this->field_240_occupation = PedOcupation::kDriver;
                     this->SetPedType_403920(PedType::kDummy);
                     if (target_objective_car)
                     {
@@ -3219,7 +3219,7 @@ void Ped::RobbedDriver_AI_461630()
             }
             else if (field_225_objective_status == ObjectiveStatus::kFailed)
             {
-                this->field_240_occupation = PedOcupation::dummy;
+                this->field_240_occupation = PedOcupation::kDummy;
                 SetObjective(Objectives::kNoObj);
                 SetObjective2_463830(Objectives::kNoObj);
                 this->SetPedType_403920(PedType::kDummy);
@@ -3240,7 +3240,7 @@ void Ped::RobbedDriver_AI_461630()
                 }
                 else
                 {
-                    this->field_240_occupation = PedOcupation::dummy;
+                    this->field_240_occupation = PedOcupation::kDummy;
                     SetObjective(Objectives::kNoObj);
                     SetObjective2_463830(Objectives::kNoObj);
                     this->SetPedType_403920(PedType::kDummy);
@@ -3260,7 +3260,7 @@ void Ped::RobbedDriver_AI_461630()
 
                 if (field_225_objective_status == ObjectiveStatus::kFailed)
                 {
-                    this->field_240_occupation = PedOcupation::dummy;
+                    this->field_240_occupation = PedOcupation::kDummy;
                     SetObjective(Objectives::kNoObj);
                     SetObjective2_463830(Objectives::kNoObj);
                     this->SetPedType_403920(PedType::kDummy);
@@ -3271,7 +3271,7 @@ void Ped::RobbedDriver_AI_461630()
         case PedOcupation::kFleeingRobbedDriver:
             if (this->field_225_objective_status == ObjectiveStatus::kPassed)
             {
-                this->field_240_occupation = PedOcupation::dummy;
+                this->field_240_occupation = PedOcupation::kDummy;
                 SetObjective(Objectives::kNoObj);
             }
             return;
@@ -3286,7 +3286,7 @@ void Ped::RoadBlockTank_AI_4619F0()
 {
     if (!field_16C_car)
     {
-        this->field_240_occupation = PedOcupation::dummy;
+        this->field_240_occupation = PedOcupation::kDummy;
     }
     else
     {
@@ -3411,7 +3411,7 @@ void Ped::Occupation_AI_461F20()
 {
     switch (field_240_occupation)
     {
-        case PedOcupation::dummy:
+        case PedOcupation::kDummy:
             if (!field_21C_bf.bPanicking && field_258_objective == Objectives::kNoObj && !field_164_ped_group)
             {
                 if (field_168_game_object)
@@ -3442,7 +3442,7 @@ void Ped::Occupation_AI_461F20()
         case PedOcupation::kUnknown2:
             byte_61A8A0 = 0;
             break;
-        case PedOcupation::driver:
+        case PedOcupation::kDriver:
             byte_61A8A0 = 0;
             if (field_16C_car)
             {
@@ -3453,17 +3453,17 @@ void Ped::Occupation_AI_461F20()
             }
             else
             {
-                set_occupation_403970(PedOcupation::dummy);
+                set_occupation_403970(PedOcupation::kDummy);
             }
             break;
         case PedOcupation::kTaxiCustomer:
             Ped::TaxiCustomer_AI_460820();
             break;
 
-        case PedOcupation::mugger:
+        case PedOcupation::kMugger:
             Ped::Mugger_AI_45F360();
             break;
-        case PedOcupation::car_thief:
+        case PedOcupation::kCarThief:
             Ped::CarThief_AI_45FF60();
             break;
         case PedOcupation::kRobbedDriver:
@@ -3479,13 +3479,13 @@ void Ped::Occupation_AI_461F20()
                 ClearPanicking_403960();
             }
             break;
-        case PedOcupation::road_block_tank_man:
+        case PedOcupation::kRoadBlockTankMan:
             Ped::RoadBlockTank_AI_4619F0();
             break;
         case PedOcupation::kMadMugger:
             if (!gPedManager_6787BC->field_7_make_all_muggers)
             {
-                set_occupation_403970(PedOcupation::dummy);
+                set_occupation_403970(PedOcupation::kDummy);
                 SetPedType_403920(PedType::kDummy);
                 Ped::ForceDoNothing_462590();
             }
@@ -3533,7 +3533,7 @@ void Ped::Occupation_AI_461F20()
                 {
                     if (field_225_objective_status == ObjectiveStatus::kPassed)
                     {
-                        set_occupation_403970(PedOcupation::dummy);
+                        set_occupation_403970(PedOcupation::kDummy);
                         Ped::SetObjective(Objectives::kNoObj);
                         Ped::SetObjective2_463830(Objectives::kNoObj);
                     }
@@ -3765,9 +3765,9 @@ char_type Ped::StateMachineTick_4626B0()
             this->field_288_threat_search = ThreatSearch::kNoThreats;
             this->field_28C_threat_reaction = ThreatReaction::kNoReaction;
 
-            if (this->field_240_occupation != PedOcupation::empty && this->field_240_occupation != PedOcupation::player)
+            if (this->field_240_occupation != PedOcupation::kEmpty && this->field_240_occupation != PedOcupation::kPlayer)
             {
-                this->field_240_occupation = PedOcupation::player;
+                this->field_240_occupation = PedOcupation::kPlayer;
             }
             this->field_230_jump_over_mode = ped_jump_over_mode::can_jump_2;
             this->field_15C_player->field_64_jumping = 0;
@@ -3868,14 +3868,14 @@ char_type Ped::StateMachineTick_4626B0()
             if (this->field_240_occupation == PedOcupation::kArmedGangMember && this->field_278_ped_state_1 == PedState1::kDead)
             {
                 --gNumberArmedGangMembers_6787CE;
-                this->field_240_occupation = PedOcupation::dummy;
+                this->field_240_occupation = PedOcupation::kDummy;
             }
             if (this->field_168_game_object)
             {
                 ++this->field_20E_offscreen_counter;
                 if (this->field_20E_offscreen_counter > 100U)
                 {
-                    if (this->field_240_occupation == PedOcupation::elvis_leader)
+                    if (this->field_240_occupation == PedOcupation::kElvisLeader)
                     {
                         if (!this->field_164_ped_group)
                         {
@@ -3888,7 +3888,7 @@ char_type Ped::StateMachineTick_4626B0()
                             return 0;
                         }
                     }
-                    else if (this->field_240_occupation != PedOcupation::special_groups_member && !Ped::IsEmergencyOccupation_45B590())
+                    else if (this->field_240_occupation != PedOcupation::kSpecialGroupsMember && !Ped::IsEmergencyOccupation_45B590())
                     {
                         Ped::Deallocate_45EB60();
                         return 0;
@@ -3903,7 +3903,7 @@ char_type Ped::StateMachineTick_4626B0()
             {
                 this->field_20E_offscreen_counter = 0;
             }
-            if (this->field_20E_offscreen_counter > 60U && this->field_16C_car && this->field_240_occupation == PedOcupation::car_thief)
+            if (this->field_20E_offscreen_counter > 60U && this->field_16C_car && this->field_240_occupation == PedOcupation::kCarThief)
             {
                 this->field_16C_car->field_7C_ped_type = PedType::kDummy;
             }
@@ -4144,7 +4144,7 @@ bool Ped::PoolUpdate()
                 Ped::ManageWeapon_46F390();
                 if (field_20A_wanted_points)
                 {
-                    if (bSkip_police_67D4F9 || field_240_occupation == PedOcupation::empty)
+                    if (bSkip_police_67D4F9 || field_240_occupation == PedOcupation::kEmpty)
                     {
                         field_20A_wanted_points = 0;
                     }
@@ -5278,12 +5278,12 @@ void Ped::Threat_Reaction_AI_465270()
                             {
                                 SetVoiceEvent_IfBit24Clear_433DD0(1);
                             }
-                            else if (pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::pistol ||
-                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::smg ||
-                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::shotgun ||
-                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::car_smg ||
-                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::silence_smg ||
-                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::dual_pistol)
+                            else if (pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kPistol ||
+                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kSmg ||
+                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kShotgun ||
+                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kCarSmg ||
+                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kSilenceSmg ||
+                                     pDangerousPed->field_170_selected_weapon->GetWeaponType_41CC90() == WeaponType::kDualPistol)
                             {
                                 SetVoiceEvent_IfBit24Clear_433DD0(3);
                             }
@@ -5806,10 +5806,10 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
             {
                 switch (pTargetPed->field_240_occupation)
                 {
-                    case PedOcupation::police:
-                    case PedOcupation::swat:
-                    case PedOcupation::fbi:
-                    case PedOcupation::army_army:
+                    case PedOcupation::kPolice:
+                    case PedOcupation::kSwat:
+                    case PedOcupation::kFbi:
+                    case PedOcupation::kArmyArmy:
                     case PedOcupation::kWalkingGuard:
                     case PedOcupation::kUnknownCopOccu30:
                     case PedOcupation::kUnknownCopOccu31:
@@ -5822,7 +5822,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
 
             if (pTargetPed->GetAttacking_433CA0())
             {
-                if (!pTargetPed->IsActivePlayerPed_45EDC0() && pTargetPed->field_240_occupation != PedOcupation::empty)
+                if (!pTargetPed->IsActivePlayerPed_45EDC0() && pTargetPed->field_240_occupation != PedOcupation::kEmpty)
                 {
                     if (pTargetPed->field_28C_threat_reaction == ThreatReaction::kReactAsEmergency)
                     {
@@ -5862,7 +5862,7 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
                 }
             }
 
-            if (pTargetPed->IsActivePlayerPed_45EDC0() || pTargetPed->field_240_occupation == PedOcupation::empty)
+            if (pTargetPed->IsActivePlayerPed_45EDC0() || pTargetPed->field_240_occupation == PedOcupation::kEmpty)
             {
                 u8 player_idx = pTargetPed->field_15C_player->get_idx_4219D0();
 
@@ -5898,17 +5898,17 @@ bool Ped::IsPedAThreat_465D00(Ped* pTargetPed)
             }
 
             goto merge_178;
-        case PedOcupation::elvis:
+        case PedOcupation::kElvis:
             if (pTargetPed->PedTypeIs_45EDE0(PedType::kPlayer))
             {
                 return false;
             }
 
             goto merge_178;
-        case PedOcupation::police:
-        case PedOcupation::swat:
-        case PedOcupation::fbi:
-        case PedOcupation::army_army:
+        case PedOcupation::kPolice:
+        case PedOcupation::kSwat:
+        case PedOcupation::kFbi:
+        case PedOcupation::kArmyArmy:
         case PedOcupation::kWalkingGuard:
         case PedOcupation::kUnknownCopOccu30:
         case PedOcupation::kUnknownCopOccu31:
@@ -5968,21 +5968,21 @@ block_466022:
         switch (target_occupation)
         {
             case PedOcupation::kParamedic:
-            case PedOcupation::police:
-            case PedOcupation::swat:
-            case PedOcupation::fbi:
-            case PedOcupation::army_army:
+            case PedOcupation::kPolice:
+            case PedOcupation::kSwat:
+            case PedOcupation::kFbi:
+            case PedOcupation::kArmyArmy:
             case PedOcupation::kWalkingGuard:
             case PedOcupation::kUnknownCopOccu30:
             case PedOcupation::kUnknownCopOccu31:
             case PedOcupation::kRoadblockCop:
-            case PedOcupation::road_block_tank_man:
+            case PedOcupation::kRoadBlockTankMan:
                 goto merge_178;
             default:
                 break;
         }
 
-        if (target_occupation == PedOcupation::empty)
+        if (target_occupation == PedOcupation::kEmpty)
         {
             goto ret_true;
         }
@@ -7227,7 +7227,7 @@ void Ped::PunchChar_467FD0()
 void Ped::ProcessAirborneMovement_468040()
 {
     u8 bUnknown = 1;
-    if (this->field_240_occupation == PedOcupation::drone)
+    if (this->field_240_occupation == PedOcupation::kDrone)
     {
         gDistanceToTarget_678750 = kFixZero;
         this->field_1E4_objective_target_z = this->field_1AC_cam.z;
@@ -7711,7 +7711,7 @@ void Ped::PatrolOnFoot_468C70()
 // 0x468de0
 void Ped::GotoAreaOnFoot_468DE0()
 {
-    if (field_240_occupation == PedOcupation::drone)
+    if (field_240_occupation == PedOcupation::kDrone)
     {
         field_1F0_max_speed = kFpOneThirtySecond_678434;
     }
@@ -8392,7 +8392,7 @@ void Ped::SetupCarFollowTargetPed_469E50()
         field_16C_car->ClearAIHalted_421550();
         field_16C_car->field_5C_AI->field_74_max_speed = kFpThree_67866C;
         field_16C_car->field_60_pChaseTask->field_20_can_snap_to_target = 1;
-        if (field_16C_car->field_84_car_info_idx == CarModel::JEEP)
+        if (field_16C_car->field_84_car_info_idx == CarModel::kJeep)
         {
             if (gDistanceToTarget_678750 < kFpTwo_678668)
             {
@@ -8450,7 +8450,7 @@ void Ped::CallPoliceCar_469FE0()
         gPathFinder_6FDEF0->FindNearbyTileMatchingSlopeType_5552B0(1, &x, &y, &z, 1);
         if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::Unknown_10))
         {
-            pCar = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::COPCAR, x, y, z);
+            pCar = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::kCopcar, x, y, z);
             u8 bFound = 0;
             if (pCar)
             {
@@ -8473,7 +8473,7 @@ void Ped::CallPoliceCar_469FE0()
         }
         else if (gCarManager_6C_677930->CanAllocateCarOfKind_446930(car_kind::police_6))
         {
-            pCar = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::COPCAR, x, y, z);
+            pCar = gCarManager_6C_677930->SpawnCarAtRoadDirection_444CF0(CarModel::kCopcar, x, y, z);
             u8 bFound = 0;
             if (pCar)
             {
@@ -9143,7 +9143,7 @@ void Ped::PullDriverOutOfCarStateMachine_46B2F0()
             Fix16 d_y_abs = Fix16::Abs(d_y);
             gDistanceToTarget_678750 = Fix16::Max(d_x_abs, d_y_abs);
 
-            if (field_14C_internal_target_ped->field_16C_car->field_84_car_info_idx == CarModel::BUS &&
+            if (field_14C_internal_target_ped->field_16C_car->field_84_car_info_idx == CarModel::kBus &&
                 field_27C_ped_state_2 == PedState2::kUnknown8)
             {
                 gDistanceToTarget_678750 = kFpOne64th_6784C4;
@@ -9310,7 +9310,7 @@ void Ped::MeleeAttackStateMachine_46B670()
             {
                 if (field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
-                    if (field_240_occupation == PedOcupation::mugger)
+                    if (field_240_occupation == PedOcupation::kMugger)
                     {
                         field_14C_internal_target_ped->field_15C_player->AddScore_41DC40(-10);
                         ++field_229_mug_count;
@@ -9343,7 +9343,7 @@ void Ped::MeleeAttackStateMachine_46B670()
 
                 if (field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer))
                 {
-                    if (field_240_occupation == PedOcupation::mugger)
+                    if (field_240_occupation == PedOcupation::kMugger)
                     {
                         field_14C_internal_target_ped->field_15C_player->AddScore_41DC40(-10);
                         ++field_229_mug_count;
@@ -9404,7 +9404,7 @@ void Ped::MeleeAttackStateMachine_46B670()
                 field_14C_internal_target_ped->field_290_death_cause = ped_death_cause::punched_10;
                 field_14C_internal_target_ped->field_264_killer_id_timer = 50;
 
-                if (field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer) && field_240_occupation == PedOcupation::mugger)
+                if (field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer) && field_240_occupation == PedOcupation::kMugger)
                 {
                     field_14C_internal_target_ped->field_15C_player->AddScore_41DC40(-10);
                     ++field_229_mug_count;
@@ -10115,7 +10115,7 @@ void Ped::WaitForTrain_46D030()
         Train_58* pTrain = gPublicTransport_181C_6FF1D4->GetTrainFromCarExcludingLeadCar_57B6A0(field_154_target_to_enter);
         Car_BC* pOldTarget = field_154_target_to_enter;
         if (pTrain->field_4C_maybe_train_station->field_1C_bOccupied == 2 &&
-            pTrain->field_C_carriages[1]->GetCarInfoIdx_411940() == CarModel::TRAIN)
+            pTrain->field_C_carriages[1]->GetCarInfoIdx_411940() == CarModel::kTrain)
         {
             Ped::SetObjective2_463830(Objectives::kEnterTrain);
             set_target_to_enter_403B00(pOldTarget);
@@ -10313,30 +10313,30 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
         {
             switch (pWeapon->field_1C_idx)
             {
-                case WeaponType::flamethrower:
+                case WeaponType::kFlamethrower:
                     attack_range = kFpTwo_678658;
                     explosive_range = kFpOne_678798;
                     break;
 
-                case WeaponType::molotov:
+                case WeaponType::kMolotov:
                     attack_range = kFpTwo_678658 * 2;
                     explosive_range = kFpOne_678798 + kFpHalf_678790;
                     bThrownWeapon = 1;
                     break;
 
-                case WeaponType::grenade:
+                case WeaponType::kGrenade:
                     attack_range = kFpHalf_678790 + kFpTwo_678658;
                     explosive_range = kFpTwo_678658;
                     bThrownWeapon = 1;
                     break;
 
-                case WeaponType::electro_batton:
+                case WeaponType::kElectroBatton:
                     close_range = kFpHalf_67853C;
                     attack_range = kFpTwo_678658;
                     bMeleeWeapon = 1;
                     break;
 
-                case WeaponType::shotgun:
+                case WeaponType::kShotgun:
                     close_range = kFpHalf_67853C;
                     attack_range = kFpOne_678798;
                     bMeleeWeapon = 1;
@@ -10397,7 +10397,7 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
             {
                 field_226_internal_objective_status = 1;
             }
-            if (field_240_occupation != PedOcupation::stand_still_bloke)
+            if (field_240_occupation != PedOcupation::kStandStillBloke)
             {
                 close_range = kFpThree_67866C;
                 attack_range = kFpTwo_678668 + kFpHalf_67853C;
@@ -10439,7 +10439,7 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
     }
     else
     {
-        if (field_240_occupation == PedOcupation::stand_still_bloke) // line 294
+        if (field_240_occupation == PedOcupation::kStandStillBloke) // line 294
         {
             pWeapon->SetTargetHit_433810(0);
         }
@@ -10537,8 +10537,8 @@ void Ped::AttackTargetStateMachine_46D460(u8 targetType)
                     }
                 }
 
-                if ((field_240_occupation == PedOcupation::fbi || field_23C_group_idx == 99 || bMeleeWeapon) &&
-                    field_240_occupation != PedOcupation::stand_still_bloke && !bAttackingVehicleOrObject)
+                if ((field_240_occupation == PedOcupation::kFbi || field_23C_group_idx == 99 || bMeleeWeapon) &&
+                    field_240_occupation != PedOcupation::kStandStillBloke && !bAttackingVehicleOrObject)
                 {
                     if (gDistanceToTarget_678750 < kFpHalf_67853C)
                     {
@@ -10646,7 +10646,7 @@ void Ped::SetupFollower_46DF70(Ped* pToFollow, s32 weaponIdx)
     field_26C_graphic_type = pToFollow->field_26C_graphic_type;
     Ped::RemovePedWeapons_462510();
     Ped::ForceWeapon_46F600(weaponIdx);
-    set_occupation_403970(PedOcupation::special_groups_member);
+    set_occupation_403970(PedOcupation::kSpecialGroupsMember);
     field_288_threat_search = pToFollow->field_288_threat_search;
     field_28C_threat_reaction = pToFollow->field_28C_threat_reaction;
     field_17C_pGang = pToFollow->field_17C_pGang;
@@ -10661,7 +10661,7 @@ bool Ped::CanBeRecruitedToGroup_46E020(PedGroup* pGroup)
     return this->field_164_ped_group != pGroup && !this->field_15C_player &&
             (PedTypeIs_45EDE0(PedType::kDummy) ||
              ((PedTypeIs_45EDE0(PedType::kSpecialPed) || PedTypeIs_45EDE0(PedType::kDummyWithOccupation)) &&
-              this->field_240_occupation == PedOcupation::special_groups_member)) ?
+              this->field_240_occupation == PedOcupation::kSpecialGroupsMember)) ?
         true :
         false;
 }
@@ -10736,7 +10736,7 @@ void Ped::RecruitNearbyPeds_46E080(s32 desiredCount, Fix16 searchRadius)
                         pGroup->RemovePed_4C9970(pPed);
                     }
                     field_164_ped_group->add_ped_to_end_of_list_4C8F90(pPed);
-                    pPed->SetupFollower_46DF70(this, WeaponType::dual_pistol);
+                    pPed->SetupFollower_46DF70(this, WeaponType::kDualPistol);
                     if (this->field_164_ped_group->field_34_count == maxCount)
                     {
                         break;
@@ -10794,17 +10794,17 @@ void Ped::SpawnPedGroupFollowers_46E200(u8 total)
 u8 Ped::get_wanted_star_count_46EF00()
 {
     short wanted_points = field_20A_wanted_points;
-    if (wanted_points < CopLevelPed::cop_6_stars)
+    if (wanted_points < CopLevelPed::kCop6Stars)
     {
-        if (wanted_points < CopLevelPed::cop_5_stars)
+        if (wanted_points < CopLevelPed::kCop5Stars)
         {
-            if (wanted_points < CopLevelPed::cop_4_stars)
+            if (wanted_points < CopLevelPed::kCop4Stars)
             {
-                if (wanted_points < CopLevelPed::cop_3_stars)
+                if (wanted_points < CopLevelPed::kCop3Stars)
                 {
-                    if (wanted_points < CopLevelPed::cop_2_stars)
+                    if (wanted_points < CopLevelPed::kCop2Stars)
                     {
-                        if (wanted_points < CopLevelPed::cop_1_stars)
+                        if (wanted_points < CopLevelPed::kCop1Stars)
                         {
                             return CopLevel::kNone;
                         }
@@ -10844,30 +10844,30 @@ void Ped::set_wanted_level_46EF40(u16 wanted)
 {
     switch (wanted)
     {
-        case CopLevelPed::cop_0_stars:
-            field_20A_wanted_points = CopLevelPed::cop_0_stars;
+        case CopLevelPed::kCop0Stars:
+            field_20A_wanted_points = CopLevelPed::kCop0Stars;
             break;
 
-        case CopLevelPed::cop_1_stars:
-            field_20A_wanted_points = CopLevelPed::cop_1_stars;
+        case CopLevelPed::kCop1Stars:
+            field_20A_wanted_points = CopLevelPed::kCop1Stars;
             break;
 
-        case CopLevelPed::cop_2_stars:
-            field_20A_wanted_points = CopLevelPed::cop_2_stars;
+        case CopLevelPed::kCop2Stars:
+            field_20A_wanted_points = CopLevelPed::kCop2Stars;
             break;
 
-        case CopLevelPed::cop_3_stars:
-            field_20A_wanted_points = CopLevelPed::cop_3_stars;
+        case CopLevelPed::kCop3Stars:
+            field_20A_wanted_points = CopLevelPed::kCop3Stars;
             break;
 
-        case CopLevelPed::cop_4_stars:
-            field_20A_wanted_points = CopLevelPed::cop_4_stars;
+        case CopLevelPed::kCop4Stars:
+            field_20A_wanted_points = CopLevelPed::kCop4Stars;
             break;
-        case CopLevelPed::cop_5_stars:
-            field_20A_wanted_points = CopLevelPed::cop_5_stars;
+        case CopLevelPed::kCop5Stars:
+            field_20A_wanted_points = CopLevelPed::kCop5Stars;
             break;
-        case CopLevelPed::cop_6_stars:
-            field_20A_wanted_points = CopLevelPed::cop_6_stars;
+        case CopLevelPed::kCop6Stars:
+            field_20A_wanted_points = CopLevelPed::kCop6Stars;
             break;
         default:
             break;
@@ -10958,7 +10958,7 @@ Weapon_30* Ped::GetWeaponFromPed_46F110()
 
         if (field_16C_car)
         {
-            if (field_170_selected_weapon && field_170_selected_weapon->field_1C_idx >= WeaponType::car_bomb)
+            if (field_170_selected_weapon && field_170_selected_weapon->field_1C_idx >= WeaponType::kCarBomb)
             {
                 field_21C_bf.bUseCarWeapon = true;
                 return field_170_selected_weapon;
@@ -11028,7 +11028,7 @@ void Ped::ApplyAimJitter_46F1E0(Weapon_30* pWeapon)
     s16 max_still;
     s16 max_moving;
     s16 max_moving_retry;
-    if (pWeapon->field_1C_idx >= WeaponType::pistol && pWeapon->field_1C_idx <= WeaponType::smg)
+    if (pWeapon->field_1C_idx >= WeaponType::kPistol && pWeapon->field_1C_idx <= WeaponType::kSmg)
     {
         if (field_270_fire_mode == ped_fire_mode::random_shots_0)
         {
@@ -11140,7 +11140,7 @@ Weapon_30* Ped::ChooseAttackWeapon_46F490()
 
     switch (this->field_240_occupation)
     {
-        case PedOcupation::police:
+        case PedOcupation::kPolice:
         case PedOcupation::kWalkingGuard:
             if (!field_14C_internal_target_ped->PedTypeIs_45EDE0(PedType::kPlayer))
             {
@@ -11180,7 +11180,7 @@ Weapon_30* Ped::ChooseAttackWeapon_46F490()
             this->field_21C_bf.bNoWeapon = 1;
             return nullptr;
 
-        case PedOcupation::fbi:
+        case PedOcupation::kFbi:
             if (this->field_14C_internal_target_ped->field_16C_car || gDistanceToTarget_678750 > kFpHalf_67853C)
             {
                 this->field_21C_bf.bWeaponChosen = 1;
@@ -11213,7 +11213,7 @@ void Ped::ForceWeapon_46F600(s32 weapon_kind)
         pWeapon->SetTargetHit_433810(1);
         if (field_170_selected_weapon->IsExplosiveWeapon_5E3BD0())
         {
-            GiveWeapon_46F650(WeaponType::pistol);
+            GiveWeapon_46F650(WeaponType::kPistol);
         }
     }
 }
@@ -11419,9 +11419,9 @@ void Ped::Kill_46F9D0()
                 }
                 break;
 
-            case PedOcupation::police:
-            case PedOcupation::swat:
-            case PedOcupation::fbi:
+            case PedOcupation::kPolice:
+            case PedOcupation::kSwat:
+            case PedOcupation::kFbi:
                 if (!PedTypeIs_45EDE0(PedType::kSpecialPed) || !gPolice_7B8_6FEE40->TryReplaceCrewLeaderOnDeath_56F4D0(this))
                 {
                     break;
@@ -11432,8 +11432,8 @@ void Ped::Kill_46F9D0()
                 Deallocate_45EB60();
                 return;
 
-            case PedOcupation::elvis:
-            case PedOcupation::elvis_leader:
+            case PedOcupation::kElvis:
+            case PedOcupation::kElvisLeader:
                 if (field_164_ped_group)
                 {
                     if (!field_1A8_ped_killer)
@@ -11793,7 +11793,7 @@ void Ped::BecomeLeaderOfGroup_4702D0(Ped* pPed)
 void Ped::BecomeDummyOnPlayerDisconnect_470300()
 {
     field_15C_player = nullptr;
-    field_240_occupation = PedOcupation::dummy;
+    field_240_occupation = PedOcupation::kDummy;
     field_238_ped_type = PedType::kDummy;
     Car_BC* pCar = field_16C_car;
     if (pCar)
@@ -11826,7 +11826,8 @@ s32 Ped::IsInTrain_470F00()
     if (pBC)
     {
         const s32 info_idx = pBC->field_84_car_info_idx;
-        if (info_idx == CarModel::TRAIN || info_idx == CarModel::TRAINCAB || info_idx == CarModel::TRAINFB || info_idx == CarModel::boxcar)
+        if (info_idx == CarModel::kTrain || info_idx == CarModel::kTraincab || info_idx == CarModel::kTrainfb ||
+            info_idx == CarModel::kBoxcar)
         {
             return 1;
         }

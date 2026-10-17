@@ -723,16 +723,16 @@ void Char_B4::UpdateAnimState_546360()
     if (field_7C_pPed->field_15C_player && field_C_ped_state_2 != 19)
     {
         if (field_7C_pPed->field_170_selected_weapon &&
-            (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::molotov ||
-             field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::grenade))
+            (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kMolotov ||
+             field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kGrenade))
         {
             bThrowWeapon = 1;
         }
 
         if (field_7C_pPed->field_170_selected_weapon && !field_7C_pPed->field_21C_bf.bAttacking)
         {
-            if ((field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::molotov ||
-                 field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::grenade) &&
+            if ((field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kMolotov ||
+                 field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kGrenade) &&
                 field_7C_pPed->field_15C_player->field_8D_was_attack_pressed)
             {
                 field_6C_animation_state = 4;
@@ -741,8 +741,8 @@ void Char_B4::UpdateAnimState_546360()
         }
         else if (field_7C_pPed->field_170_selected_weapon && field_7C_pPed->field_21C_bf.bAttacking)
         {
-            if (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::molotov ||
-                field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::grenade)
+            if (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kMolotov ||
+                field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kGrenade)
             {
                 field_7C_pPed->field_21C_bf.bAttacking = false;
             }
@@ -751,8 +751,8 @@ void Char_B4::UpdateAnimState_546360()
     else
     {
         if (field_7C_pPed->field_170_selected_weapon && field_7C_pPed->field_21C_bf.bAttacking &&
-            (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::molotov ||
-             field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::grenade))
+            (field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kMolotov ||
+             field_7C_pPed->field_170_selected_weapon->field_1C_idx == WeaponType::kGrenade))
         {
             field_6C_animation_state = 4;
             bThrowWeapon = 1;
@@ -1028,8 +1028,8 @@ void Char_B4::UpdateAnimState_546360()
                         {
                             case PedOcupation::kUnknown2:
                                 pDriver = gPedManager_6787BC->SpawnRunAwayGuy_470D60();
-                                if (pCar->field_84_car_info_idx == CarModel::apc || pCar->field_84_car_info_idx == CarModel::JEEP ||
-                                    pCar->field_84_car_info_idx == CarModel::TANK)
+                                if (pCar->field_84_car_info_idx == CarModel::kApc || pCar->field_84_car_info_idx == CarModel::kJeep ||
+                                    pCar->field_84_car_info_idx == CarModel::kTank)
                                 {
                                     pDriver->field_26C_graphic_type = ped_graphic_type::cop_2;
                                     pDriver->set_remap_433B90(4);
@@ -1038,13 +1038,13 @@ void Char_B4::UpdateAnimState_546360()
                                 pDriver->field_180_car_thief = field_7C_pPed;
                                 break;
 
-                            case PedOcupation::driver:
+                            case PedOcupation::kDriver:
                                 pDriver->set_occupation_403970(PedOcupation::kRobbedDriver);
                                 pDriver->SetStolenCar_492CB0(pCar);
                                 pDriver->field_180_car_thief = field_7C_pPed;
                                 break;
 
-                            case PedOcupation::police:
+                            case PedOcupation::kPolice:
                                 if (field_7C_pPed->field_20A_wanted_points < 600)
                                 {
                                     gPolice_7B8_6FEE40->RegisterCriminal_56F940(field_7C_pPed);
@@ -1907,7 +1907,7 @@ inline void CollideWithElvis_493040(Ped* pPed, Char_B4* pChar)
         pPed->field_138_collided_char_b4 = reinterpret_cast<sptr>(pChar);
         pPed->field_224_bf.bCollidedWithPed = false;
         pChar->field_7C_pPed->field_138_collided_char_b4 = reinterpret_cast<sptr>(pPed->field_168_game_object);
-        pPed->SetVoiceEvent_IfBit24Clear_433DD0(PedOcupation::elvis);
+        pPed->SetVoiceEvent_IfBit24Clear_433DD0(PedOcupation::kElvis);
     }
 }
 } // namespace
@@ -1960,7 +1960,7 @@ void Char_B4::HandlePedCollision_548BD0(Char_B4* pOther)
                     {
                         break;
                     }
-                    if (pOther->field_7C_pPed->get_occupation_403980() != PedOcupation::stand_still_bloke)
+                    if (pOther->field_7C_pPed->get_occupation_403980() != PedOcupation::kStandStillBloke)
                     {
                         pOther->field_6A = 4;
                         pOther->field_74 =
@@ -2761,7 +2761,7 @@ char_type Char_B4::CanMoveOntoSlope_54C1A0(s32 path_direction)
     Fix16 zpos = field_80_sprite_ptr->field_1C_zpos;
     s32 tmpZ = (zpos.ToInt()) - 1;
     if (field_10_char_state == 15 || field_8_ped_state_1 == PedState1::kDead || field_7C_pPed->PedTypeIs_45EDE0(PedType::kPlayer) ||
-        field_7C_pPed->get_occupation_403980() == PedOcupation::drone)
+        field_7C_pPed->get_occupation_403980() == PedOcupation::kDrone)
     {
         bUnknown = 1;
     }

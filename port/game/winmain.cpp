@@ -566,7 +566,7 @@ void GBH_GraphicsInit_5D97C0()
 {
     if (GBH_GraphicsLoad_5EB680(gRenderDllName_7067F0, gVidSys_7071D0))
     {
-        FatalError_4A38C0(Gta2Error::DllLoadError, "C:\\Splitting\\Gta2\\Source\\video.cpp", 206, gTmpBuffer_67C598);
+        FatalError_4A38C0(Gta2Error::kDllLoadError, "C:\\Splitting\\Gta2\\Source\\video.cpp", 206, gTmpBuffer_67C598);
     }
 }
 
@@ -577,7 +577,7 @@ void InitVideo_5D96C0()
     s32 ddraw_flags = 0;
     if (DMA_Video_LoadDll_5EB970(gVideoDllName_706654))
     {
-        FatalError_4A38C0(Gta2Error::DllLoadError, "C:\\Splitting\\Gta2\\Source\\video.cpp", 1647, gVideoDllName_706654);
+        FatalError_4A38C0(Gta2Error::kDllLoadError, "C:\\Splitting\\Gta2\\Source\\video.cpp", 1647, gVideoDllName_706654);
     }
 
     gVidSys_7071D0 = pVid_Init_SYS(gHInstance_708220, 0); // flags param ??
@@ -586,7 +586,7 @@ void InitVideo_5D96C0()
 
     if (!gVidSys_7071D0)
     {
-        FatalError_4A38C0(Gta2Error::DMAVideoInitFail, "C:\\Splitting\\Gta2\\Source\\video.cpp", 1656);
+        FatalError_4A38C0(Gta2Error::kDMAVideoInitFail, "C:\\Splitting\\Gta2\\Source\\video.cpp", 1656);
     }
 
     if (gBufferMode_706B34 == 1)
@@ -909,7 +909,7 @@ void Net_Receive_Players_Inputs_4DA9F0()
                             gPlayerQuit_6F5AEC = 1;
                             break;
                         default:
-                            FatalError_4A38C0(Gta2Error::InvalidLine, "C:\\Splitting\\Gta2\\Source\\main.cpp", 853, 0);
+                            FatalError_4A38C0(Gta2Error::kInvalidLine, "C:\\Splitting\\Gta2\\Source\\main.cpp", 853, 0);
                             break;
                     }
                     break;
@@ -921,7 +921,7 @@ void Net_Receive_Players_Inputs_4DA9F0()
                         gCurrentNetInputs_6F57D8.field_0_inputs[player_idx].field_4_rng !=
                             gCurrentNetInputs_6F57D8.field_0_inputs[gNetworkPlayerIdx_6F56C8].field_4_rng)
                     {
-                        FatalError_4A38C0(Gta2Error::SyncErrorRandom,
+                        FatalError_4A38C0(Gta2Error::kSyncErrorRandom,
                                           "C:\\Splitting\\Gta2\\Source\\main.cpp",
                                           822,
                                           gCurrentNetInputs_6F57D8.field_0_inputs[player_idx].field_4_rng,
@@ -929,7 +929,7 @@ void Net_Receive_Players_Inputs_4DA9F0()
                     }
                     break;
                 default:
-                    FatalError_4A38C0(Gta2Error::InvalidLine, "C:\\Splitting\\Gta2\\Source\\main.cpp", 860, 0);
+                    FatalError_4A38C0(Gta2Error::kInvalidLine, "C:\\Splitting\\Gta2\\Source\\main.cpp", 860, 0);
                     break;
             }
         }
@@ -1583,7 +1583,7 @@ void Start_GTA2Manager_5E4DE0()
     {
         if (!CloseHandle(hMutex))
         {
-            FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 118);
+            FatalError_4A38C0(Gta2Error::kGta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 118);
         }
 
         HWND hwndGta2Manager = FindWindowExA(nullptr, nullptr, nullptr, "GTA2 Manager");
@@ -1592,7 +1592,7 @@ void Start_GTA2Manager_5E4DE0()
             PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, reinterpret_cast<LPARAM>(hwndGta2Manager));
             if (!SetForegroundWindow(hwndGta2Manager))
             {
-                FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 125);
+                FatalError_4A38C0(Gta2Error::kGta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 125);
             }
         }
     }
@@ -1601,7 +1601,7 @@ void Start_GTA2Manager_5E4DE0()
         PostMessageA(gHwnd_707F04, WM_ACTIVATE, 0, 0); // the original passed an uninitialised lParam
         if (reinterpret_cast<uintptr_t>(ShellExecuteA(nullptr, nullptr, "GTA2 Manager.EXE", nullptr, gWorkingDir_707F64, 1)) <= 0x20)
         {
-            FatalError_4A38C0(Gta2Error::Gta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 136);
+            FatalError_4A38C0(Gta2Error::kGta2ManagerLaunchError, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 136);
         }
     }
 }
@@ -1973,7 +1973,7 @@ s32 WinMain_5E53F0(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     if (!SetWindowPos(gHwnd_707F04, nullptr, gWindowX_706B60, gWindowY_706B64, window_w, window_h, 0x314U))
     {
-        FatalError_4A38C0(Gta2Error::SetWindowPosFail, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 661);
+        FatalError_4A38C0(Gta2Error::kSetWindowPosFail, "C:\\Splitting\\Gta2\\Source\\winmain.cpp", 661);
     }
 
     Input::DirectInputCreate_4986D0(gHInstance_708220);

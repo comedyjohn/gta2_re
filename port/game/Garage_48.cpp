@@ -77,7 +77,7 @@ void Garage_48::ValidateParkCommand_534650()
                                                 (field_24_park_y_max - kFpOne64th_6FD1D8).ToInt(),
                                                 field_10_door->field_0_primary_door_data->get_z_489640()))
     {
-        FatalError_4A38C0(Gta2Error::ErrorInSetupOfParkCommand,
+        FatalError_4A38C0(Gta2Error::kErrorInSetupOfParkCommand,
                           "C:\\Splitting\\Gta2\\Source\\park.cpp",
                           62,
                           this->field_10_door->field_0_primary_door_data->get_x_489620(),

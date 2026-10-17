@@ -212,9 +212,9 @@ bool PedGroup::IsLeaderInCar_4C9210()
 // 0x4c9220
 bool PedGroup::IsLeaderEnteringCarOrUnknown5_4C9220()
 {
-    if (field_2C_ped_leader->GetPedState_403990() != PedState1Alias::ped_entering_a_car)
+    if (field_2C_ped_leader->GetPedState_403990() != PedState1Alias::kPedEnteringACar)
     {
-        if (field_2C_ped_leader->GetPedState_403990() != PedState1Alias::unused2)
+        if (field_2C_ped_leader->GetPedState_403990() != PedState1Alias::kUnused2)
         {
             return false;
         }
@@ -250,8 +250,8 @@ void PedGroup::DisbandGroup_4C92A0()
         {
             Ped* pPed = field_4_ped_list[ped_idx];
             Ped** ppSlot = field_4_ped_list + ped_idx;
-            if ((pPed->GetPedState_403990() == PedState1Alias::ped_wasted) ||
-                (pPed->field_280_stored_ped_state_1 == PedState1Alias::ped_wasted))
+            if ((pPed->GetPedState_403990() == PedState1Alias::kPedWasted) ||
+                (pPed->field_280_stored_ped_state_1 == PedState1Alias::kPedWasted))
             {
                 pPed->ClearGroupAndGroupIdx_403A30();
             }
@@ -285,7 +285,7 @@ void PedGroup::DestroyGroup_4C93A0()
     }
 
     Ped* pPed = field_2C_ped_leader;
-    if ((pPed->GetPedState_403990() != PedState1Alias::ped_wasted) && (pPed->field_280_stored_ped_state_1 != PedState1Alias::ped_wasted))
+    if ((pPed->GetPedState_403990() != PedState1Alias::kPedWasted) && (pPed->field_280_stored_ped_state_1 != PedState1Alias::kPedWasted))
     {
         pPed->SetObjective(Objectives::kNoObj);
         field_2C_ped_leader->SetObjective2_463830(Objectives::kNoObj);
@@ -298,8 +298,8 @@ void PedGroup::DestroyGroup_4C93A0()
         {
             pPed = field_4_ped_list[ped_idx];
             Ped** ppSlot = field_4_ped_list + ped_idx;
-            if ((pPed->GetPedState_403990() == PedState1Alias::ped_wasted) ||
-                (pPed->field_280_stored_ped_state_1 == PedState1Alias::ped_wasted))
+            if ((pPed->GetPedState_403990() == PedState1Alias::kPedWasted) ||
+                (pPed->field_280_stored_ped_state_1 == PedState1Alias::kPedWasted))
             {
                 pPed->ClearGroupAndGroupIdx_403A30();
             }

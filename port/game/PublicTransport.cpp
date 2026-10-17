@@ -126,16 +126,16 @@ s32 TrainStation_34::GetWagonType_577f80(u8 idx)
         switch (field_24_train_wagons[idx])
         {
             case 1:
-                return CarModel::TRAIN;
+                return CarModel::kTrain;
             case 2:
-                return CarModel::TRAINFB;
+                return CarModel::kTrainfb;
             case 3:
-                return CarModel::boxcar;
+                return CarModel::kBoxcar;
             default:
                 break;
         }
     }
-    return CarModel::none;
+    return CarModel::kNone;
 }
 
 // 0x577fd0
@@ -364,7 +364,7 @@ void Train_58::CloseCarriageDoors_578330()
         {
             if (field_C_carriages[i + 1])
             {
-                if (field_C_carriages[i + 1]->GetCarInfoIdx_411940() == CarModel::TRAIN)
+                if (field_C_carriages[i + 1]->GetCarInfoIdx_411940() == CarModel::kTrain)
                 {
                     field_C_carriages[i + 1]->CloseAllDoors_43B3D0();
                 }
@@ -382,7 +382,7 @@ void Train_58::OpenCarriageDoors_578360()
         {
             if (field_C_carriages[i + 1])
             {
-                if (field_C_carriages[i + 1]->GetCarInfoIdx_411940() == CarModel::TRAIN)
+                if (field_C_carriages[i + 1]->GetCarInfoIdx_411940() == CarModel::kTrain)
                 {
                     field_C_carriages[i + 1]->OpenAllDoors_43B380();
                 }
@@ -401,7 +401,7 @@ void Train_58::UpdatePassengerAI_578390()
             for (u8 i = 0; i < this->field_43_idx; i++)
             {
                 Car_BC** pTrainCar = &this->field_C_carriages[i + 1];
-                if ((*pTrainCar)->GetCarInfoIdx_411940() == CarModel::TRAIN)
+                if ((*pTrainCar)->GetCarInfoIdx_411940() == CarModel::kTrain)
                 {
                     this->field_56_passenger_count = 1;
                     if (gGame_0x40_67E008->IsSpriteInAnyPlayerBounds_4B97E0((*pTrainCar)->field_50_car_sprite, kFixZero))
@@ -630,11 +630,11 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                 {
                     if (!pStation->field_10_pZone)
                     {
-                        FatalError_4A38C0(Gta2Error::IllegalTrainStationNoPlatformZone, "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp", 734);
+                        FatalError_4A38C0(Gta2Error::kIllegalTrainStationNoPlatformZone, "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp", 734);
                     }
                     if (!pStation->field_4_entry_point)
                     {
-                        FatalError_4A38C0(Gta2Error::IllegalTrainStationNoEntryZone,
+                        FatalError_4A38C0(Gta2Error::kIllegalTrainStationNoEntryZone,
                                           "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                           738,
                                           pStation->field_10_pZone->field_1_x,
@@ -642,7 +642,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     }
                     if (!pStation->field_8_exit_point)
                     {
-                        FatalError_4A38C0(Gta2Error::IllegalTrainStationNoExitZone,
+                        FatalError_4A38C0(Gta2Error::kIllegalTrainStationNoExitZone,
                                           "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                           740,
                                           pStation->field_10_pZone->field_1_x,
@@ -650,7 +650,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     }
                     if (!pStation->field_C_stop_point)
                     {
-                        FatalError_4A38C0(Gta2Error::IllegalTrainStationNoStopZone,
+                        FatalError_4A38C0(Gta2Error::kIllegalTrainStationNoStopZone,
                                           "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                           742,
                                           pStation->field_10_pZone->field_1_x,
@@ -660,7 +660,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                     Train_58* pTrain = AllocateTrain_578790();
                     if (!pTrain)
                     {
-                        FatalError_4A38C0(Gta2Error::NoMoreTrainSpace, "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp", 746);
+                        FatalError_4A38C0(Gta2Error::kNoMoreTrainSpace, "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp", 746);
                     }
                     pTrain->field_8_alloc_state = 2;
 
@@ -681,7 +681,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                                 kFpOne_6FF07C);
                             if (!pTrain->field_C_carriages[j + 1])
                             {
-                                FatalError_4A38C0(Gta2Error::FailedToCreateCarriage,
+                                FatalError_4A38C0(Gta2Error::kFailedToCreateCarriage,
                                                   "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                                   761,
                                                   (Fix16(pStation->field_C_stop_point->field_1_x) + dword_6FF088 * Fix16(j + 1)).ToInt(),
@@ -693,7 +693,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                             gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(pStation->field_C_stop_point->field_1_x),
                                                                              Fix16(pStation->field_C_stop_point->field_2_y) + dword_6FEF88,
                                                                              word_6FEFFE,
-                                                                             CarModel::TRAINCAB,
+                                                                             CarModel::kTraincab,
                                                                              kFpOne_6FF07C);
                     }
                     else if (HasBlockGreenArrowAtDirection_577E20(2, pBlock))
@@ -708,7 +708,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                                 kFpOne_6FF07C);
                             if (!pTrain->field_C_carriages[j + 1])
                             {
-                                FatalError_4A38C0(Gta2Error::FailedToCreateCarriage,
+                                FatalError_4A38C0(Gta2Error::kFailedToCreateCarriage,
                                                   "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                                   773,
                                                   (Fix16(pStation->field_C_stop_point->field_1_x) + dword_6FEF88).ToInt(),
@@ -720,7 +720,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                             gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(pStation->field_C_stop_point->field_1_x) + dword_6FEF88,
                                                                              Fix16(pStation->field_C_stop_point->field_2_y),
                                                                              kAng0_6FF1BC,
-                                                                             CarModel::TRAINCAB,
+                                                                             CarModel::kTraincab,
                                                                              kFpOne_6FF07C);
                     }
                     else if (HasBlockGreenArrowAtDirection_577E20(3, pBlock))
@@ -735,7 +735,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                                 kFpOne_6FF07C);
                             if (!pTrain->field_C_carriages[j + 1])
                             {
-                                FatalError_4A38C0(Gta2Error::FailedToCreateCarriage,
+                                FatalError_4A38C0(Gta2Error::kFailedToCreateCarriage,
                                                   "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                                   785,
                                                   (Fix16(pStation->field_C_stop_point->field_1_x) - dword_6FF088 * Fix16(j + 1)).ToInt(),
@@ -747,7 +747,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                             gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(pStation->field_C_stop_point->field_1_x),
                                                                              Fix16(pStation->field_C_stop_point->field_2_y) + dword_6FEF88,
                                                                              word_6FEF04,
-                                                                             CarModel::TRAINCAB,
+                                                                             CarModel::kTraincab,
                                                                              kFpOne_6FF07C);
                     }
                     else if (HasBlockGreenArrowAtDirection_577E20(1, pBlock))
@@ -762,7 +762,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                                 kFpOne_6FF07C);
                             if (!pTrain->field_C_carriages[j + 1])
                             {
-                                FatalError_4A38C0(Gta2Error::FailedToCreateCarriage,
+                                FatalError_4A38C0(Gta2Error::kFailedToCreateCarriage,
                                                   "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                                   796,
                                                   (Fix16(pStation->field_C_stop_point->field_1_x) + dword_6FEF88).ToInt(),
@@ -774,12 +774,12 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                             gCarManager_6C_677930->SpawnCarAtCorrectZ_Scaled(Fix16(pStation->field_C_stop_point->field_1_x) + dword_6FEF88,
                                                                              Fix16(pStation->field_C_stop_point->field_2_y),
                                                                              word_6FEFD6,
-                                                                             CarModel::TRAINCAB,
+                                                                             CarModel::kTraincab,
                                                                              kFpOne_6FF07C);
                     }
                     else
                     {
-                        FatalError_4A38C0(Gta2Error::IllegalBlockForTrainCreation,
+                        FatalError_4A38C0(Gta2Error::kIllegalBlockForTrainCreation,
                                           "C:\\Splitting\\Gta2\\Source\\pubtrans.cpp",
                                           802,
                                           pStation->field_C_stop_point->field_1_x,
@@ -811,7 +811,7 @@ void PublicTransport_181C::SpawnTrainsFromStations_578860()
                         pTrain->field_C_carriages[j + 1]->SetDriverPedType_421560(PedType::kScriptCreated);
                         pTrain->field_C_carriages[j + 1]->SetupCarPhysicsAndSpriteBinding_43BCA0();
                         pTrain->field_C_carriages[j + 1]->StartEngine_426E00();
-                        if (pTrain->field_C_carriages[j + 1]->field_84_car_info_idx == CarModel::TRAINFB)
+                        if (pTrain->field_C_carriages[j + 1]->field_84_car_info_idx == CarModel::kTrainfb)
                         {
                             pTrain->field_C_carriages[j + 1]->LockPermanently_475C30();
                         }
@@ -914,7 +914,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
             gTrainStationList_6FEE68.field_194_count = 0;
 
             gmp_map_zone* i;
-            for (i = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::railway_station_platform); i != nullptr;
+            for (i = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kRailwayStationPlatform); i != nullptr;
                  i = gMap_0x370_6F6268->next_zone_4DF770())
             {
                 *&gNameCompareLen_6FF158 = 5; //LOBYTE(gNameCompareLen_6FF158) = 5; part of a object???????
@@ -960,7 +960,7 @@ void PublicTransport_181C::SetupTrainAndBusStops_5794B0()
 
     if (!bSkip_buses_67D558)
     {
-        for (gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::bus_stop_pavement); pZone != nullptr;)
+        for (gmp_map_zone* pZone = gMap_0x370_6F6268->first_zone_by_type_4DF1D0(GmpZoneType::kBusStopPavement); pZone != nullptr;)
         {
             TrainStation_34* pBusStop = gPublicTransport_181C_6FF1D4->AllocateTrainStation_5787E0();
             pBusStop->field_0_station_type = 1;
@@ -1291,22 +1291,22 @@ void PublicTransport_181C::BusesService_579CA0()
                 if (HasBlockGreenArrowAtDirection_577E20(4, HighestBlockForCoord_4E4C30))
                 {
                     field_17C0_bus.field_C_carriages[0] =
-                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos + kFpHalf_6FEEE8, 4, CarModel::BUS);
+                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos + kFpHalf_6FEEE8, 4, CarModel::kBus);
                 }
                 if (HasBlockGreenArrowAtDirection_577E20(2, HighestBlockForCoord_4E4C30))
                 {
                     field_17C0_bus.field_C_carriages[0] =
-                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos + kFpHalf_6FEEE8, ypos, 2, CarModel::BUS);
+                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos + kFpHalf_6FEEE8, ypos, 2, CarModel::kBus);
                 }
                 if (HasBlockGreenArrowAtDirection_577E20(3, HighestBlockForCoord_4E4C30))
                 {
                     field_17C0_bus.field_C_carriages[0] =
-                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos, 3, CarModel::BUS);
+                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos, 3, CarModel::kBus);
                 }
                 if (HasBlockGreenArrowAtDirection_577E20(1, HighestBlockForCoord_4E4C30))
                 {
                     field_17C0_bus.field_C_carriages[0] =
-                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos, 1, CarModel::BUS);
+                        gCarManager_6C_677930->SpawnBusAtValidRoadPosition_4453E0(xpos, ypos, 1, CarModel::kBus);
                 }
                 pBusCar = field_17C0_bus.field_C_carriages[0];
                 if (pBusCar)
@@ -1346,7 +1346,7 @@ void PublicTransport_181C::BusesService_579CA0()
                     if (pBusCar->field_54_driver)
                     {
                         if (pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::kUnknown2 &&
-                            pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::driver)
+                            pBusCar->field_54_driver->get_occupation_403980() != PedOcupation::kDriver)
                         {
                             field_17C0_bus.field_0 = 1;
                         }
@@ -1363,7 +1363,7 @@ void PublicTransport_181C::BusesService_579CA0()
                         {
                             field_17C0_bus.field_0 = 0;
                             field_17C0_bus.field_2 = 0;
-                            pBusCar->field_54_driver->set_occupation_403970(PedOcupation::driver);
+                            pBusCar->field_54_driver->set_occupation_403970(PedOcupation::kDriver);
                             field_17C0_bus.field_C_carriages[0]->field_54_driver->SetPedType_403920(3);
                         }
                     }

@@ -131,17 +131,17 @@ BOOL InputDevices_1::make_input_devices_498800(HINSTANCE hInstance)
 
     if (FAILED(gpDInput_67B804->CreateDevice(GUID_SysKeyboard, &gKeyboardDevice_67B5C0, nullptr)))
     {
-        FatalError_4A38C0(Gta2Error::DirectInputCreateFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 268);
+        FatalError_4A38C0(Gta2Error::kDirectInputCreateFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 268);
     }
 
     if (FAILED(gKeyboardDevice_67B5C0->SetDataFormat(&gKeyboardDataFormat_601A54)))
     {
-        FatalError_4A38C0(Gta2Error::DirectInputSetDataFormatFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 279);
+        FatalError_4A38C0(Gta2Error::kDirectInputSetDataFormatFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 279);
     }
 
     if (FAILED(gKeyboardDevice_67B5C0->SetCooperativeLevel(gHwnd_707F04, 6)))
     {
-        FatalError_4A38C0(Gta2Error::DirectInputSetCooperativeLevelFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 287);
+        FatalError_4A38C0(Gta2Error::kDirectInputSetCooperativeLevelFail, "C:\\Splitting\\Gta2\\Source\\diutil.cpp", 287);
     }
 
     prop.dwData = 10000; // buffer size
@@ -917,12 +917,12 @@ void InputRecorder_67F8B0::input_init_replay_4CE740(HINSTANCE hInstance)
     this->field_7533C_used_recs_count = remainderSize / sizeof(InputRecord_C);
     if (sizeof(InputRecord_C) * (remainderSize / sizeof(InputRecord_C)) != remainderSize)
     {
-        FatalError_4A38C0(Gta2Error::ReplayFileTooLarge, "C:\\Splitting\\Gta2\\Source\\input.cpp", 616, remainderSize);
+        FatalError_4A38C0(Gta2Error::kReplayFileTooLarge, "C:\\Splitting\\Gta2\\Source\\input.cpp", 616, remainderSize);
     }
 
     if (this->field_7533C_used_recs_count == 0)
     {
-        FatalError_4A38C0(Gta2Error::EmptyReplayFile, "C:\\Splitting\\Gta2\\Source\\input.cpp", 621);
+        FatalError_4A38C0(Gta2Error::kEmptyReplayFile, "C:\\Splitting\\Gta2\\Source\\input.cpp", 621);
     }
 }
 
@@ -950,7 +950,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
     gInputDevices_67B990 = new InputDevices_1();
     if (!gInputDevices_67B990)
     {
-        FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\input.cpp", 675);
+        FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\input.cpp", 675);
     }
 
     gInputDevices_67B990->input_devices_init_498C40(hInstance);
@@ -969,7 +969,7 @@ void InputRecorder_67F8B0::input_init_live_4CE880(HINSTANCE hInstance)
         field_7533C_used_recs_count = remainderSize / 0xC;
         if (12 * (remainderSize / 0xC) != remainderSize)
         {
-            FatalError_4A38C0(Gta2Error::ReplayFileTooLarge, "C:\\Splitting\\Gta2\\Source\\input.cpp", 702, remainderSize);
+            FatalError_4A38C0(Gta2Error::kReplayFileTooLarge, "C:\\Splitting\\Gta2\\Source\\input.cpp", 702, remainderSize);
         }
         field_38_replay_state = field_7533C_used_recs_count != 0 ? ReplayState::Playback_1 : ReplayState::Live_0;
     }

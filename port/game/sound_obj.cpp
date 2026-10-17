@@ -645,15 +645,15 @@ void sound_obj::ProcessCar_412B80(Sound_Params_8* pParams)
             }
             switch (pParams->field_0_pObj->field_8_car_bc_ptr->GetCarInfoIdx_411940())
             {
-                case CarModel::boxcar:
-                case CarModel::TRAIN:
-                case CarModel::TRAINFB:
+                case CarModel::kBoxcar:
+                case CarModel::kTrain:
+                case CarModel::kTrainfb:
                     sound_obj::ProcessTrain_413BE0(pParams);
                     break;
-                case CarModel::TRAINCAB:
+                case CarModel::kTraincab:
                     sound_obj::ProcessTrainCab_413B90(pParams, pAlloc);
                     break;
-                case CarModel::TANK:
+                case CarModel::kTank:
                     sound_obj::ProcessTank_413BF0(pParams, pAlloc);
                     break;
                 default:
@@ -1513,15 +1513,15 @@ void sound_obj::HandleAICarHornBeep_413D10(Sound_Params_8* pParams)
     {
         switch (pCar->GetCarInfoIdx_411940())
         {
-            case CarModel::apc:
-            case CarModel::COPCAR:
-            case CarModel::FIRETRUK:
-            case CarModel::GUNJEEP:
-            case CarModel::JEEP:
-            case CarModel::MEDICAR:
-            case CarModel::SWATVAN:
-            case CarModel::TANK:
-            case CarModel::EDSELFBI:
+            case CarModel::kApc:
+            case CarModel::kCopcar:
+            case CarModel::kFiretruk:
+            case CarModel::kGunjeep:
+            case CarModel::kJeep:
+            case CarModel::kMedicar:
+            case CarModel::kSwatvan:
+            case CarModel::kTank:
+            case CarModel::kEdselfbi:
                 return;
 
             default:
@@ -1947,23 +1947,23 @@ void sound_obj::HandleCarWeaponHitSound_415480(Sound_Params_8* pParams)
     const s32 old_weapon_kind = pCar->TakeWeaponKind_4119D0();
     switch (old_weapon_kind)
     {
-        case WeaponType::smg:
+        case WeaponType::kSmg:
             this->field_30_sQueueSample.field_14_samp_idx = 67;
             break;
-        case WeaponType::rocket:
-        case WeaponType::shocker:
+        case WeaponType::kRocket:
+        case WeaponType::kShocker:
             this->field_30_sQueueSample.field_14_samp_idx = 66;
             break;
-        case WeaponType::molotov:
+        case WeaponType::kMolotov:
             this->field_30_sQueueSample.field_14_samp_idx = 65;
             break;
-        case WeaponType::grenade:
+        case WeaponType::kGrenade:
             this->field_30_sQueueSample.field_14_samp_idx = 62;
             break;
-        case WeaponType::shotgun:
+        case WeaponType::kShotgun:
             this->field_30_sQueueSample.field_14_samp_idx = 63;
             break;
-        case WeaponType::electro_batton:
+        case WeaponType::kElectroBatton:
             this->field_30_sQueueSample.field_14_samp_idx = 64;
             break;
         default:
@@ -2000,7 +2000,7 @@ void sound_obj::HandleCarAlarmSound_415570(Sound_Params_8* pParams, SoundPosEntr
             if (pParams->field_0_pObj->field_8_car_bc_ptr->IsEmittingHorn_411970())
             {
                 bool tryPlay = false;
-                if (pParams->field_4_bDrivenByPlayer || pCar->GetCarInfoIdx_411940() == CarModel::ICECREAM)
+                if (pParams->field_4_bDrivenByPlayer || pCar->GetCarInfoIdx_411940() == CarModel::kIcecream)
                 {
                     tryPlay = true;
                 }
@@ -2021,7 +2021,7 @@ void sound_obj::HandleCarAlarmSound_415570(Sound_Params_8* pParams, SoundPosEntr
 
                 if (tryPlay && CalculateDistance_419020((Fix16(15) / Fix16(2)) * (Fix16(15) / Fix16(2))))
                 {
-                    const u8 vol = pCar->field_84_car_info_idx == CarModel::TRAINCAB ? 127 : 20;
+                    const u8 vol = pCar->field_84_car_info_idx == CarModel::kTraincab ? 127 : 20;
                     if (VolCalc_419070(vol, Fix16(15) / Fix16(2), pParams->field_5_bHasSolidAbove))
                     {
                         this->field_30_sQueueSample.field_54_sound_intensity = Fix16(15) / Fix16(2);
@@ -2107,7 +2107,7 @@ void sound_obj::HandleCarEngineSound_4157C0(Sound_Params_8* pParams)
                     gas_pedal = max_speed;
                 }
 
-                if (pCar->field_84_car_info_idx == CarModel::TANK || pCar->field_58_physics->field_94_is_backward_gas_on)
+                if (pCar->field_84_car_info_idx == CarModel::kTank || pCar->field_58_physics->field_94_is_backward_gas_on)
                 {
                     emitting_vol = Fix16::RoundToInt(Fix16(573440, 0) * (gas_pedal / max_speed)) + 25;
                 }
@@ -2449,7 +2449,7 @@ char_type sound_obj::Type_4_417A00(sound_0x68* pSound)
         pSound->field_4C_releasing_volume_divider = 2;
 
         pSound->field_20_rate = gSampManager_6FFF00.GetPlayBackRateIdx_58DBF0(pSound->field_14_samp_idx);
-        if (model == CarModel::FIRETRUK || model == CarModel::MEDICAR)
+        if (model == CarModel::kFiretruk || model == CarModel::kMedicar)
         {
             pSound->field_20_rate = 9 * pSound->field_20_rate / 10U;
         }
@@ -2468,71 +2468,71 @@ s32 sound_obj::samp_idx_for_model_417AC0(s32 car_model)
 
     switch (car_model)
     {
-        case CarModel::bug:
-        case CarModel::DART:
-        case CarModel::FIAT:
-        case CarModel::ISETTA:
-        case CarModel::MESSER:
-        case CarModel::MORRIS:
-        case CarModel::STYPECAB:
+        case CarModel::kBug:
+        case CarModel::kDart:
+        case CarModel::kFiat:
+        case CarModel::kIsetta:
+        case CarModel::kMesser:
+        case CarModel::kMorris:
+        case CarModel::kStypecab:
             result = 4;
             break;
 
-        case CarModel::amdb4:
-        case CarModel::GT24640:
-        case CarModel::GUNJEEP:
-        case CarModel::JEEP:
-        case CarModel::MERC:
-        case CarModel::MIURA:
-        case CarModel::SPIDER:
-        case CarModel::STRATOS:
-        case CarModel::STRATOSB:
-        case CarModel::TRANCEAM:
-        case CarModel::VTYPE:
-        case CarModel::XK120:
+        case CarModel::kAmdb4:
+        case CarModel::kGt24640:
+        case CarModel::kGunjeep:
+        case CarModel::kJeep:
+        case CarModel::kMerc:
+        case CarModel::kMiura:
+        case CarModel::kSpider:
+        case CarModel::kStratos:
+        case CarModel::kStratosb:
+        case CarModel::kTranceam:
+        case CarModel::kVtype:
+        case CarModel::kXk120:
             result = 5;
             break;
 
-        case CarModel::allard:
-        case CarModel::bmw:
-        case CarModel::COPCAR:
-        case CarModel::EDSEL:
-        case CarModel::JEFFREY:
-        case CarModel::STINGRAY:
-        case CarModel::STRIPETB:
-        case CarModel::T2000GT:
-        case CarModel::TBIRD:
-        case CarModel::WBTWIN:
-        case CarModel::ZCX5:
-        case CarModel::EDSELFBI:
+        case CarModel::kAllard:
+        case CarModel::kBmw:
+        case CarModel::kCopcar:
+        case CarModel::kEdsel:
+        case CarModel::kJeffrey:
+        case CarModel::kStingray:
+        case CarModel::kStripetb:
+        case CarModel::kT2000gt:
+        case CarModel::kTbird:
+        case CarModel::kWbtwin:
+        case CarModel::kZcx5:
+        case CarModel::kEdselfbi:
             result = 6;
             break;
 
-        case CarModel::bank_van:
-        case CarModel::HOTDOG:
-        case CarModel::HOTDOG_D1:
-        case CarModel::HOTDOG_D2:
-        case CarModel::HOTDOG_D3:
-        case CarModel::ICECREAM:
-        case CarModel::PICKUP:
-        case CarModel::SWATVAN:
-        case CarModel::TVVAN:
-        case CarModel::VAN:
-        case CarModel::VESPA:
-        case CarModel::HOTDOG_D4:
+        case CarModel::kBankVan:
+        case CarModel::kHotdog:
+        case CarModel::kHotdogD1:
+        case CarModel::kHotdogD2:
+        case CarModel::kHotdogD3:
+        case CarModel::kIcecream:
+        case CarModel::kPickup:
+        case CarModel::kSwatvan:
+        case CarModel::kTvvan:
+        case CarModel::kVan:
+        case CarModel::kVespa:
+        case CarModel::kHotdogD4:
             result = 7;
             break;
 
-        case CarModel::apc:
-        case CarModel::boxtruck:
-        case CarModel::BUS:
-        case CarModel::FIRETRUK:
-        case CarModel::GTRUCK:
-        case CarModel::MONSTER:
-        case CarModel::TANK:
-        case CarModel::TRUKCAB1:
-        case CarModel::TRUKCAB2:
-        case CarModel::KRSNABUS:
+        case CarModel::kApc:
+        case CarModel::kBoxtruck:
+        case CarModel::kBus:
+        case CarModel::kFiretruk:
+        case CarModel::kGtruck:
+        case CarModel::kMonster:
+        case CarModel::kTank:
+        case CarModel::kTrukcab1:
+        case CarModel::kTrukcab2:
+        case CarModel::kKrsnabus:
             result = 8;
             break;
 
@@ -2546,7 +2546,7 @@ s32 sound_obj::samp_idx_for_model_417AC0(s32 car_model)
 // 0x417B80
 s32 sound_obj::GetSirenSampleIdx_417B80(s32 car_model, bool bHornOn)
 {
-    if (car_model != CarModel::FIRETRUK)
+    if (car_model != CarModel::kFiretruk)
     {
         return (bHornOn != 0) + 14;
     }
@@ -2559,50 +2559,50 @@ s32 sound_obj::GetVehicleAudioClass_417BA0(s32 car_model)
     s32 result;
     switch (car_model)
     {
-        case CarModel::bug:
-        case CarModel::DART:
-        case CarModel::FIAT:
-        case CarModel::ISETTA:
-        case CarModel::MESSER:
-        case CarModel::MORRIS:
+        case CarModel::kBug:
+        case CarModel::kDart:
+        case CarModel::kFiat:
+        case CarModel::kIsetta:
+        case CarModel::kMesser:
+        case CarModel::kMorris:
             result = 17;
             break;
 
-        case CarModel::allard:
-        case CarModel::amdb4:
-        case CarModel::bmw:
-        case CarModel::GT24640:
-        case CarModel::GUNJEEP:
-        case CarModel::JEEP:
-        case CarModel::JEFFREY:
-        case CarModel::MONSTER:
-        case CarModel::SPIDER:
-        case CarModel::STINGRAY:
-        case CarModel::STRIPETB:
-        case CarModel::T2000GT:
-        case CarModel::TBIRD:
-        case CarModel::WBTWIN:
-        case CarModel::ZCX5:
+        case CarModel::kAllard:
+        case CarModel::kAmdb4:
+        case CarModel::kBmw:
+        case CarModel::kGt24640:
+        case CarModel::kGunjeep:
+        case CarModel::kJeep:
+        case CarModel::kJeffrey:
+        case CarModel::kMonster:
+        case CarModel::kSpider:
+        case CarModel::kStingray:
+        case CarModel::kStripetb:
+        case CarModel::kT2000gt:
+        case CarModel::kTbird:
+        case CarModel::kWbtwin:
+        case CarModel::kZcx5:
             result = 18;
             break;
 
-        case CarModel::apc:
-        case CarModel::boxtruck:
-        case CarModel::BUS:
-        case CarModel::FIRETRUK:
-        case CarModel::GTRUCK:
-        case CarModel::TANK:
-        case CarModel::TRUKCAB1:
-        case CarModel::TRUKCAB2:
-        case CarModel::KRSNABUS:
+        case CarModel::kApc:
+        case CarModel::kBoxtruck:
+        case CarModel::kBus:
+        case CarModel::kFiretruk:
+        case CarModel::kGtruck:
+        case CarModel::kTank:
+        case CarModel::kTrukcab1:
+        case CarModel::kTrukcab2:
+        case CarModel::kKrsnabus:
             result = 19;
             break;
 
-        case CarModel::TRAINCAB:
+        case CarModel::kTraincab:
             result = 20;
             break;
 
-        case CarModel::ICECREAM:
+        case CarModel::kIcecream:
             result = 23;
             break;
 
@@ -2698,24 +2698,24 @@ s32 sound_obj::get_samp_idx_for_car_417D70(Car_BC* pCar, bool bDoorOpening, bool
 
     switch (pCar->GetCarInfoIdx_411940())
     {
-        case CarModel::apc:
-        case CarModel::boxtruck:
-        case CarModel::FIRETRUK:
-        case CarModel::GTRUCK:
-        case CarModel::SWATVAN:
-        case CarModel::TANK:
-        case CarModel::TOWTRUCK:
-        case CarModel::TRUKCAB1:
-        case CarModel::TRUKCAB2:
-        case CarModel::KRSNABUS:
+        case CarModel::kApc:
+        case CarModel::kBoxtruck:
+        case CarModel::kFiretruk:
+        case CarModel::kGtruck:
+        case CarModel::kSwatvan:
+        case CarModel::kTank:
+        case CarModel::kTowtruck:
+        case CarModel::kTrukcab1:
+        case CarModel::kTrukcab2:
+        case CarModel::kKrsnabus:
             result = bDoorOpening ? 27 : 28;
             break;
 
-        case CarModel::boxcar:
-        case CarModel::BUS:
-        case CarModel::TRAIN:
-        case CarModel::TRAINCAB:
-        case CarModel::TRAINFB:
+        case CarModel::kBoxcar:
+        case CarModel::kBus:
+        case CarModel::kTrain:
+        case CarModel::kTraincab:
+        case CarModel::kTrainfb:
             result = 29;
             break;
 
@@ -2801,13 +2801,13 @@ void sound_obj::HandleTruckCorneringAudio_417FD0(Sound_Params_8* pParams)
         {
             switch (pParams->field_0_pObj->field_8_car_bc_ptr->field_84_car_info_idx)
             {
-                case CarModel::boxtruck:
-                case CarModel::BUS:
-                case CarModel::FIRETRUK:
-                case CarModel::GTRUCK:
-                case CarModel::TOWTRUCK:
-                case CarModel::TRUKCAB1:
-                case CarModel::TRUKCAB2:
+                case CarModel::kBoxtruck:
+                case CarModel::kBus:
+                case CarModel::kFiretruk:
+                case CarModel::kGtruck:
+                case CarModel::kTowtruck:
+                case CarModel::kTrukcab1:
+                case CarModel::kTrukcab2:
                     if (CalculateDistance_419020(Fix16(0x64000, 0)))
                     {
                         if (VolCalc_419070(25, Fix16(0x14000, 0), pParams->field_5_bHasSolidAbove))
@@ -2824,7 +2824,7 @@ void sound_obj::HandleTruckCorneringAudio_417FD0(Sound_Params_8* pParams)
                         }
                     }
                     break;
-                case CarModel::KRSNABUS:
+                case CarModel::kKrsnabus:
                     // Dead store, but it keeps the switch range up to 86 as in the original
                     slide_angle = 0;
                     break;
@@ -2903,8 +2903,8 @@ void sound_obj::HandleCarDoorSounds_4182E0(Sound_Params_8* pParams)
     {
         bool bTrainOrBus = false;
         s8 remap = car_remap_5AA3D0[2 * i + 1];
-        if ((remap > 64 || remap < -64) && model != CarModel::TRAIN && model != CarModel::TRAINCAB && model != CarModel::TRAINFB &&
-            model != CarModel::boxcar && model != CarModel::BUS)
+        if ((remap > 64 || remap < -64) && model != CarModel::kTrain && model != CarModel::kTraincab && model != CarModel::kTrainfb &&
+            model != CarModel::kBoxcar && model != CarModel::kBus)
         {
             bTrainOrBus = true;
         }
@@ -5837,8 +5837,8 @@ void sound_obj::HandlePedVoiceEvent_423080(Sound_Params_8* pParams)
 
     if (!pPed->is_player_41B0A0())
     {
-        bTank = pPed->IsLawEnforcement_45B4E0() || pPed->get_occupation_403980() == PedOcupation::tank_driver ||
-            pPed->get_occupation_403980() == PedOcupation::road_block_tank_man;
+        bTank = pPed->IsLawEnforcement_45B4E0() || pPed->get_occupation_403980() == PedOcupation::kTankDriver ||
+            pPed->get_occupation_403980() == PedOcupation::kRoadBlockTankMan;
         switch (voice)
         {
             case 1:
@@ -5961,7 +5961,7 @@ void sound_obj::HandlePedVoiceEvent_423080(Sound_Params_8* pParams)
         }
 
         s32 occupation = pPed->get_occupation_403980();
-        if (occupation == PedOcupation::elvis || occupation == PedOcupation::elvis_leader)
+        if (occupation == PedOcupation::kElvis || occupation == PedOcupation::kElvisLeader)
         {
             if (!word_675548)
             {
@@ -6416,54 +6416,54 @@ void sound_obj::GenerateRadioVehicleDescription_426F20(Car_BC* pCar)
             this->field_5574_car_info_idx = car_info_idx;
             switch (car_info_idx)
             {
-                case CarModel::bug:
-                case CarModel::FIAT:
-                case CarModel::ISETTA:
-                case CarModel::MESSER:
-                case CarModel::SPRITE:
+                case CarModel::kBug:
+                case CarModel::kFiat:
+                case CarModel::kIsetta:
+                case CarModel::kMesser:
+                case CarModel::kSprite:
                     car_name_word = 111;
                     break;
 
-                case CarModel::VAN:
-                case CarModel::VESPA:
+                case CarModel::kVan:
+                case CarModel::kVespa:
                     car_name_word = 111;
                     unknown = 114;
                     break;
 
-                case CarModel::boxtruck:
-                case CarModel::TOWTRUCK:
-                case CarModel::TRUKCAB1:
-                case CarModel::TRUKCAB2:
+                case CarModel::kBoxtruck:
+                case CarModel::kTowtruck:
+                case CarModel::kTrukcab1:
+                case CarModel::kTrukcab2:
                     car_name_word = 114;
                     break;
 
-                case CarModel::alfa:
-                case CarModel::amdb4:
-                case CarModel::DART:
-                case CarModel::MERC:
-                case CarModel::MORGAN:
-                case CarModel::MORRIS:
-                case CarModel::SPIDER:
+                case CarModel::kAlfa:
+                case CarModel::kAmdb4:
+                case CarModel::kDart:
+                case CarModel::kMerc:
+                case CarModel::kMorgan:
+                case CarModel::kMorris:
+                case CarModel::kSpider:
                     car_name_word = 112;
                     break;
 
-                case CarModel::allard:
-                case CarModel::bmw:
-                case CarModel::GT24640:
-                case CarModel::JEFFREY:
-                case CarModel::MIURA:
-                case CarModel::STINGRAY:
-                case CarModel::STRATOS:
-                case CarModel::STRATOSB:
-                case CarModel::STRIPETB:
-                case CarModel::T2000GT:
-                case CarModel::TBIRD:
-                case CarModel::TRANCEAM:
-                case CarModel::WBTWIN:
-                case CarModel::ZCX5:
+                case CarModel::kAllard:
+                case CarModel::kBmw:
+                case CarModel::kGt24640:
+                case CarModel::kJeffrey:
+                case CarModel::kMiura:
+                case CarModel::kStingray:
+                case CarModel::kStratos:
+                case CarModel::kStratosb:
+                case CarModel::kStripetb:
+                case CarModel::kT2000gt:
+                case CarModel::kTbird:
+                case CarModel::kTranceam:
+                case CarModel::kWbtwin:
+                case CarModel::kZcx5:
                     car_name_word = 113;
                     break;
-                case CarModel::none:
+                case CarModel::kNone:
                     // Dead store, but it keeps 'none' as its own entry in the switch table as in the original
                     car_name_word = 111;
                     return;
@@ -6706,49 +6706,49 @@ void sound_obj::ProcessType7_Weapon_42A500(s32 idx)
             {
                 switch (pWeapon->GetWeaponType_41CC90())
                 {
-                    case WeaponType::pistol:
-                    case WeaponType::dual_pistol:
+                    case WeaponType::kPistol:
+                    case WeaponType::kDualPistol:
                         samp_idx = 311;
                         break;
-                    case WeaponType::shotgun:
+                    case WeaponType::kShotgun:
                         samp_idx = 314;
                         vol = 44;
                         rate_adjust = -8000;
                         break;
-                    case WeaponType::smg:
-                    case WeaponType::car_smg:
-                    case WeaponType::army_gun_jeep:
+                    case WeaponType::kSmg:
+                    case WeaponType::kCarSmg:
+                    case WeaponType::kArmyGunJeep:
                         samp_idx = 312;
                         vol = 44;
                         break;
-                    case WeaponType::silence_smg:
+                    case WeaponType::kSilenceSmg:
                         samp_idx = 313;
                         vol = 40;
                         break;
-                    case WeaponType::flamethrower:
-                    case WeaponType::fire_truck_flamethrower:
+                    case WeaponType::kFlamethrower:
+                    case WeaponType::kFireTruckFlamethrower:
                         samp_idx = 316;
                         vol = 120;
                         this->field_30_sQueueSample.field_41 = 0;
                         break;
-                    case WeaponType::fire_truck_gun:
+                    case WeaponType::kFireTruckGun:
                         samp_idx = 317;
                         this->field_30_sQueueSample.field_41 = 0;
                         break;
-                    case WeaponType::shocker:
+                    case WeaponType::kShocker:
                         samp_idx = 318;
                         this->field_30_sQueueSample.field_41 = 0;
                         break;
-                    case WeaponType::rocket:
-                    case WeaponType::tank_main_gun:
+                    case WeaponType::kRocket:
+                    case WeaponType::kTankMainGun:
                         samp_idx = 315;
                         break;
-                    case WeaponType::car_bomb:
-                    case WeaponType::car_mines:
-                    case WeaponType::weapon_0x17:
+                    case WeaponType::kCarBomb:
+                    case WeaponType::kCarMines:
+                    case WeaponType::kWeapon0x17:
                         samp_idx = 319;
                         break;
-                    case WeaponType::oil_stain:
+                    case WeaponType::kOilStain:
                         samp_idx = 61;
                         break;
                     default:
@@ -7291,25 +7291,25 @@ void sound_obj::ChooseRadioEmitterForVehicle_57E6C0()
     u8 emitter;
     switch (pCar->GetCarInfoIdx_411940())
     {
-        case CarModel::VTYPE:
+        case CarModel::kVtype:
             emitter = FindEmitterByStatus_57F050(5);
             break;
-        case CarModel::ISETTA:
+        case CarModel::kIsetta:
             emitter = FindEmitterByStatus_57F050(7);
             break;
-        case CarModel::MIURA:
+        case CarModel::kMiura:
             emitter = FindEmitterByStatus_57F050(6);
             break;
-        case CarModel::PICKUP:
+        case CarModel::kPickup:
             emitter = FindEmitterByStatus_57F050(8);
             break;
-        case CarModel::STRATOSB:
+        case CarModel::kStratosb:
             emitter = FindEmitterByStatus_57F050(9);
             break;
-        case CarModel::BUICK:
+        case CarModel::kBuick:
             emitter = FindEmitterByStatus_57F050(11);
             break;
-        case CarModel::KRSNABUS:
+        case CarModel::kKrsnabus:
             emitter = FindEmitterByStatus_57F050(10);
             break;
         default:
@@ -7760,15 +7760,15 @@ bool sound_obj::IsPoliceOrServiceVehicle_57F090(Car_BC* pCar)
 {
     switch (pCar->GetCarInfoIdx_411940())
     {
-        case CarModel::apc:
-        case CarModel::COPCAR:
-        case CarModel::FIRETRUK:
-        case CarModel::GUNJEEP:
-        case CarModel::JEEP:
-        case CarModel::MEDICAR:
-        case CarModel::SWATVAN:
-        case CarModel::TANK:
-        case CarModel::EDSELFBI:
+        case CarModel::kApc:
+        case CarModel::kCopcar:
+        case CarModel::kFiretruk:
+        case CarModel::kGunjeep:
+        case CarModel::kJeep:
+        case CarModel::kMedicar:
+        case CarModel::kSwatvan:
+        case CarModel::kTank:
+        case CarModel::kEdselfbi:
             return true;
         default:
             break;
@@ -7784,8 +7784,8 @@ bool sound_obj::IsTrainOrBoxcar_57F120(Car_BC* pCar)
         return false;
     }
 
-    if (pCar->field_84_car_info_idx == CarModel::boxcar ||
-        (pCar->field_84_car_info_idx > CarModel::TOWTRUCK && pCar->field_84_car_info_idx <= CarModel::TRAINFB))
+    if (pCar->field_84_car_info_idx == CarModel::kBoxcar ||
+        (pCar->field_84_car_info_idx > CarModel::kTowtruck && pCar->field_84_car_info_idx <= CarModel::kTrainfb))
     {
         return true;
     }

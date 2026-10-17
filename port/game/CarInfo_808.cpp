@@ -643,17 +643,17 @@ void CarInfo_808::LoadModelPhysics_4546D0()
         strcpy(gErrStr_67C29C, file_name_677EC4);
         strcpy(gErrStr2_67C3A8, pErrorMsg);
 
-        FatalError_4A38C0(Gta2Error::BinmakeError, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbc, gErrStr_67C29C, gErrStr2_67C3A8);
+        FatalError_4A38C0(Gta2Error::kBinmakeError, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbc, gErrStr_67C29C, gErrStr2_67C3A8);
     }
 
     if (data_size % sizeof(ModelPhysics_48))
     {
-        FatalError_4A38C0(Gta2Error::InvalidSize, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbd, file_name_677EC4, data_size);
+        FatalError_4A38C0(Gta2Error::kInvalidSize, "C:\\Splitting\\Gta2\\Source\\carinfo.cpp", 0xbd, file_name_677EC4, data_size);
     }
 
     if (data_size != number_of_cars * sizeof(ModelPhysics_48))
     {
-        FatalError_4A38C0(Gta2Error::ModelCountMismatchInStyleFile,
+        FatalError_4A38C0(Gta2Error::kModelCountMismatchInStyleFile,
                           "C:\\Splitting\\Gta2\\Source\\carinfo.cpp",
                           0xbe,
                           static_cast<s32>(data_size / sizeof(ModelPhysics_48)),

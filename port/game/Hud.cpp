@@ -1184,7 +1184,7 @@ void Hud_Arrow_7C_Array::place_gang_phone_5D1110(Object_2C* pPhoneInfo)
         phone_x_67CD14 = pPhoneInfo->field_4->GetXPos();
         phone_y_67CD0C = pPhoneInfo->field_4->GetYPos();
         phone_z_67CD10 = 0;
-        FatalError_4A38C0(Gta2Error::PlacingGangPhoneWhenNoGang, // Placing gang phone when no gang at: (%.4f, %.4f)
+        FatalError_4A38C0(Gta2Error::kPlacingGangPhoneWhenNoGang, // Placing gang phone when no gang at: (%.4f, %.4f)
                           "C:\\Splitting\\Gta2\\Source\\user.cpp",
                           1509,
                           0,
@@ -1199,7 +1199,7 @@ void Hud_Arrow_7C_Array::place_gang_phone_5D1110(Object_2C* pPhoneInfo)
         {
             strcpy(gErrStr_67C29C, get_phone_colour_5D12B0(phone_type));
             strcpy(gErrStr2_67C3A8, pZone->field_2_name);
-            FatalError_4A38C0(Gta2Error::TooManyPhonesForGang, // Too many %s phones for %s gang
+            FatalError_4A38C0(Gta2Error::kTooManyPhonesForGang, // Too many %s phones for %s gang
                               "C:\\Splitting\\Gta2\\Source\\user.cpp",
                               1513,
                               gErrStr_67C29C,

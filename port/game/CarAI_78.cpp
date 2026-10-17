@@ -2461,7 +2461,7 @@ void CarAI_78::DetectCarAhead_44D1D0()
     u8 bSlowerThanTarget = 0;
 
     byte_677A94 = 0;
-    if (this->field_0_car->field_84_car_info_idx == CarModel::BUS)
+    if (this->field_0_car->field_84_car_info_idx == CarModel::kBus)
     {
         return;
     }
@@ -3276,7 +3276,7 @@ void CarAI_78::UpdateStateMachine_44E560()
                         break;
 
                     case car_task_type::follow_target_ped_4:
-                        if (this->field_0_car->field_84_car_info_idx != CarModel::EDSELFBI)
+                        if (this->field_0_car->field_84_car_info_idx != CarModel::kEdselfbi)
                         {
                             speed_limit = kFpNine_677BB8;
                         }
@@ -3419,7 +3419,7 @@ void CarAI_78::UpdateStateMachine_44E560()
                         break;
 
                     case car_task_type::follow_target_ped_4:
-                        if (this->field_0_car->field_84_car_info_idx != CarModel::EDSELFBI)
+                        if (this->field_0_car->field_84_car_info_idx != CarModel::kEdselfbi)
                         {
                             speed_limit = kFpNine_677BB8;
                         }

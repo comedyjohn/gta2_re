@@ -720,7 +720,7 @@ void PlyDat_2BC0::Create_56C2C0()
         gPlyDat_6FEAC0 = new PlyDat_2BC0();
         if (!gPlyDat_6FEAC0)
         {
-            FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\plydat.cpp", 1269);
+            FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\plydat.cpp", 1269);
         }
     }
 }

@@ -410,7 +410,7 @@ class gtx_0x106C
 
     bool IsElectrifiedFloorType_491F80(u16 tile_idx)
     {
-        return field_6C_spec[tile_idx] == SpecSurfaceType::spec_electrified;
+        return field_6C_spec[tile_idx] == SpecSurfaceType::kSpecElectrified;
     }
 
     car_info* get_car_info_4BF1F0(u8 model_idx)

@@ -88,7 +88,7 @@ void keybrd_0x204::LoadKbCfg_4D5E00()
     FILE* hConfigFile = fopen(FileName, "rt");
     if (!hConfigFile)
     {
-        FatalError_4A38C0(Gta2Error::KeyboardTypeFileOpenError, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 187);
+        FatalError_4A38C0(Gta2Error::kKeyboardTypeFileOpenError, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 187);
     }
 
     for (short& field_0_key : field_0_keys)
@@ -126,7 +126,7 @@ void keybrd_0x204::create_4D5F50()
         gKeybrd_0x204_6F52F4 = new keybrd_0x204();
         if (!gKeybrd_0x204_6F52F4)
         {
-            FatalError_4A38C0(Gta2Error::OutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 244);
+            FatalError_4A38C0(Gta2Error::kOutOfMemoryNewOperator, "C:\\Splitting\\Gta2\\Source\\keybrd.cpp", 244);
         }
     }
     gKeybrd_0x204_6F52F4->LoadKbCfg_4D5E00();

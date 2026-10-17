@@ -65,7 +65,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
     switch (gGameSession_67E8E0.GetMultiplayerGamemode_4C5BC0())
     {
         case NO_GAME_0:
-            FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\multip.cpp", 108, 0);
+            FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\multip.cpp", 108, 0);
             [[fallthrough]]; // FatalError does not return
         case FRAG_GAME_1:
         case POINTS_GAME_2:
@@ -92,7 +92,7 @@ void TagGame_28::ExecuteGamemodeTick_516660()
 
             break;
         default:
-            FatalError_4A38C0(Gta2Error::InvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\multip.cpp", 144, 0);
+            FatalError_4A38C0(Gta2Error::kInvalidLineInfo, "C:\\Splitting\\Gta2\\Source\\multip.cpp", 144, 0);
     }
 }
 
